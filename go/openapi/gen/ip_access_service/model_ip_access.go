@@ -11,8 +11,11 @@ API version: 1.0.0
 package ip_access_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IpAccess type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IpAccess{}
@@ -25,7 +28,10 @@ type IpAccess struct {
 	IpRange *string `json:"ipRange,omitempty"`
 	// The name of the IP access entry.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IpAccess IpAccess
 
 // NewIpAccess instantiates a new IpAccess object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +165,36 @@ func (o IpAccess) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IpAccess) UnmarshalJSON(data []byte) (err error) {
+	varIpAccess := _IpAccess{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIpAccess)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IpAccess(varIpAccess)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "ipRange")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIpAccess struct {

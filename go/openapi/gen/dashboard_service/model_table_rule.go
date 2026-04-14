@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TableRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TableRule{}
@@ -24,7 +27,10 @@ type TableRule struct {
 	Name *string `json:"name,omitempty"`
 	Properties []Property `json:"properties,omitempty"`
 	RuleScope *RuleScope `json:"ruleScope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TableRule TableRule
 
 // NewTableRule instantiates a new TableRule object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o TableRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RuleScope) {
 		toSerialize["ruleScope"] = o.RuleScope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TableRule) UnmarshalJSON(data []byte) (err error) {
+	varTableRule := _TableRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTableRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TableRule(varTableRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "properties")
+		delete(additionalProperties, "ruleScope")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTableRule struct {

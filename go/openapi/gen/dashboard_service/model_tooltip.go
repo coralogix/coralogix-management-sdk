@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Tooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Tooltip{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Tooltip{}
 type Tooltip struct {
 	ShowLabels *bool `json:"showLabels,omitempty"`
 	Type *TooltipType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Tooltip Tooltip
 
 // NewTooltip instantiates a new Tooltip object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Tooltip) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Tooltip) UnmarshalJSON(data []byte) (err error) {
+	varTooltip := _Tooltip{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTooltip)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Tooltip(varTooltip)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "showLabels")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTooltip struct {

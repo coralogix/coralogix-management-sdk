@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpanFieldProcessTagField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldProcessTagField{}
 
 // SpanFieldProcessTagField struct for SpanFieldProcessTagField
 type SpanFieldProcessTagField struct {
-	ProcessTagField *string `json:"processTagField,omitempty"`
+	ProcessTagField string `json:"processTagField"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpanFieldProcessTagField SpanFieldProcessTagField
 
 // NewSpanFieldProcessTagField instantiates a new SpanFieldProcessTagField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSpanFieldProcessTagField() *SpanFieldProcessTagField {
+func NewSpanFieldProcessTagField(processTagField string) *SpanFieldProcessTagField {
 	this := SpanFieldProcessTagField{}
+	this.ProcessTagField = processTagField
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSpanFieldProcessTagFieldWithDefaults() *SpanFieldProcessTagField {
 	return &this
 }
 
-// GetProcessTagField returns the ProcessTagField field value if set, zero value otherwise.
+// GetProcessTagField returns the ProcessTagField field value
 func (o *SpanFieldProcessTagField) GetProcessTagField() string {
-	if o == nil || IsNil(o.ProcessTagField) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ProcessTagField
+
+	return o.ProcessTagField
 }
 
-// GetProcessTagFieldOk returns a tuple with the ProcessTagField field value if set, nil otherwise
+// GetProcessTagFieldOk returns a tuple with the ProcessTagField field value
 // and a boolean to check if the value has been set.
 func (o *SpanFieldProcessTagField) GetProcessTagFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.ProcessTagField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProcessTagField, true
+	return &o.ProcessTagField, true
 }
 
-// HasProcessTagField returns a boolean if a field has been set.
-func (o *SpanFieldProcessTagField) HasProcessTagField() bool {
-	if o != nil && !IsNil(o.ProcessTagField) {
-		return true
-	}
-
-	return false
-}
-
-// SetProcessTagField gets a reference to the given string and assigns it to the ProcessTagField field.
+// SetProcessTagField sets field value
 func (o *SpanFieldProcessTagField) SetProcessTagField(v string) {
-	o.ProcessTagField = &v
+	o.ProcessTagField = v
 }
 
 func (o SpanFieldProcessTagField) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SpanFieldProcessTagField) MarshalJSON() ([]byte, error) {
 
 func (o SpanFieldProcessTagField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProcessTagField) {
-		toSerialize["processTagField"] = o.ProcessTagField
+	toSerialize["processTagField"] = o.ProcessTagField
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SpanFieldProcessTagField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"processTagField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSpanFieldProcessTagField := _SpanFieldProcessTagField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanFieldProcessTagField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanFieldProcessTagField(varSpanFieldProcessTagField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "processTagField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpanFieldProcessTagField struct {

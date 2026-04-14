@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypeArm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypeArm{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V1IntegrationTypeArm{}
 // V1IntegrationTypeArm This data structure represents an integration type.
 type V1IntegrationTypeArm struct {
 	// This data structure represents an Azure ARM integration.
-	Arm map[string]interface{} `json:"arm,omitempty"`
+	Arm map[string]interface{} `json:"arm"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypeArm V1IntegrationTypeArm
 
 // NewV1IntegrationTypeArm instantiates a new V1IntegrationTypeArm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypeArm() *V1IntegrationTypeArm {
+func NewV1IntegrationTypeArm(arm map[string]interface{}) *V1IntegrationTypeArm {
 	this := V1IntegrationTypeArm{}
+	this.Arm = arm
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewV1IntegrationTypeArmWithDefaults() *V1IntegrationTypeArm {
 	return &this
 }
 
-// GetArm returns the Arm field value if set, zero value otherwise.
+// GetArm returns the Arm field value
 func (o *V1IntegrationTypeArm) GetArm() map[string]interface{} {
-	if o == nil || IsNil(o.Arm) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Arm
 }
 
-// GetArmOk returns a tuple with the Arm field value if set, nil otherwise
+// GetArmOk returns a tuple with the Arm field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypeArm) GetArmOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Arm) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Arm, true
 }
 
-// HasArm returns a boolean if a field has been set.
-func (o *V1IntegrationTypeArm) HasArm() bool {
-	if o != nil && !IsNil(o.Arm) {
-		return true
-	}
-
-	return false
-}
-
-// SetArm gets a reference to the given map[string]interface{} and assigns it to the Arm field.
+// SetArm sets field value
 func (o *V1IntegrationTypeArm) SetArm(v map[string]interface{}) {
 	o.Arm = v
 }
@@ -82,10 +82,56 @@ func (o V1IntegrationTypeArm) MarshalJSON() ([]byte, error) {
 
 func (o V1IntegrationTypeArm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Arm) {
-		toSerialize["arm"] = o.Arm
+	toSerialize["arm"] = o.Arm
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypeArm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"arm",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypeArm := _V1IntegrationTypeArm{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypeArm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypeArm(varV1IntegrationTypeArm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arm")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypeArm struct {

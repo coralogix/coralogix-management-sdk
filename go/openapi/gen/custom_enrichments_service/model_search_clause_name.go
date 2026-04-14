@@ -11,23 +11,31 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SearchClauseName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SearchClauseName{}
 
 // SearchClauseName This data structure represents a search clause
 type SearchClauseName struct {
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchClauseName SearchClauseName
 
 // NewSearchClauseName instantiates a new SearchClauseName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSearchClauseName() *SearchClauseName {
+func NewSearchClauseName(name string) *SearchClauseName {
 	this := SearchClauseName{}
+	this.Name = name
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSearchClauseNameWithDefaults() *SearchClauseName {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *SearchClauseName) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *SearchClauseName) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SearchClauseName) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *SearchClauseName) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 func (o SearchClauseName) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SearchClauseName) MarshalJSON() ([]byte, error) {
 
 func (o SearchClauseName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchClauseName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSearchClauseName := _SearchClauseName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSearchClauseName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchClauseName(varSearchClauseName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchClauseName struct {

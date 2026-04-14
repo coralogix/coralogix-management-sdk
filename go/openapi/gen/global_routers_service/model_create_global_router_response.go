@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateGlobalRouterResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateGlobalRouterResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateGlobalRouterResponse{}
 // CreateGlobalRouterResponse Response which contains a created global router
 type CreateGlobalRouterResponse struct {
 	Router *GlobalRouter `json:"router,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateGlobalRouterResponse CreateGlobalRouterResponse
 
 // NewCreateGlobalRouterResponse instantiates a new CreateGlobalRouterResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateGlobalRouterResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Router) {
 		toSerialize["router"] = o.Router
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateGlobalRouterResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateGlobalRouterResponse := _CreateGlobalRouterResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateGlobalRouterResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateGlobalRouterResponse(varCreateGlobalRouterResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "router")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateGlobalRouterResponse struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetLimitsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetLimitsResponse{}
@@ -23,7 +26,10 @@ type GetLimitsResponse struct {
 	LabelsLimit *int32 `json:"labelsLimit,omitempty"`
 	MetricsLimit *LimitUsage `json:"metricsLimit,omitempty"`
 	PermutationsLimit *LimitUsage `json:"permutationsLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLimitsResponse GetLimitsResponse
 
 // NewGetLimitsResponse instantiates a new GetLimitsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o GetLimitsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PermutationsLimit) {
 		toSerialize["permutationsLimit"] = o.PermutationsLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLimitsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetLimitsResponse := _GetLimitsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetLimitsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLimitsResponse(varGetLimitsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "companyId")
+		delete(additionalProperties, "labelsLimit")
+		delete(additionalProperties, "metricsLimit")
+		delete(additionalProperties, "permutationsLimit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLimitsResponse struct {

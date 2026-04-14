@@ -11,10 +11,13 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // Events2MetricServiceCreateE2MRequest - struct for Events2MetricServiceCreateE2MRequest
 type Events2MetricServiceCreateE2MRequest struct {

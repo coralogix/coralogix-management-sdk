@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBarChartYAxisViewByCategory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartYAxisViewByCategory{}
 
 // HorizontalBarChartYAxisViewByCategory struct for HorizontalBarChartYAxisViewByCategory
 type HorizontalBarChartYAxisViewByCategory struct {
-	Category map[string]interface{} `json:"category,omitempty"`
+	Category map[string]interface{} `json:"category"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBarChartYAxisViewByCategory HorizontalBarChartYAxisViewByCategory
 
 // NewHorizontalBarChartYAxisViewByCategory instantiates a new HorizontalBarChartYAxisViewByCategory object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHorizontalBarChartYAxisViewByCategory() *HorizontalBarChartYAxisViewByCategory {
+func NewHorizontalBarChartYAxisViewByCategory(category map[string]interface{}) *HorizontalBarChartYAxisViewByCategory {
 	this := HorizontalBarChartYAxisViewByCategory{}
+	this.Category = category
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewHorizontalBarChartYAxisViewByCategoryWithDefaults() *HorizontalBarChartY
 	return &this
 }
 
-// GetCategory returns the Category field value if set, zero value otherwise.
+// GetCategory returns the Category field value
 func (o *HorizontalBarChartYAxisViewByCategory) GetCategory() map[string]interface{} {
-	if o == nil || IsNil(o.Category) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Category
 }
 
-// GetCategoryOk returns a tuple with the Category field value if set, nil otherwise
+// GetCategoryOk returns a tuple with the Category field value
 // and a boolean to check if the value has been set.
 func (o *HorizontalBarChartYAxisViewByCategory) GetCategoryOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Category) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Category, true
 }
 
-// HasCategory returns a boolean if a field has been set.
-func (o *HorizontalBarChartYAxisViewByCategory) HasCategory() bool {
-	if o != nil && !IsNil(o.Category) {
-		return true
-	}
-
-	return false
-}
-
-// SetCategory gets a reference to the given map[string]interface{} and assigns it to the Category field.
+// SetCategory sets field value
 func (o *HorizontalBarChartYAxisViewByCategory) SetCategory(v map[string]interface{}) {
 	o.Category = v
 }
@@ -81,10 +81,56 @@ func (o HorizontalBarChartYAxisViewByCategory) MarshalJSON() ([]byte, error) {
 
 func (o HorizontalBarChartYAxisViewByCategory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Category) {
-		toSerialize["category"] = o.Category
+	toSerialize["category"] = o.Category
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartYAxisViewByCategory) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"category",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHorizontalBarChartYAxisViewByCategory := _HorizontalBarChartYAxisViewByCategory{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartYAxisViewByCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartYAxisViewByCategory(varHorizontalBarChartYAxisViewByCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBarChartYAxisViewByCategory struct {

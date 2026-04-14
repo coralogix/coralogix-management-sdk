@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceE2MResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &ReplaceE2MResponse{}
 // ReplaceE2MResponse This data structure is obtained when replacing an existing event to metric definition
 type ReplaceE2MResponse struct {
 	E2m E2M `json:"e2m"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplaceE2MResponse ReplaceE2MResponse
@@ -79,6 +82,11 @@ func (o ReplaceE2MResponse) MarshalJSON() ([]byte, error) {
 func (o ReplaceE2MResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["e2m"] = o.E2m
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *ReplaceE2MResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ReplaceE2MResponse(varReplaceE2MResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "e2m")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

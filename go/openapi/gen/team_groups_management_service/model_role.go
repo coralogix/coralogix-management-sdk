@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Role type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Role{}
@@ -25,7 +28,10 @@ type Role struct {
 	Name *string `json:"name,omitempty"`
 	// Unique role identifier
 	RoleId *int64 `json:"roleId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Role Role
 
 // NewRole instantiates a new Role object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +165,36 @@ func (o Role) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RoleId) {
 		toSerialize["roleId"] = o.RoleId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Role) UnmarshalJSON(data []byte) (err error) {
+	varRole := _Role{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRole)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Role(varRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "roleId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRole struct {

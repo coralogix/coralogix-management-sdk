@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefQueryFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefQueryFilter{}
@@ -21,6 +24,7 @@ var _ MappedNullable = &AlertDefQueryFilter{}
 type AlertDefQueryFilter struct {
 	EnabledFilter interface{} `json:"enabledFilter,omitempty"`
 	EntityLabelsFilter interface{} `json:"entityLabelsFilter,omitempty"`
+	IdFilter interface{} `json:"idFilter,omitempty"`
 	LastTriggeredTimeRangeFilter interface{} `json:"lastTriggeredTimeRangeFilter,omitempty"`
 	ModifiedTimeRangeFilter interface{} `json:"modifiedTimeRangeFilter,omitempty"`
 	NameFilter interface{} `json:"nameFilter,omitempty"`
@@ -28,7 +32,10 @@ type AlertDefQueryFilter struct {
 	StatusFilter interface{} `json:"statusFilter,omitempty"`
 	TypeFilter interface{} `json:"typeFilter,omitempty"`
 	TypeSpecificFilter interface{} `json:"typeSpecificFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefQueryFilter AlertDefQueryFilter
 
 // NewAlertDefQueryFilter instantiates a new AlertDefQueryFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -111,6 +118,39 @@ func (o *AlertDefQueryFilter) HasEntityLabelsFilter() bool {
 // SetEntityLabelsFilter gets a reference to the given interface{} and assigns it to the EntityLabelsFilter field.
 func (o *AlertDefQueryFilter) SetEntityLabelsFilter(v interface{}) {
 	o.EntityLabelsFilter = v
+}
+
+// GetIdFilter returns the IdFilter field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AlertDefQueryFilter) GetIdFilter() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.IdFilter
+}
+
+// GetIdFilterOk returns a tuple with the IdFilter field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AlertDefQueryFilter) GetIdFilterOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.IdFilter) {
+		return nil, false
+	}
+	return &o.IdFilter, true
+}
+
+// HasIdFilter returns a boolean if a field has been set.
+func (o *AlertDefQueryFilter) HasIdFilter() bool {
+	if o != nil && !IsNil(o.IdFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdFilter gets a reference to the given interface{} and assigns it to the IdFilter field.
+func (o *AlertDefQueryFilter) SetIdFilter(v interface{}) {
+	o.IdFilter = v
 }
 
 // GetLastTriggeredTimeRangeFilter returns the LastTriggeredTimeRangeFilter field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -360,6 +400,9 @@ func (o AlertDefQueryFilter) ToMap() (map[string]interface{}, error) {
 	if o.EntityLabelsFilter != nil {
 		toSerialize["entityLabelsFilter"] = o.EntityLabelsFilter
 	}
+	if o.IdFilter != nil {
+		toSerialize["idFilter"] = o.IdFilter
+	}
 	if o.LastTriggeredTimeRangeFilter != nil {
 		toSerialize["lastTriggeredTimeRangeFilter"] = o.LastTriggeredTimeRangeFilter
 	}
@@ -381,7 +424,43 @@ func (o AlertDefQueryFilter) ToMap() (map[string]interface{}, error) {
 	if o.TypeSpecificFilter != nil {
 		toSerialize["typeSpecificFilter"] = o.TypeSpecificFilter
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefQueryFilter) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefQueryFilter := _AlertDefQueryFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefQueryFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefQueryFilter(varAlertDefQueryFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabledFilter")
+		delete(additionalProperties, "entityLabelsFilter")
+		delete(additionalProperties, "idFilter")
+		delete(additionalProperties, "lastTriggeredTimeRangeFilter")
+		delete(additionalProperties, "modifiedTimeRangeFilter")
+		delete(additionalProperties, "nameFilter")
+		delete(additionalProperties, "priorityFilter")
+		delete(additionalProperties, "statusFilter")
+		delete(additionalProperties, "typeFilter")
+		delete(additionalProperties, "typeSpecificFilter")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefQueryFilter struct {

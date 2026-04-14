@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DimensionGenericDimension type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionGenericDimension{}
 
 // DimensionGenericDimension struct for DimensionGenericDimension
 type DimensionGenericDimension struct {
-	GenericDimension *GenericDimension `json:"genericDimension,omitempty"`
+	GenericDimension GenericDimension `json:"genericDimension"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DimensionGenericDimension DimensionGenericDimension
 
 // NewDimensionGenericDimension instantiates a new DimensionGenericDimension object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDimensionGenericDimension() *DimensionGenericDimension {
+func NewDimensionGenericDimension(genericDimension GenericDimension) *DimensionGenericDimension {
 	this := DimensionGenericDimension{}
+	this.GenericDimension = genericDimension
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDimensionGenericDimensionWithDefaults() *DimensionGenericDimension {
 	return &this
 }
 
-// GetGenericDimension returns the GenericDimension field value if set, zero value otherwise.
+// GetGenericDimension returns the GenericDimension field value
 func (o *DimensionGenericDimension) GetGenericDimension() GenericDimension {
-	if o == nil || IsNil(o.GenericDimension) {
+	if o == nil {
 		var ret GenericDimension
 		return ret
 	}
-	return *o.GenericDimension
+
+	return o.GenericDimension
 }
 
-// GetGenericDimensionOk returns a tuple with the GenericDimension field value if set, nil otherwise
+// GetGenericDimensionOk returns a tuple with the GenericDimension field value
 // and a boolean to check if the value has been set.
 func (o *DimensionGenericDimension) GetGenericDimensionOk() (*GenericDimension, bool) {
-	if o == nil || IsNil(o.GenericDimension) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GenericDimension, true
+	return &o.GenericDimension, true
 }
 
-// HasGenericDimension returns a boolean if a field has been set.
-func (o *DimensionGenericDimension) HasGenericDimension() bool {
-	if o != nil && !IsNil(o.GenericDimension) {
-		return true
-	}
-
-	return false
-}
-
-// SetGenericDimension gets a reference to the given GenericDimension and assigns it to the GenericDimension field.
+// SetGenericDimension sets field value
 func (o *DimensionGenericDimension) SetGenericDimension(v GenericDimension) {
-	o.GenericDimension = &v
+	o.GenericDimension = v
 }
 
 func (o DimensionGenericDimension) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DimensionGenericDimension) MarshalJSON() ([]byte, error) {
 
 func (o DimensionGenericDimension) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GenericDimension) {
-		toSerialize["genericDimension"] = o.GenericDimension
+	toSerialize["genericDimension"] = o.GenericDimension
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DimensionGenericDimension) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"genericDimension",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDimensionGenericDimension := _DimensionGenericDimension{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimensionGenericDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DimensionGenericDimension(varDimensionGenericDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "genericDimension")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimensionGenericDimension struct {

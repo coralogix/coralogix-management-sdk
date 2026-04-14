@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestPoliciesResult type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestPoliciesResult{}
@@ -24,6 +26,7 @@ type TestPoliciesResult struct {
 	Matched bool `json:"matched"`
 	MetaFieldsValues LogMetaFieldsValues `json:"metaFieldsValues"`
 	Policy Policy `json:"policy"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TestPoliciesResult TestPoliciesResult
@@ -133,6 +136,11 @@ func (o TestPoliciesResult) ToMap() (map[string]interface{}, error) {
 	toSerialize["matched"] = o.Matched
 	toSerialize["metaFieldsValues"] = o.MetaFieldsValues
 	toSerialize["policy"] = o.Policy
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,6 +178,15 @@ func (o *TestPoliciesResult) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = TestPoliciesResult(varTestPoliciesResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matched")
+		delete(additionalProperties, "metaFieldsValues")
+		delete(additionalProperties, "policy")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

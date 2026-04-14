@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionDefinitionCustomAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionDefinitionCustomAction{}
 
 // ActionDefinitionCustomAction struct for ActionDefinitionCustomAction
 type ActionDefinitionCustomAction struct {
-	CustomAction *CustomAction `json:"customAction,omitempty"`
+	CustomAction CustomAction `json:"customAction"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionDefinitionCustomAction ActionDefinitionCustomAction
 
 // NewActionDefinitionCustomAction instantiates a new ActionDefinitionCustomAction object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActionDefinitionCustomAction() *ActionDefinitionCustomAction {
+func NewActionDefinitionCustomAction(customAction CustomAction) *ActionDefinitionCustomAction {
 	this := ActionDefinitionCustomAction{}
+	this.CustomAction = customAction
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewActionDefinitionCustomActionWithDefaults() *ActionDefinitionCustomAction
 	return &this
 }
 
-// GetCustomAction returns the CustomAction field value if set, zero value otherwise.
+// GetCustomAction returns the CustomAction field value
 func (o *ActionDefinitionCustomAction) GetCustomAction() CustomAction {
-	if o == nil || IsNil(o.CustomAction) {
+	if o == nil {
 		var ret CustomAction
 		return ret
 	}
-	return *o.CustomAction
+
+	return o.CustomAction
 }
 
-// GetCustomActionOk returns a tuple with the CustomAction field value if set, nil otherwise
+// GetCustomActionOk returns a tuple with the CustomAction field value
 // and a boolean to check if the value has been set.
 func (o *ActionDefinitionCustomAction) GetCustomActionOk() (*CustomAction, bool) {
-	if o == nil || IsNil(o.CustomAction) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CustomAction, true
+	return &o.CustomAction, true
 }
 
-// HasCustomAction returns a boolean if a field has been set.
-func (o *ActionDefinitionCustomAction) HasCustomAction() bool {
-	if o != nil && !IsNil(o.CustomAction) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomAction gets a reference to the given CustomAction and assigns it to the CustomAction field.
+// SetCustomAction sets field value
 func (o *ActionDefinitionCustomAction) SetCustomAction(v CustomAction) {
-	o.CustomAction = &v
+	o.CustomAction = v
 }
 
 func (o ActionDefinitionCustomAction) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o ActionDefinitionCustomAction) MarshalJSON() ([]byte, error) {
 
 func (o ActionDefinitionCustomAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomAction) {
-		toSerialize["customAction"] = o.CustomAction
+	toSerialize["customAction"] = o.CustomAction
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionDefinitionCustomAction) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"customAction",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varActionDefinitionCustomAction := _ActionDefinitionCustomAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionDefinitionCustomAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionDefinitionCustomAction(varActionDefinitionCustomAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customAction")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionDefinitionCustomAction struct {

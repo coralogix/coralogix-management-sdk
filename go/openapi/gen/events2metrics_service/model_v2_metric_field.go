@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2MetricField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2MetricField{}
@@ -24,6 +26,7 @@ type V2MetricField struct {
 	Aggregations []V2Aggregation `json:"aggregations"`
 	SourceField string `json:"sourceField"`
 	TargetBaseMetricName string `json:"targetBaseMetricName" validate:"regexp=^[\\\\w\\/-]+$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _V2MetricField V2MetricField
@@ -133,6 +136,11 @@ func (o V2MetricField) ToMap() (map[string]interface{}, error) {
 	toSerialize["aggregations"] = o.Aggregations
 	toSerialize["sourceField"] = o.SourceField
 	toSerialize["targetBaseMetricName"] = o.TargetBaseMetricName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,6 +178,15 @@ func (o *V2MetricField) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V2MetricField(varV2MetricField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregations")
+		delete(additionalProperties, "sourceField")
+		delete(additionalProperties, "targetBaseMetricName")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

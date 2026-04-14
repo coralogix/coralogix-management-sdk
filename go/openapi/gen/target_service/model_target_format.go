@@ -11,9 +11,12 @@ API version: 1.0.0
 package target_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // TargetFormat the model 'TargetFormat'
 type TargetFormat string

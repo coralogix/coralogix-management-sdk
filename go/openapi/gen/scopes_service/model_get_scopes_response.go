@@ -11,10 +11,12 @@ API version: 1.0.0
 package scopes_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetScopesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetScopesResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetScopesResponse{}
 // GetScopesResponse This data structure represents a response to get scopes
 type GetScopesResponse struct {
 	Scopes []V1Scope `json:"scopes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetScopesResponse GetScopesResponse
@@ -79,6 +82,11 @@ func (o GetScopesResponse) MarshalJSON() ([]byte, error) {
 func (o GetScopesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["scopes"] = o.Scopes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *GetScopesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetScopesResponse(varGetScopesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "scopes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

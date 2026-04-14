@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2GB type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2GB{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &V2GB{}
 // V2GB struct for V2GB
 type V2GB struct {
 	Value *float32 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2GB V2GB
 
 // NewV2GB instantiates a new V2GB object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o V2GB) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2GB) UnmarshalJSON(data []byte) (err error) {
+	varV2GB := _V2GB{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2GB)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2GB(varV2GB)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2GB struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateGenericPolicyRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateGenericPolicyRequest{}
@@ -27,7 +29,10 @@ type CreateGenericPolicyRequest struct {
 	Disabled *bool `json:"disabled,omitempty"`
 	Name string `json:"name"`
 	Priority QuotaV1Priority `json:"priority"`
+	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	Targets []V1Target `json:"targets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGenericPolicyRequest CreateGenericPolicyRequest
@@ -220,6 +225,38 @@ func (o *CreateGenericPolicyRequest) SetPriority(v QuotaV1Priority) {
 	o.Priority = v
 }
 
+// GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
+func (o *CreateGenericPolicyRequest) GetPriorityOverride() PriorityOverride {
+	if o == nil || IsNil(o.PriorityOverride) {
+		var ret PriorityOverride
+		return ret
+	}
+	return *o.PriorityOverride
+}
+
+// GetPriorityOverrideOk returns a tuple with the PriorityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGenericPolicyRequest) GetPriorityOverrideOk() (*PriorityOverride, bool) {
+	if o == nil || IsNil(o.PriorityOverride) {
+		return nil, false
+	}
+	return o.PriorityOverride, true
+}
+
+// HasPriorityOverride returns a boolean if a field has been set.
+func (o *CreateGenericPolicyRequest) HasPriorityOverride() bool {
+	if o != nil && !IsNil(o.PriorityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverride gets a reference to the given PriorityOverride and assigns it to the PriorityOverride field.
+func (o *CreateGenericPolicyRequest) SetPriorityOverride(v PriorityOverride) {
+	o.PriorityOverride = &v
+}
+
 // GetSubsystemRule returns the SubsystemRule field value if set, zero value otherwise.
 func (o *CreateGenericPolicyRequest) GetSubsystemRule() QuotaV1Rule {
 	if o == nil || IsNil(o.SubsystemRule) {
@@ -252,6 +289,38 @@ func (o *CreateGenericPolicyRequest) SetSubsystemRule(v QuotaV1Rule) {
 	o.SubsystemRule = &v
 }
 
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *CreateGenericPolicyRequest) GetTargets() []V1Target {
+	if o == nil || IsNil(o.Targets) {
+		var ret []V1Target
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateGenericPolicyRequest) GetTargetsOk() ([]V1Target, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *CreateGenericPolicyRequest) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []V1Target and assigns it to the Targets field.
+func (o *CreateGenericPolicyRequest) SetTargets(v []V1Target) {
+	o.Targets = v
+}
+
 func (o CreateGenericPolicyRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -274,9 +343,20 @@ func (o CreateGenericPolicyRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["priority"] = o.Priority
+	if !IsNil(o.PriorityOverride) {
+		toSerialize["priorityOverride"] = o.PriorityOverride
+	}
 	if !IsNil(o.SubsystemRule) {
 		toSerialize["subsystemRule"] = o.SubsystemRule
 	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -314,6 +394,21 @@ func (o *CreateGenericPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateGenericPolicyRequest(varCreateGenericPolicyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationRule")
+		delete(additionalProperties, "archiveRetention")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "targets")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

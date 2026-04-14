@@ -11,9 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // FieldConditionConditionType the model 'FieldConditionConditionType'
 type FieldConditionConditionType string

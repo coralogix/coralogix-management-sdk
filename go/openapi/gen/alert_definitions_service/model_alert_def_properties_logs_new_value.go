@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesLogsNewValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesLogsNewValue{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesLogsNewValue struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	LogsNewValue *LogsNewValueType `json:"logsNewValue,omitempty"`
+	LogsNewValue LogsNewValueType `json:"logsNewValue"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesLogsNewValue struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesLogsNewValue AlertDefPropertiesLogsNewValue
 
 // NewAlertDefPropertiesLogsNewValue instantiates a new AlertDefPropertiesLogsNewValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsNewValue() *AlertDefPropertiesLogsNewValue {
+func NewAlertDefPropertiesLogsNewValue(logsNewValue LogsNewValueType) *AlertDefPropertiesLogsNewValue {
 	this := AlertDefPropertiesLogsNewValue{}
+	this.LogsNewValue = logsNewValue
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesLogsNewValue) SetIncidentsSettings(v AlertDefIncident
 	o.IncidentsSettings = &v
 }
 
-// GetLogsNewValue returns the LogsNewValue field value if set, zero value otherwise.
+// GetLogsNewValue returns the LogsNewValue field value
 func (o *AlertDefPropertiesLogsNewValue) GetLogsNewValue() LogsNewValueType {
-	if o == nil || IsNil(o.LogsNewValue) {
+	if o == nil {
 		var ret LogsNewValueType
 		return ret
 	}
-	return *o.LogsNewValue
+
+	return o.LogsNewValue
 }
 
-// GetLogsNewValueOk returns a tuple with the LogsNewValue field value if set, nil otherwise
+// GetLogsNewValueOk returns a tuple with the LogsNewValue field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsNewValue) GetLogsNewValueOk() (*LogsNewValueType, bool) {
-	if o == nil || IsNil(o.LogsNewValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsNewValue, true
+	return &o.LogsNewValue, true
 }
 
-// HasLogsNewValue returns a boolean if a field has been set.
-func (o *AlertDefPropertiesLogsNewValue) HasLogsNewValue() bool {
-	if o != nil && !IsNil(o.LogsNewValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsNewValue gets a reference to the given LogsNewValueType and assigns it to the LogsNewValue field.
+// SetLogsNewValue sets field value
 func (o *AlertDefPropertiesLogsNewValue) SetLogsNewValue(v LogsNewValueType) {
-	o.LogsNewValue = &v
+	o.LogsNewValue = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesLogsNewValue) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.LogsNewValue) {
-		toSerialize["logsNewValue"] = o.LogsNewValue
-	}
+	toSerialize["logsNewValue"] = o.LogsNewValue
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesLogsNewValue) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesLogsNewValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsNewValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesLogsNewValue := _AlertDefPropertiesLogsNewValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesLogsNewValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesLogsNewValue(varAlertDefPropertiesLogsNewValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsNewValue")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesLogsNewValue struct {

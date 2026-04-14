@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConnectorConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectorConfig{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ConnectorConfig{}
 // ConnectorConfig Configuration for a specific output schema of a connector
 type ConnectorConfig struct {
 	Fields []NotificationCenterConnectorConfigField `json:"fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConnectorConfig ConnectorConfig
 
 // NewConnectorConfig instantiates a new ConnectorConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ConnectorConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConnectorConfig) UnmarshalJSON(data []byte) (err error) {
+	varConnectorConfig := _ConnectorConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConnectorConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConnectorConfig(varConnectorConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConnectorConfig struct {

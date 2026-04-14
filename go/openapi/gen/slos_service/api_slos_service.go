@@ -42,8 +42,6 @@ func (r ApiSlosServiceBatchExecuteSloRequest) Execute() (*BatchExecuteSloRespons
 /*
 SlosServiceBatchExecuteSlo Batch Execute Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchExecuteSloRequest
 */
@@ -149,8 +147,6 @@ func (r ApiSlosServiceBatchGetSlosRequest) Execute() (*BatchGetSlosResponse, *ht
 /*
 SlosServiceBatchGetSlos Batch Get Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchGetSlosRequest
 */
@@ -251,7 +247,7 @@ type ApiSlosServiceCreateSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
 	silenceDataValidations *bool
-	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
+	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
 }
 
 func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceCreateSloRequest {
@@ -259,8 +255,8 @@ func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValida
 	return r
 }
 
-func (r ApiSlosServiceCreateSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceCreateSloRequest {
-	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+func (r ApiSlosServiceCreateSloRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceCreateSloRequest {
+	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
 	return r
 }
 
@@ -270,8 +266,6 @@ func (r ApiSlosServiceCreateSloRequest) Execute() (*CreateSloResponse, *http.Res
 
 /*
 SlosServiceCreateSlo Create Slo
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceCreateSloRequest
@@ -325,7 +319,7 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceReplaceSloRequest
+	localVarPostBody = r.slosServiceCreateSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -375,8 +369,6 @@ func (r ApiSlosServiceDeleteSloRequest) Execute() (*DeleteSloResponse, *http.Res
 
 /*
 SlosServiceDeleteSlo Delete Slo
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -479,8 +471,6 @@ func (r ApiSlosServiceGetSloRequest) Execute() (*GetSloResponse, *http.Response,
 /*
 SlosServiceGetSlo Get Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiSlosServiceGetSloRequest
@@ -580,8 +570,6 @@ func (r ApiSlosServiceGetZeroStateRequest) Execute() (*GetZeroStateResponse, *ht
 
 /*
 SlosServiceGetZeroState Get Slo Zero State
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceGetZeroStateRequest
@@ -685,8 +673,6 @@ func (r ApiSlosServiceListSlosRequest) Execute() (*ListSlosResponse, *http.Respo
 
 /*
 SlosServiceListSlos List Slos
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceListSlosRequest
@@ -808,8 +794,6 @@ func (r ApiSlosServiceReplaceSloRequest) Execute() (*ReplaceSloResponse, *http.R
 /*
 SlosServiceReplaceSlo Replace Slo
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceReplaceSloRequest
 */
@@ -903,11 +887,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceValidateReplaceSloAlertsRequest *SlosServiceValidateReplaceSloAlertsRequest
+	slosServiceCreateSloRequest *SlosServiceCreateSloRequest
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceValidateReplaceSloAlertsRequest(slosServiceValidateReplaceSloAlertsRequest SlosServiceValidateReplaceSloAlertsRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceValidateReplaceSloAlertsRequest = &slosServiceValidateReplaceSloAlertsRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceCreateSloRequest(slosServiceCreateSloRequest SlosServiceCreateSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slosServiceCreateSloRequest = &slosServiceCreateSloRequest
 	return r
 }
 
@@ -917,8 +901,6 @@ func (r ApiSlosServiceValidateReplaceSloAlertsRequest) Execute() (*ReplaceSloAle
 
 /*
 SlosServiceValidateReplaceSloAlerts Replace Slo Pre-Validate Alerts
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceValidateReplaceSloAlertsRequest
@@ -969,7 +951,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceValidateReplaceSloAlertsRequest
+	localVarPostBody = r.slosServiceCreateSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

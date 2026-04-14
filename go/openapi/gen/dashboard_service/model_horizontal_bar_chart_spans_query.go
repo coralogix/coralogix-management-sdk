@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBarChartSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartSpansQuery{}
@@ -27,7 +30,10 @@ type HorizontalBarChartSpansQuery struct {
 	StackedGroupName *SpanField `json:"stackedGroupName,omitempty"`
 	StackedGroupNameField *SpanObservationField `json:"stackedGroupNameField,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBarChartSpansQuery HorizontalBarChartSpansQuery
 
 // NewHorizontalBarChartSpansQuery instantiates a new HorizontalBarChartSpansQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +342,41 @@ func (o HorizontalBarChartSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	varHorizontalBarChartSpansQuery := _HorizontalBarChartSpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartSpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartSpansQuery(varHorizontalBarChartSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupNames")
+		delete(additionalProperties, "groupNamesFields")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "stackedGroupName")
+		delete(additionalProperties, "stackedGroupNameField")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBarChartSpansQuery struct {

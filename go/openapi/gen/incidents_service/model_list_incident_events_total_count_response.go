@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListIncidentEventsTotalCountResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListIncidentEventsTotalCountResponse{}
@@ -23,7 +26,10 @@ type ListIncidentEventsTotalCountResponse struct {
 	Count *string `json:"count,omitempty"`
 	// Indicates if the count reached the system limit
 	ReachedLimit *bool `json:"reachedLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListIncidentEventsTotalCountResponse ListIncidentEventsTotalCountResponse
 
 // NewListIncidentEventsTotalCountResponse instantiates a new ListIncidentEventsTotalCountResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o ListIncidentEventsTotalCountResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.ReachedLimit) {
 		toSerialize["reachedLimit"] = o.ReachedLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListIncidentEventsTotalCountResponse) UnmarshalJSON(data []byte) (err error) {
+	varListIncidentEventsTotalCountResponse := _ListIncidentEventsTotalCountResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListIncidentEventsTotalCountResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListIncidentEventsTotalCountResponse(varListIncidentEventsTotalCountResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "reachedLimit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListIncidentEventsTotalCountResponse struct {

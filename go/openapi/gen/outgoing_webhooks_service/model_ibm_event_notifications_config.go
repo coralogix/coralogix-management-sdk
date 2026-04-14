@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IbmEventNotificationsConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IbmEventNotificationsConfig{}
@@ -24,7 +27,10 @@ type IbmEventNotificationsConfig struct {
 	RegionId *string `json:"regionId,omitempty"`
 	SourceId *string `json:"sourceId,omitempty"`
 	SourceName *string `json:"sourceName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IbmEventNotificationsConfig IbmEventNotificationsConfig
 
 // NewIbmEventNotificationsConfig instantiates a new IbmEventNotificationsConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o IbmEventNotificationsConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceName) {
 		toSerialize["sourceName"] = o.SourceName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IbmEventNotificationsConfig) UnmarshalJSON(data []byte) (err error) {
+	varIbmEventNotificationsConfig := _IbmEventNotificationsConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIbmEventNotificationsConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IbmEventNotificationsConfig(varIbmEventNotificationsConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "endpointType")
+		delete(additionalProperties, "eventNotificationsInstanceId")
+		delete(additionalProperties, "regionId")
+		delete(additionalProperties, "sourceId")
+		delete(additionalProperties, "sourceName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIbmEventNotificationsConfig struct {

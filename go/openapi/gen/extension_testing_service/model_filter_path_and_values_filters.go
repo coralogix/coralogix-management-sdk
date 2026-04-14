@@ -11,18 +11,21 @@ API version: 1.0.0
 package extension_testing_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterPathAndValuesFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterPathAndValuesFilters{}
 
 // FilterPathAndValuesFilters This data structure represents a filter path and values
 type FilterPathAndValuesFilters struct {
-	Filters *Filters `json:"filters,omitempty"`
+	Filters Filters `json:"filters"`
 	Path string `json:"path"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FilterPathAndValuesFilters FilterPathAndValuesFilters
@@ -31,8 +34,9 @@ type _FilterPathAndValuesFilters FilterPathAndValuesFilters
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFilterPathAndValuesFilters(path string) *FilterPathAndValuesFilters {
+func NewFilterPathAndValuesFilters(filters Filters, path string) *FilterPathAndValuesFilters {
 	this := FilterPathAndValuesFilters{}
+	this.Filters = filters
 	this.Path = path
 	return &this
 }
@@ -45,36 +49,28 @@ func NewFilterPathAndValuesFiltersWithDefaults() *FilterPathAndValuesFilters {
 	return &this
 }
 
-// GetFilters returns the Filters field value if set, zero value otherwise.
+// GetFilters returns the Filters field value
 func (o *FilterPathAndValuesFilters) GetFilters() Filters {
-	if o == nil || IsNil(o.Filters) {
+	if o == nil {
 		var ret Filters
 		return ret
 	}
-	return *o.Filters
+
+	return o.Filters
 }
 
-// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
+// GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
 func (o *FilterPathAndValuesFilters) GetFiltersOk() (*Filters, bool) {
-	if o == nil || IsNil(o.Filters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Filters, true
+	return &o.Filters, true
 }
 
-// HasFilters returns a boolean if a field has been set.
-func (o *FilterPathAndValuesFilters) HasFilters() bool {
-	if o != nil && !IsNil(o.Filters) {
-		return true
-	}
-
-	return false
-}
-
-// SetFilters gets a reference to the given Filters and assigns it to the Filters field.
+// SetFilters sets field value
 func (o *FilterPathAndValuesFilters) SetFilters(v Filters) {
-	o.Filters = &v
+	o.Filters = v
 }
 
 // GetPath returns the Path field value
@@ -111,10 +107,13 @@ func (o FilterPathAndValuesFilters) MarshalJSON() ([]byte, error) {
 
 func (o FilterPathAndValuesFilters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Filters) {
-		toSerialize["filters"] = o.Filters
-	}
+	toSerialize["filters"] = o.Filters
 	toSerialize["path"] = o.Path
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -123,6 +122,7 @@ func (o *FilterPathAndValuesFilters) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"filters",
 		"path",
 	}
 
@@ -150,6 +150,14 @@ func (o *FilterPathAndValuesFilters) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = FilterPathAndValuesFilters(varFilterPathAndValuesFilters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "path")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

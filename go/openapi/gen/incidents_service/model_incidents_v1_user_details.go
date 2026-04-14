@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentsV1UserDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentsV1UserDetails{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &IncidentsV1UserDetails{}
 // IncidentsV1UserDetails struct for IncidentsV1UserDetails
 type IncidentsV1UserDetails struct {
 	UserId string `json:"userId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentsV1UserDetails IncidentsV1UserDetails
@@ -79,6 +82,11 @@ func (o IncidentsV1UserDetails) MarshalJSON() ([]byte, error) {
 func (o IncidentsV1UserDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["userId"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *IncidentsV1UserDetails) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentsV1UserDetails(varIncidentsV1UserDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "userId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

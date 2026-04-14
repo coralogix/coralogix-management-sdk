@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Markdown type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Markdown{}
@@ -23,7 +26,10 @@ type Markdown struct {
 	MarkdownText *string `json:"markdownText,omitempty"`
 	// Tooltip text to display on widget hover
 	TooltipText *string `json:"tooltipText,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Markdown Markdown
 
 // NewMarkdown instantiates a new Markdown object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o Markdown) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TooltipText) {
 		toSerialize["tooltipText"] = o.TooltipText
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Markdown) UnmarshalJSON(data []byte) (err error) {
+	varMarkdown := _Markdown{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMarkdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Markdown(varMarkdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "markdownText")
+		delete(additionalProperties, "tooltipText")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarkdown struct {

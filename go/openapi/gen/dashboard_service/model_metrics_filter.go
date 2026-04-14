@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricsFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricsFilter{}
@@ -24,7 +27,10 @@ type MetricsFilter struct {
 	// The name of the metric to which the filter is applied.
 	Metric *string `json:"metric,omitempty"`
 	Operator *FilterOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricsFilter MetricsFilter
 
 // NewMetricsFilter instantiates a new MetricsFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +164,36 @@ func (o MetricsFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Operator) {
 		toSerialize["operator"] = o.Operator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricsFilter) UnmarshalJSON(data []byte) (err error) {
+	varMetricsFilter := _MetricsFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricsFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricsFilter(varMetricsFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "metric")
+		delete(additionalProperties, "operator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricsFilter struct {

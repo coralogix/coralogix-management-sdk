@@ -40,8 +40,6 @@ func (r ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest) Exe
 /*
 QuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSet Create quota allocation rule set
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest
 */
@@ -140,8 +138,6 @@ func (r ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest) Exe
 
 /*
 QuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSet Delete quota allocation rule set
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest
@@ -245,8 +241,6 @@ func (r ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest) Execut
 
 /*
 QuotaAllocationRuleSetServiceGetQuotaAllocationRuleSet Get quota allocation rule set
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest
@@ -353,8 +347,6 @@ func (r ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest) Ex
 
 /*
 QuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSet Replace quota allocation rule set
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest

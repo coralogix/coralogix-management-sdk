@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationMetadata{}
@@ -22,7 +25,10 @@ type IntegrationMetadata struct {
 	IntegrationKey *string `json:"integrationKey,omitempty"`
 	IntegrationParameters *GenericIntegrationParameters `json:"integrationParameters,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationMetadata IntegrationMetadata
 
 // NewIntegrationMetadata instantiates a new IntegrationMetadata object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o IntegrationMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationMetadata) UnmarshalJSON(data []byte) (err error) {
+	varIntegrationMetadata := _IntegrationMetadata{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationMetadata(varIntegrationMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationKey")
+		delete(additionalProperties, "integrationParameters")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationMetadata struct {

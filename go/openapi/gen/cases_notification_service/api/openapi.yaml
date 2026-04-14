@@ -1,0 +1,421 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /cases/notifications/v1/deliveries:
+    post:
+      description: "Retrieve notification delivery records for one or more cases,\
+        \ including routing, target, and outcome information."
+      externalDocs:
+        url: ""
+      operationId: CasesNotificationService_ListNotificationDeliveries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/List_notification_deliveries_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNotificationDeliveriesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List notification deliveries for cases
+      tags:
+      - Cases notification service
+      x-coralogixPermissions:
+      - case:Read
+components:
+  schemas:
+    CaseNotificationDeliveries:
+      description: Notification deliveries for a single case.
+      example:
+        notificationDeliveries:
+        - noRouterMatched: "{}"
+          requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          timestamp: 2025-09-22T10:30:00Z
+        - noRouterMatched: "{}"
+          requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          timestamp: 2025-09-22T10:30:00Z
+      externalDocs:
+        url: ""
+      properties:
+        notificationDeliveries:
+          items:
+            $ref: "#/components/schemas/NotificationDelivery"
+          type: array
+      required:
+      - notificationDeliveries
+      title: Case notification deliveries
+      type: object
+    ConnectorDetails:
+      description: Details of a notification connector.
+      externalDocs:
+        url: ""
+      properties:
+        connectorId:
+          description: Unique identifier of the connector
+          example: c1d2e3f4-5678-90ab-cdef-1234567890ab
+          type: string
+        connectorName:
+          description: Display name of the connector
+          example: Production Slack
+          type: string
+        connectorType:
+          $ref: "#/components/schemas/v1.ConnectorType"
+      required:
+      - connectorId
+      - connectorName
+      - connectorType
+      title: Connector details
+      type: object
+    DeliveryAttempt:
+      description: A single delivery attempt to a specific connector.
+      externalDocs:
+        url: ""
+      properties:
+        connector:
+          $ref: "#/components/schemas/ConnectorDetails"
+        outcome:
+          $ref: "#/components/schemas/DeliveryOutcome"
+      required:
+      - connector
+      - outcome
+      title: Delivery attempt
+      type: object
+    DeliveryFailure:
+      description: Failed delivery outcome with error details.
+      externalDocs:
+        url: ""
+      properties:
+        errorMessage:
+          description: Error message describing the failure
+          example: Connection timeout after 30s
+          type: string
+      required:
+      - errorMessage
+      title: Delivery failure
+      type: object
+    DeliveryOutcome:
+      oneOf:
+      - $ref: "#/components/schemas/DeliveryOutcomeSuccess"
+      - $ref: "#/components/schemas/DeliveryOutcomeFailure"
+    DeliveryOutcomeFailure:
+      description: Outcome of a notification delivery attempt.
+      externalDocs:
+        url: ""
+      properties:
+        failure:
+          $ref: "#/components/schemas/DeliveryFailure"
+      required:
+      - failure
+      title: Delivery outcome
+      type: object
+    DeliveryOutcomeSuccess:
+      description: Outcome of a notification delivery attempt.
+      externalDocs:
+        url: ""
+      properties:
+        success:
+          $ref: "#/components/schemas/DeliverySuccess"
+      required:
+      - success
+      title: Delivery outcome
+      type: object
+    DeliverySuccess:
+      description: Successful delivery outcome with an optional evidence URL.
+      externalDocs:
+        url: ""
+      properties:
+        evidenceUrl:
+          description: "URL to the delivered notification, if available (e.g. Slack\
+            \ message, ServiceNow record)"
+          example: https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456
+          type: string
+      title: Delivery success
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - filters
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - multipleValues
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    ListNotificationDeliveriesResponse:
+      example:
+        deliveriesByCase:
+          key:
+            notificationDeliveries:
+            - noRouterMatched: "{}"
+              requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+              timestamp: 2025-09-22T10:30:00Z
+            - noRouterMatched: "{}"
+              requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+              timestamp: 2025-09-22T10:30:00Z
+      externalDocs:
+        url: ""
+      properties:
+        deliveriesByCase:
+          additionalProperties:
+            $ref: "#/components/schemas/CaseNotificationDeliveries"
+          description: Notification deliveries keyed by case ID
+          type: object
+      required:
+      - deliveriesByCase
+      title: List notification deliveries response
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    NoNotificationCreatedResult:
+      description: Indicates that routers matched but no notification was ultimately
+        created.
+      externalDocs:
+        url: ""
+      properties:
+        matchedRouters:
+          items:
+            $ref: "#/components/schemas/RouterInfo"
+          type: array
+      required:
+      - matchedRouters
+      title: No notification created result
+      type: object
+    NoRouterMatchedResult:
+      description: Indicates that no router matched the notification request.
+      externalDocs:
+        url: ""
+      title: No router matched result
+      type: object
+    NotificationDelivery:
+      oneOf:
+      - $ref: "#/components/schemas/NotificationDeliveryNoRouterMatched"
+      - $ref: "#/components/schemas/NotificationDeliveryNoNotificationCreated"
+      - $ref: "#/components/schemas/NotificationDeliveryAttempted"
+    NotificationDeliveryAttempted:
+      description: Delivery results for a single notification.
+      externalDocs:
+        url: ""
+      properties:
+        attempted:
+          $ref: "#/components/schemas/RoutedDelivery"
+        requestNotificationId:
+          description: "The notification request ID that triggered this delivery,\
+            \ used to correlate delivery outcomes with their originating requests"
+          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          type: string
+        timestamp:
+          description: When the notification was triggered
+          example: 2025-09-22T10:30:00Z
+          format: date-time
+          type: string
+      required:
+      - attempted
+      - timestamp
+      title: Notification delivery
+      type: object
+    NotificationDeliveryNoNotificationCreated:
+      description: Delivery results for a single notification.
+      externalDocs:
+        url: ""
+      properties:
+        noNotificationCreated:
+          $ref: "#/components/schemas/NoNotificationCreatedResult"
+        requestNotificationId:
+          description: "The notification request ID that triggered this delivery,\
+            \ used to correlate delivery outcomes with their originating requests"
+          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          type: string
+        timestamp:
+          description: When the notification was triggered
+          example: 2025-09-22T10:30:00Z
+          format: date-time
+          type: string
+      required:
+      - noNotificationCreated
+      - timestamp
+      title: Notification delivery
+      type: object
+    NotificationDeliveryNoRouterMatched:
+      description: Delivery results for a single notification.
+      example:
+        noRouterMatched: "{}"
+        requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+        timestamp: 2025-09-22T10:30:00Z
+      externalDocs:
+        url: ""
+      properties:
+        noRouterMatched:
+          description: Indicates that no router matched the notification request.
+          externalDocs:
+            url: ""
+          title: No router matched result
+          type: object
+        requestNotificationId:
+          description: "The notification request ID that triggered this delivery,\
+            \ used to correlate delivery outcomes with their originating requests"
+          example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          type: string
+        timestamp:
+          description: When the notification was triggered
+          example: 2025-09-22T10:30:00Z
+          format: date-time
+          type: string
+      required:
+      - noRouterMatched
+      - timestamp
+      title: Notification delivery
+      type: object
+    RoutedDelivery:
+      description: Delivery attempts routed through a single router to one or more
+        connectors.
+      externalDocs:
+        url: ""
+      properties:
+        attempts:
+          items:
+            $ref: "#/components/schemas/DeliveryAttempt"
+          type: array
+        router:
+          $ref: "#/components/schemas/RouterInfo"
+      required:
+      - attempts
+      - router
+      title: Routed delivery
+      type: object
+    RouterInfo:
+      description: Information about a notification router.
+      externalDocs:
+        url: ""
+      properties:
+        routerId:
+          description: Unique identifier of the router
+          example: d4e5f678-90ab-cdef-1234-567890abcdef
+          type: string
+        routerName:
+          description: Display name of the router
+          example: Production alerts router
+          type: string
+      required:
+      - routerId
+      - routerName
+      title: Router info
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v1.ConnectorType:
+      enum:
+      - CONNECTOR_TYPE_UNSPECIFIED
+      - CONNECTOR_TYPE_SLACK
+      - CONNECTOR_TYPE_SERVICE_NOW
+      - CONNECTOR_TYPE_PAGER_DUTY
+      - CONNECTOR_TYPE_EMAIL
+      - CONNECTOR_TYPE_GENERIC_HTTPS
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    List_notification_deliveries_request:
+      properties:
+        caseIds:
+          example:
+          - 3f166e9f-3c88-4af2-b52e-138f339dab3e
+          - a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          items:
+            description: Case IDs to retrieve notification deliveries for
+            type: string
+          type: array
+      required:
+      - caseIds
+      title: List notification deliveries request
+      type: object

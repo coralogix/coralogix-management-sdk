@@ -11,22 +11,25 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventCloseOperationalEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventCloseOperationalEvent{}
 
 // IncidentEventCloseOperationalEvent struct for IncidentEventCloseOperationalEvent
 type IncidentEventCloseOperationalEvent struct {
-	Close *IncidentEventClose `json:"close,omitempty"`
+	Close IncidentEventClose `json:"close"`
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
-	OperationalEvent *IncidentEventOriginatorOperational `json:"operationalEvent,omitempty"`
+	OperationalEvent IncidentEventOriginatorOperational `json:"operationalEvent"`
 	OriginatorType OriginatorType `json:"originatorType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventCloseOperationalEvent IncidentEventCloseOperationalEvent
@@ -35,10 +38,12 @@ type _IncidentEventCloseOperationalEvent IncidentEventCloseOperationalEvent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventCloseOperationalEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventCloseOperationalEvent {
+func NewIncidentEventCloseOperationalEvent(close IncidentEventClose, id string, incidentEventType IncidentEventType, operationalEvent IncidentEventOriginatorOperational, originatorType OriginatorType) *IncidentEventCloseOperationalEvent {
 	this := IncidentEventCloseOperationalEvent{}
+	this.Close = close
 	this.Id = id
 	this.IncidentEventType = incidentEventType
+	this.OperationalEvent = operationalEvent
 	this.OriginatorType = originatorType
 	return &this
 }
@@ -51,36 +56,28 @@ func NewIncidentEventCloseOperationalEventWithDefaults() *IncidentEventCloseOper
 	return &this
 }
 
-// GetClose returns the Close field value if set, zero value otherwise.
+// GetClose returns the Close field value
 func (o *IncidentEventCloseOperationalEvent) GetClose() IncidentEventClose {
-	if o == nil || IsNil(o.Close) {
+	if o == nil {
 		var ret IncidentEventClose
 		return ret
 	}
-	return *o.Close
+
+	return o.Close
 }
 
-// GetCloseOk returns a tuple with the Close field value if set, nil otherwise
+// GetCloseOk returns a tuple with the Close field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventCloseOperationalEvent) GetCloseOk() (*IncidentEventClose, bool) {
-	if o == nil || IsNil(o.Close) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Close, true
+	return &o.Close, true
 }
 
-// HasClose returns a boolean if a field has been set.
-func (o *IncidentEventCloseOperationalEvent) HasClose() bool {
-	if o != nil && !IsNil(o.Close) {
-		return true
-	}
-
-	return false
-}
-
-// SetClose gets a reference to the given IncidentEventClose and assigns it to the Close field.
+// SetClose sets field value
 func (o *IncidentEventCloseOperationalEvent) SetClose(v IncidentEventClose) {
-	o.Close = &v
+	o.Close = v
 }
 
 // GetId returns the Id field value
@@ -131,36 +128,28 @@ func (o *IncidentEventCloseOperationalEvent) SetIncidentEventType(v IncidentEven
 	o.IncidentEventType = v
 }
 
-// GetOperationalEvent returns the OperationalEvent field value if set, zero value otherwise.
+// GetOperationalEvent returns the OperationalEvent field value
 func (o *IncidentEventCloseOperationalEvent) GetOperationalEvent() IncidentEventOriginatorOperational {
-	if o == nil || IsNil(o.OperationalEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorOperational
 		return ret
 	}
-	return *o.OperationalEvent
+
+	return o.OperationalEvent
 }
 
-// GetOperationalEventOk returns a tuple with the OperationalEvent field value if set, nil otherwise
+// GetOperationalEventOk returns a tuple with the OperationalEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventCloseOperationalEvent) GetOperationalEventOk() (*IncidentEventOriginatorOperational, bool) {
-	if o == nil || IsNil(o.OperationalEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OperationalEvent, true
+	return &o.OperationalEvent, true
 }
 
-// HasOperationalEvent returns a boolean if a field has been set.
-func (o *IncidentEventCloseOperationalEvent) HasOperationalEvent() bool {
-	if o != nil && !IsNil(o.OperationalEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetOperationalEvent gets a reference to the given IncidentEventOriginatorOperational and assigns it to the OperationalEvent field.
+// SetOperationalEvent sets field value
 func (o *IncidentEventCloseOperationalEvent) SetOperationalEvent(v IncidentEventOriginatorOperational) {
-	o.OperationalEvent = &v
+	o.OperationalEvent = v
 }
 
 // GetOriginatorType returns the OriginatorType field value
@@ -197,15 +186,16 @@ func (o IncidentEventCloseOperationalEvent) MarshalJSON() ([]byte, error) {
 
 func (o IncidentEventCloseOperationalEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Close) {
-		toSerialize["close"] = o.Close
-	}
+	toSerialize["close"] = o.Close
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
-	if !IsNil(o.OperationalEvent) {
-		toSerialize["operationalEvent"] = o.OperationalEvent
-	}
+	toSerialize["operationalEvent"] = o.OperationalEvent
 	toSerialize["originatorType"] = o.OriginatorType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,8 +204,10 @@ func (o *IncidentEventCloseOperationalEvent) UnmarshalJSON(data []byte) (err err
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"close",
 		"id",
 		"incidentEventType",
+		"operationalEvent",
 		"originatorType",
 	}
 
@@ -243,6 +235,17 @@ func (o *IncidentEventCloseOperationalEvent) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = IncidentEventCloseOperationalEvent(varIncidentEventCloseOperationalEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "close")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "operationalEvent")
+		delete(additionalProperties, "originatorType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

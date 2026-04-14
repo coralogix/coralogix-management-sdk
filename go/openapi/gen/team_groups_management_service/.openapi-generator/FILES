@@ -9,9 +9,6 @@ configuration.go
 git_push.sh
 model_clear_role.go
 model_clear_scope.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_team_group_request.go
 model_create_team_group_response.go
@@ -28,8 +25,6 @@ model_get_team_group_response.go
 model_get_team_groups_response.go
 model_group_origin.go
 model_group_type.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_rbac_v2_user.go
 model_role.go

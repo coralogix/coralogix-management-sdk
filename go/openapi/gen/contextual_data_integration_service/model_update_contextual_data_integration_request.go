@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateContextualDataIntegrationRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &UpdateContextualDataIntegrationRequest{}
 type UpdateContextualDataIntegrationRequest struct {
 	IntegrationId *string `json:"integrationId,omitempty"`
 	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateContextualDataIntegrationRequest UpdateContextualDataIntegrationRequest
 
 // NewUpdateContextualDataIntegrationRequest instantiates a new UpdateContextualDataIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o UpdateContextualDataIntegrationRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateContextualDataIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateContextualDataIntegrationRequest := _UpdateContextualDataIntegrationRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpdateContextualDataIntegrationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateContextualDataIntegrationRequest(varUpdateContextualDataIntegrationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationId")
+		delete(additionalProperties, "metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateContextualDataIntegrationRequest struct {

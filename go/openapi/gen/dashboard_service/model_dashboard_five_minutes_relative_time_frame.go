@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardFiveMinutesRelativeTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardFiveMinutesRelativeTimeFrame{}
@@ -26,7 +28,7 @@ type DashboardFiveMinutesRelativeTimeFrame struct {
 	// A brief description or summary of the dashboard's purpose or content
 	Description *string `json:"description,omitempty"`
 	Filters []FiltersFilter `json:"filters,omitempty"`
-	FiveMinutes map[string]interface{} `json:"fiveMinutes,omitempty"`
+	FiveMinutes map[string]interface{} `json:"fiveMinutes"`
 	FolderId *UUID `json:"folderId,omitempty"`
 	FolderPath *FolderPath `json:"folderPath,omitempty"`
 	// A unique identifier of the dashboard
@@ -35,11 +37,12 @@ type DashboardFiveMinutesRelativeTimeFrame struct {
 	// The display name of the dashboard
 	Name string `json:"name"`
 	// Relative time frame specifying a duration from the current time
-	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty"`
+	RelativeTimeFrame string `json:"relativeTimeFrame"`
 	// A unique slug name serving as an alias for accessing the dashboard
 	SlugName *string `json:"slugName,omitempty"`
 	Variables []Variable `json:"variables,omitempty"`
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DashboardFiveMinutesRelativeTimeFrame DashboardFiveMinutesRelativeTimeFrame
@@ -48,10 +51,12 @@ type _DashboardFiveMinutesRelativeTimeFrame DashboardFiveMinutesRelativeTimeFram
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDashboardFiveMinutesRelativeTimeFrame(layout Layout, name string) *DashboardFiveMinutesRelativeTimeFrame {
+func NewDashboardFiveMinutesRelativeTimeFrame(fiveMinutes map[string]interface{}, layout Layout, name string, relativeTimeFrame string) *DashboardFiveMinutesRelativeTimeFrame {
 	this := DashboardFiveMinutesRelativeTimeFrame{}
+	this.FiveMinutes = fiveMinutes
 	this.Layout = layout
 	this.Name = name
+	this.RelativeTimeFrame = relativeTimeFrame
 	return &this
 }
 
@@ -191,34 +196,26 @@ func (o *DashboardFiveMinutesRelativeTimeFrame) SetFilters(v []FiltersFilter) {
 	o.Filters = v
 }
 
-// GetFiveMinutes returns the FiveMinutes field value if set, zero value otherwise.
+// GetFiveMinutes returns the FiveMinutes field value
 func (o *DashboardFiveMinutesRelativeTimeFrame) GetFiveMinutes() map[string]interface{} {
-	if o == nil || IsNil(o.FiveMinutes) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.FiveMinutes
 }
 
-// GetFiveMinutesOk returns a tuple with the FiveMinutes field value if set, nil otherwise
+// GetFiveMinutesOk returns a tuple with the FiveMinutes field value
 // and a boolean to check if the value has been set.
 func (o *DashboardFiveMinutesRelativeTimeFrame) GetFiveMinutesOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.FiveMinutes) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.FiveMinutes, true
 }
 
-// HasFiveMinutes returns a boolean if a field has been set.
-func (o *DashboardFiveMinutesRelativeTimeFrame) HasFiveMinutes() bool {
-	if o != nil && !IsNil(o.FiveMinutes) {
-		return true
-	}
-
-	return false
-}
-
-// SetFiveMinutes gets a reference to the given map[string]interface{} and assigns it to the FiveMinutes field.
+// SetFiveMinutes sets field value
 func (o *DashboardFiveMinutesRelativeTimeFrame) SetFiveMinutes(v map[string]interface{}) {
 	o.FiveMinutes = v
 }
@@ -367,36 +364,28 @@ func (o *DashboardFiveMinutesRelativeTimeFrame) SetName(v string) {
 	o.Name = v
 }
 
-// GetRelativeTimeFrame returns the RelativeTimeFrame field value if set, zero value otherwise.
+// GetRelativeTimeFrame returns the RelativeTimeFrame field value
 func (o *DashboardFiveMinutesRelativeTimeFrame) GetRelativeTimeFrame() string {
-	if o == nil || IsNil(o.RelativeTimeFrame) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RelativeTimeFrame
+
+	return o.RelativeTimeFrame
 }
 
-// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value if set, nil otherwise
+// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *DashboardFiveMinutesRelativeTimeFrame) GetRelativeTimeFrameOk() (*string, bool) {
-	if o == nil || IsNil(o.RelativeTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RelativeTimeFrame, true
+	return &o.RelativeTimeFrame, true
 }
 
-// HasRelativeTimeFrame returns a boolean if a field has been set.
-func (o *DashboardFiveMinutesRelativeTimeFrame) HasRelativeTimeFrame() bool {
-	if o != nil && !IsNil(o.RelativeTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetRelativeTimeFrame gets a reference to the given string and assigns it to the RelativeTimeFrame field.
+// SetRelativeTimeFrame sets field value
 func (o *DashboardFiveMinutesRelativeTimeFrame) SetRelativeTimeFrame(v string) {
-	o.RelativeTimeFrame = &v
+	o.RelativeTimeFrame = v
 }
 
 // GetSlugName returns the SlugName field value if set, zero value otherwise.
@@ -517,9 +506,7 @@ func (o DashboardFiveMinutesRelativeTimeFrame) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
 	}
-	if !IsNil(o.FiveMinutes) {
-		toSerialize["fiveMinutes"] = o.FiveMinutes
-	}
+	toSerialize["fiveMinutes"] = o.FiveMinutes
 	if !IsNil(o.FolderId) {
 		toSerialize["folderId"] = o.FolderId
 	}
@@ -531,9 +518,7 @@ func (o DashboardFiveMinutesRelativeTimeFrame) ToMap() (map[string]interface{}, 
 	}
 	toSerialize["layout"] = o.Layout
 	toSerialize["name"] = o.Name
-	if !IsNil(o.RelativeTimeFrame) {
-		toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
-	}
+	toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
 	if !IsNil(o.SlugName) {
 		toSerialize["slugName"] = o.SlugName
 	}
@@ -543,6 +528,11 @@ func (o DashboardFiveMinutesRelativeTimeFrame) ToMap() (map[string]interface{}, 
 	if !IsNil(o.VariablesV2) {
 		toSerialize["variablesV2"] = o.VariablesV2
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -551,8 +541,10 @@ func (o *DashboardFiveMinutesRelativeTimeFrame) UnmarshalJSON(data []byte) (err 
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"fiveMinutes",
 		"layout",
 		"name",
+		"relativeTimeFrame",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -579,6 +571,26 @@ func (o *DashboardFiveMinutesRelativeTimeFrame) UnmarshalJSON(data []byte) (err 
 	}
 
 	*o = DashboardFiveMinutesRelativeTimeFrame(varDashboardFiveMinutesRelativeTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "annotations")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "fiveMinutes")
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "folderPath")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "layout")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "relativeTimeFrame")
+		delete(additionalProperties, "slugName")
+		delete(additionalProperties, "variables")
+		delete(additionalProperties, "variablesV2")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,23 +11,31 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds{}
 
 // FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds struct for FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
 type FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds struct {
-	AlertSchedulerVersionIds *AlertSchedulerRuleVersionIds `json:"alertSchedulerVersionIds,omitempty"`
+	AlertSchedulerVersionIds AlertSchedulerRuleVersionIds `json:"alertSchedulerVersionIds"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
 
 // NewFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds instantiates a new FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds() *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds {
+func NewFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds(alertSchedulerVersionIds AlertSchedulerRuleVersionIds) *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds {
 	this := FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds{}
+	this.AlertSchedulerVersionIds = alertSchedulerVersionIds
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIdsWithDefaults() *Fil
 	return &this
 }
 
-// GetAlertSchedulerVersionIds returns the AlertSchedulerVersionIds field value if set, zero value otherwise.
+// GetAlertSchedulerVersionIds returns the AlertSchedulerVersionIds field value
 func (o *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) GetAlertSchedulerVersionIds() AlertSchedulerRuleVersionIds {
-	if o == nil || IsNil(o.AlertSchedulerVersionIds) {
+	if o == nil {
 		var ret AlertSchedulerRuleVersionIds
 		return ret
 	}
-	return *o.AlertSchedulerVersionIds
+
+	return o.AlertSchedulerVersionIds
 }
 
-// GetAlertSchedulerVersionIdsOk returns a tuple with the AlertSchedulerVersionIds field value if set, nil otherwise
+// GetAlertSchedulerVersionIdsOk returns a tuple with the AlertSchedulerVersionIds field value
 // and a boolean to check if the value has been set.
 func (o *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) GetAlertSchedulerVersionIdsOk() (*AlertSchedulerRuleVersionIds, bool) {
-	if o == nil || IsNil(o.AlertSchedulerVersionIds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AlertSchedulerVersionIds, true
+	return &o.AlertSchedulerVersionIds, true
 }
 
-// HasAlertSchedulerVersionIds returns a boolean if a field has been set.
-func (o *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) HasAlertSchedulerVersionIds() bool {
-	if o != nil && !IsNil(o.AlertSchedulerVersionIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetAlertSchedulerVersionIds gets a reference to the given AlertSchedulerRuleVersionIds and assigns it to the AlertSchedulerVersionIds field.
+// SetAlertSchedulerVersionIds sets field value
 func (o *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) SetAlertSchedulerVersionIds(v AlertSchedulerRuleVersionIds) {
-	o.AlertSchedulerVersionIds = &v
+	o.AlertSchedulerVersionIds = v
 }
 
 func (o FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) MarshalJSON() ([]
 
 func (o FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AlertSchedulerVersionIds) {
-		toSerialize["alertSchedulerVersionIds"] = o.AlertSchedulerVersionIds
+	toSerialize["alertSchedulerVersionIds"] = o.AlertSchedulerVersionIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"alertSchedulerVersionIds",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds := _FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds(varFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerVersionIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds struct {

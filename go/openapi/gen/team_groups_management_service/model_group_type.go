@@ -11,9 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // GroupType the model 'GroupType'
 type GroupType string

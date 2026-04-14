@@ -11,26 +11,34 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RecurringDynamicDaily type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringDynamicDaily{}
 
 // RecurringDynamicDaily struct for RecurringDynamicDaily
 type RecurringDynamicDaily struct {
-	Daily map[string]interface{} `json:"daily,omitempty"`
+	Daily map[string]interface{} `json:"daily"`
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
 	TerminationDate *string `json:"terminationDate,omitempty"`
 	Timeframe *Timeframe `json:"timeframe,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecurringDynamicDaily RecurringDynamicDaily
 
 // NewRecurringDynamicDaily instantiates a new RecurringDynamicDaily object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecurringDynamicDaily() *RecurringDynamicDaily {
+func NewRecurringDynamicDaily(daily map[string]interface{}) *RecurringDynamicDaily {
 	this := RecurringDynamicDaily{}
+	this.Daily = daily
 	return &this
 }
 
@@ -42,34 +50,26 @@ func NewRecurringDynamicDailyWithDefaults() *RecurringDynamicDaily {
 	return &this
 }
 
-// GetDaily returns the Daily field value if set, zero value otherwise.
+// GetDaily returns the Daily field value
 func (o *RecurringDynamicDaily) GetDaily() map[string]interface{} {
-	if o == nil || IsNil(o.Daily) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Daily
 }
 
-// GetDailyOk returns a tuple with the Daily field value if set, nil otherwise
+// GetDailyOk returns a tuple with the Daily field value
 // and a boolean to check if the value has been set.
 func (o *RecurringDynamicDaily) GetDailyOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Daily) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Daily, true
 }
 
-// HasDaily returns a boolean if a field has been set.
-func (o *RecurringDynamicDaily) HasDaily() bool {
-	if o != nil && !IsNil(o.Daily) {
-		return true
-	}
-
-	return false
-}
-
-// SetDaily gets a reference to the given map[string]interface{} and assigns it to the Daily field.
+// SetDaily sets field value
 func (o *RecurringDynamicDaily) SetDaily(v map[string]interface{}) {
 	o.Daily = v
 }
@@ -180,9 +180,7 @@ func (o RecurringDynamicDaily) MarshalJSON() ([]byte, error) {
 
 func (o RecurringDynamicDaily) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Daily) {
-		toSerialize["daily"] = o.Daily
-	}
+	toSerialize["daily"] = o.Daily
 	if !IsNil(o.RepeatEvery) {
 		toSerialize["repeatEvery"] = o.RepeatEvery
 	}
@@ -192,7 +190,58 @@ func (o RecurringDynamicDaily) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timeframe) {
 		toSerialize["timeframe"] = o.Timeframe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecurringDynamicDaily) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"daily",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRecurringDynamicDaily := _RecurringDynamicDaily{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurringDynamicDaily)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecurringDynamicDaily(varRecurringDynamicDaily)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "daily")
+		delete(additionalProperties, "repeatEvery")
+		delete(additionalProperties, "terminationDate")
+		delete(additionalProperties, "timeframe")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecurringDynamicDaily struct {

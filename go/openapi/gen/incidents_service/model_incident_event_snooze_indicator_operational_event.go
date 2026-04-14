@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventSnoozeIndicatorOperationalEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventSnoozeIndicatorOperationalEvent{}
@@ -24,9 +26,10 @@ type IncidentEventSnoozeIndicatorOperationalEvent struct {
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
-	OperationalEvent *IncidentEventOriginatorOperational `json:"operationalEvent,omitempty"`
+	OperationalEvent IncidentEventOriginatorOperational `json:"operationalEvent"`
 	OriginatorType OriginatorType `json:"originatorType"`
-	SnoozeIndicator *IncidentEventSnoozeIndicator `json:"snoozeIndicator,omitempty"`
+	SnoozeIndicator IncidentEventSnoozeIndicator `json:"snoozeIndicator"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventSnoozeIndicatorOperationalEvent IncidentEventSnoozeIndicatorOperationalEvent
@@ -35,11 +38,13 @@ type _IncidentEventSnoozeIndicatorOperationalEvent IncidentEventSnoozeIndicatorO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventSnoozeIndicatorOperationalEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventSnoozeIndicatorOperationalEvent {
+func NewIncidentEventSnoozeIndicatorOperationalEvent(id string, incidentEventType IncidentEventType, operationalEvent IncidentEventOriginatorOperational, originatorType OriginatorType, snoozeIndicator IncidentEventSnoozeIndicator) *IncidentEventSnoozeIndicatorOperationalEvent {
 	this := IncidentEventSnoozeIndicatorOperationalEvent{}
 	this.Id = id
 	this.IncidentEventType = incidentEventType
+	this.OperationalEvent = operationalEvent
 	this.OriginatorType = originatorType
+	this.SnoozeIndicator = snoozeIndicator
 	return &this
 }
 
@@ -99,36 +104,28 @@ func (o *IncidentEventSnoozeIndicatorOperationalEvent) SetIncidentEventType(v In
 	o.IncidentEventType = v
 }
 
-// GetOperationalEvent returns the OperationalEvent field value if set, zero value otherwise.
+// GetOperationalEvent returns the OperationalEvent field value
 func (o *IncidentEventSnoozeIndicatorOperationalEvent) GetOperationalEvent() IncidentEventOriginatorOperational {
-	if o == nil || IsNil(o.OperationalEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorOperational
 		return ret
 	}
-	return *o.OperationalEvent
+
+	return o.OperationalEvent
 }
 
-// GetOperationalEventOk returns a tuple with the OperationalEvent field value if set, nil otherwise
+// GetOperationalEventOk returns a tuple with the OperationalEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventSnoozeIndicatorOperationalEvent) GetOperationalEventOk() (*IncidentEventOriginatorOperational, bool) {
-	if o == nil || IsNil(o.OperationalEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OperationalEvent, true
+	return &o.OperationalEvent, true
 }
 
-// HasOperationalEvent returns a boolean if a field has been set.
-func (o *IncidentEventSnoozeIndicatorOperationalEvent) HasOperationalEvent() bool {
-	if o != nil && !IsNil(o.OperationalEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetOperationalEvent gets a reference to the given IncidentEventOriginatorOperational and assigns it to the OperationalEvent field.
+// SetOperationalEvent sets field value
 func (o *IncidentEventSnoozeIndicatorOperationalEvent) SetOperationalEvent(v IncidentEventOriginatorOperational) {
-	o.OperationalEvent = &v
+	o.OperationalEvent = v
 }
 
 // GetOriginatorType returns the OriginatorType field value
@@ -155,36 +152,28 @@ func (o *IncidentEventSnoozeIndicatorOperationalEvent) SetOriginatorType(v Origi
 	o.OriginatorType = v
 }
 
-// GetSnoozeIndicator returns the SnoozeIndicator field value if set, zero value otherwise.
+// GetSnoozeIndicator returns the SnoozeIndicator field value
 func (o *IncidentEventSnoozeIndicatorOperationalEvent) GetSnoozeIndicator() IncidentEventSnoozeIndicator {
-	if o == nil || IsNil(o.SnoozeIndicator) {
+	if o == nil {
 		var ret IncidentEventSnoozeIndicator
 		return ret
 	}
-	return *o.SnoozeIndicator
+
+	return o.SnoozeIndicator
 }
 
-// GetSnoozeIndicatorOk returns a tuple with the SnoozeIndicator field value if set, nil otherwise
+// GetSnoozeIndicatorOk returns a tuple with the SnoozeIndicator field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventSnoozeIndicatorOperationalEvent) GetSnoozeIndicatorOk() (*IncidentEventSnoozeIndicator, bool) {
-	if o == nil || IsNil(o.SnoozeIndicator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SnoozeIndicator, true
+	return &o.SnoozeIndicator, true
 }
 
-// HasSnoozeIndicator returns a boolean if a field has been set.
-func (o *IncidentEventSnoozeIndicatorOperationalEvent) HasSnoozeIndicator() bool {
-	if o != nil && !IsNil(o.SnoozeIndicator) {
-		return true
-	}
-
-	return false
-}
-
-// SetSnoozeIndicator gets a reference to the given IncidentEventSnoozeIndicator and assigns it to the SnoozeIndicator field.
+// SetSnoozeIndicator sets field value
 func (o *IncidentEventSnoozeIndicatorOperationalEvent) SetSnoozeIndicator(v IncidentEventSnoozeIndicator) {
-	o.SnoozeIndicator = &v
+	o.SnoozeIndicator = v
 }
 
 func (o IncidentEventSnoozeIndicatorOperationalEvent) MarshalJSON() ([]byte, error) {
@@ -199,13 +188,14 @@ func (o IncidentEventSnoozeIndicatorOperationalEvent) ToMap() (map[string]interf
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
-	if !IsNil(o.OperationalEvent) {
-		toSerialize["operationalEvent"] = o.OperationalEvent
-	}
+	toSerialize["operationalEvent"] = o.OperationalEvent
 	toSerialize["originatorType"] = o.OriginatorType
-	if !IsNil(o.SnoozeIndicator) {
-		toSerialize["snoozeIndicator"] = o.SnoozeIndicator
+	toSerialize["snoozeIndicator"] = o.SnoozeIndicator
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -216,7 +206,9 @@ func (o *IncidentEventSnoozeIndicatorOperationalEvent) UnmarshalJSON(data []byte
 	requiredProperties := []string{
 		"id",
 		"incidentEventType",
+		"operationalEvent",
 		"originatorType",
+		"snoozeIndicator",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -243,6 +235,17 @@ func (o *IncidentEventSnoozeIndicatorOperationalEvent) UnmarshalJSON(data []byte
 	}
 
 	*o = IncidentEventSnoozeIndicatorOperationalEvent(varIncidentEventSnoozeIndicatorOperationalEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "operationalEvent")
+		delete(additionalProperties, "originatorType")
+		delete(additionalProperties, "snoozeIndicator")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

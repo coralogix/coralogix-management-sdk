@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicBatchExecuteActionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicBatchExecuteActionsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AtomicBatchExecuteActionsResponse{}
 // AtomicBatchExecuteActionsResponse This data structure represents the response to a batch Action execution request.
 type AtomicBatchExecuteActionsResponse struct {
 	MatchingResponses []ActionExecutionResponse `json:"matchingResponses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AtomicBatchExecuteActionsResponse AtomicBatchExecuteActionsResponse
 
 // NewAtomicBatchExecuteActionsResponse instantiates a new AtomicBatchExecuteActionsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AtomicBatchExecuteActionsResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.MatchingResponses) {
 		toSerialize["matchingResponses"] = o.MatchingResponses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AtomicBatchExecuteActionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varAtomicBatchExecuteActionsResponse := _AtomicBatchExecuteActionsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAtomicBatchExecuteActionsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AtomicBatchExecuteActionsResponse(varAtomicBatchExecuteActionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matchingResponses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAtomicBatchExecuteActionsResponse struct {

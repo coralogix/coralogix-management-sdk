@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActivityAnalysisStats type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActivityAnalysisStats{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ActivityAnalysisStats{}
 type ActivityAnalysisStats struct {
 	IsMutedCount *int64 `json:"isMutedCount,omitempty"`
 	Rules []string `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivityAnalysisStats ActivityAnalysisStats
 
 // NewActivityAnalysisStats instantiates a new ActivityAnalysisStats object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ActivityAnalysisStats) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivityAnalysisStats) UnmarshalJSON(data []byte) (err error) {
+	varActivityAnalysisStats := _ActivityAnalysisStats{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActivityAnalysisStats)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivityAnalysisStats(varActivityAnalysisStats)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isMutedCount")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivityAnalysisStats struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RegexValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RegexValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &RegexValue{}
 // RegexValue struct for RegexValue
 type RegexValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RegexValue RegexValue
 
 // NewRegexValue instantiates a new RegexValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o RegexValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RegexValue) UnmarshalJSON(data []byte) (err error) {
+	varRegexValue := _RegexValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRegexValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RegexValue(varRegexValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRegexValue struct {

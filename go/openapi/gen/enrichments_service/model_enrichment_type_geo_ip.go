@@ -11,23 +11,31 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentTypeGeoIp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeGeoIp{}
 
 // EnrichmentTypeGeoIp struct for EnrichmentTypeGeoIp
 type EnrichmentTypeGeoIp struct {
-	GeoIp *GeoIpType `json:"geoIp,omitempty"`
+	GeoIp GeoIpType `json:"geoIp"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnrichmentTypeGeoIp EnrichmentTypeGeoIp
 
 // NewEnrichmentTypeGeoIp instantiates a new EnrichmentTypeGeoIp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnrichmentTypeGeoIp() *EnrichmentTypeGeoIp {
+func NewEnrichmentTypeGeoIp(geoIp GeoIpType) *EnrichmentTypeGeoIp {
 	this := EnrichmentTypeGeoIp{}
+	this.GeoIp = geoIp
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewEnrichmentTypeGeoIpWithDefaults() *EnrichmentTypeGeoIp {
 	return &this
 }
 
-// GetGeoIp returns the GeoIp field value if set, zero value otherwise.
+// GetGeoIp returns the GeoIp field value
 func (o *EnrichmentTypeGeoIp) GetGeoIp() GeoIpType {
-	if o == nil || IsNil(o.GeoIp) {
+	if o == nil {
 		var ret GeoIpType
 		return ret
 	}
-	return *o.GeoIp
+
+	return o.GeoIp
 }
 
-// GetGeoIpOk returns a tuple with the GeoIp field value if set, nil otherwise
+// GetGeoIpOk returns a tuple with the GeoIp field value
 // and a boolean to check if the value has been set.
 func (o *EnrichmentTypeGeoIp) GetGeoIpOk() (*GeoIpType, bool) {
-	if o == nil || IsNil(o.GeoIp) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GeoIp, true
+	return &o.GeoIp, true
 }
 
-// HasGeoIp returns a boolean if a field has been set.
-func (o *EnrichmentTypeGeoIp) HasGeoIp() bool {
-	if o != nil && !IsNil(o.GeoIp) {
-		return true
-	}
-
-	return false
-}
-
-// SetGeoIp gets a reference to the given GeoIpType and assigns it to the GeoIp field.
+// SetGeoIp sets field value
 func (o *EnrichmentTypeGeoIp) SetGeoIp(v GeoIpType) {
-	o.GeoIp = &v
+	o.GeoIp = v
 }
 
 func (o EnrichmentTypeGeoIp) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o EnrichmentTypeGeoIp) MarshalJSON() ([]byte, error) {
 
 func (o EnrichmentTypeGeoIp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GeoIp) {
-		toSerialize["geoIp"] = o.GeoIp
+	toSerialize["geoIp"] = o.GeoIp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *EnrichmentTypeGeoIp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"geoIp",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEnrichmentTypeGeoIp := _EnrichmentTypeGeoIp{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentTypeGeoIp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentTypeGeoIp(varEnrichmentTypeGeoIp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "geoIp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnrichmentTypeGeoIp struct {

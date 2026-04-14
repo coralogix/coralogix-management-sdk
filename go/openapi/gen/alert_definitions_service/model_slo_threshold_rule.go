@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloThresholdRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloThresholdRule{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &SloThresholdRule{}
 type SloThresholdRule struct {
 	Condition *SloThresholdCondition `json:"condition,omitempty"`
 	Override *AlertDefOverride `json:"override,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloThresholdRule SloThresholdRule
 
 // NewSloThresholdRule instantiates a new SloThresholdRule object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o SloThresholdRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Override) {
 		toSerialize["override"] = o.Override
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloThresholdRule) UnmarshalJSON(data []byte) (err error) {
+	varSloThresholdRule := _SloThresholdRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloThresholdRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloThresholdRule(varSloThresholdRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		delete(additionalProperties, "override")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloThresholdRule struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GenericWebhookConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenericWebhookConfig{}
@@ -23,7 +26,10 @@ type GenericWebhookConfig struct {
 	Method *MethodType `json:"method,omitempty"`
 	Payload *string `json:"payload,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenericWebhookConfig GenericWebhookConfig
 
 // NewGenericWebhookConfig instantiates a new GenericWebhookConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o GenericWebhookConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenericWebhookConfig) UnmarshalJSON(data []byte) (err error) {
+	varGenericWebhookConfig := _GenericWebhookConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGenericWebhookConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenericWebhookConfig(varGenericWebhookConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "payload")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenericWebhookConfig struct {

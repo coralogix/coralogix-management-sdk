@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AwsType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsType{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AwsType{}
 // AwsType struct for AwsType
 type AwsType struct {
 	ResourceType *string `json:"resourceType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AwsType AwsType
 
 // NewAwsType instantiates a new AwsType object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AwsType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ResourceType) {
 		toSerialize["resourceType"] = o.ResourceType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AwsType) UnmarshalJSON(data []byte) (err error) {
+	varAwsType := _AwsType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAwsType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AwsType(varAwsType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resourceType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAwsType struct {

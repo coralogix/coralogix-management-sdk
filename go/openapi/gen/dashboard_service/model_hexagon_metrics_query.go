@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HexagonMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonMetricsQuery{}
@@ -25,7 +28,10 @@ type HexagonMetricsQuery struct {
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HexagonMetricsQuery HexagonMetricsQuery
 
 // NewHexagonMetricsQuery instantiates a new HexagonMetricsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o HexagonMetricsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HexagonMetricsQuery) UnmarshalJSON(data []byte) (err error) {
+	varHexagonMetricsQuery := _HexagonMetricsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagonMetricsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexagonMetricsQuery(varHexagonMetricsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "editorMode")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "promqlQuery")
+		delete(additionalProperties, "promqlQueryType")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHexagonMetricsQuery struct {

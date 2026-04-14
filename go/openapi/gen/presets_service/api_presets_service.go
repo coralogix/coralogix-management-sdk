@@ -42,8 +42,6 @@ func (r ApiPresetsServiceBatchGetPresetsRequest) Execute() (*BatchGetPresetsResp
 /*
 PresetsServiceBatchGetPresets Batch Get Presets
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceBatchGetPresetsRequest
 */
@@ -158,8 +156,6 @@ func (r ApiPresetsServiceCreateCustomPresetRequest) Execute() (*CreateCustomPres
 /*
 PresetsServiceCreateCustomPreset Create Custom Preset
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceCreateCustomPresetRequest
 */
@@ -260,8 +256,6 @@ func (r ApiPresetsServiceDeleteCustomPresetRequest) Execute() (map[string]interf
 /*
 PresetsServiceDeleteCustomPreset Delete Custom Preset
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiPresetsServiceDeleteCustomPresetRequest
@@ -353,11 +347,11 @@ func (a *PresetsServiceAPIService) PresetsServiceDeleteCustomPresetExecute(r Api
 type ApiPresetsServiceGetDefaultPresetSummaryRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	connectorType *ConnectorType
+	connectorType *NotificationCenterConnectorType
 	entityType *NotificationCenterEntityType
 }
 
-func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) ConnectorType(connectorType ConnectorType) ApiPresetsServiceGetDefaultPresetSummaryRequest {
+func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiPresetsServiceGetDefaultPresetSummaryRequest {
 	r.connectorType = &connectorType
 	return r
 }
@@ -373,8 +367,6 @@ func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) Execute() (*GetDefaultP
 
 /*
 PresetsServiceGetDefaultPresetSummary Get Default Preset Summary
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceGetDefaultPresetSummaryRequest
@@ -480,8 +472,6 @@ func (r ApiPresetsServiceGetPresetRequest) Execute() (*GetPresetResponse, *http.
 /*
 PresetsServiceGetPreset Get Preset
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiPresetsServiceGetPresetRequest
@@ -573,11 +563,11 @@ func (a *PresetsServiceAPIService) PresetsServiceGetPresetExecute(r ApiPresetsSe
 type ApiPresetsServiceGetSystemDefaultPresetSummaryRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	connectorType *ConnectorType
+	connectorType *NotificationCenterConnectorType
 	entityType *NotificationCenterEntityType
 }
 
-func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) ConnectorType(connectorType ConnectorType) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
+func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
 	r.connectorType = &connectorType
 	return r
 }
@@ -593,8 +583,6 @@ func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) Execute() (*GetSy
 
 /*
 PresetsServiceGetSystemDefaultPresetSummary Get System Default Preset Summary
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceGetSystemDefaultPresetSummaryRequest
@@ -690,11 +678,11 @@ func (a *PresetsServiceAPIService) PresetsServiceGetSystemDefaultPresetSummaryEx
 type ApiPresetsServiceListPresetSummariesRequest struct {
 	ctx context.Context
 	ApiService *PresetsServiceAPIService
-	connectorType *ConnectorType
+	connectorType *NotificationCenterConnectorType
 	entityType *NotificationCenterEntityType
 }
 
-func (r ApiPresetsServiceListPresetSummariesRequest) ConnectorType(connectorType ConnectorType) ApiPresetsServiceListPresetSummariesRequest {
+func (r ApiPresetsServiceListPresetSummariesRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiPresetsServiceListPresetSummariesRequest {
 	r.connectorType = &connectorType
 	return r
 }
@@ -710,8 +698,6 @@ func (r ApiPresetsServiceListPresetSummariesRequest) Execute() (*ListPresetSumma
 
 /*
 PresetsServiceListPresetSummaries List Preset Summaries
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceListPresetSummariesRequest
@@ -822,8 +808,6 @@ func (r ApiPresetsServiceReplaceCustomPresetRequest) Execute() (*ReplaceCustomPr
 /*
 PresetsServiceReplaceCustomPreset Replace Custom Preset
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceReplaceCustomPresetRequest
 */
@@ -923,8 +907,6 @@ func (r ApiPresetsServiceSetCustomPresetAsDefaultRequest) Execute() (map[string]
 
 /*
 PresetsServiceSetCustomPresetAsDefault Set Custom Preset As Default
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -1026,8 +1008,6 @@ func (r ApiPresetsServiceSetPresetAsDefaultRequest) Execute() (map[string]interf
 
 /*
 PresetsServiceSetPresetAsDefault Set Preset As Default
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

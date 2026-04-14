@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceAlertDefinitionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceAlertDefinitionRequest{}
@@ -22,7 +25,10 @@ type ReplaceAlertDefinitionRequest struct {
 	AlertDefProperties *AlertDefProperties `json:"alertDefProperties,omitempty"`
 	// Alert definition ID
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceAlertDefinitionRequest ReplaceAlertDefinitionRequest
 
 // NewReplaceAlertDefinitionRequest instantiates a new ReplaceAlertDefinitionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o ReplaceAlertDefinitionRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceAlertDefinitionRequest) UnmarshalJSON(data []byte) (err error) {
+	varReplaceAlertDefinitionRequest := _ReplaceAlertDefinitionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceAlertDefinitionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceAlertDefinitionRequest(varReplaceAlertDefinitionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDefProperties")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceAlertDefinitionRequest struct {

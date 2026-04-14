@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapAggregationAvg type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationAvg{}
 
 // GeomapAggregationAvg struct for GeomapAggregationAvg
 type GeomapAggregationAvg struct {
-	Avg *GeomapAggregationFieldBased `json:"avg,omitempty"`
+	Avg GeomapAggregationFieldBased `json:"avg"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapAggregationAvg GeomapAggregationAvg
 
 // NewGeomapAggregationAvg instantiates a new GeomapAggregationAvg object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapAggregationAvg() *GeomapAggregationAvg {
+func NewGeomapAggregationAvg(avg GeomapAggregationFieldBased) *GeomapAggregationAvg {
 	this := GeomapAggregationAvg{}
+	this.Avg = avg
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapAggregationAvgWithDefaults() *GeomapAggregationAvg {
 	return &this
 }
 
-// GetAvg returns the Avg field value if set, zero value otherwise.
+// GetAvg returns the Avg field value
 func (o *GeomapAggregationAvg) GetAvg() GeomapAggregationFieldBased {
-	if o == nil || IsNil(o.Avg) {
+	if o == nil {
 		var ret GeomapAggregationFieldBased
 		return ret
 	}
-	return *o.Avg
+
+	return o.Avg
 }
 
-// GetAvgOk returns a tuple with the Avg field value if set, nil otherwise
+// GetAvgOk returns a tuple with the Avg field value
 // and a boolean to check if the value has been set.
 func (o *GeomapAggregationAvg) GetAvgOk() (*GeomapAggregationFieldBased, bool) {
-	if o == nil || IsNil(o.Avg) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Avg, true
+	return &o.Avg, true
 }
 
-// HasAvg returns a boolean if a field has been set.
-func (o *GeomapAggregationAvg) HasAvg() bool {
-	if o != nil && !IsNil(o.Avg) {
-		return true
-	}
-
-	return false
-}
-
-// SetAvg gets a reference to the given GeomapAggregationFieldBased and assigns it to the Avg field.
+// SetAvg sets field value
 func (o *GeomapAggregationAvg) SetAvg(v GeomapAggregationFieldBased) {
-	o.Avg = &v
+	o.Avg = v
 }
 
 func (o GeomapAggregationAvg) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapAggregationAvg) MarshalJSON() ([]byte, error) {
 
 func (o GeomapAggregationAvg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Avg) {
-		toSerialize["avg"] = o.Avg
+	toSerialize["avg"] = o.Avg
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapAggregationAvg) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"avg",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapAggregationAvg := _GeomapAggregationAvg{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapAggregationAvg)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapAggregationAvg(varGeomapAggregationAvg)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapAggregationAvg struct {

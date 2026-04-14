@@ -11,9 +11,12 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // PermissionResource the model 'PermissionResource'
 type PermissionResource string

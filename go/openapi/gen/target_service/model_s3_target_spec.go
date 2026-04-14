@@ -11,10 +11,12 @@ API version: 1.0.0
 package target_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the S3TargetSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &S3TargetSpec{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &S3TargetSpec{}
 type S3TargetSpec struct {
 	Bucket string `json:"bucket"`
 	Region *string `json:"region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _S3TargetSpec S3TargetSpec
@@ -115,6 +118,11 @@ func (o S3TargetSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *S3TargetSpec) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = S3TargetSpec(varS3TargetSpec)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bucket")
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

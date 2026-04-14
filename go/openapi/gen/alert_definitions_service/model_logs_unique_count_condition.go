@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsUniqueCountCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsUniqueCountCondition{}
@@ -22,7 +25,10 @@ type LogsUniqueCountCondition struct {
 	// The maximum unique count
 	MaxUniqueCount *string `json:"maxUniqueCount,omitempty"`
 	TimeWindow *LogsUniqueValueTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsUniqueCountCondition LogsUniqueCountCondition
 
 // NewLogsUniqueCountCondition instantiates a new LogsUniqueCountCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o LogsUniqueCountCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsUniqueCountCondition) UnmarshalJSON(data []byte) (err error) {
+	varLogsUniqueCountCondition := _LogsUniqueCountCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsUniqueCountCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsUniqueCountCondition(varLogsUniqueCountCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "maxUniqueCount")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsUniqueCountCondition struct {

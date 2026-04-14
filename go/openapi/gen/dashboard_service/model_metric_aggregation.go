@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricAggregation{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MetricAggregation{}
 type MetricAggregation struct {
 	AggregationType *MetricAggregationType `json:"aggregationType,omitempty"`
 	MetricField *MetricAggregationMetricField `json:"metricField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricAggregation MetricAggregation
 
 // NewMetricAggregation instantiates a new MetricAggregation object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o MetricAggregation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetricField) {
 		toSerialize["metricField"] = o.MetricField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricAggregation) UnmarshalJSON(data []byte) (err error) {
+	varMetricAggregation := _MetricAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricAggregation(varMetricAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregationType")
+		delete(additionalProperties, "metricField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricAggregation struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ContextualLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContextualLabels{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &ContextualLabels{}
 type ContextualLabels struct {
 	FieldName string `json:"fieldName"`
 	FieldValue string `json:"fieldValue"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContextualLabels ContextualLabels
@@ -106,6 +109,11 @@ func (o ContextualLabels) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fieldName"] = o.FieldName
 	toSerialize["fieldValue"] = o.FieldValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *ContextualLabels) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ContextualLabels(varContextualLabels)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "fieldValue")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

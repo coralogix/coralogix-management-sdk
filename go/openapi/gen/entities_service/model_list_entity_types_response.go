@@ -11,8 +11,11 @@ API version: 1.0.0
 package entities_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListEntityTypesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListEntityTypesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListEntityTypesResponse{}
 // ListEntityTypesResponse struct for ListEntityTypesResponse
 type ListEntityTypesResponse struct {
 	EntityTypes []NotificationCenterEntityType `json:"entityTypes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListEntityTypesResponse ListEntityTypesResponse
 
 // NewListEntityTypesResponse instantiates a new ListEntityTypesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListEntityTypesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EntityTypes) {
 		toSerialize["entityTypes"] = o.EntityTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListEntityTypesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListEntityTypesResponse := _ListEntityTypesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListEntityTypesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListEntityTypesResponse(varListEntityTypesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entityTypes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListEntityTypesResponse struct {

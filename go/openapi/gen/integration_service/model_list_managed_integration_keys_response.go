@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListManagedIntegrationKeysResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListManagedIntegrationKeysResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListManagedIntegrationKeysResponse{}
 // ListManagedIntegrationKeysResponse struct for ListManagedIntegrationKeysResponse
 type ListManagedIntegrationKeysResponse struct {
 	IntegrationKeys []string `json:"integrationKeys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListManagedIntegrationKeysResponse ListManagedIntegrationKeysResponse
 
 // NewListManagedIntegrationKeysResponse instantiates a new ListManagedIntegrationKeysResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListManagedIntegrationKeysResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.IntegrationKeys) {
 		toSerialize["integrationKeys"] = o.IntegrationKeys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListManagedIntegrationKeysResponse) UnmarshalJSON(data []byte) (err error) {
+	varListManagedIntegrationKeysResponse := _ListManagedIntegrationKeysResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListManagedIntegrationKeysResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListManagedIntegrationKeysResponse(varListManagedIntegrationKeysResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationKeys")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListManagedIntegrationKeysResponse struct {

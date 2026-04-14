@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the StaticSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StaticSource{}
@@ -22,7 +25,10 @@ type StaticSource struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
 	Values []ValueLabel `json:"values,omitempty"`
 	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StaticSource StaticSource
 
 // NewStaticSource instantiates a new StaticSource object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o StaticSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValuesOrderDirection) {
 		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StaticSource) UnmarshalJSON(data []byte) (err error) {
+	varStaticSource := _StaticSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varStaticSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StaticSource(varStaticSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allOption")
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "valuesOrderDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStaticSource struct {

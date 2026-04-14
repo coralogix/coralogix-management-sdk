@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Terraform type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Terraform{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Terraform{}
 // Terraform This data structure represents a Terraform integration.
 type Terraform struct {
 	ConfigurationBlocks []ConfigurationBlock `json:"configurationBlocks,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Terraform Terraform
 
 // NewTerraform instantiates a new Terraform object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Terraform) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigurationBlocks) {
 		toSerialize["configurationBlocks"] = o.ConfigurationBlocks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Terraform) UnmarshalJSON(data []byte) (err error) {
+	varTerraform := _Terraform{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTerraform)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Terraform(varTerraform)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configurationBlocks")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTerraform struct {

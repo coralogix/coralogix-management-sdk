@@ -41,6 +41,8 @@ model_alert_defs_service_list_alert_defs_pagination_parameter.go
 model_alerts_op.go
 model_alerts_v3_pagination_response.go
 model_anomaly_alert_settings.go
+model_bulk_delete_alert_definitions_request.go
+model_bulk_delete_alert_defs_response.go
 model_bulk_replace_alert_definitions_request.go
 model_bulk_replace_alert_defs_response.go
 model_burn_rate_threshold.go
@@ -48,9 +50,6 @@ model_burn_rate_threshold_dual.go
 model_burn_rate_threshold_single.go
 model_burn_rate_type_dual.go
 model_burn_rate_type_single.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_alert_def_response.go
 model_create_alert_definition_request.go
@@ -132,8 +131,6 @@ model_metric_time_window.go
 model_metric_time_window_metric_time_window_dynamic_duration.go
 model_metric_time_window_metric_time_window_specific_value.go
 model_metric_time_window_value.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_next_op.go
 model_no_data_policy.go

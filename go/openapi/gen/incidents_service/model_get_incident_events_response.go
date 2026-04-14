@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetIncidentEventsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetIncidentEventsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetIncidentEventsResponse{}
 // GetIncidentEventsResponse Response containing all events associated with the requested incident
 type GetIncidentEventsResponse struct {
 	IncidentEvents []IncidentEvent `json:"incidentEvents,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetIncidentEventsResponse GetIncidentEventsResponse
 
 // NewGetIncidentEventsResponse instantiates a new GetIncidentEventsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetIncidentEventsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IncidentEvents) {
 		toSerialize["incidentEvents"] = o.IncidentEvents
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetIncidentEventsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetIncidentEventsResponse := _GetIncidentEventsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetIncidentEventsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetIncidentEventsResponse(varGetIncidentEventsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidentEvents")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetIncidentEventsResponse struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_events_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Filters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Filters{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &Filters{}
 type Filters struct {
 	Operator *V3FilterOperator `json:"operator,omitempty"`
 	PathAndValues []FilterPathAndValues `json:"pathAndValues"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Filters Filters
@@ -115,6 +118,11 @@ func (o Filters) ToMap() (map[string]interface{}, error) {
 		toSerialize["operator"] = o.Operator
 	}
 	toSerialize["pathAndValues"] = o.PathAndValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *Filters) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Filters(varFilters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operator")
+		delete(additionalProperties, "pathAndValues")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

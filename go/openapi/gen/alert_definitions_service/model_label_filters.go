@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LabelFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LabelFilters{}
@@ -22,7 +25,10 @@ type LabelFilters struct {
 	ApplicationName []LabelFilterType `json:"applicationName,omitempty"`
 	Severities []LogSeverity `json:"severities,omitempty"`
 	SubsystemName []LabelFilterType `json:"subsystemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LabelFilters LabelFilters
 
 // NewLabelFilters instantiates a new LabelFilters object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o LabelFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubsystemName) {
 		toSerialize["subsystemName"] = o.SubsystemName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LabelFilters) UnmarshalJSON(data []byte) (err error) {
+	varLabelFilters := _LabelFilters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLabelFilters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LabelFilters(varLabelFilters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationName")
+		delete(additionalProperties, "severities")
+		delete(additionalProperties, "subsystemName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLabelFilters struct {

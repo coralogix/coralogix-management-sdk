@@ -11,11 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Incident type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Incident{}
@@ -39,6 +41,7 @@ type Incident struct {
 	Severity IncidentSeverity `json:"severity"`
 	State IncidentState `json:"state"`
 	Status IncidentStatus `json:"status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Incident Incident
@@ -557,6 +560,11 @@ func (o Incident) ToMap() (map[string]interface{}, error) {
 	toSerialize["severity"] = o.Severity
 	toSerialize["state"] = o.State
 	toSerialize["status"] = o.Status
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -603,6 +611,29 @@ func (o *Incident) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Incident(varIncident)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assignments")
+		delete(additionalProperties, "closedAt")
+		delete(additionalProperties, "contextualLabels")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "displayLabels")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isMuted")
+		delete(additionalProperties, "lastStateUpdateKey")
+		delete(additionalProperties, "lastStateUpdateTime")
+		delete(additionalProperties, "metaLabels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

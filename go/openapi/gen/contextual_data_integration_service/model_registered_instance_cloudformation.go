@@ -11,16 +11,20 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RegisteredInstanceCloudformation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RegisteredInstanceCloudformation{}
 
 // RegisteredInstanceCloudformation struct for RegisteredInstanceCloudformation
 type RegisteredInstanceCloudformation struct {
-	Cloudformation *CloudFormationStack `json:"cloudformation,omitempty"`
+	Cloudformation CloudFormationStack `json:"cloudformation"`
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
@@ -28,14 +32,18 @@ type RegisteredInstanceCloudformation struct {
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
 	Parameters []Parameter `json:"parameters,omitempty"`
 	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RegisteredInstanceCloudformation RegisteredInstanceCloudformation
 
 // NewRegisteredInstanceCloudformation instantiates a new RegisteredInstanceCloudformation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegisteredInstanceCloudformation() *RegisteredInstanceCloudformation {
+func NewRegisteredInstanceCloudformation(cloudformation CloudFormationStack) *RegisteredInstanceCloudformation {
 	this := RegisteredInstanceCloudformation{}
+	this.Cloudformation = cloudformation
 	return &this
 }
 
@@ -47,36 +55,28 @@ func NewRegisteredInstanceCloudformationWithDefaults() *RegisteredInstanceCloudf
 	return &this
 }
 
-// GetCloudformation returns the Cloudformation field value if set, zero value otherwise.
+// GetCloudformation returns the Cloudformation field value
 func (o *RegisteredInstanceCloudformation) GetCloudformation() CloudFormationStack {
-	if o == nil || IsNil(o.Cloudformation) {
+	if o == nil {
 		var ret CloudFormationStack
 		return ret
 	}
-	return *o.Cloudformation
+
+	return o.Cloudformation
 }
 
-// GetCloudformationOk returns a tuple with the Cloudformation field value if set, nil otherwise
+// GetCloudformationOk returns a tuple with the Cloudformation field value
 // and a boolean to check if the value has been set.
 func (o *RegisteredInstanceCloudformation) GetCloudformationOk() (*CloudFormationStack, bool) {
-	if o == nil || IsNil(o.Cloudformation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cloudformation, true
+	return &o.Cloudformation, true
 }
 
-// HasCloudformation returns a boolean if a field has been set.
-func (o *RegisteredInstanceCloudformation) HasCloudformation() bool {
-	if o != nil && !IsNil(o.Cloudformation) {
-		return true
-	}
-
-	return false
-}
-
-// SetCloudformation gets a reference to the given CloudFormationStack and assigns it to the Cloudformation field.
+// SetCloudformation sets field value
 func (o *RegisteredInstanceCloudformation) SetCloudformation(v CloudFormationStack) {
-	o.Cloudformation = &v
+	o.Cloudformation = v
 }
 
 // GetDefinitionVersion returns the DefinitionVersion field value if set, zero value otherwise.
@@ -313,9 +313,7 @@ func (o RegisteredInstanceCloudformation) MarshalJSON() ([]byte, error) {
 
 func (o RegisteredInstanceCloudformation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Cloudformation) {
-		toSerialize["cloudformation"] = o.Cloudformation
-	}
+	toSerialize["cloudformation"] = o.Cloudformation
 	if !IsNil(o.DefinitionVersion) {
 		toSerialize["definitionVersion"] = o.DefinitionVersion
 	}
@@ -337,7 +335,62 @@ func (o RegisteredInstanceCloudformation) ToMap() (map[string]interface{}, error
 	if !IsNil(o.RevisionLifecycle) {
 		toSerialize["revisionLifecycle"] = o.RevisionLifecycle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RegisteredInstanceCloudformation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"cloudformation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRegisteredInstanceCloudformation := _RegisteredInstanceCloudformation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRegisteredInstanceCloudformation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RegisteredInstanceCloudformation(varRegisteredInstanceCloudformation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cloudformation")
+		delete(additionalProperties, "definitionVersion")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "integrationStatus")
+		delete(additionalProperties, "isTesting")
+		delete(additionalProperties, "lastUpdated")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "revisionLifecycle")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRegisteredInstanceCloudformation struct {

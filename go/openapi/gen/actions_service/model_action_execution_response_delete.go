@@ -11,8 +11,12 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionExecutionResponseDelete type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionExecutionResponseDelete{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &ActionExecutionResponseDelete{}
 // ActionExecutionResponseDelete This data structure represents a response to an Action execution request.
 type ActionExecutionResponseDelete struct {
 	// This data structure represents the response to delete an Action.
-	Delete map[string]interface{} `json:"delete,omitempty"`
+	Delete map[string]interface{} `json:"delete"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionExecutionResponseDelete ActionExecutionResponseDelete
 
 // NewActionExecutionResponseDelete instantiates a new ActionExecutionResponseDelete object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActionExecutionResponseDelete() *ActionExecutionResponseDelete {
+func NewActionExecutionResponseDelete(delete map[string]interface{}) *ActionExecutionResponseDelete {
 	this := ActionExecutionResponseDelete{}
+	this.Delete = delete
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewActionExecutionResponseDeleteWithDefaults() *ActionExecutionResponseDele
 	return &this
 }
 
-// GetDelete returns the Delete field value if set, zero value otherwise.
+// GetDelete returns the Delete field value
 func (o *ActionExecutionResponseDelete) GetDelete() map[string]interface{} {
-	if o == nil || IsNil(o.Delete) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Delete
 }
 
-// GetDeleteOk returns a tuple with the Delete field value if set, nil otherwise
+// GetDeleteOk returns a tuple with the Delete field value
 // and a boolean to check if the value has been set.
 func (o *ActionExecutionResponseDelete) GetDeleteOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Delete) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Delete, true
 }
 
-// HasDelete returns a boolean if a field has been set.
-func (o *ActionExecutionResponseDelete) HasDelete() bool {
-	if o != nil && !IsNil(o.Delete) {
-		return true
-	}
-
-	return false
-}
-
-// SetDelete gets a reference to the given map[string]interface{} and assigns it to the Delete field.
+// SetDelete sets field value
 func (o *ActionExecutionResponseDelete) SetDelete(v map[string]interface{}) {
 	o.Delete = v
 }
@@ -82,10 +82,56 @@ func (o ActionExecutionResponseDelete) MarshalJSON() ([]byte, error) {
 
 func (o ActionExecutionResponseDelete) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Delete) {
-		toSerialize["delete"] = o.Delete
+	toSerialize["delete"] = o.Delete
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionExecutionResponseDelete) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"delete",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varActionExecutionResponseDelete := _ActionExecutionResponseDelete{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionExecutionResponseDelete)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionExecutionResponseDelete(varActionExecutionResponseDelete)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "delete")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionExecutionResponseDelete struct {

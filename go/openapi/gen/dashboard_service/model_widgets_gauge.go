@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetsGauge type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsGauge{}
@@ -43,7 +46,10 @@ type WidgetsGauge struct {
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	Thresholds []GaugeThreshold `json:"thresholds,omitempty"`
 	Unit *GaugeUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetsGauge WidgetsGauge
 
 // NewWidgetsGauge instantiates a new WidgetsGauge object
 // This constructor will assign default values to properties that have it defined,
@@ -632,7 +638,49 @@ func (o WidgetsGauge) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetsGauge) UnmarshalJSON(data []byte) (err error) {
+	varWidgetsGauge := _WidgetsGauge{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetsGauge)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetsGauge(varWidgetsGauge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "decimal")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "displaySeriesName")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "legendBy")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "showInnerArc")
+		delete(additionalProperties, "showOuterArc")
+		delete(additionalProperties, "thresholdBy")
+		delete(additionalProperties, "thresholdType")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetsGauge struct {

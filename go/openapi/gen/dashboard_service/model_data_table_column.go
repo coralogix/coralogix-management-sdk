@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataTableColumn type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableColumn{}
@@ -23,7 +26,10 @@ type DataTableColumn struct {
 	Field *string `json:"field,omitempty"`
 	// Custom width of the column, by default it's automatically adjusted
 	Width *int32 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataTableColumn DataTableColumn
 
 // NewDataTableColumn instantiates a new DataTableColumn object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o DataTableColumn) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataTableColumn) UnmarshalJSON(data []byte) (err error) {
+	varDataTableColumn := _DataTableColumn{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataTableColumn)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTableColumn(varDataTableColumn)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataTableColumn struct {

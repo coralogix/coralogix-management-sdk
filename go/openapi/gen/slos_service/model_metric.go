@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Metric type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Metric{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Metric{}
 // Metric Definition of a metric used in SLOs
 type Metric struct {
 	Query *string `json:"query,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Metric Metric
 
 // NewMetric instantiates a new Metric object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Metric) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Query) {
 		toSerialize["query"] = o.Query
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Metric) UnmarshalJSON(data []byte) (err error) {
+	varMetric := _Metric{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetric)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Metric(varMetric)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetric struct {

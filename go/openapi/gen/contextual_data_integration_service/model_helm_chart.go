@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HelmChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HelmChart{}
@@ -22,7 +25,10 @@ type HelmChart struct {
 	Commands []CommandInformation `json:"commands,omitempty"`
 	Guide *IntegrationGuide `json:"guide,omitempty"`
 	Template *string `json:"template,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HelmChart HelmChart
 
 // NewHelmChart instantiates a new HelmChart object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o HelmChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Template) {
 		toSerialize["template"] = o.Template
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HelmChart) UnmarshalJSON(data []byte) (err error) {
+	varHelmChart := _HelmChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHelmChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HelmChart(varHelmChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "commands")
+		delete(additionalProperties, "guide")
+		delete(additionalProperties, "template")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHelmChart struct {

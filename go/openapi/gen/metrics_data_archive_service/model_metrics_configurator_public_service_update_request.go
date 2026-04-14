@@ -11,15 +11,26 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // MetricsConfiguratorPublicServiceUpdateRequest - struct for MetricsConfiguratorPublicServiceUpdateRequest
 type MetricsConfiguratorPublicServiceUpdateRequest struct {
+	UpdateRequestGcs *UpdateRequestGcs
 	UpdateRequestIbm *UpdateRequestIbm
 	UpdateRequestS3 *UpdateRequestS3
+}
+
+// UpdateRequestGcsAsMetricsConfiguratorPublicServiceUpdateRequest is a convenience function that returns UpdateRequestGcs wrapped in MetricsConfiguratorPublicServiceUpdateRequest
+func UpdateRequestGcsAsMetricsConfiguratorPublicServiceUpdateRequest(v *UpdateRequestGcs) MetricsConfiguratorPublicServiceUpdateRequest {
+	return MetricsConfiguratorPublicServiceUpdateRequest{
+		UpdateRequestGcs: v,
+	}
 }
 
 // UpdateRequestIbmAsMetricsConfiguratorPublicServiceUpdateRequest is a convenience function that returns UpdateRequestIbm wrapped in MetricsConfiguratorPublicServiceUpdateRequest
@@ -41,6 +52,23 @@ func UpdateRequestS3AsMetricsConfiguratorPublicServiceUpdateRequest(v *UpdateReq
 func (dst *MetricsConfiguratorPublicServiceUpdateRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into UpdateRequestGcs
+	err = json.Unmarshal(data, &dst.UpdateRequestGcs)
+	if err == nil {
+		jsonUpdateRequestGcs, _ := json.Marshal(dst.UpdateRequestGcs)
+		if string(jsonUpdateRequestGcs) == "{}" { // empty struct
+			dst.UpdateRequestGcs = nil
+		} else {
+			if err = validator.Validate(dst.UpdateRequestGcs); err != nil {
+				dst.UpdateRequestGcs = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.UpdateRequestGcs = nil
+	}
+
 	// try to unmarshal data into UpdateRequestIbm
 	err = json.Unmarshal(data, &dst.UpdateRequestIbm)
 	if err == nil {
@@ -77,6 +105,7 @@ func (dst *MetricsConfiguratorPublicServiceUpdateRequest) UnmarshalJSON(data []b
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.UpdateRequestGcs = nil
 		dst.UpdateRequestIbm = nil
 		dst.UpdateRequestS3 = nil
 
@@ -90,6 +119,10 @@ func (dst *MetricsConfiguratorPublicServiceUpdateRequest) UnmarshalJSON(data []b
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MetricsConfiguratorPublicServiceUpdateRequest) MarshalJSON() ([]byte, error) {
+	if src.UpdateRequestGcs != nil {
+		return json.Marshal(&src.UpdateRequestGcs)
+	}
+
 	if src.UpdateRequestIbm != nil {
 		return json.Marshal(&src.UpdateRequestIbm)
 	}
@@ -106,6 +139,10 @@ func (obj *MetricsConfiguratorPublicServiceUpdateRequest) GetActualInstance() (i
 	if obj == nil {
 		return nil
 	}
+	if obj.UpdateRequestGcs != nil {
+		return obj.UpdateRequestGcs
+	}
+
 	if obj.UpdateRequestIbm != nil {
 		return obj.UpdateRequestIbm
 	}
@@ -120,6 +157,10 @@ func (obj *MetricsConfiguratorPublicServiceUpdateRequest) GetActualInstance() (i
 
 // Get the actual instance value
 func (obj MetricsConfiguratorPublicServiceUpdateRequest) GetActualInstanceValue() (interface{}) {
+	if obj.UpdateRequestGcs != nil {
+		return *obj.UpdateRequestGcs
+	}
+
 	if obj.UpdateRequestIbm != nil {
 		return *obj.UpdateRequestIbm
 	}

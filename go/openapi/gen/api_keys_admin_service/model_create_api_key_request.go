@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_admin_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateApiKeyRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateApiKeyRequest{}
@@ -25,7 +28,10 @@ type CreateApiKeyRequest struct {
 	KeyPermissions *CreateApiKeyRequestKeyPermissions `json:"keyPermissions,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Owner *Owner `json:"owner,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApiKeyRequest CreateApiKeyRequest
 
 // NewCreateApiKeyRequest instantiates a new CreateApiKeyRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -229,7 +235,38 @@ func (o CreateApiKeyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Owner) {
 		toSerialize["owner"] = o.Owner
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApiKeyRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateApiKeyRequest := _CreateApiKeyRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateApiKeyRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApiKeyRequest(varCreateApiKeyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessPolicy")
+		delete(additionalProperties, "hashed")
+		delete(additionalProperties, "keyPermissions")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "owner")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApiKeyRequest struct {

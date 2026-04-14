@@ -11,23 +11,31 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RecurringSchedule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringSchedule{}
 
 // RecurringSchedule struct for RecurringSchedule
 type RecurringSchedule struct {
-	Schedule *RecurringDynamic `json:"schedule,omitempty"`
+	Schedule RecurringDynamic `json:"schedule"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecurringSchedule RecurringSchedule
 
 // NewRecurringSchedule instantiates a new RecurringSchedule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecurringSchedule() *RecurringSchedule {
+func NewRecurringSchedule(schedule RecurringDynamic) *RecurringSchedule {
 	this := RecurringSchedule{}
+	this.Schedule = schedule
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRecurringScheduleWithDefaults() *RecurringSchedule {
 	return &this
 }
 
-// GetSchedule returns the Schedule field value if set, zero value otherwise.
+// GetSchedule returns the Schedule field value
 func (o *RecurringSchedule) GetSchedule() RecurringDynamic {
-	if o == nil || IsNil(o.Schedule) {
+	if o == nil {
 		var ret RecurringDynamic
 		return ret
 	}
-	return *o.Schedule
+
+	return o.Schedule
 }
 
-// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// GetScheduleOk returns a tuple with the Schedule field value
 // and a boolean to check if the value has been set.
 func (o *RecurringSchedule) GetScheduleOk() (*RecurringDynamic, bool) {
-	if o == nil || IsNil(o.Schedule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Schedule, true
+	return &o.Schedule, true
 }
 
-// HasSchedule returns a boolean if a field has been set.
-func (o *RecurringSchedule) HasSchedule() bool {
-	if o != nil && !IsNil(o.Schedule) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchedule gets a reference to the given RecurringDynamic and assigns it to the Schedule field.
+// SetSchedule sets field value
 func (o *RecurringSchedule) SetSchedule(v RecurringDynamic) {
-	o.Schedule = &v
+	o.Schedule = v
 }
 
 func (o RecurringSchedule) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RecurringSchedule) MarshalJSON() ([]byte, error) {
 
 func (o RecurringSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Schedule) {
-		toSerialize["schedule"] = o.Schedule
+	toSerialize["schedule"] = o.Schedule
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RecurringSchedule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"schedule",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRecurringSchedule := _RecurringSchedule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurringSchedule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecurringSchedule(varRecurringSchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "schedule")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecurringSchedule struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SetIDPParametersRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetIDPParametersRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &SetIDPParametersRequest{}
 type SetIDPParametersRequest struct {
 	Params *IDPParameters `json:"params,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SetIDPParametersRequest SetIDPParametersRequest
 
 // NewSetIDPParametersRequest instantiates a new SetIDPParametersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o SetIDPParametersRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SetIDPParametersRequest) UnmarshalJSON(data []byte) (err error) {
+	varSetIDPParametersRequest := _SetIDPParametersRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSetIDPParametersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SetIDPParametersRequest(varSetIDPParametersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "params")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSetIDPParametersRequest struct {

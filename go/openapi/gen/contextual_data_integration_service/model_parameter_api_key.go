@@ -11,24 +11,32 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ParameterApiKey type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ParameterApiKey{}
 
 // ParameterApiKey struct for ParameterApiKey
 type ParameterApiKey struct {
-	ApiKey *ApiKeyData `json:"apiKey,omitempty"`
+	ApiKey ApiKeyData `json:"apiKey"`
 	Key *string `json:"key,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ParameterApiKey ParameterApiKey
 
 // NewParameterApiKey instantiates a new ParameterApiKey object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewParameterApiKey() *ParameterApiKey {
+func NewParameterApiKey(apiKey ApiKeyData) *ParameterApiKey {
 	this := ParameterApiKey{}
+	this.ApiKey = apiKey
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewParameterApiKeyWithDefaults() *ParameterApiKey {
 	return &this
 }
 
-// GetApiKey returns the ApiKey field value if set, zero value otherwise.
+// GetApiKey returns the ApiKey field value
 func (o *ParameterApiKey) GetApiKey() ApiKeyData {
-	if o == nil || IsNil(o.ApiKey) {
+	if o == nil {
 		var ret ApiKeyData
 		return ret
 	}
-	return *o.ApiKey
+
+	return o.ApiKey
 }
 
-// GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
+// GetApiKeyOk returns a tuple with the ApiKey field value
 // and a boolean to check if the value has been set.
 func (o *ParameterApiKey) GetApiKeyOk() (*ApiKeyData, bool) {
-	if o == nil || IsNil(o.ApiKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiKey, true
+	return &o.ApiKey, true
 }
 
-// HasApiKey returns a boolean if a field has been set.
-func (o *ParameterApiKey) HasApiKey() bool {
-	if o != nil && !IsNil(o.ApiKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiKey gets a reference to the given ApiKeyData and assigns it to the ApiKey field.
+// SetApiKey sets field value
 func (o *ParameterApiKey) SetApiKey(v ApiKeyData) {
-	o.ApiKey = &v
+	o.ApiKey = v
 }
 
 // GetKey returns the Key field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o ParameterApiKey) MarshalJSON() ([]byte, error) {
 
 func (o ParameterApiKey) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApiKey) {
-		toSerialize["apiKey"] = o.ApiKey
-	}
+	toSerialize["apiKey"] = o.ApiKey
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ParameterApiKey) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"apiKey",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varParameterApiKey := _ParameterApiKey{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varParameterApiKey)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParameterApiKey(varParameterApiKey)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apiKey")
+		delete(additionalProperties, "key")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParameterApiKey struct {

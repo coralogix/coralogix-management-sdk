@@ -11,23 +11,31 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotificationCenterConditionTypeMatchEntityTypeAndSubType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationCenterConditionTypeMatchEntityTypeAndSubType{}
 
 // NotificationCenterConditionTypeMatchEntityTypeAndSubType struct for NotificationCenterConditionTypeMatchEntityTypeAndSubType
 type NotificationCenterConditionTypeMatchEntityTypeAndSubType struct {
-	MatchEntityTypeAndSubType *MatchEntityTypeAndSubTypeCondition `json:"matchEntityTypeAndSubType,omitempty"`
+	MatchEntityTypeAndSubType MatchEntityTypeAndSubTypeCondition `json:"matchEntityTypeAndSubType"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationCenterConditionTypeMatchEntityTypeAndSubType NotificationCenterConditionTypeMatchEntityTypeAndSubType
 
 // NewNotificationCenterConditionTypeMatchEntityTypeAndSubType instantiates a new NotificationCenterConditionTypeMatchEntityTypeAndSubType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotificationCenterConditionTypeMatchEntityTypeAndSubType() *NotificationCenterConditionTypeMatchEntityTypeAndSubType {
+func NewNotificationCenterConditionTypeMatchEntityTypeAndSubType(matchEntityTypeAndSubType MatchEntityTypeAndSubTypeCondition) *NotificationCenterConditionTypeMatchEntityTypeAndSubType {
 	this := NotificationCenterConditionTypeMatchEntityTypeAndSubType{}
+	this.MatchEntityTypeAndSubType = matchEntityTypeAndSubType
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewNotificationCenterConditionTypeMatchEntityTypeAndSubTypeWithDefaults() *
 	return &this
 }
 
-// GetMatchEntityTypeAndSubType returns the MatchEntityTypeAndSubType field value if set, zero value otherwise.
+// GetMatchEntityTypeAndSubType returns the MatchEntityTypeAndSubType field value
 func (o *NotificationCenterConditionTypeMatchEntityTypeAndSubType) GetMatchEntityTypeAndSubType() MatchEntityTypeAndSubTypeCondition {
-	if o == nil || IsNil(o.MatchEntityTypeAndSubType) {
+	if o == nil {
 		var ret MatchEntityTypeAndSubTypeCondition
 		return ret
 	}
-	return *o.MatchEntityTypeAndSubType
+
+	return o.MatchEntityTypeAndSubType
 }
 
-// GetMatchEntityTypeAndSubTypeOk returns a tuple with the MatchEntityTypeAndSubType field value if set, nil otherwise
+// GetMatchEntityTypeAndSubTypeOk returns a tuple with the MatchEntityTypeAndSubType field value
 // and a boolean to check if the value has been set.
 func (o *NotificationCenterConditionTypeMatchEntityTypeAndSubType) GetMatchEntityTypeAndSubTypeOk() (*MatchEntityTypeAndSubTypeCondition, bool) {
-	if o == nil || IsNil(o.MatchEntityTypeAndSubType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MatchEntityTypeAndSubType, true
+	return &o.MatchEntityTypeAndSubType, true
 }
 
-// HasMatchEntityTypeAndSubType returns a boolean if a field has been set.
-func (o *NotificationCenterConditionTypeMatchEntityTypeAndSubType) HasMatchEntityTypeAndSubType() bool {
-	if o != nil && !IsNil(o.MatchEntityTypeAndSubType) {
-		return true
-	}
-
-	return false
-}
-
-// SetMatchEntityTypeAndSubType gets a reference to the given MatchEntityTypeAndSubTypeCondition and assigns it to the MatchEntityTypeAndSubType field.
+// SetMatchEntityTypeAndSubType sets field value
 func (o *NotificationCenterConditionTypeMatchEntityTypeAndSubType) SetMatchEntityTypeAndSubType(v MatchEntityTypeAndSubTypeCondition) {
-	o.MatchEntityTypeAndSubType = &v
+	o.MatchEntityTypeAndSubType = v
 }
 
 func (o NotificationCenterConditionTypeMatchEntityTypeAndSubType) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o NotificationCenterConditionTypeMatchEntityTypeAndSubType) MarshalJSON() 
 
 func (o NotificationCenterConditionTypeMatchEntityTypeAndSubType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MatchEntityTypeAndSubType) {
-		toSerialize["matchEntityTypeAndSubType"] = o.MatchEntityTypeAndSubType
+	toSerialize["matchEntityTypeAndSubType"] = o.MatchEntityTypeAndSubType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationCenterConditionTypeMatchEntityTypeAndSubType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"matchEntityTypeAndSubType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varNotificationCenterConditionTypeMatchEntityTypeAndSubType := _NotificationCenterConditionTypeMatchEntityTypeAndSubType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationCenterConditionTypeMatchEntityTypeAndSubType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationCenterConditionTypeMatchEntityTypeAndSubType(varNotificationCenterConditionTypeMatchEntityTypeAndSubType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matchEntityTypeAndSubType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationCenterConditionTypeMatchEntityTypeAndSubType struct {

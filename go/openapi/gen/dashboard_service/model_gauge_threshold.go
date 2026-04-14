@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GaugeThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeThreshold{}
@@ -25,7 +28,10 @@ type GaugeThreshold struct {
 	From *float64 `json:"from,omitempty"`
 	// Optional label of the threshold
 	Label *string `json:"label,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GaugeThreshold GaugeThreshold
 
 // NewGaugeThreshold instantiates a new GaugeThreshold object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +165,36 @@ func (o GaugeThreshold) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GaugeThreshold) UnmarshalJSON(data []byte) (err error) {
+	varGaugeThreshold := _GaugeThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeThreshold(varGaugeThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "label")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGaugeThreshold struct {

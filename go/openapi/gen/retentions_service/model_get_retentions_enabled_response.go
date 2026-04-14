@@ -11,8 +11,11 @@ API version: 1.0.0
 package retentions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetRetentionsEnabledResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRetentionsEnabledResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetRetentionsEnabledResponse{}
 // GetRetentionsEnabledResponse This data structure is obtained when retrieving the active status of retentions
 type GetRetentionsEnabledResponse struct {
 	EnableTags *bool `json:"enableTags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRetentionsEnabledResponse GetRetentionsEnabledResponse
 
 // NewGetRetentionsEnabledResponse instantiates a new GetRetentionsEnabledResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetRetentionsEnabledResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EnableTags) {
 		toSerialize["enableTags"] = o.EnableTags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRetentionsEnabledResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetRetentionsEnabledResponse := _GetRetentionsEnabledResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetRetentionsEnabledResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRetentionsEnabledResponse(varGetRetentionsEnabledResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enableTags")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRetentionsEnabledResponse struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeleteE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteE2MResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &DeleteE2MResponse{}
 // DeleteE2MResponse This data structure is obtained when deleting an existing event to metric definition
 type DeleteE2MResponse struct {
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteE2MResponse DeleteE2MResponse
@@ -79,6 +82,11 @@ func (o DeleteE2MResponse) MarshalJSON() ([]byte, error) {
 func (o DeleteE2MResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *DeleteE2MResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DeleteE2MResponse(varDeleteE2MResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

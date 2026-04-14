@@ -11,25 +11,33 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeframeEndTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeframeEndTime{}
 
 // TimeframeEndTime struct for TimeframeEndTime
 type TimeframeEndTime struct {
-	EndTime *string `json:"endTime,omitempty"`
+	EndTime string `json:"endTime"`
 	StartTime *string `json:"startTime,omitempty"`
 	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeframeEndTime TimeframeEndTime
 
 // NewTimeframeEndTime instantiates a new TimeframeEndTime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeframeEndTime() *TimeframeEndTime {
+func NewTimeframeEndTime(endTime string) *TimeframeEndTime {
 	this := TimeframeEndTime{}
+	this.EndTime = endTime
 	return &this
 }
 
@@ -41,36 +49,28 @@ func NewTimeframeEndTimeWithDefaults() *TimeframeEndTime {
 	return &this
 }
 
-// GetEndTime returns the EndTime field value if set, zero value otherwise.
+// GetEndTime returns the EndTime field value
 func (o *TimeframeEndTime) GetEndTime() string {
-	if o == nil || IsNil(o.EndTime) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EndTime
+
+	return o.EndTime
 }
 
-// GetEndTimeOk returns a tuple with the EndTime field value if set, nil otherwise
+// GetEndTimeOk returns a tuple with the EndTime field value
 // and a boolean to check if the value has been set.
 func (o *TimeframeEndTime) GetEndTimeOk() (*string, bool) {
-	if o == nil || IsNil(o.EndTime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EndTime, true
+	return &o.EndTime, true
 }
 
-// HasEndTime returns a boolean if a field has been set.
-func (o *TimeframeEndTime) HasEndTime() bool {
-	if o != nil && !IsNil(o.EndTime) {
-		return true
-	}
-
-	return false
-}
-
-// SetEndTime gets a reference to the given string and assigns it to the EndTime field.
+// SetEndTime sets field value
 func (o *TimeframeEndTime) SetEndTime(v string) {
-	o.EndTime = &v
+	o.EndTime = v
 }
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
@@ -147,16 +147,64 @@ func (o TimeframeEndTime) MarshalJSON() ([]byte, error) {
 
 func (o TimeframeEndTime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EndTime) {
-		toSerialize["endTime"] = o.EndTime
-	}
+	toSerialize["endTime"] = o.EndTime
 	if !IsNil(o.StartTime) {
 		toSerialize["startTime"] = o.StartTime
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeframeEndTime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"endTime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTimeframeEndTime := _TimeframeEndTime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeframeEndTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeframeEndTime(varTimeframeEndTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeframeEndTime struct {

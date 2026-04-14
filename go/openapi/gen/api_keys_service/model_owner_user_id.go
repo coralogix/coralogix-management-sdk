@@ -11,23 +11,31 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OwnerUserId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OwnerUserId{}
 
 // OwnerUserId struct for OwnerUserId
 type OwnerUserId struct {
-	UserId *string `json:"userId,omitempty"`
+	UserId string `json:"userId"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OwnerUserId OwnerUserId
 
 // NewOwnerUserId instantiates a new OwnerUserId object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOwnerUserId() *OwnerUserId {
+func NewOwnerUserId(userId string) *OwnerUserId {
 	this := OwnerUserId{}
+	this.UserId = userId
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewOwnerUserIdWithDefaults() *OwnerUserId {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *OwnerUserId) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *OwnerUserId) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *OwnerUserId) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *OwnerUserId) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
 func (o OwnerUserId) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o OwnerUserId) MarshalJSON() ([]byte, error) {
 
 func (o OwnerUserId) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserId) {
-		toSerialize["userId"] = o.UserId
+	toSerialize["userId"] = o.UserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *OwnerUserId) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"userId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOwnerUserId := _OwnerUserId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOwnerUserId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OwnerUserId(varOwnerUserId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "userId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOwnerUserId struct {

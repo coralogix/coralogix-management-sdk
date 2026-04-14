@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricThresholdType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricThresholdType{}
@@ -26,7 +29,10 @@ type MetricThresholdType struct {
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	Rules []MetricThresholdRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricThresholdType MetricThresholdType
 
 // NewMetricThresholdType instantiates a new MetricThresholdType object
 // This constructor will assign default values to properties that have it defined,
@@ -265,7 +271,39 @@ func (o MetricThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UndetectedValuesManagement) {
 		toSerialize["undetectedValuesManagement"] = o.UndetectedValuesManagement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricThresholdType) UnmarshalJSON(data []byte) (err error) {
+	varMetricThresholdType := _MetricThresholdType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricThresholdType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricThresholdType(varMetricThresholdType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "metricFilter")
+		delete(additionalProperties, "missingValues")
+		delete(additionalProperties, "noDataPolicy")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "undetectedValuesManagement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricThresholdType struct {

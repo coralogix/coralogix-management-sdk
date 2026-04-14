@@ -7,7 +7,6 @@ servers:
 paths:
   /integrations/contextual-data/v1:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_GetContextualDataIntegrations
@@ -44,7 +43,6 @@ paths:
       x-coralogixPermissions:
       - contextual-data:ReadConfig
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_SaveContextualDataIntegration
@@ -78,7 +76,6 @@ paths:
       x-coralogixPermissions:
       - contextual-data:UpdateConfig
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_UpdateContextualDataIntegration
@@ -113,7 +110,6 @@ paths:
       - contextual-data:UpdateConfig
   /integrations/contextual-data/v1/definitions/{id}:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_GetContextualDataIntegrationDefinition
@@ -157,8 +153,44 @@ paths:
       x-coralogixPermissions:
       - contextual-data:ReadConfig
   /integrations/contextual-data/v1/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: ContextualDataIntegrationService_DeleteContextualDataIntegration
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 076f4188-05e0-4ed3-afeb-653ad182ccb7
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteContextualDataIntegrationResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete contextual data integration
+      tags:
+      - Contextual data integration service
+      x-coralogixPermissions:
+      - contextual-data:UpdateConfig
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_GetContextualDataIntegrationDetails
@@ -202,48 +234,8 @@ paths:
       - Contextual data integration service
       x-coralogixPermissions:
       - contextual-data:ReadConfig
-  /integrations/contextual-data/v1/{integration_id}:
-    delete:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: ContextualDataIntegrationService_DeleteContextualDataIntegration
-      parameters:
-      - explode: false
-        in: path
-        name: integration_id
-        required: true
-        schema:
-          example: 076f4188-05e0-4ed3-afeb-653ad182ccb7
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteContextualDataIntegrationResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Delete contextual data integration
-      tags:
-      - Contextual data integration service
-      x-coralogixPermissions:
-      - contextual-data:UpdateConfig
   /integrations/contextual-data/v1/{integration_id}/test:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_TestContextualDataIntegration
@@ -317,8 +309,6 @@ components:
       type: object
     AzureArmTemplate:
       description: This data structure represents an azure ARM template.
-      example:
-        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
@@ -378,24 +368,6 @@ components:
         url: ""
       title: CloudFormation
       type: object
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
-      type: object
     CommandInformation:
       externalDocs:
         url: ""
@@ -417,6 +389,10 @@ components:
       title: Command information
       type: object
     ConfigurationBlock:
+      example:
+        name: name
+        description: description
+        value: value
       externalDocs:
         url: ""
       properties:
@@ -456,9 +432,9 @@ components:
               key: details
           id: id
           parameters:
-          - booleanValue: true
+          - stringValue: stringValue
             key: key
-          - booleanValue: true
+          - stringValue: stringValue
             key: key
           isTesting: true
           empty: "{}"
@@ -474,9 +450,9 @@ components:
               key: details
           id: id
           parameters:
-          - booleanValue: true
+          - stringValue: stringValue
             key: key
-          - booleanValue: true
+          - stringValue: stringValue
             key: key
           isTesting: true
           empty: "{}"
@@ -784,7 +760,6 @@ components:
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
     FieldInformationMultiText:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -818,10 +793,11 @@ components:
           type: string
         visible:
           type: boolean
+      required:
+      - multiText
       title: Field information
       type: object
     FieldInformationMultipleSelection:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -855,10 +831,11 @@ components:
           type: string
         visible:
           type: boolean
+      required:
+      - multipleSelection
       title: Field information
       type: object
     FieldInformationSelection:
-      additionalProperties: false
       example:
         visible: true
         groupId: groupId
@@ -918,10 +895,11 @@ components:
           type: string
         visible:
           type: boolean
+      required:
+      - selection
       title: Field information
       type: object
     FieldInformationSingle:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -955,10 +933,11 @@ components:
           type: string
         visible:
           type: boolean
+      required:
+      - single
       title: Field information
       type: object
     FieldInformationSingleBoolean:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -992,10 +971,11 @@ components:
           type: string
         visible:
           type: boolean
+      required:
+      - singleBoolean
       title: Field information
       type: object
     FieldInformationSingleNumber:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -1029,6 +1009,8 @@ components:
           type: string
         visible:
           type: boolean
+      required:
+      - singleNumber
       title: Field information
       type: object
     FilterPathAndValues:
@@ -1036,7 +1018,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -1047,12 +1028,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -1063,6 +1044,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -1103,18 +1085,24 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            contextualData: "{}"
+            cloudformation: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            azureArmTemplate:
-              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
+            terraform:
+              configurationBlocks:
+              - name: name
+                description: description
+                value: value
+              - name: name
+                description: description
+                value: value
             id: id
             fields:
             - visible: true
@@ -1170,13 +1158,19 @@ components:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
-            azureArmTemplate:
-              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
+            terraform:
+              configurationBlocks:
+              - name: name
+                description: description
+                value: value
+              - name: name
+                description: description
+                value: value
             id: id
             fields:
             - visible: true
@@ -1254,9 +1248,9 @@ components:
                   key: details
               id: id
               parameters:
-              - booleanValue: true
+              - stringValue: stringValue
                 key: key
-              - booleanValue: true
+              - stringValue: stringValue
                 key: key
               isTesting: true
               empty: "{}"
@@ -1272,9 +1266,9 @@ components:
                   key: details
               id: id
               parameters:
-              - booleanValue: true
+              - stringValue: stringValue
                 key: key
-              - booleanValue: true
+              - stringValue: stringValue
                 key: key
               isTesting: true
               empty: "{}"
@@ -2029,7 +2023,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              contextualData: "{}"
+              cloudformation: "{}"
             versions:
             - versions
             - versions
@@ -2066,7 +2060,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              contextualData: "{}"
+              cloudformation: "{}"
             versions:
             - versions
             - versions
@@ -2093,7 +2087,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              contextualData: "{}"
+              cloudformation: "{}"
             versions:
             - versions
             - versions
@@ -2131,7 +2125,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            contextualData: "{}"
+            cloudformation: "{}"
           versions:
           - versions
           - versions
@@ -2201,13 +2195,16 @@ components:
       - NUMBER
       - SENSITIVE_DATA
       - JSON_OBJECT_ARRAY
+      - AWS_REGION_SELECT
+      - AWS_REGION_MULTISELECT
+      - AWS_CLOUDWATCH_NAMESPACE_LIST
       type: string
     Integration:
       description: This data structure represents an integration
       example:
         featureFlag: featureFlag
         integrationType:
-          contextualData: "{}"
+          cloudformation: "{}"
         versions:
         - versions
         - versions
@@ -2260,18 +2257,24 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          contextualData: "{}"
+          cloudformation: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          azureArmTemplate:
-            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
+          terraform:
+            configurationBlocks:
+            - name: name
+              description: description
+              value: value
+            - name: name
+              description: description
+              value: value
           id: id
           fields:
           - visible: true
@@ -2327,13 +2330,19 @@ components:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
-          azureArmTemplate:
-            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
+          terraform:
+            configurationBlocks:
+            - name: name
+              description: description
+              value: value
+            - name: name
+              description: description
+              value: value
           id: id
           fields:
           - visible: true
@@ -2420,7 +2429,6 @@ components:
       - $ref: "#/components/schemas/IntegrationDetailsLocal"
       - $ref: "#/components/schemas/IntegrationDetailsExternal"
     IntegrationDetailsExternal:
-      additionalProperties: false
       description: This data structure represents a set of integration details.
       externalDocs:
         url: ""
@@ -2439,10 +2447,11 @@ components:
           $ref: "#/components/schemas/ExternalUrl"
         integration:
           $ref: "#/components/schemas/Integration"
+      required:
+      - external
       title: Integration details
       type: object
     IntegrationDetailsLocal:
-      additionalProperties: false
       description: This data structure represents a set of integration details.
       example:
         default:
@@ -2459,9 +2468,9 @@ components:
                 key: details
             id: id
             parameters:
-            - booleanValue: true
+            - stringValue: stringValue
               key: key
-            - booleanValue: true
+            - stringValue: stringValue
               key: key
             isTesting: true
             empty: "{}"
@@ -2477,9 +2486,9 @@ components:
                 key: details
             id: id
             parameters:
-            - booleanValue: true
+            - stringValue: stringValue
               key: key
-            - booleanValue: true
+            - stringValue: stringValue
               key: key
             isTesting: true
             empty: "{}"
@@ -3234,7 +3243,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            contextualData: "{}"
+            cloudformation: "{}"
           versions:
           - versions
           - versions
@@ -3274,6 +3283,8 @@ components:
           $ref: "#/components/schemas/Integration"
         local:
           $ref: "#/components/schemas/LocalChangelog"
+      required:
+      - local
       title: Integration details
       type: object
     IntegrationDoc:
@@ -3315,12 +3326,12 @@ components:
       type: object
     IntegrationRevision:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-      - $ref: "#/components/schemas/IntegrationRevisionRum"
       - $ref: "#/components/schemas/IntegrationRevisionTerraform"
       - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
       - $ref: "#/components/schemas/IntegrationRevisionManagedService"
       - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
+      - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+      - $ref: "#/components/schemas/IntegrationRevisionRum"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3344,71 +3355,7 @@ components:
       title: Single numeric value
       type: object
     IntegrationRevisionAzureArmTemplate:
-      additionalProperties: false
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        azureArmTemplate:
-          templateUrl: templateUrl
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          selection:
-            defaultValue: defaultValue
-            options:
-            - options
-            - options
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          selection:
-            defaultValue: defaultValue
-            options:
-            - options
-            - options
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3430,10 +3377,11 @@ components:
           type: boolean
         upgradeInstructionsMd:
           type: string
+      required:
+      - azureArmTemplate
       title: Integration revision
       type: object
     IntegrationRevisionCloudFormation:
-      additionalProperties: false
       description: This data structure represents an integration revision.
       externalDocs:
         url: ""
@@ -3456,10 +3404,11 @@ components:
           type: boolean
         upgradeInstructionsMd:
           type: string
+      required:
+      - cloudFormation
       title: Integration revision
       type: object
     IntegrationRevisionHelmChart:
-      additionalProperties: false
       description: This data structure represents an integration revision.
       externalDocs:
         url: ""
@@ -3482,10 +3431,11 @@ components:
           type: boolean
         upgradeInstructionsMd:
           type: string
+      required:
+      - helmChart
       title: Integration revision
       type: object
     IntegrationRevisionManagedService:
-      additionalProperties: false
       description: This data structure represents an integration revision.
       externalDocs:
         url: ""
@@ -3512,10 +3462,11 @@ components:
           type: boolean
         upgradeInstructionsMd:
           type: string
+      required:
+      - managedService
       title: Integration revision
       type: object
     IntegrationRevisionRum:
-      additionalProperties: false
       description: This data structure represents an integration revision.
       externalDocs:
         url: ""
@@ -3538,11 +3489,81 @@ components:
           $ref: "#/components/schemas/Rum"
         upgradeInstructionsMd:
           type: string
+      required:
+      - rum
       title: Integration revision
       type: object
     IntegrationRevisionTerraform:
-      additionalProperties: false
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        terraform:
+          configurationBlocks:
+          - name: name
+            description: description
+            value: value
+          - name: name
+            description: description
+            value: value
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          selection:
+            defaultValue: defaultValue
+            options:
+            - options
+            - options
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          selection:
+            defaultValue: defaultValue
+            options:
+            - options
+            - options
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -3564,6 +3585,8 @@ components:
           $ref: "#/components/schemas/Terraform"
         upgradeInstructionsMd:
           type: string
+      required:
+      - terraform
       title: Integration revision
       type: object
     IntegrationStatus:
@@ -3653,28 +3676,6 @@ components:
         url: ""
       title: Managed service
       type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
-      type: object
     MultipleSelectionValue:
       externalDocs:
         url: ""
@@ -3703,14 +3704,13 @@ components:
       type: object
     Parameter:
       oneOf:
+      - $ref: "#/components/schemas/ParameterStringValue"
       - $ref: "#/components/schemas/ParameterBooleanValue"
       - $ref: "#/components/schemas/ParameterStringList"
       - $ref: "#/components/schemas/ParameterApiKey"
       - $ref: "#/components/schemas/ParameterNumericValue"
       - $ref: "#/components/schemas/ParameterSensitiveData"
-      - $ref: "#/components/schemas/ParameterStringValue"
     ParameterApiKey:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -3718,13 +3718,11 @@ components:
           $ref: "#/components/schemas/ApiKeyData"
         key:
           type: string
+      required:
+      - apiKey
       title: Parameter
       type: object
     ParameterBooleanValue:
-      additionalProperties: false
-      example:
-        booleanValue: true
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -3732,10 +3730,11 @@ components:
           type: boolean
         key:
           type: string
+      required:
+      - booleanValue
       title: Parameter
       type: object
     ParameterNumericValue:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -3744,10 +3743,11 @@ components:
         numericValue:
           format: double
           type: number
+      required:
+      - numericValue
       title: Parameter
       type: object
     ParameterSensitiveData:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -3758,10 +3758,11 @@ components:
             url: ""
           title: Sensitive data placeholder
           type: object
+      required:
+      - sensitiveData
       title: Parameter
       type: object
     ParameterStringList:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -3769,10 +3770,14 @@ components:
           type: string
         stringList:
           $ref: "#/components/schemas/StringList"
+      required:
+      - stringList
       title: Parameter
       type: object
     ParameterStringValue:
-      additionalProperties: false
+      example:
+        stringValue: stringValue
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -3780,6 +3785,8 @@ components:
           type: string
         stringValue:
           type: string
+      required:
+      - stringValue
       title: Parameter
       type: object
     PermissionResource:
@@ -3812,7 +3819,6 @@ components:
       - $ref: "#/components/schemas/RegisteredInstanceCloudformation"
       - $ref: "#/components/schemas/RegisteredInstanceArm"
     RegisteredInstanceArm:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -3835,10 +3841,11 @@ components:
           type: array
         revisionLifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
+      required:
+      - arm
       title: Registered instance
       type: object
     RegisteredInstanceCloudformation:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
@@ -3861,10 +3868,11 @@ components:
           type: array
         revisionLifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
+      required:
+      - cloudformation
       title: Registered instance
       type: object
     RegisteredInstanceEmpty:
-      additionalProperties: false
       example:
         lastUpdated: 2000-01-23T04:56:07.000+00:00
         definitionVersion: definitionVersion
@@ -3878,9 +3886,9 @@ components:
             key: details
         id: id
         parameters:
-        - booleanValue: true
+        - stringValue: stringValue
           key: key
-        - booleanValue: true
+        - stringValue: stringValue
           key: key
         isTesting: true
         empty: "{}"
@@ -3911,6 +3919,8 @@ components:
           type: array
         revisionLifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
+      required:
+      - empty
       title: Registered instance
       type: object
     RevisionLifecycle:
@@ -4024,6 +4034,14 @@ components:
       type: string
     Terraform:
       description: This data structure represents a Terraform integration.
+      example:
+        configurationBlocks:
+        - name: name
+          description: description
+          value: value
+        - name: name
+          description: description
+          value: value
       externalDocs:
         url: ""
       properties:
@@ -4046,7 +4064,7 @@ components:
       type: object
     TestIntegrationResult:
       oneOf:
-      - $ref: "#/components/schemas/TestIntegrationResultSuccess"
+      - $ref: "#/components/schemas/TestIntegrationResultSuccessVariant"
       - $ref: "#/components/schemas/TestIntegrationResultFailure"
     TestIntegrationResult.Success:
       externalDocs:
@@ -4054,16 +4072,16 @@ components:
       title: Success
       type: object
     TestIntegrationResultFailure:
-      additionalProperties: false
       externalDocs:
         url: ""
       properties:
         failure:
           $ref: "#/components/schemas/v1.Failure"
+      required:
+      - failure
       title: Test integration result
       type: object
-    TestIntegrationResultSuccess:
-      additionalProperties: false
+    TestIntegrationResultSuccessVariant:
       example:
         success: "{}"
       externalDocs:
@@ -4074,6 +4092,8 @@ components:
             url: ""
           title: Success
           type: object
+      required:
+      - success
       title: Test integration result
       type: object
     Untracked:
@@ -4088,7 +4108,6 @@ components:
       title: Update contextual data integration response
       type: object
     V1IntegrationTypeArm:
-      additionalProperties: false
       description: This data structure represents an integration type.
       externalDocs:
         url: ""
@@ -4099,11 +4118,14 @@ components:
             url: ""
           title: Azure ARM
           type: object
+      required:
+      - arm
       title: Integration type
       type: object
     V1IntegrationTypeCloudformation:
-      additionalProperties: false
       description: This data structure represents an integration type.
+      example:
+        cloudformation: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4113,13 +4135,12 @@ components:
             url: ""
           title: CloudFormation
           type: object
+      required:
+      - cloudformation
       title: Integration type
       type: object
     V1IntegrationTypeContextualData:
-      additionalProperties: false
       description: This data structure represents an integration type.
-      example:
-        contextualData: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4129,10 +4150,11 @@ components:
             url: ""
           title: Contextual data
           type: object
+      required:
+      - contextualData
       title: Integration type
       type: object
     V1IntegrationTypeGenericWebhook:
-      additionalProperties: false
       description: This data structure represents an integration type.
       externalDocs:
         url: ""
@@ -4143,20 +4165,22 @@ components:
             url: ""
           title: Generic webhook
           type: object
+      required:
+      - genericWebhook
       title: Integration type
       type: object
     V1IntegrationTypeManaged:
-      additionalProperties: false
       description: This data structure represents an integration type.
       externalDocs:
         url: ""
       properties:
         managed:
           $ref: "#/components/schemas/Managed"
+      required:
+      - managed
       title: Integration type
       type: object
     V1IntegrationTypePushBasedContextualData:
-      additionalProperties: false
       description: This data structure represents an integration type.
       externalDocs:
         url: ""
@@ -4168,10 +4192,11 @@ components:
             url: ""
           title: Push based contextual data
           type: object
+      required:
+      - pushBasedContextualData
       title: Integration type
       type: object
     V1IntegrationTypeUntracked:
-      additionalProperties: false
       description: This data structure represents an integration type.
       externalDocs:
         url: ""
@@ -4182,6 +4207,8 @@ components:
             url: ""
           title: Untracked
           type: object
+      required:
+      - untracked
       title: Integration type
       type: object
     Variant:
@@ -4628,13 +4655,13 @@ components:
       type: object
     v1.IntegrationType:
       oneOf:
+      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
+      - $ref: "#/components/schemas/V1IntegrationTypeArm"
+      - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
       - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
-      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
-      - $ref: "#/components/schemas/V1IntegrationTypeArm"
-      - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
     v1.RevisionSummary:
       example:
         lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
@@ -4651,7 +4678,6 @@ components:
       - FILTER_OPERATOR_OR
       type: string
     Update_contextual_data_integration_request:
-      additionalProperties: false
       properties:
         integrationId:
           type: string
@@ -4660,22 +4686,14 @@ components:
       title: Update contextual data integration request
       type: object
     Save_contextual_data_integration_request:
-      additionalProperties: false
       properties:
         metadata:
           $ref: "#/components/schemas/IntegrationMetadata"
       title: Save contextual data integration request
       type: object
     Test_contextual_data_integration_request:
-      additionalProperties: false
       properties:
         integrationData:
           $ref: "#/components/schemas/IntegrationMetadata"
       title: Test contextual data integration request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

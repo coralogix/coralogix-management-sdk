@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionDataTable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionDataTable{}
 
 // WidgetDefinitionDataTable struct for WidgetDefinitionDataTable
 type WidgetDefinitionDataTable struct {
-	DataTable *DataTable `json:"dataTable,omitempty"`
+	DataTable DataTable `json:"dataTable"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionDataTable WidgetDefinitionDataTable
 
 // NewWidgetDefinitionDataTable instantiates a new WidgetDefinitionDataTable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionDataTable() *WidgetDefinitionDataTable {
+func NewWidgetDefinitionDataTable(dataTable DataTable) *WidgetDefinitionDataTable {
 	this := WidgetDefinitionDataTable{}
+	this.DataTable = dataTable
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionDataTableWithDefaults() *WidgetDefinitionDataTable {
 	return &this
 }
 
-// GetDataTable returns the DataTable field value if set, zero value otherwise.
+// GetDataTable returns the DataTable field value
 func (o *WidgetDefinitionDataTable) GetDataTable() DataTable {
-	if o == nil || IsNil(o.DataTable) {
+	if o == nil {
 		var ret DataTable
 		return ret
 	}
-	return *o.DataTable
+
+	return o.DataTable
 }
 
-// GetDataTableOk returns a tuple with the DataTable field value if set, nil otherwise
+// GetDataTableOk returns a tuple with the DataTable field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionDataTable) GetDataTableOk() (*DataTable, bool) {
-	if o == nil || IsNil(o.DataTable) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DataTable, true
+	return &o.DataTable, true
 }
 
-// HasDataTable returns a boolean if a field has been set.
-func (o *WidgetDefinitionDataTable) HasDataTable() bool {
-	if o != nil && !IsNil(o.DataTable) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataTable gets a reference to the given DataTable and assigns it to the DataTable field.
+// SetDataTable sets field value
 func (o *WidgetDefinitionDataTable) SetDataTable(v DataTable) {
-	o.DataTable = &v
+	o.DataTable = v
 }
 
 func (o WidgetDefinitionDataTable) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionDataTable) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionDataTable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DataTable) {
-		toSerialize["dataTable"] = o.DataTable
+	toSerialize["dataTable"] = o.DataTable
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionDataTable) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dataTable",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionDataTable := _WidgetDefinitionDataTable{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionDataTable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionDataTable(varWidgetDefinitionDataTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataTable")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionDataTable struct {

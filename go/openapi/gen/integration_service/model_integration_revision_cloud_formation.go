@@ -11,29 +11,37 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionCloudFormation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionCloudFormation{}
 
 // IntegrationRevisionCloudFormation This data structure represents an integration revision.
 type IntegrationRevisionCloudFormation struct {
-	CloudFormation *CloudFormationTemplate `json:"cloudFormation,omitempty"`
+	CloudFormation CloudFormationTemplate `json:"cloudFormation"`
 	FeatureFlag *string `json:"featureFlag,omitempty"`
 	Fields []FieldInformation `json:"fields,omitempty"`
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	Id *string `json:"id,omitempty"`
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionCloudFormation IntegrationRevisionCloudFormation
 
 // NewIntegrationRevisionCloudFormation instantiates a new IntegrationRevisionCloudFormation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationRevisionCloudFormation() *IntegrationRevisionCloudFormation {
+func NewIntegrationRevisionCloudFormation(cloudFormation CloudFormationTemplate) *IntegrationRevisionCloudFormation {
 	this := IntegrationRevisionCloudFormation{}
+	this.CloudFormation = cloudFormation
 	return &this
 }
 
@@ -45,36 +53,28 @@ func NewIntegrationRevisionCloudFormationWithDefaults() *IntegrationRevisionClou
 	return &this
 }
 
-// GetCloudFormation returns the CloudFormation field value if set, zero value otherwise.
+// GetCloudFormation returns the CloudFormation field value
 func (o *IntegrationRevisionCloudFormation) GetCloudFormation() CloudFormationTemplate {
-	if o == nil || IsNil(o.CloudFormation) {
+	if o == nil {
 		var ret CloudFormationTemplate
 		return ret
 	}
-	return *o.CloudFormation
+
+	return o.CloudFormation
 }
 
-// GetCloudFormationOk returns a tuple with the CloudFormation field value if set, nil otherwise
+// GetCloudFormationOk returns a tuple with the CloudFormation field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationRevisionCloudFormation) GetCloudFormationOk() (*CloudFormationTemplate, bool) {
-	if o == nil || IsNil(o.CloudFormation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CloudFormation, true
+	return &o.CloudFormation, true
 }
 
-// HasCloudFormation returns a boolean if a field has been set.
-func (o *IntegrationRevisionCloudFormation) HasCloudFormation() bool {
-	if o != nil && !IsNil(o.CloudFormation) {
-		return true
-	}
-
-	return false
-}
-
-// SetCloudFormation gets a reference to the given CloudFormationTemplate and assigns it to the CloudFormation field.
+// SetCloudFormation sets field value
 func (o *IntegrationRevisionCloudFormation) SetCloudFormation(v CloudFormationTemplate) {
-	o.CloudFormation = &v
+	o.CloudFormation = v
 }
 
 // GetFeatureFlag returns the FeatureFlag field value if set, zero value otherwise.
@@ -279,9 +279,7 @@ func (o IntegrationRevisionCloudFormation) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationRevisionCloudFormation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CloudFormation) {
-		toSerialize["cloudFormation"] = o.CloudFormation
-	}
+	toSerialize["cloudFormation"] = o.CloudFormation
 	if !IsNil(o.FeatureFlag) {
 		toSerialize["featureFlag"] = o.FeatureFlag
 	}
@@ -300,7 +298,61 @@ func (o IntegrationRevisionCloudFormation) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.UpgradeInstructionsMd) {
 		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionCloudFormation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"cloudFormation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationRevisionCloudFormation := _IntegrationRevisionCloudFormation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionCloudFormation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionCloudFormation(varIntegrationRevisionCloudFormation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cloudFormation")
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revisionDeploymentSupported")
+		delete(additionalProperties, "upgradeInstructionsMd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionCloudFormation struct {

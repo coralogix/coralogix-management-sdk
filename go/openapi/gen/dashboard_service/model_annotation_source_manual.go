@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AnnotationSourceManual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceManual{}
 
 // AnnotationSourceManual struct for AnnotationSourceManual
 type AnnotationSourceManual struct {
-	Manual *ManualSource `json:"manual,omitempty"`
+	Manual ManualSource `json:"manual"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnnotationSourceManual AnnotationSourceManual
 
 // NewAnnotationSourceManual instantiates a new AnnotationSourceManual object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnnotationSourceManual() *AnnotationSourceManual {
+func NewAnnotationSourceManual(manual ManualSource) *AnnotationSourceManual {
 	this := AnnotationSourceManual{}
+	this.Manual = manual
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewAnnotationSourceManualWithDefaults() *AnnotationSourceManual {
 	return &this
 }
 
-// GetManual returns the Manual field value if set, zero value otherwise.
+// GetManual returns the Manual field value
 func (o *AnnotationSourceManual) GetManual() ManualSource {
-	if o == nil || IsNil(o.Manual) {
+	if o == nil {
 		var ret ManualSource
 		return ret
 	}
-	return *o.Manual
+
+	return o.Manual
 }
 
-// GetManualOk returns a tuple with the Manual field value if set, nil otherwise
+// GetManualOk returns a tuple with the Manual field value
 // and a boolean to check if the value has been set.
 func (o *AnnotationSourceManual) GetManualOk() (*ManualSource, bool) {
-	if o == nil || IsNil(o.Manual) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Manual, true
+	return &o.Manual, true
 }
 
-// HasManual returns a boolean if a field has been set.
-func (o *AnnotationSourceManual) HasManual() bool {
-	if o != nil && !IsNil(o.Manual) {
-		return true
-	}
-
-	return false
-}
-
-// SetManual gets a reference to the given ManualSource and assigns it to the Manual field.
+// SetManual sets field value
 func (o *AnnotationSourceManual) SetManual(v ManualSource) {
-	o.Manual = &v
+	o.Manual = v
 }
 
 func (o AnnotationSourceManual) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o AnnotationSourceManual) MarshalJSON() ([]byte, error) {
 
 func (o AnnotationSourceManual) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Manual) {
-		toSerialize["manual"] = o.Manual
+	toSerialize["manual"] = o.Manual
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *AnnotationSourceManual) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"manual",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAnnotationSourceManual := _AnnotationSourceManual{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotationSourceManual)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnnotationSourceManual(varAnnotationSourceManual)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "manual")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnnotationSourceManual struct {

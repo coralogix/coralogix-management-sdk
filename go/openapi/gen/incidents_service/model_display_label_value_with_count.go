@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DisplayLabelValueWithCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DisplayLabelValueWithCount{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &DisplayLabelValueWithCount{}
 type DisplayLabelValueWithCount struct {
 	Count int32 `json:"count"`
 	DisplayLabelValue string `json:"displayLabelValue"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DisplayLabelValueWithCount DisplayLabelValueWithCount
@@ -106,6 +109,11 @@ func (o DisplayLabelValueWithCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["count"] = o.Count
 	toSerialize["displayLabelValue"] = o.DisplayLabelValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *DisplayLabelValueWithCount) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DisplayLabelValueWithCount(varDisplayLabelValueWithCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "displayLabelValue")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

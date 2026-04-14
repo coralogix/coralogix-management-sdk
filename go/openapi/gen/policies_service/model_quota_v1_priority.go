@@ -11,9 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // QuotaV1Priority the model 'QuotaV1Priority'
 type QuotaV1Priority string

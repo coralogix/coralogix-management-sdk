@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsUniqueValueTimeWindow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsUniqueValueTimeWindow{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LogsUniqueValueTimeWindow{}
 // LogsUniqueValueTimeWindow Time window configuration for log-based unique value alerts
 type LogsUniqueValueTimeWindow struct {
 	LogsUniqueValueTimeWindowSpecificValue *LogsUniqueValueTimeWindowValue `json:"logsUniqueValueTimeWindowSpecificValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsUniqueValueTimeWindow LogsUniqueValueTimeWindow
 
 // NewLogsUniqueValueTimeWindow instantiates a new LogsUniqueValueTimeWindow object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LogsUniqueValueTimeWindow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LogsUniqueValueTimeWindowSpecificValue) {
 		toSerialize["logsUniqueValueTimeWindowSpecificValue"] = o.LogsUniqueValueTimeWindowSpecificValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsUniqueValueTimeWindow) UnmarshalJSON(data []byte) (err error) {
+	varLogsUniqueValueTimeWindow := _LogsUniqueValueTimeWindow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsUniqueValueTimeWindow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsUniqueValueTimeWindow(varLogsUniqueValueTimeWindow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsUniqueValueTimeWindowSpecificValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsUniqueValueTimeWindow struct {

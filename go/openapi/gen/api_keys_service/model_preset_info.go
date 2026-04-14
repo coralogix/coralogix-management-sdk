@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PresetInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PresetInfo{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &PresetInfo{}
 type PresetInfo struct {
 	Name *string `json:"name,omitempty"`
 	Permissions []string `json:"permissions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PresetInfo PresetInfo
 
 // NewPresetInfo instantiates a new PresetInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o PresetInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Permissions) {
 		toSerialize["permissions"] = o.Permissions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PresetInfo) UnmarshalJSON(data []byte) (err error) {
+	varPresetInfo := _PresetInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPresetInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PresetInfo(varPresetInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permissions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePresetInfo struct {

@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertSchedulerRuleProtobufV1FilterAlertMetaLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleProtobufV1FilterAlertMetaLabels{}
 
 // AlertSchedulerRuleProtobufV1FilterAlertMetaLabels struct for AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
 type AlertSchedulerRuleProtobufV1FilterAlertMetaLabels struct {
-	AlertMetaLabels *MetaLabels `json:"alertMetaLabels,omitempty"`
+	AlertMetaLabels MetaLabels `json:"alertMetaLabels"`
 	WhatExpression *string `json:"whatExpression,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertSchedulerRuleProtobufV1FilterAlertMetaLabels AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
 
 // NewAlertSchedulerRuleProtobufV1FilterAlertMetaLabels instantiates a new AlertSchedulerRuleProtobufV1FilterAlertMetaLabels object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertSchedulerRuleProtobufV1FilterAlertMetaLabels() *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels {
+func NewAlertSchedulerRuleProtobufV1FilterAlertMetaLabels(alertMetaLabels MetaLabels) *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels {
 	this := AlertSchedulerRuleProtobufV1FilterAlertMetaLabels{}
+	this.AlertMetaLabels = alertMetaLabels
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewAlertSchedulerRuleProtobufV1FilterAlertMetaLabelsWithDefaults() *AlertSc
 	return &this
 }
 
-// GetAlertMetaLabels returns the AlertMetaLabels field value if set, zero value otherwise.
+// GetAlertMetaLabels returns the AlertMetaLabels field value
 func (o *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) GetAlertMetaLabels() MetaLabels {
-	if o == nil || IsNil(o.AlertMetaLabels) {
+	if o == nil {
 		var ret MetaLabels
 		return ret
 	}
-	return *o.AlertMetaLabels
+
+	return o.AlertMetaLabels
 }
 
-// GetAlertMetaLabelsOk returns a tuple with the AlertMetaLabels field value if set, nil otherwise
+// GetAlertMetaLabelsOk returns a tuple with the AlertMetaLabels field value
 // and a boolean to check if the value has been set.
 func (o *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) GetAlertMetaLabelsOk() (*MetaLabels, bool) {
-	if o == nil || IsNil(o.AlertMetaLabels) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AlertMetaLabels, true
+	return &o.AlertMetaLabels, true
 }
 
-// HasAlertMetaLabels returns a boolean if a field has been set.
-func (o *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) HasAlertMetaLabels() bool {
-	if o != nil && !IsNil(o.AlertMetaLabels) {
-		return true
-	}
-
-	return false
-}
-
-// SetAlertMetaLabels gets a reference to the given MetaLabels and assigns it to the AlertMetaLabels field.
+// SetAlertMetaLabels sets field value
 func (o *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) SetAlertMetaLabels(v MetaLabels) {
-	o.AlertMetaLabels = &v
+	o.AlertMetaLabels = v
 }
 
 // GetWhatExpression returns the WhatExpression field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) MarshalJSON() ([]byte
 
 func (o AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AlertMetaLabels) {
-		toSerialize["alertMetaLabels"] = o.AlertMetaLabels
-	}
+	toSerialize["alertMetaLabels"] = o.AlertMetaLabels
 	if !IsNil(o.WhatExpression) {
 		toSerialize["whatExpression"] = o.WhatExpression
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleProtobufV1FilterAlertMetaLabels) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"alertMetaLabels",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertSchedulerRuleProtobufV1FilterAlertMetaLabels := _AlertSchedulerRuleProtobufV1FilterAlertMetaLabels{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleProtobufV1FilterAlertMetaLabels(varAlertSchedulerRuleProtobufV1FilterAlertMetaLabels)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertMetaLabels")
+		delete(additionalProperties, "whatExpression")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertSchedulerRuleProtobufV1FilterAlertMetaLabels struct {

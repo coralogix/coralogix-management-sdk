@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AnnotationSourceMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceMetrics{}
 
 // AnnotationSourceMetrics struct for AnnotationSourceMetrics
 type AnnotationSourceMetrics struct {
-	Metrics *MetricsSource `json:"metrics,omitempty"`
+	Metrics MetricsSource `json:"metrics"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnnotationSourceMetrics AnnotationSourceMetrics
 
 // NewAnnotationSourceMetrics instantiates a new AnnotationSourceMetrics object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnnotationSourceMetrics() *AnnotationSourceMetrics {
+func NewAnnotationSourceMetrics(metrics MetricsSource) *AnnotationSourceMetrics {
 	this := AnnotationSourceMetrics{}
+	this.Metrics = metrics
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewAnnotationSourceMetricsWithDefaults() *AnnotationSourceMetrics {
 	return &this
 }
 
-// GetMetrics returns the Metrics field value if set, zero value otherwise.
+// GetMetrics returns the Metrics field value
 func (o *AnnotationSourceMetrics) GetMetrics() MetricsSource {
-	if o == nil || IsNil(o.Metrics) {
+	if o == nil {
 		var ret MetricsSource
 		return ret
 	}
-	return *o.Metrics
+
+	return o.Metrics
 }
 
-// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// GetMetricsOk returns a tuple with the Metrics field value
 // and a boolean to check if the value has been set.
 func (o *AnnotationSourceMetrics) GetMetricsOk() (*MetricsSource, bool) {
-	if o == nil || IsNil(o.Metrics) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metrics, true
+	return &o.Metrics, true
 }
 
-// HasMetrics returns a boolean if a field has been set.
-func (o *AnnotationSourceMetrics) HasMetrics() bool {
-	if o != nil && !IsNil(o.Metrics) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetrics gets a reference to the given MetricsSource and assigns it to the Metrics field.
+// SetMetrics sets field value
 func (o *AnnotationSourceMetrics) SetMetrics(v MetricsSource) {
-	o.Metrics = &v
+	o.Metrics = v
 }
 
 func (o AnnotationSourceMetrics) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o AnnotationSourceMetrics) MarshalJSON() ([]byte, error) {
 
 func (o AnnotationSourceMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Metrics) {
-		toSerialize["metrics"] = o.Metrics
+	toSerialize["metrics"] = o.Metrics
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *AnnotationSourceMetrics) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metrics",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAnnotationSourceMetrics := _AnnotationSourceMetrics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotationSourceMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnnotationSourceMetrics(varAnnotationSourceMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnnotationSourceMetrics struct {

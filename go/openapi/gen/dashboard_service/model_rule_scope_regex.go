@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleScopeRegex type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleScopeRegex{}
 
 // RuleScopeRegex struct for RuleScopeRegex
 type RuleScopeRegex struct {
-	Regex *string `json:"regex,omitempty"`
+	Regex string `json:"regex"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleScopeRegex RuleScopeRegex
 
 // NewRuleScopeRegex instantiates a new RuleScopeRegex object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleScopeRegex() *RuleScopeRegex {
+func NewRuleScopeRegex(regex string) *RuleScopeRegex {
 	this := RuleScopeRegex{}
+	this.Regex = regex
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleScopeRegexWithDefaults() *RuleScopeRegex {
 	return &this
 }
 
-// GetRegex returns the Regex field value if set, zero value otherwise.
+// GetRegex returns the Regex field value
 func (o *RuleScopeRegex) GetRegex() string {
-	if o == nil || IsNil(o.Regex) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Regex
+
+	return o.Regex
 }
 
-// GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
+// GetRegexOk returns a tuple with the Regex field value
 // and a boolean to check if the value has been set.
 func (o *RuleScopeRegex) GetRegexOk() (*string, bool) {
-	if o == nil || IsNil(o.Regex) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Regex, true
+	return &o.Regex, true
 }
 
-// HasRegex returns a boolean if a field has been set.
-func (o *RuleScopeRegex) HasRegex() bool {
-	if o != nil && !IsNil(o.Regex) {
-		return true
-	}
-
-	return false
-}
-
-// SetRegex gets a reference to the given string and assigns it to the Regex field.
+// SetRegex sets field value
 func (o *RuleScopeRegex) SetRegex(v string) {
-	o.Regex = &v
+	o.Regex = v
 }
 
 func (o RuleScopeRegex) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleScopeRegex) MarshalJSON() ([]byte, error) {
 
 func (o RuleScopeRegex) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Regex) {
-		toSerialize["regex"] = o.Regex
+	toSerialize["regex"] = o.Regex
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleScopeRegex) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"regex",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleScopeRegex := _RuleScopeRegex{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleScopeRegex)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleScopeRegex(varRuleScopeRegex)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "regex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleScopeRegex struct {

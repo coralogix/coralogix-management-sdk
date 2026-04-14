@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestOutgoingWebhookRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestOutgoingWebhookRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &TestOutgoingWebhookRequest{}
 // TestOutgoingWebhookRequest struct for TestOutgoingWebhookRequest
 type TestOutgoingWebhookRequest struct {
 	Data *OutgoingWebhookInputData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TestOutgoingWebhookRequest TestOutgoingWebhookRequest
 
 // NewTestOutgoingWebhookRequest instantiates a new TestOutgoingWebhookRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o TestOutgoingWebhookRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TestOutgoingWebhookRequest) UnmarshalJSON(data []byte) (err error) {
+	varTestOutgoingWebhookRequest := _TestOutgoingWebhookRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestOutgoingWebhookRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestOutgoingWebhookRequest(varTestOutgoingWebhookRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTestOutgoingWebhookRequest struct {

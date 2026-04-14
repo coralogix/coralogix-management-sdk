@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryMetricsQueryTypeLabelName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryTypeLabelName{}
 
 // QueryMetricsQueryTypeLabelName struct for QueryMetricsQueryTypeLabelName
 type QueryMetricsQueryTypeLabelName struct {
-	LabelName *QueryMetricsQueryTypeLabelName `json:"labelName,omitempty"`
+	MetricRegex *string `json:"metricRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryMetricsQueryTypeLabelName QueryMetricsQueryTypeLabelName
 
 // NewQueryMetricsQueryTypeLabelName instantiates a new QueryMetricsQueryTypeLabelName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQueryMetricsQueryTypeLabelNameWithDefaults() *QueryMetricsQueryTypeLabel
 	return &this
 }
 
-// GetLabelName returns the LabelName field value if set, zero value otherwise.
-func (o *QueryMetricsQueryTypeLabelName) GetLabelName() QueryMetricsQueryTypeLabelName {
-	if o == nil || IsNil(o.LabelName) {
-		var ret QueryMetricsQueryTypeLabelName
+// GetMetricRegex returns the MetricRegex field value if set, zero value otherwise.
+func (o *QueryMetricsQueryTypeLabelName) GetMetricRegex() string {
+	if o == nil || IsNil(o.MetricRegex) {
+		var ret string
 		return ret
 	}
-	return *o.LabelName
+	return *o.MetricRegex
 }
 
-// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// GetMetricRegexOk returns a tuple with the MetricRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryMetricsQueryTypeLabelName) GetLabelNameOk() (*QueryMetricsQueryTypeLabelName, bool) {
-	if o == nil || IsNil(o.LabelName) {
+func (o *QueryMetricsQueryTypeLabelName) GetMetricRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricRegex) {
 		return nil, false
 	}
-	return o.LabelName, true
+	return o.MetricRegex, true
 }
 
-// HasLabelName returns a boolean if a field has been set.
-func (o *QueryMetricsQueryTypeLabelName) HasLabelName() bool {
-	if o != nil && !IsNil(o.LabelName) {
+// HasMetricRegex returns a boolean if a field has been set.
+func (o *QueryMetricsQueryTypeLabelName) HasMetricRegex() bool {
+	if o != nil && !IsNil(o.MetricRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetLabelName gets a reference to the given QueryMetricsQueryTypeLabelName and assigns it to the LabelName field.
-func (o *QueryMetricsQueryTypeLabelName) SetLabelName(v QueryMetricsQueryTypeLabelName) {
-	o.LabelName = &v
+// SetMetricRegex gets a reference to the given string and assigns it to the MetricRegex field.
+func (o *QueryMetricsQueryTypeLabelName) SetMetricRegex(v string) {
+	o.MetricRegex = &v
 }
 
 func (o QueryMetricsQueryTypeLabelName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QueryMetricsQueryTypeLabelName) MarshalJSON() ([]byte, error) {
 
 func (o QueryMetricsQueryTypeLabelName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LabelName) {
-		toSerialize["labelName"] = o.LabelName
+	if !IsNil(o.MetricRegex) {
+		toSerialize["metricRegex"] = o.MetricRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryTypeLabelName) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryTypeLabelName := _QueryMetricsQueryTypeLabelName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryTypeLabelName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryTypeLabelName(varQueryMetricsQueryTypeLabelName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryMetricsQueryTypeLabelName struct {

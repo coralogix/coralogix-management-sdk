@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // VisualizationStackedLine the model 'VisualizationStackedLine'
 type VisualizationStackedLine string

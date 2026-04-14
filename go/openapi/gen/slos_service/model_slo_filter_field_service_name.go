@@ -11,8 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloFilterFieldServiceName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloFilterFieldServiceName{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &SloFilterFieldServiceName{}
 // SloFilterFieldServiceName Field used for filtering SLOs
 type SloFilterFieldServiceName struct {
 	// Filter by service name. Only applicable to product types that support services (e.g., APM). MUST be used together with product_type filter. Will throw an error if used without product_type.
-	ServiceName *string `json:"serviceName,omitempty"`
+	ServiceName string `json:"serviceName"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloFilterFieldServiceName SloFilterFieldServiceName
 
 // NewSloFilterFieldServiceName instantiates a new SloFilterFieldServiceName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloFilterFieldServiceName() *SloFilterFieldServiceName {
+func NewSloFilterFieldServiceName(serviceName string) *SloFilterFieldServiceName {
 	this := SloFilterFieldServiceName{}
+	this.ServiceName = serviceName
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewSloFilterFieldServiceNameWithDefaults() *SloFilterFieldServiceName {
 	return &this
 }
 
-// GetServiceName returns the ServiceName field value if set, zero value otherwise.
+// GetServiceName returns the ServiceName field value
 func (o *SloFilterFieldServiceName) GetServiceName() string {
-	if o == nil || IsNil(o.ServiceName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ServiceName
+
+	return o.ServiceName
 }
 
-// GetServiceNameOk returns a tuple with the ServiceName field value if set, nil otherwise
+// GetServiceNameOk returns a tuple with the ServiceName field value
 // and a boolean to check if the value has been set.
 func (o *SloFilterFieldServiceName) GetServiceNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ServiceName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ServiceName, true
+	return &o.ServiceName, true
 }
 
-// HasServiceName returns a boolean if a field has been set.
-func (o *SloFilterFieldServiceName) HasServiceName() bool {
-	if o != nil && !IsNil(o.ServiceName) {
-		return true
-	}
-
-	return false
-}
-
-// SetServiceName gets a reference to the given string and assigns it to the ServiceName field.
+// SetServiceName sets field value
 func (o *SloFilterFieldServiceName) SetServiceName(v string) {
-	o.ServiceName = &v
+	o.ServiceName = v
 }
 
 func (o SloFilterFieldServiceName) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o SloFilterFieldServiceName) MarshalJSON() ([]byte, error) {
 
 func (o SloFilterFieldServiceName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ServiceName) {
-		toSerialize["serviceName"] = o.ServiceName
+	toSerialize["serviceName"] = o.ServiceName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloFilterFieldServiceName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"serviceName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloFilterFieldServiceName := _SloFilterFieldServiceName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloFilterFieldServiceName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloFilterFieldServiceName(varSloFilterFieldServiceName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "serviceName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloFilterFieldServiceName struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersAllowParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersAllowParameters{}
 
 // RuleParametersAllowParameters struct for RuleParametersAllowParameters
 type RuleParametersAllowParameters struct {
-	AllowParameters *AllowParameters `json:"allowParameters,omitempty"`
+	AllowParameters AllowParameters `json:"allowParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersAllowParameters RuleParametersAllowParameters
 
 // NewRuleParametersAllowParameters instantiates a new RuleParametersAllowParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersAllowParameters() *RuleParametersAllowParameters {
+func NewRuleParametersAllowParameters(allowParameters AllowParameters) *RuleParametersAllowParameters {
 	this := RuleParametersAllowParameters{}
+	this.AllowParameters = allowParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersAllowParametersWithDefaults() *RuleParametersAllowParamete
 	return &this
 }
 
-// GetAllowParameters returns the AllowParameters field value if set, zero value otherwise.
+// GetAllowParameters returns the AllowParameters field value
 func (o *RuleParametersAllowParameters) GetAllowParameters() AllowParameters {
-	if o == nil || IsNil(o.AllowParameters) {
+	if o == nil {
 		var ret AllowParameters
 		return ret
 	}
-	return *o.AllowParameters
+
+	return o.AllowParameters
 }
 
-// GetAllowParametersOk returns a tuple with the AllowParameters field value if set, nil otherwise
+// GetAllowParametersOk returns a tuple with the AllowParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersAllowParameters) GetAllowParametersOk() (*AllowParameters, bool) {
-	if o == nil || IsNil(o.AllowParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllowParameters, true
+	return &o.AllowParameters, true
 }
 
-// HasAllowParameters returns a boolean if a field has been set.
-func (o *RuleParametersAllowParameters) HasAllowParameters() bool {
-	if o != nil && !IsNil(o.AllowParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowParameters gets a reference to the given AllowParameters and assigns it to the AllowParameters field.
+// SetAllowParameters sets field value
 func (o *RuleParametersAllowParameters) SetAllowParameters(v AllowParameters) {
-	o.AllowParameters = &v
+	o.AllowParameters = v
 }
 
 func (o RuleParametersAllowParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersAllowParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersAllowParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AllowParameters) {
-		toSerialize["allowParameters"] = o.AllowParameters
+	toSerialize["allowParameters"] = o.AllowParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersAllowParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"allowParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersAllowParameters := _RuleParametersAllowParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersAllowParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersAllowParameters(varRuleParametersAllowParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersAllowParameters struct {

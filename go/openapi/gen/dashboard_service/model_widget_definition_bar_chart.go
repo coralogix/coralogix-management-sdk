@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionBarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionBarChart{}
 
 // WidgetDefinitionBarChart struct for WidgetDefinitionBarChart
 type WidgetDefinitionBarChart struct {
-	BarChart *BarChart `json:"barChart,omitempty"`
+	BarChart BarChart `json:"barChart"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionBarChart WidgetDefinitionBarChart
 
 // NewWidgetDefinitionBarChart instantiates a new WidgetDefinitionBarChart object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionBarChart() *WidgetDefinitionBarChart {
+func NewWidgetDefinitionBarChart(barChart BarChart) *WidgetDefinitionBarChart {
 	this := WidgetDefinitionBarChart{}
+	this.BarChart = barChart
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionBarChartWithDefaults() *WidgetDefinitionBarChart {
 	return &this
 }
 
-// GetBarChart returns the BarChart field value if set, zero value otherwise.
+// GetBarChart returns the BarChart field value
 func (o *WidgetDefinitionBarChart) GetBarChart() BarChart {
-	if o == nil || IsNil(o.BarChart) {
+	if o == nil {
 		var ret BarChart
 		return ret
 	}
-	return *o.BarChart
+
+	return o.BarChart
 }
 
-// GetBarChartOk returns a tuple with the BarChart field value if set, nil otherwise
+// GetBarChartOk returns a tuple with the BarChart field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionBarChart) GetBarChartOk() (*BarChart, bool) {
-	if o == nil || IsNil(o.BarChart) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BarChart, true
+	return &o.BarChart, true
 }
 
-// HasBarChart returns a boolean if a field has been set.
-func (o *WidgetDefinitionBarChart) HasBarChart() bool {
-	if o != nil && !IsNil(o.BarChart) {
-		return true
-	}
-
-	return false
-}
-
-// SetBarChart gets a reference to the given BarChart and assigns it to the BarChart field.
+// SetBarChart sets field value
 func (o *WidgetDefinitionBarChart) SetBarChart(v BarChart) {
-	o.BarChart = &v
+	o.BarChart = v
 }
 
 func (o WidgetDefinitionBarChart) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionBarChart) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionBarChart) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BarChart) {
-		toSerialize["barChart"] = o.BarChart
+	toSerialize["barChart"] = o.BarChart
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionBarChart) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"barChart",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionBarChart := _WidgetDefinitionBarChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionBarChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionBarChart(varWidgetDefinitionBarChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "barChart")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionBarChart struct {

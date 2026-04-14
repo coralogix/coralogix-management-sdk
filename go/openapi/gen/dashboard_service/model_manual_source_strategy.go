@@ -11,28 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // ManualSourceStrategy - struct for ManualSourceStrategy
 type ManualSourceStrategy struct {
-	ManualSourceStrategyInstant *ManualSourceStrategyInstant
-	ManualSourceStrategyRange *ManualSourceStrategyRange
+	ManualSourceStrategyInstantVariant *ManualSourceStrategyInstantVariant
+	ManualSourceStrategyRangeVariant *ManualSourceStrategyRangeVariant
 }
 
-// ManualSourceStrategyInstantAsManualSourceStrategy is a convenience function that returns ManualSourceStrategyInstant wrapped in ManualSourceStrategy
-func ManualSourceStrategyInstantAsManualSourceStrategy(v *ManualSourceStrategyInstant) ManualSourceStrategy {
+// ManualSourceStrategyInstantVariantAsManualSourceStrategy is a convenience function that returns ManualSourceStrategyInstantVariant wrapped in ManualSourceStrategy
+func ManualSourceStrategyInstantVariantAsManualSourceStrategy(v *ManualSourceStrategyInstantVariant) ManualSourceStrategy {
 	return ManualSourceStrategy{
-		ManualSourceStrategyInstant: v,
+		ManualSourceStrategyInstantVariant: v,
 	}
 }
 
-// ManualSourceStrategyRangeAsManualSourceStrategy is a convenience function that returns ManualSourceStrategyRange wrapped in ManualSourceStrategy
-func ManualSourceStrategyRangeAsManualSourceStrategy(v *ManualSourceStrategyRange) ManualSourceStrategy {
+// ManualSourceStrategyRangeVariantAsManualSourceStrategy is a convenience function that returns ManualSourceStrategyRangeVariant wrapped in ManualSourceStrategy
+func ManualSourceStrategyRangeVariantAsManualSourceStrategy(v *ManualSourceStrategyRangeVariant) ManualSourceStrategy {
 	return ManualSourceStrategy{
-		ManualSourceStrategyRange: v,
+		ManualSourceStrategyRangeVariant: v,
 	}
 }
 
@@ -41,44 +44,44 @@ func ManualSourceStrategyRangeAsManualSourceStrategy(v *ManualSourceStrategyRang
 func (dst *ManualSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ManualSourceStrategyInstant
-	err = json.Unmarshal(data, &dst.ManualSourceStrategyInstant)
+	// try to unmarshal data into ManualSourceStrategyInstantVariant
+	err = json.Unmarshal(data, &dst.ManualSourceStrategyInstantVariant)
 	if err == nil {
-		jsonManualSourceStrategyInstant, _ := json.Marshal(dst.ManualSourceStrategyInstant)
-		if string(jsonManualSourceStrategyInstant) == "{}" { // empty struct
-			dst.ManualSourceStrategyInstant = nil
+		jsonManualSourceStrategyInstantVariant, _ := json.Marshal(dst.ManualSourceStrategyInstantVariant)
+		if string(jsonManualSourceStrategyInstantVariant) == "{}" { // empty struct
+			dst.ManualSourceStrategyInstantVariant = nil
 		} else {
-			if err = validator.Validate(dst.ManualSourceStrategyInstant); err != nil {
-				dst.ManualSourceStrategyInstant = nil
+			if err = validator.Validate(dst.ManualSourceStrategyInstantVariant); err != nil {
+				dst.ManualSourceStrategyInstantVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ManualSourceStrategyInstant = nil
+		dst.ManualSourceStrategyInstantVariant = nil
 	}
 
-	// try to unmarshal data into ManualSourceStrategyRange
-	err = json.Unmarshal(data, &dst.ManualSourceStrategyRange)
+	// try to unmarshal data into ManualSourceStrategyRangeVariant
+	err = json.Unmarshal(data, &dst.ManualSourceStrategyRangeVariant)
 	if err == nil {
-		jsonManualSourceStrategyRange, _ := json.Marshal(dst.ManualSourceStrategyRange)
-		if string(jsonManualSourceStrategyRange) == "{}" { // empty struct
-			dst.ManualSourceStrategyRange = nil
+		jsonManualSourceStrategyRangeVariant, _ := json.Marshal(dst.ManualSourceStrategyRangeVariant)
+		if string(jsonManualSourceStrategyRangeVariant) == "{}" { // empty struct
+			dst.ManualSourceStrategyRangeVariant = nil
 		} else {
-			if err = validator.Validate(dst.ManualSourceStrategyRange); err != nil {
-				dst.ManualSourceStrategyRange = nil
+			if err = validator.Validate(dst.ManualSourceStrategyRangeVariant); err != nil {
+				dst.ManualSourceStrategyRangeVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ManualSourceStrategyRange = nil
+		dst.ManualSourceStrategyRangeVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ManualSourceStrategyInstant = nil
-		dst.ManualSourceStrategyRange = nil
+		dst.ManualSourceStrategyInstantVariant = nil
+		dst.ManualSourceStrategyRangeVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ManualSourceStrategy)")
 	} else if match == 1 {
@@ -90,12 +93,12 @@ func (dst *ManualSourceStrategy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ManualSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.ManualSourceStrategyInstant != nil {
-		return json.Marshal(&src.ManualSourceStrategyInstant)
+	if src.ManualSourceStrategyInstantVariant != nil {
+		return json.Marshal(&src.ManualSourceStrategyInstantVariant)
 	}
 
-	if src.ManualSourceStrategyRange != nil {
-		return json.Marshal(&src.ManualSourceStrategyRange)
+	if src.ManualSourceStrategyRangeVariant != nil {
+		return json.Marshal(&src.ManualSourceStrategyRangeVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +109,12 @@ func (obj *ManualSourceStrategy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ManualSourceStrategyInstant != nil {
-		return obj.ManualSourceStrategyInstant
+	if obj.ManualSourceStrategyInstantVariant != nil {
+		return obj.ManualSourceStrategyInstantVariant
 	}
 
-	if obj.ManualSourceStrategyRange != nil {
-		return obj.ManualSourceStrategyRange
+	if obj.ManualSourceStrategyRangeVariant != nil {
+		return obj.ManualSourceStrategyRangeVariant
 	}
 
 	// all schemas are nil
@@ -120,12 +123,12 @@ func (obj *ManualSourceStrategy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj ManualSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.ManualSourceStrategyInstant != nil {
-		return *obj.ManualSourceStrategyInstant
+	if obj.ManualSourceStrategyInstantVariant != nil {
+		return *obj.ManualSourceStrategyInstantVariant
 	}
 
-	if obj.ManualSourceStrategyRange != nil {
-		return *obj.ManualSourceStrategyRange
+	if obj.ManualSourceStrategyRangeVariant != nil {
+		return *obj.ManualSourceStrategyRangeVariant
 	}
 
 	// all schemas are nil

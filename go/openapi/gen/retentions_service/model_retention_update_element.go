@@ -11,8 +11,11 @@ API version: 1.0.0
 package retentions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RetentionUpdateElement type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RetentionUpdateElement{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &RetentionUpdateElement{}
 type RetentionUpdateElement struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RetentionUpdateElement RetentionUpdateElement
 
 // NewRetentionUpdateElement instantiates a new RetentionUpdateElement object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o RetentionUpdateElement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RetentionUpdateElement) UnmarshalJSON(data []byte) (err error) {
+	varRetentionUpdateElement := _RetentionUpdateElement{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRetentionUpdateElement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RetentionUpdateElement(varRetentionUpdateElement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRetentionUpdateElement struct {

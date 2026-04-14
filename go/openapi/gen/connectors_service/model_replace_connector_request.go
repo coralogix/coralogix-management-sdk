@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceConnectorRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceConnectorRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ReplaceConnectorRequest{}
 // ReplaceConnectorRequest Request to replace an existing connector
 type ReplaceConnectorRequest struct {
 	Connector *Connector `json:"connector,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceConnectorRequest ReplaceConnectorRequest
 
 // NewReplaceConnectorRequest instantiates a new ReplaceConnectorRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ReplaceConnectorRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Connector) {
 		toSerialize["connector"] = o.Connector
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceConnectorRequest) UnmarshalJSON(data []byte) (err error) {
+	varReplaceConnectorRequest := _ReplaceConnectorRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceConnectorRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceConnectorRequest(varReplaceConnectorRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connector")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceConnectorRequest struct {

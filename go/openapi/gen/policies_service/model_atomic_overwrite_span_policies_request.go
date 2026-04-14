@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicOverwriteSpanPoliciesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicOverwriteSpanPoliciesRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &AtomicOverwriteSpanPoliciesRequest{}
 // AtomicOverwriteSpanPoliciesRequest In an atomic operation delete all existing span policies and create the provided list by order.
 type AtomicOverwriteSpanPoliciesRequest struct {
 	Policies []CreateSpanPolicyRequest `json:"policies"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AtomicOverwriteSpanPoliciesRequest AtomicOverwriteSpanPoliciesRequest
@@ -79,6 +82,11 @@ func (o AtomicOverwriteSpanPoliciesRequest) MarshalJSON() ([]byte, error) {
 func (o AtomicOverwriteSpanPoliciesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["policies"] = o.Policies
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *AtomicOverwriteSpanPoliciesRequest) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = AtomicOverwriteSpanPoliciesRequest(varAtomicOverwriteSpanPoliciesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "policies")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

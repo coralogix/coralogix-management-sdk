@@ -11,23 +11,31 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfDuration{}
 
 // IncidentFieldOneOfDuration struct for IncidentFieldOneOfDuration
 type IncidentFieldOneOfDuration struct {
-	Duration *string `json:"duration,omitempty"`
+	Duration string `json:"duration"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfDuration IncidentFieldOneOfDuration
 
 // NewIncidentFieldOneOfDuration instantiates a new IncidentFieldOneOfDuration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfDuration() *IncidentFieldOneOfDuration {
+func NewIncidentFieldOneOfDuration(duration string) *IncidentFieldOneOfDuration {
 	this := IncidentFieldOneOfDuration{}
+	this.Duration = duration
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIncidentFieldOneOfDurationWithDefaults() *IncidentFieldOneOfDuration {
 	return &this
 }
 
-// GetDuration returns the Duration field value if set, zero value otherwise.
+// GetDuration returns the Duration field value
 func (o *IncidentFieldOneOfDuration) GetDuration() string {
-	if o == nil || IsNil(o.Duration) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Duration
+
+	return o.Duration
 }
 
-// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// GetDurationOk returns a tuple with the Duration field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfDuration) GetDurationOk() (*string, bool) {
-	if o == nil || IsNil(o.Duration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Duration, true
+	return &o.Duration, true
 }
 
-// HasDuration returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfDuration) HasDuration() bool {
-	if o != nil && !IsNil(o.Duration) {
-		return true
-	}
-
-	return false
-}
-
-// SetDuration gets a reference to the given string and assigns it to the Duration field.
+// SetDuration sets field value
 func (o *IncidentFieldOneOfDuration) SetDuration(v string) {
-	o.Duration = &v
+	o.Duration = v
 }
 
 func (o IncidentFieldOneOfDuration) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IncidentFieldOneOfDuration) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfDuration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Duration) {
-		toSerialize["duration"] = o.Duration
+	toSerialize["duration"] = o.Duration
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfDuration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"duration",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfDuration := _IncidentFieldOneOfDuration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfDuration(varIncidentFieldOneOfDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "duration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfDuration struct {

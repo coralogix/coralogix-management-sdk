@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartQueryDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartQueryDefinition{}
@@ -51,6 +53,7 @@ type LineChartQueryDefinition struct {
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LineChartQueryDefinition LineChartQueryDefinition
@@ -694,6 +697,11 @@ func (o LineChartQueryDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisMin) {
 		toSerialize["yAxisMin"] = o.YAxisMin
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -730,6 +738,30 @@ func (o *LineChartQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LineChartQueryDefinition(varLineChartQueryDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "decimal")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "intervalResolution")
+		delete(additionalProperties, "isVisible")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "resolution")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "seriesCountLimit")
+		delete(additionalProperties, "seriesNameTemplate")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

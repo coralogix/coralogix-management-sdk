@@ -11,10 +11,12 @@ API version: 1.0.0
 package quota_allocation_rule_set_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuotaAllocationEntityTypeRuleSet type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaAllocationEntityTypeRuleSet{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRuleSet{}
 type QuotaAllocationEntityTypeRuleSet struct {
 	Id *string `json:"id,omitempty"`
 	Rules []QuotaAllocationEntityTypeRule `json:"rules"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QuotaAllocationEntityTypeRuleSet QuotaAllocationEntityTypeRuleSet
@@ -115,6 +118,11 @@ func (o QuotaAllocationEntityTypeRuleSet) ToMap() (map[string]interface{}, error
 		toSerialize["id"] = o.Id
 	}
 	toSerialize["rules"] = o.Rules
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *QuotaAllocationEntityTypeRuleSet) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = QuotaAllocationEntityTypeRuleSet(varQuotaAllocationEntityTypeRuleSet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

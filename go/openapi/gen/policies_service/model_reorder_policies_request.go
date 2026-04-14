@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReorderPoliciesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReorderPoliciesRequest{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &ReorderPoliciesRequest{}
 type ReorderPoliciesRequest struct {
 	Orders []PolicyOrder `json:"orders"`
 	SourceType V1SourceType `json:"sourceType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReorderPoliciesRequest ReorderPoliciesRequest
@@ -106,6 +109,11 @@ func (o ReorderPoliciesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["orders"] = o.Orders
 	toSerialize["sourceType"] = o.SourceType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *ReorderPoliciesRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ReorderPoliciesRequest(varReorderPoliciesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "orders")
+		delete(additionalProperties, "sourceType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

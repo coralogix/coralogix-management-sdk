@@ -11,11 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventExtended type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventExtended{}
@@ -26,6 +28,7 @@ type IncidentEventExtended struct {
 	CxEventTimestamp time.Time `json:"cxEventTimestamp"`
 	IncidentEvent IncidentEvent `json:"incidentEvent"`
 	IncidentEventExtendedMetadata *IncidentEventExtendedMetadata `json:"incidentEventExtendedMetadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventExtended IncidentEventExtended
@@ -170,6 +173,11 @@ func (o IncidentEventExtended) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IncidentEventExtendedMetadata) {
 		toSerialize["incidentEventExtendedMetadata"] = o.IncidentEventExtendedMetadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -207,6 +215,16 @@ func (o *IncidentEventExtended) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentEventExtended(varIncidentEventExtended)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cxEventKey")
+		delete(additionalProperties, "cxEventTimestamp")
+		delete(additionalProperties, "incidentEvent")
+		delete(additionalProperties, "incidentEventExtendedMetadata")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

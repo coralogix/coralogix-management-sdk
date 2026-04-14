@@ -11,8 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2AggregationHistogram type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2AggregationHistogram{}
@@ -21,16 +25,20 @@ var _ MappedNullable = &V2AggregationHistogram{}
 type V2AggregationHistogram struct {
 	AggType *AggType `json:"aggType,omitempty"`
 	Enabled *bool `json:"enabled,omitempty"`
-	Histogram *E2MAggHistogram `json:"histogram,omitempty"`
+	Histogram E2MAggHistogram `json:"histogram"`
 	TargetMetricName *string `json:"targetMetricName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2AggregationHistogram V2AggregationHistogram
 
 // NewV2AggregationHistogram instantiates a new V2AggregationHistogram object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2AggregationHistogram() *V2AggregationHistogram {
+func NewV2AggregationHistogram(histogram E2MAggHistogram) *V2AggregationHistogram {
 	this := V2AggregationHistogram{}
+	this.Histogram = histogram
 	return &this
 }
 
@@ -106,36 +114,28 @@ func (o *V2AggregationHistogram) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetHistogram returns the Histogram field value if set, zero value otherwise.
+// GetHistogram returns the Histogram field value
 func (o *V2AggregationHistogram) GetHistogram() E2MAggHistogram {
-	if o == nil || IsNil(o.Histogram) {
+	if o == nil {
 		var ret E2MAggHistogram
 		return ret
 	}
-	return *o.Histogram
+
+	return o.Histogram
 }
 
-// GetHistogramOk returns a tuple with the Histogram field value if set, nil otherwise
+// GetHistogramOk returns a tuple with the Histogram field value
 // and a boolean to check if the value has been set.
 func (o *V2AggregationHistogram) GetHistogramOk() (*E2MAggHistogram, bool) {
-	if o == nil || IsNil(o.Histogram) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Histogram, true
+	return &o.Histogram, true
 }
 
-// HasHistogram returns a boolean if a field has been set.
-func (o *V2AggregationHistogram) HasHistogram() bool {
-	if o != nil && !IsNil(o.Histogram) {
-		return true
-	}
-
-	return false
-}
-
-// SetHistogram gets a reference to the given E2MAggHistogram and assigns it to the Histogram field.
+// SetHistogram sets field value
 func (o *V2AggregationHistogram) SetHistogram(v E2MAggHistogram) {
-	o.Histogram = &v
+	o.Histogram = v
 }
 
 // GetTargetMetricName returns the TargetMetricName field value if set, zero value otherwise.
@@ -186,13 +186,62 @@ func (o V2AggregationHistogram) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Histogram) {
-		toSerialize["histogram"] = o.Histogram
-	}
+	toSerialize["histogram"] = o.Histogram
 	if !IsNil(o.TargetMetricName) {
 		toSerialize["targetMetricName"] = o.TargetMetricName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2AggregationHistogram) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"histogram",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV2AggregationHistogram := _V2AggregationHistogram{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2AggregationHistogram)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2AggregationHistogram(varV2AggregationHistogram)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggType")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "histogram")
+		delete(additionalProperties, "targetMetricName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2AggregationHistogram struct {

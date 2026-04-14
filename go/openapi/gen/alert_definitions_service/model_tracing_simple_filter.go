@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingSimpleFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingSimpleFilter{}
@@ -22,7 +25,10 @@ type TracingSimpleFilter struct {
 	// The latency threshold to filter traces in milliseconds
 	LatencyThresholdMs *string `json:"latencyThresholdMs,omitempty"`
 	TracingLabelFilters *TracingLabelFilters `json:"tracingLabelFilters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingSimpleFilter TracingSimpleFilter
 
 // NewTracingSimpleFilter instantiates a new TracingSimpleFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o TracingSimpleFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TracingLabelFilters) {
 		toSerialize["tracingLabelFilters"] = o.TracingLabelFilters
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingSimpleFilter) UnmarshalJSON(data []byte) (err error) {
+	varTracingSimpleFilter := _TracingSimpleFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingSimpleFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingSimpleFilter(varTracingSimpleFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "latencyThresholdMs")
+		delete(additionalProperties, "tracingLabelFilters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingSimpleFilter struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeSeriesLinesMulti type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSeriesLinesMulti{}
@@ -25,7 +28,10 @@ type TimeSeriesLinesMulti struct {
 	QueryDisplaySettings []QueryDisplaySettings `json:"queryDisplaySettings,omitempty"`
 	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSeriesLinesMulti TimeSeriesLinesMulti
 
 // NewTimeSeriesLinesMulti instantiates a new TimeSeriesLinesMulti object
 // This constructor will assign default values to properties that have it defined,
@@ -229,7 +235,38 @@ func (o TimeSeriesLinesMulti) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tooltip) {
 		toSerialize["tooltip"] = o.Tooltip
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSeriesLinesMulti) UnmarshalJSON(data []byte) (err error) {
+	varTimeSeriesLinesMulti := _TimeSeriesLinesMulti{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeSeriesLinesMulti)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSeriesLinesMulti(varTimeSeriesLinesMulti)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectNulls")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "queryDisplaySettings")
+		delete(additionalProperties, "stackedLine")
+		delete(additionalProperties, "tooltip")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSeriesLinesMulti struct {

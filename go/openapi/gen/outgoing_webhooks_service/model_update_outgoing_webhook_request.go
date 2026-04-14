@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateOutgoingWebhookRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateOutgoingWebhookRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &UpdateOutgoingWebhookRequest{}
 type UpdateOutgoingWebhookRequest struct {
 	Data *OutgoingWebhookInputData `json:"data,omitempty"`
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateOutgoingWebhookRequest UpdateOutgoingWebhookRequest
 
 // NewUpdateOutgoingWebhookRequest instantiates a new UpdateOutgoingWebhookRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o UpdateOutgoingWebhookRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateOutgoingWebhookRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateOutgoingWebhookRequest := _UpdateOutgoingWebhookRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpdateOutgoingWebhookRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateOutgoingWebhookRequest(varUpdateOutgoingWebhookRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateOutgoingWebhookRequest struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterLogsFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterLogsFilter{}
@@ -23,7 +26,10 @@ type FilterLogsFilter struct {
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	Operator *FilterOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterLogsFilter FilterLogsFilter
 
 // NewFilterLogsFilter instantiates a new FilterLogsFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o FilterLogsFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Operator) {
 		toSerialize["operator"] = o.Operator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterLogsFilter) UnmarshalJSON(data []byte) (err error) {
+	varFilterLogsFilter := _FilterLogsFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterLogsFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterLogsFilter(varFilterLogsFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "observationField")
+		delete(additionalProperties, "operator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterLogsFilter struct {

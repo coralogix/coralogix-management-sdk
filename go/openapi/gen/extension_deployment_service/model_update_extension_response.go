@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateExtensionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateExtensionResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &UpdateExtensionResponse{}
 // UpdateExtensionResponse struct for UpdateExtensionResponse
 type UpdateExtensionResponse struct {
 	ExtensionDeployment *ExtensionDeployment `json:"extensionDeployment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateExtensionResponse UpdateExtensionResponse
 
 // NewUpdateExtensionResponse instantiates a new UpdateExtensionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o UpdateExtensionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExtensionDeployment) {
 		toSerialize["extensionDeployment"] = o.ExtensionDeployment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateExtensionResponse) UnmarshalJSON(data []byte) (err error) {
+	varUpdateExtensionResponse := _UpdateExtensionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpdateExtensionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateExtensionResponse(varUpdateExtensionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extensionDeployment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateExtensionResponse struct {

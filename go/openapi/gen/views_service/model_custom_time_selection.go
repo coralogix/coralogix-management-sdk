@@ -11,11 +11,13 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomTimeSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomTimeSelection{}
@@ -24,6 +26,7 @@ var _ MappedNullable = &CustomTimeSelection{}
 type CustomTimeSelection struct {
 	FromTime time.Time `json:"fromTime"`
 	ToTime time.Time `json:"toTime"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CustomTimeSelection CustomTimeSelection
@@ -107,6 +110,11 @@ func (o CustomTimeSelection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fromTime"] = o.FromTime
 	toSerialize["toTime"] = o.ToTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,6 +151,14 @@ func (o *CustomTimeSelection) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CustomTimeSelection(varCustomTimeSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fromTime")
+		delete(additionalProperties, "toTime")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

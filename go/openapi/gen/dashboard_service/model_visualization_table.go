@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationTable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationTable{}
 
 // VisualizationTable struct for VisualizationTable
 type VisualizationTable struct {
-	Table *Table `json:"table,omitempty"`
+	Table Table `json:"table"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationTable VisualizationTable
 
 // NewVisualizationTable instantiates a new VisualizationTable object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationTable() *VisualizationTable {
+func NewVisualizationTable(table Table) *VisualizationTable {
 	this := VisualizationTable{}
+	this.Table = table
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationTableWithDefaults() *VisualizationTable {
 	return &this
 }
 
-// GetTable returns the Table field value if set, zero value otherwise.
+// GetTable returns the Table field value
 func (o *VisualizationTable) GetTable() Table {
-	if o == nil || IsNil(o.Table) {
+	if o == nil {
 		var ret Table
 		return ret
 	}
-	return *o.Table
+
+	return o.Table
 }
 
-// GetTableOk returns a tuple with the Table field value if set, nil otherwise
+// GetTableOk returns a tuple with the Table field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationTable) GetTableOk() (*Table, bool) {
-	if o == nil || IsNil(o.Table) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Table, true
+	return &o.Table, true
 }
 
-// HasTable returns a boolean if a field has been set.
-func (o *VisualizationTable) HasTable() bool {
-	if o != nil && !IsNil(o.Table) {
-		return true
-	}
-
-	return false
-}
-
-// SetTable gets a reference to the given Table and assigns it to the Table field.
+// SetTable sets field value
 func (o *VisualizationTable) SetTable(v Table) {
-	o.Table = &v
+	o.Table = v
 }
 
 func (o VisualizationTable) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationTable) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationTable) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Table) {
-		toSerialize["table"] = o.Table
+	toSerialize["table"] = o.Table
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationTable) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"table",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationTable := _VisualizationTable{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationTable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationTable(varVisualizationTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "table")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationTable struct {

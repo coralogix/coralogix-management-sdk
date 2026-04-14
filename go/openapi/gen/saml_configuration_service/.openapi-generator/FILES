@@ -7,9 +7,6 @@ api_saml_configuration_service.go
 client.go
 configuration.go
 git_push.sh
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_events_v3_filter_matcher.go
 model_field_group.go
@@ -23,8 +20,6 @@ model_idp_details.go
 model_idp_parameters.go
 model_idp_parameters_metadata_content.go
 model_idp_parameters_metadata_url.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_set_active_request.go
 model_set_idp_parameters_request.go

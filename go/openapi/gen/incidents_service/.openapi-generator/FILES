@@ -17,9 +17,6 @@ model_assignment.go
 model_batch_get_incident_response.go
 model_close_incidents_request.go
 model_close_incidents_response.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_contextual_label_value_with_count.go
 model_contextual_label_values.go
@@ -103,9 +100,9 @@ model_incident_status.go
 model_incident_status_count.go
 model_incident_status_with_count.go
 model_incidents_service_list_incident_aggregations_group_bys_parameter_inner.go
-model_incidents_service_list_incidents_order_bys_parameter_inner.go
 model_incidents_v1_get_filter_values_response.go
 model_incidents_v1_meta_label.go
+model_incidents_v1_pagination_request.go
 model_incidents_v1_pagination_response.go
 model_incidents_v1_user_details.go
 model_list_incident_aggregations_response.go
@@ -113,9 +110,8 @@ model_list_incident_events_filter_values_response.go
 model_list_incident_events_order_by_request.go
 model_list_incident_events_response.go
 model_list_incident_events_total_count_response.go
+model_list_incidents_request.go
 model_list_incidents_response.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_originator_type.go
 model_pagination_request.go
@@ -126,6 +122,7 @@ model_unassign_incidents_response.go
 model_upsert_incident_state_payload.go
 model_upsert_incident_state_type.go
 model_v1_filter_operator.go
+model_v1_order_by.go
 model_v1_order_by_contextual_label.go
 model_v1_order_by_direction.go
 model_v1_order_by_incident_field.go

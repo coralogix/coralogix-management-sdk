@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQueryOperatorNotEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryOperatorNotEquals{}
 
 // QuerySourceMetricsQueryOperatorNotEquals struct for QuerySourceMetricsQueryOperatorNotEquals
 type QuerySourceMetricsQueryOperatorNotEquals struct {
-	NotEquals *QuerySourceMetricsQueryNotEquals `json:"notEquals,omitempty"`
+	NotEquals QuerySourceMetricsQueryNotEquals `json:"notEquals"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQueryOperatorNotEquals QuerySourceMetricsQueryOperatorNotEquals
 
 // NewQuerySourceMetricsQueryOperatorNotEquals instantiates a new QuerySourceMetricsQueryOperatorNotEquals object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQuerySourceMetricsQueryOperatorNotEquals() *QuerySourceMetricsQueryOperatorNotEquals {
+func NewQuerySourceMetricsQueryOperatorNotEquals(notEquals QuerySourceMetricsQueryNotEquals) *QuerySourceMetricsQueryOperatorNotEquals {
 	this := QuerySourceMetricsQueryOperatorNotEquals{}
+	this.NotEquals = notEquals
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewQuerySourceMetricsQueryOperatorNotEqualsWithDefaults() *QuerySourceMetri
 	return &this
 }
 
-// GetNotEquals returns the NotEquals field value if set, zero value otherwise.
+// GetNotEquals returns the NotEquals field value
 func (o *QuerySourceMetricsQueryOperatorNotEquals) GetNotEquals() QuerySourceMetricsQueryNotEquals {
-	if o == nil || IsNil(o.NotEquals) {
+	if o == nil {
 		var ret QuerySourceMetricsQueryNotEquals
 		return ret
 	}
-	return *o.NotEquals
+
+	return o.NotEquals
 }
 
-// GetNotEqualsOk returns a tuple with the NotEquals field value if set, nil otherwise
+// GetNotEqualsOk returns a tuple with the NotEquals field value
 // and a boolean to check if the value has been set.
 func (o *QuerySourceMetricsQueryOperatorNotEquals) GetNotEqualsOk() (*QuerySourceMetricsQueryNotEquals, bool) {
-	if o == nil || IsNil(o.NotEquals) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NotEquals, true
+	return &o.NotEquals, true
 }
 
-// HasNotEquals returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQueryOperatorNotEquals) HasNotEquals() bool {
-	if o != nil && !IsNil(o.NotEquals) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotEquals gets a reference to the given QuerySourceMetricsQueryNotEquals and assigns it to the NotEquals field.
+// SetNotEquals sets field value
 func (o *QuerySourceMetricsQueryOperatorNotEquals) SetNotEquals(v QuerySourceMetricsQueryNotEquals) {
-	o.NotEquals = &v
+	o.NotEquals = v
 }
 
 func (o QuerySourceMetricsQueryOperatorNotEquals) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o QuerySourceMetricsQueryOperatorNotEquals) MarshalJSON() ([]byte, error) 
 
 func (o QuerySourceMetricsQueryOperatorNotEquals) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.NotEquals) {
-		toSerialize["notEquals"] = o.NotEquals
+	toSerialize["notEquals"] = o.NotEquals
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryOperatorNotEquals) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"notEquals",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varQuerySourceMetricsQueryOperatorNotEquals := _QuerySourceMetricsQueryOperatorNotEquals{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryOperatorNotEquals)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryOperatorNotEquals(varQuerySourceMetricsQueryOperatorNotEquals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "notEquals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQueryOperatorNotEquals struct {

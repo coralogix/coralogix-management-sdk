@@ -11,10 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScopeUpdateActionSetScopeId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopeUpdateActionSetScopeId{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &ScopeUpdateActionSetScopeId{}
 // ScopeUpdateActionSetScopeId struct for ScopeUpdateActionSetScopeId
 type ScopeUpdateActionSetScopeId struct {
 	ActionType string `json:"actionType"`
-	SetScopeId *SetScopeId `json:"setScopeId,omitempty"`
+	SetScopeId SetScopeId `json:"setScopeId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScopeUpdateActionSetScopeId ScopeUpdateActionSetScopeId
@@ -31,9 +34,10 @@ type _ScopeUpdateActionSetScopeId ScopeUpdateActionSetScopeId
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScopeUpdateActionSetScopeId(actionType string) *ScopeUpdateActionSetScopeId {
+func NewScopeUpdateActionSetScopeId(actionType string, setScopeId SetScopeId) *ScopeUpdateActionSetScopeId {
 	this := ScopeUpdateActionSetScopeId{}
 	this.ActionType = actionType
+	this.SetScopeId = setScopeId
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *ScopeUpdateActionSetScopeId) SetActionType(v string) {
 	o.ActionType = v
 }
 
-// GetSetScopeId returns the SetScopeId field value if set, zero value otherwise.
+// GetSetScopeId returns the SetScopeId field value
 func (o *ScopeUpdateActionSetScopeId) GetSetScopeId() SetScopeId {
-	if o == nil || IsNil(o.SetScopeId) {
+	if o == nil {
 		var ret SetScopeId
 		return ret
 	}
-	return *o.SetScopeId
+
+	return o.SetScopeId
 }
 
-// GetSetScopeIdOk returns a tuple with the SetScopeId field value if set, nil otherwise
+// GetSetScopeIdOk returns a tuple with the SetScopeId field value
 // and a boolean to check if the value has been set.
 func (o *ScopeUpdateActionSetScopeId) GetSetScopeIdOk() (*SetScopeId, bool) {
-	if o == nil || IsNil(o.SetScopeId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SetScopeId, true
+	return &o.SetScopeId, true
 }
 
-// HasSetScopeId returns a boolean if a field has been set.
-func (o *ScopeUpdateActionSetScopeId) HasSetScopeId() bool {
-	if o != nil && !IsNil(o.SetScopeId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSetScopeId gets a reference to the given SetScopeId and assigns it to the SetScopeId field.
+// SetSetScopeId sets field value
 func (o *ScopeUpdateActionSetScopeId) SetSetScopeId(v SetScopeId) {
-	o.SetScopeId = &v
+	o.SetScopeId = v
 }
 
 func (o ScopeUpdateActionSetScopeId) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o ScopeUpdateActionSetScopeId) MarshalJSON() ([]byte, error) {
 func (o ScopeUpdateActionSetScopeId) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["actionType"] = o.ActionType
-	if !IsNil(o.SetScopeId) {
-		toSerialize["setScopeId"] = o.SetScopeId
+	toSerialize["setScopeId"] = o.SetScopeId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *ScopeUpdateActionSetScopeId) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"actionType",
+		"setScopeId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -150,6 +150,14 @@ func (o *ScopeUpdateActionSetScopeId) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ScopeUpdateActionSetScopeId(varScopeUpdateActionSetScopeId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actionType")
+		delete(additionalProperties, "setScopeId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

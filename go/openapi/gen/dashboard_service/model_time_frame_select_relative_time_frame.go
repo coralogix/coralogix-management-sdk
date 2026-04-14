@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeFrameSelectRelativeTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeFrameSelectRelativeTimeFrame{}
 
 // TimeFrameSelectRelativeTimeFrame struct for TimeFrameSelectRelativeTimeFrame
 type TimeFrameSelectRelativeTimeFrame struct {
-	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty"`
+	RelativeTimeFrame string `json:"relativeTimeFrame"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeFrameSelectRelativeTimeFrame TimeFrameSelectRelativeTimeFrame
 
 // NewTimeFrameSelectRelativeTimeFrame instantiates a new TimeFrameSelectRelativeTimeFrame object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeFrameSelectRelativeTimeFrame() *TimeFrameSelectRelativeTimeFrame {
+func NewTimeFrameSelectRelativeTimeFrame(relativeTimeFrame string) *TimeFrameSelectRelativeTimeFrame {
 	this := TimeFrameSelectRelativeTimeFrame{}
+	this.RelativeTimeFrame = relativeTimeFrame
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTimeFrameSelectRelativeTimeFrameWithDefaults() *TimeFrameSelectRelativeT
 	return &this
 }
 
-// GetRelativeTimeFrame returns the RelativeTimeFrame field value if set, zero value otherwise.
+// GetRelativeTimeFrame returns the RelativeTimeFrame field value
 func (o *TimeFrameSelectRelativeTimeFrame) GetRelativeTimeFrame() string {
-	if o == nil || IsNil(o.RelativeTimeFrame) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RelativeTimeFrame
+
+	return o.RelativeTimeFrame
 }
 
-// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value if set, nil otherwise
+// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *TimeFrameSelectRelativeTimeFrame) GetRelativeTimeFrameOk() (*string, bool) {
-	if o == nil || IsNil(o.RelativeTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RelativeTimeFrame, true
+	return &o.RelativeTimeFrame, true
 }
 
-// HasRelativeTimeFrame returns a boolean if a field has been set.
-func (o *TimeFrameSelectRelativeTimeFrame) HasRelativeTimeFrame() bool {
-	if o != nil && !IsNil(o.RelativeTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetRelativeTimeFrame gets a reference to the given string and assigns it to the RelativeTimeFrame field.
+// SetRelativeTimeFrame sets field value
 func (o *TimeFrameSelectRelativeTimeFrame) SetRelativeTimeFrame(v string) {
-	o.RelativeTimeFrame = &v
+	o.RelativeTimeFrame = v
 }
 
 func (o TimeFrameSelectRelativeTimeFrame) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TimeFrameSelectRelativeTimeFrame) MarshalJSON() ([]byte, error) {
 
 func (o TimeFrameSelectRelativeTimeFrame) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.RelativeTimeFrame) {
-		toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
+	toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeFrameSelectRelativeTimeFrame) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"relativeTimeFrame",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTimeFrameSelectRelativeTimeFrame := _TimeFrameSelectRelativeTimeFrame{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeFrameSelectRelativeTimeFrame)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeFrameSelectRelativeTimeFrame(varTimeFrameSelectRelativeTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "relativeTimeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeFrameSelectRelativeTimeFrame struct {

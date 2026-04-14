@@ -11,9 +11,12 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V2SourceType the model 'V2SourceType'
 type V2SourceType string

@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1TeamId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1TeamId{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &V1TeamId{}
 // V1TeamId struct for V1TeamId
 type V1TeamId struct {
 	Id *int64 `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1TeamId V1TeamId
 
 // NewV1TeamId instantiates a new V1TeamId object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o V1TeamId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1TeamId) UnmarshalJSON(data []byte) (err error) {
+	varV1TeamId := _V1TeamId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1TeamId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1TeamId(varV1TeamId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1TeamId struct {

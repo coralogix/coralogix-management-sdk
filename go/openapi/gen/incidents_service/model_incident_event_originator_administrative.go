@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventOriginatorAdministrative type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventOriginatorAdministrative{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &IncidentEventOriginatorAdministrative{}
 // IncidentEventOriginatorAdministrative struct for IncidentEventOriginatorAdministrative
 type IncidentEventOriginatorAdministrative struct {
 	UserId *string `json:"userId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventOriginatorAdministrative IncidentEventOriginatorAdministrative
 
 // NewIncidentEventOriginatorAdministrative instantiates a new IncidentEventOriginatorAdministrative object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o IncidentEventOriginatorAdministrative) ToMap() (map[string]interface{}, 
 	if !IsNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventOriginatorAdministrative) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventOriginatorAdministrative := _IncidentEventOriginatorAdministrative{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventOriginatorAdministrative)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventOriginatorAdministrative(varIncidentEventOriginatorAdministrative)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "userId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventOriginatorAdministrative struct {

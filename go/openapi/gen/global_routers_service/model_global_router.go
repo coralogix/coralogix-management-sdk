@@ -11,9 +11,12 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GlobalRouter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GlobalRouter{}
@@ -22,6 +25,7 @@ var _ MappedNullable = &GlobalRouter{}
 type GlobalRouter struct {
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
+	Disabled *bool `json:"disabled,omitempty"`
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
@@ -31,7 +35,10 @@ type GlobalRouter struct {
 	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
 	Rules []RoutingRule `json:"rules,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GlobalRouter GlobalRouter
 
 // NewGlobalRouter instantiates a new GlobalRouter object
 // This constructor will assign default values to properties that have it defined,
@@ -112,6 +119,38 @@ func (o *GlobalRouter) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *GlobalRouter) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetDisabled returns the Disabled field value if set, zero value otherwise.
+func (o *GlobalRouter) GetDisabled() bool {
+	if o == nil || IsNil(o.Disabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Disabled
+}
+
+// GetDisabledOk returns a tuple with the Disabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GlobalRouter) GetDisabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Disabled) {
+		return nil, false
+	}
+	return o.Disabled, true
+}
+
+// HasDisabled returns a boolean if a field has been set.
+func (o *GlobalRouter) HasDisabled() bool {
+	if o != nil && !IsNil(o.Disabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisabled gets a reference to the given bool and assigns it to the Disabled field.
+func (o *GlobalRouter) SetDisabled(v bool) {
+	o.Disabled = &v
 }
 
 // GetEntityLabels returns the EntityLabels field value if set, zero value otherwise.
@@ -418,6 +457,9 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+	if !IsNil(o.Disabled) {
+		toSerialize["disabled"] = o.Disabled
+	}
 	if !IsNil(o.EntityLabels) {
 		toSerialize["entityLabels"] = o.EntityLabels
 	}
@@ -445,7 +487,45 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GlobalRouter) UnmarshalJSON(data []byte) (err error) {
+	varGlobalRouter := _GlobalRouter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGlobalRouter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GlobalRouter(varGlobalRouter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "fallback")
+		delete(additionalProperties, "fallbackTargets")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "routingLabels")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGlobalRouter struct {

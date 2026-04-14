@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the JsonStringifyParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonStringifyParameters{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &JsonStringifyParameters{}
 type JsonStringifyParameters struct {
 	DeleteSource *bool `json:"deleteSource,omitempty"`
 	DestinationField *string `json:"destinationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _JsonStringifyParameters JsonStringifyParameters
 
 // NewJsonStringifyParameters instantiates a new JsonStringifyParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o JsonStringifyParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DestinationField) {
 		toSerialize["destinationField"] = o.DestinationField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *JsonStringifyParameters) UnmarshalJSON(data []byte) (err error) {
+	varJsonStringifyParameters := _JsonStringifyParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varJsonStringifyParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = JsonStringifyParameters(varJsonStringifyParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deleteSource")
+		delete(additionalProperties, "destinationField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableJsonStringifyParameters struct {

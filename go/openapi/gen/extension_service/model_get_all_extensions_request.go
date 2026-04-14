@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAllExtensionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAllExtensionsRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &GetAllExtensionsRequest{}
 type GetAllExtensionsRequest struct {
 	Filter *GetAllExtensionsRequestFilter `json:"filter,omitempty"`
 	IncludeHiddenExtensions *bool `json:"includeHiddenExtensions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAllExtensionsRequest GetAllExtensionsRequest
 
 // NewGetAllExtensionsRequest instantiates a new GetAllExtensionsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o GetAllExtensionsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IncludeHiddenExtensions) {
 		toSerialize["includeHiddenExtensions"] = o.IncludeHiddenExtensions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAllExtensionsRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetAllExtensionsRequest := _GetAllExtensionsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAllExtensionsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAllExtensionsRequest(varGetAllExtensionsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filter")
+		delete(additionalProperties, "includeHiddenExtensions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAllExtensionsRequest struct {

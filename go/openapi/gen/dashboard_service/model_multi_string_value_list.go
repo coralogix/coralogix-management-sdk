@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiStringValueList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiStringValueList{}
 
 // MultiStringValueList struct for MultiStringValueList
 type MultiStringValueList struct {
-	List *ListValue `json:"list,omitempty"`
+	List ListValue `json:"list"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiStringValueList MultiStringValueList
 
 // NewMultiStringValueList instantiates a new MultiStringValueList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiStringValueList() *MultiStringValueList {
+func NewMultiStringValueList(list ListValue) *MultiStringValueList {
 	this := MultiStringValueList{}
+	this.List = list
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiStringValueListWithDefaults() *MultiStringValueList {
 	return &this
 }
 
-// GetList returns the List field value if set, zero value otherwise.
+// GetList returns the List field value
 func (o *MultiStringValueList) GetList() ListValue {
-	if o == nil || IsNil(o.List) {
+	if o == nil {
 		var ret ListValue
 		return ret
 	}
-	return *o.List
+
+	return o.List
 }
 
-// GetListOk returns a tuple with the List field value if set, nil otherwise
+// GetListOk returns a tuple with the List field value
 // and a boolean to check if the value has been set.
 func (o *MultiStringValueList) GetListOk() (*ListValue, bool) {
-	if o == nil || IsNil(o.List) {
+	if o == nil {
 		return nil, false
 	}
-	return o.List, true
+	return &o.List, true
 }
 
-// HasList returns a boolean if a field has been set.
-func (o *MultiStringValueList) HasList() bool {
-	if o != nil && !IsNil(o.List) {
-		return true
-	}
-
-	return false
-}
-
-// SetList gets a reference to the given ListValue and assigns it to the List field.
+// SetList sets field value
 func (o *MultiStringValueList) SetList(v ListValue) {
-	o.List = &v
+	o.List = v
 }
 
 func (o MultiStringValueList) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiStringValueList) MarshalJSON() ([]byte, error) {
 
 func (o MultiStringValueList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.List) {
-		toSerialize["list"] = o.List
+	toSerialize["list"] = o.List
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiStringValueList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"list",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiStringValueList := _MultiStringValueList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiStringValueList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiStringValueList(varMultiStringValueList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiStringValueList struct {

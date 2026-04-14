@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RowAppearance type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RowAppearance{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &RowAppearance{}
 type RowAppearance struct {
 	// Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc
 	Height *int32 `json:"height,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RowAppearance RowAppearance
 
 // NewRowAppearance instantiates a new RowAppearance object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o RowAppearance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Height) {
 		toSerialize["height"] = o.Height
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RowAppearance) UnmarshalJSON(data []byte) (err error) {
+	varRowAppearance := _RowAppearance{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRowAppearance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RowAppearance(varRowAppearance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRowAppearance struct {

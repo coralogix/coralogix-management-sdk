@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBars{}
@@ -52,7 +55,10 @@ type HorizontalBars struct {
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
 	YAxisViewBy *HorizontalBarsYAxisViewBy `json:"yAxisViewBy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBars HorizontalBars
 
 // NewHorizontalBars instantiates a new HorizontalBars object
 // This constructor will assign default values to properties that have it defined,
@@ -816,7 +822,54 @@ func (o HorizontalBars) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisViewBy) {
 		toSerialize["yAxisViewBy"] = o.YAxisViewBy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBars) UnmarshalJSON(data []byte) (err error) {
+	varHorizontalBars := _HorizontalBars{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBars)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBars(varHorizontalBars)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "colorsBy")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "displayOnBar")
+		delete(additionalProperties, "groupNameTemplate")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "maxBarsPerChart")
+		delete(additionalProperties, "maxSlicesPerBar")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "sortBy")
+		delete(additionalProperties, "stackNameTemplate")
+		delete(additionalProperties, "subCategoryFields")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		delete(additionalProperties, "yAxisViewBy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBars struct {

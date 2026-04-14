@@ -11,8 +11,12 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TenantConfigV2Ibm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantConfigV2Ibm{}
@@ -20,18 +24,22 @@ var _ MappedNullable = &TenantConfigV2Ibm{}
 // TenantConfigV2Ibm struct for TenantConfigV2Ibm
 type TenantConfigV2Ibm struct {
 	Disabled *bool `json:"disabled,omitempty"`
-	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
+	Ibm IbmConfigV2 `json:"ibm"`
 	Prefix *string `json:"prefix,omitempty"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
 	TenantId *int64 `json:"tenantId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TenantConfigV2Ibm TenantConfigV2Ibm
 
 // NewTenantConfigV2Ibm instantiates a new TenantConfigV2Ibm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTenantConfigV2Ibm() *TenantConfigV2Ibm {
+func NewTenantConfigV2Ibm(ibm IbmConfigV2) *TenantConfigV2Ibm {
 	this := TenantConfigV2Ibm{}
+	this.Ibm = ibm
 	return &this
 }
 
@@ -75,36 +83,28 @@ func (o *TenantConfigV2Ibm) SetDisabled(v bool) {
 	o.Disabled = &v
 }
 
-// GetIbm returns the Ibm field value if set, zero value otherwise.
+// GetIbm returns the Ibm field value
 func (o *TenantConfigV2Ibm) GetIbm() IbmConfigV2 {
-	if o == nil || IsNil(o.Ibm) {
+	if o == nil {
 		var ret IbmConfigV2
 		return ret
 	}
-	return *o.Ibm
+
+	return o.Ibm
 }
 
-// GetIbmOk returns a tuple with the Ibm field value if set, nil otherwise
+// GetIbmOk returns a tuple with the Ibm field value
 // and a boolean to check if the value has been set.
 func (o *TenantConfigV2Ibm) GetIbmOk() (*IbmConfigV2, bool) {
-	if o == nil || IsNil(o.Ibm) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ibm, true
+	return &o.Ibm, true
 }
 
-// HasIbm returns a boolean if a field has been set.
-func (o *TenantConfigV2Ibm) HasIbm() bool {
-	if o != nil && !IsNil(o.Ibm) {
-		return true
-	}
-
-	return false
-}
-
-// SetIbm gets a reference to the given IbmConfigV2 and assigns it to the Ibm field.
+// SetIbm sets field value
 func (o *TenantConfigV2Ibm) SetIbm(v IbmConfigV2) {
-	o.Ibm = &v
+	o.Ibm = v
 }
 
 // GetPrefix returns the Prefix field value if set, zero value otherwise.
@@ -216,9 +216,7 @@ func (o TenantConfigV2Ibm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Disabled) {
 		toSerialize["disabled"] = o.Disabled
 	}
-	if !IsNil(o.Ibm) {
-		toSerialize["ibm"] = o.Ibm
-	}
+	toSerialize["ibm"] = o.Ibm
 	if !IsNil(o.Prefix) {
 		toSerialize["prefix"] = o.Prefix
 	}
@@ -228,7 +226,59 @@ func (o TenantConfigV2Ibm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TenantId) {
 		toSerialize["tenantId"] = o.TenantId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TenantConfigV2Ibm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ibm",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTenantConfigV2Ibm := _TenantConfigV2Ibm{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTenantConfigV2Ibm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TenantConfigV2Ibm(varTenantConfigV2Ibm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "disabled")
+		delete(additionalProperties, "ibm")
+		delete(additionalProperties, "prefix")
+		delete(additionalProperties, "retentionPolicy")
+		delete(additionalProperties, "tenantId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTenantConfigV2Ibm struct {

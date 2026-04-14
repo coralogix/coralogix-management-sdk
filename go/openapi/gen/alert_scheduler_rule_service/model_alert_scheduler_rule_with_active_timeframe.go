@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertSchedulerRuleWithActiveTimeframe type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleWithActiveTimeframe{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AlertSchedulerRuleWithActiveTimeframe{}
 type AlertSchedulerRuleWithActiveTimeframe struct {
 	AlertSchedulerRule *AlertSchedulerRule `json:"alertSchedulerRule,omitempty"`
 	NextActiveTimeframes []ActiveTimeframe `json:"nextActiveTimeframes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertSchedulerRuleWithActiveTimeframe AlertSchedulerRuleWithActiveTimeframe
 
 // NewAlertSchedulerRuleWithActiveTimeframe instantiates a new AlertSchedulerRuleWithActiveTimeframe object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o AlertSchedulerRuleWithActiveTimeframe) ToMap() (map[string]interface{}, 
 	if !IsNil(o.NextActiveTimeframes) {
 		toSerialize["nextActiveTimeframes"] = o.NextActiveTimeframes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleWithActiveTimeframe) UnmarshalJSON(data []byte) (err error) {
+	varAlertSchedulerRuleWithActiveTimeframe := _AlertSchedulerRuleWithActiveTimeframe{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleWithActiveTimeframe)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleWithActiveTimeframe(varAlertSchedulerRuleWithActiveTimeframe)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerRule")
+		delete(additionalProperties, "nextActiveTimeframes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertSchedulerRuleWithActiveTimeframe struct {

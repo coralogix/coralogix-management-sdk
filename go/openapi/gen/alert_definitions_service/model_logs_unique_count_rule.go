@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsUniqueCountRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsUniqueCountRule{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LogsUniqueCountRule{}
 // LogsUniqueCountRule Defines the rule for detecting unique counts in logs
 type LogsUniqueCountRule struct {
 	Condition *LogsUniqueCountCondition `json:"condition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsUniqueCountRule LogsUniqueCountRule
 
 // NewLogsUniqueCountRule instantiates a new LogsUniqueCountRule object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LogsUniqueCountRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Condition) {
 		toSerialize["condition"] = o.Condition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsUniqueCountRule) UnmarshalJSON(data []byte) (err error) {
+	varLogsUniqueCountRule := _LogsUniqueCountRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsUniqueCountRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsUniqueCountRule(varLogsUniqueCountRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsUniqueCountRule struct {

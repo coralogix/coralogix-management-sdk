@@ -11,9 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // SampleType the model 'SampleType'
 type SampleType string

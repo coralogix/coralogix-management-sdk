@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Percentile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Percentile{}
@@ -22,7 +25,10 @@ type Percentile struct {
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	Percent *float64 `json:"percent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Percentile Percentile
 
 // NewPercentile instantiates a new Percentile object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o Percentile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Percent) {
 		toSerialize["percent"] = o.Percent
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Percentile) UnmarshalJSON(data []byte) (err error) {
+	varPercentile := _Percentile{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPercentile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Percentile(varPercentile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "observationField")
+		delete(additionalProperties, "percent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePercentile struct {

@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceLogsQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceLogsQueryTypeFieldName{}
 
 // QuerySourceLogsQueryTypeFieldName struct for QuerySourceLogsQueryTypeFieldName
 type QuerySourceLogsQueryTypeFieldName struct {
-	FieldName *QuerySourceLogsQueryTypeFieldName `json:"fieldName,omitempty"`
+	LogRegex *string `json:"logRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceLogsQueryTypeFieldName QuerySourceLogsQueryTypeFieldName
 
 // NewQuerySourceLogsQueryTypeFieldName instantiates a new QuerySourceLogsQueryTypeFieldName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQuerySourceLogsQueryTypeFieldNameWithDefaults() *QuerySourceLogsQueryTyp
 	return &this
 }
 
-// GetFieldName returns the FieldName field value if set, zero value otherwise.
-func (o *QuerySourceLogsQueryTypeFieldName) GetFieldName() QuerySourceLogsQueryTypeFieldName {
-	if o == nil || IsNil(o.FieldName) {
-		var ret QuerySourceLogsQueryTypeFieldName
+// GetLogRegex returns the LogRegex field value if set, zero value otherwise.
+func (o *QuerySourceLogsQueryTypeFieldName) GetLogRegex() string {
+	if o == nil || IsNil(o.LogRegex) {
+		var ret string
 		return ret
 	}
-	return *o.FieldName
+	return *o.LogRegex
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
+// GetLogRegexOk returns a tuple with the LogRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceLogsQueryTypeFieldName) GetFieldNameOk() (*QuerySourceLogsQueryTypeFieldName, bool) {
-	if o == nil || IsNil(o.FieldName) {
+func (o *QuerySourceLogsQueryTypeFieldName) GetLogRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.LogRegex) {
 		return nil, false
 	}
-	return o.FieldName, true
+	return o.LogRegex, true
 }
 
-// HasFieldName returns a boolean if a field has been set.
-func (o *QuerySourceLogsQueryTypeFieldName) HasFieldName() bool {
-	if o != nil && !IsNil(o.FieldName) {
+// HasLogRegex returns a boolean if a field has been set.
+func (o *QuerySourceLogsQueryTypeFieldName) HasLogRegex() bool {
+	if o != nil && !IsNil(o.LogRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetFieldName gets a reference to the given QuerySourceLogsQueryTypeFieldName and assigns it to the FieldName field.
-func (o *QuerySourceLogsQueryTypeFieldName) SetFieldName(v QuerySourceLogsQueryTypeFieldName) {
-	o.FieldName = &v
+// SetLogRegex gets a reference to the given string and assigns it to the LogRegex field.
+func (o *QuerySourceLogsQueryTypeFieldName) SetLogRegex(v string) {
+	o.LogRegex = &v
 }
 
 func (o QuerySourceLogsQueryTypeFieldName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QuerySourceLogsQueryTypeFieldName) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceLogsQueryTypeFieldName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldName) {
-		toSerialize["fieldName"] = o.FieldName
+	if !IsNil(o.LogRegex) {
+		toSerialize["logRegex"] = o.LogRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceLogsQueryTypeFieldName) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceLogsQueryTypeFieldName := _QuerySourceLogsQueryTypeFieldName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceLogsQueryTypeFieldName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceLogsQueryTypeFieldName(varQuerySourceLogsQueryTypeFieldName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceLogsQueryTypeFieldName struct {

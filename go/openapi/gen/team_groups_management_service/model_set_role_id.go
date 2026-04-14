@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SetRoleId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetRoleId{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SetRoleId{}
 // SetRoleId struct for SetRoleId
 type SetRoleId struct {
 	Value *int64 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SetRoleId SetRoleId
 
 // NewSetRoleId instantiates a new SetRoleId object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SetRoleId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SetRoleId) UnmarshalJSON(data []byte) (err error) {
+	varSetRoleId := _SetRoleId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSetRoleId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SetRoleId(varSetRoleId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSetRoleId struct {

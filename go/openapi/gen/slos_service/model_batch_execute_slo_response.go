@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchExecuteSloResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchExecuteSloResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &BatchExecuteSloResponse{}
 type BatchExecuteSloResponse struct {
 	MatchingResponses []SloExecutionResponse `json:"matchingResponses"`
 	Status *ResponseStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchExecuteSloResponse BatchExecuteSloResponse
@@ -115,6 +118,11 @@ func (o BatchExecuteSloResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *BatchExecuteSloResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BatchExecuteSloResponse(varBatchExecuteSloResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matchingResponses")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

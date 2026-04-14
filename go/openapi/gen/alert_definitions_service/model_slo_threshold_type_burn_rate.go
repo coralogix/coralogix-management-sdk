@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloThresholdTypeBurnRate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloThresholdTypeBurnRate{}
 
 // SloThresholdTypeBurnRate SLO threshold type definition
 type SloThresholdTypeBurnRate struct {
-	BurnRate *BurnRateThreshold `json:"burnRate,omitempty"`
+	BurnRate BurnRateThreshold `json:"burnRate"`
 	SloDefinition *V3SloDefinition `json:"sloDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloThresholdTypeBurnRate SloThresholdTypeBurnRate
 
 // NewSloThresholdTypeBurnRate instantiates a new SloThresholdTypeBurnRate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloThresholdTypeBurnRate() *SloThresholdTypeBurnRate {
+func NewSloThresholdTypeBurnRate(burnRate BurnRateThreshold) *SloThresholdTypeBurnRate {
 	this := SloThresholdTypeBurnRate{}
+	this.BurnRate = burnRate
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewSloThresholdTypeBurnRateWithDefaults() *SloThresholdTypeBurnRate {
 	return &this
 }
 
-// GetBurnRate returns the BurnRate field value if set, zero value otherwise.
+// GetBurnRate returns the BurnRate field value
 func (o *SloThresholdTypeBurnRate) GetBurnRate() BurnRateThreshold {
-	if o == nil || IsNil(o.BurnRate) {
+	if o == nil {
 		var ret BurnRateThreshold
 		return ret
 	}
-	return *o.BurnRate
+
+	return o.BurnRate
 }
 
-// GetBurnRateOk returns a tuple with the BurnRate field value if set, nil otherwise
+// GetBurnRateOk returns a tuple with the BurnRate field value
 // and a boolean to check if the value has been set.
 func (o *SloThresholdTypeBurnRate) GetBurnRateOk() (*BurnRateThreshold, bool) {
-	if o == nil || IsNil(o.BurnRate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BurnRate, true
+	return &o.BurnRate, true
 }
 
-// HasBurnRate returns a boolean if a field has been set.
-func (o *SloThresholdTypeBurnRate) HasBurnRate() bool {
-	if o != nil && !IsNil(o.BurnRate) {
-		return true
-	}
-
-	return false
-}
-
-// SetBurnRate gets a reference to the given BurnRateThreshold and assigns it to the BurnRate field.
+// SetBurnRate sets field value
 func (o *SloThresholdTypeBurnRate) SetBurnRate(v BurnRateThreshold) {
-	o.BurnRate = &v
+	o.BurnRate = v
 }
 
 // GetSloDefinition returns the SloDefinition field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o SloThresholdTypeBurnRate) MarshalJSON() ([]byte, error) {
 
 func (o SloThresholdTypeBurnRate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BurnRate) {
-		toSerialize["burnRate"] = o.BurnRate
-	}
+	toSerialize["burnRate"] = o.BurnRate
 	if !IsNil(o.SloDefinition) {
 		toSerialize["sloDefinition"] = o.SloDefinition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloThresholdTypeBurnRate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"burnRate",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloThresholdTypeBurnRate := _SloThresholdTypeBurnRate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloThresholdTypeBurnRate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloThresholdTypeBurnRate(varSloThresholdTypeBurnRate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "burnRate")
+		delete(additionalProperties, "sloDefinition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloThresholdTypeBurnRate struct {

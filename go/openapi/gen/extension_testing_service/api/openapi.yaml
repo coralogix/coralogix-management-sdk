@@ -7,7 +7,6 @@ servers:
 paths:
   /integrations/testing/v1/extensions:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionTestingService_CleanupTestingRevision
@@ -41,7 +40,6 @@ paths:
       x-coralogixPermissions:
       - extensions:UpdateConfig
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionTestingService_TestExtensionRevision
@@ -76,7 +74,6 @@ paths:
       - extensions:UpdateConfig
   /integrations/testing/v1/extensions/initialize:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionTestingService_InitializeTestingRevision
@@ -125,24 +122,6 @@ components:
       externalDocs:
         url: ""
       title: Cleanup testing revision response
-      type: object
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
       type: object
     Deprecation:
       externalDocs:
@@ -291,7 +270,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -302,12 +280,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -318,6 +296,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -351,28 +330,6 @@ components:
         name:
           type: string
       title: Integration detail
-      type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -443,7 +400,6 @@ components:
       - FILTER_OPERATOR_OR
       type: string
     Test_extension_revision_request:
-      additionalProperties: false
       properties:
         cleanupAfterTest:
           type: boolean
@@ -452,22 +408,14 @@ components:
       title: Test extension revision request
       type: object
     Cleanup_testing_revision_request:
-      additionalProperties: false
       properties:
         id:
           type: string
       title: Cleanup testing revision request
       type: object
     Initialize_testing_revision_request:
-      additionalProperties: false
       properties:
         extensionData:
           $ref: "#/components/schemas/ExtensionData"
       title: Initialize testing revision request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

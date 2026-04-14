@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeDuration{}
@@ -22,7 +25,10 @@ type TimeDuration struct {
 	// The duration value
 	Duration *string `json:"duration,omitempty"`
 	Unit *DurationUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeDuration TimeDuration
 
 // NewTimeDuration instantiates a new TimeDuration object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o TimeDuration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeDuration) UnmarshalJSON(data []byte) (err error) {
+	varTimeDuration := _TimeDuration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeDuration(varTimeDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeDuration struct {

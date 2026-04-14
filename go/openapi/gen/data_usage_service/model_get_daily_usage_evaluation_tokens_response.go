@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDailyUsageEvaluationTokensResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageEvaluationTokensResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDailyUsageEvaluationTokensResponse{}
 // GetDailyUsageEvaluationTokensResponse struct for GetDailyUsageEvaluationTokensResponse
 type GetDailyUsageEvaluationTokensResponse struct {
 	Tokens []DetailedDailyEvaluationTokens `json:"tokens,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDailyUsageEvaluationTokensResponse GetDailyUsageEvaluationTokensResponse
 
 // NewGetDailyUsageEvaluationTokensResponse instantiates a new GetDailyUsageEvaluationTokensResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDailyUsageEvaluationTokensResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Tokens) {
 		toSerialize["tokens"] = o.Tokens
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDailyUsageEvaluationTokensResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDailyUsageEvaluationTokensResponse := _GetDailyUsageEvaluationTokensResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDailyUsageEvaluationTokensResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDailyUsageEvaluationTokensResponse(varGetDailyUsageEvaluationTokensResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tokens")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDailyUsageEvaluationTokensResponse struct {

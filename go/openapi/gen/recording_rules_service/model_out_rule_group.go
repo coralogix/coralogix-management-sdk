@@ -11,8 +11,11 @@ API version: 1.0.0
 package recording_rules_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutRuleGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutRuleGroup{}
@@ -26,7 +29,10 @@ type OutRuleGroup struct {
 	Name *string `json:"name,omitempty"`
 	Rules []OutRule `json:"rules,omitempty"`
 	Version *int64 `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutRuleGroup OutRuleGroup
 
 // NewOutRuleGroup instantiates a new OutRuleGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +306,40 @@ func (o OutRuleGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutRuleGroup) UnmarshalJSON(data []byte) (err error) {
+	varOutRuleGroup := _OutRuleGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutRuleGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutRuleGroup(varOutRuleGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "interval")
+		delete(additionalProperties, "lastEvalAt")
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutRuleGroup struct {

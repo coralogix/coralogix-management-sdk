@@ -11,19 +11,22 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentSearchQueryIncidentField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentSearchQueryIncidentField{}
 
 // IncidentSearchQueryIncidentField struct for IncidentSearchQueryIncidentField
 type IncidentSearchQueryIncidentField struct {
-	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	IncidentField IncidentFields `json:"incidentField"`
 	// The search query
 	Query string `json:"query"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentSearchQueryIncidentField IncidentSearchQueryIncidentField
@@ -32,8 +35,9 @@ type _IncidentSearchQueryIncidentField IncidentSearchQueryIncidentField
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentSearchQueryIncidentField(query string) *IncidentSearchQueryIncidentField {
+func NewIncidentSearchQueryIncidentField(incidentField IncidentFields, query string) *IncidentSearchQueryIncidentField {
 	this := IncidentSearchQueryIncidentField{}
+	this.IncidentField = incidentField
 	this.Query = query
 	return &this
 }
@@ -46,36 +50,28 @@ func NewIncidentSearchQueryIncidentFieldWithDefaults() *IncidentSearchQueryIncid
 	return &this
 }
 
-// GetIncidentField returns the IncidentField field value if set, zero value otherwise.
+// GetIncidentField returns the IncidentField field value
 func (o *IncidentSearchQueryIncidentField) GetIncidentField() IncidentFields {
-	if o == nil || IsNil(o.IncidentField) {
+	if o == nil {
 		var ret IncidentFields
 		return ret
 	}
-	return *o.IncidentField
+
+	return o.IncidentField
 }
 
-// GetIncidentFieldOk returns a tuple with the IncidentField field value if set, nil otherwise
+// GetIncidentFieldOk returns a tuple with the IncidentField field value
 // and a boolean to check if the value has been set.
 func (o *IncidentSearchQueryIncidentField) GetIncidentFieldOk() (*IncidentFields, bool) {
-	if o == nil || IsNil(o.IncidentField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IncidentField, true
+	return &o.IncidentField, true
 }
 
-// HasIncidentField returns a boolean if a field has been set.
-func (o *IncidentSearchQueryIncidentField) HasIncidentField() bool {
-	if o != nil && !IsNil(o.IncidentField) {
-		return true
-	}
-
-	return false
-}
-
-// SetIncidentField gets a reference to the given IncidentFields and assigns it to the IncidentField field.
+// SetIncidentField sets field value
 func (o *IncidentSearchQueryIncidentField) SetIncidentField(v IncidentFields) {
-	o.IncidentField = &v
+	o.IncidentField = v
 }
 
 // GetQuery returns the Query field value
@@ -112,10 +108,13 @@ func (o IncidentSearchQueryIncidentField) MarshalJSON() ([]byte, error) {
 
 func (o IncidentSearchQueryIncidentField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IncidentField) {
-		toSerialize["incidentField"] = o.IncidentField
-	}
+	toSerialize["incidentField"] = o.IncidentField
 	toSerialize["query"] = o.Query
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *IncidentSearchQueryIncidentField) UnmarshalJSON(data []byte) (err error
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"incidentField",
 		"query",
 	}
 
@@ -151,6 +151,14 @@ func (o *IncidentSearchQueryIncidentField) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = IncidentSearchQueryIncidentField(varIncidentSearchQueryIncidentField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidentField")
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

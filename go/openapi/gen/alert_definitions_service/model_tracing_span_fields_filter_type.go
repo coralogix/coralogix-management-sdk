@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingSpanFieldsFilterType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingSpanFieldsFilterType{}
@@ -22,7 +25,10 @@ type TracingSpanFieldsFilterType struct {
 	FilterType *TracingFilterType `json:"filterType,omitempty"`
 	// The key of the span field to filter by
 	Key *string `json:"key,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingSpanFieldsFilterType TracingSpanFieldsFilterType
 
 // NewTracingSpanFieldsFilterType instantiates a new TracingSpanFieldsFilterType object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o TracingSpanFieldsFilterType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingSpanFieldsFilterType) UnmarshalJSON(data []byte) (err error) {
+	varTracingSpanFieldsFilterType := _TracingSpanFieldsFilterType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingSpanFieldsFilterType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingSpanFieldsFilterType(varTracingSpanFieldsFilterType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filterType")
+		delete(additionalProperties, "key")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingSpanFieldsFilterType struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersJsonStringifyParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersJsonStringifyParameters{}
 
 // RuleParametersJsonStringifyParameters struct for RuleParametersJsonStringifyParameters
 type RuleParametersJsonStringifyParameters struct {
-	JsonStringifyParameters *JsonStringifyParameters `json:"jsonStringifyParameters,omitempty"`
+	JsonStringifyParameters JsonStringifyParameters `json:"jsonStringifyParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersJsonStringifyParameters RuleParametersJsonStringifyParameters
 
 // NewRuleParametersJsonStringifyParameters instantiates a new RuleParametersJsonStringifyParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersJsonStringifyParameters() *RuleParametersJsonStringifyParameters {
+func NewRuleParametersJsonStringifyParameters(jsonStringifyParameters JsonStringifyParameters) *RuleParametersJsonStringifyParameters {
 	this := RuleParametersJsonStringifyParameters{}
+	this.JsonStringifyParameters = jsonStringifyParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersJsonStringifyParametersWithDefaults() *RuleParametersJsonS
 	return &this
 }
 
-// GetJsonStringifyParameters returns the JsonStringifyParameters field value if set, zero value otherwise.
+// GetJsonStringifyParameters returns the JsonStringifyParameters field value
 func (o *RuleParametersJsonStringifyParameters) GetJsonStringifyParameters() JsonStringifyParameters {
-	if o == nil || IsNil(o.JsonStringifyParameters) {
+	if o == nil {
 		var ret JsonStringifyParameters
 		return ret
 	}
-	return *o.JsonStringifyParameters
+
+	return o.JsonStringifyParameters
 }
 
-// GetJsonStringifyParametersOk returns a tuple with the JsonStringifyParameters field value if set, nil otherwise
+// GetJsonStringifyParametersOk returns a tuple with the JsonStringifyParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersJsonStringifyParameters) GetJsonStringifyParametersOk() (*JsonStringifyParameters, bool) {
-	if o == nil || IsNil(o.JsonStringifyParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.JsonStringifyParameters, true
+	return &o.JsonStringifyParameters, true
 }
 
-// HasJsonStringifyParameters returns a boolean if a field has been set.
-func (o *RuleParametersJsonStringifyParameters) HasJsonStringifyParameters() bool {
-	if o != nil && !IsNil(o.JsonStringifyParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetJsonStringifyParameters gets a reference to the given JsonStringifyParameters and assigns it to the JsonStringifyParameters field.
+// SetJsonStringifyParameters sets field value
 func (o *RuleParametersJsonStringifyParameters) SetJsonStringifyParameters(v JsonStringifyParameters) {
-	o.JsonStringifyParameters = &v
+	o.JsonStringifyParameters = v
 }
 
 func (o RuleParametersJsonStringifyParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersJsonStringifyParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersJsonStringifyParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.JsonStringifyParameters) {
-		toSerialize["jsonStringifyParameters"] = o.JsonStringifyParameters
+	toSerialize["jsonStringifyParameters"] = o.JsonStringifyParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersJsonStringifyParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"jsonStringifyParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersJsonStringifyParameters := _RuleParametersJsonStringifyParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersJsonStringifyParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersJsonStringifyParameters(varRuleParametersJsonStringifyParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "jsonStringifyParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersJsonStringifyParameters struct {

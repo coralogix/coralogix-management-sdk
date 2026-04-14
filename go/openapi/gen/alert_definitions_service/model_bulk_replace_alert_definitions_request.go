@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BulkReplaceAlertDefinitionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BulkReplaceAlertDefinitionsRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &BulkReplaceAlertDefinitionsRequest{}
 // BulkReplaceAlertDefinitionsRequest A request to bulk replace multiple alert definitions
 type BulkReplaceAlertDefinitionsRequest struct {
 	AlertDefsToReplace []AlertDefToReplace `json:"alertDefsToReplace,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BulkReplaceAlertDefinitionsRequest BulkReplaceAlertDefinitionsRequest
 
 // NewBulkReplaceAlertDefinitionsRequest instantiates a new BulkReplaceAlertDefinitionsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o BulkReplaceAlertDefinitionsRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.AlertDefsToReplace) {
 		toSerialize["alertDefsToReplace"] = o.AlertDefsToReplace
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BulkReplaceAlertDefinitionsRequest) UnmarshalJSON(data []byte) (err error) {
+	varBulkReplaceAlertDefinitionsRequest := _BulkReplaceAlertDefinitionsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBulkReplaceAlertDefinitionsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BulkReplaceAlertDefinitionsRequest(varBulkReplaceAlertDefinitionsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDefsToReplace")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBulkReplaceAlertDefinitionsRequest struct {

@@ -11,10 +11,13 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // TimeSelection - struct for TimeSelection
 type TimeSelection struct {

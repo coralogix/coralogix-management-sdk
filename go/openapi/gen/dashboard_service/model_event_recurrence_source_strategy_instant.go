@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventRecurrenceSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventRecurrenceSourceStrategyInstant{}
 
 // EventRecurrenceSourceStrategyInstant struct for EventRecurrenceSourceStrategyInstant
 type EventRecurrenceSourceStrategyInstant struct {
-	Instant *EventRecurrenceSourceStrategyInstant `json:"instant,omitempty"`
+	StartTimeHour *int32 `json:"startTimeHour,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventRecurrenceSourceStrategyInstant EventRecurrenceSourceStrategyInstant
 
 // NewEventRecurrenceSourceStrategyInstant instantiates a new EventRecurrenceSourceStrategyInstant object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewEventRecurrenceSourceStrategyInstantWithDefaults() *EventRecurrenceSourc
 	return &this
 }
 
-// GetInstant returns the Instant field value if set, zero value otherwise.
-func (o *EventRecurrenceSourceStrategyInstant) GetInstant() EventRecurrenceSourceStrategyInstant {
-	if o == nil || IsNil(o.Instant) {
-		var ret EventRecurrenceSourceStrategyInstant
+// GetStartTimeHour returns the StartTimeHour field value if set, zero value otherwise.
+func (o *EventRecurrenceSourceStrategyInstant) GetStartTimeHour() int32 {
+	if o == nil || IsNil(o.StartTimeHour) {
+		var ret int32
 		return ret
 	}
-	return *o.Instant
+	return *o.StartTimeHour
 }
 
-// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// GetStartTimeHourOk returns a tuple with the StartTimeHour field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventRecurrenceSourceStrategyInstant) GetInstantOk() (*EventRecurrenceSourceStrategyInstant, bool) {
-	if o == nil || IsNil(o.Instant) {
+func (o *EventRecurrenceSourceStrategyInstant) GetStartTimeHourOk() (*int32, bool) {
+	if o == nil || IsNil(o.StartTimeHour) {
 		return nil, false
 	}
-	return o.Instant, true
+	return o.StartTimeHour, true
 }
 
-// HasInstant returns a boolean if a field has been set.
-func (o *EventRecurrenceSourceStrategyInstant) HasInstant() bool {
-	if o != nil && !IsNil(o.Instant) {
+// HasStartTimeHour returns a boolean if a field has been set.
+func (o *EventRecurrenceSourceStrategyInstant) HasStartTimeHour() bool {
+	if o != nil && !IsNil(o.StartTimeHour) {
 		return true
 	}
 
 	return false
 }
 
-// SetInstant gets a reference to the given EventRecurrenceSourceStrategyInstant and assigns it to the Instant field.
-func (o *EventRecurrenceSourceStrategyInstant) SetInstant(v EventRecurrenceSourceStrategyInstant) {
-	o.Instant = &v
+// SetStartTimeHour gets a reference to the given int32 and assigns it to the StartTimeHour field.
+func (o *EventRecurrenceSourceStrategyInstant) SetStartTimeHour(v int32) {
+	o.StartTimeHour = &v
 }
 
 func (o EventRecurrenceSourceStrategyInstant) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o EventRecurrenceSourceStrategyInstant) MarshalJSON() ([]byte, error) {
 
 func (o EventRecurrenceSourceStrategyInstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Instant) {
-		toSerialize["instant"] = o.Instant
+	if !IsNil(o.StartTimeHour) {
+		toSerialize["startTimeHour"] = o.StartTimeHour
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventRecurrenceSourceStrategyInstant) UnmarshalJSON(data []byte) (err error) {
+	varEventRecurrenceSourceStrategyInstant := _EventRecurrenceSourceStrategyInstant{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventRecurrenceSourceStrategyInstant)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventRecurrenceSourceStrategyInstant(varEventRecurrenceSourceStrategyInstant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "startTimeHour")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventRecurrenceSourceStrategyInstant struct {

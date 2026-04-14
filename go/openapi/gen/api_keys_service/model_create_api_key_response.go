@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateApiKeyResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateApiKeyResponse{}
@@ -22,7 +25,10 @@ type CreateApiKeyResponse struct {
 	KeyId *string `json:"keyId,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApiKeyResponse CreateApiKeyResponse
 
 // NewCreateApiKeyResponse instantiates a new CreateApiKeyResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o CreateApiKeyResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApiKeyResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateApiKeyResponse := _CreateApiKeyResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateApiKeyResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApiKeyResponse(varCreateApiKeyResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keyId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApiKeyResponse struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetCompanyPoliciesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCompanyPoliciesResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetCompanyPoliciesResponse{}
 // GetCompanyPoliciesResponse This data structue is obtained when retrieving all policies of a company.
 type GetCompanyPoliciesResponse struct {
 	Policies []Policy `json:"policies"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetCompanyPoliciesResponse GetCompanyPoliciesResponse
@@ -79,6 +82,11 @@ func (o GetCompanyPoliciesResponse) MarshalJSON() ([]byte, error) {
 func (o GetCompanyPoliciesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["policies"] = o.Policies
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *GetCompanyPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetCompanyPoliciesResponse(varGetCompanyPoliciesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "policies")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

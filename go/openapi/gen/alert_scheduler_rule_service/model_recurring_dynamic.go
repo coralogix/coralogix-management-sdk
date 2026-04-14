@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // RecurringDynamic - struct for RecurringDynamic
 type RecurringDynamic struct {

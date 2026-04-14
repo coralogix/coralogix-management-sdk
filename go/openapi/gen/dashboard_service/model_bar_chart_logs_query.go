@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BarChartLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BarChartLogsQuery{}
@@ -28,7 +31,10 @@ type BarChartLogsQuery struct {
 	StackedGroupName *string `json:"stackedGroupName,omitempty"`
 	StackedGroupNameField *ObservationField `json:"stackedGroupNameField,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BarChartLogsQuery BarChartLogsQuery
 
 // NewBarChartLogsQuery instantiates a new BarChartLogsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -337,7 +343,41 @@ func (o BarChartLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BarChartLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	varBarChartLogsQuery := _BarChartLogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBarChartLogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BarChartLogsQuery(varBarChartLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupNames")
+		delete(additionalProperties, "groupNamesFields")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "stackedGroupName")
+		delete(additionalProperties, "stackedGroupNameField")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBarChartLogsQuery struct {

@@ -11,16 +11,23 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventRecurrenceSourceStrategyDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventRecurrenceSourceStrategyDuration{}
 
 // EventRecurrenceSourceStrategyDuration struct for EventRecurrenceSourceStrategyDuration
 type EventRecurrenceSourceStrategyDuration struct {
-	Duration *EventRecurrenceSourceStrategyDuration `json:"duration,omitempty"`
+	Duration *string `json:"duration,omitempty"`
+	StartTimeHour *int32 `json:"startTimeHour,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventRecurrenceSourceStrategyDuration EventRecurrenceSourceStrategyDuration
 
 // NewEventRecurrenceSourceStrategyDuration instantiates a new EventRecurrenceSourceStrategyDuration object
 // This constructor will assign default values to properties that have it defined,
@@ -40,9 +47,9 @@ func NewEventRecurrenceSourceStrategyDurationWithDefaults() *EventRecurrenceSour
 }
 
 // GetDuration returns the Duration field value if set, zero value otherwise.
-func (o *EventRecurrenceSourceStrategyDuration) GetDuration() EventRecurrenceSourceStrategyDuration {
+func (o *EventRecurrenceSourceStrategyDuration) GetDuration() string {
 	if o == nil || IsNil(o.Duration) {
-		var ret EventRecurrenceSourceStrategyDuration
+		var ret string
 		return ret
 	}
 	return *o.Duration
@@ -50,7 +57,7 @@ func (o *EventRecurrenceSourceStrategyDuration) GetDuration() EventRecurrenceSou
 
 // GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventRecurrenceSourceStrategyDuration) GetDurationOk() (*EventRecurrenceSourceStrategyDuration, bool) {
+func (o *EventRecurrenceSourceStrategyDuration) GetDurationOk() (*string, bool) {
 	if o == nil || IsNil(o.Duration) {
 		return nil, false
 	}
@@ -66,9 +73,41 @@ func (o *EventRecurrenceSourceStrategyDuration) HasDuration() bool {
 	return false
 }
 
-// SetDuration gets a reference to the given EventRecurrenceSourceStrategyDuration and assigns it to the Duration field.
-func (o *EventRecurrenceSourceStrategyDuration) SetDuration(v EventRecurrenceSourceStrategyDuration) {
+// SetDuration gets a reference to the given string and assigns it to the Duration field.
+func (o *EventRecurrenceSourceStrategyDuration) SetDuration(v string) {
 	o.Duration = &v
+}
+
+// GetStartTimeHour returns the StartTimeHour field value if set, zero value otherwise.
+func (o *EventRecurrenceSourceStrategyDuration) GetStartTimeHour() int32 {
+	if o == nil || IsNil(o.StartTimeHour) {
+		var ret int32
+		return ret
+	}
+	return *o.StartTimeHour
+}
+
+// GetStartTimeHourOk returns a tuple with the StartTimeHour field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EventRecurrenceSourceStrategyDuration) GetStartTimeHourOk() (*int32, bool) {
+	if o == nil || IsNil(o.StartTimeHour) {
+		return nil, false
+	}
+	return o.StartTimeHour, true
+}
+
+// HasStartTimeHour returns a boolean if a field has been set.
+func (o *EventRecurrenceSourceStrategyDuration) HasStartTimeHour() bool {
+	if o != nil && !IsNil(o.StartTimeHour) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTimeHour gets a reference to the given int32 and assigns it to the StartTimeHour field.
+func (o *EventRecurrenceSourceStrategyDuration) SetStartTimeHour(v int32) {
+	o.StartTimeHour = &v
 }
 
 func (o EventRecurrenceSourceStrategyDuration) MarshalJSON() ([]byte, error) {
@@ -84,7 +123,38 @@ func (o EventRecurrenceSourceStrategyDuration) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Duration) {
 		toSerialize["duration"] = o.Duration
 	}
+	if !IsNil(o.StartTimeHour) {
+		toSerialize["startTimeHour"] = o.StartTimeHour
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventRecurrenceSourceStrategyDuration) UnmarshalJSON(data []byte) (err error) {
+	varEventRecurrenceSourceStrategyDuration := _EventRecurrenceSourceStrategyDuration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventRecurrenceSourceStrategyDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventRecurrenceSourceStrategyDuration(varEventRecurrenceSourceStrategyDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "startTimeHour")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventRecurrenceSourceStrategyDuration struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExternalUrl type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExternalUrl{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ExternalUrl{}
 // ExternalUrl struct for ExternalUrl
 type ExternalUrl struct {
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExternalUrl ExternalUrl
 
 // NewExternalUrl instantiates a new ExternalUrl object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ExternalUrl) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExternalUrl) UnmarshalJSON(data []byte) (err error) {
+	varExternalUrl := _ExternalUrl{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExternalUrl)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExternalUrl(varExternalUrl)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExternalUrl struct {

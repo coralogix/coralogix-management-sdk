@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceCustomPresetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceCustomPresetResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ReplaceCustomPresetResponse{}
 // ReplaceCustomPresetResponse Response containing the updated custom preset
 type ReplaceCustomPresetResponse struct {
 	Preset *Preset `json:"preset,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceCustomPresetResponse ReplaceCustomPresetResponse
 
 // NewReplaceCustomPresetResponse instantiates a new ReplaceCustomPresetResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ReplaceCustomPresetResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Preset) {
 		toSerialize["preset"] = o.Preset
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceCustomPresetResponse) UnmarshalJSON(data []byte) (err error) {
+	varReplaceCustomPresetResponse := _ReplaceCustomPresetResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceCustomPresetResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceCustomPresetResponse(varReplaceCustomPresetResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "preset")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceCustomPresetResponse struct {

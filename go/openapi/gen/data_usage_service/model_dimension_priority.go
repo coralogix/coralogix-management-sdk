@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DimensionPriority type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionPriority{}
 
 // DimensionPriority struct for DimensionPriority
 type DimensionPriority struct {
-	Priority *V2Priority `json:"priority,omitempty"`
+	Priority V2Priority `json:"priority"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DimensionPriority DimensionPriority
 
 // NewDimensionPriority instantiates a new DimensionPriority object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDimensionPriority() *DimensionPriority {
+func NewDimensionPriority(priority V2Priority) *DimensionPriority {
 	this := DimensionPriority{}
+	this.Priority = priority
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDimensionPriorityWithDefaults() *DimensionPriority {
 	return &this
 }
 
-// GetPriority returns the Priority field value if set, zero value otherwise.
+// GetPriority returns the Priority field value
 func (o *DimensionPriority) GetPriority() V2Priority {
-	if o == nil || IsNil(o.Priority) {
+	if o == nil {
 		var ret V2Priority
 		return ret
 	}
-	return *o.Priority
+
+	return o.Priority
 }
 
-// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// GetPriorityOk returns a tuple with the Priority field value
 // and a boolean to check if the value has been set.
 func (o *DimensionPriority) GetPriorityOk() (*V2Priority, bool) {
-	if o == nil || IsNil(o.Priority) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Priority, true
+	return &o.Priority, true
 }
 
-// HasPriority returns a boolean if a field has been set.
-func (o *DimensionPriority) HasPriority() bool {
-	if o != nil && !IsNil(o.Priority) {
-		return true
-	}
-
-	return false
-}
-
-// SetPriority gets a reference to the given V2Priority and assigns it to the Priority field.
+// SetPriority sets field value
 func (o *DimensionPriority) SetPriority(v V2Priority) {
-	o.Priority = &v
+	o.Priority = v
 }
 
 func (o DimensionPriority) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DimensionPriority) MarshalJSON() ([]byte, error) {
 
 func (o DimensionPriority) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Priority) {
-		toSerialize["priority"] = o.Priority
+	toSerialize["priority"] = o.Priority
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DimensionPriority) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"priority",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDimensionPriority := _DimensionPriority{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimensionPriority)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DimensionPriority(varDimensionPriority)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "priority")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimensionPriority struct {

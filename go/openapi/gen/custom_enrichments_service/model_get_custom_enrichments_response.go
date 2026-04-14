@@ -11,8 +11,11 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetCustomEnrichmentsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCustomEnrichmentsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetCustomEnrichmentsResponse{}
 // GetCustomEnrichmentsResponse This response data structure is obtained when all custom enrichments are retrieved
 type GetCustomEnrichmentsResponse struct {
 	CustomEnrichments []CustomEnrichment `json:"customEnrichments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCustomEnrichmentsResponse GetCustomEnrichmentsResponse
 
 // NewGetCustomEnrichmentsResponse instantiates a new GetCustomEnrichmentsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetCustomEnrichmentsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomEnrichments) {
 		toSerialize["customEnrichments"] = o.CustomEnrichments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCustomEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCustomEnrichmentsResponse := _GetCustomEnrichmentsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetCustomEnrichmentsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCustomEnrichmentsResponse(varGetCustomEnrichmentsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customEnrichments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCustomEnrichmentsResponse struct {

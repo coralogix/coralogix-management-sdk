@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapFieldConfigAwsRegionConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapFieldConfigAwsRegionConfig{}
 
 // GeomapFieldConfigAwsRegionConfig struct for GeomapFieldConfigAwsRegionConfig
 type GeomapFieldConfigAwsRegionConfig struct {
-	AwsRegionConfig *GeomapAwsRegionConfig `json:"awsRegionConfig,omitempty"`
+	AwsRegionConfig GeomapAwsRegionConfig `json:"awsRegionConfig"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapFieldConfigAwsRegionConfig GeomapFieldConfigAwsRegionConfig
 
 // NewGeomapFieldConfigAwsRegionConfig instantiates a new GeomapFieldConfigAwsRegionConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapFieldConfigAwsRegionConfig() *GeomapFieldConfigAwsRegionConfig {
+func NewGeomapFieldConfigAwsRegionConfig(awsRegionConfig GeomapAwsRegionConfig) *GeomapFieldConfigAwsRegionConfig {
 	this := GeomapFieldConfigAwsRegionConfig{}
+	this.AwsRegionConfig = awsRegionConfig
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapFieldConfigAwsRegionConfigWithDefaults() *GeomapFieldConfigAwsRegi
 	return &this
 }
 
-// GetAwsRegionConfig returns the AwsRegionConfig field value if set, zero value otherwise.
+// GetAwsRegionConfig returns the AwsRegionConfig field value
 func (o *GeomapFieldConfigAwsRegionConfig) GetAwsRegionConfig() GeomapAwsRegionConfig {
-	if o == nil || IsNil(o.AwsRegionConfig) {
+	if o == nil {
 		var ret GeomapAwsRegionConfig
 		return ret
 	}
-	return *o.AwsRegionConfig
+
+	return o.AwsRegionConfig
 }
 
-// GetAwsRegionConfigOk returns a tuple with the AwsRegionConfig field value if set, nil otherwise
+// GetAwsRegionConfigOk returns a tuple with the AwsRegionConfig field value
 // and a boolean to check if the value has been set.
 func (o *GeomapFieldConfigAwsRegionConfig) GetAwsRegionConfigOk() (*GeomapAwsRegionConfig, bool) {
-	if o == nil || IsNil(o.AwsRegionConfig) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsRegionConfig, true
+	return &o.AwsRegionConfig, true
 }
 
-// HasAwsRegionConfig returns a boolean if a field has been set.
-func (o *GeomapFieldConfigAwsRegionConfig) HasAwsRegionConfig() bool {
-	if o != nil && !IsNil(o.AwsRegionConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetAwsRegionConfig gets a reference to the given GeomapAwsRegionConfig and assigns it to the AwsRegionConfig field.
+// SetAwsRegionConfig sets field value
 func (o *GeomapFieldConfigAwsRegionConfig) SetAwsRegionConfig(v GeomapAwsRegionConfig) {
-	o.AwsRegionConfig = &v
+	o.AwsRegionConfig = v
 }
 
 func (o GeomapFieldConfigAwsRegionConfig) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapFieldConfigAwsRegionConfig) MarshalJSON() ([]byte, error) {
 
 func (o GeomapFieldConfigAwsRegionConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AwsRegionConfig) {
-		toSerialize["awsRegionConfig"] = o.AwsRegionConfig
+	toSerialize["awsRegionConfig"] = o.AwsRegionConfig
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapFieldConfigAwsRegionConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"awsRegionConfig",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapFieldConfigAwsRegionConfig := _GeomapFieldConfigAwsRegionConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapFieldConfigAwsRegionConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapFieldConfigAwsRegionConfig(varGeomapFieldConfigAwsRegionConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "awsRegionConfig")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapFieldConfigAwsRegionConfig struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDashboardCatalogResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDashboardCatalogResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDashboardCatalogResponse{}
 // GetDashboardCatalogResponse struct for GetDashboardCatalogResponse
 type GetDashboardCatalogResponse struct {
 	Items []DashboardCatalogItem `json:"items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDashboardCatalogResponse GetDashboardCatalogResponse
 
 // NewGetDashboardCatalogResponse instantiates a new GetDashboardCatalogResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDashboardCatalogResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDashboardCatalogResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDashboardCatalogResponse := _GetDashboardCatalogResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDashboardCatalogResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDashboardCatalogResponse(varGetDashboardCatalogResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDashboardCatalogResponse struct {

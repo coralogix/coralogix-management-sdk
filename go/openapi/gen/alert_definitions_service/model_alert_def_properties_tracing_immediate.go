@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesTracingImmediate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesTracingImmediate{}
@@ -38,16 +42,20 @@ type AlertDefPropertiesTracingImmediate struct {
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
-	TracingImmediate *TracingImmediateType `json:"tracingImmediate,omitempty"`
+	TracingImmediate TracingImmediateType `json:"tracingImmediate"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesTracingImmediate AlertDefPropertiesTracingImmediate
 
 // NewAlertDefPropertiesTracingImmediate instantiates a new AlertDefPropertiesTracingImmediate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesTracingImmediate() *AlertDefPropertiesTracingImmediate {
+func NewAlertDefPropertiesTracingImmediate(tracingImmediate TracingImmediateType) *AlertDefPropertiesTracingImmediate {
 	this := AlertDefPropertiesTracingImmediate{}
+	this.TracingImmediate = tracingImmediate
 	return &this
 }
 
@@ -475,36 +483,28 @@ func (o *AlertDefPropertiesTracingImmediate) SetPriority(v AlertDefPriority) {
 	o.Priority = &v
 }
 
-// GetTracingImmediate returns the TracingImmediate field value if set, zero value otherwise.
+// GetTracingImmediate returns the TracingImmediate field value
 func (o *AlertDefPropertiesTracingImmediate) GetTracingImmediate() TracingImmediateType {
-	if o == nil || IsNil(o.TracingImmediate) {
+	if o == nil {
 		var ret TracingImmediateType
 		return ret
 	}
-	return *o.TracingImmediate
+
+	return o.TracingImmediate
 }
 
-// GetTracingImmediateOk returns a tuple with the TracingImmediate field value if set, nil otherwise
+// GetTracingImmediateOk returns a tuple with the TracingImmediate field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesTracingImmediate) GetTracingImmediateOk() (*TracingImmediateType, bool) {
-	if o == nil || IsNil(o.TracingImmediate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TracingImmediate, true
+	return &o.TracingImmediate, true
 }
 
-// HasTracingImmediate returns a boolean if a field has been set.
-func (o *AlertDefPropertiesTracingImmediate) HasTracingImmediate() bool {
-	if o != nil && !IsNil(o.TracingImmediate) {
-		return true
-	}
-
-	return false
-}
-
-// SetTracingImmediate gets a reference to the given TracingImmediateType and assigns it to the TracingImmediate field.
+// SetTracingImmediate sets field value
 func (o *AlertDefPropertiesTracingImmediate) SetTracingImmediate(v TracingImmediateType) {
-	o.TracingImmediate = &v
+	o.TracingImmediate = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -588,13 +588,73 @@ func (o AlertDefPropertiesTracingImmediate) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if !IsNil(o.TracingImmediate) {
-		toSerialize["tracingImmediate"] = o.TracingImmediate
-	}
+	toSerialize["tracingImmediate"] = o.TracingImmediate
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesTracingImmediate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"tracingImmediate",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesTracingImmediate := _AlertDefPropertiesTracingImmediate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesTracingImmediate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesTracingImmediate(varAlertDefPropertiesTracingImmediate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "tracingImmediate")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesTracingImmediate struct {

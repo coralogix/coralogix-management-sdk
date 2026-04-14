@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeployedExtensionSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeployedExtensionSummary{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &DeployedExtensionSummary{}
 // DeployedExtensionSummary struct for DeployedExtensionSummary
 type DeployedExtensionSummary struct {
 	DeployedItemCounts *ItemCounts `json:"deployedItemCounts,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeployedExtensionSummary DeployedExtensionSummary
 
 // NewDeployedExtensionSummary instantiates a new DeployedExtensionSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o DeployedExtensionSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeployedItemCounts) {
 		toSerialize["deployedItemCounts"] = o.DeployedItemCounts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeployedExtensionSummary) UnmarshalJSON(data []byte) (err error) {
+	varDeployedExtensionSummary := _DeployedExtensionSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeployedExtensionSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeployedExtensionSummary(varDeployedExtensionSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deployedItemCounts")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeployedExtensionSummary struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateDataUsageMetricsExportStatusRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateDataUsageMetricsExportStatusRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &UpdateDataUsageMetricsExportStatusRequest{}
 // UpdateDataUsageMetricsExportStatusRequest This data structure is used to update data usage metrics export status.
 type UpdateDataUsageMetricsExportStatusRequest struct {
 	Enabled *bool `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateDataUsageMetricsExportStatusRequest UpdateDataUsageMetricsExportStatusRequest
 
 // NewUpdateDataUsageMetricsExportStatusRequest instantiates a new UpdateDataUsageMetricsExportStatusRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o UpdateDataUsageMetricsExportStatusRequest) ToMap() (map[string]interface
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateDataUsageMetricsExportStatusRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateDataUsageMetricsExportStatusRequest := _UpdateDataUsageMetricsExportStatusRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpdateDataUsageMetricsExportStatusRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateDataUsageMetricsExportStatusRequest(varUpdateDataUsageMetricsExportStatusRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateDataUsageMetricsExportStatusRequest struct {

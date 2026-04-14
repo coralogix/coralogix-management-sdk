@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSelectionListSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSelectionListSelection{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MultiSelectSelectionListSelection{}
 type MultiSelectSelectionListSelection struct {
 	Labels []string `json:"labels,omitempty"`
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSelectionListSelection MultiSelectSelectionListSelection
 
 // NewMultiSelectSelectionListSelection instantiates a new MultiSelectSelectionListSelection object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o MultiSelectSelectionListSelection) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSelectionListSelection) UnmarshalJSON(data []byte) (err error) {
+	varMultiSelectSelectionListSelection := _MultiSelectSelectionListSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSelectionListSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSelectionListSelection(varMultiSelectSelectionListSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSelectionListSelection struct {

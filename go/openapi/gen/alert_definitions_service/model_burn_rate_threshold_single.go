@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BurnRateThresholdSingle type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BurnRateThresholdSingle{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &BurnRateThresholdSingle{}
 // BurnRateThresholdSingle Burn rate threshold definition
 type BurnRateThresholdSingle struct {
 	Rules []SloThresholdRule `json:"rules,omitempty"`
-	Single *BurnRateTypeSingle `json:"single,omitempty"`
+	Single BurnRateTypeSingle `json:"single"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BurnRateThresholdSingle BurnRateThresholdSingle
 
 // NewBurnRateThresholdSingle instantiates a new BurnRateThresholdSingle object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBurnRateThresholdSingle() *BurnRateThresholdSingle {
+func NewBurnRateThresholdSingle(single BurnRateTypeSingle) *BurnRateThresholdSingle {
 	this := BurnRateThresholdSingle{}
+	this.Single = single
 	return &this
 }
 
@@ -72,36 +80,28 @@ func (o *BurnRateThresholdSingle) SetRules(v []SloThresholdRule) {
 	o.Rules = v
 }
 
-// GetSingle returns the Single field value if set, zero value otherwise.
+// GetSingle returns the Single field value
 func (o *BurnRateThresholdSingle) GetSingle() BurnRateTypeSingle {
-	if o == nil || IsNil(o.Single) {
+	if o == nil {
 		var ret BurnRateTypeSingle
 		return ret
 	}
-	return *o.Single
+
+	return o.Single
 }
 
-// GetSingleOk returns a tuple with the Single field value if set, nil otherwise
+// GetSingleOk returns a tuple with the Single field value
 // and a boolean to check if the value has been set.
 func (o *BurnRateThresholdSingle) GetSingleOk() (*BurnRateTypeSingle, bool) {
-	if o == nil || IsNil(o.Single) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Single, true
+	return &o.Single, true
 }
 
-// HasSingle returns a boolean if a field has been set.
-func (o *BurnRateThresholdSingle) HasSingle() bool {
-	if o != nil && !IsNil(o.Single) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingle gets a reference to the given BurnRateTypeSingle and assigns it to the Single field.
+// SetSingle sets field value
 func (o *BurnRateThresholdSingle) SetSingle(v BurnRateTypeSingle) {
-	o.Single = &v
+	o.Single = v
 }
 
 func (o BurnRateThresholdSingle) MarshalJSON() ([]byte, error) {
@@ -117,10 +117,57 @@ func (o BurnRateThresholdSingle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
-	if !IsNil(o.Single) {
-		toSerialize["single"] = o.Single
+	toSerialize["single"] = o.Single
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *BurnRateThresholdSingle) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"single",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varBurnRateThresholdSingle := _BurnRateThresholdSingle{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBurnRateThresholdSingle)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BurnRateThresholdSingle(varBurnRateThresholdSingle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "single")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBurnRateThresholdSingle struct {

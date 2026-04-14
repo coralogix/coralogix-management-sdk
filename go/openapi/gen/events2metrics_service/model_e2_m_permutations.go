@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MPermutations type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MPermutations{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &E2MPermutations{}
 type E2MPermutations struct {
 	HasExceededLimit bool `json:"hasExceededLimit"`
 	Limit int32 `json:"limit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _E2MPermutations E2MPermutations
@@ -106,6 +109,11 @@ func (o E2MPermutations) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["hasExceededLimit"] = o.HasExceededLimit
 	toSerialize["limit"] = o.Limit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *E2MPermutations) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = E2MPermutations(varE2MPermutations)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hasExceededLimit")
+		delete(additionalProperties, "limit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

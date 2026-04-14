@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectQuerySource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectQuerySource{}
@@ -22,7 +25,10 @@ type MultiSelectQuerySource struct {
 	Query *MultiSelectQuery `json:"query,omitempty"`
 	RefreshStrategy *MultiSelectRefreshStrategy `json:"refreshStrategy,omitempty"`
 	ValueDisplayOptions *MultiSelectValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectQuerySource MultiSelectQuerySource
 
 // NewMultiSelectQuerySource instantiates a new MultiSelectQuerySource object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o MultiSelectQuerySource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueDisplayOptions) {
 		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectQuerySource) UnmarshalJSON(data []byte) (err error) {
+	varMultiSelectQuerySource := _MultiSelectQuerySource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectQuerySource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectQuerySource(varMultiSelectQuerySource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "refreshStrategy")
+		delete(additionalProperties, "valueDisplayOptions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectQuerySource struct {

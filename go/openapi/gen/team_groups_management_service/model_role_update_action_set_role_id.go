@@ -11,10 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoleUpdateActionSetRoleId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleUpdateActionSetRoleId{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &RoleUpdateActionSetRoleId{}
 // RoleUpdateActionSetRoleId struct for RoleUpdateActionSetRoleId
 type RoleUpdateActionSetRoleId struct {
 	ActionType string `json:"actionType"`
-	SetRoleId *SetRoleId `json:"setRoleId,omitempty"`
+	SetRoleId SetRoleId `json:"setRoleId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RoleUpdateActionSetRoleId RoleUpdateActionSetRoleId
@@ -31,9 +34,10 @@ type _RoleUpdateActionSetRoleId RoleUpdateActionSetRoleId
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleUpdateActionSetRoleId(actionType string) *RoleUpdateActionSetRoleId {
+func NewRoleUpdateActionSetRoleId(actionType string, setRoleId SetRoleId) *RoleUpdateActionSetRoleId {
 	this := RoleUpdateActionSetRoleId{}
 	this.ActionType = actionType
+	this.SetRoleId = setRoleId
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *RoleUpdateActionSetRoleId) SetActionType(v string) {
 	o.ActionType = v
 }
 
-// GetSetRoleId returns the SetRoleId field value if set, zero value otherwise.
+// GetSetRoleId returns the SetRoleId field value
 func (o *RoleUpdateActionSetRoleId) GetSetRoleId() SetRoleId {
-	if o == nil || IsNil(o.SetRoleId) {
+	if o == nil {
 		var ret SetRoleId
 		return ret
 	}
-	return *o.SetRoleId
+
+	return o.SetRoleId
 }
 
-// GetSetRoleIdOk returns a tuple with the SetRoleId field value if set, nil otherwise
+// GetSetRoleIdOk returns a tuple with the SetRoleId field value
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateActionSetRoleId) GetSetRoleIdOk() (*SetRoleId, bool) {
-	if o == nil || IsNil(o.SetRoleId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SetRoleId, true
+	return &o.SetRoleId, true
 }
 
-// HasSetRoleId returns a boolean if a field has been set.
-func (o *RoleUpdateActionSetRoleId) HasSetRoleId() bool {
-	if o != nil && !IsNil(o.SetRoleId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSetRoleId gets a reference to the given SetRoleId and assigns it to the SetRoleId field.
+// SetSetRoleId sets field value
 func (o *RoleUpdateActionSetRoleId) SetSetRoleId(v SetRoleId) {
-	o.SetRoleId = &v
+	o.SetRoleId = v
 }
 
 func (o RoleUpdateActionSetRoleId) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o RoleUpdateActionSetRoleId) MarshalJSON() ([]byte, error) {
 func (o RoleUpdateActionSetRoleId) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["actionType"] = o.ActionType
-	if !IsNil(o.SetRoleId) {
-		toSerialize["setRoleId"] = o.SetRoleId
+	toSerialize["setRoleId"] = o.SetRoleId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *RoleUpdateActionSetRoleId) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"actionType",
+		"setRoleId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -150,6 +150,14 @@ func (o *RoleUpdateActionSetRoleId) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RoleUpdateActionSetRoleId(varRoleUpdateActionSetRoleId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actionType")
+		delete(additionalProperties, "setRoleId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetTenantConfigResponseV2 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTenantConfigResponseV2{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetTenantConfigResponseV2{}
 // GetTenantConfigResponseV2 struct for GetTenantConfigResponseV2
 type GetTenantConfigResponseV2 struct {
 	TenantConfig *TenantConfigV2 `json:"tenantConfig,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTenantConfigResponseV2 GetTenantConfigResponseV2
 
 // NewGetTenantConfigResponseV2 instantiates a new GetTenantConfigResponseV2 object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetTenantConfigResponseV2) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TenantConfig) {
 		toSerialize["tenantConfig"] = o.TenantConfig
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTenantConfigResponseV2) UnmarshalJSON(data []byte) (err error) {
+	varGetTenantConfigResponseV2 := _GetTenantConfigResponseV2{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetTenantConfigResponseV2)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTenantConfigResponseV2(varGetTenantConfigResponseV2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tenantConfig")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTenantConfigResponseV2 struct {

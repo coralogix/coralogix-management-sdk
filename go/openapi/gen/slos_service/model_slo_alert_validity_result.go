@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloAlertValidityResult type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloAlertValidityResult{}
@@ -23,7 +26,10 @@ type SloAlertValidityResult struct {
 	ErrorMessage *string `json:"errorMessage,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloAlertValidityResult SloAlertValidityResult
 
 // NewSloAlertValidityResult instantiates a new SloAlertValidityResult object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o SloAlertValidityResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloAlertValidityResult) UnmarshalJSON(data []byte) (err error) {
+	varSloAlertValidityResult := _SloAlertValidityResult{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloAlertValidityResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloAlertValidityResult(varSloAlertValidityResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertVersionId")
+		delete(additionalProperties, "errorMessage")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloAlertValidityResult struct {

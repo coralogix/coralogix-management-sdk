@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceParameters{}
@@ -22,7 +25,10 @@ type ReplaceParameters struct {
 	DestinationField *string `json:"destinationField,omitempty"`
 	ReplaceNewVal *string `json:"replaceNewVal,omitempty"`
 	Rule *string `json:"rule,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceParameters ReplaceParameters
 
 // NewReplaceParameters instantiates a new ReplaceParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ReplaceParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rule) {
 		toSerialize["rule"] = o.Rule
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceParameters) UnmarshalJSON(data []byte) (err error) {
+	varReplaceParameters := _ReplaceParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceParameters(varReplaceParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "destinationField")
+		delete(additionalProperties, "replaceNewVal")
+		delete(additionalProperties, "rule")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceParameters struct {

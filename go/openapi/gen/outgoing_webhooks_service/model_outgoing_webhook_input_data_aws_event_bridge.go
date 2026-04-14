@@ -11,26 +11,34 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookInputDataAwsEventBridge type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataAwsEventBridge{}
 
 // OutgoingWebhookInputDataAwsEventBridge struct for OutgoingWebhookInputDataAwsEventBridge
 type OutgoingWebhookInputDataAwsEventBridge struct {
-	AwsEventBridge *AwsEventBridgeConfig `json:"awsEventBridge,omitempty"`
+	AwsEventBridge AwsEventBridgeConfig `json:"awsEventBridge"`
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookInputDataAwsEventBridge OutgoingWebhookInputDataAwsEventBridge
 
 // NewOutgoingWebhookInputDataAwsEventBridge instantiates a new OutgoingWebhookInputDataAwsEventBridge object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataAwsEventBridge() *OutgoingWebhookInputDataAwsEventBridge {
+func NewOutgoingWebhookInputDataAwsEventBridge(awsEventBridge AwsEventBridgeConfig) *OutgoingWebhookInputDataAwsEventBridge {
 	this := OutgoingWebhookInputDataAwsEventBridge{}
+	this.AwsEventBridge = awsEventBridge
 	return &this
 }
 
@@ -42,36 +50,28 @@ func NewOutgoingWebhookInputDataAwsEventBridgeWithDefaults() *OutgoingWebhookInp
 	return &this
 }
 
-// GetAwsEventBridge returns the AwsEventBridge field value if set, zero value otherwise.
+// GetAwsEventBridge returns the AwsEventBridge field value
 func (o *OutgoingWebhookInputDataAwsEventBridge) GetAwsEventBridge() AwsEventBridgeConfig {
-	if o == nil || IsNil(o.AwsEventBridge) {
+	if o == nil {
 		var ret AwsEventBridgeConfig
 		return ret
 	}
-	return *o.AwsEventBridge
+
+	return o.AwsEventBridge
 }
 
-// GetAwsEventBridgeOk returns a tuple with the AwsEventBridge field value if set, nil otherwise
+// GetAwsEventBridgeOk returns a tuple with the AwsEventBridge field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataAwsEventBridge) GetAwsEventBridgeOk() (*AwsEventBridgeConfig, bool) {
-	if o == nil || IsNil(o.AwsEventBridge) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AwsEventBridge, true
+	return &o.AwsEventBridge, true
 }
 
-// HasAwsEventBridge returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputDataAwsEventBridge) HasAwsEventBridge() bool {
-	if o != nil && !IsNil(o.AwsEventBridge) {
-		return true
-	}
-
-	return false
-}
-
-// SetAwsEventBridge gets a reference to the given AwsEventBridgeConfig and assigns it to the AwsEventBridge field.
+// SetAwsEventBridge sets field value
 func (o *OutgoingWebhookInputDataAwsEventBridge) SetAwsEventBridge(v AwsEventBridgeConfig) {
-	o.AwsEventBridge = &v
+	o.AwsEventBridge = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -180,9 +180,7 @@ func (o OutgoingWebhookInputDataAwsEventBridge) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookInputDataAwsEventBridge) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AwsEventBridge) {
-		toSerialize["awsEventBridge"] = o.AwsEventBridge
-	}
+	toSerialize["awsEventBridge"] = o.AwsEventBridge
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -192,7 +190,58 @@ func (o OutgoingWebhookInputDataAwsEventBridge) ToMap() (map[string]interface{},
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookInputDataAwsEventBridge) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"awsEventBridge",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookInputDataAwsEventBridge := _OutgoingWebhookInputDataAwsEventBridge{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookInputDataAwsEventBridge)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookInputDataAwsEventBridge(varOutgoingWebhookInputDataAwsEventBridge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "awsEventBridge")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookInputDataAwsEventBridge struct {

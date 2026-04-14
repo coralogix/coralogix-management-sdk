@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionRegexExtract type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionRegexExtract{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &PropertyDefinitionRegexExtract{}
 // PropertyDefinitionRegexExtract struct for PropertyDefinitionRegexExtract
 type PropertyDefinitionRegexExtract struct {
 	// Value of Regex Extract property, a regex string
-	RegexExtract *string `json:"regexExtract,omitempty"`
+	RegexExtract string `json:"regexExtract"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionRegexExtract PropertyDefinitionRegexExtract
 
 // NewPropertyDefinitionRegexExtract instantiates a new PropertyDefinitionRegexExtract object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionRegexExtract() *PropertyDefinitionRegexExtract {
+func NewPropertyDefinitionRegexExtract(regexExtract string) *PropertyDefinitionRegexExtract {
 	this := PropertyDefinitionRegexExtract{}
+	this.RegexExtract = regexExtract
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewPropertyDefinitionRegexExtractWithDefaults() *PropertyDefinitionRegexExt
 	return &this
 }
 
-// GetRegexExtract returns the RegexExtract field value if set, zero value otherwise.
+// GetRegexExtract returns the RegexExtract field value
 func (o *PropertyDefinitionRegexExtract) GetRegexExtract() string {
-	if o == nil || IsNil(o.RegexExtract) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RegexExtract
+
+	return o.RegexExtract
 }
 
-// GetRegexExtractOk returns a tuple with the RegexExtract field value if set, nil otherwise
+// GetRegexExtractOk returns a tuple with the RegexExtract field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionRegexExtract) GetRegexExtractOk() (*string, bool) {
-	if o == nil || IsNil(o.RegexExtract) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RegexExtract, true
+	return &o.RegexExtract, true
 }
 
-// HasRegexExtract returns a boolean if a field has been set.
-func (o *PropertyDefinitionRegexExtract) HasRegexExtract() bool {
-	if o != nil && !IsNil(o.RegexExtract) {
-		return true
-	}
-
-	return false
-}
-
-// SetRegexExtract gets a reference to the given string and assigns it to the RegexExtract field.
+// SetRegexExtract sets field value
 func (o *PropertyDefinitionRegexExtract) SetRegexExtract(v string) {
-	o.RegexExtract = &v
+	o.RegexExtract = v
 }
 
 func (o PropertyDefinitionRegexExtract) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o PropertyDefinitionRegexExtract) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionRegexExtract) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.RegexExtract) {
-		toSerialize["regexExtract"] = o.RegexExtract
+	toSerialize["regexExtract"] = o.RegexExtract
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionRegexExtract) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"regexExtract",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionRegexExtract := _PropertyDefinitionRegexExtract{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionRegexExtract)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionRegexExtract(varPropertyDefinitionRegexExtract)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "regexExtract")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionRegexExtract struct {

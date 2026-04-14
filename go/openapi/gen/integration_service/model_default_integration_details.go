@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DefaultIntegrationDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DefaultIntegrationDetails{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &DefaultIntegrationDetails{}
 // DefaultIntegrationDetails struct for DefaultIntegrationDetails
 type DefaultIntegrationDetails struct {
 	Registered []RegisteredInstance `json:"registered,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DefaultIntegrationDetails DefaultIntegrationDetails
 
 // NewDefaultIntegrationDetails instantiates a new DefaultIntegrationDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o DefaultIntegrationDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Registered) {
 		toSerialize["registered"] = o.Registered
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DefaultIntegrationDetails) UnmarshalJSON(data []byte) (err error) {
+	varDefaultIntegrationDetails := _DefaultIntegrationDetails{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDefaultIntegrationDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DefaultIntegrationDetails(varDefaultIntegrationDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "registered")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDefaultIntegrationDetails struct {

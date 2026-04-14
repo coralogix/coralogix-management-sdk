@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicOverwriteEnrichmentsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicOverwriteEnrichmentsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AtomicOverwriteEnrichmentsResponse{}
 // AtomicOverwriteEnrichmentsResponse struct for AtomicOverwriteEnrichmentsResponse
 type AtomicOverwriteEnrichmentsResponse struct {
 	Enrichments []Enrichment `json:"enrichments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AtomicOverwriteEnrichmentsResponse AtomicOverwriteEnrichmentsResponse
 
 // NewAtomicOverwriteEnrichmentsResponse instantiates a new AtomicOverwriteEnrichmentsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AtomicOverwriteEnrichmentsResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Enrichments) {
 		toSerialize["enrichments"] = o.Enrichments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AtomicOverwriteEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
+	varAtomicOverwriteEnrichmentsResponse := _AtomicOverwriteEnrichmentsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAtomicOverwriteEnrichmentsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AtomicOverwriteEnrichmentsResponse(varAtomicOverwriteEnrichmentsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enrichments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAtomicOverwriteEnrichmentsResponse struct {

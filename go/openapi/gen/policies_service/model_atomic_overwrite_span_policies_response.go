@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicOverwriteSpanPoliciesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicOverwriteSpanPoliciesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AtomicOverwriteSpanPoliciesResponse{}
 // AtomicOverwriteSpanPoliciesResponse This data structue is obtained when overwriting span policies atomically.
 type AtomicOverwriteSpanPoliciesResponse struct {
 	CreateResponses []CreatePolicyResponse `json:"createResponses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AtomicOverwriteSpanPoliciesResponse AtomicOverwriteSpanPoliciesResponse
 
 // NewAtomicOverwriteSpanPoliciesResponse instantiates a new AtomicOverwriteSpanPoliciesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AtomicOverwriteSpanPoliciesResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.CreateResponses) {
 		toSerialize["createResponses"] = o.CreateResponses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AtomicOverwriteSpanPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
+	varAtomicOverwriteSpanPoliciesResponse := _AtomicOverwriteSpanPoliciesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAtomicOverwriteSpanPoliciesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AtomicOverwriteSpanPoliciesResponse(varAtomicOverwriteSpanPoliciesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createResponses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAtomicOverwriteSpanPoliciesResponse struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FlowStagesGroups type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FlowStagesGroups{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &FlowStagesGroups{}
 // FlowStagesGroups Groups of stages in a flow alert
 type FlowStagesGroups struct {
 	Groups []FlowStagesGroup `json:"groups,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FlowStagesGroups FlowStagesGroups
 
 // NewFlowStagesGroups instantiates a new FlowStagesGroups object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o FlowStagesGroups) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Groups) {
 		toSerialize["groups"] = o.Groups
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FlowStagesGroups) UnmarshalJSON(data []byte) (err error) {
+	varFlowStagesGroups := _FlowStagesGroups{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFlowStagesGroups)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FlowStagesGroups(varFlowStagesGroups)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "groups")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFlowStagesGroups struct {

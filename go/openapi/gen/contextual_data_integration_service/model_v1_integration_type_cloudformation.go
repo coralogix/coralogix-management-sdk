@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypeCloudformation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypeCloudformation{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V1IntegrationTypeCloudformation{}
 // V1IntegrationTypeCloudformation This data structure represents an integration type.
 type V1IntegrationTypeCloudformation struct {
 	// This data structure represents a CloudFormation integration.
-	Cloudformation map[string]interface{} `json:"cloudformation,omitempty"`
+	Cloudformation map[string]interface{} `json:"cloudformation"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypeCloudformation V1IntegrationTypeCloudformation
 
 // NewV1IntegrationTypeCloudformation instantiates a new V1IntegrationTypeCloudformation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypeCloudformation() *V1IntegrationTypeCloudformation {
+func NewV1IntegrationTypeCloudformation(cloudformation map[string]interface{}) *V1IntegrationTypeCloudformation {
 	this := V1IntegrationTypeCloudformation{}
+	this.Cloudformation = cloudformation
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewV1IntegrationTypeCloudformationWithDefaults() *V1IntegrationTypeCloudfor
 	return &this
 }
 
-// GetCloudformation returns the Cloudformation field value if set, zero value otherwise.
+// GetCloudformation returns the Cloudformation field value
 func (o *V1IntegrationTypeCloudformation) GetCloudformation() map[string]interface{} {
-	if o == nil || IsNil(o.Cloudformation) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Cloudformation
 }
 
-// GetCloudformationOk returns a tuple with the Cloudformation field value if set, nil otherwise
+// GetCloudformationOk returns a tuple with the Cloudformation field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypeCloudformation) GetCloudformationOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Cloudformation) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Cloudformation, true
 }
 
-// HasCloudformation returns a boolean if a field has been set.
-func (o *V1IntegrationTypeCloudformation) HasCloudformation() bool {
-	if o != nil && !IsNil(o.Cloudformation) {
-		return true
-	}
-
-	return false
-}
-
-// SetCloudformation gets a reference to the given map[string]interface{} and assigns it to the Cloudformation field.
+// SetCloudformation sets field value
 func (o *V1IntegrationTypeCloudformation) SetCloudformation(v map[string]interface{}) {
 	o.Cloudformation = v
 }
@@ -82,10 +82,56 @@ func (o V1IntegrationTypeCloudformation) MarshalJSON() ([]byte, error) {
 
 func (o V1IntegrationTypeCloudformation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Cloudformation) {
-		toSerialize["cloudformation"] = o.Cloudformation
+	toSerialize["cloudformation"] = o.Cloudformation
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypeCloudformation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"cloudformation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypeCloudformation := _V1IntegrationTypeCloudformation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypeCloudformation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypeCloudformation(varV1IntegrationTypeCloudformation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cloudformation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypeCloudformation struct {

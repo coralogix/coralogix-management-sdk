@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Geomap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Geomap{}
@@ -31,7 +34,10 @@ type Geomap struct {
 	MinMax *MinMax `json:"minMax,omitempty"`
 	Tooltip *GeomapTooltip `json:"tooltip,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Geomap Geomap
 
 // NewGeomap instantiates a new Geomap object
 // This constructor will assign default values to properties that have it defined,
@@ -375,7 +381,42 @@ func (o Geomap) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Geomap) UnmarshalJSON(data []byte) (err error) {
+	varGeomap := _Geomap{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomap)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Geomap(varGeomap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "config")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "minMax")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomap struct {

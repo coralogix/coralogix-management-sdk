@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PolicySpanRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PolicySpanRules{}
@@ -32,9 +34,13 @@ type PolicySpanRules struct {
 	Name string `json:"name"`
 	Order int32 `json:"order"`
 	Priority QuotaV1Priority `json:"priority"`
-	SpanRules *SpanRules `json:"spanRules,omitempty"`
+	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
+	PriorityOverrideStatus *PriorityOverrideStatus `json:"priorityOverrideStatus,omitempty"`
+	SpanRules SpanRules `json:"spanRules"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	Targets []V1Target `json:"targets,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PolicySpanRules PolicySpanRules
@@ -43,7 +49,7 @@ type _PolicySpanRules PolicySpanRules
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPolicySpanRules(companyId int32, deleted bool, enabled bool, id string, name string, order int32, priority QuotaV1Priority) *PolicySpanRules {
+func NewPolicySpanRules(companyId int32, deleted bool, enabled bool, id string, name string, order int32, priority QuotaV1Priority, spanRules SpanRules) *PolicySpanRules {
 	this := PolicySpanRules{}
 	this.CompanyId = companyId
 	this.Deleted = deleted
@@ -52,6 +58,7 @@ func NewPolicySpanRules(companyId int32, deleted bool, enabled bool, id string, 
 	this.Name = name
 	this.Order = order
 	this.Priority = priority
+	this.SpanRules = spanRules
 	return &this
 }
 
@@ -359,36 +366,92 @@ func (o *PolicySpanRules) SetPriority(v QuotaV1Priority) {
 	o.Priority = v
 }
 
-// GetSpanRules returns the SpanRules field value if set, zero value otherwise.
-func (o *PolicySpanRules) GetSpanRules() SpanRules {
-	if o == nil || IsNil(o.SpanRules) {
-		var ret SpanRules
+// GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
+func (o *PolicySpanRules) GetPriorityOverride() PriorityOverride {
+	if o == nil || IsNil(o.PriorityOverride) {
+		var ret PriorityOverride
 		return ret
 	}
-	return *o.SpanRules
+	return *o.PriorityOverride
 }
 
-// GetSpanRulesOk returns a tuple with the SpanRules field value if set, nil otherwise
+// GetPriorityOverrideOk returns a tuple with the PriorityOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PolicySpanRules) GetSpanRulesOk() (*SpanRules, bool) {
-	if o == nil || IsNil(o.SpanRules) {
+func (o *PolicySpanRules) GetPriorityOverrideOk() (*PriorityOverride, bool) {
+	if o == nil || IsNil(o.PriorityOverride) {
 		return nil, false
 	}
-	return o.SpanRules, true
+	return o.PriorityOverride, true
 }
 
-// HasSpanRules returns a boolean if a field has been set.
-func (o *PolicySpanRules) HasSpanRules() bool {
-	if o != nil && !IsNil(o.SpanRules) {
+// HasPriorityOverride returns a boolean if a field has been set.
+func (o *PolicySpanRules) HasPriorityOverride() bool {
+	if o != nil && !IsNil(o.PriorityOverride) {
 		return true
 	}
 
 	return false
 }
 
-// SetSpanRules gets a reference to the given SpanRules and assigns it to the SpanRules field.
+// SetPriorityOverride gets a reference to the given PriorityOverride and assigns it to the PriorityOverride field.
+func (o *PolicySpanRules) SetPriorityOverride(v PriorityOverride) {
+	o.PriorityOverride = &v
+}
+
+// GetPriorityOverrideStatus returns the PriorityOverrideStatus field value if set, zero value otherwise.
+func (o *PolicySpanRules) GetPriorityOverrideStatus() PriorityOverrideStatus {
+	if o == nil || IsNil(o.PriorityOverrideStatus) {
+		var ret PriorityOverrideStatus
+		return ret
+	}
+	return *o.PriorityOverrideStatus
+}
+
+// GetPriorityOverrideStatusOk returns a tuple with the PriorityOverrideStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicySpanRules) GetPriorityOverrideStatusOk() (*PriorityOverrideStatus, bool) {
+	if o == nil || IsNil(o.PriorityOverrideStatus) {
+		return nil, false
+	}
+	return o.PriorityOverrideStatus, true
+}
+
+// HasPriorityOverrideStatus returns a boolean if a field has been set.
+func (o *PolicySpanRules) HasPriorityOverrideStatus() bool {
+	if o != nil && !IsNil(o.PriorityOverrideStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverrideStatus gets a reference to the given PriorityOverrideStatus and assigns it to the PriorityOverrideStatus field.
+func (o *PolicySpanRules) SetPriorityOverrideStatus(v PriorityOverrideStatus) {
+	o.PriorityOverrideStatus = &v
+}
+
+// GetSpanRules returns the SpanRules field value
+func (o *PolicySpanRules) GetSpanRules() SpanRules {
+	if o == nil {
+		var ret SpanRules
+		return ret
+	}
+
+	return o.SpanRules
+}
+
+// GetSpanRulesOk returns a tuple with the SpanRules field value
+// and a boolean to check if the value has been set.
+func (o *PolicySpanRules) GetSpanRulesOk() (*SpanRules, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SpanRules, true
+}
+
+// SetSpanRules sets field value
 func (o *PolicySpanRules) SetSpanRules(v SpanRules) {
-	o.SpanRules = &v
+	o.SpanRules = v
 }
 
 // GetSubsystemRule returns the SubsystemRule field value if set, zero value otherwise.
@@ -421,6 +484,38 @@ func (o *PolicySpanRules) HasSubsystemRule() bool {
 // SetSubsystemRule gets a reference to the given QuotaV1Rule and assigns it to the SubsystemRule field.
 func (o *PolicySpanRules) SetSubsystemRule(v QuotaV1Rule) {
 	o.SubsystemRule = &v
+}
+
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *PolicySpanRules) GetTargets() []V1Target {
+	if o == nil || IsNil(o.Targets) {
+		var ret []V1Target
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicySpanRules) GetTargetsOk() ([]V1Target, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *PolicySpanRules) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []V1Target and assigns it to the Targets field.
+func (o *PolicySpanRules) SetTargets(v []V1Target) {
+	o.Targets = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -484,15 +579,27 @@ func (o PolicySpanRules) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["order"] = o.Order
 	toSerialize["priority"] = o.Priority
-	if !IsNil(o.SpanRules) {
-		toSerialize["spanRules"] = o.SpanRules
+	if !IsNil(o.PriorityOverride) {
+		toSerialize["priorityOverride"] = o.PriorityOverride
 	}
+	if !IsNil(o.PriorityOverrideStatus) {
+		toSerialize["priorityOverrideStatus"] = o.PriorityOverrideStatus
+	}
+	toSerialize["spanRules"] = o.SpanRules
 	if !IsNil(o.SubsystemRule) {
 		toSerialize["subsystemRule"] = o.SubsystemRule
+	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -508,6 +615,7 @@ func (o *PolicySpanRules) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"order",
 		"priority",
+		"spanRules",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -534,6 +642,29 @@ func (o *PolicySpanRules) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = PolicySpanRules(varPolicySpanRules)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationRule")
+		delete(additionalProperties, "archiveRetention")
+		delete(additionalProperties, "companyId")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "priorityOverrideStatus")
+		delete(additionalProperties, "spanRules")
+		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "targets")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

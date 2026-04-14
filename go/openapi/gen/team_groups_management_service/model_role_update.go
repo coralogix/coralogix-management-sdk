@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoleUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleUpdate{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &RoleUpdate{}
 // RoleUpdate Update the role assigned to the group. Either set a new role or clear the existing one.
 type RoleUpdate struct {
 	Action *RoleUpdateAction `json:"action,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RoleUpdate RoleUpdate
 
 // NewRoleUpdate instantiates a new RoleUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o RoleUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RoleUpdate) UnmarshalJSON(data []byte) (err error) {
+	varRoleUpdate := _RoleUpdate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoleUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoleUpdate(varRoleUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRoleUpdate struct {

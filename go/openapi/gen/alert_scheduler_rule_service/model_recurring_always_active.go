@@ -11,23 +11,31 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RecurringAlwaysActive type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringAlwaysActive{}
 
 // RecurringAlwaysActive struct for RecurringAlwaysActive
 type RecurringAlwaysActive struct {
-	AlwaysActive map[string]interface{} `json:"alwaysActive,omitempty"`
+	AlwaysActive map[string]interface{} `json:"alwaysActive"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecurringAlwaysActive RecurringAlwaysActive
 
 // NewRecurringAlwaysActive instantiates a new RecurringAlwaysActive object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecurringAlwaysActive() *RecurringAlwaysActive {
+func NewRecurringAlwaysActive(alwaysActive map[string]interface{}) *RecurringAlwaysActive {
 	this := RecurringAlwaysActive{}
+	this.AlwaysActive = alwaysActive
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewRecurringAlwaysActiveWithDefaults() *RecurringAlwaysActive {
 	return &this
 }
 
-// GetAlwaysActive returns the AlwaysActive field value if set, zero value otherwise.
+// GetAlwaysActive returns the AlwaysActive field value
 func (o *RecurringAlwaysActive) GetAlwaysActive() map[string]interface{} {
-	if o == nil || IsNil(o.AlwaysActive) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.AlwaysActive
 }
 
-// GetAlwaysActiveOk returns a tuple with the AlwaysActive field value if set, nil otherwise
+// GetAlwaysActiveOk returns a tuple with the AlwaysActive field value
 // and a boolean to check if the value has been set.
 func (o *RecurringAlwaysActive) GetAlwaysActiveOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.AlwaysActive) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.AlwaysActive, true
 }
 
-// HasAlwaysActive returns a boolean if a field has been set.
-func (o *RecurringAlwaysActive) HasAlwaysActive() bool {
-	if o != nil && !IsNil(o.AlwaysActive) {
-		return true
-	}
-
-	return false
-}
-
-// SetAlwaysActive gets a reference to the given map[string]interface{} and assigns it to the AlwaysActive field.
+// SetAlwaysActive sets field value
 func (o *RecurringAlwaysActive) SetAlwaysActive(v map[string]interface{}) {
 	o.AlwaysActive = v
 }
@@ -81,10 +81,56 @@ func (o RecurringAlwaysActive) MarshalJSON() ([]byte, error) {
 
 func (o RecurringAlwaysActive) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AlwaysActive) {
-		toSerialize["alwaysActive"] = o.AlwaysActive
+	toSerialize["alwaysActive"] = o.AlwaysActive
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RecurringAlwaysActive) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"alwaysActive",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRecurringAlwaysActive := _RecurringAlwaysActive{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurringAlwaysActive)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecurringAlwaysActive(varRecurringAlwaysActive)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alwaysActive")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecurringAlwaysActive struct {

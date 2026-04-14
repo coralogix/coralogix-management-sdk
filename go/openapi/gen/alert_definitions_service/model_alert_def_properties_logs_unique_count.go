@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesLogsUniqueCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesLogsUniqueCount{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesLogsUniqueCount struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	LogsUniqueCount *LogsUniqueCountType `json:"logsUniqueCount,omitempty"`
+	LogsUniqueCount LogsUniqueCountType `json:"logsUniqueCount"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesLogsUniqueCount struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesLogsUniqueCount AlertDefPropertiesLogsUniqueCount
 
 // NewAlertDefPropertiesLogsUniqueCount instantiates a new AlertDefPropertiesLogsUniqueCount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsUniqueCount() *AlertDefPropertiesLogsUniqueCount {
+func NewAlertDefPropertiesLogsUniqueCount(logsUniqueCount LogsUniqueCountType) *AlertDefPropertiesLogsUniqueCount {
 	this := AlertDefPropertiesLogsUniqueCount{}
+	this.LogsUniqueCount = logsUniqueCount
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesLogsUniqueCount) SetIncidentsSettings(v AlertDefIncid
 	o.IncidentsSettings = &v
 }
 
-// GetLogsUniqueCount returns the LogsUniqueCount field value if set, zero value otherwise.
+// GetLogsUniqueCount returns the LogsUniqueCount field value
 func (o *AlertDefPropertiesLogsUniqueCount) GetLogsUniqueCount() LogsUniqueCountType {
-	if o == nil || IsNil(o.LogsUniqueCount) {
+	if o == nil {
 		var ret LogsUniqueCountType
 		return ret
 	}
-	return *o.LogsUniqueCount
+
+	return o.LogsUniqueCount
 }
 
-// GetLogsUniqueCountOk returns a tuple with the LogsUniqueCount field value if set, nil otherwise
+// GetLogsUniqueCountOk returns a tuple with the LogsUniqueCount field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsUniqueCount) GetLogsUniqueCountOk() (*LogsUniqueCountType, bool) {
-	if o == nil || IsNil(o.LogsUniqueCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsUniqueCount, true
+	return &o.LogsUniqueCount, true
 }
 
-// HasLogsUniqueCount returns a boolean if a field has been set.
-func (o *AlertDefPropertiesLogsUniqueCount) HasLogsUniqueCount() bool {
-	if o != nil && !IsNil(o.LogsUniqueCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsUniqueCount gets a reference to the given LogsUniqueCountType and assigns it to the LogsUniqueCount field.
+// SetLogsUniqueCount sets field value
 func (o *AlertDefPropertiesLogsUniqueCount) SetLogsUniqueCount(v LogsUniqueCountType) {
-	o.LogsUniqueCount = &v
+	o.LogsUniqueCount = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesLogsUniqueCount) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.LogsUniqueCount) {
-		toSerialize["logsUniqueCount"] = o.LogsUniqueCount
-	}
+	toSerialize["logsUniqueCount"] = o.LogsUniqueCount
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesLogsUniqueCount) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesLogsUniqueCount) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsUniqueCount",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesLogsUniqueCount := _AlertDefPropertiesLogsUniqueCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesLogsUniqueCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesLogsUniqueCount(varAlertDefPropertiesLogsUniqueCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsUniqueCount")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesLogsUniqueCount struct {

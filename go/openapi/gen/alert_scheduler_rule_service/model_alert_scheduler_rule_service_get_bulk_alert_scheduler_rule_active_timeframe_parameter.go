@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter{}
@@ -22,7 +25,10 @@ type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter 
 	EndTime *string `json:"endTime,omitempty"`
 	StartTime *string `json:"startTime,omitempty"`
 	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter
 
 // NewAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter instantiates a new AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParamet
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter) UnmarshalJSON(data []byte) (err error) {
+	varAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter := _AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter(varAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter struct {

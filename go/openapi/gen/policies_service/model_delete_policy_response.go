@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeletePolicyResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeletePolicyResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &DeletePolicyResponse{}
 // DeletePolicyResponse This data structue is obtained when deleting a policy by its ID.
 type DeletePolicyResponse struct {
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeletePolicyResponse DeletePolicyResponse
@@ -79,6 +82,11 @@ func (o DeletePolicyResponse) MarshalJSON() ([]byte, error) {
 func (o DeletePolicyResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *DeletePolicyResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DeletePolicyResponse(varDeletePolicyResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ClearRole type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClearRole{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ClearRole{}
 // ClearRole struct for ClearRole
 type ClearRole struct {
 	Clear *bool `json:"clear,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ClearRole ClearRole
 
 // NewClearRole instantiates a new ClearRole object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ClearRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Clear) {
 		toSerialize["clear"] = o.Clear
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ClearRole) UnmarshalJSON(data []byte) (err error) {
+	varClearRole := _ClearRole{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varClearRole)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClearRole(varClearRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "clear")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClearRole struct {

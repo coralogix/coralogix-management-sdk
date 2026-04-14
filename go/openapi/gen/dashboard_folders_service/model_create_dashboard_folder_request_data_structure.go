@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_folders_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateDashboardFolderRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateDashboardFolderRequestDataStructure{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &CreateDashboardFolderRequestDataStructure{}
 type CreateDashboardFolderRequestDataStructure struct {
 	Folder *DashboardFolder `json:"folder,omitempty"`
 	RequestId *string `json:"requestId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateDashboardFolderRequestDataStructure CreateDashboardFolderRequestDataStructure
 
 // NewCreateDashboardFolderRequestDataStructure instantiates a new CreateDashboardFolderRequestDataStructure object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o CreateDashboardFolderRequestDataStructure) ToMap() (map[string]interface
 	if !IsNil(o.RequestId) {
 		toSerialize["requestId"] = o.RequestId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateDashboardFolderRequestDataStructure) UnmarshalJSON(data []byte) (err error) {
+	varCreateDashboardFolderRequestDataStructure := _CreateDashboardFolderRequestDataStructure{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateDashboardFolderRequestDataStructure)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateDashboardFolderRequestDataStructure(varCreateDashboardFolderRequestDataStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "folder")
+		delete(additionalProperties, "requestId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateDashboardFolderRequestDataStructure struct {

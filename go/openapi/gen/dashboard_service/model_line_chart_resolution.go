@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartResolution type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartResolution{}
@@ -23,7 +26,10 @@ type LineChartResolution struct {
 	BucketsPresented *int32 `json:"bucketsPresented,omitempty"`
 	// Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)
 	Interval *string `json:"interval,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineChartResolution LineChartResolution
 
 // NewLineChartResolution instantiates a new LineChartResolution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o LineChartResolution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Interval) {
 		toSerialize["interval"] = o.Interval
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LineChartResolution) UnmarshalJSON(data []byte) (err error) {
+	varLineChartResolution := _LineChartResolution{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartResolution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartResolution(varLineChartResolution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bucketsPresented")
+		delete(additionalProperties, "interval")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineChartResolution struct {

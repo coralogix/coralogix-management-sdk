@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventQueryFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventQueryFilter{}
@@ -31,7 +34,10 @@ type IncidentEventQueryFilter struct {
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	Status []IncidentStatus `json:"status,omitempty"`
 	Timestamp interface{} `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventQueryFilter IncidentEventQueryFilter
 
 // NewIncidentEventQueryFilter instantiates a new IncidentEventQueryFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -342,7 +348,41 @@ func (o IncidentEventQueryFilter) ToMap() (map[string]interface{}, error) {
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventQueryFilter) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventQueryFilter := _IncidentEventQueryFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventQueryFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventQueryFilter(varIncidentEventQueryFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contextualLabels")
+		delete(additionalProperties, "displayLabels")
+		delete(additionalProperties, "isMuted")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventQueryFilter struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DimensionSeverity type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionSeverity{}
 
 // DimensionSeverity struct for DimensionSeverity
 type DimensionSeverity struct {
-	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	Severity DatausageV2Severity `json:"severity"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DimensionSeverity DimensionSeverity
 
 // NewDimensionSeverity instantiates a new DimensionSeverity object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDimensionSeverity() *DimensionSeverity {
+func NewDimensionSeverity(severity DatausageV2Severity) *DimensionSeverity {
 	this := DimensionSeverity{}
+	this.Severity = severity
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDimensionSeverityWithDefaults() *DimensionSeverity {
 	return &this
 }
 
-// GetSeverity returns the Severity field value if set, zero value otherwise.
+// GetSeverity returns the Severity field value
 func (o *DimensionSeverity) GetSeverity() DatausageV2Severity {
-	if o == nil || IsNil(o.Severity) {
+	if o == nil {
 		var ret DatausageV2Severity
 		return ret
 	}
-	return *o.Severity
+
+	return o.Severity
 }
 
-// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
 func (o *DimensionSeverity) GetSeverityOk() (*DatausageV2Severity, bool) {
-	if o == nil || IsNil(o.Severity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Severity, true
+	return &o.Severity, true
 }
 
-// HasSeverity returns a boolean if a field has been set.
-func (o *DimensionSeverity) HasSeverity() bool {
-	if o != nil && !IsNil(o.Severity) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeverity gets a reference to the given DatausageV2Severity and assigns it to the Severity field.
+// SetSeverity sets field value
 func (o *DimensionSeverity) SetSeverity(v DatausageV2Severity) {
-	o.Severity = &v
+	o.Severity = v
 }
 
 func (o DimensionSeverity) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DimensionSeverity) MarshalJSON() ([]byte, error) {
 
 func (o DimensionSeverity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Severity) {
-		toSerialize["severity"] = o.Severity
+	toSerialize["severity"] = o.Severity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DimensionSeverity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"severity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDimensionSeverity := _DimensionSeverity{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimensionSeverity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DimensionSeverity(varDimensionSeverity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "severity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimensionSeverity struct {

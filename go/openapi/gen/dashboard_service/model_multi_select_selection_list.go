@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSelectionList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSelectionList{}
 
 // MultiSelectSelectionList struct for MultiSelectSelectionList
 type MultiSelectSelectionList struct {
-	List *MultiSelectSelectionListSelection `json:"list,omitempty"`
+	List MultiSelectSelectionListSelection `json:"list"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSelectionList MultiSelectSelectionList
 
 // NewMultiSelectSelectionList instantiates a new MultiSelectSelectionList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectSelectionList() *MultiSelectSelectionList {
+func NewMultiSelectSelectionList(list MultiSelectSelectionListSelection) *MultiSelectSelectionList {
 	this := MultiSelectSelectionList{}
+	this.List = list
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectSelectionListWithDefaults() *MultiSelectSelectionList {
 	return &this
 }
 
-// GetList returns the List field value if set, zero value otherwise.
+// GetList returns the List field value
 func (o *MultiSelectSelectionList) GetList() MultiSelectSelectionListSelection {
-	if o == nil || IsNil(o.List) {
+	if o == nil {
 		var ret MultiSelectSelectionListSelection
 		return ret
 	}
-	return *o.List
+
+	return o.List
 }
 
-// GetListOk returns a tuple with the List field value if set, nil otherwise
+// GetListOk returns a tuple with the List field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectSelectionList) GetListOk() (*MultiSelectSelectionListSelection, bool) {
-	if o == nil || IsNil(o.List) {
+	if o == nil {
 		return nil, false
 	}
-	return o.List, true
+	return &o.List, true
 }
 
-// HasList returns a boolean if a field has been set.
-func (o *MultiSelectSelectionList) HasList() bool {
-	if o != nil && !IsNil(o.List) {
-		return true
-	}
-
-	return false
-}
-
-// SetList gets a reference to the given MultiSelectSelectionListSelection and assigns it to the List field.
+// SetList sets field value
 func (o *MultiSelectSelectionList) SetList(v MultiSelectSelectionListSelection) {
-	o.List = &v
+	o.List = v
 }
 
 func (o MultiSelectSelectionList) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectSelectionList) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectSelectionList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.List) {
-		toSerialize["list"] = o.List
+	toSerialize["list"] = o.List
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSelectionList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"list",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectSelectionList := _MultiSelectSelectionList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSelectionList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSelectionList(varMultiSelectSelectionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSelectionList struct {

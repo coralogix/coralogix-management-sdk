@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetIncidentByEventIdResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetIncidentByEventIdResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetIncidentByEventIdResponse{}
 // GetIncidentByEventIdResponse Response containing the requested incident
 type GetIncidentByEventIdResponse struct {
 	Incident Incident `json:"incident"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetIncidentByEventIdResponse GetIncidentByEventIdResponse
@@ -79,6 +82,11 @@ func (o GetIncidentByEventIdResponse) MarshalJSON() ([]byte, error) {
 func (o GetIncidentByEventIdResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["incident"] = o.Incident
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *GetIncidentByEventIdResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetIncidentByEventIdResponse(varGetIncidentByEventIdResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incident")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package ip_access_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateCompanyIpAccessSettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateCompanyIpAccessSettingsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateCompanyIpAccessSettingsResponse{}
 // CreateCompanyIpAccessSettingsResponse This data structure represents the response to create company IP access settings.
 type CreateCompanyIpAccessSettingsResponse struct {
 	Settings *CompanyIpAccessSettings `json:"settings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCompanyIpAccessSettingsResponse CreateCompanyIpAccessSettingsResponse
 
 // NewCreateCompanyIpAccessSettingsResponse instantiates a new CreateCompanyIpAccessSettingsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateCompanyIpAccessSettingsResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCompanyIpAccessSettingsResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateCompanyIpAccessSettingsResponse := _CreateCompanyIpAccessSettingsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateCompanyIpAccessSettingsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCompanyIpAccessSettingsResponse(varCreateCompanyIpAccessSettingsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "settings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCompanyIpAccessSettingsResponse struct {

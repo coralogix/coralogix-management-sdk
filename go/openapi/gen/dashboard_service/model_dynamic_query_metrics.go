@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DynamicQueryMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryMetrics{}
 
 // DynamicQueryMetrics struct for DynamicQueryMetrics
 type DynamicQueryMetrics struct {
-	Metrics *Metrics `json:"metrics,omitempty"`
+	Metrics Metrics `json:"metrics"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DynamicQueryMetrics DynamicQueryMetrics
 
 // NewDynamicQueryMetrics instantiates a new DynamicQueryMetrics object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDynamicQueryMetrics() *DynamicQueryMetrics {
+func NewDynamicQueryMetrics(metrics Metrics) *DynamicQueryMetrics {
 	this := DynamicQueryMetrics{}
+	this.Metrics = metrics
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDynamicQueryMetricsWithDefaults() *DynamicQueryMetrics {
 	return &this
 }
 
-// GetMetrics returns the Metrics field value if set, zero value otherwise.
+// GetMetrics returns the Metrics field value
 func (o *DynamicQueryMetrics) GetMetrics() Metrics {
-	if o == nil || IsNil(o.Metrics) {
+	if o == nil {
 		var ret Metrics
 		return ret
 	}
-	return *o.Metrics
+
+	return o.Metrics
 }
 
-// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// GetMetricsOk returns a tuple with the Metrics field value
 // and a boolean to check if the value has been set.
 func (o *DynamicQueryMetrics) GetMetricsOk() (*Metrics, bool) {
-	if o == nil || IsNil(o.Metrics) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metrics, true
+	return &o.Metrics, true
 }
 
-// HasMetrics returns a boolean if a field has been set.
-func (o *DynamicQueryMetrics) HasMetrics() bool {
-	if o != nil && !IsNil(o.Metrics) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetrics gets a reference to the given Metrics and assigns it to the Metrics field.
+// SetMetrics sets field value
 func (o *DynamicQueryMetrics) SetMetrics(v Metrics) {
-	o.Metrics = &v
+	o.Metrics = v
 }
 
 func (o DynamicQueryMetrics) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DynamicQueryMetrics) MarshalJSON() ([]byte, error) {
 
 func (o DynamicQueryMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Metrics) {
-		toSerialize["metrics"] = o.Metrics
+	toSerialize["metrics"] = o.Metrics
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DynamicQueryMetrics) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metrics",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDynamicQueryMetrics := _DynamicQueryMetrics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDynamicQueryMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DynamicQueryMetrics(varDynamicQueryMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDynamicQueryMetrics struct {

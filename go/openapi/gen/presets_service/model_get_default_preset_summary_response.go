@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDefaultPresetSummaryResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDefaultPresetSummaryResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDefaultPresetSummaryResponse{}
 // GetDefaultPresetSummaryResponse struct for GetDefaultPresetSummaryResponse
 type GetDefaultPresetSummaryResponse struct {
 	PresetSummary *PresetSummary `json:"presetSummary,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDefaultPresetSummaryResponse GetDefaultPresetSummaryResponse
 
 // NewGetDefaultPresetSummaryResponse instantiates a new GetDefaultPresetSummaryResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDefaultPresetSummaryResponse) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.PresetSummary) {
 		toSerialize["presetSummary"] = o.PresetSummary
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDefaultPresetSummaryResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDefaultPresetSummaryResponse := _GetDefaultPresetSummaryResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDefaultPresetSummaryResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDefaultPresetSummaryResponse(varGetDefaultPresetSummaryResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "presetSummary")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDefaultPresetSummaryResponse struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansPolicySettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansPolicySettings{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SpansPolicySettings{}
 // SpansPolicySettings This data structure is used to define the default priority for spans policies.
 type SpansPolicySettings struct {
 	DefaultPriority *QuotaV1Priority `json:"defaultPriority,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansPolicySettings SpansPolicySettings
 
 // NewSpansPolicySettings instantiates a new SpansPolicySettings object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SpansPolicySettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultPriority) {
 		toSerialize["defaultPriority"] = o.DefaultPriority
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansPolicySettings) UnmarshalJSON(data []byte) (err error) {
+	varSpansPolicySettings := _SpansPolicySettings{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansPolicySettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansPolicySettings(varSpansPolicySettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultPriority")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansPolicySettings struct {

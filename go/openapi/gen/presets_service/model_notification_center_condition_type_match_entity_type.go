@@ -11,23 +11,31 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotificationCenterConditionTypeMatchEntityType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationCenterConditionTypeMatchEntityType{}
 
 // NotificationCenterConditionTypeMatchEntityType struct for NotificationCenterConditionTypeMatchEntityType
 type NotificationCenterConditionTypeMatchEntityType struct {
-	MatchEntityType map[string]interface{} `json:"matchEntityType,omitempty"`
+	MatchEntityType map[string]interface{} `json:"matchEntityType"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationCenterConditionTypeMatchEntityType NotificationCenterConditionTypeMatchEntityType
 
 // NewNotificationCenterConditionTypeMatchEntityType instantiates a new NotificationCenterConditionTypeMatchEntityType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotificationCenterConditionTypeMatchEntityType() *NotificationCenterConditionTypeMatchEntityType {
+func NewNotificationCenterConditionTypeMatchEntityType(matchEntityType map[string]interface{}) *NotificationCenterConditionTypeMatchEntityType {
 	this := NotificationCenterConditionTypeMatchEntityType{}
+	this.MatchEntityType = matchEntityType
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewNotificationCenterConditionTypeMatchEntityTypeWithDefaults() *Notificati
 	return &this
 }
 
-// GetMatchEntityType returns the MatchEntityType field value if set, zero value otherwise.
+// GetMatchEntityType returns the MatchEntityType field value
 func (o *NotificationCenterConditionTypeMatchEntityType) GetMatchEntityType() map[string]interface{} {
-	if o == nil || IsNil(o.MatchEntityType) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.MatchEntityType
 }
 
-// GetMatchEntityTypeOk returns a tuple with the MatchEntityType field value if set, nil otherwise
+// GetMatchEntityTypeOk returns a tuple with the MatchEntityType field value
 // and a boolean to check if the value has been set.
 func (o *NotificationCenterConditionTypeMatchEntityType) GetMatchEntityTypeOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.MatchEntityType) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.MatchEntityType, true
 }
 
-// HasMatchEntityType returns a boolean if a field has been set.
-func (o *NotificationCenterConditionTypeMatchEntityType) HasMatchEntityType() bool {
-	if o != nil && !IsNil(o.MatchEntityType) {
-		return true
-	}
-
-	return false
-}
-
-// SetMatchEntityType gets a reference to the given map[string]interface{} and assigns it to the MatchEntityType field.
+// SetMatchEntityType sets field value
 func (o *NotificationCenterConditionTypeMatchEntityType) SetMatchEntityType(v map[string]interface{}) {
 	o.MatchEntityType = v
 }
@@ -81,10 +81,56 @@ func (o NotificationCenterConditionTypeMatchEntityType) MarshalJSON() ([]byte, e
 
 func (o NotificationCenterConditionTypeMatchEntityType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MatchEntityType) {
-		toSerialize["matchEntityType"] = o.MatchEntityType
+	toSerialize["matchEntityType"] = o.MatchEntityType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationCenterConditionTypeMatchEntityType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"matchEntityType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varNotificationCenterConditionTypeMatchEntityType := _NotificationCenterConditionTypeMatchEntityType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationCenterConditionTypeMatchEntityType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationCenterConditionTypeMatchEntityType(varNotificationCenterConditionTypeMatchEntityType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matchEntityType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationCenterConditionTypeMatchEntityType struct {

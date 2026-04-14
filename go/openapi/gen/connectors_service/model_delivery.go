@@ -11,9 +11,12 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // Delivery the model 'Delivery'
 type Delivery string

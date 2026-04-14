@@ -11,8 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApmSliErrorConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApmSliErrorConfig{}
@@ -20,18 +24,22 @@ var _ MappedNullable = &ApmSliErrorConfig{}
 // ApmSliErrorConfig Definition of an APM-based SLI with automatic query generation
 type ApmSliErrorConfig struct {
 	// Configuration for error-based APM SLI
-	ErrorConfig map[string]interface{} `json:"errorConfig,omitempty"`
+	ErrorConfig map[string]interface{} `json:"errorConfig"`
 	Filters []ApmFilter `json:"filters,omitempty"`
 	GroupingKeys []string `json:"groupingKeys,omitempty"`
 	Services []string `json:"services,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApmSliErrorConfig ApmSliErrorConfig
 
 // NewApmSliErrorConfig instantiates a new ApmSliErrorConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApmSliErrorConfig() *ApmSliErrorConfig {
+func NewApmSliErrorConfig(errorConfig map[string]interface{}) *ApmSliErrorConfig {
 	this := ApmSliErrorConfig{}
+	this.ErrorConfig = errorConfig
 	return &this
 }
 
@@ -43,34 +51,26 @@ func NewApmSliErrorConfigWithDefaults() *ApmSliErrorConfig {
 	return &this
 }
 
-// GetErrorConfig returns the ErrorConfig field value if set, zero value otherwise.
+// GetErrorConfig returns the ErrorConfig field value
 func (o *ApmSliErrorConfig) GetErrorConfig() map[string]interface{} {
-	if o == nil || IsNil(o.ErrorConfig) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.ErrorConfig
 }
 
-// GetErrorConfigOk returns a tuple with the ErrorConfig field value if set, nil otherwise
+// GetErrorConfigOk returns a tuple with the ErrorConfig field value
 // and a boolean to check if the value has been set.
 func (o *ApmSliErrorConfig) GetErrorConfigOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ErrorConfig) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.ErrorConfig, true
 }
 
-// HasErrorConfig returns a boolean if a field has been set.
-func (o *ApmSliErrorConfig) HasErrorConfig() bool {
-	if o != nil && !IsNil(o.ErrorConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetErrorConfig gets a reference to the given map[string]interface{} and assigns it to the ErrorConfig field.
+// SetErrorConfig sets field value
 func (o *ApmSliErrorConfig) SetErrorConfig(v map[string]interface{}) {
 	o.ErrorConfig = v
 }
@@ -181,9 +181,7 @@ func (o ApmSliErrorConfig) MarshalJSON() ([]byte, error) {
 
 func (o ApmSliErrorConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ErrorConfig) {
-		toSerialize["errorConfig"] = o.ErrorConfig
-	}
+	toSerialize["errorConfig"] = o.ErrorConfig
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
 	}
@@ -193,7 +191,58 @@ func (o ApmSliErrorConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Services) {
 		toSerialize["services"] = o.Services
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApmSliErrorConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"errorConfig",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varApmSliErrorConfig := _ApmSliErrorConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmSliErrorConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmSliErrorConfig(varApmSliErrorConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errorConfig")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupingKeys")
+		delete(additionalProperties, "services")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApmSliErrorConfig struct {

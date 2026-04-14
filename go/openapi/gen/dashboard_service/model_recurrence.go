@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Recurrence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Recurrence{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Recurrence{}
 // Recurrence struct for Recurrence
 type Recurrence struct {
 	Weekly *WeeklyRecurrence `json:"weekly,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Recurrence Recurrence
 
 // NewRecurrence instantiates a new Recurrence object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Recurrence) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Weekly) {
 		toSerialize["weekly"] = o.Weekly
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Recurrence) UnmarshalJSON(data []byte) (err error) {
+	varRecurrence := _Recurrence{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurrence)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Recurrence(varRecurrence)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "weekly")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecurrence struct {

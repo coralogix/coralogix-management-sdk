@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsRatioTimeWindow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsRatioTimeWindow{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LogsRatioTimeWindow{}
 // LogsRatioTimeWindow Time window configuration for ratio alerts
 type LogsRatioTimeWindow struct {
 	LogsRatioTimeWindowSpecificValue *LogsRatioTimeWindowValue `json:"logsRatioTimeWindowSpecificValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsRatioTimeWindow LogsRatioTimeWindow
 
 // NewLogsRatioTimeWindow instantiates a new LogsRatioTimeWindow object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LogsRatioTimeWindow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LogsRatioTimeWindowSpecificValue) {
 		toSerialize["logsRatioTimeWindowSpecificValue"] = o.LogsRatioTimeWindowSpecificValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsRatioTimeWindow) UnmarshalJSON(data []byte) (err error) {
+	varLogsRatioTimeWindow := _LogsRatioTimeWindow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsRatioTimeWindow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsRatioTimeWindow(varLogsRatioTimeWindow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsRatioTimeWindowSpecificValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsRatioTimeWindow struct {

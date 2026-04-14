@@ -11,23 +11,31 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfName{}
 
 // IncidentFieldOneOfName struct for IncidentFieldOneOfName
 type IncidentFieldOneOfName struct {
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfName IncidentFieldOneOfName
 
 // NewIncidentFieldOneOfName instantiates a new IncidentFieldOneOfName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfName() *IncidentFieldOneOfName {
+func NewIncidentFieldOneOfName(name string) *IncidentFieldOneOfName {
 	this := IncidentFieldOneOfName{}
+	this.Name = name
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIncidentFieldOneOfNameWithDefaults() *IncidentFieldOneOfName {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *IncidentFieldOneOfName) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfName) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfName) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *IncidentFieldOneOfName) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 func (o IncidentFieldOneOfName) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IncidentFieldOneOfName) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
+	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfName := _IncidentFieldOneOfName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfName(varIncidentFieldOneOfName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfName struct {

@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // AlertSchedulerRuleProtobufV1Filter - struct for AlertSchedulerRuleProtobufV1Filter
 type AlertSchedulerRuleProtobufV1Filter struct {

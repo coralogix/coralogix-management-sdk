@@ -11,8 +11,11 @@ API version: 1.0.0
 package cases_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CaseExternalReference type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CaseExternalReference{}
@@ -24,7 +27,10 @@ type CaseExternalReference struct {
 	// The direct URL to view the case in the external system
 	Url *string `json:"url,omitempty"`
 	Vendor *ExternalReferenceVendor `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CaseExternalReference CaseExternalReference
 
 // NewCaseExternalReference instantiates a new CaseExternalReference object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +164,36 @@ func (o CaseExternalReference) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CaseExternalReference) UnmarshalJSON(data []byte) (err error) {
+	varCaseExternalReference := _CaseExternalReference{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCaseExternalReference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CaseExternalReference(varCaseExternalReference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCaseExternalReference struct {

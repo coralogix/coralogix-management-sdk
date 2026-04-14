@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EmailGroupConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EmailGroupConfig{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &EmailGroupConfig{}
 // EmailGroupConfig struct for EmailGroupConfig
 type EmailGroupConfig struct {
 	EmailAddresses []string `json:"emailAddresses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EmailGroupConfig EmailGroupConfig
 
 // NewEmailGroupConfig instantiates a new EmailGroupConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o EmailGroupConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EmailAddresses) {
 		toSerialize["emailAddresses"] = o.EmailAddresses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EmailGroupConfig) UnmarshalJSON(data []byte) (err error) {
+	varEmailGroupConfig := _EmailGroupConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEmailGroupConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EmailGroupConfig(varEmailGroupConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "emailAddresses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEmailGroupConfig struct {

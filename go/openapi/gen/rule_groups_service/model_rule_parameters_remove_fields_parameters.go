@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersRemoveFieldsParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersRemoveFieldsParameters{}
 
 // RuleParametersRemoveFieldsParameters struct for RuleParametersRemoveFieldsParameters
 type RuleParametersRemoveFieldsParameters struct {
-	RemoveFieldsParameters *RemoveFieldsParameters `json:"removeFieldsParameters,omitempty"`
+	RemoveFieldsParameters RemoveFieldsParameters `json:"removeFieldsParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersRemoveFieldsParameters RuleParametersRemoveFieldsParameters
 
 // NewRuleParametersRemoveFieldsParameters instantiates a new RuleParametersRemoveFieldsParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersRemoveFieldsParameters() *RuleParametersRemoveFieldsParameters {
+func NewRuleParametersRemoveFieldsParameters(removeFieldsParameters RemoveFieldsParameters) *RuleParametersRemoveFieldsParameters {
 	this := RuleParametersRemoveFieldsParameters{}
+	this.RemoveFieldsParameters = removeFieldsParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersRemoveFieldsParametersWithDefaults() *RuleParametersRemove
 	return &this
 }
 
-// GetRemoveFieldsParameters returns the RemoveFieldsParameters field value if set, zero value otherwise.
+// GetRemoveFieldsParameters returns the RemoveFieldsParameters field value
 func (o *RuleParametersRemoveFieldsParameters) GetRemoveFieldsParameters() RemoveFieldsParameters {
-	if o == nil || IsNil(o.RemoveFieldsParameters) {
+	if o == nil {
 		var ret RemoveFieldsParameters
 		return ret
 	}
-	return *o.RemoveFieldsParameters
+
+	return o.RemoveFieldsParameters
 }
 
-// GetRemoveFieldsParametersOk returns a tuple with the RemoveFieldsParameters field value if set, nil otherwise
+// GetRemoveFieldsParametersOk returns a tuple with the RemoveFieldsParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersRemoveFieldsParameters) GetRemoveFieldsParametersOk() (*RemoveFieldsParameters, bool) {
-	if o == nil || IsNil(o.RemoveFieldsParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RemoveFieldsParameters, true
+	return &o.RemoveFieldsParameters, true
 }
 
-// HasRemoveFieldsParameters returns a boolean if a field has been set.
-func (o *RuleParametersRemoveFieldsParameters) HasRemoveFieldsParameters() bool {
-	if o != nil && !IsNil(o.RemoveFieldsParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetRemoveFieldsParameters gets a reference to the given RemoveFieldsParameters and assigns it to the RemoveFieldsParameters field.
+// SetRemoveFieldsParameters sets field value
 func (o *RuleParametersRemoveFieldsParameters) SetRemoveFieldsParameters(v RemoveFieldsParameters) {
-	o.RemoveFieldsParameters = &v
+	o.RemoveFieldsParameters = v
 }
 
 func (o RuleParametersRemoveFieldsParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersRemoveFieldsParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersRemoveFieldsParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.RemoveFieldsParameters) {
-		toSerialize["removeFieldsParameters"] = o.RemoveFieldsParameters
+	toSerialize["removeFieldsParameters"] = o.RemoveFieldsParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersRemoveFieldsParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"removeFieldsParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersRemoveFieldsParameters := _RuleParametersRemoveFieldsParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersRemoveFieldsParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersRemoveFieldsParameters(varRuleParametersRemoveFieldsParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "removeFieldsParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersRemoveFieldsParameters struct {

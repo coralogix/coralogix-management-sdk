@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ContextualLabelValuesWithCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContextualLabelValuesWithCount{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &ContextualLabelValuesWithCount{}
 // ContextualLabelValuesWithCount struct for ContextualLabelValuesWithCount
 type ContextualLabelValuesWithCount struct {
 	ValuesWithCount []ContextualLabelValueWithCount `json:"valuesWithCount"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContextualLabelValuesWithCount ContextualLabelValuesWithCount
@@ -79,6 +82,11 @@ func (o ContextualLabelValuesWithCount) MarshalJSON() ([]byte, error) {
 func (o ContextualLabelValuesWithCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["valuesWithCount"] = o.ValuesWithCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *ContextualLabelValuesWithCount) UnmarshalJSON(data []byte) (err error) 
 	}
 
 	*o = ContextualLabelValuesWithCount(varContextualLabelValuesWithCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "valuesWithCount")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

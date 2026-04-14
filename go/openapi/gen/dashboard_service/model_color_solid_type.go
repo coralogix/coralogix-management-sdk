@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // ColorSolidType the model 'ColorSolidType'
 type ColorSolidType string
@@ -25,6 +28,10 @@ const (
 	COLORSOLIDTYPE_COLOR_SOLID_TYPE_GREEN ColorSolidType = "COLOR_SOLID_TYPE_GREEN"
 	COLORSOLIDTYPE_COLOR_SOLID_TYPE_RED ColorSolidType = "COLOR_SOLID_TYPE_RED"
 	COLORSOLIDTYPE_COLOR_SOLID_TYPE_PURPLE ColorSolidType = "COLOR_SOLID_TYPE_PURPLE"
+	COLORSOLIDTYPE_COLOR_SOLID_TYPE_CYAN ColorSolidType = "COLOR_SOLID_TYPE_CYAN"
+	COLORSOLIDTYPE_COLOR_SOLID_TYPE_MAGENTA ColorSolidType = "COLOR_SOLID_TYPE_MAGENTA"
+	COLORSOLIDTYPE_COLOR_SOLID_TYPE_ORANGE ColorSolidType = "COLOR_SOLID_TYPE_ORANGE"
+	COLORSOLIDTYPE_COLOR_SOLID_TYPE_YELLOW ColorSolidType = "COLOR_SOLID_TYPE_YELLOW"
 )
 
 // All allowed values of ColorSolidType enum
@@ -34,6 +41,10 @@ var AllowedColorSolidTypeEnumValues = []ColorSolidType{
 	"COLOR_SOLID_TYPE_GREEN",
 	"COLOR_SOLID_TYPE_RED",
 	"COLOR_SOLID_TYPE_PURPLE",
+	"COLOR_SOLID_TYPE_CYAN",
+	"COLOR_SOLID_TYPE_MAGENTA",
+	"COLOR_SOLID_TYPE_ORANGE",
+	"COLOR_SOLID_TYPE_YELLOW",
 }
 
 func (v *ColorSolidType) UnmarshalJSON(src []byte) error {

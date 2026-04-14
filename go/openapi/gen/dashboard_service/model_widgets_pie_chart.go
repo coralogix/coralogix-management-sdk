@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetsPieChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsPieChart{}
@@ -45,7 +48,10 @@ type WidgetsPieChart struct {
 	ShowTotal *bool `json:"showTotal,omitempty"`
 	StackDefinition *PieChartStackDefinition `json:"stackDefinition,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetsPieChart WidgetsPieChart
 
 // NewWidgetsPieChart instantiates a new WidgetsPieChart object
 // This constructor will assign default values to properties that have it defined,
@@ -634,7 +640,49 @@ func (o WidgetsPieChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetsPieChart) UnmarshalJSON(data []byte) (err error) {
+	varWidgetsPieChart := _WidgetsPieChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetsPieChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetsPieChart(varWidgetsPieChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "decimal")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "groupNameTemplate")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "labelDefinition")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "maxSlicesPerChart")
+		delete(additionalProperties, "minSlicePercentage")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "showLegend")
+		delete(additionalProperties, "showTotal")
+		delete(additionalProperties, "stackDefinition")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetsPieChart struct {

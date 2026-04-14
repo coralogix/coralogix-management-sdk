@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapAggregationMin type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationMin{}
 
 // GeomapAggregationMin struct for GeomapAggregationMin
 type GeomapAggregationMin struct {
-	Min *GeomapAggregationFieldBased `json:"min,omitempty"`
+	Min GeomapAggregationFieldBased `json:"min"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapAggregationMin GeomapAggregationMin
 
 // NewGeomapAggregationMin instantiates a new GeomapAggregationMin object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapAggregationMin() *GeomapAggregationMin {
+func NewGeomapAggregationMin(min GeomapAggregationFieldBased) *GeomapAggregationMin {
 	this := GeomapAggregationMin{}
+	this.Min = min
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapAggregationMinWithDefaults() *GeomapAggregationMin {
 	return &this
 }
 
-// GetMin returns the Min field value if set, zero value otherwise.
+// GetMin returns the Min field value
 func (o *GeomapAggregationMin) GetMin() GeomapAggregationFieldBased {
-	if o == nil || IsNil(o.Min) {
+	if o == nil {
 		var ret GeomapAggregationFieldBased
 		return ret
 	}
-	return *o.Min
+
+	return o.Min
 }
 
-// GetMinOk returns a tuple with the Min field value if set, nil otherwise
+// GetMinOk returns a tuple with the Min field value
 // and a boolean to check if the value has been set.
 func (o *GeomapAggregationMin) GetMinOk() (*GeomapAggregationFieldBased, bool) {
-	if o == nil || IsNil(o.Min) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Min, true
+	return &o.Min, true
 }
 
-// HasMin returns a boolean if a field has been set.
-func (o *GeomapAggregationMin) HasMin() bool {
-	if o != nil && !IsNil(o.Min) {
-		return true
-	}
-
-	return false
-}
-
-// SetMin gets a reference to the given GeomapAggregationFieldBased and assigns it to the Min field.
+// SetMin sets field value
 func (o *GeomapAggregationMin) SetMin(v GeomapAggregationFieldBased) {
-	o.Min = &v
+	o.Min = v
 }
 
 func (o GeomapAggregationMin) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapAggregationMin) MarshalJSON() ([]byte, error) {
 
 func (o GeomapAggregationMin) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Min) {
-		toSerialize["min"] = o.Min
+	toSerialize["min"] = o.Min
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapAggregationMin) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"min",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapAggregationMin := _GeomapAggregationMin{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapAggregationMin)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapAggregationMin(varGeomapAggregationMin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapAggregationMin struct {

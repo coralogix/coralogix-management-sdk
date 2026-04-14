@@ -11,9 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SyncRumDataResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SyncRumDataResponse{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &SyncRumDataResponse{}
 type SyncRumDataResponse struct {
 	SyncExecuted *bool `json:"syncExecuted,omitempty"`
 	SyncedAt *time.Time `json:"syncedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SyncRumDataResponse SyncRumDataResponse
 
 // NewSyncRumDataResponse instantiates a new SyncRumDataResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o SyncRumDataResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SyncedAt) {
 		toSerialize["syncedAt"] = o.SyncedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SyncRumDataResponse) UnmarshalJSON(data []byte) (err error) {
+	varSyncRumDataResponse := _SyncRumDataResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSyncRumDataResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SyncRumDataResponse(varSyncRumDataResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "syncExecuted")
+		delete(additionalProperties, "syncedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSyncRumDataResponse struct {

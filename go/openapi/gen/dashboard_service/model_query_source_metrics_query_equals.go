@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQueryEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryEquals{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &QuerySourceMetricsQueryEquals{}
 // QuerySourceMetricsQueryEquals struct for QuerySourceMetricsQueryEquals
 type QuerySourceMetricsQueryEquals struct {
 	Selection *QuerySourceMetricsQuerySelection `json:"selection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQueryEquals QuerySourceMetricsQueryEquals
 
 // NewQuerySourceMetricsQueryEquals instantiates a new QuerySourceMetricsQueryEquals object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o QuerySourceMetricsQueryEquals) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Selection) {
 		toSerialize["selection"] = o.Selection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryEquals) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceMetricsQueryEquals := _QuerySourceMetricsQueryEquals{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryEquals)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryEquals(varQuerySourceMetricsQueryEquals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "selection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQueryEquals struct {

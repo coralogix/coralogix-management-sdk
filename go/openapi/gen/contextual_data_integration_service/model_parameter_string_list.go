@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ParameterStringList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ParameterStringList{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &ParameterStringList{}
 // ParameterStringList struct for ParameterStringList
 type ParameterStringList struct {
 	Key *string `json:"key,omitempty"`
-	StringList *StringList `json:"stringList,omitempty"`
+	StringList StringList `json:"stringList"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ParameterStringList ParameterStringList
 
 // NewParameterStringList instantiates a new ParameterStringList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewParameterStringList() *ParameterStringList {
+func NewParameterStringList(stringList StringList) *ParameterStringList {
 	this := ParameterStringList{}
+	this.StringList = stringList
 	return &this
 }
 
@@ -72,36 +80,28 @@ func (o *ParameterStringList) SetKey(v string) {
 	o.Key = &v
 }
 
-// GetStringList returns the StringList field value if set, zero value otherwise.
+// GetStringList returns the StringList field value
 func (o *ParameterStringList) GetStringList() StringList {
-	if o == nil || IsNil(o.StringList) {
+	if o == nil {
 		var ret StringList
 		return ret
 	}
-	return *o.StringList
+
+	return o.StringList
 }
 
-// GetStringListOk returns a tuple with the StringList field value if set, nil otherwise
+// GetStringListOk returns a tuple with the StringList field value
 // and a boolean to check if the value has been set.
 func (o *ParameterStringList) GetStringListOk() (*StringList, bool) {
-	if o == nil || IsNil(o.StringList) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StringList, true
+	return &o.StringList, true
 }
 
-// HasStringList returns a boolean if a field has been set.
-func (o *ParameterStringList) HasStringList() bool {
-	if o != nil && !IsNil(o.StringList) {
-		return true
-	}
-
-	return false
-}
-
-// SetStringList gets a reference to the given StringList and assigns it to the StringList field.
+// SetStringList sets field value
 func (o *ParameterStringList) SetStringList(v StringList) {
-	o.StringList = &v
+	o.StringList = v
 }
 
 func (o ParameterStringList) MarshalJSON() ([]byte, error) {
@@ -117,10 +117,57 @@ func (o ParameterStringList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if !IsNil(o.StringList) {
-		toSerialize["stringList"] = o.StringList
+	toSerialize["stringList"] = o.StringList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ParameterStringList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"stringList",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varParameterStringList := _ParameterStringList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varParameterStringList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParameterStringList(varParameterStringList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "stringList")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParameterStringList struct {

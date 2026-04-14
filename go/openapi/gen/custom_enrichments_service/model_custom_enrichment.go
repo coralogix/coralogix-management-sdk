@@ -11,8 +11,11 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomEnrichment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichment{}
@@ -26,7 +29,10 @@ type CustomEnrichment struct {
 	IsQueryOnly *bool `json:"isQueryOnly,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Version *int64 `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomEnrichment CustomEnrichment
 
 // NewCustomEnrichment instantiates a new CustomEnrichment object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +306,40 @@ func (o CustomEnrichment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomEnrichment) UnmarshalJSON(data []byte) (err error) {
+	varCustomEnrichment := _CustomEnrichment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomEnrichment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomEnrichment(varCustomEnrichment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "fileName")
+		delete(additionalProperties, "fileSize")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isQueryOnly")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomEnrichment struct {

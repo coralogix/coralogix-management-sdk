@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBarChartStackDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartStackDefinition{}
@@ -23,7 +26,10 @@ type HorizontalBarChartStackDefinition struct {
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`
 	// Custom template name of an individual stack
 	StackNameTemplate *string `json:"stackNameTemplate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBarChartStackDefinition HorizontalBarChartStackDefinition
 
 // NewHorizontalBarChartStackDefinition instantiates a new HorizontalBarChartStackDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o HorizontalBarChartStackDefinition) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.StackNameTemplate) {
 		toSerialize["stackNameTemplate"] = o.StackNameTemplate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartStackDefinition) UnmarshalJSON(data []byte) (err error) {
+	varHorizontalBarChartStackDefinition := _HorizontalBarChartStackDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartStackDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartStackDefinition(varHorizontalBarChartStackDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "maxSlicesPerBar")
+		delete(additionalProperties, "stackNameTemplate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBarChartStackDefinition struct {

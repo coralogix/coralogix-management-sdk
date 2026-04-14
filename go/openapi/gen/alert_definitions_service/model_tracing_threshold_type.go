@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingThresholdType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingThresholdType{}
@@ -22,7 +25,10 @@ type TracingThresholdType struct {
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	Rules []TracingThresholdRule `json:"rules,omitempty"`
 	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingThresholdType TracingThresholdType
 
 // NewTracingThresholdType instantiates a new TracingThresholdType object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o TracingThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TracingFilter) {
 		toSerialize["tracingFilter"] = o.TracingFilter
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingThresholdType) UnmarshalJSON(data []byte) (err error) {
+	varTracingThresholdType := _TracingThresholdType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingThresholdType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingThresholdType(varTracingThresholdType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "notificationPayloadFilter")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "tracingFilter")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingThresholdType struct {

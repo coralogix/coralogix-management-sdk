@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionMarkdown type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionMarkdown{}
 
 // WidgetDefinitionMarkdown struct for WidgetDefinitionMarkdown
 type WidgetDefinitionMarkdown struct {
-	Markdown *Markdown `json:"markdown,omitempty"`
+	Markdown Markdown `json:"markdown"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionMarkdown WidgetDefinitionMarkdown
 
 // NewWidgetDefinitionMarkdown instantiates a new WidgetDefinitionMarkdown object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionMarkdown() *WidgetDefinitionMarkdown {
+func NewWidgetDefinitionMarkdown(markdown Markdown) *WidgetDefinitionMarkdown {
 	this := WidgetDefinitionMarkdown{}
+	this.Markdown = markdown
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionMarkdownWithDefaults() *WidgetDefinitionMarkdown {
 	return &this
 }
 
-// GetMarkdown returns the Markdown field value if set, zero value otherwise.
+// GetMarkdown returns the Markdown field value
 func (o *WidgetDefinitionMarkdown) GetMarkdown() Markdown {
-	if o == nil || IsNil(o.Markdown) {
+	if o == nil {
 		var ret Markdown
 		return ret
 	}
-	return *o.Markdown
+
+	return o.Markdown
 }
 
-// GetMarkdownOk returns a tuple with the Markdown field value if set, nil otherwise
+// GetMarkdownOk returns a tuple with the Markdown field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionMarkdown) GetMarkdownOk() (*Markdown, bool) {
-	if o == nil || IsNil(o.Markdown) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Markdown, true
+	return &o.Markdown, true
 }
 
-// HasMarkdown returns a boolean if a field has been set.
-func (o *WidgetDefinitionMarkdown) HasMarkdown() bool {
-	if o != nil && !IsNil(o.Markdown) {
-		return true
-	}
-
-	return false
-}
-
-// SetMarkdown gets a reference to the given Markdown and assigns it to the Markdown field.
+// SetMarkdown sets field value
 func (o *WidgetDefinitionMarkdown) SetMarkdown(v Markdown) {
-	o.Markdown = &v
+	o.Markdown = v
 }
 
 func (o WidgetDefinitionMarkdown) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionMarkdown) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionMarkdown) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Markdown) {
-		toSerialize["markdown"] = o.Markdown
+	toSerialize["markdown"] = o.Markdown
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionMarkdown) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"markdown",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionMarkdown := _WidgetDefinitionMarkdown{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionMarkdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionMarkdown(varWidgetDefinitionMarkdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "markdown")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionMarkdown struct {

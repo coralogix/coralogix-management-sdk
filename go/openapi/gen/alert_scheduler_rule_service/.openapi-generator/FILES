@@ -18,9 +18,6 @@ model_alert_scheduler_rule_service_get_bulk_alert_scheduler_rule_alert_scheduler
 model_alert_scheduler_rule_version_ids.go
 model_alert_scheduler_rule_with_active_timeframe.go
 model_alert_unique_ids.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_alert_scheduler_rule_request.go
 model_create_alert_scheduler_rule_request_data_structure.go
@@ -40,8 +37,6 @@ model_get_alert_scheduler_rule_response.go
 model_get_bulk_alert_scheduler_rule_response.go
 model_meta_labels.go
 model_meta_labels_protobuf_v1_meta_label.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_monthly.go
 model_multiple_values.go
 model_one_time.go

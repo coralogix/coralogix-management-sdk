@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueDefaultNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueDefaultNumericValue{}
 
 // TextboxDefaultValueDefaultNumericValue struct for TextboxDefaultValueDefaultNumericValue
 type TextboxDefaultValueDefaultNumericValue struct {
-	DefaultNumericValue *TextboxDefaultNumericValue `json:"defaultNumericValue,omitempty"`
+	DefaultNumericValue TextboxDefaultNumericValue `json:"defaultNumericValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueDefaultNumericValue TextboxDefaultValueDefaultNumericValue
 
 // NewTextboxDefaultValueDefaultNumericValue instantiates a new TextboxDefaultValueDefaultNumericValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueDefaultNumericValue() *TextboxDefaultValueDefaultNumericValue {
+func NewTextboxDefaultValueDefaultNumericValue(defaultNumericValue TextboxDefaultNumericValue) *TextboxDefaultValueDefaultNumericValue {
 	this := TextboxDefaultValueDefaultNumericValue{}
+	this.DefaultNumericValue = defaultNumericValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTextboxDefaultValueDefaultNumericValueWithDefaults() *TextboxDefaultValu
 	return &this
 }
 
-// GetDefaultNumericValue returns the DefaultNumericValue field value if set, zero value otherwise.
+// GetDefaultNumericValue returns the DefaultNumericValue field value
 func (o *TextboxDefaultValueDefaultNumericValue) GetDefaultNumericValue() TextboxDefaultNumericValue {
-	if o == nil || IsNil(o.DefaultNumericValue) {
+	if o == nil {
 		var ret TextboxDefaultNumericValue
 		return ret
 	}
-	return *o.DefaultNumericValue
+
+	return o.DefaultNumericValue
 }
 
-// GetDefaultNumericValueOk returns a tuple with the DefaultNumericValue field value if set, nil otherwise
+// GetDefaultNumericValueOk returns a tuple with the DefaultNumericValue field value
 // and a boolean to check if the value has been set.
 func (o *TextboxDefaultValueDefaultNumericValue) GetDefaultNumericValueOk() (*TextboxDefaultNumericValue, bool) {
-	if o == nil || IsNil(o.DefaultNumericValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultNumericValue, true
+	return &o.DefaultNumericValue, true
 }
 
-// HasDefaultNumericValue returns a boolean if a field has been set.
-func (o *TextboxDefaultValueDefaultNumericValue) HasDefaultNumericValue() bool {
-	if o != nil && !IsNil(o.DefaultNumericValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultNumericValue gets a reference to the given TextboxDefaultNumericValue and assigns it to the DefaultNumericValue field.
+// SetDefaultNumericValue sets field value
 func (o *TextboxDefaultValueDefaultNumericValue) SetDefaultNumericValue(v TextboxDefaultNumericValue) {
-	o.DefaultNumericValue = &v
+	o.DefaultNumericValue = v
 }
 
 func (o TextboxDefaultValueDefaultNumericValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TextboxDefaultValueDefaultNumericValue) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueDefaultNumericValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultNumericValue) {
-		toSerialize["defaultNumericValue"] = o.DefaultNumericValue
+	toSerialize["defaultNumericValue"] = o.DefaultNumericValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueDefaultNumericValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"defaultNumericValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueDefaultNumericValue := _TextboxDefaultValueDefaultNumericValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueDefaultNumericValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueDefaultNumericValue(varTextboxDefaultValueDefaultNumericValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultNumericValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueDefaultNumericValue struct {

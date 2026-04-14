@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_folders_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardFolder type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardFolder{}
@@ -22,7 +25,10 @@ type DashboardFolder struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ParentId *string `json:"parentId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DashboardFolder DashboardFolder
 
 // NewDashboardFolder instantiates a new DashboardFolder object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o DashboardFolder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DashboardFolder) UnmarshalJSON(data []byte) (err error) {
+	varDashboardFolder := _DashboardFolder{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDashboardFolder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DashboardFolder(varDashboardFolder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parentId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDashboardFolder struct {

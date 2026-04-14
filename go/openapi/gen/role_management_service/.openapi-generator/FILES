@@ -7,9 +7,6 @@ api_role_management_service.go
 client.go
 configuration.go
 git_push.sh
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_role_request_parent_role_id.go
 model_create_role_request_parent_role_name.go
@@ -24,8 +21,6 @@ model_filters.go
 model_get_custom_role_response.go
 model_list_custom_roles_response.go
 model_list_system_roles_response.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_role_management_service_create_role_request.go
 model_role_management_service_update_role_request.go

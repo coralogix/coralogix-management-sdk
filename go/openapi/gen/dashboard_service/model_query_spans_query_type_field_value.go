@@ -11,16 +11,23 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySpansQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySpansQueryTypeFieldValue{}
 
 // QuerySpansQueryTypeFieldValue struct for QuerySpansQueryTypeFieldValue
 type QuerySpansQueryTypeFieldValue struct {
-	FieldValue *QuerySpansQueryTypeFieldValue `json:"fieldValue,omitempty"`
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	Value *SpanField `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySpansQueryTypeFieldValue QuerySpansQueryTypeFieldValue
 
 // NewQuerySpansQueryTypeFieldValue instantiates a new QuerySpansQueryTypeFieldValue object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +46,68 @@ func NewQuerySpansQueryTypeFieldValueWithDefaults() *QuerySpansQueryTypeFieldVal
 	return &this
 }
 
-// GetFieldValue returns the FieldValue field value if set, zero value otherwise.
-func (o *QuerySpansQueryTypeFieldValue) GetFieldValue() QuerySpansQueryTypeFieldValue {
-	if o == nil || IsNil(o.FieldValue) {
-		var ret QuerySpansQueryTypeFieldValue
+// GetObservationField returns the ObservationField field value if set, zero value otherwise.
+func (o *QuerySpansQueryTypeFieldValue) GetObservationField() ObservationField {
+	if o == nil || IsNil(o.ObservationField) {
+		var ret ObservationField
 		return ret
 	}
-	return *o.FieldValue
+	return *o.ObservationField
 }
 
-// GetFieldValueOk returns a tuple with the FieldValue field value if set, nil otherwise
+// GetObservationFieldOk returns a tuple with the ObservationField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySpansQueryTypeFieldValue) GetFieldValueOk() (*QuerySpansQueryTypeFieldValue, bool) {
-	if o == nil || IsNil(o.FieldValue) {
+func (o *QuerySpansQueryTypeFieldValue) GetObservationFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.ObservationField) {
 		return nil, false
 	}
-	return o.FieldValue, true
+	return o.ObservationField, true
 }
 
-// HasFieldValue returns a boolean if a field has been set.
-func (o *QuerySpansQueryTypeFieldValue) HasFieldValue() bool {
-	if o != nil && !IsNil(o.FieldValue) {
+// HasObservationField returns a boolean if a field has been set.
+func (o *QuerySpansQueryTypeFieldValue) HasObservationField() bool {
+	if o != nil && !IsNil(o.ObservationField) {
 		return true
 	}
 
 	return false
 }
 
-// SetFieldValue gets a reference to the given QuerySpansQueryTypeFieldValue and assigns it to the FieldValue field.
-func (o *QuerySpansQueryTypeFieldValue) SetFieldValue(v QuerySpansQueryTypeFieldValue) {
-	o.FieldValue = &v
+// SetObservationField gets a reference to the given ObservationField and assigns it to the ObservationField field.
+func (o *QuerySpansQueryTypeFieldValue) SetObservationField(v ObservationField) {
+	o.ObservationField = &v
+}
+
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *QuerySpansQueryTypeFieldValue) GetValue() SpanField {
+	if o == nil || IsNil(o.Value) {
+		var ret SpanField
+		return ret
+	}
+	return *o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuerySpansQueryTypeFieldValue) GetValueOk() (*SpanField, bool) {
+	if o == nil || IsNil(o.Value) {
+		return nil, false
+	}
+	return o.Value, true
+}
+
+// HasValue returns a boolean if a field has been set.
+func (o *QuerySpansQueryTypeFieldValue) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given SpanField and assigns it to the Value field.
+func (o *QuerySpansQueryTypeFieldValue) SetValue(v SpanField) {
+	o.Value = &v
 }
 
 func (o QuerySpansQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +120,41 @@ func (o QuerySpansQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
 
 func (o QuerySpansQueryTypeFieldValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldValue) {
-		toSerialize["fieldValue"] = o.FieldValue
+	if !IsNil(o.ObservationField) {
+		toSerialize["observationField"] = o.ObservationField
 	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySpansQueryTypeFieldValue) UnmarshalJSON(data []byte) (err error) {
+	varQuerySpansQueryTypeFieldValue := _QuerySpansQueryTypeFieldValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySpansQueryTypeFieldValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySpansQueryTypeFieldValue(varQuerySpansQueryTypeFieldValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "observationField")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySpansQueryTypeFieldValue struct {

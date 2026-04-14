@@ -11,9 +11,13 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookSlack type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookSlack{}
@@ -24,18 +28,22 @@ type OutgoingWebhookSlack struct {
 	ExternalId *int64 `json:"externalId,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Slack *SlackConfig `json:"slack,omitempty"`
+	Slack SlackConfig `json:"slack"`
 	Type *WebhookType `json:"type,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookSlack OutgoingWebhookSlack
 
 // NewOutgoingWebhookSlack instantiates a new OutgoingWebhookSlack object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookSlack() *OutgoingWebhookSlack {
+func NewOutgoingWebhookSlack(slack SlackConfig) *OutgoingWebhookSlack {
 	this := OutgoingWebhookSlack{}
+	this.Slack = slack
 	return &this
 }
 
@@ -175,36 +183,28 @@ func (o *OutgoingWebhookSlack) SetName(v string) {
 	o.Name = &v
 }
 
-// GetSlack returns the Slack field value if set, zero value otherwise.
+// GetSlack returns the Slack field value
 func (o *OutgoingWebhookSlack) GetSlack() SlackConfig {
-	if o == nil || IsNil(o.Slack) {
+	if o == nil {
 		var ret SlackConfig
 		return ret
 	}
-	return *o.Slack
+
+	return o.Slack
 }
 
-// GetSlackOk returns a tuple with the Slack field value if set, nil otherwise
+// GetSlackOk returns a tuple with the Slack field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookSlack) GetSlackOk() (*SlackConfig, bool) {
-	if o == nil || IsNil(o.Slack) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Slack, true
+	return &o.Slack, true
 }
 
-// HasSlack returns a boolean if a field has been set.
-func (o *OutgoingWebhookSlack) HasSlack() bool {
-	if o != nil && !IsNil(o.Slack) {
-		return true
-	}
-
-	return false
-}
-
-// SetSlack gets a reference to the given SlackConfig and assigns it to the Slack field.
+// SetSlack sets field value
 func (o *OutgoingWebhookSlack) SetSlack(v SlackConfig) {
-	o.Slack = &v
+	o.Slack = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -325,9 +325,7 @@ func (o OutgoingWebhookSlack) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Slack) {
-		toSerialize["slack"] = o.Slack
-	}
+	toSerialize["slack"] = o.Slack
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -337,7 +335,62 @@ func (o OutgoingWebhookSlack) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookSlack) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"slack",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookSlack := _OutgoingWebhookSlack{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookSlack)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookSlack(varOutgoingWebhookSlack)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slack")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookSlack struct {

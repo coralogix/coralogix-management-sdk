@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleGroupsServiceCreateRuleGroupRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroupsServiceCreateRuleGroupRequest{}
@@ -28,7 +31,10 @@ type RuleGroupsServiceCreateRuleGroupRequest struct {
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
 	RuleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
 	TeamId *V1TeamId `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleGroupsServiceCreateRuleGroupRequest RuleGroupsServiceCreateRuleGroupRequest
 
 // NewRuleGroupsServiceCreateRuleGroupRequest instantiates a new RuleGroupsServiceCreateRuleGroupRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +378,42 @@ func (o RuleGroupsServiceCreateRuleGroupRequest) ToMap() (map[string]interface{}
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleGroupsServiceCreateRuleGroupRequest) UnmarshalJSON(data []byte) (err error) {
+	varRuleGroupsServiceCreateRuleGroupRequest := _RuleGroupsServiceCreateRuleGroupRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleGroupsServiceCreateRuleGroupRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleGroupsServiceCreateRuleGroupRequest(varRuleGroupsServiceCreateRuleGroupRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "hidden")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "ruleMatchers")
+		delete(additionalProperties, "ruleSubgroups")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleGroupsServiceCreateRuleGroupRequest struct {

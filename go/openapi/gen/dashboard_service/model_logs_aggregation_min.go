@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsAggregationMin type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationMin{}
 
 // LogsAggregationMin struct for LogsAggregationMin
 type LogsAggregationMin struct {
-	Min *Min `json:"min,omitempty"`
+	Min Min `json:"min"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsAggregationMin LogsAggregationMin
 
 // NewLogsAggregationMin instantiates a new LogsAggregationMin object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAggregationMin() *LogsAggregationMin {
+func NewLogsAggregationMin(min Min) *LogsAggregationMin {
 	this := LogsAggregationMin{}
+	this.Min = min
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewLogsAggregationMinWithDefaults() *LogsAggregationMin {
 	return &this
 }
 
-// GetMin returns the Min field value if set, zero value otherwise.
+// GetMin returns the Min field value
 func (o *LogsAggregationMin) GetMin() Min {
-	if o == nil || IsNil(o.Min) {
+	if o == nil {
 		var ret Min
 		return ret
 	}
-	return *o.Min
+
+	return o.Min
 }
 
-// GetMinOk returns a tuple with the Min field value if set, nil otherwise
+// GetMinOk returns a tuple with the Min field value
 // and a boolean to check if the value has been set.
 func (o *LogsAggregationMin) GetMinOk() (*Min, bool) {
-	if o == nil || IsNil(o.Min) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Min, true
+	return &o.Min, true
 }
 
-// HasMin returns a boolean if a field has been set.
-func (o *LogsAggregationMin) HasMin() bool {
-	if o != nil && !IsNil(o.Min) {
-		return true
-	}
-
-	return false
-}
-
-// SetMin gets a reference to the given Min and assigns it to the Min field.
+// SetMin sets field value
 func (o *LogsAggregationMin) SetMin(v Min) {
-	o.Min = &v
+	o.Min = v
 }
 
 func (o LogsAggregationMin) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o LogsAggregationMin) MarshalJSON() ([]byte, error) {
 
 func (o LogsAggregationMin) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Min) {
-		toSerialize["min"] = o.Min
+	toSerialize["min"] = o.Min
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsAggregationMin) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"min",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLogsAggregationMin := _LogsAggregationMin{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsAggregationMin)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsAggregationMin(varLogsAggregationMin)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsAggregationMin struct {

@@ -11,8 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2AggregationNone type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2AggregationNone{}
@@ -21,16 +25,20 @@ var _ MappedNullable = &V2AggregationNone{}
 type V2AggregationNone struct {
 	AggType *AggType `json:"aggType,omitempty"`
 	Enabled *bool `json:"enabled,omitempty"`
-	None map[string]interface{} `json:"none,omitempty"`
+	None map[string]interface{} `json:"none"`
 	TargetMetricName *string `json:"targetMetricName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2AggregationNone V2AggregationNone
 
 // NewV2AggregationNone instantiates a new V2AggregationNone object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2AggregationNone() *V2AggregationNone {
+func NewV2AggregationNone(none map[string]interface{}) *V2AggregationNone {
 	this := V2AggregationNone{}
+	this.None = none
 	return &this
 }
 
@@ -106,34 +114,26 @@ func (o *V2AggregationNone) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetNone returns the None field value if set, zero value otherwise.
+// GetNone returns the None field value
 func (o *V2AggregationNone) GetNone() map[string]interface{} {
-	if o == nil || IsNil(o.None) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.None
 }
 
-// GetNoneOk returns a tuple with the None field value if set, nil otherwise
+// GetNoneOk returns a tuple with the None field value
 // and a boolean to check if the value has been set.
 func (o *V2AggregationNone) GetNoneOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.None) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.None, true
 }
 
-// HasNone returns a boolean if a field has been set.
-func (o *V2AggregationNone) HasNone() bool {
-	if o != nil && !IsNil(o.None) {
-		return true
-	}
-
-	return false
-}
-
-// SetNone gets a reference to the given map[string]interface{} and assigns it to the None field.
+// SetNone sets field value
 func (o *V2AggregationNone) SetNone(v map[string]interface{}) {
 	o.None = v
 }
@@ -186,13 +186,62 @@ func (o V2AggregationNone) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.None) {
-		toSerialize["none"] = o.None
-	}
+	toSerialize["none"] = o.None
 	if !IsNil(o.TargetMetricName) {
 		toSerialize["targetMetricName"] = o.TargetMetricName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2AggregationNone) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"none",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV2AggregationNone := _V2AggregationNone{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2AggregationNone)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2AggregationNone(varV2AggregationNone)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggType")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "none")
+		delete(additionalProperties, "targetMetricName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2AggregationNone struct {

@@ -11,23 +11,27 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MCreateParamsSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MCreateParamsSpansQuery{}
 
 // E2MCreateParamsSpansQuery This data structure is used to create a new event to metric definition
 type E2MCreateParamsSpansQuery struct {
+	DataSource *string `json:"dataSource,omitempty"`
 	Description *string `json:"description,omitempty"`
 	MetricFields []V2MetricField `json:"metricFields,omitempty"`
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
 	Name string `json:"name"`
 	PermutationsLimit *int32 `json:"permutationsLimit,omitempty"`
-	SpansQuery *V2SpansQuery `json:"spansQuery,omitempty"`
+	SpansQuery V2SpansQuery `json:"spansQuery"`
 	Type *E2MType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _E2MCreateParamsSpansQuery E2MCreateParamsSpansQuery
@@ -36,9 +40,10 @@ type _E2MCreateParamsSpansQuery E2MCreateParamsSpansQuery
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewE2MCreateParamsSpansQuery(name string) *E2MCreateParamsSpansQuery {
+func NewE2MCreateParamsSpansQuery(name string, spansQuery V2SpansQuery) *E2MCreateParamsSpansQuery {
 	this := E2MCreateParamsSpansQuery{}
 	this.Name = name
+	this.SpansQuery = spansQuery
 	return &this
 }
 
@@ -48,6 +53,38 @@ func NewE2MCreateParamsSpansQuery(name string) *E2MCreateParamsSpansQuery {
 func NewE2MCreateParamsSpansQueryWithDefaults() *E2MCreateParamsSpansQuery {
 	this := E2MCreateParamsSpansQuery{}
 	return &this
+}
+
+// GetDataSource returns the DataSource field value if set, zero value otherwise.
+func (o *E2MCreateParamsSpansQuery) GetDataSource() string {
+	if o == nil || IsNil(o.DataSource) {
+		var ret string
+		return ret
+	}
+	return *o.DataSource
+}
+
+// GetDataSourceOk returns a tuple with the DataSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2MCreateParamsSpansQuery) GetDataSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.DataSource) {
+		return nil, false
+	}
+	return o.DataSource, true
+}
+
+// HasDataSource returns a boolean if a field has been set.
+func (o *E2MCreateParamsSpansQuery) HasDataSource() bool {
+	if o != nil && !IsNil(o.DataSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataSource gets a reference to the given string and assigns it to the DataSource field.
+func (o *E2MCreateParamsSpansQuery) SetDataSource(v string) {
+	o.DataSource = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -202,36 +239,28 @@ func (o *E2MCreateParamsSpansQuery) SetPermutationsLimit(v int32) {
 	o.PermutationsLimit = &v
 }
 
-// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+// GetSpansQuery returns the SpansQuery field value
 func (o *E2MCreateParamsSpansQuery) GetSpansQuery() V2SpansQuery {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		var ret V2SpansQuery
 		return ret
 	}
-	return *o.SpansQuery
+
+	return o.SpansQuery
 }
 
-// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// GetSpansQueryOk returns a tuple with the SpansQuery field value
 // and a boolean to check if the value has been set.
 func (o *E2MCreateParamsSpansQuery) GetSpansQueryOk() (*V2SpansQuery, bool) {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpansQuery, true
+	return &o.SpansQuery, true
 }
 
-// HasSpansQuery returns a boolean if a field has been set.
-func (o *E2MCreateParamsSpansQuery) HasSpansQuery() bool {
-	if o != nil && !IsNil(o.SpansQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpansQuery gets a reference to the given V2SpansQuery and assigns it to the SpansQuery field.
+// SetSpansQuery sets field value
 func (o *E2MCreateParamsSpansQuery) SetSpansQuery(v V2SpansQuery) {
-	o.SpansQuery = &v
+	o.SpansQuery = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -276,6 +305,9 @@ func (o E2MCreateParamsSpansQuery) MarshalJSON() ([]byte, error) {
 
 func (o E2MCreateParamsSpansQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DataSource) {
+		toSerialize["dataSource"] = o.DataSource
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -289,12 +321,15 @@ func (o E2MCreateParamsSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PermutationsLimit) {
 		toSerialize["permutationsLimit"] = o.PermutationsLimit
 	}
-	if !IsNil(o.SpansQuery) {
-		toSerialize["spansQuery"] = o.SpansQuery
-	}
+	toSerialize["spansQuery"] = o.SpansQuery
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -304,6 +339,7 @@ func (o *E2MCreateParamsSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
+		"spansQuery",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -330,6 +366,20 @@ func (o *E2MCreateParamsSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = E2MCreateParamsSpansQuery(varE2MCreateParamsSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataSource")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "metricFields")
+		delete(additionalProperties, "metricLabels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permutationsLimit")
+		delete(additionalProperties, "spansQuery")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

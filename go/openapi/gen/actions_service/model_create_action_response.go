@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateActionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateActionResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateActionResponse{}
 // CreateActionResponse This data structure represents the response to create an Action.
 type CreateActionResponse struct {
 	Action *V2Action `json:"action,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateActionResponse CreateActionResponse
 
 // NewCreateActionResponse instantiates a new CreateActionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateActionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateActionResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateActionResponse := _CreateActionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateActionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateActionResponse(varCreateActionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateActionResponse struct {

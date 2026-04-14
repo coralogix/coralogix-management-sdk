@@ -26,7 +26,7 @@ type ContextualDataIntegrationServiceAPIService service
 type ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest struct {
 	ctx context.Context
 	ApiService *ContextualDataIntegrationServiceAPIService
-	integrationId string
+	id string
 }
 
 func (r ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -36,17 +36,15 @@ func (r ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationReques
 /*
 ContextualDataIntegrationServiceDeleteContextualDataIntegration Delete contextual data integration
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param integrationId
+ @param id
  @return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest
 */
-func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceDeleteContextualDataIntegration(ctx context.Context, integrationId string) ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest {
+func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceDeleteContextualDataIntegration(ctx context.Context, id string) ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest {
 	return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest{
 		ApiService: a,
 		ctx: ctx,
-		integrationId: integrationId,
+		id: id,
 	}
 }
 
@@ -65,8 +63,8 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/contextual-data/v1/{integration_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"integration_id"+"}", url.PathEscape(parameterValueToString(r.integrationId, "integrationId")), -1)
+	localVarPath := localBasePath + "/integrations/contextual-data/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -144,8 +142,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitio
 
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition Get contextual data integration definition
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -257,8 +253,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRe
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrationDetails Get contextual data integration details
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest
@@ -368,8 +362,6 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest)
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrations Get all contextual data integrations accessible
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest
 */
@@ -476,8 +468,6 @@ func (r ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest)
 /*
 ContextualDataIntegrationServiceSaveContextualDataIntegration Save contextual data integration
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest
 */
@@ -583,8 +573,6 @@ func (r ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest)
 
 /*
 ContextualDataIntegrationServiceTestContextualDataIntegration Test contextual data integration
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId
@@ -693,8 +681,6 @@ func (r ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationReques
 
 /*
 ContextualDataIntegrationServiceUpdateContextualDataIntegration Update contextual data integration
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest

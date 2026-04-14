@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListIncidentEventsOrderByRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListIncidentEventsOrderByRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ListIncidentEventsOrderByRequest{}
 type ListIncidentEventsOrderByRequest struct {
 	Direction *V1OrderByDirection `json:"direction,omitempty"`
 	Field *IncidentEventOrderByFieldType `json:"field,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListIncidentEventsOrderByRequest ListIncidentEventsOrderByRequest
 
 // NewListIncidentEventsOrderByRequest instantiates a new ListIncidentEventsOrderByRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ListIncidentEventsOrderByRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Field) {
 		toSerialize["field"] = o.Field
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListIncidentEventsOrderByRequest) UnmarshalJSON(data []byte) (err error) {
+	varListIncidentEventsOrderByRequest := _ListIncidentEventsOrderByRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListIncidentEventsOrderByRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListIncidentEventsOrderByRequest(varListIncidentEventsOrderByRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "field")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListIncidentEventsOrderByRequest struct {

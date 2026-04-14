@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SlackConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SlackConfig{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &SlackConfig{}
 type SlackConfig struct {
 	Attachments []Attachment `json:"attachments,omitempty"`
 	Digests []Digest `json:"digests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SlackConfig SlackConfig
 
 // NewSlackConfig instantiates a new SlackConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o SlackConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Digests) {
 		toSerialize["digests"] = o.Digests
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SlackConfig) UnmarshalJSON(data []byte) (err error) {
+	varSlackConfig := _SlackConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSlackConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SlackConfig(varSlackConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attachments")
+		delete(additionalProperties, "digests")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSlackConfig struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventsServiceListAlertEventsPaginationParameter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventsServiceListAlertEventsPaginationParameter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &EventsServiceListAlertEventsPaginationParameter{}
 type EventsServiceListAlertEventsPaginationParameter struct {
 	PageSize *int64 `json:"pageSize,omitempty"`
 	PageToken *string `json:"pageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventsServiceListAlertEventsPaginationParameter EventsServiceListAlertEventsPaginationParameter
 
 // NewEventsServiceListAlertEventsPaginationParameter instantiates a new EventsServiceListAlertEventsPaginationParameter object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o EventsServiceListAlertEventsPaginationParameter) ToMap() (map[string]int
 	if !IsNil(o.PageToken) {
 		toSerialize["pageToken"] = o.PageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventsServiceListAlertEventsPaginationParameter) UnmarshalJSON(data []byte) (err error) {
+	varEventsServiceListAlertEventsPaginationParameter := _EventsServiceListAlertEventsPaginationParameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventsServiceListAlertEventsPaginationParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventsServiceListAlertEventsPaginationParameter(varEventsServiceListAlertEventsPaginationParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pageSize")
+		delete(additionalProperties, "pageToken")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventsServiceListAlertEventsPaginationParameter struct {

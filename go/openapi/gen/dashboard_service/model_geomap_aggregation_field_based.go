@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapAggregationFieldBased type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationFieldBased{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GeomapAggregationFieldBased{}
 // GeomapAggregationFieldBased struct for GeomapAggregationFieldBased
 type GeomapAggregationFieldBased struct {
 	Field *ObservationField `json:"field,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapAggregationFieldBased GeomapAggregationFieldBased
 
 // NewGeomapAggregationFieldBased instantiates a new GeomapAggregationFieldBased object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GeomapAggregationFieldBased) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Field) {
 		toSerialize["field"] = o.Field
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapAggregationFieldBased) UnmarshalJSON(data []byte) (err error) {
+	varGeomapAggregationFieldBased := _GeomapAggregationFieldBased{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapAggregationFieldBased)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapAggregationFieldBased(varGeomapAggregationFieldBased)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapAggregationFieldBased struct {

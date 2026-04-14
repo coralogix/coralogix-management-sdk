@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsAggregationCountDistinct type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationCountDistinct{}
 
 // LogsAggregationCountDistinct struct for LogsAggregationCountDistinct
 type LogsAggregationCountDistinct struct {
-	CountDistinct *CountDistinct `json:"countDistinct,omitempty"`
+	CountDistinct CountDistinct `json:"countDistinct"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsAggregationCountDistinct LogsAggregationCountDistinct
 
 // NewLogsAggregationCountDistinct instantiates a new LogsAggregationCountDistinct object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAggregationCountDistinct() *LogsAggregationCountDistinct {
+func NewLogsAggregationCountDistinct(countDistinct CountDistinct) *LogsAggregationCountDistinct {
 	this := LogsAggregationCountDistinct{}
+	this.CountDistinct = countDistinct
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewLogsAggregationCountDistinctWithDefaults() *LogsAggregationCountDistinct
 	return &this
 }
 
-// GetCountDistinct returns the CountDistinct field value if set, zero value otherwise.
+// GetCountDistinct returns the CountDistinct field value
 func (o *LogsAggregationCountDistinct) GetCountDistinct() CountDistinct {
-	if o == nil || IsNil(o.CountDistinct) {
+	if o == nil {
 		var ret CountDistinct
 		return ret
 	}
-	return *o.CountDistinct
+
+	return o.CountDistinct
 }
 
-// GetCountDistinctOk returns a tuple with the CountDistinct field value if set, nil otherwise
+// GetCountDistinctOk returns a tuple with the CountDistinct field value
 // and a boolean to check if the value has been set.
 func (o *LogsAggregationCountDistinct) GetCountDistinctOk() (*CountDistinct, bool) {
-	if o == nil || IsNil(o.CountDistinct) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CountDistinct, true
+	return &o.CountDistinct, true
 }
 
-// HasCountDistinct returns a boolean if a field has been set.
-func (o *LogsAggregationCountDistinct) HasCountDistinct() bool {
-	if o != nil && !IsNil(o.CountDistinct) {
-		return true
-	}
-
-	return false
-}
-
-// SetCountDistinct gets a reference to the given CountDistinct and assigns it to the CountDistinct field.
+// SetCountDistinct sets field value
 func (o *LogsAggregationCountDistinct) SetCountDistinct(v CountDistinct) {
-	o.CountDistinct = &v
+	o.CountDistinct = v
 }
 
 func (o LogsAggregationCountDistinct) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o LogsAggregationCountDistinct) MarshalJSON() ([]byte, error) {
 
 func (o LogsAggregationCountDistinct) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CountDistinct) {
-		toSerialize["countDistinct"] = o.CountDistinct
+	toSerialize["countDistinct"] = o.CountDistinct
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsAggregationCountDistinct) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"countDistinct",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLogsAggregationCountDistinct := _LogsAggregationCountDistinct{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsAggregationCountDistinct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsAggregationCountDistinct(varLogsAggregationCountDistinct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "countDistinct")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsAggregationCountDistinct struct {

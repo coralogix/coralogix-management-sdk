@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RecurringDynamicWeekly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringDynamicWeekly{}
@@ -22,15 +26,19 @@ type RecurringDynamicWeekly struct {
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
 	TerminationDate *string `json:"terminationDate,omitempty"`
 	Timeframe *Timeframe `json:"timeframe,omitempty"`
-	Weekly *Weekly `json:"weekly,omitempty"`
+	Weekly Weekly `json:"weekly"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecurringDynamicWeekly RecurringDynamicWeekly
 
 // NewRecurringDynamicWeekly instantiates a new RecurringDynamicWeekly object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecurringDynamicWeekly() *RecurringDynamicWeekly {
+func NewRecurringDynamicWeekly(weekly Weekly) *RecurringDynamicWeekly {
 	this := RecurringDynamicWeekly{}
+	this.Weekly = weekly
 	return &this
 }
 
@@ -138,36 +146,28 @@ func (o *RecurringDynamicWeekly) SetTimeframe(v Timeframe) {
 	o.Timeframe = &v
 }
 
-// GetWeekly returns the Weekly field value if set, zero value otherwise.
+// GetWeekly returns the Weekly field value
 func (o *RecurringDynamicWeekly) GetWeekly() Weekly {
-	if o == nil || IsNil(o.Weekly) {
+	if o == nil {
 		var ret Weekly
 		return ret
 	}
-	return *o.Weekly
+
+	return o.Weekly
 }
 
-// GetWeeklyOk returns a tuple with the Weekly field value if set, nil otherwise
+// GetWeeklyOk returns a tuple with the Weekly field value
 // and a boolean to check if the value has been set.
 func (o *RecurringDynamicWeekly) GetWeeklyOk() (*Weekly, bool) {
-	if o == nil || IsNil(o.Weekly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Weekly, true
+	return &o.Weekly, true
 }
 
-// HasWeekly returns a boolean if a field has been set.
-func (o *RecurringDynamicWeekly) HasWeekly() bool {
-	if o != nil && !IsNil(o.Weekly) {
-		return true
-	}
-
-	return false
-}
-
-// SetWeekly gets a reference to the given Weekly and assigns it to the Weekly field.
+// SetWeekly sets field value
 func (o *RecurringDynamicWeekly) SetWeekly(v Weekly) {
-	o.Weekly = &v
+	o.Weekly = v
 }
 
 func (o RecurringDynamicWeekly) MarshalJSON() ([]byte, error) {
@@ -189,10 +189,59 @@ func (o RecurringDynamicWeekly) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timeframe) {
 		toSerialize["timeframe"] = o.Timeframe
 	}
-	if !IsNil(o.Weekly) {
-		toSerialize["weekly"] = o.Weekly
+	toSerialize["weekly"] = o.Weekly
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RecurringDynamicWeekly) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"weekly",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRecurringDynamicWeekly := _RecurringDynamicWeekly{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurringDynamicWeekly)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecurringDynamicWeekly(varRecurringDynamicWeekly)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "repeatEvery")
+		delete(additionalProperties, "terminationDate")
+		delete(additionalProperties, "timeframe")
+		delete(additionalProperties, "weekly")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecurringDynamicWeekly struct {

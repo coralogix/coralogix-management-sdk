@@ -11,8 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2AggregationSamples type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2AggregationSamples{}
@@ -21,16 +25,20 @@ var _ MappedNullable = &V2AggregationSamples{}
 type V2AggregationSamples struct {
 	AggType *AggType `json:"aggType,omitempty"`
 	Enabled *bool `json:"enabled,omitempty"`
-	Samples *E2MAggSamples `json:"samples,omitempty"`
+	Samples E2MAggSamples `json:"samples"`
 	TargetMetricName *string `json:"targetMetricName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2AggregationSamples V2AggregationSamples
 
 // NewV2AggregationSamples instantiates a new V2AggregationSamples object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV2AggregationSamples() *V2AggregationSamples {
+func NewV2AggregationSamples(samples E2MAggSamples) *V2AggregationSamples {
 	this := V2AggregationSamples{}
+	this.Samples = samples
 	return &this
 }
 
@@ -106,36 +114,28 @@ func (o *V2AggregationSamples) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetSamples returns the Samples field value if set, zero value otherwise.
+// GetSamples returns the Samples field value
 func (o *V2AggregationSamples) GetSamples() E2MAggSamples {
-	if o == nil || IsNil(o.Samples) {
+	if o == nil {
 		var ret E2MAggSamples
 		return ret
 	}
-	return *o.Samples
+
+	return o.Samples
 }
 
-// GetSamplesOk returns a tuple with the Samples field value if set, nil otherwise
+// GetSamplesOk returns a tuple with the Samples field value
 // and a boolean to check if the value has been set.
 func (o *V2AggregationSamples) GetSamplesOk() (*E2MAggSamples, bool) {
-	if o == nil || IsNil(o.Samples) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Samples, true
+	return &o.Samples, true
 }
 
-// HasSamples returns a boolean if a field has been set.
-func (o *V2AggregationSamples) HasSamples() bool {
-	if o != nil && !IsNil(o.Samples) {
-		return true
-	}
-
-	return false
-}
-
-// SetSamples gets a reference to the given E2MAggSamples and assigns it to the Samples field.
+// SetSamples sets field value
 func (o *V2AggregationSamples) SetSamples(v E2MAggSamples) {
-	o.Samples = &v
+	o.Samples = v
 }
 
 // GetTargetMetricName returns the TargetMetricName field value if set, zero value otherwise.
@@ -186,13 +186,62 @@ func (o V2AggregationSamples) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Samples) {
-		toSerialize["samples"] = o.Samples
-	}
+	toSerialize["samples"] = o.Samples
 	if !IsNil(o.TargetMetricName) {
 		toSerialize["targetMetricName"] = o.TargetMetricName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2AggregationSamples) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"samples",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV2AggregationSamples := _V2AggregationSamples{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2AggregationSamples)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2AggregationSamples(varV2AggregationSamples)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggType")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "samples")
+		delete(additionalProperties, "targetMetricName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2AggregationSamples struct {

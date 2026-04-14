@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotificationCenterMessageConfigField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationCenterMessageConfigField{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &NotificationCenterMessageConfigField{}
 type NotificationCenterMessageConfigField struct {
 	FieldName *string `json:"fieldName,omitempty"`
 	Template *string `json:"template,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationCenterMessageConfigField NotificationCenterMessageConfigField
 
 // NewNotificationCenterMessageConfigField instantiates a new NotificationCenterMessageConfigField object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o NotificationCenterMessageConfigField) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Template) {
 		toSerialize["template"] = o.Template
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationCenterMessageConfigField) UnmarshalJSON(data []byte) (err error) {
+	varNotificationCenterMessageConfigField := _NotificationCenterMessageConfigField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationCenterMessageConfigField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationCenterMessageConfigField(varNotificationCenterMessageConfigField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "template")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationCenterMessageConfigField struct {

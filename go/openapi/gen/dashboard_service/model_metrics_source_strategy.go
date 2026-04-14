@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricsSourceStrategy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricsSourceStrategy{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &MetricsSourceStrategy{}
 // MetricsSourceStrategy struct for MetricsSourceStrategy
 type MetricsSourceStrategy struct {
 	StartTimeMetric map[string]interface{} `json:"startTimeMetric,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricsSourceStrategy MetricsSourceStrategy
 
 // NewMetricsSourceStrategy instantiates a new MetricsSourceStrategy object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o MetricsSourceStrategy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartTimeMetric) {
 		toSerialize["startTimeMetric"] = o.StartTimeMetric
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricsSourceStrategy) UnmarshalJSON(data []byte) (err error) {
+	varMetricsSourceStrategy := _MetricsSourceStrategy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricsSourceStrategy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricsSourceStrategy(varMetricsSourceStrategy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "startTimeMetric")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricsSourceStrategy struct {

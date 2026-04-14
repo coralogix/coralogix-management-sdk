@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSourceLogsPath type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceLogsPath{}
 
 // MultiSelectSourceLogsPath struct for MultiSelectSourceLogsPath
 type MultiSelectSourceLogsPath struct {
-	LogsPath *LogsPathSource `json:"logsPath,omitempty"`
+	LogsPath LogsPathSource `json:"logsPath"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSourceLogsPath MultiSelectSourceLogsPath
 
 // NewMultiSelectSourceLogsPath instantiates a new MultiSelectSourceLogsPath object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectSourceLogsPath() *MultiSelectSourceLogsPath {
+func NewMultiSelectSourceLogsPath(logsPath LogsPathSource) *MultiSelectSourceLogsPath {
 	this := MultiSelectSourceLogsPath{}
+	this.LogsPath = logsPath
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectSourceLogsPathWithDefaults() *MultiSelectSourceLogsPath {
 	return &this
 }
 
-// GetLogsPath returns the LogsPath field value if set, zero value otherwise.
+// GetLogsPath returns the LogsPath field value
 func (o *MultiSelectSourceLogsPath) GetLogsPath() LogsPathSource {
-	if o == nil || IsNil(o.LogsPath) {
+	if o == nil {
 		var ret LogsPathSource
 		return ret
 	}
-	return *o.LogsPath
+
+	return o.LogsPath
 }
 
-// GetLogsPathOk returns a tuple with the LogsPath field value if set, nil otherwise
+// GetLogsPathOk returns a tuple with the LogsPath field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectSourceLogsPath) GetLogsPathOk() (*LogsPathSource, bool) {
-	if o == nil || IsNil(o.LogsPath) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsPath, true
+	return &o.LogsPath, true
 }
 
-// HasLogsPath returns a boolean if a field has been set.
-func (o *MultiSelectSourceLogsPath) HasLogsPath() bool {
-	if o != nil && !IsNil(o.LogsPath) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsPath gets a reference to the given LogsPathSource and assigns it to the LogsPath field.
+// SetLogsPath sets field value
 func (o *MultiSelectSourceLogsPath) SetLogsPath(v LogsPathSource) {
-	o.LogsPath = &v
+	o.LogsPath = v
 }
 
 func (o MultiSelectSourceLogsPath) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectSourceLogsPath) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectSourceLogsPath) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LogsPath) {
-		toSerialize["logsPath"] = o.LogsPath
+	toSerialize["logsPath"] = o.LogsPath
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSourceLogsPath) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsPath",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectSourceLogsPath := _MultiSelectSourceLogsPath{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSourceLogsPath)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSourceLogsPath(varMultiSelectSourceLogsPath)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsPath")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSourceLogsPath struct {

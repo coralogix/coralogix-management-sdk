@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RumVersionDataVersion type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RumVersionDataVersion{}
@@ -22,7 +25,10 @@ type RumVersionDataVersion struct {
 	LogMetadata *LogMetadata `json:"logMetadata,omitempty"`
 	SourceMapMetadata *SourceMapMetadata `json:"sourceMapMetadata,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RumVersionDataVersion RumVersionDataVersion
 
 // NewRumVersionDataVersion instantiates a new RumVersionDataVersion object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o RumVersionDataVersion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RumVersionDataVersion) UnmarshalJSON(data []byte) (err error) {
+	varRumVersionDataVersion := _RumVersionDataVersion{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRumVersionDataVersion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RumVersionDataVersion(varRumVersionDataVersion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logMetadata")
+		delete(additionalProperties, "sourceMapMetadata")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRumVersionDataVersion struct {

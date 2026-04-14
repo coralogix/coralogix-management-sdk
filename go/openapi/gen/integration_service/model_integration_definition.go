@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationDefinition{}
@@ -23,7 +26,10 @@ type IntegrationDefinition struct {
 	IntegrationType *V1IntegrationType `json:"integrationType,omitempty"`
 	Key *string `json:"key,omitempty"`
 	Revisions []IntegrationRevision `json:"revisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationDefinition IntegrationDefinition
 
 // NewIntegrationDefinition instantiates a new IntegrationDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o IntegrationDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Revisions) {
 		toSerialize["revisions"] = o.Revisions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationDefinition) UnmarshalJSON(data []byte) (err error) {
+	varIntegrationDefinition := _IntegrationDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationDefinition(varIntegrationDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "integrationType")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "revisions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationDefinition struct {

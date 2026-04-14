@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartDataprimeQuery{}
@@ -22,7 +25,10 @@ type LineChartDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	Filters []FilterSource `json:"filters,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineChartDataprimeQuery LineChartDataprimeQuery
 
 // NewLineChartDataprimeQuery instantiates a new LineChartDataprimeQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o LineChartDataprimeQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LineChartDataprimeQuery) UnmarshalJSON(data []byte) (err error) {
+	varLineChartDataprimeQuery := _LineChartDataprimeQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartDataprimeQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartDataprimeQuery(varLineChartDataprimeQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataprimeQuery")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineChartDataprimeQuery struct {

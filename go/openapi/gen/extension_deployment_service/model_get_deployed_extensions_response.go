@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDeployedExtensionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDeployedExtensionsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDeployedExtensionsResponse{}
 // GetDeployedExtensionsResponse struct for GetDeployedExtensionsResponse
 type GetDeployedExtensionsResponse struct {
 	DeployedExtensions []DeployedExtension `json:"deployedExtensions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDeployedExtensionsResponse GetDeployedExtensionsResponse
 
 // NewGetDeployedExtensionsResponse instantiates a new GetDeployedExtensionsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDeployedExtensionsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeployedExtensions) {
 		toSerialize["deployedExtensions"] = o.DeployedExtensions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDeployedExtensionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDeployedExtensionsResponse := _GetDeployedExtensionsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDeployedExtensionsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDeployedExtensionsResponse(varGetDeployedExtensionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deployedExtensions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDeployedExtensionsResponse struct {

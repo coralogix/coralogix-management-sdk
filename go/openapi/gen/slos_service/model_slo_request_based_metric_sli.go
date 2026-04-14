@@ -11,9 +11,13 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloRequestBasedMetricSli type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloRequestBasedMetricSli{}
@@ -28,7 +32,7 @@ type SloRequestBasedMetricSli struct {
 	Labels *map[string]string `json:"labels,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ProductType *SloProductType `json:"productType,omitempty"`
-	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
+	RequestBasedMetricSli RequestBasedMetricSli `json:"requestBasedMetricSli"`
 	Revision *V1Revision `json:"revision,omitempty"`
 	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
 	SloType *SloType `json:"sloType,omitempty"`
@@ -36,14 +40,18 @@ type SloRequestBasedMetricSli struct {
 	// Deprecated
 	Type *string `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloRequestBasedMetricSli SloRequestBasedMetricSli
 
 // NewSloRequestBasedMetricSli instantiates a new SloRequestBasedMetricSli object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloRequestBasedMetricSli() *SloRequestBasedMetricSli {
+func NewSloRequestBasedMetricSli(requestBasedMetricSli RequestBasedMetricSli) *SloRequestBasedMetricSli {
 	this := SloRequestBasedMetricSli{}
+	this.RequestBasedMetricSli = requestBasedMetricSli
 	return &this
 }
 
@@ -311,36 +319,28 @@ func (o *SloRequestBasedMetricSli) SetProductType(v SloProductType) {
 	o.ProductType = &v
 }
 
-// GetRequestBasedMetricSli returns the RequestBasedMetricSli field value if set, zero value otherwise.
+// GetRequestBasedMetricSli returns the RequestBasedMetricSli field value
 func (o *SloRequestBasedMetricSli) GetRequestBasedMetricSli() RequestBasedMetricSli {
-	if o == nil || IsNil(o.RequestBasedMetricSli) {
+	if o == nil {
 		var ret RequestBasedMetricSli
 		return ret
 	}
-	return *o.RequestBasedMetricSli
+
+	return o.RequestBasedMetricSli
 }
 
-// GetRequestBasedMetricSliOk returns a tuple with the RequestBasedMetricSli field value if set, nil otherwise
+// GetRequestBasedMetricSliOk returns a tuple with the RequestBasedMetricSli field value
 // and a boolean to check if the value has been set.
 func (o *SloRequestBasedMetricSli) GetRequestBasedMetricSliOk() (*RequestBasedMetricSli, bool) {
-	if o == nil || IsNil(o.RequestBasedMetricSli) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RequestBasedMetricSli, true
+	return &o.RequestBasedMetricSli, true
 }
 
-// HasRequestBasedMetricSli returns a boolean if a field has been set.
-func (o *SloRequestBasedMetricSli) HasRequestBasedMetricSli() bool {
-	if o != nil && !IsNil(o.RequestBasedMetricSli) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequestBasedMetricSli gets a reference to the given RequestBasedMetricSli and assigns it to the RequestBasedMetricSli field.
+// SetRequestBasedMetricSli sets field value
 func (o *SloRequestBasedMetricSli) SetRequestBasedMetricSli(v RequestBasedMetricSli) {
-	o.RequestBasedMetricSli = &v
+	o.RequestBasedMetricSli = v
 }
 
 // GetRevision returns the Revision field value if set, zero value otherwise.
@@ -572,9 +572,7 @@ func (o SloRequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProductType) {
 		toSerialize["productType"] = o.ProductType
 	}
-	if !IsNil(o.RequestBasedMetricSli) {
-		toSerialize["requestBasedMetricSli"] = o.RequestBasedMetricSli
-	}
+	toSerialize["requestBasedMetricSli"] = o.RequestBasedMetricSli
 	if !IsNil(o.Revision) {
 		toSerialize["revision"] = o.Revision
 	}
@@ -593,7 +591,69 @@ func (o SloRequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloRequestBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"requestBasedMetricSli",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloRequestBasedMetricSli := _SloRequestBasedMetricSli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloRequestBasedMetricSli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloRequestBasedMetricSli(varSloRequestBasedMetricSli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "grouping")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "requestBasedMetricSli")
+		delete(additionalProperties, "revision")
+		delete(additionalProperties, "sloTimeFrame")
+		delete(additionalProperties, "sloType")
+		delete(additionalProperties, "targetThresholdPercentage")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloRequestBasedMetricSli struct {

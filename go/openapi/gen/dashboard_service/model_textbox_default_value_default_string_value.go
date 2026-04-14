@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueDefaultStringValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueDefaultStringValue{}
 
 // TextboxDefaultValueDefaultStringValue struct for TextboxDefaultValueDefaultStringValue
 type TextboxDefaultValueDefaultStringValue struct {
-	DefaultStringValue *TextboxDefaultStringValue `json:"defaultStringValue,omitempty"`
+	DefaultStringValue TextboxDefaultStringValue `json:"defaultStringValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueDefaultStringValue TextboxDefaultValueDefaultStringValue
 
 // NewTextboxDefaultValueDefaultStringValue instantiates a new TextboxDefaultValueDefaultStringValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueDefaultStringValue() *TextboxDefaultValueDefaultStringValue {
+func NewTextboxDefaultValueDefaultStringValue(defaultStringValue TextboxDefaultStringValue) *TextboxDefaultValueDefaultStringValue {
 	this := TextboxDefaultValueDefaultStringValue{}
+	this.DefaultStringValue = defaultStringValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTextboxDefaultValueDefaultStringValueWithDefaults() *TextboxDefaultValue
 	return &this
 }
 
-// GetDefaultStringValue returns the DefaultStringValue field value if set, zero value otherwise.
+// GetDefaultStringValue returns the DefaultStringValue field value
 func (o *TextboxDefaultValueDefaultStringValue) GetDefaultStringValue() TextboxDefaultStringValue {
-	if o == nil || IsNil(o.DefaultStringValue) {
+	if o == nil {
 		var ret TextboxDefaultStringValue
 		return ret
 	}
-	return *o.DefaultStringValue
+
+	return o.DefaultStringValue
 }
 
-// GetDefaultStringValueOk returns a tuple with the DefaultStringValue field value if set, nil otherwise
+// GetDefaultStringValueOk returns a tuple with the DefaultStringValue field value
 // and a boolean to check if the value has been set.
 func (o *TextboxDefaultValueDefaultStringValue) GetDefaultStringValueOk() (*TextboxDefaultStringValue, bool) {
-	if o == nil || IsNil(o.DefaultStringValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultStringValue, true
+	return &o.DefaultStringValue, true
 }
 
-// HasDefaultStringValue returns a boolean if a field has been set.
-func (o *TextboxDefaultValueDefaultStringValue) HasDefaultStringValue() bool {
-	if o != nil && !IsNil(o.DefaultStringValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultStringValue gets a reference to the given TextboxDefaultStringValue and assigns it to the DefaultStringValue field.
+// SetDefaultStringValue sets field value
 func (o *TextboxDefaultValueDefaultStringValue) SetDefaultStringValue(v TextboxDefaultStringValue) {
-	o.DefaultStringValue = &v
+	o.DefaultStringValue = v
 }
 
 func (o TextboxDefaultValueDefaultStringValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TextboxDefaultValueDefaultStringValue) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueDefaultStringValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultStringValue) {
-		toSerialize["defaultStringValue"] = o.DefaultStringValue
+	toSerialize["defaultStringValue"] = o.DefaultStringValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueDefaultStringValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"defaultStringValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueDefaultStringValue := _TextboxDefaultValueDefaultStringValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueDefaultStringValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueDefaultStringValue(varTextboxDefaultValueDefaultStringValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultStringValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueDefaultStringValue struct {

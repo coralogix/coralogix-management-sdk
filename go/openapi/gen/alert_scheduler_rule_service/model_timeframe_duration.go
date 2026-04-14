@@ -11,25 +11,33 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeframeDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeframeDuration{}
 
 // TimeframeDuration struct for TimeframeDuration
 type TimeframeDuration struct {
-	Duration *V1Duration `json:"duration,omitempty"`
+	Duration V1Duration `json:"duration"`
 	StartTime *string `json:"startTime,omitempty"`
 	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeframeDuration TimeframeDuration
 
 // NewTimeframeDuration instantiates a new TimeframeDuration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeframeDuration() *TimeframeDuration {
+func NewTimeframeDuration(duration V1Duration) *TimeframeDuration {
 	this := TimeframeDuration{}
+	this.Duration = duration
 	return &this
 }
 
@@ -41,36 +49,28 @@ func NewTimeframeDurationWithDefaults() *TimeframeDuration {
 	return &this
 }
 
-// GetDuration returns the Duration field value if set, zero value otherwise.
+// GetDuration returns the Duration field value
 func (o *TimeframeDuration) GetDuration() V1Duration {
-	if o == nil || IsNil(o.Duration) {
+	if o == nil {
 		var ret V1Duration
 		return ret
 	}
-	return *o.Duration
+
+	return o.Duration
 }
 
-// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// GetDurationOk returns a tuple with the Duration field value
 // and a boolean to check if the value has been set.
 func (o *TimeframeDuration) GetDurationOk() (*V1Duration, bool) {
-	if o == nil || IsNil(o.Duration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Duration, true
+	return &o.Duration, true
 }
 
-// HasDuration returns a boolean if a field has been set.
-func (o *TimeframeDuration) HasDuration() bool {
-	if o != nil && !IsNil(o.Duration) {
-		return true
-	}
-
-	return false
-}
-
-// SetDuration gets a reference to the given V1Duration and assigns it to the Duration field.
+// SetDuration sets field value
 func (o *TimeframeDuration) SetDuration(v V1Duration) {
-	o.Duration = &v
+	o.Duration = v
 }
 
 // GetStartTime returns the StartTime field value if set, zero value otherwise.
@@ -147,16 +147,64 @@ func (o TimeframeDuration) MarshalJSON() ([]byte, error) {
 
 func (o TimeframeDuration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Duration) {
-		toSerialize["duration"] = o.Duration
-	}
+	toSerialize["duration"] = o.Duration
 	if !IsNil(o.StartTime) {
 		toSerialize["startTime"] = o.StartTime
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeframeDuration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"duration",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTimeframeDuration := _TimeframeDuration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeframeDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeframeDuration(varTimeframeDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeframeDuration struct {

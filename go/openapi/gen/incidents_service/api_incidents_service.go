@@ -39,9 +39,6 @@ IncidentsServiceAcknowledgeIncidentByEventId Acknowledge incident by event id
 
 Mark incident as acknowledged by event id.
 
-Requires the following permissions:
-- `incidents:acknowledge`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param eventId
  @return ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest
@@ -150,9 +147,6 @@ IncidentsServiceAcknowledgeIncidents Acknowledge incidents
 
 Mark one or more incidents as acknowledged.
 
-Requires the following permissions:
-- `incidents:acknowledge`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceAcknowledgeIncidentsRequest
 */
@@ -260,9 +254,6 @@ IncidentsServiceAssignIncidents Assign incidents to a user
 
 Assign one or more incidents to a specific user.
 
-Requires the following permissions:
-- `incidents:assign`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceAssignIncidentsRequest
 */
@@ -369,9 +360,6 @@ func (r ApiIncidentsServiceBatchGetIncidentRequest) Execute() (*BatchGetIncident
 IncidentsServiceBatchGetIncident Get multiple incidents by IDs
 
 Retrieve multiple incidents by their IDs in a single request.
-
-Requires the following permissions:
-- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceBatchGetIncidentRequest
@@ -487,8 +475,6 @@ func (r ApiIncidentsServiceCloseIncidentsRequest) Execute() (*CloseIncidentsResp
 /*
 IncidentsServiceCloseIncidents Close incidents
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceCloseIncidentsRequest
 */
@@ -594,8 +580,6 @@ func (r ApiIncidentsServiceGetFilterValuesRequest) Execute() (*IncidentsV1GetFil
 /*
 IncidentsServiceGetFilterValues Get available filter values
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceGetFilterValuesRequest
 */
@@ -697,9 +681,6 @@ func (r ApiIncidentsServiceGetIncidentRequest) Execute() (*GetIncidentResponse, 
 IncidentsServiceGetIncident Get incident by ID
 
 Retrieve detailed information about a single incident by its unique identifier.
-
-Requires the following permissions:
-- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -804,9 +785,6 @@ IncidentsServiceGetIncidentByEventId Get incident by event ID
 
 Retrieve detailed information about a single incident by related alert event id.
 
-Requires the following permissions:
-- `incidents:read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param eventId
  @return ApiIncidentsServiceGetIncidentByEventIdRequest
@@ -909,9 +887,6 @@ func (r ApiIncidentsServiceGetIncidentEventsRequest) Execute() (*GetIncidentEven
 IncidentsServiceGetIncidentEvents Get incident events
 
 Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.
-
-Requires the following permissions:
-- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param incidentId
@@ -1032,9 +1007,6 @@ func (r ApiIncidentsServiceListIncidentAggregationsRequest) Execute() (*ListInci
 IncidentsServiceListIncidentAggregations Get incident aggregations
 
 Retrieve aggregated incident data with support for grouping and filtering.
-
-Requires the following permissions:
-- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceListIncidentAggregationsRequest
@@ -1170,9 +1142,6 @@ IncidentsServiceListIncidentEvents List incident events with filters
 
 List incident events with support for filtering, pagination, and ordering.
 
-Requires the following permissions:
-- `incidents:read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceListIncidentEventsRequest
 */
@@ -1285,8 +1254,6 @@ func (r ApiIncidentsServiceListIncidentEventsFilterValuesRequest) Execute() (*Li
 /*
 IncidentsServiceListIncidentEventsFilterValues Get available incident event filter values
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceListIncidentEventsFilterValuesRequest
 */
@@ -1395,9 +1362,6 @@ IncidentsServiceListIncidentEventsTotalCount Get total count of incident events
 
 Retrieve the total count of incident events matching a filter.
 
-Requires the following permissions:
-- `incidents:read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceListIncidentEventsTotalCountRequest
 */
@@ -1489,23 +1453,11 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentEventsTotalCoun
 type ApiIncidentsServiceListIncidentsRequest struct {
 	ctx context.Context
 	ApiService *IncidentsServiceAPIService
-	filter *IncidentQueryFilter
-	pagination *PaginationRequest
-	orderBys *[]IncidentsServiceListIncidentsOrderBysParameterInner
+	listIncidentsRequest *ListIncidentsRequest
 }
 
-func (r ApiIncidentsServiceListIncidentsRequest) Filter(filter IncidentQueryFilter) ApiIncidentsServiceListIncidentsRequest {
-	r.filter = &filter
-	return r
-}
-
-func (r ApiIncidentsServiceListIncidentsRequest) Pagination(pagination PaginationRequest) ApiIncidentsServiceListIncidentsRequest {
-	r.pagination = &pagination
-	return r
-}
-
-func (r ApiIncidentsServiceListIncidentsRequest) OrderBys(orderBys []IncidentsServiceListIncidentsOrderBysParameterInner) ApiIncidentsServiceListIncidentsRequest {
-	r.orderBys = &orderBys
+func (r ApiIncidentsServiceListIncidentsRequest) ListIncidentsRequest(listIncidentsRequest ListIncidentsRequest) ApiIncidentsServiceListIncidentsRequest {
+	r.listIncidentsRequest = &listIncidentsRequest
 	return r
 }
 
@@ -1517,9 +1469,6 @@ func (r ApiIncidentsServiceListIncidentsRequest) Execute() (*ListIncidentsRespon
 IncidentsServiceListIncidents List incidents with filters
 
 Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.
-
-Requires the following permissions:
-- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceListIncidentsRequest
@@ -1552,25 +1501,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiI
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "form", "")
-	}
-	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "form", "")
-	}
-	if r.orderBys != nil {
-		t := *r.orderBys
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "order_bys", t, "form", "multi")
-		}
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1586,6 +1518,8 @@ func (a *IncidentsServiceAPIService) IncidentsServiceListIncidentsExecute(r ApiI
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.listIncidentsRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1637,9 +1571,6 @@ func (r ApiIncidentsServiceResolveIncidentByEventIdRequest) Execute() (*ResolveI
 IncidentsServiceResolveIncidentByEventId Resolve incident by event id
 
 Mark incident as resolved by event id.
-
-Requires the following permissions:
-- `incidents:close`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param eventId
@@ -1749,9 +1680,6 @@ IncidentsServiceResolveIncidents Resolve incidents
 
 Mark one or more incidents as resolved.
 
-Requires the following permissions:
-- `incidents:close`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceResolveIncidentsRequest
 */
@@ -1858,9 +1786,6 @@ func (r ApiIncidentsServiceUnassignIncidentsRequest) Execute() (*UnassignInciden
 IncidentsServiceUnassignIncidents Remove incident user assignments
 
 Remove user assignments from one or more incidents.
-
-Requires the following permissions:
-- `incidents:assign`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceUnassignIncidentsRequest

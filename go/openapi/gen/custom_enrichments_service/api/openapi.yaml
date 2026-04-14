@@ -7,7 +7,6 @@ servers:
 paths:
   /enrichment-rules/custom-enrichment-rules/v1:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_GetCustomEnrichments
@@ -22,7 +21,6 @@ paths:
       tags:
       - Custom Enrichments Service
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_CreateCustomEnrichment
@@ -42,7 +40,6 @@ paths:
       tags:
       - Custom Enrichments Service
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_UpdateCustomEnrichment
@@ -63,7 +60,6 @@ paths:
       - Custom Enrichments Service
   /enrichment-rules/custom-enrichment-rules/v1/all/contents:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_SearchCustomEnrichmentData
@@ -87,16 +83,15 @@ paths:
       summary: Search Custom Enrichment Data
       tags:
       - Custom Enrichments Service
-  /enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}:
+  /enrichment-rules/custom-enrichment-rules/v1/{id}:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_DeleteCustomEnrichment
       parameters:
       - explode: false
         in: path
-        name: custom_enrichment_id
+        name: id
         required: true
         schema:
           example: 1
@@ -113,9 +108,7 @@ paths:
       summary: Delete Custom Enrichments
       tags:
       - Custom Enrichments Service
-  /enrichment-rules/custom-enrichment-rules/v1/{id}:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_GetCustomEnrichment
@@ -141,24 +134,6 @@ paths:
       - Custom Enrichments Service
 components:
   schemas:
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
-      type: object
     CreateCustomEnrichmentResponse:
       description: This response data structure is obtained when a custom enrichment
         is created
@@ -213,12 +188,20 @@ components:
       type: object
     CustomEnrichmentData:
       oneOf:
-      - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
       - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
+      - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
     CustomEnrichmentDataBinary:
-      additionalProperties: false
+      properties:
+        binary:
+          format: byte
+          type: string
+        definition:
+          $ref: "#/components/schemas/CustomEnrichment"
+      required:
+      - binary
+      type: object
+    CustomEnrichmentDataTextual:
       example:
-        binary: binary
         definition:
           fileName: fileName
           isQueryOnly: true
@@ -227,20 +210,14 @@ components:
           description: description
           id: 6
           version: 1
-      properties:
-        binary:
-          format: byte
-          type: string
-        definition:
-          $ref: "#/components/schemas/CustomEnrichment"
-      type: object
-    CustomEnrichmentDataTextual:
-      additionalProperties: false
+        textual: textual
       properties:
         definition:
           $ref: "#/components/schemas/CustomEnrichment"
         textual:
           type: string
+      required:
+      - textual
       type: object
     DeleteCustomEnrichmentResponse:
       example:
@@ -267,7 +244,6 @@ components:
       - $ref: "#/components/schemas/FileTextual"
       - $ref: "#/components/schemas/FileBinary"
     FileBinary:
-      additionalProperties: false
       description: This data structure represents a file
       externalDocs:
         description: Find out more about enrichments
@@ -288,10 +264,11 @@ components:
           example: 100
           format: int64
           type: integer
+      required:
+      - binary
       title: File
       type: object
     FileTextual:
-      additionalProperties: false
       description: This data structure represents a file
       externalDocs:
         description: Find out more about enrichments
@@ -310,6 +287,8 @@ components:
         textual:
           example: "row1,row2 value1,value2"
           type: string
+      required:
+      - textual
       title: File
       type: object
     FilterPathAndValues:
@@ -317,7 +296,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -328,12 +306,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -344,6 +322,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -414,28 +393,6 @@ components:
           type: array
       title: Get Custom Enrichments Response
       type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
-      type: object
     MultipleValues:
       properties:
         matcher:
@@ -446,7 +403,6 @@ components:
           type: array
       type: object
     SearchClauseId:
-      additionalProperties: false
       description: This data structure represents a search clause
       externalDocs:
         description: Find out more about enrichments
@@ -456,10 +412,11 @@ components:
           example: 1
           format: int64
           type: integer
+      required:
+      - id
       title: Search Clause
       type: object
     SearchClauseName:
-      additionalProperties: false
       description: This data structure represents a search clause
       externalDocs:
         description: Find out more about enrichments
@@ -468,13 +425,14 @@ components:
         name:
           example: custom_enrichment_name
           type: string
+      required:
+      - name
       title: Search Clause
       type: object
     SearchCustomEnrichmentDataResponse:
       example:
         customEnrichmentsData:
-        - binary: binary
-          definition:
+        - definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -482,8 +440,8 @@ components:
             description: description
             id: 6
             version: 1
-        - binary: binary
-          definition:
+          textual: textual
+        - definition:
             fileName: fileName
             isQueryOnly: true
             fileSize: 0
@@ -491,6 +449,7 @@ components:
             description: description
             id: 6
             version: 1
+          textual: textual
       properties:
         customEnrichmentsData:
           items:
@@ -544,7 +503,6 @@ components:
       - FILTER_OPERATOR_OR
       type: string
     Update_Custom_Enrichment_Request:
-      additionalProperties: false
       description: This request data structure is used to update a custom enrichment
       properties:
         customEnrichmentId:
@@ -567,7 +525,6 @@ components:
       title: Update Custom Enrichment Request
       type: object
     Create_Custom_Enrichment_Request:
-      additionalProperties: false
       description: This request data structure is used to create a custom enrichment
       properties:
         description:
@@ -586,11 +543,5 @@ components:
       type: object
     CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/SearchClauseName"
       - $ref: "#/components/schemas/SearchClauseId"
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey
+      - $ref: "#/components/schemas/SearchClauseName"

@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Widget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Widget{}
@@ -26,10 +29,14 @@ type Widget struct {
 	// Short description of the widget
 	Description *string `json:"description,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	Reference *WidgetReference `json:"reference,omitempty"`
 	// Name of the widget
 	Title *string `json:"title,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Widget Widget
 
 // NewWidget instantiates a new Widget object
 // This constructor will assign default values to properties that have it defined,
@@ -208,6 +215,38 @@ func (o *Widget) SetId(v UUID) {
 	o.Id = &v
 }
 
+// GetReference returns the Reference field value if set, zero value otherwise.
+func (o *Widget) GetReference() WidgetReference {
+	if o == nil || IsNil(o.Reference) {
+		var ret WidgetReference
+		return ret
+	}
+	return *o.Reference
+}
+
+// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Widget) GetReferenceOk() (*WidgetReference, bool) {
+	if o == nil || IsNil(o.Reference) {
+		return nil, false
+	}
+	return o.Reference, true
+}
+
+// HasReference returns a boolean if a field has been set.
+func (o *Widget) HasReference() bool {
+	if o != nil && !IsNil(o.Reference) {
+		return true
+	}
+
+	return false
+}
+
+// SetReference gets a reference to the given WidgetReference and assigns it to the Reference field.
+func (o *Widget) SetReference(v WidgetReference) {
+	o.Reference = &v
+}
+
 // GetTitle returns the Title field value if set, zero value otherwise.
 func (o *Widget) GetTitle() string {
 	if o == nil || IsNil(o.Title) {
@@ -297,13 +336,50 @@ func (o Widget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	if !IsNil(o.Reference) {
+		toSerialize["reference"] = o.Reference
+	}
 	if !IsNil(o.Title) {
 		toSerialize["title"] = o.Title
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Widget) UnmarshalJSON(data []byte) (err error) {
+	varWidget := _Widget{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidget)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Widget(varWidget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "appearance")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidget struct {

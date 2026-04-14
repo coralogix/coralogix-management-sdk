@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationGuide type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationGuide{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &IntegrationGuide{}
 type IntegrationGuide struct {
 	InstallationRequirements *string `json:"installationRequirements,omitempty"`
 	Introduction *string `json:"introduction,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationGuide IntegrationGuide
 
 // NewIntegrationGuide instantiates a new IntegrationGuide object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o IntegrationGuide) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Introduction) {
 		toSerialize["introduction"] = o.Introduction
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationGuide) UnmarshalJSON(data []byte) (err error) {
+	varIntegrationGuide := _IntegrationGuide{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationGuide)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationGuide(varIntegrationGuide)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "installationRequirements")
+		delete(additionalProperties, "introduction")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationGuide struct {

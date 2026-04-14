@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DisplayLabelValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DisplayLabelValues{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &DisplayLabelValues{}
 // DisplayLabelValues Represents display label values for filtering incidents
 type DisplayLabelValues struct {
 	DisplayLabelValues []string `json:"displayLabelValues"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DisplayLabelValues DisplayLabelValues
@@ -79,6 +82,11 @@ func (o DisplayLabelValues) MarshalJSON() ([]byte, error) {
 func (o DisplayLabelValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["displayLabelValues"] = o.DisplayLabelValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *DisplayLabelValues) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DisplayLabelValues(varDisplayLabelValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "displayLabelValues")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

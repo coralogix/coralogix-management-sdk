@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_testing_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the InitializeTestingRevisionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InitializeTestingRevisionRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &InitializeTestingRevisionRequest{}
 // InitializeTestingRevisionRequest struct for InitializeTestingRevisionRequest
 type InitializeTestingRevisionRequest struct {
 	ExtensionData *ExtensionData `json:"extensionData,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InitializeTestingRevisionRequest InitializeTestingRevisionRequest
 
 // NewInitializeTestingRevisionRequest instantiates a new InitializeTestingRevisionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o InitializeTestingRevisionRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.ExtensionData) {
 		toSerialize["extensionData"] = o.ExtensionData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InitializeTestingRevisionRequest) UnmarshalJSON(data []byte) (err error) {
+	varInitializeTestingRevisionRequest := _InitializeTestingRevisionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varInitializeTestingRevisionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InitializeTestingRevisionRequest(varInitializeTestingRevisionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extensionData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInitializeTestingRevisionRequest struct {

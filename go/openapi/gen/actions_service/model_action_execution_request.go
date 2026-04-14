@@ -11,10 +11,13 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // ActionExecutionRequest - struct for ActionExecutionRequest
 type ActionExecutionRequest struct {

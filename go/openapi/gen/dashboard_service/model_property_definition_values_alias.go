@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionValuesAlias type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionValuesAlias{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &PropertyDefinitionValuesAlias{}
 // PropertyDefinitionValuesAlias struct for PropertyDefinitionValuesAlias
 type PropertyDefinitionValuesAlias struct {
 	// Value alias property, used to give alias names to selected fields
-	ValuesAlias *string `json:"valuesAlias,omitempty"`
+	ValuesAlias string `json:"valuesAlias"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionValuesAlias PropertyDefinitionValuesAlias
 
 // NewPropertyDefinitionValuesAlias instantiates a new PropertyDefinitionValuesAlias object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionValuesAlias() *PropertyDefinitionValuesAlias {
+func NewPropertyDefinitionValuesAlias(valuesAlias string) *PropertyDefinitionValuesAlias {
 	this := PropertyDefinitionValuesAlias{}
+	this.ValuesAlias = valuesAlias
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewPropertyDefinitionValuesAliasWithDefaults() *PropertyDefinitionValuesAli
 	return &this
 }
 
-// GetValuesAlias returns the ValuesAlias field value if set, zero value otherwise.
+// GetValuesAlias returns the ValuesAlias field value
 func (o *PropertyDefinitionValuesAlias) GetValuesAlias() string {
-	if o == nil || IsNil(o.ValuesAlias) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ValuesAlias
+
+	return o.ValuesAlias
 }
 
-// GetValuesAliasOk returns a tuple with the ValuesAlias field value if set, nil otherwise
+// GetValuesAliasOk returns a tuple with the ValuesAlias field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionValuesAlias) GetValuesAliasOk() (*string, bool) {
-	if o == nil || IsNil(o.ValuesAlias) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ValuesAlias, true
+	return &o.ValuesAlias, true
 }
 
-// HasValuesAlias returns a boolean if a field has been set.
-func (o *PropertyDefinitionValuesAlias) HasValuesAlias() bool {
-	if o != nil && !IsNil(o.ValuesAlias) {
-		return true
-	}
-
-	return false
-}
-
-// SetValuesAlias gets a reference to the given string and assigns it to the ValuesAlias field.
+// SetValuesAlias sets field value
 func (o *PropertyDefinitionValuesAlias) SetValuesAlias(v string) {
-	o.ValuesAlias = &v
+	o.ValuesAlias = v
 }
 
 func (o PropertyDefinitionValuesAlias) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o PropertyDefinitionValuesAlias) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionValuesAlias) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ValuesAlias) {
-		toSerialize["valuesAlias"] = o.ValuesAlias
+	toSerialize["valuesAlias"] = o.ValuesAlias
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionValuesAlias) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"valuesAlias",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionValuesAlias := _PropertyDefinitionValuesAlias{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionValuesAlias)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionValuesAlias(varPropertyDefinitionValuesAlias)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "valuesAlias")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionValuesAlias struct {

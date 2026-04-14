@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryMetricsQueryTypeMetricName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryTypeMetricName{}
 
 // QueryMetricsQueryTypeMetricName struct for QueryMetricsQueryTypeMetricName
 type QueryMetricsQueryTypeMetricName struct {
-	MetricName *QueryMetricsQueryTypeMetricName `json:"metricName,omitempty"`
+	MetricRegex *string `json:"metricRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryMetricsQueryTypeMetricName QueryMetricsQueryTypeMetricName
 
 // NewQueryMetricsQueryTypeMetricName instantiates a new QueryMetricsQueryTypeMetricName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQueryMetricsQueryTypeMetricNameWithDefaults() *QueryMetricsQueryTypeMetr
 	return &this
 }
 
-// GetMetricName returns the MetricName field value if set, zero value otherwise.
-func (o *QueryMetricsQueryTypeMetricName) GetMetricName() QueryMetricsQueryTypeMetricName {
-	if o == nil || IsNil(o.MetricName) {
-		var ret QueryMetricsQueryTypeMetricName
+// GetMetricRegex returns the MetricRegex field value if set, zero value otherwise.
+func (o *QueryMetricsQueryTypeMetricName) GetMetricRegex() string {
+	if o == nil || IsNil(o.MetricRegex) {
+		var ret string
 		return ret
 	}
-	return *o.MetricName
+	return *o.MetricRegex
 }
 
-// GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
+// GetMetricRegexOk returns a tuple with the MetricRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryMetricsQueryTypeMetricName) GetMetricNameOk() (*QueryMetricsQueryTypeMetricName, bool) {
-	if o == nil || IsNil(o.MetricName) {
+func (o *QueryMetricsQueryTypeMetricName) GetMetricRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricRegex) {
 		return nil, false
 	}
-	return o.MetricName, true
+	return o.MetricRegex, true
 }
 
-// HasMetricName returns a boolean if a field has been set.
-func (o *QueryMetricsQueryTypeMetricName) HasMetricName() bool {
-	if o != nil && !IsNil(o.MetricName) {
+// HasMetricRegex returns a boolean if a field has been set.
+func (o *QueryMetricsQueryTypeMetricName) HasMetricRegex() bool {
+	if o != nil && !IsNil(o.MetricRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetMetricName gets a reference to the given QueryMetricsQueryTypeMetricName and assigns it to the MetricName field.
-func (o *QueryMetricsQueryTypeMetricName) SetMetricName(v QueryMetricsQueryTypeMetricName) {
-	o.MetricName = &v
+// SetMetricRegex gets a reference to the given string and assigns it to the MetricRegex field.
+func (o *QueryMetricsQueryTypeMetricName) SetMetricRegex(v string) {
+	o.MetricRegex = &v
 }
 
 func (o QueryMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QueryMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
 
 func (o QueryMetricsQueryTypeMetricName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricName) {
-		toSerialize["metricName"] = o.MetricName
+	if !IsNil(o.MetricRegex) {
+		toSerialize["metricRegex"] = o.MetricRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryTypeMetricName) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryTypeMetricName := _QueryMetricsQueryTypeMetricName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryTypeMetricName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryTypeMetricName(varQueryMetricsQueryTypeMetricName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryMetricsQueryTypeMetricName struct {

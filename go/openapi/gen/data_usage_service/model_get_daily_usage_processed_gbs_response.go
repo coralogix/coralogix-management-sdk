@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDailyUsageProcessedGbsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageProcessedGbsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDailyUsageProcessedGbsResponse{}
 // GetDailyUsageProcessedGbsResponse struct for GetDailyUsageProcessedGbsResponse
 type GetDailyUsageProcessedGbsResponse struct {
 	Gbs []DetailedDailyProcessedGbs `json:"gbs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDailyUsageProcessedGbsResponse GetDailyUsageProcessedGbsResponse
 
 // NewGetDailyUsageProcessedGbsResponse instantiates a new GetDailyUsageProcessedGbsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDailyUsageProcessedGbsResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Gbs) {
 		toSerialize["gbs"] = o.Gbs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDailyUsageProcessedGbsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDailyUsageProcessedGbsResponse := _GetDailyUsageProcessedGbsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDailyUsageProcessedGbsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDailyUsageProcessedGbsResponse(varGetDailyUsageProcessedGbsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gbs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDailyUsageProcessedGbsResponse struct {

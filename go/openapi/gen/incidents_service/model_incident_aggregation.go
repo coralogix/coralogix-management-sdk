@@ -11,11 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentAggregation{}
@@ -33,6 +35,7 @@ type IncidentAggregation struct {
 	LastClosedAt time.Time `json:"lastClosedAt"`
 	LastStateUpdateTime time.Time `json:"lastStateUpdateTime"`
 	ListIncidentsId []string `json:"listIncidentsId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentAggregation IncidentAggregation
@@ -350,6 +353,11 @@ func (o IncidentAggregation) ToMap() (map[string]interface{}, error) {
 	toSerialize["lastClosedAt"] = o.LastClosedAt
 	toSerialize["lastStateUpdateTime"] = o.LastStateUpdateTime
 	toSerialize["listIncidentsId"] = o.ListIncidentsId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -395,6 +403,23 @@ func (o *IncidentAggregation) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentAggregation(varIncidentAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggAssignmentsCount")
+		delete(additionalProperties, "aggMetaLabelsCount")
+		delete(additionalProperties, "aggSeverityCount")
+		delete(additionalProperties, "aggStateCount")
+		delete(additionalProperties, "aggStatusCount")
+		delete(additionalProperties, "allValuesCount")
+		delete(additionalProperties, "firstCreatedAt")
+		delete(additionalProperties, "groupBysValue")
+		delete(additionalProperties, "lastClosedAt")
+		delete(additionalProperties, "lastStateUpdateTime")
+		delete(additionalProperties, "listIncidentsId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

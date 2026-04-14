@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQueryOperatorEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryOperatorEquals{}
 
 // QuerySourceMetricsQueryOperatorEquals struct for QuerySourceMetricsQueryOperatorEquals
 type QuerySourceMetricsQueryOperatorEquals struct {
-	Equals *QuerySourceMetricsQueryEquals `json:"equals,omitempty"`
+	Equals QuerySourceMetricsQueryEquals `json:"equals"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQueryOperatorEquals QuerySourceMetricsQueryOperatorEquals
 
 // NewQuerySourceMetricsQueryOperatorEquals instantiates a new QuerySourceMetricsQueryOperatorEquals object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQuerySourceMetricsQueryOperatorEquals() *QuerySourceMetricsQueryOperatorEquals {
+func NewQuerySourceMetricsQueryOperatorEquals(equals QuerySourceMetricsQueryEquals) *QuerySourceMetricsQueryOperatorEquals {
 	this := QuerySourceMetricsQueryOperatorEquals{}
+	this.Equals = equals
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewQuerySourceMetricsQueryOperatorEqualsWithDefaults() *QuerySourceMetricsQ
 	return &this
 }
 
-// GetEquals returns the Equals field value if set, zero value otherwise.
+// GetEquals returns the Equals field value
 func (o *QuerySourceMetricsQueryOperatorEquals) GetEquals() QuerySourceMetricsQueryEquals {
-	if o == nil || IsNil(o.Equals) {
+	if o == nil {
 		var ret QuerySourceMetricsQueryEquals
 		return ret
 	}
-	return *o.Equals
+
+	return o.Equals
 }
 
-// GetEqualsOk returns a tuple with the Equals field value if set, nil otherwise
+// GetEqualsOk returns a tuple with the Equals field value
 // and a boolean to check if the value has been set.
 func (o *QuerySourceMetricsQueryOperatorEquals) GetEqualsOk() (*QuerySourceMetricsQueryEquals, bool) {
-	if o == nil || IsNil(o.Equals) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Equals, true
+	return &o.Equals, true
 }
 
-// HasEquals returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQueryOperatorEquals) HasEquals() bool {
-	if o != nil && !IsNil(o.Equals) {
-		return true
-	}
-
-	return false
-}
-
-// SetEquals gets a reference to the given QuerySourceMetricsQueryEquals and assigns it to the Equals field.
+// SetEquals sets field value
 func (o *QuerySourceMetricsQueryOperatorEquals) SetEquals(v QuerySourceMetricsQueryEquals) {
-	o.Equals = &v
+	o.Equals = v
 }
 
 func (o QuerySourceMetricsQueryOperatorEquals) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o QuerySourceMetricsQueryOperatorEquals) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceMetricsQueryOperatorEquals) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Equals) {
-		toSerialize["equals"] = o.Equals
+	toSerialize["equals"] = o.Equals
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryOperatorEquals) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"equals",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varQuerySourceMetricsQueryOperatorEquals := _QuerySourceMetricsQueryOperatorEquals{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryOperatorEquals)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryOperatorEquals(varQuerySourceMetricsQueryOperatorEquals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "equals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQueryOperatorEquals struct {

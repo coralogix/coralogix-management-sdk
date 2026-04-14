@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionDefinitionGoToDashboardAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionDefinitionGoToDashboardAction{}
 
 // ActionDefinitionGoToDashboardAction struct for ActionDefinitionGoToDashboardAction
 type ActionDefinitionGoToDashboardAction struct {
-	GoToDashboardAction *GoToDashboardTemplateAction `json:"goToDashboardAction,omitempty"`
+	GoToDashboardAction GoToDashboardTemplateAction `json:"goToDashboardAction"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionDefinitionGoToDashboardAction ActionDefinitionGoToDashboardAction
 
 // NewActionDefinitionGoToDashboardAction instantiates a new ActionDefinitionGoToDashboardAction object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActionDefinitionGoToDashboardAction() *ActionDefinitionGoToDashboardAction {
+func NewActionDefinitionGoToDashboardAction(goToDashboardAction GoToDashboardTemplateAction) *ActionDefinitionGoToDashboardAction {
 	this := ActionDefinitionGoToDashboardAction{}
+	this.GoToDashboardAction = goToDashboardAction
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewActionDefinitionGoToDashboardActionWithDefaults() *ActionDefinitionGoToD
 	return &this
 }
 
-// GetGoToDashboardAction returns the GoToDashboardAction field value if set, zero value otherwise.
+// GetGoToDashboardAction returns the GoToDashboardAction field value
 func (o *ActionDefinitionGoToDashboardAction) GetGoToDashboardAction() GoToDashboardTemplateAction {
-	if o == nil || IsNil(o.GoToDashboardAction) {
+	if o == nil {
 		var ret GoToDashboardTemplateAction
 		return ret
 	}
-	return *o.GoToDashboardAction
+
+	return o.GoToDashboardAction
 }
 
-// GetGoToDashboardActionOk returns a tuple with the GoToDashboardAction field value if set, nil otherwise
+// GetGoToDashboardActionOk returns a tuple with the GoToDashboardAction field value
 // and a boolean to check if the value has been set.
 func (o *ActionDefinitionGoToDashboardAction) GetGoToDashboardActionOk() (*GoToDashboardTemplateAction, bool) {
-	if o == nil || IsNil(o.GoToDashboardAction) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GoToDashboardAction, true
+	return &o.GoToDashboardAction, true
 }
 
-// HasGoToDashboardAction returns a boolean if a field has been set.
-func (o *ActionDefinitionGoToDashboardAction) HasGoToDashboardAction() bool {
-	if o != nil && !IsNil(o.GoToDashboardAction) {
-		return true
-	}
-
-	return false
-}
-
-// SetGoToDashboardAction gets a reference to the given GoToDashboardTemplateAction and assigns it to the GoToDashboardAction field.
+// SetGoToDashboardAction sets field value
 func (o *ActionDefinitionGoToDashboardAction) SetGoToDashboardAction(v GoToDashboardTemplateAction) {
-	o.GoToDashboardAction = &v
+	o.GoToDashboardAction = v
 }
 
 func (o ActionDefinitionGoToDashboardAction) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o ActionDefinitionGoToDashboardAction) MarshalJSON() ([]byte, error) {
 
 func (o ActionDefinitionGoToDashboardAction) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GoToDashboardAction) {
-		toSerialize["goToDashboardAction"] = o.GoToDashboardAction
+	toSerialize["goToDashboardAction"] = o.GoToDashboardAction
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionDefinitionGoToDashboardAction) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"goToDashboardAction",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varActionDefinitionGoToDashboardAction := _ActionDefinitionGoToDashboardAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionDefinitionGoToDashboardAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionDefinitionGoToDashboardAction(varActionDefinitionGoToDashboardAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goToDashboardAction")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionDefinitionGoToDashboardAction struct {

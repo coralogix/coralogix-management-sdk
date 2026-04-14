@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListSlosResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListSlosResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &ListSlosResponse{}
 // ListSlosResponse Response containing a list of SLOs.
 type ListSlosResponse struct {
 	Slos []Slo `json:"slos"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListSlosResponse ListSlosResponse
@@ -79,6 +82,11 @@ func (o ListSlosResponse) MarshalJSON() ([]byte, error) {
 func (o ListSlosResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["slos"] = o.Slos
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *ListSlosResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListSlosResponse(varListSlosResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "slos")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

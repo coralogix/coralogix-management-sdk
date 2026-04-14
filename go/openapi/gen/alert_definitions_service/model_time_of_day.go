@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeOfDay type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeOfDay{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &TimeOfDay{}
 type TimeOfDay struct {
 	Hours *int32 `json:"hours,omitempty"`
 	Minutes *int32 `json:"minutes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeOfDay TimeOfDay
 
 // NewTimeOfDay instantiates a new TimeOfDay object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o TimeOfDay) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Minutes) {
 		toSerialize["minutes"] = o.Minutes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeOfDay) UnmarshalJSON(data []byte) (err error) {
+	varTimeOfDay := _TimeOfDay{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeOfDay)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeOfDay(varTimeOfDay)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hours")
+		delete(additionalProperties, "minutes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeOfDay struct {

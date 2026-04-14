@@ -11,28 +11,31 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // TestOutgoingWebhookResponse - struct for TestOutgoingWebhookResponse
 type TestOutgoingWebhookResponse struct {
-	TestOutgoingWebhookResponseFailure *TestOutgoingWebhookResponseFailure
-	TestOutgoingWebhookResponseSuccess *TestOutgoingWebhookResponseSuccess
+	TestOutgoingWebhookResponseFailureVariant *TestOutgoingWebhookResponseFailureVariant
+	TestOutgoingWebhookResponseSuccessVariant *TestOutgoingWebhookResponseSuccessVariant
 }
 
-// TestOutgoingWebhookResponseFailureAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseFailure wrapped in TestOutgoingWebhookResponse
-func TestOutgoingWebhookResponseFailureAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseFailure) TestOutgoingWebhookResponse {
+// TestOutgoingWebhookResponseFailureVariantAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseFailureVariant wrapped in TestOutgoingWebhookResponse
+func TestOutgoingWebhookResponseFailureVariantAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseFailureVariant) TestOutgoingWebhookResponse {
 	return TestOutgoingWebhookResponse{
-		TestOutgoingWebhookResponseFailure: v,
+		TestOutgoingWebhookResponseFailureVariant: v,
 	}
 }
 
-// TestOutgoingWebhookResponseSuccessAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseSuccess wrapped in TestOutgoingWebhookResponse
-func TestOutgoingWebhookResponseSuccessAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseSuccess) TestOutgoingWebhookResponse {
+// TestOutgoingWebhookResponseSuccessVariantAsTestOutgoingWebhookResponse is a convenience function that returns TestOutgoingWebhookResponseSuccessVariant wrapped in TestOutgoingWebhookResponse
+func TestOutgoingWebhookResponseSuccessVariantAsTestOutgoingWebhookResponse(v *TestOutgoingWebhookResponseSuccessVariant) TestOutgoingWebhookResponse {
 	return TestOutgoingWebhookResponse{
-		TestOutgoingWebhookResponseSuccess: v,
+		TestOutgoingWebhookResponseSuccessVariant: v,
 	}
 }
 
@@ -41,44 +44,44 @@ func TestOutgoingWebhookResponseSuccessAsTestOutgoingWebhookResponse(v *TestOutg
 func (dst *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into TestOutgoingWebhookResponseFailure
-	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseFailure)
+	// try to unmarshal data into TestOutgoingWebhookResponseFailureVariant
+	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseFailureVariant)
 	if err == nil {
-		jsonTestOutgoingWebhookResponseFailure, _ := json.Marshal(dst.TestOutgoingWebhookResponseFailure)
-		if string(jsonTestOutgoingWebhookResponseFailure) == "{}" { // empty struct
-			dst.TestOutgoingWebhookResponseFailure = nil
+		jsonTestOutgoingWebhookResponseFailureVariant, _ := json.Marshal(dst.TestOutgoingWebhookResponseFailureVariant)
+		if string(jsonTestOutgoingWebhookResponseFailureVariant) == "{}" { // empty struct
+			dst.TestOutgoingWebhookResponseFailureVariant = nil
 		} else {
-			if err = validator.Validate(dst.TestOutgoingWebhookResponseFailure); err != nil {
-				dst.TestOutgoingWebhookResponseFailure = nil
+			if err = validator.Validate(dst.TestOutgoingWebhookResponseFailureVariant); err != nil {
+				dst.TestOutgoingWebhookResponseFailureVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TestOutgoingWebhookResponseFailure = nil
+		dst.TestOutgoingWebhookResponseFailureVariant = nil
 	}
 
-	// try to unmarshal data into TestOutgoingWebhookResponseSuccess
-	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseSuccess)
+	// try to unmarshal data into TestOutgoingWebhookResponseSuccessVariant
+	err = json.Unmarshal(data, &dst.TestOutgoingWebhookResponseSuccessVariant)
 	if err == nil {
-		jsonTestOutgoingWebhookResponseSuccess, _ := json.Marshal(dst.TestOutgoingWebhookResponseSuccess)
-		if string(jsonTestOutgoingWebhookResponseSuccess) == "{}" { // empty struct
-			dst.TestOutgoingWebhookResponseSuccess = nil
+		jsonTestOutgoingWebhookResponseSuccessVariant, _ := json.Marshal(dst.TestOutgoingWebhookResponseSuccessVariant)
+		if string(jsonTestOutgoingWebhookResponseSuccessVariant) == "{}" { // empty struct
+			dst.TestOutgoingWebhookResponseSuccessVariant = nil
 		} else {
-			if err = validator.Validate(dst.TestOutgoingWebhookResponseSuccess); err != nil {
-				dst.TestOutgoingWebhookResponseSuccess = nil
+			if err = validator.Validate(dst.TestOutgoingWebhookResponseSuccessVariant); err != nil {
+				dst.TestOutgoingWebhookResponseSuccessVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TestOutgoingWebhookResponseSuccess = nil
+		dst.TestOutgoingWebhookResponseSuccessVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.TestOutgoingWebhookResponseFailure = nil
-		dst.TestOutgoingWebhookResponseSuccess = nil
+		dst.TestOutgoingWebhookResponseFailureVariant = nil
+		dst.TestOutgoingWebhookResponseSuccessVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TestOutgoingWebhookResponse)")
 	} else if match == 1 {
@@ -90,12 +93,12 @@ func (dst *TestOutgoingWebhookResponse) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TestOutgoingWebhookResponse) MarshalJSON() ([]byte, error) {
-	if src.TestOutgoingWebhookResponseFailure != nil {
-		return json.Marshal(&src.TestOutgoingWebhookResponseFailure)
+	if src.TestOutgoingWebhookResponseFailureVariant != nil {
+		return json.Marshal(&src.TestOutgoingWebhookResponseFailureVariant)
 	}
 
-	if src.TestOutgoingWebhookResponseSuccess != nil {
-		return json.Marshal(&src.TestOutgoingWebhookResponseSuccess)
+	if src.TestOutgoingWebhookResponseSuccessVariant != nil {
+		return json.Marshal(&src.TestOutgoingWebhookResponseSuccessVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +109,12 @@ func (obj *TestOutgoingWebhookResponse) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.TestOutgoingWebhookResponseFailure != nil {
-		return obj.TestOutgoingWebhookResponseFailure
+	if obj.TestOutgoingWebhookResponseFailureVariant != nil {
+		return obj.TestOutgoingWebhookResponseFailureVariant
 	}
 
-	if obj.TestOutgoingWebhookResponseSuccess != nil {
-		return obj.TestOutgoingWebhookResponseSuccess
+	if obj.TestOutgoingWebhookResponseSuccessVariant != nil {
+		return obj.TestOutgoingWebhookResponseSuccessVariant
 	}
 
 	// all schemas are nil
@@ -120,12 +123,12 @@ func (obj *TestOutgoingWebhookResponse) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj TestOutgoingWebhookResponse) GetActualInstanceValue() (interface{}) {
-	if obj.TestOutgoingWebhookResponseFailure != nil {
-		return *obj.TestOutgoingWebhookResponseFailure
+	if obj.TestOutgoingWebhookResponseFailureVariant != nil {
+		return *obj.TestOutgoingWebhookResponseFailureVariant
 	}
 
-	if obj.TestOutgoingWebhookResponseSuccess != nil {
-		return *obj.TestOutgoingWebhookResponseSuccess
+	if obj.TestOutgoingWebhookResponseSuccessVariant != nil {
+		return *obj.TestOutgoingWebhookResponseSuccessVariant
 	}
 
 	// all schemas are nil

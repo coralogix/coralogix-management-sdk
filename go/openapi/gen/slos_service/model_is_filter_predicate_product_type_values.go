@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IsFilterPredicateProductTypeValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IsFilterPredicateProductTypeValues{}
 
 // IsFilterPredicateProductTypeValues Predicate for SLO filters that checks if a field is equal to one of multiple values
 type IsFilterPredicateProductTypeValues struct {
-	ProductTypeValues *ProductTypeValues `json:"productTypeValues,omitempty"`
+	ProductTypeValues ProductTypeValues `json:"productTypeValues"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IsFilterPredicateProductTypeValues IsFilterPredicateProductTypeValues
 
 // NewIsFilterPredicateProductTypeValues instantiates a new IsFilterPredicateProductTypeValues object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIsFilterPredicateProductTypeValues() *IsFilterPredicateProductTypeValues {
+func NewIsFilterPredicateProductTypeValues(productTypeValues ProductTypeValues) *IsFilterPredicateProductTypeValues {
 	this := IsFilterPredicateProductTypeValues{}
+	this.ProductTypeValues = productTypeValues
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIsFilterPredicateProductTypeValuesWithDefaults() *IsFilterPredicateProdu
 	return &this
 }
 
-// GetProductTypeValues returns the ProductTypeValues field value if set, zero value otherwise.
+// GetProductTypeValues returns the ProductTypeValues field value
 func (o *IsFilterPredicateProductTypeValues) GetProductTypeValues() ProductTypeValues {
-	if o == nil || IsNil(o.ProductTypeValues) {
+	if o == nil {
 		var ret ProductTypeValues
 		return ret
 	}
-	return *o.ProductTypeValues
+
+	return o.ProductTypeValues
 }
 
-// GetProductTypeValuesOk returns a tuple with the ProductTypeValues field value if set, nil otherwise
+// GetProductTypeValuesOk returns a tuple with the ProductTypeValues field value
 // and a boolean to check if the value has been set.
 func (o *IsFilterPredicateProductTypeValues) GetProductTypeValuesOk() (*ProductTypeValues, bool) {
-	if o == nil || IsNil(o.ProductTypeValues) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProductTypeValues, true
+	return &o.ProductTypeValues, true
 }
 
-// HasProductTypeValues returns a boolean if a field has been set.
-func (o *IsFilterPredicateProductTypeValues) HasProductTypeValues() bool {
-	if o != nil && !IsNil(o.ProductTypeValues) {
-		return true
-	}
-
-	return false
-}
-
-// SetProductTypeValues gets a reference to the given ProductTypeValues and assigns it to the ProductTypeValues field.
+// SetProductTypeValues sets field value
 func (o *IsFilterPredicateProductTypeValues) SetProductTypeValues(v ProductTypeValues) {
-	o.ProductTypeValues = &v
+	o.ProductTypeValues = v
 }
 
 func (o IsFilterPredicateProductTypeValues) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IsFilterPredicateProductTypeValues) MarshalJSON() ([]byte, error) {
 
 func (o IsFilterPredicateProductTypeValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProductTypeValues) {
-		toSerialize["productTypeValues"] = o.ProductTypeValues
+	toSerialize["productTypeValues"] = o.ProductTypeValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IsFilterPredicateProductTypeValues) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"productTypeValues",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIsFilterPredicateProductTypeValues := _IsFilterPredicateProductTypeValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIsFilterPredicateProductTypeValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IsFilterPredicateProductTypeValues(varIsFilterPredicateProductTypeValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "productTypeValues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIsFilterPredicateProductTypeValues struct {

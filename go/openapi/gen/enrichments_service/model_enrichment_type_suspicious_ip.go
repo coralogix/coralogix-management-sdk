@@ -11,23 +11,31 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentTypeSuspiciousIp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeSuspiciousIp{}
 
 // EnrichmentTypeSuspiciousIp struct for EnrichmentTypeSuspiciousIp
 type EnrichmentTypeSuspiciousIp struct {
-	SuspiciousIp map[string]interface{} `json:"suspiciousIp,omitempty"`
+	SuspiciousIp map[string]interface{} `json:"suspiciousIp"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnrichmentTypeSuspiciousIp EnrichmentTypeSuspiciousIp
 
 // NewEnrichmentTypeSuspiciousIp instantiates a new EnrichmentTypeSuspiciousIp object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnrichmentTypeSuspiciousIp() *EnrichmentTypeSuspiciousIp {
+func NewEnrichmentTypeSuspiciousIp(suspiciousIp map[string]interface{}) *EnrichmentTypeSuspiciousIp {
 	this := EnrichmentTypeSuspiciousIp{}
+	this.SuspiciousIp = suspiciousIp
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewEnrichmentTypeSuspiciousIpWithDefaults() *EnrichmentTypeSuspiciousIp {
 	return &this
 }
 
-// GetSuspiciousIp returns the SuspiciousIp field value if set, zero value otherwise.
+// GetSuspiciousIp returns the SuspiciousIp field value
 func (o *EnrichmentTypeSuspiciousIp) GetSuspiciousIp() map[string]interface{} {
-	if o == nil || IsNil(o.SuspiciousIp) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.SuspiciousIp
 }
 
-// GetSuspiciousIpOk returns a tuple with the SuspiciousIp field value if set, nil otherwise
+// GetSuspiciousIpOk returns a tuple with the SuspiciousIp field value
 // and a boolean to check if the value has been set.
 func (o *EnrichmentTypeSuspiciousIp) GetSuspiciousIpOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.SuspiciousIp) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.SuspiciousIp, true
 }
 
-// HasSuspiciousIp returns a boolean if a field has been set.
-func (o *EnrichmentTypeSuspiciousIp) HasSuspiciousIp() bool {
-	if o != nil && !IsNil(o.SuspiciousIp) {
-		return true
-	}
-
-	return false
-}
-
-// SetSuspiciousIp gets a reference to the given map[string]interface{} and assigns it to the SuspiciousIp field.
+// SetSuspiciousIp sets field value
 func (o *EnrichmentTypeSuspiciousIp) SetSuspiciousIp(v map[string]interface{}) {
 	o.SuspiciousIp = v
 }
@@ -81,10 +81,56 @@ func (o EnrichmentTypeSuspiciousIp) MarshalJSON() ([]byte, error) {
 
 func (o EnrichmentTypeSuspiciousIp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SuspiciousIp) {
-		toSerialize["suspiciousIp"] = o.SuspiciousIp
+	toSerialize["suspiciousIp"] = o.SuspiciousIp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *EnrichmentTypeSuspiciousIp) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"suspiciousIp",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEnrichmentTypeSuspiciousIp := _EnrichmentTypeSuspiciousIp{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentTypeSuspiciousIp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentTypeSuspiciousIp(varEnrichmentTypeSuspiciousIp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "suspiciousIp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnrichmentTypeSuspiciousIp struct {

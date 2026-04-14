@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HexagonBins type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonBins{}
@@ -36,7 +39,10 @@ type HexagonBins struct {
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HexagonBins HexagonBins
 
 // NewHexagonBins instantiates a new HexagonBins object
 // This constructor will assign default values to properties that have it defined,
@@ -485,7 +491,45 @@ func (o HexagonBins) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueField) {
 		toSerialize["valueField"] = o.ValueField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HexagonBins) UnmarshalJSON(data []byte) (err error) {
+	varHexagonBins := _HexagonBins{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagonBins)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexagonBins(varHexagonBins)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "legendBy")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "thresholdType")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHexagonBins struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceSloAlertsValidationsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceSloAlertsValidationsResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &ReplaceSloAlertsValidationsResponse{}
 // ReplaceSloAlertsValidationsResponse Response with validated alerts before replacing an existing SLO.
 type ReplaceSloAlertsValidationsResponse struct {
 	AlertsValidationResult []SloAlertValidityResult `json:"alertsValidationResult"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplaceSloAlertsValidationsResponse ReplaceSloAlertsValidationsResponse
@@ -79,6 +82,11 @@ func (o ReplaceSloAlertsValidationsResponse) MarshalJSON() ([]byte, error) {
 func (o ReplaceSloAlertsValidationsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertsValidationResult"] = o.AlertsValidationResult
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *ReplaceSloAlertsValidationsResponse) UnmarshalJSON(data []byte) (err er
 	}
 
 	*o = ReplaceSloAlertsValidationsResponse(varReplaceSloAlertsValidationsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertsValidationResult")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

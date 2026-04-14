@@ -11,24 +11,32 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomEnrichmentDataBinary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichmentDataBinary{}
 
 // CustomEnrichmentDataBinary struct for CustomEnrichmentDataBinary
 type CustomEnrichmentDataBinary struct {
-	Binary *string `json:"binary,omitempty"`
+	Binary string `json:"binary"`
 	Definition *CustomEnrichment `json:"definition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomEnrichmentDataBinary CustomEnrichmentDataBinary
 
 // NewCustomEnrichmentDataBinary instantiates a new CustomEnrichmentDataBinary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomEnrichmentDataBinary() *CustomEnrichmentDataBinary {
+func NewCustomEnrichmentDataBinary(binary string) *CustomEnrichmentDataBinary {
 	this := CustomEnrichmentDataBinary{}
+	this.Binary = binary
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewCustomEnrichmentDataBinaryWithDefaults() *CustomEnrichmentDataBinary {
 	return &this
 }
 
-// GetBinary returns the Binary field value if set, zero value otherwise.
+// GetBinary returns the Binary field value
 func (o *CustomEnrichmentDataBinary) GetBinary() string {
-	if o == nil || IsNil(o.Binary) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Binary
+
+	return o.Binary
 }
 
-// GetBinaryOk returns a tuple with the Binary field value if set, nil otherwise
+// GetBinaryOk returns a tuple with the Binary field value
 // and a boolean to check if the value has been set.
 func (o *CustomEnrichmentDataBinary) GetBinaryOk() (*string, bool) {
-	if o == nil || IsNil(o.Binary) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Binary, true
+	return &o.Binary, true
 }
 
-// HasBinary returns a boolean if a field has been set.
-func (o *CustomEnrichmentDataBinary) HasBinary() bool {
-	if o != nil && !IsNil(o.Binary) {
-		return true
-	}
-
-	return false
-}
-
-// SetBinary gets a reference to the given string and assigns it to the Binary field.
+// SetBinary sets field value
 func (o *CustomEnrichmentDataBinary) SetBinary(v string) {
-	o.Binary = &v
+	o.Binary = v
 }
 
 // GetDefinition returns the Definition field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o CustomEnrichmentDataBinary) MarshalJSON() ([]byte, error) {
 
 func (o CustomEnrichmentDataBinary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Binary) {
-		toSerialize["binary"] = o.Binary
-	}
+	toSerialize["binary"] = o.Binary
 	if !IsNil(o.Definition) {
 		toSerialize["definition"] = o.Definition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomEnrichmentDataBinary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"binary",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCustomEnrichmentDataBinary := _CustomEnrichmentDataBinary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomEnrichmentDataBinary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomEnrichmentDataBinary(varCustomEnrichmentDataBinary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary")
+		delete(additionalProperties, "definition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomEnrichmentDataBinary struct {

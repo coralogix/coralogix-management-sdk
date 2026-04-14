@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventClose type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventClose{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &IncidentEventClose{}
 // IncidentEventClose struct for IncidentEventClose
 type IncidentEventClose struct {
 	ClosedBy *IncidentsV1UserDetails `json:"closedBy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventClose IncidentEventClose
 
 // NewIncidentEventClose instantiates a new IncidentEventClose object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o IncidentEventClose) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ClosedBy) {
 		toSerialize["closedBy"] = o.ClosedBy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventClose) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventClose := _IncidentEventClose{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventClose)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventClose(varIncidentEventClose)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "closedBy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventClose struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoutingTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoutingTarget{}
@@ -23,7 +26,10 @@ type RoutingTarget struct {
 	CustomDetails *map[string]string `json:"customDetails,omitempty"`
 	Id *string `json:"id,omitempty"`
 	PresetId *string `json:"presetId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RoutingTarget RoutingTarget
 
 // NewRoutingTarget instantiates a new RoutingTarget object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o RoutingTarget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PresetId) {
 		toSerialize["presetId"] = o.PresetId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RoutingTarget) UnmarshalJSON(data []byte) (err error) {
+	varRoutingTarget := _RoutingTarget{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoutingTarget)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoutingTarget(varRoutingTarget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectorId")
+		delete(additionalProperties, "customDetails")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "presetId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRoutingTarget struct {

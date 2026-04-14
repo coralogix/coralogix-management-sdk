@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateRuleGroupResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRuleGroupResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateRuleGroupResponse{}
 // CreateRuleGroupResponse struct for CreateRuleGroupResponse
 type CreateRuleGroupResponse struct {
 	RuleGroup *RuleGroup `json:"ruleGroup,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRuleGroupResponse CreateRuleGroupResponse
 
 // NewCreateRuleGroupResponse instantiates a new CreateRuleGroupResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateRuleGroupResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RuleGroup) {
 		toSerialize["ruleGroup"] = o.RuleGroup
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRuleGroupResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateRuleGroupResponse := _CreateRuleGroupResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateRuleGroupResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRuleGroupResponse(varCreateRuleGroupResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ruleGroup")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRuleGroupResponse struct {

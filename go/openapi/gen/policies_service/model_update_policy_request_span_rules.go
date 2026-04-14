@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdatePolicyRequestSpanRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdatePolicyRequestSpanRules{}
@@ -28,8 +30,11 @@ type UpdatePolicyRequestSpanRules struct {
 	Id string `json:"id"`
 	Name *string `json:"name,omitempty"`
 	Priority *QuotaV1Priority `json:"priority,omitempty"`
-	SpanRules *SpanRules `json:"spanRules,omitempty"`
+	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
+	SpanRules SpanRules `json:"spanRules"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	Targets []V1Target `json:"targets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePolicyRequestSpanRules UpdatePolicyRequestSpanRules
@@ -38,9 +43,10 @@ type _UpdatePolicyRequestSpanRules UpdatePolicyRequestSpanRules
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdatePolicyRequestSpanRules(id string) *UpdatePolicyRequestSpanRules {
+func NewUpdatePolicyRequestSpanRules(id string, spanRules SpanRules) *UpdatePolicyRequestSpanRules {
 	this := UpdatePolicyRequestSpanRules{}
 	this.Id = id
+	this.SpanRules = spanRules
 	return &this
 }
 
@@ -268,36 +274,60 @@ func (o *UpdatePolicyRequestSpanRules) SetPriority(v QuotaV1Priority) {
 	o.Priority = &v
 }
 
-// GetSpanRules returns the SpanRules field value if set, zero value otherwise.
-func (o *UpdatePolicyRequestSpanRules) GetSpanRules() SpanRules {
-	if o == nil || IsNil(o.SpanRules) {
-		var ret SpanRules
+// GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
+func (o *UpdatePolicyRequestSpanRules) GetPriorityOverride() PriorityOverride {
+	if o == nil || IsNil(o.PriorityOverride) {
+		var ret PriorityOverride
 		return ret
 	}
-	return *o.SpanRules
+	return *o.PriorityOverride
 }
 
-// GetSpanRulesOk returns a tuple with the SpanRules field value if set, nil otherwise
+// GetPriorityOverrideOk returns a tuple with the PriorityOverride field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePolicyRequestSpanRules) GetSpanRulesOk() (*SpanRules, bool) {
-	if o == nil || IsNil(o.SpanRules) {
+func (o *UpdatePolicyRequestSpanRules) GetPriorityOverrideOk() (*PriorityOverride, bool) {
+	if o == nil || IsNil(o.PriorityOverride) {
 		return nil, false
 	}
-	return o.SpanRules, true
+	return o.PriorityOverride, true
 }
 
-// HasSpanRules returns a boolean if a field has been set.
-func (o *UpdatePolicyRequestSpanRules) HasSpanRules() bool {
-	if o != nil && !IsNil(o.SpanRules) {
+// HasPriorityOverride returns a boolean if a field has been set.
+func (o *UpdatePolicyRequestSpanRules) HasPriorityOverride() bool {
+	if o != nil && !IsNil(o.PriorityOverride) {
 		return true
 	}
 
 	return false
 }
 
-// SetSpanRules gets a reference to the given SpanRules and assigns it to the SpanRules field.
+// SetPriorityOverride gets a reference to the given PriorityOverride and assigns it to the PriorityOverride field.
+func (o *UpdatePolicyRequestSpanRules) SetPriorityOverride(v PriorityOverride) {
+	o.PriorityOverride = &v
+}
+
+// GetSpanRules returns the SpanRules field value
+func (o *UpdatePolicyRequestSpanRules) GetSpanRules() SpanRules {
+	if o == nil {
+		var ret SpanRules
+		return ret
+	}
+
+	return o.SpanRules
+}
+
+// GetSpanRulesOk returns a tuple with the SpanRules field value
+// and a boolean to check if the value has been set.
+func (o *UpdatePolicyRequestSpanRules) GetSpanRulesOk() (*SpanRules, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SpanRules, true
+}
+
+// SetSpanRules sets field value
 func (o *UpdatePolicyRequestSpanRules) SetSpanRules(v SpanRules) {
-	o.SpanRules = &v
+	o.SpanRules = v
 }
 
 // GetSubsystemRule returns the SubsystemRule field value if set, zero value otherwise.
@@ -332,6 +362,38 @@ func (o *UpdatePolicyRequestSpanRules) SetSubsystemRule(v QuotaV1Rule) {
 	o.SubsystemRule = &v
 }
 
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *UpdatePolicyRequestSpanRules) GetTargets() []V1Target {
+	if o == nil || IsNil(o.Targets) {
+		var ret []V1Target
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdatePolicyRequestSpanRules) GetTargetsOk() ([]V1Target, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *UpdatePolicyRequestSpanRules) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []V1Target and assigns it to the Targets field.
+func (o *UpdatePolicyRequestSpanRules) SetTargets(v []V1Target) {
+	o.Targets = v
+}
+
 func (o UpdatePolicyRequestSpanRules) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -361,12 +423,21 @@ func (o UpdatePolicyRequestSpanRules) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if !IsNil(o.SpanRules) {
-		toSerialize["spanRules"] = o.SpanRules
+	if !IsNil(o.PriorityOverride) {
+		toSerialize["priorityOverride"] = o.PriorityOverride
 	}
+	toSerialize["spanRules"] = o.SpanRules
 	if !IsNil(o.SubsystemRule) {
 		toSerialize["subsystemRule"] = o.SubsystemRule
 	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -376,6 +447,7 @@ func (o *UpdatePolicyRequestSpanRules) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
+		"spanRules",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -402,6 +474,23 @@ func (o *UpdatePolicyRequestSpanRules) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UpdatePolicyRequestSpanRules(varUpdatePolicyRequestSpanRules)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationRule")
+		delete(additionalProperties, "archiveRetention")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "spanRules")
+		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "targets")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

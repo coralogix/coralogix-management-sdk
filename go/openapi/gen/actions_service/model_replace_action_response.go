@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceActionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceActionResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ReplaceActionResponse{}
 // ReplaceActionResponse This data structure represents the response to replace an Action.
 type ReplaceActionResponse struct {
 	Action *V2Action `json:"action,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceActionResponse ReplaceActionResponse
 
 // NewReplaceActionResponse instantiates a new ReplaceActionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ReplaceActionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceActionResponse) UnmarshalJSON(data []byte) (err error) {
+	varReplaceActionResponse := _ReplaceActionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceActionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceActionResponse(varReplaceActionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceActionResponse struct {

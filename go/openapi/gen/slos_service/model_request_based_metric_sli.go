@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RequestBasedMetricSli type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RequestBasedMetricSli{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &RequestBasedMetricSli{}
 type RequestBasedMetricSli struct {
 	GoodEvents *Metric `json:"goodEvents,omitempty"`
 	TotalEvents *Metric `json:"totalEvents,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RequestBasedMetricSli RequestBasedMetricSli
 
 // NewRequestBasedMetricSli instantiates a new RequestBasedMetricSli object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o RequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalEvents) {
 		toSerialize["totalEvents"] = o.TotalEvents
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RequestBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
+	varRequestBasedMetricSli := _RequestBasedMetricSli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRequestBasedMetricSli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RequestBasedMetricSli(varRequestBasedMetricSli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goodEvents")
+		delete(additionalProperties, "totalEvents")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRequestBasedMetricSli struct {

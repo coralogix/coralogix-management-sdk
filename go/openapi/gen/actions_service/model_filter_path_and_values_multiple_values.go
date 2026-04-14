@@ -11,18 +11,21 @@ API version: 1.0.0
 package actions_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterPathAndValuesMultipleValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterPathAndValuesMultipleValues{}
 
 // FilterPathAndValuesMultipleValues This data structure represents a filter path and values
 type FilterPathAndValuesMultipleValues struct {
-	MultipleValues *MultipleValues `json:"multipleValues,omitempty"`
+	MultipleValues MultipleValues `json:"multipleValues"`
 	Path string `json:"path"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FilterPathAndValuesMultipleValues FilterPathAndValuesMultipleValues
@@ -31,8 +34,9 @@ type _FilterPathAndValuesMultipleValues FilterPathAndValuesMultipleValues
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFilterPathAndValuesMultipleValues(path string) *FilterPathAndValuesMultipleValues {
+func NewFilterPathAndValuesMultipleValues(multipleValues MultipleValues, path string) *FilterPathAndValuesMultipleValues {
 	this := FilterPathAndValuesMultipleValues{}
+	this.MultipleValues = multipleValues
 	this.Path = path
 	return &this
 }
@@ -45,36 +49,28 @@ func NewFilterPathAndValuesMultipleValuesWithDefaults() *FilterPathAndValuesMult
 	return &this
 }
 
-// GetMultipleValues returns the MultipleValues field value if set, zero value otherwise.
+// GetMultipleValues returns the MultipleValues field value
 func (o *FilterPathAndValuesMultipleValues) GetMultipleValues() MultipleValues {
-	if o == nil || IsNil(o.MultipleValues) {
+	if o == nil {
 		var ret MultipleValues
 		return ret
 	}
-	return *o.MultipleValues
+
+	return o.MultipleValues
 }
 
-// GetMultipleValuesOk returns a tuple with the MultipleValues field value if set, nil otherwise
+// GetMultipleValuesOk returns a tuple with the MultipleValues field value
 // and a boolean to check if the value has been set.
 func (o *FilterPathAndValuesMultipleValues) GetMultipleValuesOk() (*MultipleValues, bool) {
-	if o == nil || IsNil(o.MultipleValues) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultipleValues, true
+	return &o.MultipleValues, true
 }
 
-// HasMultipleValues returns a boolean if a field has been set.
-func (o *FilterPathAndValuesMultipleValues) HasMultipleValues() bool {
-	if o != nil && !IsNil(o.MultipleValues) {
-		return true
-	}
-
-	return false
-}
-
-// SetMultipleValues gets a reference to the given MultipleValues and assigns it to the MultipleValues field.
+// SetMultipleValues sets field value
 func (o *FilterPathAndValuesMultipleValues) SetMultipleValues(v MultipleValues) {
-	o.MultipleValues = &v
+	o.MultipleValues = v
 }
 
 // GetPath returns the Path field value
@@ -111,10 +107,13 @@ func (o FilterPathAndValuesMultipleValues) MarshalJSON() ([]byte, error) {
 
 func (o FilterPathAndValuesMultipleValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MultipleValues) {
-		toSerialize["multipleValues"] = o.MultipleValues
-	}
+	toSerialize["multipleValues"] = o.MultipleValues
 	toSerialize["path"] = o.Path
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -123,6 +122,7 @@ func (o *FilterPathAndValuesMultipleValues) UnmarshalJSON(data []byte) (err erro
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"multipleValues",
 		"path",
 	}
 
@@ -150,6 +150,14 @@ func (o *FilterPathAndValuesMultipleValues) UnmarshalJSON(data []byte) (err erro
 	}
 
 	*o = FilterPathAndValuesMultipleValues(varFilterPathAndValuesMultipleValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "multipleValues")
+		delete(additionalProperties, "path")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesTracingThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesTracingThreshold{}
@@ -38,16 +42,20 @@ type AlertDefPropertiesTracingThreshold struct {
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
-	TracingThreshold *TracingThresholdType `json:"tracingThreshold,omitempty"`
+	TracingThreshold TracingThresholdType `json:"tracingThreshold"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesTracingThreshold AlertDefPropertiesTracingThreshold
 
 // NewAlertDefPropertiesTracingThreshold instantiates a new AlertDefPropertiesTracingThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesTracingThreshold() *AlertDefPropertiesTracingThreshold {
+func NewAlertDefPropertiesTracingThreshold(tracingThreshold TracingThresholdType) *AlertDefPropertiesTracingThreshold {
 	this := AlertDefPropertiesTracingThreshold{}
+	this.TracingThreshold = tracingThreshold
 	return &this
 }
 
@@ -475,36 +483,28 @@ func (o *AlertDefPropertiesTracingThreshold) SetPriority(v AlertDefPriority) {
 	o.Priority = &v
 }
 
-// GetTracingThreshold returns the TracingThreshold field value if set, zero value otherwise.
+// GetTracingThreshold returns the TracingThreshold field value
 func (o *AlertDefPropertiesTracingThreshold) GetTracingThreshold() TracingThresholdType {
-	if o == nil || IsNil(o.TracingThreshold) {
+	if o == nil {
 		var ret TracingThresholdType
 		return ret
 	}
-	return *o.TracingThreshold
+
+	return o.TracingThreshold
 }
 
-// GetTracingThresholdOk returns a tuple with the TracingThreshold field value if set, nil otherwise
+// GetTracingThresholdOk returns a tuple with the TracingThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesTracingThreshold) GetTracingThresholdOk() (*TracingThresholdType, bool) {
-	if o == nil || IsNil(o.TracingThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TracingThreshold, true
+	return &o.TracingThreshold, true
 }
 
-// HasTracingThreshold returns a boolean if a field has been set.
-func (o *AlertDefPropertiesTracingThreshold) HasTracingThreshold() bool {
-	if o != nil && !IsNil(o.TracingThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetTracingThreshold gets a reference to the given TracingThresholdType and assigns it to the TracingThreshold field.
+// SetTracingThreshold sets field value
 func (o *AlertDefPropertiesTracingThreshold) SetTracingThreshold(v TracingThresholdType) {
-	o.TracingThreshold = &v
+	o.TracingThreshold = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -588,13 +588,73 @@ func (o AlertDefPropertiesTracingThreshold) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if !IsNil(o.TracingThreshold) {
-		toSerialize["tracingThreshold"] = o.TracingThreshold
-	}
+	toSerialize["tracingThreshold"] = o.TracingThreshold
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesTracingThreshold) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"tracingThreshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesTracingThreshold := _AlertDefPropertiesTracingThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesTracingThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesTracingThreshold(varAlertDefPropertiesTracingThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "tracingThreshold")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesTracingThreshold struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FallbackTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FallbackTarget{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &FallbackTarget{}
 type FallbackTarget struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Target *RoutingTarget `json:"target,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FallbackTarget FallbackTarget
 
 // NewFallbackTarget instantiates a new FallbackTarget object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o FallbackTarget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Target) {
 		toSerialize["target"] = o.Target
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FallbackTarget) UnmarshalJSON(data []byte) (err error) {
+	varFallbackTarget := _FallbackTarget{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFallbackTarget)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FallbackTarget(varFallbackTarget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "target")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFallbackTarget struct {

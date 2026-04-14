@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesSloThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesSloThreshold{}
@@ -38,16 +42,20 @@ type AlertDefPropertiesSloThreshold struct {
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
-	SloThreshold *SloThresholdType `json:"sloThreshold,omitempty"`
+	SloThreshold SloThresholdType `json:"sloThreshold"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesSloThreshold AlertDefPropertiesSloThreshold
 
 // NewAlertDefPropertiesSloThreshold instantiates a new AlertDefPropertiesSloThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesSloThreshold() *AlertDefPropertiesSloThreshold {
+func NewAlertDefPropertiesSloThreshold(sloThreshold SloThresholdType) *AlertDefPropertiesSloThreshold {
 	this := AlertDefPropertiesSloThreshold{}
+	this.SloThreshold = sloThreshold
 	return &this
 }
 
@@ -475,36 +483,28 @@ func (o *AlertDefPropertiesSloThreshold) SetPriority(v AlertDefPriority) {
 	o.Priority = &v
 }
 
-// GetSloThreshold returns the SloThreshold field value if set, zero value otherwise.
+// GetSloThreshold returns the SloThreshold field value
 func (o *AlertDefPropertiesSloThreshold) GetSloThreshold() SloThresholdType {
-	if o == nil || IsNil(o.SloThreshold) {
+	if o == nil {
 		var ret SloThresholdType
 		return ret
 	}
-	return *o.SloThreshold
+
+	return o.SloThreshold
 }
 
-// GetSloThresholdOk returns a tuple with the SloThreshold field value if set, nil otherwise
+// GetSloThresholdOk returns a tuple with the SloThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesSloThreshold) GetSloThresholdOk() (*SloThresholdType, bool) {
-	if o == nil || IsNil(o.SloThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SloThreshold, true
+	return &o.SloThreshold, true
 }
 
-// HasSloThreshold returns a boolean if a field has been set.
-func (o *AlertDefPropertiesSloThreshold) HasSloThreshold() bool {
-	if o != nil && !IsNil(o.SloThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetSloThreshold gets a reference to the given SloThresholdType and assigns it to the SloThreshold field.
+// SetSloThreshold sets field value
 func (o *AlertDefPropertiesSloThreshold) SetSloThreshold(v SloThresholdType) {
-	o.SloThreshold = &v
+	o.SloThreshold = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -588,13 +588,73 @@ func (o AlertDefPropertiesSloThreshold) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if !IsNil(o.SloThreshold) {
-		toSerialize["sloThreshold"] = o.SloThreshold
-	}
+	toSerialize["sloThreshold"] = o.SloThreshold
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesSloThreshold) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sloThreshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesSloThreshold := _AlertDefPropertiesSloThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesSloThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesSloThreshold(varAlertDefPropertiesSloThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "sloThreshold")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesSloThreshold struct {

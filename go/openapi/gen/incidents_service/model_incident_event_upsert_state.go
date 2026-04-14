@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventUpsertState type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventUpsertState{}
@@ -24,6 +26,7 @@ type IncidentEventUpsertState struct {
 	IsMuted *bool `json:"isMuted,omitempty"`
 	Payload UpsertIncidentStatePayload `json:"payload"`
 	StateType UpsertIncidentStateType `json:"stateType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventUpsertState IncidentEventUpsertState
@@ -142,6 +145,11 @@ func (o IncidentEventUpsertState) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["payload"] = o.Payload
 	toSerialize["stateType"] = o.StateType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,6 +186,15 @@ func (o *IncidentEventUpsertState) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentEventUpsertState(varIncidentEventUpsertState)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isMuted")
+		delete(additionalProperties, "payload")
+		delete(additionalProperties, "stateType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

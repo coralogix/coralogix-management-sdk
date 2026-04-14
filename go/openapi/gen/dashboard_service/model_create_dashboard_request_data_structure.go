@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateDashboardRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateDashboardRequestDataStructure{}
@@ -24,6 +26,7 @@ type CreateDashboardRequestDataStructure struct {
 	Dashboard Dashboard `json:"dashboard"`
 	IsLocked *bool `json:"isLocked,omitempty"`
 	RequestId string `json:"requestId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateDashboardRequestDataStructure CreateDashboardRequestDataStructure
@@ -142,6 +145,11 @@ func (o CreateDashboardRequestDataStructure) ToMap() (map[string]interface{}, er
 		toSerialize["isLocked"] = o.IsLocked
 	}
 	toSerialize["requestId"] = o.RequestId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,6 +186,15 @@ func (o *CreateDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err er
 	}
 
 	*o = CreateDashboardRequestDataStructure(varCreateDashboardRequestDataStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dashboard")
+		delete(additionalProperties, "isLocked")
+		delete(additionalProperties, "requestId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

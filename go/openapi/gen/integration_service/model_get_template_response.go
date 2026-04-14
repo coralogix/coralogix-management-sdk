@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetTemplateResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTemplateResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetTemplateResponse{}
 // GetTemplateResponse struct for GetTemplateResponse
 type GetTemplateResponse struct {
 	TemplateUrl *string `json:"templateUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTemplateResponse GetTemplateResponse
 
 // NewGetTemplateResponse instantiates a new GetTemplateResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetTemplateResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TemplateUrl) {
 		toSerialize["templateUrl"] = o.TemplateUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTemplateResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetTemplateResponse := _GetTemplateResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetTemplateResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTemplateResponse(varGetTemplateResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "templateUrl")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTemplateResponse struct {

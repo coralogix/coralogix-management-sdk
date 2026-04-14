@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationHeatmap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationHeatmap{}
 
 // VisualizationHeatmap struct for VisualizationHeatmap
 type VisualizationHeatmap struct {
-	Heatmap *Heatmap `json:"heatmap,omitempty"`
+	Heatmap Heatmap `json:"heatmap"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationHeatmap VisualizationHeatmap
 
 // NewVisualizationHeatmap instantiates a new VisualizationHeatmap object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationHeatmap() *VisualizationHeatmap {
+func NewVisualizationHeatmap(heatmap Heatmap) *VisualizationHeatmap {
 	this := VisualizationHeatmap{}
+	this.Heatmap = heatmap
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationHeatmapWithDefaults() *VisualizationHeatmap {
 	return &this
 }
 
-// GetHeatmap returns the Heatmap field value if set, zero value otherwise.
+// GetHeatmap returns the Heatmap field value
 func (o *VisualizationHeatmap) GetHeatmap() Heatmap {
-	if o == nil || IsNil(o.Heatmap) {
+	if o == nil {
 		var ret Heatmap
 		return ret
 	}
-	return *o.Heatmap
+
+	return o.Heatmap
 }
 
-// GetHeatmapOk returns a tuple with the Heatmap field value if set, nil otherwise
+// GetHeatmapOk returns a tuple with the Heatmap field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationHeatmap) GetHeatmapOk() (*Heatmap, bool) {
-	if o == nil || IsNil(o.Heatmap) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Heatmap, true
+	return &o.Heatmap, true
 }
 
-// HasHeatmap returns a boolean if a field has been set.
-func (o *VisualizationHeatmap) HasHeatmap() bool {
-	if o != nil && !IsNil(o.Heatmap) {
-		return true
-	}
-
-	return false
-}
-
-// SetHeatmap gets a reference to the given Heatmap and assigns it to the Heatmap field.
+// SetHeatmap sets field value
 func (o *VisualizationHeatmap) SetHeatmap(v Heatmap) {
-	o.Heatmap = &v
+	o.Heatmap = v
 }
 
 func (o VisualizationHeatmap) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationHeatmap) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationHeatmap) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Heatmap) {
-		toSerialize["heatmap"] = o.Heatmap
+	toSerialize["heatmap"] = o.Heatmap
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationHeatmap) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"heatmap",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationHeatmap := _VisualizationHeatmap{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationHeatmap)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationHeatmap(varVisualizationHeatmap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "heatmap")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationHeatmap struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectValueDisplayOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectValueDisplayOptions{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MultiSelectValueDisplayOptions{}
 type MultiSelectValueDisplayOptions struct {
 	LabelRegex *string `json:"labelRegex,omitempty"`
 	ValueRegex *string `json:"valueRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectValueDisplayOptions MultiSelectValueDisplayOptions
 
 // NewMultiSelectValueDisplayOptions instantiates a new MultiSelectValueDisplayOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o MultiSelectValueDisplayOptions) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.ValueRegex) {
 		toSerialize["valueRegex"] = o.ValueRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectValueDisplayOptions) UnmarshalJSON(data []byte) (err error) {
+	varMultiSelectValueDisplayOptions := _MultiSelectValueDisplayOptions{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectValueDisplayOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectValueDisplayOptions(varMultiSelectValueDisplayOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labelRegex")
+		delete(additionalProperties, "valueRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectValueDisplayOptions struct {

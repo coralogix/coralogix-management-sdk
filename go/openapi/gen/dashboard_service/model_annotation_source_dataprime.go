@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AnnotationSourceDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceDataprime{}
 
 // AnnotationSourceDataprime struct for AnnotationSourceDataprime
 type AnnotationSourceDataprime struct {
-	Dataprime *DataprimeSource `json:"dataprime,omitempty"`
+	Dataprime DataprimeSource `json:"dataprime"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnnotationSourceDataprime AnnotationSourceDataprime
 
 // NewAnnotationSourceDataprime instantiates a new AnnotationSourceDataprime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnnotationSourceDataprime() *AnnotationSourceDataprime {
+func NewAnnotationSourceDataprime(dataprime DataprimeSource) *AnnotationSourceDataprime {
 	this := AnnotationSourceDataprime{}
+	this.Dataprime = dataprime
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewAnnotationSourceDataprimeWithDefaults() *AnnotationSourceDataprime {
 	return &this
 }
 
-// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+// GetDataprime returns the Dataprime field value
 func (o *AnnotationSourceDataprime) GetDataprime() DataprimeSource {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		var ret DataprimeSource
 		return ret
 	}
-	return *o.Dataprime
+
+	return o.Dataprime
 }
 
-// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// GetDataprimeOk returns a tuple with the Dataprime field value
 // and a boolean to check if the value has been set.
 func (o *AnnotationSourceDataprime) GetDataprimeOk() (*DataprimeSource, bool) {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Dataprime, true
+	return &o.Dataprime, true
 }
 
-// HasDataprime returns a boolean if a field has been set.
-func (o *AnnotationSourceDataprime) HasDataprime() bool {
-	if o != nil && !IsNil(o.Dataprime) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataprime gets a reference to the given DataprimeSource and assigns it to the Dataprime field.
+// SetDataprime sets field value
 func (o *AnnotationSourceDataprime) SetDataprime(v DataprimeSource) {
-	o.Dataprime = &v
+	o.Dataprime = v
 }
 
 func (o AnnotationSourceDataprime) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o AnnotationSourceDataprime) MarshalJSON() ([]byte, error) {
 
 func (o AnnotationSourceDataprime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dataprime) {
-		toSerialize["dataprime"] = o.Dataprime
+	toSerialize["dataprime"] = o.Dataprime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *AnnotationSourceDataprime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dataprime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAnnotationSourceDataprime := _AnnotationSourceDataprime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotationSourceDataprime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnnotationSourceDataprime(varAnnotationSourceDataprime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataprime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnnotationSourceDataprime struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventExtendedMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventExtendedMetadata{}
@@ -29,7 +32,10 @@ type IncidentEventExtendedMetadata struct {
 	IncidentState *IncidentState `json:"incidentState,omitempty"`
 	IncidentStatus *IncidentStatus `json:"incidentStatus,omitempty"`
 	IsMuted *bool `json:"isMuted,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventExtendedMetadata IncidentEventExtendedMetadata
 
 // NewIncidentEventExtendedMetadata instantiates a new IncidentEventExtendedMetadata object
 // This constructor will assign default values to properties that have it defined,
@@ -408,7 +414,43 @@ func (o IncidentEventExtendedMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsMuted) {
 		toSerialize["isMuted"] = o.IsMuted
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventExtendedMetadata) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventExtendedMetadata := _IncidentEventExtendedMetadata{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventExtendedMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventExtendedMetadata(varIncidentEventExtendedMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertGroupByFields")
+		delete(additionalProperties, "alertId")
+		delete(additionalProperties, "alertLabels")
+		delete(additionalProperties, "alertName")
+		delete(additionalProperties, "alertType")
+		delete(additionalProperties, "incidentPermutation")
+		delete(additionalProperties, "incidentSeverity")
+		delete(additionalProperties, "incidentState")
+		delete(additionalProperties, "incidentStatus")
+		delete(additionalProperties, "isMuted")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventExtendedMetadata struct {

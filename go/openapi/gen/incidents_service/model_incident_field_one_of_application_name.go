@@ -11,23 +11,31 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfApplicationName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfApplicationName{}
 
 // IncidentFieldOneOfApplicationName struct for IncidentFieldOneOfApplicationName
 type IncidentFieldOneOfApplicationName struct {
-	ApplicationName *string `json:"applicationName,omitempty"`
+	ApplicationName string `json:"applicationName"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfApplicationName IncidentFieldOneOfApplicationName
 
 // NewIncidentFieldOneOfApplicationName instantiates a new IncidentFieldOneOfApplicationName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfApplicationName() *IncidentFieldOneOfApplicationName {
+func NewIncidentFieldOneOfApplicationName(applicationName string) *IncidentFieldOneOfApplicationName {
 	this := IncidentFieldOneOfApplicationName{}
+	this.ApplicationName = applicationName
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIncidentFieldOneOfApplicationNameWithDefaults() *IncidentFieldOneOfAppli
 	return &this
 }
 
-// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+// GetApplicationName returns the ApplicationName field value
 func (o *IncidentFieldOneOfApplicationName) GetApplicationName() string {
-	if o == nil || IsNil(o.ApplicationName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ApplicationName
+
+	return o.ApplicationName
 }
 
-// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// GetApplicationNameOk returns a tuple with the ApplicationName field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfApplicationName) GetApplicationNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ApplicationName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApplicationName, true
+	return &o.ApplicationName, true
 }
 
-// HasApplicationName returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfApplicationName) HasApplicationName() bool {
-	if o != nil && !IsNil(o.ApplicationName) {
-		return true
-	}
-
-	return false
-}
-
-// SetApplicationName gets a reference to the given string and assigns it to the ApplicationName field.
+// SetApplicationName sets field value
 func (o *IncidentFieldOneOfApplicationName) SetApplicationName(v string) {
-	o.ApplicationName = &v
+	o.ApplicationName = v
 }
 
 func (o IncidentFieldOneOfApplicationName) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IncidentFieldOneOfApplicationName) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfApplicationName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApplicationName) {
-		toSerialize["applicationName"] = o.ApplicationName
+	toSerialize["applicationName"] = o.ApplicationName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfApplicationName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"applicationName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfApplicationName := _IncidentFieldOneOfApplicationName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfApplicationName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfApplicationName(varIncidentFieldOneOfApplicationName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfApplicationName struct {

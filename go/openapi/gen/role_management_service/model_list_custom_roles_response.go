@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListCustomRolesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListCustomRolesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListCustomRolesResponse{}
 // ListCustomRolesResponse struct for ListCustomRolesResponse
 type ListCustomRolesResponse struct {
 	Roles []CustomRole `json:"roles,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListCustomRolesResponse ListCustomRolesResponse
 
 // NewListCustomRolesResponse instantiates a new ListCustomRolesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListCustomRolesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Roles) {
 		toSerialize["roles"] = o.Roles
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListCustomRolesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListCustomRolesResponse := _ListCustomRolesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListCustomRolesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListCustomRolesResponse(varListCustomRolesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "roles")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListCustomRolesResponse struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ValueLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValueLabel{}
@@ -22,7 +25,10 @@ type ValueLabel struct {
 	IsDefault *bool `json:"isDefault,omitempty"`
 	Label *string `json:"label,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ValueLabel ValueLabel
 
 // NewValueLabel instantiates a new ValueLabel object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ValueLabel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ValueLabel) UnmarshalJSON(data []byte) (err error) {
+	varValueLabel := _ValueLabel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varValueLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ValueLabel(varValueLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isDefault")
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableValueLabel struct {

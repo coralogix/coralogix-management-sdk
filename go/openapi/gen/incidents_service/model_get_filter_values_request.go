@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetFilterValuesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetFilterValuesRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetFilterValuesRequest{}
 // GetFilterValuesRequest Request to get available filter values for incidents
 type GetFilterValuesRequest struct {
 	Filter *IncidentQueryFilter `json:"filter,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFilterValuesRequest GetFilterValuesRequest
 
 // NewGetFilterValuesRequest instantiates a new GetFilterValuesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetFilterValuesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Filter) {
 		toSerialize["filter"] = o.Filter
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFilterValuesRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetFilterValuesRequest := _GetFilterValuesRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetFilterValuesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFilterValuesRequest(varGetFilterValuesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filter")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFilterValuesRequest struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Layout type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Layout{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Layout{}
 // Layout struct for Layout
 type Layout struct {
 	Sections []Section `json:"sections,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Layout Layout
 
 // NewLayout instantiates a new Layout object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Layout) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sections) {
 		toSerialize["sections"] = o.Sections
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Layout) UnmarshalJSON(data []byte) (err error) {
+	varLayout := _Layout{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLayout)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Layout(varLayout)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sections")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLayout struct {

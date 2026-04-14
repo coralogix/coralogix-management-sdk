@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsPathSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsPathSource{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &LogsPathSource{}
 type LogsPathSource struct {
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsPathSource LogsPathSource
 
 // NewLogsPathSource instantiates a new LogsPathSource object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o LogsPathSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsPathSource) UnmarshalJSON(data []byte) (err error) {
+	varLogsPathSource := _LogsPathSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsPathSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsPathSource(varLogsPathSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "observationField")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsPathSource struct {

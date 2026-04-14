@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsImmediateType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsImmediateType{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &LogsImmediateType{}
 type LogsImmediateType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsImmediateType LogsImmediateType
 
 // NewLogsImmediateType instantiates a new LogsImmediateType object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o LogsImmediateType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotificationPayloadFilter) {
 		toSerialize["notificationPayloadFilter"] = o.NotificationPayloadFilter
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsImmediateType) UnmarshalJSON(data []byte) (err error) {
+	varLogsImmediateType := _LogsImmediateType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsImmediateType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsImmediateType(varLogsImmediateType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsFilter")
+		delete(additionalProperties, "notificationPayloadFilter")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsImmediateType struct {

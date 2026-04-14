@@ -11,9 +11,12 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutboundWebhookSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutboundWebhookSummary{}
@@ -26,7 +29,10 @@ type OutboundWebhookSummary struct {
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutboundWebhookSummary OutboundWebhookSummary
 
 // NewOutboundWebhookSummary instantiates a new OutboundWebhookSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -265,7 +271,39 @@ func (o OutboundWebhookSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutboundWebhookSummary) UnmarshalJSON(data []byte) (err error) {
+	varOutboundWebhookSummary := _OutboundWebhookSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutboundWebhookSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutboundWebhookSummary(varOutboundWebhookSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutboundWebhookSummary struct {

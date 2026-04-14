@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueDefaultLuceneValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueDefaultLuceneValue{}
 
 // TextboxDefaultValueDefaultLuceneValue struct for TextboxDefaultValueDefaultLuceneValue
 type TextboxDefaultValueDefaultLuceneValue struct {
-	DefaultLuceneValue *TextboxDefaultLuceneValue `json:"defaultLuceneValue,omitempty"`
+	DefaultLuceneValue TextboxDefaultLuceneValue `json:"defaultLuceneValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueDefaultLuceneValue TextboxDefaultValueDefaultLuceneValue
 
 // NewTextboxDefaultValueDefaultLuceneValue instantiates a new TextboxDefaultValueDefaultLuceneValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueDefaultLuceneValue() *TextboxDefaultValueDefaultLuceneValue {
+func NewTextboxDefaultValueDefaultLuceneValue(defaultLuceneValue TextboxDefaultLuceneValue) *TextboxDefaultValueDefaultLuceneValue {
 	this := TextboxDefaultValueDefaultLuceneValue{}
+	this.DefaultLuceneValue = defaultLuceneValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTextboxDefaultValueDefaultLuceneValueWithDefaults() *TextboxDefaultValue
 	return &this
 }
 
-// GetDefaultLuceneValue returns the DefaultLuceneValue field value if set, zero value otherwise.
+// GetDefaultLuceneValue returns the DefaultLuceneValue field value
 func (o *TextboxDefaultValueDefaultLuceneValue) GetDefaultLuceneValue() TextboxDefaultLuceneValue {
-	if o == nil || IsNil(o.DefaultLuceneValue) {
+	if o == nil {
 		var ret TextboxDefaultLuceneValue
 		return ret
 	}
-	return *o.DefaultLuceneValue
+
+	return o.DefaultLuceneValue
 }
 
-// GetDefaultLuceneValueOk returns a tuple with the DefaultLuceneValue field value if set, nil otherwise
+// GetDefaultLuceneValueOk returns a tuple with the DefaultLuceneValue field value
 // and a boolean to check if the value has been set.
 func (o *TextboxDefaultValueDefaultLuceneValue) GetDefaultLuceneValueOk() (*TextboxDefaultLuceneValue, bool) {
-	if o == nil || IsNil(o.DefaultLuceneValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultLuceneValue, true
+	return &o.DefaultLuceneValue, true
 }
 
-// HasDefaultLuceneValue returns a boolean if a field has been set.
-func (o *TextboxDefaultValueDefaultLuceneValue) HasDefaultLuceneValue() bool {
-	if o != nil && !IsNil(o.DefaultLuceneValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultLuceneValue gets a reference to the given TextboxDefaultLuceneValue and assigns it to the DefaultLuceneValue field.
+// SetDefaultLuceneValue sets field value
 func (o *TextboxDefaultValueDefaultLuceneValue) SetDefaultLuceneValue(v TextboxDefaultLuceneValue) {
-	o.DefaultLuceneValue = &v
+	o.DefaultLuceneValue = v
 }
 
 func (o TextboxDefaultValueDefaultLuceneValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TextboxDefaultValueDefaultLuceneValue) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueDefaultLuceneValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultLuceneValue) {
-		toSerialize["defaultLuceneValue"] = o.DefaultLuceneValue
+	toSerialize["defaultLuceneValue"] = o.DefaultLuceneValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueDefaultLuceneValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"defaultLuceneValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueDefaultLuceneValue := _TextboxDefaultValueDefaultLuceneValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueDefaultLuceneValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueDefaultLuceneValue(varTextboxDefaultValueDefaultLuceneValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultLuceneValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueDefaultLuceneValue struct {

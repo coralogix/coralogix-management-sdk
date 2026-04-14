@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SaveContextualDataIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveContextualDataIntegrationResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SaveContextualDataIntegrationResponse{}
 // SaveContextualDataIntegrationResponse struct for SaveContextualDataIntegrationResponse
 type SaveContextualDataIntegrationResponse struct {
 	IntegrationId *string `json:"integrationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SaveContextualDataIntegrationResponse SaveContextualDataIntegrationResponse
 
 // NewSaveContextualDataIntegrationResponse instantiates a new SaveContextualDataIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SaveContextualDataIntegrationResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.IntegrationId) {
 		toSerialize["integrationId"] = o.IntegrationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SaveContextualDataIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
+	varSaveContextualDataIntegrationResponse := _SaveContextualDataIntegrationResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSaveContextualDataIntegrationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SaveContextualDataIntegrationResponse(varSaveContextualDataIntegrationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSaveContextualDataIntegrationResponse struct {

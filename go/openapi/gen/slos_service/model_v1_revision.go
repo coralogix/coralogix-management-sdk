@@ -11,9 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1Revision type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Revision{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &V1Revision{}
 type V1Revision struct {
 	Revision *int32 `json:"revision,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1Revision V1Revision
 
 // NewV1Revision instantiates a new V1Revision object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o V1Revision) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1Revision) UnmarshalJSON(data []byte) (err error) {
+	varV1Revision := _V1Revision{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1Revision)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1Revision(varV1Revision)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "revision")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1Revision struct {

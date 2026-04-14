@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQueryMetricsLabelFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryMetricsLabelFilter{}
@@ -22,7 +25,10 @@ type QuerySourceMetricsQueryMetricsLabelFilter struct {
 	Label *QuerySourceMetricsQueryStringOrVariable `json:"label,omitempty"`
 	Metric *QuerySourceMetricsQueryStringOrVariable `json:"metric,omitempty"`
 	Operator *QuerySourceMetricsQueryOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQueryMetricsLabelFilter QuerySourceMetricsQueryMetricsLabelFilter
 
 // NewQuerySourceMetricsQueryMetricsLabelFilter instantiates a new QuerySourceMetricsQueryMetricsLabelFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o QuerySourceMetricsQueryMetricsLabelFilter) ToMap() (map[string]interface
 	if !IsNil(o.Operator) {
 		toSerialize["operator"] = o.Operator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryMetricsLabelFilter) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceMetricsQueryMetricsLabelFilter := _QuerySourceMetricsQueryMetricsLabelFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryMetricsLabelFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryMetricsLabelFilter(varQuerySourceMetricsQueryMetricsLabelFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "metric")
+		delete(additionalProperties, "operator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQueryMetricsLabelFilter struct {

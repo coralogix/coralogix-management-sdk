@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Managed type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Managed{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Managed{}
 // Managed This data structure represents a managed integration.
 type Managed struct {
 	Variant *Variant `json:"variant,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Managed Managed
 
 // NewManaged instantiates a new Managed object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Managed) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Variant) {
 		toSerialize["variant"] = o.Variant
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Managed) UnmarshalJSON(data []byte) (err error) {
+	varManaged := _Managed{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varManaged)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Managed(varManaged)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "variant")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManaged struct {

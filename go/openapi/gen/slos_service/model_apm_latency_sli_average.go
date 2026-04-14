@@ -11,8 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApmLatencySliAverage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApmLatencySliAverage{}
@@ -20,18 +24,22 @@ var _ MappedNullable = &ApmLatencySliAverage{}
 // ApmLatencySliAverage Configuration for latency-based APM SLI
 type ApmLatencySliAverage struct {
 	// Average/mean-based latency measurement
-	Average map[string]interface{} `json:"average,omitempty"`
+	Average map[string]interface{} `json:"average"`
 	// Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.
 	Threshold *float32 `json:"threshold,omitempty"`
 	TimeWindow *WindowSloWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApmLatencySliAverage ApmLatencySliAverage
 
 // NewApmLatencySliAverage instantiates a new ApmLatencySliAverage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApmLatencySliAverage() *ApmLatencySliAverage {
+func NewApmLatencySliAverage(average map[string]interface{}) *ApmLatencySliAverage {
 	this := ApmLatencySliAverage{}
+	this.Average = average
 	return &this
 }
 
@@ -43,34 +51,26 @@ func NewApmLatencySliAverageWithDefaults() *ApmLatencySliAverage {
 	return &this
 }
 
-// GetAverage returns the Average field value if set, zero value otherwise.
+// GetAverage returns the Average field value
 func (o *ApmLatencySliAverage) GetAverage() map[string]interface{} {
-	if o == nil || IsNil(o.Average) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Average
 }
 
-// GetAverageOk returns a tuple with the Average field value if set, nil otherwise
+// GetAverageOk returns a tuple with the Average field value
 // and a boolean to check if the value has been set.
 func (o *ApmLatencySliAverage) GetAverageOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Average) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Average, true
 }
 
-// HasAverage returns a boolean if a field has been set.
-func (o *ApmLatencySliAverage) HasAverage() bool {
-	if o != nil && !IsNil(o.Average) {
-		return true
-	}
-
-	return false
-}
-
-// SetAverage gets a reference to the given map[string]interface{} and assigns it to the Average field.
+// SetAverage sets field value
 func (o *ApmLatencySliAverage) SetAverage(v map[string]interface{}) {
 	o.Average = v
 }
@@ -149,16 +149,64 @@ func (o ApmLatencySliAverage) MarshalJSON() ([]byte, error) {
 
 func (o ApmLatencySliAverage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Average) {
-		toSerialize["average"] = o.Average
-	}
+	toSerialize["average"] = o.Average
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApmLatencySliAverage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"average",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varApmLatencySliAverage := _ApmLatencySliAverage{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmLatencySliAverage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmLatencySliAverage(varApmLatencySliAverage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "average")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApmLatencySliAverage struct {

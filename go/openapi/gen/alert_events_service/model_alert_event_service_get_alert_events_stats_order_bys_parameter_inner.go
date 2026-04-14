@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertEventServiceGetAlertEventsStatsOrderBysParameterInner type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertEventServiceGetAlertEventsStatsOrderBysParameterInner{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AlertEventServiceGetAlertEventsStatsOrderBysParameterInn
 type AlertEventServiceGetAlertEventsStatsOrderBysParameterInner struct {
 	Direction *OrderByAlertEventDirection `json:"direction,omitempty"`
 	FieldName *OrderByAlertEventFields `json:"fieldName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertEventServiceGetAlertEventsStatsOrderBysParameterInner AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
 
 // NewAlertEventServiceGetAlertEventsStatsOrderBysParameterInner instantiates a new AlertEventServiceGetAlertEventsStatsOrderBysParameterInner object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) ToMap() (map
 	if !IsNil(o.FieldName) {
 		toSerialize["fieldName"] = o.FieldName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) UnmarshalJSON(data []byte) (err error) {
+	varAlertEventServiceGetAlertEventsStatsOrderBysParameterInner := _AlertEventServiceGetAlertEventsStatsOrderBysParameterInner{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertEventServiceGetAlertEventsStatsOrderBysParameterInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertEventServiceGetAlertEventsStatsOrderBysParameterInner(varAlertEventServiceGetAlertEventsStatsOrderBysParameterInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "fieldName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertEventServiceGetAlertEventsStatsOrderBysParameterInner struct {

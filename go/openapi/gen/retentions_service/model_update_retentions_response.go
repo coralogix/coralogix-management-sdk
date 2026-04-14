@@ -11,10 +11,12 @@ API version: 1.0.0
 package retentions_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateRetentionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateRetentionsResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &UpdateRetentionsResponse{}
 // UpdateRetentionsResponse This data structure is obtained after updating retentions
 type UpdateRetentionsResponse struct {
 	Retentions []ArchiveV1Retention `json:"retentions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateRetentionsResponse UpdateRetentionsResponse
@@ -79,6 +82,11 @@ func (o UpdateRetentionsResponse) MarshalJSON() ([]byte, error) {
 func (o UpdateRetentionsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["retentions"] = o.Retentions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *UpdateRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UpdateRetentionsResponse(varUpdateRetentionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "retentions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

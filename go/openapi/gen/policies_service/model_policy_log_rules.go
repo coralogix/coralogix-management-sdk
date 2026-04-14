@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PolicyLogRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PolicyLogRules{}
@@ -29,12 +31,16 @@ type PolicyLogRules struct {
 	Description *string `json:"description,omitempty"`
 	Enabled bool `json:"enabled"`
 	Id string `json:"id"`
-	LogRules *LogRules `json:"logRules,omitempty"`
+	LogRules LogRules `json:"logRules"`
 	Name string `json:"name"`
 	Order int32 `json:"order"`
 	Priority QuotaV1Priority `json:"priority"`
+	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
+	PriorityOverrideStatus *PriorityOverrideStatus `json:"priorityOverrideStatus,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	Targets []V1Target `json:"targets,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PolicyLogRules PolicyLogRules
@@ -43,12 +49,13 @@ type _PolicyLogRules PolicyLogRules
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPolicyLogRules(companyId int32, deleted bool, enabled bool, id string, name string, order int32, priority QuotaV1Priority) *PolicyLogRules {
+func NewPolicyLogRules(companyId int32, deleted bool, enabled bool, id string, logRules LogRules, name string, order int32, priority QuotaV1Priority) *PolicyLogRules {
 	this := PolicyLogRules{}
 	this.CompanyId = companyId
 	this.Deleted = deleted
 	this.Enabled = enabled
 	this.Id = id
+	this.LogRules = logRules
 	this.Name = name
 	this.Order = order
 	this.Priority = priority
@@ -287,36 +294,28 @@ func (o *PolicyLogRules) SetId(v string) {
 	o.Id = v
 }
 
-// GetLogRules returns the LogRules field value if set, zero value otherwise.
+// GetLogRules returns the LogRules field value
 func (o *PolicyLogRules) GetLogRules() LogRules {
-	if o == nil || IsNil(o.LogRules) {
+	if o == nil {
 		var ret LogRules
 		return ret
 	}
-	return *o.LogRules
+
+	return o.LogRules
 }
 
-// GetLogRulesOk returns a tuple with the LogRules field value if set, nil otherwise
+// GetLogRulesOk returns a tuple with the LogRules field value
 // and a boolean to check if the value has been set.
 func (o *PolicyLogRules) GetLogRulesOk() (*LogRules, bool) {
-	if o == nil || IsNil(o.LogRules) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogRules, true
+	return &o.LogRules, true
 }
 
-// HasLogRules returns a boolean if a field has been set.
-func (o *PolicyLogRules) HasLogRules() bool {
-	if o != nil && !IsNil(o.LogRules) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogRules gets a reference to the given LogRules and assigns it to the LogRules field.
+// SetLogRules sets field value
 func (o *PolicyLogRules) SetLogRules(v LogRules) {
-	o.LogRules = &v
+	o.LogRules = v
 }
 
 // GetName returns the Name field value
@@ -391,6 +390,70 @@ func (o *PolicyLogRules) SetPriority(v QuotaV1Priority) {
 	o.Priority = v
 }
 
+// GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
+func (o *PolicyLogRules) GetPriorityOverride() PriorityOverride {
+	if o == nil || IsNil(o.PriorityOverride) {
+		var ret PriorityOverride
+		return ret
+	}
+	return *o.PriorityOverride
+}
+
+// GetPriorityOverrideOk returns a tuple with the PriorityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyLogRules) GetPriorityOverrideOk() (*PriorityOverride, bool) {
+	if o == nil || IsNil(o.PriorityOverride) {
+		return nil, false
+	}
+	return o.PriorityOverride, true
+}
+
+// HasPriorityOverride returns a boolean if a field has been set.
+func (o *PolicyLogRules) HasPriorityOverride() bool {
+	if o != nil && !IsNil(o.PriorityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverride gets a reference to the given PriorityOverride and assigns it to the PriorityOverride field.
+func (o *PolicyLogRules) SetPriorityOverride(v PriorityOverride) {
+	o.PriorityOverride = &v
+}
+
+// GetPriorityOverrideStatus returns the PriorityOverrideStatus field value if set, zero value otherwise.
+func (o *PolicyLogRules) GetPriorityOverrideStatus() PriorityOverrideStatus {
+	if o == nil || IsNil(o.PriorityOverrideStatus) {
+		var ret PriorityOverrideStatus
+		return ret
+	}
+	return *o.PriorityOverrideStatus
+}
+
+// GetPriorityOverrideStatusOk returns a tuple with the PriorityOverrideStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyLogRules) GetPriorityOverrideStatusOk() (*PriorityOverrideStatus, bool) {
+	if o == nil || IsNil(o.PriorityOverrideStatus) {
+		return nil, false
+	}
+	return o.PriorityOverrideStatus, true
+}
+
+// HasPriorityOverrideStatus returns a boolean if a field has been set.
+func (o *PolicyLogRules) HasPriorityOverrideStatus() bool {
+	if o != nil && !IsNil(o.PriorityOverrideStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverrideStatus gets a reference to the given PriorityOverrideStatus and assigns it to the PriorityOverrideStatus field.
+func (o *PolicyLogRules) SetPriorityOverrideStatus(v PriorityOverrideStatus) {
+	o.PriorityOverrideStatus = &v
+}
+
 // GetSubsystemRule returns the SubsystemRule field value if set, zero value otherwise.
 func (o *PolicyLogRules) GetSubsystemRule() QuotaV1Rule {
 	if o == nil || IsNil(o.SubsystemRule) {
@@ -421,6 +484,38 @@ func (o *PolicyLogRules) HasSubsystemRule() bool {
 // SetSubsystemRule gets a reference to the given QuotaV1Rule and assigns it to the SubsystemRule field.
 func (o *PolicyLogRules) SetSubsystemRule(v QuotaV1Rule) {
 	o.SubsystemRule = &v
+}
+
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *PolicyLogRules) GetTargets() []V1Target {
+	if o == nil || IsNil(o.Targets) {
+		var ret []V1Target
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PolicyLogRules) GetTargetsOk() ([]V1Target, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *PolicyLogRules) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []V1Target and assigns it to the Targets field.
+func (o *PolicyLogRules) SetTargets(v []V1Target) {
+	o.Targets = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -481,18 +576,30 @@ func (o PolicyLogRules) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["id"] = o.Id
-	if !IsNil(o.LogRules) {
-		toSerialize["logRules"] = o.LogRules
-	}
+	toSerialize["logRules"] = o.LogRules
 	toSerialize["name"] = o.Name
 	toSerialize["order"] = o.Order
 	toSerialize["priority"] = o.Priority
+	if !IsNil(o.PriorityOverride) {
+		toSerialize["priorityOverride"] = o.PriorityOverride
+	}
+	if !IsNil(o.PriorityOverrideStatus) {
+		toSerialize["priorityOverrideStatus"] = o.PriorityOverrideStatus
+	}
 	if !IsNil(o.SubsystemRule) {
 		toSerialize["subsystemRule"] = o.SubsystemRule
+	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -505,6 +612,7 @@ func (o *PolicyLogRules) UnmarshalJSON(data []byte) (err error) {
 		"deleted",
 		"enabled",
 		"id",
+		"logRules",
 		"name",
 		"order",
 		"priority",
@@ -534,6 +642,29 @@ func (o *PolicyLogRules) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = PolicyLogRules(varPolicyLogRules)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationRule")
+		delete(additionalProperties, "archiveRetention")
+		delete(additionalProperties, "companyId")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "logRules")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "priorityOverride")
+		delete(additionalProperties, "priorityOverrideStatus")
+		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "targets")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

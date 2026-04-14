@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansQueryGrouping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansQueryGrouping{}
@@ -22,7 +25,10 @@ type SpansQueryGrouping struct {
 	Aggregations []SpansQueryAggregation `json:"aggregations,omitempty"`
 	GroupBy []SpanField `json:"groupBy,omitempty"`
 	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansQueryGrouping SpansQueryGrouping
 
 // NewSpansQueryGrouping instantiates a new SpansQueryGrouping object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o SpansQueryGrouping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupBys) {
 		toSerialize["groupBys"] = o.GroupBys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansQueryGrouping) UnmarshalJSON(data []byte) (err error) {
+	varSpansQueryGrouping := _SpansQueryGrouping{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansQueryGrouping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansQueryGrouping(varSpansQueryGrouping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregations")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "groupBys")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansQueryGrouping struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpanRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanRules{}
@@ -22,7 +25,10 @@ type SpanRules struct {
 	ActionRule *QuotaV1Rule `json:"actionRule,omitempty"`
 	ServiceRule *QuotaV1Rule `json:"serviceRule,omitempty"`
 	TagRules []TagRule `json:"tagRules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpanRules SpanRules
 
 // NewSpanRules instantiates a new SpanRules object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o SpanRules) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TagRules) {
 		toSerialize["tagRules"] = o.TagRules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpanRules) UnmarshalJSON(data []byte) (err error) {
+	varSpanRules := _SpanRules{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanRules)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanRules(varSpanRules)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actionRule")
+		delete(additionalProperties, "serviceRule")
+		delete(additionalProperties, "tagRules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpanRules struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBarChartYAxisViewByValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartYAxisViewByValue{}
 
 // HorizontalBarChartYAxisViewByValue struct for HorizontalBarChartYAxisViewByValue
 type HorizontalBarChartYAxisViewByValue struct {
-	Value map[string]interface{} `json:"value,omitempty"`
+	Value map[string]interface{} `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBarChartYAxisViewByValue HorizontalBarChartYAxisViewByValue
 
 // NewHorizontalBarChartYAxisViewByValue instantiates a new HorizontalBarChartYAxisViewByValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHorizontalBarChartYAxisViewByValue() *HorizontalBarChartYAxisViewByValue {
+func NewHorizontalBarChartYAxisViewByValue(value map[string]interface{}) *HorizontalBarChartYAxisViewByValue {
 	this := HorizontalBarChartYAxisViewByValue{}
+	this.Value = value
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewHorizontalBarChartYAxisViewByValueWithDefaults() *HorizontalBarChartYAxi
 	return &this
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
 func (o *HorizontalBarChartYAxisViewByValue) GetValue() map[string]interface{} {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *HorizontalBarChartYAxisViewByValue) GetValueOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *HorizontalBarChartYAxisViewByValue) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given map[string]interface{} and assigns it to the Value field.
+// SetValue sets field value
 func (o *HorizontalBarChartYAxisViewByValue) SetValue(v map[string]interface{}) {
 	o.Value = v
 }
@@ -81,10 +81,56 @@ func (o HorizontalBarChartYAxisViewByValue) MarshalJSON() ([]byte, error) {
 
 func (o HorizontalBarChartYAxisViewByValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
+	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartYAxisViewByValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHorizontalBarChartYAxisViewByValue := _HorizontalBarChartYAxisViewByValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartYAxisViewByValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartYAxisViewByValue(varHorizontalBarChartYAxisViewByValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBarChartYAxisViewByValue struct {

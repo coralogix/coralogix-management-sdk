@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetE2MResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetE2MResponse{}
 // GetE2MResponse This data structure is obtained when retrieving an existing event to metric definition
 type GetE2MResponse struct {
 	E2m E2M `json:"e2m"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetE2MResponse GetE2MResponse
@@ -79,6 +82,11 @@ func (o GetE2MResponse) MarshalJSON() ([]byte, error) {
 func (o GetE2MResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["e2m"] = o.E2m
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *GetE2MResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetE2MResponse(varGetE2MResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "e2m")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

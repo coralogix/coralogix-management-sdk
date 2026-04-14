@@ -11,8 +11,11 @@ API version: 1.0.0
 package retentions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ArchiveV1Retention type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ArchiveV1Retention{}
@@ -23,7 +26,10 @@ type ArchiveV1Retention struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Order *int32 `json:"order,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ArchiveV1Retention ArchiveV1Retention
 
 // NewArchiveV1Retention instantiates a new ArchiveV1Retention object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o ArchiveV1Retention) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Order) {
 		toSerialize["order"] = o.Order
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ArchiveV1Retention) UnmarshalJSON(data []byte) (err error) {
+	varArchiveV1Retention := _ArchiveV1Retention{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varArchiveV1Retention)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ArchiveV1Retention(varArchiveV1Retention)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "editable")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableArchiveV1Retention struct {

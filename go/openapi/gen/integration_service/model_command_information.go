@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CommandInformation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommandInformation{}
@@ -25,7 +28,10 @@ type CommandInformation struct {
 	Links []Link `json:"links,omitempty"`
 	Name *string `json:"name,omitempty"`
 	TooltipText *string `json:"tooltipText,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CommandInformation CommandInformation
 
 // NewCommandInformation instantiates a new CommandInformation object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o CommandInformation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TooltipText) {
 		toSerialize["tooltipText"] = o.TooltipText
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CommandInformation) UnmarshalJSON(data []byte) (err error) {
+	varCommandInformation := _CommandInformation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCommandInformation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommandInformation(varCommandInformation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "command")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "language")
+		delete(additionalProperties, "links")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "tooltipText")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCommandInformation struct {

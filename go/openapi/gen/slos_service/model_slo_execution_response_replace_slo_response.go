@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloExecutionResponseReplaceSloResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloExecutionResponseReplaceSloResponse{}
 
 // SloExecutionResponseReplaceSloResponse Response for an executed SLO operation.
 type SloExecutionResponseReplaceSloResponse struct {
-	ReplaceSloResponse *ReplaceSloResponse `json:"replaceSloResponse,omitempty"`
+	ReplaceSloResponse ReplaceSloResponse `json:"replaceSloResponse"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloExecutionResponseReplaceSloResponse SloExecutionResponseReplaceSloResponse
 
 // NewSloExecutionResponseReplaceSloResponse instantiates a new SloExecutionResponseReplaceSloResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloExecutionResponseReplaceSloResponse() *SloExecutionResponseReplaceSloResponse {
+func NewSloExecutionResponseReplaceSloResponse(replaceSloResponse ReplaceSloResponse) *SloExecutionResponseReplaceSloResponse {
 	this := SloExecutionResponseReplaceSloResponse{}
+	this.ReplaceSloResponse = replaceSloResponse
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSloExecutionResponseReplaceSloResponseWithDefaults() *SloExecutionRespon
 	return &this
 }
 
-// GetReplaceSloResponse returns the ReplaceSloResponse field value if set, zero value otherwise.
+// GetReplaceSloResponse returns the ReplaceSloResponse field value
 func (o *SloExecutionResponseReplaceSloResponse) GetReplaceSloResponse() ReplaceSloResponse {
-	if o == nil || IsNil(o.ReplaceSloResponse) {
+	if o == nil {
 		var ret ReplaceSloResponse
 		return ret
 	}
-	return *o.ReplaceSloResponse
+
+	return o.ReplaceSloResponse
 }
 
-// GetReplaceSloResponseOk returns a tuple with the ReplaceSloResponse field value if set, nil otherwise
+// GetReplaceSloResponseOk returns a tuple with the ReplaceSloResponse field value
 // and a boolean to check if the value has been set.
 func (o *SloExecutionResponseReplaceSloResponse) GetReplaceSloResponseOk() (*ReplaceSloResponse, bool) {
-	if o == nil || IsNil(o.ReplaceSloResponse) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReplaceSloResponse, true
+	return &o.ReplaceSloResponse, true
 }
 
-// HasReplaceSloResponse returns a boolean if a field has been set.
-func (o *SloExecutionResponseReplaceSloResponse) HasReplaceSloResponse() bool {
-	if o != nil && !IsNil(o.ReplaceSloResponse) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplaceSloResponse gets a reference to the given ReplaceSloResponse and assigns it to the ReplaceSloResponse field.
+// SetReplaceSloResponse sets field value
 func (o *SloExecutionResponseReplaceSloResponse) SetReplaceSloResponse(v ReplaceSloResponse) {
-	o.ReplaceSloResponse = &v
+	o.ReplaceSloResponse = v
 }
 
 func (o SloExecutionResponseReplaceSloResponse) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SloExecutionResponseReplaceSloResponse) MarshalJSON() ([]byte, error) {
 
 func (o SloExecutionResponseReplaceSloResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ReplaceSloResponse) {
-		toSerialize["replaceSloResponse"] = o.ReplaceSloResponse
+	toSerialize["replaceSloResponse"] = o.ReplaceSloResponse
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloExecutionResponseReplaceSloResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"replaceSloResponse",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloExecutionResponseReplaceSloResponse := _SloExecutionResponseReplaceSloResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloExecutionResponseReplaceSloResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloExecutionResponseReplaceSloResponse(varSloExecutionResponseReplaceSloResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replaceSloResponse")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloExecutionResponseReplaceSloResponse struct {

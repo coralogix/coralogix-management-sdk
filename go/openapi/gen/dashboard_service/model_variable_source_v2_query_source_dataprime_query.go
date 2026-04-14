@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2QuerySourceDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2QuerySourceDataprimeQuery{}
@@ -20,18 +24,22 @@ var _ MappedNullable = &VariableSourceV2QuerySourceDataprimeQuery{}
 // VariableSourceV2QuerySourceDataprimeQuery struct for VariableSourceV2QuerySourceDataprimeQuery
 type VariableSourceV2QuerySourceDataprimeQuery struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
-	DataprimeQuery *QuerySourceDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	DataprimeQuery QuerySourceDataprimeQuery `json:"dataprimeQuery"`
 	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
 	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
 	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2QuerySourceDataprimeQuery VariableSourceV2QuerySourceDataprimeQuery
 
 // NewVariableSourceV2QuerySourceDataprimeQuery instantiates a new VariableSourceV2QuerySourceDataprimeQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2QuerySourceDataprimeQuery() *VariableSourceV2QuerySourceDataprimeQuery {
+func NewVariableSourceV2QuerySourceDataprimeQuery(dataprimeQuery QuerySourceDataprimeQuery) *VariableSourceV2QuerySourceDataprimeQuery {
 	this := VariableSourceV2QuerySourceDataprimeQuery{}
+	this.DataprimeQuery = dataprimeQuery
 	return &this
 }
 
@@ -75,36 +83,28 @@ func (o *VariableSourceV2QuerySourceDataprimeQuery) SetAllOption(v AllOption) {
 	o.AllOption = &v
 }
 
-// GetDataprimeQuery returns the DataprimeQuery field value if set, zero value otherwise.
+// GetDataprimeQuery returns the DataprimeQuery field value
 func (o *VariableSourceV2QuerySourceDataprimeQuery) GetDataprimeQuery() QuerySourceDataprimeQuery {
-	if o == nil || IsNil(o.DataprimeQuery) {
+	if o == nil {
 		var ret QuerySourceDataprimeQuery
 		return ret
 	}
-	return *o.DataprimeQuery
+
+	return o.DataprimeQuery
 }
 
-// GetDataprimeQueryOk returns a tuple with the DataprimeQuery field value if set, nil otherwise
+// GetDataprimeQueryOk returns a tuple with the DataprimeQuery field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2QuerySourceDataprimeQuery) GetDataprimeQueryOk() (*QuerySourceDataprimeQuery, bool) {
-	if o == nil || IsNil(o.DataprimeQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DataprimeQuery, true
+	return &o.DataprimeQuery, true
 }
 
-// HasDataprimeQuery returns a boolean if a field has been set.
-func (o *VariableSourceV2QuerySourceDataprimeQuery) HasDataprimeQuery() bool {
-	if o != nil && !IsNil(o.DataprimeQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataprimeQuery gets a reference to the given QuerySourceDataprimeQuery and assigns it to the DataprimeQuery field.
+// SetDataprimeQuery sets field value
 func (o *VariableSourceV2QuerySourceDataprimeQuery) SetDataprimeQuery(v QuerySourceDataprimeQuery) {
-	o.DataprimeQuery = &v
+	o.DataprimeQuery = v
 }
 
 // GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
@@ -216,9 +216,7 @@ func (o VariableSourceV2QuerySourceDataprimeQuery) ToMap() (map[string]interface
 	if !IsNil(o.AllOption) {
 		toSerialize["allOption"] = o.AllOption
 	}
-	if !IsNil(o.DataprimeQuery) {
-		toSerialize["dataprimeQuery"] = o.DataprimeQuery
-	}
+	toSerialize["dataprimeQuery"] = o.DataprimeQuery
 	if !IsNil(o.RefreshStrategy) {
 		toSerialize["refreshStrategy"] = o.RefreshStrategy
 	}
@@ -228,7 +226,59 @@ func (o VariableSourceV2QuerySourceDataprimeQuery) ToMap() (map[string]interface
 	if !IsNil(o.ValuesOrderDirection) {
 		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2QuerySourceDataprimeQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dataprimeQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2QuerySourceDataprimeQuery := _VariableSourceV2QuerySourceDataprimeQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2QuerySourceDataprimeQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2QuerySourceDataprimeQuery(varVariableSourceV2QuerySourceDataprimeQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allOption")
+		delete(additionalProperties, "dataprimeQuery")
+		delete(additionalProperties, "refreshStrategy")
+		delete(additionalProperties, "valueDisplayOptions")
+		delete(additionalProperties, "valuesOrderDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2QuerySourceDataprimeQuery struct {

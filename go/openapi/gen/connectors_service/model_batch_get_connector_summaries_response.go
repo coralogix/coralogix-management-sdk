@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchGetConnectorSummariesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchGetConnectorSummariesResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &BatchGetConnectorSummariesResponse{}
 type BatchGetConnectorSummariesResponse struct {
 	ConnectorSummaries *map[string]ConnectorSummary `json:"connectorSummaries,omitempty"`
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchGetConnectorSummariesResponse BatchGetConnectorSummariesResponse
 
 // NewBatchGetConnectorSummariesResponse instantiates a new BatchGetConnectorSummariesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o BatchGetConnectorSummariesResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.NotFoundIds) {
 		toSerialize["notFoundIds"] = o.NotFoundIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchGetConnectorSummariesResponse) UnmarshalJSON(data []byte) (err error) {
+	varBatchGetConnectorSummariesResponse := _BatchGetConnectorSummariesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBatchGetConnectorSummariesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchGetConnectorSummariesResponse(varBatchGetConnectorSummariesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectorSummaries")
+		delete(additionalProperties, "notFoundIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchGetConnectorSummariesResponse struct {

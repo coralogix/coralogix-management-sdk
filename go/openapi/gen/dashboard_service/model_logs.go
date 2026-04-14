@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Logs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Logs{}
@@ -24,7 +27,10 @@ type Logs struct {
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
 	GroupBy []ObservationField `json:"groupBy,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Logs Logs
 
 // NewLogs instantiates a new Logs object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o Logs) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LuceneQuery) {
 		toSerialize["luceneQuery"] = o.LuceneQuery
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Logs) UnmarshalJSON(data []byte) (err error) {
+	varLogs := _Logs{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Logs(varLogs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "luceneQuery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogs struct {

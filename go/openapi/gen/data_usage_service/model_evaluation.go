@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Evaluation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Evaluation{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Evaluation{}
 type Evaluation struct {
 	EvaluationTokens *Token `json:"evaluationTokens,omitempty"`
 	EvaluatorName *string `json:"evaluatorName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Evaluation Evaluation
 
 // NewEvaluation instantiates a new Evaluation object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Evaluation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EvaluatorName) {
 		toSerialize["evaluatorName"] = o.EvaluatorName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Evaluation) UnmarshalJSON(data []byte) (err error) {
+	varEvaluation := _Evaluation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEvaluation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Evaluation(varEvaluation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "evaluationTokens")
+		delete(additionalProperties, "evaluatorName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEvaluation struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UserUpdates type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserUpdates{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &UserUpdates{}
 // UserUpdates Patch object for updating group user membership. Choose one operation: add, remove, or replace all users.
 type UserUpdates struct {
 	Operation *UserUpdatesOperation `json:"operation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserUpdates UserUpdates
 
 // NewUserUpdates instantiates a new UserUpdates object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o UserUpdates) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Operation) {
 		toSerialize["operation"] = o.Operation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserUpdates) UnmarshalJSON(data []byte) (err error) {
+	varUserUpdates := _UserUpdates{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUserUpdates)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserUpdates(varUserUpdates)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserUpdates struct {

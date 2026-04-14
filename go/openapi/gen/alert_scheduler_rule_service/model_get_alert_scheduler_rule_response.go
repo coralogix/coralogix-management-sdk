@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAlertSchedulerRuleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertSchedulerRuleResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetAlertSchedulerRuleResponse{}
 // GetAlertSchedulerRuleResponse This is a response sent to get an alert scheduler rule
 type GetAlertSchedulerRuleResponse struct {
 	AlertSchedulerRule AlertSchedulerRule `json:"alertSchedulerRule"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetAlertSchedulerRuleResponse GetAlertSchedulerRuleResponse
@@ -79,6 +82,11 @@ func (o GetAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
 func (o GetAlertSchedulerRuleResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertSchedulerRule"] = o.AlertSchedulerRule
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *GetAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetAlertSchedulerRuleResponse(varGetAlertSchedulerRuleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerRule")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

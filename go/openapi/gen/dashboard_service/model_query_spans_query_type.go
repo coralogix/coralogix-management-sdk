@@ -11,28 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // QuerySpansQueryType - struct for QuerySpansQueryType
 type QuerySpansQueryType struct {
-	QuerySpansQueryTypeFieldName *QuerySpansQueryTypeFieldName
-	QuerySpansQueryTypeFieldValue *QuerySpansQueryTypeFieldValue
+	QuerySpansQueryTypeFieldNameVariant *QuerySpansQueryTypeFieldNameVariant
+	QuerySpansQueryTypeFieldValueVariant *QuerySpansQueryTypeFieldValueVariant
 }
 
-// QuerySpansQueryTypeFieldNameAsQuerySpansQueryType is a convenience function that returns QuerySpansQueryTypeFieldName wrapped in QuerySpansQueryType
-func QuerySpansQueryTypeFieldNameAsQuerySpansQueryType(v *QuerySpansQueryTypeFieldName) QuerySpansQueryType {
+// QuerySpansQueryTypeFieldNameVariantAsQuerySpansQueryType is a convenience function that returns QuerySpansQueryTypeFieldNameVariant wrapped in QuerySpansQueryType
+func QuerySpansQueryTypeFieldNameVariantAsQuerySpansQueryType(v *QuerySpansQueryTypeFieldNameVariant) QuerySpansQueryType {
 	return QuerySpansQueryType{
-		QuerySpansQueryTypeFieldName: v,
+		QuerySpansQueryTypeFieldNameVariant: v,
 	}
 }
 
-// QuerySpansQueryTypeFieldValueAsQuerySpansQueryType is a convenience function that returns QuerySpansQueryTypeFieldValue wrapped in QuerySpansQueryType
-func QuerySpansQueryTypeFieldValueAsQuerySpansQueryType(v *QuerySpansQueryTypeFieldValue) QuerySpansQueryType {
+// QuerySpansQueryTypeFieldValueVariantAsQuerySpansQueryType is a convenience function that returns QuerySpansQueryTypeFieldValueVariant wrapped in QuerySpansQueryType
+func QuerySpansQueryTypeFieldValueVariantAsQuerySpansQueryType(v *QuerySpansQueryTypeFieldValueVariant) QuerySpansQueryType {
 	return QuerySpansQueryType{
-		QuerySpansQueryTypeFieldValue: v,
+		QuerySpansQueryTypeFieldValueVariant: v,
 	}
 }
 
@@ -41,44 +44,44 @@ func QuerySpansQueryTypeFieldValueAsQuerySpansQueryType(v *QuerySpansQueryTypeFi
 func (dst *QuerySpansQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QuerySpansQueryTypeFieldName
-	err = json.Unmarshal(data, &dst.QuerySpansQueryTypeFieldName)
+	// try to unmarshal data into QuerySpansQueryTypeFieldNameVariant
+	err = json.Unmarshal(data, &dst.QuerySpansQueryTypeFieldNameVariant)
 	if err == nil {
-		jsonQuerySpansQueryTypeFieldName, _ := json.Marshal(dst.QuerySpansQueryTypeFieldName)
-		if string(jsonQuerySpansQueryTypeFieldName) == "{}" { // empty struct
-			dst.QuerySpansQueryTypeFieldName = nil
+		jsonQuerySpansQueryTypeFieldNameVariant, _ := json.Marshal(dst.QuerySpansQueryTypeFieldNameVariant)
+		if string(jsonQuerySpansQueryTypeFieldNameVariant) == "{}" { // empty struct
+			dst.QuerySpansQueryTypeFieldNameVariant = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpansQueryTypeFieldName); err != nil {
-				dst.QuerySpansQueryTypeFieldName = nil
+			if err = validator.Validate(dst.QuerySpansQueryTypeFieldNameVariant); err != nil {
+				dst.QuerySpansQueryTypeFieldNameVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpansQueryTypeFieldName = nil
+		dst.QuerySpansQueryTypeFieldNameVariant = nil
 	}
 
-	// try to unmarshal data into QuerySpansQueryTypeFieldValue
-	err = json.Unmarshal(data, &dst.QuerySpansQueryTypeFieldValue)
+	// try to unmarshal data into QuerySpansQueryTypeFieldValueVariant
+	err = json.Unmarshal(data, &dst.QuerySpansQueryTypeFieldValueVariant)
 	if err == nil {
-		jsonQuerySpansQueryTypeFieldValue, _ := json.Marshal(dst.QuerySpansQueryTypeFieldValue)
-		if string(jsonQuerySpansQueryTypeFieldValue) == "{}" { // empty struct
-			dst.QuerySpansQueryTypeFieldValue = nil
+		jsonQuerySpansQueryTypeFieldValueVariant, _ := json.Marshal(dst.QuerySpansQueryTypeFieldValueVariant)
+		if string(jsonQuerySpansQueryTypeFieldValueVariant) == "{}" { // empty struct
+			dst.QuerySpansQueryTypeFieldValueVariant = nil
 		} else {
-			if err = validator.Validate(dst.QuerySpansQueryTypeFieldValue); err != nil {
-				dst.QuerySpansQueryTypeFieldValue = nil
+			if err = validator.Validate(dst.QuerySpansQueryTypeFieldValueVariant); err != nil {
+				dst.QuerySpansQueryTypeFieldValueVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySpansQueryTypeFieldValue = nil
+		dst.QuerySpansQueryTypeFieldValueVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QuerySpansQueryTypeFieldName = nil
-		dst.QuerySpansQueryTypeFieldValue = nil
+		dst.QuerySpansQueryTypeFieldNameVariant = nil
+		dst.QuerySpansQueryTypeFieldValueVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QuerySpansQueryType)")
 	} else if match == 1 {
@@ -90,12 +93,12 @@ func (dst *QuerySpansQueryType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QuerySpansQueryType) MarshalJSON() ([]byte, error) {
-	if src.QuerySpansQueryTypeFieldName != nil {
-		return json.Marshal(&src.QuerySpansQueryTypeFieldName)
+	if src.QuerySpansQueryTypeFieldNameVariant != nil {
+		return json.Marshal(&src.QuerySpansQueryTypeFieldNameVariant)
 	}
 
-	if src.QuerySpansQueryTypeFieldValue != nil {
-		return json.Marshal(&src.QuerySpansQueryTypeFieldValue)
+	if src.QuerySpansQueryTypeFieldValueVariant != nil {
+		return json.Marshal(&src.QuerySpansQueryTypeFieldValueVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +109,12 @@ func (obj *QuerySpansQueryType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QuerySpansQueryTypeFieldName != nil {
-		return obj.QuerySpansQueryTypeFieldName
+	if obj.QuerySpansQueryTypeFieldNameVariant != nil {
+		return obj.QuerySpansQueryTypeFieldNameVariant
 	}
 
-	if obj.QuerySpansQueryTypeFieldValue != nil {
-		return obj.QuerySpansQueryTypeFieldValue
+	if obj.QuerySpansQueryTypeFieldValueVariant != nil {
+		return obj.QuerySpansQueryTypeFieldValueVariant
 	}
 
 	// all schemas are nil
@@ -120,12 +123,12 @@ func (obj *QuerySpansQueryType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QuerySpansQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QuerySpansQueryTypeFieldName != nil {
-		return *obj.QuerySpansQueryTypeFieldName
+	if obj.QuerySpansQueryTypeFieldNameVariant != nil {
+		return *obj.QuerySpansQueryTypeFieldNameVariant
 	}
 
-	if obj.QuerySpansQueryTypeFieldValue != nil {
-		return *obj.QuerySpansQueryTypeFieldValue
+	if obj.QuerySpansQueryTypeFieldValueVariant != nil {
+		return *obj.QuerySpansQueryTypeFieldValueVariant
 	}
 
 	// all schemas are nil

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Legend type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Legend{}
@@ -25,7 +28,10 @@ type Legend struct {
 	// Is the legend visible in the widget
 	IsVisible *bool `json:"isVisible,omitempty"`
 	Placement *LegendPlacement `json:"placement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Legend Legend
 
 // NewLegend instantiates a new Legend object
 // This constructor will assign default values to properties that have it defined,
@@ -194,7 +200,37 @@ func (o Legend) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Placement) {
 		toSerialize["placement"] = o.Placement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Legend) UnmarshalJSON(data []byte) (err error) {
+	varLegend := _Legend{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLegend)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Legend(varLegend)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "columns")
+		delete(additionalProperties, "groupByQuery")
+		delete(additionalProperties, "isVisible")
+		delete(additionalProperties, "placement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLegend struct {

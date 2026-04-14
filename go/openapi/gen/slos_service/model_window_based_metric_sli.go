@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WindowBasedMetricSli type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WindowBasedMetricSli{}
@@ -24,7 +27,10 @@ type WindowBasedMetricSli struct {
 	Query *Metric `json:"query,omitempty"`
 	Threshold *float32 `json:"threshold,omitempty"`
 	Window *WindowSloWindow `json:"window,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WindowBasedMetricSli WindowBasedMetricSli
 
 // NewWindowBasedMetricSli instantiates a new WindowBasedMetricSli object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o WindowBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Window) {
 		toSerialize["window"] = o.Window
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WindowBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
+	varWindowBasedMetricSli := _WindowBasedMetricSli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWindowBasedMetricSli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WindowBasedMetricSli(varWindowBasedMetricSli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comparisonOperator")
+		delete(additionalProperties, "missingDataStrategy")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "window")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWindowBasedMetricSli struct {

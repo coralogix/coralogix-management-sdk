@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardOffRelativeTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardOffRelativeTimeFrame{}
@@ -33,13 +35,14 @@ type DashboardOffRelativeTimeFrame struct {
 	Layout Layout `json:"layout"`
 	// The display name of the dashboard
 	Name string `json:"name"`
-	Off map[string]interface{} `json:"off,omitempty"`
+	Off map[string]interface{} `json:"off"`
 	// Relative time frame specifying a duration from the current time
-	RelativeTimeFrame *string `json:"relativeTimeFrame,omitempty"`
+	RelativeTimeFrame string `json:"relativeTimeFrame"`
 	// A unique slug name serving as an alias for accessing the dashboard
 	SlugName *string `json:"slugName,omitempty"`
 	Variables []Variable `json:"variables,omitempty"`
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DashboardOffRelativeTimeFrame DashboardOffRelativeTimeFrame
@@ -48,10 +51,12 @@ type _DashboardOffRelativeTimeFrame DashboardOffRelativeTimeFrame
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDashboardOffRelativeTimeFrame(layout Layout, name string) *DashboardOffRelativeTimeFrame {
+func NewDashboardOffRelativeTimeFrame(layout Layout, name string, off map[string]interface{}, relativeTimeFrame string) *DashboardOffRelativeTimeFrame {
 	this := DashboardOffRelativeTimeFrame{}
 	this.Layout = layout
 	this.Name = name
+	this.Off = off
+	this.RelativeTimeFrame = relativeTimeFrame
 	return &this
 }
 
@@ -335,68 +340,52 @@ func (o *DashboardOffRelativeTimeFrame) SetName(v string) {
 	o.Name = v
 }
 
-// GetOff returns the Off field value if set, zero value otherwise.
+// GetOff returns the Off field value
 func (o *DashboardOffRelativeTimeFrame) GetOff() map[string]interface{} {
-	if o == nil || IsNil(o.Off) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Off
 }
 
-// GetOffOk returns a tuple with the Off field value if set, nil otherwise
+// GetOffOk returns a tuple with the Off field value
 // and a boolean to check if the value has been set.
 func (o *DashboardOffRelativeTimeFrame) GetOffOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Off) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Off, true
 }
 
-// HasOff returns a boolean if a field has been set.
-func (o *DashboardOffRelativeTimeFrame) HasOff() bool {
-	if o != nil && !IsNil(o.Off) {
-		return true
-	}
-
-	return false
-}
-
-// SetOff gets a reference to the given map[string]interface{} and assigns it to the Off field.
+// SetOff sets field value
 func (o *DashboardOffRelativeTimeFrame) SetOff(v map[string]interface{}) {
 	o.Off = v
 }
 
-// GetRelativeTimeFrame returns the RelativeTimeFrame field value if set, zero value otherwise.
+// GetRelativeTimeFrame returns the RelativeTimeFrame field value
 func (o *DashboardOffRelativeTimeFrame) GetRelativeTimeFrame() string {
-	if o == nil || IsNil(o.RelativeTimeFrame) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RelativeTimeFrame
+
+	return o.RelativeTimeFrame
 }
 
-// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value if set, nil otherwise
+// GetRelativeTimeFrameOk returns a tuple with the RelativeTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *DashboardOffRelativeTimeFrame) GetRelativeTimeFrameOk() (*string, bool) {
-	if o == nil || IsNil(o.RelativeTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RelativeTimeFrame, true
+	return &o.RelativeTimeFrame, true
 }
 
-// HasRelativeTimeFrame returns a boolean if a field has been set.
-func (o *DashboardOffRelativeTimeFrame) HasRelativeTimeFrame() bool {
-	if o != nil && !IsNil(o.RelativeTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetRelativeTimeFrame gets a reference to the given string and assigns it to the RelativeTimeFrame field.
+// SetRelativeTimeFrame sets field value
 func (o *DashboardOffRelativeTimeFrame) SetRelativeTimeFrame(v string) {
-	o.RelativeTimeFrame = &v
+	o.RelativeTimeFrame = v
 }
 
 // GetSlugName returns the SlugName field value if set, zero value otherwise.
@@ -528,12 +517,8 @@ func (o DashboardOffRelativeTimeFrame) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["layout"] = o.Layout
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Off) {
-		toSerialize["off"] = o.Off
-	}
-	if !IsNil(o.RelativeTimeFrame) {
-		toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
-	}
+	toSerialize["off"] = o.Off
+	toSerialize["relativeTimeFrame"] = o.RelativeTimeFrame
 	if !IsNil(o.SlugName) {
 		toSerialize["slugName"] = o.SlugName
 	}
@@ -543,6 +528,11 @@ func (o DashboardOffRelativeTimeFrame) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VariablesV2) {
 		toSerialize["variablesV2"] = o.VariablesV2
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -553,6 +543,8 @@ func (o *DashboardOffRelativeTimeFrame) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"layout",
 		"name",
+		"off",
+		"relativeTimeFrame",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -579,6 +571,26 @@ func (o *DashboardOffRelativeTimeFrame) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DashboardOffRelativeTimeFrame(varDashboardOffRelativeTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "annotations")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "folderPath")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "layout")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "off")
+		delete(additionalProperties, "relativeTimeFrame")
+		delete(additionalProperties, "slugName")
+		delete(additionalProperties, "variables")
+		delete(additionalProperties, "variablesV2")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

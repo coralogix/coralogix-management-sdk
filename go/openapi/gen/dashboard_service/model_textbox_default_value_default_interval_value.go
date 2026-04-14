@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueDefaultIntervalValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueDefaultIntervalValue{}
 
 // TextboxDefaultValueDefaultIntervalValue struct for TextboxDefaultValueDefaultIntervalValue
 type TextboxDefaultValueDefaultIntervalValue struct {
-	DefaultIntervalValue *TextboxDefaultIntervalValue `json:"defaultIntervalValue,omitempty"`
+	DefaultIntervalValue TextboxDefaultIntervalValue `json:"defaultIntervalValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueDefaultIntervalValue TextboxDefaultValueDefaultIntervalValue
 
 // NewTextboxDefaultValueDefaultIntervalValue instantiates a new TextboxDefaultValueDefaultIntervalValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueDefaultIntervalValue() *TextboxDefaultValueDefaultIntervalValue {
+func NewTextboxDefaultValueDefaultIntervalValue(defaultIntervalValue TextboxDefaultIntervalValue) *TextboxDefaultValueDefaultIntervalValue {
 	this := TextboxDefaultValueDefaultIntervalValue{}
+	this.DefaultIntervalValue = defaultIntervalValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTextboxDefaultValueDefaultIntervalValueWithDefaults() *TextboxDefaultVal
 	return &this
 }
 
-// GetDefaultIntervalValue returns the DefaultIntervalValue field value if set, zero value otherwise.
+// GetDefaultIntervalValue returns the DefaultIntervalValue field value
 func (o *TextboxDefaultValueDefaultIntervalValue) GetDefaultIntervalValue() TextboxDefaultIntervalValue {
-	if o == nil || IsNil(o.DefaultIntervalValue) {
+	if o == nil {
 		var ret TextboxDefaultIntervalValue
 		return ret
 	}
-	return *o.DefaultIntervalValue
+
+	return o.DefaultIntervalValue
 }
 
-// GetDefaultIntervalValueOk returns a tuple with the DefaultIntervalValue field value if set, nil otherwise
+// GetDefaultIntervalValueOk returns a tuple with the DefaultIntervalValue field value
 // and a boolean to check if the value has been set.
 func (o *TextboxDefaultValueDefaultIntervalValue) GetDefaultIntervalValueOk() (*TextboxDefaultIntervalValue, bool) {
-	if o == nil || IsNil(o.DefaultIntervalValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultIntervalValue, true
+	return &o.DefaultIntervalValue, true
 }
 
-// HasDefaultIntervalValue returns a boolean if a field has been set.
-func (o *TextboxDefaultValueDefaultIntervalValue) HasDefaultIntervalValue() bool {
-	if o != nil && !IsNil(o.DefaultIntervalValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultIntervalValue gets a reference to the given TextboxDefaultIntervalValue and assigns it to the DefaultIntervalValue field.
+// SetDefaultIntervalValue sets field value
 func (o *TextboxDefaultValueDefaultIntervalValue) SetDefaultIntervalValue(v TextboxDefaultIntervalValue) {
-	o.DefaultIntervalValue = &v
+	o.DefaultIntervalValue = v
 }
 
 func (o TextboxDefaultValueDefaultIntervalValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TextboxDefaultValueDefaultIntervalValue) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueDefaultIntervalValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultIntervalValue) {
-		toSerialize["defaultIntervalValue"] = o.DefaultIntervalValue
+	toSerialize["defaultIntervalValue"] = o.DefaultIntervalValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueDefaultIntervalValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"defaultIntervalValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueDefaultIntervalValue := _TextboxDefaultValueDefaultIntervalValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueDefaultIntervalValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueDefaultIntervalValue(varTextboxDefaultValueDefaultIntervalValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultIntervalValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueDefaultIntervalValue struct {

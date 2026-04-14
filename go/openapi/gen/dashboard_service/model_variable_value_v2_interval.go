@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableValueV2Interval type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2Interval{}
 
 // VariableValueV2Interval struct for VariableValueV2Interval
 type VariableValueV2Interval struct {
-	Interval *IntervalValue `json:"interval,omitempty"`
+	Interval IntervalValue `json:"interval"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableValueV2Interval VariableValueV2Interval
 
 // NewVariableValueV2Interval instantiates a new VariableValueV2Interval object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableValueV2Interval() *VariableValueV2Interval {
+func NewVariableValueV2Interval(interval IntervalValue) *VariableValueV2Interval {
 	this := VariableValueV2Interval{}
+	this.Interval = interval
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableValueV2IntervalWithDefaults() *VariableValueV2Interval {
 	return &this
 }
 
-// GetInterval returns the Interval field value if set, zero value otherwise.
+// GetInterval returns the Interval field value
 func (o *VariableValueV2Interval) GetInterval() IntervalValue {
-	if o == nil || IsNil(o.Interval) {
+	if o == nil {
 		var ret IntervalValue
 		return ret
 	}
-	return *o.Interval
+
+	return o.Interval
 }
 
-// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// GetIntervalOk returns a tuple with the Interval field value
 // and a boolean to check if the value has been set.
 func (o *VariableValueV2Interval) GetIntervalOk() (*IntervalValue, bool) {
-	if o == nil || IsNil(o.Interval) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Interval, true
+	return &o.Interval, true
 }
 
-// HasInterval returns a boolean if a field has been set.
-func (o *VariableValueV2Interval) HasInterval() bool {
-	if o != nil && !IsNil(o.Interval) {
-		return true
-	}
-
-	return false
-}
-
-// SetInterval gets a reference to the given IntervalValue and assigns it to the Interval field.
+// SetInterval sets field value
 func (o *VariableValueV2Interval) SetInterval(v IntervalValue) {
-	o.Interval = &v
+	o.Interval = v
 }
 
 func (o VariableValueV2Interval) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableValueV2Interval) MarshalJSON() ([]byte, error) {
 
 func (o VariableValueV2Interval) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Interval) {
-		toSerialize["interval"] = o.Interval
+	toSerialize["interval"] = o.Interval
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableValueV2Interval) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"interval",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableValueV2Interval := _VariableValueV2Interval{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2Interval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2Interval(varVariableValueV2Interval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "interval")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableValueV2Interval struct {

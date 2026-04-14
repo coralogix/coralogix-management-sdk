@@ -11,8 +11,12 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookInputDataPagerDuty type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataPagerDuty{}
@@ -20,17 +24,21 @@ var _ MappedNullable = &OutgoingWebhookInputDataPagerDuty{}
 // OutgoingWebhookInputDataPagerDuty struct for OutgoingWebhookInputDataPagerDuty
 type OutgoingWebhookInputDataPagerDuty struct {
 	Name *string `json:"name,omitempty"`
-	PagerDuty *PagerDutyConfig `json:"pagerDuty,omitempty"`
+	PagerDuty PagerDutyConfig `json:"pagerDuty"`
 	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookInputDataPagerDuty OutgoingWebhookInputDataPagerDuty
 
 // NewOutgoingWebhookInputDataPagerDuty instantiates a new OutgoingWebhookInputDataPagerDuty object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataPagerDuty() *OutgoingWebhookInputDataPagerDuty {
+func NewOutgoingWebhookInputDataPagerDuty(pagerDuty PagerDutyConfig) *OutgoingWebhookInputDataPagerDuty {
 	this := OutgoingWebhookInputDataPagerDuty{}
+	this.PagerDuty = pagerDuty
 	return &this
 }
 
@@ -74,36 +82,28 @@ func (o *OutgoingWebhookInputDataPagerDuty) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPagerDuty returns the PagerDuty field value if set, zero value otherwise.
+// GetPagerDuty returns the PagerDuty field value
 func (o *OutgoingWebhookInputDataPagerDuty) GetPagerDuty() PagerDutyConfig {
-	if o == nil || IsNil(o.PagerDuty) {
+	if o == nil {
 		var ret PagerDutyConfig
 		return ret
 	}
-	return *o.PagerDuty
+
+	return o.PagerDuty
 }
 
-// GetPagerDutyOk returns a tuple with the PagerDuty field value if set, nil otherwise
+// GetPagerDutyOk returns a tuple with the PagerDuty field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataPagerDuty) GetPagerDutyOk() (*PagerDutyConfig, bool) {
-	if o == nil || IsNil(o.PagerDuty) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PagerDuty, true
+	return &o.PagerDuty, true
 }
 
-// HasPagerDuty returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputDataPagerDuty) HasPagerDuty() bool {
-	if o != nil && !IsNil(o.PagerDuty) {
-		return true
-	}
-
-	return false
-}
-
-// SetPagerDuty gets a reference to the given PagerDutyConfig and assigns it to the PagerDuty field.
+// SetPagerDuty sets field value
 func (o *OutgoingWebhookInputDataPagerDuty) SetPagerDuty(v PagerDutyConfig) {
-	o.PagerDuty = &v
+	o.PagerDuty = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -183,16 +183,65 @@ func (o OutgoingWebhookInputDataPagerDuty) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.PagerDuty) {
-		toSerialize["pagerDuty"] = o.PagerDuty
-	}
+	toSerialize["pagerDuty"] = o.PagerDuty
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookInputDataPagerDuty) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"pagerDuty",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookInputDataPagerDuty := _OutgoingWebhookInputDataPagerDuty{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookInputDataPagerDuty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookInputDataPagerDuty(varOutgoingWebhookInputDataPagerDuty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "pagerDuty")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookInputDataPagerDuty struct {

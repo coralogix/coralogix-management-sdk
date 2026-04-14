@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // VariableDisplayTypeV2 the model 'VariableDisplayTypeV2'
 type VariableDisplayTypeV2 string

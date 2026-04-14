@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryLogsQuery{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &QueryLogsQuery{}
 // QueryLogsQuery struct for QueryLogsQuery
 type QueryLogsQuery struct {
 	Type *QueryLogsQueryType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryLogsQuery QueryLogsQuery
 
 // NewQueryLogsQuery instantiates a new QueryLogsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o QueryLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	varQueryLogsQuery := _QueryLogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryLogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryLogsQuery(varQueryLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryLogsQuery struct {

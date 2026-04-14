@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloFilterPredicate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloFilterPredicate{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SloFilterPredicate{}
 // SloFilterPredicate Predicate used for filtering SLOs
 type SloFilterPredicate struct {
 	Is *SloFilterPredicateIs `json:"is,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloFilterPredicate SloFilterPredicate
 
 // NewSloFilterPredicate instantiates a new SloFilterPredicate object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SloFilterPredicate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Is) {
 		toSerialize["is"] = o.Is
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloFilterPredicate) UnmarshalJSON(data []byte) (err error) {
+	varSloFilterPredicate := _SloFilterPredicate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloFilterPredicate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloFilterPredicate(varSloFilterPredicate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloFilterPredicate struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ItemCounts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ItemCounts{}
@@ -29,7 +32,10 @@ type ItemCounts struct {
 	MetricsRuleGroup *int64 `json:"metricsRuleGroup,omitempty"`
 	ParsingRules *int64 `json:"parsingRules,omitempty"`
 	SavedViews *int64 `json:"savedViews,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ItemCounts ItemCounts
 
 // NewItemCounts instantiates a new ItemCounts object
 // This constructor will assign default values to properties that have it defined,
@@ -408,7 +414,43 @@ func (o ItemCounts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SavedViews) {
 		toSerialize["savedViews"] = o.SavedViews
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ItemCounts) UnmarshalJSON(data []byte) (err error) {
+	varItemCounts := _ItemCounts{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varItemCounts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ItemCounts(varItemCounts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "alerts")
+		delete(additionalProperties, "customDashboards")
+		delete(additionalProperties, "enrichments")
+		delete(additionalProperties, "eventsToMetrics")
+		delete(additionalProperties, "grafanaDashboards")
+		delete(additionalProperties, "kibanaDashboards")
+		delete(additionalProperties, "metricsRuleGroup")
+		delete(additionalProperties, "parsingRules")
+		delete(additionalProperties, "savedViews")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableItemCounts struct {

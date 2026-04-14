@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChart{}
@@ -48,7 +51,10 @@ type HorizontalBarChart struct {
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
 	YAxisViewBy *HorizontalBarChartYAxisViewBy `json:"yAxisViewBy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBarChart HorizontalBarChart
 
 // NewHorizontalBarChart instantiates a new HorizontalBarChart object
 // This constructor will assign default values to properties that have it defined,
@@ -742,7 +748,52 @@ func (o HorizontalBarChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisViewBy) {
 		toSerialize["yAxisViewBy"] = o.YAxisViewBy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBarChart) UnmarshalJSON(data []byte) (err error) {
+	varHorizontalBarChart := _HorizontalBarChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChart(varHorizontalBarChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "colorsBy")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "decimal")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "displayOnBar")
+		delete(additionalProperties, "groupNameTemplate")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "maxBarsPerChart")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "sortBy")
+		delete(additionalProperties, "stackDefinition")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		delete(additionalProperties, "yAxisViewBy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBarChart struct {

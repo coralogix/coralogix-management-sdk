@@ -7,7 +7,6 @@ servers:
 paths:
   /aaa/team-saml/v1/active:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_SetActive
@@ -40,7 +39,6 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/configuration:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_GetConfiguration
@@ -77,7 +75,6 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/idp_parameters:
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_SetIDPParameters
@@ -110,7 +107,6 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/sp_parameters:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_GetSPParameters
@@ -148,24 +144,6 @@ paths:
       - SAML Configuration Service
 components:
   schemas:
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
-      type: object
     FieldGroup:
       properties:
         name:
@@ -178,7 +156,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -189,12 +166,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -205,6 +182,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -293,7 +271,6 @@ components:
       - $ref: "#/components/schemas/IDPParametersMetadataUrl"
       - $ref: "#/components/schemas/IDPParametersMetadataContent"
     IDPParametersMetadataContent:
-      additionalProperties: false
       description: This data structure represents a set of SAML identity provider
         parameters
       externalDocs:
@@ -315,10 +292,11 @@ components:
           example: 1234567
           format: int64
           type: integer
+      required:
+      - metadataContent
       title: IDP Parameters
       type: object
     IDPParametersMetadataUrl:
-      additionalProperties: false
       description: This data structure represents a set of SAML identity provider
         parameters
       example:
@@ -347,29 +325,9 @@ components:
           example: 1234567
           format: int64
           type: integer
+      required:
+      - metadataUrl
       title: IDP Parameters
-      type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -437,7 +395,6 @@ components:
       - FILTER_OPERATOR_OR
       type: string
     Set_Active_Request:
-      additionalProperties: false
       description: This data structure is used to activate or deactivate a SAML identity
         provider
       properties:
@@ -449,7 +406,6 @@ components:
       title: Set Active Request
       type: object
     Set_IDP_Parameters_Request:
-      additionalProperties: false
       description: This data structure is used to set the parameters of a SAML identity
         provider
       properties:
@@ -460,9 +416,3 @@ components:
           type: integer
       title: Set IDP Parameters Request
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateRoleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRoleResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateRoleResponse{}
 // CreateRoleResponse struct for CreateRoleResponse
 type CreateRoleResponse struct {
 	Id *int64 `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRoleResponse CreateRoleResponse
 
 // NewCreateRoleResponse instantiates a new CreateRoleResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateRoleResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRoleResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateRoleResponse := _CreateRoleResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateRoleResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRoleResponse(varCreateRoleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRoleResponse struct {

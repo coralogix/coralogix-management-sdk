@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchGetIncidentResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchGetIncidentResponse{}
@@ -24,6 +26,7 @@ type BatchGetIncidentResponse struct {
 	// Map of incident IDs to their corresponding incidents
 	Incidents map[string]Incident `json:"incidents"`
 	NotFoundIds []string `json:"notFoundIds"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchGetIncidentResponse BatchGetIncidentResponse
@@ -107,6 +110,11 @@ func (o BatchGetIncidentResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["incidents"] = o.Incidents
 	toSerialize["notFoundIds"] = o.NotFoundIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,6 +151,14 @@ func (o *BatchGetIncidentResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BatchGetIncidentResponse(varBatchGetIncidentResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidents")
+		delete(additionalProperties, "notFoundIds")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

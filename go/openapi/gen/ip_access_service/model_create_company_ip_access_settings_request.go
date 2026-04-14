@@ -11,8 +11,11 @@ API version: 1.0.0
 package ip_access_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateCompanyIPAccessSettingsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateCompanyIPAccessSettingsRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &CreateCompanyIPAccessSettingsRequest{}
 type CreateCompanyIPAccessSettingsRequest struct {
 	EnableCoralogixCustomerSupportAccess *CoralogixCustomerSupportAccess `json:"enableCoralogixCustomerSupportAccess,omitempty"`
 	IpAccess []IpAccess `json:"ipAccess,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCompanyIPAccessSettingsRequest CreateCompanyIPAccessSettingsRequest
 
 // NewCreateCompanyIPAccessSettingsRequest instantiates a new CreateCompanyIPAccessSettingsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o CreateCompanyIPAccessSettingsRequest) ToMap() (map[string]interface{}, e
 	if !IsNil(o.IpAccess) {
 		toSerialize["ipAccess"] = o.IpAccess
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCompanyIPAccessSettingsRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateCompanyIPAccessSettingsRequest := _CreateCompanyIPAccessSettingsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateCompanyIPAccessSettingsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCompanyIPAccessSettingsRequest(varCreateCompanyIPAccessSettingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enableCoralogixCustomerSupportAccess")
+		delete(additionalProperties, "ipAccess")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCompanyIPAccessSettingsRequest struct {

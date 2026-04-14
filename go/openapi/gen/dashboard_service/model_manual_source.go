@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ManualSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSource{}
@@ -22,7 +25,10 @@ type ManualSource struct {
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
 	Strategy *ManualSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManualSource ManualSource
 
 // NewManualSource instantiates a new ManualSource object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ManualSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Strategy) {
 		toSerialize["strategy"] = o.Strategy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManualSource) UnmarshalJSON(data []byte) (err error) {
+	varManualSource := _ManualSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varManualSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManualSource(varManualSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "messageTemplate")
+		delete(additionalProperties, "orientation")
+		delete(additionalProperties, "strategy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManualSource struct {

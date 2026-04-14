@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PieChartStackDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PieChartStackDefinition{}
@@ -23,7 +26,10 @@ type PieChartStackDefinition struct {
 	MaxSlicesPerStack *int32 `json:"maxSlicesPerStack,omitempty"`
 	// Custom template name of an individual slice in the stack
 	StackNameTemplate *string `json:"stackNameTemplate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PieChartStackDefinition PieChartStackDefinition
 
 // NewPieChartStackDefinition instantiates a new PieChartStackDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o PieChartStackDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StackNameTemplate) {
 		toSerialize["stackNameTemplate"] = o.StackNameTemplate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PieChartStackDefinition) UnmarshalJSON(data []byte) (err error) {
+	varPieChartStackDefinition := _PieChartStackDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPieChartStackDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PieChartStackDefinition(varPieChartStackDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "maxSlicesPerStack")
+		delete(additionalProperties, "stackNameTemplate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePieChartStackDefinition struct {

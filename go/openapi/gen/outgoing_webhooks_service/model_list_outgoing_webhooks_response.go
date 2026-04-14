@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListOutgoingWebhooksResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListOutgoingWebhooksResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListOutgoingWebhooksResponse{}
 // ListOutgoingWebhooksResponse struct for ListOutgoingWebhooksResponse
 type ListOutgoingWebhooksResponse struct {
 	Deployed []OutgoingWebhookSummary `json:"deployed,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListOutgoingWebhooksResponse ListOutgoingWebhooksResponse
 
 // NewListOutgoingWebhooksResponse instantiates a new ListOutgoingWebhooksResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListOutgoingWebhooksResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Deployed) {
 		toSerialize["deployed"] = o.Deployed
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListOutgoingWebhooksResponse) UnmarshalJSON(data []byte) (err error) {
+	varListOutgoingWebhooksResponse := _ListOutgoingWebhooksResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListOutgoingWebhooksResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListOutgoingWebhooksResponse(varListOutgoingWebhooksResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deployed")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListOutgoingWebhooksResponse struct {

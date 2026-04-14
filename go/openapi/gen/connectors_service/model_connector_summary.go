@@ -11,23 +11,31 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConnectorSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectorSummary{}
 
 // ConnectorSummary struct for ConnectorSummary
 type ConnectorSummary struct {
+	ConfigOverrides []EntityTypeConfigOverrides `json:"configOverrides,omitempty"`
+	ConnectorConfig *ConnectorConfig `json:"connectorConfig,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
-	Type *ConnectorType `json:"type,omitempty"`
+	Type *NotificationCenterConnectorType `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConnectorSummary ConnectorSummary
 
 // NewConnectorSummary instantiates a new ConnectorSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -44,6 +52,70 @@ func NewConnectorSummary() *ConnectorSummary {
 func NewConnectorSummaryWithDefaults() *ConnectorSummary {
 	this := ConnectorSummary{}
 	return &this
+}
+
+// GetConfigOverrides returns the ConfigOverrides field value if set, zero value otherwise.
+func (o *ConnectorSummary) GetConfigOverrides() []EntityTypeConfigOverrides {
+	if o == nil || IsNil(o.ConfigOverrides) {
+		var ret []EntityTypeConfigOverrides
+		return ret
+	}
+	return o.ConfigOverrides
+}
+
+// GetConfigOverridesOk returns a tuple with the ConfigOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectorSummary) GetConfigOverridesOk() ([]EntityTypeConfigOverrides, bool) {
+	if o == nil || IsNil(o.ConfigOverrides) {
+		return nil, false
+	}
+	return o.ConfigOverrides, true
+}
+
+// HasConfigOverrides returns a boolean if a field has been set.
+func (o *ConnectorSummary) HasConfigOverrides() bool {
+	if o != nil && !IsNil(o.ConfigOverrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigOverrides gets a reference to the given []EntityTypeConfigOverrides and assigns it to the ConfigOverrides field.
+func (o *ConnectorSummary) SetConfigOverrides(v []EntityTypeConfigOverrides) {
+	o.ConfigOverrides = v
+}
+
+// GetConnectorConfig returns the ConnectorConfig field value if set, zero value otherwise.
+func (o *ConnectorSummary) GetConnectorConfig() ConnectorConfig {
+	if o == nil || IsNil(o.ConnectorConfig) {
+		var ret ConnectorConfig
+		return ret
+	}
+	return *o.ConnectorConfig
+}
+
+// GetConnectorConfigOk returns a tuple with the ConnectorConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectorSummary) GetConnectorConfigOk() (*ConnectorConfig, bool) {
+	if o == nil || IsNil(o.ConnectorConfig) {
+		return nil, false
+	}
+	return o.ConnectorConfig, true
+}
+
+// HasConnectorConfig returns a boolean if a field has been set.
+func (o *ConnectorSummary) HasConnectorConfig() bool {
+	if o != nil && !IsNil(o.ConnectorConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectorConfig gets a reference to the given ConnectorConfig and assigns it to the ConnectorConfig field.
+func (o *ConnectorSummary) SetConnectorConfig(v ConnectorConfig) {
+	o.ConnectorConfig = &v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -207,9 +279,9 @@ func (o *ConnectorSummary) SetTeamId(v int64) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *ConnectorSummary) GetType() ConnectorType {
+func (o *ConnectorSummary) GetType() NotificationCenterConnectorType {
 	if o == nil || IsNil(o.Type) {
-		var ret ConnectorType
+		var ret NotificationCenterConnectorType
 		return ret
 	}
 	return *o.Type
@@ -217,7 +289,7 @@ func (o *ConnectorSummary) GetType() ConnectorType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectorSummary) GetTypeOk() (*ConnectorType, bool) {
+func (o *ConnectorSummary) GetTypeOk() (*NotificationCenterConnectorType, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -233,8 +305,8 @@ func (o *ConnectorSummary) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given ConnectorType and assigns it to the Type field.
-func (o *ConnectorSummary) SetType(v ConnectorType) {
+// SetType gets a reference to the given NotificationCenterConnectorType and assigns it to the Type field.
+func (o *ConnectorSummary) SetType(v NotificationCenterConnectorType) {
 	o.Type = &v
 }
 
@@ -280,6 +352,12 @@ func (o ConnectorSummary) MarshalJSON() ([]byte, error) {
 
 func (o ConnectorSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ConfigOverrides) {
+		toSerialize["configOverrides"] = o.ConfigOverrides
+	}
+	if !IsNil(o.ConnectorConfig) {
+		toSerialize["connectorConfig"] = o.ConnectorConfig
+	}
 	if !IsNil(o.CreateTime) {
 		toSerialize["createTime"] = o.CreateTime
 	}
@@ -301,7 +379,42 @@ func (o ConnectorSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConnectorSummary) UnmarshalJSON(data []byte) (err error) {
+	varConnectorSummary := _ConnectorSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConnectorSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConnectorSummary(varConnectorSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configOverrides")
+		delete(additionalProperties, "connectorConfig")
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "teamId")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConnectorSummary struct {

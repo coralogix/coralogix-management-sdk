@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsTimeRelativeThresholdType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsTimeRelativeThresholdType{}
@@ -27,7 +30,10 @@ type LogsTimeRelativeThresholdType struct {
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	Rules []LogsTimeRelativeRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsTimeRelativeThresholdType LogsTimeRelativeThresholdType
 
 // NewLogsTimeRelativeThresholdType instantiates a new LogsTimeRelativeThresholdType object
 // This constructor will assign default values to properties that have it defined,
@@ -266,7 +272,39 @@ func (o LogsTimeRelativeThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UndetectedValuesManagement) {
 		toSerialize["undetectedValuesManagement"] = o.UndetectedValuesManagement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsTimeRelativeThresholdType) UnmarshalJSON(data []byte) (err error) {
+	varLogsTimeRelativeThresholdType := _LogsTimeRelativeThresholdType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsTimeRelativeThresholdType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsTimeRelativeThresholdType(varLogsTimeRelativeThresholdType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "ignoreInfinity")
+		delete(additionalProperties, "logsFilter")
+		delete(additionalProperties, "notificationPayloadFilter")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "undetectedValuesManagement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsTimeRelativeThresholdType struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package views_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuickTimeSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuickTimeSelection{}
@@ -26,6 +28,7 @@ type QuickTimeSelection struct {
 	Caption *string `json:"caption,omitempty"`
 	// Folder name
 	Seconds int64 `json:"seconds"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QuickTimeSelection QuickTimeSelection
@@ -121,6 +124,11 @@ func (o QuickTimeSelection) ToMap() (map[string]interface{}, error) {
 		toSerialize["caption"] = o.Caption
 	}
 	toSerialize["seconds"] = o.Seconds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -156,6 +164,14 @@ func (o *QuickTimeSelection) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = QuickTimeSelection(varQuickTimeSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "caption")
+		delete(additionalProperties, "seconds")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

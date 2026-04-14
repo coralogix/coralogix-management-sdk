@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetCompanyEnrichmentSettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCompanyEnrichmentSettingsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetCompanyEnrichmentSettingsResponse{}
 // GetCompanyEnrichmentSettingsResponse struct for GetCompanyEnrichmentSettingsResponse
 type GetCompanyEnrichmentSettingsResponse struct {
 	EnrichmentSettings *CompanyEnrichmentSettings `json:"enrichmentSettings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCompanyEnrichmentSettingsResponse GetCompanyEnrichmentSettingsResponse
 
 // NewGetCompanyEnrichmentSettingsResponse instantiates a new GetCompanyEnrichmentSettingsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetCompanyEnrichmentSettingsResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.EnrichmentSettings) {
 		toSerialize["enrichmentSettings"] = o.EnrichmentSettings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCompanyEnrichmentSettingsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCompanyEnrichmentSettingsResponse := _GetCompanyEnrichmentSettingsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetCompanyEnrichmentSettingsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCompanyEnrichmentSettingsResponse(varGetCompanyEnrichmentSettingsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enrichmentSettings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCompanyEnrichmentSettingsResponse struct {

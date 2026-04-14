@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Average type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Average{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Average{}
 type Average struct {
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Average Average
 
 // NewAverage instantiates a new Average object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Average) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ObservationField) {
 		toSerialize["observationField"] = o.ObservationField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Average) UnmarshalJSON(data []byte) (err error) {
+	varAverage := _Average{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAverage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Average(varAverage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "observationField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAverage struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetSloResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetSloResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetSloResponse{}
 // GetSloResponse Response containing the details of a specific SLO.
 type GetSloResponse struct {
 	Slo Slo `json:"slo"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetSloResponse GetSloResponse
@@ -79,6 +82,11 @@ func (o GetSloResponse) MarshalJSON() ([]byte, error) {
 func (o GetSloResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["slo"] = o.Slo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *GetSloResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetSloResponse(varGetSloResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "slo")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

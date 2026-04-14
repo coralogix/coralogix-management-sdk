@@ -11,18 +11,24 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApiKeySummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApiKeySummary{}
 
 // ApiKeySummary This data structure represents summary about an API key including its permissions.
 type ApiKeySummary struct {
-	ApiKey *ApiKey `json:"apiKey,omitempty"`
+	ApiKey *V3ApiKey `json:"apiKey,omitempty"`
 	Permissions []string `json:"permissions,omitempty"`
 	Presets []PermissionsPreset `json:"presets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApiKeySummary ApiKeySummary
 
 // NewApiKeySummary instantiates a new ApiKeySummary object
 // This constructor will assign default values to properties that have it defined,
@@ -42,9 +48,9 @@ func NewApiKeySummaryWithDefaults() *ApiKeySummary {
 }
 
 // GetApiKey returns the ApiKey field value if set, zero value otherwise.
-func (o *ApiKeySummary) GetApiKey() ApiKey {
+func (o *ApiKeySummary) GetApiKey() V3ApiKey {
 	if o == nil || IsNil(o.ApiKey) {
-		var ret ApiKey
+		var ret V3ApiKey
 		return ret
 	}
 	return *o.ApiKey
@@ -52,7 +58,7 @@ func (o *ApiKeySummary) GetApiKey() ApiKey {
 
 // GetApiKeyOk returns a tuple with the ApiKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ApiKeySummary) GetApiKeyOk() (*ApiKey, bool) {
+func (o *ApiKeySummary) GetApiKeyOk() (*V3ApiKey, bool) {
 	if o == nil || IsNil(o.ApiKey) {
 		return nil, false
 	}
@@ -68,8 +74,8 @@ func (o *ApiKeySummary) HasApiKey() bool {
 	return false
 }
 
-// SetApiKey gets a reference to the given ApiKey and assigns it to the ApiKey field.
-func (o *ApiKeySummary) SetApiKey(v ApiKey) {
+// SetApiKey gets a reference to the given V3ApiKey and assigns it to the ApiKey field.
+func (o *ApiKeySummary) SetApiKey(v V3ApiKey) {
 	o.ApiKey = &v
 }
 
@@ -156,7 +162,36 @@ func (o ApiKeySummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Presets) {
 		toSerialize["presets"] = o.Presets
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApiKeySummary) UnmarshalJSON(data []byte) (err error) {
+	varApiKeySummary := _ApiKeySummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApiKeySummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApiKeySummary(varApiKeySummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apiKey")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "presets")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApiKeySummary struct {

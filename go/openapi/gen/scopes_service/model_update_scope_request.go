@@ -11,10 +11,12 @@ API version: 1.0.0
 package scopes_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateScopeRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateScopeRequest{}
@@ -26,6 +28,7 @@ type UpdateScopeRequest struct {
 	DisplayName string `json:"displayName"`
 	Filters []ScopesV1Filter `json:"filters"`
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateScopeRequest UpdateScopeRequest
@@ -196,6 +199,11 @@ func (o UpdateScopeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["displayName"] = o.DisplayName
 	toSerialize["filters"] = o.Filters
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -234,6 +242,17 @@ func (o *UpdateScopeRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UpdateScopeRequest(varUpdateScopeRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultExpression")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

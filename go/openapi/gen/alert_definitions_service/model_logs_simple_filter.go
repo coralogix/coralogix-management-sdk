@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsSimpleFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSimpleFilter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &LogsSimpleFilter{}
 type LogsSimpleFilter struct {
 	LabelFilters *LabelFilters `json:"labelFilters,omitempty"`
 	LuceneQuery *string `json:"luceneQuery,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsSimpleFilter LogsSimpleFilter
 
 // NewLogsSimpleFilter instantiates a new LogsSimpleFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o LogsSimpleFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LuceneQuery) {
 		toSerialize["luceneQuery"] = o.LuceneQuery
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsSimpleFilter) UnmarshalJSON(data []byte) (err error) {
+	varLogsSimpleFilter := _LogsSimpleFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsSimpleFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsSimpleFilter(varLogsSimpleFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labelFilters")
+		delete(additionalProperties, "luceneQuery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsSimpleFilter struct {

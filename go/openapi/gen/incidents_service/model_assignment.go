@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Assignment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Assignment{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &Assignment{}
 type Assignment struct {
 	AssignedBy IncidentsV1UserDetails `json:"assignedBy"`
 	AssignedTo IncidentsV1UserDetails `json:"assignedTo"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Assignment Assignment
@@ -106,6 +109,11 @@ func (o Assignment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["assignedBy"] = o.AssignedBy
 	toSerialize["assignedTo"] = o.AssignedTo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *Assignment) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Assignment(varAssignment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assignedBy")
+		delete(additionalProperties, "assignedTo")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListConnectorSummariesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListConnectorSummariesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListConnectorSummariesResponse{}
 // ListConnectorSummariesResponse Response containing summaries of connectors
 type ListConnectorSummariesResponse struct {
 	Connectors []ConnectorSummary `json:"connectors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListConnectorSummariesResponse ListConnectorSummariesResponse
 
 // NewListConnectorSummariesResponse instantiates a new ListConnectorSummariesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListConnectorSummariesResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Connectors) {
 		toSerialize["connectors"] = o.Connectors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListConnectorSummariesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListConnectorSummariesResponse := _ListConnectorSummariesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListConnectorSummariesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListConnectorSummariesResponse(varListConnectorSummariesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListConnectorSummariesResponse struct {

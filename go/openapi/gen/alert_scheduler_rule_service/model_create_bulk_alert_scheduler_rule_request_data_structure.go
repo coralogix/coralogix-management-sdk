@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateBulkAlertSchedulerRuleRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateBulkAlertSchedulerRuleRequestDataStructure{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateBulkAlertSchedulerRuleRequestDataStructure{}
 // CreateBulkAlertSchedulerRuleRequestDataStructure This is a request sent to create multiple alert scheduler rules
 type CreateBulkAlertSchedulerRuleRequestDataStructure struct {
 	CreateAlertSchedulerRuleRequests []CreateAlertSchedulerRuleRequest `json:"createAlertSchedulerRuleRequests"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateBulkAlertSchedulerRuleRequestDataStructure CreateBulkAlertSchedulerRuleRequestDataStructure
@@ -79,6 +82,11 @@ func (o CreateBulkAlertSchedulerRuleRequestDataStructure) MarshalJSON() ([]byte,
 func (o CreateBulkAlertSchedulerRuleRequestDataStructure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["createAlertSchedulerRuleRequests"] = o.CreateAlertSchedulerRuleRequests
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *CreateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []
 	}
 
 	*o = CreateBulkAlertSchedulerRuleRequestDataStructure(varCreateBulkAlertSchedulerRuleRequestDataStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createAlertSchedulerRuleRequests")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

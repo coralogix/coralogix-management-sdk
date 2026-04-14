@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingImmediateType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingImmediateType{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &TracingImmediateType{}
 type TracingImmediateType struct {
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingImmediateType TracingImmediateType
 
 // NewTracingImmediateType instantiates a new TracingImmediateType object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o TracingImmediateType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TracingFilter) {
 		toSerialize["tracingFilter"] = o.TracingFilter
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingImmediateType) UnmarshalJSON(data []byte) (err error) {
+	varTracingImmediateType := _TracingImmediateType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingImmediateType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingImmediateType(varTracingImmediateType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "notificationPayloadFilter")
+		delete(additionalProperties, "tracingFilter")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingImmediateType struct {

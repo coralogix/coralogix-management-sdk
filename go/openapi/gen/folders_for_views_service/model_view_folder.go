@@ -11,10 +11,12 @@ API version: 1.0.0
 package folders_for_views_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ViewFolder type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ViewFolder{}
@@ -25,6 +27,7 @@ type ViewFolder struct {
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Folder name
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ViewFolder ViewFolder
@@ -117,6 +120,11 @@ func (o ViewFolder) ToMap() (map[string]interface{}, error) {
 		toSerialize["id"] = o.Id
 	}
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -152,6 +160,14 @@ func (o *ViewFolder) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ViewFolder(varViewFolder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

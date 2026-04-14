@@ -11,9 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDef type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDef{}
@@ -32,7 +35,10 @@ type AlertDef struct {
 	Status *AlertDefStatus `json:"status,omitempty"`
 	// The time when the alert definition was last updated
 	UpdatedTime *time.Time `json:"updatedTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDef AlertDef
 
 // NewAlertDef instantiates a new AlertDef object
 // This constructor will assign default values to properties that have it defined,
@@ -306,7 +312,40 @@ func (o AlertDef) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedTime) {
 		toSerialize["updatedTime"] = o.UpdatedTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDef) UnmarshalJSON(data []byte) (err error) {
+	varAlertDef := _AlertDef{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDef)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDef(varAlertDef)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDefProperties")
+		delete(additionalProperties, "alertVersionId")
+		delete(additionalProperties, "createdTime")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "lastTriggeredTime")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "updatedTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDef struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package api_keys_admin_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OwnerOrganisationId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OwnerOrganisationId{}
 
 // OwnerOrganisationId struct for OwnerOrganisationId
 type OwnerOrganisationId struct {
-	OrganisationId *string `json:"organisationId,omitempty"`
+	OrganisationId string `json:"organisationId"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OwnerOrganisationId OwnerOrganisationId
 
 // NewOwnerOrganisationId instantiates a new OwnerOrganisationId object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOwnerOrganisationId() *OwnerOrganisationId {
+func NewOwnerOrganisationId(organisationId string) *OwnerOrganisationId {
 	this := OwnerOrganisationId{}
+	this.OrganisationId = organisationId
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewOwnerOrganisationIdWithDefaults() *OwnerOrganisationId {
 	return &this
 }
 
-// GetOrganisationId returns the OrganisationId field value if set, zero value otherwise.
+// GetOrganisationId returns the OrganisationId field value
 func (o *OwnerOrganisationId) GetOrganisationId() string {
-	if o == nil || IsNil(o.OrganisationId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrganisationId
+
+	return o.OrganisationId
 }
 
-// GetOrganisationIdOk returns a tuple with the OrganisationId field value if set, nil otherwise
+// GetOrganisationIdOk returns a tuple with the OrganisationId field value
 // and a boolean to check if the value has been set.
 func (o *OwnerOrganisationId) GetOrganisationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganisationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrganisationId, true
+	return &o.OrganisationId, true
 }
 
-// HasOrganisationId returns a boolean if a field has been set.
-func (o *OwnerOrganisationId) HasOrganisationId() bool {
-	if o != nil && !IsNil(o.OrganisationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganisationId gets a reference to the given string and assigns it to the OrganisationId field.
+// SetOrganisationId sets field value
 func (o *OwnerOrganisationId) SetOrganisationId(v string) {
-	o.OrganisationId = &v
+	o.OrganisationId = v
 }
 
 func (o OwnerOrganisationId) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o OwnerOrganisationId) MarshalJSON() ([]byte, error) {
 
 func (o OwnerOrganisationId) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrganisationId) {
-		toSerialize["organisationId"] = o.OrganisationId
+	toSerialize["organisationId"] = o.OrganisationId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *OwnerOrganisationId) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"organisationId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOwnerOrganisationId := _OwnerOrganisationId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOwnerOrganisationId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OwnerOrganisationId(varOwnerOrganisationId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "organisationId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOwnerOrganisationId struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the JiraConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JiraConfig{}
@@ -22,7 +25,10 @@ type JiraConfig struct {
 	ApiToken *string `json:"apiToken,omitempty"`
 	Email *string `json:"email,omitempty"`
 	ProjectKey *string `json:"projectKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _JiraConfig JiraConfig
 
 // NewJiraConfig instantiates a new JiraConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o JiraConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProjectKey) {
 		toSerialize["projectKey"] = o.ProjectKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *JiraConfig) UnmarshalJSON(data []byte) (err error) {
+	varJiraConfig := _JiraConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varJiraConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = JiraConfig(varJiraConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apiToken")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "projectKey")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableJiraConfig struct {

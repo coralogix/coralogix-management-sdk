@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionSingleNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionSingleNumericValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &IntegrationRevisionSingleNumericValue{}
 // IntegrationRevisionSingleNumericValue struct for IntegrationRevisionSingleNumericValue
 type IntegrationRevisionSingleNumericValue struct {
 	DefaultValue *float64 `json:"defaultValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionSingleNumericValue IntegrationRevisionSingleNumericValue
 
 // NewIntegrationRevisionSingleNumericValue instantiates a new IntegrationRevisionSingleNumericValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o IntegrationRevisionSingleNumericValue) ToMap() (map[string]interface{}, 
 	if !IsNil(o.DefaultValue) {
 		toSerialize["defaultValue"] = o.DefaultValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionSingleNumericValue) UnmarshalJSON(data []byte) (err error) {
+	varIntegrationRevisionSingleNumericValue := _IntegrationRevisionSingleNumericValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionSingleNumericValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionSingleNumericValue(varIntegrationRevisionSingleNumericValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionSingleNumericValue struct {

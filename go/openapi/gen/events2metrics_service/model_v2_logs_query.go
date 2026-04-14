@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2LogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2LogsQuery{}
@@ -24,7 +27,10 @@ type V2LogsQuery struct {
 	Lucene *string `json:"lucene,omitempty"`
 	SeverityFilters []Logs2metricsV2Severity `json:"severityFilters,omitempty"`
 	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2LogsQuery V2LogsQuery
 
 // NewV2LogsQuery instantiates a new V2LogsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o V2LogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubsystemnameFilters) {
 		toSerialize["subsystemnameFilters"] = o.SubsystemnameFilters
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2LogsQuery) UnmarshalJSON(data []byte) (err error) {
+	varV2LogsQuery := _V2LogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2LogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2LogsQuery(varV2LogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alias")
+		delete(additionalProperties, "applicationnameFilters")
+		delete(additionalProperties, "lucene")
+		delete(additionalProperties, "severityFilters")
+		delete(additionalProperties, "subsystemnameFilters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2LogsQuery struct {

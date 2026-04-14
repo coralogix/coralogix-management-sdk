@@ -11,16 +11,24 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryMetricsQueryTypeLabelValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryTypeLabelValue{}
 
 // QueryMetricsQueryTypeLabelValue struct for QueryMetricsQueryTypeLabelValue
 type QueryMetricsQueryTypeLabelValue struct {
-	LabelValue *QueryMetricsQueryTypeLabelValue `json:"labelValue,omitempty"`
+	LabelFilters []QueryMetricsQueryMetricsLabelFilter `json:"labelFilters,omitempty"`
+	LabelName *QueryMetricsQueryStringOrVariable `json:"labelName,omitempty"`
+	MetricName *QueryMetricsQueryStringOrVariable `json:"metricName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryMetricsQueryTypeLabelValue QueryMetricsQueryTypeLabelValue
 
 // NewQueryMetricsQueryTypeLabelValue instantiates a new QueryMetricsQueryTypeLabelValue object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +47,100 @@ func NewQueryMetricsQueryTypeLabelValueWithDefaults() *QueryMetricsQueryTypeLabe
 	return &this
 }
 
-// GetLabelValue returns the LabelValue field value if set, zero value otherwise.
-func (o *QueryMetricsQueryTypeLabelValue) GetLabelValue() QueryMetricsQueryTypeLabelValue {
-	if o == nil || IsNil(o.LabelValue) {
-		var ret QueryMetricsQueryTypeLabelValue
+// GetLabelFilters returns the LabelFilters field value if set, zero value otherwise.
+func (o *QueryMetricsQueryTypeLabelValue) GetLabelFilters() []QueryMetricsQueryMetricsLabelFilter {
+	if o == nil || IsNil(o.LabelFilters) {
+		var ret []QueryMetricsQueryMetricsLabelFilter
 		return ret
 	}
-	return *o.LabelValue
+	return o.LabelFilters
 }
 
-// GetLabelValueOk returns a tuple with the LabelValue field value if set, nil otherwise
+// GetLabelFiltersOk returns a tuple with the LabelFilters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryMetricsQueryTypeLabelValue) GetLabelValueOk() (*QueryMetricsQueryTypeLabelValue, bool) {
-	if o == nil || IsNil(o.LabelValue) {
+func (o *QueryMetricsQueryTypeLabelValue) GetLabelFiltersOk() ([]QueryMetricsQueryMetricsLabelFilter, bool) {
+	if o == nil || IsNil(o.LabelFilters) {
 		return nil, false
 	}
-	return o.LabelValue, true
+	return o.LabelFilters, true
 }
 
-// HasLabelValue returns a boolean if a field has been set.
-func (o *QueryMetricsQueryTypeLabelValue) HasLabelValue() bool {
-	if o != nil && !IsNil(o.LabelValue) {
+// HasLabelFilters returns a boolean if a field has been set.
+func (o *QueryMetricsQueryTypeLabelValue) HasLabelFilters() bool {
+	if o != nil && !IsNil(o.LabelFilters) {
 		return true
 	}
 
 	return false
 }
 
-// SetLabelValue gets a reference to the given QueryMetricsQueryTypeLabelValue and assigns it to the LabelValue field.
-func (o *QueryMetricsQueryTypeLabelValue) SetLabelValue(v QueryMetricsQueryTypeLabelValue) {
-	o.LabelValue = &v
+// SetLabelFilters gets a reference to the given []QueryMetricsQueryMetricsLabelFilter and assigns it to the LabelFilters field.
+func (o *QueryMetricsQueryTypeLabelValue) SetLabelFilters(v []QueryMetricsQueryMetricsLabelFilter) {
+	o.LabelFilters = v
+}
+
+// GetLabelName returns the LabelName field value if set, zero value otherwise.
+func (o *QueryMetricsQueryTypeLabelValue) GetLabelName() QueryMetricsQueryStringOrVariable {
+	if o == nil || IsNil(o.LabelName) {
+		var ret QueryMetricsQueryStringOrVariable
+		return ret
+	}
+	return *o.LabelName
+}
+
+// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryTypeLabelValue) GetLabelNameOk() (*QueryMetricsQueryStringOrVariable, bool) {
+	if o == nil || IsNil(o.LabelName) {
+		return nil, false
+	}
+	return o.LabelName, true
+}
+
+// HasLabelName returns a boolean if a field has been set.
+func (o *QueryMetricsQueryTypeLabelValue) HasLabelName() bool {
+	if o != nil && !IsNil(o.LabelName) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabelName gets a reference to the given QueryMetricsQueryStringOrVariable and assigns it to the LabelName field.
+func (o *QueryMetricsQueryTypeLabelValue) SetLabelName(v QueryMetricsQueryStringOrVariable) {
+	o.LabelName = &v
+}
+
+// GetMetricName returns the MetricName field value if set, zero value otherwise.
+func (o *QueryMetricsQueryTypeLabelValue) GetMetricName() QueryMetricsQueryStringOrVariable {
+	if o == nil || IsNil(o.MetricName) {
+		var ret QueryMetricsQueryStringOrVariable
+		return ret
+	}
+	return *o.MetricName
+}
+
+// GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QueryMetricsQueryTypeLabelValue) GetMetricNameOk() (*QueryMetricsQueryStringOrVariable, bool) {
+	if o == nil || IsNil(o.MetricName) {
+		return nil, false
+	}
+	return o.MetricName, true
+}
+
+// HasMetricName returns a boolean if a field has been set.
+func (o *QueryMetricsQueryTypeLabelValue) HasMetricName() bool {
+	if o != nil && !IsNil(o.MetricName) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetricName gets a reference to the given QueryMetricsQueryStringOrVariable and assigns it to the MetricName field.
+func (o *QueryMetricsQueryTypeLabelValue) SetMetricName(v QueryMetricsQueryStringOrVariable) {
+	o.MetricName = &v
 }
 
 func (o QueryMetricsQueryTypeLabelValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +153,45 @@ func (o QueryMetricsQueryTypeLabelValue) MarshalJSON() ([]byte, error) {
 
 func (o QueryMetricsQueryTypeLabelValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LabelValue) {
-		toSerialize["labelValue"] = o.LabelValue
+	if !IsNil(o.LabelFilters) {
+		toSerialize["labelFilters"] = o.LabelFilters
 	}
+	if !IsNil(o.LabelName) {
+		toSerialize["labelName"] = o.LabelName
+	}
+	if !IsNil(o.MetricName) {
+		toSerialize["metricName"] = o.MetricName
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryTypeLabelValue) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryTypeLabelValue := _QueryMetricsQueryTypeLabelValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryTypeLabelValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryTypeLabelValue(varQueryMetricsQueryTypeLabelValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labelFilters")
+		delete(additionalProperties, "labelName")
+		delete(additionalProperties, "metricName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryMetricsQueryTypeLabelValue struct {

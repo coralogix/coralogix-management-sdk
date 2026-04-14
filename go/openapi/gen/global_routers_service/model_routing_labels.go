@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoutingLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoutingLabels{}
@@ -22,7 +25,10 @@ type RoutingLabels struct {
 	Environment *string `json:"environment,omitempty"`
 	Service *string `json:"service,omitempty"`
 	Team *string `json:"team,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RoutingLabels RoutingLabels
 
 // NewRoutingLabels instantiates a new RoutingLabels object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o RoutingLabels) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Team) {
 		toSerialize["team"] = o.Team
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RoutingLabels) UnmarshalJSON(data []byte) (err error) {
+	varRoutingLabels := _RoutingLabels{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoutingLabels)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoutingLabels(varRoutingLabels)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "environment")
+		delete(additionalProperties, "service")
+		delete(additionalProperties, "team")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRoutingLabels struct {

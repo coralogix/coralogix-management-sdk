@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AcknowledgeIncidentsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AcknowledgeIncidentsResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &AcknowledgeIncidentsResponse{}
 // AcknowledgeIncidentsResponse Response containing the updated incidents after acknowledgment
 type AcknowledgeIncidentsResponse struct {
 	Incidents []Incident `json:"incidents"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AcknowledgeIncidentsResponse AcknowledgeIncidentsResponse
@@ -79,6 +82,11 @@ func (o AcknowledgeIncidentsResponse) MarshalJSON() ([]byte, error) {
 func (o AcknowledgeIncidentsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["incidents"] = o.Incidents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *AcknowledgeIncidentsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = AcknowledgeIncidentsResponse(varAcknowledgeIncidentsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidents")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQuerySelectionListSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQuerySelectionListSelection{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &QuerySourceMetricsQuerySelectionListSelection{}
 // QuerySourceMetricsQuerySelectionListSelection struct for QuerySourceMetricsQuerySelectionListSelection
 type QuerySourceMetricsQuerySelectionListSelection struct {
 	Values []QuerySourceMetricsQueryStringOrVariable `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQuerySelectionListSelection QuerySourceMetricsQuerySelectionListSelection
 
 // NewQuerySourceMetricsQuerySelectionListSelection instantiates a new QuerySourceMetricsQuerySelectionListSelection object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o QuerySourceMetricsQuerySelectionListSelection) ToMap() (map[string]inter
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQuerySelectionListSelection) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceMetricsQuerySelectionListSelection := _QuerySourceMetricsQuerySelectionListSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQuerySelectionListSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQuerySelectionListSelection(varQuerySourceMetricsQuerySelectionListSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQuerySelectionListSelection struct {

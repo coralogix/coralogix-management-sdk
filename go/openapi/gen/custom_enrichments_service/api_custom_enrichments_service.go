@@ -42,8 +42,6 @@ func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) Execute() (*Cre
 /*
 CustomEnrichmentServiceCreateCustomEnrichment Create Custom Enrichments
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest
 */
@@ -134,7 +132,7 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustom
 type ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest struct {
 	ctx context.Context
 	ApiService *CustomEnrichmentsServiceAPIService
-	customEnrichmentId int64
+	id int64
 }
 
 func (r ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest) Execute() (*DeleteCustomEnrichmentResponse, *http.Response, error) {
@@ -144,17 +142,15 @@ func (r ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest) Execute() (*Del
 /*
 CustomEnrichmentServiceDeleteCustomEnrichment Delete Custom Enrichments
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param customEnrichmentId
+ @param id
  @return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest
 */
-func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustomEnrichment(ctx context.Context, customEnrichmentId int64) ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest {
+func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustomEnrichment(ctx context.Context, id int64) ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest {
 	return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest{
 		ApiService: a,
 		ctx: ctx,
-		customEnrichmentId: customEnrichmentId,
+		id: id,
 	}
 }
 
@@ -173,8 +169,8 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustom
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"custom_enrichment_id"+"}", url.PathEscape(parameterValueToString(r.customEnrichmentId, "customEnrichmentId")), -1)
+	localVarPath := localBasePath + "/enrichment-rules/custom-enrichment-rules/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -246,8 +242,6 @@ func (r ApiCustomEnrichmentServiceGetCustomEnrichmentRequest) Execute() (*GetCus
 
 /*
 CustomEnrichmentServiceGetCustomEnrichment Get Custom Enrichment
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -348,8 +342,6 @@ func (r ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest) Execute() (*GetCu
 
 /*
 CustomEnrichmentServiceGetCustomEnrichments Get Custom Enrichments
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest
@@ -453,8 +445,6 @@ func (r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) Execute() (
 
 /*
 CustomEnrichmentServiceSearchCustomEnrichmentData Search Custom Enrichment Data
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest
@@ -569,8 +559,6 @@ func (r ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest) Execute() (*Upd
 
 /*
 CustomEnrichmentServiceUpdateCustomEnrichment Update Custom Enrichment
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest

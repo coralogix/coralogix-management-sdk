@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DetailedDailyProcessedGbs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DetailedDailyProcessedGbs{}
@@ -33,7 +36,10 @@ type DetailedDailyProcessedGbs struct {
 	MediumTracingGbs *V2GB `json:"mediumTracingGbs,omitempty"`
 	StatsDate *time.Time `json:"statsDate,omitempty"`
 	TotalGbs *V2GB `json:"totalGbs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DetailedDailyProcessedGbs DetailedDailyProcessedGbs
 
 // NewDetailedDailyProcessedGbs instantiates a new DetailedDailyProcessedGbs object
 // This constructor will assign default values to properties that have it defined,
@@ -517,7 +523,46 @@ func (o DetailedDailyProcessedGbs) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalGbs) {
 		toSerialize["totalGbs"] = o.TotalGbs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DetailedDailyProcessedGbs) UnmarshalJSON(data []byte) (err error) {
+	varDetailedDailyProcessedGbs := _DetailedDailyProcessedGbs{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDetailedDailyProcessedGbs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DetailedDailyProcessedGbs(varDetailedDailyProcessedGbs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "blockedGbs")
+		delete(additionalProperties, "blockedMetricsGbs")
+		delete(additionalProperties, "cpuProfilesGbs")
+		delete(additionalProperties, "highLogsGbs")
+		delete(additionalProperties, "highMetricsGbs")
+		delete(additionalProperties, "highTracingGbs")
+		delete(additionalProperties, "lowLogsGbs")
+		delete(additionalProperties, "lowSessionRecordingGbs")
+		delete(additionalProperties, "lowTracingGbs")
+		delete(additionalProperties, "mediumLogsGbs")
+		delete(additionalProperties, "mediumTracingGbs")
+		delete(additionalProperties, "statsDate")
+		delete(additionalProperties, "totalGbs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDetailedDailyProcessedGbs struct {

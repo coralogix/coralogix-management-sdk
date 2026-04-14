@@ -11,9 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentQueryFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentQueryFilter{}
@@ -43,7 +46,10 @@ type IncidentQueryFilter struct {
 	State []IncidentState `json:"state,omitempty"`
 	Status []IncidentStatus `json:"status,omitempty"`
 	SubsystemName []string `json:"subsystemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentQueryFilter IncidentQueryFilter
 
 // NewIncidentQueryFilter instantiates a new IncidentQueryFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -641,7 +647,49 @@ func (o IncidentQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubsystemName) {
 		toSerialize["subsystemName"] = o.SubsystemName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentQueryFilter) UnmarshalJSON(data []byte) (err error) {
+	varIncidentQueryFilter := _IncidentQueryFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentQueryFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentQueryFilter(varIncidentQueryFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationName")
+		delete(additionalProperties, "assignee")
+		delete(additionalProperties, "contextualLabels")
+		delete(additionalProperties, "createdAtRange")
+		delete(additionalProperties, "displayLabels")
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "incidentDurationRange")
+		delete(additionalProperties, "isMuted")
+		delete(additionalProperties, "metaLabels")
+		delete(additionalProperties, "metaLabelsOp")
+		delete(additionalProperties, "searchQuery")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subsystemName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentQueryFilter struct {

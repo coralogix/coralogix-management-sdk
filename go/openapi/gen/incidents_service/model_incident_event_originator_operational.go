@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventOriginatorOperational type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventOriginatorOperational{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &IncidentEventOriginatorOperational{}
 // IncidentEventOriginatorOperational struct for IncidentEventOriginatorOperational
 type IncidentEventOriginatorOperational struct {
 	SystemName *string `json:"systemName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventOriginatorOperational IncidentEventOriginatorOperational
 
 // NewIncidentEventOriginatorOperational instantiates a new IncidentEventOriginatorOperational object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o IncidentEventOriginatorOperational) ToMap() (map[string]interface{}, err
 	if !IsNil(o.SystemName) {
 		toSerialize["systemName"] = o.SystemName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventOriginatorOperational) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventOriginatorOperational := _IncidentEventOriginatorOperational{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventOriginatorOperational)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventOriginatorOperational(varIncidentEventOriginatorOperational)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "systemName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventOriginatorOperational struct {

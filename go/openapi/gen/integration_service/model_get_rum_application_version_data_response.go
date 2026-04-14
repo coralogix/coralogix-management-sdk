@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetRumApplicationVersionDataResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRumApplicationVersionDataResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetRumApplicationVersionDataResponse{}
 // GetRumApplicationVersionDataResponse struct for GetRumApplicationVersionDataResponse
 type GetRumApplicationVersionDataResponse struct {
 	VersionData *RumVersionData `json:"versionData,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRumApplicationVersionDataResponse GetRumApplicationVersionDataResponse
 
 // NewGetRumApplicationVersionDataResponse instantiates a new GetRumApplicationVersionDataResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetRumApplicationVersionDataResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.VersionData) {
 		toSerialize["versionData"] = o.VersionData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRumApplicationVersionDataResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetRumApplicationVersionDataResponse := _GetRumApplicationVersionDataResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetRumApplicationVersionDataResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRumApplicationVersionDataResponse(varGetRumApplicationVersionDataResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "versionData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRumApplicationVersionDataResponse struct {

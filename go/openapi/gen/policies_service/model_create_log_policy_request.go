@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateLogPolicyRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateLogPolicyRequest{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &CreateLogPolicyRequest{}
 type CreateLogPolicyRequest struct {
 	LogRules LogRules `json:"logRules"`
 	Policy CreateGenericPolicyRequest `json:"policy"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateLogPolicyRequest CreateLogPolicyRequest
@@ -106,6 +109,11 @@ func (o CreateLogPolicyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["logRules"] = o.LogRules
 	toSerialize["policy"] = o.Policy
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *CreateLogPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateLogPolicyRequest(varCreateLogPolicyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logRules")
+		delete(additionalProperties, "policy")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

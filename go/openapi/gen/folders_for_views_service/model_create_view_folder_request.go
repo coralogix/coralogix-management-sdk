@@ -11,8 +11,11 @@ API version: 1.0.0
 package folders_for_views_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateViewFolderRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateViewFolderRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &CreateViewFolderRequest{}
 type CreateViewFolderRequest struct {
 	// Folder name
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateViewFolderRequest CreateViewFolderRequest
 
 // NewCreateViewFolderRequest instantiates a new CreateViewFolderRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o CreateViewFolderRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateViewFolderRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateViewFolderRequest := _CreateViewFolderRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateViewFolderRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateViewFolderRequest(varCreateViewFolderRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateViewFolderRequest struct {

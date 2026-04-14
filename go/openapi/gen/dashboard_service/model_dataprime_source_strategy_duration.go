@@ -11,16 +11,23 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataprimeSourceStrategyDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyDuration{}
 
 // DataprimeSourceStrategyDuration struct for DataprimeSourceStrategyDuration
 type DataprimeSourceStrategyDuration struct {
-	Duration *DataprimeSourceStrategyDuration `json:"duration,omitempty"`
+	DurationField *ObservationField `json:"durationField,omitempty"`
+	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataprimeSourceStrategyDuration DataprimeSourceStrategyDuration
 
 // NewDataprimeSourceStrategyDuration instantiates a new DataprimeSourceStrategyDuration object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +46,68 @@ func NewDataprimeSourceStrategyDurationWithDefaults() *DataprimeSourceStrategyDu
 	return &this
 }
 
-// GetDuration returns the Duration field value if set, zero value otherwise.
-func (o *DataprimeSourceStrategyDuration) GetDuration() DataprimeSourceStrategyDuration {
-	if o == nil || IsNil(o.Duration) {
-		var ret DataprimeSourceStrategyDuration
+// GetDurationField returns the DurationField field value if set, zero value otherwise.
+func (o *DataprimeSourceStrategyDuration) GetDurationField() ObservationField {
+	if o == nil || IsNil(o.DurationField) {
+		var ret ObservationField
 		return ret
 	}
-	return *o.Duration
+	return *o.DurationField
 }
 
-// GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
+// GetDurationFieldOk returns a tuple with the DurationField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataprimeSourceStrategyDuration) GetDurationOk() (*DataprimeSourceStrategyDuration, bool) {
-	if o == nil || IsNil(o.Duration) {
+func (o *DataprimeSourceStrategyDuration) GetDurationFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.DurationField) {
 		return nil, false
 	}
-	return o.Duration, true
+	return o.DurationField, true
 }
 
-// HasDuration returns a boolean if a field has been set.
-func (o *DataprimeSourceStrategyDuration) HasDuration() bool {
-	if o != nil && !IsNil(o.Duration) {
+// HasDurationField returns a boolean if a field has been set.
+func (o *DataprimeSourceStrategyDuration) HasDurationField() bool {
+	if o != nil && !IsNil(o.DurationField) {
 		return true
 	}
 
 	return false
 }
 
-// SetDuration gets a reference to the given DataprimeSourceStrategyDuration and assigns it to the Duration field.
-func (o *DataprimeSourceStrategyDuration) SetDuration(v DataprimeSourceStrategyDuration) {
-	o.Duration = &v
+// SetDurationField gets a reference to the given ObservationField and assigns it to the DurationField field.
+func (o *DataprimeSourceStrategyDuration) SetDurationField(v ObservationField) {
+	o.DurationField = &v
+}
+
+// GetStartTimestampField returns the StartTimestampField field value if set, zero value otherwise.
+func (o *DataprimeSourceStrategyDuration) GetStartTimestampField() ObservationField {
+	if o == nil || IsNil(o.StartTimestampField) {
+		var ret ObservationField
+		return ret
+	}
+	return *o.StartTimestampField
+}
+
+// GetStartTimestampFieldOk returns a tuple with the StartTimestampField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataprimeSourceStrategyDuration) GetStartTimestampFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.StartTimestampField) {
+		return nil, false
+	}
+	return o.StartTimestampField, true
+}
+
+// HasStartTimestampField returns a boolean if a field has been set.
+func (o *DataprimeSourceStrategyDuration) HasStartTimestampField() bool {
+	if o != nil && !IsNil(o.StartTimestampField) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTimestampField gets a reference to the given ObservationField and assigns it to the StartTimestampField field.
+func (o *DataprimeSourceStrategyDuration) SetStartTimestampField(v ObservationField) {
+	o.StartTimestampField = &v
 }
 
 func (o DataprimeSourceStrategyDuration) MarshalJSON() ([]byte, error) {
@@ -81,10 +120,41 @@ func (o DataprimeSourceStrategyDuration) MarshalJSON() ([]byte, error) {
 
 func (o DataprimeSourceStrategyDuration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Duration) {
-		toSerialize["duration"] = o.Duration
+	if !IsNil(o.DurationField) {
+		toSerialize["durationField"] = o.DurationField
 	}
+	if !IsNil(o.StartTimestampField) {
+		toSerialize["startTimestampField"] = o.StartTimestampField
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataprimeSourceStrategyDuration) UnmarshalJSON(data []byte) (err error) {
+	varDataprimeSourceStrategyDuration := _DataprimeSourceStrategyDuration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataprimeSourceStrategyDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataprimeSourceStrategyDuration(varDataprimeSourceStrategyDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "durationField")
+		delete(additionalProperties, "startTimestampField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataprimeSourceStrategyDuration struct {

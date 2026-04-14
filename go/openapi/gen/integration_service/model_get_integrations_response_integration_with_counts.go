@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetIntegrationsResponseIntegrationWithCounts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetIntegrationsResponseIntegrationWithCounts{}
@@ -25,7 +28,10 @@ type GetIntegrationsResponseIntegrationWithCounts struct {
 	IsDeprecated *bool `json:"isDeprecated,omitempty"`
 	IsNew *bool `json:"isNew,omitempty"`
 	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetIntegrationsResponseIntegrationWithCounts GetIntegrationsResponseIntegrationWithCounts
 
 // NewGetIntegrationsResponseIntegrationWithCounts instantiates a new GetIntegrationsResponseIntegrationWithCounts object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o GetIntegrationsResponseIntegrationWithCounts) ToMap() (map[string]interf
 	if !IsNil(o.UpgradeAvailable) {
 		toSerialize["upgradeAvailable"] = o.UpgradeAvailable
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetIntegrationsResponseIntegrationWithCounts) UnmarshalJSON(data []byte) (err error) {
+	varGetIntegrationsResponseIntegrationWithCounts := _GetIntegrationsResponseIntegrationWithCounts{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetIntegrationsResponseIntegrationWithCounts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetIntegrationsResponseIntegrationWithCounts(varGetIntegrationsResponseIntegrationWithCounts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amountIntegrations")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "integration")
+		delete(additionalProperties, "isDeprecated")
+		delete(additionalProperties, "isNew")
+		delete(additionalProperties, "upgradeAvailable")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetIntegrationsResponseIntegrationWithCounts struct {

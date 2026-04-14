@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSourceConstantList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceConstantList{}
 
 // MultiSelectSourceConstantList struct for MultiSelectSourceConstantList
 type MultiSelectSourceConstantList struct {
-	ConstantList *ConstantListSource `json:"constantList,omitempty"`
+	ConstantList ConstantListSource `json:"constantList"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSourceConstantList MultiSelectSourceConstantList
 
 // NewMultiSelectSourceConstantList instantiates a new MultiSelectSourceConstantList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectSourceConstantList() *MultiSelectSourceConstantList {
+func NewMultiSelectSourceConstantList(constantList ConstantListSource) *MultiSelectSourceConstantList {
 	this := MultiSelectSourceConstantList{}
+	this.ConstantList = constantList
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectSourceConstantListWithDefaults() *MultiSelectSourceConstantLi
 	return &this
 }
 
-// GetConstantList returns the ConstantList field value if set, zero value otherwise.
+// GetConstantList returns the ConstantList field value
 func (o *MultiSelectSourceConstantList) GetConstantList() ConstantListSource {
-	if o == nil || IsNil(o.ConstantList) {
+	if o == nil {
 		var ret ConstantListSource
 		return ret
 	}
-	return *o.ConstantList
+
+	return o.ConstantList
 }
 
-// GetConstantListOk returns a tuple with the ConstantList field value if set, nil otherwise
+// GetConstantListOk returns a tuple with the ConstantList field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectSourceConstantList) GetConstantListOk() (*ConstantListSource, bool) {
-	if o == nil || IsNil(o.ConstantList) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConstantList, true
+	return &o.ConstantList, true
 }
 
-// HasConstantList returns a boolean if a field has been set.
-func (o *MultiSelectSourceConstantList) HasConstantList() bool {
-	if o != nil && !IsNil(o.ConstantList) {
-		return true
-	}
-
-	return false
-}
-
-// SetConstantList gets a reference to the given ConstantListSource and assigns it to the ConstantList field.
+// SetConstantList sets field value
 func (o *MultiSelectSourceConstantList) SetConstantList(v ConstantListSource) {
-	o.ConstantList = &v
+	o.ConstantList = v
 }
 
 func (o MultiSelectSourceConstantList) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectSourceConstantList) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectSourceConstantList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ConstantList) {
-		toSerialize["constantList"] = o.ConstantList
+	toSerialize["constantList"] = o.ConstantList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSourceConstantList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"constantList",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectSourceConstantList := _MultiSelectSourceConstantList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSourceConstantList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSourceConstantList(varMultiSelectSourceConstantList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "constantList")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSourceConstantList struct {

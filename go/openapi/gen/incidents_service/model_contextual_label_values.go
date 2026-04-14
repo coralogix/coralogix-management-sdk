@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ContextualLabelValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContextualLabelValues{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &ContextualLabelValues{}
 // ContextualLabelValues Represents contextual label values for filtering incidents
 type ContextualLabelValues struct {
 	ContextualLabelValues []string `json:"contextualLabelValues"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ContextualLabelValues ContextualLabelValues
@@ -79,6 +82,11 @@ func (o ContextualLabelValues) MarshalJSON() ([]byte, error) {
 func (o ContextualLabelValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["contextualLabelValues"] = o.ContextualLabelValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *ContextualLabelValues) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ContextualLabelValues(varContextualLabelValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contextualLabelValues")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

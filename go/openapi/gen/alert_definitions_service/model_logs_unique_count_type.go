@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsUniqueCountType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsUniqueCountType{}
@@ -26,7 +29,10 @@ type LogsUniqueCountType struct {
 	Rules []LogsUniqueCountRule `json:"rules,omitempty"`
 	// The keypath in the logs to be used for unique count
 	UniqueCountKeypath *string `json:"uniqueCountKeypath,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsUniqueCountType LogsUniqueCountType
 
 // NewLogsUniqueCountType instantiates a new LogsUniqueCountType object
 // This constructor will assign default values to properties that have it defined,
@@ -230,7 +236,38 @@ func (o LogsUniqueCountType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UniqueCountKeypath) {
 		toSerialize["uniqueCountKeypath"] = o.UniqueCountKeypath
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsUniqueCountType) UnmarshalJSON(data []byte) (err error) {
+	varLogsUniqueCountType := _LogsUniqueCountType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsUniqueCountType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsUniqueCountType(varLogsUniqueCountType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsFilter")
+		delete(additionalProperties, "maxUniqueCountPerGroupByKey")
+		delete(additionalProperties, "notificationPayloadFilter")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "uniqueCountKeypath")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsUniqueCountType struct {

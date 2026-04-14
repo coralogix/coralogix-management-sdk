@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateSpanPolicyRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateSpanPolicyRequest{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &CreateSpanPolicyRequest{}
 type CreateSpanPolicyRequest struct {
 	Policy CreateGenericPolicyRequest `json:"policy"`
 	SpanRules SpanRules `json:"spanRules"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSpanPolicyRequest CreateSpanPolicyRequest
@@ -106,6 +109,11 @@ func (o CreateSpanPolicyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["policy"] = o.Policy
 	toSerialize["spanRules"] = o.SpanRules
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -142,6 +150,14 @@ func (o *CreateSpanPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateSpanPolicyRequest(varCreateSpanPolicyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "policy")
+		delete(additionalProperties, "spanRules")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

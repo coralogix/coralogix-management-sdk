@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Hexagon type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Hexagon{}
@@ -36,7 +39,10 @@ type Hexagon struct {
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Hexagon Hexagon
 
 // NewHexagon instantiates a new Hexagon object
 // This constructor will assign default values to properties that have it defined,
@@ -485,7 +491,45 @@ func (o Hexagon) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Hexagon) UnmarshalJSON(data []byte) (err error) {
+	varHexagon := _Hexagon{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagon)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Hexagon(varHexagon)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "decimal")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "legendBy")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "thresholdType")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHexagon struct {

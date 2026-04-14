@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Spans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Spans{}
@@ -24,7 +27,10 @@ type Spans struct {
 	Filters []SpansFilter `json:"filters,omitempty"`
 	GroupBy []SpanObservationField `json:"groupBy,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Spans Spans
 
 // NewSpans instantiates a new Spans object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o Spans) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LuceneQuery) {
 		toSerialize["luceneQuery"] = o.LuceneQuery
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Spans) UnmarshalJSON(data []byte) (err error) {
+	varSpans := _Spans{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpans)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Spans(varSpans)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "luceneQuery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpans struct {

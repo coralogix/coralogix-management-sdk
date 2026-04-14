@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EntityLabelCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EntityLabelCount{}
@@ -25,7 +28,10 @@ type EntityLabelCount struct {
 	LabelKey *string `json:"labelKey,omitempty"`
 	// The entity label value
 	LabelValue *string `json:"labelValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EntityLabelCount EntityLabelCount
 
 // NewEntityLabelCount instantiates a new EntityLabelCount object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +165,36 @@ func (o EntityLabelCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LabelValue) {
 		toSerialize["labelValue"] = o.LabelValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EntityLabelCount) UnmarshalJSON(data []byte) (err error) {
+	varEntityLabelCount := _EntityLabelCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEntityLabelCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EntityLabelCount(varEntityLabelCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "labelKey")
+		delete(additionalProperties, "labelValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEntityLabelCount struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetSendDataApiKeysResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetSendDataApiKeysResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetSendDataApiKeysResponse{}
 // GetSendDataApiKeysResponse This data structure is the response obtained when retrieving an API key.
 type GetSendDataApiKeysResponse struct {
 	Keys []KeyInfo `json:"keys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSendDataApiKeysResponse GetSendDataApiKeysResponse
 
 // NewGetSendDataApiKeysResponse instantiates a new GetSendDataApiKeysResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetSendDataApiKeysResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Keys) {
 		toSerialize["keys"] = o.Keys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSendDataApiKeysResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetSendDataApiKeysResponse := _GetSendDataApiKeysResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetSendDataApiKeysResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSendDataApiKeysResponse(varGetSendDataApiKeysResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keys")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSendDataApiKeysResponse struct {

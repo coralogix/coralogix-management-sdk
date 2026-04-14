@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionUnits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionUnits{}
 
 // PropertyDefinitionUnits struct for PropertyDefinitionUnits
 type PropertyDefinitionUnits struct {
-	Units *PropertyUnits `json:"units,omitempty"`
+	Units PropertyUnits `json:"units"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionUnits PropertyDefinitionUnits
 
 // NewPropertyDefinitionUnits instantiates a new PropertyDefinitionUnits object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionUnits() *PropertyDefinitionUnits {
+func NewPropertyDefinitionUnits(units PropertyUnits) *PropertyDefinitionUnits {
 	this := PropertyDefinitionUnits{}
+	this.Units = units
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewPropertyDefinitionUnitsWithDefaults() *PropertyDefinitionUnits {
 	return &this
 }
 
-// GetUnits returns the Units field value if set, zero value otherwise.
+// GetUnits returns the Units field value
 func (o *PropertyDefinitionUnits) GetUnits() PropertyUnits {
-	if o == nil || IsNil(o.Units) {
+	if o == nil {
 		var ret PropertyUnits
 		return ret
 	}
-	return *o.Units
+
+	return o.Units
 }
 
-// GetUnitsOk returns a tuple with the Units field value if set, nil otherwise
+// GetUnitsOk returns a tuple with the Units field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionUnits) GetUnitsOk() (*PropertyUnits, bool) {
-	if o == nil || IsNil(o.Units) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Units, true
+	return &o.Units, true
 }
 
-// HasUnits returns a boolean if a field has been set.
-func (o *PropertyDefinitionUnits) HasUnits() bool {
-	if o != nil && !IsNil(o.Units) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnits gets a reference to the given PropertyUnits and assigns it to the Units field.
+// SetUnits sets field value
 func (o *PropertyDefinitionUnits) SetUnits(v PropertyUnits) {
-	o.Units = &v
+	o.Units = v
 }
 
 func (o PropertyDefinitionUnits) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o PropertyDefinitionUnits) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionUnits) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Units) {
-		toSerialize["units"] = o.Units
+	toSerialize["units"] = o.Units
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionUnits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"units",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionUnits := _PropertyDefinitionUnits{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionUnits)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionUnits(varPropertyDefinitionUnits)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "units")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionUnits struct {

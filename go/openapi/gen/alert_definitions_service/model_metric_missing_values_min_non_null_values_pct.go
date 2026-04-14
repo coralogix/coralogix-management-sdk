@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricMissingValuesMinNonNullValuesPct type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricMissingValuesMinNonNullValuesPct{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &MetricMissingValuesMinNonNullValuesPct{}
 // MetricMissingValuesMinNonNullValuesPct Configuration for handling missing values in metric threshold alerts.
 type MetricMissingValuesMinNonNullValuesPct struct {
 	// If set, specifies the minimum percentage of non-null values required for the alert to be triggered
-	MinNonNullValuesPct *int64 `json:"minNonNullValuesPct,omitempty"`
+	MinNonNullValuesPct int64 `json:"minNonNullValuesPct"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricMissingValuesMinNonNullValuesPct MetricMissingValuesMinNonNullValuesPct
 
 // NewMetricMissingValuesMinNonNullValuesPct instantiates a new MetricMissingValuesMinNonNullValuesPct object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricMissingValuesMinNonNullValuesPct() *MetricMissingValuesMinNonNullValuesPct {
+func NewMetricMissingValuesMinNonNullValuesPct(minNonNullValuesPct int64) *MetricMissingValuesMinNonNullValuesPct {
 	this := MetricMissingValuesMinNonNullValuesPct{}
+	this.MinNonNullValuesPct = minNonNullValuesPct
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewMetricMissingValuesMinNonNullValuesPctWithDefaults() *MetricMissingValue
 	return &this
 }
 
-// GetMinNonNullValuesPct returns the MinNonNullValuesPct field value if set, zero value otherwise.
+// GetMinNonNullValuesPct returns the MinNonNullValuesPct field value
 func (o *MetricMissingValuesMinNonNullValuesPct) GetMinNonNullValuesPct() int64 {
-	if o == nil || IsNil(o.MinNonNullValuesPct) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.MinNonNullValuesPct
+
+	return o.MinNonNullValuesPct
 }
 
-// GetMinNonNullValuesPctOk returns a tuple with the MinNonNullValuesPct field value if set, nil otherwise
+// GetMinNonNullValuesPctOk returns a tuple with the MinNonNullValuesPct field value
 // and a boolean to check if the value has been set.
 func (o *MetricMissingValuesMinNonNullValuesPct) GetMinNonNullValuesPctOk() (*int64, bool) {
-	if o == nil || IsNil(o.MinNonNullValuesPct) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MinNonNullValuesPct, true
+	return &o.MinNonNullValuesPct, true
 }
 
-// HasMinNonNullValuesPct returns a boolean if a field has been set.
-func (o *MetricMissingValuesMinNonNullValuesPct) HasMinNonNullValuesPct() bool {
-	if o != nil && !IsNil(o.MinNonNullValuesPct) {
-		return true
-	}
-
-	return false
-}
-
-// SetMinNonNullValuesPct gets a reference to the given int64 and assigns it to the MinNonNullValuesPct field.
+// SetMinNonNullValuesPct sets field value
 func (o *MetricMissingValuesMinNonNullValuesPct) SetMinNonNullValuesPct(v int64) {
-	o.MinNonNullValuesPct = &v
+	o.MinNonNullValuesPct = v
 }
 
 func (o MetricMissingValuesMinNonNullValuesPct) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o MetricMissingValuesMinNonNullValuesPct) MarshalJSON() ([]byte, error) {
 
 func (o MetricMissingValuesMinNonNullValuesPct) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MinNonNullValuesPct) {
-		toSerialize["minNonNullValuesPct"] = o.MinNonNullValuesPct
+	toSerialize["minNonNullValuesPct"] = o.MinNonNullValuesPct
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricMissingValuesMinNonNullValuesPct) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"minNonNullValuesPct",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMetricMissingValuesMinNonNullValuesPct := _MetricMissingValuesMinNonNullValuesPct{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricMissingValuesMinNonNullValuesPct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricMissingValuesMinNonNullValuesPct(varMetricMissingValuesMinNonNullValuesPct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "minNonNullValuesPct")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricMissingValuesMinNonNullValuesPct struct {

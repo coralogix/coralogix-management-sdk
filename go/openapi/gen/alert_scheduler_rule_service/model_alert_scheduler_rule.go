@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertSchedulerRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRule{}
@@ -29,7 +32,10 @@ type AlertSchedulerRule struct {
 	Schedule *Schedule `json:"schedule,omitempty"`
 	UniqueIdentifier *string `json:"uniqueIdentifier,omitempty"`
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertSchedulerRule AlertSchedulerRule
 
 // NewAlertSchedulerRule instantiates a new AlertSchedulerRule object
 // This constructor will assign default values to properties that have it defined,
@@ -408,7 +414,43 @@ func (o AlertSchedulerRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRule) UnmarshalJSON(data []byte) (err error) {
+	varAlertSchedulerRule := _AlertSchedulerRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRule(varAlertSchedulerRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "filter")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "metaLabels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "schedule")
+		delete(additionalProperties, "uniqueIdentifier")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertSchedulerRule struct {

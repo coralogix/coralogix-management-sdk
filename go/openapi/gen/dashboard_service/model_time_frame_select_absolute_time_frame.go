@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeFrameSelectAbsoluteTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeFrameSelectAbsoluteTimeFrame{}
 
 // TimeFrameSelectAbsoluteTimeFrame struct for TimeFrameSelectAbsoluteTimeFrame
 type TimeFrameSelectAbsoluteTimeFrame struct {
-	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
+	AbsoluteTimeFrame TimeFrame `json:"absoluteTimeFrame"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeFrameSelectAbsoluteTimeFrame TimeFrameSelectAbsoluteTimeFrame
 
 // NewTimeFrameSelectAbsoluteTimeFrame instantiates a new TimeFrameSelectAbsoluteTimeFrame object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeFrameSelectAbsoluteTimeFrame() *TimeFrameSelectAbsoluteTimeFrame {
+func NewTimeFrameSelectAbsoluteTimeFrame(absoluteTimeFrame TimeFrame) *TimeFrameSelectAbsoluteTimeFrame {
 	this := TimeFrameSelectAbsoluteTimeFrame{}
+	this.AbsoluteTimeFrame = absoluteTimeFrame
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTimeFrameSelectAbsoluteTimeFrameWithDefaults() *TimeFrameSelectAbsoluteT
 	return &this
 }
 
-// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value if set, zero value otherwise.
+// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value
 func (o *TimeFrameSelectAbsoluteTimeFrame) GetAbsoluteTimeFrame() TimeFrame {
-	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+	if o == nil {
 		var ret TimeFrame
 		return ret
 	}
-	return *o.AbsoluteTimeFrame
+
+	return o.AbsoluteTimeFrame
 }
 
-// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value if set, nil otherwise
+// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *TimeFrameSelectAbsoluteTimeFrame) GetAbsoluteTimeFrameOk() (*TimeFrame, bool) {
-	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AbsoluteTimeFrame, true
+	return &o.AbsoluteTimeFrame, true
 }
 
-// HasAbsoluteTimeFrame returns a boolean if a field has been set.
-func (o *TimeFrameSelectAbsoluteTimeFrame) HasAbsoluteTimeFrame() bool {
-	if o != nil && !IsNil(o.AbsoluteTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbsoluteTimeFrame gets a reference to the given TimeFrame and assigns it to the AbsoluteTimeFrame field.
+// SetAbsoluteTimeFrame sets field value
 func (o *TimeFrameSelectAbsoluteTimeFrame) SetAbsoluteTimeFrame(v TimeFrame) {
-	o.AbsoluteTimeFrame = &v
+	o.AbsoluteTimeFrame = v
 }
 
 func (o TimeFrameSelectAbsoluteTimeFrame) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TimeFrameSelectAbsoluteTimeFrame) MarshalJSON() ([]byte, error) {
 
 func (o TimeFrameSelectAbsoluteTimeFrame) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AbsoluteTimeFrame) {
-		toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
+	toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeFrameSelectAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"absoluteTimeFrame",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTimeFrameSelectAbsoluteTimeFrame := _TimeFrameSelectAbsoluteTimeFrame{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeFrameSelectAbsoluteTimeFrame)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeFrameSelectAbsoluteTimeFrame(varTimeFrameSelectAbsoluteTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "absoluteTimeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeFrameSelectAbsoluteTimeFrame struct {

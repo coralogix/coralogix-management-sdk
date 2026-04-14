@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDataUsageResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDataUsageResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDataUsageResponse{}
 // GetDataUsageResponse This data structure is used to return data usage.
 type GetDataUsageResponse struct {
 	Entries []DataUsageEntry `json:"entries,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDataUsageResponse GetDataUsageResponse
 
 // NewGetDataUsageResponse instantiates a new GetDataUsageResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDataUsageResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Entries) {
 		toSerialize["entries"] = o.Entries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDataUsageResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDataUsageResponse := _GetDataUsageResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDataUsageResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDataUsageResponse(varGetDataUsageResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entries")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDataUsageResponse struct {

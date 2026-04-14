@@ -11,23 +11,31 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricTimeWindowMetricTimeWindowSpecificValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricTimeWindowMetricTimeWindowSpecificValue{}
 
 // MetricTimeWindowMetricTimeWindowSpecificValue struct for MetricTimeWindowMetricTimeWindowSpecificValue
 type MetricTimeWindowMetricTimeWindowSpecificValue struct {
-	MetricTimeWindowSpecificValue *MetricTimeWindowValue `json:"metricTimeWindowSpecificValue,omitempty"`
+	MetricTimeWindowSpecificValue MetricTimeWindowValue `json:"metricTimeWindowSpecificValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricTimeWindowMetricTimeWindowSpecificValue MetricTimeWindowMetricTimeWindowSpecificValue
 
 // NewMetricTimeWindowMetricTimeWindowSpecificValue instantiates a new MetricTimeWindowMetricTimeWindowSpecificValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricTimeWindowMetricTimeWindowSpecificValue() *MetricTimeWindowMetricTimeWindowSpecificValue {
+func NewMetricTimeWindowMetricTimeWindowSpecificValue(metricTimeWindowSpecificValue MetricTimeWindowValue) *MetricTimeWindowMetricTimeWindowSpecificValue {
 	this := MetricTimeWindowMetricTimeWindowSpecificValue{}
+	this.MetricTimeWindowSpecificValue = metricTimeWindowSpecificValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMetricTimeWindowMetricTimeWindowSpecificValueWithDefaults() *MetricTimeW
 	return &this
 }
 
-// GetMetricTimeWindowSpecificValue returns the MetricTimeWindowSpecificValue field value if set, zero value otherwise.
+// GetMetricTimeWindowSpecificValue returns the MetricTimeWindowSpecificValue field value
 func (o *MetricTimeWindowMetricTimeWindowSpecificValue) GetMetricTimeWindowSpecificValue() MetricTimeWindowValue {
-	if o == nil || IsNil(o.MetricTimeWindowSpecificValue) {
+	if o == nil {
 		var ret MetricTimeWindowValue
 		return ret
 	}
-	return *o.MetricTimeWindowSpecificValue
+
+	return o.MetricTimeWindowSpecificValue
 }
 
-// GetMetricTimeWindowSpecificValueOk returns a tuple with the MetricTimeWindowSpecificValue field value if set, nil otherwise
+// GetMetricTimeWindowSpecificValueOk returns a tuple with the MetricTimeWindowSpecificValue field value
 // and a boolean to check if the value has been set.
 func (o *MetricTimeWindowMetricTimeWindowSpecificValue) GetMetricTimeWindowSpecificValueOk() (*MetricTimeWindowValue, bool) {
-	if o == nil || IsNil(o.MetricTimeWindowSpecificValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricTimeWindowSpecificValue, true
+	return &o.MetricTimeWindowSpecificValue, true
 }
 
-// HasMetricTimeWindowSpecificValue returns a boolean if a field has been set.
-func (o *MetricTimeWindowMetricTimeWindowSpecificValue) HasMetricTimeWindowSpecificValue() bool {
-	if o != nil && !IsNil(o.MetricTimeWindowSpecificValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricTimeWindowSpecificValue gets a reference to the given MetricTimeWindowValue and assigns it to the MetricTimeWindowSpecificValue field.
+// SetMetricTimeWindowSpecificValue sets field value
 func (o *MetricTimeWindowMetricTimeWindowSpecificValue) SetMetricTimeWindowSpecificValue(v MetricTimeWindowValue) {
-	o.MetricTimeWindowSpecificValue = &v
+	o.MetricTimeWindowSpecificValue = v
 }
 
 func (o MetricTimeWindowMetricTimeWindowSpecificValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MetricTimeWindowMetricTimeWindowSpecificValue) MarshalJSON() ([]byte, er
 
 func (o MetricTimeWindowMetricTimeWindowSpecificValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricTimeWindowSpecificValue) {
-		toSerialize["metricTimeWindowSpecificValue"] = o.MetricTimeWindowSpecificValue
+	toSerialize["metricTimeWindowSpecificValue"] = o.MetricTimeWindowSpecificValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricTimeWindowMetricTimeWindowSpecificValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricTimeWindowSpecificValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMetricTimeWindowMetricTimeWindowSpecificValue := _MetricTimeWindowMetricTimeWindowSpecificValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricTimeWindowMetricTimeWindowSpecificValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricTimeWindowMetricTimeWindowSpecificValue(varMetricTimeWindowMetricTimeWindowSpecificValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricTimeWindowSpecificValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricTimeWindowMetricTimeWindowSpecificValue struct {

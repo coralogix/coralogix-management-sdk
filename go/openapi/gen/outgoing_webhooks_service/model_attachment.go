@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Attachment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Attachment{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Attachment{}
 type Attachment struct {
 	IsActive *bool `json:"isActive,omitempty"`
 	Type *AttachmentType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Attachment Attachment
 
 // NewAttachment instantiates a new Attachment object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Attachment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Attachment) UnmarshalJSON(data []byte) (err error) {
+	varAttachment := _Attachment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAttachment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Attachment(varAttachment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAttachment struct {

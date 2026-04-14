@@ -11,10 +11,12 @@ API version: 1.0.0
 package target_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IBMCosTargetSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IBMCosTargetSpec{}
@@ -25,6 +27,7 @@ type IBMCosTargetSpec struct {
 	BucketType *IbmBucketType `json:"bucketType,omitempty"`
 	Endpoint string `json:"endpoint"`
 	ServiceCrn *string `json:"serviceCrn,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IBMCosTargetSpec IBMCosTargetSpec
@@ -178,6 +181,11 @@ func (o IBMCosTargetSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ServiceCrn) {
 		toSerialize["serviceCrn"] = o.ServiceCrn
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,6 +222,16 @@ func (o *IBMCosTargetSpec) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IBMCosTargetSpec(varIBMCosTargetSpec)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bucketCrn")
+		delete(additionalProperties, "bucketType")
+		delete(additionalProperties, "endpoint")
+		delete(additionalProperties, "serviceCrn")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

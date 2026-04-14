@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SaveIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveIntegrationResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SaveIntegrationResponse{}
 // SaveIntegrationResponse struct for SaveIntegrationResponse
 type SaveIntegrationResponse struct {
 	IntegrationId *string `json:"integrationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SaveIntegrationResponse SaveIntegrationResponse
 
 // NewSaveIntegrationResponse instantiates a new SaveIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SaveIntegrationResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IntegrationId) {
 		toSerialize["integrationId"] = o.IntegrationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SaveIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
+	varSaveIntegrationResponse := _SaveIntegrationResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSaveIntegrationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SaveIntegrationResponse(varSaveIntegrationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSaveIntegrationResponse struct {

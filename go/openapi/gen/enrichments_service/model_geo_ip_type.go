@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeoIpType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeoIpType{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GeoIpType{}
 // GeoIpType struct for GeoIpType
 type GeoIpType struct {
 	WithAsn *bool `json:"withAsn,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeoIpType GeoIpType
 
 // NewGeoIpType instantiates a new GeoIpType object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GeoIpType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WithAsn) {
 		toSerialize["withAsn"] = o.WithAsn
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GeoIpType) UnmarshalJSON(data []byte) (err error) {
+	varGeoIpType := _GeoIpType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeoIpType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeoIpType(varGeoIpType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "withAsn")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeoIpType struct {

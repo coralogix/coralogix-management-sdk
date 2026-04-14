@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DynamicQueryDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryDefinition{}
@@ -26,6 +28,7 @@ type DynamicQueryDefinition struct {
 	// Custom name of the query
 	Name *string `json:"name,omitempty"`
 	Query DynamicQuery `json:"query"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DynamicQueryDefinition DynamicQueryDefinition
@@ -144,6 +147,11 @@ func (o DynamicQueryDefinition) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name
 	}
 	toSerialize["query"] = o.Query
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -180,6 +188,15 @@ func (o *DynamicQueryDefinition) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DynamicQueryDefinition(varDynamicQueryDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

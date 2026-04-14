@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CloudFormationTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CloudFormationTemplate{}
@@ -23,7 +26,10 @@ type CloudFormationTemplate struct {
 	Parameters *map[string]string `json:"parameters,omitempty"`
 	PostInstallationSteps *map[string]string `json:"postInstallationSteps,omitempty"`
 	TemplateUrl *string `json:"templateUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CloudFormationTemplate CloudFormationTemplate
 
 // NewCloudFormationTemplate instantiates a new CloudFormationTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o CloudFormationTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TemplateUrl) {
 		toSerialize["templateUrl"] = o.TemplateUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CloudFormationTemplate) UnmarshalJSON(data []byte) (err error) {
+	varCloudFormationTemplate := _CloudFormationTemplate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCloudFormationTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CloudFormationTemplate(varCloudFormationTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "commands")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "postInstallationSteps")
+		delete(additionalProperties, "templateUrl")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCloudFormationTemplate struct {

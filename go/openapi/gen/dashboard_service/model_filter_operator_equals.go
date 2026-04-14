@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterOperatorEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterOperatorEquals{}
 
 // FilterOperatorEquals This data structure defines the comparison operation for the filter.
 type FilterOperatorEquals struct {
-	Equals *FilterEquals `json:"equals,omitempty"`
+	Equals FilterEquals `json:"equals"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterOperatorEquals FilterOperatorEquals
 
 // NewFilterOperatorEquals instantiates a new FilterOperatorEquals object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFilterOperatorEquals() *FilterOperatorEquals {
+func NewFilterOperatorEquals(equals FilterEquals) *FilterOperatorEquals {
 	this := FilterOperatorEquals{}
+	this.Equals = equals
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewFilterOperatorEqualsWithDefaults() *FilterOperatorEquals {
 	return &this
 }
 
-// GetEquals returns the Equals field value if set, zero value otherwise.
+// GetEquals returns the Equals field value
 func (o *FilterOperatorEquals) GetEquals() FilterEquals {
-	if o == nil || IsNil(o.Equals) {
+	if o == nil {
 		var ret FilterEquals
 		return ret
 	}
-	return *o.Equals
+
+	return o.Equals
 }
 
-// GetEqualsOk returns a tuple with the Equals field value if set, nil otherwise
+// GetEqualsOk returns a tuple with the Equals field value
 // and a boolean to check if the value has been set.
 func (o *FilterOperatorEquals) GetEqualsOk() (*FilterEquals, bool) {
-	if o == nil || IsNil(o.Equals) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Equals, true
+	return &o.Equals, true
 }
 
-// HasEquals returns a boolean if a field has been set.
-func (o *FilterOperatorEquals) HasEquals() bool {
-	if o != nil && !IsNil(o.Equals) {
-		return true
-	}
-
-	return false
-}
-
-// SetEquals gets a reference to the given FilterEquals and assigns it to the Equals field.
+// SetEquals sets field value
 func (o *FilterOperatorEquals) SetEquals(v FilterEquals) {
-	o.Equals = &v
+	o.Equals = v
 }
 
 func (o FilterOperatorEquals) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o FilterOperatorEquals) MarshalJSON() ([]byte, error) {
 
 func (o FilterOperatorEquals) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Equals) {
-		toSerialize["equals"] = o.Equals
+	toSerialize["equals"] = o.Equals
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterOperatorEquals) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"equals",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFilterOperatorEquals := _FilterOperatorEquals{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterOperatorEquals)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterOperatorEquals(varFilterOperatorEquals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "equals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterOperatorEquals struct {

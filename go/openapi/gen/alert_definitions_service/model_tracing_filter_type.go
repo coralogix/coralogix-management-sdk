@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingFilterType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingFilterType{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &TracingFilterType{}
 type TracingFilterType struct {
 	Operation *TracingFilterOperationType `json:"operation,omitempty"`
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingFilterType TracingFilterType
 
 // NewTracingFilterType instantiates a new TracingFilterType object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o TracingFilterType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingFilterType) UnmarshalJSON(data []byte) (err error) {
+	varTracingFilterType := _TracingFilterType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingFilterType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingFilterType(varTracingFilterType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operation")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingFilterType struct {

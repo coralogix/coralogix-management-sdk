@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ParameterSensitiveData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ParameterSensitiveData{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &ParameterSensitiveData{}
 // ParameterSensitiveData struct for ParameterSensitiveData
 type ParameterSensitiveData struct {
 	Key *string `json:"key,omitempty"`
-	SensitiveData map[string]interface{} `json:"sensitiveData,omitempty"`
+	SensitiveData map[string]interface{} `json:"sensitiveData"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ParameterSensitiveData ParameterSensitiveData
 
 // NewParameterSensitiveData instantiates a new ParameterSensitiveData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewParameterSensitiveData() *ParameterSensitiveData {
+func NewParameterSensitiveData(sensitiveData map[string]interface{}) *ParameterSensitiveData {
 	this := ParameterSensitiveData{}
+	this.SensitiveData = sensitiveData
 	return &this
 }
 
@@ -72,34 +80,26 @@ func (o *ParameterSensitiveData) SetKey(v string) {
 	o.Key = &v
 }
 
-// GetSensitiveData returns the SensitiveData field value if set, zero value otherwise.
+// GetSensitiveData returns the SensitiveData field value
 func (o *ParameterSensitiveData) GetSensitiveData() map[string]interface{} {
-	if o == nil || IsNil(o.SensitiveData) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.SensitiveData
 }
 
-// GetSensitiveDataOk returns a tuple with the SensitiveData field value if set, nil otherwise
+// GetSensitiveDataOk returns a tuple with the SensitiveData field value
 // and a boolean to check if the value has been set.
 func (o *ParameterSensitiveData) GetSensitiveDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.SensitiveData) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.SensitiveData, true
 }
 
-// HasSensitiveData returns a boolean if a field has been set.
-func (o *ParameterSensitiveData) HasSensitiveData() bool {
-	if o != nil && !IsNil(o.SensitiveData) {
-		return true
-	}
-
-	return false
-}
-
-// SetSensitiveData gets a reference to the given map[string]interface{} and assigns it to the SensitiveData field.
+// SetSensitiveData sets field value
 func (o *ParameterSensitiveData) SetSensitiveData(v map[string]interface{}) {
 	o.SensitiveData = v
 }
@@ -117,10 +117,57 @@ func (o ParameterSensitiveData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if !IsNil(o.SensitiveData) {
-		toSerialize["sensitiveData"] = o.SensitiveData
+	toSerialize["sensitiveData"] = o.SensitiveData
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ParameterSensitiveData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sensitiveData",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varParameterSensitiveData := _ParameterSensitiveData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varParameterSensitiveData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParameterSensitiveData(varParameterSensitiveData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "sensitiveData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParameterSensitiveData struct {

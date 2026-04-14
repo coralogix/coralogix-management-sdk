@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomEnrichmentType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichmentType{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CustomEnrichmentType{}
 // CustomEnrichmentType struct for CustomEnrichmentType
 type CustomEnrichmentType struct {
 	Id *int64 `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomEnrichmentType CustomEnrichmentType
 
 // NewCustomEnrichmentType instantiates a new CustomEnrichmentType object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CustomEnrichmentType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomEnrichmentType) UnmarshalJSON(data []byte) (err error) {
+	varCustomEnrichmentType := _CustomEnrichmentType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomEnrichmentType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomEnrichmentType(varCustomEnrichmentType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomEnrichmentType struct {

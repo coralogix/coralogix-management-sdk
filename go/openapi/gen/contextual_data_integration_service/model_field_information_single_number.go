@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldInformationSingleNumber type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldInformationSingleNumber{}
@@ -28,20 +32,24 @@ type FieldInformationSingleNumber struct {
 	Predefined *bool `json:"predefined,omitempty"`
 	Readonly *bool `json:"readonly,omitempty"`
 	Required *bool `json:"required,omitempty"`
-	SingleNumber *IntegrationRevisionSingleNumericValue `json:"singleNumber,omitempty"`
+	SingleNumber IntegrationRevisionSingleNumericValue `json:"singleNumber"`
 	TemplateParamName *string `json:"templateParamName,omitempty"`
 	Tooltip *string `json:"tooltip,omitempty"`
 	Type *InputType `json:"type,omitempty"`
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	Visible *bool `json:"visible,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldInformationSingleNumber FieldInformationSingleNumber
 
 // NewFieldInformationSingleNumber instantiates a new FieldInformationSingleNumber object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldInformationSingleNumber() *FieldInformationSingleNumber {
+func NewFieldInformationSingleNumber(singleNumber IntegrationRevisionSingleNumericValue) *FieldInformationSingleNumber {
 	this := FieldInformationSingleNumber{}
+	this.SingleNumber = singleNumber
 	return &this
 }
 
@@ -341,36 +349,28 @@ func (o *FieldInformationSingleNumber) SetRequired(v bool) {
 	o.Required = &v
 }
 
-// GetSingleNumber returns the SingleNumber field value if set, zero value otherwise.
+// GetSingleNumber returns the SingleNumber field value
 func (o *FieldInformationSingleNumber) GetSingleNumber() IntegrationRevisionSingleNumericValue {
-	if o == nil || IsNil(o.SingleNumber) {
+	if o == nil {
 		var ret IntegrationRevisionSingleNumericValue
 		return ret
 	}
-	return *o.SingleNumber
+
+	return o.SingleNumber
 }
 
-// GetSingleNumberOk returns a tuple with the SingleNumber field value if set, nil otherwise
+// GetSingleNumberOk returns a tuple with the SingleNumber field value
 // and a boolean to check if the value has been set.
 func (o *FieldInformationSingleNumber) GetSingleNumberOk() (*IntegrationRevisionSingleNumericValue, bool) {
-	if o == nil || IsNil(o.SingleNumber) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SingleNumber, true
+	return &o.SingleNumber, true
 }
 
-// HasSingleNumber returns a boolean if a field has been set.
-func (o *FieldInformationSingleNumber) HasSingleNumber() bool {
-	if o != nil && !IsNil(o.SingleNumber) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleNumber gets a reference to the given IntegrationRevisionSingleNumericValue and assigns it to the SingleNumber field.
+// SetSingleNumber sets field value
 func (o *FieldInformationSingleNumber) SetSingleNumber(v IntegrationRevisionSingleNumericValue) {
-	o.SingleNumber = &v
+	o.SingleNumber = v
 }
 
 // GetTemplateParamName returns the TemplateParamName field value if set, zero value otherwise.
@@ -570,9 +570,7 @@ func (o FieldInformationSingleNumber) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
-	if !IsNil(o.SingleNumber) {
-		toSerialize["singleNumber"] = o.SingleNumber
-	}
+	toSerialize["singleNumber"] = o.SingleNumber
 	if !IsNil(o.TemplateParamName) {
 		toSerialize["templateParamName"] = o.TemplateParamName
 	}
@@ -588,7 +586,69 @@ func (o FieldInformationSingleNumber) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visible) {
 		toSerialize["visible"] = o.Visible
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldInformationSingleNumber) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singleNumber",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFieldInformationSingleNumber := _FieldInformationSingleNumber{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldInformationSingleNumber)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldInformationSingleNumber(varFieldInformationSingleNumber)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowedPattern")
+		delete(additionalProperties, "applicableIf")
+		delete(additionalProperties, "documentationReference")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "placeholder")
+		delete(additionalProperties, "predefined")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "required")
+		delete(additionalProperties, "singleNumber")
+		delete(additionalProperties, "templateParamName")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "upgradeNotice")
+		delete(additionalProperties, "visible")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldInformationSingleNumber struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersReplaceParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersReplaceParameters{}
 
 // RuleParametersReplaceParameters struct for RuleParametersReplaceParameters
 type RuleParametersReplaceParameters struct {
-	ReplaceParameters *ReplaceParameters `json:"replaceParameters,omitempty"`
+	ReplaceParameters ReplaceParameters `json:"replaceParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersReplaceParameters RuleParametersReplaceParameters
 
 // NewRuleParametersReplaceParameters instantiates a new RuleParametersReplaceParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersReplaceParameters() *RuleParametersReplaceParameters {
+func NewRuleParametersReplaceParameters(replaceParameters ReplaceParameters) *RuleParametersReplaceParameters {
 	this := RuleParametersReplaceParameters{}
+	this.ReplaceParameters = replaceParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersReplaceParametersWithDefaults() *RuleParametersReplacePara
 	return &this
 }
 
-// GetReplaceParameters returns the ReplaceParameters field value if set, zero value otherwise.
+// GetReplaceParameters returns the ReplaceParameters field value
 func (o *RuleParametersReplaceParameters) GetReplaceParameters() ReplaceParameters {
-	if o == nil || IsNil(o.ReplaceParameters) {
+	if o == nil {
 		var ret ReplaceParameters
 		return ret
 	}
-	return *o.ReplaceParameters
+
+	return o.ReplaceParameters
 }
 
-// GetReplaceParametersOk returns a tuple with the ReplaceParameters field value if set, nil otherwise
+// GetReplaceParametersOk returns a tuple with the ReplaceParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersReplaceParameters) GetReplaceParametersOk() (*ReplaceParameters, bool) {
-	if o == nil || IsNil(o.ReplaceParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReplaceParameters, true
+	return &o.ReplaceParameters, true
 }
 
-// HasReplaceParameters returns a boolean if a field has been set.
-func (o *RuleParametersReplaceParameters) HasReplaceParameters() bool {
-	if o != nil && !IsNil(o.ReplaceParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplaceParameters gets a reference to the given ReplaceParameters and assigns it to the ReplaceParameters field.
+// SetReplaceParameters sets field value
 func (o *RuleParametersReplaceParameters) SetReplaceParameters(v ReplaceParameters) {
-	o.ReplaceParameters = &v
+	o.ReplaceParameters = v
 }
 
 func (o RuleParametersReplaceParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersReplaceParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersReplaceParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ReplaceParameters) {
-		toSerialize["replaceParameters"] = o.ReplaceParameters
+	toSerialize["replaceParameters"] = o.ReplaceParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersReplaceParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"replaceParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersReplaceParameters := _RuleParametersReplaceParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersReplaceParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersReplaceParameters(varRuleParametersReplaceParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replaceParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersReplaceParameters struct {

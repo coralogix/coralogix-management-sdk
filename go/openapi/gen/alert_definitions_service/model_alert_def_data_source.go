@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefDataSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefDataSource{}
@@ -23,7 +26,10 @@ type AlertDefDataSource struct {
 	DataSet *string `json:"dataSet,omitempty"`
 	// Folder name of the datasource
 	DataSpace *string `json:"dataSpace,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefDataSource AlertDefDataSource
 
 // NewAlertDefDataSource instantiates a new AlertDefDataSource object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o AlertDefDataSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DataSpace) {
 		toSerialize["dataSpace"] = o.DataSpace
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefDataSource) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefDataSource := _AlertDefDataSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefDataSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefDataSource(varAlertDefDataSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataSet")
+		delete(additionalProperties, "dataSpace")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefDataSource struct {

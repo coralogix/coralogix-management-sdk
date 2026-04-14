@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartQueryMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartQueryMetrics{}
 
 // LineChartQueryMetrics struct for LineChartQueryMetrics
 type LineChartQueryMetrics struct {
-	Metrics *LineChartMetricsQuery `json:"metrics,omitempty"`
+	Metrics LineChartMetricsQuery `json:"metrics"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineChartQueryMetrics LineChartQueryMetrics
 
 // NewLineChartQueryMetrics instantiates a new LineChartQueryMetrics object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLineChartQueryMetrics() *LineChartQueryMetrics {
+func NewLineChartQueryMetrics(metrics LineChartMetricsQuery) *LineChartQueryMetrics {
 	this := LineChartQueryMetrics{}
+	this.Metrics = metrics
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewLineChartQueryMetricsWithDefaults() *LineChartQueryMetrics {
 	return &this
 }
 
-// GetMetrics returns the Metrics field value if set, zero value otherwise.
+// GetMetrics returns the Metrics field value
 func (o *LineChartQueryMetrics) GetMetrics() LineChartMetricsQuery {
-	if o == nil || IsNil(o.Metrics) {
+	if o == nil {
 		var ret LineChartMetricsQuery
 		return ret
 	}
-	return *o.Metrics
+
+	return o.Metrics
 }
 
-// GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
+// GetMetricsOk returns a tuple with the Metrics field value
 // and a boolean to check if the value has been set.
 func (o *LineChartQueryMetrics) GetMetricsOk() (*LineChartMetricsQuery, bool) {
-	if o == nil || IsNil(o.Metrics) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metrics, true
+	return &o.Metrics, true
 }
 
-// HasMetrics returns a boolean if a field has been set.
-func (o *LineChartQueryMetrics) HasMetrics() bool {
-	if o != nil && !IsNil(o.Metrics) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetrics gets a reference to the given LineChartMetricsQuery and assigns it to the Metrics field.
+// SetMetrics sets field value
 func (o *LineChartQueryMetrics) SetMetrics(v LineChartMetricsQuery) {
-	o.Metrics = &v
+	o.Metrics = v
 }
 
 func (o LineChartQueryMetrics) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o LineChartQueryMetrics) MarshalJSON() ([]byte, error) {
 
 func (o LineChartQueryMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Metrics) {
-		toSerialize["metrics"] = o.Metrics
+	toSerialize["metrics"] = o.Metrics
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *LineChartQueryMetrics) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metrics",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLineChartQueryMetrics := _LineChartQueryMetrics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartQueryMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartQueryMetrics(varLineChartQueryMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineChartQueryMetrics struct {

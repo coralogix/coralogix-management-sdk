@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScheduleOneTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScheduleOneTime{}
 
 // ScheduleOneTime struct for ScheduleOneTime
 type ScheduleOneTime struct {
-	OneTime *OneTime `json:"oneTime,omitempty"`
+	OneTime OneTime `json:"oneTime"`
 	ScheduleOperation *ScheduleOperation `json:"scheduleOperation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleOneTime ScheduleOneTime
 
 // NewScheduleOneTime instantiates a new ScheduleOneTime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduleOneTime() *ScheduleOneTime {
+func NewScheduleOneTime(oneTime OneTime) *ScheduleOneTime {
 	this := ScheduleOneTime{}
+	this.OneTime = oneTime
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewScheduleOneTimeWithDefaults() *ScheduleOneTime {
 	return &this
 }
 
-// GetOneTime returns the OneTime field value if set, zero value otherwise.
+// GetOneTime returns the OneTime field value
 func (o *ScheduleOneTime) GetOneTime() OneTime {
-	if o == nil || IsNil(o.OneTime) {
+	if o == nil {
 		var ret OneTime
 		return ret
 	}
-	return *o.OneTime
+
+	return o.OneTime
 }
 
-// GetOneTimeOk returns a tuple with the OneTime field value if set, nil otherwise
+// GetOneTimeOk returns a tuple with the OneTime field value
 // and a boolean to check if the value has been set.
 func (o *ScheduleOneTime) GetOneTimeOk() (*OneTime, bool) {
-	if o == nil || IsNil(o.OneTime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OneTime, true
+	return &o.OneTime, true
 }
 
-// HasOneTime returns a boolean if a field has been set.
-func (o *ScheduleOneTime) HasOneTime() bool {
-	if o != nil && !IsNil(o.OneTime) {
-		return true
-	}
-
-	return false
-}
-
-// SetOneTime gets a reference to the given OneTime and assigns it to the OneTime field.
+// SetOneTime sets field value
 func (o *ScheduleOneTime) SetOneTime(v OneTime) {
-	o.OneTime = &v
+	o.OneTime = v
 }
 
 // GetScheduleOperation returns the ScheduleOperation field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o ScheduleOneTime) MarshalJSON() ([]byte, error) {
 
 func (o ScheduleOneTime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OneTime) {
-		toSerialize["oneTime"] = o.OneTime
-	}
+	toSerialize["oneTime"] = o.OneTime
 	if !IsNil(o.ScheduleOperation) {
 		toSerialize["scheduleOperation"] = o.ScheduleOperation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleOneTime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"oneTime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varScheduleOneTime := _ScheduleOneTime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varScheduleOneTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleOneTime(varScheduleOneTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "oneTime")
+		delete(additionalProperties, "scheduleOperation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleOneTime struct {

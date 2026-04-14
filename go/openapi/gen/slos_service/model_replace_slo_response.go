@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceSloResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceSloResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &ReplaceSloResponse{}
 type ReplaceSloResponse struct {
 	EffectedSloAlertIds []string `json:"effectedSloAlertIds,omitempty"`
 	Slo Slo `json:"slo"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplaceSloResponse ReplaceSloResponse
@@ -115,6 +118,11 @@ func (o ReplaceSloResponse) ToMap() (map[string]interface{}, error) {
 		toSerialize["effectedSloAlertIds"] = o.EffectedSloAlertIds
 	}
 	toSerialize["slo"] = o.Slo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *ReplaceSloResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ReplaceSloResponse(varReplaceSloResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "effectedSloAlertIds")
+		delete(additionalProperties, "slo")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

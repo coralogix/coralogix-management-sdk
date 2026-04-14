@@ -11,8 +11,12 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateRoleRequestParentRoleId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRoleRequestParentRoleId{}
@@ -21,17 +25,21 @@ var _ MappedNullable = &CreateRoleRequestParentRoleId{}
 type CreateRoleRequestParentRoleId struct {
 	Description *string `json:"description,omitempty"`
 	Name *string `json:"name,omitempty"`
-	ParentRoleId *int64 `json:"parentRoleId,omitempty"`
+	ParentRoleId int64 `json:"parentRoleId"`
 	Permissions []string `json:"permissions,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRoleRequestParentRoleId CreateRoleRequestParentRoleId
 
 // NewCreateRoleRequestParentRoleId instantiates a new CreateRoleRequestParentRoleId object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateRoleRequestParentRoleId() *CreateRoleRequestParentRoleId {
+func NewCreateRoleRequestParentRoleId(parentRoleId int64) *CreateRoleRequestParentRoleId {
 	this := CreateRoleRequestParentRoleId{}
+	this.ParentRoleId = parentRoleId
 	return &this
 }
 
@@ -107,36 +115,28 @@ func (o *CreateRoleRequestParentRoleId) SetName(v string) {
 	o.Name = &v
 }
 
-// GetParentRoleId returns the ParentRoleId field value if set, zero value otherwise.
+// GetParentRoleId returns the ParentRoleId field value
 func (o *CreateRoleRequestParentRoleId) GetParentRoleId() int64 {
-	if o == nil || IsNil(o.ParentRoleId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.ParentRoleId
+
+	return o.ParentRoleId
 }
 
-// GetParentRoleIdOk returns a tuple with the ParentRoleId field value if set, nil otherwise
+// GetParentRoleIdOk returns a tuple with the ParentRoleId field value
 // and a boolean to check if the value has been set.
 func (o *CreateRoleRequestParentRoleId) GetParentRoleIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.ParentRoleId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParentRoleId, true
+	return &o.ParentRoleId, true
 }
 
-// HasParentRoleId returns a boolean if a field has been set.
-func (o *CreateRoleRequestParentRoleId) HasParentRoleId() bool {
-	if o != nil && !IsNil(o.ParentRoleId) {
-		return true
-	}
-
-	return false
-}
-
-// SetParentRoleId gets a reference to the given int64 and assigns it to the ParentRoleId field.
+// SetParentRoleId sets field value
 func (o *CreateRoleRequestParentRoleId) SetParentRoleId(v int64) {
-	o.ParentRoleId = &v
+	o.ParentRoleId = v
 }
 
 // GetPermissions returns the Permissions field value if set, zero value otherwise.
@@ -219,16 +219,66 @@ func (o CreateRoleRequestParentRoleId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.ParentRoleId) {
-		toSerialize["parentRoleId"] = o.ParentRoleId
-	}
+	toSerialize["parentRoleId"] = o.ParentRoleId
 	if !IsNil(o.Permissions) {
 		toSerialize["permissions"] = o.Permissions
 	}
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRoleRequestParentRoleId) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"parentRoleId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateRoleRequestParentRoleId := _CreateRoleRequestParentRoleId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateRoleRequestParentRoleId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRoleRequestParentRoleId(varCreateRoleRequestParentRoleId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parentRoleId")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRoleRequestParentRoleId struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2Static type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2Static{}
 
 // VariableSourceV2Static struct for VariableSourceV2Static
 type VariableSourceV2Static struct {
-	Static *StaticSource `json:"static,omitempty"`
+	Static StaticSource `json:"static"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2Static VariableSourceV2Static
 
 // NewVariableSourceV2Static instantiates a new VariableSourceV2Static object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2Static() *VariableSourceV2Static {
+func NewVariableSourceV2Static(static StaticSource) *VariableSourceV2Static {
 	this := VariableSourceV2Static{}
+	this.Static = static
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableSourceV2StaticWithDefaults() *VariableSourceV2Static {
 	return &this
 }
 
-// GetStatic returns the Static field value if set, zero value otherwise.
+// GetStatic returns the Static field value
 func (o *VariableSourceV2Static) GetStatic() StaticSource {
-	if o == nil || IsNil(o.Static) {
+	if o == nil {
 		var ret StaticSource
 		return ret
 	}
-	return *o.Static
+
+	return o.Static
 }
 
-// GetStaticOk returns a tuple with the Static field value if set, nil otherwise
+// GetStaticOk returns a tuple with the Static field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2Static) GetStaticOk() (*StaticSource, bool) {
-	if o == nil || IsNil(o.Static) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Static, true
+	return &o.Static, true
 }
 
-// HasStatic returns a boolean if a field has been set.
-func (o *VariableSourceV2Static) HasStatic() bool {
-	if o != nil && !IsNil(o.Static) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatic gets a reference to the given StaticSource and assigns it to the Static field.
+// SetStatic sets field value
 func (o *VariableSourceV2Static) SetStatic(v StaticSource) {
-	o.Static = &v
+	o.Static = v
 }
 
 func (o VariableSourceV2Static) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableSourceV2Static) MarshalJSON() ([]byte, error) {
 
 func (o VariableSourceV2Static) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Static) {
-		toSerialize["static"] = o.Static
+	toSerialize["static"] = o.Static
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2Static) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"static",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2Static := _VariableSourceV2Static{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2Static)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2Static(varVariableSourceV2Static)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "static")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2Static struct {

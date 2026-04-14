@@ -11,10 +11,12 @@ API version: 1.0.0
 package views_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ViewFolder type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ViewFolder{}
@@ -29,6 +31,7 @@ type ViewFolder struct {
 	SearchQuery *SearchQuery `json:"searchQuery,omitempty"`
 	TimeSelection TimeSelection `json:"timeSelection"`
 	ViewType *ViewType `json:"viewType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ViewFolder ViewFolder
@@ -252,6 +255,11 @@ func (o ViewFolder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ViewType) {
 		toSerialize["viewType"] = o.ViewType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -288,6 +296,18 @@ func (o *ViewFolder) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ViewFolder(varViewFolder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "searchQuery")
+		delete(additionalProperties, "timeSelection")
+		delete(additionalProperties, "viewType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

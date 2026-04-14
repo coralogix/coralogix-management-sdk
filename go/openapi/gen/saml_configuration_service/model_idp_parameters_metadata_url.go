@@ -11,8 +11,12 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IDPParametersMetadataUrl type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IDPParametersMetadataUrl{}
@@ -21,16 +25,20 @@ var _ MappedNullable = &IDPParametersMetadataUrl{}
 type IDPParametersMetadataUrl struct {
 	Active *bool `json:"active,omitempty"`
 	GroupNames []string `json:"groupNames,omitempty"`
-	MetadataUrl *string `json:"metadataUrl,omitempty"`
+	MetadataUrl string `json:"metadataUrl"`
 	TeamEntityId *int64 `json:"teamEntityId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IDPParametersMetadataUrl IDPParametersMetadataUrl
 
 // NewIDPParametersMetadataUrl instantiates a new IDPParametersMetadataUrl object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIDPParametersMetadataUrl() *IDPParametersMetadataUrl {
+func NewIDPParametersMetadataUrl(metadataUrl string) *IDPParametersMetadataUrl {
 	this := IDPParametersMetadataUrl{}
+	this.MetadataUrl = metadataUrl
 	return &this
 }
 
@@ -106,36 +114,28 @@ func (o *IDPParametersMetadataUrl) SetGroupNames(v []string) {
 	o.GroupNames = v
 }
 
-// GetMetadataUrl returns the MetadataUrl field value if set, zero value otherwise.
+// GetMetadataUrl returns the MetadataUrl field value
 func (o *IDPParametersMetadataUrl) GetMetadataUrl() string {
-	if o == nil || IsNil(o.MetadataUrl) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MetadataUrl
+
+	return o.MetadataUrl
 }
 
-// GetMetadataUrlOk returns a tuple with the MetadataUrl field value if set, nil otherwise
+// GetMetadataUrlOk returns a tuple with the MetadataUrl field value
 // and a boolean to check if the value has been set.
 func (o *IDPParametersMetadataUrl) GetMetadataUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.MetadataUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetadataUrl, true
+	return &o.MetadataUrl, true
 }
 
-// HasMetadataUrl returns a boolean if a field has been set.
-func (o *IDPParametersMetadataUrl) HasMetadataUrl() bool {
-	if o != nil && !IsNil(o.MetadataUrl) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadataUrl gets a reference to the given string and assigns it to the MetadataUrl field.
+// SetMetadataUrl sets field value
 func (o *IDPParametersMetadataUrl) SetMetadataUrl(v string) {
-	o.MetadataUrl = &v
+	o.MetadataUrl = v
 }
 
 // GetTeamEntityId returns the TeamEntityId field value if set, zero value otherwise.
@@ -186,13 +186,62 @@ func (o IDPParametersMetadataUrl) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupNames) {
 		toSerialize["groupNames"] = o.GroupNames
 	}
-	if !IsNil(o.MetadataUrl) {
-		toSerialize["metadataUrl"] = o.MetadataUrl
-	}
+	toSerialize["metadataUrl"] = o.MetadataUrl
 	if !IsNil(o.TeamEntityId) {
 		toSerialize["teamEntityId"] = o.TeamEntityId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IDPParametersMetadataUrl) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadataUrl",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIDPParametersMetadataUrl := _IDPParametersMetadataUrl{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIDPParametersMetadataUrl)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IDPParametersMetadataUrl(varIDPParametersMetadataUrl)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "groupNames")
+		delete(additionalProperties, "metadataUrl")
+		delete(additionalProperties, "teamEntityId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIDPParametersMetadataUrl struct {

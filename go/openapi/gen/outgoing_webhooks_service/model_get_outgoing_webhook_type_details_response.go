@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetOutgoingWebhookTypeDetailsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetOutgoingWebhookTypeDetailsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetOutgoingWebhookTypeDetailsResponse{}
 // GetOutgoingWebhookTypeDetailsResponse struct for GetOutgoingWebhookTypeDetailsResponse
 type GetOutgoingWebhookTypeDetailsResponse struct {
 	Details *OutgoingWebhookDetails `json:"details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOutgoingWebhookTypeDetailsResponse GetOutgoingWebhookTypeDetailsResponse
 
 // NewGetOutgoingWebhookTypeDetailsResponse instantiates a new GetOutgoingWebhookTypeDetailsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetOutgoingWebhookTypeDetailsResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOutgoingWebhookTypeDetailsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetOutgoingWebhookTypeDetailsResponse := _GetOutgoingWebhookTypeDetailsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetOutgoingWebhookTypeDetailsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOutgoingWebhookTypeDetailsResponse(varGetOutgoingWebhookTypeDetailsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOutgoingWebhookTypeDetailsResponse struct {

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the XAxisTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &XAxisTime{}
 
 // XAxisTime struct for XAxisTime
 type XAxisTime struct {
-	Time *XAxisByTime `json:"time,omitempty"`
+	Time XAxisByTime `json:"time"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _XAxisTime XAxisTime
 
 // NewXAxisTime instantiates a new XAxisTime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewXAxisTime() *XAxisTime {
+func NewXAxisTime(time XAxisByTime) *XAxisTime {
 	this := XAxisTime{}
+	this.Time = time
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewXAxisTimeWithDefaults() *XAxisTime {
 	return &this
 }
 
-// GetTime returns the Time field value if set, zero value otherwise.
+// GetTime returns the Time field value
 func (o *XAxisTime) GetTime() XAxisByTime {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		var ret XAxisByTime
 		return ret
 	}
-	return *o.Time
+
+	return o.Time
 }
 
-// GetTimeOk returns a tuple with the Time field value if set, nil otherwise
+// GetTimeOk returns a tuple with the Time field value
 // and a boolean to check if the value has been set.
 func (o *XAxisTime) GetTimeOk() (*XAxisByTime, bool) {
-	if o == nil || IsNil(o.Time) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Time, true
+	return &o.Time, true
 }
 
-// HasTime returns a boolean if a field has been set.
-func (o *XAxisTime) HasTime() bool {
-	if o != nil && !IsNil(o.Time) {
-		return true
-	}
-
-	return false
-}
-
-// SetTime gets a reference to the given XAxisByTime and assigns it to the Time field.
+// SetTime sets field value
 func (o *XAxisTime) SetTime(v XAxisByTime) {
-	o.Time = &v
+	o.Time = v
 }
 
 func (o XAxisTime) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o XAxisTime) MarshalJSON() ([]byte, error) {
 
 func (o XAxisTime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Time) {
-		toSerialize["time"] = o.Time
+	toSerialize["time"] = o.Time
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *XAxisTime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"time",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varXAxisTime := _XAxisTime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varXAxisTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = XAxisTime(varXAxisTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableXAxisTime struct {

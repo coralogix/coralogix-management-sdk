@@ -11,17 +11,19 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardTwoMinutesAbsoluteTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardTwoMinutesAbsoluteTimeFrame{}
 
 // DashboardTwoMinutesAbsoluteTimeFrame Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.
 type DashboardTwoMinutesAbsoluteTimeFrame struct {
-	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
+	AbsoluteTimeFrame TimeFrame `json:"absoluteTimeFrame"`
 	Actions []DashboardAction `json:"actions,omitempty"`
 	Annotations []Annotation `json:"annotations,omitempty"`
 	// A brief description or summary of the dashboard's purpose or content
@@ -36,9 +38,10 @@ type DashboardTwoMinutesAbsoluteTimeFrame struct {
 	Name string `json:"name"`
 	// A unique slug name serving as an alias for accessing the dashboard
 	SlugName *string `json:"slugName,omitempty"`
-	TwoMinutes map[string]interface{} `json:"twoMinutes,omitempty"`
+	TwoMinutes map[string]interface{} `json:"twoMinutes"`
 	Variables []Variable `json:"variables,omitempty"`
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DashboardTwoMinutesAbsoluteTimeFrame DashboardTwoMinutesAbsoluteTimeFrame
@@ -47,10 +50,12 @@ type _DashboardTwoMinutesAbsoluteTimeFrame DashboardTwoMinutesAbsoluteTimeFrame
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDashboardTwoMinutesAbsoluteTimeFrame(layout Layout, name string) *DashboardTwoMinutesAbsoluteTimeFrame {
+func NewDashboardTwoMinutesAbsoluteTimeFrame(absoluteTimeFrame TimeFrame, layout Layout, name string, twoMinutes map[string]interface{}) *DashboardTwoMinutesAbsoluteTimeFrame {
 	this := DashboardTwoMinutesAbsoluteTimeFrame{}
+	this.AbsoluteTimeFrame = absoluteTimeFrame
 	this.Layout = layout
 	this.Name = name
+	this.TwoMinutes = twoMinutes
 	return &this
 }
 
@@ -62,36 +67,28 @@ func NewDashboardTwoMinutesAbsoluteTimeFrameWithDefaults() *DashboardTwoMinutesA
 	return &this
 }
 
-// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value if set, zero value otherwise.
+// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value
 func (o *DashboardTwoMinutesAbsoluteTimeFrame) GetAbsoluteTimeFrame() TimeFrame {
-	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+	if o == nil {
 		var ret TimeFrame
 		return ret
 	}
-	return *o.AbsoluteTimeFrame
+
+	return o.AbsoluteTimeFrame
 }
 
-// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value if set, nil otherwise
+// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *DashboardTwoMinutesAbsoluteTimeFrame) GetAbsoluteTimeFrameOk() (*TimeFrame, bool) {
-	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AbsoluteTimeFrame, true
+	return &o.AbsoluteTimeFrame, true
 }
 
-// HasAbsoluteTimeFrame returns a boolean if a field has been set.
-func (o *DashboardTwoMinutesAbsoluteTimeFrame) HasAbsoluteTimeFrame() bool {
-	if o != nil && !IsNil(o.AbsoluteTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbsoluteTimeFrame gets a reference to the given TimeFrame and assigns it to the AbsoluteTimeFrame field.
+// SetAbsoluteTimeFrame sets field value
 func (o *DashboardTwoMinutesAbsoluteTimeFrame) SetAbsoluteTimeFrame(v TimeFrame) {
-	o.AbsoluteTimeFrame = &v
+	o.AbsoluteTimeFrame = v
 }
 
 // GetActions returns the Actions field value if set, zero value otherwise.
@@ -398,34 +395,26 @@ func (o *DashboardTwoMinutesAbsoluteTimeFrame) SetSlugName(v string) {
 	o.SlugName = &v
 }
 
-// GetTwoMinutes returns the TwoMinutes field value if set, zero value otherwise.
+// GetTwoMinutes returns the TwoMinutes field value
 func (o *DashboardTwoMinutesAbsoluteTimeFrame) GetTwoMinutes() map[string]interface{} {
-	if o == nil || IsNil(o.TwoMinutes) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.TwoMinutes
 }
 
-// GetTwoMinutesOk returns a tuple with the TwoMinutes field value if set, nil otherwise
+// GetTwoMinutesOk returns a tuple with the TwoMinutes field value
 // and a boolean to check if the value has been set.
 func (o *DashboardTwoMinutesAbsoluteTimeFrame) GetTwoMinutesOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.TwoMinutes) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.TwoMinutes, true
 }
 
-// HasTwoMinutes returns a boolean if a field has been set.
-func (o *DashboardTwoMinutesAbsoluteTimeFrame) HasTwoMinutes() bool {
-	if o != nil && !IsNil(o.TwoMinutes) {
-		return true
-	}
-
-	return false
-}
-
-// SetTwoMinutes gets a reference to the given map[string]interface{} and assigns it to the TwoMinutes field.
+// SetTwoMinutes sets field value
 func (o *DashboardTwoMinutesAbsoluteTimeFrame) SetTwoMinutes(v map[string]interface{}) {
 	o.TwoMinutes = v
 }
@@ -504,9 +493,7 @@ func (o DashboardTwoMinutesAbsoluteTimeFrame) MarshalJSON() ([]byte, error) {
 
 func (o DashboardTwoMinutesAbsoluteTimeFrame) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AbsoluteTimeFrame) {
-		toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
-	}
+	toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
@@ -533,15 +520,18 @@ func (o DashboardTwoMinutesAbsoluteTimeFrame) ToMap() (map[string]interface{}, e
 	if !IsNil(o.SlugName) {
 		toSerialize["slugName"] = o.SlugName
 	}
-	if !IsNil(o.TwoMinutes) {
-		toSerialize["twoMinutes"] = o.TwoMinutes
-	}
+	toSerialize["twoMinutes"] = o.TwoMinutes
 	if !IsNil(o.Variables) {
 		toSerialize["variables"] = o.Variables
 	}
 	if !IsNil(o.VariablesV2) {
 		toSerialize["variablesV2"] = o.VariablesV2
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -550,8 +540,10 @@ func (o *DashboardTwoMinutesAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err e
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"absoluteTimeFrame",
 		"layout",
 		"name",
+		"twoMinutes",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -578,6 +570,26 @@ func (o *DashboardTwoMinutesAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err e
 	}
 
 	*o = DashboardTwoMinutesAbsoluteTimeFrame(varDashboardTwoMinutesAbsoluteTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "absoluteTimeFrame")
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "annotations")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "folderPath")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "layout")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slugName")
+		delete(additionalProperties, "twoMinutes")
+		delete(additionalProperties, "variables")
+		delete(additionalProperties, "variablesV2")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

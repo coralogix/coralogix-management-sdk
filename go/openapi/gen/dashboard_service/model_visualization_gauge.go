@@ -11,16 +11,45 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationGauge type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationGauge{}
 
 // VisualizationGauge struct for VisualizationGauge
 type VisualizationGauge struct {
-	Gauge *VisualizationGauge `json:"gauge,omitempty"`
+	// Whether to render numeric value with abbreviation
+	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
+	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
+	CustomUnit *string `json:"customUnit,omitempty"`
+	// Number indicating the decimal precision of the numeric values, within range 0-15
+	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
+	// (multigauge display only) Whether to show the series names above the value
+	DisplaySeriesName *bool `json:"displaySeriesName,omitempty"`
+	Legend *Legend `json:"legend,omitempty"`
+	LegendBy *LegendBy `json:"legendBy,omitempty"`
+	// A maximum gauge value used in percentage threshold calculation and for visual value representation
+	Max *float64 `json:"max,omitempty"`
+	// A minimum gauge value used in percentage threshold calculation and for visual value representation
+	Min *float64 `json:"min,omitempty"`
+	// Whether to show the inner arc of gauge which graphically represents the value
+	ShowInnerArc *bool `json:"showInnerArc,omitempty"`
+	// Whether to show the outer arc of gauge which graphically represents the min/max range
+	ShowOuterArc *bool `json:"showOuterArc,omitempty"`
+	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
+	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
+	Unit *CommonUnit `json:"unit,omitempty"`
+	ValueField *ObservationField `json:"valueField,omitempty"`
+	ValueFields []ObservationField `json:"valueFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationGauge VisualizationGauge
 
 // NewVisualizationGauge instantiates a new VisualizationGauge object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +68,516 @@ func NewVisualizationGaugeWithDefaults() *VisualizationGauge {
 	return &this
 }
 
-// GetGauge returns the Gauge field value if set, zero value otherwise.
-func (o *VisualizationGauge) GetGauge() VisualizationGauge {
-	if o == nil || IsNil(o.Gauge) {
-		var ret VisualizationGauge
+// GetAllowAbbreviation returns the AllowAbbreviation field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetAllowAbbreviation() bool {
+	if o == nil || IsNil(o.AllowAbbreviation) {
+		var ret bool
 		return ret
 	}
-	return *o.Gauge
+	return *o.AllowAbbreviation
 }
 
-// GetGaugeOk returns a tuple with the Gauge field value if set, nil otherwise
+// GetAllowAbbreviationOk returns a tuple with the AllowAbbreviation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VisualizationGauge) GetGaugeOk() (*VisualizationGauge, bool) {
-	if o == nil || IsNil(o.Gauge) {
+func (o *VisualizationGauge) GetAllowAbbreviationOk() (*bool, bool) {
+	if o == nil || IsNil(o.AllowAbbreviation) {
 		return nil, false
 	}
-	return o.Gauge, true
+	return o.AllowAbbreviation, true
 }
 
-// HasGauge returns a boolean if a field has been set.
-func (o *VisualizationGauge) HasGauge() bool {
-	if o != nil && !IsNil(o.Gauge) {
+// HasAllowAbbreviation returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasAllowAbbreviation() bool {
+	if o != nil && !IsNil(o.AllowAbbreviation) {
 		return true
 	}
 
 	return false
 }
 
-// SetGauge gets a reference to the given VisualizationGauge and assigns it to the Gauge field.
-func (o *VisualizationGauge) SetGauge(v VisualizationGauge) {
-	o.Gauge = &v
+// SetAllowAbbreviation gets a reference to the given bool and assigns it to the AllowAbbreviation field.
+func (o *VisualizationGauge) SetAllowAbbreviation(v bool) {
+	o.AllowAbbreviation = &v
+}
+
+// GetCategoryFields returns the CategoryFields field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetCategoryFields() []ObservationField {
+	if o == nil || IsNil(o.CategoryFields) {
+		var ret []ObservationField
+		return ret
+	}
+	return o.CategoryFields
+}
+
+// GetCategoryFieldsOk returns a tuple with the CategoryFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetCategoryFieldsOk() ([]ObservationField, bool) {
+	if o == nil || IsNil(o.CategoryFields) {
+		return nil, false
+	}
+	return o.CategoryFields, true
+}
+
+// HasCategoryFields returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasCategoryFields() bool {
+	if o != nil && !IsNil(o.CategoryFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetCategoryFields gets a reference to the given []ObservationField and assigns it to the CategoryFields field.
+func (o *VisualizationGauge) SetCategoryFields(v []ObservationField) {
+	o.CategoryFields = v
+}
+
+// GetCustomUnit returns the CustomUnit field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetCustomUnit() string {
+	if o == nil || IsNil(o.CustomUnit) {
+		var ret string
+		return ret
+	}
+	return *o.CustomUnit
+}
+
+// GetCustomUnitOk returns a tuple with the CustomUnit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetCustomUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomUnit) {
+		return nil, false
+	}
+	return o.CustomUnit, true
+}
+
+// HasCustomUnit returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasCustomUnit() bool {
+	if o != nil && !IsNil(o.CustomUnit) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomUnit gets a reference to the given string and assigns it to the CustomUnit field.
+func (o *VisualizationGauge) SetCustomUnit(v string) {
+	o.CustomUnit = &v
+}
+
+// GetDecimalPrecision returns the DecimalPrecision field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetDecimalPrecision() int32 {
+	if o == nil || IsNil(o.DecimalPrecision) {
+		var ret int32
+		return ret
+	}
+	return *o.DecimalPrecision
+}
+
+// GetDecimalPrecisionOk returns a tuple with the DecimalPrecision field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetDecimalPrecisionOk() (*int32, bool) {
+	if o == nil || IsNil(o.DecimalPrecision) {
+		return nil, false
+	}
+	return o.DecimalPrecision, true
+}
+
+// HasDecimalPrecision returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasDecimalPrecision() bool {
+	if o != nil && !IsNil(o.DecimalPrecision) {
+		return true
+	}
+
+	return false
+}
+
+// SetDecimalPrecision gets a reference to the given int32 and assigns it to the DecimalPrecision field.
+func (o *VisualizationGauge) SetDecimalPrecision(v int32) {
+	o.DecimalPrecision = &v
+}
+
+// GetDisplaySeriesName returns the DisplaySeriesName field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetDisplaySeriesName() bool {
+	if o == nil || IsNil(o.DisplaySeriesName) {
+		var ret bool
+		return ret
+	}
+	return *o.DisplaySeriesName
+}
+
+// GetDisplaySeriesNameOk returns a tuple with the DisplaySeriesName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetDisplaySeriesNameOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisplaySeriesName) {
+		return nil, false
+	}
+	return o.DisplaySeriesName, true
+}
+
+// HasDisplaySeriesName returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasDisplaySeriesName() bool {
+	if o != nil && !IsNil(o.DisplaySeriesName) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplaySeriesName gets a reference to the given bool and assigns it to the DisplaySeriesName field.
+func (o *VisualizationGauge) SetDisplaySeriesName(v bool) {
+	o.DisplaySeriesName = &v
+}
+
+// GetLegend returns the Legend field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetLegend() Legend {
+	if o == nil || IsNil(o.Legend) {
+		var ret Legend
+		return ret
+	}
+	return *o.Legend
+}
+
+// GetLegendOk returns a tuple with the Legend field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetLegendOk() (*Legend, bool) {
+	if o == nil || IsNil(o.Legend) {
+		return nil, false
+	}
+	return o.Legend, true
+}
+
+// HasLegend returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasLegend() bool {
+	if o != nil && !IsNil(o.Legend) {
+		return true
+	}
+
+	return false
+}
+
+// SetLegend gets a reference to the given Legend and assigns it to the Legend field.
+func (o *VisualizationGauge) SetLegend(v Legend) {
+	o.Legend = &v
+}
+
+// GetLegendBy returns the LegendBy field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetLegendBy() LegendBy {
+	if o == nil || IsNil(o.LegendBy) {
+		var ret LegendBy
+		return ret
+	}
+	return *o.LegendBy
+}
+
+// GetLegendByOk returns a tuple with the LegendBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetLegendByOk() (*LegendBy, bool) {
+	if o == nil || IsNil(o.LegendBy) {
+		return nil, false
+	}
+	return o.LegendBy, true
+}
+
+// HasLegendBy returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasLegendBy() bool {
+	if o != nil && !IsNil(o.LegendBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetLegendBy gets a reference to the given LegendBy and assigns it to the LegendBy field.
+func (o *VisualizationGauge) SetLegendBy(v LegendBy) {
+	o.LegendBy = &v
+}
+
+// GetMax returns the Max field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetMax() float64 {
+	if o == nil || IsNil(o.Max) {
+		var ret float64
+		return ret
+	}
+	return *o.Max
+}
+
+// GetMaxOk returns a tuple with the Max field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetMaxOk() (*float64, bool) {
+	if o == nil || IsNil(o.Max) {
+		return nil, false
+	}
+	return o.Max, true
+}
+
+// HasMax returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasMax() bool {
+	if o != nil && !IsNil(o.Max) {
+		return true
+	}
+
+	return false
+}
+
+// SetMax gets a reference to the given float64 and assigns it to the Max field.
+func (o *VisualizationGauge) SetMax(v float64) {
+	o.Max = &v
+}
+
+// GetMin returns the Min field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetMin() float64 {
+	if o == nil || IsNil(o.Min) {
+		var ret float64
+		return ret
+	}
+	return *o.Min
+}
+
+// GetMinOk returns a tuple with the Min field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetMinOk() (*float64, bool) {
+	if o == nil || IsNil(o.Min) {
+		return nil, false
+	}
+	return o.Min, true
+}
+
+// HasMin returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasMin() bool {
+	if o != nil && !IsNil(o.Min) {
+		return true
+	}
+
+	return false
+}
+
+// SetMin gets a reference to the given float64 and assigns it to the Min field.
+func (o *VisualizationGauge) SetMin(v float64) {
+	o.Min = &v
+}
+
+// GetShowInnerArc returns the ShowInnerArc field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetShowInnerArc() bool {
+	if o == nil || IsNil(o.ShowInnerArc) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowInnerArc
+}
+
+// GetShowInnerArcOk returns a tuple with the ShowInnerArc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetShowInnerArcOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShowInnerArc) {
+		return nil, false
+	}
+	return o.ShowInnerArc, true
+}
+
+// HasShowInnerArc returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasShowInnerArc() bool {
+	if o != nil && !IsNil(o.ShowInnerArc) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowInnerArc gets a reference to the given bool and assigns it to the ShowInnerArc field.
+func (o *VisualizationGauge) SetShowInnerArc(v bool) {
+	o.ShowInnerArc = &v
+}
+
+// GetShowOuterArc returns the ShowOuterArc field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetShowOuterArc() bool {
+	if o == nil || IsNil(o.ShowOuterArc) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowOuterArc
+}
+
+// GetShowOuterArcOk returns a tuple with the ShowOuterArc field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetShowOuterArcOk() (*bool, bool) {
+	if o == nil || IsNil(o.ShowOuterArc) {
+		return nil, false
+	}
+	return o.ShowOuterArc, true
+}
+
+// HasShowOuterArc returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasShowOuterArc() bool {
+	if o != nil && !IsNil(o.ShowOuterArc) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowOuterArc gets a reference to the given bool and assigns it to the ShowOuterArc field.
+func (o *VisualizationGauge) SetShowOuterArc(v bool) {
+	o.ShowOuterArc = &v
+}
+
+// GetThresholdType returns the ThresholdType field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetThresholdType() ThresholdType {
+	if o == nil || IsNil(o.ThresholdType) {
+		var ret ThresholdType
+		return ret
+	}
+	return *o.ThresholdType
+}
+
+// GetThresholdTypeOk returns a tuple with the ThresholdType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetThresholdTypeOk() (*ThresholdType, bool) {
+	if o == nil || IsNil(o.ThresholdType) {
+		return nil, false
+	}
+	return o.ThresholdType, true
+}
+
+// HasThresholdType returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasThresholdType() bool {
+	if o != nil && !IsNil(o.ThresholdType) {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholdType gets a reference to the given ThresholdType and assigns it to the ThresholdType field.
+func (o *VisualizationGauge) SetThresholdType(v ThresholdType) {
+	o.ThresholdType = &v
+}
+
+// GetThresholds returns the Thresholds field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetThresholds() []CommonThreshold {
+	if o == nil || IsNil(o.Thresholds) {
+		var ret []CommonThreshold
+		return ret
+	}
+	return o.Thresholds
+}
+
+// GetThresholdsOk returns a tuple with the Thresholds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetThresholdsOk() ([]CommonThreshold, bool) {
+	if o == nil || IsNil(o.Thresholds) {
+		return nil, false
+	}
+	return o.Thresholds, true
+}
+
+// HasThresholds returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasThresholds() bool {
+	if o != nil && !IsNil(o.Thresholds) {
+		return true
+	}
+
+	return false
+}
+
+// SetThresholds gets a reference to the given []CommonThreshold and assigns it to the Thresholds field.
+func (o *VisualizationGauge) SetThresholds(v []CommonThreshold) {
+	o.Thresholds = v
+}
+
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetUnit() CommonUnit {
+	if o == nil || IsNil(o.Unit) {
+		var ret CommonUnit
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetUnitOk() (*CommonUnit, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given CommonUnit and assigns it to the Unit field.
+func (o *VisualizationGauge) SetUnit(v CommonUnit) {
+	o.Unit = &v
+}
+
+// GetValueField returns the ValueField field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetValueField() ObservationField {
+	if o == nil || IsNil(o.ValueField) {
+		var ret ObservationField
+		return ret
+	}
+	return *o.ValueField
+}
+
+// GetValueFieldOk returns a tuple with the ValueField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetValueFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.ValueField) {
+		return nil, false
+	}
+	return o.ValueField, true
+}
+
+// HasValueField returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasValueField() bool {
+	if o != nil && !IsNil(o.ValueField) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueField gets a reference to the given ObservationField and assigns it to the ValueField field.
+func (o *VisualizationGauge) SetValueField(v ObservationField) {
+	o.ValueField = &v
+}
+
+// GetValueFields returns the ValueFields field value if set, zero value otherwise.
+func (o *VisualizationGauge) GetValueFields() []ObservationField {
+	if o == nil || IsNil(o.ValueFields) {
+		var ret []ObservationField
+		return ret
+	}
+	return o.ValueFields
+}
+
+// GetValueFieldsOk returns a tuple with the ValueFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VisualizationGauge) GetValueFieldsOk() ([]ObservationField, bool) {
+	if o == nil || IsNil(o.ValueFields) {
+		return nil, false
+	}
+	return o.ValueFields, true
+}
+
+// HasValueFields returns a boolean if a field has been set.
+func (o *VisualizationGauge) HasValueFields() bool {
+	if o != nil && !IsNil(o.ValueFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetValueFields gets a reference to the given []ObservationField and assigns it to the ValueFields field.
+func (o *VisualizationGauge) SetValueFields(v []ObservationField) {
+	o.ValueFields = v
 }
 
 func (o VisualizationGauge) MarshalJSON() ([]byte, error) {
@@ -81,10 +590,97 @@ func (o VisualizationGauge) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationGauge) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Gauge) {
-		toSerialize["gauge"] = o.Gauge
+	if !IsNil(o.AllowAbbreviation) {
+		toSerialize["allowAbbreviation"] = o.AllowAbbreviation
 	}
+	if !IsNil(o.CategoryFields) {
+		toSerialize["categoryFields"] = o.CategoryFields
+	}
+	if !IsNil(o.CustomUnit) {
+		toSerialize["customUnit"] = o.CustomUnit
+	}
+	if !IsNil(o.DecimalPrecision) {
+		toSerialize["decimalPrecision"] = o.DecimalPrecision
+	}
+	if !IsNil(o.DisplaySeriesName) {
+		toSerialize["displaySeriesName"] = o.DisplaySeriesName
+	}
+	if !IsNil(o.Legend) {
+		toSerialize["legend"] = o.Legend
+	}
+	if !IsNil(o.LegendBy) {
+		toSerialize["legendBy"] = o.LegendBy
+	}
+	if !IsNil(o.Max) {
+		toSerialize["max"] = o.Max
+	}
+	if !IsNil(o.Min) {
+		toSerialize["min"] = o.Min
+	}
+	if !IsNil(o.ShowInnerArc) {
+		toSerialize["showInnerArc"] = o.ShowInnerArc
+	}
+	if !IsNil(o.ShowOuterArc) {
+		toSerialize["showOuterArc"] = o.ShowOuterArc
+	}
+	if !IsNil(o.ThresholdType) {
+		toSerialize["thresholdType"] = o.ThresholdType
+	}
+	if !IsNil(o.Thresholds) {
+		toSerialize["thresholds"] = o.Thresholds
+	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
+	if !IsNil(o.ValueField) {
+		toSerialize["valueField"] = o.ValueField
+	}
+	if !IsNil(o.ValueFields) {
+		toSerialize["valueFields"] = o.ValueFields
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationGauge) UnmarshalJSON(data []byte) (err error) {
+	varVisualizationGauge := _VisualizationGauge{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationGauge)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationGauge(varVisualizationGauge)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "displaySeriesName")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "legendBy")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "showInnerArc")
+		delete(additionalProperties, "showOuterArc")
+		delete(additionalProperties, "thresholdType")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "valueFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationGauge struct {

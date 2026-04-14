@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionAlignment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionAlignment{}
 
 // PropertyDefinitionAlignment struct for PropertyDefinitionAlignment
 type PropertyDefinitionAlignment struct {
-	Alignment *TextAlignment `json:"alignment,omitempty"`
+	Alignment TextAlignment `json:"alignment"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionAlignment PropertyDefinitionAlignment
 
 // NewPropertyDefinitionAlignment instantiates a new PropertyDefinitionAlignment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionAlignment() *PropertyDefinitionAlignment {
+func NewPropertyDefinitionAlignment(alignment TextAlignment) *PropertyDefinitionAlignment {
 	this := PropertyDefinitionAlignment{}
+	this.Alignment = alignment
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewPropertyDefinitionAlignmentWithDefaults() *PropertyDefinitionAlignment {
 	return &this
 }
 
-// GetAlignment returns the Alignment field value if set, zero value otherwise.
+// GetAlignment returns the Alignment field value
 func (o *PropertyDefinitionAlignment) GetAlignment() TextAlignment {
-	if o == nil || IsNil(o.Alignment) {
+	if o == nil {
 		var ret TextAlignment
 		return ret
 	}
-	return *o.Alignment
+
+	return o.Alignment
 }
 
-// GetAlignmentOk returns a tuple with the Alignment field value if set, nil otherwise
+// GetAlignmentOk returns a tuple with the Alignment field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionAlignment) GetAlignmentOk() (*TextAlignment, bool) {
-	if o == nil || IsNil(o.Alignment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Alignment, true
+	return &o.Alignment, true
 }
 
-// HasAlignment returns a boolean if a field has been set.
-func (o *PropertyDefinitionAlignment) HasAlignment() bool {
-	if o != nil && !IsNil(o.Alignment) {
-		return true
-	}
-
-	return false
-}
-
-// SetAlignment gets a reference to the given TextAlignment and assigns it to the Alignment field.
+// SetAlignment sets field value
 func (o *PropertyDefinitionAlignment) SetAlignment(v TextAlignment) {
-	o.Alignment = &v
+	o.Alignment = v
 }
 
 func (o PropertyDefinitionAlignment) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o PropertyDefinitionAlignment) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionAlignment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Alignment) {
-		toSerialize["alignment"] = o.Alignment
+	toSerialize["alignment"] = o.Alignment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionAlignment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"alignment",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionAlignment := _PropertyDefinitionAlignment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionAlignment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionAlignment(varPropertyDefinitionAlignment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alignment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionAlignment struct {

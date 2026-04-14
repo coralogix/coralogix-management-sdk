@@ -11,8 +11,11 @@ API version: 1.0.0
 package quota_allocation_rule_set_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceQuotaAllocationRuleSetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceQuotaAllocationRuleSetResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ReplaceQuotaAllocationRuleSetResponse{}
 // ReplaceQuotaAllocationRuleSetResponse Response confirming quota allocation rule set has been successfully replaced
 type ReplaceQuotaAllocationRuleSetResponse struct {
 	RuleSet *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceQuotaAllocationRuleSetResponse ReplaceQuotaAllocationRuleSetResponse
 
 // NewReplaceQuotaAllocationRuleSetResponse instantiates a new ReplaceQuotaAllocationRuleSetResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ReplaceQuotaAllocationRuleSetResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.RuleSet) {
 		toSerialize["ruleSet"] = o.RuleSet
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceQuotaAllocationRuleSetResponse) UnmarshalJSON(data []byte) (err error) {
+	varReplaceQuotaAllocationRuleSetResponse := _ReplaceQuotaAllocationRuleSetResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceQuotaAllocationRuleSetResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceQuotaAllocationRuleSetResponse(varReplaceQuotaAllocationRuleSetResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ruleSet")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceQuotaAllocationRuleSetResponse struct {

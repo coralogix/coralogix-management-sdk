@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationHorizontalBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationHorizontalBars{}
 
 // VisualizationHorizontalBars struct for VisualizationHorizontalBars
 type VisualizationHorizontalBars struct {
-	HorizontalBars *HorizontalBars `json:"horizontalBars,omitempty"`
+	HorizontalBars HorizontalBars `json:"horizontalBars"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationHorizontalBars VisualizationHorizontalBars
 
 // NewVisualizationHorizontalBars instantiates a new VisualizationHorizontalBars object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationHorizontalBars() *VisualizationHorizontalBars {
+func NewVisualizationHorizontalBars(horizontalBars HorizontalBars) *VisualizationHorizontalBars {
 	this := VisualizationHorizontalBars{}
+	this.HorizontalBars = horizontalBars
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationHorizontalBarsWithDefaults() *VisualizationHorizontalBars {
 	return &this
 }
 
-// GetHorizontalBars returns the HorizontalBars field value if set, zero value otherwise.
+// GetHorizontalBars returns the HorizontalBars field value
 func (o *VisualizationHorizontalBars) GetHorizontalBars() HorizontalBars {
-	if o == nil || IsNil(o.HorizontalBars) {
+	if o == nil {
 		var ret HorizontalBars
 		return ret
 	}
-	return *o.HorizontalBars
+
+	return o.HorizontalBars
 }
 
-// GetHorizontalBarsOk returns a tuple with the HorizontalBars field value if set, nil otherwise
+// GetHorizontalBarsOk returns a tuple with the HorizontalBars field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationHorizontalBars) GetHorizontalBarsOk() (*HorizontalBars, bool) {
-	if o == nil || IsNil(o.HorizontalBars) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HorizontalBars, true
+	return &o.HorizontalBars, true
 }
 
-// HasHorizontalBars returns a boolean if a field has been set.
-func (o *VisualizationHorizontalBars) HasHorizontalBars() bool {
-	if o != nil && !IsNil(o.HorizontalBars) {
-		return true
-	}
-
-	return false
-}
-
-// SetHorizontalBars gets a reference to the given HorizontalBars and assigns it to the HorizontalBars field.
+// SetHorizontalBars sets field value
 func (o *VisualizationHorizontalBars) SetHorizontalBars(v HorizontalBars) {
-	o.HorizontalBars = &v
+	o.HorizontalBars = v
 }
 
 func (o VisualizationHorizontalBars) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationHorizontalBars) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationHorizontalBars) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.HorizontalBars) {
-		toSerialize["horizontalBars"] = o.HorizontalBars
+	toSerialize["horizontalBars"] = o.HorizontalBars
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationHorizontalBars) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"horizontalBars",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationHorizontalBars := _VisualizationHorizontalBars{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationHorizontalBars)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationHorizontalBars(varVisualizationHorizontalBars)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "horizontalBars")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationHorizontalBars struct {

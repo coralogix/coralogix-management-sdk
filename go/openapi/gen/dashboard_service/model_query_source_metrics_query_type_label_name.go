@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQueryTypeLabelName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryTypeLabelName{}
 
 // QuerySourceMetricsQueryTypeLabelName struct for QuerySourceMetricsQueryTypeLabelName
 type QuerySourceMetricsQueryTypeLabelName struct {
-	LabelName *QuerySourceMetricsQueryTypeLabelName `json:"labelName,omitempty"`
+	MetricRegex *string `json:"metricRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQueryTypeLabelName QuerySourceMetricsQueryTypeLabelName
 
 // NewQuerySourceMetricsQueryTypeLabelName instantiates a new QuerySourceMetricsQueryTypeLabelName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQuerySourceMetricsQueryTypeLabelNameWithDefaults() *QuerySourceMetricsQu
 	return &this
 }
 
-// GetLabelName returns the LabelName field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQueryTypeLabelName) GetLabelName() QuerySourceMetricsQueryTypeLabelName {
-	if o == nil || IsNil(o.LabelName) {
-		var ret QuerySourceMetricsQueryTypeLabelName
+// GetMetricRegex returns the MetricRegex field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQueryTypeLabelName) GetMetricRegex() string {
+	if o == nil || IsNil(o.MetricRegex) {
+		var ret string
 		return ret
 	}
-	return *o.LabelName
+	return *o.MetricRegex
 }
 
-// GetLabelNameOk returns a tuple with the LabelName field value if set, nil otherwise
+// GetMetricRegexOk returns a tuple with the MetricRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQueryTypeLabelName) GetLabelNameOk() (*QuerySourceMetricsQueryTypeLabelName, bool) {
-	if o == nil || IsNil(o.LabelName) {
+func (o *QuerySourceMetricsQueryTypeLabelName) GetMetricRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricRegex) {
 		return nil, false
 	}
-	return o.LabelName, true
+	return o.MetricRegex, true
 }
 
-// HasLabelName returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQueryTypeLabelName) HasLabelName() bool {
-	if o != nil && !IsNil(o.LabelName) {
+// HasMetricRegex returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQueryTypeLabelName) HasMetricRegex() bool {
+	if o != nil && !IsNil(o.MetricRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetLabelName gets a reference to the given QuerySourceMetricsQueryTypeLabelName and assigns it to the LabelName field.
-func (o *QuerySourceMetricsQueryTypeLabelName) SetLabelName(v QuerySourceMetricsQueryTypeLabelName) {
-	o.LabelName = &v
+// SetMetricRegex gets a reference to the given string and assigns it to the MetricRegex field.
+func (o *QuerySourceMetricsQueryTypeLabelName) SetMetricRegex(v string) {
+	o.MetricRegex = &v
 }
 
 func (o QuerySourceMetricsQueryTypeLabelName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QuerySourceMetricsQueryTypeLabelName) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceMetricsQueryTypeLabelName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LabelName) {
-		toSerialize["labelName"] = o.LabelName
+	if !IsNil(o.MetricRegex) {
+		toSerialize["metricRegex"] = o.MetricRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryTypeLabelName) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceMetricsQueryTypeLabelName := _QuerySourceMetricsQueryTypeLabelName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryTypeLabelName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryTypeLabelName(varQuerySourceMetricsQueryTypeLabelName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQueryTypeLabelName struct {

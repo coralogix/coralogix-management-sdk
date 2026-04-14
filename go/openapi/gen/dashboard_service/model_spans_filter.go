@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansFilter{}
@@ -22,7 +25,10 @@ type SpansFilter struct {
 	Field *SpanField `json:"field,omitempty"`
 	ObservationField *SpanObservationField `json:"observationField,omitempty"`
 	Operator *FilterOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansFilter SpansFilter
 
 // NewSpansFilter instantiates a new SpansFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o SpansFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Operator) {
 		toSerialize["operator"] = o.Operator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansFilter) UnmarshalJSON(data []byte) (err error) {
+	varSpansFilter := _SpansFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansFilter(varSpansFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "observationField")
+		delete(additionalProperties, "operator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansFilter struct {

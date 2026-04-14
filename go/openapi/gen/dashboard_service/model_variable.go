@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Variable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Variable{}
@@ -24,7 +27,10 @@ type Variable struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	DisplayType *VariableDisplayType `json:"displayType,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Variable Variable
 
 // NewVariable instantiates a new Variable object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o Variable) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Variable) UnmarshalJSON(data []byte) (err error) {
+	varVariable := _Variable{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Variable(varVariable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "displayType")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariable struct {

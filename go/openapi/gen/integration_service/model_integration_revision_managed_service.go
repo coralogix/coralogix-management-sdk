@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionManagedService type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionManagedService{}
@@ -24,17 +28,21 @@ type IntegrationRevisionManagedService struct {
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	Id *string `json:"id,omitempty"`
 	// This data structure represents a managed service.
-	ManagedService map[string]interface{} `json:"managedService,omitempty"`
+	ManagedService map[string]interface{} `json:"managedService"`
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionManagedService IntegrationRevisionManagedService
 
 // NewIntegrationRevisionManagedService instantiates a new IntegrationRevisionManagedService object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationRevisionManagedService() *IntegrationRevisionManagedService {
+func NewIntegrationRevisionManagedService(managedService map[string]interface{}) *IntegrationRevisionManagedService {
 	this := IntegrationRevisionManagedService{}
+	this.ManagedService = managedService
 	return &this
 }
 
@@ -174,34 +182,26 @@ func (o *IntegrationRevisionManagedService) SetId(v string) {
 	o.Id = &v
 }
 
-// GetManagedService returns the ManagedService field value if set, zero value otherwise.
+// GetManagedService returns the ManagedService field value
 func (o *IntegrationRevisionManagedService) GetManagedService() map[string]interface{} {
-	if o == nil || IsNil(o.ManagedService) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.ManagedService
 }
 
-// GetManagedServiceOk returns a tuple with the ManagedService field value if set, nil otherwise
+// GetManagedServiceOk returns a tuple with the ManagedService field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationRevisionManagedService) GetManagedServiceOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ManagedService) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.ManagedService, true
 }
 
-// HasManagedService returns a boolean if a field has been set.
-func (o *IntegrationRevisionManagedService) HasManagedService() bool {
-	if o != nil && !IsNil(o.ManagedService) {
-		return true
-	}
-
-	return false
-}
-
-// SetManagedService gets a reference to the given map[string]interface{} and assigns it to the ManagedService field.
+// SetManagedService sets field value
 func (o *IntegrationRevisionManagedService) SetManagedService(v map[string]interface{}) {
 	o.ManagedService = v
 }
@@ -292,16 +292,68 @@ func (o IntegrationRevisionManagedService) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.ManagedService) {
-		toSerialize["managedService"] = o.ManagedService
-	}
+	toSerialize["managedService"] = o.ManagedService
 	if !IsNil(o.RevisionDeploymentSupported) {
 		toSerialize["revisionDeploymentSupported"] = o.RevisionDeploymentSupported
 	}
 	if !IsNil(o.UpgradeInstructionsMd) {
 		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionManagedService) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"managedService",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationRevisionManagedService := _IntegrationRevisionManagedService{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionManagedService)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionManagedService(varIntegrationRevisionManagedService)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "managedService")
+		delete(additionalProperties, "revisionDeploymentSupported")
+		delete(additionalProperties, "upgradeInstructionsMd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionManagedService struct {

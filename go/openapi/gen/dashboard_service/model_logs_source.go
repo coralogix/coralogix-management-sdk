@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSource{}
@@ -24,7 +27,10 @@ type LogsSource struct {
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Strategy *LogsSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsSource LogsSource
 
 // NewLogsSource instantiates a new LogsSource object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o LogsSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Strategy) {
 		toSerialize["strategy"] = o.Strategy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsSource) UnmarshalJSON(data []byte) (err error) {
+	varLogsSource := _LogsSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsSource(varLogsSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "labelFields")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "messageTemplate")
+		delete(additionalProperties, "strategy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsSource struct {

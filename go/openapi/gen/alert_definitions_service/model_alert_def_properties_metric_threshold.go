@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesMetricThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesMetricThreshold{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesMetricThreshold struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	MetricThreshold *MetricThresholdType `json:"metricThreshold,omitempty"`
+	MetricThreshold MetricThresholdType `json:"metricThreshold"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesMetricThreshold struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesMetricThreshold AlertDefPropertiesMetricThreshold
 
 // NewAlertDefPropertiesMetricThreshold instantiates a new AlertDefPropertiesMetricThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesMetricThreshold() *AlertDefPropertiesMetricThreshold {
+func NewAlertDefPropertiesMetricThreshold(metricThreshold MetricThresholdType) *AlertDefPropertiesMetricThreshold {
 	this := AlertDefPropertiesMetricThreshold{}
+	this.MetricThreshold = metricThreshold
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesMetricThreshold) SetIncidentsSettings(v AlertDefIncid
 	o.IncidentsSettings = &v
 }
 
-// GetMetricThreshold returns the MetricThreshold field value if set, zero value otherwise.
+// GetMetricThreshold returns the MetricThreshold field value
 func (o *AlertDefPropertiesMetricThreshold) GetMetricThreshold() MetricThresholdType {
-	if o == nil || IsNil(o.MetricThreshold) {
+	if o == nil {
 		var ret MetricThresholdType
 		return ret
 	}
-	return *o.MetricThreshold
+
+	return o.MetricThreshold
 }
 
-// GetMetricThresholdOk returns a tuple with the MetricThreshold field value if set, nil otherwise
+// GetMetricThresholdOk returns a tuple with the MetricThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesMetricThreshold) GetMetricThresholdOk() (*MetricThresholdType, bool) {
-	if o == nil || IsNil(o.MetricThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricThreshold, true
+	return &o.MetricThreshold, true
 }
 
-// HasMetricThreshold returns a boolean if a field has been set.
-func (o *AlertDefPropertiesMetricThreshold) HasMetricThreshold() bool {
-	if o != nil && !IsNil(o.MetricThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricThreshold gets a reference to the given MetricThresholdType and assigns it to the MetricThreshold field.
+// SetMetricThreshold sets field value
 func (o *AlertDefPropertiesMetricThreshold) SetMetricThreshold(v MetricThresholdType) {
-	o.MetricThreshold = &v
+	o.MetricThreshold = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesMetricThreshold) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.MetricThreshold) {
-		toSerialize["metricThreshold"] = o.MetricThreshold
-	}
+	toSerialize["metricThreshold"] = o.MetricThreshold
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesMetricThreshold) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesMetricThreshold) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricThreshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesMetricThreshold := _AlertDefPropertiesMetricThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesMetricThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesMetricThreshold(varAlertDefPropertiesMetricThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "metricThreshold")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesMetricThreshold struct {

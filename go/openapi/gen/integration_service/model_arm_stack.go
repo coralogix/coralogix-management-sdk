@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ARMStack type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ARMStack{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ARMStack{}
 type ARMStack struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty"`
 	SubscriptionId *string `json:"subscriptionId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ARMStack ARMStack
 
 // NewARMStack instantiates a new ARMStack object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ARMStack) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubscriptionId) {
 		toSerialize["subscriptionId"] = o.SubscriptionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ARMStack) UnmarshalJSON(data []byte) (err error) {
+	varARMStack := _ARMStack{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varARMStack)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ARMStack(varARMStack)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resourceGroupName")
+		delete(additionalProperties, "subscriptionId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableARMStack struct {

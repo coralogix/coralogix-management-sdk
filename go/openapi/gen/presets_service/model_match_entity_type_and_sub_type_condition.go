@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MatchEntityTypeAndSubTypeCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MatchEntityTypeAndSubTypeCondition{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &MatchEntityTypeAndSubTypeCondition{}
 // MatchEntityTypeAndSubTypeCondition struct for MatchEntityTypeAndSubTypeCondition
 type MatchEntityTypeAndSubTypeCondition struct {
 	EntitySubType *string `json:"entitySubType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MatchEntityTypeAndSubTypeCondition MatchEntityTypeAndSubTypeCondition
 
 // NewMatchEntityTypeAndSubTypeCondition instantiates a new MatchEntityTypeAndSubTypeCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o MatchEntityTypeAndSubTypeCondition) ToMap() (map[string]interface{}, err
 	if !IsNil(o.EntitySubType) {
 		toSerialize["entitySubType"] = o.EntitySubType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MatchEntityTypeAndSubTypeCondition) UnmarshalJSON(data []byte) (err error) {
+	varMatchEntityTypeAndSubTypeCondition := _MatchEntityTypeAndSubTypeCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMatchEntityTypeAndSubTypeCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MatchEntityTypeAndSubTypeCondition(varMatchEntityTypeAndSubTypeCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entitySubType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMatchEntityTypeAndSubTypeCondition struct {

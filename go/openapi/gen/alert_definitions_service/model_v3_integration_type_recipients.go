@@ -11,23 +11,31 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3IntegrationTypeRecipients type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3IntegrationTypeRecipients{}
 
 // V3IntegrationTypeRecipients Defines the type of integration to use for notifications
 type V3IntegrationTypeRecipients struct {
-	Recipients *Recipients `json:"recipients,omitempty"`
+	Recipients Recipients `json:"recipients"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3IntegrationTypeRecipients V3IntegrationTypeRecipients
 
 // NewV3IntegrationTypeRecipients instantiates a new V3IntegrationTypeRecipients object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV3IntegrationTypeRecipients() *V3IntegrationTypeRecipients {
+func NewV3IntegrationTypeRecipients(recipients Recipients) *V3IntegrationTypeRecipients {
 	this := V3IntegrationTypeRecipients{}
+	this.Recipients = recipients
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewV3IntegrationTypeRecipientsWithDefaults() *V3IntegrationTypeRecipients {
 	return &this
 }
 
-// GetRecipients returns the Recipients field value if set, zero value otherwise.
+// GetRecipients returns the Recipients field value
 func (o *V3IntegrationTypeRecipients) GetRecipients() Recipients {
-	if o == nil || IsNil(o.Recipients) {
+	if o == nil {
 		var ret Recipients
 		return ret
 	}
-	return *o.Recipients
+
+	return o.Recipients
 }
 
-// GetRecipientsOk returns a tuple with the Recipients field value if set, nil otherwise
+// GetRecipientsOk returns a tuple with the Recipients field value
 // and a boolean to check if the value has been set.
 func (o *V3IntegrationTypeRecipients) GetRecipientsOk() (*Recipients, bool) {
-	if o == nil || IsNil(o.Recipients) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Recipients, true
+	return &o.Recipients, true
 }
 
-// HasRecipients returns a boolean if a field has been set.
-func (o *V3IntegrationTypeRecipients) HasRecipients() bool {
-	if o != nil && !IsNil(o.Recipients) {
-		return true
-	}
-
-	return false
-}
-
-// SetRecipients gets a reference to the given Recipients and assigns it to the Recipients field.
+// SetRecipients sets field value
 func (o *V3IntegrationTypeRecipients) SetRecipients(v Recipients) {
-	o.Recipients = &v
+	o.Recipients = v
 }
 
 func (o V3IntegrationTypeRecipients) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o V3IntegrationTypeRecipients) MarshalJSON() ([]byte, error) {
 
 func (o V3IntegrationTypeRecipients) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Recipients) {
-		toSerialize["recipients"] = o.Recipients
+	toSerialize["recipients"] = o.Recipients
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V3IntegrationTypeRecipients) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"recipients",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV3IntegrationTypeRecipients := _V3IntegrationTypeRecipients{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3IntegrationTypeRecipients)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3IntegrationTypeRecipients(varV3IntegrationTypeRecipients)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "recipients")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3IntegrationTypeRecipients struct {

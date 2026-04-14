@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryMetricsQueryMetricsLabelFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryMetricsLabelFilter{}
@@ -22,7 +25,10 @@ type QueryMetricsQueryMetricsLabelFilter struct {
 	Label *QueryMetricsQueryStringOrVariable `json:"label,omitempty"`
 	Metric *QueryMetricsQueryStringOrVariable `json:"metric,omitempty"`
 	Operator *QueryMetricsQueryOperator `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryMetricsQueryMetricsLabelFilter QueryMetricsQueryMetricsLabelFilter
 
 // NewQueryMetricsQueryMetricsLabelFilter instantiates a new QueryMetricsQueryMetricsLabelFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o QueryMetricsQueryMetricsLabelFilter) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Operator) {
 		toSerialize["operator"] = o.Operator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryMetricsLabelFilter) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQueryMetricsLabelFilter := _QueryMetricsQueryMetricsLabelFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryMetricsLabelFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryMetricsLabelFilter(varQueryMetricsQueryMetricsLabelFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "metric")
+		delete(additionalProperties, "operator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryMetricsQueryMetricsLabelFilter struct {

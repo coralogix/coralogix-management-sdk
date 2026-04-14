@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceSpansQuery{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &QuerySourceSpansQuery{}
 // QuerySourceSpansQuery struct for QuerySourceSpansQuery
 type QuerySourceSpansQuery struct {
 	Type *QuerySourceSpansQueryType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceSpansQuery QuerySourceSpansQuery
 
 // NewQuerySourceSpansQuery instantiates a new QuerySourceSpansQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o QuerySourceSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceSpansQuery := _QuerySourceSpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceSpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceSpansQuery(varQuerySourceSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceSpansQuery struct {

@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_testing_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtensionData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtensionData{}
@@ -35,7 +38,10 @@ type ExtensionData struct {
 	Labels []string `json:"labels,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtensionData ExtensionData
 
 // NewExtensionData instantiates a new ExtensionData object
 // This constructor will assign default values to properties that have it defined,
@@ -624,7 +630,49 @@ func (o ExtensionData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtensionData) UnmarshalJSON(data []byte) (err error) {
+	varExtensionData := _ExtensionData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtensionData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtensionData(varExtensionData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "changelog")
+		delete(additionalProperties, "darkModeImage")
+		delete(additionalProperties, "deprecation")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "excerpt")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "integrationDetails")
+		delete(additionalProperties, "integrations")
+		delete(additionalProperties, "isHidden")
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "keywords")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtensionData struct {

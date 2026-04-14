@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDailyUsageUnitsRequestRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageUnitsRequestRange{}
 
 // GetDailyUsageUnitsRequestRange struct for GetDailyUsageUnitsRequestRange
 type GetDailyUsageUnitsRequestRange struct {
-	Range *V2Range `json:"range,omitempty"`
+	Range V2Range `json:"range"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDailyUsageUnitsRequestRange GetDailyUsageUnitsRequestRange
 
 // NewGetDailyUsageUnitsRequestRange instantiates a new GetDailyUsageUnitsRequestRange object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDailyUsageUnitsRequestRange() *GetDailyUsageUnitsRequestRange {
+func NewGetDailyUsageUnitsRequestRange(range_ V2Range) *GetDailyUsageUnitsRequestRange {
 	this := GetDailyUsageUnitsRequestRange{}
+	this.Range = range_
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGetDailyUsageUnitsRequestRangeWithDefaults() *GetDailyUsageUnitsRequestR
 	return &this
 }
 
-// GetRange returns the Range field value if set, zero value otherwise.
+// GetRange returns the Range field value
 func (o *GetDailyUsageUnitsRequestRange) GetRange() V2Range {
-	if o == nil || IsNil(o.Range) {
+	if o == nil {
 		var ret V2Range
 		return ret
 	}
-	return *o.Range
+
+	return o.Range
 }
 
-// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// GetRangeOk returns a tuple with the Range field value
 // and a boolean to check if the value has been set.
 func (o *GetDailyUsageUnitsRequestRange) GetRangeOk() (*V2Range, bool) {
-	if o == nil || IsNil(o.Range) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Range, true
+	return &o.Range, true
 }
 
-// HasRange returns a boolean if a field has been set.
-func (o *GetDailyUsageUnitsRequestRange) HasRange() bool {
-	if o != nil && !IsNil(o.Range) {
-		return true
-	}
-
-	return false
-}
-
-// SetRange gets a reference to the given V2Range and assigns it to the Range field.
+// SetRange sets field value
 func (o *GetDailyUsageUnitsRequestRange) SetRange(v V2Range) {
-	o.Range = &v
+	o.Range = v
 }
 
 func (o GetDailyUsageUnitsRequestRange) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GetDailyUsageUnitsRequestRange) MarshalJSON() ([]byte, error) {
 
 func (o GetDailyUsageUnitsRequestRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Range) {
-		toSerialize["range"] = o.Range
+	toSerialize["range"] = o.Range
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDailyUsageUnitsRequestRange) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"range",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGetDailyUsageUnitsRequestRange := _GetDailyUsageUnitsRequestRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDailyUsageUnitsRequestRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDailyUsageUnitsRequestRange(varGetDailyUsageUnitsRequestRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDailyUsageUnitsRequestRange struct {

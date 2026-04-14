@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetIntegrationDefinitionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetIntegrationDefinitionResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetIntegrationDefinitionResponse{}
 // GetIntegrationDefinitionResponse This data structure represents a list of outgoing webhook types.
 type GetIntegrationDefinitionResponse struct {
 	IntegrationDefinition *IntegrationDefinition `json:"integrationDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetIntegrationDefinitionResponse GetIntegrationDefinitionResponse
 
 // NewGetIntegrationDefinitionResponse instantiates a new GetIntegrationDefinitionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetIntegrationDefinitionResponse) ToMap() (map[string]interface{}, error
 	if !IsNil(o.IntegrationDefinition) {
 		toSerialize["integrationDefinition"] = o.IntegrationDefinition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetIntegrationDefinitionResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetIntegrationDefinitionResponse := _GetIntegrationDefinitionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetIntegrationDefinitionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetIntegrationDefinitionResponse(varGetIntegrationDefinitionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationDefinition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetIntegrationDefinitionResponse struct {

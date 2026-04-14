@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersBlockParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersBlockParameters{}
 
 // RuleParametersBlockParameters struct for RuleParametersBlockParameters
 type RuleParametersBlockParameters struct {
-	BlockParameters *BlockParameters `json:"blockParameters,omitempty"`
+	BlockParameters BlockParameters `json:"blockParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersBlockParameters RuleParametersBlockParameters
 
 // NewRuleParametersBlockParameters instantiates a new RuleParametersBlockParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersBlockParameters() *RuleParametersBlockParameters {
+func NewRuleParametersBlockParameters(blockParameters BlockParameters) *RuleParametersBlockParameters {
 	this := RuleParametersBlockParameters{}
+	this.BlockParameters = blockParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersBlockParametersWithDefaults() *RuleParametersBlockParamete
 	return &this
 }
 
-// GetBlockParameters returns the BlockParameters field value if set, zero value otherwise.
+// GetBlockParameters returns the BlockParameters field value
 func (o *RuleParametersBlockParameters) GetBlockParameters() BlockParameters {
-	if o == nil || IsNil(o.BlockParameters) {
+	if o == nil {
 		var ret BlockParameters
 		return ret
 	}
-	return *o.BlockParameters
+
+	return o.BlockParameters
 }
 
-// GetBlockParametersOk returns a tuple with the BlockParameters field value if set, nil otherwise
+// GetBlockParametersOk returns a tuple with the BlockParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersBlockParameters) GetBlockParametersOk() (*BlockParameters, bool) {
-	if o == nil || IsNil(o.BlockParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BlockParameters, true
+	return &o.BlockParameters, true
 }
 
-// HasBlockParameters returns a boolean if a field has been set.
-func (o *RuleParametersBlockParameters) HasBlockParameters() bool {
-	if o != nil && !IsNil(o.BlockParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetBlockParameters gets a reference to the given BlockParameters and assigns it to the BlockParameters field.
+// SetBlockParameters sets field value
 func (o *RuleParametersBlockParameters) SetBlockParameters(v BlockParameters) {
-	o.BlockParameters = &v
+	o.BlockParameters = v
 }
 
 func (o RuleParametersBlockParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersBlockParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersBlockParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BlockParameters) {
-		toSerialize["blockParameters"] = o.BlockParameters
+	toSerialize["blockParameters"] = o.BlockParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersBlockParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"blockParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersBlockParameters := _RuleParametersBlockParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersBlockParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersBlockParameters(varRuleParametersBlockParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "blockParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersBlockParameters struct {

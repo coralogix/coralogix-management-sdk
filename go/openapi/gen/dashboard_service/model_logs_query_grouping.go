@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsQueryGrouping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsQueryGrouping{}
@@ -22,7 +25,10 @@ type LogsQueryGrouping struct {
 	Aggregations []LogsQueryAggregation `json:"aggregations,omitempty"`
 	GroupBy []string `json:"groupBy,omitempty"`
 	GroupBys []ObservationField `json:"groupBys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsQueryGrouping LogsQueryGrouping
 
 // NewLogsQueryGrouping instantiates a new LogsQueryGrouping object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o LogsQueryGrouping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupBys) {
 		toSerialize["groupBys"] = o.GroupBys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsQueryGrouping) UnmarshalJSON(data []byte) (err error) {
+	varLogsQueryGrouping := _LogsQueryGrouping{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsQueryGrouping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsQueryGrouping(varLogsQueryGrouping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregations")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "groupBys")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsQueryGrouping struct {

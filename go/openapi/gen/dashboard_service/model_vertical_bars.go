@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VerticalBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VerticalBars{}
@@ -50,7 +53,10 @@ type VerticalBars struct {
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VerticalBars VerticalBars
 
 // NewVerticalBars instantiates a new VerticalBars object
 // This constructor will assign default values to properties that have it defined,
@@ -779,7 +785,53 @@ func (o VerticalBars) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisMin) {
 		toSerialize["yAxisMin"] = o.YAxisMin
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VerticalBars) UnmarshalJSON(data []byte) (err error) {
+	varVerticalBars := _VerticalBars{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVerticalBars)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VerticalBars(varVerticalBars)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "barValueDisplay")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "colorsBy")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "groupNameTemplate")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "maxBarsPerChart")
+		delete(additionalProperties, "maxSlicesPerBar")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "sortBy")
+		delete(additionalProperties, "stackNameTemplate")
+		delete(additionalProperties, "subCategoryFields")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVerticalBars struct {

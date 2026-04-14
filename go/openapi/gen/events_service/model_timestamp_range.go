@@ -11,11 +11,13 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimestampRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimestampRange{}
@@ -24,6 +26,7 @@ var _ MappedNullable = &TimestampRange{}
 type TimestampRange struct {
 	From time.Time `json:"from"`
 	To time.Time `json:"to"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TimestampRange TimestampRange
@@ -107,6 +110,11 @@ func (o TimestampRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["from"] = o.From
 	toSerialize["to"] = o.To
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,6 +151,14 @@ func (o *TimestampRange) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = TimestampRange(varTimestampRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

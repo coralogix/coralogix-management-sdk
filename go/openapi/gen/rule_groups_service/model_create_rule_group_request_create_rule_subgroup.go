@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateRuleGroupRequestCreateRuleSubgroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRuleGroupRequestCreateRuleSubgroup{}
@@ -22,7 +25,10 @@ type CreateRuleGroupRequestCreateRuleSubgroup struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	Order *int64 `json:"order,omitempty"`
 	Rules []CreateRuleGroupRequestCreateRuleSubgroupCreateRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRuleGroupRequestCreateRuleSubgroup CreateRuleGroupRequestCreateRuleSubgroup
 
 // NewCreateRuleGroupRequestCreateRuleSubgroup instantiates a new CreateRuleGroupRequestCreateRuleSubgroup object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o CreateRuleGroupRequestCreateRuleSubgroup) ToMap() (map[string]interface{
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRuleGroupRequestCreateRuleSubgroup) UnmarshalJSON(data []byte) (err error) {
+	varCreateRuleGroupRequestCreateRuleSubgroup := _CreateRuleGroupRequestCreateRuleSubgroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateRuleGroupRequestCreateRuleSubgroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRuleGroupRequestCreateRuleSubgroup(varCreateRuleGroupRequestCreateRuleSubgroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRuleGroupRequestCreateRuleSubgroup struct {

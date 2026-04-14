@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3SloDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3SloDefinition{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &V3SloDefinition{}
 type V3SloDefinition struct {
 	// The SLO ID
 	SloId *string `json:"sloId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3SloDefinition V3SloDefinition
 
 // NewV3SloDefinition instantiates a new V3SloDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o V3SloDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SloId) {
 		toSerialize["sloId"] = o.SloId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V3SloDefinition) UnmarshalJSON(data []byte) (err error) {
+	varV3SloDefinition := _V3SloDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3SloDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3SloDefinition(varV3SloDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sloId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3SloDefinition struct {

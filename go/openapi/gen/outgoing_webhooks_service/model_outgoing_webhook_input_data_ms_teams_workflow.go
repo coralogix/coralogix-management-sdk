@@ -11,26 +11,34 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookInputDataMsTeamsWorkflow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataMsTeamsWorkflow{}
 
 // OutgoingWebhookInputDataMsTeamsWorkflow struct for OutgoingWebhookInputDataMsTeamsWorkflow
 type OutgoingWebhookInputDataMsTeamsWorkflow struct {
-	MsTeamsWorkflow map[string]interface{} `json:"msTeamsWorkflow,omitempty"`
+	MsTeamsWorkflow map[string]interface{} `json:"msTeamsWorkflow"`
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookInputDataMsTeamsWorkflow OutgoingWebhookInputDataMsTeamsWorkflow
 
 // NewOutgoingWebhookInputDataMsTeamsWorkflow instantiates a new OutgoingWebhookInputDataMsTeamsWorkflow object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataMsTeamsWorkflow() *OutgoingWebhookInputDataMsTeamsWorkflow {
+func NewOutgoingWebhookInputDataMsTeamsWorkflow(msTeamsWorkflow map[string]interface{}) *OutgoingWebhookInputDataMsTeamsWorkflow {
 	this := OutgoingWebhookInputDataMsTeamsWorkflow{}
+	this.MsTeamsWorkflow = msTeamsWorkflow
 	return &this
 }
 
@@ -42,34 +50,26 @@ func NewOutgoingWebhookInputDataMsTeamsWorkflowWithDefaults() *OutgoingWebhookIn
 	return &this
 }
 
-// GetMsTeamsWorkflow returns the MsTeamsWorkflow field value if set, zero value otherwise.
+// GetMsTeamsWorkflow returns the MsTeamsWorkflow field value
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) GetMsTeamsWorkflow() map[string]interface{} {
-	if o == nil || IsNil(o.MsTeamsWorkflow) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.MsTeamsWorkflow
 }
 
-// GetMsTeamsWorkflowOk returns a tuple with the MsTeamsWorkflow field value if set, nil otherwise
+// GetMsTeamsWorkflowOk returns a tuple with the MsTeamsWorkflow field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) GetMsTeamsWorkflowOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.MsTeamsWorkflow) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.MsTeamsWorkflow, true
 }
 
-// HasMsTeamsWorkflow returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputDataMsTeamsWorkflow) HasMsTeamsWorkflow() bool {
-	if o != nil && !IsNil(o.MsTeamsWorkflow) {
-		return true
-	}
-
-	return false
-}
-
-// SetMsTeamsWorkflow gets a reference to the given map[string]interface{} and assigns it to the MsTeamsWorkflow field.
+// SetMsTeamsWorkflow sets field value
 func (o *OutgoingWebhookInputDataMsTeamsWorkflow) SetMsTeamsWorkflow(v map[string]interface{}) {
 	o.MsTeamsWorkflow = v
 }
@@ -180,9 +180,7 @@ func (o OutgoingWebhookInputDataMsTeamsWorkflow) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookInputDataMsTeamsWorkflow) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MsTeamsWorkflow) {
-		toSerialize["msTeamsWorkflow"] = o.MsTeamsWorkflow
-	}
+	toSerialize["msTeamsWorkflow"] = o.MsTeamsWorkflow
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -192,7 +190,58 @@ func (o OutgoingWebhookInputDataMsTeamsWorkflow) ToMap() (map[string]interface{}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookInputDataMsTeamsWorkflow) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"msTeamsWorkflow",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookInputDataMsTeamsWorkflow := _OutgoingWebhookInputDataMsTeamsWorkflow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookInputDataMsTeamsWorkflow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookInputDataMsTeamsWorkflow(varOutgoingWebhookInputDataMsTeamsWorkflow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "msTeamsWorkflow")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookInputDataMsTeamsWorkflow struct {

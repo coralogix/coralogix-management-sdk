@@ -11,9 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // AlertDefOrderByDirection the model 'AlertDefOrderByDirection'
 type AlertDefOrderByDirection string

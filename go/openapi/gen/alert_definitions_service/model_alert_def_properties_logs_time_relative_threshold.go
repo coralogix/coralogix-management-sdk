@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesLogsTimeRelativeThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesLogsTimeRelativeThreshold{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesLogsTimeRelativeThreshold struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	LogsTimeRelativeThreshold *LogsTimeRelativeThresholdType `json:"logsTimeRelativeThreshold,omitempty"`
+	LogsTimeRelativeThreshold LogsTimeRelativeThresholdType `json:"logsTimeRelativeThreshold"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesLogsTimeRelativeThreshold struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesLogsTimeRelativeThreshold AlertDefPropertiesLogsTimeRelativeThreshold
 
 // NewAlertDefPropertiesLogsTimeRelativeThreshold instantiates a new AlertDefPropertiesLogsTimeRelativeThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsTimeRelativeThreshold() *AlertDefPropertiesLogsTimeRelativeThreshold {
+func NewAlertDefPropertiesLogsTimeRelativeThreshold(logsTimeRelativeThreshold LogsTimeRelativeThresholdType) *AlertDefPropertiesLogsTimeRelativeThreshold {
 	this := AlertDefPropertiesLogsTimeRelativeThreshold{}
+	this.LogsTimeRelativeThreshold = logsTimeRelativeThreshold
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesLogsTimeRelativeThreshold) SetIncidentsSettings(v Ale
 	o.IncidentsSettings = &v
 }
 
-// GetLogsTimeRelativeThreshold returns the LogsTimeRelativeThreshold field value if set, zero value otherwise.
+// GetLogsTimeRelativeThreshold returns the LogsTimeRelativeThreshold field value
 func (o *AlertDefPropertiesLogsTimeRelativeThreshold) GetLogsTimeRelativeThreshold() LogsTimeRelativeThresholdType {
-	if o == nil || IsNil(o.LogsTimeRelativeThreshold) {
+	if o == nil {
 		var ret LogsTimeRelativeThresholdType
 		return ret
 	}
-	return *o.LogsTimeRelativeThreshold
+
+	return o.LogsTimeRelativeThreshold
 }
 
-// GetLogsTimeRelativeThresholdOk returns a tuple with the LogsTimeRelativeThreshold field value if set, nil otherwise
+// GetLogsTimeRelativeThresholdOk returns a tuple with the LogsTimeRelativeThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsTimeRelativeThreshold) GetLogsTimeRelativeThresholdOk() (*LogsTimeRelativeThresholdType, bool) {
-	if o == nil || IsNil(o.LogsTimeRelativeThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsTimeRelativeThreshold, true
+	return &o.LogsTimeRelativeThreshold, true
 }
 
-// HasLogsTimeRelativeThreshold returns a boolean if a field has been set.
-func (o *AlertDefPropertiesLogsTimeRelativeThreshold) HasLogsTimeRelativeThreshold() bool {
-	if o != nil && !IsNil(o.LogsTimeRelativeThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsTimeRelativeThreshold gets a reference to the given LogsTimeRelativeThresholdType and assigns it to the LogsTimeRelativeThreshold field.
+// SetLogsTimeRelativeThreshold sets field value
 func (o *AlertDefPropertiesLogsTimeRelativeThreshold) SetLogsTimeRelativeThreshold(v LogsTimeRelativeThresholdType) {
-	o.LogsTimeRelativeThreshold = &v
+	o.LogsTimeRelativeThreshold = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesLogsTimeRelativeThreshold) ToMap() (map[string]interfa
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.LogsTimeRelativeThreshold) {
-		toSerialize["logsTimeRelativeThreshold"] = o.LogsTimeRelativeThreshold
-	}
+	toSerialize["logsTimeRelativeThreshold"] = o.LogsTimeRelativeThreshold
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesLogsTimeRelativeThreshold) ToMap() (map[string]interfa
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesLogsTimeRelativeThreshold) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsTimeRelativeThreshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesLogsTimeRelativeThreshold := _AlertDefPropertiesLogsTimeRelativeThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesLogsTimeRelativeThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesLogsTimeRelativeThreshold(varAlertDefPropertiesLogsTimeRelativeThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsTimeRelativeThreshold")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesLogsTimeRelativeThreshold struct {

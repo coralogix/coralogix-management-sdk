@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListIncidentEventsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListIncidentEventsResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &ListIncidentEventsResponse{}
 type ListIncidentEventsResponse struct {
 	Items []IncidentEventExtended `json:"items"`
 	Pagination *IncidentsV1PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListIncidentEventsResponse ListIncidentEventsResponse
@@ -115,6 +118,11 @@ func (o ListIncidentEventsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *ListIncidentEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListIncidentEventsResponse(varListIncidentEventsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

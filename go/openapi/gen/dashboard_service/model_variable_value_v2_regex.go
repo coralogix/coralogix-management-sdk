@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableValueV2Regex type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2Regex{}
 
 // VariableValueV2Regex struct for VariableValueV2Regex
 type VariableValueV2Regex struct {
-	Regex *RegexValue `json:"regex,omitempty"`
+	Regex RegexValue `json:"regex"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableValueV2Regex VariableValueV2Regex
 
 // NewVariableValueV2Regex instantiates a new VariableValueV2Regex object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableValueV2Regex() *VariableValueV2Regex {
+func NewVariableValueV2Regex(regex RegexValue) *VariableValueV2Regex {
 	this := VariableValueV2Regex{}
+	this.Regex = regex
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableValueV2RegexWithDefaults() *VariableValueV2Regex {
 	return &this
 }
 
-// GetRegex returns the Regex field value if set, zero value otherwise.
+// GetRegex returns the Regex field value
 func (o *VariableValueV2Regex) GetRegex() RegexValue {
-	if o == nil || IsNil(o.Regex) {
+	if o == nil {
 		var ret RegexValue
 		return ret
 	}
-	return *o.Regex
+
+	return o.Regex
 }
 
-// GetRegexOk returns a tuple with the Regex field value if set, nil otherwise
+// GetRegexOk returns a tuple with the Regex field value
 // and a boolean to check if the value has been set.
 func (o *VariableValueV2Regex) GetRegexOk() (*RegexValue, bool) {
-	if o == nil || IsNil(o.Regex) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Regex, true
+	return &o.Regex, true
 }
 
-// HasRegex returns a boolean if a field has been set.
-func (o *VariableValueV2Regex) HasRegex() bool {
-	if o != nil && !IsNil(o.Regex) {
-		return true
-	}
-
-	return false
-}
-
-// SetRegex gets a reference to the given RegexValue and assigns it to the Regex field.
+// SetRegex sets field value
 func (o *VariableValueV2Regex) SetRegex(v RegexValue) {
-	o.Regex = &v
+	o.Regex = v
 }
 
 func (o VariableValueV2Regex) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableValueV2Regex) MarshalJSON() ([]byte, error) {
 
 func (o VariableValueV2Regex) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Regex) {
-		toSerialize["regex"] = o.Regex
+	toSerialize["regex"] = o.Regex
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableValueV2Regex) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"regex",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableValueV2Regex := _VariableValueV2Regex{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2Regex)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2Regex(varVariableValueV2Regex)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "regex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableValueV2Regex struct {

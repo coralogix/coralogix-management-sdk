@@ -11,8 +11,11 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListViewsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListViewsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListViewsResponse{}
 // ListViewsResponse struct for ListViewsResponse
 type ListViewsResponse struct {
 	Views []View `json:"views,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListViewsResponse ListViewsResponse
 
 // NewListViewsResponse instantiates a new ListViewsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListViewsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Views) {
 		toSerialize["views"] = o.Views
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListViewsResponse) UnmarshalJSON(data []byte) (err error) {
+	varListViewsResponse := _ListViewsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListViewsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListViewsResponse(varListViewsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "views")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListViewsResponse struct {

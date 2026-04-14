@@ -11,8 +11,11 @@ API version: 1.0.0
 package folders_for_views_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListViewFoldersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListViewFoldersResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListViewFoldersResponse{}
 // ListViewFoldersResponse struct for ListViewFoldersResponse
 type ListViewFoldersResponse struct {
 	Folders []ViewFolder `json:"folders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListViewFoldersResponse ListViewFoldersResponse
 
 // NewListViewFoldersResponse instantiates a new ListViewFoldersResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListViewFoldersResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Folders) {
 		toSerialize["folders"] = o.Folders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListViewFoldersResponse) UnmarshalJSON(data []byte) (err error) {
+	varListViewFoldersResponse := _ListViewFoldersResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListViewFoldersResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListViewFoldersResponse(varListViewFoldersResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "folders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListViewFoldersResponse struct {

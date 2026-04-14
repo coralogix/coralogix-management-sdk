@@ -11,8 +11,11 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetSPParametersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetSPParametersResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetSPParametersResponse{}
 // GetSPParametersResponse This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider
 type GetSPParametersResponse struct {
 	Params *SPParameters `json:"params,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPParametersResponse GetSPParametersResponse
 
 // NewGetSPParametersResponse instantiates a new GetSPParametersResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetSPParametersResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Params) {
 		toSerialize["params"] = o.Params
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPParametersResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetSPParametersResponse := _GetSPParametersResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetSPParametersResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPParametersResponse(varGetSPParametersResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "params")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPParametersResponse struct {

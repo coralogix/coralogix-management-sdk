@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryText type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryText{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &QueryText{}
 type QueryText struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	Query *CommonDataprimeQuery `json:"query,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryText QueryText
 
 // NewQueryText instantiates a new QueryText object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o QueryText) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Query) {
 		toSerialize["query"] = o.Query
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryText) UnmarshalJSON(data []byte) (err error) {
+	varQueryText := _QueryText{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryText)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryText(varQueryText)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryText struct {

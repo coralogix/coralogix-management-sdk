@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectQuerySpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectQuerySpansQuery{}
 
 // MultiSelectQuerySpansQuery struct for MultiSelectQuerySpansQuery
 type MultiSelectQuerySpansQuery struct {
-	SpansQuery *QuerySpansQuery `json:"spansQuery,omitempty"`
+	SpansQuery QuerySpansQuery `json:"spansQuery"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectQuerySpansQuery MultiSelectQuerySpansQuery
 
 // NewMultiSelectQuerySpansQuery instantiates a new MultiSelectQuerySpansQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectQuerySpansQuery() *MultiSelectQuerySpansQuery {
+func NewMultiSelectQuerySpansQuery(spansQuery QuerySpansQuery) *MultiSelectQuerySpansQuery {
 	this := MultiSelectQuerySpansQuery{}
+	this.SpansQuery = spansQuery
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectQuerySpansQueryWithDefaults() *MultiSelectQuerySpansQuery {
 	return &this
 }
 
-// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+// GetSpansQuery returns the SpansQuery field value
 func (o *MultiSelectQuerySpansQuery) GetSpansQuery() QuerySpansQuery {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		var ret QuerySpansQuery
 		return ret
 	}
-	return *o.SpansQuery
+
+	return o.SpansQuery
 }
 
-// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// GetSpansQueryOk returns a tuple with the SpansQuery field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectQuerySpansQuery) GetSpansQueryOk() (*QuerySpansQuery, bool) {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpansQuery, true
+	return &o.SpansQuery, true
 }
 
-// HasSpansQuery returns a boolean if a field has been set.
-func (o *MultiSelectQuerySpansQuery) HasSpansQuery() bool {
-	if o != nil && !IsNil(o.SpansQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpansQuery gets a reference to the given QuerySpansQuery and assigns it to the SpansQuery field.
+// SetSpansQuery sets field value
 func (o *MultiSelectQuerySpansQuery) SetSpansQuery(v QuerySpansQuery) {
-	o.SpansQuery = &v
+	o.SpansQuery = v
 }
 
 func (o MultiSelectQuerySpansQuery) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectQuerySpansQuery) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectQuerySpansQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SpansQuery) {
-		toSerialize["spansQuery"] = o.SpansQuery
+	toSerialize["spansQuery"] = o.SpansQuery
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectQuerySpansQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spansQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectQuerySpansQuery := _MultiSelectQuerySpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectQuerySpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectQuerySpansQuery(varMultiSelectQuerySpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "spansQuery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectQuerySpansQuery struct {

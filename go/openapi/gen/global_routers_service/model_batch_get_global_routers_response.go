@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchGetGlobalRoutersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchGetGlobalRoutersResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &BatchGetGlobalRoutersResponse{}
 type BatchGetGlobalRoutersResponse struct {
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	Routers *map[string]GlobalRouter `json:"routers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchGetGlobalRoutersResponse BatchGetGlobalRoutersResponse
 
 // NewBatchGetGlobalRoutersResponse instantiates a new BatchGetGlobalRoutersResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o BatchGetGlobalRoutersResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Routers) {
 		toSerialize["routers"] = o.Routers
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchGetGlobalRoutersResponse) UnmarshalJSON(data []byte) (err error) {
+	varBatchGetGlobalRoutersResponse := _BatchGetGlobalRoutersResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBatchGetGlobalRoutersResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchGetGlobalRoutersResponse(varBatchGetGlobalRoutersResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "notFoundIds")
+		delete(additionalProperties, "routers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchGetGlobalRoutersResponse struct {

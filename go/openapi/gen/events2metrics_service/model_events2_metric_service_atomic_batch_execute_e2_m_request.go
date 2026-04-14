@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Events2MetricServiceAtomicBatchExecuteE2MRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Events2MetricServiceAtomicBatchExecuteE2MRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Events2MetricServiceAtomicBatchExecuteE2MRequest{}
 // Events2MetricServiceAtomicBatchExecuteE2MRequest struct for Events2MetricServiceAtomicBatchExecuteE2MRequest
 type Events2MetricServiceAtomicBatchExecuteE2MRequest struct {
 	Requests []E2MExecutionRequest `json:"requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Events2MetricServiceAtomicBatchExecuteE2MRequest Events2MetricServiceAtomicBatchExecuteE2MRequest
 
 // NewEvents2MetricServiceAtomicBatchExecuteE2MRequest instantiates a new Events2MetricServiceAtomicBatchExecuteE2MRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Events2MetricServiceAtomicBatchExecuteE2MRequest) ToMap() (map[string]in
 	if !IsNil(o.Requests) {
 		toSerialize["requests"] = o.Requests
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Events2MetricServiceAtomicBatchExecuteE2MRequest) UnmarshalJSON(data []byte) (err error) {
+	varEvents2MetricServiceAtomicBatchExecuteE2MRequest := _Events2MetricServiceAtomicBatchExecuteE2MRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEvents2MetricServiceAtomicBatchExecuteE2MRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Events2MetricServiceAtomicBatchExecuteE2MRequest(varEvents2MetricServiceAtomicBatchExecuteE2MRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requests")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEvents2MetricServiceAtomicBatchExecuteE2MRequest struct {

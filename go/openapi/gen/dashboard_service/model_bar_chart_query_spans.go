@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BarChartQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BarChartQuerySpans{}
 
 // BarChartQuerySpans struct for BarChartQuerySpans
 type BarChartQuerySpans struct {
-	Spans *BarChartSpansQuery `json:"spans,omitempty"`
+	Spans BarChartSpansQuery `json:"spans"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BarChartQuerySpans BarChartQuerySpans
 
 // NewBarChartQuerySpans instantiates a new BarChartQuerySpans object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBarChartQuerySpans() *BarChartQuerySpans {
+func NewBarChartQuerySpans(spans BarChartSpansQuery) *BarChartQuerySpans {
 	this := BarChartQuerySpans{}
+	this.Spans = spans
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewBarChartQuerySpansWithDefaults() *BarChartQuerySpans {
 	return &this
 }
 
-// GetSpans returns the Spans field value if set, zero value otherwise.
+// GetSpans returns the Spans field value
 func (o *BarChartQuerySpans) GetSpans() BarChartSpansQuery {
-	if o == nil || IsNil(o.Spans) {
+	if o == nil {
 		var ret BarChartSpansQuery
 		return ret
 	}
-	return *o.Spans
+
+	return o.Spans
 }
 
-// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// GetSpansOk returns a tuple with the Spans field value
 // and a boolean to check if the value has been set.
 func (o *BarChartQuerySpans) GetSpansOk() (*BarChartSpansQuery, bool) {
-	if o == nil || IsNil(o.Spans) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spans, true
+	return &o.Spans, true
 }
 
-// HasSpans returns a boolean if a field has been set.
-func (o *BarChartQuerySpans) HasSpans() bool {
-	if o != nil && !IsNil(o.Spans) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpans gets a reference to the given BarChartSpansQuery and assigns it to the Spans field.
+// SetSpans sets field value
 func (o *BarChartQuerySpans) SetSpans(v BarChartSpansQuery) {
-	o.Spans = &v
+	o.Spans = v
 }
 
 func (o BarChartQuerySpans) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o BarChartQuerySpans) MarshalJSON() ([]byte, error) {
 
 func (o BarChartQuerySpans) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Spans) {
-		toSerialize["spans"] = o.Spans
+	toSerialize["spans"] = o.Spans
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *BarChartQuerySpans) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spans",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varBarChartQuerySpans := _BarChartQuerySpans{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBarChartQuerySpans)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BarChartQuerySpans(varBarChartQuerySpans)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBarChartQuerySpans struct {

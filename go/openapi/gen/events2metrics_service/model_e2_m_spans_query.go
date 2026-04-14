@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MSpansQuery{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &E2MSpansQuery{}
 // E2MSpansQuery This data structure represents an Event to Metrics (E2M) object.
 type E2MSpansQuery struct {
 	CreateTime *string `json:"createTime,omitempty"`
+	DataSource *string `json:"dataSource,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	IsInternal *bool `json:"isInternal,omitempty"`
@@ -29,9 +32,10 @@ type E2MSpansQuery struct {
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
 	Name string `json:"name"`
 	Permutations *E2MPermutations `json:"permutations,omitempty"`
-	SpansQuery *V2SpansQuery `json:"spansQuery,omitempty"`
+	SpansQuery V2SpansQuery `json:"spansQuery"`
 	Type E2MType `json:"type"`
 	UpdateTime *string `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _E2MSpansQuery E2MSpansQuery
@@ -40,9 +44,10 @@ type _E2MSpansQuery E2MSpansQuery
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewE2MSpansQuery(name string, type_ E2MType) *E2MSpansQuery {
+func NewE2MSpansQuery(name string, spansQuery V2SpansQuery, type_ E2MType) *E2MSpansQuery {
 	this := E2MSpansQuery{}
 	this.Name = name
+	this.SpansQuery = spansQuery
 	this.Type = type_
 	return &this
 }
@@ -85,6 +90,38 @@ func (o *E2MSpansQuery) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given string and assigns it to the CreateTime field.
 func (o *E2MSpansQuery) SetCreateTime(v string) {
 	o.CreateTime = &v
+}
+
+// GetDataSource returns the DataSource field value if set, zero value otherwise.
+func (o *E2MSpansQuery) GetDataSource() string {
+	if o == nil || IsNil(o.DataSource) {
+		var ret string
+		return ret
+	}
+	return *o.DataSource
+}
+
+// GetDataSourceOk returns a tuple with the DataSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2MSpansQuery) GetDataSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.DataSource) {
+		return nil, false
+	}
+	return o.DataSource, true
+}
+
+// HasDataSource returns a boolean if a field has been set.
+func (o *E2MSpansQuery) HasDataSource() bool {
+	if o != nil && !IsNil(o.DataSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataSource gets a reference to the given string and assigns it to the DataSource field.
+func (o *E2MSpansQuery) SetDataSource(v string) {
+	o.DataSource = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -303,36 +340,28 @@ func (o *E2MSpansQuery) SetPermutations(v E2MPermutations) {
 	o.Permutations = &v
 }
 
-// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+// GetSpansQuery returns the SpansQuery field value
 func (o *E2MSpansQuery) GetSpansQuery() V2SpansQuery {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		var ret V2SpansQuery
 		return ret
 	}
-	return *o.SpansQuery
+
+	return o.SpansQuery
 }
 
-// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// GetSpansQueryOk returns a tuple with the SpansQuery field value
 // and a boolean to check if the value has been set.
 func (o *E2MSpansQuery) GetSpansQueryOk() (*V2SpansQuery, bool) {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpansQuery, true
+	return &o.SpansQuery, true
 }
 
-// HasSpansQuery returns a boolean if a field has been set.
-func (o *E2MSpansQuery) HasSpansQuery() bool {
-	if o != nil && !IsNil(o.SpansQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpansQuery gets a reference to the given V2SpansQuery and assigns it to the SpansQuery field.
+// SetSpansQuery sets field value
 func (o *E2MSpansQuery) SetSpansQuery(v V2SpansQuery) {
-	o.SpansQuery = &v
+	o.SpansQuery = v
 }
 
 // GetType returns the Type field value
@@ -404,6 +433,9 @@ func (o E2MSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreateTime) {
 		toSerialize["createTime"] = o.CreateTime
 	}
+	if !IsNil(o.DataSource) {
+		toSerialize["dataSource"] = o.DataSource
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -423,13 +455,16 @@ func (o E2MSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Permutations) {
 		toSerialize["permutations"] = o.Permutations
 	}
-	if !IsNil(o.SpansQuery) {
-		toSerialize["spansQuery"] = o.SpansQuery
-	}
+	toSerialize["spansQuery"] = o.SpansQuery
 	toSerialize["type"] = o.Type
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -439,6 +474,7 @@ func (o *E2MSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
+		"spansQuery",
 		"type",
 	}
 
@@ -466,6 +502,24 @@ func (o *E2MSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = E2MSpansQuery(varE2MSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "dataSource")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isInternal")
+		delete(additionalProperties, "metricFields")
+		delete(additionalProperties, "metricLabels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permutations")
+		delete(additionalProperties, "spansQuery")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

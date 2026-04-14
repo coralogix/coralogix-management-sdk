@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetContextualDataIntegrationDetailsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetContextualDataIntegrationDetailsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetContextualDataIntegrationDetailsResponse{}
 // GetContextualDataIntegrationDetailsResponse struct for GetContextualDataIntegrationDetailsResponse
 type GetContextualDataIntegrationDetailsResponse struct {
 	IntegrationDetail *IntegrationDetails `json:"integrationDetail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetContextualDataIntegrationDetailsResponse GetContextualDataIntegrationDetailsResponse
 
 // NewGetContextualDataIntegrationDetailsResponse instantiates a new GetContextualDataIntegrationDetailsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetContextualDataIntegrationDetailsResponse) ToMap() (map[string]interfa
 	if !IsNil(o.IntegrationDetail) {
 		toSerialize["integrationDetail"] = o.IntegrationDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetContextualDataIntegrationDetailsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetContextualDataIntegrationDetailsResponse := _GetContextualDataIntegrationDetailsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetContextualDataIntegrationDetailsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetContextualDataIntegrationDetailsResponse(varGetContextualDataIntegrationDetailsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationDetail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetContextualDataIntegrationDetailsResponse struct {

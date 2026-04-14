@@ -11,16 +11,20 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RegisteredInstanceArm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RegisteredInstanceArm{}
 
 // RegisteredInstanceArm struct for RegisteredInstanceArm
 type RegisteredInstanceArm struct {
-	Arm *ARMStack `json:"arm,omitempty"`
+	Arm ARMStack `json:"arm"`
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
@@ -28,14 +32,18 @@ type RegisteredInstanceArm struct {
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
 	Parameters []Parameter `json:"parameters,omitempty"`
 	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RegisteredInstanceArm RegisteredInstanceArm
 
 // NewRegisteredInstanceArm instantiates a new RegisteredInstanceArm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegisteredInstanceArm() *RegisteredInstanceArm {
+func NewRegisteredInstanceArm(arm ARMStack) *RegisteredInstanceArm {
 	this := RegisteredInstanceArm{}
+	this.Arm = arm
 	return &this
 }
 
@@ -47,36 +55,28 @@ func NewRegisteredInstanceArmWithDefaults() *RegisteredInstanceArm {
 	return &this
 }
 
-// GetArm returns the Arm field value if set, zero value otherwise.
+// GetArm returns the Arm field value
 func (o *RegisteredInstanceArm) GetArm() ARMStack {
-	if o == nil || IsNil(o.Arm) {
+	if o == nil {
 		var ret ARMStack
 		return ret
 	}
-	return *o.Arm
+
+	return o.Arm
 }
 
-// GetArmOk returns a tuple with the Arm field value if set, nil otherwise
+// GetArmOk returns a tuple with the Arm field value
 // and a boolean to check if the value has been set.
 func (o *RegisteredInstanceArm) GetArmOk() (*ARMStack, bool) {
-	if o == nil || IsNil(o.Arm) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Arm, true
+	return &o.Arm, true
 }
 
-// HasArm returns a boolean if a field has been set.
-func (o *RegisteredInstanceArm) HasArm() bool {
-	if o != nil && !IsNil(o.Arm) {
-		return true
-	}
-
-	return false
-}
-
-// SetArm gets a reference to the given ARMStack and assigns it to the Arm field.
+// SetArm sets field value
 func (o *RegisteredInstanceArm) SetArm(v ARMStack) {
-	o.Arm = &v
+	o.Arm = v
 }
 
 // GetDefinitionVersion returns the DefinitionVersion field value if set, zero value otherwise.
@@ -313,9 +313,7 @@ func (o RegisteredInstanceArm) MarshalJSON() ([]byte, error) {
 
 func (o RegisteredInstanceArm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Arm) {
-		toSerialize["arm"] = o.Arm
-	}
+	toSerialize["arm"] = o.Arm
 	if !IsNil(o.DefinitionVersion) {
 		toSerialize["definitionVersion"] = o.DefinitionVersion
 	}
@@ -337,7 +335,62 @@ func (o RegisteredInstanceArm) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RevisionLifecycle) {
 		toSerialize["revisionLifecycle"] = o.RevisionLifecycle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RegisteredInstanceArm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"arm",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRegisteredInstanceArm := _RegisteredInstanceArm{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRegisteredInstanceArm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RegisteredInstanceArm(varRegisteredInstanceArm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "arm")
+		delete(additionalProperties, "definitionVersion")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "integrationStatus")
+		delete(additionalProperties, "isTesting")
+		delete(additionalProperties, "lastUpdated")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "revisionLifecycle")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRegisteredInstanceArm struct {

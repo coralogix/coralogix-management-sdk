@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypeUntracked type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypeUntracked{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V1IntegrationTypeUntracked{}
 // V1IntegrationTypeUntracked This data structure represents an integration type.
 type V1IntegrationTypeUntracked struct {
 	// This data structure represents an untracked integration.
-	Untracked map[string]interface{} `json:"untracked,omitempty"`
+	Untracked map[string]interface{} `json:"untracked"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypeUntracked V1IntegrationTypeUntracked
 
 // NewV1IntegrationTypeUntracked instantiates a new V1IntegrationTypeUntracked object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypeUntracked() *V1IntegrationTypeUntracked {
+func NewV1IntegrationTypeUntracked(untracked map[string]interface{}) *V1IntegrationTypeUntracked {
 	this := V1IntegrationTypeUntracked{}
+	this.Untracked = untracked
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewV1IntegrationTypeUntrackedWithDefaults() *V1IntegrationTypeUntracked {
 	return &this
 }
 
-// GetUntracked returns the Untracked field value if set, zero value otherwise.
+// GetUntracked returns the Untracked field value
 func (o *V1IntegrationTypeUntracked) GetUntracked() map[string]interface{} {
-	if o == nil || IsNil(o.Untracked) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Untracked
 }
 
-// GetUntrackedOk returns a tuple with the Untracked field value if set, nil otherwise
+// GetUntrackedOk returns a tuple with the Untracked field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypeUntracked) GetUntrackedOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Untracked) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Untracked, true
 }
 
-// HasUntracked returns a boolean if a field has been set.
-func (o *V1IntegrationTypeUntracked) HasUntracked() bool {
-	if o != nil && !IsNil(o.Untracked) {
-		return true
-	}
-
-	return false
-}
-
-// SetUntracked gets a reference to the given map[string]interface{} and assigns it to the Untracked field.
+// SetUntracked sets field value
 func (o *V1IntegrationTypeUntracked) SetUntracked(v map[string]interface{}) {
 	o.Untracked = v
 }
@@ -82,10 +82,56 @@ func (o V1IntegrationTypeUntracked) MarshalJSON() ([]byte, error) {
 
 func (o V1IntegrationTypeUntracked) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Untracked) {
-		toSerialize["untracked"] = o.Untracked
+	toSerialize["untracked"] = o.Untracked
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypeUntracked) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"untracked",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypeUntracked := _V1IntegrationTypeUntracked{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypeUntracked)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypeUntracked(varV1IntegrationTypeUntracked)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "untracked")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypeUntracked struct {

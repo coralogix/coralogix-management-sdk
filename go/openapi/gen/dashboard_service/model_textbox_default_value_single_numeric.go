@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueSingleNumeric type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueSingleNumeric{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &TextboxDefaultValueSingleNumeric{}
 // TextboxDefaultValueSingleNumeric struct for TextboxDefaultValueSingleNumeric
 type TextboxDefaultValueSingleNumeric struct {
 	// Deprecated
-	SingleNumeric *float32 `json:"singleNumeric,omitempty"`
+	SingleNumeric float32 `json:"singleNumeric"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueSingleNumeric TextboxDefaultValueSingleNumeric
 
 // NewTextboxDefaultValueSingleNumeric instantiates a new TextboxDefaultValueSingleNumeric object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueSingleNumeric() *TextboxDefaultValueSingleNumeric {
+func NewTextboxDefaultValueSingleNumeric(singleNumeric float32) *TextboxDefaultValueSingleNumeric {
 	this := TextboxDefaultValueSingleNumeric{}
+	this.SingleNumeric = singleNumeric
 	return &this
 }
 
@@ -40,39 +48,31 @@ func NewTextboxDefaultValueSingleNumericWithDefaults() *TextboxDefaultValueSingl
 	return &this
 }
 
-// GetSingleNumeric returns the SingleNumeric field value if set, zero value otherwise.
+// GetSingleNumeric returns the SingleNumeric field value
 // Deprecated
 func (o *TextboxDefaultValueSingleNumeric) GetSingleNumeric() float32 {
-	if o == nil || IsNil(o.SingleNumeric) {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.SingleNumeric
+
+	return o.SingleNumeric
 }
 
-// GetSingleNumericOk returns a tuple with the SingleNumeric field value if set, nil otherwise
+// GetSingleNumericOk returns a tuple with the SingleNumeric field value
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *TextboxDefaultValueSingleNumeric) GetSingleNumericOk() (*float32, bool) {
-	if o == nil || IsNil(o.SingleNumeric) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SingleNumeric, true
+	return &o.SingleNumeric, true
 }
 
-// HasSingleNumeric returns a boolean if a field has been set.
-func (o *TextboxDefaultValueSingleNumeric) HasSingleNumeric() bool {
-	if o != nil && !IsNil(o.SingleNumeric) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleNumeric gets a reference to the given float32 and assigns it to the SingleNumeric field.
+// SetSingleNumeric sets field value
 // Deprecated
 func (o *TextboxDefaultValueSingleNumeric) SetSingleNumeric(v float32) {
-	o.SingleNumeric = &v
+	o.SingleNumeric = v
 }
 
 func (o TextboxDefaultValueSingleNumeric) MarshalJSON() ([]byte, error) {
@@ -85,10 +85,56 @@ func (o TextboxDefaultValueSingleNumeric) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueSingleNumeric) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SingleNumeric) {
-		toSerialize["singleNumeric"] = o.SingleNumeric
+	toSerialize["singleNumeric"] = o.SingleNumeric
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueSingleNumeric) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singleNumeric",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueSingleNumeric := _TextboxDefaultValueSingleNumeric{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueSingleNumeric)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueSingleNumeric(varTextboxDefaultValueSingleNumeric)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "singleNumeric")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueSingleNumeric struct {

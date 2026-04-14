@@ -11,22 +11,25 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventUpsertStateAdministrativeEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventUpsertStateAdministrativeEvent{}
 
 // IncidentEventUpsertStateAdministrativeEvent struct for IncidentEventUpsertStateAdministrativeEvent
 type IncidentEventUpsertStateAdministrativeEvent struct {
-	AdministrativeEvent *IncidentEventOriginatorAdministrative `json:"administrativeEvent,omitempty"`
+	AdministrativeEvent IncidentEventOriginatorAdministrative `json:"administrativeEvent"`
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
 	OriginatorType OriginatorType `json:"originatorType"`
-	UpsertState *IncidentEventUpsertState `json:"upsertState,omitempty"`
+	UpsertState IncidentEventUpsertState `json:"upsertState"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventUpsertStateAdministrativeEvent IncidentEventUpsertStateAdministrativeEvent
@@ -35,11 +38,13 @@ type _IncidentEventUpsertStateAdministrativeEvent IncidentEventUpsertStateAdmini
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventUpsertStateAdministrativeEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventUpsertStateAdministrativeEvent {
+func NewIncidentEventUpsertStateAdministrativeEvent(administrativeEvent IncidentEventOriginatorAdministrative, id string, incidentEventType IncidentEventType, originatorType OriginatorType, upsertState IncidentEventUpsertState) *IncidentEventUpsertStateAdministrativeEvent {
 	this := IncidentEventUpsertStateAdministrativeEvent{}
+	this.AdministrativeEvent = administrativeEvent
 	this.Id = id
 	this.IncidentEventType = incidentEventType
 	this.OriginatorType = originatorType
+	this.UpsertState = upsertState
 	return &this
 }
 
@@ -51,36 +56,28 @@ func NewIncidentEventUpsertStateAdministrativeEventWithDefaults() *IncidentEvent
 	return &this
 }
 
-// GetAdministrativeEvent returns the AdministrativeEvent field value if set, zero value otherwise.
+// GetAdministrativeEvent returns the AdministrativeEvent field value
 func (o *IncidentEventUpsertStateAdministrativeEvent) GetAdministrativeEvent() IncidentEventOriginatorAdministrative {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorAdministrative
 		return ret
 	}
-	return *o.AdministrativeEvent
+
+	return o.AdministrativeEvent
 }
 
-// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value if set, nil otherwise
+// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventUpsertStateAdministrativeEvent) GetAdministrativeEventOk() (*IncidentEventOriginatorAdministrative, bool) {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdministrativeEvent, true
+	return &o.AdministrativeEvent, true
 }
 
-// HasAdministrativeEvent returns a boolean if a field has been set.
-func (o *IncidentEventUpsertStateAdministrativeEvent) HasAdministrativeEvent() bool {
-	if o != nil && !IsNil(o.AdministrativeEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdministrativeEvent gets a reference to the given IncidentEventOriginatorAdministrative and assigns it to the AdministrativeEvent field.
+// SetAdministrativeEvent sets field value
 func (o *IncidentEventUpsertStateAdministrativeEvent) SetAdministrativeEvent(v IncidentEventOriginatorAdministrative) {
-	o.AdministrativeEvent = &v
+	o.AdministrativeEvent = v
 }
 
 // GetId returns the Id field value
@@ -155,36 +152,28 @@ func (o *IncidentEventUpsertStateAdministrativeEvent) SetOriginatorType(v Origin
 	o.OriginatorType = v
 }
 
-// GetUpsertState returns the UpsertState field value if set, zero value otherwise.
+// GetUpsertState returns the UpsertState field value
 func (o *IncidentEventUpsertStateAdministrativeEvent) GetUpsertState() IncidentEventUpsertState {
-	if o == nil || IsNil(o.UpsertState) {
+	if o == nil {
 		var ret IncidentEventUpsertState
 		return ret
 	}
-	return *o.UpsertState
+
+	return o.UpsertState
 }
 
-// GetUpsertStateOk returns a tuple with the UpsertState field value if set, nil otherwise
+// GetUpsertStateOk returns a tuple with the UpsertState field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventUpsertStateAdministrativeEvent) GetUpsertStateOk() (*IncidentEventUpsertState, bool) {
-	if o == nil || IsNil(o.UpsertState) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpsertState, true
+	return &o.UpsertState, true
 }
 
-// HasUpsertState returns a boolean if a field has been set.
-func (o *IncidentEventUpsertStateAdministrativeEvent) HasUpsertState() bool {
-	if o != nil && !IsNil(o.UpsertState) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpsertState gets a reference to the given IncidentEventUpsertState and assigns it to the UpsertState field.
+// SetUpsertState sets field value
 func (o *IncidentEventUpsertStateAdministrativeEvent) SetUpsertState(v IncidentEventUpsertState) {
-	o.UpsertState = &v
+	o.UpsertState = v
 }
 
 func (o IncidentEventUpsertStateAdministrativeEvent) MarshalJSON() ([]byte, error) {
@@ -197,15 +186,16 @@ func (o IncidentEventUpsertStateAdministrativeEvent) MarshalJSON() ([]byte, erro
 
 func (o IncidentEventUpsertStateAdministrativeEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AdministrativeEvent) {
-		toSerialize["administrativeEvent"] = o.AdministrativeEvent
-	}
+	toSerialize["administrativeEvent"] = o.AdministrativeEvent
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
 	toSerialize["originatorType"] = o.OriginatorType
-	if !IsNil(o.UpsertState) {
-		toSerialize["upsertState"] = o.UpsertState
+	toSerialize["upsertState"] = o.UpsertState
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -214,9 +204,11 @@ func (o *IncidentEventUpsertStateAdministrativeEvent) UnmarshalJSON(data []byte)
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"administrativeEvent",
 		"id",
 		"incidentEventType",
 		"originatorType",
+		"upsertState",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -243,6 +235,17 @@ func (o *IncidentEventUpsertStateAdministrativeEvent) UnmarshalJSON(data []byte)
 	}
 
 	*o = IncidentEventUpsertStateAdministrativeEvent(varIncidentEventUpsertStateAdministrativeEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "administrativeEvent")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "originatorType")
+		delete(additionalProperties, "upsertState")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

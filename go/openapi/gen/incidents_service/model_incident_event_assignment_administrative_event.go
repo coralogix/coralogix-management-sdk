@@ -11,22 +11,25 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventAssignmentAdministrativeEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventAssignmentAdministrativeEvent{}
 
 // IncidentEventAssignmentAdministrativeEvent struct for IncidentEventAssignmentAdministrativeEvent
 type IncidentEventAssignmentAdministrativeEvent struct {
-	AdministrativeEvent *IncidentEventOriginatorAdministrative `json:"administrativeEvent,omitempty"`
-	Assignment *IncidentEventAssign `json:"assignment,omitempty"`
+	AdministrativeEvent IncidentEventOriginatorAdministrative `json:"administrativeEvent"`
+	Assignment IncidentEventAssign `json:"assignment"`
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
 	OriginatorType OriginatorType `json:"originatorType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventAssignmentAdministrativeEvent IncidentEventAssignmentAdministrativeEvent
@@ -35,8 +38,10 @@ type _IncidentEventAssignmentAdministrativeEvent IncidentEventAssignmentAdminist
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventAssignmentAdministrativeEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventAssignmentAdministrativeEvent {
+func NewIncidentEventAssignmentAdministrativeEvent(administrativeEvent IncidentEventOriginatorAdministrative, assignment IncidentEventAssign, id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventAssignmentAdministrativeEvent {
 	this := IncidentEventAssignmentAdministrativeEvent{}
+	this.AdministrativeEvent = administrativeEvent
+	this.Assignment = assignment
 	this.Id = id
 	this.IncidentEventType = incidentEventType
 	this.OriginatorType = originatorType
@@ -51,68 +56,52 @@ func NewIncidentEventAssignmentAdministrativeEventWithDefaults() *IncidentEventA
 	return &this
 }
 
-// GetAdministrativeEvent returns the AdministrativeEvent field value if set, zero value otherwise.
+// GetAdministrativeEvent returns the AdministrativeEvent field value
 func (o *IncidentEventAssignmentAdministrativeEvent) GetAdministrativeEvent() IncidentEventOriginatorAdministrative {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorAdministrative
 		return ret
 	}
-	return *o.AdministrativeEvent
+
+	return o.AdministrativeEvent
 }
 
-// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value if set, nil otherwise
+// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventAssignmentAdministrativeEvent) GetAdministrativeEventOk() (*IncidentEventOriginatorAdministrative, bool) {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdministrativeEvent, true
+	return &o.AdministrativeEvent, true
 }
 
-// HasAdministrativeEvent returns a boolean if a field has been set.
-func (o *IncidentEventAssignmentAdministrativeEvent) HasAdministrativeEvent() bool {
-	if o != nil && !IsNil(o.AdministrativeEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdministrativeEvent gets a reference to the given IncidentEventOriginatorAdministrative and assigns it to the AdministrativeEvent field.
+// SetAdministrativeEvent sets field value
 func (o *IncidentEventAssignmentAdministrativeEvent) SetAdministrativeEvent(v IncidentEventOriginatorAdministrative) {
-	o.AdministrativeEvent = &v
+	o.AdministrativeEvent = v
 }
 
-// GetAssignment returns the Assignment field value if set, zero value otherwise.
+// GetAssignment returns the Assignment field value
 func (o *IncidentEventAssignmentAdministrativeEvent) GetAssignment() IncidentEventAssign {
-	if o == nil || IsNil(o.Assignment) {
+	if o == nil {
 		var ret IncidentEventAssign
 		return ret
 	}
-	return *o.Assignment
+
+	return o.Assignment
 }
 
-// GetAssignmentOk returns a tuple with the Assignment field value if set, nil otherwise
+// GetAssignmentOk returns a tuple with the Assignment field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventAssignmentAdministrativeEvent) GetAssignmentOk() (*IncidentEventAssign, bool) {
-	if o == nil || IsNil(o.Assignment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Assignment, true
+	return &o.Assignment, true
 }
 
-// HasAssignment returns a boolean if a field has been set.
-func (o *IncidentEventAssignmentAdministrativeEvent) HasAssignment() bool {
-	if o != nil && !IsNil(o.Assignment) {
-		return true
-	}
-
-	return false
-}
-
-// SetAssignment gets a reference to the given IncidentEventAssign and assigns it to the Assignment field.
+// SetAssignment sets field value
 func (o *IncidentEventAssignmentAdministrativeEvent) SetAssignment(v IncidentEventAssign) {
-	o.Assignment = &v
+	o.Assignment = v
 }
 
 // GetId returns the Id field value
@@ -197,15 +186,16 @@ func (o IncidentEventAssignmentAdministrativeEvent) MarshalJSON() ([]byte, error
 
 func (o IncidentEventAssignmentAdministrativeEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AdministrativeEvent) {
-		toSerialize["administrativeEvent"] = o.AdministrativeEvent
-	}
-	if !IsNil(o.Assignment) {
-		toSerialize["assignment"] = o.Assignment
-	}
+	toSerialize["administrativeEvent"] = o.AdministrativeEvent
+	toSerialize["assignment"] = o.Assignment
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
 	toSerialize["originatorType"] = o.OriginatorType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,6 +204,8 @@ func (o *IncidentEventAssignmentAdministrativeEvent) UnmarshalJSON(data []byte) 
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"administrativeEvent",
+		"assignment",
 		"id",
 		"incidentEventType",
 		"originatorType",
@@ -243,6 +235,17 @@ func (o *IncidentEventAssignmentAdministrativeEvent) UnmarshalJSON(data []byte) 
 	}
 
 	*o = IncidentEventAssignmentAdministrativeEvent(varIncidentEventAssignmentAdministrativeEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "administrativeEvent")
+		delete(additionalProperties, "assignment")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "originatorType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

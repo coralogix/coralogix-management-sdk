@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartQueryDataprime{}
 
 // LineChartQueryDataprime struct for LineChartQueryDataprime
 type LineChartQueryDataprime struct {
-	Dataprime *LineChartDataprimeQuery `json:"dataprime,omitempty"`
+	Dataprime LineChartDataprimeQuery `json:"dataprime"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineChartQueryDataprime LineChartQueryDataprime
 
 // NewLineChartQueryDataprime instantiates a new LineChartQueryDataprime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLineChartQueryDataprime() *LineChartQueryDataprime {
+func NewLineChartQueryDataprime(dataprime LineChartDataprimeQuery) *LineChartQueryDataprime {
 	this := LineChartQueryDataprime{}
+	this.Dataprime = dataprime
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewLineChartQueryDataprimeWithDefaults() *LineChartQueryDataprime {
 	return &this
 }
 
-// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+// GetDataprime returns the Dataprime field value
 func (o *LineChartQueryDataprime) GetDataprime() LineChartDataprimeQuery {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		var ret LineChartDataprimeQuery
 		return ret
 	}
-	return *o.Dataprime
+
+	return o.Dataprime
 }
 
-// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// GetDataprimeOk returns a tuple with the Dataprime field value
 // and a boolean to check if the value has been set.
 func (o *LineChartQueryDataprime) GetDataprimeOk() (*LineChartDataprimeQuery, bool) {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Dataprime, true
+	return &o.Dataprime, true
 }
 
-// HasDataprime returns a boolean if a field has been set.
-func (o *LineChartQueryDataprime) HasDataprime() bool {
-	if o != nil && !IsNil(o.Dataprime) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataprime gets a reference to the given LineChartDataprimeQuery and assigns it to the Dataprime field.
+// SetDataprime sets field value
 func (o *LineChartQueryDataprime) SetDataprime(v LineChartDataprimeQuery) {
-	o.Dataprime = &v
+	o.Dataprime = v
 }
 
 func (o LineChartQueryDataprime) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o LineChartQueryDataprime) MarshalJSON() ([]byte, error) {
 
 func (o LineChartQueryDataprime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dataprime) {
-		toSerialize["dataprime"] = o.Dataprime
+	toSerialize["dataprime"] = o.Dataprime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *LineChartQueryDataprime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dataprime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLineChartQueryDataprime := _LineChartQueryDataprime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartQueryDataprime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartQueryDataprime(varLineChartQueryDataprime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataprime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineChartQueryDataprime struct {

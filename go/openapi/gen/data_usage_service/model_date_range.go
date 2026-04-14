@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DateRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DateRange{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &DateRange{}
 type DateRange struct {
 	FromDate *time.Time `json:"fromDate,omitempty"`
 	ToDate *time.Time `json:"toDate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DateRange DateRange
 
 // NewDateRange instantiates a new DateRange object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o DateRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ToDate) {
 		toSerialize["toDate"] = o.ToDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DateRange) UnmarshalJSON(data []byte) (err error) {
+	varDateRange := _DateRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDateRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DateRange(varDateRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fromDate")
+		delete(additionalProperties, "toDate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDateRange struct {

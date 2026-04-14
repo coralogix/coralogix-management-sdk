@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansQuery{}
@@ -24,7 +27,10 @@ type SpansQuery struct {
 	Lucene *string `json:"lucene,omitempty"`
 	ServiceFilters []string `json:"serviceFilters,omitempty"`
 	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansQuery SpansQuery
 
 // NewSpansQuery instantiates a new SpansQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o SpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubsystemnameFilters) {
 		toSerialize["subsystemnameFilters"] = o.SubsystemnameFilters
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansQuery) UnmarshalJSON(data []byte) (err error) {
+	varSpansQuery := _SpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansQuery(varSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actionFilters")
+		delete(additionalProperties, "applicationnameFilters")
+		delete(additionalProperties, "lucene")
+		delete(additionalProperties, "serviceFilters")
+		delete(additionalProperties, "subsystemnameFilters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansQuery struct {

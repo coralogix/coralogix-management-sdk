@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FailedItem type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FailedItem{}
@@ -22,7 +25,10 @@ type FailedItem struct {
 	ItemId *string `json:"itemId,omitempty"`
 	Reason *string `json:"reason,omitempty"`
 	RemoteId *string `json:"remoteId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FailedItem FailedItem
 
 // NewFailedItem instantiates a new FailedItem object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o FailedItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoteId) {
 		toSerialize["remoteId"] = o.RemoteId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FailedItem) UnmarshalJSON(data []byte) (err error) {
+	varFailedItem := _FailedItem{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFailedItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FailedItem(varFailedItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "itemId")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "remoteId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFailedItem struct {

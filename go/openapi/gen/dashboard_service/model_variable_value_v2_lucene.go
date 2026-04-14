@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableValueV2Lucene type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2Lucene{}
 
 // VariableValueV2Lucene struct for VariableValueV2Lucene
 type VariableValueV2Lucene struct {
-	Lucene *LuceneQueryValue `json:"lucene,omitempty"`
+	Lucene LuceneQueryValue `json:"lucene"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableValueV2Lucene VariableValueV2Lucene
 
 // NewVariableValueV2Lucene instantiates a new VariableValueV2Lucene object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableValueV2Lucene() *VariableValueV2Lucene {
+func NewVariableValueV2Lucene(lucene LuceneQueryValue) *VariableValueV2Lucene {
 	this := VariableValueV2Lucene{}
+	this.Lucene = lucene
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableValueV2LuceneWithDefaults() *VariableValueV2Lucene {
 	return &this
 }
 
-// GetLucene returns the Lucene field value if set, zero value otherwise.
+// GetLucene returns the Lucene field value
 func (o *VariableValueV2Lucene) GetLucene() LuceneQueryValue {
-	if o == nil || IsNil(o.Lucene) {
+	if o == nil {
 		var ret LuceneQueryValue
 		return ret
 	}
-	return *o.Lucene
+
+	return o.Lucene
 }
 
-// GetLuceneOk returns a tuple with the Lucene field value if set, nil otherwise
+// GetLuceneOk returns a tuple with the Lucene field value
 // and a boolean to check if the value has been set.
 func (o *VariableValueV2Lucene) GetLuceneOk() (*LuceneQueryValue, bool) {
-	if o == nil || IsNil(o.Lucene) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Lucene, true
+	return &o.Lucene, true
 }
 
-// HasLucene returns a boolean if a field has been set.
-func (o *VariableValueV2Lucene) HasLucene() bool {
-	if o != nil && !IsNil(o.Lucene) {
-		return true
-	}
-
-	return false
-}
-
-// SetLucene gets a reference to the given LuceneQueryValue and assigns it to the Lucene field.
+// SetLucene sets field value
 func (o *VariableValueV2Lucene) SetLucene(v LuceneQueryValue) {
-	o.Lucene = &v
+	o.Lucene = v
 }
 
 func (o VariableValueV2Lucene) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableValueV2Lucene) MarshalJSON() ([]byte, error) {
 
 func (o VariableValueV2Lucene) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Lucene) {
-		toSerialize["lucene"] = o.Lucene
+	toSerialize["lucene"] = o.Lucene
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableValueV2Lucene) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"lucene",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableValueV2Lucene := _VariableValueV2Lucene{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2Lucene)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2Lucene(varVariableValueV2Lucene)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lucene")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableValueV2Lucene struct {

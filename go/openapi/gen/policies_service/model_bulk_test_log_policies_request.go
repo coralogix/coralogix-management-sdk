@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BulkTestLogPoliciesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BulkTestLogPoliciesRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &BulkTestLogPoliciesRequest{}
 // BulkTestLogPoliciesRequest Request to test multiple log policies.
 type BulkTestLogPoliciesRequest struct {
 	MetaFieldsValuesList []LogMetaFieldsValues `json:"metaFieldsValuesList"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BulkTestLogPoliciesRequest BulkTestLogPoliciesRequest
@@ -79,6 +82,11 @@ func (o BulkTestLogPoliciesRequest) MarshalJSON() ([]byte, error) {
 func (o BulkTestLogPoliciesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["metaFieldsValuesList"] = o.MetaFieldsValuesList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +122,13 @@ func (o *BulkTestLogPoliciesRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BulkTestLogPoliciesRequest(varBulkTestLogPoliciesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metaFieldsValuesList")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

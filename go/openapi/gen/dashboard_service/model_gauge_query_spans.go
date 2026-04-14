@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GaugeQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQuerySpans{}
 
 // GaugeQuerySpans struct for GaugeQuerySpans
 type GaugeQuerySpans struct {
-	Spans *GaugeSpansQuery `json:"spans,omitempty"`
+	Spans GaugeSpansQuery `json:"spans"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GaugeQuerySpans GaugeQuerySpans
 
 // NewGaugeQuerySpans instantiates a new GaugeQuerySpans object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGaugeQuerySpans() *GaugeQuerySpans {
+func NewGaugeQuerySpans(spans GaugeSpansQuery) *GaugeQuerySpans {
 	this := GaugeQuerySpans{}
+	this.Spans = spans
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGaugeQuerySpansWithDefaults() *GaugeQuerySpans {
 	return &this
 }
 
-// GetSpans returns the Spans field value if set, zero value otherwise.
+// GetSpans returns the Spans field value
 func (o *GaugeQuerySpans) GetSpans() GaugeSpansQuery {
-	if o == nil || IsNil(o.Spans) {
+	if o == nil {
 		var ret GaugeSpansQuery
 		return ret
 	}
-	return *o.Spans
+
+	return o.Spans
 }
 
-// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// GetSpansOk returns a tuple with the Spans field value
 // and a boolean to check if the value has been set.
 func (o *GaugeQuerySpans) GetSpansOk() (*GaugeSpansQuery, bool) {
-	if o == nil || IsNil(o.Spans) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spans, true
+	return &o.Spans, true
 }
 
-// HasSpans returns a boolean if a field has been set.
-func (o *GaugeQuerySpans) HasSpans() bool {
-	if o != nil && !IsNil(o.Spans) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpans gets a reference to the given GaugeSpansQuery and assigns it to the Spans field.
+// SetSpans sets field value
 func (o *GaugeQuerySpans) SetSpans(v GaugeSpansQuery) {
-	o.Spans = &v
+	o.Spans = v
 }
 
 func (o GaugeQuerySpans) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GaugeQuerySpans) MarshalJSON() ([]byte, error) {
 
 func (o GaugeQuerySpans) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Spans) {
-		toSerialize["spans"] = o.Spans
+	toSerialize["spans"] = o.Spans
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GaugeQuerySpans) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spans",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGaugeQuerySpans := _GaugeQuerySpans{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeQuerySpans)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeQuerySpans(varGaugeQuerySpans)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGaugeQuerySpans struct {

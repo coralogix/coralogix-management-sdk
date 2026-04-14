@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartMetricsQuery{}
@@ -24,7 +27,10 @@ type LineChartMetricsQuery struct {
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	SeriesLimitType *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineChartMetricsQuery LineChartMetricsQuery
 
 // NewLineChartMetricsQuery instantiates a new LineChartMetricsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o LineChartMetricsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LineChartMetricsQuery) UnmarshalJSON(data []byte) (err error) {
+	varLineChartMetricsQuery := _LineChartMetricsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartMetricsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartMetricsQuery(varLineChartMetricsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "editorMode")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "promqlQuery")
+		delete(additionalProperties, "seriesLimitType")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineChartMetricsQuery struct {

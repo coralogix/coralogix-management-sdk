@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule{}
@@ -25,7 +28,10 @@ type GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule struct {
 	Order *int64 `json:"order,omitempty"`
 	Parameters *RuleParameters `json:"parameters,omitempty"`
 	SourceField *string `json:"sourceField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule
 
 // NewGetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule instantiates a new GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule) ToMap() (ma
 	if !IsNil(o.SourceField) {
 		toSerialize["sourceField"] = o.SourceField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule) UnmarshalJSON(data []byte) (err error) {
+	varGetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule := _GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule(varGetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "sourceField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule struct {

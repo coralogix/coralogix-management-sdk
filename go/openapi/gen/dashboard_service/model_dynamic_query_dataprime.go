@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DynamicQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryDataprime{}
 
 // DynamicQueryDataprime struct for DynamicQueryDataprime
 type DynamicQueryDataprime struct {
-	Dataprime *Dataprime `json:"dataprime,omitempty"`
+	Dataprime Dataprime `json:"dataprime"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DynamicQueryDataprime DynamicQueryDataprime
 
 // NewDynamicQueryDataprime instantiates a new DynamicQueryDataprime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDynamicQueryDataprime() *DynamicQueryDataprime {
+func NewDynamicQueryDataprime(dataprime Dataprime) *DynamicQueryDataprime {
 	this := DynamicQueryDataprime{}
+	this.Dataprime = dataprime
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDynamicQueryDataprimeWithDefaults() *DynamicQueryDataprime {
 	return &this
 }
 
-// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+// GetDataprime returns the Dataprime field value
 func (o *DynamicQueryDataprime) GetDataprime() Dataprime {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		var ret Dataprime
 		return ret
 	}
-	return *o.Dataprime
+
+	return o.Dataprime
 }
 
-// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// GetDataprimeOk returns a tuple with the Dataprime field value
 // and a boolean to check if the value has been set.
 func (o *DynamicQueryDataprime) GetDataprimeOk() (*Dataprime, bool) {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Dataprime, true
+	return &o.Dataprime, true
 }
 
-// HasDataprime returns a boolean if a field has been set.
-func (o *DynamicQueryDataprime) HasDataprime() bool {
-	if o != nil && !IsNil(o.Dataprime) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataprime gets a reference to the given Dataprime and assigns it to the Dataprime field.
+// SetDataprime sets field value
 func (o *DynamicQueryDataprime) SetDataprime(v Dataprime) {
-	o.Dataprime = &v
+	o.Dataprime = v
 }
 
 func (o DynamicQueryDataprime) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DynamicQueryDataprime) MarshalJSON() ([]byte, error) {
 
 func (o DynamicQueryDataprime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dataprime) {
-		toSerialize["dataprime"] = o.Dataprime
+	toSerialize["dataprime"] = o.Dataprime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DynamicQueryDataprime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dataprime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDynamicQueryDataprime := _DynamicQueryDataprime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDynamicQueryDataprime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DynamicQueryDataprime(varDynamicQueryDataprime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataprime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDynamicQueryDataprime struct {

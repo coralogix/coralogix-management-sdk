@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionHexagon type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionHexagon{}
 
 // WidgetDefinitionHexagon struct for WidgetDefinitionHexagon
 type WidgetDefinitionHexagon struct {
-	Hexagon *Hexagon `json:"hexagon,omitempty"`
+	Hexagon Hexagon `json:"hexagon"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionHexagon WidgetDefinitionHexagon
 
 // NewWidgetDefinitionHexagon instantiates a new WidgetDefinitionHexagon object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionHexagon() *WidgetDefinitionHexagon {
+func NewWidgetDefinitionHexagon(hexagon Hexagon) *WidgetDefinitionHexagon {
 	this := WidgetDefinitionHexagon{}
+	this.Hexagon = hexagon
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionHexagonWithDefaults() *WidgetDefinitionHexagon {
 	return &this
 }
 
-// GetHexagon returns the Hexagon field value if set, zero value otherwise.
+// GetHexagon returns the Hexagon field value
 func (o *WidgetDefinitionHexagon) GetHexagon() Hexagon {
-	if o == nil || IsNil(o.Hexagon) {
+	if o == nil {
 		var ret Hexagon
 		return ret
 	}
-	return *o.Hexagon
+
+	return o.Hexagon
 }
 
-// GetHexagonOk returns a tuple with the Hexagon field value if set, nil otherwise
+// GetHexagonOk returns a tuple with the Hexagon field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionHexagon) GetHexagonOk() (*Hexagon, bool) {
-	if o == nil || IsNil(o.Hexagon) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Hexagon, true
+	return &o.Hexagon, true
 }
 
-// HasHexagon returns a boolean if a field has been set.
-func (o *WidgetDefinitionHexagon) HasHexagon() bool {
-	if o != nil && !IsNil(o.Hexagon) {
-		return true
-	}
-
-	return false
-}
-
-// SetHexagon gets a reference to the given Hexagon and assigns it to the Hexagon field.
+// SetHexagon sets field value
 func (o *WidgetDefinitionHexagon) SetHexagon(v Hexagon) {
-	o.Hexagon = &v
+	o.Hexagon = v
 }
 
 func (o WidgetDefinitionHexagon) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionHexagon) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionHexagon) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Hexagon) {
-		toSerialize["hexagon"] = o.Hexagon
+	toSerialize["hexagon"] = o.Hexagon
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionHexagon) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"hexagon",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionHexagon := _WidgetDefinitionHexagon{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionHexagon)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionHexagon(varWidgetDefinitionHexagon)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hexagon")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionHexagon struct {

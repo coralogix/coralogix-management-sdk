@@ -11,10 +11,13 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // CustomEnrichmentData - struct for CustomEnrichmentData
 type CustomEnrichmentData struct {

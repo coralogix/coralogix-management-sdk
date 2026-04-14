@@ -11,18 +11,26 @@ API version: 1.0.0
 package recording_rules_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the InRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InRule{}
 
 // InRule A rule within a group that defines a recording rule expression.
 type InRule struct {
+	// The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.
+	EvaluationDelayMs *int64 `json:"evaluationDelayMs,omitempty"`
 	Expr *string `json:"expr,omitempty"`
 	Labels *map[string]string `json:"labels,omitempty"`
 	Record *string `json:"record,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InRule InRule
 
 // NewInRule instantiates a new InRule object
 // This constructor will assign default values to properties that have it defined,
@@ -39,6 +47,38 @@ func NewInRule() *InRule {
 func NewInRuleWithDefaults() *InRule {
 	this := InRule{}
 	return &this
+}
+
+// GetEvaluationDelayMs returns the EvaluationDelayMs field value if set, zero value otherwise.
+func (o *InRule) GetEvaluationDelayMs() int64 {
+	if o == nil || IsNil(o.EvaluationDelayMs) {
+		var ret int64
+		return ret
+	}
+	return *o.EvaluationDelayMs
+}
+
+// GetEvaluationDelayMsOk returns a tuple with the EvaluationDelayMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InRule) GetEvaluationDelayMsOk() (*int64, bool) {
+	if o == nil || IsNil(o.EvaluationDelayMs) {
+		return nil, false
+	}
+	return o.EvaluationDelayMs, true
+}
+
+// HasEvaluationDelayMs returns a boolean if a field has been set.
+func (o *InRule) HasEvaluationDelayMs() bool {
+	if o != nil && !IsNil(o.EvaluationDelayMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetEvaluationDelayMs gets a reference to the given int64 and assigns it to the EvaluationDelayMs field.
+func (o *InRule) SetEvaluationDelayMs(v int64) {
+	o.EvaluationDelayMs = &v
 }
 
 // GetExpr returns the Expr field value if set, zero value otherwise.
@@ -147,6 +187,9 @@ func (o InRule) MarshalJSON() ([]byte, error) {
 
 func (o InRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EvaluationDelayMs) {
+		toSerialize["evaluationDelayMs"] = o.EvaluationDelayMs
+	}
 	if !IsNil(o.Expr) {
 		toSerialize["expr"] = o.Expr
 	}
@@ -156,7 +199,37 @@ func (o InRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Record) {
 		toSerialize["record"] = o.Record
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InRule) UnmarshalJSON(data []byte) (err error) {
+	varInRule := _InRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varInRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InRule(varInRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "expr")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "record")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInRule struct {

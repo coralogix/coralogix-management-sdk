@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricAnomalyCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricAnomalyCondition{}
@@ -27,7 +30,10 @@ type MetricAnomalyCondition struct {
 	OfTheLast *MetricTimeWindow `json:"ofTheLast,omitempty"`
 	// The threshold value for the alert condition
 	Threshold *float64 `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricAnomalyCondition MetricAnomalyCondition
 
 // NewMetricAnomalyCondition instantiates a new MetricAnomalyCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -231,7 +237,38 @@ func (o MetricAnomalyCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricAnomalyCondition) UnmarshalJSON(data []byte) (err error) {
+	varMetricAnomalyCondition := _MetricAnomalyCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricAnomalyCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricAnomalyCondition(varMetricAnomalyCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conditionType")
+		delete(additionalProperties, "forOverPct")
+		delete(additionalProperties, "minNonNullValuesPct")
+		delete(additionalProperties, "ofTheLast")
+		delete(additionalProperties, "threshold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricAnomalyCondition struct {

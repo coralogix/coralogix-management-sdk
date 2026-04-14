@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterOptionCountsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterOptionCountsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &FilterOptionCountsResponse{}
 // FilterOptionCountsResponse Response containing counts for different filter options
 type FilterOptionCountsResponse struct {
 	Counts *FilterOptionCounts `json:"counts,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterOptionCountsResponse FilterOptionCountsResponse
 
 // NewFilterOptionCountsResponse instantiates a new FilterOptionCountsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o FilterOptionCountsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Counts) {
 		toSerialize["counts"] = o.Counts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterOptionCountsResponse) UnmarshalJSON(data []byte) (err error) {
+	varFilterOptionCountsResponse := _FilterOptionCountsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterOptionCountsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterOptionCountsResponse(varFilterOptionCountsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "counts")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterOptionCountsResponse struct {

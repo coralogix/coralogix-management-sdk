@@ -10,9 +10,6 @@ git_push.sh
 model_attachment.go
 model_attachment_type.go
 model_aws_event_bridge_config.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_outgoing_webhook_request.go
 model_create_outgoing_webhook_response.go
@@ -37,8 +34,6 @@ model_list_outbound_webhooks_summary_response.go
 model_list_outgoing_webhook_types_response.go
 model_list_outgoing_webhooks_response.go
 model_method_type.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_outbound_webhook_summary.go
 model_outgoing_webhook.go
@@ -77,7 +72,8 @@ model_slack_config.go
 model_test_outgoing_webhook_request.go
 model_test_outgoing_webhook_response.go
 model_test_outgoing_webhook_response_failure.go
-model_test_outgoing_webhook_response_success.go
+model_test_outgoing_webhook_response_failure_variant.go
+model_test_outgoing_webhook_response_success_variant.go
 model_update_outgoing_webhook_request.go
 model_v3_filter_operator.go
 model_webhook_type.go

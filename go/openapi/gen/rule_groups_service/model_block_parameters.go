@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BlockParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BlockParameters{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &BlockParameters{}
 type BlockParameters struct {
 	KeepBlockedLogs *bool `json:"keepBlockedLogs,omitempty"`
 	Rule *string `json:"rule,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BlockParameters BlockParameters
 
 // NewBlockParameters instantiates a new BlockParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o BlockParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rule) {
 		toSerialize["rule"] = o.Rule
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BlockParameters) UnmarshalJSON(data []byte) (err error) {
+	varBlockParameters := _BlockParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBlockParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BlockParameters(varBlockParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keepBlockedLogs")
+		delete(additionalProperties, "rule")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBlockParameters struct {

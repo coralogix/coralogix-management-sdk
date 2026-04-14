@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApiKeyData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApiKeyData{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ApiKeyData{}
 type ApiKeyData struct {
 	Id *string `json:"id,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApiKeyData ApiKeyData
 
 // NewApiKeyData instantiates a new ApiKeyData object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ApiKeyData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApiKeyData) UnmarshalJSON(data []byte) (err error) {
+	varApiKeyData := _ApiKeyData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApiKeyData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApiKeyData(varApiKeyData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApiKeyData struct {

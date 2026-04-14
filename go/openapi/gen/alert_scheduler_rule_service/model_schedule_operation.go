@@ -11,9 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // ScheduleOperation the model 'ScheduleOperation'
 type ScheduleOperation string

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableDefinitionMultiSelect type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableDefinitionMultiSelect{}
 
 // VariableDefinitionMultiSelect struct for VariableDefinitionMultiSelect
 type VariableDefinitionMultiSelect struct {
-	MultiSelect *MultiSelect `json:"multiSelect,omitempty"`
+	MultiSelect MultiSelect `json:"multiSelect"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableDefinitionMultiSelect VariableDefinitionMultiSelect
 
 // NewVariableDefinitionMultiSelect instantiates a new VariableDefinitionMultiSelect object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableDefinitionMultiSelect() *VariableDefinitionMultiSelect {
+func NewVariableDefinitionMultiSelect(multiSelect MultiSelect) *VariableDefinitionMultiSelect {
 	this := VariableDefinitionMultiSelect{}
+	this.MultiSelect = multiSelect
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableDefinitionMultiSelectWithDefaults() *VariableDefinitionMultiSele
 	return &this
 }
 
-// GetMultiSelect returns the MultiSelect field value if set, zero value otherwise.
+// GetMultiSelect returns the MultiSelect field value
 func (o *VariableDefinitionMultiSelect) GetMultiSelect() MultiSelect {
-	if o == nil || IsNil(o.MultiSelect) {
+	if o == nil {
 		var ret MultiSelect
 		return ret
 	}
-	return *o.MultiSelect
+
+	return o.MultiSelect
 }
 
-// GetMultiSelectOk returns a tuple with the MultiSelect field value if set, nil otherwise
+// GetMultiSelectOk returns a tuple with the MultiSelect field value
 // and a boolean to check if the value has been set.
 func (o *VariableDefinitionMultiSelect) GetMultiSelectOk() (*MultiSelect, bool) {
-	if o == nil || IsNil(o.MultiSelect) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultiSelect, true
+	return &o.MultiSelect, true
 }
 
-// HasMultiSelect returns a boolean if a field has been set.
-func (o *VariableDefinitionMultiSelect) HasMultiSelect() bool {
-	if o != nil && !IsNil(o.MultiSelect) {
-		return true
-	}
-
-	return false
-}
-
-// SetMultiSelect gets a reference to the given MultiSelect and assigns it to the MultiSelect field.
+// SetMultiSelect sets field value
 func (o *VariableDefinitionMultiSelect) SetMultiSelect(v MultiSelect) {
-	o.MultiSelect = &v
+	o.MultiSelect = v
 }
 
 func (o VariableDefinitionMultiSelect) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableDefinitionMultiSelect) MarshalJSON() ([]byte, error) {
 
 func (o VariableDefinitionMultiSelect) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MultiSelect) {
-		toSerialize["multiSelect"] = o.MultiSelect
+	toSerialize["multiSelect"] = o.MultiSelect
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableDefinitionMultiSelect) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"multiSelect",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableDefinitionMultiSelect := _VariableDefinitionMultiSelect{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableDefinitionMultiSelect)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableDefinitionMultiSelect(varVariableDefinitionMultiSelect)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "multiSelect")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableDefinitionMultiSelect struct {

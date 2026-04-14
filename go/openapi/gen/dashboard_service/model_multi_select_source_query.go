@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSourceQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceQuery{}
 
 // MultiSelectSourceQuery struct for MultiSelectSourceQuery
 type MultiSelectSourceQuery struct {
-	Query *MultiSelectQuerySource `json:"query,omitempty"`
+	Query MultiSelectQuerySource `json:"query"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSourceQuery MultiSelectSourceQuery
 
 // NewMultiSelectSourceQuery instantiates a new MultiSelectSourceQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectSourceQuery() *MultiSelectSourceQuery {
+func NewMultiSelectSourceQuery(query MultiSelectQuerySource) *MultiSelectSourceQuery {
 	this := MultiSelectSourceQuery{}
+	this.Query = query
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectSourceQueryWithDefaults() *MultiSelectSourceQuery {
 	return &this
 }
 
-// GetQuery returns the Query field value if set, zero value otherwise.
+// GetQuery returns the Query field value
 func (o *MultiSelectSourceQuery) GetQuery() MultiSelectQuerySource {
-	if o == nil || IsNil(o.Query) {
+	if o == nil {
 		var ret MultiSelectQuerySource
 		return ret
 	}
-	return *o.Query
+
+	return o.Query
 }
 
-// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// GetQueryOk returns a tuple with the Query field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectSourceQuery) GetQueryOk() (*MultiSelectQuerySource, bool) {
-	if o == nil || IsNil(o.Query) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Query, true
+	return &o.Query, true
 }
 
-// HasQuery returns a boolean if a field has been set.
-func (o *MultiSelectSourceQuery) HasQuery() bool {
-	if o != nil && !IsNil(o.Query) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuery gets a reference to the given MultiSelectQuerySource and assigns it to the Query field.
+// SetQuery sets field value
 func (o *MultiSelectSourceQuery) SetQuery(v MultiSelectQuerySource) {
-	o.Query = &v
+	o.Query = v
 }
 
 func (o MultiSelectSourceQuery) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectSourceQuery) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectSourceQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Query) {
-		toSerialize["query"] = o.Query
+	toSerialize["query"] = o.Query
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSourceQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"query",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectSourceQuery := _MultiSelectSourceQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSourceQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSourceQuery(varMultiSelectSourceQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSourceQuery struct {

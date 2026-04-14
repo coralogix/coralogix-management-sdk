@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateDashboardResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateDashboardResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateDashboardResponse{}
 // CreateDashboardResponse This is a response received when a custom dashboard is successfully created
 type CreateDashboardResponse struct {
 	DashboardId *string `json:"dashboardId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateDashboardResponse CreateDashboardResponse
 
 // NewCreateDashboardResponse instantiates a new CreateDashboardResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateDashboardResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DashboardId) {
 		toSerialize["dashboardId"] = o.DashboardId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateDashboardResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateDashboardResponse := _CreateDashboardResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateDashboardResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateDashboardResponse(varCreateDashboardResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dashboardId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateDashboardResponse struct {

@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldInformationSingle type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldInformationSingle{}
@@ -28,20 +32,24 @@ type FieldInformationSingle struct {
 	Predefined *bool `json:"predefined,omitempty"`
 	Readonly *bool `json:"readonly,omitempty"`
 	Required *bool `json:"required,omitempty"`
-	Single *SingleValue `json:"single,omitempty"`
+	Single SingleValue `json:"single"`
 	TemplateParamName *string `json:"templateParamName,omitempty"`
 	Tooltip *string `json:"tooltip,omitempty"`
 	Type *InputType `json:"type,omitempty"`
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	Visible *bool `json:"visible,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldInformationSingle FieldInformationSingle
 
 // NewFieldInformationSingle instantiates a new FieldInformationSingle object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldInformationSingle() *FieldInformationSingle {
+func NewFieldInformationSingle(single SingleValue) *FieldInformationSingle {
 	this := FieldInformationSingle{}
+	this.Single = single
 	return &this
 }
 
@@ -341,36 +349,28 @@ func (o *FieldInformationSingle) SetRequired(v bool) {
 	o.Required = &v
 }
 
-// GetSingle returns the Single field value if set, zero value otherwise.
+// GetSingle returns the Single field value
 func (o *FieldInformationSingle) GetSingle() SingleValue {
-	if o == nil || IsNil(o.Single) {
+	if o == nil {
 		var ret SingleValue
 		return ret
 	}
-	return *o.Single
+
+	return o.Single
 }
 
-// GetSingleOk returns a tuple with the Single field value if set, nil otherwise
+// GetSingleOk returns a tuple with the Single field value
 // and a boolean to check if the value has been set.
 func (o *FieldInformationSingle) GetSingleOk() (*SingleValue, bool) {
-	if o == nil || IsNil(o.Single) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Single, true
+	return &o.Single, true
 }
 
-// HasSingle returns a boolean if a field has been set.
-func (o *FieldInformationSingle) HasSingle() bool {
-	if o != nil && !IsNil(o.Single) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingle gets a reference to the given SingleValue and assigns it to the Single field.
+// SetSingle sets field value
 func (o *FieldInformationSingle) SetSingle(v SingleValue) {
-	o.Single = &v
+	o.Single = v
 }
 
 // GetTemplateParamName returns the TemplateParamName field value if set, zero value otherwise.
@@ -570,9 +570,7 @@ func (o FieldInformationSingle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
-	if !IsNil(o.Single) {
-		toSerialize["single"] = o.Single
-	}
+	toSerialize["single"] = o.Single
 	if !IsNil(o.TemplateParamName) {
 		toSerialize["templateParamName"] = o.TemplateParamName
 	}
@@ -588,7 +586,69 @@ func (o FieldInformationSingle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visible) {
 		toSerialize["visible"] = o.Visible
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldInformationSingle) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"single",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFieldInformationSingle := _FieldInformationSingle{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldInformationSingle)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldInformationSingle(varFieldInformationSingle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowedPattern")
+		delete(additionalProperties, "applicableIf")
+		delete(additionalProperties, "documentationReference")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "placeholder")
+		delete(additionalProperties, "predefined")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "required")
+		delete(additionalProperties, "single")
+		delete(additionalProperties, "templateParamName")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "upgradeNotice")
+		delete(additionalProperties, "visible")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldInformationSingle struct {

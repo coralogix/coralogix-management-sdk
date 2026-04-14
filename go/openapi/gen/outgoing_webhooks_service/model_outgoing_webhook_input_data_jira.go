@@ -11,26 +11,34 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookInputDataJira type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataJira{}
 
 // OutgoingWebhookInputDataJira struct for OutgoingWebhookInputDataJira
 type OutgoingWebhookInputDataJira struct {
-	Jira *JiraConfig `json:"jira,omitempty"`
+	Jira JiraConfig `json:"jira"`
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookInputDataJira OutgoingWebhookInputDataJira
 
 // NewOutgoingWebhookInputDataJira instantiates a new OutgoingWebhookInputDataJira object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataJira() *OutgoingWebhookInputDataJira {
+func NewOutgoingWebhookInputDataJira(jira JiraConfig) *OutgoingWebhookInputDataJira {
 	this := OutgoingWebhookInputDataJira{}
+	this.Jira = jira
 	return &this
 }
 
@@ -42,36 +50,28 @@ func NewOutgoingWebhookInputDataJiraWithDefaults() *OutgoingWebhookInputDataJira
 	return &this
 }
 
-// GetJira returns the Jira field value if set, zero value otherwise.
+// GetJira returns the Jira field value
 func (o *OutgoingWebhookInputDataJira) GetJira() JiraConfig {
-	if o == nil || IsNil(o.Jira) {
+	if o == nil {
 		var ret JiraConfig
 		return ret
 	}
-	return *o.Jira
+
+	return o.Jira
 }
 
-// GetJiraOk returns a tuple with the Jira field value if set, nil otherwise
+// GetJiraOk returns a tuple with the Jira field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataJira) GetJiraOk() (*JiraConfig, bool) {
-	if o == nil || IsNil(o.Jira) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Jira, true
+	return &o.Jira, true
 }
 
-// HasJira returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputDataJira) HasJira() bool {
-	if o != nil && !IsNil(o.Jira) {
-		return true
-	}
-
-	return false
-}
-
-// SetJira gets a reference to the given JiraConfig and assigns it to the Jira field.
+// SetJira sets field value
 func (o *OutgoingWebhookInputDataJira) SetJira(v JiraConfig) {
-	o.Jira = &v
+	o.Jira = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -180,9 +180,7 @@ func (o OutgoingWebhookInputDataJira) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookInputDataJira) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Jira) {
-		toSerialize["jira"] = o.Jira
-	}
+	toSerialize["jira"] = o.Jira
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -192,7 +190,58 @@ func (o OutgoingWebhookInputDataJira) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookInputDataJira) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"jira",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookInputDataJira := _OutgoingWebhookInputDataJira{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookInputDataJira)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookInputDataJira(varOutgoingWebhookInputDataJira)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "jira")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookInputDataJira struct {

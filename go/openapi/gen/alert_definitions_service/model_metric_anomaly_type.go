@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricAnomalyType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricAnomalyType{}
@@ -24,7 +27,10 @@ type MetricAnomalyType struct {
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
 	Rules []MetricAnomalyRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricAnomalyType MetricAnomalyType
 
 // NewMetricAnomalyType instantiates a new MetricAnomalyType object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +199,37 @@ func (o MetricAnomalyType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricAnomalyType) UnmarshalJSON(data []byte) (err error) {
+	varMetricAnomalyType := _MetricAnomalyType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricAnomalyType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricAnomalyType(varMetricAnomalyType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "anomalyAlertSettings")
+		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "metricFilter")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricAnomalyType struct {

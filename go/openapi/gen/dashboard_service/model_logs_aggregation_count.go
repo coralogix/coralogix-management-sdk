@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsAggregationCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationCount{}
 
 // LogsAggregationCount struct for LogsAggregationCount
 type LogsAggregationCount struct {
-	Count map[string]interface{} `json:"count,omitempty"`
+	Count map[string]interface{} `json:"count"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsAggregationCount LogsAggregationCount
 
 // NewLogsAggregationCount instantiates a new LogsAggregationCount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAggregationCount() *LogsAggregationCount {
+func NewLogsAggregationCount(count map[string]interface{}) *LogsAggregationCount {
 	this := LogsAggregationCount{}
+	this.Count = count
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewLogsAggregationCountWithDefaults() *LogsAggregationCount {
 	return &this
 }
 
-// GetCount returns the Count field value if set, zero value otherwise.
+// GetCount returns the Count field value
 func (o *LogsAggregationCount) GetCount() map[string]interface{} {
-	if o == nil || IsNil(o.Count) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Count
 }
 
-// GetCountOk returns a tuple with the Count field value if set, nil otherwise
+// GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
 func (o *LogsAggregationCount) GetCountOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Count) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Count, true
 }
 
-// HasCount returns a boolean if a field has been set.
-func (o *LogsAggregationCount) HasCount() bool {
-	if o != nil && !IsNil(o.Count) {
-		return true
-	}
-
-	return false
-}
-
-// SetCount gets a reference to the given map[string]interface{} and assigns it to the Count field.
+// SetCount sets field value
 func (o *LogsAggregationCount) SetCount(v map[string]interface{}) {
 	o.Count = v
 }
@@ -81,10 +81,56 @@ func (o LogsAggregationCount) MarshalJSON() ([]byte, error) {
 
 func (o LogsAggregationCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Count) {
-		toSerialize["count"] = o.Count
+	toSerialize["count"] = o.Count
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsAggregationCount) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"count",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLogsAggregationCount := _LogsAggregationCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsAggregationCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsAggregationCount(varLogsAggregationCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsAggregationCount struct {

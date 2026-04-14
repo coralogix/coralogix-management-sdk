@@ -11,10 +11,12 @@ API version: 1.0.0
 package enrichments_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Enrichment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Enrichment{}
@@ -26,6 +28,7 @@ type Enrichment struct {
 	FieldName string `json:"fieldName"`
 	Id int64 `json:"id"`
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Enrichment Enrichment
@@ -205,6 +208,11 @@ func (o Enrichment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SelectedColumns) {
 		toSerialize["selectedColumns"] = o.SelectedColumns
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -242,6 +250,17 @@ func (o *Enrichment) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Enrichment(varEnrichment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enrichedFieldName")
+		delete(additionalProperties, "enrichmentType")
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "selectedColumns")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -11,10 +11,13 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // FilterPathAndValues - struct for FilterPathAndValues
 type FilterPathAndValues struct {

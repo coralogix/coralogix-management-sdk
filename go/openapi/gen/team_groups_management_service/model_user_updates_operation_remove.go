@@ -11,10 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UserUpdatesOperationRemove type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserUpdatesOperationRemove{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &UserUpdatesOperationRemove{}
 // UserUpdatesOperationRemove struct for UserUpdatesOperationRemove
 type UserUpdatesOperationRemove struct {
 	OperationType string `json:"operationType"`
-	Remove *UserIdList `json:"remove,omitempty"`
+	Remove UserIdList `json:"remove"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserUpdatesOperationRemove UserUpdatesOperationRemove
@@ -31,9 +34,10 @@ type _UserUpdatesOperationRemove UserUpdatesOperationRemove
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserUpdatesOperationRemove(operationType string) *UserUpdatesOperationRemove {
+func NewUserUpdatesOperationRemove(operationType string, remove UserIdList) *UserUpdatesOperationRemove {
 	this := UserUpdatesOperationRemove{}
 	this.OperationType = operationType
+	this.Remove = remove
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *UserUpdatesOperationRemove) SetOperationType(v string) {
 	o.OperationType = v
 }
 
-// GetRemove returns the Remove field value if set, zero value otherwise.
+// GetRemove returns the Remove field value
 func (o *UserUpdatesOperationRemove) GetRemove() UserIdList {
-	if o == nil || IsNil(o.Remove) {
+	if o == nil {
 		var ret UserIdList
 		return ret
 	}
-	return *o.Remove
+
+	return o.Remove
 }
 
-// GetRemoveOk returns a tuple with the Remove field value if set, nil otherwise
+// GetRemoveOk returns a tuple with the Remove field value
 // and a boolean to check if the value has been set.
 func (o *UserUpdatesOperationRemove) GetRemoveOk() (*UserIdList, bool) {
-	if o == nil || IsNil(o.Remove) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Remove, true
+	return &o.Remove, true
 }
 
-// HasRemove returns a boolean if a field has been set.
-func (o *UserUpdatesOperationRemove) HasRemove() bool {
-	if o != nil && !IsNil(o.Remove) {
-		return true
-	}
-
-	return false
-}
-
-// SetRemove gets a reference to the given UserIdList and assigns it to the Remove field.
+// SetRemove sets field value
 func (o *UserUpdatesOperationRemove) SetRemove(v UserIdList) {
-	o.Remove = &v
+	o.Remove = v
 }
 
 func (o UserUpdatesOperationRemove) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o UserUpdatesOperationRemove) MarshalJSON() ([]byte, error) {
 func (o UserUpdatesOperationRemove) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["operationType"] = o.OperationType
-	if !IsNil(o.Remove) {
-		toSerialize["remove"] = o.Remove
+	toSerialize["remove"] = o.Remove
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *UserUpdatesOperationRemove) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"operationType",
+		"remove",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -150,6 +150,14 @@ func (o *UserUpdatesOperationRemove) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UserUpdatesOperationRemove(varUserUpdatesOperationRemove)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operationType")
+		delete(additionalProperties, "remove")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

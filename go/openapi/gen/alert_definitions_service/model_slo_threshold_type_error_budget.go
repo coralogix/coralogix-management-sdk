@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloThresholdTypeErrorBudget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloThresholdTypeErrorBudget{}
 
 // SloThresholdTypeErrorBudget SLO threshold type definition
 type SloThresholdTypeErrorBudget struct {
-	ErrorBudget *ErrorBudgetThreshold `json:"errorBudget,omitempty"`
+	ErrorBudget ErrorBudgetThreshold `json:"errorBudget"`
 	SloDefinition *V3SloDefinition `json:"sloDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloThresholdTypeErrorBudget SloThresholdTypeErrorBudget
 
 // NewSloThresholdTypeErrorBudget instantiates a new SloThresholdTypeErrorBudget object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloThresholdTypeErrorBudget() *SloThresholdTypeErrorBudget {
+func NewSloThresholdTypeErrorBudget(errorBudget ErrorBudgetThreshold) *SloThresholdTypeErrorBudget {
 	this := SloThresholdTypeErrorBudget{}
+	this.ErrorBudget = errorBudget
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewSloThresholdTypeErrorBudgetWithDefaults() *SloThresholdTypeErrorBudget {
 	return &this
 }
 
-// GetErrorBudget returns the ErrorBudget field value if set, zero value otherwise.
+// GetErrorBudget returns the ErrorBudget field value
 func (o *SloThresholdTypeErrorBudget) GetErrorBudget() ErrorBudgetThreshold {
-	if o == nil || IsNil(o.ErrorBudget) {
+	if o == nil {
 		var ret ErrorBudgetThreshold
 		return ret
 	}
-	return *o.ErrorBudget
+
+	return o.ErrorBudget
 }
 
-// GetErrorBudgetOk returns a tuple with the ErrorBudget field value if set, nil otherwise
+// GetErrorBudgetOk returns a tuple with the ErrorBudget field value
 // and a boolean to check if the value has been set.
 func (o *SloThresholdTypeErrorBudget) GetErrorBudgetOk() (*ErrorBudgetThreshold, bool) {
-	if o == nil || IsNil(o.ErrorBudget) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ErrorBudget, true
+	return &o.ErrorBudget, true
 }
 
-// HasErrorBudget returns a boolean if a field has been set.
-func (o *SloThresholdTypeErrorBudget) HasErrorBudget() bool {
-	if o != nil && !IsNil(o.ErrorBudget) {
-		return true
-	}
-
-	return false
-}
-
-// SetErrorBudget gets a reference to the given ErrorBudgetThreshold and assigns it to the ErrorBudget field.
+// SetErrorBudget sets field value
 func (o *SloThresholdTypeErrorBudget) SetErrorBudget(v ErrorBudgetThreshold) {
-	o.ErrorBudget = &v
+	o.ErrorBudget = v
 }
 
 // GetSloDefinition returns the SloDefinition field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o SloThresholdTypeErrorBudget) MarshalJSON() ([]byte, error) {
 
 func (o SloThresholdTypeErrorBudget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ErrorBudget) {
-		toSerialize["errorBudget"] = o.ErrorBudget
-	}
+	toSerialize["errorBudget"] = o.ErrorBudget
 	if !IsNil(o.SloDefinition) {
 		toSerialize["sloDefinition"] = o.SloDefinition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloThresholdTypeErrorBudget) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"errorBudget",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloThresholdTypeErrorBudget := _SloThresholdTypeErrorBudget{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloThresholdTypeErrorBudget)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloThresholdTypeErrorBudget(varSloThresholdTypeErrorBudget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errorBudget")
+		delete(additionalProperties, "sloDefinition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloThresholdTypeErrorBudget struct {

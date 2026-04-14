@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Link type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Link{}
@@ -22,7 +25,10 @@ type Link struct {
 	Key *string `json:"key,omitempty"`
 	Text *string `json:"text,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Link Link
 
 // NewLink instantiates a new Link object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o Link) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Link) UnmarshalJSON(data []byte) (err error) {
+	varLink := _Link{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Link(varLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLink struct {

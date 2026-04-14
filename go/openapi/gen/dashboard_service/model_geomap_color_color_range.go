@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapColorColorRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapColorColorRange{}
 
 // GeomapColorColorRange struct for GeomapColorColorRange
 type GeomapColorColorRange struct {
-	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
+	ColorRange ColorGradientType `json:"colorRange"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapColorColorRange GeomapColorColorRange
 
 // NewGeomapColorColorRange instantiates a new GeomapColorColorRange object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapColorColorRange() *GeomapColorColorRange {
+func NewGeomapColorColorRange(colorRange ColorGradientType) *GeomapColorColorRange {
 	this := GeomapColorColorRange{}
+	this.ColorRange = colorRange
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapColorColorRangeWithDefaults() *GeomapColorColorRange {
 	return &this
 }
 
-// GetColorRange returns the ColorRange field value if set, zero value otherwise.
+// GetColorRange returns the ColorRange field value
 func (o *GeomapColorColorRange) GetColorRange() ColorGradientType {
-	if o == nil || IsNil(o.ColorRange) {
+	if o == nil {
 		var ret ColorGradientType
 		return ret
 	}
-	return *o.ColorRange
+
+	return o.ColorRange
 }
 
-// GetColorRangeOk returns a tuple with the ColorRange field value if set, nil otherwise
+// GetColorRangeOk returns a tuple with the ColorRange field value
 // and a boolean to check if the value has been set.
 func (o *GeomapColorColorRange) GetColorRangeOk() (*ColorGradientType, bool) {
-	if o == nil || IsNil(o.ColorRange) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ColorRange, true
+	return &o.ColorRange, true
 }
 
-// HasColorRange returns a boolean if a field has been set.
-func (o *GeomapColorColorRange) HasColorRange() bool {
-	if o != nil && !IsNil(o.ColorRange) {
-		return true
-	}
-
-	return false
-}
-
-// SetColorRange gets a reference to the given ColorGradientType and assigns it to the ColorRange field.
+// SetColorRange sets field value
 func (o *GeomapColorColorRange) SetColorRange(v ColorGradientType) {
-	o.ColorRange = &v
+	o.ColorRange = v
 }
 
 func (o GeomapColorColorRange) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapColorColorRange) MarshalJSON() ([]byte, error) {
 
 func (o GeomapColorColorRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ColorRange) {
-		toSerialize["colorRange"] = o.ColorRange
+	toSerialize["colorRange"] = o.ColorRange
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapColorColorRange) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"colorRange",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapColorColorRange := _GeomapColorColorRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapColorColorRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapColorColorRange(varGeomapColorColorRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "colorRange")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapColorColorRange struct {

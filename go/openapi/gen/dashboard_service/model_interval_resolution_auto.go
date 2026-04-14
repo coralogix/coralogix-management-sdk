@@ -11,23 +11,33 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntervalResolutionAuto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntervalResolutionAuto{}
 
 // IntervalResolutionAuto Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification.
 type IntervalResolutionAuto struct {
-	Auto *AutoIntervalResolution `json:"auto,omitempty"`
+	Auto AutoIntervalResolution `json:"auto"`
+	// Whether the max. data points and min. interval fields are user-editable. When true, users can modify these constraint fields; when false or unset, they are read-only.
+	UseAdvancedLimit *bool `json:"useAdvancedLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntervalResolutionAuto IntervalResolutionAuto
 
 // NewIntervalResolutionAuto instantiates a new IntervalResolutionAuto object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntervalResolutionAuto() *IntervalResolutionAuto {
+func NewIntervalResolutionAuto(auto AutoIntervalResolution) *IntervalResolutionAuto {
 	this := IntervalResolutionAuto{}
+	this.Auto = auto
 	return &this
 }
 
@@ -39,36 +49,60 @@ func NewIntervalResolutionAutoWithDefaults() *IntervalResolutionAuto {
 	return &this
 }
 
-// GetAuto returns the Auto field value if set, zero value otherwise.
+// GetAuto returns the Auto field value
 func (o *IntervalResolutionAuto) GetAuto() AutoIntervalResolution {
-	if o == nil || IsNil(o.Auto) {
+	if o == nil {
 		var ret AutoIntervalResolution
 		return ret
 	}
-	return *o.Auto
+
+	return o.Auto
 }
 
-// GetAutoOk returns a tuple with the Auto field value if set, nil otherwise
+// GetAutoOk returns a tuple with the Auto field value
 // and a boolean to check if the value has been set.
 func (o *IntervalResolutionAuto) GetAutoOk() (*AutoIntervalResolution, bool) {
-	if o == nil || IsNil(o.Auto) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Auto, true
+	return &o.Auto, true
 }
 
-// HasAuto returns a boolean if a field has been set.
-func (o *IntervalResolutionAuto) HasAuto() bool {
-	if o != nil && !IsNil(o.Auto) {
+// SetAuto sets field value
+func (o *IntervalResolutionAuto) SetAuto(v AutoIntervalResolution) {
+	o.Auto = v
+}
+
+// GetUseAdvancedLimit returns the UseAdvancedLimit field value if set, zero value otherwise.
+func (o *IntervalResolutionAuto) GetUseAdvancedLimit() bool {
+	if o == nil || IsNil(o.UseAdvancedLimit) {
+		var ret bool
+		return ret
+	}
+	return *o.UseAdvancedLimit
+}
+
+// GetUseAdvancedLimitOk returns a tuple with the UseAdvancedLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IntervalResolutionAuto) GetUseAdvancedLimitOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseAdvancedLimit) {
+		return nil, false
+	}
+	return o.UseAdvancedLimit, true
+}
+
+// HasUseAdvancedLimit returns a boolean if a field has been set.
+func (o *IntervalResolutionAuto) HasUseAdvancedLimit() bool {
+	if o != nil && !IsNil(o.UseAdvancedLimit) {
 		return true
 	}
 
 	return false
 }
 
-// SetAuto gets a reference to the given AutoIntervalResolution and assigns it to the Auto field.
-func (o *IntervalResolutionAuto) SetAuto(v AutoIntervalResolution) {
-	o.Auto = &v
+// SetUseAdvancedLimit gets a reference to the given bool and assigns it to the UseAdvancedLimit field.
+func (o *IntervalResolutionAuto) SetUseAdvancedLimit(v bool) {
+	o.UseAdvancedLimit = &v
 }
 
 func (o IntervalResolutionAuto) MarshalJSON() ([]byte, error) {
@@ -81,10 +115,60 @@ func (o IntervalResolutionAuto) MarshalJSON() ([]byte, error) {
 
 func (o IntervalResolutionAuto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Auto) {
-		toSerialize["auto"] = o.Auto
+	toSerialize["auto"] = o.Auto
+	if !IsNil(o.UseAdvancedLimit) {
+		toSerialize["useAdvancedLimit"] = o.UseAdvancedLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntervalResolutionAuto) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"auto",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntervalResolutionAuto := _IntervalResolutionAuto{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntervalResolutionAuto)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntervalResolutionAuto(varIntervalResolutionAuto)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auto")
+		delete(additionalProperties, "useAdvancedLimit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntervalResolutionAuto struct {

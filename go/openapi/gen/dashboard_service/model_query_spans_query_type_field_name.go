@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySpansQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySpansQueryTypeFieldName{}
 
 // QuerySpansQueryTypeFieldName struct for QuerySpansQueryTypeFieldName
 type QuerySpansQueryTypeFieldName struct {
-	FieldName *QuerySpansQueryTypeFieldName `json:"fieldName,omitempty"`
+	SpanRegex *string `json:"spanRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySpansQueryTypeFieldName QuerySpansQueryTypeFieldName
 
 // NewQuerySpansQueryTypeFieldName instantiates a new QuerySpansQueryTypeFieldName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQuerySpansQueryTypeFieldNameWithDefaults() *QuerySpansQueryTypeFieldName
 	return &this
 }
 
-// GetFieldName returns the FieldName field value if set, zero value otherwise.
-func (o *QuerySpansQueryTypeFieldName) GetFieldName() QuerySpansQueryTypeFieldName {
-	if o == nil || IsNil(o.FieldName) {
-		var ret QuerySpansQueryTypeFieldName
+// GetSpanRegex returns the SpanRegex field value if set, zero value otherwise.
+func (o *QuerySpansQueryTypeFieldName) GetSpanRegex() string {
+	if o == nil || IsNil(o.SpanRegex) {
+		var ret string
 		return ret
 	}
-	return *o.FieldName
+	return *o.SpanRegex
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
+// GetSpanRegexOk returns a tuple with the SpanRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySpansQueryTypeFieldName) GetFieldNameOk() (*QuerySpansQueryTypeFieldName, bool) {
-	if o == nil || IsNil(o.FieldName) {
+func (o *QuerySpansQueryTypeFieldName) GetSpanRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.SpanRegex) {
 		return nil, false
 	}
-	return o.FieldName, true
+	return o.SpanRegex, true
 }
 
-// HasFieldName returns a boolean if a field has been set.
-func (o *QuerySpansQueryTypeFieldName) HasFieldName() bool {
-	if o != nil && !IsNil(o.FieldName) {
+// HasSpanRegex returns a boolean if a field has been set.
+func (o *QuerySpansQueryTypeFieldName) HasSpanRegex() bool {
+	if o != nil && !IsNil(o.SpanRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetFieldName gets a reference to the given QuerySpansQueryTypeFieldName and assigns it to the FieldName field.
-func (o *QuerySpansQueryTypeFieldName) SetFieldName(v QuerySpansQueryTypeFieldName) {
-	o.FieldName = &v
+// SetSpanRegex gets a reference to the given string and assigns it to the SpanRegex field.
+func (o *QuerySpansQueryTypeFieldName) SetSpanRegex(v string) {
+	o.SpanRegex = &v
 }
 
 func (o QuerySpansQueryTypeFieldName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QuerySpansQueryTypeFieldName) MarshalJSON() ([]byte, error) {
 
 func (o QuerySpansQueryTypeFieldName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldName) {
-		toSerialize["fieldName"] = o.FieldName
+	if !IsNil(o.SpanRegex) {
+		toSerialize["spanRegex"] = o.SpanRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySpansQueryTypeFieldName) UnmarshalJSON(data []byte) (err error) {
+	varQuerySpansQueryTypeFieldName := _QuerySpansQueryTypeFieldName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySpansQueryTypeFieldName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySpansQueryTypeFieldName(varQuerySpansQueryTypeFieldName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "spanRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySpansQueryTypeFieldName struct {

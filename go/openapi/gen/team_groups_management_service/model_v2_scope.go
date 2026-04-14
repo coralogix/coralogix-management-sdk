@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2Scope type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2Scope{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &V2Scope{}
 type V2Scope struct {
 	// Reference to an existing scope by ID
 	ScopeId *string `json:"scopeId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2Scope V2Scope
 
 // NewV2Scope instantiates a new V2Scope object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o V2Scope) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ScopeId) {
 		toSerialize["scopeId"] = o.ScopeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2Scope) UnmarshalJSON(data []byte) (err error) {
+	varV2Scope := _V2Scope{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2Scope)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2Scope(varV2Scope)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "scopeId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2Scope struct {

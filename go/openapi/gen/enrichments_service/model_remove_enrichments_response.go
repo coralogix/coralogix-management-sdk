@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RemoveEnrichmentsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RemoveEnrichmentsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &RemoveEnrichmentsResponse{}
 // RemoveEnrichmentsResponse Response data structure for enrichments deletion
 type RemoveEnrichmentsResponse struct {
 	RemainingEnrichments []Enrichment `json:"remainingEnrichments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RemoveEnrichmentsResponse RemoveEnrichmentsResponse
 
 // NewRemoveEnrichmentsResponse instantiates a new RemoveEnrichmentsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o RemoveEnrichmentsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemainingEnrichments) {
 		toSerialize["remainingEnrichments"] = o.RemainingEnrichments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RemoveEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
+	varRemoveEnrichmentsResponse := _RemoveEnrichmentsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRemoveEnrichmentsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RemoveEnrichmentsResponse(varRemoveEnrichmentsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "remainingEnrichments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRemoveEnrichmentsResponse struct {

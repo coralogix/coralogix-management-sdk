@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomAction{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &CustomAction{}
 type CustomAction struct {
 	// Static URL that may contain variables using {{variable_name}} syntax
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomAction CustomAction
 
 // NewCustomAction instantiates a new CustomAction object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o CustomAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomAction) UnmarshalJSON(data []byte) (err error) {
+	varCustomAction := _CustomAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomAction(varCustomAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomAction struct {

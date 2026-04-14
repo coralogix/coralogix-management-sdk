@@ -14,9 +14,6 @@ model_atomic_overwrite_span_policies_request.go
 model_atomic_overwrite_span_policies_response.go
 model_bulk_test_log_policies_request.go
 model_bulk_test_log_policies_response.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_generic_policy_request.go
 model_create_log_policy_request.go
@@ -37,8 +34,6 @@ model_get_policy_settings_response.go
 model_log_meta_fields_values.go
 model_log_rules.go
 model_logs_policy_settings.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_placement.go
 model_placement_first.go
@@ -49,6 +44,10 @@ model_policy.go
 model_policy_log_rules.go
 model_policy_order.go
 model_policy_span_rules.go
+model_priority_override.go
+model_priority_override_status.go
+model_quota_based.go
+model_quota_based_status.go
 model_quota_v1_priority.go
 model_quota_v1_rule.go
 model_quota_v1_severity.go
@@ -64,7 +63,9 @@ model_test_policies_result.go
 model_update_policy_request_log_rules.go
 model_update_policy_request_span_rules.go
 model_update_policy_response.go
+model_usage_tier.go
 model_v1_source_type.go
+model_v1_target.go
 model_v3_filter_operator.go
 response.go
 utils.go

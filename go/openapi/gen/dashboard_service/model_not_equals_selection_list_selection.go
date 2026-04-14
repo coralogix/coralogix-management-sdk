@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotEqualsSelectionListSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotEqualsSelectionListSelection{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &NotEqualsSelectionListSelection{}
 // NotEqualsSelectionListSelection This data structure represents a selection from a list of specific values.
 type NotEqualsSelectionListSelection struct {
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotEqualsSelectionListSelection NotEqualsSelectionListSelection
 
 // NewNotEqualsSelectionListSelection instantiates a new NotEqualsSelectionListSelection object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o NotEqualsSelectionListSelection) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotEqualsSelectionListSelection) UnmarshalJSON(data []byte) (err error) {
+	varNotEqualsSelectionListSelection := _NotEqualsSelectionListSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotEqualsSelectionListSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotEqualsSelectionListSelection(varNotEqualsSelectionListSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotEqualsSelectionListSelection struct {

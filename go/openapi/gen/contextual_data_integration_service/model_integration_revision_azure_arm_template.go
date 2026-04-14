@@ -11,29 +11,37 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionAzureArmTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionAzureArmTemplate{}
 
 // IntegrationRevisionAzureArmTemplate This data structure represents an integration revision.
 type IntegrationRevisionAzureArmTemplate struct {
-	AzureArmTemplate *AzureArmTemplate `json:"azureArmTemplate,omitempty"`
+	AzureArmTemplate AzureArmTemplate `json:"azureArmTemplate"`
 	FeatureFlag *string `json:"featureFlag,omitempty"`
 	Fields []FieldInformation `json:"fields,omitempty"`
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	Id *string `json:"id,omitempty"`
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionAzureArmTemplate IntegrationRevisionAzureArmTemplate
 
 // NewIntegrationRevisionAzureArmTemplate instantiates a new IntegrationRevisionAzureArmTemplate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationRevisionAzureArmTemplate() *IntegrationRevisionAzureArmTemplate {
+func NewIntegrationRevisionAzureArmTemplate(azureArmTemplate AzureArmTemplate) *IntegrationRevisionAzureArmTemplate {
 	this := IntegrationRevisionAzureArmTemplate{}
+	this.AzureArmTemplate = azureArmTemplate
 	return &this
 }
 
@@ -45,36 +53,28 @@ func NewIntegrationRevisionAzureArmTemplateWithDefaults() *IntegrationRevisionAz
 	return &this
 }
 
-// GetAzureArmTemplate returns the AzureArmTemplate field value if set, zero value otherwise.
+// GetAzureArmTemplate returns the AzureArmTemplate field value
 func (o *IntegrationRevisionAzureArmTemplate) GetAzureArmTemplate() AzureArmTemplate {
-	if o == nil || IsNil(o.AzureArmTemplate) {
+	if o == nil {
 		var ret AzureArmTemplate
 		return ret
 	}
-	return *o.AzureArmTemplate
+
+	return o.AzureArmTemplate
 }
 
-// GetAzureArmTemplateOk returns a tuple with the AzureArmTemplate field value if set, nil otherwise
+// GetAzureArmTemplateOk returns a tuple with the AzureArmTemplate field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationRevisionAzureArmTemplate) GetAzureArmTemplateOk() (*AzureArmTemplate, bool) {
-	if o == nil || IsNil(o.AzureArmTemplate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AzureArmTemplate, true
+	return &o.AzureArmTemplate, true
 }
 
-// HasAzureArmTemplate returns a boolean if a field has been set.
-func (o *IntegrationRevisionAzureArmTemplate) HasAzureArmTemplate() bool {
-	if o != nil && !IsNil(o.AzureArmTemplate) {
-		return true
-	}
-
-	return false
-}
-
-// SetAzureArmTemplate gets a reference to the given AzureArmTemplate and assigns it to the AzureArmTemplate field.
+// SetAzureArmTemplate sets field value
 func (o *IntegrationRevisionAzureArmTemplate) SetAzureArmTemplate(v AzureArmTemplate) {
-	o.AzureArmTemplate = &v
+	o.AzureArmTemplate = v
 }
 
 // GetFeatureFlag returns the FeatureFlag field value if set, zero value otherwise.
@@ -279,9 +279,7 @@ func (o IntegrationRevisionAzureArmTemplate) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationRevisionAzureArmTemplate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AzureArmTemplate) {
-		toSerialize["azureArmTemplate"] = o.AzureArmTemplate
-	}
+	toSerialize["azureArmTemplate"] = o.AzureArmTemplate
 	if !IsNil(o.FeatureFlag) {
 		toSerialize["featureFlag"] = o.FeatureFlag
 	}
@@ -300,7 +298,61 @@ func (o IntegrationRevisionAzureArmTemplate) ToMap() (map[string]interface{}, er
 	if !IsNil(o.UpgradeInstructionsMd) {
 		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionAzureArmTemplate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"azureArmTemplate",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationRevisionAzureArmTemplate := _IntegrationRevisionAzureArmTemplate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionAzureArmTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionAzureArmTemplate(varIntegrationRevisionAzureArmTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "azureArmTemplate")
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revisionDeploymentSupported")
+		delete(additionalProperties, "upgradeInstructionsMd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionAzureArmTemplate struct {

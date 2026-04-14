@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2QuerySourceMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2QuerySourceMetricsQuery{}
@@ -20,18 +24,22 @@ var _ MappedNullable = &VariableSourceV2QuerySourceMetricsQuery{}
 // VariableSourceV2QuerySourceMetricsQuery struct for VariableSourceV2QuerySourceMetricsQuery
 type VariableSourceV2QuerySourceMetricsQuery struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
-	MetricsQuery *QuerySourceMetricsQuery `json:"metricsQuery,omitempty"`
+	MetricsQuery QuerySourceMetricsQuery `json:"metricsQuery"`
 	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
 	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
 	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2QuerySourceMetricsQuery VariableSourceV2QuerySourceMetricsQuery
 
 // NewVariableSourceV2QuerySourceMetricsQuery instantiates a new VariableSourceV2QuerySourceMetricsQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2QuerySourceMetricsQuery() *VariableSourceV2QuerySourceMetricsQuery {
+func NewVariableSourceV2QuerySourceMetricsQuery(metricsQuery QuerySourceMetricsQuery) *VariableSourceV2QuerySourceMetricsQuery {
 	this := VariableSourceV2QuerySourceMetricsQuery{}
+	this.MetricsQuery = metricsQuery
 	return &this
 }
 
@@ -75,36 +83,28 @@ func (o *VariableSourceV2QuerySourceMetricsQuery) SetAllOption(v AllOption) {
 	o.AllOption = &v
 }
 
-// GetMetricsQuery returns the MetricsQuery field value if set, zero value otherwise.
+// GetMetricsQuery returns the MetricsQuery field value
 func (o *VariableSourceV2QuerySourceMetricsQuery) GetMetricsQuery() QuerySourceMetricsQuery {
-	if o == nil || IsNil(o.MetricsQuery) {
+	if o == nil {
 		var ret QuerySourceMetricsQuery
 		return ret
 	}
-	return *o.MetricsQuery
+
+	return o.MetricsQuery
 }
 
-// GetMetricsQueryOk returns a tuple with the MetricsQuery field value if set, nil otherwise
+// GetMetricsQueryOk returns a tuple with the MetricsQuery field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2QuerySourceMetricsQuery) GetMetricsQueryOk() (*QuerySourceMetricsQuery, bool) {
-	if o == nil || IsNil(o.MetricsQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricsQuery, true
+	return &o.MetricsQuery, true
 }
 
-// HasMetricsQuery returns a boolean if a field has been set.
-func (o *VariableSourceV2QuerySourceMetricsQuery) HasMetricsQuery() bool {
-	if o != nil && !IsNil(o.MetricsQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricsQuery gets a reference to the given QuerySourceMetricsQuery and assigns it to the MetricsQuery field.
+// SetMetricsQuery sets field value
 func (o *VariableSourceV2QuerySourceMetricsQuery) SetMetricsQuery(v QuerySourceMetricsQuery) {
-	o.MetricsQuery = &v
+	o.MetricsQuery = v
 }
 
 // GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
@@ -216,9 +216,7 @@ func (o VariableSourceV2QuerySourceMetricsQuery) ToMap() (map[string]interface{}
 	if !IsNil(o.AllOption) {
 		toSerialize["allOption"] = o.AllOption
 	}
-	if !IsNil(o.MetricsQuery) {
-		toSerialize["metricsQuery"] = o.MetricsQuery
-	}
+	toSerialize["metricsQuery"] = o.MetricsQuery
 	if !IsNil(o.RefreshStrategy) {
 		toSerialize["refreshStrategy"] = o.RefreshStrategy
 	}
@@ -228,7 +226,59 @@ func (o VariableSourceV2QuerySourceMetricsQuery) ToMap() (map[string]interface{}
 	if !IsNil(o.ValuesOrderDirection) {
 		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2QuerySourceMetricsQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricsQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2QuerySourceMetricsQuery := _VariableSourceV2QuerySourceMetricsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2QuerySourceMetricsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2QuerySourceMetricsQuery(varVariableSourceV2QuerySourceMetricsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allOption")
+		delete(additionalProperties, "metricsQuery")
+		delete(additionalProperties, "refreshStrategy")
+		delete(additionalProperties, "valueDisplayOptions")
+		delete(additionalProperties, "valuesOrderDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2QuerySourceMetricsQuery struct {

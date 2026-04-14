@@ -11,19 +11,40 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // Dashboard - struct for Dashboard
 type Dashboard struct {
+	DashboardFifteenMinutesAbsoluteTimeFrame *DashboardFifteenMinutesAbsoluteTimeFrame
+	DashboardFifteenMinutesRelativeTimeFrame *DashboardFifteenMinutesRelativeTimeFrame
 	DashboardFiveMinutesAbsoluteTimeFrame *DashboardFiveMinutesAbsoluteTimeFrame
 	DashboardFiveMinutesRelativeTimeFrame *DashboardFiveMinutesRelativeTimeFrame
 	DashboardOffAbsoluteTimeFrame *DashboardOffAbsoluteTimeFrame
 	DashboardOffRelativeTimeFrame *DashboardOffRelativeTimeFrame
+	DashboardOneMinuteAbsoluteTimeFrame *DashboardOneMinuteAbsoluteTimeFrame
+	DashboardOneMinuteRelativeTimeFrame *DashboardOneMinuteRelativeTimeFrame
 	DashboardTwoMinutesAbsoluteTimeFrame *DashboardTwoMinutesAbsoluteTimeFrame
 	DashboardTwoMinutesRelativeTimeFrame *DashboardTwoMinutesRelativeTimeFrame
+}
+
+// DashboardFifteenMinutesAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardFifteenMinutesAbsoluteTimeFrame wrapped in Dashboard
+func DashboardFifteenMinutesAbsoluteTimeFrameAsDashboard(v *DashboardFifteenMinutesAbsoluteTimeFrame) Dashboard {
+	return Dashboard{
+		DashboardFifteenMinutesAbsoluteTimeFrame: v,
+	}
+}
+
+// DashboardFifteenMinutesRelativeTimeFrameAsDashboard is a convenience function that returns DashboardFifteenMinutesRelativeTimeFrame wrapped in Dashboard
+func DashboardFifteenMinutesRelativeTimeFrameAsDashboard(v *DashboardFifteenMinutesRelativeTimeFrame) Dashboard {
+	return Dashboard{
+		DashboardFifteenMinutesRelativeTimeFrame: v,
+	}
 }
 
 // DashboardFiveMinutesAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardFiveMinutesAbsoluteTimeFrame wrapped in Dashboard
@@ -54,6 +75,20 @@ func DashboardOffRelativeTimeFrameAsDashboard(v *DashboardOffRelativeTimeFrame) 
 	}
 }
 
+// DashboardOneMinuteAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardOneMinuteAbsoluteTimeFrame wrapped in Dashboard
+func DashboardOneMinuteAbsoluteTimeFrameAsDashboard(v *DashboardOneMinuteAbsoluteTimeFrame) Dashboard {
+	return Dashboard{
+		DashboardOneMinuteAbsoluteTimeFrame: v,
+	}
+}
+
+// DashboardOneMinuteRelativeTimeFrameAsDashboard is a convenience function that returns DashboardOneMinuteRelativeTimeFrame wrapped in Dashboard
+func DashboardOneMinuteRelativeTimeFrameAsDashboard(v *DashboardOneMinuteRelativeTimeFrame) Dashboard {
+	return Dashboard{
+		DashboardOneMinuteRelativeTimeFrame: v,
+	}
+}
+
 // DashboardTwoMinutesAbsoluteTimeFrameAsDashboard is a convenience function that returns DashboardTwoMinutesAbsoluteTimeFrame wrapped in Dashboard
 func DashboardTwoMinutesAbsoluteTimeFrameAsDashboard(v *DashboardTwoMinutesAbsoluteTimeFrame) Dashboard {
 	return Dashboard{
@@ -73,6 +108,40 @@ func DashboardTwoMinutesRelativeTimeFrameAsDashboard(v *DashboardTwoMinutesRelat
 func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into DashboardFifteenMinutesAbsoluteTimeFrame
+	err = json.Unmarshal(data, &dst.DashboardFifteenMinutesAbsoluteTimeFrame)
+	if err == nil {
+		jsonDashboardFifteenMinutesAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardFifteenMinutesAbsoluteTimeFrame)
+		if string(jsonDashboardFifteenMinutesAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
+		} else {
+			if err = validator.Validate(dst.DashboardFifteenMinutesAbsoluteTimeFrame); err != nil {
+				dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
+	}
+
+	// try to unmarshal data into DashboardFifteenMinutesRelativeTimeFrame
+	err = json.Unmarshal(data, &dst.DashboardFifteenMinutesRelativeTimeFrame)
+	if err == nil {
+		jsonDashboardFifteenMinutesRelativeTimeFrame, _ := json.Marshal(dst.DashboardFifteenMinutesRelativeTimeFrame)
+		if string(jsonDashboardFifteenMinutesRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardFifteenMinutesRelativeTimeFrame = nil
+		} else {
+			if err = validator.Validate(dst.DashboardFifteenMinutesRelativeTimeFrame); err != nil {
+				dst.DashboardFifteenMinutesRelativeTimeFrame = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.DashboardFifteenMinutesRelativeTimeFrame = nil
+	}
+
 	// try to unmarshal data into DashboardFiveMinutesAbsoluteTimeFrame
 	err = json.Unmarshal(data, &dst.DashboardFiveMinutesAbsoluteTimeFrame)
 	if err == nil {
@@ -141,6 +210,40 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 		dst.DashboardOffRelativeTimeFrame = nil
 	}
 
+	// try to unmarshal data into DashboardOneMinuteAbsoluteTimeFrame
+	err = json.Unmarshal(data, &dst.DashboardOneMinuteAbsoluteTimeFrame)
+	if err == nil {
+		jsonDashboardOneMinuteAbsoluteTimeFrame, _ := json.Marshal(dst.DashboardOneMinuteAbsoluteTimeFrame)
+		if string(jsonDashboardOneMinuteAbsoluteTimeFrame) == "{}" { // empty struct
+			dst.DashboardOneMinuteAbsoluteTimeFrame = nil
+		} else {
+			if err = validator.Validate(dst.DashboardOneMinuteAbsoluteTimeFrame); err != nil {
+				dst.DashboardOneMinuteAbsoluteTimeFrame = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.DashboardOneMinuteAbsoluteTimeFrame = nil
+	}
+
+	// try to unmarshal data into DashboardOneMinuteRelativeTimeFrame
+	err = json.Unmarshal(data, &dst.DashboardOneMinuteRelativeTimeFrame)
+	if err == nil {
+		jsonDashboardOneMinuteRelativeTimeFrame, _ := json.Marshal(dst.DashboardOneMinuteRelativeTimeFrame)
+		if string(jsonDashboardOneMinuteRelativeTimeFrame) == "{}" { // empty struct
+			dst.DashboardOneMinuteRelativeTimeFrame = nil
+		} else {
+			if err = validator.Validate(dst.DashboardOneMinuteRelativeTimeFrame); err != nil {
+				dst.DashboardOneMinuteRelativeTimeFrame = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.DashboardOneMinuteRelativeTimeFrame = nil
+	}
+
 	// try to unmarshal data into DashboardTwoMinutesAbsoluteTimeFrame
 	err = json.Unmarshal(data, &dst.DashboardTwoMinutesAbsoluteTimeFrame)
 	if err == nil {
@@ -177,10 +280,14 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.DashboardFifteenMinutesAbsoluteTimeFrame = nil
+		dst.DashboardFifteenMinutesRelativeTimeFrame = nil
 		dst.DashboardFiveMinutesAbsoluteTimeFrame = nil
 		dst.DashboardFiveMinutesRelativeTimeFrame = nil
 		dst.DashboardOffAbsoluteTimeFrame = nil
 		dst.DashboardOffRelativeTimeFrame = nil
+		dst.DashboardOneMinuteAbsoluteTimeFrame = nil
+		dst.DashboardOneMinuteRelativeTimeFrame = nil
 		dst.DashboardTwoMinutesAbsoluteTimeFrame = nil
 		dst.DashboardTwoMinutesRelativeTimeFrame = nil
 
@@ -194,6 +301,14 @@ func (dst *Dashboard) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Dashboard) MarshalJSON() ([]byte, error) {
+	if src.DashboardFifteenMinutesAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardFifteenMinutesAbsoluteTimeFrame)
+	}
+
+	if src.DashboardFifteenMinutesRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardFifteenMinutesRelativeTimeFrame)
+	}
+
 	if src.DashboardFiveMinutesAbsoluteTimeFrame != nil {
 		return json.Marshal(&src.DashboardFiveMinutesAbsoluteTimeFrame)
 	}
@@ -208,6 +323,14 @@ func (src Dashboard) MarshalJSON() ([]byte, error) {
 
 	if src.DashboardOffRelativeTimeFrame != nil {
 		return json.Marshal(&src.DashboardOffRelativeTimeFrame)
+	}
+
+	if src.DashboardOneMinuteAbsoluteTimeFrame != nil {
+		return json.Marshal(&src.DashboardOneMinuteAbsoluteTimeFrame)
+	}
+
+	if src.DashboardOneMinuteRelativeTimeFrame != nil {
+		return json.Marshal(&src.DashboardOneMinuteRelativeTimeFrame)
 	}
 
 	if src.DashboardTwoMinutesAbsoluteTimeFrame != nil {
@@ -226,6 +349,14 @@ func (obj *Dashboard) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.DashboardFifteenMinutesAbsoluteTimeFrame != nil {
+		return obj.DashboardFifteenMinutesAbsoluteTimeFrame
+	}
+
+	if obj.DashboardFifteenMinutesRelativeTimeFrame != nil {
+		return obj.DashboardFifteenMinutesRelativeTimeFrame
+	}
+
 	if obj.DashboardFiveMinutesAbsoluteTimeFrame != nil {
 		return obj.DashboardFiveMinutesAbsoluteTimeFrame
 	}
@@ -242,6 +373,14 @@ func (obj *Dashboard) GetActualInstance() (interface{}) {
 		return obj.DashboardOffRelativeTimeFrame
 	}
 
+	if obj.DashboardOneMinuteAbsoluteTimeFrame != nil {
+		return obj.DashboardOneMinuteAbsoluteTimeFrame
+	}
+
+	if obj.DashboardOneMinuteRelativeTimeFrame != nil {
+		return obj.DashboardOneMinuteRelativeTimeFrame
+	}
+
 	if obj.DashboardTwoMinutesAbsoluteTimeFrame != nil {
 		return obj.DashboardTwoMinutesAbsoluteTimeFrame
 	}
@@ -256,6 +395,14 @@ func (obj *Dashboard) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj Dashboard) GetActualInstanceValue() (interface{}) {
+	if obj.DashboardFifteenMinutesAbsoluteTimeFrame != nil {
+		return *obj.DashboardFifteenMinutesAbsoluteTimeFrame
+	}
+
+	if obj.DashboardFifteenMinutesRelativeTimeFrame != nil {
+		return *obj.DashboardFifteenMinutesRelativeTimeFrame
+	}
+
 	if obj.DashboardFiveMinutesAbsoluteTimeFrame != nil {
 		return *obj.DashboardFiveMinutesAbsoluteTimeFrame
 	}
@@ -270,6 +417,14 @@ func (obj Dashboard) GetActualInstanceValue() (interface{}) {
 
 	if obj.DashboardOffRelativeTimeFrame != nil {
 		return *obj.DashboardOffRelativeTimeFrame
+	}
+
+	if obj.DashboardOneMinuteAbsoluteTimeFrame != nil {
+		return *obj.DashboardOneMinuteAbsoluteTimeFrame
+	}
+
+	if obj.DashboardOneMinuteRelativeTimeFrame != nil {
+		return *obj.DashboardOneMinuteRelativeTimeFrame
 	}
 
 	if obj.DashboardTwoMinutesAbsoluteTimeFrame != nil {

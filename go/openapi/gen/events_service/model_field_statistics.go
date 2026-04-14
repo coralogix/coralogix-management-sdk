@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldStatistics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldStatistics{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &FieldStatistics{}
 // FieldStatistics struct for FieldStatistics
 type FieldStatistics struct {
 	FieldStatistics *map[string]string `json:"fieldStatistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldStatistics FieldStatistics
 
 // NewFieldStatistics instantiates a new FieldStatistics object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o FieldStatistics) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FieldStatistics) {
 		toSerialize["fieldStatistics"] = o.FieldStatistics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldStatistics) UnmarshalJSON(data []byte) (err error) {
+	varFieldStatistics := _FieldStatistics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldStatistics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldStatistics(varFieldStatistics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fieldStatistics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldStatistics struct {

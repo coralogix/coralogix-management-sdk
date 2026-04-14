@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryDisplaySettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryDisplaySettings{}
@@ -46,6 +48,7 @@ type QueryDisplaySettings struct {
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QueryDisplaySettings QueryDisplaySettings
@@ -593,6 +596,11 @@ func (o QueryDisplaySettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisMin) {
 		toSerialize["yAxisMin"] = o.YAxisMin
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -628,6 +636,27 @@ func (o *QueryDisplaySettings) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = QueryDisplaySettings(varQueryDisplaySettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "queryId")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "seriesCountLimit")
+		delete(additionalProperties, "seriesNameTemplate")
+		delete(additionalProperties, "temporalField")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueFields")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

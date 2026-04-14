@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConnectorTypeSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectorTypeSummary{}
@@ -20,8 +23,11 @@ var _ MappedNullable = &ConnectorTypeSummary{}
 // ConnectorTypeSummary Summary information about a connector type
 type ConnectorTypeSummary struct {
 	Count *int64 `json:"count,omitempty"`
-	Type *ConnectorType `json:"type,omitempty"`
+	Type *NotificationCenterConnectorType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConnectorTypeSummary ConnectorTypeSummary
 
 // NewConnectorTypeSummary instantiates a new ConnectorTypeSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -73,9 +79,9 @@ func (o *ConnectorTypeSummary) SetCount(v int64) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *ConnectorTypeSummary) GetType() ConnectorType {
+func (o *ConnectorTypeSummary) GetType() NotificationCenterConnectorType {
 	if o == nil || IsNil(o.Type) {
-		var ret ConnectorType
+		var ret NotificationCenterConnectorType
 		return ret
 	}
 	return *o.Type
@@ -83,7 +89,7 @@ func (o *ConnectorTypeSummary) GetType() ConnectorType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConnectorTypeSummary) GetTypeOk() (*ConnectorType, bool) {
+func (o *ConnectorTypeSummary) GetTypeOk() (*NotificationCenterConnectorType, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -99,8 +105,8 @@ func (o *ConnectorTypeSummary) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given ConnectorType and assigns it to the Type field.
-func (o *ConnectorTypeSummary) SetType(v ConnectorType) {
+// SetType gets a reference to the given NotificationCenterConnectorType and assigns it to the Type field.
+func (o *ConnectorTypeSummary) SetType(v NotificationCenterConnectorType) {
 	o.Type = &v
 }
 
@@ -120,7 +126,35 @@ func (o ConnectorTypeSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConnectorTypeSummary) UnmarshalJSON(data []byte) (err error) {
+	varConnectorTypeSummary := _ConnectorTypeSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConnectorTypeSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConnectorTypeSummary(varConnectorTypeSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConnectorTypeSummary struct {

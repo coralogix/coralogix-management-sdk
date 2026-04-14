@@ -11,23 +11,31 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestIntegrationResultFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestIntegrationResultFailure{}
 
 // TestIntegrationResultFailure struct for TestIntegrationResultFailure
 type TestIntegrationResultFailure struct {
-	Failure *V1Failure `json:"failure,omitempty"`
+	Failure V1Failure `json:"failure"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TestIntegrationResultFailure TestIntegrationResultFailure
 
 // NewTestIntegrationResultFailure instantiates a new TestIntegrationResultFailure object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTestIntegrationResultFailure() *TestIntegrationResultFailure {
+func NewTestIntegrationResultFailure(failure V1Failure) *TestIntegrationResultFailure {
 	this := TestIntegrationResultFailure{}
+	this.Failure = failure
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTestIntegrationResultFailureWithDefaults() *TestIntegrationResultFailure
 	return &this
 }
 
-// GetFailure returns the Failure field value if set, zero value otherwise.
+// GetFailure returns the Failure field value
 func (o *TestIntegrationResultFailure) GetFailure() V1Failure {
-	if o == nil || IsNil(o.Failure) {
+	if o == nil {
 		var ret V1Failure
 		return ret
 	}
-	return *o.Failure
+
+	return o.Failure
 }
 
-// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// GetFailureOk returns a tuple with the Failure field value
 // and a boolean to check if the value has been set.
 func (o *TestIntegrationResultFailure) GetFailureOk() (*V1Failure, bool) {
-	if o == nil || IsNil(o.Failure) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Failure, true
+	return &o.Failure, true
 }
 
-// HasFailure returns a boolean if a field has been set.
-func (o *TestIntegrationResultFailure) HasFailure() bool {
-	if o != nil && !IsNil(o.Failure) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailure gets a reference to the given V1Failure and assigns it to the Failure field.
+// SetFailure sets field value
 func (o *TestIntegrationResultFailure) SetFailure(v V1Failure) {
-	o.Failure = &v
+	o.Failure = v
 }
 
 func (o TestIntegrationResultFailure) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TestIntegrationResultFailure) MarshalJSON() ([]byte, error) {
 
 func (o TestIntegrationResultFailure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Failure) {
-		toSerialize["failure"] = o.Failure
+	toSerialize["failure"] = o.Failure
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TestIntegrationResultFailure) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"failure",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTestIntegrationResultFailure := _TestIntegrationResultFailure{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestIntegrationResultFailure)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestIntegrationResultFailure(varTestIntegrationResultFailure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "failure")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTestIntegrationResultFailure struct {

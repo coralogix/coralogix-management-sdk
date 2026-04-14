@@ -11,15 +11,18 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // TestIntegrationResult - struct for TestIntegrationResult
 type TestIntegrationResult struct {
 	TestIntegrationResultFailure *TestIntegrationResultFailure
-	TestIntegrationResultSuccess *TestIntegrationResultSuccess
+	TestIntegrationResultSuccessVariant *TestIntegrationResultSuccessVariant
 }
 
 // TestIntegrationResultFailureAsTestIntegrationResult is a convenience function that returns TestIntegrationResultFailure wrapped in TestIntegrationResult
@@ -29,10 +32,10 @@ func TestIntegrationResultFailureAsTestIntegrationResult(v *TestIntegrationResul
 	}
 }
 
-// TestIntegrationResultSuccessAsTestIntegrationResult is a convenience function that returns TestIntegrationResultSuccess wrapped in TestIntegrationResult
-func TestIntegrationResultSuccessAsTestIntegrationResult(v *TestIntegrationResultSuccess) TestIntegrationResult {
+// TestIntegrationResultSuccessVariantAsTestIntegrationResult is a convenience function that returns TestIntegrationResultSuccessVariant wrapped in TestIntegrationResult
+func TestIntegrationResultSuccessVariantAsTestIntegrationResult(v *TestIntegrationResultSuccessVariant) TestIntegrationResult {
 	return TestIntegrationResult{
-		TestIntegrationResultSuccess: v,
+		TestIntegrationResultSuccessVariant: v,
 	}
 }
 
@@ -58,27 +61,27 @@ func (dst *TestIntegrationResult) UnmarshalJSON(data []byte) error {
 		dst.TestIntegrationResultFailure = nil
 	}
 
-	// try to unmarshal data into TestIntegrationResultSuccess
-	err = json.Unmarshal(data, &dst.TestIntegrationResultSuccess)
+	// try to unmarshal data into TestIntegrationResultSuccessVariant
+	err = json.Unmarshal(data, &dst.TestIntegrationResultSuccessVariant)
 	if err == nil {
-		jsonTestIntegrationResultSuccess, _ := json.Marshal(dst.TestIntegrationResultSuccess)
-		if string(jsonTestIntegrationResultSuccess) == "{}" { // empty struct
-			dst.TestIntegrationResultSuccess = nil
+		jsonTestIntegrationResultSuccessVariant, _ := json.Marshal(dst.TestIntegrationResultSuccessVariant)
+		if string(jsonTestIntegrationResultSuccessVariant) == "{}" { // empty struct
+			dst.TestIntegrationResultSuccessVariant = nil
 		} else {
-			if err = validator.Validate(dst.TestIntegrationResultSuccess); err != nil {
-				dst.TestIntegrationResultSuccess = nil
+			if err = validator.Validate(dst.TestIntegrationResultSuccessVariant); err != nil {
+				dst.TestIntegrationResultSuccessVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.TestIntegrationResultSuccess = nil
+		dst.TestIntegrationResultSuccessVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.TestIntegrationResultFailure = nil
-		dst.TestIntegrationResultSuccess = nil
+		dst.TestIntegrationResultSuccessVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(TestIntegrationResult)")
 	} else if match == 1 {
@@ -94,8 +97,8 @@ func (src TestIntegrationResult) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.TestIntegrationResultFailure)
 	}
 
-	if src.TestIntegrationResultSuccess != nil {
-		return json.Marshal(&src.TestIntegrationResultSuccess)
+	if src.TestIntegrationResultSuccessVariant != nil {
+		return json.Marshal(&src.TestIntegrationResultSuccessVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -110,8 +113,8 @@ func (obj *TestIntegrationResult) GetActualInstance() (interface{}) {
 		return obj.TestIntegrationResultFailure
 	}
 
-	if obj.TestIntegrationResultSuccess != nil {
-		return obj.TestIntegrationResultSuccess
+	if obj.TestIntegrationResultSuccessVariant != nil {
+		return obj.TestIntegrationResultSuccessVariant
 	}
 
 	// all schemas are nil
@@ -124,8 +127,8 @@ func (obj TestIntegrationResult) GetActualInstanceValue() (interface{}) {
 		return *obj.TestIntegrationResultFailure
 	}
 
-	if obj.TestIntegrationResultSuccess != nil {
-		return *obj.TestIntegrationResultSuccess
+	if obj.TestIntegrationResultSuccessVariant != nil {
+		return *obj.TestIntegrationResultSuccessVariant
 	}
 
 	// all schemas are nil

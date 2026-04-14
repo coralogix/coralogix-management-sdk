@@ -11,9 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SourceMapMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SourceMapMetadata{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &SourceMapMetadata{}
 type SourceMapMetadata struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	IsUploadedSuccessful *bool `json:"isUploadedSuccessful,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SourceMapMetadata SourceMapMetadata
 
 // NewSourceMapMetadata instantiates a new SourceMapMetadata object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o SourceMapMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsUploadedSuccessful) {
 		toSerialize["isUploadedSuccessful"] = o.IsUploadedSuccessful
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SourceMapMetadata) UnmarshalJSON(data []byte) (err error) {
+	varSourceMapMetadata := _SourceMapMetadata{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSourceMapMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SourceMapMetadata(varSourceMapMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "isUploadedSuccessful")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSourceMapMetadata struct {

@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScheduleRecurring type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScheduleRecurring{}
 
 // ScheduleRecurring struct for ScheduleRecurring
 type ScheduleRecurring struct {
-	Recurring *Recurring `json:"recurring,omitempty"`
+	Recurring Recurring `json:"recurring"`
 	ScheduleOperation *ScheduleOperation `json:"scheduleOperation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScheduleRecurring ScheduleRecurring
 
 // NewScheduleRecurring instantiates a new ScheduleRecurring object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScheduleRecurring() *ScheduleRecurring {
+func NewScheduleRecurring(recurring Recurring) *ScheduleRecurring {
 	this := ScheduleRecurring{}
+	this.Recurring = recurring
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewScheduleRecurringWithDefaults() *ScheduleRecurring {
 	return &this
 }
 
-// GetRecurring returns the Recurring field value if set, zero value otherwise.
+// GetRecurring returns the Recurring field value
 func (o *ScheduleRecurring) GetRecurring() Recurring {
-	if o == nil || IsNil(o.Recurring) {
+	if o == nil {
 		var ret Recurring
 		return ret
 	}
-	return *o.Recurring
+
+	return o.Recurring
 }
 
-// GetRecurringOk returns a tuple with the Recurring field value if set, nil otherwise
+// GetRecurringOk returns a tuple with the Recurring field value
 // and a boolean to check if the value has been set.
 func (o *ScheduleRecurring) GetRecurringOk() (*Recurring, bool) {
-	if o == nil || IsNil(o.Recurring) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Recurring, true
+	return &o.Recurring, true
 }
 
-// HasRecurring returns a boolean if a field has been set.
-func (o *ScheduleRecurring) HasRecurring() bool {
-	if o != nil && !IsNil(o.Recurring) {
-		return true
-	}
-
-	return false
-}
-
-// SetRecurring gets a reference to the given Recurring and assigns it to the Recurring field.
+// SetRecurring sets field value
 func (o *ScheduleRecurring) SetRecurring(v Recurring) {
-	o.Recurring = &v
+	o.Recurring = v
 }
 
 // GetScheduleOperation returns the ScheduleOperation field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o ScheduleRecurring) MarshalJSON() ([]byte, error) {
 
 func (o ScheduleRecurring) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Recurring) {
-		toSerialize["recurring"] = o.Recurring
-	}
+	toSerialize["recurring"] = o.Recurring
 	if !IsNil(o.ScheduleOperation) {
 		toSerialize["scheduleOperation"] = o.ScheduleOperation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScheduleRecurring) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"recurring",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varScheduleRecurring := _ScheduleRecurring{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varScheduleRecurring)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScheduleRecurring(varScheduleRecurring)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "recurring")
+		delete(additionalProperties, "scheduleOperation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScheduleRecurring struct {

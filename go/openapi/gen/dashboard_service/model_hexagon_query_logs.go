@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HexagonQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonQueryLogs{}
 
 // HexagonQueryLogs struct for HexagonQueryLogs
 type HexagonQueryLogs struct {
-	Logs *HexagonLogsQuery `json:"logs,omitempty"`
+	Logs HexagonLogsQuery `json:"logs"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HexagonQueryLogs HexagonQueryLogs
 
 // NewHexagonQueryLogs instantiates a new HexagonQueryLogs object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHexagonQueryLogs() *HexagonQueryLogs {
+func NewHexagonQueryLogs(logs HexagonLogsQuery) *HexagonQueryLogs {
 	this := HexagonQueryLogs{}
+	this.Logs = logs
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewHexagonQueryLogsWithDefaults() *HexagonQueryLogs {
 	return &this
 }
 
-// GetLogs returns the Logs field value if set, zero value otherwise.
+// GetLogs returns the Logs field value
 func (o *HexagonQueryLogs) GetLogs() HexagonLogsQuery {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		var ret HexagonLogsQuery
 		return ret
 	}
-	return *o.Logs
+
+	return o.Logs
 }
 
-// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// GetLogsOk returns a tuple with the Logs field value
 // and a boolean to check if the value has been set.
 func (o *HexagonQueryLogs) GetLogsOk() (*HexagonLogsQuery, bool) {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logs, true
+	return &o.Logs, true
 }
 
-// HasLogs returns a boolean if a field has been set.
-func (o *HexagonQueryLogs) HasLogs() bool {
-	if o != nil && !IsNil(o.Logs) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogs gets a reference to the given HexagonLogsQuery and assigns it to the Logs field.
+// SetLogs sets field value
 func (o *HexagonQueryLogs) SetLogs(v HexagonLogsQuery) {
-	o.Logs = &v
+	o.Logs = v
 }
 
 func (o HexagonQueryLogs) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o HexagonQueryLogs) MarshalJSON() ([]byte, error) {
 
 func (o HexagonQueryLogs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Logs) {
-		toSerialize["logs"] = o.Logs
+	toSerialize["logs"] = o.Logs
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *HexagonQueryLogs) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logs",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHexagonQueryLogs := _HexagonQueryLogs{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagonQueryLogs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexagonQueryLogs(varHexagonQueryLogs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHexagonQueryLogs struct {

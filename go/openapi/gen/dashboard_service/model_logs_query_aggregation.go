@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsQueryAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsQueryAggregation{}
@@ -26,7 +29,10 @@ type LogsQueryAggregation struct {
 	IsVisible *bool `json:"isVisible,omitempty"`
 	// Aggregation name
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsQueryAggregation LogsQueryAggregation
 
 // NewLogsQueryAggregation instantiates a new LogsQueryAggregation object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +201,37 @@ func (o LogsQueryAggregation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsQueryAggregation) UnmarshalJSON(data []byte) (err error) {
+	varLogsQueryAggregation := _LogsQueryAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsQueryAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsQueryAggregation(varLogsQueryAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isVisible")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsQueryAggregation struct {

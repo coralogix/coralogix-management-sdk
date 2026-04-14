@@ -11,9 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // LogsNewValueTimeWindowValue the model 'LogsNewValueTimeWindowValue'
 type LogsNewValueTimeWindowValue string

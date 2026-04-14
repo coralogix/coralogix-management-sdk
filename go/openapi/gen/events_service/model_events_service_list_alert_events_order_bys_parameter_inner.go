@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventsServiceListAlertEventsOrderBysParameterInner type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventsServiceListAlertEventsOrderBysParameterInner{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &EventsServiceListAlertEventsOrderBysParameterInner{}
 type EventsServiceListAlertEventsOrderBysParameterInner struct {
 	Direction *EventsV3OrderByDirection `json:"direction,omitempty"`
 	FieldName *EventsV3OrderByFields `json:"fieldName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventsServiceListAlertEventsOrderBysParameterInner EventsServiceListAlertEventsOrderBysParameterInner
 
 // NewEventsServiceListAlertEventsOrderBysParameterInner instantiates a new EventsServiceListAlertEventsOrderBysParameterInner object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o EventsServiceListAlertEventsOrderBysParameterInner) ToMap() (map[string]
 	if !IsNil(o.FieldName) {
 		toSerialize["fieldName"] = o.FieldName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventsServiceListAlertEventsOrderBysParameterInner) UnmarshalJSON(data []byte) (err error) {
+	varEventsServiceListAlertEventsOrderBysParameterInner := _EventsServiceListAlertEventsOrderBysParameterInner{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventsServiceListAlertEventsOrderBysParameterInner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventsServiceListAlertEventsOrderBysParameterInner(varEventsServiceListAlertEventsOrderBysParameterInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "fieldName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventsServiceListAlertEventsOrderBysParameterInner struct {

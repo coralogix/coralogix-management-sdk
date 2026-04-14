@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DynamicQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryLogs{}
 
 // DynamicQueryLogs struct for DynamicQueryLogs
 type DynamicQueryLogs struct {
-	Logs *Logs `json:"logs,omitempty"`
+	Logs Logs `json:"logs"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DynamicQueryLogs DynamicQueryLogs
 
 // NewDynamicQueryLogs instantiates a new DynamicQueryLogs object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDynamicQueryLogs() *DynamicQueryLogs {
+func NewDynamicQueryLogs(logs Logs) *DynamicQueryLogs {
 	this := DynamicQueryLogs{}
+	this.Logs = logs
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDynamicQueryLogsWithDefaults() *DynamicQueryLogs {
 	return &this
 }
 
-// GetLogs returns the Logs field value if set, zero value otherwise.
+// GetLogs returns the Logs field value
 func (o *DynamicQueryLogs) GetLogs() Logs {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		var ret Logs
 		return ret
 	}
-	return *o.Logs
+
+	return o.Logs
 }
 
-// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// GetLogsOk returns a tuple with the Logs field value
 // and a boolean to check if the value has been set.
 func (o *DynamicQueryLogs) GetLogsOk() (*Logs, bool) {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logs, true
+	return &o.Logs, true
 }
 
-// HasLogs returns a boolean if a field has been set.
-func (o *DynamicQueryLogs) HasLogs() bool {
-	if o != nil && !IsNil(o.Logs) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogs gets a reference to the given Logs and assigns it to the Logs field.
+// SetLogs sets field value
 func (o *DynamicQueryLogs) SetLogs(v Logs) {
-	o.Logs = &v
+	o.Logs = v
 }
 
 func (o DynamicQueryLogs) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DynamicQueryLogs) MarshalJSON() ([]byte, error) {
 
 func (o DynamicQueryLogs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Logs) {
-		toSerialize["logs"] = o.Logs
+	toSerialize["logs"] = o.Logs
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DynamicQueryLogs) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logs",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDynamicQueryLogs := _DynamicQueryLogs{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDynamicQueryLogs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DynamicQueryLogs(varDynamicQueryLogs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDynamicQueryLogs struct {

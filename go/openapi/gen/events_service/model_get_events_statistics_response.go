@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetEventsStatisticsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetEventsStatisticsResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &GetEventsStatisticsResponse{}
 type GetEventsStatisticsResponse struct {
 	CxEventLabelsFieldStatistics *map[string]FieldStatistics `json:"cxEventLabelsFieldStatistics,omitempty"`
 	CxEventMetadataFieldStatistics *map[string]FieldStatistics `json:"cxEventMetadataFieldStatistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEventsStatisticsResponse GetEventsStatisticsResponse
 
 // NewGetEventsStatisticsResponse instantiates a new GetEventsStatisticsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o GetEventsStatisticsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CxEventMetadataFieldStatistics) {
 		toSerialize["cxEventMetadataFieldStatistics"] = o.CxEventMetadataFieldStatistics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEventsStatisticsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetEventsStatisticsResponse := _GetEventsStatisticsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetEventsStatisticsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEventsStatisticsResponse(varGetEventsStatisticsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cxEventLabelsFieldStatistics")
+		delete(additionalProperties, "cxEventMetadataFieldStatistics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEventsStatisticsResponse struct {

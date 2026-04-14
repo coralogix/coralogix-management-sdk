@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationVerticalBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationVerticalBars{}
 
 // VisualizationVerticalBars struct for VisualizationVerticalBars
 type VisualizationVerticalBars struct {
-	VerticalBars *VerticalBars `json:"verticalBars,omitempty"`
+	VerticalBars VerticalBars `json:"verticalBars"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationVerticalBars VisualizationVerticalBars
 
 // NewVisualizationVerticalBars instantiates a new VisualizationVerticalBars object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationVerticalBars() *VisualizationVerticalBars {
+func NewVisualizationVerticalBars(verticalBars VerticalBars) *VisualizationVerticalBars {
 	this := VisualizationVerticalBars{}
+	this.VerticalBars = verticalBars
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationVerticalBarsWithDefaults() *VisualizationVerticalBars {
 	return &this
 }
 
-// GetVerticalBars returns the VerticalBars field value if set, zero value otherwise.
+// GetVerticalBars returns the VerticalBars field value
 func (o *VisualizationVerticalBars) GetVerticalBars() VerticalBars {
-	if o == nil || IsNil(o.VerticalBars) {
+	if o == nil {
 		var ret VerticalBars
 		return ret
 	}
-	return *o.VerticalBars
+
+	return o.VerticalBars
 }
 
-// GetVerticalBarsOk returns a tuple with the VerticalBars field value if set, nil otherwise
+// GetVerticalBarsOk returns a tuple with the VerticalBars field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationVerticalBars) GetVerticalBarsOk() (*VerticalBars, bool) {
-	if o == nil || IsNil(o.VerticalBars) {
+	if o == nil {
 		return nil, false
 	}
-	return o.VerticalBars, true
+	return &o.VerticalBars, true
 }
 
-// HasVerticalBars returns a boolean if a field has been set.
-func (o *VisualizationVerticalBars) HasVerticalBars() bool {
-	if o != nil && !IsNil(o.VerticalBars) {
-		return true
-	}
-
-	return false
-}
-
-// SetVerticalBars gets a reference to the given VerticalBars and assigns it to the VerticalBars field.
+// SetVerticalBars sets field value
 func (o *VisualizationVerticalBars) SetVerticalBars(v VerticalBars) {
-	o.VerticalBars = &v
+	o.VerticalBars = v
 }
 
 func (o VisualizationVerticalBars) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationVerticalBars) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationVerticalBars) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.VerticalBars) {
-		toSerialize["verticalBars"] = o.VerticalBars
+	toSerialize["verticalBars"] = o.VerticalBars
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationVerticalBars) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"verticalBars",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationVerticalBars := _VisualizationVerticalBars{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationVerticalBars)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationVerticalBars(varVisualizationVerticalBars)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "verticalBars")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationVerticalBars struct {

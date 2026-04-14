@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionDynamic type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionDynamic{}
 
 // WidgetDefinitionDynamic struct for WidgetDefinitionDynamic
 type WidgetDefinitionDynamic struct {
-	Dynamic *WidgetsDynamic `json:"dynamic,omitempty"`
+	Dynamic WidgetsDynamic `json:"dynamic"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionDynamic WidgetDefinitionDynamic
 
 // NewWidgetDefinitionDynamic instantiates a new WidgetDefinitionDynamic object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionDynamic() *WidgetDefinitionDynamic {
+func NewWidgetDefinitionDynamic(dynamic WidgetsDynamic) *WidgetDefinitionDynamic {
 	this := WidgetDefinitionDynamic{}
+	this.Dynamic = dynamic
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionDynamicWithDefaults() *WidgetDefinitionDynamic {
 	return &this
 }
 
-// GetDynamic returns the Dynamic field value if set, zero value otherwise.
+// GetDynamic returns the Dynamic field value
 func (o *WidgetDefinitionDynamic) GetDynamic() WidgetsDynamic {
-	if o == nil || IsNil(o.Dynamic) {
+	if o == nil {
 		var ret WidgetsDynamic
 		return ret
 	}
-	return *o.Dynamic
+
+	return o.Dynamic
 }
 
-// GetDynamicOk returns a tuple with the Dynamic field value if set, nil otherwise
+// GetDynamicOk returns a tuple with the Dynamic field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionDynamic) GetDynamicOk() (*WidgetsDynamic, bool) {
-	if o == nil || IsNil(o.Dynamic) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Dynamic, true
+	return &o.Dynamic, true
 }
 
-// HasDynamic returns a boolean if a field has been set.
-func (o *WidgetDefinitionDynamic) HasDynamic() bool {
-	if o != nil && !IsNil(o.Dynamic) {
-		return true
-	}
-
-	return false
-}
-
-// SetDynamic gets a reference to the given WidgetsDynamic and assigns it to the Dynamic field.
+// SetDynamic sets field value
 func (o *WidgetDefinitionDynamic) SetDynamic(v WidgetsDynamic) {
-	o.Dynamic = &v
+	o.Dynamic = v
 }
 
 func (o WidgetDefinitionDynamic) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionDynamic) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionDynamic) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dynamic) {
-		toSerialize["dynamic"] = o.Dynamic
+	toSerialize["dynamic"] = o.Dynamic
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionDynamic) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dynamic",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionDynamic := _WidgetDefinitionDynamic{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionDynamic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionDynamic(varWidgetDefinitionDynamic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dynamic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionDynamic struct {

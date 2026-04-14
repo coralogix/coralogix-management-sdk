@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentQueryFiltersValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentQueryFiltersValues{}
@@ -29,6 +31,7 @@ type IncidentQueryFiltersValues struct {
 	SeverityWithCount []IncidentSeverityWithCount `json:"severityWithCount"`
 	StateWithCount []IncidentStateWithCount `json:"stateWithCount"`
 	StatusWithCount []IncidentStatusWithCount `json:"statusWithCount"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentQueryFiltersValues IncidentQueryFiltersValues
@@ -268,6 +271,11 @@ func (o IncidentQueryFiltersValues) ToMap() (map[string]interface{}, error) {
 	toSerialize["severityWithCount"] = o.SeverityWithCount
 	toSerialize["stateWithCount"] = o.StateWithCount
 	toSerialize["statusWithCount"] = o.StatusWithCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -310,6 +318,20 @@ func (o *IncidentQueryFiltersValues) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentQueryFiltersValues(varIncidentQueryFiltersValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assigneeWithCount")
+		delete(additionalProperties, "contextualLabels")
+		delete(additionalProperties, "displayLabels")
+		delete(additionalProperties, "metaLabelsOp")
+		delete(additionalProperties, "metaLabelsWithCount")
+		delete(additionalProperties, "severityWithCount")
+		delete(additionalProperties, "stateWithCount")
+		delete(additionalProperties, "statusWithCount")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

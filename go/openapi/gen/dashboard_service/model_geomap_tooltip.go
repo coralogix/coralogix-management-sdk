@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapTooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapTooltip{}
@@ -22,7 +25,10 @@ type GeomapTooltip struct {
 	Labels []ObservationField `json:"labels,omitempty"`
 	// Custom template for the geomap tooltip
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapTooltip GeomapTooltip
 
 // NewGeomapTooltip instantiates a new GeomapTooltip object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o GeomapTooltip) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MessageTemplate) {
 		toSerialize["messageTemplate"] = o.MessageTemplate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapTooltip) UnmarshalJSON(data []byte) (err error) {
+	varGeomapTooltip := _GeomapTooltip{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapTooltip)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapTooltip(varGeomapTooltip)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "messageTemplate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapTooltip struct {

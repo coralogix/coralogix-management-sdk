@@ -11,8 +11,11 @@ API version: 1.0.0
 package cases_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetCaseExternalReferencesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCaseExternalReferencesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetCaseExternalReferencesResponse{}
 // GetCaseExternalReferencesResponse Response containing the list of external references for a case
 type GetCaseExternalReferencesResponse struct {
 	ExternalReferences []CaseExternalReference `json:"externalReferences,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCaseExternalReferencesResponse GetCaseExternalReferencesResponse
 
 // NewGetCaseExternalReferencesResponse instantiates a new GetCaseExternalReferencesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetCaseExternalReferencesResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.ExternalReferences) {
 		toSerialize["externalReferences"] = o.ExternalReferences
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCaseExternalReferencesResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCaseExternalReferencesResponse := _GetCaseExternalReferencesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetCaseExternalReferencesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCaseExternalReferencesResponse(varGetCaseExternalReferencesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "externalReferences")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCaseExternalReferencesResponse struct {

@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AssignDashboardToFolderRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AssignDashboardToFolderRequestDataStructure{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &AssignDashboardToFolderRequestDataStructure{}
 type AssignDashboardToFolderRequestDataStructure struct {
 	FolderId *string `json:"folderId,omitempty"`
 	RequestId string `json:"requestId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AssignDashboardToFolderRequestDataStructure AssignDashboardToFolderRequestDataStructure
@@ -115,6 +118,11 @@ func (o AssignDashboardToFolderRequestDataStructure) ToMap() (map[string]interfa
 		toSerialize["folderId"] = o.FolderId
 	}
 	toSerialize["requestId"] = o.RequestId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *AssignDashboardToFolderRequestDataStructure) UnmarshalJSON(data []byte)
 	}
 
 	*o = AssignDashboardToFolderRequestDataStructure(varAssignDashboardToFolderRequestDataStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "requestId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

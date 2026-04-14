@@ -11,10 +11,12 @@ API version: 1.0.0
 package events_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventsFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventsFilter{}
@@ -26,6 +28,7 @@ type EventsFilter struct {
 	CxEventMetadataFilters interface{} `json:"cxEventMetadataFilters,omitempty"`
 	CxEventTypes []string `json:"cxEventTypes"`
 	Timestamp interface{} `json:"timestamp"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EventsFilter EventsFilter
@@ -211,6 +214,11 @@ func (o EventsFilter) ToMap() (map[string]interface{}, error) {
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -248,6 +256,17 @@ func (o *EventsFilter) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = EventsFilter(varEventsFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cxEventKeys")
+		delete(additionalProperties, "cxEventLabelsFilters")
+		delete(additionalProperties, "cxEventMetadataFilters")
+		delete(additionalProperties, "cxEventTypes")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

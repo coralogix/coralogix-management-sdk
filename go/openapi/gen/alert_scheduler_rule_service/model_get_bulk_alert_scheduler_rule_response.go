@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetBulkAlertSchedulerRuleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetBulkAlertSchedulerRuleResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &GetBulkAlertSchedulerRuleResponse{}
 type GetBulkAlertSchedulerRuleResponse struct {
 	AlertSchedulerRules []AlertSchedulerRuleWithActiveTimeframe `json:"alertSchedulerRules"`
 	NextPageToken *string `json:"nextPageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetBulkAlertSchedulerRuleResponse GetBulkAlertSchedulerRuleResponse
@@ -115,6 +118,11 @@ func (o GetBulkAlertSchedulerRuleResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.NextPageToken) {
 		toSerialize["nextPageToken"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -150,6 +158,14 @@ func (o *GetBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err erro
 	}
 
 	*o = GetBulkAlertSchedulerRuleResponse(varGetBulkAlertSchedulerRuleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerRules")
+		delete(additionalProperties, "nextPageToken")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

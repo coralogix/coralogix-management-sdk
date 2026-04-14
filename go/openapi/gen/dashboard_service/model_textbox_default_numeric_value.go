@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultNumericValue{}
@@ -23,7 +26,10 @@ type TextboxDefaultNumericValue struct {
 	Max *float32 `json:"max,omitempty"`
 	Min *float32 `json:"min,omitempty"`
 	Value *float32 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultNumericValue TextboxDefaultNumericValue
 
 // NewTextboxDefaultNumericValue instantiates a new TextboxDefaultNumericValue object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o TextboxDefaultNumericValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultNumericValue) UnmarshalJSON(data []byte) (err error) {
+	varTextboxDefaultNumericValue := _TextboxDefaultNumericValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultNumericValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultNumericValue(varTextboxDefaultNumericValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isInteger")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultNumericValue struct {

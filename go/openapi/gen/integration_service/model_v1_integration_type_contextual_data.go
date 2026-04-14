@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypeContextualData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypeContextualData{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V1IntegrationTypeContextualData{}
 // V1IntegrationTypeContextualData This data structure represents an integration type.
 type V1IntegrationTypeContextualData struct {
 	// This data structure represents a contextual data integration.
-	ContextualData map[string]interface{} `json:"contextualData,omitempty"`
+	ContextualData map[string]interface{} `json:"contextualData"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypeContextualData V1IntegrationTypeContextualData
 
 // NewV1IntegrationTypeContextualData instantiates a new V1IntegrationTypeContextualData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypeContextualData() *V1IntegrationTypeContextualData {
+func NewV1IntegrationTypeContextualData(contextualData map[string]interface{}) *V1IntegrationTypeContextualData {
 	this := V1IntegrationTypeContextualData{}
+	this.ContextualData = contextualData
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewV1IntegrationTypeContextualDataWithDefaults() *V1IntegrationTypeContextu
 	return &this
 }
 
-// GetContextualData returns the ContextualData field value if set, zero value otherwise.
+// GetContextualData returns the ContextualData field value
 func (o *V1IntegrationTypeContextualData) GetContextualData() map[string]interface{} {
-	if o == nil || IsNil(o.ContextualData) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.ContextualData
 }
 
-// GetContextualDataOk returns a tuple with the ContextualData field value if set, nil otherwise
+// GetContextualDataOk returns a tuple with the ContextualData field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypeContextualData) GetContextualDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ContextualData) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.ContextualData, true
 }
 
-// HasContextualData returns a boolean if a field has been set.
-func (o *V1IntegrationTypeContextualData) HasContextualData() bool {
-	if o != nil && !IsNil(o.ContextualData) {
-		return true
-	}
-
-	return false
-}
-
-// SetContextualData gets a reference to the given map[string]interface{} and assigns it to the ContextualData field.
+// SetContextualData sets field value
 func (o *V1IntegrationTypeContextualData) SetContextualData(v map[string]interface{}) {
 	o.ContextualData = v
 }
@@ -82,10 +82,56 @@ func (o V1IntegrationTypeContextualData) MarshalJSON() ([]byte, error) {
 
 func (o V1IntegrationTypeContextualData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ContextualData) {
-		toSerialize["contextualData"] = o.ContextualData
+	toSerialize["contextualData"] = o.ContextualData
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypeContextualData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"contextualData",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypeContextualData := _V1IntegrationTypeContextualData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypeContextualData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypeContextualData(varV1IntegrationTypeContextualData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contextualData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypeContextualData struct {

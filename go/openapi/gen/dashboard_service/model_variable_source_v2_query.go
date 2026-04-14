@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2Query type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2Query{}
 
 // VariableSourceV2Query struct for VariableSourceV2Query
 type VariableSourceV2Query struct {
-	Query *VariableSourceV2QuerySource `json:"query,omitempty"`
+	Query VariableSourceV2QuerySource `json:"query"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2Query VariableSourceV2Query
 
 // NewVariableSourceV2Query instantiates a new VariableSourceV2Query object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2Query() *VariableSourceV2Query {
+func NewVariableSourceV2Query(query VariableSourceV2QuerySource) *VariableSourceV2Query {
 	this := VariableSourceV2Query{}
+	this.Query = query
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableSourceV2QueryWithDefaults() *VariableSourceV2Query {
 	return &this
 }
 
-// GetQuery returns the Query field value if set, zero value otherwise.
+// GetQuery returns the Query field value
 func (o *VariableSourceV2Query) GetQuery() VariableSourceV2QuerySource {
-	if o == nil || IsNil(o.Query) {
+	if o == nil {
 		var ret VariableSourceV2QuerySource
 		return ret
 	}
-	return *o.Query
+
+	return o.Query
 }
 
-// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// GetQueryOk returns a tuple with the Query field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2Query) GetQueryOk() (*VariableSourceV2QuerySource, bool) {
-	if o == nil || IsNil(o.Query) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Query, true
+	return &o.Query, true
 }
 
-// HasQuery returns a boolean if a field has been set.
-func (o *VariableSourceV2Query) HasQuery() bool {
-	if o != nil && !IsNil(o.Query) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuery gets a reference to the given VariableSourceV2QuerySource and assigns it to the Query field.
+// SetQuery sets field value
 func (o *VariableSourceV2Query) SetQuery(v VariableSourceV2QuerySource) {
-	o.Query = &v
+	o.Query = v
 }
 
 func (o VariableSourceV2Query) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableSourceV2Query) MarshalJSON() ([]byte, error) {
 
 func (o VariableSourceV2Query) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Query) {
-		toSerialize["query"] = o.Query
+	toSerialize["query"] = o.Query
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2Query) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"query",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2Query := _VariableSourceV2Query{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2Query)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2Query(varVariableSourceV2Query)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2Query struct {

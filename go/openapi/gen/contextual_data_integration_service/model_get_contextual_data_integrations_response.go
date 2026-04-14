@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetContextualDataIntegrationsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetContextualDataIntegrationsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetContextualDataIntegrationsResponse{}
 // GetContextualDataIntegrationsResponse struct for GetContextualDataIntegrationsResponse
 type GetContextualDataIntegrationsResponse struct {
 	Integrations []GetContextualDataIntegrationsResponseIntegrationWithCounts `json:"integrations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetContextualDataIntegrationsResponse GetContextualDataIntegrationsResponse
 
 // NewGetContextualDataIntegrationsResponse instantiates a new GetContextualDataIntegrationsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetContextualDataIntegrationsResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Integrations) {
 		toSerialize["integrations"] = o.Integrations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetContextualDataIntegrationsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetContextualDataIntegrationsResponse := _GetContextualDataIntegrationsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetContextualDataIntegrationsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetContextualDataIntegrationsResponse(varGetContextualDataIntegrationsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetContextualDataIntegrationsResponse struct {

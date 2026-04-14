@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Max type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Max{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Max{}
 type Max struct {
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Max Max
 
 // NewMax instantiates a new Max object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Max) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ObservationField) {
 		toSerialize["observationField"] = o.ObservationField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Max) UnmarshalJSON(data []byte) (err error) {
+	varMax := _Max{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Max(varMax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "observationField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMax struct {

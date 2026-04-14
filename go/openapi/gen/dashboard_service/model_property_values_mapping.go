@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyValuesMapping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyValuesMapping{}
 
 // PropertyValuesMapping struct for PropertyValuesMapping
 type PropertyValuesMapping struct {
-	Mappings []ValueMapping `json:"mappings,omitempty"`
+	Mappings []PropertyValuesMappingValueMapping `json:"mappings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyValuesMapping PropertyValuesMapping
 
 // NewPropertyValuesMapping instantiates a new PropertyValuesMapping object
 // This constructor will assign default values to properties that have it defined,
@@ -40,9 +46,9 @@ func NewPropertyValuesMappingWithDefaults() *PropertyValuesMapping {
 }
 
 // GetMappings returns the Mappings field value if set, zero value otherwise.
-func (o *PropertyValuesMapping) GetMappings() []ValueMapping {
+func (o *PropertyValuesMapping) GetMappings() []PropertyValuesMappingValueMapping {
 	if o == nil || IsNil(o.Mappings) {
-		var ret []ValueMapping
+		var ret []PropertyValuesMappingValueMapping
 		return ret
 	}
 	return o.Mappings
@@ -50,7 +56,7 @@ func (o *PropertyValuesMapping) GetMappings() []ValueMapping {
 
 // GetMappingsOk returns a tuple with the Mappings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PropertyValuesMapping) GetMappingsOk() ([]ValueMapping, bool) {
+func (o *PropertyValuesMapping) GetMappingsOk() ([]PropertyValuesMappingValueMapping, bool) {
 	if o == nil || IsNil(o.Mappings) {
 		return nil, false
 	}
@@ -66,8 +72,8 @@ func (o *PropertyValuesMapping) HasMappings() bool {
 	return false
 }
 
-// SetMappings gets a reference to the given []ValueMapping and assigns it to the Mappings field.
-func (o *PropertyValuesMapping) SetMappings(v []ValueMapping) {
+// SetMappings gets a reference to the given []PropertyValuesMappingValueMapping and assigns it to the Mappings field.
+func (o *PropertyValuesMapping) SetMappings(v []PropertyValuesMappingValueMapping) {
 	o.Mappings = v
 }
 
@@ -84,7 +90,34 @@ func (o PropertyValuesMapping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Mappings) {
 		toSerialize["mappings"] = o.Mappings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyValuesMapping) UnmarshalJSON(data []byte) (err error) {
+	varPropertyValuesMapping := _PropertyValuesMapping{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyValuesMapping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyValuesMapping(varPropertyValuesMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mappings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyValuesMapping struct {

@@ -11,17 +11,21 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogRules{}
 
 // LogRules Log rules for a policy.
 type LogRules struct {
+	DpxlExpression *string `json:"dpxlExpression,omitempty"`
 	Severities []QuotaV1Severity `json:"severities"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LogRules LogRules
@@ -42,6 +46,38 @@ func NewLogRules(severities []QuotaV1Severity) *LogRules {
 func NewLogRulesWithDefaults() *LogRules {
 	this := LogRules{}
 	return &this
+}
+
+// GetDpxlExpression returns the DpxlExpression field value if set, zero value otherwise.
+func (o *LogRules) GetDpxlExpression() string {
+	if o == nil || IsNil(o.DpxlExpression) {
+		var ret string
+		return ret
+	}
+	return *o.DpxlExpression
+}
+
+// GetDpxlExpressionOk returns a tuple with the DpxlExpression field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogRules) GetDpxlExpressionOk() (*string, bool) {
+	if o == nil || IsNil(o.DpxlExpression) {
+		return nil, false
+	}
+	return o.DpxlExpression, true
+}
+
+// HasDpxlExpression returns a boolean if a field has been set.
+func (o *LogRules) HasDpxlExpression() bool {
+	if o != nil && !IsNil(o.DpxlExpression) {
+		return true
+	}
+
+	return false
+}
+
+// SetDpxlExpression gets a reference to the given string and assigns it to the DpxlExpression field.
+func (o *LogRules) SetDpxlExpression(v string) {
+	o.DpxlExpression = &v
 }
 
 // GetSeverities returns the Severities field value
@@ -78,7 +114,15 @@ func (o LogRules) MarshalJSON() ([]byte, error) {
 
 func (o LogRules) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.DpxlExpression) {
+		toSerialize["dpxlExpression"] = o.DpxlExpression
+	}
 	toSerialize["severities"] = o.Severities
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -114,6 +158,14 @@ func (o *LogRules) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LogRules(varLogRules)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dpxlExpression")
+		delete(additionalProperties, "severities")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

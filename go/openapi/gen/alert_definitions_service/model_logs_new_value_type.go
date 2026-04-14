@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsNewValueType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsNewValueType{}
@@ -22,7 +25,10 @@ type LogsNewValueType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	Rules []LogsNewValueRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsNewValueType LogsNewValueType
 
 // NewLogsNewValueType instantiates a new LogsNewValueType object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o LogsNewValueType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsNewValueType) UnmarshalJSON(data []byte) (err error) {
+	varLogsNewValueType := _LogsNewValueType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsNewValueType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsNewValueType(varLogsNewValueType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsFilter")
+		delete(additionalProperties, "notificationPayloadFilter")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsNewValueType struct {
