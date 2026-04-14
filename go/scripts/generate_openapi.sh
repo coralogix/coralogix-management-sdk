@@ -26,6 +26,11 @@ run_openapi_generator() {
     return
   fi
 
+  if command -v openapi-generator >/dev/null 2>&1; then
+    openapi-generator "$@"
+    return
+  fi
+
   if java -version >/dev/null 2>&1; then
     npx --yes @openapitools/openapi-generator-cli "$@"
     return
@@ -70,7 +75,7 @@ for spec in "$SPECS_DIR"/*; do
     -g go \
     -o "$outdir" \
     --template-dir="$TEMPLATE_DIR" \
-    --additional-properties=withGoMod=false,packageName="$name",enumClassPrefix=true, disallowAdditionalPropertiesIfNotPresent=false \
+    --additional-properties=withGoMod=false,packageName="$name",enumClassPrefix=true,disallowAdditionalPropertiesIfNotPresent=false \
     --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false; then
       echo "FAILED to generate for $filename"
       continue
