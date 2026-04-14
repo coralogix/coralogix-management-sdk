@@ -62,13 +62,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateRequestIbm"
-                  },
-                  {
                     "$ref": "#/components/schemas/UpdateRequestS3"
                   },
                   {
                     "$ref": "#/components/schemas/UpdateRequestGcs"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UpdateRequestIbm"
                   }
                 ]
               }
@@ -122,13 +122,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
-                  },
-                  {
                     "$ref": "#/components/schemas/ConfigureTenantRequestS3"
                   },
                   {
                     "$ref": "#/components/schemas/ConfigureTenantRequestGcs"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
                   }
                 ]
               }
@@ -268,13 +268,13 @@
                 "type": "object",
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
+                  },
+                  {
                     "$ref": "#/components/schemas/ValidateBucketRequestS3"
                   },
                   {
                     "$ref": "#/components/schemas/ValidateBucketRequestGcs"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
                   }
                 ]
               }
@@ -316,61 +316,6 @@
   },
   "components": {
     "schemas": {
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "required": [
-          "aggregation"
-        ]
-      },
-      "ColorsByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/ColorsByCategory"
-          }
-        },
-        "required": [
-          "category"
-        ]
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "required": [
-          "groupBy"
-        ]
-      },
-      "ColorsByQuery": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/ColorsByQuery"
-          }
-        },
-        "required": [
-          "query"
-        ]
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "required": [
-          "stack"
-        ]
-      },
       "ConfigureTenantRequestGcs": {
         "externalDocs": {
           "description": "Find out more about metrics cost optimization",
@@ -445,10 +390,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -563,38 +508,6 @@
           }
         }
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "required": [
-          "auto"
-        ]
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "required": [
-          "custom"
-        ]
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -655,13 +568,13 @@
       "TenantConfigV2": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/TenantConfigV2Gcs"
+          },
+          {
             "$ref": "#/components/schemas/TenantConfigV2Ibm"
           },
           {
             "$ref": "#/components/schemas/TenantConfigV2S3"
-          },
-          {
-            "$ref": "#/components/schemas/TenantConfigV2Gcs"
           }
         ]
       },

@@ -4255,10 +4255,10 @@
             "schema": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
                 },
                 {
-                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerIds"
+                  "$ref": "#/components/schemas/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds"
                 }
               ]
             }
@@ -7463,6 +7463,9 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionPillar"
                   },
                   {
@@ -7473,9 +7476,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionSeverity"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPriority"
                   }
                 ]
               },
@@ -7531,10 +7531,10 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
                   }
                 ],
                 "type": "object"
@@ -8219,10 +8219,10 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
                   },
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
                   }
                 ],
                 "type": "object"
@@ -9668,10 +9668,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GroupByContextualLabel"
+                    "$ref": "#/components/schemas/GroupByIncidentField"
                   },
                   {
-                    "$ref": "#/components/schemas/GroupByIncidentField"
+                    "$ref": "#/components/schemas/GroupByContextualLabel"
                   }
                 ]
               },
@@ -13559,13 +13559,13 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateRequestIbm"
-                  },
-                  {
                     "$ref": "#/components/schemas/UpdateRequestS3"
                   },
                   {
                     "$ref": "#/components/schemas/UpdateRequestGcs"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UpdateRequestIbm"
                   }
                 ],
                 "type": "object"
@@ -13619,13 +13619,13 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
-                  },
-                  {
                     "$ref": "#/components/schemas/ConfigureTenantRequestS3"
                   },
                   {
                     "$ref": "#/components/schemas/ConfigureTenantRequestGcs"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
                   }
                 ],
                 "type": "object"
@@ -13765,13 +13765,13 @@
               "schema": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
+                  },
+                  {
                     "$ref": "#/components/schemas/ValidateBucketRequestS3"
                   },
                   {
                     "$ref": "#/components/schemas/ValidateBucketRequestGcs"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
                   }
                 ],
                 "type": "object"
@@ -16127,12 +16127,6 @@
                   "field": {
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/SloFilterFieldProductType"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
-                      },
-                      {
                         "$ref": "#/components/schemas/SloFilterFieldConstFilter"
                       },
                       {
@@ -16140,6 +16134,12 @@
                       },
                       {
                         "$ref": "#/components/schemas/SloFilterFieldSloType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldProductType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
                       }
                     ]
                   },
@@ -16152,13 +16152,13 @@
                       "is": {
                         "oneOf": [
                           {
-                            "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
-                          },
-                          {
                             "$ref": "#/components/schemas/IsFilterPredicateProductTypeValues"
                           },
                           {
                             "$ref": "#/components/schemas/IsFilterPredicateStringValues"
+                          },
+                          {
+                            "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
                           }
                         ]
                       }
@@ -16586,13 +16586,13 @@
               "schema": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/SloApmSli"
+                  },
+                  {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloWindowBasedMetricSli"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloApmSli"
                   }
                 ],
                 "type": "object"
@@ -16869,10 +16869,10 @@
       "AccessType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AccessTypeTemporaryAccess"
+            "$ref": "#/components/schemas/AccessTypePermanentAccess"
           },
           {
-            "$ref": "#/components/schemas/AccessTypePermanentAccess"
+            "$ref": "#/components/schemas/AccessTypeTemporaryAccess"
           }
         ],
         "discriminator": {
@@ -17141,13 +17141,13 @@
       "ActionExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
+          },
+          {
             "$ref": "#/components/schemas/ActionExecutionResponseReplace"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionResponseDelete"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
           }
         ]
       },
@@ -17724,13 +17724,16 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesFlow"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
@@ -17739,16 +17742,13 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
@@ -17760,7 +17760,7 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
           }
         ]
       },
@@ -19681,10 +19681,10 @@
       "Annotation.WidgetScope": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AnnotationWidgetScopeSpecificWidgets"
+            "$ref": "#/components/schemas/AnnotationWidgetScopeAllWidgets"
           },
           {
-            "$ref": "#/components/schemas/AnnotationWidgetScopeAllWidgets"
+            "$ref": "#/components/schemas/AnnotationWidgetScopeSpecificWidgets"
           }
         ]
       },
@@ -20113,10 +20113,10 @@
       "ApmLatencySli": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ApmLatencySliQuantile"
+            "$ref": "#/components/schemas/ApmLatencySliAverage"
           },
           {
-            "$ref": "#/components/schemas/ApmLatencySliAverage"
+            "$ref": "#/components/schemas/ApmLatencySliQuantile"
           }
         ]
       },
@@ -21326,9 +21326,6 @@
       "BarChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/BarChartQuerySpans"
-          },
-          {
             "$ref": "#/components/schemas/BarChartQueryMetrics"
           },
           {
@@ -21336,6 +21333,9 @@
           },
           {
             "$ref": "#/components/schemas/BarChartQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/BarChartQuerySpans"
           }
         ]
       },
@@ -22650,7 +22650,10 @@
       "CaseEventData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CaseEventDataUnassigned"
+            "$ref": "#/components/schemas/CaseEventDataPriorityDetailsChanged"
+          },
+          {
+            "$ref": "#/components/schemas/CaseEventDataChangeAssigneeFailed"
           },
           {
             "$ref": "#/components/schemas/CaseEventDataStatusChanged"
@@ -22662,9 +22665,6 @@
             "$ref": "#/components/schemas/CaseEventDataNotificationFailed"
           },
           {
-            "$ref": "#/components/schemas/CaseEventDataPriorityDetailsChanged"
-          },
-          {
             "$ref": "#/components/schemas/CaseEventDataTitleChangedEvent"
           },
           {
@@ -22674,13 +22674,13 @@
             "$ref": "#/components/schemas/CaseEventDataAssigned"
           },
           {
+            "$ref": "#/components/schemas/CaseEventDataUnassigned"
+          },
+          {
             "$ref": "#/components/schemas/CaseEventDataComment"
           },
           {
             "$ref": "#/components/schemas/CaseEventDataCreated"
-          },
-          {
-            "$ref": "#/components/schemas/CaseEventDataChangeAssigneeFailed"
           }
         ]
       },
@@ -23089,16 +23089,16 @@
       "CaseResolver": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CaseResolverSystem"
-          },
-          {
-            "$ref": "#/components/schemas/CaseResolverCxUser"
-          },
-          {
             "$ref": "#/components/schemas/CaseResolverServiceNow"
           },
           {
             "$ref": "#/components/schemas/CaseResolverApiKey"
+          },
+          {
+            "$ref": "#/components/schemas/CaseResolverSystem"
+          },
+          {
+            "$ref": "#/components/schemas/CaseResolverCxUser"
           }
         ]
       },
@@ -23570,23 +23570,26 @@
       "ColorsBy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ColorsByStack"
+            "$ref": "#/components/schemas/ColorsByStackVariant"
           },
           {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
+            "$ref": "#/components/schemas/ColorsByGroupByVariant"
           },
           {
-            "$ref": "#/components/schemas/ColorsByAggregation"
+            "$ref": "#/components/schemas/ColorsByAggregationVariant"
           },
           {
-            "$ref": "#/components/schemas/ColorsByQuery"
+            "$ref": "#/components/schemas/ColorsByQueryVariant"
           },
           {
-            "$ref": "#/components/schemas/ColorsByCategory"
+            "$ref": "#/components/schemas/ColorsByCategoryVariant"
           }
         ]
       },
       "ColorsByAggregation": {
+        "type": "object"
+      },
+      "ColorsByAggregationVariant": {
         "required": [
           "aggregation"
         ],
@@ -23598,6 +23601,9 @@
         }
       },
       "ColorsByCategory": {
+        "type": "object"
+      },
+      "ColorsByCategoryVariant": {
         "required": [
           "category"
         ],
@@ -23609,6 +23615,9 @@
         }
       },
       "ColorsByGroupBy": {
+        "type": "object"
+      },
+      "ColorsByGroupByVariant": {
         "required": [
           "groupBy"
         ],
@@ -23620,6 +23629,9 @@
         }
       },
       "ColorsByQuery": {
+        "type": "object"
+      },
+      "ColorsByQueryVariant": {
         "required": [
           "query"
         ],
@@ -23631,6 +23643,9 @@
         }
       },
       "ColorsByStack": {
+        "type": "object"
+      },
+      "ColorsByStackVariant": {
         "required": [
           "stack"
         ],
@@ -23686,13 +23701,13 @@
       "CommentAttachment": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CommentAttachmentLog"
-          },
-          {
             "$ref": "#/components/schemas/CommentAttachmentCustomWidget"
           },
           {
             "$ref": "#/components/schemas/CommentAttachmentFile"
+          },
+          {
+            "$ref": "#/components/schemas/CommentAttachmentLog"
           }
         ]
       },
@@ -26227,21 +26242,6 @@
       "Dashboard": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DashboardTwoMinutesAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardTwoMinutesRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardFifteenMinutesRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffAbsoluteTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOffRelativeTimeFrame"
-          },
-          {
             "$ref": "#/components/schemas/DashboardFiveMinutesAbsoluteTimeFrame"
           },
           {
@@ -26254,7 +26254,22 @@
             "$ref": "#/components/schemas/DashboardOneMinuteRelativeTimeFrame"
           },
           {
+            "$ref": "#/components/schemas/DashboardOffAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardOffRelativeTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardTwoMinutesRelativeTimeFrame"
+          },
+          {
             "$ref": "#/components/schemas/DashboardFifteenMinutesAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardFifteenMinutesRelativeTimeFrame"
           }
         ]
       },
@@ -28423,10 +28438,10 @@
       "DeliveryOutcome": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
+            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
           },
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
+            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
           }
         ]
       },
@@ -28798,6 +28813,12 @@
       "Dimension": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DimensionSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionPriority"
+          },
+          {
             "$ref": "#/components/schemas/DimensionPillar"
           },
           {
@@ -28805,12 +28826,6 @@
           },
           {
             "$ref": "#/components/schemas/DimensionTier"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPriority"
           }
         ]
       },
@@ -29039,6 +29054,9 @@
       "Dynamic.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DynamicQueryLogs"
+          },
+          {
             "$ref": "#/components/schemas/DynamicQuerySpans"
           },
           {
@@ -29046,9 +29064,6 @@
           },
           {
             "$ref": "#/components/schemas/DynamicQueryDataprime"
-          },
-          {
-            "$ref": "#/components/schemas/DynamicQueryLogs"
           }
         ]
       },
@@ -29142,10 +29157,10 @@
       "E2M": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MSpansQuery"
+            "$ref": "#/components/schemas/E2MLogsQuery"
           },
           {
-            "$ref": "#/components/schemas/E2MLogsQuery"
+            "$ref": "#/components/schemas/E2MSpansQuery"
           }
         ]
       },
@@ -29691,9 +29706,6 @@
       "EnrichmentType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EnrichmentTypeCustomEnrichment"
-          },
-          {
             "$ref": "#/components/schemas/EnrichmentTypeGeoIp"
           },
           {
@@ -29701,6 +29713,9 @@
           },
           {
             "$ref": "#/components/schemas/EnrichmentTypeAws"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeCustomEnrichment"
           }
         ]
       },
@@ -29777,10 +29792,10 @@
       "EntityLabelFilter": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EntityLabelFilterAll"
+            "$ref": "#/components/schemas/EntityLabelFilterValues"
           },
           {
-            "$ref": "#/components/schemas/EntityLabelFilterValues"
+            "$ref": "#/components/schemas/EntityLabelFilterAll"
           }
         ]
       },
@@ -29866,10 +29881,10 @@
       "Equals.Selection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EqualsSelectionAll"
+            "$ref": "#/components/schemas/EqualsSelectionList"
           },
           {
-            "$ref": "#/components/schemas/EqualsSelectionList"
+            "$ref": "#/components/schemas/EqualsSelectionAll"
           }
         ]
       },
@@ -32593,10 +32608,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -32865,9 +32880,6 @@
       "Format": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FormatCsv"
-          },
-          {
             "$ref": "#/components/schemas/FormatLogsAvro"
           },
           {
@@ -32878,6 +32890,9 @@
           },
           {
             "$ref": "#/components/schemas/FormatWideParquet"
+          },
+          {
+            "$ref": "#/components/schemas/FormatCsv"
           }
         ]
       },
@@ -33060,16 +33075,16 @@
       "Gauge.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GaugeQuerySpans"
-          },
-          {
-            "$ref": "#/components/schemas/GaugeQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/GaugeQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/GaugeQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/GaugeQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/GaugeQueryDataprime"
           }
         ]
       },
@@ -33354,9 +33369,6 @@
       "GeomapAggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GeomapAggregationAvg"
-          },
-          {
             "$ref": "#/components/schemas/GeomapAggregationCount"
           },
           {
@@ -33367,6 +33379,9 @@
           },
           {
             "$ref": "#/components/schemas/GeomapAggregationMax"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapAggregationAvg"
           }
         ]
       },
@@ -37131,10 +37146,10 @@
       "GroupBy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GroupByIncidentField"
+            "$ref": "#/components/schemas/GroupByContextualLabel"
           },
           {
-            "$ref": "#/components/schemas/GroupByContextualLabel"
+            "$ref": "#/components/schemas/GroupByIncidentField"
           }
         ]
       },
@@ -37636,6 +37651,9 @@
       "Hexagon.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/HexagonQuerySpans"
+          },
+          {
             "$ref": "#/components/schemas/HexagonQueryDataprime"
           },
           {
@@ -37643,9 +37661,6 @@
           },
           {
             "$ref": "#/components/schemas/HexagonQueryLogs"
-          },
-          {
-            "$ref": "#/components/schemas/HexagonQuerySpans"
           }
         ]
       },
@@ -38863,10 +38878,13 @@
       "IncidentEvent": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
+            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
@@ -38875,28 +38893,25 @@
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
           },
           {
+            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+          },
+          {
             "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
           }
         ]
       },
@@ -39588,27 +39603,6 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfId"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfName"
           },
           {
@@ -39619,6 +39613,27 @@
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfState"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfId"
           }
         ]
       },
@@ -40953,13 +40968,13 @@
       "InternalUpdateRequest": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/InternalUpdateRequestIbm"
+          },
+          {
             "$ref": "#/components/schemas/InternalUpdateRequestS3"
           },
           {
             "$ref": "#/components/schemas/InternalUpdateRequestGcs"
-          },
-          {
-            "$ref": "#/components/schemas/InternalUpdateRequestIbm"
           }
         ]
       },
@@ -43299,6 +43314,12 @@
       "LogsAggregation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/LogsAggregationCountDistinct"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationSum"
+          },
+          {
             "$ref": "#/components/schemas/LogsAggregationAverage"
           },
           {
@@ -43312,12 +43333,6 @@
           },
           {
             "$ref": "#/components/schemas/LogsAggregationCount"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationCountDistinct"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationSum"
           }
         ]
       },
@@ -43877,13 +43892,13 @@
       "LogsSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/LogsSourceStrategyInstant"
-          },
-          {
             "$ref": "#/components/schemas/LogsSourceStrategyRange"
           },
           {
             "$ref": "#/components/schemas/LogsSourceStrategyDuration"
+          },
+          {
+            "$ref": "#/components/schemas/LogsSourceStrategyInstant"
           }
         ]
       },
@@ -44916,10 +44931,10 @@
       "MetricMissingValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
+            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
           },
           {
-            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
+            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
           }
         ]
       },
@@ -45266,14 +45281,17 @@
       "MinMax": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MinMaxAuto"
+            "$ref": "#/components/schemas/MinMaxAutoVariant"
           },
           {
-            "$ref": "#/components/schemas/MinMaxCustom"
+            "$ref": "#/components/schemas/MinMaxCustomVariant"
           }
         ]
       },
       "MinMaxAuto": {
+        "type": "object"
+      },
+      "MinMaxAutoVariant": {
         "title": "Min-Max",
         "required": [
           "auto"
@@ -45290,6 +45308,19 @@
         }
       },
       "MinMaxCustom": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MinMaxCustomVariant": {
         "title": "Min-Max",
         "required": [
           "custom"
@@ -45404,13 +45435,13 @@
       "MultiSelect.Query": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/MultiSelectQueryLogsQuery"
+          },
+          {
             "$ref": "#/components/schemas/MultiSelectQueryMetricsQuery"
           },
           {
             "$ref": "#/components/schemas/MultiSelectQuerySpansQuery"
-          },
-          {
-            "$ref": "#/components/schemas/MultiSelectQueryLogsQuery"
           }
         ]
       },
@@ -45469,9 +45500,6 @@
       "MultiSelect.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MultiSelectSourceQuery"
-          },
-          {
             "$ref": "#/components/schemas/MultiSelectSourceLogsPath"
           },
           {
@@ -45482,6 +45510,9 @@
           },
           {
             "$ref": "#/components/schemas/MultiSelectSourceSpanField"
+          },
+          {
+            "$ref": "#/components/schemas/MultiSelectSourceQuery"
           }
         ]
       },
@@ -45817,13 +45848,13 @@
       "NotificationDelivery": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/NotificationDeliveryAttempted"
-          },
-          {
             "$ref": "#/components/schemas/NotificationDeliveryNoRouterMatched"
           },
           {
             "$ref": "#/components/schemas/NotificationDeliveryNoNotificationCreated"
+          },
+          {
+            "$ref": "#/components/schemas/NotificationDeliveryAttempted"
           }
         ]
       },
@@ -46335,16 +46366,13 @@
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookSendLog"
@@ -46353,22 +46381,25 @@
             "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookDemisto"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookSlack"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
+            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookJira"
+            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
           }
         ]
       },
@@ -46643,19 +46674,10 @@
       "OutgoingWebhookInputData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
@@ -46670,13 +46692,22 @@
             "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
           }
         ]
       },
@@ -47351,13 +47382,13 @@
       "Owner": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
-          },
-          {
             "$ref": "#/components/schemas/OwnerUserId"
           },
           {
             "$ref": "#/components/schemas/OwnerTeamId"
+          },
+          {
+            "$ref": "#/components/schemas/OwnerOrganisationId"
           }
         ]
       },
@@ -47816,16 +47847,16 @@
       "PieChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PieChartQueryLogs"
-          },
-          {
-            "$ref": "#/components/schemas/PieChartQuerySpans"
-          },
-          {
             "$ref": "#/components/schemas/PieChartQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/PieChartQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/PieChartQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/PieChartQuerySpans"
           }
         ]
       },
@@ -47974,10 +48005,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           },
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           }
         ]
       },
@@ -48553,6 +48584,15 @@
       "PropertyDefinition": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/PropertyDefinitionColumnDisplayName"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionAlignment"
+          },
+          {
             "$ref": "#/components/schemas/PropertyDefinitionUnits"
           },
           {
@@ -48566,15 +48606,6 @@
           },
           {
             "$ref": "#/components/schemas/PropertyDefinitionValuesMapping"
-          },
-          {
-            "$ref": "#/components/schemas/PropertyDefinitionColumnDisplayName"
-          },
-          {
-            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
-          },
-          {
-            "$ref": "#/components/schemas/PropertyDefinitionAlignment"
           }
         ]
       },
@@ -48855,10 +48886,10 @@
       "Query.MetricsQuery.Operator": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryOperatorEquals"
+            "$ref": "#/components/schemas/QueryMetricsQueryOperatorNotEquals"
           }
         ]
       },
@@ -49390,10 +49421,10 @@
       "QuerySource.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValue"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldName"
           }
         ]
       },
@@ -49804,13 +49835,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamicMonthly"
-          },
-          {
             "$ref": "#/components/schemas/RecurringDynamicDaily"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicMonthly"
           }
         ]
       },
@@ -51181,10 +51212,10 @@
       "RoleUpdateAction": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
+            "$ref": "#/components/schemas/RoleUpdateActionClear"
           },
           {
-            "$ref": "#/components/schemas/RoleUpdateActionClear"
+            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
           }
         ],
         "discriminator": {
@@ -51554,13 +51585,22 @@
             "$ref": "#/components/schemas/RuleParametersParseParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
           },
           {
+            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersAllowParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
+          },
+          {
             "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
@@ -51570,15 +51610,6 @@
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           }
         ]
       },
@@ -52027,10 +52058,10 @@
       "Schedule": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ScheduleRecurring"
+            "$ref": "#/components/schemas/ScheduleOneTime"
           },
           {
-            "$ref": "#/components/schemas/ScheduleOneTime"
+            "$ref": "#/components/schemas/ScheduleRecurring"
           }
         ]
       },
@@ -52165,10 +52196,10 @@
       "SearchClause": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SearchClauseId"
+            "$ref": "#/components/schemas/SearchClauseName"
           },
           {
-            "$ref": "#/components/schemas/SearchClauseName"
+            "$ref": "#/components/schemas/SearchClauseId"
           }
         ]
       },
@@ -52344,10 +52375,10 @@
       "SectionOptions": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SectionOptionsCustom"
+            "$ref": "#/components/schemas/SectionOptionsInternal"
           },
           {
-            "$ref": "#/components/schemas/SectionOptionsInternal"
+            "$ref": "#/components/schemas/SectionOptionsCustom"
           }
         ]
       },
@@ -53108,13 +53139,13 @@
       "SloExecutionRequest": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
-          },
-          {
             "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
           },
           {
             "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
           }
         ]
       },
@@ -53172,13 +53203,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+          },
+          {
             "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
           }
         ]
       },
@@ -53249,6 +53280,12 @@
       "SloFilterField": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloFilterFieldConstFilter"
+          },
+          {
+            "$ref": "#/components/schemas/SloFilterFieldLabelName"
+          },
+          {
             "$ref": "#/components/schemas/SloFilterFieldSloType"
           },
           {
@@ -53256,12 +53293,6 @@
           },
           {
             "$ref": "#/components/schemas/SloFilterFieldServiceName"
-          },
-          {
-            "$ref": "#/components/schemas/SloFilterFieldConstFilter"
-          },
-          {
-            "$ref": "#/components/schemas/SloFilterFieldLabelName"
           }
         ]
       },
@@ -53807,10 +53838,10 @@
       "SortStrategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SortStrategyCategory"
+            "$ref": "#/components/schemas/SortStrategyQueryValue"
           },
           {
-            "$ref": "#/components/schemas/SortStrategyQueryValue"
+            "$ref": "#/components/schemas/SortStrategyCategory"
           }
         ],
         "discriminator": {
@@ -53893,13 +53924,13 @@
       "SpanField": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpanFieldProcessTagField"
-          },
-          {
             "$ref": "#/components/schemas/SpanFieldMetadataField"
           },
           {
             "$ref": "#/components/schemas/SpanFieldTagField"
+          },
+          {
+            "$ref": "#/components/schemas/SpanFieldProcessTagField"
           }
         ]
       },
@@ -54216,13 +54247,13 @@
       "SpansSource.Strategy": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SpansSourceStrategyRange"
+          },
+          {
             "$ref": "#/components/schemas/SpansSourceStrategyDuration"
           },
           {
             "$ref": "#/components/schemas/SpansSourceStrategyInstant"
-          },
-          {
-            "$ref": "#/components/schemas/SpansSourceStrategyRange"
           }
         ]
       },
@@ -54431,10 +54462,10 @@
       "StatVisualElement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/StatVisualElementMappedValues"
+            "$ref": "#/components/schemas/StatVisualElementObservationField"
           },
           {
-            "$ref": "#/components/schemas/StatVisualElementObservationField"
+            "$ref": "#/components/schemas/StatVisualElementMappedValues"
           }
         ]
       },
@@ -55104,13 +55135,13 @@
       "TenantConfigV2": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/TenantConfigV2Gcs"
+          },
+          {
             "$ref": "#/components/schemas/TenantConfigV2Ibm"
           },
           {
             "$ref": "#/components/schemas/TenantConfigV2S3"
-          },
-          {
-            "$ref": "#/components/schemas/TenantConfigV2Gcs"
           }
         ]
       },
@@ -55476,10 +55507,10 @@
       "TestOutgoingWebhookResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
           },
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailure"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccess"
           }
         ]
       },
@@ -55871,15 +55902,6 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TextboxDefaultValueSingleNumeric"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultStringValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
-          },
-          {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
           },
           {
@@ -55890,6 +55912,15 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueSingleNumeric"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultStringValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
           }
         ]
       },
@@ -56120,10 +56151,10 @@
       "TimeSelection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
+            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
           },
           {
-            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
+            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
           }
         ]
       },
@@ -57695,13 +57726,13 @@
       "UpdateRequest": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/UpdateRequestIbm"
-          },
-          {
             "$ref": "#/components/schemas/UpdateRequestS3"
           },
           {
             "$ref": "#/components/schemas/UpdateRequestGcs"
+          },
+          {
+            "$ref": "#/components/schemas/UpdateRequestIbm"
           }
         ]
       },
@@ -58463,13 +58494,13 @@
       "UserUpdatesOperation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/UserUpdatesOperationSet"
-          },
-          {
             "$ref": "#/components/schemas/UserUpdatesOperationAdd"
           },
           {
             "$ref": "#/components/schemas/UserUpdatesOperationRemove"
+          },
+          {
+            "$ref": "#/components/schemas/UserUpdatesOperationSet"
           }
         ],
         "discriminator": {
@@ -59539,10 +59570,10 @@
       "Variable.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableDefinitionConstant"
+            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
           },
           {
-            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
+            "$ref": "#/components/schemas/VariableDefinitionConstant"
           }
         ]
       },
@@ -59799,12 +59830,6 @@
       "VariableValueV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableValueV2SingleString"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
-          },
-          {
             "$ref": "#/components/schemas/VariableValueV2Regex"
           },
           {
@@ -59815,6 +59840,12 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2MultiString"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2SingleString"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
           }
         ]
       },
@@ -60185,49 +60216,49 @@
       "Visualization": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VisualizationHorizontalBarsMulti"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationStatCard"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationStat"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHorizontalBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesLinesMulti"
+            "$ref": "#/components/schemas/VisualizationGauge"
           },
           {
             "$ref": "#/components/schemas/VisualizationHexagonBins"
           },
           {
-            "$ref": "#/components/schemas/VisualizationGeomap"
+            "$ref": "#/components/schemas/VisualizationVerticalBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHorizontalBarsMulti"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationStat"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationPieChart"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHorizontalBars"
           },
           {
             "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationGauge"
+            "$ref": "#/components/schemas/VisualizationVerticalBarsMulti"
           },
           {
-            "$ref": "#/components/schemas/VisualizationVerticalBarsMulti"
+            "$ref": "#/components/schemas/VisualizationHeatmap"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationGeomap"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLinesMulti"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationStatCard"
           },
           {
             "$ref": "#/components/schemas/VisualizationTable"
           },
           {
             "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationPieChart"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationVerticalBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHeatmap"
           }
         ]
       },
@@ -60736,31 +60767,31 @@
       "Widget.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
+            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionGauge"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
-          },
-          {
             "$ref": "#/components/schemas/WidgetDefinitionBarChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
+            "$ref": "#/components/schemas/WidgetDefinitionHexagon"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
           }
         ]
       },
@@ -62942,22 +62973,25 @@
       "v3.Group": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V3GroupFlow"
+          },
+          {
             "$ref": "#/components/schemas/V3GroupTimeRelativeThreshold"
           },
           {
             "$ref": "#/components/schemas/V3GroupTracingImmediate"
           },
           {
-            "$ref": "#/components/schemas/V3GroupLogsImmediate"
+            "$ref": "#/components/schemas/V3GroupUniqueCount"
           },
           {
             "$ref": "#/components/schemas/V3GroupLogsThreshold"
           },
           {
-            "$ref": "#/components/schemas/V3GroupSloBurnRateThreshold"
+            "$ref": "#/components/schemas/V3GroupMetricThreshold"
           },
           {
-            "$ref": "#/components/schemas/V3GroupFlow"
+            "$ref": "#/components/schemas/V3GroupSloErrorBudgetThreshold"
           },
           {
             "$ref": "#/components/schemas/V3GroupNewValue"
@@ -62969,23 +63003,20 @@
             "$ref": "#/components/schemas/V3GroupTracingThreshold"
           },
           {
-            "$ref": "#/components/schemas/V3GroupUniqueCount"
+            "$ref": "#/components/schemas/V3GroupLogsImmediate"
           },
           {
-            "$ref": "#/components/schemas/V3GroupMetricThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/V3GroupSloErrorBudgetThreshold"
+            "$ref": "#/components/schemas/V3GroupSloBurnRateThreshold"
           }
         ]
       },
       "v3.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
+            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
           },
           {
-            "$ref": "#/components/schemas/V3IntegrationTypeRecipients"
+            "$ref": "#/components/schemas/V3IntegrationTypeIntegrationId"
           }
         ]
       },
@@ -63764,8 +63795,123 @@
   },
   "tags": [
     {
-      "name": "Alert Scheduler Rule service",
-      "description": "Manage your alert scheduler rules.",
+      "name": "Presets service",
+      "description": "View and manage your presets - pre-configured templates for notification content rendering",
+      "externalDocs": {
+        "description": "Lean more about presets in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/notification-center/presets/introduction/"
+      }
+    },
+    {
+      "name": "Cases notification service",
+      "description": "Track notification adjacent data for cases.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Users Management Service",
+      "description": "Manage team members (users) including creation, updates, search, and status management.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Events2Metrics Service",
+      "description": "Manage your events2metrics.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Events Service",
+      "description": "A service for querying events.",
+      "externalDocs": {
+        "description": "Learn more about alerts in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
+      }
+    },
+    {
+      "name": "Retentions Service",
+      "description": "View and manage retentions",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Contextual data integration service",
+      "description": "Query for contextual data integration information.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Scopes Service",
+      "description": "A service to manage scopes",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Dashboard folders service",
+      "description": "Manage your dashboard folders.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Slos Service",
+      "description": "A service for managing Service Level Objectives (SLOs).",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Views service",
+      "description": "Create and manage views.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Quota Allocation Rule Set service",
+      "description": "Manage quota allocation rules for different entity types.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Extension deployment service",
+      "description": "A service that enables querying for extension deployment information.",
+      "externalDocs": {
+        "description": "Find out more about extensions in our documentation.",
+        "url": "https://coralogix.com/docs/integrations/extensions/"
+      }
+    },
+    {
+      "name": "Outgoing webhooks service",
+      "externalDocs": {
+        "description": "Find out more about outbound webhooks in our documentation.",
+        "url": "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      }
+    },
+    {
+      "name": "Enrichments Service",
+      "description": "Manage your enrichments.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Team Groups Management Service",
+      "description": "Manage Team Groups.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "API Keys Admin Service",
+      "description": "Administrative operations for API Keys management.",
       "externalDocs": {
         "url": ""
       }
@@ -63779,98 +63925,53 @@
       }
     },
     {
-      "name": "Extension deployment service",
-      "description": "A service that enables querying for extension deployment information.",
-      "externalDocs": {
-        "description": "Find out more about extensions in our documentation.",
-        "url": "https://coralogix.com/docs/integrations/extensions/"
-      }
-    },
-    {
-      "name": "Custom Enrichments Service",
-      "description": "Manage your enrichments.",
+      "name": "Dashboard service",
+      "description": "Get information about the Coralogix Dashboard catalog.",
       "externalDocs": {
         "url": ""
       }
     },
     {
-      "name": "Testing service",
-      "description": "Test your notification center configurations including connectors, presets, and templates",
-      "externalDocs": {
-        "description": "Lean more about the notification center in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/"
-      }
-    },
-    {
-      "name": "Role Management Service",
-      "description": "Service for managing system and custom roles.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Dashboard folders service",
-      "description": "Manage your dashboard folders.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Views service",
-      "description": "Create and manage views.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Target Service",
-      "description": "View and manage your storage targets for logs.",
+      "name": "Metrics Data Archive Service",
+      "description": "View and manage your storage targets for metrics.",
       "externalDocs": {
         "description": "Find out more about archives",
         "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
       }
     },
     {
-      "name": "Integration service",
-      "description": "A service that enables querying for integration information.",
+      "name": "Extension service",
+      "description": "A service that enables querying for extension information.",
       "externalDocs": {
-        "description": "Find out more about integrations in our documentation.",
-        "url": "https://coralogix.com/docs/integrations/getting-started/"
+        "description": "Learn more about extensions in our documentation.",
+        "url": "https://coralogix.com/docs/integrations/extensions/"
       }
     },
     {
-      "name": "API Keys Service",
-      "description": "Manage your API Keys.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Entities service",
-      "description": "Query information about registered entities in the notification center",
-      "externalDocs": {
-        "description": "Lean more about the notification center in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/"
-      }
-    },
-    {
-      "name": "Cases service",
-      "description": "Manage cases throughout their lifecycle. Create, view, assign, acknowledge, unacknowledge, resolve, and close cases to streamline investigations and follow-ups.",
-      "externalDocs": {
-        "description": "Learn more about Cases in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/cases/"
-      }
-    },
-    {
-      "name": "Team Groups Management Service",
-      "description": "Manage Team Groups.",
+      "name": "Rule Groups Service",
+      "description": "A service to manage rule groups.",
       "externalDocs": {
         "url": ""
       }
     },
     {
-      "name": "APM SLO Service",
-      "description": "A service for managing APM-specific SLOs (Public API)",
+      "name": "Connectors service",
+      "description": "View and manage your connectors - integration instances for notification destinations",
+      "externalDocs": {
+        "description": "Lean more about connectors in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/"
+      }
+    },
+    {
+      "name": "IP access service",
+      "description": "IP access service provides the API for managing company IP access settings.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "SAML Configuration Service",
+      "description": "Manage your SAML configuration",
       "externalDocs": {
         "url": ""
       }
@@ -63891,17 +63992,18 @@
       }
     },
     {
-      "name": "Enrichments Service",
-      "description": "Manage your enrichments.",
+      "name": "Alert Scheduler Rule service",
+      "description": "Manage your alert scheduler rules.",
       "externalDocs": {
         "url": ""
       }
     },
     {
-      "name": "Users Management Service",
-      "description": "Manage team members (users) including creation, updates, search, and status management.",
+      "name": "Testing service",
+      "description": "Test your notification center configurations including connectors, presets, and templates",
       "externalDocs": {
-        "url": ""
+        "description": "Lean more about the notification center in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/"
       }
     },
     {
@@ -63913,108 +64015,6 @@
       }
     },
     {
-      "name": "Actions Service",
-      "description": "View and manage your Actions.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Events Service",
-      "description": "A service for querying events.",
-      "externalDocs": {
-        "description": "Learn more about alerts in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
-      }
-    },
-    {
-      "name": "Metrics Data Archive Service",
-      "description": "View and manage your storage targets for metrics.",
-      "externalDocs": {
-        "description": "Find out more about archives",
-        "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-      }
-    },
-    {
-      "name": "Outgoing webhooks service",
-      "externalDocs": {
-        "description": "Find out more about outbound webhooks in our documentation.",
-        "url": "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
-      }
-    },
-    {
-      "name": "Global routers service",
-      "description": "View and manage your global routers - entities that direct notifications to configured destinations based on conditions",
-      "externalDocs": {
-        "description": "Lean more about global routers in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/"
-      }
-    },
-    {
-      "name": "Presets service",
-      "description": "View and manage your presets - pre-configured templates for notification content rendering",
-      "externalDocs": {
-        "description": "Lean more about presets in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/notification-center/presets/introduction/"
-      }
-    },
-    {
-      "name": "IP access service",
-      "description": "IP access service provides the API for managing company IP access settings.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "SAML Configuration Service",
-      "description": "Manage your SAML configuration",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Folders for views service",
-      "description": "Create and manage view folders.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Rule Groups Service",
-      "description": "A service to manage rule groups.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Dashboard service",
-      "description": "Get information about the Coralogix Dashboard catalog.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Events2Metrics Service",
-      "description": "Manage your events2metrics.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Scopes Service",
-      "description": "A service to manage scopes",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Retentions Service",
-      "description": "View and manage retentions",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
       "name": "Extension testing service",
       "externalDocs": {
         "description": "Find out more about extensions in our documentation.",
@@ -64022,22 +64022,23 @@
       }
     },
     {
-      "name": "Slos Service",
-      "description": "A service for managing Service Level Objectives (SLOs).",
+      "name": "Entities service",
+      "description": "Query information about registered entities in the notification center",
+      "externalDocs": {
+        "description": "Lean more about the notification center in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/"
+      }
+    },
+    {
+      "name": "Role Management Service",
+      "description": "Service for managing system and custom roles.",
       "externalDocs": {
         "url": ""
       }
     },
     {
-      "name": "API Keys Admin Service",
-      "description": "Administrative operations for API Keys management.",
-      "externalDocs": {
-        "url": ""
-      }
-    },
-    {
-      "name": "Cases notification service",
-      "description": "Track notification adjacent data for cases.",
+      "name": "API Keys Service",
+      "description": "Manage your API Keys.",
       "externalDocs": {
         "url": ""
       }
@@ -64050,31 +64051,31 @@
       }
     },
     {
-      "name": "Quota Allocation Rule Set service",
-      "description": "Manage quota allocation rules for different entity types.",
+      "name": "APM SLO Service",
+      "description": "A service for managing APM-specific SLOs (Public API)",
       "externalDocs": {
         "url": ""
       }
     },
     {
-      "name": "Extension service",
-      "description": "A service that enables querying for extension information.",
+      "name": "Global routers service",
+      "description": "View and manage your global routers - entities that direct notifications to configured destinations based on conditions",
       "externalDocs": {
-        "description": "Learn more about extensions in our documentation.",
-        "url": "https://coralogix.com/docs/integrations/extensions/"
+        "description": "Lean more about global routers in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/"
       }
     },
     {
-      "name": "Connectors service",
-      "description": "View and manage your connectors - integration instances for notification destinations",
+      "name": "Integration service",
+      "description": "A service that enables querying for integration information.",
       "externalDocs": {
-        "description": "Lean more about connectors in our documentation",
-        "url": "https://coralogix.com/docs/user-guides/notification-center/connectors/introduction/"
+        "description": "Find out more about integrations in our documentation.",
+        "url": "https://coralogix.com/docs/integrations/getting-started/"
       }
     },
     {
-      "name": "Contextual data integration service",
-      "description": "Query for contextual data integration information.",
+      "name": "Custom Enrichments Service",
+      "description": "Manage your enrichments.",
       "externalDocs": {
         "url": ""
       }
@@ -64084,6 +64085,36 @@
       "description": "View and manage your TCO policies",
       "externalDocs": {
         "url": ""
+      }
+    },
+    {
+      "name": "Cases service",
+      "description": "Manage cases throughout their lifecycle. Create, view, assign, acknowledge, unacknowledge, resolve, and close cases to streamline investigations and follow-ups.",
+      "externalDocs": {
+        "description": "Learn more about Cases in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/cases/"
+      }
+    },
+    {
+      "name": "Actions Service",
+      "description": "View and manage your Actions.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Folders for views service",
+      "description": "Create and manage view folders.",
+      "externalDocs": {
+        "url": ""
+      }
+    },
+    {
+      "name": "Target Service",
+      "description": "View and manage your storage targets for logs.",
+      "externalDocs": {
+        "description": "Find out more about archives",
+        "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
       }
     }
   ]

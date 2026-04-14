@@ -32,12 +32,6 @@
                   "field": {
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/SloFilterFieldProductType"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
-                      },
-                      {
                         "$ref": "#/components/schemas/SloFilterFieldConstFilter"
                       },
                       {
@@ -45,6 +39,12 @@
                       },
                       {
                         "$ref": "#/components/schemas/SloFilterFieldSloType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldProductType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
                       }
                     ]
                   },
@@ -59,13 +59,13 @@
                       "is": {
                         "oneOf": [
                           {
-                            "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
-                          },
-                          {
                             "$ref": "#/components/schemas/IsFilterPredicateProductTypeValues"
                           },
                           {
                             "$ref": "#/components/schemas/IsFilterPredicateStringValues"
+                          },
+                          {
+                            "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
                           }
                         ]
                       }
@@ -492,13 +492,13 @@
                 "type": "object",
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/SloApmSli"
+                  },
+                  {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloWindowBasedMetricSli"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloApmSli"
                   }
                 ]
               }
@@ -646,10 +646,10 @@
       "ApmLatencySli": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ApmLatencySliQuantile"
+            "$ref": "#/components/schemas/ApmLatencySliAverage"
           },
           {
-            "$ref": "#/components/schemas/ApmLatencySliAverage"
+            "$ref": "#/components/schemas/ApmLatencySliQuantile"
           }
         ]
       },
@@ -870,61 +870,6 @@
           "DATA_LOSS"
         ]
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "required": [
-          "aggregation"
-        ]
-      },
-      "ColorsByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/ColorsByCategory"
-          }
-        },
-        "required": [
-          "category"
-        ]
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "required": [
-          "groupBy"
-        ]
-      },
-      "ColorsByQuery": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/ColorsByQuery"
-          }
-        },
-        "required": [
-          "query"
-        ]
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "required": [
-          "stack"
-        ]
-      },
       "ComparisonOperator": {
         "type": "string",
         "enum": [
@@ -1017,10 +962,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1202,38 +1147,6 @@
             "type": "string"
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "required": [
-          "auto"
-        ]
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "required": [
-          "custom"
-        ]
       },
       "MissingDataStrategy": {
         "type": "string",
@@ -1482,13 +1395,13 @@
       "SloExecutionRequest": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
-          },
-          {
             "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
           },
           {
             "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+          },
+          {
+            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
           }
         ]
       },
@@ -1546,13 +1459,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
+          },
+          {
             "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
           }
         ]
       },

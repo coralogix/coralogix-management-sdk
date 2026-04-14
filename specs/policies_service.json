@@ -202,10 +202,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
                   },
                   {
-                    "$ref": "#/components/schemas/CreatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/CreatePolicyRequestLogRules"
                   }
                 ]
               }
@@ -714,61 +714,6 @@
           "testPoliciesBulkResult"
         ]
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "required": [
-          "aggregation"
-        ]
-      },
-      "ColorsByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/ColorsByCategory"
-          }
-        },
-        "required": [
-          "category"
-        ]
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "required": [
-          "groupBy"
-        ]
-      },
-      "ColorsByQuery": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/ColorsByQuery"
-          }
-        },
-        "required": [
-          "query"
-        ]
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "required": [
-          "stack"
-        ]
-      },
       "CreateGenericPolicyRequest": {
         "externalDocs": {
           "description": "Find out more about quota management.",
@@ -1016,10 +961,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1212,38 +1157,6 @@
           }
         }
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "required": [
-          "auto"
-        ]
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "required": [
-          "custom"
-        ]
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1261,10 +1174,10 @@
       "Placement": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PlacementFirst"
+            "$ref": "#/components/schemas/PlacementLast"
           },
           {
-            "$ref": "#/components/schemas/PlacementLast"
+            "$ref": "#/components/schemas/PlacementFirst"
           }
         ]
       },

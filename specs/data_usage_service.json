@@ -69,6 +69,9 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionPillar"
                   },
                   {
@@ -79,9 +82,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionSeverity"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPriority"
                   }
                 ]
               }
@@ -138,10 +138,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
                   }
                 ]
               }
@@ -644,61 +644,6 @@
           "AGGREGATE_BY_SEVERITY"
         ]
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "required": [
-          "aggregation"
-        ]
-      },
-      "ColorsByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/ColorsByCategory"
-          }
-        },
-        "required": [
-          "category"
-        ]
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "required": [
-          "groupBy"
-        ]
-      },
-      "ColorsByQuery": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/ColorsByQuery"
-          }
-        },
-        "required": [
-          "query"
-        ]
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "required": [
-          "stack"
-        ]
-      },
       "DataUsageEntry": {
         "externalDocs": {
           "description": "Find out more about data usage.",
@@ -842,6 +787,12 @@
       "Dimension": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/DimensionSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionPriority"
+          },
+          {
             "$ref": "#/components/schemas/DimensionPillar"
           },
           {
@@ -849,12 +800,6 @@
           },
           {
             "$ref": "#/components/schemas/DimensionTier"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPriority"
           }
         ]
       },
@@ -938,10 +883,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -1226,38 +1171,6 @@
             "format": "date-time"
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "required": [
-          "auto"
-        ]
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "required": [
-          "custom"
-        ]
       },
       "MultipleValues": {
         "type": "object",

@@ -99,61 +99,6 @@
           "notificationDeliveries"
         ]
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "required": [
-          "aggregation"
-        ]
-      },
-      "ColorsByCategory": {
-        "type": "object",
-        "properties": {
-          "category": {
-            "$ref": "#/components/schemas/ColorsByCategory"
-          }
-        },
-        "required": [
-          "category"
-        ]
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "required": [
-          "groupBy"
-        ]
-      },
-      "ColorsByQuery": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/ColorsByQuery"
-          }
-        },
-        "required": [
-          "query"
-        ]
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "required": [
-          "stack"
-        ]
-      },
       "ConnectorDetails": {
         "externalDocs": {
           "url": ""
@@ -223,10 +168,10 @@
       "DeliveryOutcome": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
+            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
           },
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
+            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
           }
         ]
       },
@@ -291,10 +236,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           }
         ]
       },
@@ -383,38 +328,6 @@
           "deliveriesByCase"
         ]
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "required": [
-          "auto"
-        ]
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "required": [
-          "custom"
-        ]
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -459,13 +372,13 @@
       "NotificationDelivery": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/NotificationDeliveryAttempted"
-          },
-          {
             "$ref": "#/components/schemas/NotificationDeliveryNoRouterMatched"
           },
           {
             "$ref": "#/components/schemas/NotificationDeliveryNoNotificationCreated"
+          },
+          {
+            "$ref": "#/components/schemas/NotificationDeliveryAttempted"
           }
         ]
       },
