@@ -35,7 +35,7 @@ func TestPolicies(t *testing.T) {
 		CreatePolicyRequestLogRules: &tcopolicies.CreatePolicyRequestLogRules{
 			Name:     policyName,
 			Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_LOW,
-			LogRules: &tcopolicies.LogRules{
+			LogRules: tcopolicies.LogRules{
 				Severities: []tcopolicies.QuotaV1Severity{
 					tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
 					tcopolicies.QUOTAV1SEVERITY_SEVERITY_CRITICAL,
@@ -75,7 +75,7 @@ func TestPolicies(t *testing.T) {
 			Name:     tcopolicies.PtrString(updatedName),
 			Id:       policyID,
 			Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_LOW.Ptr(),
-			LogRules: &tcopolicies.LogRules{
+			LogRules: tcopolicies.LogRules{
 				Severities: []tcopolicies.QuotaV1Severity{
 					tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
 					tcopolicies.QUOTAV1SEVERITY_SEVERITY_CRITICAL,

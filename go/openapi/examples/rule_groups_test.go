@@ -106,7 +106,7 @@ func getSubgroups() []rulegroups.CreateRuleGroupRequestCreateRuleSubgroup {
 					Order:       rulegroups.PtrInt64(int64(1)),
 					Parameters: &rulegroups.RuleParameters{
 						RuleParametersBlockParameters: &rulegroups.RuleParametersBlockParameters{
-							BlockParameters: &rulegroups.BlockParameters{
+							BlockParameters: rulegroups.BlockParameters{
 								KeepBlockedLogs: rulegroups.PtrBool(false),
 								Rule:            rulegroups.PtrString(`sql_error_code\s*=\s*28000`),
 							},

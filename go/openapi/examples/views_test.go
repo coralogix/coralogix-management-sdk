@@ -37,11 +37,11 @@ func TestViews(t *testing.T) {
 			Query: "source logs | filter $l.applicationname == 'default'",
 		},
 		TimeSelection: views.TimeSelection{
-			TimeSelectionQuickSelection: &views.TimeSelectionQuickSelection{
-				QuickSelection: &views.QuickTimeSelection{
-					Seconds: 86400,
-				},
+		TimeSelectionQuickSelection: &views.TimeSelectionQuickSelection{
+			QuickSelection: views.QuickTimeSelection{
+				Seconds: 86400,
 			},
+		},
 		},
 	}
 

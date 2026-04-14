@@ -48,7 +48,7 @@ func TestApiKeys(t *testing.T) {
 		Name: &name,
 		Owner: &apikeys.Owner{
 			OwnerTeamId: &apikeys.OwnerTeamId{
-				TeamId: &teamID,
+				TeamId: teamID,
 			},
 		},
 		KeyPermissions: &apikeys.CreateApiKeyRequestKeyPermissions{
@@ -227,7 +227,7 @@ func TestCustomRoles(t *testing.T) {
 		CreateRoleRequestParentRoleName: &customroles.CreateRoleRequestParentRoleName{
 			Name:           customroles.PtrString("custom-role-sample"),
 			Description:    customroles.PtrString("This is a sample custom role"),
-			ParentRoleName: customroles.PtrString("Standard User"),
+			ParentRoleName: "Standard User",
 			Permissions: []string{
 				"team-actions:UpdateConfig",
 				"TEAM-CUSTOM-API-KEYS:READCONFIG",

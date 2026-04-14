@@ -41,7 +41,7 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
 						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: &alerts.Recipients{
+							Recipients: alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
 						},
@@ -57,7 +57,7 @@ func CreateTracingImmediateAlert() *alerts.AlertDefPropertiesTracingImmediate {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		TracingImmediate: &alerts.TracingImmediateType{
+		TracingImmediate: alerts.TracingImmediateType{
 			TracingFilter: &alerts.TracingFilter{
 				SimpleFilter: &alerts.TracingSimpleFilter{
 					LatencyThresholdMs: &latencyThresholdMs,
@@ -94,7 +94,7 @@ func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
 						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: &alerts.Recipients{
+							Recipients: alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
 						},
@@ -110,7 +110,7 @@ func CreateLogsRatioAlert() *alerts.AlertDefPropertiesLogsRatioThreshold {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		LogsRatioThreshold: &alerts.LogsRatioThresholdType{
+		LogsRatioThreshold: alerts.LogsRatioThresholdType{
 			NumeratorAlias:   &numeratorAlias,
 			DenominatorAlias: &denominatorAlias,
 			Rules: []alerts.LogsRatioRules{
@@ -157,7 +157,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
 						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: &alerts.Recipients{
+							Recipients: alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
 						},
@@ -173,7 +173,7 @@ func CreateTracingThresholdAlert() *alerts.AlertDefPropertiesTracingThreshold {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		TracingThreshold: &alerts.TracingThresholdType{
+		TracingThreshold: alerts.TracingThresholdType{
 			TracingFilter: &alerts.TracingFilter{
 				SimpleFilter: &alerts.TracingSimpleFilter{
 					LatencyThresholdMs: &latencyThresholdMs,
@@ -231,7 +231,7 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
 						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: &alerts.Recipients{
+							Recipients: alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
 						},
@@ -247,7 +247,7 @@ func CreateFlowAlert(alertId string) *alerts.AlertDefPropertiesFlow {
 			StartTime: &alerts.TimeOfDay{Hours: &startHour, Minutes: &startMinute},
 			EndTime:   &alerts.TimeOfDay{Hours: &endHour, Minutes: &endMinute},
 		},
-		Flow: &alerts.FlowType{
+		Flow: alerts.FlowType{
 			EnforceSuppression: &enforceSuppresion,
 			Stages: []alerts.FlowStages{
 				{
@@ -535,12 +535,12 @@ func TestSloAlerts(t *testing.T) {
 	sloClient := clientSet.SLOs()
 	sloPayload := getRequestBasedSlo("example_slo_for_alert")
 
-	createSloReq := slos.SlosServiceReplaceSloRequest{
+	createSloReq := slos.SlosServiceCreateSloRequest{
 		SloRequestBasedMetricSli: sloPayload,
 	}
 	sloResp, httpResp, err := sloClient.
 		SlosServiceCreateSlo(ctx).
-		SlosServiceReplaceSloRequest(createSloReq).
+		SlosServiceCreateSloRequest(createSloReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	sloID := sloResp.GetSlo().SloRequestBasedMetricSli.GetId()
@@ -633,11 +633,11 @@ func TestAlertScheduler(t *testing.T) {
 
 	schedule := scheduler.ScheduleOneTimeAsSchedule(&scheduler.ScheduleOneTime{
 		ScheduleOperation: scheduler.SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE.Ptr(),
-		OneTime: &scheduler.OneTime{
+		OneTime: scheduler.OneTime{
 			Timeframe: &scheduler.Timeframe{
 				TimeframeEndTime: &scheduler.TimeframeEndTime{
 					StartTime: scheduler.PtrString("2025-01-01T00:00:00.000Z"),
-					EndTime:   scheduler.PtrString("2025-12-31T23:59:59.000Z"),
+					EndTime:   "2025-12-31T23:59:59.000Z",
 					Timezone:  scheduler.PtrString("UTC"),
 				},
 			},
@@ -647,7 +647,7 @@ func TestAlertScheduler(t *testing.T) {
 	filter := scheduler.AlertSchedulerRuleProtobufV1Filter{
 		AlertSchedulerRuleProtobufV1FilterAlertUniqueIds: &scheduler.AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{
 			WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
-			AlertUniqueIds: &scheduler.AlertUniqueIds{
+			AlertUniqueIds: scheduler.AlertUniqueIds{
 				Value: []string{*createdAlert.AlertDef.Id},
 			},
 		},
@@ -727,7 +727,7 @@ func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold
 					NotifyOn: alerts.NOTIFYON_NOTIFY_ON_TRIGGERED_AND_RESOLVED.Ptr(),
 					Integration: &alerts.V3IntegrationType{
 						V3IntegrationTypeRecipients: &alerts.V3IntegrationTypeRecipients{
-							Recipients: &alerts.Recipients{
+							Recipients: alerts.Recipients{
 								Emails: []string{"example@coralogix.com"},
 							},
 						},
@@ -743,12 +743,12 @@ func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold
 			StartTime: &alerts.TimeOfDay{Hours: slos.PtrInt32(8), Minutes: slos.PtrInt32(32)},
 			EndTime:   &alerts.TimeOfDay{Hours: slos.PtrInt32(20), Minutes: slos.PtrInt32(30)},
 		},
-		SloThreshold: &alerts.SloThresholdType{
+		SloThreshold: alerts.SloThresholdType{
 			SloThresholdTypeBurnRate: &alerts.SloThresholdTypeBurnRate{
 				SloDefinition: &alerts.V3SloDefinition{
 					SloId: &sloID,
 				},
-				BurnRate: &alerts.BurnRateThreshold{
+				BurnRate: alerts.BurnRateThreshold{
 					BurnRateThresholdSingle: &alerts.BurnRateThresholdSingle{
 						Rules: []alerts.SloThresholdRule{
 							{
@@ -760,7 +760,7 @@ func CreateBurnRateSloAlert(sloID string) *alerts.AlertDefPropertiesSloThreshold
 								},
 							},
 						},
-						Single: &alerts.BurnRateTypeSingle{
+						Single: alerts.BurnRateTypeSingle{
 							TimeDuration: &alerts.TimeDuration{
 								Duration: slos.PtrString("1"),
 								Unit:     alerts.DURATIONUNIT_DURATION_UNIT_HOURS.Ptr(),

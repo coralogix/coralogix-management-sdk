@@ -43,7 +43,7 @@ func TestArchiveMetrics(t *testing.T) {
 
 	configureReq := metrics.MetricsConfiguratorPublicServiceConfigureTenantRequest{
 		ConfigureTenantRequestS3: &metrics.ConfigureTenantRequestS3{
-			S3: &s3Config,
+			S3: s3Config,
 		},
 	}
 	_, httpResp, err := client.
@@ -54,7 +54,7 @@ func TestArchiveMetrics(t *testing.T) {
 
 	validateReq := metrics.MetricsConfiguratorPublicServiceValidateBucketRequest{
 		ValidateBucketRequestS3: &metrics.ValidateBucketRequestS3{
-			S3: &s3Config,
+			S3: s3Config,
 		},
 	}
 	_, httpResp, err = client.
@@ -67,7 +67,7 @@ func TestArchiveMetrics(t *testing.T) {
 	updateReq := metrics.MetricsConfiguratorPublicServiceUpdateRequest{
 		UpdateRequestS3: &metrics.UpdateRequestS3{
 			RetentionDays: &retentionDays,
-			S3:            &s3Config,
+			S3:            s3Config,
 		},
 	}
 

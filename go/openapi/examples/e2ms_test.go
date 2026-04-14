@@ -28,7 +28,7 @@ func TestE2MsLogsQuery(t *testing.T) {
 		E2MCreateParamsLogsQuery: &events2metrics_service.E2MCreateParamsLogsQuery{
 			Name:        "Test E2M Logs Query",
 			Description: &description,
-			LogsQuery: &events2metrics_service.V2LogsQuery{
+			LogsQuery: events2metrics_service.V2LogsQuery{
 				Lucene:                 &luceneQuery,
 				ApplicationnameFilters: []string{"filter:startsWith:nginx"},
 				SeverityFilters:        []events2metrics_service.Logs2metricsV2Severity{events2metrics_service.LOGS2METRICSV2SEVERITY_SEVERITY_DEBUG},
@@ -42,7 +42,7 @@ func TestE2MsLogsQuery(t *testing.T) {
 							V2AggregationSamples: &events2metrics_service.V2AggregationSamples{
 								AggType: events2metrics_service.AGGTYPE_AGG_TYPE_COUNT.Ptr(),
 								Enabled: &enable,
-								Samples: &events2metrics_service.E2MAggSamples{
+								Samples: events2metrics_service.E2MAggSamples{
 									SampleType: events2metrics_service.SAMPLETYPE_SAMPLE_TYPE_MAX.Ptr().Ptr(),
 								},
 								TargetMetricName: &geoLocationMetricName1,

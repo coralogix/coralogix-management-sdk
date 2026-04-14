@@ -64,7 +64,7 @@ func TestSlackConnector(t *testing.T) {
 
 	connector := connectors.Connector{
 		Name:        connectors.PtrString("TestSlackConnector"),
-		Type:        connectors.CONNECTORTYPE_SLACK.Ptr(),
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_SLACK.Ptr(),
 		Description: connectors.PtrString("This is the slack connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
@@ -117,7 +117,7 @@ func TestPagerdutyConnector(t *testing.T) {
 
 	connector := connectors.Connector{
 		Name:        connectors.PtrString("TestPagerdutyConnector"),
-		Type:        connectors.CONNECTORTYPE_PAGERDUTY.Ptr(),
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY.Ptr(),
 		Description: connectors.PtrString("This is the PagerDuty connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
@@ -217,12 +217,12 @@ func TestSlackPreset(t *testing.T) {
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
 		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 		ParentId:      presets.PtrString("preset_system_slack_alerts_basic"),
-		ConnectorType: presets.CONNECTORTYPE_SLACK.Ptr(),
+		ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_SLACK.Ptr(),
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
 					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
+						MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
 							EntitySubType: presets.PtrString("logsImmediateResolved"),
 						},
 					},
@@ -294,12 +294,12 @@ func TestPagerdutyPreset(t *testing.T) {
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
 		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 		ParentId:      presets.PtrString("preset_system_pagerduty_alerts_basic"),
-		ConnectorType: presets.CONNECTORTYPE_PAGERDUTY.Ptr(),
+		ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY.Ptr(),
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
 					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-						MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
+						MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
 							EntitySubType: presets.PtrString("logsImmediateTriggered"),
 						},
 					},
@@ -472,7 +472,7 @@ func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
 	return &connectors.CreateConnectorRequest{
 		Connector: &connectors.Connector{
 			Name:        &name,
-			Type:        connectors.CONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+			Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
 			Description: connectors.PtrString("This is the connector to use for Notification Center testing."),
 			ConnectorConfig: &connectors.ConnectorConfig{
 				Fields: []connectors.NotificationCenterConnectorConfigField{
@@ -504,7 +504,7 @@ func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 			PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
 			EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
 			ParentId:      presets.PtrString("preset_system_generic_https_alerts_empty"),
-			ConnectorType: presets.CONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+			ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
 			ConfigOverrides: []presets.ConfigOverrides{
 				{
 					PayloadType: presets.PtrString("generic_https_default"),
@@ -520,15 +520,15 @@ func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 							},
 						},
 					},
-					ConditionType: &presets.NotificationCenterConditionType{
-						NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
-							MatchEntityTypeAndSubType: &presets.MatchEntityTypeAndSubTypeCondition{
-								EntitySubType: presets.PtrString("logsImmediateResolved"),
-							},
+				ConditionType: &presets.NotificationCenterConditionType{
+					NotificationCenterConditionTypeMatchEntityTypeAndSubType: &presets.NotificationCenterConditionTypeMatchEntityTypeAndSubType{
+						MatchEntityTypeAndSubType: presets.MatchEntityTypeAndSubTypeCondition{
+							EntitySubType: presets.PtrString("logsImmediateResolved"),
 						},
 					},
 				},
 			},
 		},
-	}
+	},
+}
 }
