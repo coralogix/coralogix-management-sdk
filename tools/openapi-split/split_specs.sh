@@ -34,4 +34,9 @@ done
 echo "--------------------------------------------------------"
 wait $(jobs -p)
 echo "Batch processing complete."
+
+# Remove existing specs directory if it exists
+if [ -d "$REPO_ROOT/specs" ]; then
+    rm -rf "$REPO_ROOT/specs"
+fi
 mv specs "$REPO_ROOT"
