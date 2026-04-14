@@ -221,7 +221,7 @@ func URLFromRegion(region string) (string, bool) {
 func URLFromDomain(domain string) string {
 	url := gourl.URL{
 		Scheme: "https",
-		Path:   "mgmt/openapi/4",
+		Path:   "mgmt/openapi/5",
 		Host:   domain,
 	}
 	return url.String()
