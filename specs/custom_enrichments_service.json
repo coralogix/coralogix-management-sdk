@@ -11,7 +11,6 @@
           "Custom Enrichments Service"
         ],
         "summary": "Get Custom Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -34,7 +33,6 @@
           "Custom Enrichments Service"
         ],
         "summary": "Update Custom Enrichment",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -69,8 +67,7 @@
                   "name",
                   "description",
                   "file"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -93,7 +90,6 @@
           "Custom Enrichments Service"
         ],
         "summary": "Create Custom Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -122,8 +118,7 @@
                   "name",
                   "description",
                   "file"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -148,7 +143,6 @@
           "Custom Enrichments Service"
         ],
         "summary": "Search Custom Enrichment Data",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -162,10 +156,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SearchClauseName"
+                    "$ref": "#/components/schemas/SearchClauseId"
                   },
                   {
-                    "$ref": "#/components/schemas/SearchClauseId"
+                    "$ref": "#/components/schemas/SearchClauseName"
                   }
                 ]
               }
@@ -187,51 +181,12 @@
         }
       }
     },
-    "/enrichment-rules/custom-enrichment-rules/v1/{custom_enrichment_id}": {
-      "delete": {
-        "tags": [
-          "Custom Enrichments Service"
-        ],
-        "summary": "Delete Custom Enrichments",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "CustomEnrichmentService_DeleteCustomEnrichment",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "custom_enrichment_id",
-            "required": true,
-            "schema": {
-              "example": 1,
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteCustomEnrichmentResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/enrichment-rules/custom-enrichment-rules/v1/{id}": {
       "get": {
         "tags": [
           "Custom Enrichments Service"
         ],
         "summary": "Get Custom Enrichment",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -261,6 +216,41 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Custom Enrichments Service"
+        ],
+        "summary": "Delete Custom Enrichments",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_DeleteCustomEnrichment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 1,
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCustomEnrichmentResponse"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -273,7 +263,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -282,7 +285,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -291,7 +307,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "CreateCustomEnrichmentResponse": {
         "externalDocs": {
@@ -343,10 +361,10 @@
       "CustomEnrichmentData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
           },
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
           }
         ]
       },
@@ -361,7 +379,9 @@
             "$ref": "#/components/schemas/CustomEnrichment"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "binary"
+        ]
       },
       "CustomEnrichmentDataTextual": {
         "type": "object",
@@ -373,7 +393,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "textual"
+        ]
       },
       "DeleteCustomEnrichmentResponse": {
         "type": "object",
@@ -438,7 +460,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "binary"
+        ]
       },
       "FileTextual": {
         "externalDocs": {
@@ -467,15 +491,17 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "textual"
+        ]
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -497,9 +523,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -519,9 +545,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -591,7 +617,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -605,7 +633,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -636,7 +666,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "id"
+        ]
       },
       "SearchClauseName": {
         "externalDocs": {
@@ -652,7 +684,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "name"
+        ]
       },
       "SearchCustomEnrichmentDataResponse": {
         "type": "object",
@@ -714,14 +748,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

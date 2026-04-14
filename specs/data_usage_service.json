@@ -11,7 +11,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -30,12 +29,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -128,7 +127,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Evaluation Tokens",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -188,7 +186,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Processed GBs",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -200,10 +197,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
                   }
                 ]
               }
@@ -248,7 +245,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Units",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -260,10 +256,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
                   }
                 ]
               }
@@ -308,7 +304,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage Metrics Export Status",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -349,7 +344,6 @@
           "Data Usage Service"
         ],
         "summary": "Update Data Usage Metrics Export Status",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -366,8 +360,7 @@
                     "example": true,
                     "type": "boolean"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -410,7 +403,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Logs Count",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -429,12 +421,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -535,7 +527,6 @@
           "Data Usage Service"
         ],
         "summary": "Get Spans Count",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -554,12 +545,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00.000Z",
+                  "example": "2021-01-01T00:00:00Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -660,7 +651,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -669,7 +673,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -678,7 +695,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "DataUsageEntry": {
         "externalDocs": {
@@ -846,16 +865,20 @@
             "$ref": "#/components/schemas/GenericDimension"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "genericDimension"
+        ]
       },
       "DimensionPillar": {
         "type": "object",
         "properties": {
           "pillar": {
-            "$ref": "#/components/schemas/v2.Pillar"
+            "$ref": "#/components/schemas/Pillar"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "pillar"
+        ]
       },
       "DimensionPriority": {
         "type": "object",
@@ -864,7 +887,9 @@
             "$ref": "#/components/schemas/v2.Priority"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "priority"
+        ]
       },
       "DimensionSeverity": {
         "type": "object",
@@ -873,7 +898,9 @@
             "$ref": "#/components/schemas/datausage.v2.Severity"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "severity"
+        ]
       },
       "DimensionTier": {
         "type": "object",
@@ -882,7 +909,9 @@
             "$ref": "#/components/schemas/v2.TcoTier"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "tier"
+        ]
       },
       "Evaluation": {
         "type": "object",
@@ -909,10 +938,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -934,9 +963,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -956,9 +985,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -1008,7 +1037,9 @@
             "$ref": "#/components/schemas/v2.DateRange"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "dateRange"
+        ]
       },
       "GetDailyUsageEvaluationTokensRequestRange": {
         "type": "object",
@@ -1017,7 +1048,9 @@
             "$ref": "#/components/schemas/v2.Range"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "range"
+        ]
       },
       "GetDailyUsageEvaluationTokensResponse": {
         "type": "object",
@@ -1037,7 +1070,9 @@
             "$ref": "#/components/schemas/v2.DateRange"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "dateRange"
+        ]
       },
       "GetDailyUsageProcessedGbsRequestRange": {
         "type": "object",
@@ -1046,7 +1081,9 @@
             "$ref": "#/components/schemas/v2.Range"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "range"
+        ]
       },
       "GetDailyUsageProcessedGbsResponse": {
         "type": "object",
@@ -1066,7 +1103,9 @@
             "$ref": "#/components/schemas/v2.DateRange"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "dateRange"
+        ]
       },
       "GetDailyUsageUnitsRequestRange": {
         "type": "object",
@@ -1075,7 +1114,9 @@
             "$ref": "#/components/schemas/v2.Range"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "range"
+        ]
       },
       "GetDailyUsageUnitsResponse": {
         "type": "object",
@@ -1198,7 +1239,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -1212,7 +1255,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -1227,6 +1272,17 @@
             }
           }
         }
+      },
+      "Pillar": {
+        "type": "string",
+        "enum": [
+          "PILLAR_UNSPECIFIED",
+          "PILLAR_METRICS",
+          "PILLAR_LOGS",
+          "PILLAR_SPANS",
+          "PILLAR_BINARY",
+          "PILLAR_PROFILES"
+        ]
       },
       "SpansCount": {
         "externalDocs": {
@@ -1268,7 +1324,7 @@
             "format": "int64"
           },
           "timestamp": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1345,12 +1401,12 @@
         "type": "object",
         "properties": {
           "fromDate": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           },
           "toDate": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1364,17 +1420,6 @@
             "format": "float"
           }
         }
-      },
-      "v2.Pillar": {
-        "type": "string",
-        "enum": [
-          "PILLAR_UNSPECIFIED",
-          "PILLAR_METRICS",
-          "PILLAR_LOGS",
-          "PILLAR_SPANS",
-          "PILLAR_BINARY",
-          "PILLAR_PROFILES"
-        ]
       },
       "v2.Priority": {
         "type": "string",
@@ -1422,14 +1467,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

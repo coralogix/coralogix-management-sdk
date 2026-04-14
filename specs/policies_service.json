@@ -11,7 +11,6 @@
           "Policies Service"
         ],
         "summary": "Atomic Overwrite Log Policies",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,8 +32,7 @@
                 },
                 "required": [
                   "policies"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -77,7 +75,6 @@
           "Policies Service"
         ],
         "summary": "Get Company Policies",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -137,7 +134,6 @@
           "Policies Service"
         ],
         "summary": "Update Policy",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -149,10 +145,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
                   }
                 ]
               }
@@ -195,7 +191,6 @@
           "Policies Service"
         ],
         "summary": "Create Policy",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -255,7 +250,6 @@
           "Policies Service"
         ],
         "summary": "Reorder Policies",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -281,8 +275,7 @@
                 "required": [
                   "orders",
                   "sourceType"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -325,7 +318,6 @@
           "Policies Service"
         ],
         "summary": "Bulk Test Log Policies",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -347,8 +339,7 @@
                 },
                 "required": [
                   "metaFieldsValuesList"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -391,7 +382,6 @@
           "Policies Service"
         ],
         "summary": "Get Policy by ID",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -444,7 +434,6 @@
           "Policies Service"
         ],
         "summary": "Delete Policy",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -499,7 +488,6 @@
           "Policies Service"
         ],
         "summary": "Replace Policy Settings",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -518,8 +506,7 @@
                   "spansPolicySettings": {
                     "$ref": "#/components/schemas/SpansPolicySettings"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -562,7 +549,6 @@
           "Policies Service"
         ],
         "summary": "Get Policy Priority Settings",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -605,7 +591,6 @@
           "Policies Service"
         ],
         "summary": "Atomic Overwrite Span Policies",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -627,8 +612,7 @@
                 },
                 "required": [
                   "policies"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -737,7 +721,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -746,7 +743,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -755,7 +765,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "CreateGenericPolicyRequest": {
         "externalDocs": {
@@ -786,8 +798,17 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
           }
         },
         "required": [
@@ -852,15 +873,24 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
           }
         },
         "required": [
           "name",
-          "priority"
-        ],
-        "additionalProperties": false
+          "priority",
+          "logRules"
+        ]
       },
       "CreatePolicyRequestSpanRules": {
         "externalDocs": {
@@ -894,18 +924,27 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
           "spanRules": {
             "$ref": "#/components/schemas/SpanRules"
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
           }
         },
         "required": [
           "name",
-          "priority"
-        ],
-        "additionalProperties": false
+          "priority",
+          "spanRules"
+        ]
       },
       "CreatePolicyResponse": {
         "externalDocs": {
@@ -977,10 +1016,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -1002,9 +1041,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -1024,9 +1063,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -1146,6 +1185,9 @@
         "description": "Log rules for a policy.",
         "type": "object",
         "properties": {
+          "dpxlExpression": {
+            "type": "string"
+          },
           "severities": {
             "type": "array",
             "items": {
@@ -1182,7 +1224,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -1196,7 +1240,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -1229,7 +1275,9 @@
             "$ref": "#/components/schemas/First"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "first"
+        ]
       },
       "PlacementLast": {
         "type": "object",
@@ -1238,7 +1286,9 @@
             "$ref": "#/components/schemas/Last"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "last"
+        ]
       },
       "Policy": {
         "oneOf": [
@@ -1271,7 +1321,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string"
           },
           "deleted": {
@@ -1305,11 +1355,23 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
+          "priorityOverrideStatus": {
+            "$ref": "#/components/schemas/PriorityOverrideStatus"
+          },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
+          },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string"
           }
         },
@@ -1320,9 +1382,9 @@
           "priority",
           "deleted",
           "enabled",
-          "order"
-        ],
-        "additionalProperties": false
+          "order",
+          "logRules"
+        ]
       },
       "PolicyOrder": {
         "externalDocs": {
@@ -1369,7 +1431,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string"
           },
           "deleted": {
@@ -1400,14 +1462,26 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
+          "priorityOverrideStatus": {
+            "$ref": "#/components/schemas/PriorityOverrideStatus"
+          },
           "spanRules": {
             "$ref": "#/components/schemas/SpanRules"
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
+          },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00.000Z",
+            "example": "2021-01-01T00:00:00Z",
             "type": "string"
           }
         },
@@ -1418,9 +1492,52 @@
           "priority",
           "deleted",
           "enabled",
-          "order"
-        ],
-        "additionalProperties": false
+          "order",
+          "spanRules"
+        ]
+      },
+      "PriorityOverride": {
+        "type": "object",
+        "properties": {
+          "quotaBased": {
+            "$ref": "#/components/schemas/QuotaBased"
+          }
+        }
+      },
+      "PriorityOverrideStatus": {
+        "type": "object",
+        "properties": {
+          "quotaBased": {
+            "$ref": "#/components/schemas/QuotaBasedStatus"
+          }
+        }
+      },
+      "QuotaBased": {
+        "type": "object",
+        "properties": {
+          "usageTiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageTier"
+            }
+          }
+        }
+      },
+      "QuotaBasedStatus": {
+        "type": "object",
+        "properties": {
+          "currentPriority": {
+            "$ref": "#/components/schemas/quota.v1.Priority"
+          },
+          "currentUsage": {
+            "type": "number",
+            "format": "double"
+          },
+          "dailyLimit": {
+            "type": "number",
+            "format": "double"
+          }
+        }
       },
       "ReorderPoliciesResponse": {
         "externalDocs": {
@@ -1588,14 +1705,23 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
           }
         },
         "required": [
-          "id"
-        ],
-        "additionalProperties": false
+          "id",
+          "logRules"
+        ]
       },
       "UpdatePolicyRequestSpanRules": {
         "externalDocs": {
@@ -1631,17 +1757,26 @@
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
+          "priorityOverride": {
+            "$ref": "#/components/schemas/PriorityOverride"
+          },
           "spanRules": {
             "$ref": "#/components/schemas/SpanRules"
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.Target"
+            }
           }
         },
         "required": [
-          "id"
-        ],
-        "additionalProperties": false
+          "id",
+          "spanRules"
+        ]
       },
       "UpdatePolicyResponse": {
         "externalDocs": {
@@ -1659,6 +1794,19 @@
         "required": [
           "policy"
         ]
+      },
+      "UsageTier": {
+        "type": "object",
+        "properties": {
+          "dailyQuotaPercentage": {
+            "example": 80,
+            "type": "number",
+            "format": "double"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/quota.v1.Priority"
+          }
+        }
       },
       "common.Group": {
         "type": "object",
@@ -1726,20 +1874,37 @@
           "SOURCE_TYPE_SPANS"
         ]
       },
+      "v1.Target": {
+        "externalDocs": {
+          "description": "Find out more about quota management.",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+        },
+        "title": "Target",
+        "description": "This data structure represents a target for quota policies. It defines a named group of datasets with a priority level and optional archive retention configuration.",
+        "type": "object",
+        "properties": {
+          "archiveRetention": {
+            "$ref": "#/components/schemas/ArchiveRetention"
+          },
+          "dataset": {
+            "example": "dataset1",
+            "type": "string"
+          },
+          "name": {
+            "example": "My Target",
+            "type": "string"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/quota.v1.Priority"
+          }
+        }
+      },
       "v3.FilterOperator": {
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

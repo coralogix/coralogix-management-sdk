@@ -11,7 +11,6 @@
           "Recording Rules Service"
         ],
         "summary": "List Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +51,6 @@
           "Recording Rules Service"
         ],
         "summary": "Create Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -74,8 +72,7 @@
                   "name": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -118,7 +115,6 @@
           "Recording Rules Service"
         ],
         "summary": "Get Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -170,7 +166,6 @@
           "Recording Rules Service"
         ],
         "summary": "Update Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -203,8 +198,7 @@
                   "name": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -245,7 +239,6 @@
           "Recording Rules Service"
         ],
         "summary": "Delete Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -303,7 +296,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -312,7 +318,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -321,7 +340,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "CreateRuleGroupSetResult": {
         "externalDocs": {
@@ -351,10 +372,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -376,9 +397,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -398,9 +419,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -433,6 +454,12 @@
         "description": "A rule within a group that defines a recording rule expression.",
         "type": "object",
         "properties": {
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
+            "type": "integer",
+            "format": "int64"
+          },
           "expr": {
             "type": "string"
           },
@@ -495,7 +522,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -509,7 +538,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -528,6 +559,10 @@
       "OutRule": {
         "type": "object",
         "properties": {
+          "evaluationDelayMs": {
+            "type": "integer",
+            "format": "int64"
+          },
           "expr": {
             "type": "string"
           },
@@ -653,14 +688,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

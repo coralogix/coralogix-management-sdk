@@ -11,7 +11,6 @@
           "Rule Groups Service"
         ],
         "summary": "Get Company Usage Limits",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -54,7 +53,6 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group Model Mapping",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -96,8 +94,7 @@
                       "$ref": "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -140,7 +137,6 @@
           "Rule Groups Service"
         ],
         "summary": "List Rule Groups",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -181,7 +177,6 @@
           "Rule Groups Service"
         ],
         "summary": "Create Rule Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -226,8 +221,7 @@
                   "teamId": {
                     "$ref": "#/components/schemas/v1.TeamId"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -268,7 +262,6 @@
           "Rule Groups Service"
         ],
         "summary": "Bulk Delete Rule Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -325,7 +318,6 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -377,7 +369,6 @@
           "Rule Groups Service"
         ],
         "summary": "Update Rule Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -433,8 +424,7 @@
                   "teamId": {
                     "$ref": "#/components/schemas/v1.TeamId"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -475,7 +465,6 @@
           "Rule Groups Service"
         ],
         "summary": "Delete Rule Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -566,7 +555,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -575,7 +577,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -584,7 +599,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "Counts": {
         "type": "object",
@@ -700,10 +717,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -725,9 +742,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -747,9 +764,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -922,7 +939,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -936,7 +955,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -1047,7 +1068,9 @@
             "$ref": "#/components/schemas/ApplicationNameConstraint"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "applicationName"
+        ]
       },
       "RuleMatcherSeverity": {
         "type": "object",
@@ -1056,7 +1079,9 @@
             "$ref": "#/components/schemas/SeverityConstraint"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "severity"
+        ]
       },
       "RuleMatcherSubsystemName": {
         "type": "object",
@@ -1065,15 +1090,14 @@
             "$ref": "#/components/schemas/SubsystemNameConstraint"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "subsystemName"
+        ]
       },
       "RuleParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersAllowParameters"
@@ -1085,19 +1109,22 @@
             "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
           },
           {
+            "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
+          },
+          {
             "$ref": "#/components/schemas/RuleParametersExtractParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersBlockParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           }
         ]
       },
@@ -1108,7 +1135,9 @@
             "$ref": "#/components/schemas/AllowParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "allowParameters"
+        ]
       },
       "RuleParametersBlockParameters": {
         "type": "object",
@@ -1117,7 +1146,9 @@
             "$ref": "#/components/schemas/BlockParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "blockParameters"
+        ]
       },
       "RuleParametersExtractParameters": {
         "type": "object",
@@ -1126,7 +1157,9 @@
             "$ref": "#/components/schemas/ExtractParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "extractParameters"
+        ]
       },
       "RuleParametersExtractTimestampParameters": {
         "type": "object",
@@ -1135,7 +1168,9 @@
             "$ref": "#/components/schemas/ExtractTimestampParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "extractTimestampParameters"
+        ]
       },
       "RuleParametersJsonExtractParameters": {
         "type": "object",
@@ -1144,7 +1179,9 @@
             "$ref": "#/components/schemas/JsonExtractParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "jsonExtractParameters"
+        ]
       },
       "RuleParametersJsonParseParameters": {
         "type": "object",
@@ -1153,7 +1190,9 @@
             "$ref": "#/components/schemas/JsonParseParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "jsonParseParameters"
+        ]
       },
       "RuleParametersJsonStringifyParameters": {
         "type": "object",
@@ -1162,7 +1201,9 @@
             "$ref": "#/components/schemas/JsonStringifyParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "jsonStringifyParameters"
+        ]
       },
       "RuleParametersParseParameters": {
         "type": "object",
@@ -1171,7 +1212,9 @@
             "$ref": "#/components/schemas/ParseParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "parseParameters"
+        ]
       },
       "RuleParametersRemoveFieldsParameters": {
         "type": "object",
@@ -1180,7 +1223,9 @@
             "$ref": "#/components/schemas/RemoveFieldsParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "removeFieldsParameters"
+        ]
       },
       "RuleParametersReplaceParameters": {
         "type": "object",
@@ -1189,7 +1234,9 @@
             "$ref": "#/components/schemas/ReplaceParameters"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replaceParameters"
+        ]
       },
       "RuleSubgroup": {
         "type": "object",
@@ -1314,14 +1361,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -11,7 +11,6 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,8 +32,7 @@
         "tags": [
           "Enrichments Service"
         ],
-        "summary": "Atomic Overwrite Enrichments",
-        "description": "No description available",
+        "summary": "Atomic Overwrite for CustomEnrichments only.",
         "externalDocs": {
           "url": ""
         },
@@ -60,8 +58,7 @@
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -84,7 +81,6 @@
           "Enrichments Service"
         ],
         "summary": "Add Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -106,8 +102,7 @@
                 },
                 "required": [
                   "requestEnrichments"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -130,7 +125,6 @@
           "Enrichments Service"
         ],
         "summary": "Delete Enrichments",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -168,13 +162,53 @@
         }
       }
     },
+    "/enrichment-rules/enrichment-rules/v1/all": {
+      "put": {
+        "tags": [
+          "Enrichments Service"
+        ],
+        "summary": "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_AtomicOverwriteAllEnrichments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "requestEnrichments": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EnrichmentRequestModel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicOverwriteAllEnrichmentsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/enrichment-rules/enrichment-rules/v1/limit": {
       "get": {
         "tags": [
           "Enrichments Service"
         ],
         "summary": "Get Enrichment Limit",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -199,7 +233,6 @@
           "Enrichments Service"
         ],
         "summary": "Get Company Enrichment Settings",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -241,6 +274,17 @@
           "enrichments"
         ]
       },
+      "AtomicOverwriteAllEnrichmentsResponse": {
+        "type": "object",
+        "properties": {
+          "enrichments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Enrichment"
+            }
+          }
+        }
+      },
       "AtomicOverwriteEnrichmentsResponse": {
         "type": "object",
         "properties": {
@@ -268,7 +312,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -277,7 +334,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -286,7 +356,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "CompanyEnrichmentSettings": {
         "type": "object",
@@ -422,16 +494,16 @@
       "EnrichmentType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
-          },
-          {
-            "$ref": "#/components/schemas/EnrichmentTypeAws"
-          },
-          {
             "$ref": "#/components/schemas/EnrichmentTypeCustomEnrichment"
           },
           {
             "$ref": "#/components/schemas/EnrichmentTypeGeoIp"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeAws"
           }
         ]
       },
@@ -442,7 +514,9 @@
             "$ref": "#/components/schemas/AwsType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aws"
+        ]
       },
       "EnrichmentTypeCustomEnrichment": {
         "type": "object",
@@ -451,7 +525,9 @@
             "$ref": "#/components/schemas/CustomEnrichmentType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "customEnrichment"
+        ]
       },
       "EnrichmentTypeGeoIp": {
         "type": "object",
@@ -460,7 +536,9 @@
             "$ref": "#/components/schemas/GeoIpType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "geoIp"
+        ]
       },
       "EnrichmentTypeSuspiciousIp": {
         "type": "object",
@@ -469,7 +547,9 @@
             "$ref": "#/components/schemas/SuspiciousIpType"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "suspiciousIp"
+        ]
       },
       "FieldGroup": {
         "type": "object",
@@ -485,10 +565,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -510,9 +590,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -532,9 +612,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -631,7 +711,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -645,7 +727,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -712,14 +796,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

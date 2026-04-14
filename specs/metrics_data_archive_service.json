@@ -11,7 +11,6 @@
           "Metrics Data Archive Service"
         ],
         "summary": "GetTenantConfig",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +51,6 @@
           "Metrics Data Archive Service"
         ],
         "summary": "Update",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -64,10 +62,13 @@
                 "type": "object",
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/UpdateRequestIbm"
+                  },
+                  {
                     "$ref": "#/components/schemas/UpdateRequestS3"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdateRequestIbm"
+                    "$ref": "#/components/schemas/UpdateRequestGcs"
                   }
                 ]
               }
@@ -110,7 +111,6 @@
           "Metrics Data Archive Service"
         ],
         "summary": "ConfigureTenant",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -126,6 +126,9 @@
                   },
                   {
                     "$ref": "#/components/schemas/ConfigureTenantRequestS3"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ConfigureTenantRequestGcs"
                   }
                 ]
               }
@@ -170,7 +173,6 @@
           "Metrics Data Archive Service"
         ],
         "summary": "DisableArchive",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -213,7 +215,6 @@
           "Metrics Data Archive Service"
         ],
         "summary": "EnableArchive",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -256,7 +257,6 @@
           "Metrics Data Archive Service"
         ],
         "summary": "ValidateBucket",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -268,10 +268,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
+                    "$ref": "#/components/schemas/ValidateBucketRequestS3"
                   },
                   {
-                    "$ref": "#/components/schemas/ValidateBucketRequestS3"
+                    "$ref": "#/components/schemas/ValidateBucketRequestGcs"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ValidateBucketRequestIbm"
                   }
                 ]
               }
@@ -320,7 +323,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -329,7 +345,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -338,7 +367,29 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
+      },
+      "ConfigureTenantRequestGcs": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Configure Tenant Request",
+        "description": "This data structure is used to configure a tenant.",
+        "type": "object",
+        "properties": {
+          "gcs": {
+            "$ref": "#/components/schemas/GcsConfig"
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          }
+        },
+        "required": [
+          "gcs"
+        ]
       },
       "ConfigureTenantRequestIbm": {
         "externalDocs": {
@@ -356,7 +407,9 @@
             "$ref": "#/components/schemas/RetentionPolicyRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "ibm"
+        ]
       },
       "ConfigureTenantRequestS3": {
         "externalDocs": {
@@ -374,7 +427,9 @@
             "$ref": "#/components/schemas/S3Config"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "s3"
+        ]
       },
       "FieldGroup": {
         "type": "object",
@@ -390,10 +445,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -415,9 +470,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -437,9 +492,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -462,6 +517,20 @@
         "required": [
           "pathAndValues"
         ]
+      },
+      "GcsConfig": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "GCS Configuration",
+        "description": "This data structure represents the GCS configuration for a tenant.",
+        "type": "object",
+        "properties": {
+          "bucket": {
+            "type": "string"
+          }
+        }
       },
       "GetTenantConfigResponseV2": {
         "type": "object",
@@ -506,7 +575,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -520,7 +591,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -586,7 +659,34 @@
           },
           {
             "$ref": "#/components/schemas/TenantConfigV2S3"
+          },
+          {
+            "$ref": "#/components/schemas/TenantConfigV2Gcs"
           }
+        ]
+      },
+      "TenantConfigV2Gcs": {
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "type": "boolean"
+          },
+          "gcs": {
+            "$ref": "#/components/schemas/GcsConfig"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "tenantId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "gcs"
         ]
       },
       "TenantConfigV2Ibm": {
@@ -609,7 +709,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "ibm"
+        ]
       },
       "TenantConfigV2S3": {
         "type": "object",
@@ -631,7 +733,30 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "s3"
+        ]
+      },
+      "UpdateRequestGcs": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Update Tenant Request",
+        "description": "This data structure is used to update the configuration of a tenant.",
+        "type": "object",
+        "properties": {
+          "gcs": {
+            "$ref": "#/components/schemas/GcsConfig"
+          },
+          "retentionDays": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "gcs"
+        ]
       },
       "UpdateRequestIbm": {
         "externalDocs": {
@@ -650,7 +775,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "ibm"
+        ]
       },
       "UpdateRequestS3": {
         "externalDocs": {
@@ -669,7 +796,26 @@
             "$ref": "#/components/schemas/S3Config"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "s3"
+        ]
+      },
+      "ValidateBucketRequestGcs": {
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+        },
+        "title": "Bucket Validation Request",
+        "description": "This data structure is used to validate a bucket.",
+        "type": "object",
+        "properties": {
+          "gcs": {
+            "$ref": "#/components/schemas/GcsConfig"
+          }
+        },
+        "required": [
+          "gcs"
+        ]
       },
       "ValidateBucketRequestIbm": {
         "externalDocs": {
@@ -684,7 +830,9 @@
             "$ref": "#/components/schemas/IbmConfigV2"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "ibm"
+        ]
       },
       "ValidateBucketRequestS3": {
         "externalDocs": {
@@ -699,7 +847,9 @@
             "$ref": "#/components/schemas/S3Config"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "s3"
+        ]
       },
       "common.Group": {
         "type": "object",
@@ -732,14 +882,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

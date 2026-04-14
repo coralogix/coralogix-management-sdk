@@ -11,7 +11,7 @@
           "Incidents service"
         ],
         "summary": "Get incident aggregations",
-        "description": "Retrieve aggregated incident data with support for grouping and filtering.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Retrieve aggregated incident data with support for grouping and filtering.",
         "externalDocs": {
           "url": ""
         },
@@ -131,10 +131,10 @@
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GroupByIncidentField"
+                    "$ref": "#/components/schemas/GroupByContextualLabel"
                   },
                   {
-                    "$ref": "#/components/schemas/GroupByContextualLabel"
+                    "$ref": "#/components/schemas/GroupByIncidentField"
                   }
                 ]
               }
@@ -212,7 +212,7 @@
           "Incidents service"
         ],
         "summary": "List incident events with filters",
-        "description": "List incident events with support for filtering, pagination, and ordering.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "List incident events with support for filtering, pagination, and ordering.",
         "externalDocs": {
           "url": ""
         },
@@ -356,7 +356,7 @@
           "Incidents service"
         ],
         "summary": "Get total count of incident events",
-        "description": "Retrieve the total count of incident events matching a filter.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Retrieve the total count of incident events matching a filter.",
         "externalDocs": {
           "url": ""
         },
@@ -451,7 +451,7 @@
           "Incidents service"
         ],
         "summary": "Get incident by event ID",
-        "description": "Retrieve detailed information about a single incident by related alert event id.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Retrieve detailed information about a single incident by related alert event id.",
         "externalDocs": {
           "url": ""
         },
@@ -510,7 +510,7 @@
           "Incidents service"
         ],
         "summary": "Acknowledge incident by event id",
-        "description": "Mark incident as acknowledged by event id.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
+        "description": "Mark incident as acknowledged by event id.",
         "externalDocs": {
           "url": ""
         },
@@ -569,7 +569,7 @@
           "Incidents service"
         ],
         "summary": "Resolve incident by event id",
-        "description": "Mark incident as resolved by event id.\n\nRequires the following permissions:\n- `incidents:close`",
+        "description": "Mark incident as resolved by event id.",
         "externalDocs": {
           "url": ""
         },
@@ -628,7 +628,6 @@
           "Incidents service"
         ],
         "summary": "Get available filter values",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -644,8 +643,7 @@
                   "filter": {
                     "$ref": "#/components/schemas/IncidentQueryFilter"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -691,7 +689,6 @@
           "Incidents service"
         ],
         "summary": "Get available incident event filter values",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -786,7 +783,7 @@
           "Incidents service"
         ],
         "summary": "Get multiple incidents by IDs",
-        "description": "Retrieve multiple incidents by their IDs in a single request.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Retrieve multiple incidents by their IDs in a single request.",
         "externalDocs": {
           "url": ""
         },
@@ -843,166 +840,36 @@
           "Incidents service"
         ],
         "summary": "List incidents with filters",
-        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.",
         "externalDocs": {
           "url": ""
         },
         "operationId": "IncidentsService_ListIncidents",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "filter",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "Incident query filter",
-              "description": "Filter configuration for incidents",
-              "type": "object",
-              "properties": {
-                "applicationName": {
-                  "type": "array",
-                  "items": {
-                    "description": "Filter by application names",
-                    "type": "string"
-                  }
-                },
-                "assignee": {
-                  "type": "array",
-                  "items": {
-                    "description": "Filter by assignee",
-                    "type": "string"
-                  }
-                },
-                "contextualLabels": {
-                  "description": "Filter by contextual labels",
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "createdAtRange": {},
-                "displayLabels": {
-                  "description": "Filter by display labels",
-                  "type": "object",
-                  "additionalProperties": {}
-                },
-                "endTime": {
-                  "deprecated": true,
-                  "description": "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)",
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "incidentDurationRange": {},
-                "isMuted": {
-                  "description": "Indicates if the incident is muted",
-                  "type": "boolean"
-                },
-                "metaLabels": {
-                  "type": "array",
-                  "items": {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "Incident meta label",
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "example": "key",
-                        "type": "string"
-                      },
-                      "value": {
-                        "example": "value",
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "metaLabelsOp": {
-                  "$ref": "#/components/schemas/v1.FilterOperator"
-                },
-                "searchQuery": {},
-                "severity": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/IncidentSeverity"
-                  }
-                },
-                "startTime": {
-                  "deprecated": true,
-                  "description": "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)",
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "state": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/IncidentState"
-                  }
-                },
-                "status": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/IncidentStatus"
-                  }
-                },
-                "subsystemName": {
-                  "type": "array",
-                  "items": {
-                    "description": "Filter by subsystem names",
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "pagination",
-            "schema": {
-              "externalDocs": {
-                "url": ""
-              },
-              "title": "Pagination request",
-              "description": "Pagination parameters for list requests",
-              "type": "object",
-              "properties": {
-                "pageSize": {
-                  "example": 10,
-                  "description": "Number of items to return per page",
-                  "type": "integer",
-                  "format": "int64"
-                },
-                "pageToken": {
-                  "example": "next_page_token",
-                  "description": "Token for the next page of results",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "pageSize"
-              ]
-            },
-            "style": "form"
-          },
-          {
-            "in": "query",
-            "name": "order_bys",
-            "schema": {
-              "type": "array",
-              "items": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/V1OrderByContextualLabel"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "List incidents request",
+                "description": "Request to list incidents with filtering, pagination and ordering options",
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "$ref": "#/components/schemas/IncidentQueryFilter"
                   },
-                  {
-                    "$ref": "#/components/schemas/V1OrderByIncidentField"
+                  "orderBys": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/v1.OrderBy"
+                    }
+                  },
+                  "pagination": {
+                    "$ref": "#/components/schemas/incidents.v1.PaginationRequest"
                   }
-                ]
+                }
               }
-            },
-            "style": "form"
+            }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "",
@@ -1044,7 +911,7 @@
           "Incidents service"
         ],
         "summary": "Acknowledge incidents",
-        "description": "Mark one or more incidents as acknowledged.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
+        "description": "Mark one or more incidents as acknowledged.",
         "externalDocs": {
           "url": ""
         },
@@ -1071,8 +938,7 @@
                 },
                 "required": [
                   "incidentIds"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -1118,7 +984,7 @@
           "Incidents service"
         ],
         "summary": "Assign incidents to a user",
-        "description": "Assign one or more incidents to a specific user.\n\nRequires the following permissions:\n- `incidents:assign`",
+        "description": "Assign one or more incidents to a specific user.",
         "externalDocs": {
           "url": ""
         },
@@ -1149,8 +1015,7 @@
                 "required": [
                   "incidentIds",
                   "assignedTo"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -1194,7 +1059,7 @@
           "Incidents service"
         ],
         "summary": "Remove incident user assignments",
-        "description": "Remove user assignments from one or more incidents.\n\nRequires the following permissions:\n- `incidents:assign`",
+        "description": "Remove user assignments from one or more incidents.",
         "externalDocs": {
           "url": ""
         },
@@ -1258,7 +1123,6 @@
           "Incidents service"
         ],
         "summary": "Close incidents",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1285,8 +1149,7 @@
                 },
                 "required": [
                   "incidentIds"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -1332,7 +1195,7 @@
           "Incidents service"
         ],
         "summary": "Resolve incidents",
-        "description": "Mark one or more incidents as resolved.\n\nRequires the following permissions:\n- `incidents:close`",
+        "description": "Mark one or more incidents as resolved.",
         "externalDocs": {
           "url": ""
         },
@@ -1359,8 +1222,7 @@
                 },
                 "required": [
                   "incidentIds"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -1406,7 +1268,7 @@
           "Incidents service"
         ],
         "summary": "Get incident by ID",
-        "description": "Retrieve detailed information about a single incident by its unique identifier.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Retrieve detailed information about a single incident by its unique identifier.",
         "externalDocs": {
           "url": ""
         },
@@ -1464,7 +1326,7 @@
           "Incidents service"
         ],
         "summary": "Get incident events",
-        "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.\n\nRequires the following permissions:\n- `incidents:read`",
+        "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.",
         "externalDocs": {
           "url": ""
         },
@@ -1674,7 +1536,20 @@
             "$ref": "#/components/schemas/ColorsByAggregation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "aggregation"
+        ]
+      },
+      "ColorsByCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/ColorsByCategory"
+          }
+        },
+        "required": [
+          "category"
+        ]
       },
       "ColorsByGroupBy": {
         "type": "object",
@@ -1683,7 +1558,20 @@
             "$ref": "#/components/schemas/ColorsByGroupBy"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "groupBy"
+        ]
+      },
+      "ColorsByQuery": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/ColorsByQuery"
+          }
+        },
+        "required": [
+          "query"
+        ]
       },
       "ColorsByStack": {
         "type": "object",
@@ -1692,7 +1580,9 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stack"
+        ]
       },
       "ContextualLabelValueWithCount": {
         "externalDocs": {
@@ -1847,10 +1737,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -1872,9 +1762,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -1894,9 +1784,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -1984,9 +1874,9 @@
           }
         },
         "required": [
-          "field"
-        ],
-        "additionalProperties": false
+          "field",
+          "contextualLabel"
+        ]
       },
       "GroupByIncidentField": {
         "externalDocs": {
@@ -2003,9 +1893,9 @@
           }
         },
         "required": [
-          "field"
-        ],
-        "additionalProperties": false
+          "field",
+          "incidentField"
+        ]
       },
       "GroupByValues": {
         "oneOf": [
@@ -2024,7 +1914,9 @@
             "$ref": "#/components/schemas/ContextualLabels"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "contextualLabels"
+        ]
       },
       "GroupByValuesIncidentField": {
         "type": "object",
@@ -2033,7 +1925,9 @@
             "$ref": "#/components/schemas/IncidentFieldOneOf"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "incidentField"
+        ]
       },
       "Incident": {
         "externalDocs": {
@@ -2049,7 +1943,7 @@
             }
           },
           "closedAt": {
-            "example": "2024-01-01T00:00:00.000Z",
+            "example": "2024-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           },
@@ -2060,7 +1954,7 @@
             }
           },
           "createdAt": {
-            "example": "2024-01-01T00:00:00.000Z",
+            "example": "2024-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           },
@@ -2096,7 +1990,7 @@
             "type": "string"
           },
           "lastStateUpdateTime": {
-            "example": "2024-01-01T00:00:00.000Z",
+            "example": "2024-01-01T00:00:00Z",
             "type": "string",
             "format": "date-time"
           },
@@ -2239,6 +2133,12 @@
       "IncidentEvent": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+          },
+          {
             "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
           },
           {
@@ -2248,31 +2148,25 @@
             "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-          },
-          {
             "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+            "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
           }
         ]
       },
@@ -2314,9 +2208,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "acknowledge",
+          "administrativeEvent"
+        ]
       },
       "IncidentEventAcknowledgeOperationalEvent": {
         "externalDocs": {
@@ -2348,9 +2243,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "acknowledge",
+          "operationalEvent"
+        ]
       },
       "IncidentEventAlertType": {
         "type": "string",
@@ -2408,9 +2304,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "administrativeEvent",
+          "assignment"
+        ]
       },
       "IncidentEventAssignmentOperationalEvent": {
         "externalDocs": {
@@ -2442,9 +2339,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "assignment",
+          "operationalEvent"
+        ]
       },
       "IncidentEventClose": {
         "type": "object",
@@ -2484,9 +2382,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "administrativeEvent",
+          "close"
+        ]
       },
       "IncidentEventCloseOperationalEvent": {
         "externalDocs": {
@@ -2518,9 +2417,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "close",
+          "operationalEvent"
+        ]
       },
       "IncidentEventExtended": {
         "externalDocs": {
@@ -2665,9 +2565,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "administrativeEvent",
+          "snoozeIndicator"
+        ]
       },
       "IncidentEventSnoozeIndicatorOperationalEvent": {
         "externalDocs": {
@@ -2699,9 +2600,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "operationalEvent",
+          "snoozeIndicator"
+        ]
       },
       "IncidentEventType": {
         "type": "string",
@@ -2749,9 +2651,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "administrativeEvent",
+          "unassign"
+        ]
       },
       "IncidentEventUnassignOperationalEvent": {
         "externalDocs": {
@@ -2783,9 +2686,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "operationalEvent",
+          "unassign"
+        ]
       },
       "IncidentEventUpsertState": {
         "externalDocs": {
@@ -2839,9 +2743,10 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "administrativeEvent",
+          "upsertState"
+        ]
       },
       "IncidentEventUpsertStateOperationalEvent": {
         "externalDocs": {
@@ -2873,14 +2778,33 @@
           "incidentEventType",
           "originatorType",
           "originator",
-          "incidentEventPayload"
-        ],
-        "additionalProperties": false
+          "incidentEventPayload",
+          "operationalEvent",
+          "upsertState"
+        ]
       },
       "IncidentFieldOneOf": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
+          },
+          {
             "$ref": "#/components/schemas/IncidentFieldOneOfId"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfName"
@@ -2893,24 +2817,6 @@
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfState"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfStatus"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
           }
         ]
       },
@@ -2921,7 +2827,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "applicationName"
+        ]
       },
       "IncidentFieldOneOfClosedAt": {
         "type": "object",
@@ -2931,7 +2839,9 @@
             "format": "date-time"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "closedAt"
+        ]
       },
       "IncidentFieldOneOfCreatedAt": {
         "type": "object",
@@ -2941,7 +2851,9 @@
             "format": "date-time"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "createdAt"
+        ]
       },
       "IncidentFieldOneOfDuration": {
         "type": "object",
@@ -2950,7 +2862,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "duration"
+        ]
       },
       "IncidentFieldOneOfId": {
         "type": "object",
@@ -2959,7 +2873,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "id"
+        ]
       },
       "IncidentFieldOneOfLastStateUpdateTime": {
         "type": "object",
@@ -2969,7 +2885,9 @@
             "format": "date-time"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "lastStateUpdateTime"
+        ]
       },
       "IncidentFieldOneOfName": {
         "type": "object",
@@ -2978,7 +2896,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "name"
+        ]
       },
       "IncidentFieldOneOfSeverity": {
         "type": "object",
@@ -2987,7 +2907,9 @@
             "$ref": "#/components/schemas/IncidentSeverity"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "severity"
+        ]
       },
       "IncidentFieldOneOfState": {
         "type": "object",
@@ -2996,7 +2918,9 @@
             "$ref": "#/components/schemas/IncidentState"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "state"
+        ]
       },
       "IncidentFieldOneOfStatus": {
         "type": "object",
@@ -3005,7 +2929,9 @@
             "$ref": "#/components/schemas/IncidentStatus"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "status"
+        ]
       },
       "IncidentFieldOneOfSubsystemName": {
         "type": "object",
@@ -3014,7 +2940,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "subsystemName"
+        ]
       },
       "IncidentFields": {
         "type": "string",
@@ -3265,9 +3193,9 @@
         },
         "required": [
           "query",
-          "field"
-        ],
-        "additionalProperties": false
+          "field",
+          "contextualLabel"
+        ]
       },
       "IncidentSearchQueryIncidentField": {
         "externalDocs": {
@@ -3287,9 +3215,9 @@
         },
         "required": [
           "query",
-          "field"
-        ],
-        "additionalProperties": false
+          "field",
+          "incidentField"
+        ]
       },
       "IncidentSeverity": {
         "type": "string",
@@ -3559,7 +3487,9 @@
             "$ref": "#/components/schemas/MinMaxAuto"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "auto"
+        ]
       },
       "MinMaxCustom": {
         "externalDocs": {
@@ -3573,7 +3503,9 @@
             "$ref": "#/components/schemas/MinMaxCustom"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "custom"
+        ]
       },
       "MultipleValues": {
         "type": "object",
@@ -3683,9 +3615,9 @@
         },
         "required": [
           "field",
-          "direction"
-        ],
-        "additionalProperties": false
+          "direction",
+          "contextualLabel"
+        ]
       },
       "V1OrderByIncidentField": {
         "externalDocs": {
@@ -3703,9 +3635,9 @@
         },
         "required": [
           "field",
-          "direction"
-        ],
-        "additionalProperties": false
+          "direction",
+          "incidentField"
+        ]
       },
       "common.Group": {
         "type": "object",
@@ -3765,6 +3697,30 @@
           }
         }
       },
+      "incidents.v1.PaginationRequest": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Pagination request",
+        "description": "Pagination parameters for list requests",
+        "type": "object",
+        "properties": {
+          "pageSize": {
+            "example": 10,
+            "description": "Number of items to return per page",
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageToken": {
+            "example": "next_page_token",
+            "description": "Token for the next page of results",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pageSize"
+        ]
+      },
       "incidents.v1.PaginationResponse": {
         "externalDocs": {
           "url": ""
@@ -3812,6 +3768,16 @@
           "FILTER_OPERATOR_AND"
         ]
       },
+      "v1.OrderBy": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/V1OrderByIncidentField"
+          },
+          {
+            "$ref": "#/components/schemas/V1OrderByContextualLabel"
+          }
+        ]
+      },
       "v1.OrderByDirection": {
         "type": "string",
         "enum": [
@@ -3850,14 +3816,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }
