@@ -64,7 +64,7 @@ for fixture_dir in "$FIXTURES_DIR"/*; do
     -g go \
     -o "$outdir_rel" \
     --template-dir="$template_rel" \
-    --additional-properties=withGoMod=false,packageName="$package_name",enumClassPrefix=true \
+    --additional-properties=withGoMod=false,packageName="$package_name",enumClassPrefix=true,disallowAdditionalPropertiesIfNotPresent=false \
     --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false >/dev/null
 
   cp "$fixture_dir/compat_test.go" "$outdir/compat_test.go"
