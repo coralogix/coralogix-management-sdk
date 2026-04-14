@@ -5,14 +5,12 @@ package {{packageName}}
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 {{#imports}}
 	"{{import}}"
 {{/imports}}
 )
 
 var _ = bytes.MinRead
-var _ = fmt.Print
 
 {{#model}}
 {{#isEnum}}
