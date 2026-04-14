@@ -32,6 +32,12 @@
                   "field": {
                     "oneOf": [
                       {
+                        "$ref": "#/components/schemas/SloFilterFieldProductType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
+                      },
+                      {
                         "$ref": "#/components/schemas/SloFilterFieldConstFilter"
                       },
                       {
@@ -39,12 +45,6 @@
                       },
                       {
                         "$ref": "#/components/schemas/SloFilterFieldSloType"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldProductType"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
                       }
                     ]
                   },
@@ -59,13 +59,13 @@
                       "is": {
                         "oneOf": [
                           {
-                            "$ref": "#/components/schemas/IsFilterPredicateProductTypeValues"
-                          },
-                          {
                             "$ref": "#/components/schemas/IsFilterPredicateStringValues"
                           },
                           {
                             "$ref": "#/components/schemas/IsFilterPredicateTypeValues"
+                          },
+                          {
+                            "$ref": "#/components/schemas/IsFilterPredicateProductTypeValues"
                           }
                         ]
                       }
@@ -135,13 +135,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloApmSli"
-                  },
-                  {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloApmSli"
                   }
                 ]
               }
@@ -206,13 +206,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
-                  },
-                  {
                     "$ref": "#/components/schemas/SloApmSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -646,10 +646,10 @@
       "ApmLatencySli": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ApmLatencySliAverage"
+            "$ref": "#/components/schemas/ApmLatencySliQuantile"
           },
           {
-            "$ref": "#/components/schemas/ApmLatencySliQuantile"
+            "$ref": "#/components/schemas/ApmLatencySliAverage"
           }
         ]
       },
@@ -1286,13 +1286,13 @@
       "Slo": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
-          },
-          {
             "$ref": "#/components/schemas/SloWindowBasedMetricSli"
           },
           {
             "$ref": "#/components/schemas/SloApmSli"
+          },
+          {
+            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
           }
         ]
       },
@@ -1395,13 +1395,13 @@
       "SloExecutionRequest": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
+          },
+          {
             "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
           },
           {
             "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
           }
         ]
       },
@@ -1459,13 +1459,13 @@
       "SloExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
+          },
+          {
             "$ref": "#/components/schemas/SloExecutionResponseReplaceSloResponse"
           },
           {
             "$ref": "#/components/schemas/SloExecutionResponseDeleteSloResponse"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionResponseCreateSloResponse"
           }
         ]
       },

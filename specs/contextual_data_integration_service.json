@@ -877,6 +877,12 @@
       "FieldInformation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/FieldInformationSelection"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSingleNumber"
+          },
+          {
             "$ref": "#/components/schemas/FieldInformationSingle"
           },
           {
@@ -887,12 +893,6 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleBoolean"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSelection"
-          },
-          {
-            "$ref": "#/components/schemas/FieldInformationSingleNumber"
           }
         ]
       },
@@ -1667,6 +1667,9 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionCloudFormation"
           },
           {
@@ -1680,9 +1683,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           }
         ]
       },
@@ -2562,7 +2562,7 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
+            "$ref": "#/components/schemas/TestIntegrationResultSuccessVariant"
           },
           {
             "$ref": "#/components/schemas/TestIntegrationResultFailure"
@@ -2591,7 +2591,7 @@
           "failure"
         ]
       },
-      "TestIntegrationResultSuccess": {
+      "TestIntegrationResultSuccessVariant": {
         "externalDocs": {
           "url": ""
         },
@@ -2839,6 +2839,12 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeArm"
+          },
+          {
             "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
           },
           {
@@ -2852,12 +2858,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeArm"
           }
         ]
       },

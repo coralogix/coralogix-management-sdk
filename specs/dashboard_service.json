@@ -734,15 +734,6 @@
       "Annotation.Source": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AnnotationSourceDataprime"
-          },
-          {
-            "$ref": "#/components/schemas/AnnotationSourceManual"
-          },
-          {
-            "$ref": "#/components/schemas/AnnotationSourceEventRecurrence"
-          },
-          {
             "$ref": "#/components/schemas/AnnotationSourceMetrics"
           },
           {
@@ -750,16 +741,25 @@
           },
           {
             "$ref": "#/components/schemas/AnnotationSourceSpans"
+          },
+          {
+            "$ref": "#/components/schemas/AnnotationSourceDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/AnnotationSourceManual"
+          },
+          {
+            "$ref": "#/components/schemas/AnnotationSourceEventRecurrence"
           }
         ]
       },
       "Annotation.WidgetScope": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AnnotationWidgetScopeAllWidgets"
+            "$ref": "#/components/schemas/AnnotationWidgetScopeAllWidgetsVariant"
           },
           {
-            "$ref": "#/components/schemas/AnnotationWidgetScopeSpecificWidgets"
+            "$ref": "#/components/schemas/AnnotationWidgetScopeSpecificWidgetsVariant"
           }
         ]
       },
@@ -865,7 +865,7 @@
           "spans"
         ]
       },
-      "AnnotationWidgetScopeAllWidgets": {
+      "AnnotationWidgetScopeAllWidgetsVariant": {
         "type": "object",
         "properties": {
           "allWidgets": {
@@ -876,7 +876,7 @@
           "allWidgets"
         ]
       },
-      "AnnotationWidgetScopeSpecificWidgets": {
+      "AnnotationWidgetScopeSpecificWidgetsVariant": {
         "type": "object",
         "properties": {
           "specificWidgets": {
@@ -1294,13 +1294,13 @@
       "ColorLabelMapping": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ColorLabelMappingRange"
-          },
-          {
             "$ref": "#/components/schemas/ColorLabelMappingValue"
           },
           {
             "$ref": "#/components/schemas/ColorLabelMappingRegex"
+          },
+          {
+            "$ref": "#/components/schemas/ColorLabelMappingRange"
           }
         ]
       },
@@ -1575,19 +1575,16 @@
       "Dashboard": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DashboardFiveMinutesAbsoluteTimeFrame"
-          },
-          {
             "$ref": "#/components/schemas/DashboardFiveMinutesRelativeTimeFrame"
-          },
-          {
-            "$ref": "#/components/schemas/DashboardOneMinuteAbsoluteTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOneMinuteRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardOffAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardFifteenMinutesAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardFifteenMinutesRelativeTimeFrame"
           },
           {
             "$ref": "#/components/schemas/DashboardOffRelativeTimeFrame"
@@ -1599,10 +1596,13 @@
             "$ref": "#/components/schemas/DashboardTwoMinutesRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFifteenMinutesAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/DashboardFiveMinutesAbsoluteTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/DashboardFifteenMinutesRelativeTimeFrame"
+            "$ref": "#/components/schemas/DashboardOneMinuteAbsoluteTimeFrame"
+          },
+          {
+            "$ref": "#/components/schemas/DashboardOffAbsoluteTimeFrame"
           }
         ]
       },
@@ -2651,16 +2651,16 @@
       "DataTable.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DataTableQueryLogs"
-          },
-          {
-            "$ref": "#/components/schemas/DataTableQuerySpans"
-          },
-          {
             "$ref": "#/components/schemas/DataTableQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/DataTableQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/DataTableQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/DataTableQuerySpans"
           }
         ]
       },
@@ -2786,13 +2786,13 @@
       "DataprimeSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DataprimeSourceStrategyInstant"
+            "$ref": "#/components/schemas/DataprimeSourceStrategyDurationVariant"
           },
           {
-            "$ref": "#/components/schemas/DataprimeSourceStrategyRange"
+            "$ref": "#/components/schemas/DataprimeSourceStrategyInstantVariant"
           },
           {
-            "$ref": "#/components/schemas/DataprimeSourceStrategyDuration"
+            "$ref": "#/components/schemas/DataprimeSourceStrategyRangeVariant"
           }
         ]
       },
@@ -2826,7 +2826,7 @@
           }
         }
       },
-      "DataprimeSourceStrategyDuration": {
+      "DataprimeSourceStrategyDurationVariant": {
         "type": "object",
         "properties": {
           "duration": {
@@ -2837,7 +2837,7 @@
           "duration"
         ]
       },
-      "DataprimeSourceStrategyInstant": {
+      "DataprimeSourceStrategyInstantVariant": {
         "type": "object",
         "properties": {
           "instant": {
@@ -2848,7 +2848,7 @@
           "instant"
         ]
       },
-      "DataprimeSourceStrategyRange": {
+      "DataprimeSourceStrategyRangeVariant": {
         "type": "object",
         "properties": {
           "range": {
@@ -2948,16 +2948,16 @@
       "Dynamic.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DynamicQueryLogs"
-          },
-          {
-            "$ref": "#/components/schemas/DynamicQuerySpans"
-          },
-          {
             "$ref": "#/components/schemas/DynamicQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/DynamicQueryDataprime"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/DynamicQuerySpans"
           }
         ]
       },
@@ -3033,10 +3033,10 @@
       "Equals.Selection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EqualsSelectionList"
+            "$ref": "#/components/schemas/EqualsSelectionAll"
           },
           {
-            "$ref": "#/components/schemas/EqualsSelectionAll"
+            "$ref": "#/components/schemas/EqualsSelectionList"
           }
         ]
       },
@@ -3114,10 +3114,10 @@
       "EventRecurrenceSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EventRecurrenceSourceStrategyInstant"
+            "$ref": "#/components/schemas/EventRecurrenceSourceStrategyInstantVariant"
           },
           {
-            "$ref": "#/components/schemas/EventRecurrenceSourceStrategyDuration"
+            "$ref": "#/components/schemas/EventRecurrenceSourceStrategyDurationVariant"
           }
         ]
       },
@@ -3142,7 +3142,7 @@
           }
         }
       },
-      "EventRecurrenceSourceStrategyDuration": {
+      "EventRecurrenceSourceStrategyDurationVariant": {
         "type": "object",
         "properties": {
           "duration": {
@@ -3153,7 +3153,7 @@
           "duration"
         ]
       },
-      "EventRecurrenceSourceStrategyInstant": {
+      "EventRecurrenceSourceStrategyInstantVariant": {
         "type": "object",
         "properties": {
           "instant": {
@@ -3749,9 +3749,6 @@
       "GeomapAggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GeomapAggregationCount"
-          },
-          {
             "$ref": "#/components/schemas/GeomapAggregationSum"
           },
           {
@@ -3762,6 +3759,9 @@
           },
           {
             "$ref": "#/components/schemas/GeomapAggregationAvg"
+          },
+          {
+            "$ref": "#/components/schemas/GeomapAggregationCount"
           }
         ]
       },
@@ -4372,16 +4372,16 @@
       "Hexagon.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/HexagonQuerySpans"
-          },
-          {
-            "$ref": "#/components/schemas/HexagonQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/HexagonQueryMetrics"
           },
           {
             "$ref": "#/components/schemas/HexagonQueryLogs"
+          },
+          {
+            "$ref": "#/components/schemas/HexagonQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/HexagonQueryDataprime"
           }
         ]
       },
@@ -5635,6 +5635,15 @@
       "LogsAggregation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/LogsAggregationMax"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationPercentile"
+          },
+          {
+            "$ref": "#/components/schemas/LogsAggregationCount"
+          },
+          {
             "$ref": "#/components/schemas/LogsAggregationCountDistinct"
           },
           {
@@ -5645,15 +5654,6 @@
           },
           {
             "$ref": "#/components/schemas/LogsAggregationMin"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationMax"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationPercentile"
-          },
-          {
-            "$ref": "#/components/schemas/LogsAggregationCount"
           }
         ]
       },
@@ -5815,13 +5815,13 @@
       "LogsSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/LogsSourceStrategyRange"
+            "$ref": "#/components/schemas/LogsSourceStrategyInstantVariant"
           },
           {
-            "$ref": "#/components/schemas/LogsSourceStrategyDuration"
+            "$ref": "#/components/schemas/LogsSourceStrategyRangeVariant"
           },
           {
-            "$ref": "#/components/schemas/LogsSourceStrategyInstant"
+            "$ref": "#/components/schemas/LogsSourceStrategyDurationVariant"
           }
         ]
       },
@@ -5855,7 +5855,7 @@
           }
         }
       },
-      "LogsSourceStrategyDuration": {
+      "LogsSourceStrategyDurationVariant": {
         "type": "object",
         "properties": {
           "duration": {
@@ -5866,7 +5866,7 @@
           "duration"
         ]
       },
-      "LogsSourceStrategyInstant": {
+      "LogsSourceStrategyInstantVariant": {
         "type": "object",
         "properties": {
           "instant": {
@@ -5877,7 +5877,7 @@
           "instant"
         ]
       },
-      "LogsSourceStrategyRange": {
+      "LogsSourceStrategyRangeVariant": {
         "type": "object",
         "properties": {
           "range": {
@@ -5948,10 +5948,10 @@
       "ManualSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ManualSourceStrategyInstant"
+            "$ref": "#/components/schemas/ManualSourceStrategyRangeVariant"
           },
           {
-            "$ref": "#/components/schemas/ManualSourceStrategyRange"
+            "$ref": "#/components/schemas/ManualSourceStrategyInstantVariant"
           }
         ]
       },
@@ -5989,7 +5989,7 @@
           }
         }
       },
-      "ManualSourceStrategyInstant": {
+      "ManualSourceStrategyInstantVariant": {
         "type": "object",
         "properties": {
           "instant": {
@@ -6000,7 +6000,7 @@
           "instant"
         ]
       },
-      "ManualSourceStrategyRange": {
+      "ManualSourceStrategyRangeVariant": {
         "type": "object",
         "properties": {
           "range": {
@@ -6505,13 +6505,13 @@
       "MultiStringValue": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/MultiStringValueSelectedAll"
+          },
+          {
             "$ref": "#/components/schemas/MultiStringValueAll"
           },
           {
             "$ref": "#/components/schemas/MultiStringValueList"
-          },
-          {
-            "$ref": "#/components/schemas/MultiStringValueSelectedAll"
           }
         ]
       },
@@ -6777,16 +6777,16 @@
       "PieChart.Query": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PieChartQueryMetrics"
-          },
-          {
-            "$ref": "#/components/schemas/PieChartQueryDataprime"
-          },
-          {
             "$ref": "#/components/schemas/PieChartQueryLogs"
           },
           {
             "$ref": "#/components/schemas/PieChartQuerySpans"
+          },
+          {
+            "$ref": "#/components/schemas/PieChartQueryMetrics"
+          },
+          {
+            "$ref": "#/components/schemas/PieChartQueryDataprime"
           }
         ]
       },
@@ -6930,12 +6930,6 @@
       "PropertyDefinition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/PropertyDefinitionColumnDisplayName"
-          },
-          {
-            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
-          },
-          {
             "$ref": "#/components/schemas/PropertyDefinitionAlignment"
           },
           {
@@ -6952,6 +6946,12 @@
           },
           {
             "$ref": "#/components/schemas/PropertyDefinitionValuesMapping"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionColumnDisplayName"
+          },
+          {
+            "$ref": "#/components/schemas/PropertyDefinitionThresholds"
           }
         ]
       },
@@ -7152,10 +7152,10 @@
       "Query.LogsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldName"
+            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldValueVariant"
           },
           {
-            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QueryLogsQueryTypeFieldNameVariant"
           }
         ]
       },
@@ -7255,13 +7255,13 @@
       "Query.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricName"
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeMetricNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelName"
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValue"
+            "$ref": "#/components/schemas/QueryMetricsQueryTypeLabelValueVariant"
           }
         ]
       },
@@ -7309,10 +7309,10 @@
       "Query.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySpansQueryTypeFieldValueVariant"
           }
         ]
       },
@@ -7418,7 +7418,7 @@
           "queryId"
         ]
       },
-      "QueryLogsQueryTypeFieldName": {
+      "QueryLogsQueryTypeFieldNameVariant": {
         "type": "object",
         "properties": {
           "fieldName": {
@@ -7429,7 +7429,7 @@
           "fieldName"
         ]
       },
-      "QueryLogsQueryTypeFieldValue": {
+      "QueryLogsQueryTypeFieldValueVariant": {
         "type": "object",
         "properties": {
           "fieldValue": {
@@ -7484,7 +7484,7 @@
           "variableName"
         ]
       },
-      "QueryMetricsQueryTypeLabelName": {
+      "QueryMetricsQueryTypeLabelNameVariant": {
         "type": "object",
         "properties": {
           "labelName": {
@@ -7495,7 +7495,7 @@
           "labelName"
         ]
       },
-      "QueryMetricsQueryTypeLabelValue": {
+      "QueryMetricsQueryTypeLabelValueVariant": {
         "type": "object",
         "properties": {
           "labelValue": {
@@ -7506,7 +7506,7 @@
           "labelValue"
         ]
       },
-      "QueryMetricsQueryTypeMetricName": {
+      "QueryMetricsQueryTypeMetricNameVariant": {
         "type": "object",
         "properties": {
           "metricName": {
@@ -7536,10 +7536,10 @@
       "QuerySource.LogsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceLogsQueryTypeFieldValueVariant"
           }
         ]
       },
@@ -7629,23 +7629,23 @@
       "QuerySource.MetricsQuery.StringOrVariable": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableStringValue"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableStringValue"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryStringOrVariableVariableName"
           }
         ]
       },
       "QuerySource.MetricsQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricName"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeMetricNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelName"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelValue"
+            "$ref": "#/components/schemas/QuerySourceMetricsQueryTypeLabelValueVariant"
           }
         ]
       },
@@ -7693,10 +7693,10 @@
       "QuerySource.SpansQuery.Type": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValue"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldNameVariant"
           },
           {
-            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldName"
+            "$ref": "#/components/schemas/QuerySourceSpansQueryTypeFieldValueVariant"
           }
         ]
       },
@@ -7719,7 +7719,7 @@
           }
         }
       },
-      "QuerySourceLogsQueryTypeFieldName": {
+      "QuerySourceLogsQueryTypeFieldNameVariant": {
         "type": "object",
         "properties": {
           "fieldName": {
@@ -7730,7 +7730,7 @@
           "fieldName"
         ]
       },
-      "QuerySourceLogsQueryTypeFieldValue": {
+      "QuerySourceLogsQueryTypeFieldValueVariant": {
         "type": "object",
         "properties": {
           "fieldValue": {
@@ -7785,7 +7785,7 @@
           "variableName"
         ]
       },
-      "QuerySourceMetricsQueryTypeLabelName": {
+      "QuerySourceMetricsQueryTypeLabelNameVariant": {
         "type": "object",
         "properties": {
           "labelName": {
@@ -7796,7 +7796,7 @@
           "labelName"
         ]
       },
-      "QuerySourceMetricsQueryTypeLabelValue": {
+      "QuerySourceMetricsQueryTypeLabelValueVariant": {
         "type": "object",
         "properties": {
           "labelValue": {
@@ -7807,7 +7807,7 @@
           "labelValue"
         ]
       },
-      "QuerySourceMetricsQueryTypeMetricName": {
+      "QuerySourceMetricsQueryTypeMetricNameVariant": {
         "type": "object",
         "properties": {
           "metricName": {
@@ -7818,7 +7818,7 @@
           "metricName"
         ]
       },
-      "QuerySourceSpansQueryTypeFieldName": {
+      "QuerySourceSpansQueryTypeFieldNameVariant": {
         "type": "object",
         "properties": {
           "fieldName": {
@@ -7829,7 +7829,7 @@
           "fieldName"
         ]
       },
-      "QuerySourceSpansQueryTypeFieldValue": {
+      "QuerySourceSpansQueryTypeFieldValueVariant": {
         "type": "object",
         "properties": {
           "fieldValue": {
@@ -7840,7 +7840,7 @@
           "fieldValue"
         ]
       },
-      "QuerySpansQueryTypeFieldName": {
+      "QuerySpansQueryTypeFieldNameVariant": {
         "type": "object",
         "properties": {
           "fieldName": {
@@ -7851,7 +7851,7 @@
           "fieldName"
         ]
       },
-      "QuerySpansQueryTypeFieldValue": {
+      "QuerySpansQueryTypeFieldValueVariant": {
         "type": "object",
         "properties": {
           "fieldValue": {
@@ -8167,10 +8167,10 @@
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SortStrategyQueryValue"
+            "$ref": "#/components/schemas/SortStrategyCategory"
           },
           {
-            "$ref": "#/components/schemas/SortStrategyCategory"
+            "$ref": "#/components/schemas/SortStrategyQueryValue"
           }
         ]
       },
@@ -8333,10 +8333,10 @@
       "SpansAggregation": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpansAggregationMetricAggregation"
+            "$ref": "#/components/schemas/SpansAggregationDimensionAggregation"
           },
           {
-            "$ref": "#/components/schemas/SpansAggregationDimensionAggregation"
+            "$ref": "#/components/schemas/SpansAggregationMetricAggregation"
           }
         ]
       },
@@ -8450,13 +8450,13 @@
       "SpansSource.Strategy": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SpansSourceStrategyRange"
+            "$ref": "#/components/schemas/SpansSourceStrategyInstantVariant"
           },
           {
-            "$ref": "#/components/schemas/SpansSourceStrategyDuration"
+            "$ref": "#/components/schemas/SpansSourceStrategyRangeVariant"
           },
           {
-            "$ref": "#/components/schemas/SpansSourceStrategyInstant"
+            "$ref": "#/components/schemas/SpansSourceStrategyDurationVariant"
           }
         ]
       },
@@ -8490,7 +8490,7 @@
           }
         }
       },
-      "SpansSourceStrategyDuration": {
+      "SpansSourceStrategyDurationVariant": {
         "type": "object",
         "properties": {
           "duration": {
@@ -8501,7 +8501,7 @@
           "duration"
         ]
       },
-      "SpansSourceStrategyInstant": {
+      "SpansSourceStrategyInstantVariant": {
         "type": "object",
         "properties": {
           "instant": {
@@ -8512,7 +8512,7 @@
           "instant"
         ]
       },
-      "SpansSourceStrategyRange": {
+      "SpansSourceStrategyRangeVariant": {
         "type": "object",
         "properties": {
           "range": {
@@ -8889,15 +8889,6 @@
       "TextboxDefaultValue": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
-          },
-          {
-            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
-          },
-          {
             "$ref": "#/components/schemas/TextboxDefaultValueSingleString"
           },
           {
@@ -8908,6 +8899,15 @@
           },
           {
             "$ref": "#/components/schemas/TextboxDefaultValueDefaultNumericValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultLuceneValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultRegexValue"
+          },
+          {
+            "$ref": "#/components/schemas/TextboxDefaultValueDefaultIntervalValue"
           }
         ]
       },
@@ -9023,10 +9023,10 @@
       "TimeFrameSelect": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeFrameSelectAbsoluteTimeFrame"
+            "$ref": "#/components/schemas/TimeFrameSelectRelativeTimeFrame"
           },
           {
-            "$ref": "#/components/schemas/TimeFrameSelectRelativeTimeFrame"
+            "$ref": "#/components/schemas/TimeFrameSelectAbsoluteTimeFrame"
           }
         ]
       },
@@ -9349,10 +9349,10 @@
       "Variable.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
+            "$ref": "#/components/schemas/VariableDefinitionConstant"
           },
           {
-            "$ref": "#/components/schemas/VariableDefinitionConstant"
+            "$ref": "#/components/schemas/VariableDefinitionMultiSelect"
           }
         ]
       },
@@ -9609,15 +9609,6 @@
       "VariableValueV2": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VariableValueV2Regex"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2Lucene"
-          },
-          {
-            "$ref": "#/components/schemas/VariableValueV2Interval"
-          },
-          {
             "$ref": "#/components/schemas/VariableValueV2MultiString"
           },
           {
@@ -9625,6 +9616,15 @@
           },
           {
             "$ref": "#/components/schemas/VariableValueV2SingleNumeric"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Regex"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Lucene"
+          },
+          {
+            "$ref": "#/components/schemas/VariableValueV2Interval"
           }
         ]
       },
@@ -9899,7 +9899,34 @@
       "Visualization": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/VisualizationGauge"
+            "$ref": "#/components/schemas/VisualizationStat"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationGaugeVariant"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHorizontalBars"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLinesMulti"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationVerticalBarsMulti"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationHorizontalBarsMulti"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationPieChartVariant"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationStatCard"
+          },
+          {
+            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
           },
           {
             "$ref": "#/components/schemas/VisualizationHexagonBins"
@@ -9908,40 +9935,13 @@
             "$ref": "#/components/schemas/VisualizationVerticalBars"
           },
           {
-            "$ref": "#/components/schemas/VisualizationHorizontalBarsMulti"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationStat"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationPieChart"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationHorizontalBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesBars"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationVerticalBarsMulti"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationHeatmap"
           },
           {
             "$ref": "#/components/schemas/VisualizationGeomap"
           },
           {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesLinesMulti"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationStatCard"
-          },
-          {
             "$ref": "#/components/schemas/VisualizationTable"
-          },
-          {
-            "$ref": "#/components/schemas/VisualizationTimeSeriesLines"
           }
         ]
       },
@@ -10172,7 +10172,7 @@
           "STACKED_LINE_RELATIVE"
         ]
       },
-      "VisualizationGauge": {
+      "VisualizationGaugeVariant": {
         "type": "object",
         "properties": {
           "gauge": {
@@ -10238,7 +10238,7 @@
           "horizontalBarsMulti"
         ]
       },
-      "VisualizationPieChart": {
+      "VisualizationPieChartVariant": {
         "type": "object",
         "properties": {
           "pieChart": {
@@ -10412,13 +10412,16 @@
       "Widget.Definition": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
+            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionGauge"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
+            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionMarkdown"
@@ -10427,16 +10430,13 @@
             "$ref": "#/components/schemas/WidgetDefinitionHexagon"
           },
           {
-            "$ref": "#/components/schemas/WidgetDefinitionLineChart"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionDataTable"
-          },
-          {
-            "$ref": "#/components/schemas/WidgetDefinitionPieChart"
+            "$ref": "#/components/schemas/WidgetDefinitionBarChart"
           },
           {
             "$ref": "#/components/schemas/WidgetDefinitionHorizontalBarChart"
+          },
+          {
+            "$ref": "#/components/schemas/WidgetDefinitionDynamic"
           }
         ]
       },

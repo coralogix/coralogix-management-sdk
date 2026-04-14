@@ -802,10 +802,10 @@
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RoleUpdateActionClear"
+            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
           },
           {
-            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
+            "$ref": "#/components/schemas/RoleUpdateActionClear"
           }
         ]
       },

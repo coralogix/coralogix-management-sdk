@@ -83,10 +83,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
                   }
                 ]
               }
@@ -482,10 +482,10 @@
       "E2M": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MLogsQuery"
+            "$ref": "#/components/schemas/E2MSpansQuery"
           },
           {
-            "$ref": "#/components/schemas/E2MSpansQuery"
+            "$ref": "#/components/schemas/E2MLogsQuery"
           }
         ]
       },
