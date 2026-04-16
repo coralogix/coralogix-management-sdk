@@ -19,7 +19,7 @@ run_openapi_generator() {
     return
   fi
 
-  if java -version >/dev/null 2>&1; then
+  if command -v npx >/dev/null 2>&1 && java -version >/dev/null 2>&1; then
     npx --yes @openapitools/openapi-generator-cli "$@"
     return
   fi
