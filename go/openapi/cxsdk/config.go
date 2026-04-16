@@ -191,7 +191,7 @@ func URLFromRegion(region string) (string, bool) {
 	valid := true
 	url := gourl.URL{
 		Scheme: "https",
-		Path:   "mgmt/openapi/4",
+		Path:   "mgmt/openapi/5",
 	}
 
 	switch strings.ToLower(region) {
