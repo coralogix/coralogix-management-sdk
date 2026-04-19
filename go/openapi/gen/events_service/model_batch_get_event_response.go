@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchGetEventResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchGetEventResponse{}
@@ -22,7 +25,10 @@ type BatchGetEventResponse struct {
 	Events map[string]CxEventSingleOrMultiple `json:"events,omitempty"`
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchGetEventResponse BatchGetEventResponse
 
 // NewBatchGetEventResponse instantiates a new BatchGetEventResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o BatchGetEventResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchGetEventResponse) UnmarshalJSON(data []byte) (err error) {
+	varBatchGetEventResponse := _BatchGetEventResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBatchGetEventResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchGetEventResponse(varBatchGetEventResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "notFoundIds")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchGetEventResponse struct {
@@ -194,5 +229,4 @@ func (v *NullableBatchGetEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

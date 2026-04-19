@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MessageConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MessageConfig{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &MessageConfig{}
 // MessageConfig struct for MessageConfig
 type MessageConfig struct {
 	Fields []NotificationCenterMessageConfigField `json:"fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MessageConfig MessageConfig
 
 // NewMessageConfig instantiates a new MessageConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o MessageConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MessageConfig) UnmarshalJSON(data []byte) (err error) {
+	varMessageConfig := _MessageConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMessageConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MessageConfig(varMessageConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMessageConfig struct {
@@ -122,5 +155,4 @@ func (v *NullableMessageConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

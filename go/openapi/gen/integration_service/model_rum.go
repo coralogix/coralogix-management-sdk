@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Rum type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Rum{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Rum{}
 type Rum struct {
 	BrowserSdkCommands []CommandInformation `json:"browserSdkCommands,omitempty"`
 	SourceMapCommands []CommandInformation `json:"sourceMapCommands,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Rum Rum
 
 // NewRum instantiates a new Rum object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Rum) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceMapCommands) {
 		toSerialize["sourceMapCommands"] = o.SourceMapCommands
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Rum) UnmarshalJSON(data []byte) (err error) {
+	varRum := _Rum{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRum)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Rum(varRum)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "browserSdkCommands")
+		delete(additionalProperties, "sourceMapCommands")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRum struct {
@@ -158,5 +192,4 @@ func (v *NullableRum) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

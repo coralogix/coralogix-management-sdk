@@ -11,10 +11,12 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateCustomEnrichmentRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateCustomEnrichmentRequest{}
@@ -24,6 +26,7 @@ type CreateCustomEnrichmentRequest struct {
 	Description string `json:"description"`
 	File File `json:"file"`
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateCustomEnrichmentRequest CreateCustomEnrichmentRequest
@@ -133,6 +136,11 @@ func (o CreateCustomEnrichmentRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["file"] = o.File
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,7 +171,6 @@ func (o *CreateCustomEnrichmentRequest) UnmarshalJSON(data []byte) (err error) {
 	varCreateCustomEnrichmentRequest := _CreateCustomEnrichmentRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateCustomEnrichmentRequest)
 
 	if err != nil {
@@ -171,6 +178,15 @@ func (o *CreateCustomEnrichmentRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateCustomEnrichmentRequest(varCreateCustomEnrichmentRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "file")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -210,5 +226,4 @@ func (v *NullableCreateCustomEnrichmentRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

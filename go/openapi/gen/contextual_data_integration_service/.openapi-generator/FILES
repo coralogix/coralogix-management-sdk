@@ -13,9 +13,6 @@ model_azure_arm_template.go
 model_changelog_entry.go
 model_cloud_formation_stack.go
 model_cloud_formation_template.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_command_information.go
 model_common_group.go
 model_configuration_block.go
@@ -76,8 +73,6 @@ model_link.go
 model_list_text_value.go
 model_local_changelog.go
 model_managed.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_selection_value.go
 model_multiple_values.go
 model_parameter.go
@@ -107,7 +102,7 @@ model_test_contextual_data_integration_request.go
 model_test_contextual_data_integration_response.go
 model_test_integration_result.go
 model_test_integration_result_failure.go
-model_test_integration_result_success.go
+model_test_integration_result_success_variant.go
 model_update_contextual_data_integration_request.go
 model_v1_extension.go
 model_v1_failure.go

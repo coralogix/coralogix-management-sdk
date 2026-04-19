@@ -11,18 +11,25 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ManualIntervalResolution type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualIntervalResolution{}
 
-// ManualIntervalResolution Manual interval resolution with a fixed, user-specified interval for time buckets.
+// ManualIntervalResolution Manual interval resolution with a fixed, user-specified interval for time buckets. Optionally supports minimum interval and maximum data points constraints.
 type ManualIntervalResolution struct {
 	// Fixed interval duration for time buckets, specified by the user.
 	Interval string `json:"interval"`
+	// Maximum number of data points constraint.
+	MaximumDataPoints *int32 `json:"maximumDataPoints,omitempty"`
+	// Minimum interval duration constraint. The selected interval will not be smaller than this value.
+	MinimumInterval *string `json:"minimumInterval,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ManualIntervalResolution ManualIntervalResolution
@@ -69,6 +76,70 @@ func (o *ManualIntervalResolution) SetInterval(v string) {
 	o.Interval = v
 }
 
+// GetMaximumDataPoints returns the MaximumDataPoints field value if set, zero value otherwise.
+func (o *ManualIntervalResolution) GetMaximumDataPoints() int32 {
+	if o == nil || IsNil(o.MaximumDataPoints) {
+		var ret int32
+		return ret
+	}
+	return *o.MaximumDataPoints
+}
+
+// GetMaximumDataPointsOk returns a tuple with the MaximumDataPoints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualIntervalResolution) GetMaximumDataPointsOk() (*int32, bool) {
+	if o == nil || IsNil(o.MaximumDataPoints) {
+		return nil, false
+	}
+	return o.MaximumDataPoints, true
+}
+
+// HasMaximumDataPoints returns a boolean if a field has been set.
+func (o *ManualIntervalResolution) HasMaximumDataPoints() bool {
+	if o != nil && !IsNil(o.MaximumDataPoints) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaximumDataPoints gets a reference to the given int32 and assigns it to the MaximumDataPoints field.
+func (o *ManualIntervalResolution) SetMaximumDataPoints(v int32) {
+	o.MaximumDataPoints = &v
+}
+
+// GetMinimumInterval returns the MinimumInterval field value if set, zero value otherwise.
+func (o *ManualIntervalResolution) GetMinimumInterval() string {
+	if o == nil || IsNil(o.MinimumInterval) {
+		var ret string
+		return ret
+	}
+	return *o.MinimumInterval
+}
+
+// GetMinimumIntervalOk returns a tuple with the MinimumInterval field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualIntervalResolution) GetMinimumIntervalOk() (*string, bool) {
+	if o == nil || IsNil(o.MinimumInterval) {
+		return nil, false
+	}
+	return o.MinimumInterval, true
+}
+
+// HasMinimumInterval returns a boolean if a field has been set.
+func (o *ManualIntervalResolution) HasMinimumInterval() bool {
+	if o != nil && !IsNil(o.MinimumInterval) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinimumInterval gets a reference to the given string and assigns it to the MinimumInterval field.
+func (o *ManualIntervalResolution) SetMinimumInterval(v string) {
+	o.MinimumInterval = &v
+}
+
 func (o ManualIntervalResolution) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +151,17 @@ func (o ManualIntervalResolution) MarshalJSON() ([]byte, error) {
 func (o ManualIntervalResolution) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["interval"] = o.Interval
+	if !IsNil(o.MaximumDataPoints) {
+		toSerialize["maximumDataPoints"] = o.MaximumDataPoints
+	}
+	if !IsNil(o.MinimumInterval) {
+		toSerialize["minimumInterval"] = o.MinimumInterval
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,7 +190,6 @@ func (o *ManualIntervalResolution) UnmarshalJSON(data []byte) (err error) {
 	varManualIntervalResolution := _ManualIntervalResolution{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varManualIntervalResolution)
 
 	if err != nil {
@@ -116,6 +197,15 @@ func (o *ManualIntervalResolution) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ManualIntervalResolution(varManualIntervalResolution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "interval")
+		delete(additionalProperties, "maximumDataPoints")
+		delete(additionalProperties, "minimumInterval")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -155,5 +245,4 @@ func (v *NullableManualIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -41,8 +41,6 @@ func (r ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest) Execute() (*Crea
 /*
 OutgoingWebhooksServiceCreateOutgoingWebhook Create an outgoing webhook
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceCreateOutgoingWebhookRequest
 */
@@ -142,8 +140,6 @@ func (r ApiOutgoingWebhooksServiceDeleteOutgoingWebhookRequest) Execute() (map[s
 
 /*
 OutgoingWebhooksServiceDeleteOutgoingWebhook Delete an outgoing webhook
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -246,8 +242,6 @@ func (r ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest) Execute() (*GetOutg
 /*
 OutgoingWebhooksServiceGetOutgoingWebhook Get outgoing webhook
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiOutgoingWebhooksServiceGetOutgoingWebhookRequest
@@ -349,8 +343,6 @@ func (r ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest) Execute(
 /*
 OutgoingWebhooksServiceGetOutgoingWebhookTypeDetails Get outgoing webhook type details
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param type_
  @return ApiOutgoingWebhooksServiceGetOutgoingWebhookTypeDetailsRequest
@@ -451,8 +443,6 @@ func (r ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest) Execute() (*Li
 /*
 OutgoingWebhooksServiceListAllOutgoingWebhooks List all outgoing webhooks
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceListAllOutgoingWebhooksRequest
 */
@@ -550,8 +540,6 @@ func (r ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest) Execute() 
 /*
 OutgoingWebhooksServiceListOutboundWebhooksSummary List outbound webhooks summary
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceListOutboundWebhooksSummaryRequest
 */
@@ -648,8 +636,6 @@ func (r ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest) Execute() (*L
 
 /*
 OutgoingWebhooksServiceListOutgoingWebhookTypes Get outgoing webhook types
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceListOutgoingWebhookTypesRequest
@@ -754,8 +740,6 @@ func (r ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest) Execute() (*ListO
 /*
 OutgoingWebhooksServiceListOutgoingWebhooks List outgoing webhooks
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceListOutgoingWebhooksRequest
 */
@@ -856,8 +840,6 @@ func (r ApiOutgoingWebhooksServiceTestExistingOutgoingWebhookRequest) Execute() 
 
 /*
 OutgoingWebhooksServiceTestExistingOutgoingWebhook Test an existing outgoing webhook
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -965,8 +947,6 @@ func (r ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest) Execute() (*TestOu
 /*
 OutgoingWebhooksServiceTestOutgoingWebhook Test an outgoing webhook
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceTestOutgoingWebhookRequest
 */
@@ -1071,8 +1051,6 @@ func (r ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest) Execute() (map[s
 
 /*
 OutgoingWebhooksServiceUpdateOutgoingWebhook Update an outgoing webhook
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiOutgoingWebhooksServiceUpdateOutgoingWebhookRequest

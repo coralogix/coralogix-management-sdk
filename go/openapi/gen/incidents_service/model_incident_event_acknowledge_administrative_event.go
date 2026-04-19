@@ -11,22 +11,25 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventAcknowledgeAdministrativeEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventAcknowledgeAdministrativeEvent{}
 
 // IncidentEventAcknowledgeAdministrativeEvent struct for IncidentEventAcknowledgeAdministrativeEvent
 type IncidentEventAcknowledgeAdministrativeEvent struct {
-	Acknowledge *IncidentEventAcknowledge `json:"acknowledge,omitempty"`
-	AdministrativeEvent *IncidentEventOriginatorAdministrative `json:"administrativeEvent,omitempty"`
+	Acknowledge IncidentEventAcknowledge `json:"acknowledge"`
+	AdministrativeEvent IncidentEventOriginatorAdministrative `json:"administrativeEvent"`
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
 	OriginatorType OriginatorType `json:"originatorType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventAcknowledgeAdministrativeEvent IncidentEventAcknowledgeAdministrativeEvent
@@ -35,8 +38,10 @@ type _IncidentEventAcknowledgeAdministrativeEvent IncidentEventAcknowledgeAdmini
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventAcknowledgeAdministrativeEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventAcknowledgeAdministrativeEvent {
+func NewIncidentEventAcknowledgeAdministrativeEvent(acknowledge IncidentEventAcknowledge, administrativeEvent IncidentEventOriginatorAdministrative, id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventAcknowledgeAdministrativeEvent {
 	this := IncidentEventAcknowledgeAdministrativeEvent{}
+	this.Acknowledge = acknowledge
+	this.AdministrativeEvent = administrativeEvent
 	this.Id = id
 	this.IncidentEventType = incidentEventType
 	this.OriginatorType = originatorType
@@ -51,68 +56,52 @@ func NewIncidentEventAcknowledgeAdministrativeEventWithDefaults() *IncidentEvent
 	return &this
 }
 
-// GetAcknowledge returns the Acknowledge field value if set, zero value otherwise.
+// GetAcknowledge returns the Acknowledge field value
 func (o *IncidentEventAcknowledgeAdministrativeEvent) GetAcknowledge() IncidentEventAcknowledge {
-	if o == nil || IsNil(o.Acknowledge) {
+	if o == nil {
 		var ret IncidentEventAcknowledge
 		return ret
 	}
-	return *o.Acknowledge
+
+	return o.Acknowledge
 }
 
-// GetAcknowledgeOk returns a tuple with the Acknowledge field value if set, nil otherwise
+// GetAcknowledgeOk returns a tuple with the Acknowledge field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventAcknowledgeAdministrativeEvent) GetAcknowledgeOk() (*IncidentEventAcknowledge, bool) {
-	if o == nil || IsNil(o.Acknowledge) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Acknowledge, true
+	return &o.Acknowledge, true
 }
 
-// HasAcknowledge returns a boolean if a field has been set.
-func (o *IncidentEventAcknowledgeAdministrativeEvent) HasAcknowledge() bool {
-	if o != nil && !IsNil(o.Acknowledge) {
-		return true
-	}
-
-	return false
-}
-
-// SetAcknowledge gets a reference to the given IncidentEventAcknowledge and assigns it to the Acknowledge field.
+// SetAcknowledge sets field value
 func (o *IncidentEventAcknowledgeAdministrativeEvent) SetAcknowledge(v IncidentEventAcknowledge) {
-	o.Acknowledge = &v
+	o.Acknowledge = v
 }
 
-// GetAdministrativeEvent returns the AdministrativeEvent field value if set, zero value otherwise.
+// GetAdministrativeEvent returns the AdministrativeEvent field value
 func (o *IncidentEventAcknowledgeAdministrativeEvent) GetAdministrativeEvent() IncidentEventOriginatorAdministrative {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorAdministrative
 		return ret
 	}
-	return *o.AdministrativeEvent
+
+	return o.AdministrativeEvent
 }
 
-// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value if set, nil otherwise
+// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventAcknowledgeAdministrativeEvent) GetAdministrativeEventOk() (*IncidentEventOriginatorAdministrative, bool) {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdministrativeEvent, true
+	return &o.AdministrativeEvent, true
 }
 
-// HasAdministrativeEvent returns a boolean if a field has been set.
-func (o *IncidentEventAcknowledgeAdministrativeEvent) HasAdministrativeEvent() bool {
-	if o != nil && !IsNil(o.AdministrativeEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdministrativeEvent gets a reference to the given IncidentEventOriginatorAdministrative and assigns it to the AdministrativeEvent field.
+// SetAdministrativeEvent sets field value
 func (o *IncidentEventAcknowledgeAdministrativeEvent) SetAdministrativeEvent(v IncidentEventOriginatorAdministrative) {
-	o.AdministrativeEvent = &v
+	o.AdministrativeEvent = v
 }
 
 // GetId returns the Id field value
@@ -197,15 +186,16 @@ func (o IncidentEventAcknowledgeAdministrativeEvent) MarshalJSON() ([]byte, erro
 
 func (o IncidentEventAcknowledgeAdministrativeEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Acknowledge) {
-		toSerialize["acknowledge"] = o.Acknowledge
-	}
-	if !IsNil(o.AdministrativeEvent) {
-		toSerialize["administrativeEvent"] = o.AdministrativeEvent
-	}
+	toSerialize["acknowledge"] = o.Acknowledge
+	toSerialize["administrativeEvent"] = o.AdministrativeEvent
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
 	toSerialize["originatorType"] = o.OriginatorType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -214,6 +204,8 @@ func (o *IncidentEventAcknowledgeAdministrativeEvent) UnmarshalJSON(data []byte)
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"acknowledge",
+		"administrativeEvent",
 		"id",
 		"incidentEventType",
 		"originatorType",
@@ -236,7 +228,6 @@ func (o *IncidentEventAcknowledgeAdministrativeEvent) UnmarshalJSON(data []byte)
 	varIncidentEventAcknowledgeAdministrativeEvent := _IncidentEventAcknowledgeAdministrativeEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventAcknowledgeAdministrativeEvent)
 
 	if err != nil {
@@ -244,6 +235,17 @@ func (o *IncidentEventAcknowledgeAdministrativeEvent) UnmarshalJSON(data []byte)
 	}
 
 	*o = IncidentEventAcknowledgeAdministrativeEvent(varIncidentEventAcknowledgeAdministrativeEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "acknowledge")
+		delete(additionalProperties, "administrativeEvent")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "originatorType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -283,5 +285,4 @@ func (v *NullableIncidentEventAcknowledgeAdministrativeEvent) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

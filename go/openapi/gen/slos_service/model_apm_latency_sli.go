@@ -11,10 +11,13 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // ApmLatencySli - struct for ApmLatencySli
 type ApmLatencySli struct {
@@ -42,7 +45,7 @@ func (dst *ApmLatencySli) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ApmLatencySliAverage
-	err = newStrictDecoder(data).Decode(&dst.ApmLatencySliAverage)
+	err = json.Unmarshal(data, &dst.ApmLatencySliAverage)
 	if err == nil {
 		jsonApmLatencySliAverage, _ := json.Marshal(dst.ApmLatencySliAverage)
 		if string(jsonApmLatencySliAverage) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *ApmLatencySli) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ApmLatencySliQuantile
-	err = newStrictDecoder(data).Decode(&dst.ApmLatencySliQuantile)
+	err = json.Unmarshal(data, &dst.ApmLatencySliQuantile)
 	if err == nil {
 		jsonApmLatencySliQuantile, _ := json.Marshal(dst.ApmLatencySliQuantile)
 		if string(jsonApmLatencySliQuantile) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableApmLatencySli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

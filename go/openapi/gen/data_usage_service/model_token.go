@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Token type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Token{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Token{}
 // Token struct for Token
 type Token struct {
 	Value *float32 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Token Token
 
 // NewToken instantiates a new Token object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Token) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Token) UnmarshalJSON(data []byte) (err error) {
+	varToken := _Token{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varToken)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Token(varToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableToken struct {
@@ -122,5 +155,4 @@ func (v *NullableToken) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

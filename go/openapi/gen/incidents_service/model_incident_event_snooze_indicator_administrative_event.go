@@ -11,22 +11,25 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventSnoozeIndicatorAdministrativeEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventSnoozeIndicatorAdministrativeEvent{}
 
 // IncidentEventSnoozeIndicatorAdministrativeEvent struct for IncidentEventSnoozeIndicatorAdministrativeEvent
 type IncidentEventSnoozeIndicatorAdministrativeEvent struct {
-	AdministrativeEvent *IncidentEventOriginatorAdministrative `json:"administrativeEvent,omitempty"`
+	AdministrativeEvent IncidentEventOriginatorAdministrative `json:"administrativeEvent"`
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
 	OriginatorType OriginatorType `json:"originatorType"`
-	SnoozeIndicator *IncidentEventSnoozeIndicator `json:"snoozeIndicator,omitempty"`
+	SnoozeIndicator IncidentEventSnoozeIndicator `json:"snoozeIndicator"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventSnoozeIndicatorAdministrativeEvent IncidentEventSnoozeIndicatorAdministrativeEvent
@@ -35,11 +38,13 @@ type _IncidentEventSnoozeIndicatorAdministrativeEvent IncidentEventSnoozeIndicat
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventSnoozeIndicatorAdministrativeEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventSnoozeIndicatorAdministrativeEvent {
+func NewIncidentEventSnoozeIndicatorAdministrativeEvent(administrativeEvent IncidentEventOriginatorAdministrative, id string, incidentEventType IncidentEventType, originatorType OriginatorType, snoozeIndicator IncidentEventSnoozeIndicator) *IncidentEventSnoozeIndicatorAdministrativeEvent {
 	this := IncidentEventSnoozeIndicatorAdministrativeEvent{}
+	this.AdministrativeEvent = administrativeEvent
 	this.Id = id
 	this.IncidentEventType = incidentEventType
 	this.OriginatorType = originatorType
+	this.SnoozeIndicator = snoozeIndicator
 	return &this
 }
 
@@ -51,36 +56,28 @@ func NewIncidentEventSnoozeIndicatorAdministrativeEventWithDefaults() *IncidentE
 	return &this
 }
 
-// GetAdministrativeEvent returns the AdministrativeEvent field value if set, zero value otherwise.
+// GetAdministrativeEvent returns the AdministrativeEvent field value
 func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) GetAdministrativeEvent() IncidentEventOriginatorAdministrative {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorAdministrative
 		return ret
 	}
-	return *o.AdministrativeEvent
+
+	return o.AdministrativeEvent
 }
 
-// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value if set, nil otherwise
+// GetAdministrativeEventOk returns a tuple with the AdministrativeEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) GetAdministrativeEventOk() (*IncidentEventOriginatorAdministrative, bool) {
-	if o == nil || IsNil(o.AdministrativeEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AdministrativeEvent, true
+	return &o.AdministrativeEvent, true
 }
 
-// HasAdministrativeEvent returns a boolean if a field has been set.
-func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) HasAdministrativeEvent() bool {
-	if o != nil && !IsNil(o.AdministrativeEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdministrativeEvent gets a reference to the given IncidentEventOriginatorAdministrative and assigns it to the AdministrativeEvent field.
+// SetAdministrativeEvent sets field value
 func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) SetAdministrativeEvent(v IncidentEventOriginatorAdministrative) {
-	o.AdministrativeEvent = &v
+	o.AdministrativeEvent = v
 }
 
 // GetId returns the Id field value
@@ -155,36 +152,28 @@ func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) SetOriginatorType(v Or
 	o.OriginatorType = v
 }
 
-// GetSnoozeIndicator returns the SnoozeIndicator field value if set, zero value otherwise.
+// GetSnoozeIndicator returns the SnoozeIndicator field value
 func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) GetSnoozeIndicator() IncidentEventSnoozeIndicator {
-	if o == nil || IsNil(o.SnoozeIndicator) {
+	if o == nil {
 		var ret IncidentEventSnoozeIndicator
 		return ret
 	}
-	return *o.SnoozeIndicator
+
+	return o.SnoozeIndicator
 }
 
-// GetSnoozeIndicatorOk returns a tuple with the SnoozeIndicator field value if set, nil otherwise
+// GetSnoozeIndicatorOk returns a tuple with the SnoozeIndicator field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) GetSnoozeIndicatorOk() (*IncidentEventSnoozeIndicator, bool) {
-	if o == nil || IsNil(o.SnoozeIndicator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SnoozeIndicator, true
+	return &o.SnoozeIndicator, true
 }
 
-// HasSnoozeIndicator returns a boolean if a field has been set.
-func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) HasSnoozeIndicator() bool {
-	if o != nil && !IsNil(o.SnoozeIndicator) {
-		return true
-	}
-
-	return false
-}
-
-// SetSnoozeIndicator gets a reference to the given IncidentEventSnoozeIndicator and assigns it to the SnoozeIndicator field.
+// SetSnoozeIndicator sets field value
 func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) SetSnoozeIndicator(v IncidentEventSnoozeIndicator) {
-	o.SnoozeIndicator = &v
+	o.SnoozeIndicator = v
 }
 
 func (o IncidentEventSnoozeIndicatorAdministrativeEvent) MarshalJSON() ([]byte, error) {
@@ -197,15 +186,16 @@ func (o IncidentEventSnoozeIndicatorAdministrativeEvent) MarshalJSON() ([]byte, 
 
 func (o IncidentEventSnoozeIndicatorAdministrativeEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AdministrativeEvent) {
-		toSerialize["administrativeEvent"] = o.AdministrativeEvent
-	}
+	toSerialize["administrativeEvent"] = o.AdministrativeEvent
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
 	toSerialize["originatorType"] = o.OriginatorType
-	if !IsNil(o.SnoozeIndicator) {
-		toSerialize["snoozeIndicator"] = o.SnoozeIndicator
+	toSerialize["snoozeIndicator"] = o.SnoozeIndicator
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -214,9 +204,11 @@ func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) UnmarshalJSON(data []b
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"administrativeEvent",
 		"id",
 		"incidentEventType",
 		"originatorType",
+		"snoozeIndicator",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -236,7 +228,6 @@ func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) UnmarshalJSON(data []b
 	varIncidentEventSnoozeIndicatorAdministrativeEvent := _IncidentEventSnoozeIndicatorAdministrativeEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventSnoozeIndicatorAdministrativeEvent)
 
 	if err != nil {
@@ -244,6 +235,17 @@ func (o *IncidentEventSnoozeIndicatorAdministrativeEvent) UnmarshalJSON(data []b
 	}
 
 	*o = IncidentEventSnoozeIndicatorAdministrativeEvent(varIncidentEventSnoozeIndicatorAdministrativeEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "administrativeEvent")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "originatorType")
+		delete(additionalProperties, "snoozeIndicator")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -283,5 +285,4 @@ func (v *NullableIncidentEventSnoozeIndicatorAdministrativeEvent) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1OrderByIncidentField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1OrderByIncidentField{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &V1OrderByIncidentField{}
 // V1OrderByIncidentField struct for V1OrderByIncidentField
 type V1OrderByIncidentField struct {
 	Direction V1OrderByDirection `json:"direction"`
-	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	IncidentField IncidentFields `json:"incidentField"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _V1OrderByIncidentField V1OrderByIncidentField
@@ -31,9 +34,10 @@ type _V1OrderByIncidentField V1OrderByIncidentField
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1OrderByIncidentField(direction V1OrderByDirection) *V1OrderByIncidentField {
+func NewV1OrderByIncidentField(direction V1OrderByDirection, incidentField IncidentFields) *V1OrderByIncidentField {
 	this := V1OrderByIncidentField{}
 	this.Direction = direction
+	this.IncidentField = incidentField
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *V1OrderByIncidentField) SetDirection(v V1OrderByDirection) {
 	o.Direction = v
 }
 
-// GetIncidentField returns the IncidentField field value if set, zero value otherwise.
+// GetIncidentField returns the IncidentField field value
 func (o *V1OrderByIncidentField) GetIncidentField() IncidentFields {
-	if o == nil || IsNil(o.IncidentField) {
+	if o == nil {
 		var ret IncidentFields
 		return ret
 	}
-	return *o.IncidentField
+
+	return o.IncidentField
 }
 
-// GetIncidentFieldOk returns a tuple with the IncidentField field value if set, nil otherwise
+// GetIncidentFieldOk returns a tuple with the IncidentField field value
 // and a boolean to check if the value has been set.
 func (o *V1OrderByIncidentField) GetIncidentFieldOk() (*IncidentFields, bool) {
-	if o == nil || IsNil(o.IncidentField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IncidentField, true
+	return &o.IncidentField, true
 }
 
-// HasIncidentField returns a boolean if a field has been set.
-func (o *V1OrderByIncidentField) HasIncidentField() bool {
-	if o != nil && !IsNil(o.IncidentField) {
-		return true
-	}
-
-	return false
-}
-
-// SetIncidentField gets a reference to the given IncidentFields and assigns it to the IncidentField field.
+// SetIncidentField sets field value
 func (o *V1OrderByIncidentField) SetIncidentField(v IncidentFields) {
-	o.IncidentField = &v
+	o.IncidentField = v
 }
 
 func (o V1OrderByIncidentField) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o V1OrderByIncidentField) MarshalJSON() ([]byte, error) {
 func (o V1OrderByIncidentField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["direction"] = o.Direction
-	if !IsNil(o.IncidentField) {
-		toSerialize["incidentField"] = o.IncidentField
+	toSerialize["incidentField"] = o.IncidentField
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *V1OrderByIncidentField) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"direction",
+		"incidentField",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -143,7 +143,6 @@ func (o *V1OrderByIncidentField) UnmarshalJSON(data []byte) (err error) {
 	varV1OrderByIncidentField := _V1OrderByIncidentField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV1OrderByIncidentField)
 
 	if err != nil {
@@ -151,6 +150,14 @@ func (o *V1OrderByIncidentField) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V1OrderByIncidentField(varV1OrderByIncidentField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "incidentField")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +197,4 @@ func (v *NullableV1OrderByIncidentField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsAnomalyRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAnomalyRule{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LogsAnomalyRule{}
 // LogsAnomalyRule Defines a rule for detecting log anomalies
 type LogsAnomalyRule struct {
 	Condition *LogsAnomalyCondition `json:"condition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsAnomalyRule LogsAnomalyRule
 
 // NewLogsAnomalyRule instantiates a new LogsAnomalyRule object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LogsAnomalyRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Condition) {
 		toSerialize["condition"] = o.Condition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsAnomalyRule) UnmarshalJSON(data []byte) (err error) {
+	varLogsAnomalyRule := _LogsAnomalyRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsAnomalyRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsAnomalyRule(varLogsAnomalyRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsAnomalyRule struct {
@@ -122,5 +155,4 @@ func (v *NullableLogsAnomalyRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

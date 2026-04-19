@@ -47,35 +47,35 @@ func TestIntegration(t *testing.T) {
 	params := []integrations.Parameter{
 		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("ApplicationName"),
-			StringValue: strPtr("cxsdk"),
+			StringValue: "cxsdk",
 		}),
 		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("SubsystemName"),
-			StringValue: strPtr("aws-metrics-collector"),
+			StringValue: "aws-metrics-collector",
 		}),
 		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("AwsRoleArn"),
-			StringValue: strPtr(role),
+			StringValue: role,
 		}),
 		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("IntegrationName"),
-			StringValue: strPtr("sdk-integration-setup"),
+			StringValue: "sdk-integration-setup",
 		}),
 		integrations.ParameterStringValueAsParameter(&integrations.ParameterStringValue{
 			Key:         strPtr("AwsRegion"),
-			StringValue: strPtr(awsRegion),
+			StringValue: awsRegion,
 		}),
 		integrations.ParameterBooleanValueAsParameter(&integrations.ParameterBooleanValue{
 			Key:          strPtr("WithAggregations"),
-			BooleanValue: boolPtr(false),
+			BooleanValue: false,
 		}),
 		integrations.ParameterBooleanValueAsParameter(&integrations.ParameterBooleanValue{
 			Key:          strPtr("EnrichWithTags"),
-			BooleanValue: boolPtr(false),
+			BooleanValue: false,
 		}),
 		integrations.ParameterStringListAsParameter(&integrations.ParameterStringList{
 			Key: strPtr("MetricNamespaces"),
-			StringList: &integrations.StringList{
+			StringList: integrations.StringList{
 				Values: []string{"AWS/S3"},
 			},
 		}),
@@ -133,7 +133,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("slack-webhook"),
 					Type: webhooks.WEBHOOKTYPE_SLACK.Ptr(),
 					Url:  webhooks.PtrString("https://join.slack.com/example"),
-					Slack: &webhooks.SlackConfig{
+					Slack: webhooks.SlackConfig{
 						Attachments: []webhooks.Attachment{
 							{
 								IsActive: boolPtr(true),
@@ -157,7 +157,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("custom-webhook"),
 					Type: webhooks.WEBHOOKTYPE_GENERIC.Ptr(),
 					Url:  webhooks.PtrString("https://example-url.com"),
-					GenericWebhook: &webhooks.GenericWebhookConfig{
+					GenericWebhook: webhooks.GenericWebhookConfig{
 						Method: webhooks.METHODTYPE_GET.Ptr(),
 						Payload: webhooks.PtrString(
 							"Hello from $ALERT_NAME, a coralogix alert",
@@ -174,7 +174,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("pager-duty-webhook"),
 					Type: webhooks.WEBHOOKTYPE_PAGERDUTY.Ptr(),
 					Url:  webhooks.PtrString("https://example-url.com/"),
-					PagerDuty: &webhooks.PagerDutyConfig{
+					PagerDuty: webhooks.PagerDutyConfig{
 						ServiceKey: webhooks.PtrString("example-key"),
 					},
 				},
@@ -187,7 +187,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("email-group-webhook"),
 					Type: webhooks.WEBHOOKTYPE_EMAIL_GROUP.Ptr(),
 					Url:  webhooks.PtrString("https://example-url.com/"),
-					EmailGroup: &webhooks.EmailGroupConfig{
+					EmailGroup: webhooks.EmailGroupConfig{
 						EmailAddresses: []string{"user@example.com"}},
 				},
 			),
@@ -199,7 +199,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("jira-webhook"),
 					Type: webhooks.WEBHOOKTYPE_JIRA.Ptr(),
 					Url:  webhooks.PtrString("https://my-jira.atlassian.net/jira/"),
-					Jira: &webhooks.JiraConfig{
+					Jira: webhooks.JiraConfig{
 
 						ProjectKey: webhooks.PtrString("example-key"),
 						Email:      webhooks.PtrString("email@coralogix.com"),
@@ -226,7 +226,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("demisto-webhook"),
 					Type: webhooks.WEBHOOKTYPE_DEMISTO.Ptr(),
 					Url:  webhooks.PtrString("https://example.com"),
-					Demisto: &webhooks.DemistoConfig{
+					Demisto: webhooks.DemistoConfig{
 						Uuid:    webhooks.PtrString(uuid.NewString()),
 						Payload: webhooks.PtrString("Hello from $ALERT_NAME, a coralogix alert"),
 					},
@@ -240,7 +240,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("sendlog-webhook"),
 					Type: webhooks.WEBHOOKTYPE_SEND_LOG.Ptr(),
 					Url:  webhooks.PtrString("https://example.com"),
-					SendLog: &webhooks.SendLogConfig{
+					SendLog: webhooks.SendLogConfig{
 						Uuid:    webhooks.PtrString(uuid.NewString()),
 						Payload: webhooks.PtrString("Hello from $ALERT_NAME, a coralogix alert"),
 					},
@@ -254,7 +254,7 @@ func TestWebhooks(t *testing.T) {
 					Name: webhooks.PtrString("event-bridge-webhook"),
 					Type: webhooks.WEBHOOKTYPE_AWS_EVENT_BRIDGE.Ptr(),
 					Url:  webhooks.PtrString("https://aws.amazon.com"),
-					AwsEventBridge: &webhooks.AwsEventBridgeConfig{
+					AwsEventBridge: webhooks.AwsEventBridgeConfig{
 						EventBusArn: webhooks.PtrString("arn:aws:events:us-east-1:123456789012:event-bus/default"),
 						Detail:      webhooks.PtrString("example-detail"),
 						DetailType:  webhooks.PtrString("example-detail-type"),

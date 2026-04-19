@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CommonGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommonGroup{}
@@ -22,7 +25,10 @@ type CommonGroup struct {
 	Field *FieldGroup `json:"field,omitempty"`
 	Groups []CommonGroup `json:"groups,omitempty"`
 	Value *float64 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CommonGroup CommonGroup
 
 // NewCommonGroup instantiates a new CommonGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o CommonGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CommonGroup) UnmarshalJSON(data []byte) (err error) {
+	varCommonGroup := _CommonGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCommonGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommonGroup(varCommonGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCommonGroup struct {
@@ -194,5 +229,4 @@ func (v *NullableCommonGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

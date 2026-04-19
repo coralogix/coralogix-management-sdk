@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsThresholdCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsThresholdCondition{}
@@ -23,7 +26,10 @@ type LogsThresholdCondition struct {
 	// The threshold value for the alert condition
 	Threshold *float64 `json:"threshold,omitempty"`
 	TimeWindow *LogsTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsThresholdCondition LogsThresholdCondition
 
 // NewLogsThresholdCondition instantiates a new LogsThresholdCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o LogsThresholdCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsThresholdCondition) UnmarshalJSON(data []byte) (err error) {
+	varLogsThresholdCondition := _LogsThresholdCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsThresholdCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsThresholdCondition(varLogsThresholdCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conditionType")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsThresholdCondition struct {
@@ -195,5 +230,4 @@ func (v *NullableLogsThresholdCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

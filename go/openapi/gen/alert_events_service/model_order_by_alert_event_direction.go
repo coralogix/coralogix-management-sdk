@@ -11,9 +11,12 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // OrderByAlertEventDirection the model 'OrderByAlertEventDirection'
 type OrderByAlertEventDirection string

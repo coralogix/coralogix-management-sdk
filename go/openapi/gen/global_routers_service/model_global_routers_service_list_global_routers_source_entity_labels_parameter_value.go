@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsP
 // GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct for GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 type GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct {
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 
 // NewGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue instantiates a new GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue) T
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue) UnmarshalJSON(data []byte) (err error) {
+	varGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue := _GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue(varGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct {
@@ -122,5 +155,4 @@ func (v *NullableGlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParamete
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

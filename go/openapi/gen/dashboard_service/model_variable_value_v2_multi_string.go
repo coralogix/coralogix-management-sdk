@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableValueV2MultiString type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2MultiString{}
 
 // VariableValueV2MultiString struct for VariableValueV2MultiString
 type VariableValueV2MultiString struct {
-	MultiString *MultiStringValue `json:"multiString,omitempty"`
+	MultiString MultiStringValue `json:"multiString"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableValueV2MultiString VariableValueV2MultiString
 
 // NewVariableValueV2MultiString instantiates a new VariableValueV2MultiString object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableValueV2MultiString() *VariableValueV2MultiString {
+func NewVariableValueV2MultiString(multiString MultiStringValue) *VariableValueV2MultiString {
 	this := VariableValueV2MultiString{}
+	this.MultiString = multiString
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableValueV2MultiStringWithDefaults() *VariableValueV2MultiString {
 	return &this
 }
 
-// GetMultiString returns the MultiString field value if set, zero value otherwise.
+// GetMultiString returns the MultiString field value
 func (o *VariableValueV2MultiString) GetMultiString() MultiStringValue {
-	if o == nil || IsNil(o.MultiString) {
+	if o == nil {
 		var ret MultiStringValue
 		return ret
 	}
-	return *o.MultiString
+
+	return o.MultiString
 }
 
-// GetMultiStringOk returns a tuple with the MultiString field value if set, nil otherwise
+// GetMultiStringOk returns a tuple with the MultiString field value
 // and a boolean to check if the value has been set.
 func (o *VariableValueV2MultiString) GetMultiStringOk() (*MultiStringValue, bool) {
-	if o == nil || IsNil(o.MultiString) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultiString, true
+	return &o.MultiString, true
 }
 
-// HasMultiString returns a boolean if a field has been set.
-func (o *VariableValueV2MultiString) HasMultiString() bool {
-	if o != nil && !IsNil(o.MultiString) {
-		return true
-	}
-
-	return false
-}
-
-// SetMultiString gets a reference to the given MultiStringValue and assigns it to the MultiString field.
+// SetMultiString sets field value
 func (o *VariableValueV2MultiString) SetMultiString(v MultiStringValue) {
-	o.MultiString = &v
+	o.MultiString = v
 }
 
 func (o VariableValueV2MultiString) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableValueV2MultiString) MarshalJSON() ([]byte, error) {
 
 func (o VariableValueV2MultiString) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MultiString) {
-		toSerialize["multiString"] = o.MultiString
+	toSerialize["multiString"] = o.MultiString
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableValueV2MultiString) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"multiString",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableValueV2MultiString := _VariableValueV2MultiString{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2MultiString)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2MultiString(varVariableValueV2MultiString)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "multiString")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableValueV2MultiString struct {
@@ -122,5 +168,4 @@ func (v *NullableVariableValueV2MultiString) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

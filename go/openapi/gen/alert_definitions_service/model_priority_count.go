@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PriorityCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PriorityCount{}
@@ -22,7 +25,10 @@ type PriorityCount struct {
 	// The count for this alert priority
 	Count *int64 `json:"count,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PriorityCount PriorityCount
 
 // NewPriorityCount instantiates a new PriorityCount object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o PriorityCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PriorityCount) UnmarshalJSON(data []byte) (err error) {
+	varPriorityCount := _PriorityCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPriorityCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PriorityCount(varPriorityCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "priority")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePriorityCount struct {
@@ -159,5 +193,4 @@ func (v *NullablePriorityCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

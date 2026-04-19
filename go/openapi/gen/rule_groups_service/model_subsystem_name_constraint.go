@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SubsystemNameConstraint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SubsystemNameConstraint{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SubsystemNameConstraint{}
 // SubsystemNameConstraint struct for SubsystemNameConstraint
 type SubsystemNameConstraint struct {
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubsystemNameConstraint SubsystemNameConstraint
 
 // NewSubsystemNameConstraint instantiates a new SubsystemNameConstraint object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SubsystemNameConstraint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubsystemNameConstraint) UnmarshalJSON(data []byte) (err error) {
+	varSubsystemNameConstraint := _SubsystemNameConstraint{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSubsystemNameConstraint)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubsystemNameConstraint(varSubsystemNameConstraint)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubsystemNameConstraint struct {
@@ -122,5 +155,4 @@ func (v *NullableSubsystemNameConstraint) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

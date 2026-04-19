@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateRuleGroupRequestCreateRuleSubgroupCreateRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRuleGroupRequestCreateRuleSubgroupCreateRule{}
@@ -25,7 +28,10 @@ type CreateRuleGroupRequestCreateRuleSubgroupCreateRule struct {
 	Order *int64 `json:"order,omitempty"`
 	Parameters *RuleParameters `json:"parameters,omitempty"`
 	SourceField *string `json:"sourceField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRuleGroupRequestCreateRuleSubgroupCreateRule CreateRuleGroupRequestCreateRuleSubgroupCreateRule
 
 // NewCreateRuleGroupRequestCreateRuleSubgroupCreateRule instantiates a new CreateRuleGroupRequestCreateRuleSubgroupCreateRule object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o CreateRuleGroupRequestCreateRuleSubgroupCreateRule) ToMap() (map[string]
 	if !IsNil(o.SourceField) {
 		toSerialize["sourceField"] = o.SourceField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRuleGroupRequestCreateRuleSubgroupCreateRule) UnmarshalJSON(data []byte) (err error) {
+	varCreateRuleGroupRequestCreateRuleSubgroupCreateRule := _CreateRuleGroupRequestCreateRuleSubgroupCreateRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateRuleGroupRequestCreateRuleSubgroupCreateRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRuleGroupRequestCreateRuleSubgroupCreateRule(varCreateRuleGroupRequestCreateRuleSubgroupCreateRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "sourceField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRuleGroupRequestCreateRuleSubgroupCreateRule struct {
@@ -302,5 +340,4 @@ func (v *NullableCreateRuleGroupRequestCreateRuleSubgroupCreateRule) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

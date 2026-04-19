@@ -11,16 +11,24 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ManualSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSourceStrategyInstant{}
 
 // ManualSourceStrategyInstant struct for ManualSourceStrategyInstant
 type ManualSourceStrategyInstant struct {
-	Instant *ManualSourceStrategyInstant `json:"instant,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty"`
+	Unit *CommonUnit `json:"unit,omitempty"`
+	Value *float64 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManualSourceStrategyInstant ManualSourceStrategyInstant
 
 // NewManualSourceStrategyInstant instantiates a new ManualSourceStrategyInstant object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +47,100 @@ func NewManualSourceStrategyInstantWithDefaults() *ManualSourceStrategyInstant {
 	return &this
 }
 
-// GetInstant returns the Instant field value if set, zero value otherwise.
-func (o *ManualSourceStrategyInstant) GetInstant() ManualSourceStrategyInstant {
-	if o == nil || IsNil(o.Instant) {
-		var ret ManualSourceStrategyInstant
+// GetCustomUnit returns the CustomUnit field value if set, zero value otherwise.
+func (o *ManualSourceStrategyInstant) GetCustomUnit() string {
+	if o == nil || IsNil(o.CustomUnit) {
+		var ret string
 		return ret
 	}
-	return *o.Instant
+	return *o.CustomUnit
 }
 
-// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// GetCustomUnitOk returns a tuple with the CustomUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ManualSourceStrategyInstant) GetInstantOk() (*ManualSourceStrategyInstant, bool) {
-	if o == nil || IsNil(o.Instant) {
+func (o *ManualSourceStrategyInstant) GetCustomUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomUnit) {
 		return nil, false
 	}
-	return o.Instant, true
+	return o.CustomUnit, true
 }
 
-// HasInstant returns a boolean if a field has been set.
-func (o *ManualSourceStrategyInstant) HasInstant() bool {
-	if o != nil && !IsNil(o.Instant) {
+// HasCustomUnit returns a boolean if a field has been set.
+func (o *ManualSourceStrategyInstant) HasCustomUnit() bool {
+	if o != nil && !IsNil(o.CustomUnit) {
 		return true
 	}
 
 	return false
 }
 
-// SetInstant gets a reference to the given ManualSourceStrategyInstant and assigns it to the Instant field.
-func (o *ManualSourceStrategyInstant) SetInstant(v ManualSourceStrategyInstant) {
-	o.Instant = &v
+// SetCustomUnit gets a reference to the given string and assigns it to the CustomUnit field.
+func (o *ManualSourceStrategyInstant) SetCustomUnit(v string) {
+	o.CustomUnit = &v
+}
+
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *ManualSourceStrategyInstant) GetUnit() CommonUnit {
+	if o == nil || IsNil(o.Unit) {
+		var ret CommonUnit
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategyInstant) GetUnitOk() (*CommonUnit, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *ManualSourceStrategyInstant) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given CommonUnit and assigns it to the Unit field.
+func (o *ManualSourceStrategyInstant) SetUnit(v CommonUnit) {
+	o.Unit = &v
+}
+
+// GetValue returns the Value field value if set, zero value otherwise.
+func (o *ManualSourceStrategyInstant) GetValue() float64 {
+	if o == nil || IsNil(o.Value) {
+		var ret float64
+		return ret
+	}
+	return *o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategyInstant) GetValueOk() (*float64, bool) {
+	if o == nil || IsNil(o.Value) {
+		return nil, false
+	}
+	return o.Value, true
+}
+
+// HasValue returns a boolean if a field has been set.
+func (o *ManualSourceStrategyInstant) HasValue() bool {
+	if o != nil && !IsNil(o.Value) {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given float64 and assigns it to the Value field.
+func (o *ManualSourceStrategyInstant) SetValue(v float64) {
+	o.Value = &v
 }
 
 func (o ManualSourceStrategyInstant) MarshalJSON() ([]byte, error) {
@@ -81,10 +153,45 @@ func (o ManualSourceStrategyInstant) MarshalJSON() ([]byte, error) {
 
 func (o ManualSourceStrategyInstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Instant) {
-		toSerialize["instant"] = o.Instant
+	if !IsNil(o.CustomUnit) {
+		toSerialize["customUnit"] = o.CustomUnit
 	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
+	if !IsNil(o.Value) {
+		toSerialize["value"] = o.Value
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManualSourceStrategyInstant) UnmarshalJSON(data []byte) (err error) {
+	varManualSourceStrategyInstant := _ManualSourceStrategyInstant{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varManualSourceStrategyInstant)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManualSourceStrategyInstant(varManualSourceStrategyInstant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManualSourceStrategyInstant struct {
@@ -122,5 +229,4 @@ func (v *NullableManualSourceStrategyInstant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SingleBooleanValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SingleBooleanValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SingleBooleanValue{}
 // SingleBooleanValue struct for SingleBooleanValue
 type SingleBooleanValue struct {
 	DefaultValue *bool `json:"defaultValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SingleBooleanValue SingleBooleanValue
 
 // NewSingleBooleanValue instantiates a new SingleBooleanValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SingleBooleanValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultValue) {
 		toSerialize["defaultValue"] = o.DefaultValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SingleBooleanValue) UnmarshalJSON(data []byte) (err error) {
+	varSingleBooleanValue := _SingleBooleanValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSingleBooleanValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SingleBooleanValue(varSingleBooleanValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSingleBooleanValue struct {
@@ -122,5 +155,4 @@ func (v *NullableSingleBooleanValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

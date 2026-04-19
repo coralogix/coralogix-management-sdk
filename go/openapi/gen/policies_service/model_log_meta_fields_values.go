@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogMetaFieldsValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogMetaFieldsValues{}
@@ -24,6 +26,7 @@ type LogMetaFieldsValues struct {
 	ApplicationNameValues string `json:"applicationNameValues"`
 	SeverityValues string `json:"severityValues"`
 	SubsystemNameValues string `json:"subsystemNameValues"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LogMetaFieldsValues LogMetaFieldsValues
@@ -133,6 +136,11 @@ func (o LogMetaFieldsValues) ToMap() (map[string]interface{}, error) {
 	toSerialize["applicationNameValues"] = o.ApplicationNameValues
 	toSerialize["severityValues"] = o.SeverityValues
 	toSerialize["subsystemNameValues"] = o.SubsystemNameValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,7 +171,6 @@ func (o *LogMetaFieldsValues) UnmarshalJSON(data []byte) (err error) {
 	varLogMetaFieldsValues := _LogMetaFieldsValues{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLogMetaFieldsValues)
 
 	if err != nil {
@@ -171,6 +178,15 @@ func (o *LogMetaFieldsValues) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LogMetaFieldsValues(varLogMetaFieldsValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationNameValues")
+		delete(additionalProperties, "severityValues")
+		delete(additionalProperties, "subsystemNameValues")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -210,5 +226,4 @@ func (v *NullableLogMetaFieldsValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

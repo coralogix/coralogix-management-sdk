@@ -11,23 +11,31 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfState type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfState{}
 
 // IncidentFieldOneOfState struct for IncidentFieldOneOfState
 type IncidentFieldOneOfState struct {
-	State *IncidentState `json:"state,omitempty"`
+	State IncidentState `json:"state"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfState IncidentFieldOneOfState
 
 // NewIncidentFieldOneOfState instantiates a new IncidentFieldOneOfState object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfState() *IncidentFieldOneOfState {
+func NewIncidentFieldOneOfState(state IncidentState) *IncidentFieldOneOfState {
 	this := IncidentFieldOneOfState{}
+	this.State = state
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIncidentFieldOneOfStateWithDefaults() *IncidentFieldOneOfState {
 	return &this
 }
 
-// GetState returns the State field value if set, zero value otherwise.
+// GetState returns the State field value
 func (o *IncidentFieldOneOfState) GetState() IncidentState {
-	if o == nil || IsNil(o.State) {
+	if o == nil {
 		var ret IncidentState
 		return ret
 	}
-	return *o.State
+
+	return o.State
 }
 
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfState) GetStateOk() (*IncidentState, bool) {
-	if o == nil || IsNil(o.State) {
+	if o == nil {
 		return nil, false
 	}
-	return o.State, true
+	return &o.State, true
 }
 
-// HasState returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfState) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given IncidentState and assigns it to the State field.
+// SetState sets field value
 func (o *IncidentFieldOneOfState) SetState(v IncidentState) {
-	o.State = &v
+	o.State = v
 }
 
 func (o IncidentFieldOneOfState) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IncidentFieldOneOfState) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfState) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
+	toSerialize["state"] = o.State
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfState) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"state",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfState := _IncidentFieldOneOfState{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfState)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfState(varIncidentFieldOneOfState)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "state")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfState struct {
@@ -122,5 +168,4 @@ func (v *NullableIncidentFieldOneOfState) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

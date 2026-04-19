@@ -11,10 +11,13 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // ApmSli - struct for ApmSli
 type ApmSli struct {
@@ -42,7 +45,7 @@ func (dst *ApmSli) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ApmSliErrorConfig
-	err = newStrictDecoder(data).Decode(&dst.ApmSliErrorConfig)
+	err = json.Unmarshal(data, &dst.ApmSliErrorConfig)
 	if err == nil {
 		jsonApmSliErrorConfig, _ := json.Marshal(dst.ApmSliErrorConfig)
 		if string(jsonApmSliErrorConfig) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *ApmSli) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ApmSliLatencyConfig
-	err = newStrictDecoder(data).Decode(&dst.ApmSliLatencyConfig)
+	err = json.Unmarshal(data, &dst.ApmSliLatencyConfig)
 	if err == nil {
 		jsonApmSliLatencyConfig, _ := json.Marshal(dst.ApmSliLatencyConfig)
 		if string(jsonApmSliLatencyConfig) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableApmSli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionLineChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionLineChart{}
 
 // WidgetDefinitionLineChart struct for WidgetDefinitionLineChart
 type WidgetDefinitionLineChart struct {
-	LineChart *LineChart `json:"lineChart,omitempty"`
+	LineChart LineChart `json:"lineChart"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionLineChart WidgetDefinitionLineChart
 
 // NewWidgetDefinitionLineChart instantiates a new WidgetDefinitionLineChart object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionLineChart() *WidgetDefinitionLineChart {
+func NewWidgetDefinitionLineChart(lineChart LineChart) *WidgetDefinitionLineChart {
 	this := WidgetDefinitionLineChart{}
+	this.LineChart = lineChart
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionLineChartWithDefaults() *WidgetDefinitionLineChart {
 	return &this
 }
 
-// GetLineChart returns the LineChart field value if set, zero value otherwise.
+// GetLineChart returns the LineChart field value
 func (o *WidgetDefinitionLineChart) GetLineChart() LineChart {
-	if o == nil || IsNil(o.LineChart) {
+	if o == nil {
 		var ret LineChart
 		return ret
 	}
-	return *o.LineChart
+
+	return o.LineChart
 }
 
-// GetLineChartOk returns a tuple with the LineChart field value if set, nil otherwise
+// GetLineChartOk returns a tuple with the LineChart field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionLineChart) GetLineChartOk() (*LineChart, bool) {
-	if o == nil || IsNil(o.LineChart) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LineChart, true
+	return &o.LineChart, true
 }
 
-// HasLineChart returns a boolean if a field has been set.
-func (o *WidgetDefinitionLineChart) HasLineChart() bool {
-	if o != nil && !IsNil(o.LineChart) {
-		return true
-	}
-
-	return false
-}
-
-// SetLineChart gets a reference to the given LineChart and assigns it to the LineChart field.
+// SetLineChart sets field value
 func (o *WidgetDefinitionLineChart) SetLineChart(v LineChart) {
-	o.LineChart = &v
+	o.LineChart = v
 }
 
 func (o WidgetDefinitionLineChart) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionLineChart) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionLineChart) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LineChart) {
-		toSerialize["lineChart"] = o.LineChart
+	toSerialize["lineChart"] = o.LineChart
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionLineChart) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"lineChart",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionLineChart := _WidgetDefinitionLineChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionLineChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionLineChart(varWidgetDefinitionLineChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lineChart")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionLineChart struct {
@@ -122,5 +168,4 @@ func (v *NullableWidgetDefinitionLineChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

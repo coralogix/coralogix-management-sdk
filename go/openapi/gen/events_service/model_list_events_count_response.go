@@ -11,10 +11,12 @@ API version: 1.0.0
 package events_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListEventsCountResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListEventsCountResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &ListEventsCountResponse{}
 type ListEventsCountResponse struct {
 	Count string `json:"count"`
 	ReachedLimit bool `json:"reachedLimit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListEventsCountResponse ListEventsCountResponse
@@ -106,6 +109,11 @@ func (o ListEventsCountResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["count"] = o.Count
 	toSerialize["reachedLimit"] = o.ReachedLimit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,7 +143,6 @@ func (o *ListEventsCountResponse) UnmarshalJSON(data []byte) (err error) {
 	varListEventsCountResponse := _ListEventsCountResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListEventsCountResponse)
 
 	if err != nil {
@@ -143,6 +150,14 @@ func (o *ListEventsCountResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListEventsCountResponse(varListEventsCountResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "reachedLimit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -182,5 +197,4 @@ func (v *NullableListEventsCountResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

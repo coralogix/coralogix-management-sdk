@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterOperatorNotEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterOperatorNotEquals{}
 
 // FilterOperatorNotEquals This data structure defines the comparison operation for the filter.
 type FilterOperatorNotEquals struct {
-	NotEquals *FilterNotEquals `json:"notEquals,omitempty"`
+	NotEquals FilterNotEquals `json:"notEquals"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterOperatorNotEquals FilterOperatorNotEquals
 
 // NewFilterOperatorNotEquals instantiates a new FilterOperatorNotEquals object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFilterOperatorNotEquals() *FilterOperatorNotEquals {
+func NewFilterOperatorNotEquals(notEquals FilterNotEquals) *FilterOperatorNotEquals {
 	this := FilterOperatorNotEquals{}
+	this.NotEquals = notEquals
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewFilterOperatorNotEqualsWithDefaults() *FilterOperatorNotEquals {
 	return &this
 }
 
-// GetNotEquals returns the NotEquals field value if set, zero value otherwise.
+// GetNotEquals returns the NotEquals field value
 func (o *FilterOperatorNotEquals) GetNotEquals() FilterNotEquals {
-	if o == nil || IsNil(o.NotEquals) {
+	if o == nil {
 		var ret FilterNotEquals
 		return ret
 	}
-	return *o.NotEquals
+
+	return o.NotEquals
 }
 
-// GetNotEqualsOk returns a tuple with the NotEquals field value if set, nil otherwise
+// GetNotEqualsOk returns a tuple with the NotEquals field value
 // and a boolean to check if the value has been set.
 func (o *FilterOperatorNotEquals) GetNotEqualsOk() (*FilterNotEquals, bool) {
-	if o == nil || IsNil(o.NotEquals) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NotEquals, true
+	return &o.NotEquals, true
 }
 
-// HasNotEquals returns a boolean if a field has been set.
-func (o *FilterOperatorNotEquals) HasNotEquals() bool {
-	if o != nil && !IsNil(o.NotEquals) {
-		return true
-	}
-
-	return false
-}
-
-// SetNotEquals gets a reference to the given FilterNotEquals and assigns it to the NotEquals field.
+// SetNotEquals sets field value
 func (o *FilterOperatorNotEquals) SetNotEquals(v FilterNotEquals) {
-	o.NotEquals = &v
+	o.NotEquals = v
 }
 
 func (o FilterOperatorNotEquals) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o FilterOperatorNotEquals) MarshalJSON() ([]byte, error) {
 
 func (o FilterOperatorNotEquals) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.NotEquals) {
-		toSerialize["notEquals"] = o.NotEquals
+	toSerialize["notEquals"] = o.NotEquals
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterOperatorNotEquals) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"notEquals",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFilterOperatorNotEquals := _FilterOperatorNotEquals{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterOperatorNotEquals)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterOperatorNotEquals(varFilterOperatorNotEquals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "notEquals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterOperatorNotEquals struct {
@@ -122,5 +168,4 @@ func (v *NullableFilterOperatorNotEquals) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

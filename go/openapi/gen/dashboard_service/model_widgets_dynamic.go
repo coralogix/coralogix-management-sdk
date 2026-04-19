@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetsDynamic type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsDynamic{}
@@ -24,7 +27,10 @@ type WidgetsDynamic struct {
 	QueryDefinitions []DynamicQueryDefinition `json:"queryDefinitions,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	Visualization *Visualization `json:"visualization,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetsDynamic WidgetsDynamic
 
 // NewWidgetsDynamic instantiates a new WidgetsDynamic object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o WidgetsDynamic) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visualization) {
 		toSerialize["visualization"] = o.Visualization
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetsDynamic) UnmarshalJSON(data []byte) (err error) {
+	varWidgetsDynamic := _WidgetsDynamic{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetsDynamic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetsDynamic(varWidgetsDynamic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "interpretation")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "queryDefinitions")
+		delete(additionalProperties, "timeFrame")
+		delete(additionalProperties, "visualization")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetsDynamic struct {
@@ -266,5 +303,4 @@ func (v *NullableWidgetsDynamic) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

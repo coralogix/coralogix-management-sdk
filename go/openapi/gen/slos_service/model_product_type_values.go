@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ProductTypeValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ProductTypeValues{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ProductTypeValues{}
 // ProductTypeValues struct for ProductTypeValues
 type ProductTypeValues struct {
 	Values []SloProductType `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductTypeValues ProductTypeValues
 
 // NewProductTypeValues instantiates a new ProductTypeValues object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ProductTypeValues) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductTypeValues) UnmarshalJSON(data []byte) (err error) {
+	varProductTypeValues := _ProductTypeValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varProductTypeValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductTypeValues(varProductTypeValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductTypeValues struct {
@@ -122,5 +155,4 @@ func (v *NullableProductTypeValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

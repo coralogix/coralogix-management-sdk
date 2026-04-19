@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1Duration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Duration{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &V1Duration{}
 type V1Duration struct {
 	ForOver *int32 `json:"forOver,omitempty"`
 	Frequency *DurationFrequency `json:"frequency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1Duration V1Duration
 
 // NewV1Duration instantiates a new V1Duration object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o V1Duration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Frequency) {
 		toSerialize["frequency"] = o.Frequency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1Duration) UnmarshalJSON(data []byte) (err error) {
+	varV1Duration := _V1Duration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1Duration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1Duration(varV1Duration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "forOver")
+		delete(additionalProperties, "frequency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1Duration struct {
@@ -158,5 +192,4 @@ func (v *NullableV1Duration) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

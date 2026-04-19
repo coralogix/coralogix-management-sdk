@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1Failure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Failure{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &V1Failure{}
 // V1Failure struct for V1Failure
 type V1Failure struct {
 	ErrorMessage *string `json:"errorMessage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1Failure V1Failure
 
 // NewV1Failure instantiates a new V1Failure object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o V1Failure) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ErrorMessage) {
 		toSerialize["errorMessage"] = o.ErrorMessage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1Failure) UnmarshalJSON(data []byte) (err error) {
+	varV1Failure := _V1Failure{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1Failure)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1Failure(varV1Failure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errorMessage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1Failure struct {
@@ -122,5 +155,4 @@ func (v *NullableV1Failure) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IbmConfigV2 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IbmConfigV2{}
@@ -22,7 +25,10 @@ type IbmConfigV2 struct {
 	Crn *string `json:"crn,omitempty"`
 	Endpoint *string `json:"endpoint,omitempty"`
 	ServiceCrn *string `json:"serviceCrn,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IbmConfigV2 IbmConfigV2
 
 // NewIbmConfigV2 instantiates a new IbmConfigV2 object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o IbmConfigV2) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ServiceCrn) {
 		toSerialize["serviceCrn"] = o.ServiceCrn
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IbmConfigV2) UnmarshalJSON(data []byte) (err error) {
+	varIbmConfigV2 := _IbmConfigV2{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIbmConfigV2)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IbmConfigV2(varIbmConfigV2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "crn")
+		delete(additionalProperties, "endpoint")
+		delete(additionalProperties, "serviceCrn")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIbmConfigV2 struct {
@@ -194,5 +229,4 @@ func (v *NullableIbmConfigV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

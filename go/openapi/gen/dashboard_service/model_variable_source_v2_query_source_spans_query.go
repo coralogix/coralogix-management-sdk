@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2QuerySourceSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2QuerySourceSpansQuery{}
@@ -21,17 +25,21 @@ var _ MappedNullable = &VariableSourceV2QuerySourceSpansQuery{}
 type VariableSourceV2QuerySourceSpansQuery struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
 	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
-	SpansQuery *QuerySourceSpansQuery `json:"spansQuery,omitempty"`
+	SpansQuery QuerySourceSpansQuery `json:"spansQuery"`
 	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
 	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2QuerySourceSpansQuery VariableSourceV2QuerySourceSpansQuery
 
 // NewVariableSourceV2QuerySourceSpansQuery instantiates a new VariableSourceV2QuerySourceSpansQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2QuerySourceSpansQuery() *VariableSourceV2QuerySourceSpansQuery {
+func NewVariableSourceV2QuerySourceSpansQuery(spansQuery QuerySourceSpansQuery) *VariableSourceV2QuerySourceSpansQuery {
 	this := VariableSourceV2QuerySourceSpansQuery{}
+	this.SpansQuery = spansQuery
 	return &this
 }
 
@@ -107,36 +115,28 @@ func (o *VariableSourceV2QuerySourceSpansQuery) SetRefreshStrategy(v VariableSou
 	o.RefreshStrategy = &v
 }
 
-// GetSpansQuery returns the SpansQuery field value if set, zero value otherwise.
+// GetSpansQuery returns the SpansQuery field value
 func (o *VariableSourceV2QuerySourceSpansQuery) GetSpansQuery() QuerySourceSpansQuery {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		var ret QuerySourceSpansQuery
 		return ret
 	}
-	return *o.SpansQuery
+
+	return o.SpansQuery
 }
 
-// GetSpansQueryOk returns a tuple with the SpansQuery field value if set, nil otherwise
+// GetSpansQueryOk returns a tuple with the SpansQuery field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2QuerySourceSpansQuery) GetSpansQueryOk() (*QuerySourceSpansQuery, bool) {
-	if o == nil || IsNil(o.SpansQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpansQuery, true
+	return &o.SpansQuery, true
 }
 
-// HasSpansQuery returns a boolean if a field has been set.
-func (o *VariableSourceV2QuerySourceSpansQuery) HasSpansQuery() bool {
-	if o != nil && !IsNil(o.SpansQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpansQuery gets a reference to the given QuerySourceSpansQuery and assigns it to the SpansQuery field.
+// SetSpansQuery sets field value
 func (o *VariableSourceV2QuerySourceSpansQuery) SetSpansQuery(v QuerySourceSpansQuery) {
-	o.SpansQuery = &v
+	o.SpansQuery = v
 }
 
 // GetValueDisplayOptions returns the ValueDisplayOptions field value if set, zero value otherwise.
@@ -219,16 +219,66 @@ func (o VariableSourceV2QuerySourceSpansQuery) ToMap() (map[string]interface{}, 
 	if !IsNil(o.RefreshStrategy) {
 		toSerialize["refreshStrategy"] = o.RefreshStrategy
 	}
-	if !IsNil(o.SpansQuery) {
-		toSerialize["spansQuery"] = o.SpansQuery
-	}
+	toSerialize["spansQuery"] = o.SpansQuery
 	if !IsNil(o.ValueDisplayOptions) {
 		toSerialize["valueDisplayOptions"] = o.ValueDisplayOptions
 	}
 	if !IsNil(o.ValuesOrderDirection) {
 		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2QuerySourceSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spansQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2QuerySourceSpansQuery := _VariableSourceV2QuerySourceSpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2QuerySourceSpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2QuerySourceSpansQuery(varVariableSourceV2QuerySourceSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allOption")
+		delete(additionalProperties, "refreshStrategy")
+		delete(additionalProperties, "spansQuery")
+		delete(additionalProperties, "valueDisplayOptions")
+		delete(additionalProperties, "valuesOrderDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2QuerySourceSpansQuery struct {
@@ -266,5 +316,4 @@ func (v *NullableVariableSourceV2QuerySourceSpansQuery) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

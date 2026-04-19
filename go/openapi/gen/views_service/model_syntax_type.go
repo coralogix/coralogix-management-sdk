@@ -11,9 +11,12 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // SyntaxType the model 'SyntaxType'
 type SyntaxType string

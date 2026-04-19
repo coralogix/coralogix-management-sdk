@@ -10,9 +10,6 @@ git_push.sh
 model_allow_parameters.go
 model_application_name_constraint.go
 model_block_parameters.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_counts.go
 model_create_rule_group_request_create_rule_subgroup.go
@@ -37,8 +34,6 @@ model_json_extract_parameters.go
 model_json_parse_parameters.go
 model_json_stringify_parameters.go
 model_list_rule_groups_response.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_parse_parameters.go
 model_remove_fields_parameters.go

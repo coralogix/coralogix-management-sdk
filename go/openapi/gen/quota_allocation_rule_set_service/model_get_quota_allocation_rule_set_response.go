@@ -11,8 +11,11 @@ API version: 1.0.0
 package quota_allocation_rule_set_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetQuotaAllocationRuleSetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetQuotaAllocationRuleSetResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetQuotaAllocationRuleSetResponse{}
 // GetQuotaAllocationRuleSetResponse Response containing quota allocation rule set
 type GetQuotaAllocationRuleSetResponse struct {
 	RuleSet *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetQuotaAllocationRuleSetResponse GetQuotaAllocationRuleSetResponse
 
 // NewGetQuotaAllocationRuleSetResponse instantiates a new GetQuotaAllocationRuleSetResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetQuotaAllocationRuleSetResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.RuleSet) {
 		toSerialize["ruleSet"] = o.RuleSet
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetQuotaAllocationRuleSetResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetQuotaAllocationRuleSetResponse := _GetQuotaAllocationRuleSetResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetQuotaAllocationRuleSetResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetQuotaAllocationRuleSetResponse(varGetQuotaAllocationRuleSetResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ruleSet")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetQuotaAllocationRuleSetResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetQuotaAllocationRuleSetResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

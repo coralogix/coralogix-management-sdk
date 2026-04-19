@@ -11,23 +11,31 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MExecutionResponseCreated type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MExecutionResponseCreated{}
 
 // E2MExecutionResponseCreated struct for E2MExecutionResponseCreated
 type E2MExecutionResponseCreated struct {
-	Created *CreateE2MResponse `json:"created,omitempty"`
+	Created CreateE2MResponse `json:"created"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _E2MExecutionResponseCreated E2MExecutionResponseCreated
 
 // NewE2MExecutionResponseCreated instantiates a new E2MExecutionResponseCreated object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewE2MExecutionResponseCreated() *E2MExecutionResponseCreated {
+func NewE2MExecutionResponseCreated(created CreateE2MResponse) *E2MExecutionResponseCreated {
 	this := E2MExecutionResponseCreated{}
+	this.Created = created
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewE2MExecutionResponseCreatedWithDefaults() *E2MExecutionResponseCreated {
 	return &this
 }
 
-// GetCreated returns the Created field value if set, zero value otherwise.
+// GetCreated returns the Created field value
 func (o *E2MExecutionResponseCreated) GetCreated() CreateE2MResponse {
-	if o == nil || IsNil(o.Created) {
+	if o == nil {
 		var ret CreateE2MResponse
 		return ret
 	}
-	return *o.Created
+
+	return o.Created
 }
 
-// GetCreatedOk returns a tuple with the Created field value if set, nil otherwise
+// GetCreatedOk returns a tuple with the Created field value
 // and a boolean to check if the value has been set.
 func (o *E2MExecutionResponseCreated) GetCreatedOk() (*CreateE2MResponse, bool) {
-	if o == nil || IsNil(o.Created) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Created, true
+	return &o.Created, true
 }
 
-// HasCreated returns a boolean if a field has been set.
-func (o *E2MExecutionResponseCreated) HasCreated() bool {
-	if o != nil && !IsNil(o.Created) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreated gets a reference to the given CreateE2MResponse and assigns it to the Created field.
+// SetCreated sets field value
 func (o *E2MExecutionResponseCreated) SetCreated(v CreateE2MResponse) {
-	o.Created = &v
+	o.Created = v
 }
 
 func (o E2MExecutionResponseCreated) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o E2MExecutionResponseCreated) MarshalJSON() ([]byte, error) {
 
 func (o E2MExecutionResponseCreated) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Created) {
-		toSerialize["created"] = o.Created
+	toSerialize["created"] = o.Created
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *E2MExecutionResponseCreated) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"created",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varE2MExecutionResponseCreated := _E2MExecutionResponseCreated{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2MExecutionResponseCreated)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2MExecutionResponseCreated(varE2MExecutionResponseCreated)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableE2MExecutionResponseCreated struct {
@@ -122,5 +168,4 @@ func (v *NullableE2MExecutionResponseCreated) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

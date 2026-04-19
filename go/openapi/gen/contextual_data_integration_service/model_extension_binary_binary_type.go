@@ -11,9 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // ExtensionBinaryBinaryType the model 'ExtensionBinaryBinaryType'
 type ExtensionBinaryBinaryType string

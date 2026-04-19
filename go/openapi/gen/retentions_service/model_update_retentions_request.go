@@ -11,10 +11,12 @@ API version: 1.0.0
 package retentions_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateRetentionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateRetentionsRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &UpdateRetentionsRequest{}
 // UpdateRetentionsRequest This data structure is used to update retentions
 type UpdateRetentionsRequest struct {
 	RetentionUpdateElements []RetentionUpdateElement `json:"retentionUpdateElements"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateRetentionsRequest UpdateRetentionsRequest
@@ -79,6 +82,11 @@ func (o UpdateRetentionsRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateRetentionsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["retentionUpdateElements"] = o.RetentionUpdateElements
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *UpdateRetentionsRequest) UnmarshalJSON(data []byte) (err error) {
 	varUpdateRetentionsRequest := _UpdateRetentionsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateRetentionsRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *UpdateRetentionsRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UpdateRetentionsRequest(varUpdateRetentionsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "retentionUpdateElements")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableUpdateRetentionsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

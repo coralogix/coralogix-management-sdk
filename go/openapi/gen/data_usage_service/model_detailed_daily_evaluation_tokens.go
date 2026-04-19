@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DetailedDailyEvaluationTokens type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DetailedDailyEvaluationTokens{}
@@ -23,7 +26,10 @@ type DetailedDailyEvaluationTokens struct {
 	Evaluations []Evaluation `json:"evaluations,omitempty"`
 	StatsDate *time.Time `json:"statsDate,omitempty"`
 	TotalTokens *Token `json:"totalTokens,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DetailedDailyEvaluationTokens DetailedDailyEvaluationTokens
 
 // NewDetailedDailyEvaluationTokens instantiates a new DetailedDailyEvaluationTokens object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o DetailedDailyEvaluationTokens) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalTokens) {
 		toSerialize["totalTokens"] = o.TotalTokens
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DetailedDailyEvaluationTokens) UnmarshalJSON(data []byte) (err error) {
+	varDetailedDailyEvaluationTokens := _DetailedDailyEvaluationTokens{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDetailedDailyEvaluationTokens)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DetailedDailyEvaluationTokens(varDetailedDailyEvaluationTokens)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "evaluations")
+		delete(additionalProperties, "statsDate")
+		delete(additionalProperties, "totalTokens")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDetailedDailyEvaluationTokens struct {
@@ -195,5 +230,4 @@ func (v *NullableDetailedDailyEvaluationTokens) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

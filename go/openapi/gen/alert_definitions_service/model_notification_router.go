@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotificationRouter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationRouter{}
@@ -22,7 +25,10 @@ type NotificationRouter struct {
 	// The ID of the notification router
 	Id *string `json:"id,omitempty"`
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationRouter NotificationRouter
 
 // NewNotificationRouter instantiates a new NotificationRouter object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o NotificationRouter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotifyOn) {
 		toSerialize["notifyOn"] = o.NotifyOn
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationRouter) UnmarshalJSON(data []byte) (err error) {
+	varNotificationRouter := _NotificationRouter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationRouter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationRouter(varNotificationRouter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "notifyOn")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationRouter struct {
@@ -159,5 +193,4 @@ func (v *NullableNotificationRouter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

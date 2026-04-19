@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Digest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Digest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Digest{}
 type Digest struct {
 	IsActive *bool `json:"isActive,omitempty"`
 	Type *DigestType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Digest Digest
 
 // NewDigest instantiates a new Digest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Digest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Digest) UnmarshalJSON(data []byte) (err error) {
+	varDigest := _Digest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDigest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Digest(varDigest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDigest struct {
@@ -158,5 +192,4 @@ func (v *NullableDigest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

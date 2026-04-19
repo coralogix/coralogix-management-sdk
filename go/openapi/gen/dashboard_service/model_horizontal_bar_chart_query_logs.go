@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HorizontalBarChartQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartQueryLogs{}
 
 // HorizontalBarChartQueryLogs struct for HorizontalBarChartQueryLogs
 type HorizontalBarChartQueryLogs struct {
-	Logs *HorizontalBarChartLogsQuery `json:"logs,omitempty"`
+	Logs HorizontalBarChartLogsQuery `json:"logs"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HorizontalBarChartQueryLogs HorizontalBarChartQueryLogs
 
 // NewHorizontalBarChartQueryLogs instantiates a new HorizontalBarChartQueryLogs object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHorizontalBarChartQueryLogs() *HorizontalBarChartQueryLogs {
+func NewHorizontalBarChartQueryLogs(logs HorizontalBarChartLogsQuery) *HorizontalBarChartQueryLogs {
 	this := HorizontalBarChartQueryLogs{}
+	this.Logs = logs
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewHorizontalBarChartQueryLogsWithDefaults() *HorizontalBarChartQueryLogs {
 	return &this
 }
 
-// GetLogs returns the Logs field value if set, zero value otherwise.
+// GetLogs returns the Logs field value
 func (o *HorizontalBarChartQueryLogs) GetLogs() HorizontalBarChartLogsQuery {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		var ret HorizontalBarChartLogsQuery
 		return ret
 	}
-	return *o.Logs
+
+	return o.Logs
 }
 
-// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// GetLogsOk returns a tuple with the Logs field value
 // and a boolean to check if the value has been set.
 func (o *HorizontalBarChartQueryLogs) GetLogsOk() (*HorizontalBarChartLogsQuery, bool) {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logs, true
+	return &o.Logs, true
 }
 
-// HasLogs returns a boolean if a field has been set.
-func (o *HorizontalBarChartQueryLogs) HasLogs() bool {
-	if o != nil && !IsNil(o.Logs) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogs gets a reference to the given HorizontalBarChartLogsQuery and assigns it to the Logs field.
+// SetLogs sets field value
 func (o *HorizontalBarChartQueryLogs) SetLogs(v HorizontalBarChartLogsQuery) {
-	o.Logs = &v
+	o.Logs = v
 }
 
 func (o HorizontalBarChartQueryLogs) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o HorizontalBarChartQueryLogs) MarshalJSON() ([]byte, error) {
 
 func (o HorizontalBarChartQueryLogs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Logs) {
-		toSerialize["logs"] = o.Logs
+	toSerialize["logs"] = o.Logs
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *HorizontalBarChartQueryLogs) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logs",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHorizontalBarChartQueryLogs := _HorizontalBarChartQueryLogs{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHorizontalBarChartQueryLogs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HorizontalBarChartQueryLogs(varHorizontalBarChartQueryLogs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHorizontalBarChartQueryLogs struct {
@@ -122,5 +168,4 @@ func (v *NullableHorizontalBarChartQueryLogs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

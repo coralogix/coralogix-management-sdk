@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpanObservationField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanObservationField{}
@@ -22,7 +25,10 @@ type SpanObservationField struct {
 	Keypath []string `json:"keypath,omitempty"`
 	RelationType *SpanRelationType `json:"relationType,omitempty"`
 	Scope *DatasetScope `json:"scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpanObservationField SpanObservationField
 
 // NewSpanObservationField instantiates a new SpanObservationField object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o SpanObservationField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpanObservationField) UnmarshalJSON(data []byte) (err error) {
+	varSpanObservationField := _SpanObservationField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanObservationField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanObservationField(varSpanObservationField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keypath")
+		delete(additionalProperties, "relationType")
+		delete(additionalProperties, "scope")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpanObservationField struct {
@@ -194,5 +229,4 @@ func (v *NullableSpanObservationField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

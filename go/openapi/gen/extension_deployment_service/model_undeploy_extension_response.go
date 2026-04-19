@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UndeployExtensionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UndeployExtensionResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &UndeployExtensionResponse{}
 type UndeployExtensionResponse struct {
 	ExtensionDeployment *ExtensionDeployment `json:"extensionDeployment,omitempty"`
 	FailedItems []FailedItem `json:"failedItems,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UndeployExtensionResponse UndeployExtensionResponse
 
 // NewUndeployExtensionResponse instantiates a new UndeployExtensionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o UndeployExtensionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailedItems) {
 		toSerialize["failedItems"] = o.FailedItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UndeployExtensionResponse) UnmarshalJSON(data []byte) (err error) {
+	varUndeployExtensionResponse := _UndeployExtensionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUndeployExtensionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UndeployExtensionResponse(varUndeployExtensionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extensionDeployment")
+		delete(additionalProperties, "failedItems")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUndeployExtensionResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableUndeployExtensionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

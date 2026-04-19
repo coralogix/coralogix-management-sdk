@@ -8,13 +8,9 @@ api_api_keys_service.go
 client.go
 configuration.go
 git_push.sh
-model_api_key.go
 model_api_key_owner.go
 model_api_key_summary.go
 model_api_key_user_owner.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_api_key_request.go
 model_create_api_key_request_key_permissions.go
@@ -30,8 +26,6 @@ model_get_send_data_api_keys_response.go
 model_get_team_members_api_keys_response.go
 model_key_info.go
 model_key_info_key_permissions.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_owner.go
 model_owner_organisation_id.go
@@ -42,6 +36,7 @@ model_preset_info.go
 model_presets.go
 model_update_api_key_request.go
 model_update_api_key_request_permissions.go
+model_v3_api_key.go
 model_v3_filter_operator.go
 response.go
 utils.go

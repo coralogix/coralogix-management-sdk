@@ -11,10 +11,12 @@ API version: 1.0.0
 package scopes_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateScopeResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateScopeResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateScopeResponse{}
 // CreateScopeResponse This data structure represents a response to create a scope
 type CreateScopeResponse struct {
 	Scope V1Scope `json:"scope"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateScopeResponse CreateScopeResponse
@@ -79,6 +82,11 @@ func (o CreateScopeResponse) MarshalJSON() ([]byte, error) {
 func (o CreateScopeResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["scope"] = o.Scope
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CreateScopeResponse) UnmarshalJSON(data []byte) (err error) {
 	varCreateScopeResponse := _CreateScopeResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateScopeResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CreateScopeResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateScopeResponse(varCreateScopeResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "scope")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCreateScopeResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

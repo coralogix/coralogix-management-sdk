@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the StringList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StringList{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &StringList{}
 // StringList struct for StringList
 type StringList struct {
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StringList StringList
 
 // NewStringList instantiates a new StringList object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o StringList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StringList) UnmarshalJSON(data []byte) (err error) {
+	varStringList := _StringList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varStringList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StringList(varStringList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStringList struct {
@@ -122,5 +155,4 @@ func (v *NullableStringList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

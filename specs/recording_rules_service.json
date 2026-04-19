@@ -11,7 +11,6 @@
           "Recording Rules Service"
         ],
         "summary": "List Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +51,6 @@
           "Recording Rules Service"
         ],
         "summary": "Create Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -74,8 +72,7 @@
                   "name": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -118,7 +115,6 @@
           "Recording Rules Service"
         ],
         "summary": "Get Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -170,7 +166,6 @@
           "Recording Rules Service"
         ],
         "summary": "Update Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -203,8 +198,7 @@
                   "name": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -245,7 +239,6 @@
           "Recording Rules Service"
         ],
         "summary": "Delete Recording Rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -296,33 +289,6 @@
   },
   "components": {
     "schemas": {
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateRuleGroupSetResult": {
         "externalDocs": {
           "description": "Find out more about recording rules",
@@ -376,9 +342,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -398,9 +364,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -433,6 +399,12 @@
         "description": "A rule within a group that defines a recording rule expression.",
         "type": "object",
         "properties": {
+          "evaluationDelayMs": {
+            "example": 60000,
+            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
+            "type": "integer",
+            "format": "int64"
+          },
           "expr": {
             "type": "string"
           },
@@ -483,34 +455,6 @@
           }
         }
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -528,6 +472,10 @@
       "OutRule": {
         "type": "object",
         "properties": {
+          "evaluationDelayMs": {
+            "type": "integer",
+            "format": "int64"
+          },
           "expr": {
             "type": "string"
           },
@@ -653,14 +601,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetPolicyResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetPolicyResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetPolicyResponse{}
 // GetPolicyResponse This data structue is obtained when retrieving a policy by its ID.
 type GetPolicyResponse struct {
 	Policy *Policy `json:"policy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPolicyResponse GetPolicyResponse
 
 // NewGetPolicyResponse instantiates a new GetPolicyResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetPolicyResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Policy) {
 		toSerialize["policy"] = o.Policy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPolicyResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetPolicyResponse := _GetPolicyResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetPolicyResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPolicyResponse(varGetPolicyResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "policy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPolicyResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetPolicyResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

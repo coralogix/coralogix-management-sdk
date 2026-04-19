@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateBulkAlertSchedulerRuleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateBulkAlertSchedulerRuleResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateBulkAlertSchedulerRuleResponse{}
 // CreateBulkAlertSchedulerRuleResponse This is a response sent after creating multiple alert scheduler rules
 type CreateBulkAlertSchedulerRuleResponse struct {
 	CreateSuppressionResponses []CreateAlertSchedulerRuleResponse `json:"createSuppressionResponses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateBulkAlertSchedulerRuleResponse CreateBulkAlertSchedulerRuleResponse
@@ -79,6 +82,11 @@ func (o CreateBulkAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
 func (o CreateBulkAlertSchedulerRuleResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["createSuppressionResponses"] = o.CreateSuppressionResponses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 	varCreateBulkAlertSchedulerRuleResponse := _CreateBulkAlertSchedulerRuleResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateBulkAlertSchedulerRuleResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 	}
 
 	*o = CreateBulkAlertSchedulerRuleResponse(varCreateBulkAlertSchedulerRuleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createSuppressionResponses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingThresholdCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingThresholdCondition{}
@@ -23,7 +26,10 @@ type TracingThresholdCondition struct {
 	// The threshold value for the alert condition
 	SpanAmount *float64 `json:"spanAmount,omitempty"`
 	TimeWindow *TracingTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingThresholdCondition TracingThresholdCondition
 
 // NewTracingThresholdCondition instantiates a new TracingThresholdCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o TracingThresholdCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingThresholdCondition) UnmarshalJSON(data []byte) (err error) {
+	varTracingThresholdCondition := _TracingThresholdCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingThresholdCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingThresholdCondition(varTracingThresholdCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conditionType")
+		delete(additionalProperties, "spanAmount")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingThresholdCondition struct {
@@ -195,5 +230,4 @@ func (v *NullableTracingThresholdCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

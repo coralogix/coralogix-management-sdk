@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchExecuteSloRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchExecuteSloRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &BatchExecuteSloRequest{}
 // BatchExecuteSloRequest Request to batch execute multiple SLO operations.
 type BatchExecuteSloRequest struct {
 	Requests []SloExecutionRequest `json:"requests"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchExecuteSloRequest BatchExecuteSloRequest
@@ -79,6 +82,11 @@ func (o BatchExecuteSloRequest) MarshalJSON() ([]byte, error) {
 func (o BatchExecuteSloRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["requests"] = o.Requests
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *BatchExecuteSloRequest) UnmarshalJSON(data []byte) (err error) {
 	varBatchExecuteSloRequest := _BatchExecuteSloRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varBatchExecuteSloRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *BatchExecuteSloRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BatchExecuteSloRequest(varBatchExecuteSloRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requests")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableBatchExecuteSloRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

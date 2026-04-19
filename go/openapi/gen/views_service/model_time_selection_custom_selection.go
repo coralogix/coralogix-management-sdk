@@ -11,23 +11,31 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeSelectionCustomSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSelectionCustomSelection{}
 
 // TimeSelectionCustomSelection struct for TimeSelectionCustomSelection
 type TimeSelectionCustomSelection struct {
-	CustomSelection *CustomTimeSelection `json:"customSelection,omitempty"`
+	CustomSelection CustomTimeSelection `json:"customSelection"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSelectionCustomSelection TimeSelectionCustomSelection
 
 // NewTimeSelectionCustomSelection instantiates a new TimeSelectionCustomSelection object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeSelectionCustomSelection() *TimeSelectionCustomSelection {
+func NewTimeSelectionCustomSelection(customSelection CustomTimeSelection) *TimeSelectionCustomSelection {
 	this := TimeSelectionCustomSelection{}
+	this.CustomSelection = customSelection
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTimeSelectionCustomSelectionWithDefaults() *TimeSelectionCustomSelection
 	return &this
 }
 
-// GetCustomSelection returns the CustomSelection field value if set, zero value otherwise.
+// GetCustomSelection returns the CustomSelection field value
 func (o *TimeSelectionCustomSelection) GetCustomSelection() CustomTimeSelection {
-	if o == nil || IsNil(o.CustomSelection) {
+	if o == nil {
 		var ret CustomTimeSelection
 		return ret
 	}
-	return *o.CustomSelection
+
+	return o.CustomSelection
 }
 
-// GetCustomSelectionOk returns a tuple with the CustomSelection field value if set, nil otherwise
+// GetCustomSelectionOk returns a tuple with the CustomSelection field value
 // and a boolean to check if the value has been set.
 func (o *TimeSelectionCustomSelection) GetCustomSelectionOk() (*CustomTimeSelection, bool) {
-	if o == nil || IsNil(o.CustomSelection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CustomSelection, true
+	return &o.CustomSelection, true
 }
 
-// HasCustomSelection returns a boolean if a field has been set.
-func (o *TimeSelectionCustomSelection) HasCustomSelection() bool {
-	if o != nil && !IsNil(o.CustomSelection) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomSelection gets a reference to the given CustomTimeSelection and assigns it to the CustomSelection field.
+// SetCustomSelection sets field value
 func (o *TimeSelectionCustomSelection) SetCustomSelection(v CustomTimeSelection) {
-	o.CustomSelection = &v
+	o.CustomSelection = v
 }
 
 func (o TimeSelectionCustomSelection) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TimeSelectionCustomSelection) MarshalJSON() ([]byte, error) {
 
 func (o TimeSelectionCustomSelection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomSelection) {
-		toSerialize["customSelection"] = o.CustomSelection
+	toSerialize["customSelection"] = o.CustomSelection
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSelectionCustomSelection) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"customSelection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTimeSelectionCustomSelection := _TimeSelectionCustomSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeSelectionCustomSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSelectionCustomSelection(varTimeSelectionCustomSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customSelection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSelectionCustomSelection struct {
@@ -122,5 +168,4 @@ func (v *NullableTimeSelectionCustomSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

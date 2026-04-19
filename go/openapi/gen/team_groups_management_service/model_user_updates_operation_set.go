@@ -11,10 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UserUpdatesOperationSet type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserUpdatesOperationSet{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &UserUpdatesOperationSet{}
 // UserUpdatesOperationSet struct for UserUpdatesOperationSet
 type UserUpdatesOperationSet struct {
 	OperationType string `json:"operationType"`
-	Set *UserIdList `json:"set,omitempty"`
+	Set UserIdList `json:"set"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserUpdatesOperationSet UserUpdatesOperationSet
@@ -31,9 +34,10 @@ type _UserUpdatesOperationSet UserUpdatesOperationSet
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserUpdatesOperationSet(operationType string) *UserUpdatesOperationSet {
+func NewUserUpdatesOperationSet(operationType string, set UserIdList) *UserUpdatesOperationSet {
 	this := UserUpdatesOperationSet{}
 	this.OperationType = operationType
+	this.Set = set
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *UserUpdatesOperationSet) SetOperationType(v string) {
 	o.OperationType = v
 }
 
-// GetSet returns the Set field value if set, zero value otherwise.
+// GetSet returns the Set field value
 func (o *UserUpdatesOperationSet) GetSet() UserIdList {
-	if o == nil || IsNil(o.Set) {
+	if o == nil {
 		var ret UserIdList
 		return ret
 	}
-	return *o.Set
+
+	return o.Set
 }
 
-// GetSetOk returns a tuple with the Set field value if set, nil otherwise
+// GetSetOk returns a tuple with the Set field value
 // and a boolean to check if the value has been set.
 func (o *UserUpdatesOperationSet) GetSetOk() (*UserIdList, bool) {
-	if o == nil || IsNil(o.Set) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Set, true
+	return &o.Set, true
 }
 
-// HasSet returns a boolean if a field has been set.
-func (o *UserUpdatesOperationSet) HasSet() bool {
-	if o != nil && !IsNil(o.Set) {
-		return true
-	}
-
-	return false
-}
-
-// SetSet gets a reference to the given UserIdList and assigns it to the Set field.
+// SetSet sets field value
 func (o *UserUpdatesOperationSet) SetSet(v UserIdList) {
-	o.Set = &v
+	o.Set = v
 }
 
 func (o UserUpdatesOperationSet) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o UserUpdatesOperationSet) MarshalJSON() ([]byte, error) {
 func (o UserUpdatesOperationSet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["operationType"] = o.OperationType
-	if !IsNil(o.Set) {
-		toSerialize["set"] = o.Set
+	toSerialize["set"] = o.Set
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *UserUpdatesOperationSet) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"operationType",
+		"set",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -143,7 +143,6 @@ func (o *UserUpdatesOperationSet) UnmarshalJSON(data []byte) (err error) {
 	varUserUpdatesOperationSet := _UserUpdatesOperationSet{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUserUpdatesOperationSet)
 
 	if err != nil {
@@ -151,6 +150,14 @@ func (o *UserUpdatesOperationSet) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UserUpdatesOperationSet(varUserUpdatesOperationSet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operationType")
+		delete(additionalProperties, "set")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +197,4 @@ func (v *NullableUserUpdatesOperationSet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

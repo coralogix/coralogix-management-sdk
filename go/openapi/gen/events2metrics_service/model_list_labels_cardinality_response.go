@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListLabelsCardinalityResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListLabelsCardinalityResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListLabelsCardinalityResponse{}
 // ListLabelsCardinalityResponse struct for ListLabelsCardinalityResponse
 type ListLabelsCardinalityResponse struct {
 	Permutations []LabelsPermutationsCardinalityDay `json:"permutations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListLabelsCardinalityResponse ListLabelsCardinalityResponse
 
 // NewListLabelsCardinalityResponse instantiates a new ListLabelsCardinalityResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListLabelsCardinalityResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Permutations) {
 		toSerialize["permutations"] = o.Permutations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListLabelsCardinalityResponse) UnmarshalJSON(data []byte) (err error) {
+	varListLabelsCardinalityResponse := _ListLabelsCardinalityResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListLabelsCardinalityResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListLabelsCardinalityResponse(varListLabelsCardinalityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "permutations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListLabelsCardinalityResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableListLabelsCardinalityResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

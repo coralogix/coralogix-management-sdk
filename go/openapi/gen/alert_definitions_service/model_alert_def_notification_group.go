@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefNotificationGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefNotificationGroup{}
@@ -23,7 +26,10 @@ type AlertDefNotificationGroup struct {
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	Router *NotificationRouter `json:"router,omitempty"`
 	Webhooks []AlertDefWebhooksSettings `json:"webhooks,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefNotificationGroup AlertDefNotificationGroup
 
 // NewAlertDefNotificationGroup instantiates a new AlertDefNotificationGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o AlertDefNotificationGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Webhooks) {
 		toSerialize["webhooks"] = o.Webhooks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefNotificationGroup) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefNotificationGroup := _AlertDefNotificationGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefNotificationGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefNotificationGroup(varAlertDefNotificationGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "destinations")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "router")
+		delete(additionalProperties, "webhooks")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefNotificationGroup struct {
@@ -230,5 +266,4 @@ func (v *NullableAlertDefNotificationGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

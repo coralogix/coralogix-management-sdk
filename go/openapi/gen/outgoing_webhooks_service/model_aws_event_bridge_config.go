@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AwsEventBridgeConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsEventBridgeConfig{}
@@ -24,7 +27,10 @@ type AwsEventBridgeConfig struct {
 	EventBusArn *string `json:"eventBusArn,omitempty"`
 	RoleName *string `json:"roleName,omitempty"`
 	Source *string `json:"source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AwsEventBridgeConfig AwsEventBridgeConfig
 
 // NewAwsEventBridgeConfig instantiates a new AwsEventBridgeConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o AwsEventBridgeConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Source) {
 		toSerialize["source"] = o.Source
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AwsEventBridgeConfig) UnmarshalJSON(data []byte) (err error) {
+	varAwsEventBridgeConfig := _AwsEventBridgeConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAwsEventBridgeConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AwsEventBridgeConfig(varAwsEventBridgeConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "detailType")
+		delete(additionalProperties, "eventBusArn")
+		delete(additionalProperties, "roleName")
+		delete(additionalProperties, "source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAwsEventBridgeConfig struct {
@@ -266,5 +303,4 @@ func (v *NullableAwsEventBridgeConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

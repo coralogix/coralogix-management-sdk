@@ -11,10 +11,13 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // EnrichmentType - struct for EnrichmentType
 type EnrichmentType struct {
@@ -58,7 +61,7 @@ func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into EnrichmentTypeAws
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeAws)
+	err = json.Unmarshal(data, &dst.EnrichmentTypeAws)
 	if err == nil {
 		jsonEnrichmentTypeAws, _ := json.Marshal(dst.EnrichmentTypeAws)
 		if string(jsonEnrichmentTypeAws) == "{}" { // empty struct
@@ -75,7 +78,7 @@ func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into EnrichmentTypeCustomEnrichment
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeCustomEnrichment)
+	err = json.Unmarshal(data, &dst.EnrichmentTypeCustomEnrichment)
 	if err == nil {
 		jsonEnrichmentTypeCustomEnrichment, _ := json.Marshal(dst.EnrichmentTypeCustomEnrichment)
 		if string(jsonEnrichmentTypeCustomEnrichment) == "{}" { // empty struct
@@ -92,7 +95,7 @@ func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into EnrichmentTypeGeoIp
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeGeoIp)
+	err = json.Unmarshal(data, &dst.EnrichmentTypeGeoIp)
 	if err == nil {
 		jsonEnrichmentTypeGeoIp, _ := json.Marshal(dst.EnrichmentTypeGeoIp)
 		if string(jsonEnrichmentTypeGeoIp) == "{}" { // empty struct
@@ -109,7 +112,7 @@ func (dst *EnrichmentType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into EnrichmentTypeSuspiciousIp
-	err = newStrictDecoder(data).Decode(&dst.EnrichmentTypeSuspiciousIp)
+	err = json.Unmarshal(data, &dst.EnrichmentTypeSuspiciousIp)
 	if err == nil {
 		jsonEnrichmentTypeSuspiciousIp, _ := json.Marshal(dst.EnrichmentTypeSuspiciousIp)
 		if string(jsonEnrichmentTypeSuspiciousIp) == "{}" { // empty struct
@@ -243,5 +246,4 @@ func (v *NullableEnrichmentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

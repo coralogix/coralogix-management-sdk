@@ -11,10 +11,13 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // IntegrationRevision - struct for IntegrationRevision
 type IntegrationRevision struct {
@@ -74,7 +77,7 @@ func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IntegrationRevisionAzureArmTemplate
-	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionAzureArmTemplate)
+	err = json.Unmarshal(data, &dst.IntegrationRevisionAzureArmTemplate)
 	if err == nil {
 		jsonIntegrationRevisionAzureArmTemplate, _ := json.Marshal(dst.IntegrationRevisionAzureArmTemplate)
 		if string(jsonIntegrationRevisionAzureArmTemplate) == "{}" { // empty struct
@@ -91,7 +94,7 @@ func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntegrationRevisionCloudFormation
-	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionCloudFormation)
+	err = json.Unmarshal(data, &dst.IntegrationRevisionCloudFormation)
 	if err == nil {
 		jsonIntegrationRevisionCloudFormation, _ := json.Marshal(dst.IntegrationRevisionCloudFormation)
 		if string(jsonIntegrationRevisionCloudFormation) == "{}" { // empty struct
@@ -108,7 +111,7 @@ func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntegrationRevisionHelmChart
-	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionHelmChart)
+	err = json.Unmarshal(data, &dst.IntegrationRevisionHelmChart)
 	if err == nil {
 		jsonIntegrationRevisionHelmChart, _ := json.Marshal(dst.IntegrationRevisionHelmChart)
 		if string(jsonIntegrationRevisionHelmChart) == "{}" { // empty struct
@@ -125,7 +128,7 @@ func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntegrationRevisionManagedService
-	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionManagedService)
+	err = json.Unmarshal(data, &dst.IntegrationRevisionManagedService)
 	if err == nil {
 		jsonIntegrationRevisionManagedService, _ := json.Marshal(dst.IntegrationRevisionManagedService)
 		if string(jsonIntegrationRevisionManagedService) == "{}" { // empty struct
@@ -142,7 +145,7 @@ func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntegrationRevisionRum
-	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionRum)
+	err = json.Unmarshal(data, &dst.IntegrationRevisionRum)
 	if err == nil {
 		jsonIntegrationRevisionRum, _ := json.Marshal(dst.IntegrationRevisionRum)
 		if string(jsonIntegrationRevisionRum) == "{}" { // empty struct
@@ -159,7 +162,7 @@ func (dst *IntegrationRevision) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntegrationRevisionTerraform
-	err = newStrictDecoder(data).Decode(&dst.IntegrationRevisionTerraform)
+	err = json.Unmarshal(data, &dst.IntegrationRevisionTerraform)
 	if err == nil {
 		jsonIntegrationRevisionTerraform, _ := json.Marshal(dst.IntegrationRevisionTerraform)
 		if string(jsonIntegrationRevisionTerraform) == "{}" { // empty struct
@@ -319,5 +322,4 @@ func (v *NullableIntegrationRevision) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LabelFilterType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LabelFilterType{}
@@ -22,7 +25,10 @@ type LabelFilterType struct {
 	Operation *LogFilterOperationType `json:"operation,omitempty"`
 	// The value of the label to filter by
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LabelFilterType LabelFilterType
 
 // NewLabelFilterType instantiates a new LabelFilterType object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o LabelFilterType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LabelFilterType) UnmarshalJSON(data []byte) (err error) {
+	varLabelFilterType := _LabelFilterType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLabelFilterType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LabelFilterType(varLabelFilterType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operation")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLabelFilterType struct {
@@ -159,5 +193,4 @@ func (v *NullableLabelFilterType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

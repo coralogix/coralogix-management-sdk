@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansSourceStrategyInstant{}
 
 // SpansSourceStrategyInstant struct for SpansSourceStrategyInstant
 type SpansSourceStrategyInstant struct {
-	Instant *SpansSourceStrategyInstant `json:"instant,omitempty"`
+	TimestampField *ObservationField `json:"timestampField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansSourceStrategyInstant SpansSourceStrategyInstant
 
 // NewSpansSourceStrategyInstant instantiates a new SpansSourceStrategyInstant object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewSpansSourceStrategyInstantWithDefaults() *SpansSourceStrategyInstant {
 	return &this
 }
 
-// GetInstant returns the Instant field value if set, zero value otherwise.
-func (o *SpansSourceStrategyInstant) GetInstant() SpansSourceStrategyInstant {
-	if o == nil || IsNil(o.Instant) {
-		var ret SpansSourceStrategyInstant
+// GetTimestampField returns the TimestampField field value if set, zero value otherwise.
+func (o *SpansSourceStrategyInstant) GetTimestampField() ObservationField {
+	if o == nil || IsNil(o.TimestampField) {
+		var ret ObservationField
 		return ret
 	}
-	return *o.Instant
+	return *o.TimestampField
 }
 
-// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// GetTimestampFieldOk returns a tuple with the TimestampField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SpansSourceStrategyInstant) GetInstantOk() (*SpansSourceStrategyInstant, bool) {
-	if o == nil || IsNil(o.Instant) {
+func (o *SpansSourceStrategyInstant) GetTimestampFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.TimestampField) {
 		return nil, false
 	}
-	return o.Instant, true
+	return o.TimestampField, true
 }
 
-// HasInstant returns a boolean if a field has been set.
-func (o *SpansSourceStrategyInstant) HasInstant() bool {
-	if o != nil && !IsNil(o.Instant) {
+// HasTimestampField returns a boolean if a field has been set.
+func (o *SpansSourceStrategyInstant) HasTimestampField() bool {
+	if o != nil && !IsNil(o.TimestampField) {
 		return true
 	}
 
 	return false
 }
 
-// SetInstant gets a reference to the given SpansSourceStrategyInstant and assigns it to the Instant field.
-func (o *SpansSourceStrategyInstant) SetInstant(v SpansSourceStrategyInstant) {
-	o.Instant = &v
+// SetTimestampField gets a reference to the given ObservationField and assigns it to the TimestampField field.
+func (o *SpansSourceStrategyInstant) SetTimestampField(v ObservationField) {
+	o.TimestampField = &v
 }
 
 func (o SpansSourceStrategyInstant) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o SpansSourceStrategyInstant) MarshalJSON() ([]byte, error) {
 
 func (o SpansSourceStrategyInstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Instant) {
-		toSerialize["instant"] = o.Instant
+	if !IsNil(o.TimestampField) {
+		toSerialize["timestampField"] = o.TimestampField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansSourceStrategyInstant) UnmarshalJSON(data []byte) (err error) {
+	varSpansSourceStrategyInstant := _SpansSourceStrategyInstant{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansSourceStrategyInstant)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansSourceStrategyInstant(varSpansSourceStrategyInstant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timestampField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansSourceStrategyInstant struct {
@@ -122,5 +155,4 @@ func (v *NullableSpansSourceStrategyInstant) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

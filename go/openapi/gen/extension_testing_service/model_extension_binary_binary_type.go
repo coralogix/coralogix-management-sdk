@@ -11,9 +11,12 @@ API version: 1.0.0
 package extension_testing_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // ExtensionBinaryBinaryType the model 'ExtensionBinaryBinaryType'
 type ExtensionBinaryBinaryType string

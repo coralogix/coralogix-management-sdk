@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApmLatencyQuantile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApmLatencyQuantile{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ApmLatencyQuantile{}
 type ApmLatencyQuantile struct {
 	// Percentile for latency SLOs (0.95 = P95, 0.99 = P99)
 	Percentile *float32 `json:"percentile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApmLatencyQuantile ApmLatencyQuantile
 
 // NewApmLatencyQuantile instantiates a new ApmLatencyQuantile object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o ApmLatencyQuantile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Percentile) {
 		toSerialize["percentile"] = o.Percentile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApmLatencyQuantile) UnmarshalJSON(data []byte) (err error) {
+	varApmLatencyQuantile := _ApmLatencyQuantile{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmLatencyQuantile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmLatencyQuantile(varApmLatencyQuantile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "percentile")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApmLatencyQuantile struct {
@@ -123,5 +156,4 @@ func (v *NullableApmLatencyQuantile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

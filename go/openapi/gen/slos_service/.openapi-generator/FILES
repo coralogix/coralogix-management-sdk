@@ -19,9 +19,6 @@ model_batch_execute_slo_request.go
 model_batch_execute_slo_response.go
 model_batch_get_slos_response.go
 model_code.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_comparison_operator.go
 model_create_slo_request.go
@@ -41,8 +38,6 @@ model_is_filter_predicate_string_values.go
 model_is_filter_predicate_type_values.go
 model_list_slos_response.go
 model_metric.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_missing_data_strategy.go
 model_multiple_values.go
 model_product_type_values.go
@@ -77,8 +72,8 @@ model_slo_request_based_metric_sli.go
 model_slo_time_frame.go
 model_slo_type.go
 model_slo_window_based_metric_sli.go
+model_slos_service_create_slo_request.go
 model_slos_service_replace_slo_request.go
-model_slos_service_validate_replace_slo_alerts_request.go
 model_string_values.go
 model_type_values.go
 model_v1_grouping.go

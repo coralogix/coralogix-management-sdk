@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BatchGetPresetsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchGetPresetsResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &BatchGetPresetsResponse{}
 type BatchGetPresetsResponse struct {
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	Presets *map[string]Preset `json:"presets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchGetPresetsResponse BatchGetPresetsResponse
 
 // NewBatchGetPresetsResponse instantiates a new BatchGetPresetsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o BatchGetPresetsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Presets) {
 		toSerialize["presets"] = o.Presets
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchGetPresetsResponse) UnmarshalJSON(data []byte) (err error) {
+	varBatchGetPresetsResponse := _BatchGetPresetsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBatchGetPresetsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchGetPresetsResponse(varBatchGetPresetsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "notFoundIds")
+		delete(additionalProperties, "presets")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchGetPresetsResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableBatchGetPresetsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

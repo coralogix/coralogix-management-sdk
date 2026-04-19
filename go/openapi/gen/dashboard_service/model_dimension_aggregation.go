@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DimensionAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionAggregation{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &DimensionAggregation{}
 type DimensionAggregation struct {
 	AggregationType *DimensionAggregationType `json:"aggregationType,omitempty"`
 	DimensionField *DimensionField `json:"dimensionField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DimensionAggregation DimensionAggregation
 
 // NewDimensionAggregation instantiates a new DimensionAggregation object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o DimensionAggregation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DimensionField) {
 		toSerialize["dimensionField"] = o.DimensionField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DimensionAggregation) UnmarshalJSON(data []byte) (err error) {
+	varDimensionAggregation := _DimensionAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimensionAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DimensionAggregation(varDimensionAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregationType")
+		delete(additionalProperties, "dimensionField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimensionAggregation struct {
@@ -158,5 +192,4 @@ func (v *NullableDimensionAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

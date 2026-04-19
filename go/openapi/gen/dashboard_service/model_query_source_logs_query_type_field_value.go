@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceLogsQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceLogsQueryTypeFieldValue{}
 
 // QuerySourceLogsQueryTypeFieldValue struct for QuerySourceLogsQueryTypeFieldValue
 type QuerySourceLogsQueryTypeFieldValue struct {
-	FieldValue *QuerySourceLogsQueryTypeFieldValue `json:"fieldValue,omitempty"`
+	ObservationField *ObservationField `json:"observationField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceLogsQueryTypeFieldValue QuerySourceLogsQueryTypeFieldValue
 
 // NewQuerySourceLogsQueryTypeFieldValue instantiates a new QuerySourceLogsQueryTypeFieldValue object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQuerySourceLogsQueryTypeFieldValueWithDefaults() *QuerySourceLogsQueryTy
 	return &this
 }
 
-// GetFieldValue returns the FieldValue field value if set, zero value otherwise.
-func (o *QuerySourceLogsQueryTypeFieldValue) GetFieldValue() QuerySourceLogsQueryTypeFieldValue {
-	if o == nil || IsNil(o.FieldValue) {
-		var ret QuerySourceLogsQueryTypeFieldValue
+// GetObservationField returns the ObservationField field value if set, zero value otherwise.
+func (o *QuerySourceLogsQueryTypeFieldValue) GetObservationField() ObservationField {
+	if o == nil || IsNil(o.ObservationField) {
+		var ret ObservationField
 		return ret
 	}
-	return *o.FieldValue
+	return *o.ObservationField
 }
 
-// GetFieldValueOk returns a tuple with the FieldValue field value if set, nil otherwise
+// GetObservationFieldOk returns a tuple with the ObservationField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceLogsQueryTypeFieldValue) GetFieldValueOk() (*QuerySourceLogsQueryTypeFieldValue, bool) {
-	if o == nil || IsNil(o.FieldValue) {
+func (o *QuerySourceLogsQueryTypeFieldValue) GetObservationFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.ObservationField) {
 		return nil, false
 	}
-	return o.FieldValue, true
+	return o.ObservationField, true
 }
 
-// HasFieldValue returns a boolean if a field has been set.
-func (o *QuerySourceLogsQueryTypeFieldValue) HasFieldValue() bool {
-	if o != nil && !IsNil(o.FieldValue) {
+// HasObservationField returns a boolean if a field has been set.
+func (o *QuerySourceLogsQueryTypeFieldValue) HasObservationField() bool {
+	if o != nil && !IsNil(o.ObservationField) {
 		return true
 	}
 
 	return false
 }
 
-// SetFieldValue gets a reference to the given QuerySourceLogsQueryTypeFieldValue and assigns it to the FieldValue field.
-func (o *QuerySourceLogsQueryTypeFieldValue) SetFieldValue(v QuerySourceLogsQueryTypeFieldValue) {
-	o.FieldValue = &v
+// SetObservationField gets a reference to the given ObservationField and assigns it to the ObservationField field.
+func (o *QuerySourceLogsQueryTypeFieldValue) SetObservationField(v ObservationField) {
+	o.ObservationField = &v
 }
 
 func (o QuerySourceLogsQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QuerySourceLogsQueryTypeFieldValue) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceLogsQueryTypeFieldValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldValue) {
-		toSerialize["fieldValue"] = o.FieldValue
+	if !IsNil(o.ObservationField) {
+		toSerialize["observationField"] = o.ObservationField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceLogsQueryTypeFieldValue) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceLogsQueryTypeFieldValue := _QuerySourceLogsQueryTypeFieldValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceLogsQueryTypeFieldValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceLogsQueryTypeFieldValue(varQuerySourceLogsQueryTypeFieldValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "observationField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceLogsQueryTypeFieldValue struct {
@@ -122,5 +155,4 @@ func (v *NullableQuerySourceLogsQueryTypeFieldValue) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

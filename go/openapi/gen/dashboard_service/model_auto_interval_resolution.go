@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AutoIntervalResolution type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AutoIntervalResolution{}
@@ -23,7 +26,10 @@ type AutoIntervalResolution struct {
 	MaximumDataPoints *int32 `json:"maximumDataPoints,omitempty"`
 	// Minimum interval duration. The calculated interval will not be smaller than this value.
 	MinimumInterval *string `json:"minimumInterval,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutoIntervalResolution AutoIntervalResolution
 
 // NewAutoIntervalResolution instantiates a new AutoIntervalResolution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o AutoIntervalResolution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MinimumInterval) {
 		toSerialize["minimumInterval"] = o.MinimumInterval
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutoIntervalResolution) UnmarshalJSON(data []byte) (err error) {
+	varAutoIntervalResolution := _AutoIntervalResolution{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAutoIntervalResolution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutoIntervalResolution(varAutoIntervalResolution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "maximumDataPoints")
+		delete(additionalProperties, "minimumInterval")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutoIntervalResolution struct {
@@ -160,5 +194,4 @@ func (v *NullableAutoIntervalResolution) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

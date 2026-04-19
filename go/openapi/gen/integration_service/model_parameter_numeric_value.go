@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ParameterNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ParameterNumericValue{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &ParameterNumericValue{}
 // ParameterNumericValue struct for ParameterNumericValue
 type ParameterNumericValue struct {
 	Key *string `json:"key,omitempty"`
-	NumericValue *float64 `json:"numericValue,omitempty"`
+	NumericValue float64 `json:"numericValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ParameterNumericValue ParameterNumericValue
 
 // NewParameterNumericValue instantiates a new ParameterNumericValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewParameterNumericValue() *ParameterNumericValue {
+func NewParameterNumericValue(numericValue float64) *ParameterNumericValue {
 	this := ParameterNumericValue{}
+	this.NumericValue = numericValue
 	return &this
 }
 
@@ -72,36 +80,28 @@ func (o *ParameterNumericValue) SetKey(v string) {
 	o.Key = &v
 }
 
-// GetNumericValue returns the NumericValue field value if set, zero value otherwise.
+// GetNumericValue returns the NumericValue field value
 func (o *ParameterNumericValue) GetNumericValue() float64 {
-	if o == nil || IsNil(o.NumericValue) {
+	if o == nil {
 		var ret float64
 		return ret
 	}
-	return *o.NumericValue
+
+	return o.NumericValue
 }
 
-// GetNumericValueOk returns a tuple with the NumericValue field value if set, nil otherwise
+// GetNumericValueOk returns a tuple with the NumericValue field value
 // and a boolean to check if the value has been set.
 func (o *ParameterNumericValue) GetNumericValueOk() (*float64, bool) {
-	if o == nil || IsNil(o.NumericValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NumericValue, true
+	return &o.NumericValue, true
 }
 
-// HasNumericValue returns a boolean if a field has been set.
-func (o *ParameterNumericValue) HasNumericValue() bool {
-	if o != nil && !IsNil(o.NumericValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetNumericValue gets a reference to the given float64 and assigns it to the NumericValue field.
+// SetNumericValue sets field value
 func (o *ParameterNumericValue) SetNumericValue(v float64) {
-	o.NumericValue = &v
+	o.NumericValue = v
 }
 
 func (o ParameterNumericValue) MarshalJSON() ([]byte, error) {
@@ -117,10 +117,57 @@ func (o ParameterNumericValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
-	if !IsNil(o.NumericValue) {
-		toSerialize["numericValue"] = o.NumericValue
+	toSerialize["numericValue"] = o.NumericValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ParameterNumericValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"numericValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varParameterNumericValue := _ParameterNumericValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varParameterNumericValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParameterNumericValue(varParameterNumericValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "numericValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParameterNumericValue struct {
@@ -158,5 +205,4 @@ func (v *NullableParameterNumericValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

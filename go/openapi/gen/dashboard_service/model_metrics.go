@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Metrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Metrics{}
@@ -23,7 +26,10 @@ type Metrics struct {
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
 	SeriesLimitType *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Metrics Metrics
 
 // NewMetrics instantiates a new Metrics object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o Metrics) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SeriesLimitType) {
 		toSerialize["seriesLimitType"] = o.SeriesLimitType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Metrics) UnmarshalJSON(data []byte) (err error) {
+	varMetrics := _Metrics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Metrics(varMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "editorMode")
+		delete(additionalProperties, "promqlQuery")
+		delete(additionalProperties, "promqlQueryType")
+		delete(additionalProperties, "seriesLimitType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetrics struct {
@@ -230,5 +266,4 @@ func (v *NullableMetrics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

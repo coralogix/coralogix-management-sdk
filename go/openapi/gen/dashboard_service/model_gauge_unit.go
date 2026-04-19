@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // GaugeUnit the model 'GaugeUnit'
 type GaugeUnit string
@@ -42,6 +45,7 @@ const (
 	GAUGEUNIT_UNIT_PERCENT_ZERO_ONE GaugeUnit = "UNIT_PERCENT_ZERO_ONE"
 	GAUGEUNIT_UNIT_PERCENT_ZERO_HUNDRED GaugeUnit = "UNIT_PERCENT_ZERO_HUNDRED"
 	GAUGEUNIT_UNIT_NANOSECONDS GaugeUnit = "UNIT_NANOSECONDS"
+	GAUGEUNIT_UNIT_DATETIME_ISO GaugeUnit = "UNIT_DATETIME_ISO"
 )
 
 // All allowed values of GaugeUnit enum
@@ -68,6 +72,7 @@ var AllowedGaugeUnitEnumValues = []GaugeUnit{
 	"UNIT_PERCENT_ZERO_ONE",
 	"UNIT_PERCENT_ZERO_HUNDRED",
 	"UNIT_NANOSECONDS",
+	"UNIT_DATETIME_ISO",
 }
 
 func (v *GaugeUnit) UnmarshalJSON(src []byte) error {

@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // GetAlertEventResponse - struct for GetAlertEventResponse
 type GetAlertEventResponse struct {
@@ -42,7 +45,7 @@ func (dst *GetAlertEventResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into GetAlertEventResponseMultiplePermutation
-	err = newStrictDecoder(data).Decode(&dst.GetAlertEventResponseMultiplePermutation)
+	err = json.Unmarshal(data, &dst.GetAlertEventResponseMultiplePermutation)
 	if err == nil {
 		jsonGetAlertEventResponseMultiplePermutation, _ := json.Marshal(dst.GetAlertEventResponseMultiplePermutation)
 		if string(jsonGetAlertEventResponseMultiplePermutation) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *GetAlertEventResponse) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GetAlertEventResponseSinglePermutation
-	err = newStrictDecoder(data).Decode(&dst.GetAlertEventResponseSinglePermutation)
+	err = json.Unmarshal(data, &dst.GetAlertEventResponseSinglePermutation)
 	if err == nil {
 		jsonGetAlertEventResponseSinglePermutation, _ := json.Marshal(dst.GetAlertEventResponseSinglePermutation)
 		if string(jsonGetAlertEventResponseSinglePermutation) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableGetAlertEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

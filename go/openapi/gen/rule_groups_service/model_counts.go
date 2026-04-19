@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Counts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Counts{}
@@ -22,7 +25,10 @@ type Counts struct {
 	Groups *int32 `json:"groups,omitempty"`
 	ParsingThemes *int32 `json:"parsingThemes,omitempty"`
 	Rules *int32 `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Counts Counts
 
 // NewCounts instantiates a new Counts object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o Counts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Counts) UnmarshalJSON(data []byte) (err error) {
+	varCounts := _Counts{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCounts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Counts(varCounts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "parsingThemes")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCounts struct {
@@ -194,5 +229,4 @@ func (v *NullableCounts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,9 +11,12 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Connector type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Connector{}
@@ -28,9 +31,12 @@ type Connector struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
-	Type *ConnectorType `json:"type,omitempty"`
+	Type *NotificationCenterConnectorType `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Connector Connector
 
 // NewConnector instantiates a new Connector object
 // This constructor will assign default values to properties that have it defined,
@@ -306,9 +312,9 @@ func (o *Connector) SetTeamId(v int64) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *Connector) GetType() ConnectorType {
+func (o *Connector) GetType() NotificationCenterConnectorType {
 	if o == nil || IsNil(o.Type) {
-		var ret ConnectorType
+		var ret NotificationCenterConnectorType
 		return ret
 	}
 	return *o.Type
@@ -316,7 +322,7 @@ func (o *Connector) GetType() ConnectorType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Connector) GetTypeOk() (*ConnectorType, bool) {
+func (o *Connector) GetTypeOk() (*NotificationCenterConnectorType, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -332,8 +338,8 @@ func (o *Connector) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given ConnectorType and assigns it to the Type field.
-func (o *Connector) SetType(v ConnectorType) {
+// SetType gets a reference to the given NotificationCenterConnectorType and assigns it to the Type field.
+func (o *Connector) SetType(v NotificationCenterConnectorType) {
 	o.Type = &v
 }
 
@@ -409,7 +415,43 @@ func (o Connector) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Connector) UnmarshalJSON(data []byte) (err error) {
+	varConnector := _Connector{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConnector)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Connector(varConnector)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configOverrides")
+		delete(additionalProperties, "connectorConfig")
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "diagnostics")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "teamId")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConnector struct {
@@ -447,5 +489,4 @@ func (v *NullableConnector) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

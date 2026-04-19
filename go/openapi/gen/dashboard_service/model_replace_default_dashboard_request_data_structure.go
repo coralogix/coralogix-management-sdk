@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceDefaultDashboardRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceDefaultDashboardRequestDataStructure{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &ReplaceDefaultDashboardRequestDataStructure{}
 // ReplaceDefaultDashboardRequestDataStructure This is a request to replace a default dashboard
 type ReplaceDefaultDashboardRequestDataStructure struct {
 	RequestId string `json:"requestId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplaceDefaultDashboardRequestDataStructure ReplaceDefaultDashboardRequestDataStructure
@@ -79,6 +82,11 @@ func (o ReplaceDefaultDashboardRequestDataStructure) MarshalJSON() ([]byte, erro
 func (o ReplaceDefaultDashboardRequestDataStructure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["requestId"] = o.RequestId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *ReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(data []byte)
 	varReplaceDefaultDashboardRequestDataStructure := _ReplaceDefaultDashboardRequestDataStructure{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReplaceDefaultDashboardRequestDataStructure)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *ReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(data []byte)
 	}
 
 	*o = ReplaceDefaultDashboardRequestDataStructure(varReplaceDefaultDashboardRequestDataStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requestId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableReplaceDefaultDashboardRequestDataStructure) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

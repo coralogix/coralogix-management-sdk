@@ -11,10 +11,12 @@ API version: 1.0.0
 package enrichments_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetEnrichmentLimitResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetEnrichmentLimitResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &GetEnrichmentLimitResponse{}
 type GetEnrichmentLimitResponse struct {
 	Limit int64 `json:"limit"`
 	Used int64 `json:"used"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetEnrichmentLimitResponse GetEnrichmentLimitResponse
@@ -106,6 +109,11 @@ func (o GetEnrichmentLimitResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["limit"] = o.Limit
 	toSerialize["used"] = o.Used
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,7 +143,6 @@ func (o *GetEnrichmentLimitResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetEnrichmentLimitResponse := _GetEnrichmentLimitResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetEnrichmentLimitResponse)
 
 	if err != nil {
@@ -143,6 +150,14 @@ func (o *GetEnrichmentLimitResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetEnrichmentLimitResponse(varGetEnrichmentLimitResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -182,5 +197,4 @@ func (v *NullableGetEnrichmentLimitResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

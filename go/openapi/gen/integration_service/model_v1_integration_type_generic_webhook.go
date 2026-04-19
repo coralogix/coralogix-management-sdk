@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypeGenericWebhook type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypeGenericWebhook{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V1IntegrationTypeGenericWebhook{}
 // V1IntegrationTypeGenericWebhook This data structure represents an integration type.
 type V1IntegrationTypeGenericWebhook struct {
 	// This data structure represents a generic webhook integration.
-	GenericWebhook map[string]interface{} `json:"genericWebhook,omitempty"`
+	GenericWebhook map[string]interface{} `json:"genericWebhook"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypeGenericWebhook V1IntegrationTypeGenericWebhook
 
 // NewV1IntegrationTypeGenericWebhook instantiates a new V1IntegrationTypeGenericWebhook object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypeGenericWebhook() *V1IntegrationTypeGenericWebhook {
+func NewV1IntegrationTypeGenericWebhook(genericWebhook map[string]interface{}) *V1IntegrationTypeGenericWebhook {
 	this := V1IntegrationTypeGenericWebhook{}
+	this.GenericWebhook = genericWebhook
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewV1IntegrationTypeGenericWebhookWithDefaults() *V1IntegrationTypeGenericW
 	return &this
 }
 
-// GetGenericWebhook returns the GenericWebhook field value if set, zero value otherwise.
+// GetGenericWebhook returns the GenericWebhook field value
 func (o *V1IntegrationTypeGenericWebhook) GetGenericWebhook() map[string]interface{} {
-	if o == nil || IsNil(o.GenericWebhook) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.GenericWebhook
 }
 
-// GetGenericWebhookOk returns a tuple with the GenericWebhook field value if set, nil otherwise
+// GetGenericWebhookOk returns a tuple with the GenericWebhook field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypeGenericWebhook) GetGenericWebhookOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.GenericWebhook) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.GenericWebhook, true
 }
 
-// HasGenericWebhook returns a boolean if a field has been set.
-func (o *V1IntegrationTypeGenericWebhook) HasGenericWebhook() bool {
-	if o != nil && !IsNil(o.GenericWebhook) {
-		return true
-	}
-
-	return false
-}
-
-// SetGenericWebhook gets a reference to the given map[string]interface{} and assigns it to the GenericWebhook field.
+// SetGenericWebhook sets field value
 func (o *V1IntegrationTypeGenericWebhook) SetGenericWebhook(v map[string]interface{}) {
 	o.GenericWebhook = v
 }
@@ -82,10 +82,56 @@ func (o V1IntegrationTypeGenericWebhook) MarshalJSON() ([]byte, error) {
 
 func (o V1IntegrationTypeGenericWebhook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GenericWebhook) {
-		toSerialize["genericWebhook"] = o.GenericWebhook
+	toSerialize["genericWebhook"] = o.GenericWebhook
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypeGenericWebhook) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"genericWebhook",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypeGenericWebhook := _V1IntegrationTypeGenericWebhook{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypeGenericWebhook)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypeGenericWebhook(varV1IntegrationTypeGenericWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "genericWebhook")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypeGenericWebhook struct {
@@ -123,5 +169,4 @@ func (v *NullableV1IntegrationTypeGenericWebhook) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

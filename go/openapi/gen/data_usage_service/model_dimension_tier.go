@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DimensionTier type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionTier{}
 
 // DimensionTier struct for DimensionTier
 type DimensionTier struct {
-	Tier *V2TcoTier `json:"tier,omitempty"`
+	Tier V2TcoTier `json:"tier"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DimensionTier DimensionTier
 
 // NewDimensionTier instantiates a new DimensionTier object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDimensionTier() *DimensionTier {
+func NewDimensionTier(tier V2TcoTier) *DimensionTier {
 	this := DimensionTier{}
+	this.Tier = tier
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDimensionTierWithDefaults() *DimensionTier {
 	return &this
 }
 
-// GetTier returns the Tier field value if set, zero value otherwise.
+// GetTier returns the Tier field value
 func (o *DimensionTier) GetTier() V2TcoTier {
-	if o == nil || IsNil(o.Tier) {
+	if o == nil {
 		var ret V2TcoTier
 		return ret
 	}
-	return *o.Tier
+
+	return o.Tier
 }
 
-// GetTierOk returns a tuple with the Tier field value if set, nil otherwise
+// GetTierOk returns a tuple with the Tier field value
 // and a boolean to check if the value has been set.
 func (o *DimensionTier) GetTierOk() (*V2TcoTier, bool) {
-	if o == nil || IsNil(o.Tier) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tier, true
+	return &o.Tier, true
 }
 
-// HasTier returns a boolean if a field has been set.
-func (o *DimensionTier) HasTier() bool {
-	if o != nil && !IsNil(o.Tier) {
-		return true
-	}
-
-	return false
-}
-
-// SetTier gets a reference to the given V2TcoTier and assigns it to the Tier field.
+// SetTier sets field value
 func (o *DimensionTier) SetTier(v V2TcoTier) {
-	o.Tier = &v
+	o.Tier = v
 }
 
 func (o DimensionTier) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DimensionTier) MarshalJSON() ([]byte, error) {
 
 func (o DimensionTier) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Tier) {
-		toSerialize["tier"] = o.Tier
+	toSerialize["tier"] = o.Tier
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DimensionTier) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"tier",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDimensionTier := _DimensionTier{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimensionTier)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DimensionTier(varDimensionTier)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tier")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimensionTier struct {
@@ -122,5 +168,4 @@ func (v *NullableDimensionTier) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

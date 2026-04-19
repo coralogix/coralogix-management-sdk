@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceDashboardRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceDashboardRequestDataStructure{}
@@ -24,6 +26,7 @@ type ReplaceDashboardRequestDataStructure struct {
 	Dashboard Dashboard `json:"dashboard"`
 	IsLocked *bool `json:"isLocked,omitempty"`
 	RequestId string `json:"requestId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplaceDashboardRequestDataStructure ReplaceDashboardRequestDataStructure
@@ -142,6 +145,11 @@ func (o ReplaceDashboardRequestDataStructure) ToMap() (map[string]interface{}, e
 		toSerialize["isLocked"] = o.IsLocked
 	}
 	toSerialize["requestId"] = o.RequestId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -171,7 +179,6 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 	varReplaceDashboardRequestDataStructure := _ReplaceDashboardRequestDataStructure{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReplaceDashboardRequestDataStructure)
 
 	if err != nil {
@@ -179,6 +186,15 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 	}
 
 	*o = ReplaceDashboardRequestDataStructure(varReplaceDashboardRequestDataStructure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dashboard")
+		delete(additionalProperties, "isLocked")
+		delete(additionalProperties, "requestId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -218,5 +234,4 @@ func (v *NullableReplaceDashboardRequestDataStructure) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

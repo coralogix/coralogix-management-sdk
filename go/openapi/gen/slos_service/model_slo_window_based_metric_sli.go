@@ -11,9 +11,13 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloWindowBasedMetricSli type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloWindowBasedMetricSli{}
@@ -35,15 +39,19 @@ type SloWindowBasedMetricSli struct {
 	// Deprecated
 	Type *string `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
-	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
+	WindowBasedMetricSli WindowBasedMetricSli `json:"windowBasedMetricSli"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloWindowBasedMetricSli SloWindowBasedMetricSli
 
 // NewSloWindowBasedMetricSli instantiates a new SloWindowBasedMetricSli object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloWindowBasedMetricSli() *SloWindowBasedMetricSli {
+func NewSloWindowBasedMetricSli(windowBasedMetricSli WindowBasedMetricSli) *SloWindowBasedMetricSli {
 	this := SloWindowBasedMetricSli{}
+	this.WindowBasedMetricSli = windowBasedMetricSli
 	return &this
 }
 
@@ -506,36 +514,28 @@ func (o *SloWindowBasedMetricSli) SetUpdateTime(v time.Time) {
 	o.UpdateTime = &v
 }
 
-// GetWindowBasedMetricSli returns the WindowBasedMetricSli field value if set, zero value otherwise.
+// GetWindowBasedMetricSli returns the WindowBasedMetricSli field value
 func (o *SloWindowBasedMetricSli) GetWindowBasedMetricSli() WindowBasedMetricSli {
-	if o == nil || IsNil(o.WindowBasedMetricSli) {
+	if o == nil {
 		var ret WindowBasedMetricSli
 		return ret
 	}
-	return *o.WindowBasedMetricSli
+
+	return o.WindowBasedMetricSli
 }
 
-// GetWindowBasedMetricSliOk returns a tuple with the WindowBasedMetricSli field value if set, nil otherwise
+// GetWindowBasedMetricSliOk returns a tuple with the WindowBasedMetricSli field value
 // and a boolean to check if the value has been set.
 func (o *SloWindowBasedMetricSli) GetWindowBasedMetricSliOk() (*WindowBasedMetricSli, bool) {
-	if o == nil || IsNil(o.WindowBasedMetricSli) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WindowBasedMetricSli, true
+	return &o.WindowBasedMetricSli, true
 }
 
-// HasWindowBasedMetricSli returns a boolean if a field has been set.
-func (o *SloWindowBasedMetricSli) HasWindowBasedMetricSli() bool {
-	if o != nil && !IsNil(o.WindowBasedMetricSli) {
-		return true
-	}
-
-	return false
-}
-
-// SetWindowBasedMetricSli gets a reference to the given WindowBasedMetricSli and assigns it to the WindowBasedMetricSli field.
+// SetWindowBasedMetricSli sets field value
 func (o *SloWindowBasedMetricSli) SetWindowBasedMetricSli(v WindowBasedMetricSli) {
-	o.WindowBasedMetricSli = &v
+	o.WindowBasedMetricSli = v
 }
 
 func (o SloWindowBasedMetricSli) MarshalJSON() ([]byte, error) {
@@ -590,10 +590,70 @@ func (o SloWindowBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
-	if !IsNil(o.WindowBasedMetricSli) {
-		toSerialize["windowBasedMetricSli"] = o.WindowBasedMetricSli
+	toSerialize["windowBasedMetricSli"] = o.WindowBasedMetricSli
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloWindowBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"windowBasedMetricSli",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloWindowBasedMetricSli := _SloWindowBasedMetricSli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloWindowBasedMetricSli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloWindowBasedMetricSli(varSloWindowBasedMetricSli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "grouping")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "revision")
+		delete(additionalProperties, "sloTimeFrame")
+		delete(additionalProperties, "sloType")
+		delete(additionalProperties, "targetThresholdPercentage")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		delete(additionalProperties, "windowBasedMetricSli")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloWindowBasedMetricSli struct {
@@ -631,5 +691,4 @@ func (v *NullableSloWindowBasedMetricSli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

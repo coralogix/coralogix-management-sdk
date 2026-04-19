@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataUsageEntry type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataUsageEntry{}
@@ -24,7 +27,10 @@ type DataUsageEntry struct {
 	SizeGb *float32 `json:"sizeGb,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	Units *float32 `json:"units,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataUsageEntry DataUsageEntry
 
 // NewDataUsageEntry instantiates a new DataUsageEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +199,37 @@ func (o DataUsageEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Units) {
 		toSerialize["units"] = o.Units
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataUsageEntry) UnmarshalJSON(data []byte) (err error) {
+	varDataUsageEntry := _DataUsageEntry{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataUsageEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataUsageEntry(varDataUsageEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dimensions")
+		delete(additionalProperties, "sizeGb")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "units")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataUsageEntry struct {
@@ -231,5 +267,4 @@ func (v *NullableDataUsageEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

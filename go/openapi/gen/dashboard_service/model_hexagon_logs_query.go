@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HexagonLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonLogsQuery{}
@@ -24,7 +27,10 @@ type HexagonLogsQuery struct {
 	LogsAggregation *LogsAggregation `json:"logsAggregation,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HexagonLogsQuery HexagonLogsQuery
 
 // NewHexagonLogsQuery instantiates a new HexagonLogsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o HexagonLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HexagonLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	varHexagonLogsQuery := _HexagonLogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagonLogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexagonLogsQuery(varHexagonLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "logsAggregation")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHexagonLogsQuery struct {
@@ -266,5 +303,4 @@ func (v *NullableHexagonLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3ConnectorConfigField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3ConnectorConfigField{}
@@ -23,7 +26,10 @@ type V3ConnectorConfigField struct {
 	FieldName *string `json:"fieldName,omitempty"`
 	// The template for the configuration field
 	Template *string `json:"template,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3ConnectorConfigField V3ConnectorConfigField
 
 // NewV3ConnectorConfigField instantiates a new V3ConnectorConfigField object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o V3ConnectorConfigField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Template) {
 		toSerialize["template"] = o.Template
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V3ConnectorConfigField) UnmarshalJSON(data []byte) (err error) {
+	varV3ConnectorConfigField := _V3ConnectorConfigField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3ConnectorConfigField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3ConnectorConfigField(varV3ConnectorConfigField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "template")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3ConnectorConfigField struct {
@@ -160,5 +194,4 @@ func (v *NullableV3ConnectorConfigField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

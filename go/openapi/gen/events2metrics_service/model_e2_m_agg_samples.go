@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MAggSamples type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MAggSamples{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &E2MAggSamples{}
 // E2MAggSamples This data structure represents the e2m aggregate samples
 type E2MAggSamples struct {
 	SampleType *SampleType `json:"sampleType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _E2MAggSamples E2MAggSamples
 
 // NewE2MAggSamples instantiates a new E2MAggSamples object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o E2MAggSamples) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SampleType) {
 		toSerialize["sampleType"] = o.SampleType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *E2MAggSamples) UnmarshalJSON(data []byte) (err error) {
+	varE2MAggSamples := _E2MAggSamples{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2MAggSamples)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2MAggSamples(varE2MAggSamples)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sampleType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableE2MAggSamples struct {
@@ -122,5 +155,4 @@ func (v *NullableE2MAggSamples) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

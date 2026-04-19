@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetLogsCountResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetLogsCountResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetLogsCountResponse{}
 // GetLogsCountResponse This data structure is used to return logs count.
 type GetLogsCountResponse struct {
 	LogsCount []LogsCount `json:"logsCount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLogsCountResponse GetLogsCountResponse
 
 // NewGetLogsCountResponse instantiates a new GetLogsCountResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetLogsCountResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LogsCount) {
 		toSerialize["logsCount"] = o.LogsCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLogsCountResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetLogsCountResponse := _GetLogsCountResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetLogsCountResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLogsCountResponse(varGetLogsCountResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsCount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLogsCountResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetLogsCountResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

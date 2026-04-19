@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AzureArmTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AzureArmTemplate{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AzureArmTemplate{}
 // AzureArmTemplate This data structure represents an azure ARM template.
 type AzureArmTemplate struct {
 	TemplateUrl *string `json:"templateUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AzureArmTemplate AzureArmTemplate
 
 // NewAzureArmTemplate instantiates a new AzureArmTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AzureArmTemplate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TemplateUrl) {
 		toSerialize["templateUrl"] = o.TemplateUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AzureArmTemplate) UnmarshalJSON(data []byte) (err error) {
+	varAzureArmTemplate := _AzureArmTemplate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAzureArmTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AzureArmTemplate(varAzureArmTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "templateUrl")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAzureArmTemplate struct {
@@ -122,5 +155,4 @@ func (v *NullableAzureArmTemplate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

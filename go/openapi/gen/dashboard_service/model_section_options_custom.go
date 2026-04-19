@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SectionOptionsCustom type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SectionOptionsCustom{}
 
 // SectionOptionsCustom struct for SectionOptionsCustom
 type SectionOptionsCustom struct {
-	Custom *CustomSectionOptions `json:"custom,omitempty"`
+	Custom CustomSectionOptions `json:"custom"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SectionOptionsCustom SectionOptionsCustom
 
 // NewSectionOptionsCustom instantiates a new SectionOptionsCustom object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSectionOptionsCustom() *SectionOptionsCustom {
+func NewSectionOptionsCustom(custom CustomSectionOptions) *SectionOptionsCustom {
 	this := SectionOptionsCustom{}
+	this.Custom = custom
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSectionOptionsCustomWithDefaults() *SectionOptionsCustom {
 	return &this
 }
 
-// GetCustom returns the Custom field value if set, zero value otherwise.
+// GetCustom returns the Custom field value
 func (o *SectionOptionsCustom) GetCustom() CustomSectionOptions {
-	if o == nil || IsNil(o.Custom) {
+	if o == nil {
 		var ret CustomSectionOptions
 		return ret
 	}
-	return *o.Custom
+
+	return o.Custom
 }
 
-// GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
+// GetCustomOk returns a tuple with the Custom field value
 // and a boolean to check if the value has been set.
 func (o *SectionOptionsCustom) GetCustomOk() (*CustomSectionOptions, bool) {
-	if o == nil || IsNil(o.Custom) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Custom, true
+	return &o.Custom, true
 }
 
-// HasCustom returns a boolean if a field has been set.
-func (o *SectionOptionsCustom) HasCustom() bool {
-	if o != nil && !IsNil(o.Custom) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustom gets a reference to the given CustomSectionOptions and assigns it to the Custom field.
+// SetCustom sets field value
 func (o *SectionOptionsCustom) SetCustom(v CustomSectionOptions) {
-	o.Custom = &v
+	o.Custom = v
 }
 
 func (o SectionOptionsCustom) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SectionOptionsCustom) MarshalJSON() ([]byte, error) {
 
 func (o SectionOptionsCustom) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Custom) {
-		toSerialize["custom"] = o.Custom
+	toSerialize["custom"] = o.Custom
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SectionOptionsCustom) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"custom",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSectionOptionsCustom := _SectionOptionsCustom{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSectionOptionsCustom)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SectionOptionsCustom(varSectionOptionsCustom)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "custom")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSectionOptionsCustom struct {
@@ -122,5 +168,4 @@ func (v *NullableSectionOptionsCustom) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

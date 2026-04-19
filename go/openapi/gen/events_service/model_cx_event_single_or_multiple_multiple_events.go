@@ -11,23 +11,31 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CxEventSingleOrMultipleMultipleEvents type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CxEventSingleOrMultipleMultipleEvents{}
 
 // CxEventSingleOrMultipleMultipleEvents This data structure represents a single or multiple events
 type CxEventSingleOrMultipleMultipleEvents struct {
-	MultipleEvents *CxEventArray `json:"multipleEvents,omitempty"`
+	MultipleEvents CxEventArray `json:"multipleEvents"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CxEventSingleOrMultipleMultipleEvents CxEventSingleOrMultipleMultipleEvents
 
 // NewCxEventSingleOrMultipleMultipleEvents instantiates a new CxEventSingleOrMultipleMultipleEvents object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCxEventSingleOrMultipleMultipleEvents() *CxEventSingleOrMultipleMultipleEvents {
+func NewCxEventSingleOrMultipleMultipleEvents(multipleEvents CxEventArray) *CxEventSingleOrMultipleMultipleEvents {
 	this := CxEventSingleOrMultipleMultipleEvents{}
+	this.MultipleEvents = multipleEvents
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewCxEventSingleOrMultipleMultipleEventsWithDefaults() *CxEventSingleOrMult
 	return &this
 }
 
-// GetMultipleEvents returns the MultipleEvents field value if set, zero value otherwise.
+// GetMultipleEvents returns the MultipleEvents field value
 func (o *CxEventSingleOrMultipleMultipleEvents) GetMultipleEvents() CxEventArray {
-	if o == nil || IsNil(o.MultipleEvents) {
+	if o == nil {
 		var ret CxEventArray
 		return ret
 	}
-	return *o.MultipleEvents
+
+	return o.MultipleEvents
 }
 
-// GetMultipleEventsOk returns a tuple with the MultipleEvents field value if set, nil otherwise
+// GetMultipleEventsOk returns a tuple with the MultipleEvents field value
 // and a boolean to check if the value has been set.
 func (o *CxEventSingleOrMultipleMultipleEvents) GetMultipleEventsOk() (*CxEventArray, bool) {
-	if o == nil || IsNil(o.MultipleEvents) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultipleEvents, true
+	return &o.MultipleEvents, true
 }
 
-// HasMultipleEvents returns a boolean if a field has been set.
-func (o *CxEventSingleOrMultipleMultipleEvents) HasMultipleEvents() bool {
-	if o != nil && !IsNil(o.MultipleEvents) {
-		return true
-	}
-
-	return false
-}
-
-// SetMultipleEvents gets a reference to the given CxEventArray and assigns it to the MultipleEvents field.
+// SetMultipleEvents sets field value
 func (o *CxEventSingleOrMultipleMultipleEvents) SetMultipleEvents(v CxEventArray) {
-	o.MultipleEvents = &v
+	o.MultipleEvents = v
 }
 
 func (o CxEventSingleOrMultipleMultipleEvents) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o CxEventSingleOrMultipleMultipleEvents) MarshalJSON() ([]byte, error) {
 
 func (o CxEventSingleOrMultipleMultipleEvents) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MultipleEvents) {
-		toSerialize["multipleEvents"] = o.MultipleEvents
+	toSerialize["multipleEvents"] = o.MultipleEvents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *CxEventSingleOrMultipleMultipleEvents) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"multipleEvents",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCxEventSingleOrMultipleMultipleEvents := _CxEventSingleOrMultipleMultipleEvents{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCxEventSingleOrMultipleMultipleEvents)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CxEventSingleOrMultipleMultipleEvents(varCxEventSingleOrMultipleMultipleEvents)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "multipleEvents")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCxEventSingleOrMultipleMultipleEvents struct {
@@ -122,5 +168,4 @@ func (v *NullableCxEventSingleOrMultipleMultipleEvents) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

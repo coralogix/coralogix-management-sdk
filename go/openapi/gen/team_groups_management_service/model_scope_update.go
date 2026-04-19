@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScopeUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopeUpdate{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ScopeUpdate{}
 // ScopeUpdate Update the scope assigned to the group. Either reference an existing scope by ID or clear the scope.
 type ScopeUpdate struct {
 	Action *ScopeUpdateAction `json:"action,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScopeUpdate ScopeUpdate
 
 // NewScopeUpdate instantiates a new ScopeUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ScopeUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScopeUpdate) UnmarshalJSON(data []byte) (err error) {
+	varScopeUpdate := _ScopeUpdate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varScopeUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScopeUpdate(varScopeUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScopeUpdate struct {
@@ -122,5 +155,4 @@ func (v *NullableScopeUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DemistoConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DemistoConfig{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &DemistoConfig{}
 type DemistoConfig struct {
 	Payload *string `json:"payload,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DemistoConfig DemistoConfig
 
 // NewDemistoConfig instantiates a new DemistoConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o DemistoConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DemistoConfig) UnmarshalJSON(data []byte) (err error) {
+	varDemistoConfig := _DemistoConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDemistoConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DemistoConfig(varDemistoConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "payload")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDemistoConfig struct {
@@ -158,5 +192,4 @@ func (v *NullableDemistoConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

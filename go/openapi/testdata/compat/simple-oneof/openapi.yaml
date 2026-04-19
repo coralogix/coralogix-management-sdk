@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: Simple OneOf Compat
+  version: 1.0.0
+paths:
+  /simple-oneof:
+    get:
+      operationId: getSimpleOneOf
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleOneOf"
+components:
+  schemas:
+    SimpleOneOf:
+      oneOf:
+        - $ref: "#/components/schemas/LogRulesVariant"
+        - $ref: "#/components/schemas/SpanRulesVariant"
+    LogRulesVariant:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - priority
+        - logRules
+      properties:
+        name:
+          type: string
+        priority:
+          type: string
+        logRules:
+          type: object
+          additionalProperties: true
+    SpanRulesVariant:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - priority
+        - spanRules
+      properties:
+        name:
+          type: string
+        priority:
+          type: string
+        spanRules:
+          type: object
+          additionalProperties: true

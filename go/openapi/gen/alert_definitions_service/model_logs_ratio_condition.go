@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsRatioCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsRatioCondition{}
@@ -23,7 +26,10 @@ type LogsRatioCondition struct {
 	// The threshold value for the alert condition
 	Threshold *float64 `json:"threshold,omitempty"`
 	TimeWindow *LogsRatioTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsRatioCondition LogsRatioCondition
 
 // NewLogsRatioCondition instantiates a new LogsRatioCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o LogsRatioCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsRatioCondition) UnmarshalJSON(data []byte) (err error) {
+	varLogsRatioCondition := _LogsRatioCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsRatioCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsRatioCondition(varLogsRatioCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conditionType")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsRatioCondition struct {
@@ -195,5 +230,4 @@ func (v *NullableLogsRatioCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

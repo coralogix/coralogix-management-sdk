@@ -11,23 +11,31 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionExecutionRequestCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionExecutionRequestCreate{}
 
 // ActionExecutionRequestCreate This data structure represents a request to execute an Action operation.
 type ActionExecutionRequestCreate struct {
-	Create *CreateActionRequest `json:"create,omitempty"`
+	Create CreateActionRequest `json:"create"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionExecutionRequestCreate ActionExecutionRequestCreate
 
 // NewActionExecutionRequestCreate instantiates a new ActionExecutionRequestCreate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActionExecutionRequestCreate() *ActionExecutionRequestCreate {
+func NewActionExecutionRequestCreate(create CreateActionRequest) *ActionExecutionRequestCreate {
 	this := ActionExecutionRequestCreate{}
+	this.Create = create
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewActionExecutionRequestCreateWithDefaults() *ActionExecutionRequestCreate
 	return &this
 }
 
-// GetCreate returns the Create field value if set, zero value otherwise.
+// GetCreate returns the Create field value
 func (o *ActionExecutionRequestCreate) GetCreate() CreateActionRequest {
-	if o == nil || IsNil(o.Create) {
+	if o == nil {
 		var ret CreateActionRequest
 		return ret
 	}
-	return *o.Create
+
+	return o.Create
 }
 
-// GetCreateOk returns a tuple with the Create field value if set, nil otherwise
+// GetCreateOk returns a tuple with the Create field value
 // and a boolean to check if the value has been set.
 func (o *ActionExecutionRequestCreate) GetCreateOk() (*CreateActionRequest, bool) {
-	if o == nil || IsNil(o.Create) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Create, true
+	return &o.Create, true
 }
 
-// HasCreate returns a boolean if a field has been set.
-func (o *ActionExecutionRequestCreate) HasCreate() bool {
-	if o != nil && !IsNil(o.Create) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreate gets a reference to the given CreateActionRequest and assigns it to the Create field.
+// SetCreate sets field value
 func (o *ActionExecutionRequestCreate) SetCreate(v CreateActionRequest) {
-	o.Create = &v
+	o.Create = v
 }
 
 func (o ActionExecutionRequestCreate) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o ActionExecutionRequestCreate) MarshalJSON() ([]byte, error) {
 
 func (o ActionExecutionRequestCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Create) {
-		toSerialize["create"] = o.Create
+	toSerialize["create"] = o.Create
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionExecutionRequestCreate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"create",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varActionExecutionRequestCreate := _ActionExecutionRequestCreate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionExecutionRequestCreate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionExecutionRequestCreate(varActionExecutionRequestCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionExecutionRequestCreate struct {
@@ -122,5 +168,4 @@ func (v *NullableActionExecutionRequestCreate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

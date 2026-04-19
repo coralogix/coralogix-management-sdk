@@ -11,23 +11,31 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ValidateBucketRequestIbm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValidateBucketRequestIbm{}
 
 // ValidateBucketRequestIbm This data structure is used to validate a bucket.
 type ValidateBucketRequestIbm struct {
-	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
+	Ibm IbmConfigV2 `json:"ibm"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ValidateBucketRequestIbm ValidateBucketRequestIbm
 
 // NewValidateBucketRequestIbm instantiates a new ValidateBucketRequestIbm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidateBucketRequestIbm() *ValidateBucketRequestIbm {
+func NewValidateBucketRequestIbm(ibm IbmConfigV2) *ValidateBucketRequestIbm {
 	this := ValidateBucketRequestIbm{}
+	this.Ibm = ibm
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewValidateBucketRequestIbmWithDefaults() *ValidateBucketRequestIbm {
 	return &this
 }
 
-// GetIbm returns the Ibm field value if set, zero value otherwise.
+// GetIbm returns the Ibm field value
 func (o *ValidateBucketRequestIbm) GetIbm() IbmConfigV2 {
-	if o == nil || IsNil(o.Ibm) {
+	if o == nil {
 		var ret IbmConfigV2
 		return ret
 	}
-	return *o.Ibm
+
+	return o.Ibm
 }
 
-// GetIbmOk returns a tuple with the Ibm field value if set, nil otherwise
+// GetIbmOk returns a tuple with the Ibm field value
 // and a boolean to check if the value has been set.
 func (o *ValidateBucketRequestIbm) GetIbmOk() (*IbmConfigV2, bool) {
-	if o == nil || IsNil(o.Ibm) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ibm, true
+	return &o.Ibm, true
 }
 
-// HasIbm returns a boolean if a field has been set.
-func (o *ValidateBucketRequestIbm) HasIbm() bool {
-	if o != nil && !IsNil(o.Ibm) {
-		return true
-	}
-
-	return false
-}
-
-// SetIbm gets a reference to the given IbmConfigV2 and assigns it to the Ibm field.
+// SetIbm sets field value
 func (o *ValidateBucketRequestIbm) SetIbm(v IbmConfigV2) {
-	o.Ibm = &v
+	o.Ibm = v
 }
 
 func (o ValidateBucketRequestIbm) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o ValidateBucketRequestIbm) MarshalJSON() ([]byte, error) {
 
 func (o ValidateBucketRequestIbm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Ibm) {
-		toSerialize["ibm"] = o.Ibm
+	toSerialize["ibm"] = o.Ibm
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ValidateBucketRequestIbm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ibm",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varValidateBucketRequestIbm := _ValidateBucketRequestIbm{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varValidateBucketRequestIbm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ValidateBucketRequestIbm(varValidateBucketRequestIbm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ibm")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableValidateBucketRequestIbm struct {
@@ -122,5 +168,4 @@ func (v *NullableValidateBucketRequestIbm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

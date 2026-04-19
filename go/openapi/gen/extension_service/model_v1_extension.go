@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1Extension type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Extension{}
@@ -30,7 +33,10 @@ type V1Extension struct {
 	Name *string `json:"name,omitempty"`
 	PermissionDeniedRevisions []ExtensionRevision `json:"permissionDeniedRevisions,omitempty"`
 	Revisions []ExtensionRevision `json:"revisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1Extension V1Extension
 
 // NewV1Extension instantiates a new V1Extension object
 // This constructor will assign default values to properties that have it defined,
@@ -444,7 +450,44 @@ func (o V1Extension) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Revisions) {
 		toSerialize["revisions"] = o.Revisions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1Extension) UnmarshalJSON(data []byte) (err error) {
+	varV1Extension := _V1Extension{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1Extension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1Extension(varV1Extension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "changelog")
+		delete(additionalProperties, "darkModeImage")
+		delete(additionalProperties, "deprecation")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "integrations")
+		delete(additionalProperties, "isHidden")
+		delete(additionalProperties, "keywords")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permissionDeniedRevisions")
+		delete(additionalProperties, "revisions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1Extension struct {
@@ -482,5 +525,4 @@ func (v *NullableV1Extension) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

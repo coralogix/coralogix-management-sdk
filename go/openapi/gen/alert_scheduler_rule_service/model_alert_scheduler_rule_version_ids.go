@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertSchedulerRuleVersionIds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleVersionIds{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AlertSchedulerRuleVersionIds{}
 // AlertSchedulerRuleVersionIds struct for AlertSchedulerRuleVersionIds
 type AlertSchedulerRuleVersionIds struct {
 	AlertSchedulerRuleVersionIds []string `json:"alertSchedulerRuleVersionIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertSchedulerRuleVersionIds AlertSchedulerRuleVersionIds
 
 // NewAlertSchedulerRuleVersionIds instantiates a new AlertSchedulerRuleVersionIds object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AlertSchedulerRuleVersionIds) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlertSchedulerRuleVersionIds) {
 		toSerialize["alertSchedulerRuleVersionIds"] = o.AlertSchedulerRuleVersionIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleVersionIds) UnmarshalJSON(data []byte) (err error) {
+	varAlertSchedulerRuleVersionIds := _AlertSchedulerRuleVersionIds{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleVersionIds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleVersionIds(varAlertSchedulerRuleVersionIds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerRuleVersionIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertSchedulerRuleVersionIds struct {
@@ -122,5 +155,4 @@ func (v *NullableAlertSchedulerRuleVersionIds) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAlertEventResponseSinglePermutation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertEventResponseSinglePermutation{}
@@ -21,15 +25,19 @@ var _ MappedNullable = &GetAlertEventResponseSinglePermutation{}
 type GetAlertEventResponseSinglePermutation struct {
 	Id *string `json:"id,omitempty"`
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
-	SinglePermutation *AlertEvent `json:"singlePermutation,omitempty"`
+	SinglePermutation AlertEvent `json:"singlePermutation"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAlertEventResponseSinglePermutation GetAlertEventResponseSinglePermutation
 
 // NewGetAlertEventResponseSinglePermutation instantiates a new GetAlertEventResponseSinglePermutation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAlertEventResponseSinglePermutation() *GetAlertEventResponseSinglePermutation {
+func NewGetAlertEventResponseSinglePermutation(singlePermutation AlertEvent) *GetAlertEventResponseSinglePermutation {
 	this := GetAlertEventResponseSinglePermutation{}
+	this.SinglePermutation = singlePermutation
 	return &this
 }
 
@@ -105,36 +113,28 @@ func (o *GetAlertEventResponseSinglePermutation) SetPagination(v AlertsV3Paginat
 	o.Pagination = &v
 }
 
-// GetSinglePermutation returns the SinglePermutation field value if set, zero value otherwise.
+// GetSinglePermutation returns the SinglePermutation field value
 func (o *GetAlertEventResponseSinglePermutation) GetSinglePermutation() AlertEvent {
-	if o == nil || IsNil(o.SinglePermutation) {
+	if o == nil {
 		var ret AlertEvent
 		return ret
 	}
-	return *o.SinglePermutation
+
+	return o.SinglePermutation
 }
 
-// GetSinglePermutationOk returns a tuple with the SinglePermutation field value if set, nil otherwise
+// GetSinglePermutationOk returns a tuple with the SinglePermutation field value
 // and a boolean to check if the value has been set.
 func (o *GetAlertEventResponseSinglePermutation) GetSinglePermutationOk() (*AlertEvent, bool) {
-	if o == nil || IsNil(o.SinglePermutation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SinglePermutation, true
+	return &o.SinglePermutation, true
 }
 
-// HasSinglePermutation returns a boolean if a field has been set.
-func (o *GetAlertEventResponseSinglePermutation) HasSinglePermutation() bool {
-	if o != nil && !IsNil(o.SinglePermutation) {
-		return true
-	}
-
-	return false
-}
-
-// SetSinglePermutation gets a reference to the given AlertEvent and assigns it to the SinglePermutation field.
+// SetSinglePermutation sets field value
 func (o *GetAlertEventResponseSinglePermutation) SetSinglePermutation(v AlertEvent) {
-	o.SinglePermutation = &v
+	o.SinglePermutation = v
 }
 
 func (o GetAlertEventResponseSinglePermutation) MarshalJSON() ([]byte, error) {
@@ -153,10 +153,58 @@ func (o GetAlertEventResponseSinglePermutation) ToMap() (map[string]interface{},
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
-	if !IsNil(o.SinglePermutation) {
-		toSerialize["singlePermutation"] = o.SinglePermutation
+	toSerialize["singlePermutation"] = o.SinglePermutation
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAlertEventResponseSinglePermutation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singlePermutation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGetAlertEventResponseSinglePermutation := _GetAlertEventResponseSinglePermutation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAlertEventResponseSinglePermutation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAlertEventResponseSinglePermutation(varGetAlertEventResponseSinglePermutation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "pagination")
+		delete(additionalProperties, "singlePermutation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAlertEventResponseSinglePermutation struct {
@@ -194,5 +242,4 @@ func (v *NullableGetAlertEventResponseSinglePermutation) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

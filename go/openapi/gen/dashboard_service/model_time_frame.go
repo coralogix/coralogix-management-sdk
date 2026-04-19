@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeFrame{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &TimeFrame{}
 type TimeFrame struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeFrame TimeFrame
 
 // NewTimeFrame instantiates a new TimeFrame object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o TimeFrame) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.To) {
 		toSerialize["to"] = o.To
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeFrame) UnmarshalJSON(data []byte) (err error) {
+	varTimeFrame := _TimeFrame{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeFrame)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeFrame(varTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeFrame struct {
@@ -159,5 +193,4 @@ func (v *NullableTimeFrame) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

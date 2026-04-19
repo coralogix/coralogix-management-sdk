@@ -11,10 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // IncidentFieldOneOf - struct for IncidentFieldOneOf
 type IncidentFieldOneOf struct {
@@ -114,7 +117,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IncidentFieldOneOfApplicationName
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfApplicationName)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfApplicationName)
 	if err == nil {
 		jsonIncidentFieldOneOfApplicationName, _ := json.Marshal(dst.IncidentFieldOneOfApplicationName)
 		if string(jsonIncidentFieldOneOfApplicationName) == "{}" { // empty struct
@@ -131,7 +134,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfClosedAt
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfClosedAt)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfClosedAt)
 	if err == nil {
 		jsonIncidentFieldOneOfClosedAt, _ := json.Marshal(dst.IncidentFieldOneOfClosedAt)
 		if string(jsonIncidentFieldOneOfClosedAt) == "{}" { // empty struct
@@ -148,7 +151,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfCreatedAt
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfCreatedAt)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfCreatedAt)
 	if err == nil {
 		jsonIncidentFieldOneOfCreatedAt, _ := json.Marshal(dst.IncidentFieldOneOfCreatedAt)
 		if string(jsonIncidentFieldOneOfCreatedAt) == "{}" { // empty struct
@@ -165,7 +168,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfDuration
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfDuration)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfDuration)
 	if err == nil {
 		jsonIncidentFieldOneOfDuration, _ := json.Marshal(dst.IncidentFieldOneOfDuration)
 		if string(jsonIncidentFieldOneOfDuration) == "{}" { // empty struct
@@ -182,7 +185,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfId
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfId)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfId)
 	if err == nil {
 		jsonIncidentFieldOneOfId, _ := json.Marshal(dst.IncidentFieldOneOfId)
 		if string(jsonIncidentFieldOneOfId) == "{}" { // empty struct
@@ -199,7 +202,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfLastStateUpdateTime
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfLastStateUpdateTime)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfLastStateUpdateTime)
 	if err == nil {
 		jsonIncidentFieldOneOfLastStateUpdateTime, _ := json.Marshal(dst.IncidentFieldOneOfLastStateUpdateTime)
 		if string(jsonIncidentFieldOneOfLastStateUpdateTime) == "{}" { // empty struct
@@ -216,7 +219,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfName
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfName)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfName)
 	if err == nil {
 		jsonIncidentFieldOneOfName, _ := json.Marshal(dst.IncidentFieldOneOfName)
 		if string(jsonIncidentFieldOneOfName) == "{}" { // empty struct
@@ -233,7 +236,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfSeverity
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfSeverity)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfSeverity)
 	if err == nil {
 		jsonIncidentFieldOneOfSeverity, _ := json.Marshal(dst.IncidentFieldOneOfSeverity)
 		if string(jsonIncidentFieldOneOfSeverity) == "{}" { // empty struct
@@ -250,7 +253,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfState
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfState)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfState)
 	if err == nil {
 		jsonIncidentFieldOneOfState, _ := json.Marshal(dst.IncidentFieldOneOfState)
 		if string(jsonIncidentFieldOneOfState) == "{}" { // empty struct
@@ -267,7 +270,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfStatus
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfStatus)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfStatus)
 	if err == nil {
 		jsonIncidentFieldOneOfStatus, _ := json.Marshal(dst.IncidentFieldOneOfStatus)
 		if string(jsonIncidentFieldOneOfStatus) == "{}" { // empty struct
@@ -284,7 +287,7 @@ func (dst *IncidentFieldOneOf) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentFieldOneOfSubsystemName
-	err = newStrictDecoder(data).Decode(&dst.IncidentFieldOneOfSubsystemName)
+	err = json.Unmarshal(data, &dst.IncidentFieldOneOfSubsystemName)
 	if err == nil {
 		jsonIncidentFieldOneOfSubsystemName, _ := json.Marshal(dst.IncidentFieldOneOfSubsystemName)
 		if string(jsonIncidentFieldOneOfSubsystemName) == "{}" { // empty struct
@@ -509,5 +512,4 @@ func (v *NullableIncidentFieldOneOf) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

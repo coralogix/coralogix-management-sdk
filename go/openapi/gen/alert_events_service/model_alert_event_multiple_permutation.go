@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertEventMultiplePermutation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertEventMultiplePermutation{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AlertEventMultiplePermutation{}
 // AlertEventMultiplePermutation struct for AlertEventMultiplePermutation
 type AlertEventMultiplePermutation struct {
 	AlertEventMultiplePermutation []AlertEvent `json:"alertEventMultiplePermutation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertEventMultiplePermutation AlertEventMultiplePermutation
 
 // NewAlertEventMultiplePermutation instantiates a new AlertEventMultiplePermutation object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AlertEventMultiplePermutation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlertEventMultiplePermutation) {
 		toSerialize["alertEventMultiplePermutation"] = o.AlertEventMultiplePermutation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertEventMultiplePermutation) UnmarshalJSON(data []byte) (err error) {
+	varAlertEventMultiplePermutation := _AlertEventMultiplePermutation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertEventMultiplePermutation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertEventMultiplePermutation(varAlertEventMultiplePermutation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertEventMultiplePermutation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertEventMultiplePermutation struct {
@@ -122,5 +155,4 @@ func (v *NullableAlertEventMultiplePermutation) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

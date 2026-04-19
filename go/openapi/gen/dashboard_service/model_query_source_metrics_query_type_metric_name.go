@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuerySourceMetricsQueryTypeMetricName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryTypeMetricName{}
 
 // QuerySourceMetricsQueryTypeMetricName struct for QuerySourceMetricsQueryTypeMetricName
 type QuerySourceMetricsQueryTypeMetricName struct {
-	MetricName *QuerySourceMetricsQueryTypeMetricName `json:"metricName,omitempty"`
+	MetricRegex *string `json:"metricRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuerySourceMetricsQueryTypeMetricName QuerySourceMetricsQueryTypeMetricName
 
 // NewQuerySourceMetricsQueryTypeMetricName instantiates a new QuerySourceMetricsQueryTypeMetricName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQuerySourceMetricsQueryTypeMetricNameWithDefaults() *QuerySourceMetricsQ
 	return &this
 }
 
-// GetMetricName returns the MetricName field value if set, zero value otherwise.
-func (o *QuerySourceMetricsQueryTypeMetricName) GetMetricName() QuerySourceMetricsQueryTypeMetricName {
-	if o == nil || IsNil(o.MetricName) {
-		var ret QuerySourceMetricsQueryTypeMetricName
+// GetMetricRegex returns the MetricRegex field value if set, zero value otherwise.
+func (o *QuerySourceMetricsQueryTypeMetricName) GetMetricRegex() string {
+	if o == nil || IsNil(o.MetricRegex) {
+		var ret string
 		return ret
 	}
-	return *o.MetricName
+	return *o.MetricRegex
 }
 
-// GetMetricNameOk returns a tuple with the MetricName field value if set, nil otherwise
+// GetMetricRegexOk returns a tuple with the MetricRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QuerySourceMetricsQueryTypeMetricName) GetMetricNameOk() (*QuerySourceMetricsQueryTypeMetricName, bool) {
-	if o == nil || IsNil(o.MetricName) {
+func (o *QuerySourceMetricsQueryTypeMetricName) GetMetricRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.MetricRegex) {
 		return nil, false
 	}
-	return o.MetricName, true
+	return o.MetricRegex, true
 }
 
-// HasMetricName returns a boolean if a field has been set.
-func (o *QuerySourceMetricsQueryTypeMetricName) HasMetricName() bool {
-	if o != nil && !IsNil(o.MetricName) {
+// HasMetricRegex returns a boolean if a field has been set.
+func (o *QuerySourceMetricsQueryTypeMetricName) HasMetricRegex() bool {
+	if o != nil && !IsNil(o.MetricRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetMetricName gets a reference to the given QuerySourceMetricsQueryTypeMetricName and assigns it to the MetricName field.
-func (o *QuerySourceMetricsQueryTypeMetricName) SetMetricName(v QuerySourceMetricsQueryTypeMetricName) {
-	o.MetricName = &v
+// SetMetricRegex gets a reference to the given string and assigns it to the MetricRegex field.
+func (o *QuerySourceMetricsQueryTypeMetricName) SetMetricRegex(v string) {
+	o.MetricRegex = &v
 }
 
 func (o QuerySourceMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QuerySourceMetricsQueryTypeMetricName) MarshalJSON() ([]byte, error) {
 
 func (o QuerySourceMetricsQueryTypeMetricName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricName) {
-		toSerialize["metricName"] = o.MetricName
+	if !IsNil(o.MetricRegex) {
+		toSerialize["metricRegex"] = o.MetricRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuerySourceMetricsQueryTypeMetricName) UnmarshalJSON(data []byte) (err error) {
+	varQuerySourceMetricsQueryTypeMetricName := _QuerySourceMetricsQueryTypeMetricName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuerySourceMetricsQueryTypeMetricName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuerySourceMetricsQueryTypeMetricName(varQuerySourceMetricsQueryTypeMetricName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuerySourceMetricsQueryTypeMetricName struct {
@@ -122,5 +155,4 @@ func (v *NullableQuerySourceMetricsQueryTypeMetricName) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

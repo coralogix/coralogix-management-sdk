@@ -11,10 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScopeUpdateActionClear type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopeUpdateActionClear{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &ScopeUpdateActionClear{}
 // ScopeUpdateActionClear struct for ScopeUpdateActionClear
 type ScopeUpdateActionClear struct {
 	ActionType string `json:"actionType"`
-	Clear *ClearScope `json:"clear,omitempty"`
+	Clear ClearScope `json:"clear"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScopeUpdateActionClear ScopeUpdateActionClear
@@ -31,9 +34,10 @@ type _ScopeUpdateActionClear ScopeUpdateActionClear
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewScopeUpdateActionClear(actionType string) *ScopeUpdateActionClear {
+func NewScopeUpdateActionClear(actionType string, clear ClearScope) *ScopeUpdateActionClear {
 	this := ScopeUpdateActionClear{}
 	this.ActionType = actionType
+	this.Clear = clear
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *ScopeUpdateActionClear) SetActionType(v string) {
 	o.ActionType = v
 }
 
-// GetClear returns the Clear field value if set, zero value otherwise.
+// GetClear returns the Clear field value
 func (o *ScopeUpdateActionClear) GetClear() ClearScope {
-	if o == nil || IsNil(o.Clear) {
+	if o == nil {
 		var ret ClearScope
 		return ret
 	}
-	return *o.Clear
+
+	return o.Clear
 }
 
-// GetClearOk returns a tuple with the Clear field value if set, nil otherwise
+// GetClearOk returns a tuple with the Clear field value
 // and a boolean to check if the value has been set.
 func (o *ScopeUpdateActionClear) GetClearOk() (*ClearScope, bool) {
-	if o == nil || IsNil(o.Clear) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Clear, true
+	return &o.Clear, true
 }
 
-// HasClear returns a boolean if a field has been set.
-func (o *ScopeUpdateActionClear) HasClear() bool {
-	if o != nil && !IsNil(o.Clear) {
-		return true
-	}
-
-	return false
-}
-
-// SetClear gets a reference to the given ClearScope and assigns it to the Clear field.
+// SetClear sets field value
 func (o *ScopeUpdateActionClear) SetClear(v ClearScope) {
-	o.Clear = &v
+	o.Clear = v
 }
 
 func (o ScopeUpdateActionClear) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o ScopeUpdateActionClear) MarshalJSON() ([]byte, error) {
 func (o ScopeUpdateActionClear) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["actionType"] = o.ActionType
-	if !IsNil(o.Clear) {
-		toSerialize["clear"] = o.Clear
+	toSerialize["clear"] = o.Clear
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *ScopeUpdateActionClear) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"actionType",
+		"clear",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -143,7 +143,6 @@ func (o *ScopeUpdateActionClear) UnmarshalJSON(data []byte) (err error) {
 	varScopeUpdateActionClear := _ScopeUpdateActionClear{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varScopeUpdateActionClear)
 
 	if err != nil {
@@ -151,6 +150,14 @@ func (o *ScopeUpdateActionClear) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ScopeUpdateActionClear(varScopeUpdateActionClear)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actionType")
+		delete(additionalProperties, "clear")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +197,4 @@ func (v *NullableScopeUpdateActionClear) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

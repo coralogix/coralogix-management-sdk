@@ -11,23 +11,31 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ValidateBucketRequestS3 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValidateBucketRequestS3{}
 
 // ValidateBucketRequestS3 This data structure is used to validate a bucket.
 type ValidateBucketRequestS3 struct {
-	S3 *S3Config `json:"s3,omitempty"`
+	S3 S3Config `json:"s3"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ValidateBucketRequestS3 ValidateBucketRequestS3
 
 // NewValidateBucketRequestS3 instantiates a new ValidateBucketRequestS3 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValidateBucketRequestS3() *ValidateBucketRequestS3 {
+func NewValidateBucketRequestS3(s3 S3Config) *ValidateBucketRequestS3 {
 	this := ValidateBucketRequestS3{}
+	this.S3 = s3
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewValidateBucketRequestS3WithDefaults() *ValidateBucketRequestS3 {
 	return &this
 }
 
-// GetS3 returns the S3 field value if set, zero value otherwise.
+// GetS3 returns the S3 field value
 func (o *ValidateBucketRequestS3) GetS3() S3Config {
-	if o == nil || IsNil(o.S3) {
+	if o == nil {
 		var ret S3Config
 		return ret
 	}
-	return *o.S3
+
+	return o.S3
 }
 
-// GetS3Ok returns a tuple with the S3 field value if set, nil otherwise
+// GetS3Ok returns a tuple with the S3 field value
 // and a boolean to check if the value has been set.
 func (o *ValidateBucketRequestS3) GetS3Ok() (*S3Config, bool) {
-	if o == nil || IsNil(o.S3) {
+	if o == nil {
 		return nil, false
 	}
-	return o.S3, true
+	return &o.S3, true
 }
 
-// HasS3 returns a boolean if a field has been set.
-func (o *ValidateBucketRequestS3) HasS3() bool {
-	if o != nil && !IsNil(o.S3) {
-		return true
-	}
-
-	return false
-}
-
-// SetS3 gets a reference to the given S3Config and assigns it to the S3 field.
+// SetS3 sets field value
 func (o *ValidateBucketRequestS3) SetS3(v S3Config) {
-	o.S3 = &v
+	o.S3 = v
 }
 
 func (o ValidateBucketRequestS3) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o ValidateBucketRequestS3) MarshalJSON() ([]byte, error) {
 
 func (o ValidateBucketRequestS3) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.S3) {
-		toSerialize["s3"] = o.S3
+	toSerialize["s3"] = o.S3
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ValidateBucketRequestS3) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"s3",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varValidateBucketRequestS3 := _ValidateBucketRequestS3{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varValidateBucketRequestS3)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ValidateBucketRequestS3(varValidateBucketRequestS3)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "s3")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableValidateBucketRequestS3 struct {
@@ -122,5 +168,4 @@ func (v *NullableValidateBucketRequestS3) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

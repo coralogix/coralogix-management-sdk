@@ -11,8 +11,11 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the S3Config type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &S3Config{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &S3Config{}
 type S3Config struct {
 	Bucket *string `json:"bucket,omitempty"`
 	Region *string `json:"region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _S3Config S3Config
 
 // NewS3Config instantiates a new S3Config object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o S3Config) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *S3Config) UnmarshalJSON(data []byte) (err error) {
+	varS3Config := _S3Config{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varS3Config)
+
+	if err != nil {
+		return err
+	}
+
+	*o = S3Config(varS3Config)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bucket")
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableS3Config struct {
@@ -158,5 +192,4 @@ func (v *NullableS3Config) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

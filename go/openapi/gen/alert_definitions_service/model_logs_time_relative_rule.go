@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsTimeRelativeRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsTimeRelativeRule{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &LogsTimeRelativeRule{}
 type LogsTimeRelativeRule struct {
 	Condition *LogsTimeRelativeCondition `json:"condition,omitempty"`
 	Override *AlertDefOverride `json:"override,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsTimeRelativeRule LogsTimeRelativeRule
 
 // NewLogsTimeRelativeRule instantiates a new LogsTimeRelativeRule object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o LogsTimeRelativeRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Override) {
 		toSerialize["override"] = o.Override
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsTimeRelativeRule) UnmarshalJSON(data []byte) (err error) {
+	varLogsTimeRelativeRule := _LogsTimeRelativeRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsTimeRelativeRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsTimeRelativeRule(varLogsTimeRelativeRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		delete(additionalProperties, "override")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsTimeRelativeRule struct {
@@ -158,5 +192,4 @@ func (v *NullableLogsTimeRelativeRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

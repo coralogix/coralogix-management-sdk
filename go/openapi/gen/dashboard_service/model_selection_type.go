@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // SelectionType the model 'SelectionType'
 type SelectionType string

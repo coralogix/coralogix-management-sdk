@@ -1,0 +1,37 @@
+openapi: 3.0.3
+info:
+  title: Ambiguous OneOf Compat
+  version: 1.0.0
+paths:
+  /ambiguous-oneof:
+    get:
+      operationId: getAmbiguousOneOf
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AmbiguousOneOf"
+components:
+  schemas:
+    AmbiguousOneOf:
+      oneOf:
+        - $ref: "#/components/schemas/AmbiguousLeft"
+        - $ref: "#/components/schemas/AmbiguousRight"
+    AmbiguousLeft:
+      type: object
+      additionalProperties: false
+      required:
+        - value
+      properties:
+        value:
+          type: string
+    AmbiguousRight:
+      type: object
+      additionalProperties: false
+      required:
+        - value
+      properties:
+        value:
+          type: string

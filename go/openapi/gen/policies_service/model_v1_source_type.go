@@ -11,9 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V1SourceType the model 'V1SourceType'
 type V1SourceType string

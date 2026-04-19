@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotificationRouting type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationRouting{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &NotificationRouting{}
 // NotificationRouting struct for NotificationRouting
 type NotificationRouting struct {
 	ConfigOverrides *V3SourceOverrides `json:"configOverrides,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationRouting NotificationRouting
 
 // NewNotificationRouting instantiates a new NotificationRouting object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o NotificationRouting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigOverrides) {
 		toSerialize["configOverrides"] = o.ConfigOverrides
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationRouting) UnmarshalJSON(data []byte) (err error) {
+	varNotificationRouting := _NotificationRouting{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationRouting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationRouting(varNotificationRouting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configOverrides")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationRouting struct {
@@ -122,5 +155,4 @@ func (v *NullableNotificationRouting) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

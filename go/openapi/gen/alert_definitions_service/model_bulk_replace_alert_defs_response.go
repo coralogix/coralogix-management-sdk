@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BulkReplaceAlertDefsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BulkReplaceAlertDefsResponse{}
@@ -23,7 +26,10 @@ type BulkReplaceAlertDefsResponse struct {
 	FailedToReplaceAlertDefs []FailedToReplaceAlertDef `json:"failedToReplaceAlertDefs,omitempty"`
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	SkippedIds []string `json:"skippedIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BulkReplaceAlertDefsResponse BulkReplaceAlertDefsResponse
 
 // NewBulkReplaceAlertDefsResponse instantiates a new BulkReplaceAlertDefsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o BulkReplaceAlertDefsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkippedIds) {
 		toSerialize["skippedIds"] = o.SkippedIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BulkReplaceAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
+	varBulkReplaceAlertDefsResponse := _BulkReplaceAlertDefsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBulkReplaceAlertDefsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BulkReplaceAlertDefsResponse(varBulkReplaceAlertDefsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDefs")
+		delete(additionalProperties, "failedToReplaceAlertDefs")
+		delete(additionalProperties, "notFoundIds")
+		delete(additionalProperties, "skippedIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBulkReplaceAlertDefsResponse struct {
@@ -230,5 +266,4 @@ func (v *NullableBulkReplaceAlertDefsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

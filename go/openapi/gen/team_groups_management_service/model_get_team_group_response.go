@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetTeamGroupResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTeamGroupResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetTeamGroupResponse{}
 // GetTeamGroupResponse Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration.
 type GetTeamGroupResponse struct {
 	Group *TeamGroup `json:"group,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTeamGroupResponse GetTeamGroupResponse
 
 // NewGetTeamGroupResponse instantiates a new GetTeamGroupResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetTeamGroupResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Group) {
 		toSerialize["group"] = o.Group
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTeamGroupResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetTeamGroupResponse := _GetTeamGroupResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetTeamGroupResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTeamGroupResponse(varGetTeamGroupResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTeamGroupResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetTeamGroupResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the XAxisByTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &XAxisByTime{}
@@ -23,7 +26,10 @@ type XAxisByTime struct {
 	BucketsPresented *int32 `json:"bucketsPresented,omitempty"`
 	// Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)
 	Interval *string `json:"interval,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _XAxisByTime XAxisByTime
 
 // NewXAxisByTime instantiates a new XAxisByTime object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o XAxisByTime) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Interval) {
 		toSerialize["interval"] = o.Interval
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *XAxisByTime) UnmarshalJSON(data []byte) (err error) {
+	varXAxisByTime := _XAxisByTime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varXAxisByTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = XAxisByTime(varXAxisByTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bucketsPresented")
+		delete(additionalProperties, "interval")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableXAxisByTime struct {
@@ -160,5 +194,4 @@ func (v *NullableXAxisByTime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

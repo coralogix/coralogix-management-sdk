@@ -8,9 +8,6 @@ client.go
 configuration.go
 git_push.sh
 model_batch_get_event_response.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_cx_event.go
 model_cx_event_array.go
@@ -34,8 +31,6 @@ model_filters.go
 model_get_events_statistics_response.go
 model_list_alert_events_response.go
 model_list_events_count_response.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_timestamp_range.go
 model_v3_filter_operator.go

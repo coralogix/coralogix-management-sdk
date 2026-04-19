@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // HorizontalBarChartYAxisViewBy - struct for HorizontalBarChartYAxisViewBy
 type HorizontalBarChartYAxisViewBy struct {
@@ -42,7 +45,7 @@ func (dst *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into HorizontalBarChartYAxisViewByCategory
-	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartYAxisViewByCategory)
+	err = json.Unmarshal(data, &dst.HorizontalBarChartYAxisViewByCategory)
 	if err == nil {
 		jsonHorizontalBarChartYAxisViewByCategory, _ := json.Marshal(dst.HorizontalBarChartYAxisViewByCategory)
 		if string(jsonHorizontalBarChartYAxisViewByCategory) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *HorizontalBarChartYAxisViewBy) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HorizontalBarChartYAxisViewByValue
-	err = newStrictDecoder(data).Decode(&dst.HorizontalBarChartYAxisViewByValue)
+	err = json.Unmarshal(data, &dst.HorizontalBarChartYAxisViewByValue)
 	if err == nil {
 		jsonHorizontalBarChartYAxisViewByValue, _ := json.Marshal(dst.HorizontalBarChartYAxisViewByValue)
 		if string(jsonHorizontalBarChartYAxisViewByValue) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableHorizontalBarChartYAxisViewBy) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,7 +11,6 @@
           "Events Service"
         ],
         "summary": "List Alert Events",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -149,7 +148,6 @@
           "Events Service"
         ],
         "summary": "List Events",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -273,7 +271,6 @@
           "Events Service"
         ],
         "summary": "List Events Count",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -359,7 +356,6 @@
           "Events Service"
         ],
         "summary": "Batch Get Event",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -464,7 +460,6 @@
           "Events Service"
         ],
         "summary": "Get Events Statistics",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -550,7 +545,6 @@
           "Events Service"
         ],
         "summary": "Get Event",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -660,33 +654,6 @@
           }
         }
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "CxEvent": {
         "externalDocs": {
           "description": "Find out more about events",
@@ -790,7 +757,9 @@
             "$ref": "#/components/schemas/CxEventArray"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "multipleEvents"
+        ]
       },
       "CxEventSingleOrMultipleSingleEvent": {
         "externalDocs": {
@@ -804,7 +773,9 @@
             "$ref": "#/components/schemas/CxEvent"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "singleEvent"
+        ]
       },
       "FieldGroup": {
         "type": "object",
@@ -857,9 +828,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -879,9 +850,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -974,34 +945,6 @@
           "count",
           "reachedLimit"
         ]
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -1110,14 +1053,6 @@
         "required": [
           "events"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

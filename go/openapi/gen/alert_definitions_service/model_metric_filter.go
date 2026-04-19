@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricFilter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MetricFilter{}
 type MetricFilter struct {
 	// A PromQL filter for metrics
 	Promql *string `json:"promql,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricFilter MetricFilter
 
 // NewMetricFilter instantiates a new MetricFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o MetricFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Promql) {
 		toSerialize["promql"] = o.Promql
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricFilter) UnmarshalJSON(data []byte) (err error) {
+	varMetricFilter := _MetricFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricFilter(varMetricFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "promql")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricFilter struct {
@@ -123,5 +156,4 @@ func (v *NullableMetricFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

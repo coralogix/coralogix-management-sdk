@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricTimeWindowMetricTimeWindowDynamicDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricTimeWindowMetricTimeWindowDynamicDuration{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &MetricTimeWindowMetricTimeWindowDynamicDuration{}
 // MetricTimeWindowMetricTimeWindowDynamicDuration struct for MetricTimeWindowMetricTimeWindowDynamicDuration
 type MetricTimeWindowMetricTimeWindowDynamicDuration struct {
 	// The time window as a dynamic value
-	MetricTimeWindowDynamicDuration *string `json:"metricTimeWindowDynamicDuration,omitempty"`
+	MetricTimeWindowDynamicDuration string `json:"metricTimeWindowDynamicDuration"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricTimeWindowMetricTimeWindowDynamicDuration MetricTimeWindowMetricTimeWindowDynamicDuration
 
 // NewMetricTimeWindowMetricTimeWindowDynamicDuration instantiates a new MetricTimeWindowMetricTimeWindowDynamicDuration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricTimeWindowMetricTimeWindowDynamicDuration() *MetricTimeWindowMetricTimeWindowDynamicDuration {
+func NewMetricTimeWindowMetricTimeWindowDynamicDuration(metricTimeWindowDynamicDuration string) *MetricTimeWindowMetricTimeWindowDynamicDuration {
 	this := MetricTimeWindowMetricTimeWindowDynamicDuration{}
+	this.MetricTimeWindowDynamicDuration = metricTimeWindowDynamicDuration
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewMetricTimeWindowMetricTimeWindowDynamicDurationWithDefaults() *MetricTim
 	return &this
 }
 
-// GetMetricTimeWindowDynamicDuration returns the MetricTimeWindowDynamicDuration field value if set, zero value otherwise.
+// GetMetricTimeWindowDynamicDuration returns the MetricTimeWindowDynamicDuration field value
 func (o *MetricTimeWindowMetricTimeWindowDynamicDuration) GetMetricTimeWindowDynamicDuration() string {
-	if o == nil || IsNil(o.MetricTimeWindowDynamicDuration) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MetricTimeWindowDynamicDuration
+
+	return o.MetricTimeWindowDynamicDuration
 }
 
-// GetMetricTimeWindowDynamicDurationOk returns a tuple with the MetricTimeWindowDynamicDuration field value if set, nil otherwise
+// GetMetricTimeWindowDynamicDurationOk returns a tuple with the MetricTimeWindowDynamicDuration field value
 // and a boolean to check if the value has been set.
 func (o *MetricTimeWindowMetricTimeWindowDynamicDuration) GetMetricTimeWindowDynamicDurationOk() (*string, bool) {
-	if o == nil || IsNil(o.MetricTimeWindowDynamicDuration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricTimeWindowDynamicDuration, true
+	return &o.MetricTimeWindowDynamicDuration, true
 }
 
-// HasMetricTimeWindowDynamicDuration returns a boolean if a field has been set.
-func (o *MetricTimeWindowMetricTimeWindowDynamicDuration) HasMetricTimeWindowDynamicDuration() bool {
-	if o != nil && !IsNil(o.MetricTimeWindowDynamicDuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricTimeWindowDynamicDuration gets a reference to the given string and assigns it to the MetricTimeWindowDynamicDuration field.
+// SetMetricTimeWindowDynamicDuration sets field value
 func (o *MetricTimeWindowMetricTimeWindowDynamicDuration) SetMetricTimeWindowDynamicDuration(v string) {
-	o.MetricTimeWindowDynamicDuration = &v
+	o.MetricTimeWindowDynamicDuration = v
 }
 
 func (o MetricTimeWindowMetricTimeWindowDynamicDuration) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o MetricTimeWindowMetricTimeWindowDynamicDuration) MarshalJSON() ([]byte, 
 
 func (o MetricTimeWindowMetricTimeWindowDynamicDuration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricTimeWindowDynamicDuration) {
-		toSerialize["metricTimeWindowDynamicDuration"] = o.MetricTimeWindowDynamicDuration
+	toSerialize["metricTimeWindowDynamicDuration"] = o.MetricTimeWindowDynamicDuration
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricTimeWindowMetricTimeWindowDynamicDuration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricTimeWindowDynamicDuration",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMetricTimeWindowMetricTimeWindowDynamicDuration := _MetricTimeWindowMetricTimeWindowDynamicDuration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricTimeWindowMetricTimeWindowDynamicDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricTimeWindowMetricTimeWindowDynamicDuration(varMetricTimeWindowMetricTimeWindowDynamicDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricTimeWindowDynamicDuration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricTimeWindowMetricTimeWindowDynamicDuration struct {
@@ -123,5 +169,4 @@ func (v *NullableMetricTimeWindowMetricTimeWindowDynamicDuration) UnmarshalJSON(
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

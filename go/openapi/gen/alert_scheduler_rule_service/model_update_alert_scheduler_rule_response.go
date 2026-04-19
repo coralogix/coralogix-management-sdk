@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateAlertSchedulerRuleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateAlertSchedulerRuleResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &UpdateAlertSchedulerRuleResponse{}
 // UpdateAlertSchedulerRuleResponse This is a response sent after creating an alert scheduler rule
 type UpdateAlertSchedulerRuleResponse struct {
 	AlertSchedulerRule AlertSchedulerRule `json:"alertSchedulerRule"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateAlertSchedulerRuleResponse UpdateAlertSchedulerRuleResponse
@@ -79,6 +82,11 @@ func (o UpdateAlertSchedulerRuleResponse) MarshalJSON() ([]byte, error) {
 func (o UpdateAlertSchedulerRuleResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertSchedulerRule"] = o.AlertSchedulerRule
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *UpdateAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err error
 	varUpdateAlertSchedulerRuleResponse := _UpdateAlertSchedulerRuleResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateAlertSchedulerRuleResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *UpdateAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = UpdateAlertSchedulerRuleResponse(varUpdateAlertSchedulerRuleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerRule")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableUpdateAlertSchedulerRuleResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

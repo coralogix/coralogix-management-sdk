@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventUnassignOperationalEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventUnassignOperationalEvent{}
@@ -24,9 +26,10 @@ type IncidentEventUnassignOperationalEvent struct {
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
-	OperationalEvent *IncidentEventOriginatorOperational `json:"operationalEvent,omitempty"`
+	OperationalEvent IncidentEventOriginatorOperational `json:"operationalEvent"`
 	OriginatorType OriginatorType `json:"originatorType"`
-	Unassign map[string]interface{} `json:"unassign,omitempty"`
+	Unassign map[string]interface{} `json:"unassign"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentEventUnassignOperationalEvent IncidentEventUnassignOperationalEvent
@@ -35,11 +38,13 @@ type _IncidentEventUnassignOperationalEvent IncidentEventUnassignOperationalEven
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentEventUnassignOperationalEvent(id string, incidentEventType IncidentEventType, originatorType OriginatorType) *IncidentEventUnassignOperationalEvent {
+func NewIncidentEventUnassignOperationalEvent(id string, incidentEventType IncidentEventType, operationalEvent IncidentEventOriginatorOperational, originatorType OriginatorType, unassign map[string]interface{}) *IncidentEventUnassignOperationalEvent {
 	this := IncidentEventUnassignOperationalEvent{}
 	this.Id = id
 	this.IncidentEventType = incidentEventType
+	this.OperationalEvent = operationalEvent
 	this.OriginatorType = originatorType
+	this.Unassign = unassign
 	return &this
 }
 
@@ -99,36 +104,28 @@ func (o *IncidentEventUnassignOperationalEvent) SetIncidentEventType(v IncidentE
 	o.IncidentEventType = v
 }
 
-// GetOperationalEvent returns the OperationalEvent field value if set, zero value otherwise.
+// GetOperationalEvent returns the OperationalEvent field value
 func (o *IncidentEventUnassignOperationalEvent) GetOperationalEvent() IncidentEventOriginatorOperational {
-	if o == nil || IsNil(o.OperationalEvent) {
+	if o == nil {
 		var ret IncidentEventOriginatorOperational
 		return ret
 	}
-	return *o.OperationalEvent
+
+	return o.OperationalEvent
 }
 
-// GetOperationalEventOk returns a tuple with the OperationalEvent field value if set, nil otherwise
+// GetOperationalEventOk returns a tuple with the OperationalEvent field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventUnassignOperationalEvent) GetOperationalEventOk() (*IncidentEventOriginatorOperational, bool) {
-	if o == nil || IsNil(o.OperationalEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OperationalEvent, true
+	return &o.OperationalEvent, true
 }
 
-// HasOperationalEvent returns a boolean if a field has been set.
-func (o *IncidentEventUnassignOperationalEvent) HasOperationalEvent() bool {
-	if o != nil && !IsNil(o.OperationalEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetOperationalEvent gets a reference to the given IncidentEventOriginatorOperational and assigns it to the OperationalEvent field.
+// SetOperationalEvent sets field value
 func (o *IncidentEventUnassignOperationalEvent) SetOperationalEvent(v IncidentEventOriginatorOperational) {
-	o.OperationalEvent = &v
+	o.OperationalEvent = v
 }
 
 // GetOriginatorType returns the OriginatorType field value
@@ -155,34 +152,26 @@ func (o *IncidentEventUnassignOperationalEvent) SetOriginatorType(v OriginatorTy
 	o.OriginatorType = v
 }
 
-// GetUnassign returns the Unassign field value if set, zero value otherwise.
+// GetUnassign returns the Unassign field value
 func (o *IncidentEventUnassignOperationalEvent) GetUnassign() map[string]interface{} {
-	if o == nil || IsNil(o.Unassign) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Unassign
 }
 
-// GetUnassignOk returns a tuple with the Unassign field value if set, nil otherwise
+// GetUnassignOk returns a tuple with the Unassign field value
 // and a boolean to check if the value has been set.
 func (o *IncidentEventUnassignOperationalEvent) GetUnassignOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Unassign) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Unassign, true
 }
 
-// HasUnassign returns a boolean if a field has been set.
-func (o *IncidentEventUnassignOperationalEvent) HasUnassign() bool {
-	if o != nil && !IsNil(o.Unassign) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnassign gets a reference to the given map[string]interface{} and assigns it to the Unassign field.
+// SetUnassign sets field value
 func (o *IncidentEventUnassignOperationalEvent) SetUnassign(v map[string]interface{}) {
 	o.Unassign = v
 }
@@ -199,13 +188,14 @@ func (o IncidentEventUnassignOperationalEvent) ToMap() (map[string]interface{}, 
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["incidentEventType"] = o.IncidentEventType
-	if !IsNil(o.OperationalEvent) {
-		toSerialize["operationalEvent"] = o.OperationalEvent
-	}
+	toSerialize["operationalEvent"] = o.OperationalEvent
 	toSerialize["originatorType"] = o.OriginatorType
-	if !IsNil(o.Unassign) {
-		toSerialize["unassign"] = o.Unassign
+	toSerialize["unassign"] = o.Unassign
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -216,7 +206,9 @@ func (o *IncidentEventUnassignOperationalEvent) UnmarshalJSON(data []byte) (err 
 	requiredProperties := []string{
 		"id",
 		"incidentEventType",
+		"operationalEvent",
 		"originatorType",
+		"unassign",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -236,7 +228,6 @@ func (o *IncidentEventUnassignOperationalEvent) UnmarshalJSON(data []byte) (err 
 	varIncidentEventUnassignOperationalEvent := _IncidentEventUnassignOperationalEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentEventUnassignOperationalEvent)
 
 	if err != nil {
@@ -244,6 +235,17 @@ func (o *IncidentEventUnassignOperationalEvent) UnmarshalJSON(data []byte) (err 
 	}
 
 	*o = IncidentEventUnassignOperationalEvent(varIncidentEventUnassignOperationalEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "incidentEventType")
+		delete(additionalProperties, "operationalEvent")
+		delete(additionalProperties, "originatorType")
+		delete(additionalProperties, "unassign")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -283,5 +285,4 @@ func (v *NullableIncidentEventUnassignOperationalEvent) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

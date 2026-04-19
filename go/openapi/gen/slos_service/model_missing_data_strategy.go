@@ -11,9 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // MissingDataStrategy the model 'MissingDataStrategy'
 type MissingDataStrategy string

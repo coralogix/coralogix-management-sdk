@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertsV3PaginationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertsV3PaginationResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AlertsV3PaginationResponse{}
 type AlertsV3PaginationResponse struct {
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	TotalSize *int64 `json:"totalSize,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertsV3PaginationResponse AlertsV3PaginationResponse
 
 // NewAlertsV3PaginationResponse instantiates a new AlertsV3PaginationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o AlertsV3PaginationResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalSize) {
 		toSerialize["totalSize"] = o.TotalSize
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertsV3PaginationResponse) UnmarshalJSON(data []byte) (err error) {
+	varAlertsV3PaginationResponse := _AlertsV3PaginationResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertsV3PaginationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertsV3PaginationResponse(varAlertsV3PaginationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nextPageToken")
+		delete(additionalProperties, "totalSize")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertsV3PaginationResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableAlertsV3PaginationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

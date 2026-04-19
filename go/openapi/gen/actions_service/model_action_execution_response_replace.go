@@ -11,23 +11,31 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionExecutionResponseReplace type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionExecutionResponseReplace{}
 
 // ActionExecutionResponseReplace This data structure represents a response to an Action execution request.
 type ActionExecutionResponseReplace struct {
-	Replace *ReplaceActionResponse `json:"replace,omitempty"`
+	Replace ReplaceActionResponse `json:"replace"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionExecutionResponseReplace ActionExecutionResponseReplace
 
 // NewActionExecutionResponseReplace instantiates a new ActionExecutionResponseReplace object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActionExecutionResponseReplace() *ActionExecutionResponseReplace {
+func NewActionExecutionResponseReplace(replace ReplaceActionResponse) *ActionExecutionResponseReplace {
 	this := ActionExecutionResponseReplace{}
+	this.Replace = replace
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewActionExecutionResponseReplaceWithDefaults() *ActionExecutionResponseRep
 	return &this
 }
 
-// GetReplace returns the Replace field value if set, zero value otherwise.
+// GetReplace returns the Replace field value
 func (o *ActionExecutionResponseReplace) GetReplace() ReplaceActionResponse {
-	if o == nil || IsNil(o.Replace) {
+	if o == nil {
 		var ret ReplaceActionResponse
 		return ret
 	}
-	return *o.Replace
+
+	return o.Replace
 }
 
-// GetReplaceOk returns a tuple with the Replace field value if set, nil otherwise
+// GetReplaceOk returns a tuple with the Replace field value
 // and a boolean to check if the value has been set.
 func (o *ActionExecutionResponseReplace) GetReplaceOk() (*ReplaceActionResponse, bool) {
-	if o == nil || IsNil(o.Replace) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Replace, true
+	return &o.Replace, true
 }
 
-// HasReplace returns a boolean if a field has been set.
-func (o *ActionExecutionResponseReplace) HasReplace() bool {
-	if o != nil && !IsNil(o.Replace) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplace gets a reference to the given ReplaceActionResponse and assigns it to the Replace field.
+// SetReplace sets field value
 func (o *ActionExecutionResponseReplace) SetReplace(v ReplaceActionResponse) {
-	o.Replace = &v
+	o.Replace = v
 }
 
 func (o ActionExecutionResponseReplace) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o ActionExecutionResponseReplace) MarshalJSON() ([]byte, error) {
 
 func (o ActionExecutionResponseReplace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Replace) {
-		toSerialize["replace"] = o.Replace
+	toSerialize["replace"] = o.Replace
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionExecutionResponseReplace) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"replace",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varActionExecutionResponseReplace := _ActionExecutionResponseReplace{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionExecutionResponseReplace)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionExecutionResponseReplace(varActionExecutionResponseReplace)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replace")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionExecutionResponseReplace struct {
@@ -122,5 +168,4 @@ func (v *NullableActionExecutionResponseReplace) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

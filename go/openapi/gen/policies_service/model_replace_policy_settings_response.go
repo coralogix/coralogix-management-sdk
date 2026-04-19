@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplacePolicySettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplacePolicySettingsResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ReplacePolicySettingsResponse{}
 type ReplacePolicySettingsResponse struct {
 	LogsPolicySettings *LogsPolicySettings `json:"logsPolicySettings,omitempty"`
 	SpansPolicySettings *SpansPolicySettings `json:"spansPolicySettings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplacePolicySettingsResponse ReplacePolicySettingsResponse
 
 // NewReplacePolicySettingsResponse instantiates a new ReplacePolicySettingsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ReplacePolicySettingsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpansPolicySettings) {
 		toSerialize["spansPolicySettings"] = o.SpansPolicySettings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplacePolicySettingsResponse) UnmarshalJSON(data []byte) (err error) {
+	varReplacePolicySettingsResponse := _ReplacePolicySettingsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplacePolicySettingsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplacePolicySettingsResponse(varReplacePolicySettingsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsPolicySettings")
+		delete(additionalProperties, "spansPolicySettings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplacePolicySettingsResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableReplacePolicySettingsResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

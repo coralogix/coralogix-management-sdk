@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDashboardBySlugResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDashboardBySlugResponse{}
@@ -32,7 +35,10 @@ type GetDashboardBySlugResponse struct {
 	UpdatedOriginType *TokenOriginType `json:"updatedOriginType,omitempty"`
 	UpdaterAuthorId *string `json:"updaterAuthorId,omitempty"`
 	UpdaterName *string `json:"updaterName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDashboardBySlugResponse GetDashboardBySlugResponse
 
 // NewGetDashboardBySlugResponse instantiates a new GetDashboardBySlugResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -481,7 +487,45 @@ func (o GetDashboardBySlugResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdaterName) {
 		toSerialize["updaterName"] = o.UpdaterName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDashboardBySlugResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDashboardBySlugResponse := _GetDashboardBySlugResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDashboardBySlugResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDashboardBySlugResponse(varGetDashboardBySlugResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "authorId")
+		delete(additionalProperties, "authorName")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "createdOriginType")
+		delete(additionalProperties, "dashboard")
+		delete(additionalProperties, "isLocked")
+		delete(additionalProperties, "lockerAuthorId")
+		delete(additionalProperties, "lockerName")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "updatedOriginType")
+		delete(additionalProperties, "updaterAuthorId")
+		delete(additionalProperties, "updaterName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDashboardBySlugResponse struct {
@@ -519,5 +563,4 @@ func (v *NullableGetDashboardBySlugResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

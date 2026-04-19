@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListTextValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListTextValue{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ListTextValue{}
 type ListTextValue struct {
 	DefaultValues []string `json:"defaultValues,omitempty"`
 	Options []string `json:"options,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListTextValue ListTextValue
 
 // NewListTextValue instantiates a new ListTextValue object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ListTextValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListTextValue) UnmarshalJSON(data []byte) (err error) {
+	varListTextValue := _ListTextValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListTextValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListTextValue(varListTextValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultValues")
+		delete(additionalProperties, "options")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListTextValue struct {
@@ -158,5 +192,4 @@ func (v *NullableListTextValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

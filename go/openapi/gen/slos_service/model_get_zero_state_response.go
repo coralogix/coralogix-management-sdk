@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetZeroStateResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetZeroStateResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &GetZeroStateResponse{}
 // GetZeroStateResponse Response with Zero State.
 type GetZeroStateResponse struct {
 	ZeroState bool `json:"zeroState"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetZeroStateResponse GetZeroStateResponse
@@ -79,6 +82,11 @@ func (o GetZeroStateResponse) MarshalJSON() ([]byte, error) {
 func (o GetZeroStateResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["zeroState"] = o.ZeroState
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *GetZeroStateResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetZeroStateResponse := _GetZeroStateResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetZeroStateResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *GetZeroStateResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetZeroStateResponse(varGetZeroStateResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "zeroState")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableGetZeroStateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

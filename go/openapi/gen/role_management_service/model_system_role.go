@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SystemRole type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SystemRole{}
@@ -23,7 +26,10 @@ type SystemRole struct {
 	Name *string `json:"name,omitempty"`
 	Permissions []string `json:"permissions,omitempty"`
 	RoleId *int64 `json:"roleId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SystemRole SystemRole
 
 // NewSystemRole instantiates a new SystemRole object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o SystemRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RoleId) {
 		toSerialize["roleId"] = o.RoleId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SystemRole) UnmarshalJSON(data []byte) (err error) {
+	varSystemRole := _SystemRole{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSystemRole)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SystemRole(varSystemRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "roleId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSystemRole struct {
@@ -230,5 +266,4 @@ func (v *NullableSystemRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

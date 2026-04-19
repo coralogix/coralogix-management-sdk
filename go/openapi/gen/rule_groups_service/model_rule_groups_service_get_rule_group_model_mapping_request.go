@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleGroupsServiceGetRuleGroupModelMappingRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroupsServiceGetRuleGroupModelMappingRequest{}
@@ -27,7 +30,10 @@ type RuleGroupsServiceGetRuleGroupModelMappingRequest struct {
 	Order *int64 `json:"order,omitempty"`
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
 	RuleSubgroups []GetRuleGroupModelMappingRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleGroupsServiceGetRuleGroupModelMappingRequest RuleGroupsServiceGetRuleGroupModelMappingRequest
 
 // NewRuleGroupsServiceGetRuleGroupModelMappingRequest instantiates a new RuleGroupsServiceGetRuleGroupModelMappingRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +342,41 @@ func (o RuleGroupsServiceGetRuleGroupModelMappingRequest) ToMap() (map[string]in
 	if !IsNil(o.RuleSubgroups) {
 		toSerialize["ruleSubgroups"] = o.RuleSubgroups
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleGroupsServiceGetRuleGroupModelMappingRequest) UnmarshalJSON(data []byte) (err error) {
+	varRuleGroupsServiceGetRuleGroupModelMappingRequest := _RuleGroupsServiceGetRuleGroupModelMappingRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleGroupsServiceGetRuleGroupModelMappingRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleGroupsServiceGetRuleGroupModelMappingRequest(varRuleGroupsServiceGetRuleGroupModelMappingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "hidden")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "ruleMatchers")
+		delete(additionalProperties, "ruleSubgroups")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleGroupsServiceGetRuleGroupModelMappingRequest struct {
@@ -374,5 +414,4 @@ func (v *NullableRuleGroupsServiceGetRuleGroupModelMappingRequest) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

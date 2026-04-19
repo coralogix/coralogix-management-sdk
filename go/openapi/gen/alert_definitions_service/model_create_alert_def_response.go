@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateAlertDefResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateAlertDefResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateAlertDefResponse{}
 // CreateAlertDefResponse A response that contains the newly created alert definition
 type CreateAlertDefResponse struct {
 	AlertDef *AlertDef `json:"alertDef,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateAlertDefResponse CreateAlertDefResponse
 
 // NewCreateAlertDefResponse instantiates a new CreateAlertDefResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateAlertDefResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AlertDef) {
 		toSerialize["alertDef"] = o.AlertDef
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateAlertDefResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateAlertDefResponse := _CreateAlertDefResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateAlertDefResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateAlertDefResponse(varCreateAlertDefResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDef")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateAlertDefResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableCreateAlertDefResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

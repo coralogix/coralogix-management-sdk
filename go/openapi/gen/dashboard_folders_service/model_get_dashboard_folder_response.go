@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_folders_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDashboardFolderResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDashboardFolderResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDashboardFolderResponse{}
 // GetDashboardFolderResponse struct for GetDashboardFolderResponse
 type GetDashboardFolderResponse struct {
 	Folder *DashboardFolder `json:"folder,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDashboardFolderResponse GetDashboardFolderResponse
 
 // NewGetDashboardFolderResponse instantiates a new GetDashboardFolderResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDashboardFolderResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Folder) {
 		toSerialize["folder"] = o.Folder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDashboardFolderResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDashboardFolderResponse := _GetDashboardFolderResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDashboardFolderResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDashboardFolderResponse(varGetDashboardFolderResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "folder")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDashboardFolderResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetDashboardFolderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

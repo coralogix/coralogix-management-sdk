@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDataUsageMetricsExportStatusResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDataUsageMetricsExportStatusResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDataUsageMetricsExportStatusResponse{}
 // GetDataUsageMetricsExportStatusResponse This data structure is used to return data usage metrics export status.
 type GetDataUsageMetricsExportStatusResponse struct {
 	Enabled *bool `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDataUsageMetricsExportStatusResponse GetDataUsageMetricsExportStatusResponse
 
 // NewGetDataUsageMetricsExportStatusResponse instantiates a new GetDataUsageMetricsExportStatusResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDataUsageMetricsExportStatusResponse) ToMap() (map[string]interface{}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDataUsageMetricsExportStatusResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDataUsageMetricsExportStatusResponse := _GetDataUsageMetricsExportStatusResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDataUsageMetricsExportStatusResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDataUsageMetricsExportStatusResponse(varGetDataUsageMetricsExportStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDataUsageMetricsExportStatusResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetDataUsageMetricsExportStatusResponse) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

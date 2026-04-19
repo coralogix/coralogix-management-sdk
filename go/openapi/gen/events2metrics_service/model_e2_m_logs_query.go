@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MLogsQuery{}
@@ -22,16 +24,18 @@ var _ MappedNullable = &E2MLogsQuery{}
 // E2MLogsQuery This data structure represents an Event to Metrics (E2M) object.
 type E2MLogsQuery struct {
 	CreateTime *string `json:"createTime,omitempty"`
+	DataSource *string `json:"dataSource,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	IsInternal *bool `json:"isInternal,omitempty"`
-	LogsQuery *V2LogsQuery `json:"logsQuery,omitempty"`
+	LogsQuery V2LogsQuery `json:"logsQuery"`
 	MetricFields []V2MetricField `json:"metricFields,omitempty"`
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
 	Name string `json:"name"`
 	Permutations *E2MPermutations `json:"permutations,omitempty"`
 	Type E2MType `json:"type"`
 	UpdateTime *string `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _E2MLogsQuery E2MLogsQuery
@@ -40,8 +44,9 @@ type _E2MLogsQuery E2MLogsQuery
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewE2MLogsQuery(name string, type_ E2MType) *E2MLogsQuery {
+func NewE2MLogsQuery(logsQuery V2LogsQuery, name string, type_ E2MType) *E2MLogsQuery {
 	this := E2MLogsQuery{}
+	this.LogsQuery = logsQuery
 	this.Name = name
 	this.Type = type_
 	return &this
@@ -85,6 +90,38 @@ func (o *E2MLogsQuery) HasCreateTime() bool {
 // SetCreateTime gets a reference to the given string and assigns it to the CreateTime field.
 func (o *E2MLogsQuery) SetCreateTime(v string) {
 	o.CreateTime = &v
+}
+
+// GetDataSource returns the DataSource field value if set, zero value otherwise.
+func (o *E2MLogsQuery) GetDataSource() string {
+	if o == nil || IsNil(o.DataSource) {
+		var ret string
+		return ret
+	}
+	return *o.DataSource
+}
+
+// GetDataSourceOk returns a tuple with the DataSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *E2MLogsQuery) GetDataSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.DataSource) {
+		return nil, false
+	}
+	return o.DataSource, true
+}
+
+// HasDataSource returns a boolean if a field has been set.
+func (o *E2MLogsQuery) HasDataSource() bool {
+	if o != nil && !IsNil(o.DataSource) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataSource gets a reference to the given string and assigns it to the DataSource field.
+func (o *E2MLogsQuery) SetDataSource(v string) {
+	o.DataSource = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -183,36 +220,28 @@ func (o *E2MLogsQuery) SetIsInternal(v bool) {
 	o.IsInternal = &v
 }
 
-// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
+// GetLogsQuery returns the LogsQuery field value
 func (o *E2MLogsQuery) GetLogsQuery() V2LogsQuery {
-	if o == nil || IsNil(o.LogsQuery) {
+	if o == nil {
 		var ret V2LogsQuery
 		return ret
 	}
-	return *o.LogsQuery
+
+	return o.LogsQuery
 }
 
-// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// GetLogsQueryOk returns a tuple with the LogsQuery field value
 // and a boolean to check if the value has been set.
 func (o *E2MLogsQuery) GetLogsQueryOk() (*V2LogsQuery, bool) {
-	if o == nil || IsNil(o.LogsQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsQuery, true
+	return &o.LogsQuery, true
 }
 
-// HasLogsQuery returns a boolean if a field has been set.
-func (o *E2MLogsQuery) HasLogsQuery() bool {
-	if o != nil && !IsNil(o.LogsQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsQuery gets a reference to the given V2LogsQuery and assigns it to the LogsQuery field.
+// SetLogsQuery sets field value
 func (o *E2MLogsQuery) SetLogsQuery(v V2LogsQuery) {
-	o.LogsQuery = &v
+	o.LogsQuery = v
 }
 
 // GetMetricFields returns the MetricFields field value if set, zero value otherwise.
@@ -404,6 +433,9 @@ func (o E2MLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreateTime) {
 		toSerialize["createTime"] = o.CreateTime
 	}
+	if !IsNil(o.DataSource) {
+		toSerialize["dataSource"] = o.DataSource
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -413,9 +445,7 @@ func (o E2MLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsInternal) {
 		toSerialize["isInternal"] = o.IsInternal
 	}
-	if !IsNil(o.LogsQuery) {
-		toSerialize["logsQuery"] = o.LogsQuery
-	}
+	toSerialize["logsQuery"] = o.LogsQuery
 	if !IsNil(o.MetricFields) {
 		toSerialize["metricFields"] = o.MetricFields
 	}
@@ -430,6 +460,11 @@ func (o E2MLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -438,6 +473,7 @@ func (o *E2MLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"logsQuery",
 		"name",
 		"type",
 	}
@@ -459,7 +495,6 @@ func (o *E2MLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	varE2MLogsQuery := _E2MLogsQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varE2MLogsQuery)
 
 	if err != nil {
@@ -467,6 +502,24 @@ func (o *E2MLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = E2MLogsQuery(varE2MLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "dataSource")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isInternal")
+		delete(additionalProperties, "logsQuery")
+		delete(additionalProperties, "metricFields")
+		delete(additionalProperties, "metricLabels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permutations")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -506,5 +559,4 @@ func (v *NullableE2MLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

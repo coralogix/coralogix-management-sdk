@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDailyUsageUnitsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageUnitsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDailyUsageUnitsResponse{}
 // GetDailyUsageUnitsResponse struct for GetDailyUsageUnitsResponse
 type GetDailyUsageUnitsResponse struct {
 	Units []DetailedDailyUnits `json:"units,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDailyUsageUnitsResponse GetDailyUsageUnitsResponse
 
 // NewGetDailyUsageUnitsResponse instantiates a new GetDailyUsageUnitsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDailyUsageUnitsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Units) {
 		toSerialize["units"] = o.Units
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDailyUsageUnitsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDailyUsageUnitsResponse := _GetDailyUsageUnitsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDailyUsageUnitsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDailyUsageUnitsResponse(varGetDailyUsageUnitsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "units")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDailyUsageUnitsResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetDailyUsageUnitsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyLinks type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyLinks{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &PropertyLinks{}
 // PropertyLinks struct for PropertyLinks
 type PropertyLinks struct {
 	Actions []LinkAction `json:"actions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyLinks PropertyLinks
 
 // NewPropertyLinks instantiates a new PropertyLinks object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o PropertyLinks) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyLinks) UnmarshalJSON(data []byte) (err error) {
+	varPropertyLinks := _PropertyLinks{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyLinks)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyLinks(varPropertyLinks)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyLinks struct {
@@ -122,5 +155,4 @@ func (v *NullablePropertyLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

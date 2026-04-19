@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationDoc type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationDoc{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &IntegrationDoc{}
 type IntegrationDoc struct {
 	Link *string `json:"link,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationDoc IntegrationDoc
 
 // NewIntegrationDoc instantiates a new IntegrationDoc object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o IntegrationDoc) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationDoc) UnmarshalJSON(data []byte) (err error) {
+	varIntegrationDoc := _IntegrationDoc{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationDoc)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationDoc(varIntegrationDoc)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "link")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationDoc struct {
@@ -158,5 +192,4 @@ func (v *NullableIntegrationDoc) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

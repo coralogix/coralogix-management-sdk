@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloFilterFieldSloType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloFilterFieldSloType{}
 
 // SloFilterFieldSloType Field used for filtering SLOs
 type SloFilterFieldSloType struct {
-	SloType *bool `json:"sloType,omitempty"`
+	SloType bool `json:"sloType"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloFilterFieldSloType SloFilterFieldSloType
 
 // NewSloFilterFieldSloType instantiates a new SloFilterFieldSloType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloFilterFieldSloType() *SloFilterFieldSloType {
+func NewSloFilterFieldSloType(sloType bool) *SloFilterFieldSloType {
 	this := SloFilterFieldSloType{}
+	this.SloType = sloType
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSloFilterFieldSloTypeWithDefaults() *SloFilterFieldSloType {
 	return &this
 }
 
-// GetSloType returns the SloType field value if set, zero value otherwise.
+// GetSloType returns the SloType field value
 func (o *SloFilterFieldSloType) GetSloType() bool {
-	if o == nil || IsNil(o.SloType) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.SloType
+
+	return o.SloType
 }
 
-// GetSloTypeOk returns a tuple with the SloType field value if set, nil otherwise
+// GetSloTypeOk returns a tuple with the SloType field value
 // and a boolean to check if the value has been set.
 func (o *SloFilterFieldSloType) GetSloTypeOk() (*bool, bool) {
-	if o == nil || IsNil(o.SloType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SloType, true
+	return &o.SloType, true
 }
 
-// HasSloType returns a boolean if a field has been set.
-func (o *SloFilterFieldSloType) HasSloType() bool {
-	if o != nil && !IsNil(o.SloType) {
-		return true
-	}
-
-	return false
-}
-
-// SetSloType gets a reference to the given bool and assigns it to the SloType field.
+// SetSloType sets field value
 func (o *SloFilterFieldSloType) SetSloType(v bool) {
-	o.SloType = &v
+	o.SloType = v
 }
 
 func (o SloFilterFieldSloType) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SloFilterFieldSloType) MarshalJSON() ([]byte, error) {
 
 func (o SloFilterFieldSloType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SloType) {
-		toSerialize["sloType"] = o.SloType
+	toSerialize["sloType"] = o.SloType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloFilterFieldSloType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sloType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloFilterFieldSloType := _SloFilterFieldSloType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloFilterFieldSloType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloFilterFieldSloType(varSloFilterFieldSloType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sloType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloFilterFieldSloType struct {
@@ -122,5 +168,4 @@ func (v *NullableSloFilterFieldSloType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

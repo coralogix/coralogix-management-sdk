@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectQueryMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectQueryMetricsQuery{}
 
 // MultiSelectQueryMetricsQuery struct for MultiSelectQueryMetricsQuery
 type MultiSelectQueryMetricsQuery struct {
-	MetricsQuery *QueryMetricsQuery `json:"metricsQuery,omitempty"`
+	MetricsQuery QueryMetricsQuery `json:"metricsQuery"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectQueryMetricsQuery MultiSelectQueryMetricsQuery
 
 // NewMultiSelectQueryMetricsQuery instantiates a new MultiSelectQueryMetricsQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectQueryMetricsQuery() *MultiSelectQueryMetricsQuery {
+func NewMultiSelectQueryMetricsQuery(metricsQuery QueryMetricsQuery) *MultiSelectQueryMetricsQuery {
 	this := MultiSelectQueryMetricsQuery{}
+	this.MetricsQuery = metricsQuery
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectQueryMetricsQueryWithDefaults() *MultiSelectQueryMetricsQuery
 	return &this
 }
 
-// GetMetricsQuery returns the MetricsQuery field value if set, zero value otherwise.
+// GetMetricsQuery returns the MetricsQuery field value
 func (o *MultiSelectQueryMetricsQuery) GetMetricsQuery() QueryMetricsQuery {
-	if o == nil || IsNil(o.MetricsQuery) {
+	if o == nil {
 		var ret QueryMetricsQuery
 		return ret
 	}
-	return *o.MetricsQuery
+
+	return o.MetricsQuery
 }
 
-// GetMetricsQueryOk returns a tuple with the MetricsQuery field value if set, nil otherwise
+// GetMetricsQueryOk returns a tuple with the MetricsQuery field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectQueryMetricsQuery) GetMetricsQueryOk() (*QueryMetricsQuery, bool) {
-	if o == nil || IsNil(o.MetricsQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricsQuery, true
+	return &o.MetricsQuery, true
 }
 
-// HasMetricsQuery returns a boolean if a field has been set.
-func (o *MultiSelectQueryMetricsQuery) HasMetricsQuery() bool {
-	if o != nil && !IsNil(o.MetricsQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricsQuery gets a reference to the given QueryMetricsQuery and assigns it to the MetricsQuery field.
+// SetMetricsQuery sets field value
 func (o *MultiSelectQueryMetricsQuery) SetMetricsQuery(v QueryMetricsQuery) {
-	o.MetricsQuery = &v
+	o.MetricsQuery = v
 }
 
 func (o MultiSelectQueryMetricsQuery) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectQueryMetricsQuery) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectQueryMetricsQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricsQuery) {
-		toSerialize["metricsQuery"] = o.MetricsQuery
+	toSerialize["metricsQuery"] = o.MetricsQuery
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectQueryMetricsQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricsQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectQueryMetricsQuery := _MultiSelectQueryMetricsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectQueryMetricsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectQueryMetricsQuery(varMultiSelectQueryMetricsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricsQuery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectQueryMetricsQuery struct {
@@ -122,5 +168,4 @@ func (v *NullableMultiSelectQueryMetricsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateSloRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateSloRequest{}
@@ -24,6 +26,7 @@ type CreateSloRequest struct {
 	// Deprecated
 	SilenceDataValidations *bool `json:"silenceDataValidations,omitempty"`
 	Slo Slo `json:"slo"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSloRequest CreateSloRequest
@@ -119,6 +122,11 @@ func (o CreateSloRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["silenceDataValidations"] = o.SilenceDataValidations
 	}
 	toSerialize["slo"] = o.Slo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -147,7 +155,6 @@ func (o *CreateSloRequest) UnmarshalJSON(data []byte) (err error) {
 	varCreateSloRequest := _CreateSloRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateSloRequest)
 
 	if err != nil {
@@ -155,6 +162,14 @@ func (o *CreateSloRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateSloRequest(varCreateSloRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "silenceDataValidations")
+		delete(additionalProperties, "slo")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -194,5 +209,4 @@ func (v *NullableCreateSloRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

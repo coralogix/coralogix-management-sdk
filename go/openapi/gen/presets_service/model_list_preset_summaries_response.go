@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListPresetSummariesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListPresetSummariesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListPresetSummariesResponse{}
 // ListPresetSummariesResponse struct for ListPresetSummariesResponse
 type ListPresetSummariesResponse struct {
 	PresetSummaries []PresetSummary `json:"presetSummaries,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListPresetSummariesResponse ListPresetSummariesResponse
 
 // NewListPresetSummariesResponse instantiates a new ListPresetSummariesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListPresetSummariesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PresetSummaries) {
 		toSerialize["presetSummaries"] = o.PresetSummaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListPresetSummariesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListPresetSummariesResponse := _ListPresetSummariesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListPresetSummariesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListPresetSummariesResponse(varListPresetSummariesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "presetSummaries")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListPresetSummariesResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableListPresetSummariesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

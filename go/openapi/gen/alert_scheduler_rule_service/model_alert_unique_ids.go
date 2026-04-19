@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertUniqueIds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertUniqueIds{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AlertUniqueIds{}
 // AlertUniqueIds struct for AlertUniqueIds
 type AlertUniqueIds struct {
 	Value []string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertUniqueIds AlertUniqueIds
 
 // NewAlertUniqueIds instantiates a new AlertUniqueIds object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AlertUniqueIds) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertUniqueIds) UnmarshalJSON(data []byte) (err error) {
+	varAlertUniqueIds := _AlertUniqueIds{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertUniqueIds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertUniqueIds(varAlertUniqueIds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertUniqueIds struct {
@@ -122,5 +155,4 @@ func (v *NullableAlertUniqueIds) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

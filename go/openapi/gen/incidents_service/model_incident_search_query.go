@@ -11,10 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // IncidentSearchQuery - struct for IncidentSearchQuery
 type IncidentSearchQuery struct {
@@ -42,7 +45,7 @@ func (dst *IncidentSearchQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IncidentSearchQueryContextualLabel
-	err = newStrictDecoder(data).Decode(&dst.IncidentSearchQueryContextualLabel)
+	err = json.Unmarshal(data, &dst.IncidentSearchQueryContextualLabel)
 	if err == nil {
 		jsonIncidentSearchQueryContextualLabel, _ := json.Marshal(dst.IncidentSearchQueryContextualLabel)
 		if string(jsonIncidentSearchQueryContextualLabel) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *IncidentSearchQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentSearchQueryIncidentField
-	err = newStrictDecoder(data).Decode(&dst.IncidentSearchQueryIncidentField)
+	err = json.Unmarshal(data, &dst.IncidentSearchQueryIncidentField)
 	if err == nil {
 		jsonIncidentSearchQueryIncidentField, _ := json.Marshal(dst.IncidentSearchQueryIncidentField)
 		if string(jsonIncidentSearchQueryIncidentField) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableIncidentSearchQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

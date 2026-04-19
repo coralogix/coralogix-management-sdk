@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetsPieChartLabelDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsPieChartLabelDefinition{}
@@ -28,7 +31,10 @@ type WidgetsPieChartLabelDefinition struct {
 	ShowPercentage *bool `json:"showPercentage,omitempty"`
 	// Whether to show value of slice in the label
 	ShowValue *bool `json:"showValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetsPieChartLabelDefinition WidgetsPieChartLabelDefinition
 
 // NewWidgetsPieChartLabelDefinition instantiates a new WidgetsPieChartLabelDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -232,7 +238,38 @@ func (o WidgetsPieChartLabelDefinition) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.ShowValue) {
 		toSerialize["showValue"] = o.ShowValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetsPieChartLabelDefinition) UnmarshalJSON(data []byte) (err error) {
+	varWidgetsPieChartLabelDefinition := _WidgetsPieChartLabelDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetsPieChartLabelDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetsPieChartLabelDefinition(varWidgetsPieChartLabelDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isVisible")
+		delete(additionalProperties, "labelSource")
+		delete(additionalProperties, "showName")
+		delete(additionalProperties, "showPercentage")
+		delete(additionalProperties, "showValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetsPieChartLabelDefinition struct {
@@ -270,5 +307,4 @@ func (v *NullableWidgetsPieChartLabelDefinition) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

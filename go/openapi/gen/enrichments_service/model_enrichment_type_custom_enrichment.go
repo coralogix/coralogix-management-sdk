@@ -11,23 +11,31 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentTypeCustomEnrichment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeCustomEnrichment{}
 
 // EnrichmentTypeCustomEnrichment struct for EnrichmentTypeCustomEnrichment
 type EnrichmentTypeCustomEnrichment struct {
-	CustomEnrichment *CustomEnrichmentType `json:"customEnrichment,omitempty"`
+	CustomEnrichment CustomEnrichmentType `json:"customEnrichment"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnrichmentTypeCustomEnrichment EnrichmentTypeCustomEnrichment
 
 // NewEnrichmentTypeCustomEnrichment instantiates a new EnrichmentTypeCustomEnrichment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnrichmentTypeCustomEnrichment() *EnrichmentTypeCustomEnrichment {
+func NewEnrichmentTypeCustomEnrichment(customEnrichment CustomEnrichmentType) *EnrichmentTypeCustomEnrichment {
 	this := EnrichmentTypeCustomEnrichment{}
+	this.CustomEnrichment = customEnrichment
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewEnrichmentTypeCustomEnrichmentWithDefaults() *EnrichmentTypeCustomEnrich
 	return &this
 }
 
-// GetCustomEnrichment returns the CustomEnrichment field value if set, zero value otherwise.
+// GetCustomEnrichment returns the CustomEnrichment field value
 func (o *EnrichmentTypeCustomEnrichment) GetCustomEnrichment() CustomEnrichmentType {
-	if o == nil || IsNil(o.CustomEnrichment) {
+	if o == nil {
 		var ret CustomEnrichmentType
 		return ret
 	}
-	return *o.CustomEnrichment
+
+	return o.CustomEnrichment
 }
 
-// GetCustomEnrichmentOk returns a tuple with the CustomEnrichment field value if set, nil otherwise
+// GetCustomEnrichmentOk returns a tuple with the CustomEnrichment field value
 // and a boolean to check if the value has been set.
 func (o *EnrichmentTypeCustomEnrichment) GetCustomEnrichmentOk() (*CustomEnrichmentType, bool) {
-	if o == nil || IsNil(o.CustomEnrichment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CustomEnrichment, true
+	return &o.CustomEnrichment, true
 }
 
-// HasCustomEnrichment returns a boolean if a field has been set.
-func (o *EnrichmentTypeCustomEnrichment) HasCustomEnrichment() bool {
-	if o != nil && !IsNil(o.CustomEnrichment) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomEnrichment gets a reference to the given CustomEnrichmentType and assigns it to the CustomEnrichment field.
+// SetCustomEnrichment sets field value
 func (o *EnrichmentTypeCustomEnrichment) SetCustomEnrichment(v CustomEnrichmentType) {
-	o.CustomEnrichment = &v
+	o.CustomEnrichment = v
 }
 
 func (o EnrichmentTypeCustomEnrichment) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o EnrichmentTypeCustomEnrichment) MarshalJSON() ([]byte, error) {
 
 func (o EnrichmentTypeCustomEnrichment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomEnrichment) {
-		toSerialize["customEnrichment"] = o.CustomEnrichment
+	toSerialize["customEnrichment"] = o.CustomEnrichment
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *EnrichmentTypeCustomEnrichment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"customEnrichment",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEnrichmentTypeCustomEnrichment := _EnrichmentTypeCustomEnrichment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentTypeCustomEnrichment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentTypeCustomEnrichment(varEnrichmentTypeCustomEnrichment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customEnrichment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnrichmentTypeCustomEnrichment struct {
@@ -122,5 +168,4 @@ func (v *NullableEnrichmentTypeCustomEnrichment) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

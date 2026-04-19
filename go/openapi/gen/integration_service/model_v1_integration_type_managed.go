@@ -11,23 +11,31 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypeManaged type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypeManaged{}
 
 // V1IntegrationTypeManaged This data structure represents an integration type.
 type V1IntegrationTypeManaged struct {
-	Managed *Managed `json:"managed,omitempty"`
+	Managed Managed `json:"managed"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypeManaged V1IntegrationTypeManaged
 
 // NewV1IntegrationTypeManaged instantiates a new V1IntegrationTypeManaged object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypeManaged() *V1IntegrationTypeManaged {
+func NewV1IntegrationTypeManaged(managed Managed) *V1IntegrationTypeManaged {
 	this := V1IntegrationTypeManaged{}
+	this.Managed = managed
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewV1IntegrationTypeManagedWithDefaults() *V1IntegrationTypeManaged {
 	return &this
 }
 
-// GetManaged returns the Managed field value if set, zero value otherwise.
+// GetManaged returns the Managed field value
 func (o *V1IntegrationTypeManaged) GetManaged() Managed {
-	if o == nil || IsNil(o.Managed) {
+	if o == nil {
 		var ret Managed
 		return ret
 	}
-	return *o.Managed
+
+	return o.Managed
 }
 
-// GetManagedOk returns a tuple with the Managed field value if set, nil otherwise
+// GetManagedOk returns a tuple with the Managed field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypeManaged) GetManagedOk() (*Managed, bool) {
-	if o == nil || IsNil(o.Managed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Managed, true
+	return &o.Managed, true
 }
 
-// HasManaged returns a boolean if a field has been set.
-func (o *V1IntegrationTypeManaged) HasManaged() bool {
-	if o != nil && !IsNil(o.Managed) {
-		return true
-	}
-
-	return false
-}
-
-// SetManaged gets a reference to the given Managed and assigns it to the Managed field.
+// SetManaged sets field value
 func (o *V1IntegrationTypeManaged) SetManaged(v Managed) {
-	o.Managed = &v
+	o.Managed = v
 }
 
 func (o V1IntegrationTypeManaged) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o V1IntegrationTypeManaged) MarshalJSON() ([]byte, error) {
 
 func (o V1IntegrationTypeManaged) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Managed) {
-		toSerialize["managed"] = o.Managed
+	toSerialize["managed"] = o.Managed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypeManaged) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"managed",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypeManaged := _V1IntegrationTypeManaged{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypeManaged)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypeManaged(varV1IntegrationTypeManaged)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "managed")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypeManaged struct {
@@ -122,5 +168,4 @@ func (v *NullableV1IntegrationTypeManaged) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

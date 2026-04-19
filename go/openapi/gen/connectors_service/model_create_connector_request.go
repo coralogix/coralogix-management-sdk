@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateConnectorRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateConnectorRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateConnectorRequest{}
 // CreateConnectorRequest Request to create a new connector
 type CreateConnectorRequest struct {
 	Connector *Connector `json:"connector,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateConnectorRequest CreateConnectorRequest
 
 // NewCreateConnectorRequest instantiates a new CreateConnectorRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateConnectorRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Connector) {
 		toSerialize["connector"] = o.Connector
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateConnectorRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateConnectorRequest := _CreateConnectorRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateConnectorRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateConnectorRequest(varCreateConnectorRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connector")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateConnectorRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableCreateConnectorRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

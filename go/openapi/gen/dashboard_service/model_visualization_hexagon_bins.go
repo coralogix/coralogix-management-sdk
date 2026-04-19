@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationHexagonBins type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationHexagonBins{}
 
 // VisualizationHexagonBins struct for VisualizationHexagonBins
 type VisualizationHexagonBins struct {
-	HexagonBins *HexagonBins `json:"hexagonBins,omitempty"`
+	HexagonBins HexagonBins `json:"hexagonBins"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationHexagonBins VisualizationHexagonBins
 
 // NewVisualizationHexagonBins instantiates a new VisualizationHexagonBins object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationHexagonBins() *VisualizationHexagonBins {
+func NewVisualizationHexagonBins(hexagonBins HexagonBins) *VisualizationHexagonBins {
 	this := VisualizationHexagonBins{}
+	this.HexagonBins = hexagonBins
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationHexagonBinsWithDefaults() *VisualizationHexagonBins {
 	return &this
 }
 
-// GetHexagonBins returns the HexagonBins field value if set, zero value otherwise.
+// GetHexagonBins returns the HexagonBins field value
 func (o *VisualizationHexagonBins) GetHexagonBins() HexagonBins {
-	if o == nil || IsNil(o.HexagonBins) {
+	if o == nil {
 		var ret HexagonBins
 		return ret
 	}
-	return *o.HexagonBins
+
+	return o.HexagonBins
 }
 
-// GetHexagonBinsOk returns a tuple with the HexagonBins field value if set, nil otherwise
+// GetHexagonBinsOk returns a tuple with the HexagonBins field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationHexagonBins) GetHexagonBinsOk() (*HexagonBins, bool) {
-	if o == nil || IsNil(o.HexagonBins) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HexagonBins, true
+	return &o.HexagonBins, true
 }
 
-// HasHexagonBins returns a boolean if a field has been set.
-func (o *VisualizationHexagonBins) HasHexagonBins() bool {
-	if o != nil && !IsNil(o.HexagonBins) {
-		return true
-	}
-
-	return false
-}
-
-// SetHexagonBins gets a reference to the given HexagonBins and assigns it to the HexagonBins field.
+// SetHexagonBins sets field value
 func (o *VisualizationHexagonBins) SetHexagonBins(v HexagonBins) {
-	o.HexagonBins = &v
+	o.HexagonBins = v
 }
 
 func (o VisualizationHexagonBins) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationHexagonBins) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationHexagonBins) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.HexagonBins) {
-		toSerialize["hexagonBins"] = o.HexagonBins
+	toSerialize["hexagonBins"] = o.HexagonBins
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationHexagonBins) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"hexagonBins",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationHexagonBins := _VisualizationHexagonBins{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationHexagonBins)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationHexagonBins(varVisualizationHexagonBins)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hexagonBins")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationHexagonBins struct {
@@ -122,5 +168,4 @@ func (v *NullableVisualizationHexagonBins) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

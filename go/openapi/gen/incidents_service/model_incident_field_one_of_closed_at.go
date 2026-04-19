@@ -11,24 +11,32 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfClosedAt type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfClosedAt{}
 
 // IncidentFieldOneOfClosedAt struct for IncidentFieldOneOfClosedAt
 type IncidentFieldOneOfClosedAt struct {
-	ClosedAt *time.Time `json:"closedAt,omitempty"`
+	ClosedAt time.Time `json:"closedAt"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfClosedAt IncidentFieldOneOfClosedAt
 
 // NewIncidentFieldOneOfClosedAt instantiates a new IncidentFieldOneOfClosedAt object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfClosedAt() *IncidentFieldOneOfClosedAt {
+func NewIncidentFieldOneOfClosedAt(closedAt time.Time) *IncidentFieldOneOfClosedAt {
 	this := IncidentFieldOneOfClosedAt{}
+	this.ClosedAt = closedAt
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewIncidentFieldOneOfClosedAtWithDefaults() *IncidentFieldOneOfClosedAt {
 	return &this
 }
 
-// GetClosedAt returns the ClosedAt field value if set, zero value otherwise.
+// GetClosedAt returns the ClosedAt field value
 func (o *IncidentFieldOneOfClosedAt) GetClosedAt() time.Time {
-	if o == nil || IsNil(o.ClosedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.ClosedAt
+
+	return o.ClosedAt
 }
 
-// GetClosedAtOk returns a tuple with the ClosedAt field value if set, nil otherwise
+// GetClosedAtOk returns a tuple with the ClosedAt field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfClosedAt) GetClosedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.ClosedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ClosedAt, true
+	return &o.ClosedAt, true
 }
 
-// HasClosedAt returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfClosedAt) HasClosedAt() bool {
-	if o != nil && !IsNil(o.ClosedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetClosedAt gets a reference to the given time.Time and assigns it to the ClosedAt field.
+// SetClosedAt sets field value
 func (o *IncidentFieldOneOfClosedAt) SetClosedAt(v time.Time) {
-	o.ClosedAt = &v
+	o.ClosedAt = v
 }
 
 func (o IncidentFieldOneOfClosedAt) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o IncidentFieldOneOfClosedAt) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfClosedAt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ClosedAt) {
-		toSerialize["closedAt"] = o.ClosedAt
+	toSerialize["closedAt"] = o.ClosedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfClosedAt) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"closedAt",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfClosedAt := _IncidentFieldOneOfClosedAt{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfClosedAt)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfClosedAt(varIncidentFieldOneOfClosedAt)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "closedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfClosedAt struct {
@@ -123,5 +169,4 @@ func (v *NullableIncidentFieldOneOfClosedAt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

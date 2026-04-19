@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // V3IntegrationType - struct for V3IntegrationType
 type V3IntegrationType struct {
@@ -42,7 +45,7 @@ func (dst *V3IntegrationType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into V3IntegrationTypeIntegrationId
-	err = newStrictDecoder(data).Decode(&dst.V3IntegrationTypeIntegrationId)
+	err = json.Unmarshal(data, &dst.V3IntegrationTypeIntegrationId)
 	if err == nil {
 		jsonV3IntegrationTypeIntegrationId, _ := json.Marshal(dst.V3IntegrationTypeIntegrationId)
 		if string(jsonV3IntegrationTypeIntegrationId) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *V3IntegrationType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into V3IntegrationTypeRecipients
-	err = newStrictDecoder(data).Decode(&dst.V3IntegrationTypeRecipients)
+	err = json.Unmarshal(data, &dst.V3IntegrationTypeRecipients)
 	if err == nil {
 		jsonV3IntegrationTypeRecipients, _ := json.Marshal(dst.V3IntegrationTypeRecipients)
 		if string(jsonV3IntegrationTypeRecipients) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableV3IntegrationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

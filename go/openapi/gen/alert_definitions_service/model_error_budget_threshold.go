@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ErrorBudgetThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ErrorBudgetThreshold{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ErrorBudgetThreshold{}
 // ErrorBudgetThreshold Error budget threshold definition
 type ErrorBudgetThreshold struct {
 	Rules []SloThresholdRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ErrorBudgetThreshold ErrorBudgetThreshold
 
 // NewErrorBudgetThreshold instantiates a new ErrorBudgetThreshold object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ErrorBudgetThreshold) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ErrorBudgetThreshold) UnmarshalJSON(data []byte) (err error) {
+	varErrorBudgetThreshold := _ErrorBudgetThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varErrorBudgetThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ErrorBudgetThreshold(varErrorBudgetThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableErrorBudgetThreshold struct {
@@ -122,5 +155,4 @@ func (v *NullableErrorBudgetThreshold) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EqualsSelectionList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EqualsSelectionList{}
 
 // EqualsSelectionList This data structure defines the values for the equality comparison.
 type EqualsSelectionList struct {
-	List *EqualsSelectionListSelection `json:"list,omitempty"`
+	List EqualsSelectionListSelection `json:"list"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EqualsSelectionList EqualsSelectionList
 
 // NewEqualsSelectionList instantiates a new EqualsSelectionList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEqualsSelectionList() *EqualsSelectionList {
+func NewEqualsSelectionList(list EqualsSelectionListSelection) *EqualsSelectionList {
 	this := EqualsSelectionList{}
+	this.List = list
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewEqualsSelectionListWithDefaults() *EqualsSelectionList {
 	return &this
 }
 
-// GetList returns the List field value if set, zero value otherwise.
+// GetList returns the List field value
 func (o *EqualsSelectionList) GetList() EqualsSelectionListSelection {
-	if o == nil || IsNil(o.List) {
+	if o == nil {
 		var ret EqualsSelectionListSelection
 		return ret
 	}
-	return *o.List
+
+	return o.List
 }
 
-// GetListOk returns a tuple with the List field value if set, nil otherwise
+// GetListOk returns a tuple with the List field value
 // and a boolean to check if the value has been set.
 func (o *EqualsSelectionList) GetListOk() (*EqualsSelectionListSelection, bool) {
-	if o == nil || IsNil(o.List) {
+	if o == nil {
 		return nil, false
 	}
-	return o.List, true
+	return &o.List, true
 }
 
-// HasList returns a boolean if a field has been set.
-func (o *EqualsSelectionList) HasList() bool {
-	if o != nil && !IsNil(o.List) {
-		return true
-	}
-
-	return false
-}
-
-// SetList gets a reference to the given EqualsSelectionListSelection and assigns it to the List field.
+// SetList sets field value
 func (o *EqualsSelectionList) SetList(v EqualsSelectionListSelection) {
-	o.List = &v
+	o.List = v
 }
 
 func (o EqualsSelectionList) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o EqualsSelectionList) MarshalJSON() ([]byte, error) {
 
 func (o EqualsSelectionList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.List) {
-		toSerialize["list"] = o.List
+	toSerialize["list"] = o.List
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *EqualsSelectionList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"list",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEqualsSelectionList := _EqualsSelectionList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEqualsSelectionList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EqualsSelectionList(varEqualsSelectionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEqualsSelectionList struct {
@@ -122,5 +168,4 @@ func (v *NullableEqualsSelectionList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionHorizontalBarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionHorizontalBarChart{}
 
 // WidgetDefinitionHorizontalBarChart struct for WidgetDefinitionHorizontalBarChart
 type WidgetDefinitionHorizontalBarChart struct {
-	HorizontalBarChart *HorizontalBarChart `json:"horizontalBarChart,omitempty"`
+	HorizontalBarChart HorizontalBarChart `json:"horizontalBarChart"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionHorizontalBarChart WidgetDefinitionHorizontalBarChart
 
 // NewWidgetDefinitionHorizontalBarChart instantiates a new WidgetDefinitionHorizontalBarChart object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionHorizontalBarChart() *WidgetDefinitionHorizontalBarChart {
+func NewWidgetDefinitionHorizontalBarChart(horizontalBarChart HorizontalBarChart) *WidgetDefinitionHorizontalBarChart {
 	this := WidgetDefinitionHorizontalBarChart{}
+	this.HorizontalBarChart = horizontalBarChart
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionHorizontalBarChartWithDefaults() *WidgetDefinitionHorizo
 	return &this
 }
 
-// GetHorizontalBarChart returns the HorizontalBarChart field value if set, zero value otherwise.
+// GetHorizontalBarChart returns the HorizontalBarChart field value
 func (o *WidgetDefinitionHorizontalBarChart) GetHorizontalBarChart() HorizontalBarChart {
-	if o == nil || IsNil(o.HorizontalBarChart) {
+	if o == nil {
 		var ret HorizontalBarChart
 		return ret
 	}
-	return *o.HorizontalBarChart
+
+	return o.HorizontalBarChart
 }
 
-// GetHorizontalBarChartOk returns a tuple with the HorizontalBarChart field value if set, nil otherwise
+// GetHorizontalBarChartOk returns a tuple with the HorizontalBarChart field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionHorizontalBarChart) GetHorizontalBarChartOk() (*HorizontalBarChart, bool) {
-	if o == nil || IsNil(o.HorizontalBarChart) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HorizontalBarChart, true
+	return &o.HorizontalBarChart, true
 }
 
-// HasHorizontalBarChart returns a boolean if a field has been set.
-func (o *WidgetDefinitionHorizontalBarChart) HasHorizontalBarChart() bool {
-	if o != nil && !IsNil(o.HorizontalBarChart) {
-		return true
-	}
-
-	return false
-}
-
-// SetHorizontalBarChart gets a reference to the given HorizontalBarChart and assigns it to the HorizontalBarChart field.
+// SetHorizontalBarChart sets field value
 func (o *WidgetDefinitionHorizontalBarChart) SetHorizontalBarChart(v HorizontalBarChart) {
-	o.HorizontalBarChart = &v
+	o.HorizontalBarChart = v
 }
 
 func (o WidgetDefinitionHorizontalBarChart) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionHorizontalBarChart) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionHorizontalBarChart) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.HorizontalBarChart) {
-		toSerialize["horizontalBarChart"] = o.HorizontalBarChart
+	toSerialize["horizontalBarChart"] = o.HorizontalBarChart
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionHorizontalBarChart) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"horizontalBarChart",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionHorizontalBarChart := _WidgetDefinitionHorizontalBarChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionHorizontalBarChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionHorizontalBarChart(varWidgetDefinitionHorizontalBarChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "horizontalBarChart")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionHorizontalBarChart struct {
@@ -122,5 +168,4 @@ func (v *NullableWidgetDefinitionHorizontalBarChart) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

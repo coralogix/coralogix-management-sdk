@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestIntegrationRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &TestIntegrationRequest{}
 type TestIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
 	IntegrationId *string `json:"integrationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TestIntegrationRequest TestIntegrationRequest
 
 // NewTestIntegrationRequest instantiates a new TestIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o TestIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IntegrationId) {
 		toSerialize["integrationId"] = o.IntegrationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TestIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	varTestIntegrationRequest := _TestIntegrationRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestIntegrationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestIntegrationRequest(varTestIntegrationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationData")
+		delete(additionalProperties, "integrationId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTestIntegrationRequest struct {
@@ -158,5 +192,4 @@ func (v *NullableTestIntegrationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

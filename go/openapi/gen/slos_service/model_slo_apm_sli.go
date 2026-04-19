@@ -11,16 +11,20 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloApmSli type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloApmSli{}
 
 // SloApmSli Definition of an SLO
 type SloApmSli struct {
-	ApmSli *ApmSli `json:"apmSli,omitempty"`
+	ApmSli ApmSli `json:"apmSli"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Creator *string `json:"creator,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -36,14 +40,18 @@ type SloApmSli struct {
 	// Deprecated
 	Type *string `json:"type,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloApmSli SloApmSli
 
 // NewSloApmSli instantiates a new SloApmSli object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloApmSli() *SloApmSli {
+func NewSloApmSli(apmSli ApmSli) *SloApmSli {
 	this := SloApmSli{}
+	this.ApmSli = apmSli
 	return &this
 }
 
@@ -55,36 +63,28 @@ func NewSloApmSliWithDefaults() *SloApmSli {
 	return &this
 }
 
-// GetApmSli returns the ApmSli field value if set, zero value otherwise.
+// GetApmSli returns the ApmSli field value
 func (o *SloApmSli) GetApmSli() ApmSli {
-	if o == nil || IsNil(o.ApmSli) {
+	if o == nil {
 		var ret ApmSli
 		return ret
 	}
-	return *o.ApmSli
+
+	return o.ApmSli
 }
 
-// GetApmSliOk returns a tuple with the ApmSli field value if set, nil otherwise
+// GetApmSliOk returns a tuple with the ApmSli field value
 // and a boolean to check if the value has been set.
 func (o *SloApmSli) GetApmSliOk() (*ApmSli, bool) {
-	if o == nil || IsNil(o.ApmSli) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApmSli, true
+	return &o.ApmSli, true
 }
 
-// HasApmSli returns a boolean if a field has been set.
-func (o *SloApmSli) HasApmSli() bool {
-	if o != nil && !IsNil(o.ApmSli) {
-		return true
-	}
-
-	return false
-}
-
-// SetApmSli gets a reference to the given ApmSli and assigns it to the ApmSli field.
+// SetApmSli sets field value
 func (o *SloApmSli) SetApmSli(v ApmSli) {
-	o.ApmSli = &v
+	o.ApmSli = v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -548,9 +548,7 @@ func (o SloApmSli) MarshalJSON() ([]byte, error) {
 
 func (o SloApmSli) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApmSli) {
-		toSerialize["apmSli"] = o.ApmSli
-	}
+	toSerialize["apmSli"] = o.ApmSli
 	if !IsNil(o.CreateTime) {
 		toSerialize["createTime"] = o.CreateTime
 	}
@@ -593,7 +591,69 @@ func (o SloApmSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloApmSli) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"apmSli",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloApmSli := _SloApmSli{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloApmSli)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloApmSli(varSloApmSli)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apmSli")
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "grouping")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "revision")
+		delete(additionalProperties, "sloTimeFrame")
+		delete(additionalProperties, "sloType")
+		delete(additionalProperties, "targetThresholdPercentage")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloApmSli struct {
@@ -631,5 +691,4 @@ func (v *NullableSloApmSli) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,16 +11,23 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MinMaxCustom type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MinMaxCustom{}
 
-// MinMaxCustom Definition of min/max value configuration, can be automatically derived from data or custom
+// MinMaxCustom struct for MinMaxCustom
 type MinMaxCustom struct {
-	Custom *MinMaxCustom `json:"custom,omitempty"`
+	Max *float64 `json:"max,omitempty"`
+	Min *float64 `json:"min,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MinMaxCustom MinMaxCustom
 
 // NewMinMaxCustom instantiates a new MinMaxCustom object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +46,68 @@ func NewMinMaxCustomWithDefaults() *MinMaxCustom {
 	return &this
 }
 
-// GetCustom returns the Custom field value if set, zero value otherwise.
-func (o *MinMaxCustom) GetCustom() MinMaxCustom {
-	if o == nil || IsNil(o.Custom) {
-		var ret MinMaxCustom
+// GetMax returns the Max field value if set, zero value otherwise.
+func (o *MinMaxCustom) GetMax() float64 {
+	if o == nil || IsNil(o.Max) {
+		var ret float64
 		return ret
 	}
-	return *o.Custom
+	return *o.Max
 }
 
-// GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
+// GetMaxOk returns a tuple with the Max field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MinMaxCustom) GetCustomOk() (*MinMaxCustom, bool) {
-	if o == nil || IsNil(o.Custom) {
+func (o *MinMaxCustom) GetMaxOk() (*float64, bool) {
+	if o == nil || IsNil(o.Max) {
 		return nil, false
 	}
-	return o.Custom, true
+	return o.Max, true
 }
 
-// HasCustom returns a boolean if a field has been set.
-func (o *MinMaxCustom) HasCustom() bool {
-	if o != nil && !IsNil(o.Custom) {
+// HasMax returns a boolean if a field has been set.
+func (o *MinMaxCustom) HasMax() bool {
+	if o != nil && !IsNil(o.Max) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustom gets a reference to the given MinMaxCustom and assigns it to the Custom field.
-func (o *MinMaxCustom) SetCustom(v MinMaxCustom) {
-	o.Custom = &v
+// SetMax gets a reference to the given float64 and assigns it to the Max field.
+func (o *MinMaxCustom) SetMax(v float64) {
+	o.Max = &v
+}
+
+// GetMin returns the Min field value if set, zero value otherwise.
+func (o *MinMaxCustom) GetMin() float64 {
+	if o == nil || IsNil(o.Min) {
+		var ret float64
+		return ret
+	}
+	return *o.Min
+}
+
+// GetMinOk returns a tuple with the Min field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MinMaxCustom) GetMinOk() (*float64, bool) {
+	if o == nil || IsNil(o.Min) {
+		return nil, false
+	}
+	return o.Min, true
+}
+
+// HasMin returns a boolean if a field has been set.
+func (o *MinMaxCustom) HasMin() bool {
+	if o != nil && !IsNil(o.Min) {
+		return true
+	}
+
+	return false
+}
+
+// SetMin gets a reference to the given float64 and assigns it to the Min field.
+func (o *MinMaxCustom) SetMin(v float64) {
+	o.Min = &v
 }
 
 func (o MinMaxCustom) MarshalJSON() ([]byte, error) {
@@ -81,10 +120,41 @@ func (o MinMaxCustom) MarshalJSON() ([]byte, error) {
 
 func (o MinMaxCustom) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Custom) {
-		toSerialize["custom"] = o.Custom
+	if !IsNil(o.Max) {
+		toSerialize["max"] = o.Max
 	}
+	if !IsNil(o.Min) {
+		toSerialize["min"] = o.Min
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MinMaxCustom) UnmarshalJSON(data []byte) (err error) {
+	varMinMaxCustom := _MinMaxCustom{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMinMaxCustom)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MinMaxCustom(varMinMaxCustom)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMinMaxCustom struct {
@@ -122,5 +192,4 @@ func (v *NullableMinMaxCustom) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

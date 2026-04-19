@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RevertDeploymentOfExtensionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RevertDeploymentOfExtensionRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &RevertDeploymentOfExtensionRequest{}
 type RevertDeploymentOfExtensionRequest struct {
 	Id *string `json:"id,omitempty"`
 	KeptExtensionItems []string `json:"keptExtensionItems,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RevertDeploymentOfExtensionRequest RevertDeploymentOfExtensionRequest
 
 // NewRevertDeploymentOfExtensionRequest instantiates a new RevertDeploymentOfExtensionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o RevertDeploymentOfExtensionRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.KeptExtensionItems) {
 		toSerialize["keptExtensionItems"] = o.KeptExtensionItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RevertDeploymentOfExtensionRequest) UnmarshalJSON(data []byte) (err error) {
+	varRevertDeploymentOfExtensionRequest := _RevertDeploymentOfExtensionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRevertDeploymentOfExtensionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RevertDeploymentOfExtensionRequest(varRevertDeploymentOfExtensionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "keptExtensionItems")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRevertDeploymentOfExtensionRequest struct {
@@ -158,5 +192,4 @@ func (v *NullableRevertDeploymentOfExtensionRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

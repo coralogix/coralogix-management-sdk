@@ -11,16 +11,24 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestOutgoingWebhookResponseFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestOutgoingWebhookResponseFailure{}
 
 // TestOutgoingWebhookResponseFailure struct for TestOutgoingWebhookResponseFailure
 type TestOutgoingWebhookResponseFailure struct {
-	Failure *TestOutgoingWebhookResponseFailure `json:"failure,omitempty"`
+	DisplayMessage *string `json:"displayMessage,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+	StatusCode *int64 `json:"statusCode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TestOutgoingWebhookResponseFailure TestOutgoingWebhookResponseFailure
 
 // NewTestOutgoingWebhookResponseFailure instantiates a new TestOutgoingWebhookResponseFailure object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +47,100 @@ func NewTestOutgoingWebhookResponseFailureWithDefaults() *TestOutgoingWebhookRes
 	return &this
 }
 
-// GetFailure returns the Failure field value if set, zero value otherwise.
-func (o *TestOutgoingWebhookResponseFailure) GetFailure() TestOutgoingWebhookResponseFailure {
-	if o == nil || IsNil(o.Failure) {
-		var ret TestOutgoingWebhookResponseFailure
+// GetDisplayMessage returns the DisplayMessage field value if set, zero value otherwise.
+func (o *TestOutgoingWebhookResponseFailure) GetDisplayMessage() string {
+	if o == nil || IsNil(o.DisplayMessage) {
+		var ret string
 		return ret
 	}
-	return *o.Failure
+	return *o.DisplayMessage
 }
 
-// GetFailureOk returns a tuple with the Failure field value if set, nil otherwise
+// GetDisplayMessageOk returns a tuple with the DisplayMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TestOutgoingWebhookResponseFailure) GetFailureOk() (*TestOutgoingWebhookResponseFailure, bool) {
-	if o == nil || IsNil(o.Failure) {
+func (o *TestOutgoingWebhookResponseFailure) GetDisplayMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.DisplayMessage) {
 		return nil, false
 	}
-	return o.Failure, true
+	return o.DisplayMessage, true
 }
 
-// HasFailure returns a boolean if a field has been set.
-func (o *TestOutgoingWebhookResponseFailure) HasFailure() bool {
-	if o != nil && !IsNil(o.Failure) {
+// HasDisplayMessage returns a boolean if a field has been set.
+func (o *TestOutgoingWebhookResponseFailure) HasDisplayMessage() bool {
+	if o != nil && !IsNil(o.DisplayMessage) {
 		return true
 	}
 
 	return false
 }
 
-// SetFailure gets a reference to the given TestOutgoingWebhookResponseFailure and assigns it to the Failure field.
-func (o *TestOutgoingWebhookResponseFailure) SetFailure(v TestOutgoingWebhookResponseFailure) {
-	o.Failure = &v
+// SetDisplayMessage gets a reference to the given string and assigns it to the DisplayMessage field.
+func (o *TestOutgoingWebhookResponseFailure) SetDisplayMessage(v string) {
+	o.DisplayMessage = &v
+}
+
+// GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
+func (o *TestOutgoingWebhookResponseFailure) GetErrorMessage() string {
+	if o == nil || IsNil(o.ErrorMessage) {
+		var ret string
+		return ret
+	}
+	return *o.ErrorMessage
+}
+
+// GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestOutgoingWebhookResponseFailure) GetErrorMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.ErrorMessage) {
+		return nil, false
+	}
+	return o.ErrorMessage, true
+}
+
+// HasErrorMessage returns a boolean if a field has been set.
+func (o *TestOutgoingWebhookResponseFailure) HasErrorMessage() bool {
+	if o != nil && !IsNil(o.ErrorMessage) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
+func (o *TestOutgoingWebhookResponseFailure) SetErrorMessage(v string) {
+	o.ErrorMessage = &v
+}
+
+// GetStatusCode returns the StatusCode field value if set, zero value otherwise.
+func (o *TestOutgoingWebhookResponseFailure) GetStatusCode() int64 {
+	if o == nil || IsNil(o.StatusCode) {
+		var ret int64
+		return ret
+	}
+	return *o.StatusCode
+}
+
+// GetStatusCodeOk returns a tuple with the StatusCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TestOutgoingWebhookResponseFailure) GetStatusCodeOk() (*int64, bool) {
+	if o == nil || IsNil(o.StatusCode) {
+		return nil, false
+	}
+	return o.StatusCode, true
+}
+
+// HasStatusCode returns a boolean if a field has been set.
+func (o *TestOutgoingWebhookResponseFailure) HasStatusCode() bool {
+	if o != nil && !IsNil(o.StatusCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatusCode gets a reference to the given int64 and assigns it to the StatusCode field.
+func (o *TestOutgoingWebhookResponseFailure) SetStatusCode(v int64) {
+	o.StatusCode = &v
 }
 
 func (o TestOutgoingWebhookResponseFailure) MarshalJSON() ([]byte, error) {
@@ -81,10 +153,45 @@ func (o TestOutgoingWebhookResponseFailure) MarshalJSON() ([]byte, error) {
 
 func (o TestOutgoingWebhookResponseFailure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Failure) {
-		toSerialize["failure"] = o.Failure
+	if !IsNil(o.DisplayMessage) {
+		toSerialize["displayMessage"] = o.DisplayMessage
 	}
+	if !IsNil(o.ErrorMessage) {
+		toSerialize["errorMessage"] = o.ErrorMessage
+	}
+	if !IsNil(o.StatusCode) {
+		toSerialize["statusCode"] = o.StatusCode
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TestOutgoingWebhookResponseFailure) UnmarshalJSON(data []byte) (err error) {
+	varTestOutgoingWebhookResponseFailure := _TestOutgoingWebhookResponseFailure{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestOutgoingWebhookResponseFailure)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestOutgoingWebhookResponseFailure(varTestOutgoingWebhookResponseFailure)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "displayMessage")
+		delete(additionalProperties, "errorMessage")
+		delete(additionalProperties, "statusCode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTestOutgoingWebhookResponseFailure struct {
@@ -122,5 +229,4 @@ func (v *NullableTestOutgoingWebhookResponseFailure) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

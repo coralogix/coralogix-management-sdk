@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionsServiceAtomicBatchExecuteActionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionsServiceAtomicBatchExecuteActionsRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ActionsServiceAtomicBatchExecuteActionsRequest{}
 // ActionsServiceAtomicBatchExecuteActionsRequest This data structure represents a request to execute a batch of Action operations atomically.
 type ActionsServiceAtomicBatchExecuteActionsRequest struct {
 	Requests []ActionExecutionRequest `json:"requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionsServiceAtomicBatchExecuteActionsRequest ActionsServiceAtomicBatchExecuteActionsRequest
 
 // NewActionsServiceAtomicBatchExecuteActionsRequest instantiates a new ActionsServiceAtomicBatchExecuteActionsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ActionsServiceAtomicBatchExecuteActionsRequest) ToMap() (map[string]inte
 	if !IsNil(o.Requests) {
 		toSerialize["requests"] = o.Requests
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionsServiceAtomicBatchExecuteActionsRequest) UnmarshalJSON(data []byte) (err error) {
+	varActionsServiceAtomicBatchExecuteActionsRequest := _ActionsServiceAtomicBatchExecuteActionsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionsServiceAtomicBatchExecuteActionsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionsServiceAtomicBatchExecuteActionsRequest(varActionsServiceAtomicBatchExecuteActionsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requests")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionsServiceAtomicBatchExecuteActionsRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableActionsServiceAtomicBatchExecuteActionsRequest) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

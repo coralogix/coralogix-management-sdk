@@ -11,10 +11,13 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // E2MCreateParams - struct for E2MCreateParams
 type E2MCreateParams struct {
@@ -42,7 +45,7 @@ func (dst *E2MCreateParams) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into E2MCreateParamsLogsQuery
-	err = newStrictDecoder(data).Decode(&dst.E2MCreateParamsLogsQuery)
+	err = json.Unmarshal(data, &dst.E2MCreateParamsLogsQuery)
 	if err == nil {
 		jsonE2MCreateParamsLogsQuery, _ := json.Marshal(dst.E2MCreateParamsLogsQuery)
 		if string(jsonE2MCreateParamsLogsQuery) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *E2MCreateParams) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into E2MCreateParamsSpansQuery
-	err = newStrictDecoder(data).Decode(&dst.E2MCreateParamsSpansQuery)
+	err = json.Unmarshal(data, &dst.E2MCreateParamsSpansQuery)
 	if err == nil {
 		jsonE2MCreateParamsSpansQuery, _ := json.Marshal(dst.E2MCreateParamsSpansQuery)
 		if string(jsonE2MCreateParamsSpansQuery) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableE2MCreateParams) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

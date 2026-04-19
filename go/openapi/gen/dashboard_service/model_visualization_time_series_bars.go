@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationTimeSeriesBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationTimeSeriesBars{}
 
 // VisualizationTimeSeriesBars struct for VisualizationTimeSeriesBars
 type VisualizationTimeSeriesBars struct {
-	TimeSeriesBars *TimeSeriesBars `json:"timeSeriesBars,omitempty"`
+	TimeSeriesBars TimeSeriesBars `json:"timeSeriesBars"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationTimeSeriesBars VisualizationTimeSeriesBars
 
 // NewVisualizationTimeSeriesBars instantiates a new VisualizationTimeSeriesBars object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationTimeSeriesBars() *VisualizationTimeSeriesBars {
+func NewVisualizationTimeSeriesBars(timeSeriesBars TimeSeriesBars) *VisualizationTimeSeriesBars {
 	this := VisualizationTimeSeriesBars{}
+	this.TimeSeriesBars = timeSeriesBars
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationTimeSeriesBarsWithDefaults() *VisualizationTimeSeriesBars {
 	return &this
 }
 
-// GetTimeSeriesBars returns the TimeSeriesBars field value if set, zero value otherwise.
+// GetTimeSeriesBars returns the TimeSeriesBars field value
 func (o *VisualizationTimeSeriesBars) GetTimeSeriesBars() TimeSeriesBars {
-	if o == nil || IsNil(o.TimeSeriesBars) {
+	if o == nil {
 		var ret TimeSeriesBars
 		return ret
 	}
-	return *o.TimeSeriesBars
+
+	return o.TimeSeriesBars
 }
 
-// GetTimeSeriesBarsOk returns a tuple with the TimeSeriesBars field value if set, nil otherwise
+// GetTimeSeriesBarsOk returns a tuple with the TimeSeriesBars field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationTimeSeriesBars) GetTimeSeriesBarsOk() (*TimeSeriesBars, bool) {
-	if o == nil || IsNil(o.TimeSeriesBars) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TimeSeriesBars, true
+	return &o.TimeSeriesBars, true
 }
 
-// HasTimeSeriesBars returns a boolean if a field has been set.
-func (o *VisualizationTimeSeriesBars) HasTimeSeriesBars() bool {
-	if o != nil && !IsNil(o.TimeSeriesBars) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeSeriesBars gets a reference to the given TimeSeriesBars and assigns it to the TimeSeriesBars field.
+// SetTimeSeriesBars sets field value
 func (o *VisualizationTimeSeriesBars) SetTimeSeriesBars(v TimeSeriesBars) {
-	o.TimeSeriesBars = &v
+	o.TimeSeriesBars = v
 }
 
 func (o VisualizationTimeSeriesBars) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationTimeSeriesBars) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationTimeSeriesBars) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TimeSeriesBars) {
-		toSerialize["timeSeriesBars"] = o.TimeSeriesBars
+	toSerialize["timeSeriesBars"] = o.TimeSeriesBars
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationTimeSeriesBars) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timeSeriesBars",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationTimeSeriesBars := _VisualizationTimeSeriesBars{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationTimeSeriesBars)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationTimeSeriesBars(varVisualizationTimeSeriesBars)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timeSeriesBars")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationTimeSeriesBars struct {
@@ -122,5 +168,4 @@ func (v *NullableVisualizationTimeSeriesBars) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,7 +11,6 @@
           "Alert events service"
         ],
         "summary": "Get alert events statistics",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -89,7 +88,6 @@
           "Alert events service"
         ],
         "summary": "Get alert event by ID",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -292,33 +290,6 @@
           "ALERT_STATUS_NO_DATA"
         ]
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "EventStats": {
         "externalDocs": {
           "url": ""
@@ -340,7 +311,7 @@
           "resolvedPermutationsSamples": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Permutation"
+              "$ref": "#/components/schemas/v3.Permutation"
             }
           },
           "triggeredCount": {
@@ -350,7 +321,7 @@
           "triggeredPermutationsSamples": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Permutation"
+              "$ref": "#/components/schemas/v3.Permutation"
             }
           }
         }
@@ -394,9 +365,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -416,9 +387,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -445,10 +416,10 @@
       "GetAlertEventResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GetAlertEventResponseMultiplePermutation"
+            "$ref": "#/components/schemas/GetAlertEventResponseSinglePermutation"
           },
           {
-            "$ref": "#/components/schemas/GetAlertEventResponseSinglePermutation"
+            "$ref": "#/components/schemas/GetAlertEventResponseMultiplePermutation"
           }
         ]
       },
@@ -469,7 +440,9 @@
             "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "multiplePermutation"
+        ]
       },
       "GetAlertEventResponseSinglePermutation": {
         "externalDocs": {
@@ -488,7 +461,9 @@
             "$ref": "#/components/schemas/AlertEvent"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "singlePermutation"
+        ]
       },
       "GetAlertEventStatsResponse": {
         "externalDocs": {
@@ -504,34 +479,6 @@
             }
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -561,21 +508,6 @@
           "ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED",
           "ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP"
         ]
-      },
-      "Permutation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Permutation data structure",
-        "type": "object",
-        "properties": {
-          "permutationLabels": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
       },
       "alerts.v3.PaginationResponse": {
         "type": "object",
@@ -620,14 +552,21 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
+      },
+      "v3.Permutation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Permutation data structure",
+        "type": "object",
+        "properties": {
+          "permutationLabels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
       }
     }
   }

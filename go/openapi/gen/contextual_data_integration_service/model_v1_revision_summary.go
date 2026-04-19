@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1RevisionSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1RevisionSummary{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &V1RevisionSummary{}
 type V1RevisionSummary struct {
 	Lifecycle *RevisionLifecycle `json:"lifecycle,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1RevisionSummary V1RevisionSummary
 
 // NewV1RevisionSummary instantiates a new V1RevisionSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o V1RevisionSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1RevisionSummary) UnmarshalJSON(data []byte) (err error) {
+	varV1RevisionSummary := _V1RevisionSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1RevisionSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1RevisionSummary(varV1RevisionSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lifecycle")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1RevisionSummary struct {
@@ -158,5 +192,4 @@ func (v *NullableV1RevisionSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,9 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // OriginatorType the model 'OriginatorType'
 type OriginatorType string

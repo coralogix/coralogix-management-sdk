@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GaugeQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQueryLogs{}
 
 // GaugeQueryLogs struct for GaugeQueryLogs
 type GaugeQueryLogs struct {
-	Logs *GaugeLogsQuery `json:"logs,omitempty"`
+	Logs GaugeLogsQuery `json:"logs"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GaugeQueryLogs GaugeQueryLogs
 
 // NewGaugeQueryLogs instantiates a new GaugeQueryLogs object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGaugeQueryLogs() *GaugeQueryLogs {
+func NewGaugeQueryLogs(logs GaugeLogsQuery) *GaugeQueryLogs {
 	this := GaugeQueryLogs{}
+	this.Logs = logs
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGaugeQueryLogsWithDefaults() *GaugeQueryLogs {
 	return &this
 }
 
-// GetLogs returns the Logs field value if set, zero value otherwise.
+// GetLogs returns the Logs field value
 func (o *GaugeQueryLogs) GetLogs() GaugeLogsQuery {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		var ret GaugeLogsQuery
 		return ret
 	}
-	return *o.Logs
+
+	return o.Logs
 }
 
-// GetLogsOk returns a tuple with the Logs field value if set, nil otherwise
+// GetLogsOk returns a tuple with the Logs field value
 // and a boolean to check if the value has been set.
 func (o *GaugeQueryLogs) GetLogsOk() (*GaugeLogsQuery, bool) {
-	if o == nil || IsNil(o.Logs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Logs, true
+	return &o.Logs, true
 }
 
-// HasLogs returns a boolean if a field has been set.
-func (o *GaugeQueryLogs) HasLogs() bool {
-	if o != nil && !IsNil(o.Logs) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogs gets a reference to the given GaugeLogsQuery and assigns it to the Logs field.
+// SetLogs sets field value
 func (o *GaugeQueryLogs) SetLogs(v GaugeLogsQuery) {
-	o.Logs = &v
+	o.Logs = v
 }
 
 func (o GaugeQueryLogs) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GaugeQueryLogs) MarshalJSON() ([]byte, error) {
 
 func (o GaugeQueryLogs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Logs) {
-		toSerialize["logs"] = o.Logs
+	toSerialize["logs"] = o.Logs
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GaugeQueryLogs) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logs",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGaugeQueryLogs := _GaugeQueryLogs{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeQueryLogs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeQueryLogs(varGaugeQueryLogs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGaugeQueryLogs struct {
@@ -122,5 +168,4 @@ func (v *NullableGaugeQueryLogs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

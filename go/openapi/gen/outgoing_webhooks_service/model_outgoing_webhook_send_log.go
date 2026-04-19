@@ -11,9 +11,13 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookSendLog type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookSendLog{}
@@ -24,18 +28,22 @@ type OutgoingWebhookSendLog struct {
 	ExternalId *int64 `json:"externalId,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
-	SendLog *SendLogConfig `json:"sendLog,omitempty"`
+	SendLog SendLogConfig `json:"sendLog"`
 	Type *WebhookType `json:"type,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookSendLog OutgoingWebhookSendLog
 
 // NewOutgoingWebhookSendLog instantiates a new OutgoingWebhookSendLog object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookSendLog() *OutgoingWebhookSendLog {
+func NewOutgoingWebhookSendLog(sendLog SendLogConfig) *OutgoingWebhookSendLog {
 	this := OutgoingWebhookSendLog{}
+	this.SendLog = sendLog
 	return &this
 }
 
@@ -175,36 +183,28 @@ func (o *OutgoingWebhookSendLog) SetName(v string) {
 	o.Name = &v
 }
 
-// GetSendLog returns the SendLog field value if set, zero value otherwise.
+// GetSendLog returns the SendLog field value
 func (o *OutgoingWebhookSendLog) GetSendLog() SendLogConfig {
-	if o == nil || IsNil(o.SendLog) {
+	if o == nil {
 		var ret SendLogConfig
 		return ret
 	}
-	return *o.SendLog
+
+	return o.SendLog
 }
 
-// GetSendLogOk returns a tuple with the SendLog field value if set, nil otherwise
+// GetSendLogOk returns a tuple with the SendLog field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookSendLog) GetSendLogOk() (*SendLogConfig, bool) {
-	if o == nil || IsNil(o.SendLog) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SendLog, true
+	return &o.SendLog, true
 }
 
-// HasSendLog returns a boolean if a field has been set.
-func (o *OutgoingWebhookSendLog) HasSendLog() bool {
-	if o != nil && !IsNil(o.SendLog) {
-		return true
-	}
-
-	return false
-}
-
-// SetSendLog gets a reference to the given SendLogConfig and assigns it to the SendLog field.
+// SetSendLog sets field value
 func (o *OutgoingWebhookSendLog) SetSendLog(v SendLogConfig) {
-	o.SendLog = &v
+	o.SendLog = v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -325,9 +325,7 @@ func (o OutgoingWebhookSendLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.SendLog) {
-		toSerialize["sendLog"] = o.SendLog
-	}
+	toSerialize["sendLog"] = o.SendLog
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -337,7 +335,62 @@ func (o OutgoingWebhookSendLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookSendLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sendLog",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookSendLog := _OutgoingWebhookSendLog{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookSendLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookSendLog(varOutgoingWebhookSendLog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sendLog")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookSendLog struct {
@@ -375,5 +428,4 @@ func (v *NullableOutgoingWebhookSendLog) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

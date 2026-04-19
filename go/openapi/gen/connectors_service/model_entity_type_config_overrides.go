@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EntityTypeConfigOverrides type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EntityTypeConfigOverrides{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &EntityTypeConfigOverrides{}
 type EntityTypeConfigOverrides struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Fields []TemplatedConnectorConfigField `json:"fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EntityTypeConfigOverrides EntityTypeConfigOverrides
 
 // NewEntityTypeConfigOverrides instantiates a new EntityTypeConfigOverrides object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o EntityTypeConfigOverrides) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EntityTypeConfigOverrides) UnmarshalJSON(data []byte) (err error) {
+	varEntityTypeConfigOverrides := _EntityTypeConfigOverrides{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEntityTypeConfigOverrides)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EntityTypeConfigOverrides(varEntityTypeConfigOverrides)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "fields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEntityTypeConfigOverrides struct {
@@ -158,5 +192,4 @@ func (v *NullableEntityTypeConfigOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

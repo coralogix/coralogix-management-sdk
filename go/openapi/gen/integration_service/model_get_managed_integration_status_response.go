@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetManagedIntegrationStatusResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetManagedIntegrationStatusResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &GetManagedIntegrationStatusResponse{}
 type GetManagedIntegrationStatusResponse struct {
 	IntegrationId *string `json:"integrationId,omitempty"`
 	Status *IntegrationStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetManagedIntegrationStatusResponse GetManagedIntegrationStatusResponse
 
 // NewGetManagedIntegrationStatusResponse instantiates a new GetManagedIntegrationStatusResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o GetManagedIntegrationStatusResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetManagedIntegrationStatusResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetManagedIntegrationStatusResponse := _GetManagedIntegrationStatusResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetManagedIntegrationStatusResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetManagedIntegrationStatusResponse(varGetManagedIntegrationStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationId")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetManagedIntegrationStatusResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableGetManagedIntegrationStatusResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

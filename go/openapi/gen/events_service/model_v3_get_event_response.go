@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3GetEventResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3GetEventResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &V3GetEventResponse{}
 type V3GetEventResponse struct {
 	Event *CxEventSingleOrMultiple `json:"event,omitempty"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3GetEventResponse V3GetEventResponse
 
 // NewV3GetEventResponse instantiates a new V3GetEventResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o V3GetEventResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V3GetEventResponse) UnmarshalJSON(data []byte) (err error) {
+	varV3GetEventResponse := _V3GetEventResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3GetEventResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3GetEventResponse(varV3GetEventResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3GetEventResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableV3GetEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

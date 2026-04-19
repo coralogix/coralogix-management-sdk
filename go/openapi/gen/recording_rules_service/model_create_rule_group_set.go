@@ -11,8 +11,11 @@ API version: 1.0.0
 package recording_rules_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateRuleGroupSet type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRuleGroupSet{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &CreateRuleGroupSet{}
 type CreateRuleGroupSet struct {
 	Groups []InRuleGroup `json:"groups,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateRuleGroupSet CreateRuleGroupSet
 
 // NewCreateRuleGroupSet instantiates a new CreateRuleGroupSet object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o CreateRuleGroupSet) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateRuleGroupSet) UnmarshalJSON(data []byte) (err error) {
+	varCreateRuleGroupSet := _CreateRuleGroupSet{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateRuleGroupSet)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateRuleGroupSet(varCreateRuleGroupSet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateRuleGroupSet struct {
@@ -158,5 +192,4 @@ func (v *NullableCreateRuleGroupSet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

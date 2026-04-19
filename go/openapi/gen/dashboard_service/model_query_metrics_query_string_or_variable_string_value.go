@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryMetricsQueryStringOrVariableStringValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryStringOrVariableStringValue{}
 
 // QueryMetricsQueryStringOrVariableStringValue struct for QueryMetricsQueryStringOrVariableStringValue
 type QueryMetricsQueryStringOrVariableStringValue struct {
-	StringValue *string `json:"stringValue,omitempty"`
+	StringValue string `json:"stringValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryMetricsQueryStringOrVariableStringValue QueryMetricsQueryStringOrVariableStringValue
 
 // NewQueryMetricsQueryStringOrVariableStringValue instantiates a new QueryMetricsQueryStringOrVariableStringValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryMetricsQueryStringOrVariableStringValue() *QueryMetricsQueryStringOrVariableStringValue {
+func NewQueryMetricsQueryStringOrVariableStringValue(stringValue string) *QueryMetricsQueryStringOrVariableStringValue {
 	this := QueryMetricsQueryStringOrVariableStringValue{}
+	this.StringValue = stringValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewQueryMetricsQueryStringOrVariableStringValueWithDefaults() *QueryMetrics
 	return &this
 }
 
-// GetStringValue returns the StringValue field value if set, zero value otherwise.
+// GetStringValue returns the StringValue field value
 func (o *QueryMetricsQueryStringOrVariableStringValue) GetStringValue() string {
-	if o == nil || IsNil(o.StringValue) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.StringValue
+
+	return o.StringValue
 }
 
-// GetStringValueOk returns a tuple with the StringValue field value if set, nil otherwise
+// GetStringValueOk returns a tuple with the StringValue field value
 // and a boolean to check if the value has been set.
 func (o *QueryMetricsQueryStringOrVariableStringValue) GetStringValueOk() (*string, bool) {
-	if o == nil || IsNil(o.StringValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StringValue, true
+	return &o.StringValue, true
 }
 
-// HasStringValue returns a boolean if a field has been set.
-func (o *QueryMetricsQueryStringOrVariableStringValue) HasStringValue() bool {
-	if o != nil && !IsNil(o.StringValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetStringValue gets a reference to the given string and assigns it to the StringValue field.
+// SetStringValue sets field value
 func (o *QueryMetricsQueryStringOrVariableStringValue) SetStringValue(v string) {
-	o.StringValue = &v
+	o.StringValue = v
 }
 
 func (o QueryMetricsQueryStringOrVariableStringValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o QueryMetricsQueryStringOrVariableStringValue) MarshalJSON() ([]byte, err
 
 func (o QueryMetricsQueryStringOrVariableStringValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.StringValue) {
-		toSerialize["stringValue"] = o.StringValue
+	toSerialize["stringValue"] = o.StringValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryMetricsQueryStringOrVariableStringValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"stringValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varQueryMetricsQueryStringOrVariableStringValue := _QueryMetricsQueryStringOrVariableStringValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQueryStringOrVariableStringValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQueryStringOrVariableStringValue(varQueryMetricsQueryStringOrVariableStringValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stringValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryMetricsQueryStringOrVariableStringValue struct {
@@ -122,5 +168,4 @@ func (v *NullableQueryMetricsQueryStringOrVariableStringValue) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

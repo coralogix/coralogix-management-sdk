@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeleteE2MRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteE2MRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &DeleteE2MRequest{}
 // DeleteE2MRequest This data structure is used to delete an existing event to metric definition
 type DeleteE2MRequest struct {
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteE2MRequest DeleteE2MRequest
@@ -79,6 +82,11 @@ func (o DeleteE2MRequest) MarshalJSON() ([]byte, error) {
 func (o DeleteE2MRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *DeleteE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	varDeleteE2MRequest := _DeleteE2MRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDeleteE2MRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *DeleteE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DeleteE2MRequest(varDeleteE2MRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableDeleteE2MRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

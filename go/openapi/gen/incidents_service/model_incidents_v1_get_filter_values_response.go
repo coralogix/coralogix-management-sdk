@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentsV1GetFilterValuesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentsV1GetFilterValuesResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &IncidentsV1GetFilterValuesResponse{}
 // IncidentsV1GetFilterValuesResponse Response containing available filter values for incidents
 type IncidentsV1GetFilterValuesResponse struct {
 	FiltersValues IncidentQueryFiltersValues `json:"filtersValues"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentsV1GetFilterValuesResponse IncidentsV1GetFilterValuesResponse
@@ -79,6 +82,11 @@ func (o IncidentsV1GetFilterValuesResponse) MarshalJSON() ([]byte, error) {
 func (o IncidentsV1GetFilterValuesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["filtersValues"] = o.FiltersValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *IncidentsV1GetFilterValuesResponse) UnmarshalJSON(data []byte) (err err
 	varIncidentsV1GetFilterValuesResponse := _IncidentsV1GetFilterValuesResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentsV1GetFilterValuesResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *IncidentsV1GetFilterValuesResponse) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = IncidentsV1GetFilterValuesResponse(varIncidentsV1GetFilterValuesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filtersValues")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableIncidentsV1GetFilterValuesResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

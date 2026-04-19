@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectQueryLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectQueryLogsQuery{}
 
 // MultiSelectQueryLogsQuery struct for MultiSelectQueryLogsQuery
 type MultiSelectQueryLogsQuery struct {
-	LogsQuery *QueryLogsQuery `json:"logsQuery,omitempty"`
+	LogsQuery QueryLogsQuery `json:"logsQuery"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectQueryLogsQuery MultiSelectQueryLogsQuery
 
 // NewMultiSelectQueryLogsQuery instantiates a new MultiSelectQueryLogsQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectQueryLogsQuery() *MultiSelectQueryLogsQuery {
+func NewMultiSelectQueryLogsQuery(logsQuery QueryLogsQuery) *MultiSelectQueryLogsQuery {
 	this := MultiSelectQueryLogsQuery{}
+	this.LogsQuery = logsQuery
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectQueryLogsQueryWithDefaults() *MultiSelectQueryLogsQuery {
 	return &this
 }
 
-// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
+// GetLogsQuery returns the LogsQuery field value
 func (o *MultiSelectQueryLogsQuery) GetLogsQuery() QueryLogsQuery {
-	if o == nil || IsNil(o.LogsQuery) {
+	if o == nil {
 		var ret QueryLogsQuery
 		return ret
 	}
-	return *o.LogsQuery
+
+	return o.LogsQuery
 }
 
-// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// GetLogsQueryOk returns a tuple with the LogsQuery field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectQueryLogsQuery) GetLogsQueryOk() (*QueryLogsQuery, bool) {
-	if o == nil || IsNil(o.LogsQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsQuery, true
+	return &o.LogsQuery, true
 }
 
-// HasLogsQuery returns a boolean if a field has been set.
-func (o *MultiSelectQueryLogsQuery) HasLogsQuery() bool {
-	if o != nil && !IsNil(o.LogsQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsQuery gets a reference to the given QueryLogsQuery and assigns it to the LogsQuery field.
+// SetLogsQuery sets field value
 func (o *MultiSelectQueryLogsQuery) SetLogsQuery(v QueryLogsQuery) {
-	o.LogsQuery = &v
+	o.LogsQuery = v
 }
 
 func (o MultiSelectQueryLogsQuery) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectQueryLogsQuery) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectQueryLogsQuery) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LogsQuery) {
-		toSerialize["logsQuery"] = o.LogsQuery
+	toSerialize["logsQuery"] = o.LogsQuery
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectQueryLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectQueryLogsQuery := _MultiSelectQueryLogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectQueryLogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectQueryLogsQuery(varMultiSelectQueryLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsQuery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectQueryLogsQuery struct {
@@ -122,5 +168,4 @@ func (v *NullableMultiSelectQueryLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

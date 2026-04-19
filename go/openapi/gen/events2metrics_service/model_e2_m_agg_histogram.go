@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MAggHistogram type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MAggHistogram{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &E2MAggHistogram{}
 // E2MAggHistogram This data structure represents the e2m aggregate histogram
 type E2MAggHistogram struct {
 	Buckets []float32 `json:"buckets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _E2MAggHistogram E2MAggHistogram
 
 // NewE2MAggHistogram instantiates a new E2MAggHistogram object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o E2MAggHistogram) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Buckets) {
 		toSerialize["buckets"] = o.Buckets
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *E2MAggHistogram) UnmarshalJSON(data []byte) (err error) {
+	varE2MAggHistogram := _E2MAggHistogram{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2MAggHistogram)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2MAggHistogram(varE2MAggHistogram)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "buckets")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableE2MAggHistogram struct {
@@ -122,5 +155,4 @@ func (v *NullableE2MAggHistogram) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3UndetectedValuesManagement type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3UndetectedValuesManagement{}
@@ -22,7 +25,10 @@ type V3UndetectedValuesManagement struct {
 	AutoRetireTimeframe *V3AutoRetireTimeframe `json:"autoRetireTimeframe,omitempty"`
 	// Should trigger the alert when undetected values are detected
 	TriggerUndetectedValues *bool `json:"triggerUndetectedValues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3UndetectedValuesManagement V3UndetectedValuesManagement
 
 // NewV3UndetectedValuesManagement instantiates a new V3UndetectedValuesManagement object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o V3UndetectedValuesManagement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TriggerUndetectedValues) {
 		toSerialize["triggerUndetectedValues"] = o.TriggerUndetectedValues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V3UndetectedValuesManagement) UnmarshalJSON(data []byte) (err error) {
+	varV3UndetectedValuesManagement := _V3UndetectedValuesManagement{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3UndetectedValuesManagement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3UndetectedValuesManagement(varV3UndetectedValuesManagement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "autoRetireTimeframe")
+		delete(additionalProperties, "triggerUndetectedValues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3UndetectedValuesManagement struct {
@@ -159,5 +193,4 @@ func (v *NullableV3UndetectedValuesManagement) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

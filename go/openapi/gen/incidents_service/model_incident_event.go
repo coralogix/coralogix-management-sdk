@@ -11,10 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // IncidentEvent - struct for IncidentEvent
 type IncidentEvent struct {
@@ -122,7 +125,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IncidentEventAcknowledgeAdministrativeEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventAcknowledgeAdministrativeEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventAcknowledgeAdministrativeEvent)
 	if err == nil {
 		jsonIncidentEventAcknowledgeAdministrativeEvent, _ := json.Marshal(dst.IncidentEventAcknowledgeAdministrativeEvent)
 		if string(jsonIncidentEventAcknowledgeAdministrativeEvent) == "{}" { // empty struct
@@ -139,7 +142,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventAcknowledgeOperationalEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventAcknowledgeOperationalEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventAcknowledgeOperationalEvent)
 	if err == nil {
 		jsonIncidentEventAcknowledgeOperationalEvent, _ := json.Marshal(dst.IncidentEventAcknowledgeOperationalEvent)
 		if string(jsonIncidentEventAcknowledgeOperationalEvent) == "{}" { // empty struct
@@ -156,7 +159,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventAssignmentAdministrativeEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventAssignmentAdministrativeEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventAssignmentAdministrativeEvent)
 	if err == nil {
 		jsonIncidentEventAssignmentAdministrativeEvent, _ := json.Marshal(dst.IncidentEventAssignmentAdministrativeEvent)
 		if string(jsonIncidentEventAssignmentAdministrativeEvent) == "{}" { // empty struct
@@ -173,7 +176,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventAssignmentOperationalEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventAssignmentOperationalEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventAssignmentOperationalEvent)
 	if err == nil {
 		jsonIncidentEventAssignmentOperationalEvent, _ := json.Marshal(dst.IncidentEventAssignmentOperationalEvent)
 		if string(jsonIncidentEventAssignmentOperationalEvent) == "{}" { // empty struct
@@ -190,7 +193,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventCloseAdministrativeEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventCloseAdministrativeEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventCloseAdministrativeEvent)
 	if err == nil {
 		jsonIncidentEventCloseAdministrativeEvent, _ := json.Marshal(dst.IncidentEventCloseAdministrativeEvent)
 		if string(jsonIncidentEventCloseAdministrativeEvent) == "{}" { // empty struct
@@ -207,7 +210,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventCloseOperationalEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventCloseOperationalEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventCloseOperationalEvent)
 	if err == nil {
 		jsonIncidentEventCloseOperationalEvent, _ := json.Marshal(dst.IncidentEventCloseOperationalEvent)
 		if string(jsonIncidentEventCloseOperationalEvent) == "{}" { // empty struct
@@ -224,7 +227,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventSnoozeIndicatorAdministrativeEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventSnoozeIndicatorAdministrativeEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventSnoozeIndicatorAdministrativeEvent)
 	if err == nil {
 		jsonIncidentEventSnoozeIndicatorAdministrativeEvent, _ := json.Marshal(dst.IncidentEventSnoozeIndicatorAdministrativeEvent)
 		if string(jsonIncidentEventSnoozeIndicatorAdministrativeEvent) == "{}" { // empty struct
@@ -241,7 +244,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventSnoozeIndicatorOperationalEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventSnoozeIndicatorOperationalEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventSnoozeIndicatorOperationalEvent)
 	if err == nil {
 		jsonIncidentEventSnoozeIndicatorOperationalEvent, _ := json.Marshal(dst.IncidentEventSnoozeIndicatorOperationalEvent)
 		if string(jsonIncidentEventSnoozeIndicatorOperationalEvent) == "{}" { // empty struct
@@ -258,7 +261,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventUnassignAdministrativeEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventUnassignAdministrativeEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventUnassignAdministrativeEvent)
 	if err == nil {
 		jsonIncidentEventUnassignAdministrativeEvent, _ := json.Marshal(dst.IncidentEventUnassignAdministrativeEvent)
 		if string(jsonIncidentEventUnassignAdministrativeEvent) == "{}" { // empty struct
@@ -275,7 +278,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventUnassignOperationalEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventUnassignOperationalEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventUnassignOperationalEvent)
 	if err == nil {
 		jsonIncidentEventUnassignOperationalEvent, _ := json.Marshal(dst.IncidentEventUnassignOperationalEvent)
 		if string(jsonIncidentEventUnassignOperationalEvent) == "{}" { // empty struct
@@ -292,7 +295,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventUpsertStateAdministrativeEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventUpsertStateAdministrativeEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventUpsertStateAdministrativeEvent)
 	if err == nil {
 		jsonIncidentEventUpsertStateAdministrativeEvent, _ := json.Marshal(dst.IncidentEventUpsertStateAdministrativeEvent)
 		if string(jsonIncidentEventUpsertStateAdministrativeEvent) == "{}" { // empty struct
@@ -309,7 +312,7 @@ func (dst *IncidentEvent) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IncidentEventUpsertStateOperationalEvent
-	err = newStrictDecoder(data).Decode(&dst.IncidentEventUpsertStateOperationalEvent)
+	err = json.Unmarshal(data, &dst.IncidentEventUpsertStateOperationalEvent)
 	if err == nil {
 		jsonIncidentEventUpsertStateOperationalEvent, _ := json.Marshal(dst.IncidentEventUpsertStateOperationalEvent)
 		if string(jsonIncidentEventUpsertStateOperationalEvent) == "{}" { // empty struct
@@ -547,5 +550,4 @@ func (v *NullableIncidentEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

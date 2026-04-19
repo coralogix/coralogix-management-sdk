@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardCatalogItem type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardCatalogItem{}
@@ -32,7 +35,10 @@ type DashboardCatalogItem struct {
 	Name *string `json:"name,omitempty"`
 	SlugName *string `json:"slugName,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DashboardCatalogItem DashboardCatalogItem
 
 // NewDashboardCatalogItem instantiates a new DashboardCatalogItem object
 // This constructor will assign default values to properties that have it defined,
@@ -481,7 +487,45 @@ func (o DashboardCatalogItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DashboardCatalogItem) UnmarshalJSON(data []byte) (err error) {
+	varDashboardCatalogItem := _DashboardCatalogItem{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDashboardCatalogItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DashboardCatalogItem(varDashboardCatalogItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "authorId")
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "folder")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isDefault")
+		delete(additionalProperties, "isLocked")
+		delete(additionalProperties, "isPinned")
+		delete(additionalProperties, "lockerAuthorId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slugName")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDashboardCatalogItem struct {
@@ -519,5 +563,4 @@ func (v *NullableDashboardCatalogItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

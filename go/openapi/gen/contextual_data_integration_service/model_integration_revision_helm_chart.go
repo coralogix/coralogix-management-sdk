@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionHelmChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionHelmChart{}
@@ -22,18 +26,22 @@ type IntegrationRevisionHelmChart struct {
 	FeatureFlag *string `json:"featureFlag,omitempty"`
 	Fields []FieldInformation `json:"fields,omitempty"`
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
-	HelmChart *HelmChart `json:"helmChart,omitempty"`
+	HelmChart HelmChart `json:"helmChart"`
 	Id *string `json:"id,omitempty"`
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionHelmChart IntegrationRevisionHelmChart
 
 // NewIntegrationRevisionHelmChart instantiates a new IntegrationRevisionHelmChart object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationRevisionHelmChart() *IntegrationRevisionHelmChart {
+func NewIntegrationRevisionHelmChart(helmChart HelmChart) *IntegrationRevisionHelmChart {
 	this := IntegrationRevisionHelmChart{}
+	this.HelmChart = helmChart
 	return &this
 }
 
@@ -141,36 +149,28 @@ func (o *IntegrationRevisionHelmChart) SetGroups(v []IntegrationRevisionGroup) {
 	o.Groups = v
 }
 
-// GetHelmChart returns the HelmChart field value if set, zero value otherwise.
+// GetHelmChart returns the HelmChart field value
 func (o *IntegrationRevisionHelmChart) GetHelmChart() HelmChart {
-	if o == nil || IsNil(o.HelmChart) {
+	if o == nil {
 		var ret HelmChart
 		return ret
 	}
-	return *o.HelmChart
+
+	return o.HelmChart
 }
 
-// GetHelmChartOk returns a tuple with the HelmChart field value if set, nil otherwise
+// GetHelmChartOk returns a tuple with the HelmChart field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationRevisionHelmChart) GetHelmChartOk() (*HelmChart, bool) {
-	if o == nil || IsNil(o.HelmChart) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HelmChart, true
+	return &o.HelmChart, true
 }
 
-// HasHelmChart returns a boolean if a field has been set.
-func (o *IntegrationRevisionHelmChart) HasHelmChart() bool {
-	if o != nil && !IsNil(o.HelmChart) {
-		return true
-	}
-
-	return false
-}
-
-// SetHelmChart gets a reference to the given HelmChart and assigns it to the HelmChart field.
+// SetHelmChart sets field value
 func (o *IntegrationRevisionHelmChart) SetHelmChart(v HelmChart) {
-	o.HelmChart = &v
+	o.HelmChart = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -288,9 +288,7 @@ func (o IntegrationRevisionHelmChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Groups) {
 		toSerialize["groups"] = o.Groups
 	}
-	if !IsNil(o.HelmChart) {
-		toSerialize["helmChart"] = o.HelmChart
-	}
+	toSerialize["helmChart"] = o.HelmChart
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -300,7 +298,61 @@ func (o IntegrationRevisionHelmChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpgradeInstructionsMd) {
 		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionHelmChart) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"helmChart",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationRevisionHelmChart := _IntegrationRevisionHelmChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionHelmChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionHelmChart(varIntegrationRevisionHelmChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "helmChart")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revisionDeploymentSupported")
+		delete(additionalProperties, "upgradeInstructionsMd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionHelmChart struct {
@@ -338,5 +390,4 @@ func (v *NullableIntegrationRevisionHelmChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

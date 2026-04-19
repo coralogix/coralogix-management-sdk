@@ -11,15 +11,26 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // MetricsConfiguratorPublicServiceValidateBucketRequest - struct for MetricsConfiguratorPublicServiceValidateBucketRequest
 type MetricsConfiguratorPublicServiceValidateBucketRequest struct {
+	ValidateBucketRequestGcs *ValidateBucketRequestGcs
 	ValidateBucketRequestIbm *ValidateBucketRequestIbm
 	ValidateBucketRequestS3 *ValidateBucketRequestS3
+}
+
+// ValidateBucketRequestGcsAsMetricsConfiguratorPublicServiceValidateBucketRequest is a convenience function that returns ValidateBucketRequestGcs wrapped in MetricsConfiguratorPublicServiceValidateBucketRequest
+func ValidateBucketRequestGcsAsMetricsConfiguratorPublicServiceValidateBucketRequest(v *ValidateBucketRequestGcs) MetricsConfiguratorPublicServiceValidateBucketRequest {
+	return MetricsConfiguratorPublicServiceValidateBucketRequest{
+		ValidateBucketRequestGcs: v,
+	}
 }
 
 // ValidateBucketRequestIbmAsMetricsConfiguratorPublicServiceValidateBucketRequest is a convenience function that returns ValidateBucketRequestIbm wrapped in MetricsConfiguratorPublicServiceValidateBucketRequest
@@ -41,8 +52,25 @@ func ValidateBucketRequestS3AsMetricsConfiguratorPublicServiceValidateBucketRequ
 func (dst *MetricsConfiguratorPublicServiceValidateBucketRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into ValidateBucketRequestGcs
+	err = json.Unmarshal(data, &dst.ValidateBucketRequestGcs)
+	if err == nil {
+		jsonValidateBucketRequestGcs, _ := json.Marshal(dst.ValidateBucketRequestGcs)
+		if string(jsonValidateBucketRequestGcs) == "{}" { // empty struct
+			dst.ValidateBucketRequestGcs = nil
+		} else {
+			if err = validator.Validate(dst.ValidateBucketRequestGcs); err != nil {
+				dst.ValidateBucketRequestGcs = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.ValidateBucketRequestGcs = nil
+	}
+
 	// try to unmarshal data into ValidateBucketRequestIbm
-	err = newStrictDecoder(data).Decode(&dst.ValidateBucketRequestIbm)
+	err = json.Unmarshal(data, &dst.ValidateBucketRequestIbm)
 	if err == nil {
 		jsonValidateBucketRequestIbm, _ := json.Marshal(dst.ValidateBucketRequestIbm)
 		if string(jsonValidateBucketRequestIbm) == "{}" { // empty struct
@@ -59,7 +87,7 @@ func (dst *MetricsConfiguratorPublicServiceValidateBucketRequest) UnmarshalJSON(
 	}
 
 	// try to unmarshal data into ValidateBucketRequestS3
-	err = newStrictDecoder(data).Decode(&dst.ValidateBucketRequestS3)
+	err = json.Unmarshal(data, &dst.ValidateBucketRequestS3)
 	if err == nil {
 		jsonValidateBucketRequestS3, _ := json.Marshal(dst.ValidateBucketRequestS3)
 		if string(jsonValidateBucketRequestS3) == "{}" { // empty struct
@@ -77,6 +105,7 @@ func (dst *MetricsConfiguratorPublicServiceValidateBucketRequest) UnmarshalJSON(
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.ValidateBucketRequestGcs = nil
 		dst.ValidateBucketRequestIbm = nil
 		dst.ValidateBucketRequestS3 = nil
 
@@ -90,6 +119,10 @@ func (dst *MetricsConfiguratorPublicServiceValidateBucketRequest) UnmarshalJSON(
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MetricsConfiguratorPublicServiceValidateBucketRequest) MarshalJSON() ([]byte, error) {
+	if src.ValidateBucketRequestGcs != nil {
+		return json.Marshal(&src.ValidateBucketRequestGcs)
+	}
+
 	if src.ValidateBucketRequestIbm != nil {
 		return json.Marshal(&src.ValidateBucketRequestIbm)
 	}
@@ -106,6 +139,10 @@ func (obj *MetricsConfiguratorPublicServiceValidateBucketRequest) GetActualInsta
 	if obj == nil {
 		return nil
 	}
+	if obj.ValidateBucketRequestGcs != nil {
+		return obj.ValidateBucketRequestGcs
+	}
+
 	if obj.ValidateBucketRequestIbm != nil {
 		return obj.ValidateBucketRequestIbm
 	}
@@ -120,6 +157,10 @@ func (obj *MetricsConfiguratorPublicServiceValidateBucketRequest) GetActualInsta
 
 // Get the actual instance value
 func (obj MetricsConfiguratorPublicServiceValidateBucketRequest) GetActualInstanceValue() (interface{}) {
+	if obj.ValidateBucketRequestGcs != nil {
+		return *obj.ValidateBucketRequestGcs
+	}
+
 	if obj.ValidateBucketRequestIbm != nil {
 		return *obj.ValidateBucketRequestIbm
 	}
@@ -167,5 +208,4 @@ func (v *NullableMetricsConfiguratorPublicServiceValidateBucketRequest) Unmarsha
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

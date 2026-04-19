@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAllExtensionsResponseRevisionSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAllExtensionsResponseRevisionSummary{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &GetAllExtensionsResponseRevisionSummary{}
 type GetAllExtensionsResponseRevisionSummary struct {
 	IsNew *bool `json:"isNew,omitempty"`
 	ItemCounts *ItemCounts `json:"itemCounts,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAllExtensionsResponseRevisionSummary GetAllExtensionsResponseRevisionSummary
 
 // NewGetAllExtensionsResponseRevisionSummary instantiates a new GetAllExtensionsResponseRevisionSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o GetAllExtensionsResponseRevisionSummary) ToMap() (map[string]interface{}
 	if !IsNil(o.ItemCounts) {
 		toSerialize["itemCounts"] = o.ItemCounts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAllExtensionsResponseRevisionSummary) UnmarshalJSON(data []byte) (err error) {
+	varGetAllExtensionsResponseRevisionSummary := _GetAllExtensionsResponseRevisionSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAllExtensionsResponseRevisionSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAllExtensionsResponseRevisionSummary(varGetAllExtensionsResponseRevisionSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isNew")
+		delete(additionalProperties, "itemCounts")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAllExtensionsResponseRevisionSummary struct {
@@ -158,5 +192,4 @@ func (v *NullableGetAllExtensionsResponseRevisionSummary) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

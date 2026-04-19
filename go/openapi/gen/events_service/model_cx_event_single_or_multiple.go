@@ -11,10 +11,13 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // CxEventSingleOrMultiple - struct for CxEventSingleOrMultiple
 type CxEventSingleOrMultiple struct {
@@ -42,7 +45,7 @@ func (dst *CxEventSingleOrMultiple) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into CxEventSingleOrMultipleMultipleEvents
-	err = newStrictDecoder(data).Decode(&dst.CxEventSingleOrMultipleMultipleEvents)
+	err = json.Unmarshal(data, &dst.CxEventSingleOrMultipleMultipleEvents)
 	if err == nil {
 		jsonCxEventSingleOrMultipleMultipleEvents, _ := json.Marshal(dst.CxEventSingleOrMultipleMultipleEvents)
 		if string(jsonCxEventSingleOrMultipleMultipleEvents) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *CxEventSingleOrMultiple) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into CxEventSingleOrMultipleSingleEvent
-	err = newStrictDecoder(data).Decode(&dst.CxEventSingleOrMultipleSingleEvent)
+	err = json.Unmarshal(data, &dst.CxEventSingleOrMultipleSingleEvent)
 	if err == nil {
 		jsonCxEventSingleOrMultipleSingleEvent, _ := json.Marshal(dst.CxEventSingleOrMultipleSingleEvent)
 		if string(jsonCxEventSingleOrMultipleSingleEvent) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableCxEventSingleOrMultiple) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

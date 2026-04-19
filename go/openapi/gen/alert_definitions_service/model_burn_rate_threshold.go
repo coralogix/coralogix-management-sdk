@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // BurnRateThreshold - struct for BurnRateThreshold
 type BurnRateThreshold struct {
@@ -42,7 +45,7 @@ func (dst *BurnRateThreshold) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into BurnRateThresholdDual
-	err = newStrictDecoder(data).Decode(&dst.BurnRateThresholdDual)
+	err = json.Unmarshal(data, &dst.BurnRateThresholdDual)
 	if err == nil {
 		jsonBurnRateThresholdDual, _ := json.Marshal(dst.BurnRateThresholdDual)
 		if string(jsonBurnRateThresholdDual) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *BurnRateThreshold) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into BurnRateThresholdSingle
-	err = newStrictDecoder(data).Decode(&dst.BurnRateThresholdSingle)
+	err = json.Unmarshal(data, &dst.BurnRateThresholdSingle)
 	if err == nil {
 		jsonBurnRateThresholdSingle, _ := json.Marshal(dst.BurnRateThresholdSingle)
 		if string(jsonBurnRateThresholdSingle) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableBurnRateThreshold) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

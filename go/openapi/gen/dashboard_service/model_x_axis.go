@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // XAxis - struct for XAxis
 type XAxis struct {
@@ -50,7 +53,7 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into XAxisTime
-	err = newStrictDecoder(data).Decode(&dst.XAxisTime)
+	err = json.Unmarshal(data, &dst.XAxisTime)
 	if err == nil {
 		jsonXAxisTime, _ := json.Marshal(dst.XAxisTime)
 		if string(jsonXAxisTime) == "{}" { // empty struct
@@ -67,7 +70,7 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into XAxisTimeBuckets
-	err = newStrictDecoder(data).Decode(&dst.XAxisTimeBuckets)
+	err = json.Unmarshal(data, &dst.XAxisTimeBuckets)
 	if err == nil {
 		jsonXAxisTimeBuckets, _ := json.Marshal(dst.XAxisTimeBuckets)
 		if string(jsonXAxisTimeBuckets) == "{}" { // empty struct
@@ -84,7 +87,7 @@ func (dst *XAxis) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into XAxisValue
-	err = newStrictDecoder(data).Decode(&dst.XAxisValue)
+	err = json.Unmarshal(data, &dst.XAxisValue)
 	if err == nil {
 		jsonXAxisValue, _ := json.Marshal(dst.XAxisValue)
 		if string(jsonXAxisValue) == "{}" { // empty struct
@@ -205,5 +208,4 @@ func (v *NullableXAxis) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

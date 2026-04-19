@@ -11,9 +11,13 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RegisteredInstanceEmpty type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RegisteredInstanceEmpty{}
@@ -22,21 +26,25 @@ var _ MappedNullable = &RegisteredInstanceEmpty{}
 type RegisteredInstanceEmpty struct {
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
 	// This data structure represents an integration that does not require deployment.
-	Empty map[string]interface{} `json:"empty,omitempty"`
+	Empty map[string]interface{} `json:"empty"`
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
 	IsTesting *bool `json:"isTesting,omitempty"`
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
 	Parameters []Parameter `json:"parameters,omitempty"`
 	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RegisteredInstanceEmpty RegisteredInstanceEmpty
 
 // NewRegisteredInstanceEmpty instantiates a new RegisteredInstanceEmpty object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegisteredInstanceEmpty() *RegisteredInstanceEmpty {
+func NewRegisteredInstanceEmpty(empty map[string]interface{}) *RegisteredInstanceEmpty {
 	this := RegisteredInstanceEmpty{}
+	this.Empty = empty
 	return &this
 }
 
@@ -80,34 +88,26 @@ func (o *RegisteredInstanceEmpty) SetDefinitionVersion(v string) {
 	o.DefinitionVersion = &v
 }
 
-// GetEmpty returns the Empty field value if set, zero value otherwise.
+// GetEmpty returns the Empty field value
 func (o *RegisteredInstanceEmpty) GetEmpty() map[string]interface{} {
-	if o == nil || IsNil(o.Empty) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Empty
 }
 
-// GetEmptyOk returns a tuple with the Empty field value if set, nil otherwise
+// GetEmptyOk returns a tuple with the Empty field value
 // and a boolean to check if the value has been set.
 func (o *RegisteredInstanceEmpty) GetEmptyOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Empty) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Empty, true
 }
 
-// HasEmpty returns a boolean if a field has been set.
-func (o *RegisteredInstanceEmpty) HasEmpty() bool {
-	if o != nil && !IsNil(o.Empty) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmpty gets a reference to the given map[string]interface{} and assigns it to the Empty field.
+// SetEmpty sets field value
 func (o *RegisteredInstanceEmpty) SetEmpty(v map[string]interface{}) {
 	o.Empty = v
 }
@@ -317,9 +317,7 @@ func (o RegisteredInstanceEmpty) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefinitionVersion) {
 		toSerialize["definitionVersion"] = o.DefinitionVersion
 	}
-	if !IsNil(o.Empty) {
-		toSerialize["empty"] = o.Empty
-	}
+	toSerialize["empty"] = o.Empty
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -338,7 +336,62 @@ func (o RegisteredInstanceEmpty) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RevisionLifecycle) {
 		toSerialize["revisionLifecycle"] = o.RevisionLifecycle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RegisteredInstanceEmpty) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"empty",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRegisteredInstanceEmpty := _RegisteredInstanceEmpty{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRegisteredInstanceEmpty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RegisteredInstanceEmpty(varRegisteredInstanceEmpty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "definitionVersion")
+		delete(additionalProperties, "empty")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "integrationStatus")
+		delete(additionalProperties, "isTesting")
+		delete(additionalProperties, "lastUpdated")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "revisionLifecycle")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRegisteredInstanceEmpty struct {
@@ -376,5 +429,4 @@ func (v *NullableRegisteredInstanceEmpty) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

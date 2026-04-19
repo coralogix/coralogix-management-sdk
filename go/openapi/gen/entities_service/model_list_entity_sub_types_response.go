@@ -11,8 +11,11 @@ API version: 1.0.0
 package entities_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListEntitySubTypesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListEntitySubTypesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListEntitySubTypesResponse{}
 // ListEntitySubTypesResponse struct for ListEntitySubTypesResponse
 type ListEntitySubTypesResponse struct {
 	EntitySubTypes []string `json:"entitySubTypes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListEntitySubTypesResponse ListEntitySubTypesResponse
 
 // NewListEntitySubTypesResponse instantiates a new ListEntitySubTypesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListEntitySubTypesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EntitySubTypes) {
 		toSerialize["entitySubTypes"] = o.EntitySubTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListEntitySubTypesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListEntitySubTypesResponse := _ListEntitySubTypesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListEntitySubTypesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListEntitySubTypesResponse(varListEntitySubTypesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entitySubTypes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListEntitySubTypesResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableListEntitySubTypesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

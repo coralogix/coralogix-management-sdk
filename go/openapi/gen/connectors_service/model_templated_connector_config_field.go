@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TemplatedConnectorConfigField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TemplatedConnectorConfigField{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &TemplatedConnectorConfigField{}
 type TemplatedConnectorConfigField struct {
 	FieldName *string `json:"fieldName,omitempty"`
 	Template *string `json:"template,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TemplatedConnectorConfigField TemplatedConnectorConfigField
 
 // NewTemplatedConnectorConfigField instantiates a new TemplatedConnectorConfigField object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o TemplatedConnectorConfigField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Template) {
 		toSerialize["template"] = o.Template
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TemplatedConnectorConfigField) UnmarshalJSON(data []byte) (err error) {
+	varTemplatedConnectorConfigField := _TemplatedConnectorConfigField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTemplatedConnectorConfigField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TemplatedConnectorConfigField(varTemplatedConnectorConfigField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "template")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTemplatedConnectorConfigField struct {
@@ -158,5 +192,4 @@ func (v *NullableTemplatedConnectorConfigField) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

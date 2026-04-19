@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AnomalyAlertSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnomalyAlertSettings{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AnomalyAlertSettings{}
 type AnomalyAlertSettings struct {
 	// The percentage of deviation from the baseline for triggering the alert.
 	PercentageOfDeviation *float32 `json:"percentageOfDeviation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnomalyAlertSettings AnomalyAlertSettings
 
 // NewAnomalyAlertSettings instantiates a new AnomalyAlertSettings object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o AnomalyAlertSettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PercentageOfDeviation) {
 		toSerialize["percentageOfDeviation"] = o.PercentageOfDeviation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AnomalyAlertSettings) UnmarshalJSON(data []byte) (err error) {
+	varAnomalyAlertSettings := _AnomalyAlertSettings{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnomalyAlertSettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnomalyAlertSettings(varAnomalyAlertSettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "percentageOfDeviation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnomalyAlertSettings struct {
@@ -123,5 +156,4 @@ func (v *NullableAnomalyAlertSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

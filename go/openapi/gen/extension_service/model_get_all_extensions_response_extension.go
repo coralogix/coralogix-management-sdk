@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAllExtensionsResponseExtension type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAllExtensionsResponseExtension{}
@@ -28,7 +31,10 @@ type GetAllExtensionsResponseExtension struct {
 	Keywords []string `json:"keywords,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Revisions []GetAllExtensionsResponseRevision `json:"revisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAllExtensionsResponseExtension GetAllExtensionsResponseExtension
 
 // NewGetAllExtensionsResponseExtension instantiates a new GetAllExtensionsResponseExtension object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +378,42 @@ func (o GetAllExtensionsResponseExtension) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Revisions) {
 		toSerialize["revisions"] = o.Revisions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAllExtensionsResponseExtension) UnmarshalJSON(data []byte) (err error) {
+	varGetAllExtensionsResponseExtension := _GetAllExtensionsResponseExtension{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAllExtensionsResponseExtension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAllExtensionsResponseExtension(varGetAllExtensionsResponseExtension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "darkModeImage")
+		delete(additionalProperties, "deprecation")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "integrations")
+		delete(additionalProperties, "isHidden")
+		delete(additionalProperties, "keywords")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "revisions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAllExtensionsResponseExtension struct {
@@ -410,5 +451,4 @@ func (v *NullableGetAllExtensionsResponseExtension) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

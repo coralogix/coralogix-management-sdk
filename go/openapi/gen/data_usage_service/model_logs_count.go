@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsCount{}
@@ -26,7 +29,10 @@ type LogsCount struct {
 	Severity *DatausageV2Severity `json:"severity,omitempty"`
 	SubsystemName *string `json:"subsystemName,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsCount LogsCount
 
 // NewLogsCount instantiates a new LogsCount object
 // This constructor will assign default values to properties that have it defined,
@@ -265,7 +271,39 @@ func (o LogsCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsCount) UnmarshalJSON(data []byte) (err error) {
+	varLogsCount := _LogsCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsCount(varLogsCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationName")
+		delete(additionalProperties, "logsCount")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "severity")
+		delete(additionalProperties, "subsystemName")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsCount struct {
@@ -303,5 +341,4 @@ func (v *NullableLogsCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -1,0 +1,652 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /aaa/teams/v2/{team_id}/members:
+    post:
+      externalDocs:
+        url: ""
+      operationId: UsersMgmtService_CreateUsers
+      parameters:
+      - explode: false
+        in: path
+        name: team_id
+        required: true
+        schema:
+          description: Team ID where the users will be created
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersMgmtService_CreateUsers_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateUsersResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team not found
+        "409":
+          content:
+            application/json: {}
+          description: User already exists
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Users
+      tags:
+      - Users Management Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: UsersMgmtService_UpdateUsers
+      parameters:
+      - explode: false
+        in: path
+        name: team_id
+        required: true
+        schema:
+          description: Team ID containing the users to update
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersMgmtService_UpdateUsers_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateUsersResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: User not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Users
+      tags:
+      - Users Management Service
+  /aaa/teams/v2/{team_id}/members/status:
+    patch:
+      externalDocs:
+        url: ""
+      operationId: UsersMgmtService_UpdateUsersStatuses
+      parameters:
+      - explode: false
+        in: path
+        name: team_id
+        required: true
+        schema:
+          description: Team ID containing the users to update
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserStatusRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateUsersStatusesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: User not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Activate/Revoke Users
+      tags:
+      - Users Management Service
+  /aaa/teams/v2/{team_id}/members/{user_account_id}:
+    get:
+      externalDocs:
+        url: ""
+      operationId: UsersMgmtService_GetUser
+      parameters:
+      - explode: false
+        in: path
+        name: team_id
+        required: true
+        schema:
+          description: Team ID to search within
+          format: int64
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: user_account_id
+        required: true
+        schema:
+          description: User account ID to retrieve
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: User not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get User
+      tags:
+      - Users Management Service
+  /aaa/teams/v2/{team_id}/search:
+    get:
+      externalDocs:
+        url: ""
+      operationId: UsersMgmtService_SearchUsers
+      parameters:
+      - explode: false
+        in: path
+        name: team_id
+        required: true
+        schema:
+          description: Team ID to search within
+          format: int64
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: username
+        required: false
+        schema:
+          description: Optional filter by username (partial match supported)
+          example: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: "#/components/schemas/UserStatus"
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          description: Number of results per page
+          format: int64
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_token
+        required: false
+        schema:
+          description: Token for pagination to retrieve the next page of results
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchUsersResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Team not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Search Users
+      tags:
+      - Users Management Service
+components:
+  schemas:
+    AccessType:
+      discriminator:
+        mapping:
+          permanent: "#/components/schemas/PermanentAccess"
+          temporary: "#/components/schemas/TemporaryAccess"
+        propertyName: access_type
+      oneOf:
+      - $ref: "#/components/schemas/AccessTypePermanentAccess"
+      - $ref: "#/components/schemas/AccessTypeTemporaryAccess"
+    AccessTypePermanentAccess:
+      description: Defines the access duration for a user. Can be either permanent
+        (indefinite) or temporary (expires at a specific time).
+      externalDocs:
+        url: ""
+      properties:
+        accessType:
+          description: "Type of access: 'permanent' or 'temporary'"
+          type: string
+        permanentAccess:
+          description: User with permanent access. The user's access does not expire
+            and remains active until manually revoked or deactivated.
+          externalDocs:
+            url: ""
+          title: PermanentAccess
+          type: object
+      required:
+      - accessType
+      - permanentAccess
+      title: AccessType
+      type: object
+    AccessTypeTemporaryAccess:
+      description: Defines the access duration for a user. Can be either permanent
+        (indefinite) or temporary (expires at a specific time).
+      externalDocs:
+        url: ""
+      properties:
+        accessType:
+          description: "Type of access: 'permanent' or 'temporary'"
+          type: string
+        temporaryAccess:
+          $ref: "#/components/schemas/TemporaryAccess"
+      required:
+      - accessType
+      - temporaryAccess
+      title: AccessType
+      type: object
+    AllowedLoginMode:
+      enum:
+      - ALLOWED_LOGIN_MODE_UNSPECIFIED
+      - ALLOWED_LOGIN_MODE_SSO
+      - ALLOWED_LOGIN_MODE_LOCAL
+      type: string
+    CreateUsersResponse:
+      description: Empty response indicating successful processing of all user creation
+        and invitation requests. Ensure failures are returned via gRPC status codes.
+      externalDocs:
+        description: Find out more about user management
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      title: CreateUsersResponse
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - filters
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - multipleValues
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetUserResponse:
+      description: "Response containing the complete details of the requested user,\
+        \ including account information, status, login modes, and access configuration."
+      example:
+        user:
+          firstName: firstName
+          lastName: lastName
+          userAccountId: 0
+          userId: userId
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+      externalDocs:
+        description: Find out more about user management
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        user:
+          $ref: "#/components/schemas/rbac.v2.User"
+      title: GetUserResponse
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    OnboardingMode:
+      enum:
+      - ONBOARDING_MODE_UNSPECIFIED
+      - ONBOARDING_MODE_INVITE_LINK
+      - ONBOARDING_MODE_NO_INVITE
+      type: string
+    PermanentAccess:
+      description: User with permanent access. The user's access does not expire and
+        remains active until manually revoked or deactivated.
+      externalDocs:
+        url: ""
+      title: PermanentAccess
+      type: object
+    SearchUsersResponse:
+      description: "Response containing a paginated list of users matching the search\
+        \ criteria, along with pagination tokens and total count."
+      example:
+        nextPageToken: 0
+        totalCount: 6
+        users:
+        - firstName: firstName
+          lastName: lastName
+          userAccountId: 0
+          userId: userId
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+        - firstName: firstName
+          lastName: lastName
+          userAccountId: 0
+          userId: userId
+          status: USER_STATUS_UNSPECIFIED
+          username: username
+      externalDocs:
+        description: Find out more about user management
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        nextPageToken:
+          description: Token for the next page of results. Empty if no more pages
+            available.
+          format: int64
+          type: integer
+        totalCount:
+          description: Total number of users matching the search criteria across all
+            pages
+          format: int64
+          type: integer
+        users:
+          items:
+            $ref: "#/components/schemas/rbac.v2.User"
+          type: array
+      title: SearchUsersResponse
+      type: object
+    TemporaryAccess:
+      description: User with temporary access. The user's access will automatically
+        expire at the specified timestamp.
+      externalDocs:
+        url: ""
+      properties:
+        expireAt:
+          description: "Timestamp when the user's temporary access will expire. After\
+            \ this time, the user will no longer be able to access the system."
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+      title: TemporaryAccess
+      type: object
+    UpdateUsersResponse:
+      description: Response confirming the successful update of users. Contains the
+        user account IDs of all users that were updated.
+      example:
+        userAccountIds:
+        - 0
+        - 0
+      externalDocs:
+        description: Find out more about user management
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        userAccountIds:
+          items:
+            description: List of user account IDs for the successfully updated users
+            format: int64
+            type: integer
+          type: array
+      title: UpdateUsersResponse
+      type: object
+    UpdateUsersStatusesResponse:
+      description: Response confirming the successful status update of users. Contains
+        the user account IDs of all users whose status was changed.
+      example:
+        userAccountIds:
+        - 0
+        - 0
+      externalDocs:
+        description: Find out more about user management
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        userAccountIds:
+          items:
+            description: List of user account IDs for users whose status was successfully
+              updated
+            format: int64
+            type: integer
+          type: array
+      title: UpdateUserStatusResponse
+      type: object
+    UserStatus:
+      enum:
+      - USER_STATUS_UNSPECIFIED
+      - USER_STATUS_ACTIVE
+      - USER_STATUS_INACTIVE
+      type: string
+    UserTemplate:
+      description: "Template containing all user properties that can be set when creating\
+        \ or updating a user. Includes personal information, status, authentication\
+        \ methods, and access duration."
+      externalDocs:
+        description: Find out more about user management
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
+      properties:
+        accessType:
+          $ref: "#/components/schemas/AccessType"
+        allowedLoginMode:
+          items:
+            $ref: "#/components/schemas/AllowedLoginMode"
+          type: array
+        firstName:
+          description: User's first name
+          type: string
+        lastName:
+          description: User's last name
+          type: string
+        status:
+          $ref: "#/components/schemas/UserStatus"
+        username:
+          description: Unique username for the user. Must be unique within the system.
+            Updating username for existing users is not supported and ignored.
+          type: string
+      title: UserTemplate
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    rbac.v2.User:
+      description: A user is an entity that is always part of a team and has an account
+        associated with it
+      example:
+        firstName: firstName
+        lastName: lastName
+        userAccountId: 0
+        userId: userId
+        status: USER_STATUS_UNSPECIFIED
+        username: username
+      externalDocs:
+        url: ""
+      properties:
+        firstName:
+          description: User first name
+          type: string
+        lastName:
+          description: User last name
+          type: string
+        status:
+          $ref: "#/components/schemas/UserStatus"
+        userAccountId:
+          description: Associated account id. An account can have many users.
+          format: int64
+          type: integer
+        userId:
+          description: Unique user id
+          type: string
+        username:
+          description: Unique username
+          type: string
+      title: User
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    UsersMgmtService_UpdateUsers_request:
+      properties:
+        userAccountId:
+          description: User account ID of the user to update
+          format: int64
+          type: integer
+        userTemplate:
+          $ref: "#/components/schemas/UserTemplate"
+      type: object
+    UsersMgmtService_CreateUsers_request:
+      properties:
+        onboardingMode:
+          $ref: "#/components/schemas/OnboardingMode"
+        userTemplate:
+          $ref: "#/components/schemas/UserTemplate"
+      type: object
+    UpdateUserStatusRequest:
+      description: Request to activate or revoke (deactivate) one or more users within
+        a team. This operation changes the user status to either Active (enables access)
+        or Inactive (disables access).
+      example:
+        userAccountIds:
+        - 0
+        - 0
+        status: USER_STATUS_UNSPECIFIED
+      properties:
+        status:
+          $ref: "#/components/schemas/UserStatus"
+        userAccountIds:
+          items:
+            description: List of user account IDs to update. All users will be set
+              to the same status.
+            format: int64
+            type: integer
+          type: array
+      title: UpdateUserStatusRequest
+      type: object

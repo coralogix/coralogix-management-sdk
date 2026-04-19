@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListOutboundWebhooksSummaryResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListOutboundWebhooksSummaryResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListOutboundWebhooksSummaryResponse{}
 // ListOutboundWebhooksSummaryResponse struct for ListOutboundWebhooksSummaryResponse
 type ListOutboundWebhooksSummaryResponse struct {
 	OutboundWebhookSummaries []OutboundWebhookSummary `json:"outboundWebhookSummaries,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListOutboundWebhooksSummaryResponse ListOutboundWebhooksSummaryResponse
 
 // NewListOutboundWebhooksSummaryResponse instantiates a new ListOutboundWebhooksSummaryResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListOutboundWebhooksSummaryResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.OutboundWebhookSummaries) {
 		toSerialize["outboundWebhookSummaries"] = o.OutboundWebhookSummaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListOutboundWebhooksSummaryResponse) UnmarshalJSON(data []byte) (err error) {
+	varListOutboundWebhooksSummaryResponse := _ListOutboundWebhooksSummaryResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListOutboundWebhooksSummaryResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListOutboundWebhooksSummaryResponse(varListOutboundWebhooksSummaryResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "outboundWebhookSummaries")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListOutboundWebhooksSummaryResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableListOutboundWebhooksSummaryResponse) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

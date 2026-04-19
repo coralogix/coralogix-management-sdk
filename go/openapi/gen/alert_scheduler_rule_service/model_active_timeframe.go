@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActiveTimeframe type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActiveTimeframe{}
@@ -22,7 +25,10 @@ type ActiveTimeframe struct {
 	EndTime *string `json:"endTime,omitempty"`
 	StartTime *string `json:"startTime,omitempty"`
 	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActiveTimeframe ActiveTimeframe
 
 // NewActiveTimeframe instantiates a new ActiveTimeframe object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ActiveTimeframe) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActiveTimeframe) UnmarshalJSON(data []byte) (err error) {
+	varActiveTimeframe := _ActiveTimeframe{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActiveTimeframe)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActiveTimeframe(varActiveTimeframe)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActiveTimeframe struct {
@@ -194,5 +229,4 @@ func (v *NullableActiveTimeframe) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

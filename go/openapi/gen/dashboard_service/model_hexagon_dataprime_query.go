@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HexagonDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonDataprimeQuery{}
@@ -22,7 +25,10 @@ type HexagonDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
 	Filters []FilterSource `json:"filters,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HexagonDataprimeQuery HexagonDataprimeQuery
 
 // NewHexagonDataprimeQuery instantiates a new HexagonDataprimeQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o HexagonDataprimeQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HexagonDataprimeQuery) UnmarshalJSON(data []byte) (err error) {
+	varHexagonDataprimeQuery := _HexagonDataprimeQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHexagonDataprimeQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexagonDataprimeQuery(varHexagonDataprimeQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataprimeQuery")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHexagonDataprimeQuery struct {
@@ -194,5 +229,4 @@ func (v *NullableHexagonDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

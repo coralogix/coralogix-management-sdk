@@ -11,23 +11,31 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeSelectionQuickSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSelectionQuickSelection{}
 
 // TimeSelectionQuickSelection struct for TimeSelectionQuickSelection
 type TimeSelectionQuickSelection struct {
-	QuickSelection *QuickTimeSelection `json:"quickSelection,omitempty"`
+	QuickSelection QuickTimeSelection `json:"quickSelection"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSelectionQuickSelection TimeSelectionQuickSelection
 
 // NewTimeSelectionQuickSelection instantiates a new TimeSelectionQuickSelection object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeSelectionQuickSelection() *TimeSelectionQuickSelection {
+func NewTimeSelectionQuickSelection(quickSelection QuickTimeSelection) *TimeSelectionQuickSelection {
 	this := TimeSelectionQuickSelection{}
+	this.QuickSelection = quickSelection
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTimeSelectionQuickSelectionWithDefaults() *TimeSelectionQuickSelection {
 	return &this
 }
 
-// GetQuickSelection returns the QuickSelection field value if set, zero value otherwise.
+// GetQuickSelection returns the QuickSelection field value
 func (o *TimeSelectionQuickSelection) GetQuickSelection() QuickTimeSelection {
-	if o == nil || IsNil(o.QuickSelection) {
+	if o == nil {
 		var ret QuickTimeSelection
 		return ret
 	}
-	return *o.QuickSelection
+
+	return o.QuickSelection
 }
 
-// GetQuickSelectionOk returns a tuple with the QuickSelection field value if set, nil otherwise
+// GetQuickSelectionOk returns a tuple with the QuickSelection field value
 // and a boolean to check if the value has been set.
 func (o *TimeSelectionQuickSelection) GetQuickSelectionOk() (*QuickTimeSelection, bool) {
-	if o == nil || IsNil(o.QuickSelection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.QuickSelection, true
+	return &o.QuickSelection, true
 }
 
-// HasQuickSelection returns a boolean if a field has been set.
-func (o *TimeSelectionQuickSelection) HasQuickSelection() bool {
-	if o != nil && !IsNil(o.QuickSelection) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuickSelection gets a reference to the given QuickTimeSelection and assigns it to the QuickSelection field.
+// SetQuickSelection sets field value
 func (o *TimeSelectionQuickSelection) SetQuickSelection(v QuickTimeSelection) {
-	o.QuickSelection = &v
+	o.QuickSelection = v
 }
 
 func (o TimeSelectionQuickSelection) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TimeSelectionQuickSelection) MarshalJSON() ([]byte, error) {
 
 func (o TimeSelectionQuickSelection) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.QuickSelection) {
-		toSerialize["quickSelection"] = o.QuickSelection
+	toSerialize["quickSelection"] = o.QuickSelection
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSelectionQuickSelection) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"quickSelection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTimeSelectionQuickSelection := _TimeSelectionQuickSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeSelectionQuickSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSelectionQuickSelection(varTimeSelectionQuickSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "quickSelection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSelectionQuickSelection struct {
@@ -122,5 +168,4 @@ func (v *NullableTimeSelectionQuickSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

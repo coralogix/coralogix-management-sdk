@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefWebhooksSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefWebhooksSettings{}
@@ -23,7 +26,10 @@ type AlertDefWebhooksSettings struct {
 	// The time in minutes before the alert can be retriggered
 	Minutes *int64 `json:"minutes,omitempty"`
 	NotifyOn *NotifyOn `json:"notifyOn,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefWebhooksSettings AlertDefWebhooksSettings
 
 // NewAlertDefWebhooksSettings instantiates a new AlertDefWebhooksSettings object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o AlertDefWebhooksSettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotifyOn) {
 		toSerialize["notifyOn"] = o.NotifyOn
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefWebhooksSettings) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefWebhooksSettings := _AlertDefWebhooksSettings{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefWebhooksSettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefWebhooksSettings(varAlertDefWebhooksSettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integration")
+		delete(additionalProperties, "minutes")
+		delete(additionalProperties, "notifyOn")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefWebhooksSettings struct {
@@ -195,5 +230,4 @@ func (v *NullableAlertDefWebhooksSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

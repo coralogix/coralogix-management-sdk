@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultipleValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultipleValues{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MultipleValues{}
 type MultipleValues struct {
 	Matcher *EventsV3FilterMatcher `json:"matcher,omitempty"`
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultipleValues MultipleValues
 
 // NewMultipleValues instantiates a new MultipleValues object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o MultipleValues) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MultipleValues) UnmarshalJSON(data []byte) (err error) {
+	varMultipleValues := _MultipleValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultipleValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultipleValues(varMultipleValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matcher")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultipleValues struct {
@@ -158,5 +192,4 @@ func (v *NullableMultipleValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

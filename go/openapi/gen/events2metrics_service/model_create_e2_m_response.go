@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateE2MResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateE2MResponse{}
 // CreateE2MResponse struct for CreateE2MResponse
 type CreateE2MResponse struct {
 	E2m *E2M `json:"e2m,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateE2MResponse CreateE2MResponse
 
 // NewCreateE2MResponse instantiates a new CreateE2MResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateE2MResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.E2m) {
 		toSerialize["e2m"] = o.E2m
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateE2MResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateE2MResponse := _CreateE2MResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateE2MResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateE2MResponse(varCreateE2MResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "e2m")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateE2MResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableCreateE2MResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

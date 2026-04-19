@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventRecurrenceSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventRecurrenceSource{}
@@ -22,7 +25,10 @@ type EventRecurrenceSource struct {
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Recurrence *Recurrence `json:"recurrence,omitempty"`
 	Strategy *EventRecurrenceSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventRecurrenceSource EventRecurrenceSource
 
 // NewEventRecurrenceSource instantiates a new EventRecurrenceSource object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o EventRecurrenceSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Strategy) {
 		toSerialize["strategy"] = o.Strategy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventRecurrenceSource) UnmarshalJSON(data []byte) (err error) {
+	varEventRecurrenceSource := _EventRecurrenceSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventRecurrenceSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventRecurrenceSource(varEventRecurrenceSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "messageTemplate")
+		delete(additionalProperties, "recurrence")
+		delete(additionalProperties, "strategy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventRecurrenceSource struct {
@@ -194,5 +229,4 @@ func (v *NullableEventRecurrenceSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

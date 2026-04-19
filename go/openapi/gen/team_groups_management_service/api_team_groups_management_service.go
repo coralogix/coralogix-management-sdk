@@ -41,8 +41,6 @@ func (r ApiGroupsMgmtServiceCreateTeamGroupRequest) Execute() (*CreateTeamGroupR
 /*
 GroupsMgmtServiceCreateTeamGroup Create Team Group
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGroupsMgmtServiceCreateTeamGroupRequest
 */
@@ -142,8 +140,6 @@ func (r ApiGroupsMgmtServiceDeleteTeamGroupRequest) Execute() (*DeleteTeamGroupR
 
 /*
 GroupsMgmtServiceDeleteTeamGroup Delete Team Group
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId
@@ -258,8 +254,6 @@ func (r ApiGroupsMgmtServiceGetGroupUsersRequest) Execute() (*GetGroupUsersRespo
 /*
 GroupsMgmtServiceGetGroupUsers Get Group Users
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId
  @return ApiGroupsMgmtServiceGetGroupUsersRequest
@@ -367,8 +361,6 @@ func (r ApiGroupsMgmtServiceGetTeamGroupRequest) Execute() (*GetTeamGroupRespons
 /*
 GroupsMgmtServiceGetTeamGroup Get Team Group
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId
  @return ApiGroupsMgmtServiceGetTeamGroupRequest
@@ -469,8 +461,6 @@ func (r ApiGroupsMgmtServiceGetTeamGroupByNameRequest) Execute() (*GetTeamGroupB
 
 /*
 GroupsMgmtServiceGetTeamGroupByName Get Team Group By Name
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param name
@@ -590,8 +580,6 @@ func (r ApiGroupsMgmtServiceGetTeamGroupsRequest) Execute() (*GetTeamGroupsRespo
 /*
 GroupsMgmtServiceGetTeamGroups Get Team Groups
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGroupsMgmtServiceGetTeamGroupsRequest
 */
@@ -704,8 +692,6 @@ func (r ApiGroupsMgmtServiceUpdateTeamGroupRequest) Execute() (*UpdateTeamGroupR
 
 /*
 GroupsMgmtServiceUpdateTeamGroup Update Team Group
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId

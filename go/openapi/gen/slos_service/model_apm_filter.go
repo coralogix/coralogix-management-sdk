@@ -11,19 +11,27 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApmFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApmFilter{}
 
-// ApmFilter Key-value filter for APM metrics (exact match: label=\"value\")
+// ApmFilter Key-value filter for APM metrics. Supports single value (legacy) or multiple values (OR semantics)
 type ApmFilter struct {
 	// Label/tag name to filter on
 	Key *string `json:"key,omitempty"`
-	// Exact value to match
+	// Deprecated: use values instead. Single value to match (kept for backward compatibility)
+	// Deprecated
 	Value *string `json:"value,omitempty"`
+	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApmFilter ApmFilter
 
 // NewApmFilter instantiates a new ApmFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -75,6 +83,7 @@ func (o *ApmFilter) SetKey(v string) {
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
+// Deprecated
 func (o *ApmFilter) GetValue() string {
 	if o == nil || IsNil(o.Value) {
 		var ret string
@@ -85,6 +94,7 @@ func (o *ApmFilter) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ApmFilter) GetValueOk() (*string, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
@@ -102,8 +112,41 @@ func (o *ApmFilter) HasValue() bool {
 }
 
 // SetValue gets a reference to the given string and assigns it to the Value field.
+// Deprecated
 func (o *ApmFilter) SetValue(v string) {
 	o.Value = &v
+}
+
+// GetValues returns the Values field value if set, zero value otherwise.
+func (o *ApmFilter) GetValues() []string {
+	if o == nil || IsNil(o.Values) {
+		var ret []string
+		return ret
+	}
+	return o.Values
+}
+
+// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmFilter) GetValuesOk() ([]string, bool) {
+	if o == nil || IsNil(o.Values) {
+		return nil, false
+	}
+	return o.Values, true
+}
+
+// HasValues returns a boolean if a field has been set.
+func (o *ApmFilter) HasValues() bool {
+	if o != nil && !IsNil(o.Values) {
+		return true
+	}
+
+	return false
+}
+
+// SetValues gets a reference to the given []string and assigns it to the Values field.
+func (o *ApmFilter) SetValues(v []string) {
+	o.Values = v
 }
 
 func (o ApmFilter) MarshalJSON() ([]byte, error) {
@@ -122,7 +165,39 @@ func (o ApmFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+	if !IsNil(o.Values) {
+		toSerialize["values"] = o.Values
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApmFilter) UnmarshalJSON(data []byte) (err error) {
+	varApmFilter := _ApmFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmFilter(varApmFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApmFilter struct {
@@ -160,5 +235,4 @@ func (v *NullableApmFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

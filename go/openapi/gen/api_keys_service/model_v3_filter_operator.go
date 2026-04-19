@@ -11,9 +11,12 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V3FilterOperator the model 'V3FilterOperator'
 type V3FilterOperator string

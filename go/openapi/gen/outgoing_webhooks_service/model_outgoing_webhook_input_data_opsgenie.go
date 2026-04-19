@@ -11,8 +11,12 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookInputDataOpsgenie type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataOpsgenie{}
@@ -20,17 +24,21 @@ var _ MappedNullable = &OutgoingWebhookInputDataOpsgenie{}
 // OutgoingWebhookInputDataOpsgenie struct for OutgoingWebhookInputDataOpsgenie
 type OutgoingWebhookInputDataOpsgenie struct {
 	Name *string `json:"name,omitempty"`
-	Opsgenie map[string]interface{} `json:"opsgenie,omitempty"`
+	Opsgenie map[string]interface{} `json:"opsgenie"`
 	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookInputDataOpsgenie OutgoingWebhookInputDataOpsgenie
 
 // NewOutgoingWebhookInputDataOpsgenie instantiates a new OutgoingWebhookInputDataOpsgenie object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataOpsgenie() *OutgoingWebhookInputDataOpsgenie {
+func NewOutgoingWebhookInputDataOpsgenie(opsgenie map[string]interface{}) *OutgoingWebhookInputDataOpsgenie {
 	this := OutgoingWebhookInputDataOpsgenie{}
+	this.Opsgenie = opsgenie
 	return &this
 }
 
@@ -74,34 +82,26 @@ func (o *OutgoingWebhookInputDataOpsgenie) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOpsgenie returns the Opsgenie field value if set, zero value otherwise.
+// GetOpsgenie returns the Opsgenie field value
 func (o *OutgoingWebhookInputDataOpsgenie) GetOpsgenie() map[string]interface{} {
-	if o == nil || IsNil(o.Opsgenie) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Opsgenie
 }
 
-// GetOpsgenieOk returns a tuple with the Opsgenie field value if set, nil otherwise
+// GetOpsgenieOk returns a tuple with the Opsgenie field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataOpsgenie) GetOpsgenieOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Opsgenie) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Opsgenie, true
 }
 
-// HasOpsgenie returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputDataOpsgenie) HasOpsgenie() bool {
-	if o != nil && !IsNil(o.Opsgenie) {
-		return true
-	}
-
-	return false
-}
-
-// SetOpsgenie gets a reference to the given map[string]interface{} and assigns it to the Opsgenie field.
+// SetOpsgenie sets field value
 func (o *OutgoingWebhookInputDataOpsgenie) SetOpsgenie(v map[string]interface{}) {
 	o.Opsgenie = v
 }
@@ -183,16 +183,65 @@ func (o OutgoingWebhookInputDataOpsgenie) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Opsgenie) {
-		toSerialize["opsgenie"] = o.Opsgenie
-	}
+	toSerialize["opsgenie"] = o.Opsgenie
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookInputDataOpsgenie) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"opsgenie",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookInputDataOpsgenie := _OutgoingWebhookInputDataOpsgenie{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookInputDataOpsgenie)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookInputDataOpsgenie(varOutgoingWebhookInputDataOpsgenie)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "opsgenie")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookInputDataOpsgenie struct {
@@ -230,5 +279,4 @@ func (v *NullableOutgoingWebhookInputDataOpsgenie) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

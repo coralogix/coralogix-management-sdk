@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDeployedIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDeployedIntegrationResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetDeployedIntegrationResponse{}
 // GetDeployedIntegrationResponse struct for GetDeployedIntegrationResponse
 type GetDeployedIntegrationResponse struct {
 	Integration *DeployedIntegrationInformation `json:"integration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDeployedIntegrationResponse GetDeployedIntegrationResponse
 
 // NewGetDeployedIntegrationResponse instantiates a new GetDeployedIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetDeployedIntegrationResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Integration) {
 		toSerialize["integration"] = o.Integration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDeployedIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDeployedIntegrationResponse := _GetDeployedIntegrationResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDeployedIntegrationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDeployedIntegrationResponse(varGetDeployedIntegrationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDeployedIntegrationResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetDeployedIntegrationResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

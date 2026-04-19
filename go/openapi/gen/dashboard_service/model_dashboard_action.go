@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardAction{}
@@ -25,11 +28,16 @@ type DashboardAction struct {
 	Id *string `json:"id,omitempty"`
 	// The display name of the action
 	Name *string `json:"name,omitempty"`
+	// Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget
+	QueryId *string `json:"queryId,omitempty"`
 	// Defines if the action should open in a new window or current window in the browser
 	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Reference to specific widget within a dashboard, can be null if the action is dashboard wide
 	WidgetId *string `json:"widgetId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DashboardAction DashboardAction
 
 // NewDashboardAction instantiates a new DashboardAction object
 // This constructor will assign default values to properties that have it defined,
@@ -176,6 +184,38 @@ func (o *DashboardAction) SetName(v string) {
 	o.Name = &v
 }
 
+// GetQueryId returns the QueryId field value if set, zero value otherwise.
+func (o *DashboardAction) GetQueryId() string {
+	if o == nil || IsNil(o.QueryId) {
+		var ret string
+		return ret
+	}
+	return *o.QueryId
+}
+
+// GetQueryIdOk returns a tuple with the QueryId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DashboardAction) GetQueryIdOk() (*string, bool) {
+	if o == nil || IsNil(o.QueryId) {
+		return nil, false
+	}
+	return o.QueryId, true
+}
+
+// HasQueryId returns a boolean if a field has been set.
+func (o *DashboardAction) HasQueryId() bool {
+	if o != nil && !IsNil(o.QueryId) {
+		return true
+	}
+
+	return false
+}
+
+// SetQueryId gets a reference to the given string and assigns it to the QueryId field.
+func (o *DashboardAction) SetQueryId(v string) {
+	o.QueryId = &v
+}
+
 // GetShouldOpenInNewWindow returns the ShouldOpenInNewWindow field value if set, zero value otherwise.
 func (o *DashboardAction) GetShouldOpenInNewWindow() bool {
 	if o == nil || IsNil(o.ShouldOpenInNewWindow) {
@@ -262,13 +302,49 @@ func (o DashboardAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.QueryId) {
+		toSerialize["queryId"] = o.QueryId
+	}
 	if !IsNil(o.ShouldOpenInNewWindow) {
 		toSerialize["shouldOpenInNewWindow"] = o.ShouldOpenInNewWindow
 	}
 	if !IsNil(o.WidgetId) {
 		toSerialize["widgetId"] = o.WidgetId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DashboardAction) UnmarshalJSON(data []byte) (err error) {
+	varDashboardAction := _DashboardAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDashboardAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DashboardAction(varDashboardAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataSource")
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "queryId")
+		delete(additionalProperties, "shouldOpenInNewWindow")
+		delete(additionalProperties, "widgetId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDashboardAction struct {
@@ -306,5 +382,4 @@ func (v *NullableDashboardAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

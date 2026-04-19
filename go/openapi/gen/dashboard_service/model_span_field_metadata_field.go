@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpanFieldMetadataField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldMetadataField{}
 
 // SpanFieldMetadataField struct for SpanFieldMetadataField
 type SpanFieldMetadataField struct {
-	MetadataField *MetadataField `json:"metadataField,omitempty"`
+	MetadataField MetadataField `json:"metadataField"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpanFieldMetadataField SpanFieldMetadataField
 
 // NewSpanFieldMetadataField instantiates a new SpanFieldMetadataField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSpanFieldMetadataField() *SpanFieldMetadataField {
+func NewSpanFieldMetadataField(metadataField MetadataField) *SpanFieldMetadataField {
 	this := SpanFieldMetadataField{}
+	this.MetadataField = metadataField
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSpanFieldMetadataFieldWithDefaults() *SpanFieldMetadataField {
 	return &this
 }
 
-// GetMetadataField returns the MetadataField field value if set, zero value otherwise.
+// GetMetadataField returns the MetadataField field value
 func (o *SpanFieldMetadataField) GetMetadataField() MetadataField {
-	if o == nil || IsNil(o.MetadataField) {
+	if o == nil {
 		var ret MetadataField
 		return ret
 	}
-	return *o.MetadataField
+
+	return o.MetadataField
 }
 
-// GetMetadataFieldOk returns a tuple with the MetadataField field value if set, nil otherwise
+// GetMetadataFieldOk returns a tuple with the MetadataField field value
 // and a boolean to check if the value has been set.
 func (o *SpanFieldMetadataField) GetMetadataFieldOk() (*MetadataField, bool) {
-	if o == nil || IsNil(o.MetadataField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetadataField, true
+	return &o.MetadataField, true
 }
 
-// HasMetadataField returns a boolean if a field has been set.
-func (o *SpanFieldMetadataField) HasMetadataField() bool {
-	if o != nil && !IsNil(o.MetadataField) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadataField gets a reference to the given MetadataField and assigns it to the MetadataField field.
+// SetMetadataField sets field value
 func (o *SpanFieldMetadataField) SetMetadataField(v MetadataField) {
-	o.MetadataField = &v
+	o.MetadataField = v
 }
 
 func (o SpanFieldMetadataField) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SpanFieldMetadataField) MarshalJSON() ([]byte, error) {
 
 func (o SpanFieldMetadataField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetadataField) {
-		toSerialize["metadataField"] = o.MetadataField
+	toSerialize["metadataField"] = o.MetadataField
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SpanFieldMetadataField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadataField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSpanFieldMetadataField := _SpanFieldMetadataField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanFieldMetadataField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanFieldMetadataField(varSpanFieldMetadataField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metadataField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpanFieldMetadataField struct {
@@ -122,5 +168,4 @@ func (v *NullableSpanFieldMetadataField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,9 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V1OrderByDirection the model 'V1OrderByDirection'
 type V1OrderByDirection string

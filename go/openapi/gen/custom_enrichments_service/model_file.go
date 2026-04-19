@@ -11,10 +11,13 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // File - struct for File
 type File struct {
@@ -42,7 +45,7 @@ func (dst *File) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into FileBinary
-	err = newStrictDecoder(data).Decode(&dst.FileBinary)
+	err = json.Unmarshal(data, &dst.FileBinary)
 	if err == nil {
 		jsonFileBinary, _ := json.Marshal(dst.FileBinary)
 		if string(jsonFileBinary) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *File) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into FileTextual
-	err = newStrictDecoder(data).Decode(&dst.FileTextual)
+	err = json.Unmarshal(data, &dst.FileTextual)
 	if err == nil {
 		jsonFileTextual, _ := json.Marshal(dst.FileTextual)
 		if string(jsonFileTextual) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableFile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

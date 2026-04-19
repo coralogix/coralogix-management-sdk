@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAlertEventResponseMultiplePermutation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertEventResponseMultiplePermutation{}
@@ -20,16 +24,20 @@ var _ MappedNullable = &GetAlertEventResponseMultiplePermutation{}
 // GetAlertEventResponseMultiplePermutation struct for GetAlertEventResponseMultiplePermutation
 type GetAlertEventResponseMultiplePermutation struct {
 	Id *string `json:"id,omitempty"`
-	MultiplePermutation *AlertEventMultiplePermutation `json:"multiplePermutation,omitempty"`
+	MultiplePermutation AlertEventMultiplePermutation `json:"multiplePermutation"`
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAlertEventResponseMultiplePermutation GetAlertEventResponseMultiplePermutation
 
 // NewGetAlertEventResponseMultiplePermutation instantiates a new GetAlertEventResponseMultiplePermutation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAlertEventResponseMultiplePermutation() *GetAlertEventResponseMultiplePermutation {
+func NewGetAlertEventResponseMultiplePermutation(multiplePermutation AlertEventMultiplePermutation) *GetAlertEventResponseMultiplePermutation {
 	this := GetAlertEventResponseMultiplePermutation{}
+	this.MultiplePermutation = multiplePermutation
 	return &this
 }
 
@@ -73,36 +81,28 @@ func (o *GetAlertEventResponseMultiplePermutation) SetId(v string) {
 	o.Id = &v
 }
 
-// GetMultiplePermutation returns the MultiplePermutation field value if set, zero value otherwise.
+// GetMultiplePermutation returns the MultiplePermutation field value
 func (o *GetAlertEventResponseMultiplePermutation) GetMultiplePermutation() AlertEventMultiplePermutation {
-	if o == nil || IsNil(o.MultiplePermutation) {
+	if o == nil {
 		var ret AlertEventMultiplePermutation
 		return ret
 	}
-	return *o.MultiplePermutation
+
+	return o.MultiplePermutation
 }
 
-// GetMultiplePermutationOk returns a tuple with the MultiplePermutation field value if set, nil otherwise
+// GetMultiplePermutationOk returns a tuple with the MultiplePermutation field value
 // and a boolean to check if the value has been set.
 func (o *GetAlertEventResponseMultiplePermutation) GetMultiplePermutationOk() (*AlertEventMultiplePermutation, bool) {
-	if o == nil || IsNil(o.MultiplePermutation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultiplePermutation, true
+	return &o.MultiplePermutation, true
 }
 
-// HasMultiplePermutation returns a boolean if a field has been set.
-func (o *GetAlertEventResponseMultiplePermutation) HasMultiplePermutation() bool {
-	if o != nil && !IsNil(o.MultiplePermutation) {
-		return true
-	}
-
-	return false
-}
-
-// SetMultiplePermutation gets a reference to the given AlertEventMultiplePermutation and assigns it to the MultiplePermutation field.
+// SetMultiplePermutation sets field value
 func (o *GetAlertEventResponseMultiplePermutation) SetMultiplePermutation(v AlertEventMultiplePermutation) {
-	o.MultiplePermutation = &v
+	o.MultiplePermutation = v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
@@ -150,13 +150,61 @@ func (o GetAlertEventResponseMultiplePermutation) ToMap() (map[string]interface{
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.MultiplePermutation) {
-		toSerialize["multiplePermutation"] = o.MultiplePermutation
-	}
+	toSerialize["multiplePermutation"] = o.MultiplePermutation
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAlertEventResponseMultiplePermutation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"multiplePermutation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGetAlertEventResponseMultiplePermutation := _GetAlertEventResponseMultiplePermutation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAlertEventResponseMultiplePermutation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAlertEventResponseMultiplePermutation(varGetAlertEventResponseMultiplePermutation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "multiplePermutation")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAlertEventResponseMultiplePermutation struct {
@@ -194,5 +242,4 @@ func (v *NullableGetAlertEventResponseMultiplePermutation) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

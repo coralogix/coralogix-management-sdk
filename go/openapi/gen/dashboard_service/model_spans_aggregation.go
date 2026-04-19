@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // SpansAggregation - struct for SpansAggregation
 type SpansAggregation struct {
@@ -42,7 +45,7 @@ func (dst *SpansAggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SpansAggregationDimensionAggregation
-	err = newStrictDecoder(data).Decode(&dst.SpansAggregationDimensionAggregation)
+	err = json.Unmarshal(data, &dst.SpansAggregationDimensionAggregation)
 	if err == nil {
 		jsonSpansAggregationDimensionAggregation, _ := json.Marshal(dst.SpansAggregationDimensionAggregation)
 		if string(jsonSpansAggregationDimensionAggregation) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *SpansAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SpansAggregationMetricAggregation
-	err = newStrictDecoder(data).Decode(&dst.SpansAggregationMetricAggregation)
+	err = json.Unmarshal(data, &dst.SpansAggregationMetricAggregation)
 	if err == nil {
 		jsonSpansAggregationMetricAggregation, _ := json.Marshal(dst.SpansAggregationMetricAggregation)
 		if string(jsonSpansAggregationMetricAggregation) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableSpansAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

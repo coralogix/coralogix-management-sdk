@@ -7,11 +7,7 @@ servers:
 paths:
   /dashboards/folders/v1:
     get:
-      description: |-
-        List all dashboard folders accessible.
-
-        Requires the following permissions:
-        - `team-dashboards:Read`
+      description: List all dashboard folders accessible.
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_ListDashboardFolders
@@ -40,7 +36,6 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Read
     post:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_CreateDashboardFolder
@@ -74,7 +69,6 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     put:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_ReplaceDashboardFolder
@@ -109,7 +103,6 @@ paths:
       - team-dashboards:Update
   /dashboards/folders/v1/{folder_id}:
     delete:
-      description: No description available
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_DeleteDashboardFolder
@@ -153,11 +146,7 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     get:
-      description: |-
-        Returns a dashboard folder data.
-
-        Requires the following permissions:
-        - `team-dashboards:Read`
+      description: Returns a dashboard folder data.
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_GetDashboardFolder
@@ -202,24 +191,6 @@ paths:
       - team-dashboards:Read
 components:
   schemas:
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
-      type: object
     CreateDashboardFolderResponse:
       example:
         folderId: folderId
@@ -262,7 +233,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -273,12 +243,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -289,6 +259,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -341,28 +312,6 @@ components:
           type: array
       title: List dashboard folders response data structure
       type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
-      type: object
     MultipleValues:
       properties:
         matcher:
@@ -401,7 +350,6 @@ components:
       - FILTER_OPERATOR_OR
       type: string
     Replace_dashboard_folder_request_data_structure:
-      additionalProperties: false
       properties:
         folder:
           $ref: "#/components/schemas/DashboardFolder"
@@ -410,7 +358,6 @@ components:
       title: Replace dashboard folder request data structure
       type: object
     Create_dashboard_folder_request_data_structure:
-      additionalProperties: false
       properties:
         folder:
           $ref: "#/components/schemas/DashboardFolder"
@@ -418,9 +365,3 @@ components:
           type: string
       title: Create dashboard folder request data structure
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

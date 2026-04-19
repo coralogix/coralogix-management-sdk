@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersParseParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersParseParameters{}
 
 // RuleParametersParseParameters struct for RuleParametersParseParameters
 type RuleParametersParseParameters struct {
-	ParseParameters *ParseParameters `json:"parseParameters,omitempty"`
+	ParseParameters ParseParameters `json:"parseParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersParseParameters RuleParametersParseParameters
 
 // NewRuleParametersParseParameters instantiates a new RuleParametersParseParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersParseParameters() *RuleParametersParseParameters {
+func NewRuleParametersParseParameters(parseParameters ParseParameters) *RuleParametersParseParameters {
 	this := RuleParametersParseParameters{}
+	this.ParseParameters = parseParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersParseParametersWithDefaults() *RuleParametersParseParamete
 	return &this
 }
 
-// GetParseParameters returns the ParseParameters field value if set, zero value otherwise.
+// GetParseParameters returns the ParseParameters field value
 func (o *RuleParametersParseParameters) GetParseParameters() ParseParameters {
-	if o == nil || IsNil(o.ParseParameters) {
+	if o == nil {
 		var ret ParseParameters
 		return ret
 	}
-	return *o.ParseParameters
+
+	return o.ParseParameters
 }
 
-// GetParseParametersOk returns a tuple with the ParseParameters field value if set, nil otherwise
+// GetParseParametersOk returns a tuple with the ParseParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersParseParameters) GetParseParametersOk() (*ParseParameters, bool) {
-	if o == nil || IsNil(o.ParseParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ParseParameters, true
+	return &o.ParseParameters, true
 }
 
-// HasParseParameters returns a boolean if a field has been set.
-func (o *RuleParametersParseParameters) HasParseParameters() bool {
-	if o != nil && !IsNil(o.ParseParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetParseParameters gets a reference to the given ParseParameters and assigns it to the ParseParameters field.
+// SetParseParameters sets field value
 func (o *RuleParametersParseParameters) SetParseParameters(v ParseParameters) {
-	o.ParseParameters = &v
+	o.ParseParameters = v
 }
 
 func (o RuleParametersParseParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersParseParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersParseParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ParseParameters) {
-		toSerialize["parseParameters"] = o.ParseParameters
+	toSerialize["parseParameters"] = o.ParseParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersParseParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"parseParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersParseParameters := _RuleParametersParseParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersParseParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersParseParameters(varRuleParametersParseParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parseParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersParseParameters struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleParametersParseParameters) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

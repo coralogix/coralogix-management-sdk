@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BurnRateThresholdDual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BurnRateThresholdDual{}
 
 // BurnRateThresholdDual Burn rate threshold definition
 type BurnRateThresholdDual struct {
-	Dual *BurnRateTypeDual `json:"dual,omitempty"`
+	Dual BurnRateTypeDual `json:"dual"`
 	Rules []SloThresholdRule `json:"rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BurnRateThresholdDual BurnRateThresholdDual
 
 // NewBurnRateThresholdDual instantiates a new BurnRateThresholdDual object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBurnRateThresholdDual() *BurnRateThresholdDual {
+func NewBurnRateThresholdDual(dual BurnRateTypeDual) *BurnRateThresholdDual {
 	this := BurnRateThresholdDual{}
+	this.Dual = dual
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewBurnRateThresholdDualWithDefaults() *BurnRateThresholdDual {
 	return &this
 }
 
-// GetDual returns the Dual field value if set, zero value otherwise.
+// GetDual returns the Dual field value
 func (o *BurnRateThresholdDual) GetDual() BurnRateTypeDual {
-	if o == nil || IsNil(o.Dual) {
+	if o == nil {
 		var ret BurnRateTypeDual
 		return ret
 	}
-	return *o.Dual
+
+	return o.Dual
 }
 
-// GetDualOk returns a tuple with the Dual field value if set, nil otherwise
+// GetDualOk returns a tuple with the Dual field value
 // and a boolean to check if the value has been set.
 func (o *BurnRateThresholdDual) GetDualOk() (*BurnRateTypeDual, bool) {
-	if o == nil || IsNil(o.Dual) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Dual, true
+	return &o.Dual, true
 }
 
-// HasDual returns a boolean if a field has been set.
-func (o *BurnRateThresholdDual) HasDual() bool {
-	if o != nil && !IsNil(o.Dual) {
-		return true
-	}
-
-	return false
-}
-
-// SetDual gets a reference to the given BurnRateTypeDual and assigns it to the Dual field.
+// SetDual sets field value
 func (o *BurnRateThresholdDual) SetDual(v BurnRateTypeDual) {
-	o.Dual = &v
+	o.Dual = v
 }
 
 // GetRules returns the Rules field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o BurnRateThresholdDual) MarshalJSON() ([]byte, error) {
 
 func (o BurnRateThresholdDual) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dual) {
-		toSerialize["dual"] = o.Dual
-	}
+	toSerialize["dual"] = o.Dual
 	if !IsNil(o.Rules) {
 		toSerialize["rules"] = o.Rules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BurnRateThresholdDual) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dual",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varBurnRateThresholdDual := _BurnRateThresholdDual{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBurnRateThresholdDual)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BurnRateThresholdDual(varBurnRateThresholdDual)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dual")
+		delete(additionalProperties, "rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBurnRateThresholdDual struct {
@@ -158,5 +205,4 @@ func (v *NullableBurnRateThresholdDual) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

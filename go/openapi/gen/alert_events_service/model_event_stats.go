@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventStats type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventStats{}
@@ -22,10 +25,13 @@ type EventStats struct {
 	ActivityAnalysisStats *ActivityAnalysisStats `json:"activityAnalysisStats,omitempty"`
 	Count *int64 `json:"count,omitempty"`
 	ResolvedCount *int64 `json:"resolvedCount,omitempty"`
-	ResolvedPermutationsSamples []Permutation `json:"resolvedPermutationsSamples,omitempty"`
+	ResolvedPermutationsSamples []V3Permutation `json:"resolvedPermutationsSamples,omitempty"`
 	TriggeredCount *int64 `json:"triggeredCount,omitempty"`
-	TriggeredPermutationsSamples []Permutation `json:"triggeredPermutationsSamples,omitempty"`
+	TriggeredPermutationsSamples []V3Permutation `json:"triggeredPermutationsSamples,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventStats EventStats
 
 // NewEventStats instantiates a new EventStats object
 // This constructor will assign default values to properties that have it defined,
@@ -141,9 +147,9 @@ func (o *EventStats) SetResolvedCount(v int64) {
 }
 
 // GetResolvedPermutationsSamples returns the ResolvedPermutationsSamples field value if set, zero value otherwise.
-func (o *EventStats) GetResolvedPermutationsSamples() []Permutation {
+func (o *EventStats) GetResolvedPermutationsSamples() []V3Permutation {
 	if o == nil || IsNil(o.ResolvedPermutationsSamples) {
-		var ret []Permutation
+		var ret []V3Permutation
 		return ret
 	}
 	return o.ResolvedPermutationsSamples
@@ -151,7 +157,7 @@ func (o *EventStats) GetResolvedPermutationsSamples() []Permutation {
 
 // GetResolvedPermutationsSamplesOk returns a tuple with the ResolvedPermutationsSamples field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventStats) GetResolvedPermutationsSamplesOk() ([]Permutation, bool) {
+func (o *EventStats) GetResolvedPermutationsSamplesOk() ([]V3Permutation, bool) {
 	if o == nil || IsNil(o.ResolvedPermutationsSamples) {
 		return nil, false
 	}
@@ -167,8 +173,8 @@ func (o *EventStats) HasResolvedPermutationsSamples() bool {
 	return false
 }
 
-// SetResolvedPermutationsSamples gets a reference to the given []Permutation and assigns it to the ResolvedPermutationsSamples field.
-func (o *EventStats) SetResolvedPermutationsSamples(v []Permutation) {
+// SetResolvedPermutationsSamples gets a reference to the given []V3Permutation and assigns it to the ResolvedPermutationsSamples field.
+func (o *EventStats) SetResolvedPermutationsSamples(v []V3Permutation) {
 	o.ResolvedPermutationsSamples = v
 }
 
@@ -205,9 +211,9 @@ func (o *EventStats) SetTriggeredCount(v int64) {
 }
 
 // GetTriggeredPermutationsSamples returns the TriggeredPermutationsSamples field value if set, zero value otherwise.
-func (o *EventStats) GetTriggeredPermutationsSamples() []Permutation {
+func (o *EventStats) GetTriggeredPermutationsSamples() []V3Permutation {
 	if o == nil || IsNil(o.TriggeredPermutationsSamples) {
-		var ret []Permutation
+		var ret []V3Permutation
 		return ret
 	}
 	return o.TriggeredPermutationsSamples
@@ -215,7 +221,7 @@ func (o *EventStats) GetTriggeredPermutationsSamples() []Permutation {
 
 // GetTriggeredPermutationsSamplesOk returns a tuple with the TriggeredPermutationsSamples field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EventStats) GetTriggeredPermutationsSamplesOk() ([]Permutation, bool) {
+func (o *EventStats) GetTriggeredPermutationsSamplesOk() ([]V3Permutation, bool) {
 	if o == nil || IsNil(o.TriggeredPermutationsSamples) {
 		return nil, false
 	}
@@ -231,8 +237,8 @@ func (o *EventStats) HasTriggeredPermutationsSamples() bool {
 	return false
 }
 
-// SetTriggeredPermutationsSamples gets a reference to the given []Permutation and assigns it to the TriggeredPermutationsSamples field.
-func (o *EventStats) SetTriggeredPermutationsSamples(v []Permutation) {
+// SetTriggeredPermutationsSamples gets a reference to the given []V3Permutation and assigns it to the TriggeredPermutationsSamples field.
+func (o *EventStats) SetTriggeredPermutationsSamples(v []V3Permutation) {
 	o.TriggeredPermutationsSamples = v
 }
 
@@ -264,7 +270,39 @@ func (o EventStats) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TriggeredPermutationsSamples) {
 		toSerialize["triggeredPermutationsSamples"] = o.TriggeredPermutationsSamples
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventStats) UnmarshalJSON(data []byte) (err error) {
+	varEventStats := _EventStats{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventStats)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventStats(varEventStats)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activityAnalysisStats")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "resolvedCount")
+		delete(additionalProperties, "resolvedPermutationsSamples")
+		delete(additionalProperties, "triggeredCount")
+		delete(additionalProperties, "triggeredPermutationsSamples")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventStats struct {
@@ -302,5 +340,4 @@ func (v *NullableEventStats) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

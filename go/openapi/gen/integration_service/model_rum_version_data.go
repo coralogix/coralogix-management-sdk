@@ -11,9 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RumVersionData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RumVersionData{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &RumVersionData{}
 type RumVersionData struct {
 	SyncedAt *time.Time `json:"syncedAt,omitempty"`
 	Versions []RumVersionDataVersion `json:"versions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RumVersionData RumVersionData
 
 // NewRumVersionData instantiates a new RumVersionData object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o RumVersionData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Versions) {
 		toSerialize["versions"] = o.Versions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RumVersionData) UnmarshalJSON(data []byte) (err error) {
+	varRumVersionData := _RumVersionData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRumVersionData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RumVersionData(varRumVersionData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "syncedAt")
+		delete(additionalProperties, "versions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRumVersionData struct {
@@ -159,5 +193,4 @@ func (v *NullableRumVersionData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

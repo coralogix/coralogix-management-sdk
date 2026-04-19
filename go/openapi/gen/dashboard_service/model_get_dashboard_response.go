@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDashboardResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDashboardResponse{}
@@ -28,11 +31,16 @@ type GetDashboardResponse struct {
 	IsLocked *bool `json:"isLocked,omitempty"`
 	LockerAuthorId *string `json:"lockerAuthorId,omitempty"`
 	LockerName *string `json:"lockerName,omitempty"`
+	// Map of resolved widget references for widgets with references in the dashboard
+	ResolvedWidgets *map[string]Widget `json:"resolvedWidgets,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	UpdatedOriginType *TokenOriginType `json:"updatedOriginType,omitempty"`
 	UpdaterAuthorId *string `json:"updaterAuthorId,omitempty"`
 	UpdaterName *string `json:"updaterName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDashboardResponse GetDashboardResponse
 
 // NewGetDashboardResponse instantiates a new GetDashboardResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -307,6 +315,38 @@ func (o *GetDashboardResponse) SetLockerName(v string) {
 	o.LockerName = &v
 }
 
+// GetResolvedWidgets returns the ResolvedWidgets field value if set, zero value otherwise.
+func (o *GetDashboardResponse) GetResolvedWidgets() map[string]Widget {
+	if o == nil || IsNil(o.ResolvedWidgets) {
+		var ret map[string]Widget
+		return ret
+	}
+	return *o.ResolvedWidgets
+}
+
+// GetResolvedWidgetsOk returns a tuple with the ResolvedWidgets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetDashboardResponse) GetResolvedWidgetsOk() (*map[string]Widget, bool) {
+	if o == nil || IsNil(o.ResolvedWidgets) {
+		return nil, false
+	}
+	return o.ResolvedWidgets, true
+}
+
+// HasResolvedWidgets returns a boolean if a field has been set.
+func (o *GetDashboardResponse) HasResolvedWidgets() bool {
+	if o != nil && !IsNil(o.ResolvedWidgets) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolvedWidgets gets a reference to the given map[string]Widget and assigns it to the ResolvedWidgets field.
+func (o *GetDashboardResponse) SetResolvedWidgets(v map[string]Widget) {
+	o.ResolvedWidgets = &v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *GetDashboardResponse) GetUpdatedAt() time.Time {
 	if o == nil || IsNil(o.UpdatedAt) {
@@ -469,6 +509,9 @@ func (o GetDashboardResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LockerName) {
 		toSerialize["lockerName"] = o.LockerName
 	}
+	if !IsNil(o.ResolvedWidgets) {
+		toSerialize["resolvedWidgets"] = o.ResolvedWidgets
+	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
@@ -481,7 +524,46 @@ func (o GetDashboardResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdaterName) {
 		toSerialize["updaterName"] = o.UpdaterName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDashboardResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetDashboardResponse := _GetDashboardResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDashboardResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDashboardResponse(varGetDashboardResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "authorId")
+		delete(additionalProperties, "authorName")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "createdOriginType")
+		delete(additionalProperties, "dashboard")
+		delete(additionalProperties, "isLocked")
+		delete(additionalProperties, "lockerAuthorId")
+		delete(additionalProperties, "lockerName")
+		delete(additionalProperties, "resolvedWidgets")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "updatedOriginType")
+		delete(additionalProperties, "updaterAuthorId")
+		delete(additionalProperties, "updaterName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDashboardResponse struct {
@@ -519,5 +601,4 @@ func (v *NullableGetDashboardResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

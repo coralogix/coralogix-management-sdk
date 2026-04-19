@@ -11,24 +11,32 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfLastStateUpdateTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfLastStateUpdateTime{}
 
 // IncidentFieldOneOfLastStateUpdateTime struct for IncidentFieldOneOfLastStateUpdateTime
 type IncidentFieldOneOfLastStateUpdateTime struct {
-	LastStateUpdateTime *time.Time `json:"lastStateUpdateTime,omitempty"`
+	LastStateUpdateTime time.Time `json:"lastStateUpdateTime"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfLastStateUpdateTime IncidentFieldOneOfLastStateUpdateTime
 
 // NewIncidentFieldOneOfLastStateUpdateTime instantiates a new IncidentFieldOneOfLastStateUpdateTime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfLastStateUpdateTime() *IncidentFieldOneOfLastStateUpdateTime {
+func NewIncidentFieldOneOfLastStateUpdateTime(lastStateUpdateTime time.Time) *IncidentFieldOneOfLastStateUpdateTime {
 	this := IncidentFieldOneOfLastStateUpdateTime{}
+	this.LastStateUpdateTime = lastStateUpdateTime
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewIncidentFieldOneOfLastStateUpdateTimeWithDefaults() *IncidentFieldOneOfL
 	return &this
 }
 
-// GetLastStateUpdateTime returns the LastStateUpdateTime field value if set, zero value otherwise.
+// GetLastStateUpdateTime returns the LastStateUpdateTime field value
 func (o *IncidentFieldOneOfLastStateUpdateTime) GetLastStateUpdateTime() time.Time {
-	if o == nil || IsNil(o.LastStateUpdateTime) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastStateUpdateTime
+
+	return o.LastStateUpdateTime
 }
 
-// GetLastStateUpdateTimeOk returns a tuple with the LastStateUpdateTime field value if set, nil otherwise
+// GetLastStateUpdateTimeOk returns a tuple with the LastStateUpdateTime field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfLastStateUpdateTime) GetLastStateUpdateTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.LastStateUpdateTime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastStateUpdateTime, true
+	return &o.LastStateUpdateTime, true
 }
 
-// HasLastStateUpdateTime returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfLastStateUpdateTime) HasLastStateUpdateTime() bool {
-	if o != nil && !IsNil(o.LastStateUpdateTime) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastStateUpdateTime gets a reference to the given time.Time and assigns it to the LastStateUpdateTime field.
+// SetLastStateUpdateTime sets field value
 func (o *IncidentFieldOneOfLastStateUpdateTime) SetLastStateUpdateTime(v time.Time) {
-	o.LastStateUpdateTime = &v
+	o.LastStateUpdateTime = v
 }
 
 func (o IncidentFieldOneOfLastStateUpdateTime) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o IncidentFieldOneOfLastStateUpdateTime) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfLastStateUpdateTime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LastStateUpdateTime) {
-		toSerialize["lastStateUpdateTime"] = o.LastStateUpdateTime
+	toSerialize["lastStateUpdateTime"] = o.LastStateUpdateTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfLastStateUpdateTime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"lastStateUpdateTime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfLastStateUpdateTime := _IncidentFieldOneOfLastStateUpdateTime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfLastStateUpdateTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfLastStateUpdateTime(varIncidentFieldOneOfLastStateUpdateTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lastStateUpdateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfLastStateUpdateTime struct {
@@ -123,5 +169,4 @@ func (v *NullableIncidentFieldOneOfLastStateUpdateTime) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

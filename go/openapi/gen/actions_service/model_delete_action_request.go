@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeleteActionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteActionRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &DeleteActionRequest{}
 // DeleteActionRequest This data structure represents the request to delete an Action.
 type DeleteActionRequest struct {
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeleteActionRequest DeleteActionRequest
 
 // NewDeleteActionRequest instantiates a new DeleteActionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o DeleteActionRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeleteActionRequest) UnmarshalJSON(data []byte) (err error) {
+	varDeleteActionRequest := _DeleteActionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeleteActionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeleteActionRequest(varDeleteActionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeleteActionRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableDeleteActionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

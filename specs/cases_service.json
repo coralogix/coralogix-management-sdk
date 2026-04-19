@@ -11,7 +11,7 @@
           "Cases service"
         ],
         "summary": "Get external references for a case",
-        "description": "Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.\n\nRequires the following permissions:\n- `case:Read`",
+        "description": "Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.",
         "externalDocs": {
           "url": ""
         },
@@ -96,33 +96,6 @@
           }
         }
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "ExternalReferenceVendor": {
         "type": "string",
         "enum": [
@@ -169,9 +142,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -191,9 +164,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -232,34 +205,6 @@
             }
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -306,14 +251,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

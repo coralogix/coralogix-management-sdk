@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroup{}
@@ -28,7 +31,10 @@ type RuleGroup struct {
 	Order *int64 `json:"order,omitempty"`
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
 	RuleSubgroups []RuleSubgroup `json:"ruleSubgroups,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleGroup RuleGroup
 
 // NewRuleGroup instantiates a new RuleGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +378,42 @@ func (o RuleGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RuleSubgroups) {
 		toSerialize["ruleSubgroups"] = o.RuleSubgroups
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleGroup) UnmarshalJSON(data []byte) (err error) {
+	varRuleGroup := _RuleGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleGroup(varRuleGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "hidden")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "ruleMatchers")
+		delete(additionalProperties, "ruleSubgroups")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleGroup struct {
@@ -410,5 +451,4 @@ func (v *NullableRuleGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

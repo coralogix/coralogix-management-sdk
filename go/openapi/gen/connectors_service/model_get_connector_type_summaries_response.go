@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetConnectorTypeSummariesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetConnectorTypeSummariesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetConnectorTypeSummariesResponse{}
 // GetConnectorTypeSummariesResponse Response containing summaries of connector types
 type GetConnectorTypeSummariesResponse struct {
 	ConnectorTypeSummaries []ConnectorTypeSummary `json:"connectorTypeSummaries,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConnectorTypeSummariesResponse GetConnectorTypeSummariesResponse
 
 // NewGetConnectorTypeSummariesResponse instantiates a new GetConnectorTypeSummariesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetConnectorTypeSummariesResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.ConnectorTypeSummaries) {
 		toSerialize["connectorTypeSummaries"] = o.ConnectorTypeSummaries
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConnectorTypeSummariesResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetConnectorTypeSummariesResponse := _GetConnectorTypeSummariesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetConnectorTypeSummariesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConnectorTypeSummariesResponse(varGetConnectorTypeSummariesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectorTypeSummaries")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConnectorTypeSummariesResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetConnectorTypeSummariesResponse) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

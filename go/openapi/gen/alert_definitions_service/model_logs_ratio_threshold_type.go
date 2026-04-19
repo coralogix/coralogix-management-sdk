@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsRatioThresholdType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsRatioThresholdType{}
@@ -33,7 +36,10 @@ type LogsRatioThresholdType struct {
 	NumeratorAlias *string `json:"numeratorAlias,omitempty"`
 	Rules []LogsRatioRules `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsRatioThresholdType LogsRatioThresholdType
 
 // NewLogsRatioThresholdType instantiates a new LogsRatioThresholdType object
 // This constructor will assign default values to properties that have it defined,
@@ -412,7 +418,43 @@ func (o LogsRatioThresholdType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UndetectedValuesManagement) {
 		toSerialize["undetectedValuesManagement"] = o.UndetectedValuesManagement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsRatioThresholdType) UnmarshalJSON(data []byte) (err error) {
+	varLogsRatioThresholdType := _LogsRatioThresholdType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsRatioThresholdType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsRatioThresholdType(varLogsRatioThresholdType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "denominator")
+		delete(additionalProperties, "denominatorAlias")
+		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "groupByFor")
+		delete(additionalProperties, "ignoreInfinity")
+		delete(additionalProperties, "notificationPayloadFilter")
+		delete(additionalProperties, "numerator")
+		delete(additionalProperties, "numeratorAlias")
+		delete(additionalProperties, "rules")
+		delete(additionalProperties, "undetectedValuesManagement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsRatioThresholdType struct {
@@ -450,5 +492,4 @@ func (v *NullableLogsRatioThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

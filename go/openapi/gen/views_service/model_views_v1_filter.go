@@ -11,10 +11,12 @@ API version: 1.0.0
 package views_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ViewsV1Filter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ViewsV1Filter{}
@@ -25,6 +27,7 @@ type ViewsV1Filter struct {
 	Name string `json:"name"`
 	// Filter selected values
 	SelectedValues map[string]bool `json:"selectedValues"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ViewsV1Filter ViewsV1Filter
@@ -108,6 +111,11 @@ func (o ViewsV1Filter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["selectedValues"] = o.SelectedValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,7 +145,6 @@ func (o *ViewsV1Filter) UnmarshalJSON(data []byte) (err error) {
 	varViewsV1Filter := _ViewsV1Filter{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varViewsV1Filter)
 
 	if err != nil {
@@ -145,6 +152,14 @@ func (o *ViewsV1Filter) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ViewsV1Filter(varViewsV1Filter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "selectedValues")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -184,5 +199,4 @@ func (v *NullableViewsV1Filter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

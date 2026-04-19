@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentsV1MetaLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentsV1MetaLabel{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &IncidentsV1MetaLabel{}
 type IncidentsV1MetaLabel struct {
 	Key *string `json:"key,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentsV1MetaLabel IncidentsV1MetaLabel
 
 // NewIncidentsV1MetaLabel instantiates a new IncidentsV1MetaLabel object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o IncidentsV1MetaLabel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentsV1MetaLabel) UnmarshalJSON(data []byte) (err error) {
+	varIncidentsV1MetaLabel := _IncidentsV1MetaLabel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentsV1MetaLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentsV1MetaLabel(varIncidentsV1MetaLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentsV1MetaLabel struct {
@@ -158,5 +192,4 @@ func (v *NullableIncidentsV1MetaLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

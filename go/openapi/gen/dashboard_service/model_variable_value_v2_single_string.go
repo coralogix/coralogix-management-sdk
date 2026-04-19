@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableValueV2SingleString type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2SingleString{}
 
 // VariableValueV2SingleString struct for VariableValueV2SingleString
 type VariableValueV2SingleString struct {
-	SingleString *SingleStringValue `json:"singleString,omitempty"`
+	SingleString SingleStringValue `json:"singleString"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableValueV2SingleString VariableValueV2SingleString
 
 // NewVariableValueV2SingleString instantiates a new VariableValueV2SingleString object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableValueV2SingleString() *VariableValueV2SingleString {
+func NewVariableValueV2SingleString(singleString SingleStringValue) *VariableValueV2SingleString {
 	this := VariableValueV2SingleString{}
+	this.SingleString = singleString
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableValueV2SingleStringWithDefaults() *VariableValueV2SingleString {
 	return &this
 }
 
-// GetSingleString returns the SingleString field value if set, zero value otherwise.
+// GetSingleString returns the SingleString field value
 func (o *VariableValueV2SingleString) GetSingleString() SingleStringValue {
-	if o == nil || IsNil(o.SingleString) {
+	if o == nil {
 		var ret SingleStringValue
 		return ret
 	}
-	return *o.SingleString
+
+	return o.SingleString
 }
 
-// GetSingleStringOk returns a tuple with the SingleString field value if set, nil otherwise
+// GetSingleStringOk returns a tuple with the SingleString field value
 // and a boolean to check if the value has been set.
 func (o *VariableValueV2SingleString) GetSingleStringOk() (*SingleStringValue, bool) {
-	if o == nil || IsNil(o.SingleString) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SingleString, true
+	return &o.SingleString, true
 }
 
-// HasSingleString returns a boolean if a field has been set.
-func (o *VariableValueV2SingleString) HasSingleString() bool {
-	if o != nil && !IsNil(o.SingleString) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleString gets a reference to the given SingleStringValue and assigns it to the SingleString field.
+// SetSingleString sets field value
 func (o *VariableValueV2SingleString) SetSingleString(v SingleStringValue) {
-	o.SingleString = &v
+	o.SingleString = v
 }
 
 func (o VariableValueV2SingleString) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableValueV2SingleString) MarshalJSON() ([]byte, error) {
 
 func (o VariableValueV2SingleString) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SingleString) {
-		toSerialize["singleString"] = o.SingleString
+	toSerialize["singleString"] = o.SingleString
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableValueV2SingleString) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singleString",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableValueV2SingleString := _VariableValueV2SingleString{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2SingleString)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2SingleString(varVariableValueV2SingleString)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "singleString")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableValueV2SingleString struct {
@@ -122,5 +168,4 @@ func (v *NullableVariableValueV2SingleString) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

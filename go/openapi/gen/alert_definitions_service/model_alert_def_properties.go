@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // AlertDefProperties - struct for AlertDefProperties
 type AlertDefProperties struct {
@@ -130,7 +133,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into AlertDefPropertiesFlow
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesFlow)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesFlow)
 	if err == nil {
 		jsonAlertDefPropertiesFlow, _ := json.Marshal(dst.AlertDefPropertiesFlow)
 		if string(jsonAlertDefPropertiesFlow) == "{}" { // empty struct
@@ -147,7 +150,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsAnomaly
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsAnomaly)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsAnomaly)
 	if err == nil {
 		jsonAlertDefPropertiesLogsAnomaly, _ := json.Marshal(dst.AlertDefPropertiesLogsAnomaly)
 		if string(jsonAlertDefPropertiesLogsAnomaly) == "{}" { // empty struct
@@ -164,7 +167,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsImmediate
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsImmediate)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsImmediate)
 	if err == nil {
 		jsonAlertDefPropertiesLogsImmediate, _ := json.Marshal(dst.AlertDefPropertiesLogsImmediate)
 		if string(jsonAlertDefPropertiesLogsImmediate) == "{}" { // empty struct
@@ -181,7 +184,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsNewValue
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsNewValue)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsNewValue)
 	if err == nil {
 		jsonAlertDefPropertiesLogsNewValue, _ := json.Marshal(dst.AlertDefPropertiesLogsNewValue)
 		if string(jsonAlertDefPropertiesLogsNewValue) == "{}" { // empty struct
@@ -198,7 +201,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsRatioThreshold
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsRatioThreshold)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsRatioThreshold)
 	if err == nil {
 		jsonAlertDefPropertiesLogsRatioThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsRatioThreshold)
 		if string(jsonAlertDefPropertiesLogsRatioThreshold) == "{}" { // empty struct
@@ -215,7 +218,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsThreshold
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsThreshold)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsThreshold)
 	if err == nil {
 		jsonAlertDefPropertiesLogsThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsThreshold)
 		if string(jsonAlertDefPropertiesLogsThreshold) == "{}" { // empty struct
@@ -232,7 +235,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsTimeRelativeThreshold
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsTimeRelativeThreshold)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsTimeRelativeThreshold)
 	if err == nil {
 		jsonAlertDefPropertiesLogsTimeRelativeThreshold, _ := json.Marshal(dst.AlertDefPropertiesLogsTimeRelativeThreshold)
 		if string(jsonAlertDefPropertiesLogsTimeRelativeThreshold) == "{}" { // empty struct
@@ -249,7 +252,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesLogsUniqueCount
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesLogsUniqueCount)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesLogsUniqueCount)
 	if err == nil {
 		jsonAlertDefPropertiesLogsUniqueCount, _ := json.Marshal(dst.AlertDefPropertiesLogsUniqueCount)
 		if string(jsonAlertDefPropertiesLogsUniqueCount) == "{}" { // empty struct
@@ -266,7 +269,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesMetricAnomaly
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesMetricAnomaly)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesMetricAnomaly)
 	if err == nil {
 		jsonAlertDefPropertiesMetricAnomaly, _ := json.Marshal(dst.AlertDefPropertiesMetricAnomaly)
 		if string(jsonAlertDefPropertiesMetricAnomaly) == "{}" { // empty struct
@@ -283,7 +286,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesMetricThreshold
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesMetricThreshold)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesMetricThreshold)
 	if err == nil {
 		jsonAlertDefPropertiesMetricThreshold, _ := json.Marshal(dst.AlertDefPropertiesMetricThreshold)
 		if string(jsonAlertDefPropertiesMetricThreshold) == "{}" { // empty struct
@@ -300,7 +303,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesSloThreshold
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesSloThreshold)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesSloThreshold)
 	if err == nil {
 		jsonAlertDefPropertiesSloThreshold, _ := json.Marshal(dst.AlertDefPropertiesSloThreshold)
 		if string(jsonAlertDefPropertiesSloThreshold) == "{}" { // empty struct
@@ -317,7 +320,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesTracingImmediate
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesTracingImmediate)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesTracingImmediate)
 	if err == nil {
 		jsonAlertDefPropertiesTracingImmediate, _ := json.Marshal(dst.AlertDefPropertiesTracingImmediate)
 		if string(jsonAlertDefPropertiesTracingImmediate) == "{}" { // empty struct
@@ -334,7 +337,7 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AlertDefPropertiesTracingThreshold
-	err = newStrictDecoder(data).Decode(&dst.AlertDefPropertiesTracingThreshold)
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesTracingThreshold)
 	if err == nil {
 		jsonAlertDefPropertiesTracingThreshold, _ := json.Marshal(dst.AlertDefPropertiesTracingThreshold)
 		if string(jsonAlertDefPropertiesTracingThreshold) == "{}" { // empty struct
@@ -585,5 +588,4 @@ func (v *NullableAlertDefProperties) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

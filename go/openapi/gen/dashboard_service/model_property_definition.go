@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // PropertyDefinition - struct for PropertyDefinition
 type PropertyDefinition struct {
@@ -90,7 +93,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into PropertyDefinitionAlignment
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionAlignment)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionAlignment)
 	if err == nil {
 		jsonPropertyDefinitionAlignment, _ := json.Marshal(dst.PropertyDefinitionAlignment)
 		if string(jsonPropertyDefinitionAlignment) == "{}" { // empty struct
@@ -107,7 +110,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionColumnDisplayName
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionColumnDisplayName)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionColumnDisplayName)
 	if err == nil {
 		jsonPropertyDefinitionColumnDisplayName, _ := json.Marshal(dst.PropertyDefinitionColumnDisplayName)
 		if string(jsonPropertyDefinitionColumnDisplayName) == "{}" { // empty struct
@@ -124,7 +127,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionLink
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionLink)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionLink)
 	if err == nil {
 		jsonPropertyDefinitionLink, _ := json.Marshal(dst.PropertyDefinitionLink)
 		if string(jsonPropertyDefinitionLink) == "{}" { // empty struct
@@ -141,7 +144,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionRegexExtract
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionRegexExtract)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionRegexExtract)
 	if err == nil {
 		jsonPropertyDefinitionRegexExtract, _ := json.Marshal(dst.PropertyDefinitionRegexExtract)
 		if string(jsonPropertyDefinitionRegexExtract) == "{}" { // empty struct
@@ -158,7 +161,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionThresholds
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionThresholds)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionThresholds)
 	if err == nil {
 		jsonPropertyDefinitionThresholds, _ := json.Marshal(dst.PropertyDefinitionThresholds)
 		if string(jsonPropertyDefinitionThresholds) == "{}" { // empty struct
@@ -175,7 +178,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionUnits
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionUnits)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionUnits)
 	if err == nil {
 		jsonPropertyDefinitionUnits, _ := json.Marshal(dst.PropertyDefinitionUnits)
 		if string(jsonPropertyDefinitionUnits) == "{}" { // empty struct
@@ -192,7 +195,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionValuesAlias
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionValuesAlias)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionValuesAlias)
 	if err == nil {
 		jsonPropertyDefinitionValuesAlias, _ := json.Marshal(dst.PropertyDefinitionValuesAlias)
 		if string(jsonPropertyDefinitionValuesAlias) == "{}" { // empty struct
@@ -209,7 +212,7 @@ func (dst *PropertyDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into PropertyDefinitionValuesMapping
-	err = newStrictDecoder(data).Decode(&dst.PropertyDefinitionValuesMapping)
+	err = json.Unmarshal(data, &dst.PropertyDefinitionValuesMapping)
 	if err == nil {
 		jsonPropertyDefinitionValuesMapping, _ := json.Marshal(dst.PropertyDefinitionValuesMapping)
 		if string(jsonPropertyDefinitionValuesMapping) == "{}" { // empty struct
@@ -395,5 +398,4 @@ func (v *NullablePropertyDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricThresholdRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricThresholdRule{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MetricThresholdRule{}
 type MetricThresholdRule struct {
 	Condition *MetricThresholdCondition `json:"condition,omitempty"`
 	Override *AlertDefOverride `json:"override,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricThresholdRule MetricThresholdRule
 
 // NewMetricThresholdRule instantiates a new MetricThresholdRule object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o MetricThresholdRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Override) {
 		toSerialize["override"] = o.Override
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricThresholdRule) UnmarshalJSON(data []byte) (err error) {
+	varMetricThresholdRule := _MetricThresholdRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricThresholdRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricThresholdRule(varMetricThresholdRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		delete(additionalProperties, "override")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricThresholdRule struct {
@@ -158,5 +192,4 @@ func (v *NullableMetricThresholdRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

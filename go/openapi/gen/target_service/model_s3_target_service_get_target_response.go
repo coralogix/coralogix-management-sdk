@@ -11,17 +11,20 @@ API version: 1.0.0
 package target_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the S3TargetServiceGetTargetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &S3TargetServiceGetTargetResponse{}
 
 // S3TargetServiceGetTargetResponse This data structure is used to retrieve a storage target for logs.
 type S3TargetServiceGetTargetResponse struct {
-	Target Target `json:"target"`
+	Target V2Target `json:"target"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _S3TargetServiceGetTargetResponse S3TargetServiceGetTargetResponse
@@ -30,7 +33,7 @@ type _S3TargetServiceGetTargetResponse S3TargetServiceGetTargetResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewS3TargetServiceGetTargetResponse(target Target) *S3TargetServiceGetTargetResponse {
+func NewS3TargetServiceGetTargetResponse(target V2Target) *S3TargetServiceGetTargetResponse {
 	this := S3TargetServiceGetTargetResponse{}
 	this.Target = target
 	return &this
@@ -45,9 +48,9 @@ func NewS3TargetServiceGetTargetResponseWithDefaults() *S3TargetServiceGetTarget
 }
 
 // GetTarget returns the Target field value
-func (o *S3TargetServiceGetTargetResponse) GetTarget() Target {
+func (o *S3TargetServiceGetTargetResponse) GetTarget() V2Target {
 	if o == nil {
-		var ret Target
+		var ret V2Target
 		return ret
 	}
 
@@ -56,7 +59,7 @@ func (o *S3TargetServiceGetTargetResponse) GetTarget() Target {
 
 // GetTargetOk returns a tuple with the Target field value
 // and a boolean to check if the value has been set.
-func (o *S3TargetServiceGetTargetResponse) GetTargetOk() (*Target, bool) {
+func (o *S3TargetServiceGetTargetResponse) GetTargetOk() (*V2Target, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,7 +67,7 @@ func (o *S3TargetServiceGetTargetResponse) GetTargetOk() (*Target, bool) {
 }
 
 // SetTarget sets field value
-func (o *S3TargetServiceGetTargetResponse) SetTarget(v Target) {
+func (o *S3TargetServiceGetTargetResponse) SetTarget(v V2Target) {
 	o.Target = v
 }
 
@@ -79,6 +82,11 @@ func (o S3TargetServiceGetTargetResponse) MarshalJSON() ([]byte, error) {
 func (o S3TargetServiceGetTargetResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["target"] = o.Target
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *S3TargetServiceGetTargetResponse) UnmarshalJSON(data []byte) (err error
 	varS3TargetServiceGetTargetResponse := _S3TargetServiceGetTargetResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varS3TargetServiceGetTargetResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *S3TargetServiceGetTargetResponse) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = S3TargetServiceGetTargetResponse(varS3TargetServiceGetTargetResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "target")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableS3TargetServiceGetTargetResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

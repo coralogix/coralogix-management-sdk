@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListIncidentEventsFilterValuesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListIncidentEventsFilterValuesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListIncidentEventsFilterValuesResponse{}
 // ListIncidentEventsFilterValuesResponse A response containing available filter values for incident events
 type ListIncidentEventsFilterValuesResponse struct {
 	FiltersValues *IncidentQueryFiltersValues `json:"filtersValues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListIncidentEventsFilterValuesResponse ListIncidentEventsFilterValuesResponse
 
 // NewListIncidentEventsFilterValuesResponse instantiates a new ListIncidentEventsFilterValuesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListIncidentEventsFilterValuesResponse) ToMap() (map[string]interface{},
 	if !IsNil(o.FiltersValues) {
 		toSerialize["filtersValues"] = o.FiltersValues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListIncidentEventsFilterValuesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListIncidentEventsFilterValuesResponse := _ListIncidentEventsFilterValuesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListIncidentEventsFilterValuesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListIncidentEventsFilterValuesResponse(varListIncidentEventsFilterValuesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filtersValues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListIncidentEventsFilterValuesResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableListIncidentEventsFilterValuesResponse) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2Permissions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2Permissions{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &V2Permissions{}
 // V2Permissions struct for V2Permissions
 type V2Permissions struct {
 	Permissions []string `json:"permissions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2Permissions V2Permissions
 
 // NewV2Permissions instantiates a new V2Permissions object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o V2Permissions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Permissions) {
 		toSerialize["permissions"] = o.Permissions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2Permissions) UnmarshalJSON(data []byte) (err error) {
+	varV2Permissions := _V2Permissions{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2Permissions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2Permissions(varV2Permissions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "permissions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2Permissions struct {
@@ -122,5 +155,4 @@ func (v *NullableV2Permissions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

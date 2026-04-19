@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CloseIncidentsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CloseIncidentsResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CloseIncidentsResponse{}
 // CloseIncidentsResponse Response containing the updated incidents after closing
 type CloseIncidentsResponse struct {
 	Incidents []Incident `json:"incidents"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CloseIncidentsResponse CloseIncidentsResponse
@@ -79,6 +82,11 @@ func (o CloseIncidentsResponse) MarshalJSON() ([]byte, error) {
 func (o CloseIncidentsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["incidents"] = o.Incidents
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CloseIncidentsResponse) UnmarshalJSON(data []byte) (err error) {
 	varCloseIncidentsResponse := _CloseIncidentsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCloseIncidentsResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CloseIncidentsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CloseIncidentsResponse(varCloseIncidentsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidents")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCloseIncidentsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

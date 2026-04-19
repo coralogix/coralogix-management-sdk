@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAllExtensionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAllExtensionsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetAllExtensionsResponse{}
 // GetAllExtensionsResponse Response to list all extensions
 type GetAllExtensionsResponse struct {
 	Extensions []GetAllExtensionsResponseExtension `json:"extensions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAllExtensionsResponse GetAllExtensionsResponse
 
 // NewGetAllExtensionsResponse instantiates a new GetAllExtensionsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetAllExtensionsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Extensions) {
 		toSerialize["extensions"] = o.Extensions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAllExtensionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetAllExtensionsResponse := _GetAllExtensionsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAllExtensionsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAllExtensionsResponse(varGetAllExtensionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extensions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAllExtensionsResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetAllExtensionsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

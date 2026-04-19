@@ -11,7 +11,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -108,7 +107,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -127,8 +125,7 @@
                 },
                 "required": [
                   "alertSchedulerRule"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -169,7 +166,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -188,8 +184,7 @@
                 },
                 "required": [
                   "alertSchedulerRule"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -232,7 +227,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -254,8 +248,7 @@
                 },
                 "required": [
                   "updateAlertSchedulerRuleRequests"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -296,7 +289,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -318,8 +310,7 @@
                 },
                 "required": [
                   "createAlertSchedulerRuleRequests"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -362,7 +353,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -414,7 +404,6 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -538,7 +527,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "alertMetaLabels"
+        ]
       },
       "AlertSchedulerRuleProtobufV1FilterAlertUniqueIds": {
         "type": "object",
@@ -550,7 +541,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "alertUniqueIds"
+        ]
       },
       "AlertSchedulerRuleVersionIds": {
         "type": "object",
@@ -590,33 +583,6 @@
       },
       "Always": {
         "type": "object"
-      },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
       },
       "CreateAlertSchedulerRuleRequest": {
         "externalDocs": {
@@ -705,7 +671,9 @@
             "$ref": "#/components/schemas/AlertSchedulerRuleIds"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "alertSchedulerIds"
+        ]
       },
       "FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds": {
         "type": "object",
@@ -714,7 +682,9 @@
             "$ref": "#/components/schemas/AlertSchedulerRuleVersionIds"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "alertSchedulerVersionIds"
+        ]
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -744,9 +714,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -766,9 +736,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -843,34 +813,6 @@
           }
         }
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "Monthly": {
         "type": "object",
         "properties": {
@@ -918,13 +860,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RecurringDynamicDaily"
+          },
+          {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicMonthly"
-          },
-          {
-            "$ref": "#/components/schemas/RecurringDynamicDaily"
           }
         ]
       },
@@ -935,7 +877,9 @@
             "$ref": "#/components/schemas/Always"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "alwaysActive"
+        ]
       },
       "RecurringDynamicDaily": {
         "type": "object",
@@ -954,7 +898,9 @@
             "$ref": "#/components/schemas/Timeframe"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "daily"
+        ]
       },
       "RecurringDynamicMonthly": {
         "type": "object",
@@ -973,7 +919,9 @@
             "$ref": "#/components/schemas/Timeframe"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "monthly"
+        ]
       },
       "RecurringDynamicWeekly": {
         "type": "object",
@@ -992,7 +940,9 @@
             "$ref": "#/components/schemas/Weekly"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "weekly"
+        ]
       },
       "RecurringSchedule": {
         "type": "object",
@@ -1001,7 +951,9 @@
             "$ref": "#/components/schemas/Recurring.Dynamic"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "schedule"
+        ]
       },
       "Schedule": {
         "oneOf": [
@@ -1023,7 +975,9 @@
             "$ref": "#/components/schemas/ScheduleOperation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "oneTime"
+        ]
       },
       "ScheduleOperation": {
         "type": "string",
@@ -1043,15 +997,17 @@
             "$ref": "#/components/schemas/ScheduleOperation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "recurring"
+        ]
       },
       "Timeframe": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeframeDuration"
+            "$ref": "#/components/schemas/TimeframeEndTime"
           },
           {
-            "$ref": "#/components/schemas/TimeframeEndTime"
+            "$ref": "#/components/schemas/TimeframeDuration"
           }
         ]
       },
@@ -1068,7 +1024,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "duration"
+        ]
       },
       "TimeframeEndTime": {
         "type": "object",
@@ -1083,7 +1041,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "endTime"
+        ]
       },
       "UpdateAlertSchedulerRuleRequest": {
         "externalDocs": {
@@ -1218,14 +1178,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FiltersFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FiltersFilter{}
@@ -26,8 +29,12 @@ type FiltersFilter struct {
 	// Indicates if the filter is currently enabled or not.
 	Enabled *bool `json:"enabled,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	Scope *FilterWidgetScope `json:"scope,omitempty"`
 	Source *FilterSource `json:"source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FiltersFilter FiltersFilter
 
 // NewFiltersFilter instantiates a new FiltersFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -174,6 +181,38 @@ func (o *FiltersFilter) SetId(v UUID) {
 	o.Id = &v
 }
 
+// GetScope returns the Scope field value if set, zero value otherwise.
+func (o *FiltersFilter) GetScope() FilterWidgetScope {
+	if o == nil || IsNil(o.Scope) {
+		var ret FilterWidgetScope
+		return ret
+	}
+	return *o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FiltersFilter) GetScopeOk() (*FilterWidgetScope, bool) {
+	if o == nil || IsNil(o.Scope) {
+		return nil, false
+	}
+	return o.Scope, true
+}
+
+// HasScope returns a boolean if a field has been set.
+func (o *FiltersFilter) HasScope() bool {
+	if o != nil && !IsNil(o.Scope) {
+		return true
+	}
+
+	return false
+}
+
+// SetScope gets a reference to the given FilterWidgetScope and assigns it to the Scope field.
+func (o *FiltersFilter) SetScope(v FilterWidgetScope) {
+	o.Scope = &v
+}
+
 // GetSource returns the Source field value if set, zero value otherwise.
 func (o *FiltersFilter) GetSource() FilterSource {
 	if o == nil || IsNil(o.Source) {
@@ -228,10 +267,45 @@ func (o FiltersFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	if !IsNil(o.Scope) {
+		toSerialize["scope"] = o.Scope
+	}
 	if !IsNil(o.Source) {
 		toSerialize["source"] = o.Source
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FiltersFilter) UnmarshalJSON(data []byte) (err error) {
+	varFiltersFilter := _FiltersFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFiltersFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FiltersFilter(varFiltersFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collapsed")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFiltersFilter struct {
@@ -269,5 +343,4 @@ func (v *NullableFiltersFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

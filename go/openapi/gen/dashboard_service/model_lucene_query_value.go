@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LuceneQueryValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LuceneQueryValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LuceneQueryValue{}
 // LuceneQueryValue struct for LuceneQueryValue
 type LuceneQueryValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LuceneQueryValue LuceneQueryValue
 
 // NewLuceneQueryValue instantiates a new LuceneQueryValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LuceneQueryValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LuceneQueryValue) UnmarshalJSON(data []byte) (err error) {
+	varLuceneQueryValue := _LuceneQueryValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLuceneQueryValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LuceneQueryValue(varLuceneQueryValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLuceneQueryValue struct {
@@ -122,5 +155,4 @@ func (v *NullableLuceneQueryValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

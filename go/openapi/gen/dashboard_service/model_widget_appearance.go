@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetAppearance type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetAppearance{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &WidgetAppearance{}
 // WidgetAppearance struct for WidgetAppearance
 type WidgetAppearance struct {
 	Width *int32 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetAppearance WidgetAppearance
 
 // NewWidgetAppearance instantiates a new WidgetAppearance object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o WidgetAppearance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetAppearance) UnmarshalJSON(data []byte) (err error) {
+	varWidgetAppearance := _WidgetAppearance{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetAppearance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetAppearance(varWidgetAppearance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetAppearance struct {
@@ -122,5 +155,4 @@ func (v *NullableWidgetAppearance) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

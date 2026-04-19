@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RepetitiveVar type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RepetitiveVar{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &RepetitiveVar{}
 type RepetitiveVar struct {
 	// Variable name that can be applied on section making it repetitive section
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepetitiveVar RepetitiveVar
 
 // NewRepetitiveVar instantiates a new RepetitiveVar object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o RepetitiveVar) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepetitiveVar) UnmarshalJSON(data []byte) (err error) {
+	varRepetitiveVar := _RepetitiveVar{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRepetitiveVar)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepetitiveVar(varRepetitiveVar)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepetitiveVar struct {
@@ -123,5 +156,4 @@ func (v *NullableRepetitiveVar) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

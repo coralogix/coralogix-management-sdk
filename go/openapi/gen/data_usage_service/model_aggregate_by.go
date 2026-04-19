@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // AggregateBy the model 'AggregateBy'
 type AggregateBy string

@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetIntegrationsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetIntegrationsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetIntegrationsResponse{}
 // GetIntegrationsResponse This data structure represents a list of outgoing webhook types.
 type GetIntegrationsResponse struct {
 	Integrations []GetIntegrationsResponseIntegrationWithCounts `json:"integrations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetIntegrationsResponse GetIntegrationsResponse
 
 // NewGetIntegrationsResponse instantiates a new GetIntegrationsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetIntegrationsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Integrations) {
 		toSerialize["integrations"] = o.Integrations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetIntegrationsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetIntegrationsResponse := _GetIntegrationsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetIntegrationsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetIntegrationsResponse(varGetIntegrationsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetIntegrationsResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetIntegrationsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

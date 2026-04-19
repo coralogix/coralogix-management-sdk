@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtractTimestampParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtractTimestampParameters{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ExtractTimestampParameters{}
 type ExtractTimestampParameters struct {
 	Format *string `json:"format,omitempty"`
 	Standard *FormatStandard `json:"standard,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtractTimestampParameters ExtractTimestampParameters
 
 // NewExtractTimestampParameters instantiates a new ExtractTimestampParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ExtractTimestampParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Standard) {
 		toSerialize["standard"] = o.Standard
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtractTimestampParameters) UnmarshalJSON(data []byte) (err error) {
+	varExtractTimestampParameters := _ExtractTimestampParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtractTimestampParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtractTimestampParameters(varExtractTimestampParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "standard")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtractTimestampParameters struct {
@@ -158,5 +192,4 @@ func (v *NullableExtractTimestampParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

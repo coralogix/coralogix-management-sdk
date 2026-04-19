@@ -11,7 +11,6 @@
           "Slos Service"
         ],
         "summary": "List Slos",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,9 +32,6 @@
                   "field": {
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/SloFilterFieldSloType"
-                      },
-                      {
                         "$ref": "#/components/schemas/SloFilterFieldProductType"
                       },
                       {
@@ -46,6 +42,9 @@
                       },
                       {
                         "$ref": "#/components/schemas/SloFilterFieldLabelName"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldSloType"
                       }
                     ]
                   },
@@ -114,7 +113,6 @@
           "Slos Service"
         ],
         "summary": "Replace Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -186,7 +184,6 @@
           "Slos Service"
         ],
         "summary": "Create Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -209,13 +206,13 @@
                 "type": "object",
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/SloApmSli"
+                  },
+                  {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloWindowBasedMetricSli"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloApmSli"
                   }
                 ]
               }
@@ -260,7 +257,6 @@
           "Slos Service"
         ],
         "summary": "Batch Execute Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -282,8 +278,7 @@
                 },
                 "required": [
                   "requests"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -326,7 +321,6 @@
           "Slos Service"
         ],
         "summary": "Batch Get Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -383,7 +377,6 @@
           "Slos Service"
         ],
         "summary": "Get Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -435,7 +428,6 @@
           "Slos Service"
         ],
         "summary": "Delete Slo",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -489,7 +481,6 @@
           "Slos Service"
         ],
         "summary": "Replace Slo Pre-Validate Alerts",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -501,13 +492,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
-                  },
-                  {
                     "$ref": "#/components/schemas/SloApmSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -552,7 +543,6 @@
           "Slos Service"
         ],
         "summary": "Get Slo Zero State",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -605,7 +595,7 @@
           "url": ""
         },
         "title": "ApmFilter",
-        "description": "Key-value filter for APM metrics (exact match: label=\"value\")",
+        "description": "Key-value filter for APM metrics. Supports single value (legacy) or multiple values (OR semantics)",
         "type": "object",
         "properties": {
           "key": {
@@ -614,9 +604,18 @@
             "type": "string"
           },
           "value": {
+            "deprecated": true,
             "example": "production",
-            "description": "Exact value to match",
+            "description": "Deprecated: use values instead. Single value to match (kept for backward compatibility)",
             "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "example": "500",
+              "description": "Preferred: multiple values to match (OR semantics, e.g. status IN [500, 503])",
+              "type": "string"
+            }
           }
         }
       },
@@ -675,7 +674,9 @@
             "$ref": "#/components/schemas/WindowSloWindow"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "average"
+        ]
       },
       "ApmLatencySliQuantile": {
         "externalDocs": {
@@ -698,7 +699,9 @@
             "$ref": "#/components/schemas/WindowSloWindow"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "quantile"
+        ]
       },
       "ApmSli": {
         "oneOf": [
@@ -750,7 +753,9 @@
             }
           }
         },
-        "additionalProperties": false
+        "required": [
+          "errorConfig"
+        ]
       },
       "ApmSliLatencyConfig": {
         "externalDocs": {
@@ -792,7 +797,9 @@
             }
           }
         },
-        "additionalProperties": false
+        "required": [
+          "latencyConfig"
+        ]
       },
       "BatchExecuteSloResponse": {
         "externalDocs": {
@@ -862,33 +869,6 @@
           "UNAVAILABLE",
           "DATA_LOSS"
         ]
-      },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
       },
       "ComparisonOperator": {
         "type": "string",
@@ -1007,9 +987,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -1029,9 +1009,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -1099,7 +1079,9 @@
             "$ref": "#/components/schemas/ProductTypeValues"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "productTypeValues"
+        ]
       },
       "IsFilterPredicateStringValues": {
         "externalDocs": {
@@ -1113,7 +1095,9 @@
             "$ref": "#/components/schemas/StringValues"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stringValues"
+        ]
       },
       "IsFilterPredicateTypeValues": {
         "externalDocs": {
@@ -1127,7 +1111,9 @@
             "$ref": "#/components/schemas/TypeValues"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "typeValues"
+        ]
       },
       "ListSlosResponse": {
         "externalDocs": {
@@ -1161,34 +1147,6 @@
             "type": "string"
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MissingDataStrategy": {
         "type": "string",
@@ -1328,13 +1286,13 @@
       "Slo": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
-          },
-          {
             "$ref": "#/components/schemas/SloWindowBasedMetricSli"
           },
           {
             "$ref": "#/components/schemas/SloApmSli"
+          },
+          {
+            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
           }
         ]
       },
@@ -1422,7 +1380,9 @@
             "format": "date-time"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "apmSli"
+        ]
       },
       "SloConstantFilterField": {
         "type": "string",
@@ -1435,13 +1395,13 @@
       "SloExecutionRequest": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
+          },
+          {
             "$ref": "#/components/schemas/SloExecutionRequestReplaceSloRequest"
           },
           {
             "$ref": "#/components/schemas/SloExecutionRequestDeleteSloRequest"
-          },
-          {
-            "$ref": "#/components/schemas/SloExecutionRequestCreateSloRequest"
           }
         ]
       },
@@ -1458,9 +1418,9 @@
           }
         },
         "required": [
-          "request"
-        ],
-        "additionalProperties": false
+          "request",
+          "createSloRequest"
+        ]
       },
       "SloExecutionRequestDeleteSloRequest": {
         "externalDocs": {
@@ -1475,9 +1435,9 @@
           }
         },
         "required": [
-          "request"
-        ],
-        "additionalProperties": false
+          "request",
+          "deleteSloRequest"
+        ]
       },
       "SloExecutionRequestReplaceSloRequest": {
         "externalDocs": {
@@ -1492,9 +1452,9 @@
           }
         },
         "required": [
-          "request"
-        ],
-        "additionalProperties": false
+          "request",
+          "replaceSloRequest"
+        ]
       },
       "SloExecutionResponse": {
         "oneOf": [
@@ -1521,7 +1481,9 @@
             "$ref": "#/components/schemas/CreateSloResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "createSloResponse"
+        ]
       },
       "SloExecutionResponseDeleteSloResponse": {
         "externalDocs": {
@@ -1535,7 +1497,9 @@
             "$ref": "#/components/schemas/DeleteSloResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "deleteSloResponse"
+        ]
       },
       "SloExecutionResponseReplaceSloResponse": {
         "externalDocs": {
@@ -1549,7 +1513,9 @@
             "$ref": "#/components/schemas/ReplaceSloResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replaceSloResponse"
+        ]
       },
       "SloFilterFieldConstFilter": {
         "externalDocs": {
@@ -1563,7 +1529,9 @@
             "$ref": "#/components/schemas/SloConstantFilterField"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "constFilter"
+        ]
       },
       "SloFilterFieldLabelName": {
         "externalDocs": {
@@ -1578,7 +1546,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "labelName"
+        ]
       },
       "SloFilterFieldProductType": {
         "externalDocs": {
@@ -1592,7 +1562,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "productType"
+        ]
       },
       "SloFilterFieldServiceName": {
         "externalDocs": {
@@ -1608,7 +1580,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "serviceName"
+        ]
       },
       "SloFilterFieldSloType": {
         "externalDocs": {
@@ -1622,7 +1596,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "sloType"
+        ]
       },
       "SloProductType": {
         "type": "string",
@@ -1698,7 +1674,9 @@
             "format": "date-time"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "requestBasedMetricSli"
+        ]
       },
       "SloTimeFrame": {
         "type": "string",
@@ -1784,7 +1762,9 @@
             "$ref": "#/components/schemas/WindowBasedMetricSli"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "windowBasedMetricSli"
+        ]
       },
       "StringValues": {
         "type": "object",
@@ -1909,14 +1889,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionLink type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionLink{}
 
 // PropertyDefinitionLink struct for PropertyDefinitionLink
 type PropertyDefinitionLink struct {
-	Link *PropertyLinks `json:"link,omitempty"`
+	Link PropertyLinks `json:"link"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionLink PropertyDefinitionLink
 
 // NewPropertyDefinitionLink instantiates a new PropertyDefinitionLink object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionLink() *PropertyDefinitionLink {
+func NewPropertyDefinitionLink(link PropertyLinks) *PropertyDefinitionLink {
 	this := PropertyDefinitionLink{}
+	this.Link = link
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewPropertyDefinitionLinkWithDefaults() *PropertyDefinitionLink {
 	return &this
 }
 
-// GetLink returns the Link field value if set, zero value otherwise.
+// GetLink returns the Link field value
 func (o *PropertyDefinitionLink) GetLink() PropertyLinks {
-	if o == nil || IsNil(o.Link) {
+	if o == nil {
 		var ret PropertyLinks
 		return ret
 	}
-	return *o.Link
+
+	return o.Link
 }
 
-// GetLinkOk returns a tuple with the Link field value if set, nil otherwise
+// GetLinkOk returns a tuple with the Link field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionLink) GetLinkOk() (*PropertyLinks, bool) {
-	if o == nil || IsNil(o.Link) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Link, true
+	return &o.Link, true
 }
 
-// HasLink returns a boolean if a field has been set.
-func (o *PropertyDefinitionLink) HasLink() bool {
-	if o != nil && !IsNil(o.Link) {
-		return true
-	}
-
-	return false
-}
-
-// SetLink gets a reference to the given PropertyLinks and assigns it to the Link field.
+// SetLink sets field value
 func (o *PropertyDefinitionLink) SetLink(v PropertyLinks) {
-	o.Link = &v
+	o.Link = v
 }
 
 func (o PropertyDefinitionLink) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o PropertyDefinitionLink) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionLink) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Link) {
-		toSerialize["link"] = o.Link
+	toSerialize["link"] = o.Link
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionLink) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"link",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionLink := _PropertyDefinitionLink{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionLink(varPropertyDefinitionLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "link")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionLink struct {
@@ -122,5 +168,4 @@ func (v *NullablePropertyDefinitionLink) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

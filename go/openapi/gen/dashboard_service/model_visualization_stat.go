@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationStat type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationStat{}
 
 // VisualizationStat struct for VisualizationStat
 type VisualizationStat struct {
-	Stat *Stat `json:"stat,omitempty"`
+	Stat Stat `json:"stat"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationStat VisualizationStat
 
 // NewVisualizationStat instantiates a new VisualizationStat object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationStat() *VisualizationStat {
+func NewVisualizationStat(stat Stat) *VisualizationStat {
 	this := VisualizationStat{}
+	this.Stat = stat
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationStatWithDefaults() *VisualizationStat {
 	return &this
 }
 
-// GetStat returns the Stat field value if set, zero value otherwise.
+// GetStat returns the Stat field value
 func (o *VisualizationStat) GetStat() Stat {
-	if o == nil || IsNil(o.Stat) {
+	if o == nil {
 		var ret Stat
 		return ret
 	}
-	return *o.Stat
+
+	return o.Stat
 }
 
-// GetStatOk returns a tuple with the Stat field value if set, nil otherwise
+// GetStatOk returns a tuple with the Stat field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationStat) GetStatOk() (*Stat, bool) {
-	if o == nil || IsNil(o.Stat) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Stat, true
+	return &o.Stat, true
 }
 
-// HasStat returns a boolean if a field has been set.
-func (o *VisualizationStat) HasStat() bool {
-	if o != nil && !IsNil(o.Stat) {
-		return true
-	}
-
-	return false
-}
-
-// SetStat gets a reference to the given Stat and assigns it to the Stat field.
+// SetStat sets field value
 func (o *VisualizationStat) SetStat(v Stat) {
-	o.Stat = &v
+	o.Stat = v
 }
 
 func (o VisualizationStat) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationStat) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationStat) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Stat) {
-		toSerialize["stat"] = o.Stat
+	toSerialize["stat"] = o.Stat
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationStat) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"stat",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationStat := _VisualizationStat{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationStat)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationStat(varVisualizationStat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stat")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationStat struct {
@@ -122,5 +168,4 @@ func (v *NullableVisualizationStat) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

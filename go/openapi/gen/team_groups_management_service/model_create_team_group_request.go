@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateTeamGroupRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateTeamGroupRequest{}
@@ -27,7 +30,10 @@ type CreateTeamGroupRequest struct {
 	Scope *V2Scope `json:"scope,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
 	UserIds []string `json:"userIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateTeamGroupRequest CreateTeamGroupRequest
 
 // NewCreateTeamGroupRequest instantiates a new CreateTeamGroupRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -336,7 +342,41 @@ func (o CreateTeamGroupRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserIds) {
 		toSerialize["userIds"] = o.UserIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateTeamGroupRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateTeamGroupRequest := _CreateTeamGroupRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateTeamGroupRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateTeamGroupRequest(varCreateTeamGroupRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "groupType")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "roleId")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "teamId")
+		delete(additionalProperties, "userIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateTeamGroupRequest struct {
@@ -374,5 +414,4 @@ func (v *NullableCreateTeamGroupRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

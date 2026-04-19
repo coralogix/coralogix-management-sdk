@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomRole type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomRole{}
@@ -26,7 +29,10 @@ type CustomRole struct {
 	Permissions []string `json:"permissions,omitempty"`
 	RoleId *int64 `json:"roleId,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomRole CustomRole
 
 // NewCustomRole instantiates a new CustomRole object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +306,40 @@ func (o CustomRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomRole) UnmarshalJSON(data []byte) (err error) {
+	varCustomRole := _CustomRole{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomRole)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomRole(varCustomRole)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parentRoleId")
+		delete(additionalProperties, "parentRoleName")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "roleId")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomRole struct {
@@ -338,5 +377,4 @@ func (v *NullableCustomRole) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

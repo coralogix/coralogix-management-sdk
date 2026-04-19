@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CompanyEnrichmentSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CompanyEnrichmentSettings{}
@@ -25,7 +28,10 @@ type CompanyEnrichmentSettings struct {
 	QueryOnlySizeLimitBytes *string `json:"queryOnlySizeLimitBytes,omitempty"`
 	RowLimit *int64 `json:"rowLimit,omitempty"`
 	SizeLimitBytes *string `json:"sizeLimitBytes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CompanyEnrichmentSettings CompanyEnrichmentSettings
 
 // NewCompanyEnrichmentSettings instantiates a new CompanyEnrichmentSettings object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o CompanyEnrichmentSettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SizeLimitBytes) {
 		toSerialize["sizeLimitBytes"] = o.SizeLimitBytes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CompanyEnrichmentSettings) UnmarshalJSON(data []byte) (err error) {
+	varCompanyEnrichmentSettings := _CompanyEnrichmentSettings{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCompanyEnrichmentSettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CompanyEnrichmentSettings(varCompanyEnrichmentSettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enrichmentAmountLimit")
+		delete(additionalProperties, "enrichmentsInUse")
+		delete(additionalProperties, "queryOnlyRowLimit")
+		delete(additionalProperties, "queryOnlySizeLimitBytes")
+		delete(additionalProperties, "rowLimit")
+		delete(additionalProperties, "sizeLimitBytes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCompanyEnrichmentSettings struct {
@@ -302,5 +340,4 @@ func (v *NullableCompanyEnrichmentSettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

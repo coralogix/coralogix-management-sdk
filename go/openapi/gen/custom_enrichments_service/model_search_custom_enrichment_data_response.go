@@ -11,8 +11,11 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SearchCustomEnrichmentDataResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SearchCustomEnrichmentDataResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SearchCustomEnrichmentDataResponse{}
 // SearchCustomEnrichmentDataResponse struct for SearchCustomEnrichmentDataResponse
 type SearchCustomEnrichmentDataResponse struct {
 	CustomEnrichmentsData []CustomEnrichmentData `json:"customEnrichmentsData,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCustomEnrichmentDataResponse SearchCustomEnrichmentDataResponse
 
 // NewSearchCustomEnrichmentDataResponse instantiates a new SearchCustomEnrichmentDataResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SearchCustomEnrichmentDataResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.CustomEnrichmentsData) {
 		toSerialize["customEnrichmentsData"] = o.CustomEnrichmentsData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCustomEnrichmentDataResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchCustomEnrichmentDataResponse := _SearchCustomEnrichmentDataResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSearchCustomEnrichmentDataResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCustomEnrichmentDataResponse(varSearchCustomEnrichmentDataResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customEnrichmentsData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCustomEnrichmentDataResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableSearchCustomEnrichmentDataResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

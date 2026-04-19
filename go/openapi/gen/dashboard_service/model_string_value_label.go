@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the StringValueLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StringValueLabel{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &StringValueLabel{}
 type StringValueLabel struct {
 	Label *string `json:"label,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StringValueLabel StringValueLabel
 
 // NewStringValueLabel instantiates a new StringValueLabel object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o StringValueLabel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StringValueLabel) UnmarshalJSON(data []byte) (err error) {
+	varStringValueLabel := _StringValueLabel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varStringValueLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StringValueLabel(varStringValueLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStringValueLabel struct {
@@ -158,5 +192,4 @@ func (v *NullableStringValueLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

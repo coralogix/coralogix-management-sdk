@@ -11,8 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GroupByContextualLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GroupByContextualLabel{}
@@ -20,16 +24,20 @@ var _ MappedNullable = &GroupByContextualLabel{}
 // GroupByContextualLabel struct for GroupByContextualLabel
 type GroupByContextualLabel struct {
 	// The contextual label to group by.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	ContextualLabel string `json:"contextualLabel"`
 	OrderByDirection *V1OrderByDirection `json:"orderByDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GroupByContextualLabel GroupByContextualLabel
 
 // NewGroupByContextualLabel instantiates a new GroupByContextualLabel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGroupByContextualLabel() *GroupByContextualLabel {
+func NewGroupByContextualLabel(contextualLabel string) *GroupByContextualLabel {
 	this := GroupByContextualLabel{}
+	this.ContextualLabel = contextualLabel
 	return &this
 }
 
@@ -41,36 +49,28 @@ func NewGroupByContextualLabelWithDefaults() *GroupByContextualLabel {
 	return &this
 }
 
-// GetContextualLabel returns the ContextualLabel field value if set, zero value otherwise.
+// GetContextualLabel returns the ContextualLabel field value
 func (o *GroupByContextualLabel) GetContextualLabel() string {
-	if o == nil || IsNil(o.ContextualLabel) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ContextualLabel
+
+	return o.ContextualLabel
 }
 
-// GetContextualLabelOk returns a tuple with the ContextualLabel field value if set, nil otherwise
+// GetContextualLabelOk returns a tuple with the ContextualLabel field value
 // and a boolean to check if the value has been set.
 func (o *GroupByContextualLabel) GetContextualLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.ContextualLabel) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ContextualLabel, true
+	return &o.ContextualLabel, true
 }
 
-// HasContextualLabel returns a boolean if a field has been set.
-func (o *GroupByContextualLabel) HasContextualLabel() bool {
-	if o != nil && !IsNil(o.ContextualLabel) {
-		return true
-	}
-
-	return false
-}
-
-// SetContextualLabel gets a reference to the given string and assigns it to the ContextualLabel field.
+// SetContextualLabel sets field value
 func (o *GroupByContextualLabel) SetContextualLabel(v string) {
-	o.ContextualLabel = &v
+	o.ContextualLabel = v
 }
 
 // GetOrderByDirection returns the OrderByDirection field value if set, zero value otherwise.
@@ -115,13 +115,60 @@ func (o GroupByContextualLabel) MarshalJSON() ([]byte, error) {
 
 func (o GroupByContextualLabel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ContextualLabel) {
-		toSerialize["contextualLabel"] = o.ContextualLabel
-	}
+	toSerialize["contextualLabel"] = o.ContextualLabel
 	if !IsNil(o.OrderByDirection) {
 		toSerialize["orderByDirection"] = o.OrderByDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GroupByContextualLabel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"contextualLabel",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGroupByContextualLabel := _GroupByContextualLabel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGroupByContextualLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupByContextualLabel(varGroupByContextualLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contextualLabel")
+		delete(additionalProperties, "orderByDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGroupByContextualLabel struct {
@@ -159,5 +206,4 @@ func (v *NullableGroupByContextualLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

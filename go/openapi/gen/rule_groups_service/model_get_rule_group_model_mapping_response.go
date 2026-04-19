@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetRuleGroupModelMappingResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRuleGroupModelMappingResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetRuleGroupModelMappingResponse{}
 // GetRuleGroupModelMappingResponse struct for GetRuleGroupModelMappingResponse
 type GetRuleGroupModelMappingResponse struct {
 	RuleDefinition map[string]interface{} `json:"ruleDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRuleGroupModelMappingResponse GetRuleGroupModelMappingResponse
 
 // NewGetRuleGroupModelMappingResponse instantiates a new GetRuleGroupModelMappingResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetRuleGroupModelMappingResponse) ToMap() (map[string]interface{}, error
 	if !IsNil(o.RuleDefinition) {
 		toSerialize["ruleDefinition"] = o.RuleDefinition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRuleGroupModelMappingResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetRuleGroupModelMappingResponse := _GetRuleGroupModelMappingResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetRuleGroupModelMappingResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRuleGroupModelMappingResponse(varGetRuleGroupModelMappingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ruleDefinition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRuleGroupModelMappingResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetRuleGroupModelMappingResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

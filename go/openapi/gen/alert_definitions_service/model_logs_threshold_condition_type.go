@@ -11,9 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // LogsThresholdConditionType the model 'LogsThresholdConditionType'
 type LogsThresholdConditionType string

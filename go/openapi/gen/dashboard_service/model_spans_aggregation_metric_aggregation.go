@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansAggregationMetricAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansAggregationMetricAggregation{}
 
 // SpansAggregationMetricAggregation struct for SpansAggregationMetricAggregation
 type SpansAggregationMetricAggregation struct {
-	MetricAggregation *MetricAggregation `json:"metricAggregation,omitempty"`
+	MetricAggregation MetricAggregation `json:"metricAggregation"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansAggregationMetricAggregation SpansAggregationMetricAggregation
 
 // NewSpansAggregationMetricAggregation instantiates a new SpansAggregationMetricAggregation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSpansAggregationMetricAggregation() *SpansAggregationMetricAggregation {
+func NewSpansAggregationMetricAggregation(metricAggregation MetricAggregation) *SpansAggregationMetricAggregation {
 	this := SpansAggregationMetricAggregation{}
+	this.MetricAggregation = metricAggregation
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSpansAggregationMetricAggregationWithDefaults() *SpansAggregationMetricA
 	return &this
 }
 
-// GetMetricAggregation returns the MetricAggregation field value if set, zero value otherwise.
+// GetMetricAggregation returns the MetricAggregation field value
 func (o *SpansAggregationMetricAggregation) GetMetricAggregation() MetricAggregation {
-	if o == nil || IsNil(o.MetricAggregation) {
+	if o == nil {
 		var ret MetricAggregation
 		return ret
 	}
-	return *o.MetricAggregation
+
+	return o.MetricAggregation
 }
 
-// GetMetricAggregationOk returns a tuple with the MetricAggregation field value if set, nil otherwise
+// GetMetricAggregationOk returns a tuple with the MetricAggregation field value
 // and a boolean to check if the value has been set.
 func (o *SpansAggregationMetricAggregation) GetMetricAggregationOk() (*MetricAggregation, bool) {
-	if o == nil || IsNil(o.MetricAggregation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricAggregation, true
+	return &o.MetricAggregation, true
 }
 
-// HasMetricAggregation returns a boolean if a field has been set.
-func (o *SpansAggregationMetricAggregation) HasMetricAggregation() bool {
-	if o != nil && !IsNil(o.MetricAggregation) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricAggregation gets a reference to the given MetricAggregation and assigns it to the MetricAggregation field.
+// SetMetricAggregation sets field value
 func (o *SpansAggregationMetricAggregation) SetMetricAggregation(v MetricAggregation) {
-	o.MetricAggregation = &v
+	o.MetricAggregation = v
 }
 
 func (o SpansAggregationMetricAggregation) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SpansAggregationMetricAggregation) MarshalJSON() ([]byte, error) {
 
 func (o SpansAggregationMetricAggregation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricAggregation) {
-		toSerialize["metricAggregation"] = o.MetricAggregation
+	toSerialize["metricAggregation"] = o.MetricAggregation
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansAggregationMetricAggregation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricAggregation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSpansAggregationMetricAggregation := _SpansAggregationMetricAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansAggregationMetricAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansAggregationMetricAggregation(varSpansAggregationMetricAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricAggregation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansAggregationMetricAggregation struct {
@@ -122,5 +168,4 @@ func (v *NullableSpansAggregationMetricAggregation) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

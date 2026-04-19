@@ -11,9 +11,12 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // EventsV3FilterMatcher the model 'EventsV3FilterMatcher'
 type EventsV3FilterMatcher string

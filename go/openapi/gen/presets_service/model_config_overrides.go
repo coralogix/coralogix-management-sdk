@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConfigOverrides type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigOverrides{}
@@ -22,7 +25,10 @@ type ConfigOverrides struct {
 	ConditionType *NotificationCenterConditionType `json:"conditionType,omitempty"`
 	MessageConfig *MessageConfig `json:"messageConfig,omitempty"`
 	PayloadType *string `json:"payloadType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigOverrides ConfigOverrides
 
 // NewConfigOverrides instantiates a new ConfigOverrides object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ConfigOverrides) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PayloadType) {
 		toSerialize["payloadType"] = o.PayloadType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigOverrides) UnmarshalJSON(data []byte) (err error) {
+	varConfigOverrides := _ConfigOverrides{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConfigOverrides)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigOverrides(varConfigOverrides)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conditionType")
+		delete(additionalProperties, "messageConfig")
+		delete(additionalProperties, "payloadType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigOverrides struct {
@@ -194,5 +229,4 @@ func (v *NullableConfigOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

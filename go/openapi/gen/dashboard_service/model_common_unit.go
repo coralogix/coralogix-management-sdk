@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // CommonUnit the model 'CommonUnit'
 type CommonUnit string
@@ -41,6 +44,7 @@ const (
 	COMMONUNIT_UNIT_PERCENT_ZERO_ONE CommonUnit = "UNIT_PERCENT_ZERO_ONE"
 	COMMONUNIT_UNIT_PERCENT_ZERO_HUNDRED CommonUnit = "UNIT_PERCENT_ZERO_HUNDRED"
 	COMMONUNIT_UNIT_PERCENT CommonUnit = "UNIT_PERCENT"
+	COMMONUNIT_UNIT_DATETIME_ISO CommonUnit = "UNIT_DATETIME_ISO"
 )
 
 // All allowed values of CommonUnit enum
@@ -66,6 +70,7 @@ var AllowedCommonUnitEnumValues = []CommonUnit{
 	"UNIT_PERCENT_ZERO_ONE",
 	"UNIT_PERCENT_ZERO_HUNDRED",
 	"UNIT_PERCENT",
+	"UNIT_DATETIME_ISO",
 }
 
 func (v *CommonUnit) UnmarshalJSON(src []byte) error {

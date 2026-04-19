@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersExtractTimestampParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersExtractTimestampParameters{}
 
 // RuleParametersExtractTimestampParameters struct for RuleParametersExtractTimestampParameters
 type RuleParametersExtractTimestampParameters struct {
-	ExtractTimestampParameters *ExtractTimestampParameters `json:"extractTimestampParameters,omitempty"`
+	ExtractTimestampParameters ExtractTimestampParameters `json:"extractTimestampParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersExtractTimestampParameters RuleParametersExtractTimestampParameters
 
 // NewRuleParametersExtractTimestampParameters instantiates a new RuleParametersExtractTimestampParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersExtractTimestampParameters() *RuleParametersExtractTimestampParameters {
+func NewRuleParametersExtractTimestampParameters(extractTimestampParameters ExtractTimestampParameters) *RuleParametersExtractTimestampParameters {
 	this := RuleParametersExtractTimestampParameters{}
+	this.ExtractTimestampParameters = extractTimestampParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersExtractTimestampParametersWithDefaults() *RuleParametersEx
 	return &this
 }
 
-// GetExtractTimestampParameters returns the ExtractTimestampParameters field value if set, zero value otherwise.
+// GetExtractTimestampParameters returns the ExtractTimestampParameters field value
 func (o *RuleParametersExtractTimestampParameters) GetExtractTimestampParameters() ExtractTimestampParameters {
-	if o == nil || IsNil(o.ExtractTimestampParameters) {
+	if o == nil {
 		var ret ExtractTimestampParameters
 		return ret
 	}
-	return *o.ExtractTimestampParameters
+
+	return o.ExtractTimestampParameters
 }
 
-// GetExtractTimestampParametersOk returns a tuple with the ExtractTimestampParameters field value if set, nil otherwise
+// GetExtractTimestampParametersOk returns a tuple with the ExtractTimestampParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersExtractTimestampParameters) GetExtractTimestampParametersOk() (*ExtractTimestampParameters, bool) {
-	if o == nil || IsNil(o.ExtractTimestampParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExtractTimestampParameters, true
+	return &o.ExtractTimestampParameters, true
 }
 
-// HasExtractTimestampParameters returns a boolean if a field has been set.
-func (o *RuleParametersExtractTimestampParameters) HasExtractTimestampParameters() bool {
-	if o != nil && !IsNil(o.ExtractTimestampParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetExtractTimestampParameters gets a reference to the given ExtractTimestampParameters and assigns it to the ExtractTimestampParameters field.
+// SetExtractTimestampParameters sets field value
 func (o *RuleParametersExtractTimestampParameters) SetExtractTimestampParameters(v ExtractTimestampParameters) {
-	o.ExtractTimestampParameters = &v
+	o.ExtractTimestampParameters = v
 }
 
 func (o RuleParametersExtractTimestampParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersExtractTimestampParameters) MarshalJSON() ([]byte, error) 
 
 func (o RuleParametersExtractTimestampParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ExtractTimestampParameters) {
-		toSerialize["extractTimestampParameters"] = o.ExtractTimestampParameters
+	toSerialize["extractTimestampParameters"] = o.ExtractTimestampParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersExtractTimestampParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"extractTimestampParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersExtractTimestampParameters := _RuleParametersExtractTimestampParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersExtractTimestampParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersExtractTimestampParameters(varRuleParametersExtractTimestampParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extractTimestampParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersExtractTimestampParameters struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleParametersExtractTimestampParameters) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

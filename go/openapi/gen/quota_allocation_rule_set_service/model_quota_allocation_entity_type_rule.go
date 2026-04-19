@@ -11,10 +11,12 @@ API version: 1.0.0
 package quota_allocation_rule_set_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuotaAllocationEntityTypeRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaAllocationEntityTypeRule{}
@@ -25,6 +27,7 @@ type QuotaAllocationEntityTypeRule struct {
 	CanOverflow bool `json:"canOverflow"`
 	Enabled bool `json:"enabled"`
 	EntityType string `json:"entityType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QuotaAllocationEntityTypeRule QuotaAllocationEntityTypeRule
@@ -160,6 +163,11 @@ func (o QuotaAllocationEntityTypeRule) ToMap() (map[string]interface{}, error) {
 	toSerialize["canOverflow"] = o.CanOverflow
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["entityType"] = o.EntityType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,7 +199,6 @@ func (o *QuotaAllocationEntityTypeRule) UnmarshalJSON(data []byte) (err error) {
 	varQuotaAllocationEntityTypeRule := _QuotaAllocationEntityTypeRule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQuotaAllocationEntityTypeRule)
 
 	if err != nil {
@@ -199,6 +206,16 @@ func (o *QuotaAllocationEntityTypeRule) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = QuotaAllocationEntityTypeRule(varQuotaAllocationEntityTypeRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allocation")
+		delete(additionalProperties, "canOverflow")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -238,5 +255,4 @@ func (v *NullableQuotaAllocationEntityTypeRule) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

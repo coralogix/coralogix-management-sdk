@@ -11,9 +11,12 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PresetSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PresetSummary{}
@@ -21,7 +24,7 @@ var _ MappedNullable = &PresetSummary{}
 // PresetSummary Provides a concise overview of a preset
 type PresetSummary struct {
 	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
-	ConnectorType *ConnectorType `json:"connectorType,omitempty"`
+	ConnectorType *NotificationCenterConnectorType `json:"connectorType,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
@@ -30,7 +33,10 @@ type PresetSummary struct {
 	ParentId *string `json:"parentId,omitempty"`
 	PresetType *PresetType `json:"presetType,omitempty"`
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PresetSummary PresetSummary
 
 // NewPresetSummary instantiates a new PresetSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -82,9 +88,9 @@ func (o *PresetSummary) SetAttachmentConfig(v AttachmentConfig) {
 }
 
 // GetConnectorType returns the ConnectorType field value if set, zero value otherwise.
-func (o *PresetSummary) GetConnectorType() ConnectorType {
+func (o *PresetSummary) GetConnectorType() NotificationCenterConnectorType {
 	if o == nil || IsNil(o.ConnectorType) {
-		var ret ConnectorType
+		var ret NotificationCenterConnectorType
 		return ret
 	}
 	return *o.ConnectorType
@@ -92,7 +98,7 @@ func (o *PresetSummary) GetConnectorType() ConnectorType {
 
 // GetConnectorTypeOk returns a tuple with the ConnectorType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetSummary) GetConnectorTypeOk() (*ConnectorType, bool) {
+func (o *PresetSummary) GetConnectorTypeOk() (*NotificationCenterConnectorType, bool) {
 	if o == nil || IsNil(o.ConnectorType) {
 		return nil, false
 	}
@@ -108,8 +114,8 @@ func (o *PresetSummary) HasConnectorType() bool {
 	return false
 }
 
-// SetConnectorType gets a reference to the given ConnectorType and assigns it to the ConnectorType field.
-func (o *PresetSummary) SetConnectorType(v ConnectorType) {
+// SetConnectorType gets a reference to the given NotificationCenterConnectorType and assigns it to the ConnectorType field.
+func (o *PresetSummary) SetConnectorType(v NotificationCenterConnectorType) {
 	o.ConnectorType = &v
 }
 
@@ -409,7 +415,43 @@ func (o PresetSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PresetSummary) UnmarshalJSON(data []byte) (err error) {
+	varPresetSummary := _PresetSummary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPresetSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PresetSummary(varPresetSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attachmentConfig")
+		delete(additionalProperties, "connectorType")
+		delete(additionalProperties, "createTime")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parentId")
+		delete(additionalProperties, "presetType")
+		delete(additionalProperties, "updateTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePresetSummary struct {
@@ -447,5 +489,4 @@ func (v *NullablePresetSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

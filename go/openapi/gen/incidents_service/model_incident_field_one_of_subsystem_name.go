@@ -11,23 +11,31 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfSubsystemName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfSubsystemName{}
 
 // IncidentFieldOneOfSubsystemName struct for IncidentFieldOneOfSubsystemName
 type IncidentFieldOneOfSubsystemName struct {
-	SubsystemName *string `json:"subsystemName,omitempty"`
+	SubsystemName string `json:"subsystemName"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfSubsystemName IncidentFieldOneOfSubsystemName
 
 // NewIncidentFieldOneOfSubsystemName instantiates a new IncidentFieldOneOfSubsystemName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfSubsystemName() *IncidentFieldOneOfSubsystemName {
+func NewIncidentFieldOneOfSubsystemName(subsystemName string) *IncidentFieldOneOfSubsystemName {
 	this := IncidentFieldOneOfSubsystemName{}
+	this.SubsystemName = subsystemName
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIncidentFieldOneOfSubsystemNameWithDefaults() *IncidentFieldOneOfSubsyst
 	return &this
 }
 
-// GetSubsystemName returns the SubsystemName field value if set, zero value otherwise.
+// GetSubsystemName returns the SubsystemName field value
 func (o *IncidentFieldOneOfSubsystemName) GetSubsystemName() string {
-	if o == nil || IsNil(o.SubsystemName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SubsystemName
+
+	return o.SubsystemName
 }
 
-// GetSubsystemNameOk returns a tuple with the SubsystemName field value if set, nil otherwise
+// GetSubsystemNameOk returns a tuple with the SubsystemName field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfSubsystemName) GetSubsystemNameOk() (*string, bool) {
-	if o == nil || IsNil(o.SubsystemName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SubsystemName, true
+	return &o.SubsystemName, true
 }
 
-// HasSubsystemName returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfSubsystemName) HasSubsystemName() bool {
-	if o != nil && !IsNil(o.SubsystemName) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubsystemName gets a reference to the given string and assigns it to the SubsystemName field.
+// SetSubsystemName sets field value
 func (o *IncidentFieldOneOfSubsystemName) SetSubsystemName(v string) {
-	o.SubsystemName = &v
+	o.SubsystemName = v
 }
 
 func (o IncidentFieldOneOfSubsystemName) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IncidentFieldOneOfSubsystemName) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfSubsystemName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SubsystemName) {
-		toSerialize["subsystemName"] = o.SubsystemName
+	toSerialize["subsystemName"] = o.SubsystemName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfSubsystemName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"subsystemName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfSubsystemName := _IncidentFieldOneOfSubsystemName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfSubsystemName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfSubsystemName(varIncidentFieldOneOfSubsystemName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "subsystemName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfSubsystemName struct {
@@ -122,5 +168,4 @@ func (v *NullableIncidentFieldOneOfSubsystemName) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

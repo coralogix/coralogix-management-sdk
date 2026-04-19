@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FolderPath type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FolderPath{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &FolderPath{}
 // FolderPath struct for FolderPath
 type FolderPath struct {
 	Segments []string `json:"segments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FolderPath FolderPath
 
 // NewFolderPath instantiates a new FolderPath object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o FolderPath) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Segments) {
 		toSerialize["segments"] = o.Segments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FolderPath) UnmarshalJSON(data []byte) (err error) {
+	varFolderPath := _FolderPath{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFolderPath)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FolderPath(varFolderPath)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "segments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFolderPath struct {
@@ -122,5 +155,4 @@ func (v *NullableFolderPath) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

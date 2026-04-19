@@ -11,24 +11,32 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentFieldOneOfCreatedAt type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfCreatedAt{}
 
 // IncidentFieldOneOfCreatedAt struct for IncidentFieldOneOfCreatedAt
 type IncidentFieldOneOfCreatedAt struct {
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentFieldOneOfCreatedAt IncidentFieldOneOfCreatedAt
 
 // NewIncidentFieldOneOfCreatedAt instantiates a new IncidentFieldOneOfCreatedAt object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentFieldOneOfCreatedAt() *IncidentFieldOneOfCreatedAt {
+func NewIncidentFieldOneOfCreatedAt(createdAt time.Time) *IncidentFieldOneOfCreatedAt {
 	this := IncidentFieldOneOfCreatedAt{}
+	this.CreatedAt = createdAt
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewIncidentFieldOneOfCreatedAtWithDefaults() *IncidentFieldOneOfCreatedAt {
 	return &this
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *IncidentFieldOneOfCreatedAt) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *IncidentFieldOneOfCreatedAt) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *IncidentFieldOneOfCreatedAt) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *IncidentFieldOneOfCreatedAt) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
 func (o IncidentFieldOneOfCreatedAt) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o IncidentFieldOneOfCreatedAt) MarshalJSON() ([]byte, error) {
 
 func (o IncidentFieldOneOfCreatedAt) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["createdAt"] = o.CreatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentFieldOneOfCreatedAt) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"createdAt",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIncidentFieldOneOfCreatedAt := _IncidentFieldOneOfCreatedAt{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentFieldOneOfCreatedAt)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentFieldOneOfCreatedAt(varIncidentFieldOneOfCreatedAt)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentFieldOneOfCreatedAt struct {
@@ -123,5 +169,4 @@ func (v *NullableIncidentFieldOneOfCreatedAt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

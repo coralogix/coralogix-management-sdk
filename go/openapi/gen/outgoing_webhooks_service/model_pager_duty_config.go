@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PagerDutyConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PagerDutyConfig{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &PagerDutyConfig{}
 // PagerDutyConfig struct for PagerDutyConfig
 type PagerDutyConfig struct {
 	ServiceKey *string `json:"serviceKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PagerDutyConfig PagerDutyConfig
 
 // NewPagerDutyConfig instantiates a new PagerDutyConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o PagerDutyConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ServiceKey) {
 		toSerialize["serviceKey"] = o.ServiceKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PagerDutyConfig) UnmarshalJSON(data []byte) (err error) {
+	varPagerDutyConfig := _PagerDutyConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPagerDutyConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PagerDutyConfig(varPagerDutyConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "serviceKey")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePagerDutyConfig struct {
@@ -122,5 +155,4 @@ func (v *NullablePagerDutyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

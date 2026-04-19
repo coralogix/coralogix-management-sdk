@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // LineChartQuery - struct for LineChartQuery
 type LineChartQuery struct {
@@ -58,7 +61,7 @@ func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into LineChartQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryDataprime)
+	err = json.Unmarshal(data, &dst.LineChartQueryDataprime)
 	if err == nil {
 		jsonLineChartQueryDataprime, _ := json.Marshal(dst.LineChartQueryDataprime)
 		if string(jsonLineChartQueryDataprime) == "{}" { // empty struct
@@ -75,7 +78,7 @@ func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LineChartQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryLogs)
+	err = json.Unmarshal(data, &dst.LineChartQueryLogs)
 	if err == nil {
 		jsonLineChartQueryLogs, _ := json.Marshal(dst.LineChartQueryLogs)
 		if string(jsonLineChartQueryLogs) == "{}" { // empty struct
@@ -92,7 +95,7 @@ func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LineChartQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.LineChartQueryMetrics)
+	err = json.Unmarshal(data, &dst.LineChartQueryMetrics)
 	if err == nil {
 		jsonLineChartQueryMetrics, _ := json.Marshal(dst.LineChartQueryMetrics)
 		if string(jsonLineChartQueryMetrics) == "{}" { // empty struct
@@ -109,7 +112,7 @@ func (dst *LineChartQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into LineChartQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.LineChartQuerySpans)
+	err = json.Unmarshal(data, &dst.LineChartQuerySpans)
 	if err == nil {
 		jsonLineChartQuerySpans, _ := json.Marshal(dst.LineChartQuerySpans)
 		if string(jsonLineChartQuerySpans) == "{}" { // empty struct
@@ -243,5 +246,4 @@ func (v *NullableLineChartQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,7 +11,6 @@
           "Role Management Service"
         ],
         "summary": "List Custom Roles",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -63,7 +62,6 @@
           "Role Management Service"
         ],
         "summary": "Create Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -135,7 +133,6 @@
           "Role Management Service"
         ],
         "summary": "Get Custom Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -194,7 +191,6 @@
           "Role Management Service"
         ],
         "summary": "Update Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -226,8 +222,7 @@
                   "newPermissions": {
                     "$ref": "#/components/schemas/v2.Permissions"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -274,7 +269,6 @@
           "Role Management Service"
         ],
         "summary": "Delete Role",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -341,7 +335,6 @@
           "Role Management Service"
         ],
         "summary": "List System Roles",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -381,33 +374,6 @@
   },
   "components": {
     "schemas": {
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateRoleRequestParentRoleId": {
         "type": "object",
         "properties": {
@@ -432,7 +398,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "parentRoleId"
+        ]
       },
       "CreateRoleRequestParentRoleName": {
         "type": "object",
@@ -457,7 +425,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "parentRoleName"
+        ]
       },
       "CreateRoleResponse": {
         "type": "object",
@@ -542,9 +512,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -564,9 +534,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -619,34 +589,6 @@
             }
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -728,14 +670,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

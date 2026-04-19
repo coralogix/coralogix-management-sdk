@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtensionItemBinary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtensionItemBinary{}
@@ -22,7 +25,10 @@ type ExtensionItemBinary struct {
 	Data *string `json:"data,omitempty"`
 	FileName *string `json:"fileName,omitempty"`
 	Type *ExtensionItemBinaryBinaryType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtensionItemBinary ExtensionItemBinary
 
 // NewExtensionItemBinary instantiates a new ExtensionItemBinary object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ExtensionItemBinary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtensionItemBinary) UnmarshalJSON(data []byte) (err error) {
+	varExtensionItemBinary := _ExtensionItemBinary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtensionItemBinary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtensionItemBinary(varExtensionItemBinary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "fileName")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtensionItemBinary struct {
@@ -194,5 +229,4 @@ func (v *NullableExtensionItemBinary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventAssign type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventAssign{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &IncidentEventAssign{}
 // IncidentEventAssign struct for IncidentEventAssign
 type IncidentEventAssign struct {
 	Assignment *Assignment `json:"assignment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventAssign IncidentEventAssign
 
 // NewIncidentEventAssign instantiates a new IncidentEventAssign object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o IncidentEventAssign) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Assignment) {
 		toSerialize["assignment"] = o.Assignment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventAssign) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventAssign := _IncidentEventAssign{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventAssign)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventAssign(varIncidentEventAssign)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assignment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventAssign struct {
@@ -122,5 +155,4 @@ func (v *NullableIncidentEventAssign) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,13 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // SloFilterField - struct for SloFilterField
 type SloFilterField struct {
@@ -66,7 +69,7 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SloFilterFieldConstFilter
-	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldConstFilter)
+	err = json.Unmarshal(data, &dst.SloFilterFieldConstFilter)
 	if err == nil {
 		jsonSloFilterFieldConstFilter, _ := json.Marshal(dst.SloFilterFieldConstFilter)
 		if string(jsonSloFilterFieldConstFilter) == "{}" { // empty struct
@@ -83,7 +86,7 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloFilterFieldLabelName
-	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldLabelName)
+	err = json.Unmarshal(data, &dst.SloFilterFieldLabelName)
 	if err == nil {
 		jsonSloFilterFieldLabelName, _ := json.Marshal(dst.SloFilterFieldLabelName)
 		if string(jsonSloFilterFieldLabelName) == "{}" { // empty struct
@@ -100,7 +103,7 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloFilterFieldProductType
-	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldProductType)
+	err = json.Unmarshal(data, &dst.SloFilterFieldProductType)
 	if err == nil {
 		jsonSloFilterFieldProductType, _ := json.Marshal(dst.SloFilterFieldProductType)
 		if string(jsonSloFilterFieldProductType) == "{}" { // empty struct
@@ -117,7 +120,7 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloFilterFieldServiceName
-	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldServiceName)
+	err = json.Unmarshal(data, &dst.SloFilterFieldServiceName)
 	if err == nil {
 		jsonSloFilterFieldServiceName, _ := json.Marshal(dst.SloFilterFieldServiceName)
 		if string(jsonSloFilterFieldServiceName) == "{}" { // empty struct
@@ -134,7 +137,7 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloFilterFieldSloType
-	err = newStrictDecoder(data).Decode(&dst.SloFilterFieldSloType)
+	err = json.Unmarshal(data, &dst.SloFilterFieldSloType)
 	if err == nil {
 		jsonSloFilterFieldSloType, _ := json.Marshal(dst.SloFilterFieldSloType)
 		if string(jsonSloFilterFieldSloType) == "{}" { // empty struct
@@ -281,5 +284,4 @@ func (v *NullableSloFilterField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

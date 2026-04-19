@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationGeomap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationGeomap{}
 
 // VisualizationGeomap struct for VisualizationGeomap
 type VisualizationGeomap struct {
-	Geomap *Geomap `json:"geomap,omitempty"`
+	Geomap Geomap `json:"geomap"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationGeomap VisualizationGeomap
 
 // NewVisualizationGeomap instantiates a new VisualizationGeomap object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationGeomap() *VisualizationGeomap {
+func NewVisualizationGeomap(geomap Geomap) *VisualizationGeomap {
 	this := VisualizationGeomap{}
+	this.Geomap = geomap
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationGeomapWithDefaults() *VisualizationGeomap {
 	return &this
 }
 
-// GetGeomap returns the Geomap field value if set, zero value otherwise.
+// GetGeomap returns the Geomap field value
 func (o *VisualizationGeomap) GetGeomap() Geomap {
-	if o == nil || IsNil(o.Geomap) {
+	if o == nil {
 		var ret Geomap
 		return ret
 	}
-	return *o.Geomap
+
+	return o.Geomap
 }
 
-// GetGeomapOk returns a tuple with the Geomap field value if set, nil otherwise
+// GetGeomapOk returns a tuple with the Geomap field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationGeomap) GetGeomapOk() (*Geomap, bool) {
-	if o == nil || IsNil(o.Geomap) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Geomap, true
+	return &o.Geomap, true
 }
 
-// HasGeomap returns a boolean if a field has been set.
-func (o *VisualizationGeomap) HasGeomap() bool {
-	if o != nil && !IsNil(o.Geomap) {
-		return true
-	}
-
-	return false
-}
-
-// SetGeomap gets a reference to the given Geomap and assigns it to the Geomap field.
+// SetGeomap sets field value
 func (o *VisualizationGeomap) SetGeomap(v Geomap) {
-	o.Geomap = &v
+	o.Geomap = v
 }
 
 func (o VisualizationGeomap) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationGeomap) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationGeomap) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Geomap) {
-		toSerialize["geomap"] = o.Geomap
+	toSerialize["geomap"] = o.Geomap
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationGeomap) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"geomap",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationGeomap := _VisualizationGeomap{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationGeomap)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationGeomap(varVisualizationGeomap)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "geomap")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationGeomap struct {
@@ -122,5 +168,4 @@ func (v *NullableVisualizationGeomap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

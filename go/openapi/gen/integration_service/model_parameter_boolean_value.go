@@ -11,24 +11,32 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ParameterBooleanValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ParameterBooleanValue{}
 
 // ParameterBooleanValue struct for ParameterBooleanValue
 type ParameterBooleanValue struct {
-	BooleanValue *bool `json:"booleanValue,omitempty"`
+	BooleanValue bool `json:"booleanValue"`
 	Key *string `json:"key,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ParameterBooleanValue ParameterBooleanValue
 
 // NewParameterBooleanValue instantiates a new ParameterBooleanValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewParameterBooleanValue() *ParameterBooleanValue {
+func NewParameterBooleanValue(booleanValue bool) *ParameterBooleanValue {
 	this := ParameterBooleanValue{}
+	this.BooleanValue = booleanValue
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewParameterBooleanValueWithDefaults() *ParameterBooleanValue {
 	return &this
 }
 
-// GetBooleanValue returns the BooleanValue field value if set, zero value otherwise.
+// GetBooleanValue returns the BooleanValue field value
 func (o *ParameterBooleanValue) GetBooleanValue() bool {
-	if o == nil || IsNil(o.BooleanValue) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.BooleanValue
+
+	return o.BooleanValue
 }
 
-// GetBooleanValueOk returns a tuple with the BooleanValue field value if set, nil otherwise
+// GetBooleanValueOk returns a tuple with the BooleanValue field value
 // and a boolean to check if the value has been set.
 func (o *ParameterBooleanValue) GetBooleanValueOk() (*bool, bool) {
-	if o == nil || IsNil(o.BooleanValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BooleanValue, true
+	return &o.BooleanValue, true
 }
 
-// HasBooleanValue returns a boolean if a field has been set.
-func (o *ParameterBooleanValue) HasBooleanValue() bool {
-	if o != nil && !IsNil(o.BooleanValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetBooleanValue gets a reference to the given bool and assigns it to the BooleanValue field.
+// SetBooleanValue sets field value
 func (o *ParameterBooleanValue) SetBooleanValue(v bool) {
-	o.BooleanValue = &v
+	o.BooleanValue = v
 }
 
 // GetKey returns the Key field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o ParameterBooleanValue) MarshalJSON() ([]byte, error) {
 
 func (o ParameterBooleanValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BooleanValue) {
-		toSerialize["booleanValue"] = o.BooleanValue
-	}
+	toSerialize["booleanValue"] = o.BooleanValue
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ParameterBooleanValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"booleanValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varParameterBooleanValue := _ParameterBooleanValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varParameterBooleanValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ParameterBooleanValue(varParameterBooleanValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "booleanValue")
+		delete(additionalProperties, "key")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableParameterBooleanValue struct {
@@ -158,5 +205,4 @@ func (v *NullableParameterBooleanValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NotificationDestination type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationDestination{}
@@ -25,8 +28,13 @@ type NotificationDestination struct {
 	// Optional preset ID for the notification destination
 	PresetId *string `json:"presetId,omitempty"`
 	ResolvedRouteOverrides *NotificationRouting `json:"resolvedRouteOverrides,omitempty"`
+	// The time in minutes before a new notification is sent for this destination
+	RetriggeringPeriodMinutes *int64 `json:"retriggeringPeriodMinutes,omitempty"`
 	TriggeredRoutingOverrides *NotificationRouting `json:"triggeredRoutingOverrides,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationDestination NotificationDestination
 
 // NewNotificationDestination instantiates a new NotificationDestination object
 // This constructor will assign default values to properties that have it defined,
@@ -173,6 +181,38 @@ func (o *NotificationDestination) SetResolvedRouteOverrides(v NotificationRoutin
 	o.ResolvedRouteOverrides = &v
 }
 
+// GetRetriggeringPeriodMinutes returns the RetriggeringPeriodMinutes field value if set, zero value otherwise.
+func (o *NotificationDestination) GetRetriggeringPeriodMinutes() int64 {
+	if o == nil || IsNil(o.RetriggeringPeriodMinutes) {
+		var ret int64
+		return ret
+	}
+	return *o.RetriggeringPeriodMinutes
+}
+
+// GetRetriggeringPeriodMinutesOk returns a tuple with the RetriggeringPeriodMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NotificationDestination) GetRetriggeringPeriodMinutesOk() (*int64, bool) {
+	if o == nil || IsNil(o.RetriggeringPeriodMinutes) {
+		return nil, false
+	}
+	return o.RetriggeringPeriodMinutes, true
+}
+
+// HasRetriggeringPeriodMinutes returns a boolean if a field has been set.
+func (o *NotificationDestination) HasRetriggeringPeriodMinutes() bool {
+	if o != nil && !IsNil(o.RetriggeringPeriodMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetRetriggeringPeriodMinutes gets a reference to the given int64 and assigns it to the RetriggeringPeriodMinutes field.
+func (o *NotificationDestination) SetRetriggeringPeriodMinutes(v int64) {
+	o.RetriggeringPeriodMinutes = &v
+}
+
 // GetTriggeredRoutingOverrides returns the TriggeredRoutingOverrides field value if set, zero value otherwise.
 func (o *NotificationDestination) GetTriggeredRoutingOverrides() NotificationRouting {
 	if o == nil || IsNil(o.TriggeredRoutingOverrides) {
@@ -227,10 +267,45 @@ func (o NotificationDestination) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ResolvedRouteOverrides) {
 		toSerialize["resolvedRouteOverrides"] = o.ResolvedRouteOverrides
 	}
+	if !IsNil(o.RetriggeringPeriodMinutes) {
+		toSerialize["retriggeringPeriodMinutes"] = o.RetriggeringPeriodMinutes
+	}
 	if !IsNil(o.TriggeredRoutingOverrides) {
 		toSerialize["triggeredRoutingOverrides"] = o.TriggeredRoutingOverrides
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationDestination) UnmarshalJSON(data []byte) (err error) {
+	varNotificationDestination := _NotificationDestination{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNotificationDestination)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationDestination(varNotificationDestination)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectorId")
+		delete(additionalProperties, "notifyOn")
+		delete(additionalProperties, "presetId")
+		delete(additionalProperties, "resolvedRouteOverrides")
+		delete(additionalProperties, "retriggeringPeriodMinutes")
+		delete(additionalProperties, "triggeredRoutingOverrides")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationDestination struct {
@@ -268,5 +343,4 @@ func (v *NullableNotificationDestination) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

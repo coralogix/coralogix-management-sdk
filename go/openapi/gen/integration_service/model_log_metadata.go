@@ -11,9 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogMetadata{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &LogMetadata{}
 type LogMetadata struct {
 	FirstOccurrence *time.Time `json:"firstOccurrence,omitempty"`
 	LastOccurrence *time.Time `json:"lastOccurrence,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogMetadata LogMetadata
 
 // NewLogMetadata instantiates a new LogMetadata object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o LogMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LastOccurrence) {
 		toSerialize["lastOccurrence"] = o.LastOccurrence
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogMetadata) UnmarshalJSON(data []byte) (err error) {
+	varLogMetadata := _LogMetadata{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogMetadata(varLogMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "firstOccurrence")
+		delete(additionalProperties, "lastOccurrence")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogMetadata struct {
@@ -159,5 +193,4 @@ func (v *NullableLogMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

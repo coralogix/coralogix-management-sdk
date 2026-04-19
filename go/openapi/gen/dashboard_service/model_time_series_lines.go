@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeSeriesLines type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSeriesLines{}
@@ -47,7 +50,10 @@ type TimeSeriesLines struct {
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSeriesLines TimeSeriesLines
 
 // NewTimeSeriesLines instantiates a new TimeSeriesLines object
 // This constructor will assign default values to properties that have it defined,
@@ -706,7 +712,51 @@ func (o TimeSeriesLines) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisMin) {
 		toSerialize["yAxisMin"] = o.YAxisMin
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSeriesLines) UnmarshalJSON(data []byte) (err error) {
+	varTimeSeriesLines := _TimeSeriesLines{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeSeriesLines)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSeriesLines(varTimeSeriesLines)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "connectNulls")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "seriesCountLimit")
+		delete(additionalProperties, "seriesNameTemplate")
+		delete(additionalProperties, "stackedLine")
+		delete(additionalProperties, "temporalField")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueFields")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSeriesLines struct {
@@ -744,5 +794,4 @@ func (v *NullableTimeSeriesLines) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationDetailsLocal type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationDetailsLocal{}
@@ -23,15 +27,19 @@ type IntegrationDetailsLocal struct {
 	Docs []IntegrationDoc `json:"docs,omitempty"`
 	Extensions []V1Extension `json:"extensions,omitempty"`
 	Integration *Integration `json:"integration,omitempty"`
-	Local *LocalChangelog `json:"local,omitempty"`
+	Local LocalChangelog `json:"local"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationDetailsLocal IntegrationDetailsLocal
 
 // NewIntegrationDetailsLocal instantiates a new IntegrationDetailsLocal object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationDetailsLocal() *IntegrationDetailsLocal {
+func NewIntegrationDetailsLocal(local LocalChangelog) *IntegrationDetailsLocal {
 	this := IntegrationDetailsLocal{}
+	this.Local = local
 	return &this
 }
 
@@ -171,36 +179,28 @@ func (o *IntegrationDetailsLocal) SetIntegration(v Integration) {
 	o.Integration = &v
 }
 
-// GetLocal returns the Local field value if set, zero value otherwise.
+// GetLocal returns the Local field value
 func (o *IntegrationDetailsLocal) GetLocal() LocalChangelog {
-	if o == nil || IsNil(o.Local) {
+	if o == nil {
 		var ret LocalChangelog
 		return ret
 	}
-	return *o.Local
+
+	return o.Local
 }
 
-// GetLocalOk returns a tuple with the Local field value if set, nil otherwise
+// GetLocalOk returns a tuple with the Local field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationDetailsLocal) GetLocalOk() (*LocalChangelog, bool) {
-	if o == nil || IsNil(o.Local) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Local, true
+	return &o.Local, true
 }
 
-// HasLocal returns a boolean if a field has been set.
-func (o *IntegrationDetailsLocal) HasLocal() bool {
-	if o != nil && !IsNil(o.Local) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocal gets a reference to the given LocalChangelog and assigns it to the Local field.
+// SetLocal sets field value
 func (o *IntegrationDetailsLocal) SetLocal(v LocalChangelog) {
-	o.Local = &v
+	o.Local = v
 }
 
 func (o IntegrationDetailsLocal) MarshalJSON() ([]byte, error) {
@@ -225,10 +225,60 @@ func (o IntegrationDetailsLocal) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Integration) {
 		toSerialize["integration"] = o.Integration
 	}
-	if !IsNil(o.Local) {
-		toSerialize["local"] = o.Local
+	toSerialize["local"] = o.Local
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationDetailsLocal) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"local",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationDetailsLocal := _IntegrationDetailsLocal{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationDetailsLocal)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationDetailsLocal(varIntegrationDetailsLocal)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "docs")
+		delete(additionalProperties, "extensions")
+		delete(additionalProperties, "integration")
+		delete(additionalProperties, "local")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationDetailsLocal struct {
@@ -266,5 +316,4 @@ func (v *NullableIntegrationDetailsLocal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

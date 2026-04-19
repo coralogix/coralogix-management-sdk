@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsTimeRelativeCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsTimeRelativeCondition{}
@@ -23,7 +26,10 @@ type LogsTimeRelativeCondition struct {
 	ConditionType *LogsTimeRelativeConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition.
 	Threshold *float64 `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsTimeRelativeCondition LogsTimeRelativeCondition
 
 // NewLogsTimeRelativeCondition instantiates a new LogsTimeRelativeCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o LogsTimeRelativeCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsTimeRelativeCondition) UnmarshalJSON(data []byte) (err error) {
+	varLogsTimeRelativeCondition := _LogsTimeRelativeCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsTimeRelativeCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsTimeRelativeCondition(varLogsTimeRelativeCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comparedTo")
+		delete(additionalProperties, "conditionType")
+		delete(additionalProperties, "threshold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsTimeRelativeCondition struct {
@@ -195,5 +230,4 @@ func (v *NullableLogsTimeRelativeCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

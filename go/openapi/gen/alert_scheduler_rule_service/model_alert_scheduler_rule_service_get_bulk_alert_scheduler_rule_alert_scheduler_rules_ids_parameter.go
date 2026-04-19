@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter - struct for AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter
 type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter struct {
@@ -42,7 +45,7 @@ func (dst *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRules
 	var err error
 	match := 0
 	// try to unmarshal data into FilterByAlertSchedulerRuleIdsAlertSchedulerIds
-	err = newStrictDecoder(data).Decode(&dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
+	err = json.Unmarshal(data, &dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
 	if err == nil {
 		jsonFilterByAlertSchedulerRuleIdsAlertSchedulerIds, _ := json.Marshal(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerIds)
 		if string(jsonFilterByAlertSchedulerRuleIdsAlertSchedulerIds) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRules
 	}
 
 	// try to unmarshal data into FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds
-	err = newStrictDecoder(data).Decode(&dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
+	err = json.Unmarshal(data, &dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
 	if err == nil {
 		jsonFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds, _ := json.Marshal(dst.FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds)
 		if string(jsonFilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedule
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

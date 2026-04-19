@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentMetaLabelsWithCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentMetaLabelsWithCount{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &IncidentMetaLabelsWithCount{}
 type IncidentMetaLabelsWithCount struct {
 	Count int32 `json:"count"`
 	MetaLabel IncidentsV1MetaLabel `json:"metaLabel"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentMetaLabelsWithCount IncidentMetaLabelsWithCount
@@ -106,6 +109,11 @@ func (o IncidentMetaLabelsWithCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["count"] = o.Count
 	toSerialize["metaLabel"] = o.MetaLabel
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,7 +143,6 @@ func (o *IncidentMetaLabelsWithCount) UnmarshalJSON(data []byte) (err error) {
 	varIncidentMetaLabelsWithCount := _IncidentMetaLabelsWithCount{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentMetaLabelsWithCount)
 
 	if err != nil {
@@ -143,6 +150,14 @@ func (o *IncidentMetaLabelsWithCount) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentMetaLabelsWithCount(varIncidentMetaLabelsWithCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "metaLabel")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -182,5 +197,4 @@ func (v *NullableIncidentMetaLabelsWithCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

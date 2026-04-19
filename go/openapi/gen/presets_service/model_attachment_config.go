@@ -11,8 +11,11 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AttachmentConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AttachmentConfig{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AttachmentConfig{}
 // AttachmentConfig struct for AttachmentConfig
 type AttachmentConfig struct {
 	Policy *AttachmentConfigPolicy `json:"policy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AttachmentConfig AttachmentConfig
 
 // NewAttachmentConfig instantiates a new AttachmentConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AttachmentConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Policy) {
 		toSerialize["policy"] = o.Policy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AttachmentConfig) UnmarshalJSON(data []byte) (err error) {
+	varAttachmentConfig := _AttachmentConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAttachmentConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AttachmentConfig(varAttachmentConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "policy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAttachmentConfig struct {
@@ -122,5 +155,4 @@ func (v *NullableAttachmentConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

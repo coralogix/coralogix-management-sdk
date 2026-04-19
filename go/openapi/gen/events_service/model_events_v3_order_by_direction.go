@@ -11,9 +11,12 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // EventsV3OrderByDirection the model 'EventsV3OrderByDirection'
 type EventsV3OrderByDirection string

@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RbacV2User type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RbacV2User{}
@@ -30,7 +33,10 @@ type RbacV2User struct {
 	UserId *string `json:"userId,omitempty"`
 	// Unique username
 	Username *string `json:"username,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RbacV2User RbacV2User
 
 // NewRbacV2User instantiates a new RbacV2User object
 // This constructor will assign default values to properties that have it defined,
@@ -269,7 +275,39 @@ func (o RbacV2User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Username) {
 		toSerialize["username"] = o.Username
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RbacV2User) UnmarshalJSON(data []byte) (err error) {
+	varRbacV2User := _RbacV2User{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRbacV2User)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RbacV2User(varRbacV2User)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "firstName")
+		delete(additionalProperties, "lastName")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "userAccountId")
+		delete(additionalProperties, "userId")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRbacV2User struct {
@@ -307,5 +345,4 @@ func (v *NullableRbacV2User) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

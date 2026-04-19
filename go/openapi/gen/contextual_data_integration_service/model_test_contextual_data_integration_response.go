@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestContextualDataIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestContextualDataIntegrationResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &TestContextualDataIntegrationResponse{}
 // TestContextualDataIntegrationResponse struct for TestContextualDataIntegrationResponse
 type TestContextualDataIntegrationResponse struct {
 	Result *TestIntegrationResult `json:"result,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TestContextualDataIntegrationResponse TestContextualDataIntegrationResponse
 
 // NewTestContextualDataIntegrationResponse instantiates a new TestContextualDataIntegrationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o TestContextualDataIntegrationResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Result) {
 		toSerialize["result"] = o.Result
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TestContextualDataIntegrationResponse) UnmarshalJSON(data []byte) (err error) {
+	varTestContextualDataIntegrationResponse := _TestContextualDataIntegrationResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestContextualDataIntegrationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestContextualDataIntegrationResponse(varTestContextualDataIntegrationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "result")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTestContextualDataIntegrationResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableTestContextualDataIntegrationResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

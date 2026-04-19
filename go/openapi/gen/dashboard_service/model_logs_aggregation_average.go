@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsAggregationAverage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationAverage{}
 
 // LogsAggregationAverage struct for LogsAggregationAverage
 type LogsAggregationAverage struct {
-	Average *Average `json:"average,omitempty"`
+	Average Average `json:"average"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsAggregationAverage LogsAggregationAverage
 
 // NewLogsAggregationAverage instantiates a new LogsAggregationAverage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogsAggregationAverage() *LogsAggregationAverage {
+func NewLogsAggregationAverage(average Average) *LogsAggregationAverage {
 	this := LogsAggregationAverage{}
+	this.Average = average
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewLogsAggregationAverageWithDefaults() *LogsAggregationAverage {
 	return &this
 }
 
-// GetAverage returns the Average field value if set, zero value otherwise.
+// GetAverage returns the Average field value
 func (o *LogsAggregationAverage) GetAverage() Average {
-	if o == nil || IsNil(o.Average) {
+	if o == nil {
 		var ret Average
 		return ret
 	}
-	return *o.Average
+
+	return o.Average
 }
 
-// GetAverageOk returns a tuple with the Average field value if set, nil otherwise
+// GetAverageOk returns a tuple with the Average field value
 // and a boolean to check if the value has been set.
 func (o *LogsAggregationAverage) GetAverageOk() (*Average, bool) {
-	if o == nil || IsNil(o.Average) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Average, true
+	return &o.Average, true
 }
 
-// HasAverage returns a boolean if a field has been set.
-func (o *LogsAggregationAverage) HasAverage() bool {
-	if o != nil && !IsNil(o.Average) {
-		return true
-	}
-
-	return false
-}
-
-// SetAverage gets a reference to the given Average and assigns it to the Average field.
+// SetAverage sets field value
 func (o *LogsAggregationAverage) SetAverage(v Average) {
-	o.Average = &v
+	o.Average = v
 }
 
 func (o LogsAggregationAverage) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o LogsAggregationAverage) MarshalJSON() ([]byte, error) {
 
 func (o LogsAggregationAverage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Average) {
-		toSerialize["average"] = o.Average
+	toSerialize["average"] = o.Average
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsAggregationAverage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"average",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLogsAggregationAverage := _LogsAggregationAverage{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsAggregationAverage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsAggregationAverage(varLogsAggregationAverage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "average")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsAggregationAverage struct {
@@ -122,5 +168,4 @@ func (v *NullableLogsAggregationAverage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

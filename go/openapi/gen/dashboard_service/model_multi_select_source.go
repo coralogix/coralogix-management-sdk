@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // MultiSelectSource - struct for MultiSelectSource
 type MultiSelectSource struct {
@@ -66,7 +69,7 @@ func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MultiSelectSourceConstantList
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceConstantList)
+	err = json.Unmarshal(data, &dst.MultiSelectSourceConstantList)
 	if err == nil {
 		jsonMultiSelectSourceConstantList, _ := json.Marshal(dst.MultiSelectSourceConstantList)
 		if string(jsonMultiSelectSourceConstantList) == "{}" { // empty struct
@@ -83,7 +86,7 @@ func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectSourceLogsPath
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceLogsPath)
+	err = json.Unmarshal(data, &dst.MultiSelectSourceLogsPath)
 	if err == nil {
 		jsonMultiSelectSourceLogsPath, _ := json.Marshal(dst.MultiSelectSourceLogsPath)
 		if string(jsonMultiSelectSourceLogsPath) == "{}" { // empty struct
@@ -100,7 +103,7 @@ func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectSourceMetricLabel
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceMetricLabel)
+	err = json.Unmarshal(data, &dst.MultiSelectSourceMetricLabel)
 	if err == nil {
 		jsonMultiSelectSourceMetricLabel, _ := json.Marshal(dst.MultiSelectSourceMetricLabel)
 		if string(jsonMultiSelectSourceMetricLabel) == "{}" { // empty struct
@@ -117,7 +120,7 @@ func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectSourceQuery
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceQuery)
+	err = json.Unmarshal(data, &dst.MultiSelectSourceQuery)
 	if err == nil {
 		jsonMultiSelectSourceQuery, _ := json.Marshal(dst.MultiSelectSourceQuery)
 		if string(jsonMultiSelectSourceQuery) == "{}" { // empty struct
@@ -134,7 +137,7 @@ func (dst *MultiSelectSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectSourceSpanField
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectSourceSpanField)
+	err = json.Unmarshal(data, &dst.MultiSelectSourceSpanField)
 	if err == nil {
 		jsonMultiSelectSourceSpanField, _ := json.Marshal(dst.MultiSelectSourceSpanField)
 		if string(jsonMultiSelectSourceSpanField) == "{}" { // empty struct
@@ -281,5 +284,4 @@ func (v *NullableMultiSelectSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

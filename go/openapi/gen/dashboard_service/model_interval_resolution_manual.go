@@ -11,23 +11,33 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntervalResolutionManual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntervalResolutionManual{}
 
 // IntervalResolutionManual Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification.
 type IntervalResolutionManual struct {
-	Manual *ManualIntervalResolution `json:"manual,omitempty"`
+	Manual ManualIntervalResolution `json:"manual"`
+	// Whether the max. data points and min. interval fields are user-editable. When true, users can modify these constraint fields; when false or unset, they are read-only.
+	UseAdvancedLimit *bool `json:"useAdvancedLimit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntervalResolutionManual IntervalResolutionManual
 
 // NewIntervalResolutionManual instantiates a new IntervalResolutionManual object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntervalResolutionManual() *IntervalResolutionManual {
+func NewIntervalResolutionManual(manual ManualIntervalResolution) *IntervalResolutionManual {
 	this := IntervalResolutionManual{}
+	this.Manual = manual
 	return &this
 }
 
@@ -39,36 +49,60 @@ func NewIntervalResolutionManualWithDefaults() *IntervalResolutionManual {
 	return &this
 }
 
-// GetManual returns the Manual field value if set, zero value otherwise.
+// GetManual returns the Manual field value
 func (o *IntervalResolutionManual) GetManual() ManualIntervalResolution {
-	if o == nil || IsNil(o.Manual) {
+	if o == nil {
 		var ret ManualIntervalResolution
 		return ret
 	}
-	return *o.Manual
+
+	return o.Manual
 }
 
-// GetManualOk returns a tuple with the Manual field value if set, nil otherwise
+// GetManualOk returns a tuple with the Manual field value
 // and a boolean to check if the value has been set.
 func (o *IntervalResolutionManual) GetManualOk() (*ManualIntervalResolution, bool) {
-	if o == nil || IsNil(o.Manual) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Manual, true
+	return &o.Manual, true
 }
 
-// HasManual returns a boolean if a field has been set.
-func (o *IntervalResolutionManual) HasManual() bool {
-	if o != nil && !IsNil(o.Manual) {
+// SetManual sets field value
+func (o *IntervalResolutionManual) SetManual(v ManualIntervalResolution) {
+	o.Manual = v
+}
+
+// GetUseAdvancedLimit returns the UseAdvancedLimit field value if set, zero value otherwise.
+func (o *IntervalResolutionManual) GetUseAdvancedLimit() bool {
+	if o == nil || IsNil(o.UseAdvancedLimit) {
+		var ret bool
+		return ret
+	}
+	return *o.UseAdvancedLimit
+}
+
+// GetUseAdvancedLimitOk returns a tuple with the UseAdvancedLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IntervalResolutionManual) GetUseAdvancedLimitOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseAdvancedLimit) {
+		return nil, false
+	}
+	return o.UseAdvancedLimit, true
+}
+
+// HasUseAdvancedLimit returns a boolean if a field has been set.
+func (o *IntervalResolutionManual) HasUseAdvancedLimit() bool {
+	if o != nil && !IsNil(o.UseAdvancedLimit) {
 		return true
 	}
 
 	return false
 }
 
-// SetManual gets a reference to the given ManualIntervalResolution and assigns it to the Manual field.
-func (o *IntervalResolutionManual) SetManual(v ManualIntervalResolution) {
-	o.Manual = &v
+// SetUseAdvancedLimit gets a reference to the given bool and assigns it to the UseAdvancedLimit field.
+func (o *IntervalResolutionManual) SetUseAdvancedLimit(v bool) {
+	o.UseAdvancedLimit = &v
 }
 
 func (o IntervalResolutionManual) MarshalJSON() ([]byte, error) {
@@ -81,10 +115,60 @@ func (o IntervalResolutionManual) MarshalJSON() ([]byte, error) {
 
 func (o IntervalResolutionManual) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Manual) {
-		toSerialize["manual"] = o.Manual
+	toSerialize["manual"] = o.Manual
+	if !IsNil(o.UseAdvancedLimit) {
+		toSerialize["useAdvancedLimit"] = o.UseAdvancedLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntervalResolutionManual) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"manual",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntervalResolutionManual := _IntervalResolutionManual{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntervalResolutionManual)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntervalResolutionManual(varIntervalResolutionManual)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "manual")
+		delete(additionalProperties, "useAdvancedLimit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntervalResolutionManual struct {
@@ -122,5 +206,4 @@ func (v *NullableIntervalResolutionManual) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

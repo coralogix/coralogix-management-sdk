@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesMetricAnomaly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesMetricAnomaly{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesMetricAnomaly struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	MetricAnomaly *MetricAnomalyType `json:"metricAnomaly,omitempty"`
+	MetricAnomaly MetricAnomalyType `json:"metricAnomaly"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesMetricAnomaly struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesMetricAnomaly AlertDefPropertiesMetricAnomaly
 
 // NewAlertDefPropertiesMetricAnomaly instantiates a new AlertDefPropertiesMetricAnomaly object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesMetricAnomaly() *AlertDefPropertiesMetricAnomaly {
+func NewAlertDefPropertiesMetricAnomaly(metricAnomaly MetricAnomalyType) *AlertDefPropertiesMetricAnomaly {
 	this := AlertDefPropertiesMetricAnomaly{}
+	this.MetricAnomaly = metricAnomaly
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesMetricAnomaly) SetIncidentsSettings(v AlertDefInciden
 	o.IncidentsSettings = &v
 }
 
-// GetMetricAnomaly returns the MetricAnomaly field value if set, zero value otherwise.
+// GetMetricAnomaly returns the MetricAnomaly field value
 func (o *AlertDefPropertiesMetricAnomaly) GetMetricAnomaly() MetricAnomalyType {
-	if o == nil || IsNil(o.MetricAnomaly) {
+	if o == nil {
 		var ret MetricAnomalyType
 		return ret
 	}
-	return *o.MetricAnomaly
+
+	return o.MetricAnomaly
 }
 
-// GetMetricAnomalyOk returns a tuple with the MetricAnomaly field value if set, nil otherwise
+// GetMetricAnomalyOk returns a tuple with the MetricAnomaly field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesMetricAnomaly) GetMetricAnomalyOk() (*MetricAnomalyType, bool) {
-	if o == nil || IsNil(o.MetricAnomaly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricAnomaly, true
+	return &o.MetricAnomaly, true
 }
 
-// HasMetricAnomaly returns a boolean if a field has been set.
-func (o *AlertDefPropertiesMetricAnomaly) HasMetricAnomaly() bool {
-	if o != nil && !IsNil(o.MetricAnomaly) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricAnomaly gets a reference to the given MetricAnomalyType and assigns it to the MetricAnomaly field.
+// SetMetricAnomaly sets field value
 func (o *AlertDefPropertiesMetricAnomaly) SetMetricAnomaly(v MetricAnomalyType) {
-	o.MetricAnomaly = &v
+	o.MetricAnomaly = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesMetricAnomaly) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.MetricAnomaly) {
-		toSerialize["metricAnomaly"] = o.MetricAnomaly
-	}
+	toSerialize["metricAnomaly"] = o.MetricAnomaly
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesMetricAnomaly) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesMetricAnomaly) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricAnomaly",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesMetricAnomaly := _AlertDefPropertiesMetricAnomaly{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesMetricAnomaly)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesMetricAnomaly(varAlertDefPropertiesMetricAnomaly)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "metricAnomaly")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesMetricAnomaly struct {
@@ -632,5 +692,4 @@ func (v *NullableAlertDefPropertiesMetricAnomaly) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

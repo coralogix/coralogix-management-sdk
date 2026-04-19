@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionTerraform type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionTerraform{}
@@ -24,16 +28,20 @@ type IntegrationRevisionTerraform struct {
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	Id *string `json:"id,omitempty"`
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
-	Terraform *Terraform `json:"terraform,omitempty"`
+	Terraform Terraform `json:"terraform"`
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionTerraform IntegrationRevisionTerraform
 
 // NewIntegrationRevisionTerraform instantiates a new IntegrationRevisionTerraform object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationRevisionTerraform() *IntegrationRevisionTerraform {
+func NewIntegrationRevisionTerraform(terraform Terraform) *IntegrationRevisionTerraform {
 	this := IntegrationRevisionTerraform{}
+	this.Terraform = terraform
 	return &this
 }
 
@@ -205,36 +213,28 @@ func (o *IntegrationRevisionTerraform) SetRevisionDeploymentSupported(v bool) {
 	o.RevisionDeploymentSupported = &v
 }
 
-// GetTerraform returns the Terraform field value if set, zero value otherwise.
+// GetTerraform returns the Terraform field value
 func (o *IntegrationRevisionTerraform) GetTerraform() Terraform {
-	if o == nil || IsNil(o.Terraform) {
+	if o == nil {
 		var ret Terraform
 		return ret
 	}
-	return *o.Terraform
+
+	return o.Terraform
 }
 
-// GetTerraformOk returns a tuple with the Terraform field value if set, nil otherwise
+// GetTerraformOk returns a tuple with the Terraform field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationRevisionTerraform) GetTerraformOk() (*Terraform, bool) {
-	if o == nil || IsNil(o.Terraform) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Terraform, true
+	return &o.Terraform, true
 }
 
-// HasTerraform returns a boolean if a field has been set.
-func (o *IntegrationRevisionTerraform) HasTerraform() bool {
-	if o != nil && !IsNil(o.Terraform) {
-		return true
-	}
-
-	return false
-}
-
-// SetTerraform gets a reference to the given Terraform and assigns it to the Terraform field.
+// SetTerraform sets field value
 func (o *IntegrationRevisionTerraform) SetTerraform(v Terraform) {
-	o.Terraform = &v
+	o.Terraform = v
 }
 
 // GetUpgradeInstructionsMd returns the UpgradeInstructionsMd field value if set, zero value otherwise.
@@ -294,13 +294,65 @@ func (o IntegrationRevisionTerraform) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RevisionDeploymentSupported) {
 		toSerialize["revisionDeploymentSupported"] = o.RevisionDeploymentSupported
 	}
-	if !IsNil(o.Terraform) {
-		toSerialize["terraform"] = o.Terraform
-	}
+	toSerialize["terraform"] = o.Terraform
 	if !IsNil(o.UpgradeInstructionsMd) {
 		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionTerraform) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"terraform",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationRevisionTerraform := _IntegrationRevisionTerraform{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionTerraform)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionTerraform(varIntegrationRevisionTerraform)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revisionDeploymentSupported")
+		delete(additionalProperties, "terraform")
+		delete(additionalProperties, "upgradeInstructionsMd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionTerraform struct {
@@ -338,5 +390,4 @@ func (v *NullableIntegrationRevisionTerraform) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

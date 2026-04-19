@@ -11,8 +11,11 @@ API version: 1.0.0
 package connectors_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Diagnostics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Diagnostics{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Diagnostics{}
 // Diagnostics Allows to configure rules for data written into 'notification.deliveries' dataset
 type Diagnostics struct {
 	Delivery *Delivery `json:"delivery,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Diagnostics Diagnostics
 
 // NewDiagnostics instantiates a new Diagnostics object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Diagnostics) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Delivery) {
 		toSerialize["delivery"] = o.Delivery
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Diagnostics) UnmarshalJSON(data []byte) (err error) {
+	varDiagnostics := _Diagnostics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDiagnostics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Diagnostics(varDiagnostics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "delivery")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnostics struct {
@@ -122,5 +155,4 @@ func (v *NullableDiagnostics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,24 +11,32 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertSchedulerRuleProtobufV1FilterAlertUniqueIds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{}
 
 // AlertSchedulerRuleProtobufV1FilterAlertUniqueIds struct for AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
 type AlertSchedulerRuleProtobufV1FilterAlertUniqueIds struct {
-	AlertUniqueIds *AlertUniqueIds `json:"alertUniqueIds,omitempty"`
+	AlertUniqueIds AlertUniqueIds `json:"alertUniqueIds"`
 	WhatExpression *string `json:"whatExpression,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertSchedulerRuleProtobufV1FilterAlertUniqueIds AlertSchedulerRuleProtobufV1FilterAlertUniqueIds
 
 // NewAlertSchedulerRuleProtobufV1FilterAlertUniqueIds instantiates a new AlertSchedulerRuleProtobufV1FilterAlertUniqueIds object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertSchedulerRuleProtobufV1FilterAlertUniqueIds() *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds {
+func NewAlertSchedulerRuleProtobufV1FilterAlertUniqueIds(alertUniqueIds AlertUniqueIds) *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds {
 	this := AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{}
+	this.AlertUniqueIds = alertUniqueIds
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewAlertSchedulerRuleProtobufV1FilterAlertUniqueIdsWithDefaults() *AlertSch
 	return &this
 }
 
-// GetAlertUniqueIds returns the AlertUniqueIds field value if set, zero value otherwise.
+// GetAlertUniqueIds returns the AlertUniqueIds field value
 func (o *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) GetAlertUniqueIds() AlertUniqueIds {
-	if o == nil || IsNil(o.AlertUniqueIds) {
+	if o == nil {
 		var ret AlertUniqueIds
 		return ret
 	}
-	return *o.AlertUniqueIds
+
+	return o.AlertUniqueIds
 }
 
-// GetAlertUniqueIdsOk returns a tuple with the AlertUniqueIds field value if set, nil otherwise
+// GetAlertUniqueIdsOk returns a tuple with the AlertUniqueIds field value
 // and a boolean to check if the value has been set.
 func (o *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) GetAlertUniqueIdsOk() (*AlertUniqueIds, bool) {
-	if o == nil || IsNil(o.AlertUniqueIds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AlertUniqueIds, true
+	return &o.AlertUniqueIds, true
 }
 
-// HasAlertUniqueIds returns a boolean if a field has been set.
-func (o *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) HasAlertUniqueIds() bool {
-	if o != nil && !IsNil(o.AlertUniqueIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetAlertUniqueIds gets a reference to the given AlertUniqueIds and assigns it to the AlertUniqueIds field.
+// SetAlertUniqueIds sets field value
 func (o *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) SetAlertUniqueIds(v AlertUniqueIds) {
-	o.AlertUniqueIds = &v
+	o.AlertUniqueIds = v
 }
 
 // GetWhatExpression returns the WhatExpression field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) MarshalJSON() ([]byte,
 
 func (o AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AlertUniqueIds) {
-		toSerialize["alertUniqueIds"] = o.AlertUniqueIds
-	}
+	toSerialize["alertUniqueIds"] = o.AlertUniqueIds
 	if !IsNil(o.WhatExpression) {
 		toSerialize["whatExpression"] = o.WhatExpression
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertSchedulerRuleProtobufV1FilterAlertUniqueIds) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"alertUniqueIds",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertSchedulerRuleProtobufV1FilterAlertUniqueIds := _AlertSchedulerRuleProtobufV1FilterAlertUniqueIds{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertSchedulerRuleProtobufV1FilterAlertUniqueIds(varAlertSchedulerRuleProtobufV1FilterAlertUniqueIds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertUniqueIds")
+		delete(additionalProperties, "whatExpression")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertSchedulerRuleProtobufV1FilterAlertUniqueIds struct {
@@ -158,5 +205,4 @@ func (v *NullableAlertSchedulerRuleProtobufV1FilterAlertUniqueIds) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAlertDefByVersionIdResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertDefByVersionIdResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetAlertDefByVersionIdResponse{}
 // GetAlertDefByVersionIdResponse A response that contains an alert definition for the requested version
 type GetAlertDefByVersionIdResponse struct {
 	AlertDef *AlertDef `json:"alertDef,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAlertDefByVersionIdResponse GetAlertDefByVersionIdResponse
 
 // NewGetAlertDefByVersionIdResponse instantiates a new GetAlertDefByVersionIdResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetAlertDefByVersionIdResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.AlertDef) {
 		toSerialize["alertDef"] = o.AlertDef
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAlertDefByVersionIdResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetAlertDefByVersionIdResponse := _GetAlertDefByVersionIdResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAlertDefByVersionIdResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAlertDefByVersionIdResponse(varGetAlertDefByVersionIdResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDef")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAlertDefByVersionIdResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetAlertDefByVersionIdResponse) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

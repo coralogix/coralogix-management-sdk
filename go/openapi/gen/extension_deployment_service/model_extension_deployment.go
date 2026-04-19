@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtensionDeployment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtensionDeployment{}
@@ -24,7 +27,10 @@ type ExtensionDeployment struct {
 	ItemIds []string `json:"itemIds,omitempty"`
 	Subsystems []string `json:"subsystems,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtensionDeployment ExtensionDeployment
 
 // NewExtensionDeployment instantiates a new ExtensionDeployment object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o ExtensionDeployment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtensionDeployment) UnmarshalJSON(data []byte) (err error) {
+	varExtensionDeployment := _ExtensionDeployment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtensionDeployment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtensionDeployment(varExtensionDeployment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applications")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "itemIds")
+		delete(additionalProperties, "subsystems")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtensionDeployment struct {
@@ -266,5 +303,4 @@ func (v *NullableExtensionDeployment) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

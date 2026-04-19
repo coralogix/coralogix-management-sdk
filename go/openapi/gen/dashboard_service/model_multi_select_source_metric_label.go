@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSourceMetricLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceMetricLabel{}
 
 // MultiSelectSourceMetricLabel struct for MultiSelectSourceMetricLabel
 type MultiSelectSourceMetricLabel struct {
-	MetricLabel *MetricLabelSource `json:"metricLabel,omitempty"`
+	MetricLabel MetricLabelSource `json:"metricLabel"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSourceMetricLabel MultiSelectSourceMetricLabel
 
 // NewMultiSelectSourceMetricLabel instantiates a new MultiSelectSourceMetricLabel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectSourceMetricLabel() *MultiSelectSourceMetricLabel {
+func NewMultiSelectSourceMetricLabel(metricLabel MetricLabelSource) *MultiSelectSourceMetricLabel {
 	this := MultiSelectSourceMetricLabel{}
+	this.MetricLabel = metricLabel
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectSourceMetricLabelWithDefaults() *MultiSelectSourceMetricLabel
 	return &this
 }
 
-// GetMetricLabel returns the MetricLabel field value if set, zero value otherwise.
+// GetMetricLabel returns the MetricLabel field value
 func (o *MultiSelectSourceMetricLabel) GetMetricLabel() MetricLabelSource {
-	if o == nil || IsNil(o.MetricLabel) {
+	if o == nil {
 		var ret MetricLabelSource
 		return ret
 	}
-	return *o.MetricLabel
+
+	return o.MetricLabel
 }
 
-// GetMetricLabelOk returns a tuple with the MetricLabel field value if set, nil otherwise
+// GetMetricLabelOk returns a tuple with the MetricLabel field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectSourceMetricLabel) GetMetricLabelOk() (*MetricLabelSource, bool) {
-	if o == nil || IsNil(o.MetricLabel) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetricLabel, true
+	return &o.MetricLabel, true
 }
 
-// HasMetricLabel returns a boolean if a field has been set.
-func (o *MultiSelectSourceMetricLabel) HasMetricLabel() bool {
-	if o != nil && !IsNil(o.MetricLabel) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetricLabel gets a reference to the given MetricLabelSource and assigns it to the MetricLabel field.
+// SetMetricLabel sets field value
 func (o *MultiSelectSourceMetricLabel) SetMetricLabel(v MetricLabelSource) {
-	o.MetricLabel = &v
+	o.MetricLabel = v
 }
 
 func (o MultiSelectSourceMetricLabel) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectSourceMetricLabel) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectSourceMetricLabel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MetricLabel) {
-		toSerialize["metricLabel"] = o.MetricLabel
+	toSerialize["metricLabel"] = o.MetricLabel
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSourceMetricLabel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metricLabel",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectSourceMetricLabel := _MultiSelectSourceMetricLabel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSourceMetricLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSourceMetricLabel(varMultiSelectSourceMetricLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metricLabel")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSourceMetricLabel struct {
@@ -122,5 +168,4 @@ func (v *NullableMultiSelectSourceMetricLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

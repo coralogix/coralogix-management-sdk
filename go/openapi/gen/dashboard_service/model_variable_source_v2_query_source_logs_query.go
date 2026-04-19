@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2QuerySourceLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2QuerySourceLogsQuery{}
@@ -20,18 +24,22 @@ var _ MappedNullable = &VariableSourceV2QuerySourceLogsQuery{}
 // VariableSourceV2QuerySourceLogsQuery struct for VariableSourceV2QuerySourceLogsQuery
 type VariableSourceV2QuerySourceLogsQuery struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
-	LogsQuery *QuerySourceLogsQuery `json:"logsQuery,omitempty"`
+	LogsQuery QuerySourceLogsQuery `json:"logsQuery"`
 	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`
 	ValueDisplayOptions *VariableSourceV2ValueDisplayOptions `json:"valueDisplayOptions,omitempty"`
 	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2QuerySourceLogsQuery VariableSourceV2QuerySourceLogsQuery
 
 // NewVariableSourceV2QuerySourceLogsQuery instantiates a new VariableSourceV2QuerySourceLogsQuery object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2QuerySourceLogsQuery() *VariableSourceV2QuerySourceLogsQuery {
+func NewVariableSourceV2QuerySourceLogsQuery(logsQuery QuerySourceLogsQuery) *VariableSourceV2QuerySourceLogsQuery {
 	this := VariableSourceV2QuerySourceLogsQuery{}
+	this.LogsQuery = logsQuery
 	return &this
 }
 
@@ -75,36 +83,28 @@ func (o *VariableSourceV2QuerySourceLogsQuery) SetAllOption(v AllOption) {
 	o.AllOption = &v
 }
 
-// GetLogsQuery returns the LogsQuery field value if set, zero value otherwise.
+// GetLogsQuery returns the LogsQuery field value
 func (o *VariableSourceV2QuerySourceLogsQuery) GetLogsQuery() QuerySourceLogsQuery {
-	if o == nil || IsNil(o.LogsQuery) {
+	if o == nil {
 		var ret QuerySourceLogsQuery
 		return ret
 	}
-	return *o.LogsQuery
+
+	return o.LogsQuery
 }
 
-// GetLogsQueryOk returns a tuple with the LogsQuery field value if set, nil otherwise
+// GetLogsQueryOk returns a tuple with the LogsQuery field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2QuerySourceLogsQuery) GetLogsQueryOk() (*QuerySourceLogsQuery, bool) {
-	if o == nil || IsNil(o.LogsQuery) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsQuery, true
+	return &o.LogsQuery, true
 }
 
-// HasLogsQuery returns a boolean if a field has been set.
-func (o *VariableSourceV2QuerySourceLogsQuery) HasLogsQuery() bool {
-	if o != nil && !IsNil(o.LogsQuery) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsQuery gets a reference to the given QuerySourceLogsQuery and assigns it to the LogsQuery field.
+// SetLogsQuery sets field value
 func (o *VariableSourceV2QuerySourceLogsQuery) SetLogsQuery(v QuerySourceLogsQuery) {
-	o.LogsQuery = &v
+	o.LogsQuery = v
 }
 
 // GetRefreshStrategy returns the RefreshStrategy field value if set, zero value otherwise.
@@ -216,9 +216,7 @@ func (o VariableSourceV2QuerySourceLogsQuery) ToMap() (map[string]interface{}, e
 	if !IsNil(o.AllOption) {
 		toSerialize["allOption"] = o.AllOption
 	}
-	if !IsNil(o.LogsQuery) {
-		toSerialize["logsQuery"] = o.LogsQuery
-	}
+	toSerialize["logsQuery"] = o.LogsQuery
 	if !IsNil(o.RefreshStrategy) {
 		toSerialize["refreshStrategy"] = o.RefreshStrategy
 	}
@@ -228,7 +226,59 @@ func (o VariableSourceV2QuerySourceLogsQuery) ToMap() (map[string]interface{}, e
 	if !IsNil(o.ValuesOrderDirection) {
 		toSerialize["valuesOrderDirection"] = o.ValuesOrderDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2QuerySourceLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsQuery",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2QuerySourceLogsQuery := _VariableSourceV2QuerySourceLogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2QuerySourceLogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2QuerySourceLogsQuery(varVariableSourceV2QuerySourceLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allOption")
+		delete(additionalProperties, "logsQuery")
+		delete(additionalProperties, "refreshStrategy")
+		delete(additionalProperties, "valueDisplayOptions")
+		delete(additionalProperties, "valuesOrderDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2QuerySourceLogsQuery struct {
@@ -266,5 +316,4 @@ func (v *NullableVariableSourceV2QuerySourceLogsQuery) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeleteTeamGroupResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteTeamGroupResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &DeleteTeamGroupResponse{}
 // DeleteTeamGroupResponse Response confirming the successful deletion of a team group and its associated configurations.
 type DeleteTeamGroupResponse struct {
 	GroupId *int64 `json:"groupId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeleteTeamGroupResponse DeleteTeamGroupResponse
 
 // NewDeleteTeamGroupResponse instantiates a new DeleteTeamGroupResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o DeleteTeamGroupResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupId) {
 		toSerialize["groupId"] = o.GroupId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeleteTeamGroupResponse) UnmarshalJSON(data []byte) (err error) {
+	varDeleteTeamGroupResponse := _DeleteTeamGroupResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeleteTeamGroupResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeleteTeamGroupResponse(varDeleteTeamGroupResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "groupId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeleteTeamGroupResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableDeleteTeamGroupResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

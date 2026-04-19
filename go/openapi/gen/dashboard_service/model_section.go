@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Section type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Section{}
@@ -22,7 +25,10 @@ type Section struct {
 	Id *UUID `json:"id,omitempty"`
 	Options *SectionOptions `json:"options,omitempty"`
 	Rows []Row `json:"rows,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Section Section
 
 // NewSection instantiates a new Section object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o Section) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rows) {
 		toSerialize["rows"] = o.Rows
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Section) UnmarshalJSON(data []byte) (err error) {
+	varSection := _Section{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Section(varSection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "options")
+		delete(additionalProperties, "rows")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSection struct {
@@ -194,5 +229,4 @@ func (v *NullableSection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

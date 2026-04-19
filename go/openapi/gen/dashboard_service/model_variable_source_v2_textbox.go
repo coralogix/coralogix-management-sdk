@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSourceV2Textbox type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2Textbox{}
 
 // VariableSourceV2Textbox struct for VariableSourceV2Textbox
 type VariableSourceV2Textbox struct {
-	Textbox *TextboxSource `json:"textbox,omitempty"`
+	Textbox TextboxSource `json:"textbox"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSourceV2Textbox VariableSourceV2Textbox
 
 // NewVariableSourceV2Textbox instantiates a new VariableSourceV2Textbox object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVariableSourceV2Textbox() *VariableSourceV2Textbox {
+func NewVariableSourceV2Textbox(textbox TextboxSource) *VariableSourceV2Textbox {
 	this := VariableSourceV2Textbox{}
+	this.Textbox = textbox
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVariableSourceV2TextboxWithDefaults() *VariableSourceV2Textbox {
 	return &this
 }
 
-// GetTextbox returns the Textbox field value if set, zero value otherwise.
+// GetTextbox returns the Textbox field value
 func (o *VariableSourceV2Textbox) GetTextbox() TextboxSource {
-	if o == nil || IsNil(o.Textbox) {
+	if o == nil {
 		var ret TextboxSource
 		return ret
 	}
-	return *o.Textbox
+
+	return o.Textbox
 }
 
-// GetTextboxOk returns a tuple with the Textbox field value if set, nil otherwise
+// GetTextboxOk returns a tuple with the Textbox field value
 // and a boolean to check if the value has been set.
 func (o *VariableSourceV2Textbox) GetTextboxOk() (*TextboxSource, bool) {
-	if o == nil || IsNil(o.Textbox) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Textbox, true
+	return &o.Textbox, true
 }
 
-// HasTextbox returns a boolean if a field has been set.
-func (o *VariableSourceV2Textbox) HasTextbox() bool {
-	if o != nil && !IsNil(o.Textbox) {
-		return true
-	}
-
-	return false
-}
-
-// SetTextbox gets a reference to the given TextboxSource and assigns it to the Textbox field.
+// SetTextbox sets field value
 func (o *VariableSourceV2Textbox) SetTextbox(v TextboxSource) {
-	o.Textbox = &v
+	o.Textbox = v
 }
 
 func (o VariableSourceV2Textbox) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VariableSourceV2Textbox) MarshalJSON() ([]byte, error) {
 
 func (o VariableSourceV2Textbox) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Textbox) {
-		toSerialize["textbox"] = o.Textbox
+	toSerialize["textbox"] = o.Textbox
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSourceV2Textbox) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"textbox",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVariableSourceV2Textbox := _VariableSourceV2Textbox{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSourceV2Textbox)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSourceV2Textbox(varVariableSourceV2Textbox)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "textbox")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSourceV2Textbox struct {
@@ -122,5 +168,4 @@ func (v *NullableVariableSourceV2Textbox) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

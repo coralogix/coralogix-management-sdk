@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SyncRUMDataRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SyncRUMDataRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SyncRUMDataRequest{}
 // SyncRUMDataRequest struct for SyncRUMDataRequest
 type SyncRUMDataRequest struct {
 	Force *bool `json:"force,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SyncRUMDataRequest SyncRUMDataRequest
 
 // NewSyncRUMDataRequest instantiates a new SyncRUMDataRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SyncRUMDataRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Force) {
 		toSerialize["force"] = o.Force
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SyncRUMDataRequest) UnmarshalJSON(data []byte) (err error) {
+	varSyncRUMDataRequest := _SyncRUMDataRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSyncRUMDataRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SyncRUMDataRequest(varSyncRUMDataRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "force")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSyncRUMDataRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableSyncRUMDataRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

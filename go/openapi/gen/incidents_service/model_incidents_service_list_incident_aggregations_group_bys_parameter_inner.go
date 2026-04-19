@@ -11,10 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // IncidentsServiceListIncidentAggregationsGroupBysParameterInner - struct for IncidentsServiceListIncidentAggregationsGroupBysParameterInner
 type IncidentsServiceListIncidentAggregationsGroupBysParameterInner struct {
@@ -42,7 +45,7 @@ func (dst *IncidentsServiceListIncidentAggregationsGroupBysParameterInner) Unmar
 	var err error
 	match := 0
 	// try to unmarshal data into GroupByContextualLabel
-	err = newStrictDecoder(data).Decode(&dst.GroupByContextualLabel)
+	err = json.Unmarshal(data, &dst.GroupByContextualLabel)
 	if err == nil {
 		jsonGroupByContextualLabel, _ := json.Marshal(dst.GroupByContextualLabel)
 		if string(jsonGroupByContextualLabel) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *IncidentsServiceListIncidentAggregationsGroupBysParameterInner) Unmar
 	}
 
 	// try to unmarshal data into GroupByIncidentField
-	err = newStrictDecoder(data).Decode(&dst.GroupByIncidentField)
+	err = json.Unmarshal(data, &dst.GroupByIncidentField)
 	if err == nil {
 		jsonGroupByIncidentField, _ := json.Marshal(dst.GroupByIncidentField)
 		if string(jsonGroupByIncidentField) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableIncidentsServiceListIncidentAggregationsGroupBysParameterInner)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

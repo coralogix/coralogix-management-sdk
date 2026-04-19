@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyUnits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyUnits{}
@@ -30,7 +33,10 @@ type PropertyUnits struct {
 	// A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value
 	Min *float64 `json:"min,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyUnits PropertyUnits
 
 // NewPropertyUnits instantiates a new PropertyUnits object
 // This constructor will assign default values to properties that have it defined,
@@ -269,7 +275,39 @@ func (o PropertyUnits) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyUnits) UnmarshalJSON(data []byte) (err error) {
+	varPropertyUnits := _PropertyUnits{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyUnits)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyUnits(varPropertyUnits)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyUnits struct {
@@ -307,5 +345,4 @@ func (v *NullablePropertyUnits) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

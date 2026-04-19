@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateOutgoingWebhookRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateOutgoingWebhookRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateOutgoingWebhookRequest{}
 // CreateOutgoingWebhookRequest struct for CreateOutgoingWebhookRequest
 type CreateOutgoingWebhookRequest struct {
 	Data *OutgoingWebhookInputData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateOutgoingWebhookRequest CreateOutgoingWebhookRequest
 
 // NewCreateOutgoingWebhookRequest instantiates a new CreateOutgoingWebhookRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateOutgoingWebhookRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateOutgoingWebhookRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateOutgoingWebhookRequest := _CreateOutgoingWebhookRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateOutgoingWebhookRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOutgoingWebhookRequest(varCreateOutgoingWebhookRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateOutgoingWebhookRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableCreateOutgoingWebhookRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

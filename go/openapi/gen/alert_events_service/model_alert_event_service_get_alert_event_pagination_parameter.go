@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertEventServiceGetAlertEventPaginationParameter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertEventServiceGetAlertEventPaginationParameter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AlertEventServiceGetAlertEventPaginationParameter{}
 type AlertEventServiceGetAlertEventPaginationParameter struct {
 	PageSize *int64 `json:"pageSize,omitempty"`
 	PageToken *string `json:"pageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertEventServiceGetAlertEventPaginationParameter AlertEventServiceGetAlertEventPaginationParameter
 
 // NewAlertEventServiceGetAlertEventPaginationParameter instantiates a new AlertEventServiceGetAlertEventPaginationParameter object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o AlertEventServiceGetAlertEventPaginationParameter) ToMap() (map[string]i
 	if !IsNil(o.PageToken) {
 		toSerialize["pageToken"] = o.PageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertEventServiceGetAlertEventPaginationParameter) UnmarshalJSON(data []byte) (err error) {
+	varAlertEventServiceGetAlertEventPaginationParameter := _AlertEventServiceGetAlertEventPaginationParameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertEventServiceGetAlertEventPaginationParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertEventServiceGetAlertEventPaginationParameter(varAlertEventServiceGetAlertEventPaginationParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pageSize")
+		delete(additionalProperties, "pageToken")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertEventServiceGetAlertEventPaginationParameter struct {
@@ -158,5 +192,4 @@ func (v *NullableAlertEventServiceGetAlertEventPaginationParameter) UnmarshalJSO
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

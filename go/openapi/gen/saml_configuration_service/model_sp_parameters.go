@@ -11,8 +11,11 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SPParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SPParameters{}
@@ -24,7 +27,10 @@ type SPParameters struct {
 	MetadataUrl *string `json:"metadataUrl,omitempty"`
 	NameIdFormat *string `json:"nameIdFormat,omitempty"`
 	SigningCertPem *string `json:"signingCertPem,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SPParameters SPParameters
 
 // NewSPParameters instantiates a new SPParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o SPParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SigningCertPem) {
 		toSerialize["signingCertPem"] = o.SigningCertPem
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SPParameters) UnmarshalJSON(data []byte) (err error) {
+	varSPParameters := _SPParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSPParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SPParameters(varSPParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assertionConsumerServiceUrl")
+		delete(additionalProperties, "binding")
+		delete(additionalProperties, "metadataUrl")
+		delete(additionalProperties, "nameIdFormat")
+		delete(additionalProperties, "signingCertPem")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSPParameters struct {
@@ -266,5 +303,4 @@ func (v *NullableSPParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

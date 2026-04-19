@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SelectionValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SelectionValue{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &SelectionValue{}
 type SelectionValue struct {
 	DefaultValue *string `json:"defaultValue,omitempty"`
 	Options []string `json:"options,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SelectionValue SelectionValue
 
 // NewSelectionValue instantiates a new SelectionValue object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o SelectionValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SelectionValue) UnmarshalJSON(data []byte) (err error) {
+	varSelectionValue := _SelectionValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSelectionValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SelectionValue(varSelectionValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultValue")
+		delete(additionalProperties, "options")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSelectionValue struct {
@@ -158,5 +192,4 @@ func (v *NullableSelectionValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

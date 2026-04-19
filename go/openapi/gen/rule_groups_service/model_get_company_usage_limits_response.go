@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetCompanyUsageLimitsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCompanyUsageLimitsResponse{}
@@ -22,7 +25,10 @@ type GetCompanyUsageLimitsResponse struct {
 	CompanyId *string `json:"companyId,omitempty"`
 	Limits *Counts `json:"limits,omitempty"`
 	Usage *Counts `json:"usage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCompanyUsageLimitsResponse GetCompanyUsageLimitsResponse
 
 // NewGetCompanyUsageLimitsResponse instantiates a new GetCompanyUsageLimitsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o GetCompanyUsageLimitsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Usage) {
 		toSerialize["usage"] = o.Usage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCompanyUsageLimitsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCompanyUsageLimitsResponse := _GetCompanyUsageLimitsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetCompanyUsageLimitsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCompanyUsageLimitsResponse(varGetCompanyUsageLimitsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "companyId")
+		delete(additionalProperties, "limits")
+		delete(additionalProperties, "usage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCompanyUsageLimitsResponse struct {
@@ -194,5 +229,4 @@ func (v *NullableGetCompanyUsageLimitsResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

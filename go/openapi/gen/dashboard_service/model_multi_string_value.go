@@ -11,15 +11,19 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // MultiStringValue - struct for MultiStringValue
 type MultiStringValue struct {
 	MultiStringValueAll *MultiStringValueAll
 	MultiStringValueList *MultiStringValueList
+	MultiStringValueSelectedAll *MultiStringValueSelectedAll
 }
 
 // MultiStringValueAllAsMultiStringValue is a convenience function that returns MultiStringValueAll wrapped in MultiStringValue
@@ -36,13 +40,20 @@ func MultiStringValueListAsMultiStringValue(v *MultiStringValueList) MultiString
 	}
 }
 
+// MultiStringValueSelectedAllAsMultiStringValue is a convenience function that returns MultiStringValueSelectedAll wrapped in MultiStringValue
+func MultiStringValueSelectedAllAsMultiStringValue(v *MultiStringValueSelectedAll) MultiStringValue {
+	return MultiStringValue{
+		MultiStringValueSelectedAll: v,
+	}
+}
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MultiStringValueAll
-	err = newStrictDecoder(data).Decode(&dst.MultiStringValueAll)
+	err = json.Unmarshal(data, &dst.MultiStringValueAll)
 	if err == nil {
 		jsonMultiStringValueAll, _ := json.Marshal(dst.MultiStringValueAll)
 		if string(jsonMultiStringValueAll) == "{}" { // empty struct
@@ -59,7 +70,7 @@ func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiStringValueList
-	err = newStrictDecoder(data).Decode(&dst.MultiStringValueList)
+	err = json.Unmarshal(data, &dst.MultiStringValueList)
 	if err == nil {
 		jsonMultiStringValueList, _ := json.Marshal(dst.MultiStringValueList)
 		if string(jsonMultiStringValueList) == "{}" { // empty struct
@@ -75,10 +86,28 @@ func (dst *MultiStringValue) UnmarshalJSON(data []byte) error {
 		dst.MultiStringValueList = nil
 	}
 
+	// try to unmarshal data into MultiStringValueSelectedAll
+	err = json.Unmarshal(data, &dst.MultiStringValueSelectedAll)
+	if err == nil {
+		jsonMultiStringValueSelectedAll, _ := json.Marshal(dst.MultiStringValueSelectedAll)
+		if string(jsonMultiStringValueSelectedAll) == "{}" { // empty struct
+			dst.MultiStringValueSelectedAll = nil
+		} else {
+			if err = validator.Validate(dst.MultiStringValueSelectedAll); err != nil {
+				dst.MultiStringValueSelectedAll = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.MultiStringValueSelectedAll = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.MultiStringValueAll = nil
 		dst.MultiStringValueList = nil
+		dst.MultiStringValueSelectedAll = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MultiStringValue)")
 	} else if match == 1 {
@@ -98,6 +127,10 @@ func (src MultiStringValue) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.MultiStringValueList)
 	}
 
+	if src.MultiStringValueSelectedAll != nil {
+		return json.Marshal(&src.MultiStringValueSelectedAll)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -114,6 +147,10 @@ func (obj *MultiStringValue) GetActualInstance() (interface{}) {
 		return obj.MultiStringValueList
 	}
 
+	if obj.MultiStringValueSelectedAll != nil {
+		return obj.MultiStringValueSelectedAll
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -126,6 +163,10 @@ func (obj MultiStringValue) GetActualInstanceValue() (interface{}) {
 
 	if obj.MultiStringValueList != nil {
 		return *obj.MultiStringValueList
+	}
+
+	if obj.MultiStringValueSelectedAll != nil {
+		return *obj.MultiStringValueSelectedAll
 	}
 
 	// all schemas are nil
@@ -167,5 +208,4 @@ func (v *NullableMultiStringValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

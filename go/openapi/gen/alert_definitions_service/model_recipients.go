@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Recipients type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Recipients{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Recipients{}
 // Recipients List of email recipients for alert notifications
 type Recipients struct {
 	Emails []string `json:"emails,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Recipients Recipients
 
 // NewRecipients instantiates a new Recipients object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Recipients) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Emails) {
 		toSerialize["emails"] = o.Emails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Recipients) UnmarshalJSON(data []byte) (err error) {
+	varRecipients := _Recipients{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecipients)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Recipients(varRecipients)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "emails")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecipients struct {
@@ -122,5 +155,4 @@ func (v *NullableRecipients) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

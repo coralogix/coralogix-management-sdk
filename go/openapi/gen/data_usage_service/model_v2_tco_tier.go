@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V2TcoTier the model 'V2TcoTier'
 type V2TcoTier string

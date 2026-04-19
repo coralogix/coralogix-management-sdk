@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueDefaultRegexValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueDefaultRegexValue{}
 
 // TextboxDefaultValueDefaultRegexValue struct for TextboxDefaultValueDefaultRegexValue
 type TextboxDefaultValueDefaultRegexValue struct {
-	DefaultRegexValue *TextboxDefaultRegexValue `json:"defaultRegexValue,omitempty"`
+	DefaultRegexValue TextboxDefaultRegexValue `json:"defaultRegexValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueDefaultRegexValue TextboxDefaultValueDefaultRegexValue
 
 // NewTextboxDefaultValueDefaultRegexValue instantiates a new TextboxDefaultValueDefaultRegexValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueDefaultRegexValue() *TextboxDefaultValueDefaultRegexValue {
+func NewTextboxDefaultValueDefaultRegexValue(defaultRegexValue TextboxDefaultRegexValue) *TextboxDefaultValueDefaultRegexValue {
 	this := TextboxDefaultValueDefaultRegexValue{}
+	this.DefaultRegexValue = defaultRegexValue
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewTextboxDefaultValueDefaultRegexValueWithDefaults() *TextboxDefaultValueD
 	return &this
 }
 
-// GetDefaultRegexValue returns the DefaultRegexValue field value if set, zero value otherwise.
+// GetDefaultRegexValue returns the DefaultRegexValue field value
 func (o *TextboxDefaultValueDefaultRegexValue) GetDefaultRegexValue() TextboxDefaultRegexValue {
-	if o == nil || IsNil(o.DefaultRegexValue) {
+	if o == nil {
 		var ret TextboxDefaultRegexValue
 		return ret
 	}
-	return *o.DefaultRegexValue
+
+	return o.DefaultRegexValue
 }
 
-// GetDefaultRegexValueOk returns a tuple with the DefaultRegexValue field value if set, nil otherwise
+// GetDefaultRegexValueOk returns a tuple with the DefaultRegexValue field value
 // and a boolean to check if the value has been set.
 func (o *TextboxDefaultValueDefaultRegexValue) GetDefaultRegexValueOk() (*TextboxDefaultRegexValue, bool) {
-	if o == nil || IsNil(o.DefaultRegexValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultRegexValue, true
+	return &o.DefaultRegexValue, true
 }
 
-// HasDefaultRegexValue returns a boolean if a field has been set.
-func (o *TextboxDefaultValueDefaultRegexValue) HasDefaultRegexValue() bool {
-	if o != nil && !IsNil(o.DefaultRegexValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultRegexValue gets a reference to the given TextboxDefaultRegexValue and assigns it to the DefaultRegexValue field.
+// SetDefaultRegexValue sets field value
 func (o *TextboxDefaultValueDefaultRegexValue) SetDefaultRegexValue(v TextboxDefaultRegexValue) {
-	o.DefaultRegexValue = &v
+	o.DefaultRegexValue = v
 }
 
 func (o TextboxDefaultValueDefaultRegexValue) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o TextboxDefaultValueDefaultRegexValue) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueDefaultRegexValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultRegexValue) {
-		toSerialize["defaultRegexValue"] = o.DefaultRegexValue
+	toSerialize["defaultRegexValue"] = o.DefaultRegexValue
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueDefaultRegexValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"defaultRegexValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueDefaultRegexValue := _TextboxDefaultValueDefaultRegexValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueDefaultRegexValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueDefaultRegexValue(varTextboxDefaultValueDefaultRegexValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultRegexValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueDefaultRegexValue struct {
@@ -122,5 +168,4 @@ func (v *NullableTextboxDefaultValueDefaultRegexValue) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

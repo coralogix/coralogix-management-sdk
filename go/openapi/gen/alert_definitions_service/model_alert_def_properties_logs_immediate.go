@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesLogsImmediate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesLogsImmediate{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesLogsImmediate struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	LogsImmediate *LogsImmediateType `json:"logsImmediate,omitempty"`
+	LogsImmediate LogsImmediateType `json:"logsImmediate"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesLogsImmediate struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesLogsImmediate AlertDefPropertiesLogsImmediate
 
 // NewAlertDefPropertiesLogsImmediate instantiates a new AlertDefPropertiesLogsImmediate object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsImmediate() *AlertDefPropertiesLogsImmediate {
+func NewAlertDefPropertiesLogsImmediate(logsImmediate LogsImmediateType) *AlertDefPropertiesLogsImmediate {
 	this := AlertDefPropertiesLogsImmediate{}
+	this.LogsImmediate = logsImmediate
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesLogsImmediate) SetIncidentsSettings(v AlertDefInciden
 	o.IncidentsSettings = &v
 }
 
-// GetLogsImmediate returns the LogsImmediate field value if set, zero value otherwise.
+// GetLogsImmediate returns the LogsImmediate field value
 func (o *AlertDefPropertiesLogsImmediate) GetLogsImmediate() LogsImmediateType {
-	if o == nil || IsNil(o.LogsImmediate) {
+	if o == nil {
 		var ret LogsImmediateType
 		return ret
 	}
-	return *o.LogsImmediate
+
+	return o.LogsImmediate
 }
 
-// GetLogsImmediateOk returns a tuple with the LogsImmediate field value if set, nil otherwise
+// GetLogsImmediateOk returns a tuple with the LogsImmediate field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsImmediate) GetLogsImmediateOk() (*LogsImmediateType, bool) {
-	if o == nil || IsNil(o.LogsImmediate) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsImmediate, true
+	return &o.LogsImmediate, true
 }
 
-// HasLogsImmediate returns a boolean if a field has been set.
-func (o *AlertDefPropertiesLogsImmediate) HasLogsImmediate() bool {
-	if o != nil && !IsNil(o.LogsImmediate) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsImmediate gets a reference to the given LogsImmediateType and assigns it to the LogsImmediate field.
+// SetLogsImmediate sets field value
 func (o *AlertDefPropertiesLogsImmediate) SetLogsImmediate(v LogsImmediateType) {
-	o.LogsImmediate = &v
+	o.LogsImmediate = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesLogsImmediate) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.LogsImmediate) {
-		toSerialize["logsImmediate"] = o.LogsImmediate
-	}
+	toSerialize["logsImmediate"] = o.LogsImmediate
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesLogsImmediate) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesLogsImmediate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsImmediate",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesLogsImmediate := _AlertDefPropertiesLogsImmediate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesLogsImmediate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesLogsImmediate(varAlertDefPropertiesLogsImmediate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsImmediate")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesLogsImmediate struct {
@@ -632,5 +692,4 @@ func (v *NullableAlertDefPropertiesLogsImmediate) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

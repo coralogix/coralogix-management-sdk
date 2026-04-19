@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiSelectSourceSpanField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceSpanField{}
 
 // MultiSelectSourceSpanField struct for MultiSelectSourceSpanField
 type MultiSelectSourceSpanField struct {
-	SpanField *SpanFieldSource `json:"spanField,omitempty"`
+	SpanField SpanFieldSource `json:"spanField"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiSelectSourceSpanField MultiSelectSourceSpanField
 
 // NewMultiSelectSourceSpanField instantiates a new MultiSelectSourceSpanField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiSelectSourceSpanField() *MultiSelectSourceSpanField {
+func NewMultiSelectSourceSpanField(spanField SpanFieldSource) *MultiSelectSourceSpanField {
 	this := MultiSelectSourceSpanField{}
+	this.SpanField = spanField
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewMultiSelectSourceSpanFieldWithDefaults() *MultiSelectSourceSpanField {
 	return &this
 }
 
-// GetSpanField returns the SpanField field value if set, zero value otherwise.
+// GetSpanField returns the SpanField field value
 func (o *MultiSelectSourceSpanField) GetSpanField() SpanFieldSource {
-	if o == nil || IsNil(o.SpanField) {
+	if o == nil {
 		var ret SpanFieldSource
 		return ret
 	}
-	return *o.SpanField
+
+	return o.SpanField
 }
 
-// GetSpanFieldOk returns a tuple with the SpanField field value if set, nil otherwise
+// GetSpanFieldOk returns a tuple with the SpanField field value
 // and a boolean to check if the value has been set.
 func (o *MultiSelectSourceSpanField) GetSpanFieldOk() (*SpanFieldSource, bool) {
-	if o == nil || IsNil(o.SpanField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpanField, true
+	return &o.SpanField, true
 }
 
-// HasSpanField returns a boolean if a field has been set.
-func (o *MultiSelectSourceSpanField) HasSpanField() bool {
-	if o != nil && !IsNil(o.SpanField) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpanField gets a reference to the given SpanFieldSource and assigns it to the SpanField field.
+// SetSpanField sets field value
 func (o *MultiSelectSourceSpanField) SetSpanField(v SpanFieldSource) {
-	o.SpanField = &v
+	o.SpanField = v
 }
 
 func (o MultiSelectSourceSpanField) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o MultiSelectSourceSpanField) MarshalJSON() ([]byte, error) {
 
 func (o MultiSelectSourceSpanField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SpanField) {
-		toSerialize["spanField"] = o.SpanField
+	toSerialize["spanField"] = o.SpanField
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiSelectSourceSpanField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spanField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiSelectSourceSpanField := _MultiSelectSourceSpanField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiSelectSourceSpanField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiSelectSourceSpanField(varMultiSelectSourceSpanField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "spanField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiSelectSourceSpanField struct {
@@ -122,5 +168,4 @@ func (v *NullableMultiSelectSourceSpanField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UserIdList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserIdList{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &UserIdList{}
 // UserIdList struct for UserIdList
 type UserIdList struct {
 	UserIds []string `json:"userIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserIdList UserIdList
 
 // NewUserIdList instantiates a new UserIdList object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o UserIdList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserIds) {
 		toSerialize["userIds"] = o.UserIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserIdList) UnmarshalJSON(data []byte) (err error) {
+	varUserIdList := _UserIdList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUserIdList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserIdList(varUserIdList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "userIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserIdList struct {
@@ -122,5 +155,4 @@ func (v *NullableUserIdList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

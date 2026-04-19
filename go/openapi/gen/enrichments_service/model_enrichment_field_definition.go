@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentFieldDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentFieldDefinition{}
@@ -22,7 +25,10 @@ type EnrichmentFieldDefinition struct {
 	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
 	FieldName *string `json:"fieldName,omitempty"`
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnrichmentFieldDefinition EnrichmentFieldDefinition
 
 // NewEnrichmentFieldDefinition instantiates a new EnrichmentFieldDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o EnrichmentFieldDefinition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SelectedColumns) {
 		toSerialize["selectedColumns"] = o.SelectedColumns
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EnrichmentFieldDefinition) UnmarshalJSON(data []byte) (err error) {
+	varEnrichmentFieldDefinition := _EnrichmentFieldDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentFieldDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentFieldDefinition(varEnrichmentFieldDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enrichedFieldName")
+		delete(additionalProperties, "fieldName")
+		delete(additionalProperties, "selectedColumns")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnrichmentFieldDefinition struct {
@@ -194,5 +229,4 @@ func (v *NullableEnrichmentFieldDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

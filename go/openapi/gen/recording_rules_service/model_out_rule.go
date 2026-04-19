@@ -11,19 +11,26 @@ API version: 1.0.0
 package recording_rules_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutRule{}
 
 // OutRule struct for OutRule
 type OutRule struct {
+	EvaluationDelayMs *int64 `json:"evaluationDelayMs,omitempty"`
 	Expr *string `json:"expr,omitempty"`
 	Labels *map[string]string `json:"labels,omitempty"`
 	LastEvalDurationMs *string `json:"lastEvalDurationMs,omitempty"`
 	Record *string `json:"record,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutRule OutRule
 
 // NewOutRule instantiates a new OutRule object
 // This constructor will assign default values to properties that have it defined,
@@ -40,6 +47,38 @@ func NewOutRule() *OutRule {
 func NewOutRuleWithDefaults() *OutRule {
 	this := OutRule{}
 	return &this
+}
+
+// GetEvaluationDelayMs returns the EvaluationDelayMs field value if set, zero value otherwise.
+func (o *OutRule) GetEvaluationDelayMs() int64 {
+	if o == nil || IsNil(o.EvaluationDelayMs) {
+		var ret int64
+		return ret
+	}
+	return *o.EvaluationDelayMs
+}
+
+// GetEvaluationDelayMsOk returns a tuple with the EvaluationDelayMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OutRule) GetEvaluationDelayMsOk() (*int64, bool) {
+	if o == nil || IsNil(o.EvaluationDelayMs) {
+		return nil, false
+	}
+	return o.EvaluationDelayMs, true
+}
+
+// HasEvaluationDelayMs returns a boolean if a field has been set.
+func (o *OutRule) HasEvaluationDelayMs() bool {
+	if o != nil && !IsNil(o.EvaluationDelayMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetEvaluationDelayMs gets a reference to the given int64 and assigns it to the EvaluationDelayMs field.
+func (o *OutRule) SetEvaluationDelayMs(v int64) {
+	o.EvaluationDelayMs = &v
 }
 
 // GetExpr returns the Expr field value if set, zero value otherwise.
@@ -180,6 +219,9 @@ func (o OutRule) MarshalJSON() ([]byte, error) {
 
 func (o OutRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EvaluationDelayMs) {
+		toSerialize["evaluationDelayMs"] = o.EvaluationDelayMs
+	}
 	if !IsNil(o.Expr) {
 		toSerialize["expr"] = o.Expr
 	}
@@ -192,7 +234,38 @@ func (o OutRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Record) {
 		toSerialize["record"] = o.Record
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutRule) UnmarshalJSON(data []byte) (err error) {
+	varOutRule := _OutRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutRule(varOutRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "expr")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "lastEvalDurationMs")
+		delete(additionalProperties, "record")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutRule struct {
@@ -230,5 +303,4 @@ func (v *NullableOutRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

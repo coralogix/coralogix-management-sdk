@@ -11,9 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // SloConstantFilterField the model 'SloConstantFilterField'
 type SloConstantFilterField string

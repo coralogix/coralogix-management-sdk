@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxSource{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &TextboxSource{}
 // TextboxSource struct for TextboxSource
 type TextboxSource struct {
 	DefaultValue *TextboxDefaultValue `json:"defaultValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxSource TextboxSource
 
 // NewTextboxSource instantiates a new TextboxSource object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o TextboxSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultValue) {
 		toSerialize["defaultValue"] = o.DefaultValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxSource) UnmarshalJSON(data []byte) (err error) {
+	varTextboxSource := _TextboxSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxSource(varTextboxSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxSource struct {
@@ -122,5 +155,4 @@ func (v *NullableTextboxSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

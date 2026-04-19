@@ -11,9 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentEventSnoozeIndicator type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventSnoozeIndicator{}
@@ -23,7 +26,10 @@ type IncidentEventSnoozeIndicator struct {
 	DurationMinutes *int32 `json:"durationMinutes,omitempty"`
 	StartTime *time.Time `json:"startTime,omitempty"`
 	UserId *string `json:"userId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IncidentEventSnoozeIndicator IncidentEventSnoozeIndicator
 
 // NewIncidentEventSnoozeIndicator instantiates a new IncidentEventSnoozeIndicator object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o IncidentEventSnoozeIndicator) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IncidentEventSnoozeIndicator) UnmarshalJSON(data []byte) (err error) {
+	varIncidentEventSnoozeIndicator := _IncidentEventSnoozeIndicator{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIncidentEventSnoozeIndicator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IncidentEventSnoozeIndicator(varIncidentEventSnoozeIndicator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "durationMinutes")
+		delete(additionalProperties, "startTime")
+		delete(additionalProperties, "userId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIncidentEventSnoozeIndicator struct {
@@ -195,5 +230,4 @@ func (v *NullableIncidentEventSnoozeIndicator) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

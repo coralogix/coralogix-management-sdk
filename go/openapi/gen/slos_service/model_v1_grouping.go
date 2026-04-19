@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1Grouping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Grouping{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &V1Grouping{}
 // V1Grouping Definition of the SLO grouping fields
 type V1Grouping struct {
 	Labels []string `json:"labels,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1Grouping V1Grouping
 
 // NewV1Grouping instantiates a new V1Grouping object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o V1Grouping) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1Grouping) UnmarshalJSON(data []byte) (err error) {
+	varV1Grouping := _V1Grouping{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1Grouping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1Grouping(varV1Grouping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "labels")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1Grouping struct {
@@ -122,5 +155,4 @@ func (v *NullableV1Grouping) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

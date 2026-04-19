@@ -8,9 +8,6 @@ client.go
 configuration.go
 git_push.sh
 model_aggregate_by.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_data_usage_entry.go
 model_data_usage_service_get_daily_usage_evaluation_tokens_request.go
@@ -50,9 +47,8 @@ model_get_data_usage_response.go
 model_get_logs_count_response.go
 model_get_spans_count_response.go
 model_logs_count.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
+model_pillar.go
 model_scopes_filter.go
 model_spans_count.go
 model_token.go
@@ -60,7 +56,6 @@ model_update_data_usage_metrics_export_status_request.go
 model_update_data_usage_metrics_export_status_response.go
 model_v2_date_range.go
 model_v2_gb.go
-model_v2_pillar.go
 model_v2_priority.go
 model_v2_range.go
 model_v2_tco_tier.go

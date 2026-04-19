@@ -11,26 +11,34 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookInputDataGenericWebhook type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataGenericWebhook{}
 
 // OutgoingWebhookInputDataGenericWebhook struct for OutgoingWebhookInputDataGenericWebhook
 type OutgoingWebhookInputDataGenericWebhook struct {
-	GenericWebhook *GenericWebhookConfig `json:"genericWebhook,omitempty"`
+	GenericWebhook GenericWebhookConfig `json:"genericWebhook"`
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookInputDataGenericWebhook OutgoingWebhookInputDataGenericWebhook
 
 // NewOutgoingWebhookInputDataGenericWebhook instantiates a new OutgoingWebhookInputDataGenericWebhook object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookInputDataGenericWebhook() *OutgoingWebhookInputDataGenericWebhook {
+func NewOutgoingWebhookInputDataGenericWebhook(genericWebhook GenericWebhookConfig) *OutgoingWebhookInputDataGenericWebhook {
 	this := OutgoingWebhookInputDataGenericWebhook{}
+	this.GenericWebhook = genericWebhook
 	return &this
 }
 
@@ -42,36 +50,28 @@ func NewOutgoingWebhookInputDataGenericWebhookWithDefaults() *OutgoingWebhookInp
 	return &this
 }
 
-// GetGenericWebhook returns the GenericWebhook field value if set, zero value otherwise.
+// GetGenericWebhook returns the GenericWebhook field value
 func (o *OutgoingWebhookInputDataGenericWebhook) GetGenericWebhook() GenericWebhookConfig {
-	if o == nil || IsNil(o.GenericWebhook) {
+	if o == nil {
 		var ret GenericWebhookConfig
 		return ret
 	}
-	return *o.GenericWebhook
+
+	return o.GenericWebhook
 }
 
-// GetGenericWebhookOk returns a tuple with the GenericWebhook field value if set, nil otherwise
+// GetGenericWebhookOk returns a tuple with the GenericWebhook field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputDataGenericWebhook) GetGenericWebhookOk() (*GenericWebhookConfig, bool) {
-	if o == nil || IsNil(o.GenericWebhook) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GenericWebhook, true
+	return &o.GenericWebhook, true
 }
 
-// HasGenericWebhook returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputDataGenericWebhook) HasGenericWebhook() bool {
-	if o != nil && !IsNil(o.GenericWebhook) {
-		return true
-	}
-
-	return false
-}
-
-// SetGenericWebhook gets a reference to the given GenericWebhookConfig and assigns it to the GenericWebhook field.
+// SetGenericWebhook sets field value
 func (o *OutgoingWebhookInputDataGenericWebhook) SetGenericWebhook(v GenericWebhookConfig) {
-	o.GenericWebhook = &v
+	o.GenericWebhook = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -180,9 +180,7 @@ func (o OutgoingWebhookInputDataGenericWebhook) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookInputDataGenericWebhook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GenericWebhook) {
-		toSerialize["genericWebhook"] = o.GenericWebhook
-	}
+	toSerialize["genericWebhook"] = o.GenericWebhook
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -192,7 +190,58 @@ func (o OutgoingWebhookInputDataGenericWebhook) ToMap() (map[string]interface{},
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookInputDataGenericWebhook) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"genericWebhook",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookInputDataGenericWebhook := _OutgoingWebhookInputDataGenericWebhook{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookInputDataGenericWebhook)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookInputDataGenericWebhook(varOutgoingWebhookInputDataGenericWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "genericWebhook")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookInputDataGenericWebhook struct {
@@ -230,5 +279,4 @@ func (v *NullableOutgoingWebhookInputDataGenericWebhook) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

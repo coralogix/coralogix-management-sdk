@@ -7,11 +7,9 @@ servers:
 paths:
   /cases/cases/v1/{case_id}/external-references:
     get:
-      description: |-
-        Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.
-
-        Requires the following permissions:
-        - `case:Read`
+      description: Retrieve all external references that link a case to external systems
+        such as ServiceNow. Returns the complete list of external references associated
+        with the specified case.
       externalDocs:
         url: ""
       operationId: CasesService_GetCaseExternalReferences
@@ -76,24 +74,6 @@ components:
           $ref: "#/components/schemas/ExternalReferenceVendor"
       title: Case external reference
       type: object
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
-      type: object
     ExternalReferenceVendor:
       enum:
       - EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED
@@ -111,7 +91,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -122,12 +101,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -138,6 +117,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -176,28 +156,6 @@ components:
           type: array
       title: Get case external references response
       type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
-      type: object
     MultipleValues:
       properties:
         matcher:
@@ -229,9 +187,3 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

@@ -11,7 +11,6 @@
           "Integration service"
         ],
         "summary": "Get all integrations",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -67,7 +66,6 @@
           "Integration service"
         ],
         "summary": "Get integration definition",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,7 +131,6 @@
           "Integration service"
         ],
         "summary": "Get deployed integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -191,7 +188,6 @@
           "Integration service"
         ],
         "summary": "Delete integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -248,7 +244,6 @@
           "Integration service"
         ],
         "summary": "Get RUM integration versions data",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -304,7 +299,6 @@
           "Integration service"
         ],
         "summary": "Trigger sync of RUM integration data",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -319,8 +313,7 @@
                   "force": {
                     "type": "boolean"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -366,7 +359,6 @@
           "Integration service"
         ],
         "summary": "Get integration details",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -431,7 +423,6 @@
           "Integration service"
         ],
         "summary": "List managed integration keys",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -477,7 +468,6 @@
           "Integration service"
         ],
         "summary": "Get managed integration status",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -534,7 +524,6 @@
           "Integration service"
         ],
         "summary": "Update integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -553,8 +542,7 @@
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -598,7 +586,6 @@
           "Integration service"
         ],
         "summary": "Save integration registration metadata",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -613,8 +600,7 @@
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -660,7 +646,6 @@
           "Integration service"
         ],
         "summary": "Test integration",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -678,8 +663,7 @@
                   "integrationId": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -725,7 +709,6 @@
           "Integration service"
         ],
         "summary": "Get integration template",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -931,33 +914,6 @@
         "title": "CloudFormation",
         "description": "This data structure represents a CloudFormation integration.",
         "type": "object"
-      },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
       },
       "CommandInformation": {
         "externalDocs": {
@@ -1371,7 +1327,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "multiText"
+        ]
       },
       "FieldInformationMultipleSelection": {
         "externalDocs": {
@@ -1426,7 +1384,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "multipleSelection"
+        ]
       },
       "FieldInformationSelection": {
         "externalDocs": {
@@ -1481,7 +1441,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "selection"
+        ]
       },
       "FieldInformationSingle": {
         "externalDocs": {
@@ -1536,7 +1498,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "single"
+        ]
       },
       "FieldInformationSingleBoolean": {
         "externalDocs": {
@@ -1591,7 +1555,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "singleBoolean"
+        ]
       },
       "FieldInformationSingleNumber": {
         "externalDocs": {
@@ -1646,7 +1612,9 @@
             "type": "boolean"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "singleNumber"
+        ]
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -1676,9 +1644,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -1698,9 +1666,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -1904,7 +1872,10 @@
           "JSON",
           "NUMBER",
           "SENSITIVE_DATA",
-          "JSON_OBJECT_ARRAY"
+          "JSON_OBJECT_ARRAY",
+          "AWS_REGION_SELECT",
+          "AWS_REGION_MULTISELECT",
+          "AWS_CLOUDWATCH_NAMESPACE_LIST"
         ]
       },
       "Integration": {
@@ -2036,7 +2007,9 @@
             "$ref": "#/components/schemas/Integration"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "external"
+        ]
       },
       "IntegrationDetailsLocal": {
         "externalDocs": {
@@ -2068,7 +2041,9 @@
             "$ref": "#/components/schemas/LocalChangelog"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "local"
+        ]
       },
       "IntegrationDoc": {
         "externalDocs": {
@@ -2123,12 +2098,6 @@
       "IntegrationRevision": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
-          },
-          {
             "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           },
           {
@@ -2139,6 +2108,12 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
           }
         ]
       },
@@ -2206,7 +2181,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "azureArmTemplate"
+        ]
       },
       "IntegrationRevisionCloudFormation": {
         "externalDocs": {
@@ -2244,7 +2221,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "cloudFormation"
+        ]
       },
       "IntegrationRevisionHelmChart": {
         "externalDocs": {
@@ -2282,7 +2261,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "helmChart"
+        ]
       },
       "IntegrationRevisionManagedService": {
         "externalDocs": {
@@ -2320,7 +2301,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "managedService"
+        ]
       },
       "IntegrationRevisionRum": {
         "externalDocs": {
@@ -2358,7 +2341,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "rum"
+        ]
       },
       "IntegrationRevisionTerraform": {
         "externalDocs": {
@@ -2396,7 +2381,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "terraform"
+        ]
       },
       "IntegrationStatus": {
         "externalDocs": {
@@ -2538,34 +2525,6 @@
         "description": "This data structure represents a managed service.",
         "type": "object"
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "MultipleSelectionValue": {
         "externalDocs": {
           "url": ""
@@ -2606,6 +2565,9 @@
       "Parameter": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ParameterStringValue"
+          },
+          {
             "$ref": "#/components/schemas/ParameterBooleanValue"
           },
           {
@@ -2619,9 +2581,6 @@
           },
           {
             "$ref": "#/components/schemas/ParameterSensitiveData"
-          },
-          {
-            "$ref": "#/components/schemas/ParameterStringValue"
           }
         ]
       },
@@ -2639,7 +2598,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "apiKey"
+        ]
       },
       "ParameterBooleanValue": {
         "externalDocs": {
@@ -2655,7 +2616,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "booleanValue"
+        ]
       },
       "ParameterNumericValue": {
         "externalDocs": {
@@ -2672,7 +2635,9 @@
             "format": "double"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "numericValue"
+        ]
       },
       "ParameterSensitiveData": {
         "externalDocs": {
@@ -2688,7 +2653,9 @@
             "$ref": "#/components/schemas/SensitiveDataPlaceholder"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "sensitiveData"
+        ]
       },
       "ParameterStringList": {
         "externalDocs": {
@@ -2704,7 +2671,9 @@
             "$ref": "#/components/schemas/StringList"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stringList"
+        ]
       },
       "ParameterStringValue": {
         "externalDocs": {
@@ -2720,7 +2689,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "stringValue"
+        ]
       },
       "PermissionResource": {
         "type": "string",
@@ -2799,7 +2770,9 @@
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "arm"
+        ]
       },
       "RegisteredInstanceCloudformation": {
         "externalDocs": {
@@ -2837,7 +2810,9 @@
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "cloudformation"
+        ]
       },
       "RegisteredInstanceEmpty": {
         "externalDocs": {
@@ -2875,7 +2850,9 @@
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "empty"
+        ]
       },
       "RevisionLifecycle": {
         "type": "string",
@@ -3117,7 +3094,7 @@
       "TestIntegrationResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestIntegrationResultSuccess"
+            "$ref": "#/components/schemas/TestIntegrationResultSuccessVariant"
           },
           {
             "$ref": "#/components/schemas/TestIntegrationResultFailure"
@@ -3142,9 +3119,11 @@
             "$ref": "#/components/schemas/v1.Failure"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "failure"
+        ]
       },
-      "TestIntegrationResultSuccess": {
+      "TestIntegrationResultSuccessVariant": {
         "externalDocs": {
           "url": ""
         },
@@ -3155,7 +3134,9 @@
             "$ref": "#/components/schemas/TestIntegrationResult.Success"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "success"
+        ]
       },
       "Untracked": {
         "externalDocs": {
@@ -3180,7 +3161,9 @@
             "$ref": "#/components/schemas/AzureArm"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "arm"
+        ]
       },
       "V1IntegrationTypeCloudformation": {
         "externalDocs": {
@@ -3194,7 +3177,9 @@
             "$ref": "#/components/schemas/Cloudformation"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "cloudformation"
+        ]
       },
       "V1IntegrationTypeContextualData": {
         "externalDocs": {
@@ -3208,7 +3193,9 @@
             "$ref": "#/components/schemas/ContextualData"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "contextualData"
+        ]
       },
       "V1IntegrationTypeGenericWebhook": {
         "externalDocs": {
@@ -3222,7 +3209,9 @@
             "$ref": "#/components/schemas/GenericWebhook"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "genericWebhook"
+        ]
       },
       "V1IntegrationTypeManaged": {
         "externalDocs": {
@@ -3236,7 +3225,9 @@
             "$ref": "#/components/schemas/Managed"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "managed"
+        ]
       },
       "V1IntegrationTypePushBasedContextualData": {
         "externalDocs": {
@@ -3250,7 +3241,9 @@
             "$ref": "#/components/schemas/PushBasedContextualData"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "pushBasedContextualData"
+        ]
       },
       "V1IntegrationTypeUntracked": {
         "externalDocs": {
@@ -3264,7 +3257,9 @@
             "$ref": "#/components/schemas/Untracked"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "untracked"
+        ]
       },
       "Variant": {
         "type": "string",
@@ -3372,6 +3367,15 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeArm"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+          },
+          {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
           },
           {
@@ -3382,15 +3386,6 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeArm"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
           }
         ]
       },
@@ -3411,14 +3406,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

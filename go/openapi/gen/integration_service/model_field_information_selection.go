@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldInformationSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldInformationSelection{}
@@ -28,20 +32,24 @@ type FieldInformationSelection struct {
 	Predefined *bool `json:"predefined,omitempty"`
 	Readonly *bool `json:"readonly,omitempty"`
 	Required *bool `json:"required,omitempty"`
-	Selection *SelectionValue `json:"selection,omitempty"`
+	Selection SelectionValue `json:"selection"`
 	TemplateParamName *string `json:"templateParamName,omitempty"`
 	Tooltip *string `json:"tooltip,omitempty"`
 	Type *InputType `json:"type,omitempty"`
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	Visible *bool `json:"visible,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldInformationSelection FieldInformationSelection
 
 // NewFieldInformationSelection instantiates a new FieldInformationSelection object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldInformationSelection() *FieldInformationSelection {
+func NewFieldInformationSelection(selection SelectionValue) *FieldInformationSelection {
 	this := FieldInformationSelection{}
+	this.Selection = selection
 	return &this
 }
 
@@ -341,36 +349,28 @@ func (o *FieldInformationSelection) SetRequired(v bool) {
 	o.Required = &v
 }
 
-// GetSelection returns the Selection field value if set, zero value otherwise.
+// GetSelection returns the Selection field value
 func (o *FieldInformationSelection) GetSelection() SelectionValue {
-	if o == nil || IsNil(o.Selection) {
+	if o == nil {
 		var ret SelectionValue
 		return ret
 	}
-	return *o.Selection
+
+	return o.Selection
 }
 
-// GetSelectionOk returns a tuple with the Selection field value if set, nil otherwise
+// GetSelectionOk returns a tuple with the Selection field value
 // and a boolean to check if the value has been set.
 func (o *FieldInformationSelection) GetSelectionOk() (*SelectionValue, bool) {
-	if o == nil || IsNil(o.Selection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Selection, true
+	return &o.Selection, true
 }
 
-// HasSelection returns a boolean if a field has been set.
-func (o *FieldInformationSelection) HasSelection() bool {
-	if o != nil && !IsNil(o.Selection) {
-		return true
-	}
-
-	return false
-}
-
-// SetSelection gets a reference to the given SelectionValue and assigns it to the Selection field.
+// SetSelection sets field value
 func (o *FieldInformationSelection) SetSelection(v SelectionValue) {
-	o.Selection = &v
+	o.Selection = v
 }
 
 // GetTemplateParamName returns the TemplateParamName field value if set, zero value otherwise.
@@ -570,9 +570,7 @@ func (o FieldInformationSelection) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
-	if !IsNil(o.Selection) {
-		toSerialize["selection"] = o.Selection
-	}
+	toSerialize["selection"] = o.Selection
 	if !IsNil(o.TemplateParamName) {
 		toSerialize["templateParamName"] = o.TemplateParamName
 	}
@@ -588,7 +586,69 @@ func (o FieldInformationSelection) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visible) {
 		toSerialize["visible"] = o.Visible
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldInformationSelection) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"selection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFieldInformationSelection := _FieldInformationSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldInformationSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldInformationSelection(varFieldInformationSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowedPattern")
+		delete(additionalProperties, "applicableIf")
+		delete(additionalProperties, "documentationReference")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "placeholder")
+		delete(additionalProperties, "predefined")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "required")
+		delete(additionalProperties, "selection")
+		delete(additionalProperties, "templateParamName")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "upgradeNotice")
+		delete(additionalProperties, "visible")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldInformationSelection struct {
@@ -626,5 +686,4 @@ func (v *NullableFieldInformationSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

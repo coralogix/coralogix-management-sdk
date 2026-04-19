@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationTimeSeriesLines type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationTimeSeriesLines{}
 
 // VisualizationTimeSeriesLines struct for VisualizationTimeSeriesLines
 type VisualizationTimeSeriesLines struct {
-	TimeSeriesLines *TimeSeriesLines `json:"timeSeriesLines,omitempty"`
+	TimeSeriesLines TimeSeriesLines `json:"timeSeriesLines"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationTimeSeriesLines VisualizationTimeSeriesLines
 
 // NewVisualizationTimeSeriesLines instantiates a new VisualizationTimeSeriesLines object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVisualizationTimeSeriesLines() *VisualizationTimeSeriesLines {
+func NewVisualizationTimeSeriesLines(timeSeriesLines TimeSeriesLines) *VisualizationTimeSeriesLines {
 	this := VisualizationTimeSeriesLines{}
+	this.TimeSeriesLines = timeSeriesLines
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewVisualizationTimeSeriesLinesWithDefaults() *VisualizationTimeSeriesLines
 	return &this
 }
 
-// GetTimeSeriesLines returns the TimeSeriesLines field value if set, zero value otherwise.
+// GetTimeSeriesLines returns the TimeSeriesLines field value
 func (o *VisualizationTimeSeriesLines) GetTimeSeriesLines() TimeSeriesLines {
-	if o == nil || IsNil(o.TimeSeriesLines) {
+	if o == nil {
 		var ret TimeSeriesLines
 		return ret
 	}
-	return *o.TimeSeriesLines
+
+	return o.TimeSeriesLines
 }
 
-// GetTimeSeriesLinesOk returns a tuple with the TimeSeriesLines field value if set, nil otherwise
+// GetTimeSeriesLinesOk returns a tuple with the TimeSeriesLines field value
 // and a boolean to check if the value has been set.
 func (o *VisualizationTimeSeriesLines) GetTimeSeriesLinesOk() (*TimeSeriesLines, bool) {
-	if o == nil || IsNil(o.TimeSeriesLines) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TimeSeriesLines, true
+	return &o.TimeSeriesLines, true
 }
 
-// HasTimeSeriesLines returns a boolean if a field has been set.
-func (o *VisualizationTimeSeriesLines) HasTimeSeriesLines() bool {
-	if o != nil && !IsNil(o.TimeSeriesLines) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeSeriesLines gets a reference to the given TimeSeriesLines and assigns it to the TimeSeriesLines field.
+// SetTimeSeriesLines sets field value
 func (o *VisualizationTimeSeriesLines) SetTimeSeriesLines(v TimeSeriesLines) {
-	o.TimeSeriesLines = &v
+	o.TimeSeriesLines = v
 }
 
 func (o VisualizationTimeSeriesLines) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o VisualizationTimeSeriesLines) MarshalJSON() ([]byte, error) {
 
 func (o VisualizationTimeSeriesLines) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TimeSeriesLines) {
-		toSerialize["timeSeriesLines"] = o.TimeSeriesLines
+	toSerialize["timeSeriesLines"] = o.TimeSeriesLines
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationTimeSeriesLines) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timeSeriesLines",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVisualizationTimeSeriesLines := _VisualizationTimeSeriesLines{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationTimeSeriesLines)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationTimeSeriesLines(varVisualizationTimeSeriesLines)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timeSeriesLines")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationTimeSeriesLines struct {
@@ -122,5 +168,4 @@ func (v *NullableVisualizationTimeSeriesLines) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

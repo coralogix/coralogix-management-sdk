@@ -11,23 +11,31 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentTypeAws type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeAws{}
 
 // EnrichmentTypeAws struct for EnrichmentTypeAws
 type EnrichmentTypeAws struct {
-	Aws *AwsType `json:"aws,omitempty"`
+	Aws AwsType `json:"aws"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnrichmentTypeAws EnrichmentTypeAws
 
 // NewEnrichmentTypeAws instantiates a new EnrichmentTypeAws object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnrichmentTypeAws() *EnrichmentTypeAws {
+func NewEnrichmentTypeAws(aws AwsType) *EnrichmentTypeAws {
 	this := EnrichmentTypeAws{}
+	this.Aws = aws
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewEnrichmentTypeAwsWithDefaults() *EnrichmentTypeAws {
 	return &this
 }
 
-// GetAws returns the Aws field value if set, zero value otherwise.
+// GetAws returns the Aws field value
 func (o *EnrichmentTypeAws) GetAws() AwsType {
-	if o == nil || IsNil(o.Aws) {
+	if o == nil {
 		var ret AwsType
 		return ret
 	}
-	return *o.Aws
+
+	return o.Aws
 }
 
-// GetAwsOk returns a tuple with the Aws field value if set, nil otherwise
+// GetAwsOk returns a tuple with the Aws field value
 // and a boolean to check if the value has been set.
 func (o *EnrichmentTypeAws) GetAwsOk() (*AwsType, bool) {
-	if o == nil || IsNil(o.Aws) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Aws, true
+	return &o.Aws, true
 }
 
-// HasAws returns a boolean if a field has been set.
-func (o *EnrichmentTypeAws) HasAws() bool {
-	if o != nil && !IsNil(o.Aws) {
-		return true
-	}
-
-	return false
-}
-
-// SetAws gets a reference to the given AwsType and assigns it to the Aws field.
+// SetAws sets field value
 func (o *EnrichmentTypeAws) SetAws(v AwsType) {
-	o.Aws = &v
+	o.Aws = v
 }
 
 func (o EnrichmentTypeAws) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o EnrichmentTypeAws) MarshalJSON() ([]byte, error) {
 
 func (o EnrichmentTypeAws) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Aws) {
-		toSerialize["aws"] = o.Aws
+	toSerialize["aws"] = o.Aws
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *EnrichmentTypeAws) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"aws",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEnrichmentTypeAws := _EnrichmentTypeAws{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentTypeAws)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentTypeAws(varEnrichmentTypeAws)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aws")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnrichmentTypeAws struct {
@@ -122,5 +168,4 @@ func (v *NullableEnrichmentTypeAws) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

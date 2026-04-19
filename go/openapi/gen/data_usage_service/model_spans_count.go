@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansCount{}
@@ -27,7 +30,10 @@ type SpansCount struct {
 	MediumSuccessSpanCount *string `json:"mediumSuccessSpanCount,omitempty"`
 	SuccessSpanCount *string `json:"successSpanCount,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansCount SpansCount
 
 // NewSpansCount instantiates a new SpansCount object
 // This constructor will assign default values to properties that have it defined,
@@ -301,7 +307,40 @@ func (o SpansCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansCount) UnmarshalJSON(data []byte) (err error) {
+	varSpansCount := _SpansCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansCount(varSpansCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errorSpanCount")
+		delete(additionalProperties, "lowErrorSpanCount")
+		delete(additionalProperties, "lowSuccessSpanCount")
+		delete(additionalProperties, "mediumErrorSpanCount")
+		delete(additionalProperties, "mediumSuccessSpanCount")
+		delete(additionalProperties, "successSpanCount")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansCount struct {
@@ -339,5 +378,4 @@ func (v *NullableSpansCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

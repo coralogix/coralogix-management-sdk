@@ -11,8 +11,11 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SelectedFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SelectedFilters{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SelectedFilters{}
 // SelectedFilters struct for SelectedFilters
 type SelectedFilters struct {
 	Filters []ViewsV1Filter `json:"filters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SelectedFilters SelectedFilters
 
 // NewSelectedFilters instantiates a new SelectedFilters object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SelectedFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SelectedFilters) UnmarshalJSON(data []byte) (err error) {
+	varSelectedFilters := _SelectedFilters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSelectedFilters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SelectedFilters(varSelectedFilters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSelectedFilters struct {
@@ -122,5 +155,4 @@ func (v *NullableSelectedFilters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

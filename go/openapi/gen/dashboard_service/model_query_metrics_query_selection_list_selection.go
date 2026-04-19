@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryMetricsQuerySelectionListSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQuerySelectionListSelection{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &QueryMetricsQuerySelectionListSelection{}
 // QueryMetricsQuerySelectionListSelection struct for QueryMetricsQuerySelectionListSelection
 type QueryMetricsQuerySelectionListSelection struct {
 	Values []QueryMetricsQueryStringOrVariable `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryMetricsQuerySelectionListSelection QueryMetricsQuerySelectionListSelection
 
 // NewQueryMetricsQuerySelectionListSelection instantiates a new QueryMetricsQuerySelectionListSelection object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o QueryMetricsQuerySelectionListSelection) ToMap() (map[string]interface{}
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryMetricsQuerySelectionListSelection) UnmarshalJSON(data []byte) (err error) {
+	varQueryMetricsQuerySelectionListSelection := _QueryMetricsQuerySelectionListSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryMetricsQuerySelectionListSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryMetricsQuerySelectionListSelection(varQueryMetricsQuerySelectionListSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryMetricsQuerySelectionListSelection struct {
@@ -122,5 +155,4 @@ func (v *NullableQueryMetricsQuerySelectionListSelection) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

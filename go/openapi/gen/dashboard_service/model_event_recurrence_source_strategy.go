@@ -11,28 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // EventRecurrenceSourceStrategy - struct for EventRecurrenceSourceStrategy
 type EventRecurrenceSourceStrategy struct {
-	EventRecurrenceSourceStrategyDuration *EventRecurrenceSourceStrategyDuration
-	EventRecurrenceSourceStrategyInstant *EventRecurrenceSourceStrategyInstant
+	EventRecurrenceSourceStrategyDurationVariant *EventRecurrenceSourceStrategyDurationVariant
+	EventRecurrenceSourceStrategyInstantVariant *EventRecurrenceSourceStrategyInstantVariant
 }
 
-// EventRecurrenceSourceStrategyDurationAsEventRecurrenceSourceStrategy is a convenience function that returns EventRecurrenceSourceStrategyDuration wrapped in EventRecurrenceSourceStrategy
-func EventRecurrenceSourceStrategyDurationAsEventRecurrenceSourceStrategy(v *EventRecurrenceSourceStrategyDuration) EventRecurrenceSourceStrategy {
+// EventRecurrenceSourceStrategyDurationVariantAsEventRecurrenceSourceStrategy is a convenience function that returns EventRecurrenceSourceStrategyDurationVariant wrapped in EventRecurrenceSourceStrategy
+func EventRecurrenceSourceStrategyDurationVariantAsEventRecurrenceSourceStrategy(v *EventRecurrenceSourceStrategyDurationVariant) EventRecurrenceSourceStrategy {
 	return EventRecurrenceSourceStrategy{
-		EventRecurrenceSourceStrategyDuration: v,
+		EventRecurrenceSourceStrategyDurationVariant: v,
 	}
 }
 
-// EventRecurrenceSourceStrategyInstantAsEventRecurrenceSourceStrategy is a convenience function that returns EventRecurrenceSourceStrategyInstant wrapped in EventRecurrenceSourceStrategy
-func EventRecurrenceSourceStrategyInstantAsEventRecurrenceSourceStrategy(v *EventRecurrenceSourceStrategyInstant) EventRecurrenceSourceStrategy {
+// EventRecurrenceSourceStrategyInstantVariantAsEventRecurrenceSourceStrategy is a convenience function that returns EventRecurrenceSourceStrategyInstantVariant wrapped in EventRecurrenceSourceStrategy
+func EventRecurrenceSourceStrategyInstantVariantAsEventRecurrenceSourceStrategy(v *EventRecurrenceSourceStrategyInstantVariant) EventRecurrenceSourceStrategy {
 	return EventRecurrenceSourceStrategy{
-		EventRecurrenceSourceStrategyInstant: v,
+		EventRecurrenceSourceStrategyInstantVariant: v,
 	}
 }
 
@@ -41,44 +44,44 @@ func EventRecurrenceSourceStrategyInstantAsEventRecurrenceSourceStrategy(v *Even
 func (dst *EventRecurrenceSourceStrategy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into EventRecurrenceSourceStrategyDuration
-	err = newStrictDecoder(data).Decode(&dst.EventRecurrenceSourceStrategyDuration)
+	// try to unmarshal data into EventRecurrenceSourceStrategyDurationVariant
+	err = json.Unmarshal(data, &dst.EventRecurrenceSourceStrategyDurationVariant)
 	if err == nil {
-		jsonEventRecurrenceSourceStrategyDuration, _ := json.Marshal(dst.EventRecurrenceSourceStrategyDuration)
-		if string(jsonEventRecurrenceSourceStrategyDuration) == "{}" { // empty struct
-			dst.EventRecurrenceSourceStrategyDuration = nil
+		jsonEventRecurrenceSourceStrategyDurationVariant, _ := json.Marshal(dst.EventRecurrenceSourceStrategyDurationVariant)
+		if string(jsonEventRecurrenceSourceStrategyDurationVariant) == "{}" { // empty struct
+			dst.EventRecurrenceSourceStrategyDurationVariant = nil
 		} else {
-			if err = validator.Validate(dst.EventRecurrenceSourceStrategyDuration); err != nil {
-				dst.EventRecurrenceSourceStrategyDuration = nil
+			if err = validator.Validate(dst.EventRecurrenceSourceStrategyDurationVariant); err != nil {
+				dst.EventRecurrenceSourceStrategyDurationVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.EventRecurrenceSourceStrategyDuration = nil
+		dst.EventRecurrenceSourceStrategyDurationVariant = nil
 	}
 
-	// try to unmarshal data into EventRecurrenceSourceStrategyInstant
-	err = newStrictDecoder(data).Decode(&dst.EventRecurrenceSourceStrategyInstant)
+	// try to unmarshal data into EventRecurrenceSourceStrategyInstantVariant
+	err = json.Unmarshal(data, &dst.EventRecurrenceSourceStrategyInstantVariant)
 	if err == nil {
-		jsonEventRecurrenceSourceStrategyInstant, _ := json.Marshal(dst.EventRecurrenceSourceStrategyInstant)
-		if string(jsonEventRecurrenceSourceStrategyInstant) == "{}" { // empty struct
-			dst.EventRecurrenceSourceStrategyInstant = nil
+		jsonEventRecurrenceSourceStrategyInstantVariant, _ := json.Marshal(dst.EventRecurrenceSourceStrategyInstantVariant)
+		if string(jsonEventRecurrenceSourceStrategyInstantVariant) == "{}" { // empty struct
+			dst.EventRecurrenceSourceStrategyInstantVariant = nil
 		} else {
-			if err = validator.Validate(dst.EventRecurrenceSourceStrategyInstant); err != nil {
-				dst.EventRecurrenceSourceStrategyInstant = nil
+			if err = validator.Validate(dst.EventRecurrenceSourceStrategyInstantVariant); err != nil {
+				dst.EventRecurrenceSourceStrategyInstantVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.EventRecurrenceSourceStrategyInstant = nil
+		dst.EventRecurrenceSourceStrategyInstantVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.EventRecurrenceSourceStrategyDuration = nil
-		dst.EventRecurrenceSourceStrategyInstant = nil
+		dst.EventRecurrenceSourceStrategyDurationVariant = nil
+		dst.EventRecurrenceSourceStrategyInstantVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(EventRecurrenceSourceStrategy)")
 	} else if match == 1 {
@@ -90,12 +93,12 @@ func (dst *EventRecurrenceSourceStrategy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src EventRecurrenceSourceStrategy) MarshalJSON() ([]byte, error) {
-	if src.EventRecurrenceSourceStrategyDuration != nil {
-		return json.Marshal(&src.EventRecurrenceSourceStrategyDuration)
+	if src.EventRecurrenceSourceStrategyDurationVariant != nil {
+		return json.Marshal(&src.EventRecurrenceSourceStrategyDurationVariant)
 	}
 
-	if src.EventRecurrenceSourceStrategyInstant != nil {
-		return json.Marshal(&src.EventRecurrenceSourceStrategyInstant)
+	if src.EventRecurrenceSourceStrategyInstantVariant != nil {
+		return json.Marshal(&src.EventRecurrenceSourceStrategyInstantVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +109,12 @@ func (obj *EventRecurrenceSourceStrategy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.EventRecurrenceSourceStrategyDuration != nil {
-		return obj.EventRecurrenceSourceStrategyDuration
+	if obj.EventRecurrenceSourceStrategyDurationVariant != nil {
+		return obj.EventRecurrenceSourceStrategyDurationVariant
 	}
 
-	if obj.EventRecurrenceSourceStrategyInstant != nil {
-		return obj.EventRecurrenceSourceStrategyInstant
+	if obj.EventRecurrenceSourceStrategyInstantVariant != nil {
+		return obj.EventRecurrenceSourceStrategyInstantVariant
 	}
 
 	// all schemas are nil
@@ -120,12 +123,12 @@ func (obj *EventRecurrenceSourceStrategy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj EventRecurrenceSourceStrategy) GetActualInstanceValue() (interface{}) {
-	if obj.EventRecurrenceSourceStrategyDuration != nil {
-		return *obj.EventRecurrenceSourceStrategyDuration
+	if obj.EventRecurrenceSourceStrategyDurationVariant != nil {
+		return *obj.EventRecurrenceSourceStrategyDurationVariant
 	}
 
-	if obj.EventRecurrenceSourceStrategyInstant != nil {
-		return *obj.EventRecurrenceSourceStrategyInstant
+	if obj.EventRecurrenceSourceStrategyInstantVariant != nil {
+		return *obj.EventRecurrenceSourceStrategyInstantVariant
 	}
 
 	// all schemas are nil
@@ -167,5 +170,4 @@ func (v *NullableEventRecurrenceSourceStrategy) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

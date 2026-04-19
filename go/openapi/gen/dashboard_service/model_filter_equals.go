@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FilterEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterEquals{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &FilterEquals{}
 // FilterEquals This data structure represents an equality comparison operation.
 type FilterEquals struct {
 	Selection *EqualsSelection `json:"selection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FilterEquals FilterEquals
 
 // NewFilterEquals instantiates a new FilterEquals object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o FilterEquals) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Selection) {
 		toSerialize["selection"] = o.Selection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FilterEquals) UnmarshalJSON(data []byte) (err error) {
+	varFilterEquals := _FilterEquals{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFilterEquals)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FilterEquals(varFilterEquals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "selection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFilterEquals struct {
@@ -122,5 +155,4 @@ func (v *NullableFilterEquals) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

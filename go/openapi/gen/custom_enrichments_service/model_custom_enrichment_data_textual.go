@@ -11,8 +11,12 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomEnrichmentDataTextual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichmentDataTextual{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &CustomEnrichmentDataTextual{}
 // CustomEnrichmentDataTextual struct for CustomEnrichmentDataTextual
 type CustomEnrichmentDataTextual struct {
 	Definition *CustomEnrichment `json:"definition,omitempty"`
-	Textual *string `json:"textual,omitempty"`
+	Textual string `json:"textual"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomEnrichmentDataTextual CustomEnrichmentDataTextual
 
 // NewCustomEnrichmentDataTextual instantiates a new CustomEnrichmentDataTextual object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomEnrichmentDataTextual() *CustomEnrichmentDataTextual {
+func NewCustomEnrichmentDataTextual(textual string) *CustomEnrichmentDataTextual {
 	this := CustomEnrichmentDataTextual{}
+	this.Textual = textual
 	return &this
 }
 
@@ -72,36 +80,28 @@ func (o *CustomEnrichmentDataTextual) SetDefinition(v CustomEnrichment) {
 	o.Definition = &v
 }
 
-// GetTextual returns the Textual field value if set, zero value otherwise.
+// GetTextual returns the Textual field value
 func (o *CustomEnrichmentDataTextual) GetTextual() string {
-	if o == nil || IsNil(o.Textual) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Textual
+
+	return o.Textual
 }
 
-// GetTextualOk returns a tuple with the Textual field value if set, nil otherwise
+// GetTextualOk returns a tuple with the Textual field value
 // and a boolean to check if the value has been set.
 func (o *CustomEnrichmentDataTextual) GetTextualOk() (*string, bool) {
-	if o == nil || IsNil(o.Textual) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Textual, true
+	return &o.Textual, true
 }
 
-// HasTextual returns a boolean if a field has been set.
-func (o *CustomEnrichmentDataTextual) HasTextual() bool {
-	if o != nil && !IsNil(o.Textual) {
-		return true
-	}
-
-	return false
-}
-
-// SetTextual gets a reference to the given string and assigns it to the Textual field.
+// SetTextual sets field value
 func (o *CustomEnrichmentDataTextual) SetTextual(v string) {
-	o.Textual = &v
+	o.Textual = v
 }
 
 func (o CustomEnrichmentDataTextual) MarshalJSON() ([]byte, error) {
@@ -117,10 +117,57 @@ func (o CustomEnrichmentDataTextual) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Definition) {
 		toSerialize["definition"] = o.Definition
 	}
-	if !IsNil(o.Textual) {
-		toSerialize["textual"] = o.Textual
+	toSerialize["textual"] = o.Textual
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomEnrichmentDataTextual) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"textual",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCustomEnrichmentDataTextual := _CustomEnrichmentDataTextual{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomEnrichmentDataTextual)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomEnrichmentDataTextual(varCustomEnrichmentDataTextual)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "textual")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomEnrichmentDataTextual struct {
@@ -158,5 +205,4 @@ func (v *NullableCustomEnrichmentDataTextual) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

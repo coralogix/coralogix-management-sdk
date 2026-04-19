@@ -11,23 +11,31 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PlacementFirst type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PlacementFirst{}
 
 // PlacementFirst struct for PlacementFirst
 type PlacementFirst struct {
-	First map[string]interface{} `json:"first,omitempty"`
+	First map[string]interface{} `json:"first"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PlacementFirst PlacementFirst
 
 // NewPlacementFirst instantiates a new PlacementFirst object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlacementFirst() *PlacementFirst {
+func NewPlacementFirst(first map[string]interface{}) *PlacementFirst {
 	this := PlacementFirst{}
+	this.First = first
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewPlacementFirstWithDefaults() *PlacementFirst {
 	return &this
 }
 
-// GetFirst returns the First field value if set, zero value otherwise.
+// GetFirst returns the First field value
 func (o *PlacementFirst) GetFirst() map[string]interface{} {
-	if o == nil || IsNil(o.First) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.First
 }
 
-// GetFirstOk returns a tuple with the First field value if set, nil otherwise
+// GetFirstOk returns a tuple with the First field value
 // and a boolean to check if the value has been set.
 func (o *PlacementFirst) GetFirstOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.First) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.First, true
 }
 
-// HasFirst returns a boolean if a field has been set.
-func (o *PlacementFirst) HasFirst() bool {
-	if o != nil && !IsNil(o.First) {
-		return true
-	}
-
-	return false
-}
-
-// SetFirst gets a reference to the given map[string]interface{} and assigns it to the First field.
+// SetFirst sets field value
 func (o *PlacementFirst) SetFirst(v map[string]interface{}) {
 	o.First = v
 }
@@ -81,10 +81,56 @@ func (o PlacementFirst) MarshalJSON() ([]byte, error) {
 
 func (o PlacementFirst) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.First) {
-		toSerialize["first"] = o.First
+	toSerialize["first"] = o.First
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PlacementFirst) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"first",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPlacementFirst := _PlacementFirst{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPlacementFirst)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PlacementFirst(varPlacementFirst)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "first")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePlacementFirst struct {
@@ -122,5 +168,4 @@ func (v *NullablePlacementFirst) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

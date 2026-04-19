@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SingleStringValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SingleStringValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SingleStringValue{}
 // SingleStringValue struct for SingleStringValue
 type SingleStringValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SingleStringValue SingleStringValue
 
 // NewSingleStringValue instantiates a new SingleStringValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SingleStringValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SingleStringValue) UnmarshalJSON(data []byte) (err error) {
+	varSingleStringValue := _SingleStringValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSingleStringValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SingleStringValue(varSingleStringValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSingleStringValue struct {
@@ -122,5 +155,4 @@ func (v *NullableSingleStringValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

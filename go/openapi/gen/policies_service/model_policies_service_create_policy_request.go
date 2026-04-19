@@ -11,10 +11,13 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // PoliciesServiceCreatePolicyRequest - struct for PoliciesServiceCreatePolicyRequest
 type PoliciesServiceCreatePolicyRequest struct {
@@ -42,7 +45,7 @@ func (dst *PoliciesServiceCreatePolicyRequest) UnmarshalJSON(data []byte) error 
 	var err error
 	match := 0
 	// try to unmarshal data into CreatePolicyRequestLogRules
-	err = newStrictDecoder(data).Decode(&dst.CreatePolicyRequestLogRules)
+	err = json.Unmarshal(data, &dst.CreatePolicyRequestLogRules)
 	if err == nil {
 		jsonCreatePolicyRequestLogRules, _ := json.Marshal(dst.CreatePolicyRequestLogRules)
 		if string(jsonCreatePolicyRequestLogRules) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *PoliciesServiceCreatePolicyRequest) UnmarshalJSON(data []byte) error 
 	}
 
 	// try to unmarshal data into CreatePolicyRequestSpanRules
-	err = newStrictDecoder(data).Decode(&dst.CreatePolicyRequestSpanRules)
+	err = json.Unmarshal(data, &dst.CreatePolicyRequestSpanRules)
 	if err == nil {
 		jsonCreatePolicyRequestSpanRules, _ := json.Marshal(dst.CreatePolicyRequestSpanRules)
 		if string(jsonCreatePolicyRequestSpanRules) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullablePoliciesServiceCreatePolicyRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

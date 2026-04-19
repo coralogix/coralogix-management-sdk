@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MultiStringValueAll type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiStringValueAll{}
 
 // MultiStringValueAll struct for MultiStringValueAll
 type MultiStringValueAll struct {
-	All map[string]interface{} `json:"all,omitempty"`
+	All map[string]interface{} `json:"all"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MultiStringValueAll MultiStringValueAll
 
 // NewMultiStringValueAll instantiates a new MultiStringValueAll object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMultiStringValueAll() *MultiStringValueAll {
+func NewMultiStringValueAll(all map[string]interface{}) *MultiStringValueAll {
 	this := MultiStringValueAll{}
+	this.All = all
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewMultiStringValueAllWithDefaults() *MultiStringValueAll {
 	return &this
 }
 
-// GetAll returns the All field value if set, zero value otherwise.
+// GetAll returns the All field value
 func (o *MultiStringValueAll) GetAll() map[string]interface{} {
-	if o == nil || IsNil(o.All) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.All
 }
 
-// GetAllOk returns a tuple with the All field value if set, nil otherwise
+// GetAllOk returns a tuple with the All field value
 // and a boolean to check if the value has been set.
 func (o *MultiStringValueAll) GetAllOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.All) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.All, true
 }
 
-// HasAll returns a boolean if a field has been set.
-func (o *MultiStringValueAll) HasAll() bool {
-	if o != nil && !IsNil(o.All) {
-		return true
-	}
-
-	return false
-}
-
-// SetAll gets a reference to the given map[string]interface{} and assigns it to the All field.
+// SetAll sets field value
 func (o *MultiStringValueAll) SetAll(v map[string]interface{}) {
 	o.All = v
 }
@@ -81,10 +81,56 @@ func (o MultiStringValueAll) MarshalJSON() ([]byte, error) {
 
 func (o MultiStringValueAll) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.All) {
-		toSerialize["all"] = o.All
+	toSerialize["all"] = o.All
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MultiStringValueAll) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"all",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMultiStringValueAll := _MultiStringValueAll{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMultiStringValueAll)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MultiStringValueAll(varMultiStringValueAll)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "all")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMultiStringValueAll struct {
@@ -122,5 +168,4 @@ func (v *NullableMultiStringValueAll) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

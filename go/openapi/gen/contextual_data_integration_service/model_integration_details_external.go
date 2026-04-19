@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationDetailsExternal type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationDetailsExternal{}
@@ -22,16 +26,20 @@ type IntegrationDetailsExternal struct {
 	Default *DefaultIntegrationDetails `json:"default,omitempty"`
 	Docs []IntegrationDoc `json:"docs,omitempty"`
 	Extensions []V1Extension `json:"extensions,omitempty"`
-	External *ExternalUrl `json:"external,omitempty"`
+	External ExternalUrl `json:"external"`
 	Integration *Integration `json:"integration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationDetailsExternal IntegrationDetailsExternal
 
 // NewIntegrationDetailsExternal instantiates a new IntegrationDetailsExternal object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationDetailsExternal() *IntegrationDetailsExternal {
+func NewIntegrationDetailsExternal(external ExternalUrl) *IntegrationDetailsExternal {
 	this := IntegrationDetailsExternal{}
+	this.External = external
 	return &this
 }
 
@@ -139,36 +147,28 @@ func (o *IntegrationDetailsExternal) SetExtensions(v []V1Extension) {
 	o.Extensions = v
 }
 
-// GetExternal returns the External field value if set, zero value otherwise.
+// GetExternal returns the External field value
 func (o *IntegrationDetailsExternal) GetExternal() ExternalUrl {
-	if o == nil || IsNil(o.External) {
+	if o == nil {
 		var ret ExternalUrl
 		return ret
 	}
-	return *o.External
+
+	return o.External
 }
 
-// GetExternalOk returns a tuple with the External field value if set, nil otherwise
+// GetExternalOk returns a tuple with the External field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationDetailsExternal) GetExternalOk() (*ExternalUrl, bool) {
-	if o == nil || IsNil(o.External) {
+	if o == nil {
 		return nil, false
 	}
-	return o.External, true
+	return &o.External, true
 }
 
-// HasExternal returns a boolean if a field has been set.
-func (o *IntegrationDetailsExternal) HasExternal() bool {
-	if o != nil && !IsNil(o.External) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternal gets a reference to the given ExternalUrl and assigns it to the External field.
+// SetExternal sets field value
 func (o *IntegrationDetailsExternal) SetExternal(v ExternalUrl) {
-	o.External = &v
+	o.External = v
 }
 
 // GetIntegration returns the Integration field value if set, zero value otherwise.
@@ -222,13 +222,63 @@ func (o IntegrationDetailsExternal) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Extensions) {
 		toSerialize["extensions"] = o.Extensions
 	}
-	if !IsNil(o.External) {
-		toSerialize["external"] = o.External
-	}
+	toSerialize["external"] = o.External
 	if !IsNil(o.Integration) {
 		toSerialize["integration"] = o.Integration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationDetailsExternal) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"external",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationDetailsExternal := _IntegrationDetailsExternal{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationDetailsExternal)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationDetailsExternal(varIntegrationDetailsExternal)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "docs")
+		delete(additionalProperties, "extensions")
+		delete(additionalProperties, "external")
+		delete(additionalProperties, "integration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationDetailsExternal struct {
@@ -266,5 +316,4 @@ func (v *NullableIntegrationDetailsExternal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

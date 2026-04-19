@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntervalValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntervalValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &IntervalValue{}
 // IntervalValue struct for IntervalValue
 type IntervalValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntervalValue IntervalValue
 
 // NewIntervalValue instantiates a new IntervalValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o IntervalValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntervalValue) UnmarshalJSON(data []byte) (err error) {
+	varIntervalValue := _IntervalValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntervalValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntervalValue(varIntervalValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntervalValue struct {
@@ -122,5 +155,4 @@ func (v *NullableIntervalValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

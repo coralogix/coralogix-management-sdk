@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionColumnDisplayName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionColumnDisplayName{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &PropertyDefinitionColumnDisplayName{}
 // PropertyDefinitionColumnDisplayName struct for PropertyDefinitionColumnDisplayName
 type PropertyDefinitionColumnDisplayName struct {
 	// Column display name property, allows renaming the column header name
-	ColumnDisplayName *string `json:"columnDisplayName,omitempty"`
+	ColumnDisplayName string `json:"columnDisplayName"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionColumnDisplayName PropertyDefinitionColumnDisplayName
 
 // NewPropertyDefinitionColumnDisplayName instantiates a new PropertyDefinitionColumnDisplayName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionColumnDisplayName() *PropertyDefinitionColumnDisplayName {
+func NewPropertyDefinitionColumnDisplayName(columnDisplayName string) *PropertyDefinitionColumnDisplayName {
 	this := PropertyDefinitionColumnDisplayName{}
+	this.ColumnDisplayName = columnDisplayName
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewPropertyDefinitionColumnDisplayNameWithDefaults() *PropertyDefinitionCol
 	return &this
 }
 
-// GetColumnDisplayName returns the ColumnDisplayName field value if set, zero value otherwise.
+// GetColumnDisplayName returns the ColumnDisplayName field value
 func (o *PropertyDefinitionColumnDisplayName) GetColumnDisplayName() string {
-	if o == nil || IsNil(o.ColumnDisplayName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ColumnDisplayName
+
+	return o.ColumnDisplayName
 }
 
-// GetColumnDisplayNameOk returns a tuple with the ColumnDisplayName field value if set, nil otherwise
+// GetColumnDisplayNameOk returns a tuple with the ColumnDisplayName field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionColumnDisplayName) GetColumnDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.ColumnDisplayName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ColumnDisplayName, true
+	return &o.ColumnDisplayName, true
 }
 
-// HasColumnDisplayName returns a boolean if a field has been set.
-func (o *PropertyDefinitionColumnDisplayName) HasColumnDisplayName() bool {
-	if o != nil && !IsNil(o.ColumnDisplayName) {
-		return true
-	}
-
-	return false
-}
-
-// SetColumnDisplayName gets a reference to the given string and assigns it to the ColumnDisplayName field.
+// SetColumnDisplayName sets field value
 func (o *PropertyDefinitionColumnDisplayName) SetColumnDisplayName(v string) {
-	o.ColumnDisplayName = &v
+	o.ColumnDisplayName = v
 }
 
 func (o PropertyDefinitionColumnDisplayName) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o PropertyDefinitionColumnDisplayName) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionColumnDisplayName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ColumnDisplayName) {
-		toSerialize["columnDisplayName"] = o.ColumnDisplayName
+	toSerialize["columnDisplayName"] = o.ColumnDisplayName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionColumnDisplayName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"columnDisplayName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionColumnDisplayName := _PropertyDefinitionColumnDisplayName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionColumnDisplayName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionColumnDisplayName(varPropertyDefinitionColumnDisplayName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "columnDisplayName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionColumnDisplayName struct {
@@ -123,5 +169,4 @@ func (v *NullablePropertyDefinitionColumnDisplayName) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

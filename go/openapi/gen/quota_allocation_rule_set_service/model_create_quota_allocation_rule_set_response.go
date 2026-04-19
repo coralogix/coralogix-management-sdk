@@ -11,8 +11,11 @@ API version: 1.0.0
 package quota_allocation_rule_set_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateQuotaAllocationRuleSetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateQuotaAllocationRuleSetResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CreateQuotaAllocationRuleSetResponse{}
 // CreateQuotaAllocationRuleSetResponse Response confirming quota allocation rule set has been successfully created
 type CreateQuotaAllocationRuleSetResponse struct {
 	RuleSet *QuotaAllocationEntityTypeRuleSet `json:"ruleSet,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateQuotaAllocationRuleSetResponse CreateQuotaAllocationRuleSetResponse
 
 // NewCreateQuotaAllocationRuleSetResponse instantiates a new CreateQuotaAllocationRuleSetResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CreateQuotaAllocationRuleSetResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.RuleSet) {
 		toSerialize["ruleSet"] = o.RuleSet
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateQuotaAllocationRuleSetResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateQuotaAllocationRuleSetResponse := _CreateQuotaAllocationRuleSetResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateQuotaAllocationRuleSetResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateQuotaAllocationRuleSetResponse(varCreateQuotaAllocationRuleSetResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ruleSet")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateQuotaAllocationRuleSetResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableCreateQuotaAllocationRuleSetResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

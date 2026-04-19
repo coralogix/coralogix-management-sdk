@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CloseIncidentsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CloseIncidentsRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CloseIncidentsRequest{}
 // CloseIncidentsRequest Request to close one or more incidents
 type CloseIncidentsRequest struct {
 	IncidentIds []string `json:"incidentIds"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CloseIncidentsRequest CloseIncidentsRequest
@@ -79,6 +82,11 @@ func (o CloseIncidentsRequest) MarshalJSON() ([]byte, error) {
 func (o CloseIncidentsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["incidentIds"] = o.IncidentIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CloseIncidentsRequest) UnmarshalJSON(data []byte) (err error) {
 	varCloseIncidentsRequest := _CloseIncidentsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCloseIncidentsRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CloseIncidentsRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CloseIncidentsRequest(varCloseIncidentsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidentIds")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCloseIncidentsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

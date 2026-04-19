@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetaLabelsProtobufV1MetaLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetaLabelsProtobufV1MetaLabel{}
@@ -22,7 +25,10 @@ type MetaLabelsProtobufV1MetaLabel struct {
 	Id *string `json:"id,omitempty"`
 	Key *string `json:"key,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetaLabelsProtobufV1MetaLabel MetaLabelsProtobufV1MetaLabel
 
 // NewMetaLabelsProtobufV1MetaLabel instantiates a new MetaLabelsProtobufV1MetaLabel object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o MetaLabelsProtobufV1MetaLabel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetaLabelsProtobufV1MetaLabel) UnmarshalJSON(data []byte) (err error) {
+	varMetaLabelsProtobufV1MetaLabel := _MetaLabelsProtobufV1MetaLabel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetaLabelsProtobufV1MetaLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetaLabelsProtobufV1MetaLabel(varMetaLabelsProtobufV1MetaLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetaLabelsProtobufV1MetaLabel struct {
@@ -194,5 +229,4 @@ func (v *NullableMetaLabelsProtobufV1MetaLabel) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

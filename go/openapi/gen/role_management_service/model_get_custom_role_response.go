@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetCustomRoleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCustomRoleResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetCustomRoleResponse{}
 // GetCustomRoleResponse struct for GetCustomRoleResponse
 type GetCustomRoleResponse struct {
 	Role *CustomRole `json:"role,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCustomRoleResponse GetCustomRoleResponse
 
 // NewGetCustomRoleResponse instantiates a new GetCustomRoleResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetCustomRoleResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCustomRoleResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCustomRoleResponse := _GetCustomRoleResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetCustomRoleResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCustomRoleResponse(varGetCustomRoleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCustomRoleResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetCustomRoleResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

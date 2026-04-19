@@ -11,28 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // QueryLogsQueryType - struct for QueryLogsQueryType
 type QueryLogsQueryType struct {
-	QueryLogsQueryTypeFieldName *QueryLogsQueryTypeFieldName
-	QueryLogsQueryTypeFieldValue *QueryLogsQueryTypeFieldValue
+	QueryLogsQueryTypeFieldNameVariant *QueryLogsQueryTypeFieldNameVariant
+	QueryLogsQueryTypeFieldValueVariant *QueryLogsQueryTypeFieldValueVariant
 }
 
-// QueryLogsQueryTypeFieldNameAsQueryLogsQueryType is a convenience function that returns QueryLogsQueryTypeFieldName wrapped in QueryLogsQueryType
-func QueryLogsQueryTypeFieldNameAsQueryLogsQueryType(v *QueryLogsQueryTypeFieldName) QueryLogsQueryType {
+// QueryLogsQueryTypeFieldNameVariantAsQueryLogsQueryType is a convenience function that returns QueryLogsQueryTypeFieldNameVariant wrapped in QueryLogsQueryType
+func QueryLogsQueryTypeFieldNameVariantAsQueryLogsQueryType(v *QueryLogsQueryTypeFieldNameVariant) QueryLogsQueryType {
 	return QueryLogsQueryType{
-		QueryLogsQueryTypeFieldName: v,
+		QueryLogsQueryTypeFieldNameVariant: v,
 	}
 }
 
-// QueryLogsQueryTypeFieldValueAsQueryLogsQueryType is a convenience function that returns QueryLogsQueryTypeFieldValue wrapped in QueryLogsQueryType
-func QueryLogsQueryTypeFieldValueAsQueryLogsQueryType(v *QueryLogsQueryTypeFieldValue) QueryLogsQueryType {
+// QueryLogsQueryTypeFieldValueVariantAsQueryLogsQueryType is a convenience function that returns QueryLogsQueryTypeFieldValueVariant wrapped in QueryLogsQueryType
+func QueryLogsQueryTypeFieldValueVariantAsQueryLogsQueryType(v *QueryLogsQueryTypeFieldValueVariant) QueryLogsQueryType {
 	return QueryLogsQueryType{
-		QueryLogsQueryTypeFieldValue: v,
+		QueryLogsQueryTypeFieldValueVariant: v,
 	}
 }
 
@@ -41,44 +44,44 @@ func QueryLogsQueryTypeFieldValueAsQueryLogsQueryType(v *QueryLogsQueryTypeField
 func (dst *QueryLogsQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QueryLogsQueryTypeFieldName
-	err = newStrictDecoder(data).Decode(&dst.QueryLogsQueryTypeFieldName)
+	// try to unmarshal data into QueryLogsQueryTypeFieldNameVariant
+	err = json.Unmarshal(data, &dst.QueryLogsQueryTypeFieldNameVariant)
 	if err == nil {
-		jsonQueryLogsQueryTypeFieldName, _ := json.Marshal(dst.QueryLogsQueryTypeFieldName)
-		if string(jsonQueryLogsQueryTypeFieldName) == "{}" { // empty struct
-			dst.QueryLogsQueryTypeFieldName = nil
+		jsonQueryLogsQueryTypeFieldNameVariant, _ := json.Marshal(dst.QueryLogsQueryTypeFieldNameVariant)
+		if string(jsonQueryLogsQueryTypeFieldNameVariant) == "{}" { // empty struct
+			dst.QueryLogsQueryTypeFieldNameVariant = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogsQueryTypeFieldName); err != nil {
-				dst.QueryLogsQueryTypeFieldName = nil
+			if err = validator.Validate(dst.QueryLogsQueryTypeFieldNameVariant); err != nil {
+				dst.QueryLogsQueryTypeFieldNameVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogsQueryTypeFieldName = nil
+		dst.QueryLogsQueryTypeFieldNameVariant = nil
 	}
 
-	// try to unmarshal data into QueryLogsQueryTypeFieldValue
-	err = newStrictDecoder(data).Decode(&dst.QueryLogsQueryTypeFieldValue)
+	// try to unmarshal data into QueryLogsQueryTypeFieldValueVariant
+	err = json.Unmarshal(data, &dst.QueryLogsQueryTypeFieldValueVariant)
 	if err == nil {
-		jsonQueryLogsQueryTypeFieldValue, _ := json.Marshal(dst.QueryLogsQueryTypeFieldValue)
-		if string(jsonQueryLogsQueryTypeFieldValue) == "{}" { // empty struct
-			dst.QueryLogsQueryTypeFieldValue = nil
+		jsonQueryLogsQueryTypeFieldValueVariant, _ := json.Marshal(dst.QueryLogsQueryTypeFieldValueVariant)
+		if string(jsonQueryLogsQueryTypeFieldValueVariant) == "{}" { // empty struct
+			dst.QueryLogsQueryTypeFieldValueVariant = nil
 		} else {
-			if err = validator.Validate(dst.QueryLogsQueryTypeFieldValue); err != nil {
-				dst.QueryLogsQueryTypeFieldValue = nil
+			if err = validator.Validate(dst.QueryLogsQueryTypeFieldValueVariant); err != nil {
+				dst.QueryLogsQueryTypeFieldValueVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QueryLogsQueryTypeFieldValue = nil
+		dst.QueryLogsQueryTypeFieldValueVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QueryLogsQueryTypeFieldName = nil
-		dst.QueryLogsQueryTypeFieldValue = nil
+		dst.QueryLogsQueryTypeFieldNameVariant = nil
+		dst.QueryLogsQueryTypeFieldValueVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QueryLogsQueryType)")
 	} else if match == 1 {
@@ -90,12 +93,12 @@ func (dst *QueryLogsQueryType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QueryLogsQueryType) MarshalJSON() ([]byte, error) {
-	if src.QueryLogsQueryTypeFieldName != nil {
-		return json.Marshal(&src.QueryLogsQueryTypeFieldName)
+	if src.QueryLogsQueryTypeFieldNameVariant != nil {
+		return json.Marshal(&src.QueryLogsQueryTypeFieldNameVariant)
 	}
 
-	if src.QueryLogsQueryTypeFieldValue != nil {
-		return json.Marshal(&src.QueryLogsQueryTypeFieldValue)
+	if src.QueryLogsQueryTypeFieldValueVariant != nil {
+		return json.Marshal(&src.QueryLogsQueryTypeFieldValueVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +109,12 @@ func (obj *QueryLogsQueryType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QueryLogsQueryTypeFieldName != nil {
-		return obj.QueryLogsQueryTypeFieldName
+	if obj.QueryLogsQueryTypeFieldNameVariant != nil {
+		return obj.QueryLogsQueryTypeFieldNameVariant
 	}
 
-	if obj.QueryLogsQueryTypeFieldValue != nil {
-		return obj.QueryLogsQueryTypeFieldValue
+	if obj.QueryLogsQueryTypeFieldValueVariant != nil {
+		return obj.QueryLogsQueryTypeFieldValueVariant
 	}
 
 	// all schemas are nil
@@ -120,12 +123,12 @@ func (obj *QueryLogsQueryType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QueryLogsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QueryLogsQueryTypeFieldName != nil {
-		return *obj.QueryLogsQueryTypeFieldName
+	if obj.QueryLogsQueryTypeFieldNameVariant != nil {
+		return *obj.QueryLogsQueryTypeFieldNameVariant
 	}
 
-	if obj.QueryLogsQueryTypeFieldValue != nil {
-		return *obj.QueryLogsQueryTypeFieldValue
+	if obj.QueryLogsQueryTypeFieldValueVariant != nil {
+		return *obj.QueryLogsQueryTypeFieldValueVariant
 	}
 
 	// all schemas are nil
@@ -167,5 +170,4 @@ func (v *NullableQueryLogsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

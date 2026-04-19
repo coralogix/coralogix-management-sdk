@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GaugeQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQueryDataprime{}
 
 // GaugeQueryDataprime struct for GaugeQueryDataprime
 type GaugeQueryDataprime struct {
-	Dataprime *GaugeDataprimeQuery `json:"dataprime,omitempty"`
+	Dataprime GaugeDataprimeQuery `json:"dataprime"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GaugeQueryDataprime GaugeQueryDataprime
 
 // NewGaugeQueryDataprime instantiates a new GaugeQueryDataprime object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGaugeQueryDataprime() *GaugeQueryDataprime {
+func NewGaugeQueryDataprime(dataprime GaugeDataprimeQuery) *GaugeQueryDataprime {
 	this := GaugeQueryDataprime{}
+	this.Dataprime = dataprime
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGaugeQueryDataprimeWithDefaults() *GaugeQueryDataprime {
 	return &this
 }
 
-// GetDataprime returns the Dataprime field value if set, zero value otherwise.
+// GetDataprime returns the Dataprime field value
 func (o *GaugeQueryDataprime) GetDataprime() GaugeDataprimeQuery {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		var ret GaugeDataprimeQuery
 		return ret
 	}
-	return *o.Dataprime
+
+	return o.Dataprime
 }
 
-// GetDataprimeOk returns a tuple with the Dataprime field value if set, nil otherwise
+// GetDataprimeOk returns a tuple with the Dataprime field value
 // and a boolean to check if the value has been set.
 func (o *GaugeQueryDataprime) GetDataprimeOk() (*GaugeDataprimeQuery, bool) {
-	if o == nil || IsNil(o.Dataprime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Dataprime, true
+	return &o.Dataprime, true
 }
 
-// HasDataprime returns a boolean if a field has been set.
-func (o *GaugeQueryDataprime) HasDataprime() bool {
-	if o != nil && !IsNil(o.Dataprime) {
-		return true
-	}
-
-	return false
-}
-
-// SetDataprime gets a reference to the given GaugeDataprimeQuery and assigns it to the Dataprime field.
+// SetDataprime sets field value
 func (o *GaugeQueryDataprime) SetDataprime(v GaugeDataprimeQuery) {
-	o.Dataprime = &v
+	o.Dataprime = v
 }
 
 func (o GaugeQueryDataprime) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GaugeQueryDataprime) MarshalJSON() ([]byte, error) {
 
 func (o GaugeQueryDataprime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Dataprime) {
-		toSerialize["dataprime"] = o.Dataprime
+	toSerialize["dataprime"] = o.Dataprime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GaugeQueryDataprime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dataprime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGaugeQueryDataprime := _GaugeQueryDataprime{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeQueryDataprime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeQueryDataprime(varGaugeQueryDataprime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataprime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGaugeQueryDataprime struct {
@@ -122,5 +168,4 @@ func (v *NullableGaugeQueryDataprime) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

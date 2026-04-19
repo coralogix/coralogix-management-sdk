@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // ActionDefinition - struct for ActionDefinition
 type ActionDefinition struct {
@@ -42,7 +45,7 @@ func (dst *ActionDefinition) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ActionDefinitionCustomAction
-	err = newStrictDecoder(data).Decode(&dst.ActionDefinitionCustomAction)
+	err = json.Unmarshal(data, &dst.ActionDefinitionCustomAction)
 	if err == nil {
 		jsonActionDefinitionCustomAction, _ := json.Marshal(dst.ActionDefinitionCustomAction)
 		if string(jsonActionDefinitionCustomAction) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *ActionDefinition) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ActionDefinitionGoToDashboardAction
-	err = newStrictDecoder(data).Decode(&dst.ActionDefinitionGoToDashboardAction)
+	err = json.Unmarshal(data, &dst.ActionDefinitionGoToDashboardAction)
 	if err == nil {
 		jsonActionDefinitionGoToDashboardAction, _ := json.Marshal(dst.ActionDefinitionGoToDashboardAction)
 		if string(jsonActionDefinitionGoToDashboardAction) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableActionDefinition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListIncidentAggregationsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListIncidentAggregationsResponse{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &ListIncidentAggregationsResponse{}
 type ListIncidentAggregationsResponse struct {
 	IncidentAggs []IncidentAggregation `json:"incidentAggs"`
 	Pagination IncidentsV1PaginationResponse `json:"pagination"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListIncidentAggregationsResponse ListIncidentAggregationsResponse
@@ -106,6 +109,11 @@ func (o ListIncidentAggregationsResponse) ToMap() (map[string]interface{}, error
 	toSerialize := map[string]interface{}{}
 	toSerialize["incidentAggs"] = o.IncidentAggs
 	toSerialize["pagination"] = o.Pagination
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,7 +143,6 @@ func (o *ListIncidentAggregationsResponse) UnmarshalJSON(data []byte) (err error
 	varListIncidentAggregationsResponse := _ListIncidentAggregationsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varListIncidentAggregationsResponse)
 
 	if err != nil {
@@ -143,6 +150,14 @@ func (o *ListIncidentAggregationsResponse) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = ListIncidentAggregationsResponse(varListIncidentAggregationsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidentAggs")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -182,5 +197,4 @@ func (v *NullableListIncidentAggregationsResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

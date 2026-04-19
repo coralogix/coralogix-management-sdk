@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the JsonParseParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonParseParameters{}
@@ -23,7 +26,10 @@ type JsonParseParameters struct {
 	DestinationField *string `json:"destinationField,omitempty"`
 	EscapedValue *bool `json:"escapedValue,omitempty"`
 	OverrideDest *bool `json:"overrideDest,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _JsonParseParameters JsonParseParameters
 
 // NewJsonParseParameters instantiates a new JsonParseParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o JsonParseParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OverrideDest) {
 		toSerialize["overrideDest"] = o.OverrideDest
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *JsonParseParameters) UnmarshalJSON(data []byte) (err error) {
+	varJsonParseParameters := _JsonParseParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varJsonParseParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = JsonParseParameters(varJsonParseParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deleteSource")
+		delete(additionalProperties, "destinationField")
+		delete(additionalProperties, "escapedValue")
+		delete(additionalProperties, "overrideDest")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableJsonParseParameters struct {
@@ -230,5 +266,4 @@ func (v *NullableJsonParseParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

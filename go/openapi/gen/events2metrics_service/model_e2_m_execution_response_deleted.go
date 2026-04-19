@@ -11,23 +11,31 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MExecutionResponseDeleted type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MExecutionResponseDeleted{}
 
 // E2MExecutionResponseDeleted struct for E2MExecutionResponseDeleted
 type E2MExecutionResponseDeleted struct {
-	Deleted *DeleteE2MResponse `json:"deleted,omitempty"`
+	Deleted DeleteE2MResponse `json:"deleted"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _E2MExecutionResponseDeleted E2MExecutionResponseDeleted
 
 // NewE2MExecutionResponseDeleted instantiates a new E2MExecutionResponseDeleted object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewE2MExecutionResponseDeleted() *E2MExecutionResponseDeleted {
+func NewE2MExecutionResponseDeleted(deleted DeleteE2MResponse) *E2MExecutionResponseDeleted {
 	this := E2MExecutionResponseDeleted{}
+	this.Deleted = deleted
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewE2MExecutionResponseDeletedWithDefaults() *E2MExecutionResponseDeleted {
 	return &this
 }
 
-// GetDeleted returns the Deleted field value if set, zero value otherwise.
+// GetDeleted returns the Deleted field value
 func (o *E2MExecutionResponseDeleted) GetDeleted() DeleteE2MResponse {
-	if o == nil || IsNil(o.Deleted) {
+	if o == nil {
 		var ret DeleteE2MResponse
 		return ret
 	}
-	return *o.Deleted
+
+	return o.Deleted
 }
 
-// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// GetDeletedOk returns a tuple with the Deleted field value
 // and a boolean to check if the value has been set.
 func (o *E2MExecutionResponseDeleted) GetDeletedOk() (*DeleteE2MResponse, bool) {
-	if o == nil || IsNil(o.Deleted) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Deleted, true
+	return &o.Deleted, true
 }
 
-// HasDeleted returns a boolean if a field has been set.
-func (o *E2MExecutionResponseDeleted) HasDeleted() bool {
-	if o != nil && !IsNil(o.Deleted) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeleted gets a reference to the given DeleteE2MResponse and assigns it to the Deleted field.
+// SetDeleted sets field value
 func (o *E2MExecutionResponseDeleted) SetDeleted(v DeleteE2MResponse) {
-	o.Deleted = &v
+	o.Deleted = v
 }
 
 func (o E2MExecutionResponseDeleted) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o E2MExecutionResponseDeleted) MarshalJSON() ([]byte, error) {
 
 func (o E2MExecutionResponseDeleted) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Deleted) {
-		toSerialize["deleted"] = o.Deleted
+	toSerialize["deleted"] = o.Deleted
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *E2MExecutionResponseDeleted) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"deleted",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varE2MExecutionResponseDeleted := _E2MExecutionResponseDeleted{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2MExecutionResponseDeleted)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2MExecutionResponseDeleted(varE2MExecutionResponseDeleted)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deleted")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableE2MExecutionResponseDeleted struct {
@@ -122,5 +168,4 @@ func (v *NullableE2MExecutionResponseDeleted) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

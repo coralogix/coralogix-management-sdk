@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TimeSeriesTooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSeriesTooltip{}
@@ -22,7 +25,10 @@ type TimeSeriesTooltip struct {
 	// Type of the tooltip display, can be showing single series value or all series values at once
 	ShowAllSeries *bool `json:"showAllSeries,omitempty"`
 	ShowLabels *bool `json:"showLabels,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeSeriesTooltip TimeSeriesTooltip
 
 // NewTimeSeriesTooltip instantiates a new TimeSeriesTooltip object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o TimeSeriesTooltip) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ShowLabels) {
 		toSerialize["showLabels"] = o.ShowLabels
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeSeriesTooltip) UnmarshalJSON(data []byte) (err error) {
+	varTimeSeriesTooltip := _TimeSeriesTooltip{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTimeSeriesTooltip)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeSeriesTooltip(varTimeSeriesTooltip)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "showAllSeries")
+		delete(additionalProperties, "showLabels")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeSeriesTooltip struct {
@@ -159,5 +193,4 @@ func (v *NullableTimeSeriesTooltip) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

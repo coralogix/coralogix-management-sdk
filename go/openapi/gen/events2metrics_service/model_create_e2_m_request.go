@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateE2MRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateE2MRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateE2MRequest{}
 // CreateE2MRequest This is used to create a new event to metric definition
 type CreateE2MRequest struct {
 	E2m E2MCreateParams `json:"e2m"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateE2MRequest CreateE2MRequest
@@ -79,6 +82,11 @@ func (o CreateE2MRequest) MarshalJSON() ([]byte, error) {
 func (o CreateE2MRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["e2m"] = o.E2m
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CreateE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	varCreateE2MRequest := _CreateE2MRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateE2MRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CreateE2MRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateE2MRequest(varCreateE2MRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "e2m")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCreateE2MRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

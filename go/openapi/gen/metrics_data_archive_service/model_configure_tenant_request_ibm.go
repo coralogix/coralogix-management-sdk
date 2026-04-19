@@ -11,24 +11,32 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConfigureTenantRequestIbm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigureTenantRequestIbm{}
 
 // ConfigureTenantRequestIbm This data structure is used to configure a tenant.
 type ConfigureTenantRequestIbm struct {
-	Ibm *IbmConfigV2 `json:"ibm,omitempty"`
+	Ibm IbmConfigV2 `json:"ibm"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigureTenantRequestIbm ConfigureTenantRequestIbm
 
 // NewConfigureTenantRequestIbm instantiates a new ConfigureTenantRequestIbm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigureTenantRequestIbm() *ConfigureTenantRequestIbm {
+func NewConfigureTenantRequestIbm(ibm IbmConfigV2) *ConfigureTenantRequestIbm {
 	this := ConfigureTenantRequestIbm{}
+	this.Ibm = ibm
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewConfigureTenantRequestIbmWithDefaults() *ConfigureTenantRequestIbm {
 	return &this
 }
 
-// GetIbm returns the Ibm field value if set, zero value otherwise.
+// GetIbm returns the Ibm field value
 func (o *ConfigureTenantRequestIbm) GetIbm() IbmConfigV2 {
-	if o == nil || IsNil(o.Ibm) {
+	if o == nil {
 		var ret IbmConfigV2
 		return ret
 	}
-	return *o.Ibm
+
+	return o.Ibm
 }
 
-// GetIbmOk returns a tuple with the Ibm field value if set, nil otherwise
+// GetIbmOk returns a tuple with the Ibm field value
 // and a boolean to check if the value has been set.
 func (o *ConfigureTenantRequestIbm) GetIbmOk() (*IbmConfigV2, bool) {
-	if o == nil || IsNil(o.Ibm) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ibm, true
+	return &o.Ibm, true
 }
 
-// HasIbm returns a boolean if a field has been set.
-func (o *ConfigureTenantRequestIbm) HasIbm() bool {
-	if o != nil && !IsNil(o.Ibm) {
-		return true
-	}
-
-	return false
-}
-
-// SetIbm gets a reference to the given IbmConfigV2 and assigns it to the Ibm field.
+// SetIbm sets field value
 func (o *ConfigureTenantRequestIbm) SetIbm(v IbmConfigV2) {
-	o.Ibm = &v
+	o.Ibm = v
 }
 
 // GetRetentionPolicy returns the RetentionPolicy field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o ConfigureTenantRequestIbm) MarshalJSON() ([]byte, error) {
 
 func (o ConfigureTenantRequestIbm) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Ibm) {
-		toSerialize["ibm"] = o.Ibm
-	}
+	toSerialize["ibm"] = o.Ibm
 	if !IsNil(o.RetentionPolicy) {
 		toSerialize["retentionPolicy"] = o.RetentionPolicy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigureTenantRequestIbm) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ibm",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConfigureTenantRequestIbm := _ConfigureTenantRequestIbm{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConfigureTenantRequestIbm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigureTenantRequestIbm(varConfigureTenantRequestIbm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ibm")
+		delete(additionalProperties, "retentionPolicy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigureTenantRequestIbm struct {
@@ -158,5 +205,4 @@ func (v *NullableConfigureTenantRequestIbm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

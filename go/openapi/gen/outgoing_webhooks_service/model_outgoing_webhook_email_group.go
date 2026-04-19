@@ -11,9 +11,13 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookEmailGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookEmailGroup{}
@@ -21,21 +25,25 @@ var _ MappedNullable = &OutgoingWebhookEmailGroup{}
 // OutgoingWebhookEmailGroup struct for OutgoingWebhookEmailGroup
 type OutgoingWebhookEmailGroup struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	EmailGroup *EmailGroupConfig `json:"emailGroup,omitempty"`
+	EmailGroup EmailGroupConfig `json:"emailGroup"`
 	ExternalId *int64 `json:"externalId,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookEmailGroup OutgoingWebhookEmailGroup
 
 // NewOutgoingWebhookEmailGroup instantiates a new OutgoingWebhookEmailGroup object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookEmailGroup() *OutgoingWebhookEmailGroup {
+func NewOutgoingWebhookEmailGroup(emailGroup EmailGroupConfig) *OutgoingWebhookEmailGroup {
 	this := OutgoingWebhookEmailGroup{}
+	this.EmailGroup = emailGroup
 	return &this
 }
 
@@ -79,36 +87,28 @@ func (o *OutgoingWebhookEmailGroup) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetEmailGroup returns the EmailGroup field value if set, zero value otherwise.
+// GetEmailGroup returns the EmailGroup field value
 func (o *OutgoingWebhookEmailGroup) GetEmailGroup() EmailGroupConfig {
-	if o == nil || IsNil(o.EmailGroup) {
+	if o == nil {
 		var ret EmailGroupConfig
 		return ret
 	}
-	return *o.EmailGroup
+
+	return o.EmailGroup
 }
 
-// GetEmailGroupOk returns a tuple with the EmailGroup field value if set, nil otherwise
+// GetEmailGroupOk returns a tuple with the EmailGroup field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookEmailGroup) GetEmailGroupOk() (*EmailGroupConfig, bool) {
-	if o == nil || IsNil(o.EmailGroup) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EmailGroup, true
+	return &o.EmailGroup, true
 }
 
-// HasEmailGroup returns a boolean if a field has been set.
-func (o *OutgoingWebhookEmailGroup) HasEmailGroup() bool {
-	if o != nil && !IsNil(o.EmailGroup) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmailGroup gets a reference to the given EmailGroupConfig and assigns it to the EmailGroup field.
+// SetEmailGroup sets field value
 func (o *OutgoingWebhookEmailGroup) SetEmailGroup(v EmailGroupConfig) {
-	o.EmailGroup = &v
+	o.EmailGroup = v
 }
 
 // GetExternalId returns the ExternalId field value if set, zero value otherwise.
@@ -316,9 +316,7 @@ func (o OutgoingWebhookEmailGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !IsNil(o.EmailGroup) {
-		toSerialize["emailGroup"] = o.EmailGroup
-	}
+	toSerialize["emailGroup"] = o.EmailGroup
 	if !IsNil(o.ExternalId) {
 		toSerialize["externalId"] = o.ExternalId
 	}
@@ -337,7 +335,62 @@ func (o OutgoingWebhookEmailGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookEmailGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"emailGroup",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookEmailGroup := _OutgoingWebhookEmailGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookEmailGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookEmailGroup(varOutgoingWebhookEmailGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "emailGroup")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookEmailGroup struct {
@@ -375,5 +428,4 @@ func (v *NullableOutgoingWebhookEmailGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

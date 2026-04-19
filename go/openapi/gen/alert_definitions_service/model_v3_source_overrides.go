@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3SourceOverrides type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3SourceOverrides{}
@@ -23,7 +26,10 @@ type V3SourceOverrides struct {
 	MessageConfigFields []V3MessageConfigField `json:"messageConfigFields,omitempty"`
 	// the payload type for the notification
 	PayloadType *string `json:"payloadType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3SourceOverrides V3SourceOverrides
 
 // NewV3SourceOverrides instantiates a new V3SourceOverrides object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +163,36 @@ func (o V3SourceOverrides) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PayloadType) {
 		toSerialize["payloadType"] = o.PayloadType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V3SourceOverrides) UnmarshalJSON(data []byte) (err error) {
+	varV3SourceOverrides := _V3SourceOverrides{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3SourceOverrides)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3SourceOverrides(varV3SourceOverrides)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectorConfigFields")
+		delete(additionalProperties, "messageConfigFields")
+		delete(additionalProperties, "payloadType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3SourceOverrides struct {
@@ -195,5 +230,4 @@ func (v *NullableV3SourceOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

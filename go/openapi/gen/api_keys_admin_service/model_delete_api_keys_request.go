@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_admin_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeleteAPIKeysRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteAPIKeysRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &DeleteAPIKeysRequest{}
 // DeleteAPIKeysRequest This data structure is used to delete specified API keys.
 type DeleteAPIKeysRequest struct {
 	KeyIds []string `json:"keyIds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeleteAPIKeysRequest DeleteAPIKeysRequest
 
 // NewDeleteAPIKeysRequest instantiates a new DeleteAPIKeysRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o DeleteAPIKeysRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.KeyIds) {
 		toSerialize["keyIds"] = o.KeyIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeleteAPIKeysRequest) UnmarshalJSON(data []byte) (err error) {
+	varDeleteAPIKeysRequest := _DeleteAPIKeysRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeleteAPIKeysRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeleteAPIKeysRequest(varDeleteAPIKeysRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keyIds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeleteAPIKeysRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableDeleteAPIKeysRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

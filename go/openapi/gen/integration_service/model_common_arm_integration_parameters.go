@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CommonARMIntegrationParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommonARMIntegrationParameters{}
@@ -22,7 +25,10 @@ type CommonARMIntegrationParameters struct {
 	ApiKey *string `json:"apiKey,omitempty"`
 	CgxDomain *string `json:"cgxDomain,omitempty"`
 	LogsUrl *string `json:"logsUrl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CommonARMIntegrationParameters CommonARMIntegrationParameters
 
 // NewCommonARMIntegrationParameters instantiates a new CommonARMIntegrationParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o CommonARMIntegrationParameters) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.LogsUrl) {
 		toSerialize["logsUrl"] = o.LogsUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CommonARMIntegrationParameters) UnmarshalJSON(data []byte) (err error) {
+	varCommonARMIntegrationParameters := _CommonARMIntegrationParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCommonARMIntegrationParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommonARMIntegrationParameters(varCommonARMIntegrationParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apiKey")
+		delete(additionalProperties, "cgxDomain")
+		delete(additionalProperties, "logsUrl")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCommonARMIntegrationParameters struct {
@@ -194,5 +229,4 @@ func (v *NullableCommonARMIntegrationParameters) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

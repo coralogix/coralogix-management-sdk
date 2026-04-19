@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // RecurringDynamic - struct for RecurringDynamic
 type RecurringDynamic struct {
@@ -50,7 +53,7 @@ func (dst *RecurringDynamic) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into RecurringDynamicDaily
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicDaily)
+	err = json.Unmarshal(data, &dst.RecurringDynamicDaily)
 	if err == nil {
 		jsonRecurringDynamicDaily, _ := json.Marshal(dst.RecurringDynamicDaily)
 		if string(jsonRecurringDynamicDaily) == "{}" { // empty struct
@@ -67,7 +70,7 @@ func (dst *RecurringDynamic) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RecurringDynamicMonthly
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicMonthly)
+	err = json.Unmarshal(data, &dst.RecurringDynamicMonthly)
 	if err == nil {
 		jsonRecurringDynamicMonthly, _ := json.Marshal(dst.RecurringDynamicMonthly)
 		if string(jsonRecurringDynamicMonthly) == "{}" { // empty struct
@@ -84,7 +87,7 @@ func (dst *RecurringDynamic) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RecurringDynamicWeekly
-	err = newStrictDecoder(data).Decode(&dst.RecurringDynamicWeekly)
+	err = json.Unmarshal(data, &dst.RecurringDynamicWeekly)
 	if err == nil {
 		jsonRecurringDynamicWeekly, _ := json.Marshal(dst.RecurringDynamicWeekly)
 		if string(jsonRecurringDynamicWeekly) == "{}" { // empty struct
@@ -205,5 +208,4 @@ func (v *NullableRecurringDynamic) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

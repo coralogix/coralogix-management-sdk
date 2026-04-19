@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapAggregationMax type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationMax{}
 
 // GeomapAggregationMax struct for GeomapAggregationMax
 type GeomapAggregationMax struct {
-	Max *GeomapAggregationFieldBased `json:"max,omitempty"`
+	Max GeomapAggregationFieldBased `json:"max"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapAggregationMax GeomapAggregationMax
 
 // NewGeomapAggregationMax instantiates a new GeomapAggregationMax object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapAggregationMax() *GeomapAggregationMax {
+func NewGeomapAggregationMax(max GeomapAggregationFieldBased) *GeomapAggregationMax {
 	this := GeomapAggregationMax{}
+	this.Max = max
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapAggregationMaxWithDefaults() *GeomapAggregationMax {
 	return &this
 }
 
-// GetMax returns the Max field value if set, zero value otherwise.
+// GetMax returns the Max field value
 func (o *GeomapAggregationMax) GetMax() GeomapAggregationFieldBased {
-	if o == nil || IsNil(o.Max) {
+	if o == nil {
 		var ret GeomapAggregationFieldBased
 		return ret
 	}
-	return *o.Max
+
+	return o.Max
 }
 
-// GetMaxOk returns a tuple with the Max field value if set, nil otherwise
+// GetMaxOk returns a tuple with the Max field value
 // and a boolean to check if the value has been set.
 func (o *GeomapAggregationMax) GetMaxOk() (*GeomapAggregationFieldBased, bool) {
-	if o == nil || IsNil(o.Max) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Max, true
+	return &o.Max, true
 }
 
-// HasMax returns a boolean if a field has been set.
-func (o *GeomapAggregationMax) HasMax() bool {
-	if o != nil && !IsNil(o.Max) {
-		return true
-	}
-
-	return false
-}
-
-// SetMax gets a reference to the given GeomapAggregationFieldBased and assigns it to the Max field.
+// SetMax sets field value
 func (o *GeomapAggregationMax) SetMax(v GeomapAggregationFieldBased) {
-	o.Max = &v
+	o.Max = v
 }
 
 func (o GeomapAggregationMax) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapAggregationMax) MarshalJSON() ([]byte, error) {
 
 func (o GeomapAggregationMax) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Max) {
-		toSerialize["max"] = o.Max
+	toSerialize["max"] = o.Max
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapAggregationMax) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"max",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapAggregationMax := _GeomapAggregationMax{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapAggregationMax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapAggregationMax(varGeomapAggregationMax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "max")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapAggregationMax struct {
@@ -122,5 +168,4 @@ func (v *NullableGeomapAggregationMax) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

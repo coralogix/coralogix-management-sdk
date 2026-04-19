@@ -11,10 +11,13 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // CustomEnrichmentData - struct for CustomEnrichmentData
 type CustomEnrichmentData struct {
@@ -42,7 +45,7 @@ func (dst *CustomEnrichmentData) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into CustomEnrichmentDataBinary
-	err = newStrictDecoder(data).Decode(&dst.CustomEnrichmentDataBinary)
+	err = json.Unmarshal(data, &dst.CustomEnrichmentDataBinary)
 	if err == nil {
 		jsonCustomEnrichmentDataBinary, _ := json.Marshal(dst.CustomEnrichmentDataBinary)
 		if string(jsonCustomEnrichmentDataBinary) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *CustomEnrichmentData) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into CustomEnrichmentDataTextual
-	err = newStrictDecoder(data).Decode(&dst.CustomEnrichmentDataTextual)
+	err = json.Unmarshal(data, &dst.CustomEnrichmentDataTextual)
 	if err == nil {
 		jsonCustomEnrichmentDataTextual, _ := json.Marshal(dst.CustomEnrichmentDataTextual)
 		if string(jsonCustomEnrichmentDataTextual) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableCustomEnrichmentData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

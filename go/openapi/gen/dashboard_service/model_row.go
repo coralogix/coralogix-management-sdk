@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Row type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Row{}
@@ -22,7 +25,10 @@ type Row struct {
 	Appearance *RowAppearance `json:"appearance,omitempty"`
 	Id *UUID `json:"id,omitempty"`
 	Widgets []Widget `json:"widgets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Row Row
 
 // NewRow instantiates a new Row object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o Row) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Widgets) {
 		toSerialize["widgets"] = o.Widgets
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Row) UnmarshalJSON(data []byte) (err error) {
+	varRow := _Row{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Row(varRow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "appearance")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "widgets")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRow struct {
@@ -194,5 +229,4 @@ func (v *NullableRow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

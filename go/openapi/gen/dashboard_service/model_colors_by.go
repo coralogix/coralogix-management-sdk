@@ -11,36 +11,55 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // ColorsBy - struct for ColorsBy
 type ColorsBy struct {
-	ColorsByAggregation *ColorsByAggregation
-	ColorsByGroupBy *ColorsByGroupBy
-	ColorsByStack *ColorsByStack
+	ColorsByAggregationVariant *ColorsByAggregationVariant
+	ColorsByCategoryVariant *ColorsByCategoryVariant
+	ColorsByGroupByVariant *ColorsByGroupByVariant
+	ColorsByQueryVariant *ColorsByQueryVariant
+	ColorsByStackVariant *ColorsByStackVariant
 }
 
-// ColorsByAggregationAsColorsBy is a convenience function that returns ColorsByAggregation wrapped in ColorsBy
-func ColorsByAggregationAsColorsBy(v *ColorsByAggregation) ColorsBy {
+// ColorsByAggregationVariantAsColorsBy is a convenience function that returns ColorsByAggregationVariant wrapped in ColorsBy
+func ColorsByAggregationVariantAsColorsBy(v *ColorsByAggregationVariant) ColorsBy {
 	return ColorsBy{
-		ColorsByAggregation: v,
+		ColorsByAggregationVariant: v,
 	}
 }
 
-// ColorsByGroupByAsColorsBy is a convenience function that returns ColorsByGroupBy wrapped in ColorsBy
-func ColorsByGroupByAsColorsBy(v *ColorsByGroupBy) ColorsBy {
+// ColorsByCategoryVariantAsColorsBy is a convenience function that returns ColorsByCategoryVariant wrapped in ColorsBy
+func ColorsByCategoryVariantAsColorsBy(v *ColorsByCategoryVariant) ColorsBy {
 	return ColorsBy{
-		ColorsByGroupBy: v,
+		ColorsByCategoryVariant: v,
 	}
 }
 
-// ColorsByStackAsColorsBy is a convenience function that returns ColorsByStack wrapped in ColorsBy
-func ColorsByStackAsColorsBy(v *ColorsByStack) ColorsBy {
+// ColorsByGroupByVariantAsColorsBy is a convenience function that returns ColorsByGroupByVariant wrapped in ColorsBy
+func ColorsByGroupByVariantAsColorsBy(v *ColorsByGroupByVariant) ColorsBy {
 	return ColorsBy{
-		ColorsByStack: v,
+		ColorsByGroupByVariant: v,
+	}
+}
+
+// ColorsByQueryVariantAsColorsBy is a convenience function that returns ColorsByQueryVariant wrapped in ColorsBy
+func ColorsByQueryVariantAsColorsBy(v *ColorsByQueryVariant) ColorsBy {
+	return ColorsBy{
+		ColorsByQueryVariant: v,
+	}
+}
+
+// ColorsByStackVariantAsColorsBy is a convenience function that returns ColorsByStackVariant wrapped in ColorsBy
+func ColorsByStackVariantAsColorsBy(v *ColorsByStackVariant) ColorsBy {
+	return ColorsBy{
+		ColorsByStackVariant: v,
 	}
 }
 
@@ -49,62 +68,98 @@ func ColorsByStackAsColorsBy(v *ColorsByStack) ColorsBy {
 func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into ColorsByAggregation
-	err = newStrictDecoder(data).Decode(&dst.ColorsByAggregation)
+	// try to unmarshal data into ColorsByAggregationVariant
+	err = json.Unmarshal(data, &dst.ColorsByAggregationVariant)
 	if err == nil {
-		jsonColorsByAggregation, _ := json.Marshal(dst.ColorsByAggregation)
-		if string(jsonColorsByAggregation) == "{}" { // empty struct
-			dst.ColorsByAggregation = nil
+		jsonColorsByAggregationVariant, _ := json.Marshal(dst.ColorsByAggregationVariant)
+		if string(jsonColorsByAggregationVariant) == "{}" { // empty struct
+			dst.ColorsByAggregationVariant = nil
 		} else {
-			if err = validator.Validate(dst.ColorsByAggregation); err != nil {
-				dst.ColorsByAggregation = nil
+			if err = validator.Validate(dst.ColorsByAggregationVariant); err != nil {
+				dst.ColorsByAggregationVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ColorsByAggregation = nil
+		dst.ColorsByAggregationVariant = nil
 	}
 
-	// try to unmarshal data into ColorsByGroupBy
-	err = newStrictDecoder(data).Decode(&dst.ColorsByGroupBy)
+	// try to unmarshal data into ColorsByCategoryVariant
+	err = json.Unmarshal(data, &dst.ColorsByCategoryVariant)
 	if err == nil {
-		jsonColorsByGroupBy, _ := json.Marshal(dst.ColorsByGroupBy)
-		if string(jsonColorsByGroupBy) == "{}" { // empty struct
-			dst.ColorsByGroupBy = nil
+		jsonColorsByCategoryVariant, _ := json.Marshal(dst.ColorsByCategoryVariant)
+		if string(jsonColorsByCategoryVariant) == "{}" { // empty struct
+			dst.ColorsByCategoryVariant = nil
 		} else {
-			if err = validator.Validate(dst.ColorsByGroupBy); err != nil {
-				dst.ColorsByGroupBy = nil
+			if err = validator.Validate(dst.ColorsByCategoryVariant); err != nil {
+				dst.ColorsByCategoryVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ColorsByGroupBy = nil
+		dst.ColorsByCategoryVariant = nil
 	}
 
-	// try to unmarshal data into ColorsByStack
-	err = newStrictDecoder(data).Decode(&dst.ColorsByStack)
+	// try to unmarshal data into ColorsByGroupByVariant
+	err = json.Unmarshal(data, &dst.ColorsByGroupByVariant)
 	if err == nil {
-		jsonColorsByStack, _ := json.Marshal(dst.ColorsByStack)
-		if string(jsonColorsByStack) == "{}" { // empty struct
-			dst.ColorsByStack = nil
+		jsonColorsByGroupByVariant, _ := json.Marshal(dst.ColorsByGroupByVariant)
+		if string(jsonColorsByGroupByVariant) == "{}" { // empty struct
+			dst.ColorsByGroupByVariant = nil
 		} else {
-			if err = validator.Validate(dst.ColorsByStack); err != nil {
-				dst.ColorsByStack = nil
+			if err = validator.Validate(dst.ColorsByGroupByVariant); err != nil {
+				dst.ColorsByGroupByVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.ColorsByStack = nil
+		dst.ColorsByGroupByVariant = nil
+	}
+
+	// try to unmarshal data into ColorsByQueryVariant
+	err = json.Unmarshal(data, &dst.ColorsByQueryVariant)
+	if err == nil {
+		jsonColorsByQueryVariant, _ := json.Marshal(dst.ColorsByQueryVariant)
+		if string(jsonColorsByQueryVariant) == "{}" { // empty struct
+			dst.ColorsByQueryVariant = nil
+		} else {
+			if err = validator.Validate(dst.ColorsByQueryVariant); err != nil {
+				dst.ColorsByQueryVariant = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.ColorsByQueryVariant = nil
+	}
+
+	// try to unmarshal data into ColorsByStackVariant
+	err = json.Unmarshal(data, &dst.ColorsByStackVariant)
+	if err == nil {
+		jsonColorsByStackVariant, _ := json.Marshal(dst.ColorsByStackVariant)
+		if string(jsonColorsByStackVariant) == "{}" { // empty struct
+			dst.ColorsByStackVariant = nil
+		} else {
+			if err = validator.Validate(dst.ColorsByStackVariant); err != nil {
+				dst.ColorsByStackVariant = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.ColorsByStackVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.ColorsByAggregation = nil
-		dst.ColorsByGroupBy = nil
-		dst.ColorsByStack = nil
+		dst.ColorsByAggregationVariant = nil
+		dst.ColorsByCategoryVariant = nil
+		dst.ColorsByGroupByVariant = nil
+		dst.ColorsByQueryVariant = nil
+		dst.ColorsByStackVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(ColorsBy)")
 	} else if match == 1 {
@@ -116,16 +171,24 @@ func (dst *ColorsBy) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ColorsBy) MarshalJSON() ([]byte, error) {
-	if src.ColorsByAggregation != nil {
-		return json.Marshal(&src.ColorsByAggregation)
+	if src.ColorsByAggregationVariant != nil {
+		return json.Marshal(&src.ColorsByAggregationVariant)
 	}
 
-	if src.ColorsByGroupBy != nil {
-		return json.Marshal(&src.ColorsByGroupBy)
+	if src.ColorsByCategoryVariant != nil {
+		return json.Marshal(&src.ColorsByCategoryVariant)
 	}
 
-	if src.ColorsByStack != nil {
-		return json.Marshal(&src.ColorsByStack)
+	if src.ColorsByGroupByVariant != nil {
+		return json.Marshal(&src.ColorsByGroupByVariant)
+	}
+
+	if src.ColorsByQueryVariant != nil {
+		return json.Marshal(&src.ColorsByQueryVariant)
+	}
+
+	if src.ColorsByStackVariant != nil {
+		return json.Marshal(&src.ColorsByStackVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +199,24 @@ func (obj *ColorsBy) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.ColorsByAggregation != nil {
-		return obj.ColorsByAggregation
+	if obj.ColorsByAggregationVariant != nil {
+		return obj.ColorsByAggregationVariant
 	}
 
-	if obj.ColorsByGroupBy != nil {
-		return obj.ColorsByGroupBy
+	if obj.ColorsByCategoryVariant != nil {
+		return obj.ColorsByCategoryVariant
 	}
 
-	if obj.ColorsByStack != nil {
-		return obj.ColorsByStack
+	if obj.ColorsByGroupByVariant != nil {
+		return obj.ColorsByGroupByVariant
+	}
+
+	if obj.ColorsByQueryVariant != nil {
+		return obj.ColorsByQueryVariant
+	}
+
+	if obj.ColorsByStackVariant != nil {
+		return obj.ColorsByStackVariant
 	}
 
 	// all schemas are nil
@@ -154,16 +225,24 @@ func (obj *ColorsBy) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj ColorsBy) GetActualInstanceValue() (interface{}) {
-	if obj.ColorsByAggregation != nil {
-		return *obj.ColorsByAggregation
+	if obj.ColorsByAggregationVariant != nil {
+		return *obj.ColorsByAggregationVariant
 	}
 
-	if obj.ColorsByGroupBy != nil {
-		return *obj.ColorsByGroupBy
+	if obj.ColorsByCategoryVariant != nil {
+		return *obj.ColorsByCategoryVariant
 	}
 
-	if obj.ColorsByStack != nil {
-		return *obj.ColorsByStack
+	if obj.ColorsByGroupByVariant != nil {
+		return *obj.ColorsByGroupByVariant
+	}
+
+	if obj.ColorsByQueryVariant != nil {
+		return *obj.ColorsByQueryVariant
+	}
+
+	if obj.ColorsByStackVariant != nil {
+		return *obj.ColorsByStackVariant
 	}
 
 	// all schemas are nil
@@ -205,5 +284,4 @@ func (v *NullableColorsBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

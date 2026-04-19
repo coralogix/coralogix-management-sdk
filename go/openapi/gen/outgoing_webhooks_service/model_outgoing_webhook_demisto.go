@@ -11,9 +11,13 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the OutgoingWebhookDemisto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookDemisto{}
@@ -21,21 +25,25 @@ var _ MappedNullable = &OutgoingWebhookDemisto{}
 // OutgoingWebhookDemisto struct for OutgoingWebhookDemisto
 type OutgoingWebhookDemisto struct {
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	Demisto *DemistoConfig `json:"demisto,omitempty"`
+	Demisto DemistoConfig `json:"demisto"`
 	ExternalId *int64 `json:"externalId,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OutgoingWebhookDemisto OutgoingWebhookDemisto
 
 // NewOutgoingWebhookDemisto instantiates a new OutgoingWebhookDemisto object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOutgoingWebhookDemisto() *OutgoingWebhookDemisto {
+func NewOutgoingWebhookDemisto(demisto DemistoConfig) *OutgoingWebhookDemisto {
 	this := OutgoingWebhookDemisto{}
+	this.Demisto = demisto
 	return &this
 }
 
@@ -79,36 +87,28 @@ func (o *OutgoingWebhookDemisto) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetDemisto returns the Demisto field value if set, zero value otherwise.
+// GetDemisto returns the Demisto field value
 func (o *OutgoingWebhookDemisto) GetDemisto() DemistoConfig {
-	if o == nil || IsNil(o.Demisto) {
+	if o == nil {
 		var ret DemistoConfig
 		return ret
 	}
-	return *o.Demisto
+
+	return o.Demisto
 }
 
-// GetDemistoOk returns a tuple with the Demisto field value if set, nil otherwise
+// GetDemistoOk returns a tuple with the Demisto field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookDemisto) GetDemistoOk() (*DemistoConfig, bool) {
-	if o == nil || IsNil(o.Demisto) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Demisto, true
+	return &o.Demisto, true
 }
 
-// HasDemisto returns a boolean if a field has been set.
-func (o *OutgoingWebhookDemisto) HasDemisto() bool {
-	if o != nil && !IsNil(o.Demisto) {
-		return true
-	}
-
-	return false
-}
-
-// SetDemisto gets a reference to the given DemistoConfig and assigns it to the Demisto field.
+// SetDemisto sets field value
 func (o *OutgoingWebhookDemisto) SetDemisto(v DemistoConfig) {
-	o.Demisto = &v
+	o.Demisto = v
 }
 
 // GetExternalId returns the ExternalId field value if set, zero value otherwise.
@@ -316,9 +316,7 @@ func (o OutgoingWebhookDemisto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !IsNil(o.Demisto) {
-		toSerialize["demisto"] = o.Demisto
-	}
+	toSerialize["demisto"] = o.Demisto
 	if !IsNil(o.ExternalId) {
 		toSerialize["externalId"] = o.ExternalId
 	}
@@ -337,7 +335,62 @@ func (o OutgoingWebhookDemisto) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OutgoingWebhookDemisto) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"demisto",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOutgoingWebhookDemisto := _OutgoingWebhookDemisto{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varOutgoingWebhookDemisto)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OutgoingWebhookDemisto(varOutgoingWebhookDemisto)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "demisto")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOutgoingWebhookDemisto struct {
@@ -375,5 +428,4 @@ func (v *NullableOutgoingWebhookDemisto) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

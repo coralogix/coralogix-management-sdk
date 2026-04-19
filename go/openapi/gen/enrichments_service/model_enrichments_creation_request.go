@@ -11,10 +11,12 @@ API version: 1.0.0
 package enrichments_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentsCreationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentsCreationRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &EnrichmentsCreationRequest{}
 // EnrichmentsCreationRequest This response data structure represents a collection of enrichments
 type EnrichmentsCreationRequest struct {
 	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EnrichmentsCreationRequest EnrichmentsCreationRequest
@@ -79,6 +82,11 @@ func (o EnrichmentsCreationRequest) MarshalJSON() ([]byte, error) {
 func (o EnrichmentsCreationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["requestEnrichments"] = o.RequestEnrichments
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *EnrichmentsCreationRequest) UnmarshalJSON(data []byte) (err error) {
 	varEnrichmentsCreationRequest := _EnrichmentsCreationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEnrichmentsCreationRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *EnrichmentsCreationRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = EnrichmentsCreationRequest(varEnrichmentsCreationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "requestEnrichments")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableEnrichmentsCreationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

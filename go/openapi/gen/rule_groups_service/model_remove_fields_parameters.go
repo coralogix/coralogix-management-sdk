@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RemoveFieldsParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RemoveFieldsParameters{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &RemoveFieldsParameters{}
 // RemoveFieldsParameters struct for RemoveFieldsParameters
 type RemoveFieldsParameters struct {
 	Fields []string `json:"fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RemoveFieldsParameters RemoveFieldsParameters
 
 // NewRemoveFieldsParameters instantiates a new RemoveFieldsParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o RemoveFieldsParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RemoveFieldsParameters) UnmarshalJSON(data []byte) (err error) {
+	varRemoveFieldsParameters := _RemoveFieldsParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRemoveFieldsParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RemoveFieldsParameters(varRemoveFieldsParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRemoveFieldsParameters struct {
@@ -122,5 +155,4 @@ func (v *NullableRemoveFieldsParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

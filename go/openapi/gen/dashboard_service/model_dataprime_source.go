@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataprimeSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSource{}
@@ -25,7 +28,10 @@ type DataprimeSource struct {
 	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
 	Query *CommonDataprimeQuery `json:"query,omitempty"`
 	Strategy *DataprimeSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataprimeSource DataprimeSource
 
 // NewDataprimeSource instantiates a new DataprimeSource object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o DataprimeSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Strategy) {
 		toSerialize["strategy"] = o.Strategy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataprimeSource) UnmarshalJSON(data []byte) (err error) {
+	varDataprimeSource := _DataprimeSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataprimeSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataprimeSource(varDataprimeSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "labelFields")
+		delete(additionalProperties, "messageTemplate")
+		delete(additionalProperties, "orientation")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "strategy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataprimeSource struct {
@@ -302,5 +340,4 @@ func (v *NullableDataprimeSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

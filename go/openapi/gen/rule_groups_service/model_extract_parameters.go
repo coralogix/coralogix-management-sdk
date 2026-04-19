@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtractParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtractParameters{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ExtractParameters{}
 // ExtractParameters struct for ExtractParameters
 type ExtractParameters struct {
 	Rule *string `json:"rule,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtractParameters ExtractParameters
 
 // NewExtractParameters instantiates a new ExtractParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ExtractParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Rule) {
 		toSerialize["rule"] = o.Rule
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtractParameters) UnmarshalJSON(data []byte) (err error) {
+	varExtractParameters := _ExtractParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtractParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtractParameters(varExtractParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rule")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtractParameters struct {
@@ -122,5 +155,4 @@ func (v *NullableExtractParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

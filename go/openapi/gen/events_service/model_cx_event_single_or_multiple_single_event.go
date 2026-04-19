@@ -11,23 +11,31 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CxEventSingleOrMultipleSingleEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CxEventSingleOrMultipleSingleEvent{}
 
 // CxEventSingleOrMultipleSingleEvent This data structure represents a single or multiple events
 type CxEventSingleOrMultipleSingleEvent struct {
-	SingleEvent *CxEvent `json:"singleEvent,omitempty"`
+	SingleEvent CxEvent `json:"singleEvent"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CxEventSingleOrMultipleSingleEvent CxEventSingleOrMultipleSingleEvent
 
 // NewCxEventSingleOrMultipleSingleEvent instantiates a new CxEventSingleOrMultipleSingleEvent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCxEventSingleOrMultipleSingleEvent() *CxEventSingleOrMultipleSingleEvent {
+func NewCxEventSingleOrMultipleSingleEvent(singleEvent CxEvent) *CxEventSingleOrMultipleSingleEvent {
 	this := CxEventSingleOrMultipleSingleEvent{}
+	this.SingleEvent = singleEvent
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewCxEventSingleOrMultipleSingleEventWithDefaults() *CxEventSingleOrMultipl
 	return &this
 }
 
-// GetSingleEvent returns the SingleEvent field value if set, zero value otherwise.
+// GetSingleEvent returns the SingleEvent field value
 func (o *CxEventSingleOrMultipleSingleEvent) GetSingleEvent() CxEvent {
-	if o == nil || IsNil(o.SingleEvent) {
+	if o == nil {
 		var ret CxEvent
 		return ret
 	}
-	return *o.SingleEvent
+
+	return o.SingleEvent
 }
 
-// GetSingleEventOk returns a tuple with the SingleEvent field value if set, nil otherwise
+// GetSingleEventOk returns a tuple with the SingleEvent field value
 // and a boolean to check if the value has been set.
 func (o *CxEventSingleOrMultipleSingleEvent) GetSingleEventOk() (*CxEvent, bool) {
-	if o == nil || IsNil(o.SingleEvent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SingleEvent, true
+	return &o.SingleEvent, true
 }
 
-// HasSingleEvent returns a boolean if a field has been set.
-func (o *CxEventSingleOrMultipleSingleEvent) HasSingleEvent() bool {
-	if o != nil && !IsNil(o.SingleEvent) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleEvent gets a reference to the given CxEvent and assigns it to the SingleEvent field.
+// SetSingleEvent sets field value
 func (o *CxEventSingleOrMultipleSingleEvent) SetSingleEvent(v CxEvent) {
-	o.SingleEvent = &v
+	o.SingleEvent = v
 }
 
 func (o CxEventSingleOrMultipleSingleEvent) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o CxEventSingleOrMultipleSingleEvent) MarshalJSON() ([]byte, error) {
 
 func (o CxEventSingleOrMultipleSingleEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SingleEvent) {
-		toSerialize["singleEvent"] = o.SingleEvent
+	toSerialize["singleEvent"] = o.SingleEvent
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *CxEventSingleOrMultipleSingleEvent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singleEvent",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCxEventSingleOrMultipleSingleEvent := _CxEventSingleOrMultipleSingleEvent{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCxEventSingleOrMultipleSingleEvent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CxEventSingleOrMultipleSingleEvent(varCxEventSingleOrMultipleSingleEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "singleEvent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCxEventSingleOrMultipleSingleEvent struct {
@@ -122,5 +168,4 @@ func (v *NullableCxEventSingleOrMultipleSingleEvent) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

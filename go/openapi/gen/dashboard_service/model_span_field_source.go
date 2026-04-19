@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpanFieldSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldSource{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SpanFieldSource{}
 // SpanFieldSource struct for SpanFieldSource
 type SpanFieldSource struct {
 	Value *SpanField `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpanFieldSource SpanFieldSource
 
 // NewSpanFieldSource instantiates a new SpanFieldSource object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SpanFieldSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SpanFieldSource) UnmarshalJSON(data []byte) (err error) {
+	varSpanFieldSource := _SpanFieldSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanFieldSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanFieldSource(varSpanFieldSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpanFieldSource struct {
@@ -122,5 +155,4 @@ func (v *NullableSpanFieldSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

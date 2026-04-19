@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TracingTimeWindow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingTimeWindow{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &TracingTimeWindow{}
 // TracingTimeWindow struct for TracingTimeWindow
 type TracingTimeWindow struct {
 	TracingTimeWindowValue *TracingTimeWindowValue `json:"tracingTimeWindowValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TracingTimeWindow TracingTimeWindow
 
 // NewTracingTimeWindow instantiates a new TracingTimeWindow object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o TracingTimeWindow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TracingTimeWindowValue) {
 		toSerialize["tracingTimeWindowValue"] = o.TracingTimeWindowValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TracingTimeWindow) UnmarshalJSON(data []byte) (err error) {
+	varTracingTimeWindow := _TracingTimeWindow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTracingTimeWindow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TracingTimeWindow(varTracingTimeWindow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tracingTimeWindowValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTracingTimeWindow struct {
@@ -122,5 +155,4 @@ func (v *NullableTracingTimeWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

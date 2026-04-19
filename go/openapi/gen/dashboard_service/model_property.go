@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Property type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Property{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Property{}
 type Property struct {
 	Definition *PropertyDefinition `json:"definition,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Property Property
 
 // NewProperty instantiates a new Property object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Property) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Property) UnmarshalJSON(data []byte) (err error) {
+	varProperty := _Property{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varProperty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Property(varProperty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "definition")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProperty struct {
@@ -158,5 +192,4 @@ func (v *NullableProperty) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

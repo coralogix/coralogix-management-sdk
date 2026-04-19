@@ -11,8 +11,11 @@ API version: 1.0.0
 package scopes_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1Scope type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Scope{}
@@ -25,7 +28,10 @@ type V1Scope struct {
 	Filters []ScopesV1Filter `json:"filters,omitempty"`
 	Id *string `json:"id,omitempty"`
 	TeamId *int32 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1Scope V1Scope
 
 // NewV1Scope instantiates a new V1Scope object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o V1Scope) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V1Scope) UnmarshalJSON(data []byte) (err error) {
+	varV1Scope := _V1Scope{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1Scope)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1Scope(varV1Scope)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultExpression")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1Scope struct {
@@ -302,5 +340,4 @@ func (v *NullableV1Scope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

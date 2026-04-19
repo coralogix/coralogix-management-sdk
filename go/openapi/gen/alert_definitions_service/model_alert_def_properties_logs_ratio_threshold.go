@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesLogsRatioThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesLogsRatioThreshold{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesLogsRatioThreshold struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	LogsRatioThreshold *LogsRatioThresholdType `json:"logsRatioThreshold,omitempty"`
+	LogsRatioThreshold LogsRatioThresholdType `json:"logsRatioThreshold"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesLogsRatioThreshold struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesLogsRatioThreshold AlertDefPropertiesLogsRatioThreshold
 
 // NewAlertDefPropertiesLogsRatioThreshold instantiates a new AlertDefPropertiesLogsRatioThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsRatioThreshold() *AlertDefPropertiesLogsRatioThreshold {
+func NewAlertDefPropertiesLogsRatioThreshold(logsRatioThreshold LogsRatioThresholdType) *AlertDefPropertiesLogsRatioThreshold {
 	this := AlertDefPropertiesLogsRatioThreshold{}
+	this.LogsRatioThreshold = logsRatioThreshold
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesLogsRatioThreshold) SetIncidentsSettings(v AlertDefIn
 	o.IncidentsSettings = &v
 }
 
-// GetLogsRatioThreshold returns the LogsRatioThreshold field value if set, zero value otherwise.
+// GetLogsRatioThreshold returns the LogsRatioThreshold field value
 func (o *AlertDefPropertiesLogsRatioThreshold) GetLogsRatioThreshold() LogsRatioThresholdType {
-	if o == nil || IsNil(o.LogsRatioThreshold) {
+	if o == nil {
 		var ret LogsRatioThresholdType
 		return ret
 	}
-	return *o.LogsRatioThreshold
+
+	return o.LogsRatioThreshold
 }
 
-// GetLogsRatioThresholdOk returns a tuple with the LogsRatioThreshold field value if set, nil otherwise
+// GetLogsRatioThresholdOk returns a tuple with the LogsRatioThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsRatioThreshold) GetLogsRatioThresholdOk() (*LogsRatioThresholdType, bool) {
-	if o == nil || IsNil(o.LogsRatioThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsRatioThreshold, true
+	return &o.LogsRatioThreshold, true
 }
 
-// HasLogsRatioThreshold returns a boolean if a field has been set.
-func (o *AlertDefPropertiesLogsRatioThreshold) HasLogsRatioThreshold() bool {
-	if o != nil && !IsNil(o.LogsRatioThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsRatioThreshold gets a reference to the given LogsRatioThresholdType and assigns it to the LogsRatioThreshold field.
+// SetLogsRatioThreshold sets field value
 func (o *AlertDefPropertiesLogsRatioThreshold) SetLogsRatioThreshold(v LogsRatioThresholdType) {
-	o.LogsRatioThreshold = &v
+	o.LogsRatioThreshold = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesLogsRatioThreshold) ToMap() (map[string]interface{}, e
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.LogsRatioThreshold) {
-		toSerialize["logsRatioThreshold"] = o.LogsRatioThreshold
-	}
+	toSerialize["logsRatioThreshold"] = o.LogsRatioThreshold
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesLogsRatioThreshold) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesLogsRatioThreshold) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsRatioThreshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesLogsRatioThreshold := _AlertDefPropertiesLogsRatioThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesLogsRatioThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesLogsRatioThreshold(varAlertDefPropertiesLogsRatioThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsRatioThreshold")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesLogsRatioThreshold struct {
@@ -632,5 +692,4 @@ func (v *NullableAlertDefPropertiesLogsRatioThreshold) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

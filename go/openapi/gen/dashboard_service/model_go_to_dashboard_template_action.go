@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GoToDashboardTemplateAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GoToDashboardTemplateAction{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &GoToDashboardTemplateAction{}
 type GoToDashboardTemplateAction struct {
 	// Reference to specific dashboard
 	DashboardId *string `json:"dashboardId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GoToDashboardTemplateAction GoToDashboardTemplateAction
 
 // NewGoToDashboardTemplateAction instantiates a new GoToDashboardTemplateAction object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o GoToDashboardTemplateAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DashboardId) {
 		toSerialize["dashboardId"] = o.DashboardId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GoToDashboardTemplateAction) UnmarshalJSON(data []byte) (err error) {
+	varGoToDashboardTemplateAction := _GoToDashboardTemplateAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGoToDashboardTemplateAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GoToDashboardTemplateAction(varGoToDashboardTemplateAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dashboardId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGoToDashboardTemplateAction struct {
@@ -123,5 +156,4 @@ func (v *NullableGoToDashboardTemplateAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

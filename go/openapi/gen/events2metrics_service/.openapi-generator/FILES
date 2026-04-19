@@ -9,9 +9,6 @@ configuration.go
 git_push.sh
 model_agg_type.go
 model_atomic_batch_execute_e2_m_response.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_create_e2_m_request.go
 model_create_e2_m_response.go
@@ -52,8 +49,6 @@ model_list_e2_m_response.go
 model_list_labels_cardinality_response.go
 model_logs2metrics_v2_severity.go
 model_metric_label.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_replace_e2_m_request.go
 model_replace_e2_m_response.go

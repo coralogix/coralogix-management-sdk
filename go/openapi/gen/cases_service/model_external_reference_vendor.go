@@ -11,9 +11,12 @@ API version: 1.0.0
 package cases_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // ExternalReferenceVendor the model 'ExternalReferenceVendor'
 type ExternalReferenceVendor string

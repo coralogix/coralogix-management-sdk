@@ -11,8 +11,11 @@ API version: 1.0.0
 package global_routers_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoutingRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoutingRule{}
@@ -24,7 +27,10 @@ type RoutingRule struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Targets []RoutingTarget `json:"targets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RoutingRule RoutingRule
 
 // NewRoutingRule instantiates a new RoutingRule object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o RoutingRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Targets) {
 		toSerialize["targets"] = o.Targets
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RoutingRule) UnmarshalJSON(data []byte) (err error) {
+	varRoutingRule := _RoutingRule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoutingRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoutingRule(varRoutingRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition")
+		delete(additionalProperties, "customDetails")
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "targets")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRoutingRule struct {
@@ -266,5 +303,4 @@ func (v *NullableRoutingRule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

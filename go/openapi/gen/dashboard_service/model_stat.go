@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Stat type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Stat{}
@@ -40,7 +43,10 @@ type Stat struct {
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Stat Stat
 
 // NewStat instantiates a new Stat object
 // This constructor will assign default values to properties that have it defined,
@@ -594,7 +600,48 @@ func (o Stat) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueFields) {
 		toSerialize["valueFields"] = o.ValueFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Stat) UnmarshalJSON(data []byte) (err error) {
+	varStat := _Stat{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varStat)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Stat(varStat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "categoryFields")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "displaySeriesName")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "legendBy")
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "thresholdBy")
+		delete(additionalProperties, "thresholdType")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "valueFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStat struct {
@@ -632,5 +679,4 @@ func (v *NullableStat) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

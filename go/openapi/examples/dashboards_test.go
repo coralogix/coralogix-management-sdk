@@ -29,6 +29,7 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
+	t.Skip("Dashboards API is not OpenAPI compliant yet")
 	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
 	client := cxsdk.NewDashboardClient(cfg)
 

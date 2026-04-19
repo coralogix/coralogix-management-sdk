@@ -52,7 +52,6 @@
           "API Keys Service"
         ],
         "summary": "Create API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -84,8 +83,7 @@
                   "owner": {
                     "$ref": "#/components/schemas/Owner"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -128,7 +126,6 @@
           "API Keys Service"
         ],
         "summary": "Get API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -181,7 +178,6 @@
           "API Keys Service"
         ],
         "summary": "Update API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -225,8 +221,7 @@
                   "presets": {
                     "$ref": "#/components/schemas/Presets"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -267,7 +262,6 @@
           "API Keys Service"
         ],
         "summary": "Delete API Key",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -321,7 +315,6 @@
           "API Keys Service"
         ],
         "summary": "Get \"Send Data\" API Keys",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -361,41 +354,6 @@
   },
   "components": {
     "schemas": {
-      "ApiKey": {
-        "externalDocs": {
-          "description": "Find out more about api keys",
-          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
-        },
-        "title": "API Key",
-        "description": "This data structure represents an API key with its metadata.",
-        "type": "object",
-        "properties": {
-          "createdAt": {
-            "description": "The timestamp when the API key was created.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "id": {
-            "example": "key_abc123",
-            "type": "string"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "keyName": {
-            "example": "my_api_key",
-            "type": "string"
-          },
-          "lastActivated": {
-            "description": "The timestamp when the API key was last activated.",
-            "type": "string",
-            "format": "date-time"
-          },
-          "owner": {
-            "$ref": "#/components/schemas/ApiKeyOwner"
-          }
-        }
-      },
       "ApiKeyOwner": {
         "externalDocs": {
           "description": "Find out more about api keys",
@@ -420,7 +378,7 @@
         "type": "object",
         "properties": {
           "apiKey": {
-            "$ref": "#/components/schemas/ApiKey"
+            "$ref": "#/components/schemas/v3.ApiKey"
           },
           "permissions": {
             "type": "array",
@@ -455,33 +413,6 @@
             "type": "string"
           }
         }
-      },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
       },
       "CreateApiKeyRequest.KeyPermissions": {
         "externalDocs": {
@@ -573,9 +504,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -595,9 +526,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -732,34 +663,6 @@
           }
         }
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -777,13 +680,13 @@
       "Owner": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
-          },
-          {
             "$ref": "#/components/schemas/OwnerUserId"
           },
           {
             "$ref": "#/components/schemas/OwnerTeamId"
+          },
+          {
+            "$ref": "#/components/schemas/OwnerOrganisationId"
           }
         ]
       },
@@ -794,7 +697,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "organisationId"
+        ]
       },
       "OwnerTeamId": {
         "type": "object",
@@ -804,7 +709,9 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "teamId"
+        ]
       },
       "OwnerUserId": {
         "type": "object",
@@ -813,7 +720,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "userId"
+        ]
       },
       "PermissionsPreset": {
         "externalDocs": {
@@ -926,20 +835,47 @@
           "FILTER_MATCHER_REGEXP"
         ]
       },
+      "v3.ApiKey": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "API Key",
+        "description": "This data structure represents an API key with its metadata.",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "description": "The timestamp when the API key was created.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "example": "key_abc123",
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "keyName": {
+            "example": "my_api_key",
+            "type": "string"
+          },
+          "lastActivated": {
+            "description": "The timestamp when the API key was last activated.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/ApiKeyOwner"
+          }
+        }
+      },
       "v3.FilterOperator": {
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

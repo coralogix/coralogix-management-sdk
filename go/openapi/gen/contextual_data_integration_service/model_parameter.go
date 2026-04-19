@@ -11,10 +11,13 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // Parameter - struct for Parameter
 type Parameter struct {
@@ -74,7 +77,7 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ParameterApiKey
-	err = newStrictDecoder(data).Decode(&dst.ParameterApiKey)
+	err = json.Unmarshal(data, &dst.ParameterApiKey)
 	if err == nil {
 		jsonParameterApiKey, _ := json.Marshal(dst.ParameterApiKey)
 		if string(jsonParameterApiKey) == "{}" { // empty struct
@@ -91,7 +94,7 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ParameterBooleanValue
-	err = newStrictDecoder(data).Decode(&dst.ParameterBooleanValue)
+	err = json.Unmarshal(data, &dst.ParameterBooleanValue)
 	if err == nil {
 		jsonParameterBooleanValue, _ := json.Marshal(dst.ParameterBooleanValue)
 		if string(jsonParameterBooleanValue) == "{}" { // empty struct
@@ -108,7 +111,7 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ParameterNumericValue
-	err = newStrictDecoder(data).Decode(&dst.ParameterNumericValue)
+	err = json.Unmarshal(data, &dst.ParameterNumericValue)
 	if err == nil {
 		jsonParameterNumericValue, _ := json.Marshal(dst.ParameterNumericValue)
 		if string(jsonParameterNumericValue) == "{}" { // empty struct
@@ -125,7 +128,7 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ParameterSensitiveData
-	err = newStrictDecoder(data).Decode(&dst.ParameterSensitiveData)
+	err = json.Unmarshal(data, &dst.ParameterSensitiveData)
 	if err == nil {
 		jsonParameterSensitiveData, _ := json.Marshal(dst.ParameterSensitiveData)
 		if string(jsonParameterSensitiveData) == "{}" { // empty struct
@@ -142,7 +145,7 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ParameterStringList
-	err = newStrictDecoder(data).Decode(&dst.ParameterStringList)
+	err = json.Unmarshal(data, &dst.ParameterStringList)
 	if err == nil {
 		jsonParameterStringList, _ := json.Marshal(dst.ParameterStringList)
 		if string(jsonParameterStringList) == "{}" { // empty struct
@@ -159,7 +162,7 @@ func (dst *Parameter) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ParameterStringValue
-	err = newStrictDecoder(data).Decode(&dst.ParameterStringValue)
+	err = json.Unmarshal(data, &dst.ParameterStringValue)
 	if err == nil {
 		jsonParameterStringValue, _ := json.Marshal(dst.ParameterStringValue)
 		if string(jsonParameterStringValue) == "{}" { // empty struct
@@ -319,5 +322,4 @@ func (v *NullableParameter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

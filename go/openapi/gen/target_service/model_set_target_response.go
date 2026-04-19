@@ -11,10 +11,12 @@ API version: 1.0.0
 package target_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SetTargetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetTargetResponse{}
@@ -24,6 +26,7 @@ type SetTargetResponse struct {
 	Format *TargetFormat `json:"format,omitempty"`
 	IsActive bool `json:"isActive"`
 	S3 *S3TargetSpec `json:"s3,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SetTargetResponse SetTargetResponse
@@ -151,6 +154,11 @@ func (o SetTargetResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.S3) {
 		toSerialize["s3"] = o.S3
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -179,7 +187,6 @@ func (o *SetTargetResponse) UnmarshalJSON(data []byte) (err error) {
 	varSetTargetResponse := _SetTargetResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetTargetResponse)
 
 	if err != nil {
@@ -187,6 +194,15 @@ func (o *SetTargetResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = SetTargetResponse(varSetTargetResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "s3")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -226,5 +242,4 @@ func (v *NullableSetTargetResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BarChart{}
@@ -47,7 +50,10 @@ type BarChart struct {
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
 	YAxisMin *float32 `json:"yAxisMin,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BarChart BarChart
 
 // NewBarChart instantiates a new BarChart object
 // This constructor will assign default values to properties that have it defined,
@@ -741,7 +747,52 @@ func (o BarChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisMin) {
 		toSerialize["yAxisMin"] = o.YAxisMin
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BarChart) UnmarshalJSON(data []byte) (err error) {
+	varBarChart := _BarChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBarChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BarChart(varBarChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "barValueDisplay")
+		delete(additionalProperties, "colorScheme")
+		delete(additionalProperties, "colorsBy")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "decimal")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "groupNameTemplate")
+		delete(additionalProperties, "hashColors")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "maxBarsPerChart")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "sortBy")
+		delete(additionalProperties, "stackDefinition")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "xAxis")
+		delete(additionalProperties, "yAxisMax")
+		delete(additionalProperties, "yAxisMin")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBarChart struct {
@@ -779,5 +830,4 @@ func (v *NullableBarChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

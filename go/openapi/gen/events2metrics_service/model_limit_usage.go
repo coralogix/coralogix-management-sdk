@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LimitUsage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LimitUsage{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &LimitUsage{}
 type LimitUsage struct {
 	Limit *int32 `json:"limit,omitempty"`
 	Used *int32 `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LimitUsage LimitUsage
 
 // NewLimitUsage instantiates a new LimitUsage object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o LimitUsage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LimitUsage) UnmarshalJSON(data []byte) (err error) {
+	varLimitUsage := _LimitUsage{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLimitUsage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LimitUsage(varLimitUsage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLimitUsage struct {
@@ -158,5 +192,4 @@ func (v *NullableLimitUsage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

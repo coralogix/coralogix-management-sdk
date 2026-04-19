@@ -11,31 +11,37 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // Visualization - struct for Visualization
 type Visualization struct {
-	VisualizationGauge *VisualizationGauge
+	VisualizationGaugeVariant *VisualizationGaugeVariant
 	VisualizationGeomap *VisualizationGeomap
 	VisualizationHeatmap *VisualizationHeatmap
 	VisualizationHexagonBins *VisualizationHexagonBins
 	VisualizationHorizontalBars *VisualizationHorizontalBars
-	VisualizationPieChart *VisualizationPieChart
+	VisualizationHorizontalBarsMulti *VisualizationHorizontalBarsMulti
+	VisualizationPieChartVariant *VisualizationPieChartVariant
 	VisualizationStat *VisualizationStat
+	VisualizationStatCard *VisualizationStatCard
 	VisualizationTable *VisualizationTable
 	VisualizationTimeSeriesBars *VisualizationTimeSeriesBars
 	VisualizationTimeSeriesLines *VisualizationTimeSeriesLines
 	VisualizationTimeSeriesLinesMulti *VisualizationTimeSeriesLinesMulti
 	VisualizationVerticalBars *VisualizationVerticalBars
+	VisualizationVerticalBarsMulti *VisualizationVerticalBarsMulti
 }
 
-// VisualizationGaugeAsVisualization is a convenience function that returns VisualizationGauge wrapped in Visualization
-func VisualizationGaugeAsVisualization(v *VisualizationGauge) Visualization {
+// VisualizationGaugeVariantAsVisualization is a convenience function that returns VisualizationGaugeVariant wrapped in Visualization
+func VisualizationGaugeVariantAsVisualization(v *VisualizationGaugeVariant) Visualization {
 	return Visualization{
-		VisualizationGauge: v,
+		VisualizationGaugeVariant: v,
 	}
 }
 
@@ -67,10 +73,17 @@ func VisualizationHorizontalBarsAsVisualization(v *VisualizationHorizontalBars) 
 	}
 }
 
-// VisualizationPieChartAsVisualization is a convenience function that returns VisualizationPieChart wrapped in Visualization
-func VisualizationPieChartAsVisualization(v *VisualizationPieChart) Visualization {
+// VisualizationHorizontalBarsMultiAsVisualization is a convenience function that returns VisualizationHorizontalBarsMulti wrapped in Visualization
+func VisualizationHorizontalBarsMultiAsVisualization(v *VisualizationHorizontalBarsMulti) Visualization {
 	return Visualization{
-		VisualizationPieChart: v,
+		VisualizationHorizontalBarsMulti: v,
+	}
+}
+
+// VisualizationPieChartVariantAsVisualization is a convenience function that returns VisualizationPieChartVariant wrapped in Visualization
+func VisualizationPieChartVariantAsVisualization(v *VisualizationPieChartVariant) Visualization {
+	return Visualization{
+		VisualizationPieChartVariant: v,
 	}
 }
 
@@ -78,6 +91,13 @@ func VisualizationPieChartAsVisualization(v *VisualizationPieChart) Visualizatio
 func VisualizationStatAsVisualization(v *VisualizationStat) Visualization {
 	return Visualization{
 		VisualizationStat: v,
+	}
+}
+
+// VisualizationStatCardAsVisualization is a convenience function that returns VisualizationStatCard wrapped in Visualization
+func VisualizationStatCardAsVisualization(v *VisualizationStatCard) Visualization {
+	return Visualization{
+		VisualizationStatCard: v,
 	}
 }
 
@@ -116,30 +136,37 @@ func VisualizationVerticalBarsAsVisualization(v *VisualizationVerticalBars) Visu
 	}
 }
 
+// VisualizationVerticalBarsMultiAsVisualization is a convenience function that returns VisualizationVerticalBarsMulti wrapped in Visualization
+func VisualizationVerticalBarsMultiAsVisualization(v *VisualizationVerticalBarsMulti) Visualization {
+	return Visualization{
+		VisualizationVerticalBarsMulti: v,
+	}
+}
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into VisualizationGauge
-	err = newStrictDecoder(data).Decode(&dst.VisualizationGauge)
+	// try to unmarshal data into VisualizationGaugeVariant
+	err = json.Unmarshal(data, &dst.VisualizationGaugeVariant)
 	if err == nil {
-		jsonVisualizationGauge, _ := json.Marshal(dst.VisualizationGauge)
-		if string(jsonVisualizationGauge) == "{}" { // empty struct
-			dst.VisualizationGauge = nil
+		jsonVisualizationGaugeVariant, _ := json.Marshal(dst.VisualizationGaugeVariant)
+		if string(jsonVisualizationGaugeVariant) == "{}" { // empty struct
+			dst.VisualizationGaugeVariant = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationGauge); err != nil {
-				dst.VisualizationGauge = nil
+			if err = validator.Validate(dst.VisualizationGaugeVariant); err != nil {
+				dst.VisualizationGaugeVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationGauge = nil
+		dst.VisualizationGaugeVariant = nil
 	}
 
 	// try to unmarshal data into VisualizationGeomap
-	err = newStrictDecoder(data).Decode(&dst.VisualizationGeomap)
+	err = json.Unmarshal(data, &dst.VisualizationGeomap)
 	if err == nil {
 		jsonVisualizationGeomap, _ := json.Marshal(dst.VisualizationGeomap)
 		if string(jsonVisualizationGeomap) == "{}" { // empty struct
@@ -156,7 +183,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationHeatmap
-	err = newStrictDecoder(data).Decode(&dst.VisualizationHeatmap)
+	err = json.Unmarshal(data, &dst.VisualizationHeatmap)
 	if err == nil {
 		jsonVisualizationHeatmap, _ := json.Marshal(dst.VisualizationHeatmap)
 		if string(jsonVisualizationHeatmap) == "{}" { // empty struct
@@ -173,7 +200,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationHexagonBins
-	err = newStrictDecoder(data).Decode(&dst.VisualizationHexagonBins)
+	err = json.Unmarshal(data, &dst.VisualizationHexagonBins)
 	if err == nil {
 		jsonVisualizationHexagonBins, _ := json.Marshal(dst.VisualizationHexagonBins)
 		if string(jsonVisualizationHexagonBins) == "{}" { // empty struct
@@ -190,7 +217,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationHorizontalBars
-	err = newStrictDecoder(data).Decode(&dst.VisualizationHorizontalBars)
+	err = json.Unmarshal(data, &dst.VisualizationHorizontalBars)
 	if err == nil {
 		jsonVisualizationHorizontalBars, _ := json.Marshal(dst.VisualizationHorizontalBars)
 		if string(jsonVisualizationHorizontalBars) == "{}" { // empty struct
@@ -206,25 +233,42 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		dst.VisualizationHorizontalBars = nil
 	}
 
-	// try to unmarshal data into VisualizationPieChart
-	err = newStrictDecoder(data).Decode(&dst.VisualizationPieChart)
+	// try to unmarshal data into VisualizationHorizontalBarsMulti
+	err = json.Unmarshal(data, &dst.VisualizationHorizontalBarsMulti)
 	if err == nil {
-		jsonVisualizationPieChart, _ := json.Marshal(dst.VisualizationPieChart)
-		if string(jsonVisualizationPieChart) == "{}" { // empty struct
-			dst.VisualizationPieChart = nil
+		jsonVisualizationHorizontalBarsMulti, _ := json.Marshal(dst.VisualizationHorizontalBarsMulti)
+		if string(jsonVisualizationHorizontalBarsMulti) == "{}" { // empty struct
+			dst.VisualizationHorizontalBarsMulti = nil
 		} else {
-			if err = validator.Validate(dst.VisualizationPieChart); err != nil {
-				dst.VisualizationPieChart = nil
+			if err = validator.Validate(dst.VisualizationHorizontalBarsMulti); err != nil {
+				dst.VisualizationHorizontalBarsMulti = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.VisualizationPieChart = nil
+		dst.VisualizationHorizontalBarsMulti = nil
+	}
+
+	// try to unmarshal data into VisualizationPieChartVariant
+	err = json.Unmarshal(data, &dst.VisualizationPieChartVariant)
+	if err == nil {
+		jsonVisualizationPieChartVariant, _ := json.Marshal(dst.VisualizationPieChartVariant)
+		if string(jsonVisualizationPieChartVariant) == "{}" { // empty struct
+			dst.VisualizationPieChartVariant = nil
+		} else {
+			if err = validator.Validate(dst.VisualizationPieChartVariant); err != nil {
+				dst.VisualizationPieChartVariant = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.VisualizationPieChartVariant = nil
 	}
 
 	// try to unmarshal data into VisualizationStat
-	err = newStrictDecoder(data).Decode(&dst.VisualizationStat)
+	err = json.Unmarshal(data, &dst.VisualizationStat)
 	if err == nil {
 		jsonVisualizationStat, _ := json.Marshal(dst.VisualizationStat)
 		if string(jsonVisualizationStat) == "{}" { // empty struct
@@ -240,8 +284,25 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		dst.VisualizationStat = nil
 	}
 
+	// try to unmarshal data into VisualizationStatCard
+	err = json.Unmarshal(data, &dst.VisualizationStatCard)
+	if err == nil {
+		jsonVisualizationStatCard, _ := json.Marshal(dst.VisualizationStatCard)
+		if string(jsonVisualizationStatCard) == "{}" { // empty struct
+			dst.VisualizationStatCard = nil
+		} else {
+			if err = validator.Validate(dst.VisualizationStatCard); err != nil {
+				dst.VisualizationStatCard = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.VisualizationStatCard = nil
+	}
+
 	// try to unmarshal data into VisualizationTable
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTable)
+	err = json.Unmarshal(data, &dst.VisualizationTable)
 	if err == nil {
 		jsonVisualizationTable, _ := json.Marshal(dst.VisualizationTable)
 		if string(jsonVisualizationTable) == "{}" { // empty struct
@@ -258,7 +319,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTimeSeriesBars
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesBars)
+	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesBars)
 	if err == nil {
 		jsonVisualizationTimeSeriesBars, _ := json.Marshal(dst.VisualizationTimeSeriesBars)
 		if string(jsonVisualizationTimeSeriesBars) == "{}" { // empty struct
@@ -275,7 +336,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTimeSeriesLines
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesLines)
+	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesLines)
 	if err == nil {
 		jsonVisualizationTimeSeriesLines, _ := json.Marshal(dst.VisualizationTimeSeriesLines)
 		if string(jsonVisualizationTimeSeriesLines) == "{}" { // empty struct
@@ -292,7 +353,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationTimeSeriesLinesMulti
-	err = newStrictDecoder(data).Decode(&dst.VisualizationTimeSeriesLinesMulti)
+	err = json.Unmarshal(data, &dst.VisualizationTimeSeriesLinesMulti)
 	if err == nil {
 		jsonVisualizationTimeSeriesLinesMulti, _ := json.Marshal(dst.VisualizationTimeSeriesLinesMulti)
 		if string(jsonVisualizationTimeSeriesLinesMulti) == "{}" { // empty struct
@@ -309,7 +370,7 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into VisualizationVerticalBars
-	err = newStrictDecoder(data).Decode(&dst.VisualizationVerticalBars)
+	err = json.Unmarshal(data, &dst.VisualizationVerticalBars)
 	if err == nil {
 		jsonVisualizationVerticalBars, _ := json.Marshal(dst.VisualizationVerticalBars)
 		if string(jsonVisualizationVerticalBars) == "{}" { // empty struct
@@ -325,20 +386,40 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 		dst.VisualizationVerticalBars = nil
 	}
 
+	// try to unmarshal data into VisualizationVerticalBarsMulti
+	err = json.Unmarshal(data, &dst.VisualizationVerticalBarsMulti)
+	if err == nil {
+		jsonVisualizationVerticalBarsMulti, _ := json.Marshal(dst.VisualizationVerticalBarsMulti)
+		if string(jsonVisualizationVerticalBarsMulti) == "{}" { // empty struct
+			dst.VisualizationVerticalBarsMulti = nil
+		} else {
+			if err = validator.Validate(dst.VisualizationVerticalBarsMulti); err != nil {
+				dst.VisualizationVerticalBarsMulti = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.VisualizationVerticalBarsMulti = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.VisualizationGauge = nil
+		dst.VisualizationGaugeVariant = nil
 		dst.VisualizationGeomap = nil
 		dst.VisualizationHeatmap = nil
 		dst.VisualizationHexagonBins = nil
 		dst.VisualizationHorizontalBars = nil
-		dst.VisualizationPieChart = nil
+		dst.VisualizationHorizontalBarsMulti = nil
+		dst.VisualizationPieChartVariant = nil
 		dst.VisualizationStat = nil
+		dst.VisualizationStatCard = nil
 		dst.VisualizationTable = nil
 		dst.VisualizationTimeSeriesBars = nil
 		dst.VisualizationTimeSeriesLines = nil
 		dst.VisualizationTimeSeriesLinesMulti = nil
 		dst.VisualizationVerticalBars = nil
+		dst.VisualizationVerticalBarsMulti = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(Visualization)")
 	} else if match == 1 {
@@ -350,8 +431,8 @@ func (dst *Visualization) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src Visualization) MarshalJSON() ([]byte, error) {
-	if src.VisualizationGauge != nil {
-		return json.Marshal(&src.VisualizationGauge)
+	if src.VisualizationGaugeVariant != nil {
+		return json.Marshal(&src.VisualizationGaugeVariant)
 	}
 
 	if src.VisualizationGeomap != nil {
@@ -370,12 +451,20 @@ func (src Visualization) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.VisualizationHorizontalBars)
 	}
 
-	if src.VisualizationPieChart != nil {
-		return json.Marshal(&src.VisualizationPieChart)
+	if src.VisualizationHorizontalBarsMulti != nil {
+		return json.Marshal(&src.VisualizationHorizontalBarsMulti)
+	}
+
+	if src.VisualizationPieChartVariant != nil {
+		return json.Marshal(&src.VisualizationPieChartVariant)
 	}
 
 	if src.VisualizationStat != nil {
 		return json.Marshal(&src.VisualizationStat)
+	}
+
+	if src.VisualizationStatCard != nil {
+		return json.Marshal(&src.VisualizationStatCard)
 	}
 
 	if src.VisualizationTable != nil {
@@ -398,6 +487,10 @@ func (src Visualization) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.VisualizationVerticalBars)
 	}
 
+	if src.VisualizationVerticalBarsMulti != nil {
+		return json.Marshal(&src.VisualizationVerticalBarsMulti)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -406,8 +499,8 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.VisualizationGauge != nil {
-		return obj.VisualizationGauge
+	if obj.VisualizationGaugeVariant != nil {
+		return obj.VisualizationGaugeVariant
 	}
 
 	if obj.VisualizationGeomap != nil {
@@ -426,12 +519,20 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 		return obj.VisualizationHorizontalBars
 	}
 
-	if obj.VisualizationPieChart != nil {
-		return obj.VisualizationPieChart
+	if obj.VisualizationHorizontalBarsMulti != nil {
+		return obj.VisualizationHorizontalBarsMulti
+	}
+
+	if obj.VisualizationPieChartVariant != nil {
+		return obj.VisualizationPieChartVariant
 	}
 
 	if obj.VisualizationStat != nil {
 		return obj.VisualizationStat
+	}
+
+	if obj.VisualizationStatCard != nil {
+		return obj.VisualizationStatCard
 	}
 
 	if obj.VisualizationTable != nil {
@@ -454,14 +555,18 @@ func (obj *Visualization) GetActualInstance() (interface{}) {
 		return obj.VisualizationVerticalBars
 	}
 
+	if obj.VisualizationVerticalBarsMulti != nil {
+		return obj.VisualizationVerticalBarsMulti
+	}
+
 	// all schemas are nil
 	return nil
 }
 
 // Get the actual instance value
 func (obj Visualization) GetActualInstanceValue() (interface{}) {
-	if obj.VisualizationGauge != nil {
-		return *obj.VisualizationGauge
+	if obj.VisualizationGaugeVariant != nil {
+		return *obj.VisualizationGaugeVariant
 	}
 
 	if obj.VisualizationGeomap != nil {
@@ -480,12 +585,20 @@ func (obj Visualization) GetActualInstanceValue() (interface{}) {
 		return *obj.VisualizationHorizontalBars
 	}
 
-	if obj.VisualizationPieChart != nil {
-		return *obj.VisualizationPieChart
+	if obj.VisualizationHorizontalBarsMulti != nil {
+		return *obj.VisualizationHorizontalBarsMulti
+	}
+
+	if obj.VisualizationPieChartVariant != nil {
+		return *obj.VisualizationPieChartVariant
 	}
 
 	if obj.VisualizationStat != nil {
 		return *obj.VisualizationStat
+	}
+
+	if obj.VisualizationStatCard != nil {
+		return *obj.VisualizationStatCard
 	}
 
 	if obj.VisualizationTable != nil {
@@ -506,6 +619,10 @@ func (obj Visualization) GetActualInstanceValue() (interface{}) {
 
 	if obj.VisualizationVerticalBars != nil {
 		return *obj.VisualizationVerticalBars
+	}
+
+	if obj.VisualizationVerticalBarsMulti != nil {
+		return *obj.VisualizationVerticalBarsMulti
 	}
 
 	// all schemas are nil
@@ -547,5 +664,4 @@ func (v *NullableVisualization) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

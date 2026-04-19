@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListAlertDefsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListAlertDefsResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ListAlertDefsResponse{}
 type ListAlertDefsResponse struct {
 	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListAlertDefsResponse ListAlertDefsResponse
 
 // NewListAlertDefsResponse instantiates a new ListAlertDefsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ListAlertDefsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
+	varListAlertDefsResponse := _ListAlertDefsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListAlertDefsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListAlertDefsResponse(varListAlertDefsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertDefs")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListAlertDefsResponse struct {
@@ -158,5 +192,4 @@ func (v *NullableListAlertDefsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

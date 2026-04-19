@@ -11,8 +11,12 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IDPParametersMetadataContent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IDPParametersMetadataContent{}
@@ -21,16 +25,20 @@ var _ MappedNullable = &IDPParametersMetadataContent{}
 type IDPParametersMetadataContent struct {
 	Active *bool `json:"active,omitempty"`
 	GroupNames []string `json:"groupNames,omitempty"`
-	MetadataContent *string `json:"metadataContent,omitempty"`
+	MetadataContent string `json:"metadataContent"`
 	TeamEntityId *int64 `json:"teamEntityId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IDPParametersMetadataContent IDPParametersMetadataContent
 
 // NewIDPParametersMetadataContent instantiates a new IDPParametersMetadataContent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIDPParametersMetadataContent() *IDPParametersMetadataContent {
+func NewIDPParametersMetadataContent(metadataContent string) *IDPParametersMetadataContent {
 	this := IDPParametersMetadataContent{}
+	this.MetadataContent = metadataContent
 	return &this
 }
 
@@ -106,36 +114,28 @@ func (o *IDPParametersMetadataContent) SetGroupNames(v []string) {
 	o.GroupNames = v
 }
 
-// GetMetadataContent returns the MetadataContent field value if set, zero value otherwise.
+// GetMetadataContent returns the MetadataContent field value
 func (o *IDPParametersMetadataContent) GetMetadataContent() string {
-	if o == nil || IsNil(o.MetadataContent) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.MetadataContent
+
+	return o.MetadataContent
 }
 
-// GetMetadataContentOk returns a tuple with the MetadataContent field value if set, nil otherwise
+// GetMetadataContentOk returns a tuple with the MetadataContent field value
 // and a boolean to check if the value has been set.
 func (o *IDPParametersMetadataContent) GetMetadataContentOk() (*string, bool) {
-	if o == nil || IsNil(o.MetadataContent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MetadataContent, true
+	return &o.MetadataContent, true
 }
 
-// HasMetadataContent returns a boolean if a field has been set.
-func (o *IDPParametersMetadataContent) HasMetadataContent() bool {
-	if o != nil && !IsNil(o.MetadataContent) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadataContent gets a reference to the given string and assigns it to the MetadataContent field.
+// SetMetadataContent sets field value
 func (o *IDPParametersMetadataContent) SetMetadataContent(v string) {
-	o.MetadataContent = &v
+	o.MetadataContent = v
 }
 
 // GetTeamEntityId returns the TeamEntityId field value if set, zero value otherwise.
@@ -186,13 +186,62 @@ func (o IDPParametersMetadataContent) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupNames) {
 		toSerialize["groupNames"] = o.GroupNames
 	}
-	if !IsNil(o.MetadataContent) {
-		toSerialize["metadataContent"] = o.MetadataContent
-	}
+	toSerialize["metadataContent"] = o.MetadataContent
 	if !IsNil(o.TeamEntityId) {
 		toSerialize["teamEntityId"] = o.TeamEntityId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IDPParametersMetadataContent) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadataContent",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIDPParametersMetadataContent := _IDPParametersMetadataContent{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIDPParametersMetadataContent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IDPParametersMetadataContent(varIDPParametersMetadataContent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "groupNames")
+		delete(additionalProperties, "metadataContent")
+		delete(additionalProperties, "teamEntityId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIDPParametersMetadataContent struct {
@@ -230,5 +279,4 @@ func (v *NullableIDPParametersMetadataContent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

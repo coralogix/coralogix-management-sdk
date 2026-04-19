@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FlowType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FlowType{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &FlowType{}
 type FlowType struct {
 	EnforceSuppression *bool `json:"enforceSuppression,omitempty"`
 	Stages []FlowStages `json:"stages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FlowType FlowType
 
 // NewFlowType instantiates a new FlowType object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o FlowType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Stages) {
 		toSerialize["stages"] = o.Stages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FlowType) UnmarshalJSON(data []byte) (err error) {
+	varFlowType := _FlowType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFlowType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FlowType(varFlowType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enforceSuppression")
+		delete(additionalProperties, "stages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFlowType struct {
@@ -158,5 +192,4 @@ func (v *NullableFlowType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

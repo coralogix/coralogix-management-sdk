@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloFilterFieldProductType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloFilterFieldProductType{}
 
 // SloFilterFieldProductType Field used for filtering SLOs
 type SloFilterFieldProductType struct {
-	ProductType *bool `json:"productType,omitempty"`
+	ProductType bool `json:"productType"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloFilterFieldProductType SloFilterFieldProductType
 
 // NewSloFilterFieldProductType instantiates a new SloFilterFieldProductType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloFilterFieldProductType() *SloFilterFieldProductType {
+func NewSloFilterFieldProductType(productType bool) *SloFilterFieldProductType {
 	this := SloFilterFieldProductType{}
+	this.ProductType = productType
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSloFilterFieldProductTypeWithDefaults() *SloFilterFieldProductType {
 	return &this
 }
 
-// GetProductType returns the ProductType field value if set, zero value otherwise.
+// GetProductType returns the ProductType field value
 func (o *SloFilterFieldProductType) GetProductType() bool {
-	if o == nil || IsNil(o.ProductType) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ProductType
+
+	return o.ProductType
 }
 
-// GetProductTypeOk returns a tuple with the ProductType field value if set, nil otherwise
+// GetProductTypeOk returns a tuple with the ProductType field value
 // and a boolean to check if the value has been set.
 func (o *SloFilterFieldProductType) GetProductTypeOk() (*bool, bool) {
-	if o == nil || IsNil(o.ProductType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProductType, true
+	return &o.ProductType, true
 }
 
-// HasProductType returns a boolean if a field has been set.
-func (o *SloFilterFieldProductType) HasProductType() bool {
-	if o != nil && !IsNil(o.ProductType) {
-		return true
-	}
-
-	return false
-}
-
-// SetProductType gets a reference to the given bool and assigns it to the ProductType field.
+// SetProductType sets field value
 func (o *SloFilterFieldProductType) SetProductType(v bool) {
-	o.ProductType = &v
+	o.ProductType = v
 }
 
 func (o SloFilterFieldProductType) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SloFilterFieldProductType) MarshalJSON() ([]byte, error) {
 
 func (o SloFilterFieldProductType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProductType) {
-		toSerialize["productType"] = o.ProductType
+	toSerialize["productType"] = o.ProductType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloFilterFieldProductType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"productType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloFilterFieldProductType := _SloFilterFieldProductType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloFilterFieldProductType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloFilterFieldProductType(varSloFilterFieldProductType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "productType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloFilterFieldProductType struct {
@@ -122,5 +168,4 @@ func (v *NullableSloFilterFieldProductType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

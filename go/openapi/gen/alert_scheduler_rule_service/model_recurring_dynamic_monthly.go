@@ -11,26 +11,34 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RecurringDynamicMonthly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringDynamicMonthly{}
 
 // RecurringDynamicMonthly struct for RecurringDynamicMonthly
 type RecurringDynamicMonthly struct {
-	Monthly *Monthly `json:"monthly,omitempty"`
+	Monthly Monthly `json:"monthly"`
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
 	TerminationDate *string `json:"terminationDate,omitempty"`
 	Timeframe *Timeframe `json:"timeframe,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecurringDynamicMonthly RecurringDynamicMonthly
 
 // NewRecurringDynamicMonthly instantiates a new RecurringDynamicMonthly object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRecurringDynamicMonthly() *RecurringDynamicMonthly {
+func NewRecurringDynamicMonthly(monthly Monthly) *RecurringDynamicMonthly {
 	this := RecurringDynamicMonthly{}
+	this.Monthly = monthly
 	return &this
 }
 
@@ -42,36 +50,28 @@ func NewRecurringDynamicMonthlyWithDefaults() *RecurringDynamicMonthly {
 	return &this
 }
 
-// GetMonthly returns the Monthly field value if set, zero value otherwise.
+// GetMonthly returns the Monthly field value
 func (o *RecurringDynamicMonthly) GetMonthly() Monthly {
-	if o == nil || IsNil(o.Monthly) {
+	if o == nil {
 		var ret Monthly
 		return ret
 	}
-	return *o.Monthly
+
+	return o.Monthly
 }
 
-// GetMonthlyOk returns a tuple with the Monthly field value if set, nil otherwise
+// GetMonthlyOk returns a tuple with the Monthly field value
 // and a boolean to check if the value has been set.
 func (o *RecurringDynamicMonthly) GetMonthlyOk() (*Monthly, bool) {
-	if o == nil || IsNil(o.Monthly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Monthly, true
+	return &o.Monthly, true
 }
 
-// HasMonthly returns a boolean if a field has been set.
-func (o *RecurringDynamicMonthly) HasMonthly() bool {
-	if o != nil && !IsNil(o.Monthly) {
-		return true
-	}
-
-	return false
-}
-
-// SetMonthly gets a reference to the given Monthly and assigns it to the Monthly field.
+// SetMonthly sets field value
 func (o *RecurringDynamicMonthly) SetMonthly(v Monthly) {
-	o.Monthly = &v
+	o.Monthly = v
 }
 
 // GetRepeatEvery returns the RepeatEvery field value if set, zero value otherwise.
@@ -180,9 +180,7 @@ func (o RecurringDynamicMonthly) MarshalJSON() ([]byte, error) {
 
 func (o RecurringDynamicMonthly) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Monthly) {
-		toSerialize["monthly"] = o.Monthly
-	}
+	toSerialize["monthly"] = o.Monthly
 	if !IsNil(o.RepeatEvery) {
 		toSerialize["repeatEvery"] = o.RepeatEvery
 	}
@@ -192,7 +190,58 @@ func (o RecurringDynamicMonthly) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timeframe) {
 		toSerialize["timeframe"] = o.Timeframe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecurringDynamicMonthly) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"monthly",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRecurringDynamicMonthly := _RecurringDynamicMonthly{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRecurringDynamicMonthly)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecurringDynamicMonthly(varRecurringDynamicMonthly)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "monthly")
+		delete(additionalProperties, "repeatEvery")
+		delete(additionalProperties, "terminationDate")
+		delete(additionalProperties, "timeframe")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecurringDynamicMonthly struct {
@@ -230,5 +279,4 @@ func (v *NullableRecurringDynamicMonthly) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

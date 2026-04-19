@@ -11,8 +11,11 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScopesFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopesFilter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ScopesFilter{}
 type ScopesFilter struct {
 	Application []string `json:"application,omitempty"`
 	Subsystem []string `json:"subsystem,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScopesFilter ScopesFilter
 
 // NewScopesFilter instantiates a new ScopesFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ScopesFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Subsystem) {
 		toSerialize["subsystem"] = o.Subsystem
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScopesFilter) UnmarshalJSON(data []byte) (err error) {
+	varScopesFilter := _ScopesFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varScopesFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScopesFilter(varScopesFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "application")
+		delete(additionalProperties, "subsystem")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScopesFilter struct {
@@ -158,5 +192,4 @@ func (v *NullableScopesFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

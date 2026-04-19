@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleScopeFieldType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleScopeFieldType{}
 
 // RuleScopeFieldType struct for RuleScopeFieldType
 type RuleScopeFieldType struct {
-	FieldType *FieldDataType `json:"fieldType,omitempty"`
+	FieldType FieldDataType `json:"fieldType"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleScopeFieldType RuleScopeFieldType
 
 // NewRuleScopeFieldType instantiates a new RuleScopeFieldType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleScopeFieldType() *RuleScopeFieldType {
+func NewRuleScopeFieldType(fieldType FieldDataType) *RuleScopeFieldType {
 	this := RuleScopeFieldType{}
+	this.FieldType = fieldType
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleScopeFieldTypeWithDefaults() *RuleScopeFieldType {
 	return &this
 }
 
-// GetFieldType returns the FieldType field value if set, zero value otherwise.
+// GetFieldType returns the FieldType field value
 func (o *RuleScopeFieldType) GetFieldType() FieldDataType {
-	if o == nil || IsNil(o.FieldType) {
+	if o == nil {
 		var ret FieldDataType
 		return ret
 	}
-	return *o.FieldType
+
+	return o.FieldType
 }
 
-// GetFieldTypeOk returns a tuple with the FieldType field value if set, nil otherwise
+// GetFieldTypeOk returns a tuple with the FieldType field value
 // and a boolean to check if the value has been set.
 func (o *RuleScopeFieldType) GetFieldTypeOk() (*FieldDataType, bool) {
-	if o == nil || IsNil(o.FieldType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FieldType, true
+	return &o.FieldType, true
 }
 
-// HasFieldType returns a boolean if a field has been set.
-func (o *RuleScopeFieldType) HasFieldType() bool {
-	if o != nil && !IsNil(o.FieldType) {
-		return true
-	}
-
-	return false
-}
-
-// SetFieldType gets a reference to the given FieldDataType and assigns it to the FieldType field.
+// SetFieldType sets field value
 func (o *RuleScopeFieldType) SetFieldType(v FieldDataType) {
-	o.FieldType = &v
+	o.FieldType = v
 }
 
 func (o RuleScopeFieldType) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleScopeFieldType) MarshalJSON() ([]byte, error) {
 
 func (o RuleScopeFieldType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldType) {
-		toSerialize["fieldType"] = o.FieldType
+	toSerialize["fieldType"] = o.FieldType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleScopeFieldType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fieldType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleScopeFieldType := _RuleScopeFieldType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleScopeFieldType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleScopeFieldType(varRuleScopeFieldType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fieldType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleScopeFieldType struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleScopeFieldType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

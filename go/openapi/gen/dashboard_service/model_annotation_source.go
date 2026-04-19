@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // AnnotationSource - struct for AnnotationSource
 type AnnotationSource struct {
@@ -74,7 +77,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into AnnotationSourceDataprime
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceDataprime)
+	err = json.Unmarshal(data, &dst.AnnotationSourceDataprime)
 	if err == nil {
 		jsonAnnotationSourceDataprime, _ := json.Marshal(dst.AnnotationSourceDataprime)
 		if string(jsonAnnotationSourceDataprime) == "{}" { // empty struct
@@ -91,7 +94,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AnnotationSourceEventRecurrence
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceEventRecurrence)
+	err = json.Unmarshal(data, &dst.AnnotationSourceEventRecurrence)
 	if err == nil {
 		jsonAnnotationSourceEventRecurrence, _ := json.Marshal(dst.AnnotationSourceEventRecurrence)
 		if string(jsonAnnotationSourceEventRecurrence) == "{}" { // empty struct
@@ -108,7 +111,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AnnotationSourceLogs
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceLogs)
+	err = json.Unmarshal(data, &dst.AnnotationSourceLogs)
 	if err == nil {
 		jsonAnnotationSourceLogs, _ := json.Marshal(dst.AnnotationSourceLogs)
 		if string(jsonAnnotationSourceLogs) == "{}" { // empty struct
@@ -125,7 +128,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AnnotationSourceManual
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceManual)
+	err = json.Unmarshal(data, &dst.AnnotationSourceManual)
 	if err == nil {
 		jsonAnnotationSourceManual, _ := json.Marshal(dst.AnnotationSourceManual)
 		if string(jsonAnnotationSourceManual) == "{}" { // empty struct
@@ -142,7 +145,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AnnotationSourceMetrics
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceMetrics)
+	err = json.Unmarshal(data, &dst.AnnotationSourceMetrics)
 	if err == nil {
 		jsonAnnotationSourceMetrics, _ := json.Marshal(dst.AnnotationSourceMetrics)
 		if string(jsonAnnotationSourceMetrics) == "{}" { // empty struct
@@ -159,7 +162,7 @@ func (dst *AnnotationSource) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into AnnotationSourceSpans
-	err = newStrictDecoder(data).Decode(&dst.AnnotationSourceSpans)
+	err = json.Unmarshal(data, &dst.AnnotationSourceSpans)
 	if err == nil {
 		jsonAnnotationSourceSpans, _ := json.Marshal(dst.AnnotationSourceSpans)
 		if string(jsonAnnotationSourceSpans) == "{}" { // empty struct
@@ -319,5 +322,4 @@ func (v *NullableAnnotationSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

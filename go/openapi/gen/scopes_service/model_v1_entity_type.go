@@ -11,9 +11,12 @@ API version: 1.0.0
 package scopes_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V1EntityType the model 'V1EntityType'
 type V1EntityType string

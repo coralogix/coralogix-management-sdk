@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Deprecation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Deprecation{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &Deprecation{}
 type Deprecation struct {
 	Reason *string `json:"reason,omitempty"`
 	ReplacementExtensions []string `json:"replacementExtensions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Deprecation Deprecation
 
 // NewDeprecation instantiates a new Deprecation object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o Deprecation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReplacementExtensions) {
 		toSerialize["replacementExtensions"] = o.ReplacementExtensions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Deprecation) UnmarshalJSON(data []byte) (err error) {
+	varDeprecation := _Deprecation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeprecation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Deprecation(varDeprecation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "replacementExtensions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeprecation struct {
@@ -158,5 +192,4 @@ func (v *NullableDeprecation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

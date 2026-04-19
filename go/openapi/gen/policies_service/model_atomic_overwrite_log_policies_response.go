@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicOverwriteLogPoliciesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicOverwriteLogPoliciesResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AtomicOverwriteLogPoliciesResponse{}
 // AtomicOverwriteLogPoliciesResponse This data structue is obtained when overwriting log policies atomically.
 type AtomicOverwriteLogPoliciesResponse struct {
 	CreateResponses []CreatePolicyResponse `json:"createResponses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AtomicOverwriteLogPoliciesResponse AtomicOverwriteLogPoliciesResponse
 
 // NewAtomicOverwriteLogPoliciesResponse instantiates a new AtomicOverwriteLogPoliciesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AtomicOverwriteLogPoliciesResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.CreateResponses) {
 		toSerialize["createResponses"] = o.CreateResponses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AtomicOverwriteLogPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
+	varAtomicOverwriteLogPoliciesResponse := _AtomicOverwriteLogPoliciesResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAtomicOverwriteLogPoliciesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AtomicOverwriteLogPoliciesResponse(varAtomicOverwriteLogPoliciesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createResponses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAtomicOverwriteLogPoliciesResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableAtomicOverwriteLogPoliciesResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

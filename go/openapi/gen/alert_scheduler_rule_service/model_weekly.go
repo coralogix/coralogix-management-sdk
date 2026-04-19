@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Weekly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Weekly{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Weekly{}
 // Weekly struct for Weekly
 type Weekly struct {
 	DaysOfWeek []int32 `json:"daysOfWeek,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Weekly Weekly
 
 // NewWeekly instantiates a new Weekly object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Weekly) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DaysOfWeek) {
 		toSerialize["daysOfWeek"] = o.DaysOfWeek
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Weekly) UnmarshalJSON(data []byte) (err error) {
+	varWeekly := _Weekly{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWeekly)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Weekly(varWeekly)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "daysOfWeek")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWeekly struct {
@@ -122,5 +155,4 @@ func (v *NullableWeekly) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

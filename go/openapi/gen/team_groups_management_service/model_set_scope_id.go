@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SetScopeId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetScopeId{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SetScopeId{}
 // SetScopeId struct for SetScopeId
 type SetScopeId struct {
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SetScopeId SetScopeId
 
 // NewSetScopeId instantiates a new SetScopeId object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SetScopeId) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SetScopeId) UnmarshalJSON(data []byte) (err error) {
+	varSetScopeId := _SetScopeId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSetScopeId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SetScopeId(varSetScopeId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSetScopeId struct {
@@ -122,5 +155,4 @@ func (v *NullableSetScopeId) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

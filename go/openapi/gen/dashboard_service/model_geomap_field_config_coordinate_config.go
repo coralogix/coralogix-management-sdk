@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapFieldConfigCoordinateConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapFieldConfigCoordinateConfig{}
 
 // GeomapFieldConfigCoordinateConfig struct for GeomapFieldConfigCoordinateConfig
 type GeomapFieldConfigCoordinateConfig struct {
-	CoordinateConfig *GeomapCoordinateConfig `json:"coordinateConfig,omitempty"`
+	CoordinateConfig GeomapCoordinateConfig `json:"coordinateConfig"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapFieldConfigCoordinateConfig GeomapFieldConfigCoordinateConfig
 
 // NewGeomapFieldConfigCoordinateConfig instantiates a new GeomapFieldConfigCoordinateConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapFieldConfigCoordinateConfig() *GeomapFieldConfigCoordinateConfig {
+func NewGeomapFieldConfigCoordinateConfig(coordinateConfig GeomapCoordinateConfig) *GeomapFieldConfigCoordinateConfig {
 	this := GeomapFieldConfigCoordinateConfig{}
+	this.CoordinateConfig = coordinateConfig
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapFieldConfigCoordinateConfigWithDefaults() *GeomapFieldConfigCoordi
 	return &this
 }
 
-// GetCoordinateConfig returns the CoordinateConfig field value if set, zero value otherwise.
+// GetCoordinateConfig returns the CoordinateConfig field value
 func (o *GeomapFieldConfigCoordinateConfig) GetCoordinateConfig() GeomapCoordinateConfig {
-	if o == nil || IsNil(o.CoordinateConfig) {
+	if o == nil {
 		var ret GeomapCoordinateConfig
 		return ret
 	}
-	return *o.CoordinateConfig
+
+	return o.CoordinateConfig
 }
 
-// GetCoordinateConfigOk returns a tuple with the CoordinateConfig field value if set, nil otherwise
+// GetCoordinateConfigOk returns a tuple with the CoordinateConfig field value
 // and a boolean to check if the value has been set.
 func (o *GeomapFieldConfigCoordinateConfig) GetCoordinateConfigOk() (*GeomapCoordinateConfig, bool) {
-	if o == nil || IsNil(o.CoordinateConfig) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CoordinateConfig, true
+	return &o.CoordinateConfig, true
 }
 
-// HasCoordinateConfig returns a boolean if a field has been set.
-func (o *GeomapFieldConfigCoordinateConfig) HasCoordinateConfig() bool {
-	if o != nil && !IsNil(o.CoordinateConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetCoordinateConfig gets a reference to the given GeomapCoordinateConfig and assigns it to the CoordinateConfig field.
+// SetCoordinateConfig sets field value
 func (o *GeomapFieldConfigCoordinateConfig) SetCoordinateConfig(v GeomapCoordinateConfig) {
-	o.CoordinateConfig = &v
+	o.CoordinateConfig = v
 }
 
 func (o GeomapFieldConfigCoordinateConfig) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapFieldConfigCoordinateConfig) MarshalJSON() ([]byte, error) {
 
 func (o GeomapFieldConfigCoordinateConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CoordinateConfig) {
-		toSerialize["coordinateConfig"] = o.CoordinateConfig
+	toSerialize["coordinateConfig"] = o.CoordinateConfig
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapFieldConfigCoordinateConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"coordinateConfig",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapFieldConfigCoordinateConfig := _GeomapFieldConfigCoordinateConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapFieldConfigCoordinateConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapFieldConfigCoordinateConfig(varGeomapFieldConfigCoordinateConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "coordinateConfig")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapFieldConfigCoordinateConfig struct {
@@ -122,5 +168,4 @@ func (v *NullableGeomapFieldConfigCoordinateConfig) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

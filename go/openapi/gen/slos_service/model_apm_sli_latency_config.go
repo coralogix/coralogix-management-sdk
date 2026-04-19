@@ -11,8 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApmSliLatencyConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApmSliLatencyConfig{}
@@ -21,16 +25,20 @@ var _ MappedNullable = &ApmSliLatencyConfig{}
 type ApmSliLatencyConfig struct {
 	Filters []ApmFilter `json:"filters,omitempty"`
 	GroupingKeys []string `json:"groupingKeys,omitempty"`
-	LatencyConfig *ApmLatencySli `json:"latencyConfig,omitempty"`
+	LatencyConfig ApmLatencySli `json:"latencyConfig"`
 	Services []string `json:"services,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApmSliLatencyConfig ApmSliLatencyConfig
 
 // NewApmSliLatencyConfig instantiates a new ApmSliLatencyConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApmSliLatencyConfig() *ApmSliLatencyConfig {
+func NewApmSliLatencyConfig(latencyConfig ApmLatencySli) *ApmSliLatencyConfig {
 	this := ApmSliLatencyConfig{}
+	this.LatencyConfig = latencyConfig
 	return &this
 }
 
@@ -106,36 +114,28 @@ func (o *ApmSliLatencyConfig) SetGroupingKeys(v []string) {
 	o.GroupingKeys = v
 }
 
-// GetLatencyConfig returns the LatencyConfig field value if set, zero value otherwise.
+// GetLatencyConfig returns the LatencyConfig field value
 func (o *ApmSliLatencyConfig) GetLatencyConfig() ApmLatencySli {
-	if o == nil || IsNil(o.LatencyConfig) {
+	if o == nil {
 		var ret ApmLatencySli
 		return ret
 	}
-	return *o.LatencyConfig
+
+	return o.LatencyConfig
 }
 
-// GetLatencyConfigOk returns a tuple with the LatencyConfig field value if set, nil otherwise
+// GetLatencyConfigOk returns a tuple with the LatencyConfig field value
 // and a boolean to check if the value has been set.
 func (o *ApmSliLatencyConfig) GetLatencyConfigOk() (*ApmLatencySli, bool) {
-	if o == nil || IsNil(o.LatencyConfig) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LatencyConfig, true
+	return &o.LatencyConfig, true
 }
 
-// HasLatencyConfig returns a boolean if a field has been set.
-func (o *ApmSliLatencyConfig) HasLatencyConfig() bool {
-	if o != nil && !IsNil(o.LatencyConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetLatencyConfig gets a reference to the given ApmLatencySli and assigns it to the LatencyConfig field.
+// SetLatencyConfig sets field value
 func (o *ApmSliLatencyConfig) SetLatencyConfig(v ApmLatencySli) {
-	o.LatencyConfig = &v
+	o.LatencyConfig = v
 }
 
 // GetServices returns the Services field value if set, zero value otherwise.
@@ -186,13 +186,62 @@ func (o ApmSliLatencyConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GroupingKeys) {
 		toSerialize["groupingKeys"] = o.GroupingKeys
 	}
-	if !IsNil(o.LatencyConfig) {
-		toSerialize["latencyConfig"] = o.LatencyConfig
-	}
+	toSerialize["latencyConfig"] = o.LatencyConfig
 	if !IsNil(o.Services) {
 		toSerialize["services"] = o.Services
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApmSliLatencyConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"latencyConfig",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varApmSliLatencyConfig := _ApmSliLatencyConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmSliLatencyConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmSliLatencyConfig(varApmSliLatencyConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupingKeys")
+		delete(additionalProperties, "latencyConfig")
+		delete(additionalProperties, "services")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApmSliLatencyConfig struct {
@@ -230,5 +279,4 @@ func (v *NullableApmSliLatencyConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

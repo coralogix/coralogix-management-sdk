@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DeployedIntegrationInformation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeployedIntegrationInformation{}
@@ -24,7 +27,10 @@ type DeployedIntegrationInformation struct {
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
 	Parameters []Parameter `json:"parameters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeployedIntegrationInformation DeployedIntegrationInformation
 
 // NewDeployedIntegrationInformation instantiates a new DeployedIntegrationInformation object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o DeployedIntegrationInformation) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeployedIntegrationInformation) UnmarshalJSON(data []byte) (err error) {
+	varDeployedIntegrationInformation := _DeployedIntegrationInformation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDeployedIntegrationInformation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeployedIntegrationInformation(varDeployedIntegrationInformation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "definitionKey")
+		delete(additionalProperties, "definitionVersion")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "integrationStatus")
+		delete(additionalProperties, "parameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeployedIntegrationInformation struct {
@@ -266,5 +303,4 @@ func (v *NullableDeployedIntegrationInformation) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

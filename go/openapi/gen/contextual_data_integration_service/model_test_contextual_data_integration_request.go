@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TestContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestContextualDataIntegrationRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &TestContextualDataIntegrationRequest{}
 // TestContextualDataIntegrationRequest struct for TestContextualDataIntegrationRequest
 type TestContextualDataIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TestContextualDataIntegrationRequest TestContextualDataIntegrationRequest
 
 // NewTestContextualDataIntegrationRequest instantiates a new TestContextualDataIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o TestContextualDataIntegrationRequest) ToMap() (map[string]interface{}, e
 	if !IsNil(o.IntegrationData) {
 		toSerialize["integrationData"] = o.IntegrationData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TestContextualDataIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	varTestContextualDataIntegrationRequest := _TestContextualDataIntegrationRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTestContextualDataIntegrationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TestContextualDataIntegrationRequest(varTestContextualDataIntegrationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTestContextualDataIntegrationRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableTestContextualDataIntegrationRequest) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

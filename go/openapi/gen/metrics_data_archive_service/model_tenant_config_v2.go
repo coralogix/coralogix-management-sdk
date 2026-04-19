@@ -11,15 +11,26 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // TenantConfigV2 - struct for TenantConfigV2
 type TenantConfigV2 struct {
+	TenantConfigV2Gcs *TenantConfigV2Gcs
 	TenantConfigV2Ibm *TenantConfigV2Ibm
 	TenantConfigV2S3 *TenantConfigV2S3
+}
+
+// TenantConfigV2GcsAsTenantConfigV2 is a convenience function that returns TenantConfigV2Gcs wrapped in TenantConfigV2
+func TenantConfigV2GcsAsTenantConfigV2(v *TenantConfigV2Gcs) TenantConfigV2 {
+	return TenantConfigV2{
+		TenantConfigV2Gcs: v,
+	}
 }
 
 // TenantConfigV2IbmAsTenantConfigV2 is a convenience function that returns TenantConfigV2Ibm wrapped in TenantConfigV2
@@ -41,8 +52,25 @@ func TenantConfigV2S3AsTenantConfigV2(v *TenantConfigV2S3) TenantConfigV2 {
 func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into TenantConfigV2Gcs
+	err = json.Unmarshal(data, &dst.TenantConfigV2Gcs)
+	if err == nil {
+		jsonTenantConfigV2Gcs, _ := json.Marshal(dst.TenantConfigV2Gcs)
+		if string(jsonTenantConfigV2Gcs) == "{}" { // empty struct
+			dst.TenantConfigV2Gcs = nil
+		} else {
+			if err = validator.Validate(dst.TenantConfigV2Gcs); err != nil {
+				dst.TenantConfigV2Gcs = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.TenantConfigV2Gcs = nil
+	}
+
 	// try to unmarshal data into TenantConfigV2Ibm
-	err = newStrictDecoder(data).Decode(&dst.TenantConfigV2Ibm)
+	err = json.Unmarshal(data, &dst.TenantConfigV2Ibm)
 	if err == nil {
 		jsonTenantConfigV2Ibm, _ := json.Marshal(dst.TenantConfigV2Ibm)
 		if string(jsonTenantConfigV2Ibm) == "{}" { // empty struct
@@ -59,7 +87,7 @@ func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TenantConfigV2S3
-	err = newStrictDecoder(data).Decode(&dst.TenantConfigV2S3)
+	err = json.Unmarshal(data, &dst.TenantConfigV2S3)
 	if err == nil {
 		jsonTenantConfigV2S3, _ := json.Marshal(dst.TenantConfigV2S3)
 		if string(jsonTenantConfigV2S3) == "{}" { // empty struct
@@ -77,6 +105,7 @@ func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.TenantConfigV2Gcs = nil
 		dst.TenantConfigV2Ibm = nil
 		dst.TenantConfigV2S3 = nil
 
@@ -90,6 +119,10 @@ func (dst *TenantConfigV2) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src TenantConfigV2) MarshalJSON() ([]byte, error) {
+	if src.TenantConfigV2Gcs != nil {
+		return json.Marshal(&src.TenantConfigV2Gcs)
+	}
+
 	if src.TenantConfigV2Ibm != nil {
 		return json.Marshal(&src.TenantConfigV2Ibm)
 	}
@@ -106,6 +139,10 @@ func (obj *TenantConfigV2) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.TenantConfigV2Gcs != nil {
+		return obj.TenantConfigV2Gcs
+	}
+
 	if obj.TenantConfigV2Ibm != nil {
 		return obj.TenantConfigV2Ibm
 	}
@@ -120,6 +157,10 @@ func (obj *TenantConfigV2) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj TenantConfigV2) GetActualInstanceValue() (interface{}) {
+	if obj.TenantConfigV2Gcs != nil {
+		return *obj.TenantConfigV2Gcs
+	}
+
 	if obj.TenantConfigV2Ibm != nil {
 		return *obj.TenantConfigV2Ibm
 	}
@@ -167,5 +208,4 @@ func (v *NullableTenantConfigV2) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

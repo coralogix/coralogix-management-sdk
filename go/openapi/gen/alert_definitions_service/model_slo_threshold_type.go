@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // SloThresholdType - struct for SloThresholdType
 type SloThresholdType struct {
@@ -42,7 +45,7 @@ func (dst *SloThresholdType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SloThresholdTypeBurnRate
-	err = newStrictDecoder(data).Decode(&dst.SloThresholdTypeBurnRate)
+	err = json.Unmarshal(data, &dst.SloThresholdTypeBurnRate)
 	if err == nil {
 		jsonSloThresholdTypeBurnRate, _ := json.Marshal(dst.SloThresholdTypeBurnRate)
 		if string(jsonSloThresholdTypeBurnRate) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *SloThresholdType) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloThresholdTypeErrorBudget
-	err = newStrictDecoder(data).Decode(&dst.SloThresholdTypeErrorBudget)
+	err = json.Unmarshal(data, &dst.SloThresholdTypeErrorBudget)
 	if err == nil {
 		jsonSloThresholdTypeErrorBudget, _ := json.Marshal(dst.SloThresholdTypeErrorBudget)
 		if string(jsonSloThresholdTypeErrorBudget) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableSloThresholdType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -42,8 +42,6 @@ func (r ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest) Execute() (*BatchGe
 /*
 GlobalRoutersServiceBatchGetGlobalRouters Batch Get Global Routers
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest
 */
@@ -158,8 +156,6 @@ func (r ApiGlobalRoutersServiceCreateGlobalRouterRequest) Execute() (*CreateGlob
 /*
 GlobalRoutersServiceCreateGlobalRouter Create Global Router
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceCreateGlobalRouterRequest
 */
@@ -259,8 +255,6 @@ func (r ApiGlobalRoutersServiceDeleteGlobalRouterRequest) Execute() (map[string]
 
 /*
 GlobalRoutersServiceDeleteGlobalRouter Delete Global Router
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -362,8 +356,6 @@ func (r ApiGlobalRoutersServiceGetGlobalRouterRequest) Execute() (*GetGlobalRout
 
 /*
 GlobalRoutersServiceGetGlobalRouter Get Global Router
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -477,8 +469,6 @@ func (r ApiGlobalRoutersServiceListGlobalRoutersRequest) Execute() (*ListGlobalR
 /*
 GlobalRoutersServiceListGlobalRouters List Global Routers
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceListGlobalRoutersRequest
 */
@@ -587,8 +577,6 @@ func (r ApiGlobalRoutersServiceReplaceGlobalRouterRequest) Execute() (*ReplaceGl
 
 /*
 GlobalRoutersServiceReplaceGlobalRouter Replace Global Router
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceReplaceGlobalRouterRequest

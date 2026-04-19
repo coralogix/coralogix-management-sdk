@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpansAggregationDimensionAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansAggregationDimensionAggregation{}
 
 // SpansAggregationDimensionAggregation struct for SpansAggregationDimensionAggregation
 type SpansAggregationDimensionAggregation struct {
-	DimensionAggregation *DimensionAggregation `json:"dimensionAggregation,omitempty"`
+	DimensionAggregation DimensionAggregation `json:"dimensionAggregation"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpansAggregationDimensionAggregation SpansAggregationDimensionAggregation
 
 // NewSpansAggregationDimensionAggregation instantiates a new SpansAggregationDimensionAggregation object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSpansAggregationDimensionAggregation() *SpansAggregationDimensionAggregation {
+func NewSpansAggregationDimensionAggregation(dimensionAggregation DimensionAggregation) *SpansAggregationDimensionAggregation {
 	this := SpansAggregationDimensionAggregation{}
+	this.DimensionAggregation = dimensionAggregation
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSpansAggregationDimensionAggregationWithDefaults() *SpansAggregationDime
 	return &this
 }
 
-// GetDimensionAggregation returns the DimensionAggregation field value if set, zero value otherwise.
+// GetDimensionAggregation returns the DimensionAggregation field value
 func (o *SpansAggregationDimensionAggregation) GetDimensionAggregation() DimensionAggregation {
-	if o == nil || IsNil(o.DimensionAggregation) {
+	if o == nil {
 		var ret DimensionAggregation
 		return ret
 	}
-	return *o.DimensionAggregation
+
+	return o.DimensionAggregation
 }
 
-// GetDimensionAggregationOk returns a tuple with the DimensionAggregation field value if set, nil otherwise
+// GetDimensionAggregationOk returns a tuple with the DimensionAggregation field value
 // and a boolean to check if the value has been set.
 func (o *SpansAggregationDimensionAggregation) GetDimensionAggregationOk() (*DimensionAggregation, bool) {
-	if o == nil || IsNil(o.DimensionAggregation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DimensionAggregation, true
+	return &o.DimensionAggregation, true
 }
 
-// HasDimensionAggregation returns a boolean if a field has been set.
-func (o *SpansAggregationDimensionAggregation) HasDimensionAggregation() bool {
-	if o != nil && !IsNil(o.DimensionAggregation) {
-		return true
-	}
-
-	return false
-}
-
-// SetDimensionAggregation gets a reference to the given DimensionAggregation and assigns it to the DimensionAggregation field.
+// SetDimensionAggregation sets field value
 func (o *SpansAggregationDimensionAggregation) SetDimensionAggregation(v DimensionAggregation) {
-	o.DimensionAggregation = &v
+	o.DimensionAggregation = v
 }
 
 func (o SpansAggregationDimensionAggregation) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SpansAggregationDimensionAggregation) MarshalJSON() ([]byte, error) {
 
 func (o SpansAggregationDimensionAggregation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DimensionAggregation) {
-		toSerialize["dimensionAggregation"] = o.DimensionAggregation
+	toSerialize["dimensionAggregation"] = o.DimensionAggregation
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SpansAggregationDimensionAggregation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dimensionAggregation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSpansAggregationDimensionAggregation := _SpansAggregationDimensionAggregation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpansAggregationDimensionAggregation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpansAggregationDimensionAggregation(varSpansAggregationDimensionAggregation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dimensionAggregation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpansAggregationDimensionAggregation struct {
@@ -122,5 +168,4 @@ func (v *NullableSpansAggregationDimensionAggregation) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

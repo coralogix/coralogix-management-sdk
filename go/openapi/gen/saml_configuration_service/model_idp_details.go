@@ -11,8 +11,11 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IDPDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IDPDetails{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &IDPDetails{}
 type IDPDetails struct {
 	Icon *string `json:"icon,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IDPDetails IDPDetails
 
 // NewIDPDetails instantiates a new IDPDetails object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o IDPDetails) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IDPDetails) UnmarshalJSON(data []byte) (err error) {
+	varIDPDetails := _IDPDetails{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIDPDetails)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IDPDetails(varIDPDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "icon")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIDPDetails struct {
@@ -158,5 +192,4 @@ func (v *NullableIDPDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1IntegrationTypePushBasedContextualData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1IntegrationTypePushBasedContextualData{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V1IntegrationTypePushBasedContextualData{}
 // V1IntegrationTypePushBasedContextualData This data structure represents an integration type.
 type V1IntegrationTypePushBasedContextualData struct {
 	// This data structure represents a push based contextual data integration.
-	PushBasedContextualData map[string]interface{} `json:"pushBasedContextualData,omitempty"`
+	PushBasedContextualData map[string]interface{} `json:"pushBasedContextualData"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V1IntegrationTypePushBasedContextualData V1IntegrationTypePushBasedContextualData
 
 // NewV1IntegrationTypePushBasedContextualData instantiates a new V1IntegrationTypePushBasedContextualData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1IntegrationTypePushBasedContextualData() *V1IntegrationTypePushBasedContextualData {
+func NewV1IntegrationTypePushBasedContextualData(pushBasedContextualData map[string]interface{}) *V1IntegrationTypePushBasedContextualData {
 	this := V1IntegrationTypePushBasedContextualData{}
+	this.PushBasedContextualData = pushBasedContextualData
 	return &this
 }
 
@@ -40,34 +48,26 @@ func NewV1IntegrationTypePushBasedContextualDataWithDefaults() *V1IntegrationTyp
 	return &this
 }
 
-// GetPushBasedContextualData returns the PushBasedContextualData field value if set, zero value otherwise.
+// GetPushBasedContextualData returns the PushBasedContextualData field value
 func (o *V1IntegrationTypePushBasedContextualData) GetPushBasedContextualData() map[string]interface{} {
-	if o == nil || IsNil(o.PushBasedContextualData) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.PushBasedContextualData
 }
 
-// GetPushBasedContextualDataOk returns a tuple with the PushBasedContextualData field value if set, nil otherwise
+// GetPushBasedContextualDataOk returns a tuple with the PushBasedContextualData field value
 // and a boolean to check if the value has been set.
 func (o *V1IntegrationTypePushBasedContextualData) GetPushBasedContextualDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.PushBasedContextualData) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.PushBasedContextualData, true
 }
 
-// HasPushBasedContextualData returns a boolean if a field has been set.
-func (o *V1IntegrationTypePushBasedContextualData) HasPushBasedContextualData() bool {
-	if o != nil && !IsNil(o.PushBasedContextualData) {
-		return true
-	}
-
-	return false
-}
-
-// SetPushBasedContextualData gets a reference to the given map[string]interface{} and assigns it to the PushBasedContextualData field.
+// SetPushBasedContextualData sets field value
 func (o *V1IntegrationTypePushBasedContextualData) SetPushBasedContextualData(v map[string]interface{}) {
 	o.PushBasedContextualData = v
 }
@@ -82,10 +82,56 @@ func (o V1IntegrationTypePushBasedContextualData) MarshalJSON() ([]byte, error) 
 
 func (o V1IntegrationTypePushBasedContextualData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PushBasedContextualData) {
-		toSerialize["pushBasedContextualData"] = o.PushBasedContextualData
+	toSerialize["pushBasedContextualData"] = o.PushBasedContextualData
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V1IntegrationTypePushBasedContextualData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"pushBasedContextualData",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV1IntegrationTypePushBasedContextualData := _V1IntegrationTypePushBasedContextualData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV1IntegrationTypePushBasedContextualData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V1IntegrationTypePushBasedContextualData(varV1IntegrationTypePushBasedContextualData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pushBasedContextualData")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV1IntegrationTypePushBasedContextualData struct {
@@ -123,5 +169,4 @@ func (v *NullableV1IntegrationTypePushBasedContextualData) UnmarshalJSON(src []b
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

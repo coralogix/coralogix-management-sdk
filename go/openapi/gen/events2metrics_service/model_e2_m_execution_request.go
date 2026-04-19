@@ -11,10 +11,13 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // E2MExecutionRequest - struct for E2MExecutionRequest
 type E2MExecutionRequest struct {
@@ -50,7 +53,7 @@ func (dst *E2MExecutionRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into E2MExecutionRequestCreate
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestCreate)
+	err = json.Unmarshal(data, &dst.E2MExecutionRequestCreate)
 	if err == nil {
 		jsonE2MExecutionRequestCreate, _ := json.Marshal(dst.E2MExecutionRequestCreate)
 		if string(jsonE2MExecutionRequestCreate) == "{}" { // empty struct
@@ -67,7 +70,7 @@ func (dst *E2MExecutionRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into E2MExecutionRequestDelete
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestDelete)
+	err = json.Unmarshal(data, &dst.E2MExecutionRequestDelete)
 	if err == nil {
 		jsonE2MExecutionRequestDelete, _ := json.Marshal(dst.E2MExecutionRequestDelete)
 		if string(jsonE2MExecutionRequestDelete) == "{}" { // empty struct
@@ -84,7 +87,7 @@ func (dst *E2MExecutionRequest) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into E2MExecutionRequestReplace
-	err = newStrictDecoder(data).Decode(&dst.E2MExecutionRequestReplace)
+	err = json.Unmarshal(data, &dst.E2MExecutionRequestReplace)
 	if err == nil {
 		jsonE2MExecutionRequestReplace, _ := json.Marshal(dst.E2MExecutionRequestReplace)
 		if string(jsonE2MExecutionRequestReplace) == "{}" { // empty struct
@@ -205,5 +208,4 @@ func (v *NullableE2MExecutionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

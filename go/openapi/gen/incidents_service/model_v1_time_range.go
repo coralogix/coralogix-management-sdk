@@ -11,11 +11,13 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1TimeRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1TimeRange{}
@@ -26,6 +28,7 @@ type V1TimeRange struct {
 	EndTime time.Time `json:"endTime"`
 	// Start time of the range
 	StartTime time.Time `json:"startTime"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _V1TimeRange V1TimeRange
@@ -109,6 +112,11 @@ func (o V1TimeRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["endTime"] = o.EndTime
 	toSerialize["startTime"] = o.StartTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -138,7 +146,6 @@ func (o *V1TimeRange) UnmarshalJSON(data []byte) (err error) {
 	varV1TimeRange := _V1TimeRange{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV1TimeRange)
 
 	if err != nil {
@@ -146,6 +153,14 @@ func (o *V1TimeRange) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V1TimeRange(varV1TimeRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "startTime")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -185,5 +200,4 @@ func (v *NullableV1TimeRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

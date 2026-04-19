@@ -11,10 +11,13 @@ API version: 1.0.0
 package views_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // TimeSelection - struct for TimeSelection
 type TimeSelection struct {
@@ -42,7 +45,7 @@ func (dst *TimeSelection) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TimeSelectionCustomSelection
-	err = newStrictDecoder(data).Decode(&dst.TimeSelectionCustomSelection)
+	err = json.Unmarshal(data, &dst.TimeSelectionCustomSelection)
 	if err == nil {
 		jsonTimeSelectionCustomSelection, _ := json.Marshal(dst.TimeSelectionCustomSelection)
 		if string(jsonTimeSelectionCustomSelection) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *TimeSelection) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TimeSelectionQuickSelection
-	err = newStrictDecoder(data).Decode(&dst.TimeSelectionQuickSelection)
+	err = json.Unmarshal(data, &dst.TimeSelectionQuickSelection)
 	if err == nil {
 		jsonTimeSelectionQuickSelection, _ := json.Marshal(dst.TimeSelectionQuickSelection)
 		if string(jsonTimeSelectionQuickSelection) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableTimeSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

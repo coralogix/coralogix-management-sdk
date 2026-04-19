@@ -11,10 +11,13 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // DataUsageServiceGetDailyUsageEvaluationTokensRequest - struct for DataUsageServiceGetDailyUsageEvaluationTokensRequest
 type DataUsageServiceGetDailyUsageEvaluationTokensRequest struct {
@@ -42,7 +45,7 @@ func (dst *DataUsageServiceGetDailyUsageEvaluationTokensRequest) UnmarshalJSON(d
 	var err error
 	match := 0
 	// try to unmarshal data into GetDailyUsageEvaluationTokensRequestDateRange
-	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageEvaluationTokensRequestDateRange)
+	err = json.Unmarshal(data, &dst.GetDailyUsageEvaluationTokensRequestDateRange)
 	if err == nil {
 		jsonGetDailyUsageEvaluationTokensRequestDateRange, _ := json.Marshal(dst.GetDailyUsageEvaluationTokensRequestDateRange)
 		if string(jsonGetDailyUsageEvaluationTokensRequestDateRange) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *DataUsageServiceGetDailyUsageEvaluationTokensRequest) UnmarshalJSON(d
 	}
 
 	// try to unmarshal data into GetDailyUsageEvaluationTokensRequestRange
-	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageEvaluationTokensRequestRange)
+	err = json.Unmarshal(data, &dst.GetDailyUsageEvaluationTokensRequestRange)
 	if err == nil {
 		jsonGetDailyUsageEvaluationTokensRequestRange, _ := json.Marshal(dst.GetDailyUsageEvaluationTokensRequestRange)
 		if string(jsonGetDailyUsageEvaluationTokensRequestRange) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableDataUsageServiceGetDailyUsageEvaluationTokensRequest) Unmarshal
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

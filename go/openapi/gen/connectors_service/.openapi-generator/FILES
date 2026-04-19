@@ -9,14 +9,10 @@ configuration.go
 git_push.sh
 model_batch_get_connector_summaries_response.go
 model_batch_get_connectors_response.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_connector.go
 model_connector_config.go
 model_connector_summary.go
-model_connector_type.go
 model_connector_type_summary.go
 model_create_connector_request.go
 model_create_connector_response.go
@@ -33,10 +29,9 @@ model_get_connector_response.go
 model_get_connector_type_summaries_response.go
 model_list_connector_summaries_response.go
 model_list_connectors_response.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_notification_center_connector_config_field.go
+model_notification_center_connector_type.go
 model_notification_center_entity_type.go
 model_replace_connector_request.go
 model_replace_connector_response.go

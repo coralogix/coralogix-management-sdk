@@ -11,9 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TeamGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TeamGroup{}
@@ -36,7 +39,10 @@ type TeamGroup struct {
 	// Team this group belongs to
 	TeamId *int64 `json:"teamId,omitempty"`
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TeamGroup TeamGroup
 
 // NewTeamGroup instantiates a new TeamGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -450,7 +456,44 @@ func (o TeamGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TeamGroup) UnmarshalJSON(data []byte) (err error) {
+	varTeamGroup := _TeamGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTeamGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TeamGroup(varTeamGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "groupOrigin")
+		delete(additionalProperties, "groupType")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "teamId")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTeamGroup struct {
@@ -488,5 +531,4 @@ func (v *NullableTeamGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

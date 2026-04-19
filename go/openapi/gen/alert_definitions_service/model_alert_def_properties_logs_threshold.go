@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesLogsThreshold type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesLogsThreshold{}
@@ -31,7 +35,7 @@ type AlertDefPropertiesLogsThreshold struct {
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
-	LogsThreshold *LogsThresholdType `json:"logsThreshold,omitempty"`
+	LogsThreshold LogsThresholdType `json:"logsThreshold"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
@@ -40,14 +44,18 @@ type AlertDefPropertiesLogsThreshold struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesLogsThreshold AlertDefPropertiesLogsThreshold
 
 // NewAlertDefPropertiesLogsThreshold instantiates a new AlertDefPropertiesLogsThreshold object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesLogsThreshold() *AlertDefPropertiesLogsThreshold {
+func NewAlertDefPropertiesLogsThreshold(logsThreshold LogsThresholdType) *AlertDefPropertiesLogsThreshold {
 	this := AlertDefPropertiesLogsThreshold{}
+	this.LogsThreshold = logsThreshold
 	return &this
 }
 
@@ -315,36 +323,28 @@ func (o *AlertDefPropertiesLogsThreshold) SetIncidentsSettings(v AlertDefInciden
 	o.IncidentsSettings = &v
 }
 
-// GetLogsThreshold returns the LogsThreshold field value if set, zero value otherwise.
+// GetLogsThreshold returns the LogsThreshold field value
 func (o *AlertDefPropertiesLogsThreshold) GetLogsThreshold() LogsThresholdType {
-	if o == nil || IsNil(o.LogsThreshold) {
+	if o == nil {
 		var ret LogsThresholdType
 		return ret
 	}
-	return *o.LogsThreshold
+
+	return o.LogsThreshold
 }
 
-// GetLogsThresholdOk returns a tuple with the LogsThreshold field value if set, nil otherwise
+// GetLogsThresholdOk returns a tuple with the LogsThreshold field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesLogsThreshold) GetLogsThresholdOk() (*LogsThresholdType, bool) {
-	if o == nil || IsNil(o.LogsThreshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LogsThreshold, true
+	return &o.LogsThreshold, true
 }
 
-// HasLogsThreshold returns a boolean if a field has been set.
-func (o *AlertDefPropertiesLogsThreshold) HasLogsThreshold() bool {
-	if o != nil && !IsNil(o.LogsThreshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogsThreshold gets a reference to the given LogsThresholdType and assigns it to the LogsThreshold field.
+// SetLogsThreshold sets field value
 func (o *AlertDefPropertiesLogsThreshold) SetLogsThreshold(v LogsThresholdType) {
-	o.LogsThreshold = &v
+	o.LogsThreshold = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -573,9 +573,7 @@ func (o AlertDefPropertiesLogsThreshold) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.IncidentsSettings) {
 		toSerialize["incidentsSettings"] = o.IncidentsSettings
 	}
-	if !IsNil(o.LogsThreshold) {
-		toSerialize["logsThreshold"] = o.LogsThreshold
-	}
+	toSerialize["logsThreshold"] = o.LogsThreshold
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesLogsThreshold) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesLogsThreshold) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"logsThreshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesLogsThreshold := _AlertDefPropertiesLogsThreshold{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesLogsThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesLogsThreshold(varAlertDefPropertiesLogsThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "logsThreshold")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesLogsThreshold struct {
@@ -632,5 +692,4 @@ func (v *NullableAlertDefPropertiesLogsThreshold) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

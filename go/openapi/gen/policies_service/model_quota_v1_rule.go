@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QuotaV1Rule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaV1Rule{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &QuotaV1Rule{}
 type QuotaV1Rule struct {
 	Name *string `json:"name,omitempty"`
 	RuleTypeId *RuleTypeId `json:"ruleTypeId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QuotaV1Rule QuotaV1Rule
 
 // NewQuotaV1Rule instantiates a new QuotaV1Rule object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o QuotaV1Rule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RuleTypeId) {
 		toSerialize["ruleTypeId"] = o.RuleTypeId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QuotaV1Rule) UnmarshalJSON(data []byte) (err error) {
+	varQuotaV1Rule := _QuotaV1Rule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQuotaV1Rule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QuotaV1Rule(varQuotaV1Rule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ruleTypeId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQuotaV1Rule struct {
@@ -158,5 +192,4 @@ func (v *NullableQuotaV1Rule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

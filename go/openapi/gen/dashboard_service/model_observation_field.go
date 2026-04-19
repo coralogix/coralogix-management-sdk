@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ObservationField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ObservationField{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ObservationField{}
 type ObservationField struct {
 	Keypath []string `json:"keypath,omitempty"`
 	Scope *DatasetScope `json:"scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ObservationField ObservationField
 
 // NewObservationField instantiates a new ObservationField object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ObservationField) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Scope) {
 		toSerialize["scope"] = o.Scope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ObservationField) UnmarshalJSON(data []byte) (err error) {
+	varObservationField := _ObservationField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varObservationField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ObservationField(varObservationField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keypath")
+		delete(additionalProperties, "scope")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableObservationField struct {
@@ -158,5 +192,4 @@ func (v *NullableObservationField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

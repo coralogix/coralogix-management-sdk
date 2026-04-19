@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableSelectionOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSelectionOptions{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &VariableSelectionOptions{}
 // VariableSelectionOptions struct for VariableSelectionOptions
 type VariableSelectionOptions struct {
 	SelectionType *SelectionType `json:"selectionType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableSelectionOptions VariableSelectionOptions
 
 // NewVariableSelectionOptions instantiates a new VariableSelectionOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o VariableSelectionOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SelectionType) {
 		toSerialize["selectionType"] = o.SelectionType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableSelectionOptions) UnmarshalJSON(data []byte) (err error) {
+	varVariableSelectionOptions := _VariableSelectionOptions{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableSelectionOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableSelectionOptions(varVariableSelectionOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "selectionType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableSelectionOptions struct {
@@ -122,5 +155,4 @@ func (v *NullableVariableSelectionOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

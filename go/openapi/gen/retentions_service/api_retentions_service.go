@@ -34,8 +34,6 @@ func (r ApiRetentionsServiceActivateRetentionsRequest) Execute() (*ActivateReten
 /*
 RetentionsServiceActivateRetentions Activate Retentions
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceActivateRetentionsRequest
 */
@@ -133,8 +131,6 @@ func (r ApiRetentionsServiceGetRetentionsRequest) Execute() (*GetRetentionsRespo
 /*
 RetentionsServiceGetRetentions Get Retentions
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceGetRetentionsRequest
 */
@@ -231,8 +227,6 @@ func (r ApiRetentionsServiceGetRetentionsEnabledRequest) Execute() (*GetRetentio
 
 /*
 RetentionsServiceGetRetentionsEnabled Get Retentions Enabled
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceGetRetentionsEnabledRequest
@@ -336,8 +330,6 @@ func (r ApiRetentionsServiceUpdateRetentionsRequest) Execute() (*UpdateRetention
 
 /*
 RetentionsServiceUpdateRetentions Update Retentions
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceUpdateRetentionsRequest

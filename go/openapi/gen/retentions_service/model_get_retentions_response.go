@@ -11,8 +11,11 @@ API version: 1.0.0
 package retentions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetRetentionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRetentionsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetRetentionsResponse{}
 // GetRetentionsResponse struct for GetRetentionsResponse
 type GetRetentionsResponse struct {
 	Retentions []ArchiveV1Retention `json:"retentions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRetentionsResponse GetRetentionsResponse
 
 // NewGetRetentionsResponse instantiates a new GetRetentionsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetRetentionsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Retentions) {
 		toSerialize["retentions"] = o.Retentions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetRetentionsResponse := _GetRetentionsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetRetentionsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRetentionsResponse(varGetRetentionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "retentions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRetentionsResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetRetentionsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

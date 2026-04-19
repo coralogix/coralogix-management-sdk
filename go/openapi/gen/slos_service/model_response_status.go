@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ResponseStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ResponseStatus{}
@@ -24,6 +26,7 @@ type ResponseStatus struct {
 	Details *map[string]string `json:"details,omitempty"`
 	Message *string `json:"message,omitempty"`
 	StatusCode Code `json:"statusCode"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResponseStatus ResponseStatus
@@ -151,6 +154,11 @@ func (o ResponseStatus) ToMap() (map[string]interface{}, error) {
 		toSerialize["message"] = o.Message
 	}
 	toSerialize["statusCode"] = o.StatusCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -179,7 +187,6 @@ func (o *ResponseStatus) UnmarshalJSON(data []byte) (err error) {
 	varResponseStatus := _ResponseStatus{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varResponseStatus)
 
 	if err != nil {
@@ -187,6 +194,15 @@ func (o *ResponseStatus) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ResponseStatus(varResponseStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "statusCode")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -226,5 +242,4 @@ func (v *NullableResponseStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HeatmapColorRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HeatmapColorRange{}
@@ -25,7 +29,7 @@ type HeatmapColorRange struct {
 	ColorAxisMax *float32 `json:"colorAxisMax,omitempty"`
 	// Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.
 	ColorAxisMin *float32 `json:"colorAxisMin,omitempty"`
-	ColorRange *ColorGradientType `json:"colorRange,omitempty"`
+	ColorRange ColorGradientType `json:"colorRange"`
 	// Custom unit (requires to have unit field as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
@@ -38,14 +42,18 @@ type HeatmapColorRange struct {
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
 	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HeatmapColorRange HeatmapColorRange
 
 // NewHeatmapColorRange instantiates a new HeatmapColorRange object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHeatmapColorRange() *HeatmapColorRange {
+func NewHeatmapColorRange(colorRange ColorGradientType) *HeatmapColorRange {
 	this := HeatmapColorRange{}
+	this.ColorRange = colorRange
 	return &this
 }
 
@@ -153,36 +161,28 @@ func (o *HeatmapColorRange) SetColorAxisMin(v float32) {
 	o.ColorAxisMin = &v
 }
 
-// GetColorRange returns the ColorRange field value if set, zero value otherwise.
+// GetColorRange returns the ColorRange field value
 func (o *HeatmapColorRange) GetColorRange() ColorGradientType {
-	if o == nil || IsNil(o.ColorRange) {
+	if o == nil {
 		var ret ColorGradientType
 		return ret
 	}
-	return *o.ColorRange
+
+	return o.ColorRange
 }
 
-// GetColorRangeOk returns a tuple with the ColorRange field value if set, nil otherwise
+// GetColorRangeOk returns a tuple with the ColorRange field value
 // and a boolean to check if the value has been set.
 func (o *HeatmapColorRange) GetColorRangeOk() (*ColorGradientType, bool) {
-	if o == nil || IsNil(o.ColorRange) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ColorRange, true
+	return &o.ColorRange, true
 }
 
-// HasColorRange returns a boolean if a field has been set.
-func (o *HeatmapColorRange) HasColorRange() bool {
-	if o != nil && !IsNil(o.ColorRange) {
-		return true
-	}
-
-	return false
-}
-
-// SetColorRange gets a reference to the given ColorGradientType and assigns it to the ColorRange field.
+// SetColorRange sets field value
 func (o *HeatmapColorRange) SetColorRange(v ColorGradientType) {
-	o.ColorRange = &v
+	o.ColorRange = v
 }
 
 // GetCustomUnit returns the CustomUnit field value if set, zero value otherwise.
@@ -492,9 +492,7 @@ func (o HeatmapColorRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ColorAxisMin) {
 		toSerialize["colorAxisMin"] = o.ColorAxisMin
 	}
-	if !IsNil(o.ColorRange) {
-		toSerialize["colorRange"] = o.ColorRange
-	}
+	toSerialize["colorRange"] = o.ColorRange
 	if !IsNil(o.CustomUnit) {
 		toSerialize["customUnit"] = o.CustomUnit
 	}
@@ -522,7 +520,67 @@ func (o HeatmapColorRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisFields) {
 		toSerialize["yAxisFields"] = o.YAxisFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HeatmapColorRange) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"colorRange",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHeatmapColorRange := _HeatmapColorRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHeatmapColorRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HeatmapColorRange(varHeatmapColorRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "colorAxisMax")
+		delete(additionalProperties, "colorAxisMin")
+		delete(additionalProperties, "colorRange")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "showNumbers")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "xAxisFields")
+		delete(additionalProperties, "yAxisFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHeatmapColorRange struct {
@@ -560,5 +618,4 @@ func (v *NullableHeatmapColorRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

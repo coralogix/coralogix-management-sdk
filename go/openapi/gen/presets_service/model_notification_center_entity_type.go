@@ -11,9 +11,12 @@ API version: 1.0.0
 package presets_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // NotificationCenterEntityType the model 'NotificationCenterEntityType'
 type NotificationCenterEntityType string

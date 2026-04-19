@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyDefinitionThresholds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionThresholds{}
 
 // PropertyDefinitionThresholds struct for PropertyDefinitionThresholds
 type PropertyDefinitionThresholds struct {
-	Thresholds *PropertyThresholds `json:"thresholds,omitempty"`
+	Thresholds PropertyThresholds `json:"thresholds"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyDefinitionThresholds PropertyDefinitionThresholds
 
 // NewPropertyDefinitionThresholds instantiates a new PropertyDefinitionThresholds object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPropertyDefinitionThresholds() *PropertyDefinitionThresholds {
+func NewPropertyDefinitionThresholds(thresholds PropertyThresholds) *PropertyDefinitionThresholds {
 	this := PropertyDefinitionThresholds{}
+	this.Thresholds = thresholds
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewPropertyDefinitionThresholdsWithDefaults() *PropertyDefinitionThresholds
 	return &this
 }
 
-// GetThresholds returns the Thresholds field value if set, zero value otherwise.
+// GetThresholds returns the Thresholds field value
 func (o *PropertyDefinitionThresholds) GetThresholds() PropertyThresholds {
-	if o == nil || IsNil(o.Thresholds) {
+	if o == nil {
 		var ret PropertyThresholds
 		return ret
 	}
-	return *o.Thresholds
+
+	return o.Thresholds
 }
 
-// GetThresholdsOk returns a tuple with the Thresholds field value if set, nil otherwise
+// GetThresholdsOk returns a tuple with the Thresholds field value
 // and a boolean to check if the value has been set.
 func (o *PropertyDefinitionThresholds) GetThresholdsOk() (*PropertyThresholds, bool) {
-	if o == nil || IsNil(o.Thresholds) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Thresholds, true
+	return &o.Thresholds, true
 }
 
-// HasThresholds returns a boolean if a field has been set.
-func (o *PropertyDefinitionThresholds) HasThresholds() bool {
-	if o != nil && !IsNil(o.Thresholds) {
-		return true
-	}
-
-	return false
-}
-
-// SetThresholds gets a reference to the given PropertyThresholds and assigns it to the Thresholds field.
+// SetThresholds sets field value
 func (o *PropertyDefinitionThresholds) SetThresholds(v PropertyThresholds) {
-	o.Thresholds = &v
+	o.Thresholds = v
 }
 
 func (o PropertyDefinitionThresholds) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o PropertyDefinitionThresholds) MarshalJSON() ([]byte, error) {
 
 func (o PropertyDefinitionThresholds) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Thresholds) {
-		toSerialize["thresholds"] = o.Thresholds
+	toSerialize["thresholds"] = o.Thresholds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyDefinitionThresholds) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"thresholds",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPropertyDefinitionThresholds := _PropertyDefinitionThresholds{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyDefinitionThresholds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyDefinitionThresholds(varPropertyDefinitionThresholds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "thresholds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyDefinitionThresholds struct {
@@ -122,5 +168,4 @@ func (v *NullablePropertyDefinitionThresholds) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

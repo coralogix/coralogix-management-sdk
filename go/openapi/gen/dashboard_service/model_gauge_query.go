@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // GaugeQuery - struct for GaugeQuery
 type GaugeQuery struct {
@@ -58,7 +61,7 @@ func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into GaugeQueryDataprime
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryDataprime)
+	err = json.Unmarshal(data, &dst.GaugeQueryDataprime)
 	if err == nil {
 		jsonGaugeQueryDataprime, _ := json.Marshal(dst.GaugeQueryDataprime)
 		if string(jsonGaugeQueryDataprime) == "{}" { // empty struct
@@ -75,7 +78,7 @@ func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GaugeQueryLogs
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryLogs)
+	err = json.Unmarshal(data, &dst.GaugeQueryLogs)
 	if err == nil {
 		jsonGaugeQueryLogs, _ := json.Marshal(dst.GaugeQueryLogs)
 		if string(jsonGaugeQueryLogs) == "{}" { // empty struct
@@ -92,7 +95,7 @@ func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GaugeQueryMetrics
-	err = newStrictDecoder(data).Decode(&dst.GaugeQueryMetrics)
+	err = json.Unmarshal(data, &dst.GaugeQueryMetrics)
 	if err == nil {
 		jsonGaugeQueryMetrics, _ := json.Marshal(dst.GaugeQueryMetrics)
 		if string(jsonGaugeQueryMetrics) == "{}" { // empty struct
@@ -109,7 +112,7 @@ func (dst *GaugeQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GaugeQuerySpans
-	err = newStrictDecoder(data).Decode(&dst.GaugeQuerySpans)
+	err = json.Unmarshal(data, &dst.GaugeQuerySpans)
 	if err == nil {
 		jsonGaugeQuerySpans, _ := json.Marshal(dst.GaugeQuerySpans)
 		if string(jsonGaugeQuerySpans) == "{}" { // empty struct
@@ -243,5 +246,4 @@ func (v *NullableGaugeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldCondition{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &FieldCondition{}
 type FieldCondition struct {
 	Type *FieldConditionConditionType `json:"type,omitempty"`
 	Values []FieldConditionFieldValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldCondition FieldCondition
 
 // NewFieldCondition instantiates a new FieldCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o FieldCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldCondition) UnmarshalJSON(data []byte) (err error) {
+	varFieldCondition := _FieldCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldCondition(varFieldCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldCondition struct {
@@ -158,5 +192,4 @@ func (v *NullableFieldCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

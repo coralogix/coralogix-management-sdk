@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateApiKeyRequestKeyPermissions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateApiKeyRequestKeyPermissions{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &CreateApiKeyRequestKeyPermissions{}
 type CreateApiKeyRequestKeyPermissions struct {
 	Permissions []string `json:"permissions,omitempty"`
 	Presets []string `json:"presets,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateApiKeyRequestKeyPermissions CreateApiKeyRequestKeyPermissions
 
 // NewCreateApiKeyRequestKeyPermissions instantiates a new CreateApiKeyRequestKeyPermissions object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o CreateApiKeyRequestKeyPermissions) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Presets) {
 		toSerialize["presets"] = o.Presets
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateApiKeyRequestKeyPermissions) UnmarshalJSON(data []byte) (err error) {
+	varCreateApiKeyRequestKeyPermissions := _CreateApiKeyRequestKeyPermissions{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateApiKeyRequestKeyPermissions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateApiKeyRequestKeyPermissions(varCreateApiKeyRequestKeyPermissions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "presets")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateApiKeyRequestKeyPermissions struct {
@@ -158,5 +192,4 @@ func (v *NullableCreateApiKeyRequestKeyPermissions) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

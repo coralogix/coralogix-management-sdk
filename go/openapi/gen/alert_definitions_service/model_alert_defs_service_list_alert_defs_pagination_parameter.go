@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefsServiceListAlertDefsPaginationParameter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefsServiceListAlertDefsPaginationParameter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AlertDefsServiceListAlertDefsPaginationParameter{}
 type AlertDefsServiceListAlertDefsPaginationParameter struct {
 	PageSize *int64 `json:"pageSize,omitempty"`
 	PageToken *string `json:"pageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefsServiceListAlertDefsPaginationParameter AlertDefsServiceListAlertDefsPaginationParameter
 
 // NewAlertDefsServiceListAlertDefsPaginationParameter instantiates a new AlertDefsServiceListAlertDefsPaginationParameter object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o AlertDefsServiceListAlertDefsPaginationParameter) ToMap() (map[string]in
 	if !IsNil(o.PageToken) {
 		toSerialize["pageToken"] = o.PageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefsServiceListAlertDefsPaginationParameter) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefsServiceListAlertDefsPaginationParameter := _AlertDefsServiceListAlertDefsPaginationParameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefsServiceListAlertDefsPaginationParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefsServiceListAlertDefsPaginationParameter(varAlertDefsServiceListAlertDefsPaginationParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pageSize")
+		delete(additionalProperties, "pageToken")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefsServiceListAlertDefsPaginationParameter struct {
@@ -158,5 +192,4 @@ func (v *NullableAlertDefsServiceListAlertDefsPaginationParameter) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

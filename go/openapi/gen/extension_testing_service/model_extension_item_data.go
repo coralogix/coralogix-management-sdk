@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_testing_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtensionItemData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtensionItemData{}
@@ -29,7 +32,10 @@ type ExtensionItemData struct {
 	StableId *string `json:"stableId,omitempty"`
 	TargetDomain *TargetDomain `json:"targetDomain,omitempty"`
 	UniqueId *string `json:"uniqueId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtensionItemData ExtensionItemData
 
 // NewExtensionItemData instantiates a new ExtensionItemData object
 // This constructor will assign default values to properties that have it defined,
@@ -408,7 +414,43 @@ func (o ExtensionItemData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UniqueId) {
 		toSerialize["uniqueId"] = o.UniqueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtensionItemData) UnmarshalJSON(data []byte) (err error) {
+	varExtensionItemData := _ExtensionItemData{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtensionItemData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtensionItemData(varExtensionItemData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "internalId")
+		delete(additionalProperties, "isMandatory")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permissionResource")
+		delete(additionalProperties, "stableId")
+		delete(additionalProperties, "targetDomain")
+		delete(additionalProperties, "uniqueId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtensionItemData struct {
@@ -446,5 +488,4 @@ func (v *NullableExtensionItemData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_deployment_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldGroup{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &FieldGroup{}
 type FieldGroup struct {
 	Name *string `json:"name,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldGroup FieldGroup
 
 // NewFieldGroup instantiates a new FieldGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o FieldGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldGroup) UnmarshalJSON(data []byte) (err error) {
+	varFieldGroup := _FieldGroup{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldGroup(varFieldGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldGroup struct {
@@ -158,5 +192,4 @@ func (v *NullableFieldGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

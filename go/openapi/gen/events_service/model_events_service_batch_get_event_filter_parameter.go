@@ -11,8 +11,11 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EventsServiceBatchGetEventFilterParameter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventsServiceBatchGetEventFilterParameter{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &EventsServiceBatchGetEventFilterParameter{}
 // EventsServiceBatchGetEventFilterParameter struct for EventsServiceBatchGetEventFilterParameter
 type EventsServiceBatchGetEventFilterParameter struct {
 	Timestamp interface{} `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EventsServiceBatchGetEventFilterParameter EventsServiceBatchGetEventFilterParameter
 
 // NewEventsServiceBatchGetEventFilterParameter instantiates a new EventsServiceBatchGetEventFilterParameter object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o EventsServiceBatchGetEventFilterParameter) ToMap() (map[string]interface
 	if o.Timestamp != nil {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EventsServiceBatchGetEventFilterParameter) UnmarshalJSON(data []byte) (err error) {
+	varEventsServiceBatchGetEventFilterParameter := _EventsServiceBatchGetEventFilterParameter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEventsServiceBatchGetEventFilterParameter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EventsServiceBatchGetEventFilterParameter(varEventsServiceBatchGetEventFilterParameter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEventsServiceBatchGetEventFilterParameter struct {
@@ -123,5 +156,4 @@ func (v *NullableEventsServiceBatchGetEventFilterParameter) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

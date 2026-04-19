@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PropertyThresholds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyThresholds{}
@@ -25,7 +28,10 @@ type PropertyThresholds struct {
 	Min *float64 `json:"min,omitempty"`
 	Type *ThresholdType `json:"type,omitempty"`
 	Values []CommonThreshold `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PropertyThresholds PropertyThresholds
 
 // NewPropertyThresholds instantiates a new PropertyThresholds object
 // This constructor will assign default values to properties that have it defined,
@@ -194,7 +200,37 @@ func (o PropertyThresholds) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PropertyThresholds) UnmarshalJSON(data []byte) (err error) {
+	varPropertyThresholds := _PropertyThresholds{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPropertyThresholds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PropertyThresholds(varPropertyThresholds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "max")
+		delete(additionalProperties, "min")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePropertyThresholds struct {
@@ -232,5 +268,4 @@ func (v *NullablePropertyThresholds) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

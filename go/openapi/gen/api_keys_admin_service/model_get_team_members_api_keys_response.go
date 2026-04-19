@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_admin_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetTeamMembersApiKeysResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTeamMembersApiKeysResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetTeamMembersApiKeysResponse{}
 // GetTeamMembersApiKeysResponse This data structure is the response obtained when retrieving team members API keys.
 type GetTeamMembersApiKeysResponse struct {
 	Keys []ApiKeySummary `json:"keys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTeamMembersApiKeysResponse GetTeamMembersApiKeysResponse
 
 // NewGetTeamMembersApiKeysResponse instantiates a new GetTeamMembersApiKeysResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetTeamMembersApiKeysResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Keys) {
 		toSerialize["keys"] = o.Keys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTeamMembersApiKeysResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetTeamMembersApiKeysResponse := _GetTeamMembersApiKeysResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetTeamMembersApiKeysResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTeamMembersApiKeysResponse(varGetTeamMembersApiKeysResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keys")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTeamMembersApiKeysResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetTeamMembersApiKeysResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

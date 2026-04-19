@@ -11,7 +11,6 @@
           "Actions Service"
         ],
         "summary": "List Actions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +51,6 @@
           "Actions Service"
         ],
         "summary": "Replace Action",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -67,8 +65,7 @@
                   "action": {
                     "$ref": "#/components/schemas/v2.Action"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -109,7 +106,6 @@
           "Actions Service"
         ],
         "summary": "Create Action",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -145,8 +141,7 @@
                   "url": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -189,7 +184,6 @@
           "Actions Service"
         ],
         "summary": "Get Action",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -241,7 +235,6 @@
           "Actions Service"
         ],
         "summary": "Delete Action",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -295,7 +288,6 @@
           "Actions Service"
         ],
         "summary": "Atomic Batch Execute Actions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -313,8 +305,7 @@
                       "$ref": "#/components/schemas/ActionExecutionRequest"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -357,7 +348,6 @@
           "Actions Service"
         ],
         "summary": "Order Actions",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -383,8 +373,7 @@
                       "format": "int64"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -448,7 +437,9 @@
             "$ref": "#/components/schemas/CreateActionRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "create"
+        ]
       },
       "ActionExecutionRequestDelete": {
         "externalDocs": {
@@ -461,7 +452,9 @@
             "$ref": "#/components/schemas/DeleteActionRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "delete"
+        ]
       },
       "ActionExecutionRequestReplace": {
         "externalDocs": {
@@ -474,18 +467,20 @@
             "$ref": "#/components/schemas/ReplaceActionRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replace"
+        ]
       },
       "ActionExecutionResponse": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
-          },
           {
             "$ref": "#/components/schemas/ActionExecutionResponseReplace"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionResponseDelete"
+          },
+          {
+            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
           }
         ]
       },
@@ -500,7 +495,9 @@
             "$ref": "#/components/schemas/CreateActionResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "create"
+        ]
       },
       "ActionExecutionResponseDelete": {
         "externalDocs": {
@@ -513,7 +510,9 @@
             "$ref": "#/components/schemas/DeleteActionResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "delete"
+        ]
       },
       "ActionExecutionResponseReplace": {
         "externalDocs": {
@@ -526,7 +525,9 @@
             "$ref": "#/components/schemas/ReplaceActionResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replace"
+        ]
       },
       "AtomicBatchExecuteActionsResponse": {
         "externalDocs": {
@@ -542,33 +543,6 @@
             }
           }
         }
-      },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
       },
       "CreateActionRequest": {
         "externalDocs": {
@@ -673,9 +647,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -695,9 +669,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -747,34 +721,6 @@
             }
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -902,14 +848,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

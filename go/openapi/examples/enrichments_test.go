@@ -33,7 +33,7 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeGeoIp: &enrichments.EnrichmentTypeGeoIp{
-			GeoIp: &enrichments.GeoIpType{
+			GeoIp: enrichments.GeoIpType{
 				WithAsn: enrichments.PtrBool(true),
 			},
 		},
@@ -74,7 +74,7 @@ func TestEnrichmentsAws(t *testing.T) {
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeAws: &enrichments.EnrichmentTypeAws{
-			Aws: &enrichments.AwsType{
+			Aws: enrichments.AwsType{
 				ResourceType: enrichments.PtrString("ec2"),
 			},
 		},
@@ -117,7 +117,7 @@ func TestEnrichmentsCustom(t *testing.T) {
 				FileTextual: &custom_enrichments_service.FileTextual{
 					Extension: &ext,
 					Name:      &name,
-					Textual:   &contents,
+					Textual:   contents,
 				},
 			},
 			Description: name,
@@ -131,7 +131,7 @@ func TestEnrichmentsCustom(t *testing.T) {
 
 	enrichmentType := enrichments.EnrichmentType{
 		EnrichmentTypeCustomEnrichment: &enrichments.EnrichmentTypeCustomEnrichment{
-			CustomEnrichment: &enrichments.CustomEnrichmentType{
+			CustomEnrichment: enrichments.CustomEnrichmentType{
 				Id: data.CustomEnrichment.Id,
 			},
 		},

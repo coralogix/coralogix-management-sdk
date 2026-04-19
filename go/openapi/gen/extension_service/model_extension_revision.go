@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ExtensionRevision type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtensionRevision{}
@@ -28,7 +31,10 @@ type ExtensionRevision struct {
 	Labels []string `json:"labels,omitempty"`
 	PermissionDeniedItems []ExtensionItem `json:"permissionDeniedItems,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExtensionRevision ExtensionRevision
 
 // NewExtensionRevision instantiates a new ExtensionRevision object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +378,42 @@ func (o ExtensionRevision) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExtensionRevision) UnmarshalJSON(data []byte) (err error) {
+	varExtensionRevision := _ExtensionRevision{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varExtensionRevision)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExtensionRevision(varExtensionRevision)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binaries")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "excerpt")
+		delete(additionalProperties, "integrationDetails")
+		delete(additionalProperties, "isTesting")
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "permissionDeniedItems")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExtensionRevision struct {
@@ -410,5 +451,4 @@ func (v *NullableExtensionRevision) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultLuceneValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultLuceneValue{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &TextboxDefaultLuceneValue{}
 type TextboxDefaultLuceneValue struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultLuceneValue TextboxDefaultLuceneValue
 
 // NewTextboxDefaultLuceneValue instantiates a new TextboxDefaultLuceneValue object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o TextboxDefaultLuceneValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultLuceneValue) UnmarshalJSON(data []byte) (err error) {
+	varTextboxDefaultLuceneValue := _TextboxDefaultLuceneValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultLuceneValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultLuceneValue(varTextboxDefaultLuceneValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultLuceneValue struct {
@@ -158,5 +192,4 @@ func (v *NullableTextboxDefaultLuceneValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

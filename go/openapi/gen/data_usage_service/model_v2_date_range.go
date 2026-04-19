@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2DateRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2DateRange{}
@@ -22,7 +25,10 @@ var _ MappedNullable = &V2DateRange{}
 type V2DateRange struct {
 	FromDate *time.Time `json:"fromDate,omitempty"`
 	ToDate *time.Time `json:"toDate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2DateRange V2DateRange
 
 // NewV2DateRange instantiates a new V2DateRange object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o V2DateRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ToDate) {
 		toSerialize["toDate"] = o.ToDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2DateRange) UnmarshalJSON(data []byte) (err error) {
+	varV2DateRange := _V2DateRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2DateRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2DateRange(varV2DateRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fromDate")
+		delete(additionalProperties, "toDate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2DateRange struct {
@@ -159,5 +193,4 @@ func (v *NullableV2DateRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

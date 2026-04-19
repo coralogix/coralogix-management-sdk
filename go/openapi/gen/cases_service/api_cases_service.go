@@ -38,9 +38,6 @@ CasesServiceGetCaseExternalReferences Get external references for a case
 
 Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.
 
-Requires the following permissions:
-- `case:Read`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param caseId
  @return ApiCasesServiceGetCaseExternalReferencesRequest

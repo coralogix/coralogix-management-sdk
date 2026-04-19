@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentSearchQueryContextualLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentSearchQueryContextualLabel{}
@@ -22,9 +24,10 @@ var _ MappedNullable = &IncidentSearchQueryContextualLabel{}
 // IncidentSearchQueryContextualLabel struct for IncidentSearchQueryContextualLabel
 type IncidentSearchQueryContextualLabel struct {
 	// The contextual label to search in.
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	ContextualLabel string `json:"contextualLabel"`
 	// The search query
 	Query string `json:"query"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentSearchQueryContextualLabel IncidentSearchQueryContextualLabel
@@ -33,8 +36,9 @@ type _IncidentSearchQueryContextualLabel IncidentSearchQueryContextualLabel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIncidentSearchQueryContextualLabel(query string) *IncidentSearchQueryContextualLabel {
+func NewIncidentSearchQueryContextualLabel(contextualLabel string, query string) *IncidentSearchQueryContextualLabel {
 	this := IncidentSearchQueryContextualLabel{}
+	this.ContextualLabel = contextualLabel
 	this.Query = query
 	return &this
 }
@@ -47,36 +51,28 @@ func NewIncidentSearchQueryContextualLabelWithDefaults() *IncidentSearchQueryCon
 	return &this
 }
 
-// GetContextualLabel returns the ContextualLabel field value if set, zero value otherwise.
+// GetContextualLabel returns the ContextualLabel field value
 func (o *IncidentSearchQueryContextualLabel) GetContextualLabel() string {
-	if o == nil || IsNil(o.ContextualLabel) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ContextualLabel
+
+	return o.ContextualLabel
 }
 
-// GetContextualLabelOk returns a tuple with the ContextualLabel field value if set, nil otherwise
+// GetContextualLabelOk returns a tuple with the ContextualLabel field value
 // and a boolean to check if the value has been set.
 func (o *IncidentSearchQueryContextualLabel) GetContextualLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.ContextualLabel) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ContextualLabel, true
+	return &o.ContextualLabel, true
 }
 
-// HasContextualLabel returns a boolean if a field has been set.
-func (o *IncidentSearchQueryContextualLabel) HasContextualLabel() bool {
-	if o != nil && !IsNil(o.ContextualLabel) {
-		return true
-	}
-
-	return false
-}
-
-// SetContextualLabel gets a reference to the given string and assigns it to the ContextualLabel field.
+// SetContextualLabel sets field value
 func (o *IncidentSearchQueryContextualLabel) SetContextualLabel(v string) {
-	o.ContextualLabel = &v
+	o.ContextualLabel = v
 }
 
 // GetQuery returns the Query field value
@@ -113,10 +109,13 @@ func (o IncidentSearchQueryContextualLabel) MarshalJSON() ([]byte, error) {
 
 func (o IncidentSearchQueryContextualLabel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ContextualLabel) {
-		toSerialize["contextualLabel"] = o.ContextualLabel
-	}
+	toSerialize["contextualLabel"] = o.ContextualLabel
 	toSerialize["query"] = o.Query
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -125,6 +124,7 @@ func (o *IncidentSearchQueryContextualLabel) UnmarshalJSON(data []byte) (err err
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"contextualLabel",
 		"query",
 	}
 
@@ -145,7 +145,6 @@ func (o *IncidentSearchQueryContextualLabel) UnmarshalJSON(data []byte) (err err
 	varIncidentSearchQueryContextualLabel := _IncidentSearchQueryContextualLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentSearchQueryContextualLabel)
 
 	if err != nil {
@@ -153,6 +152,14 @@ func (o *IncidentSearchQueryContextualLabel) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = IncidentSearchQueryContextualLabel(varIncidentSearchQueryContextualLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contextualLabel")
+		delete(additionalProperties, "query")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -192,5 +199,4 @@ func (v *NullableIncidentSearchQueryContextualLabel) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

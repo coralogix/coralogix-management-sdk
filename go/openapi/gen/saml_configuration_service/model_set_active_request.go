@@ -11,8 +11,11 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SetActiveRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetActiveRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &SetActiveRequest{}
 type SetActiveRequest struct {
 	IsActive *bool `json:"isActive,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SetActiveRequest SetActiveRequest
 
 // NewSetActiveRequest instantiates a new SetActiveRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o SetActiveRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SetActiveRequest) UnmarshalJSON(data []byte) (err error) {
+	varSetActiveRequest := _SetActiveRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSetActiveRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SetActiveRequest(varSetActiveRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isActive")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSetActiveRequest struct {
@@ -158,5 +192,4 @@ func (v *NullableSetActiveRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

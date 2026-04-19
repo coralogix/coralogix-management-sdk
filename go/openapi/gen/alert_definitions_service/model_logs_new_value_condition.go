@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsNewValueCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsNewValueCondition{}
@@ -22,7 +25,10 @@ type LogsNewValueCondition struct {
 	// The keypath to track for new values
 	KeypathToTrack *string `json:"keypathToTrack,omitempty"`
 	TimeWindow *LogsNewValueTimeWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsNewValueCondition LogsNewValueCondition
 
 // NewLogsNewValueCondition instantiates a new LogsNewValueCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o LogsNewValueCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsNewValueCondition) UnmarshalJSON(data []byte) (err error) {
+	varLogsNewValueCondition := _LogsNewValueCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsNewValueCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsNewValueCondition(varLogsNewValueCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keypathToTrack")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsNewValueCondition struct {
@@ -159,5 +193,4 @@ func (v *NullableLogsNewValueCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

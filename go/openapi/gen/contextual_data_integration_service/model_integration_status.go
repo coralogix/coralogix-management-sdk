@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationStatus{}
@@ -22,7 +25,10 @@ type IntegrationStatus struct {
 	ConnectionStatus *ConnectionStatus `json:"connectionStatus,omitempty"`
 	Details *map[string]string `json:"details,omitempty"`
 	Messages []string `json:"messages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationStatus IntegrationStatus
 
 // NewIntegrationStatus instantiates a new IntegrationStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o IntegrationStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Messages) {
 		toSerialize["messages"] = o.Messages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationStatus) UnmarshalJSON(data []byte) (err error) {
+	varIntegrationStatus := _IntegrationStatus{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationStatus(varIntegrationStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectionStatus")
+		delete(additionalProperties, "details")
+		delete(additionalProperties, "messages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationStatus struct {
@@ -194,5 +229,4 @@ func (v *NullableIntegrationStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

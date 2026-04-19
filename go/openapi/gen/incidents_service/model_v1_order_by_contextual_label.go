@@ -11,18 +11,21 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V1OrderByContextualLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1OrderByContextualLabel{}
 
 // V1OrderByContextualLabel struct for V1OrderByContextualLabel
 type V1OrderByContextualLabel struct {
-	ContextualLabel *string `json:"contextualLabel,omitempty"`
+	ContextualLabel string `json:"contextualLabel"`
 	Direction V1OrderByDirection `json:"direction"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _V1OrderByContextualLabel V1OrderByContextualLabel
@@ -31,8 +34,9 @@ type _V1OrderByContextualLabel V1OrderByContextualLabel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1OrderByContextualLabel(direction V1OrderByDirection) *V1OrderByContextualLabel {
+func NewV1OrderByContextualLabel(contextualLabel string, direction V1OrderByDirection) *V1OrderByContextualLabel {
 	this := V1OrderByContextualLabel{}
+	this.ContextualLabel = contextualLabel
 	this.Direction = direction
 	return &this
 }
@@ -45,36 +49,28 @@ func NewV1OrderByContextualLabelWithDefaults() *V1OrderByContextualLabel {
 	return &this
 }
 
-// GetContextualLabel returns the ContextualLabel field value if set, zero value otherwise.
+// GetContextualLabel returns the ContextualLabel field value
 func (o *V1OrderByContextualLabel) GetContextualLabel() string {
-	if o == nil || IsNil(o.ContextualLabel) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ContextualLabel
+
+	return o.ContextualLabel
 }
 
-// GetContextualLabelOk returns a tuple with the ContextualLabel field value if set, nil otherwise
+// GetContextualLabelOk returns a tuple with the ContextualLabel field value
 // and a boolean to check if the value has been set.
 func (o *V1OrderByContextualLabel) GetContextualLabelOk() (*string, bool) {
-	if o == nil || IsNil(o.ContextualLabel) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ContextualLabel, true
+	return &o.ContextualLabel, true
 }
 
-// HasContextualLabel returns a boolean if a field has been set.
-func (o *V1OrderByContextualLabel) HasContextualLabel() bool {
-	if o != nil && !IsNil(o.ContextualLabel) {
-		return true
-	}
-
-	return false
-}
-
-// SetContextualLabel gets a reference to the given string and assigns it to the ContextualLabel field.
+// SetContextualLabel sets field value
 func (o *V1OrderByContextualLabel) SetContextualLabel(v string) {
-	o.ContextualLabel = &v
+	o.ContextualLabel = v
 }
 
 // GetDirection returns the Direction field value
@@ -111,10 +107,13 @@ func (o V1OrderByContextualLabel) MarshalJSON() ([]byte, error) {
 
 func (o V1OrderByContextualLabel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ContextualLabel) {
-		toSerialize["contextualLabel"] = o.ContextualLabel
-	}
+	toSerialize["contextualLabel"] = o.ContextualLabel
 	toSerialize["direction"] = o.Direction
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -123,6 +122,7 @@ func (o *V1OrderByContextualLabel) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"contextualLabel",
 		"direction",
 	}
 
@@ -143,7 +143,6 @@ func (o *V1OrderByContextualLabel) UnmarshalJSON(data []byte) (err error) {
 	varV1OrderByContextualLabel := _V1OrderByContextualLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varV1OrderByContextualLabel)
 
 	if err != nil {
@@ -151,6 +150,14 @@ func (o *V1OrderByContextualLabel) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V1OrderByContextualLabel(varV1OrderByContextualLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contextualLabel")
+		delete(additionalProperties, "direction")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +197,4 @@ func (v *NullableV1OrderByContextualLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

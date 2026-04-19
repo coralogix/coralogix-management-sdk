@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the KeyInfo type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &KeyInfo{}
@@ -28,7 +31,10 @@ type KeyInfo struct {
 	Name *string `json:"name,omitempty"`
 	Owner *Owner `json:"owner,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _KeyInfo KeyInfo
 
 // NewKeyInfo instantiates a new KeyInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -337,7 +343,41 @@ func (o KeyInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *KeyInfo) UnmarshalJSON(data []byte) (err error) {
+	varKeyInfo := _KeyInfo{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varKeyInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = KeyInfo(varKeyInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessPolicy")
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "hashed")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "keyPermissions")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "owner")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableKeyInfo struct {
@@ -375,5 +415,4 @@ func (v *NullableKeyInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

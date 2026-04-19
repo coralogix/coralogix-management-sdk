@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LocalChangelog type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LocalChangelog{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LocalChangelog{}
 // LocalChangelog struct for LocalChangelog
 type LocalChangelog struct {
 	Changes []RevisionRef `json:"changes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LocalChangelog LocalChangelog
 
 // NewLocalChangelog instantiates a new LocalChangelog object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LocalChangelog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Changes) {
 		toSerialize["changes"] = o.Changes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LocalChangelog) UnmarshalJSON(data []byte) (err error) {
+	varLocalChangelog := _LocalChangelog{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLocalChangelog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LocalChangelog(varLocalChangelog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "changes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLocalChangelog struct {
@@ -122,5 +155,4 @@ func (v *NullableLocalChangelog) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

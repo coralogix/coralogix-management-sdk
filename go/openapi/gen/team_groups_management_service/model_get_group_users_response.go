@@ -11,8 +11,11 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetGroupUsersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetGroupUsersResponse{}
@@ -22,7 +25,10 @@ type GetGroupUsersResponse struct {
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	TotalCount *int64 `json:"totalCount,omitempty"`
 	Users []RbacV2User `json:"users,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGroupUsersResponse GetGroupUsersResponse
 
 // NewGetGroupUsersResponse instantiates a new GetGroupUsersResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o GetGroupUsersResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Users) {
 		toSerialize["users"] = o.Users
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGroupUsersResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetGroupUsersResponse := _GetGroupUsersResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetGroupUsersResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGroupUsersResponse(varGetGroupUsersResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nextPageToken")
+		delete(additionalProperties, "totalCount")
+		delete(additionalProperties, "users")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGroupUsersResponse struct {
@@ -194,5 +229,4 @@ func (v *NullableGetGroupUsersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

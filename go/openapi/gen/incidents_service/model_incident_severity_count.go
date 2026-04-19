@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IncidentSeverityCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentSeverityCount{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &IncidentSeverityCount{}
 type IncidentSeverityCount struct {
 	Count int64 `json:"count"`
 	Severity IncidentSeverity `json:"severity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IncidentSeverityCount IncidentSeverityCount
@@ -106,6 +109,11 @@ func (o IncidentSeverityCount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["count"] = o.Count
 	toSerialize["severity"] = o.Severity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,7 +143,6 @@ func (o *IncidentSeverityCount) UnmarshalJSON(data []byte) (err error) {
 	varIncidentSeverityCount := _IncidentSeverityCount{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varIncidentSeverityCount)
 
 	if err != nil {
@@ -143,6 +150,14 @@ func (o *IncidentSeverityCount) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentSeverityCount(varIncidentSeverityCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "severity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -182,5 +197,4 @@ func (v *NullableIncidentSeverityCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

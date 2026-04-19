@@ -11,8 +11,11 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpsertIncidentStatePayload type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpsertIncidentStatePayload{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &UpsertIncidentStatePayload{}
 // UpsertIncidentStatePayload struct for UpsertIncidentStatePayload
 type UpsertIncidentStatePayload struct {
 	CxEventKey *string `json:"cxEventKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpsertIncidentStatePayload UpsertIncidentStatePayload
 
 // NewUpsertIncidentStatePayload instantiates a new UpsertIncidentStatePayload object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o UpsertIncidentStatePayload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CxEventKey) {
 		toSerialize["cxEventKey"] = o.CxEventKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpsertIncidentStatePayload) UnmarshalJSON(data []byte) (err error) {
+	varUpsertIncidentStatePayload := _UpsertIncidentStatePayload{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpsertIncidentStatePayload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpsertIncidentStatePayload(varUpsertIncidentStatePayload)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cxEventKey")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpsertIncidentStatePayload struct {
@@ -122,5 +155,4 @@ func (v *NullableUpsertIncidentStatePayload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

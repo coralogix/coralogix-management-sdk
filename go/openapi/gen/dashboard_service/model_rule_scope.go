@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // RuleScope - struct for RuleScope
 type RuleScope struct {
@@ -50,7 +53,7 @@ func (dst *RuleScope) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into RuleScopeField
-	err = newStrictDecoder(data).Decode(&dst.RuleScopeField)
+	err = json.Unmarshal(data, &dst.RuleScopeField)
 	if err == nil {
 		jsonRuleScopeField, _ := json.Marshal(dst.RuleScopeField)
 		if string(jsonRuleScopeField) == "{}" { // empty struct
@@ -67,7 +70,7 @@ func (dst *RuleScope) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleScopeFieldType
-	err = newStrictDecoder(data).Decode(&dst.RuleScopeFieldType)
+	err = json.Unmarshal(data, &dst.RuleScopeFieldType)
 	if err == nil {
 		jsonRuleScopeFieldType, _ := json.Marshal(dst.RuleScopeFieldType)
 		if string(jsonRuleScopeFieldType) == "{}" { // empty struct
@@ -84,7 +87,7 @@ func (dst *RuleScope) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleScopeRegex
-	err = newStrictDecoder(data).Decode(&dst.RuleScopeRegex)
+	err = json.Unmarshal(data, &dst.RuleScopeRegex)
 	if err == nil {
 		jsonRuleScopeRegex, _ := json.Marshal(dst.RuleScopeRegex)
 		if string(jsonRuleScopeRegex) == "{}" { // empty struct
@@ -205,5 +208,4 @@ func (v *NullableRuleScope) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

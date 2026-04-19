@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CommonDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommonDataprimeQuery{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &CommonDataprimeQuery{}
 // CommonDataprimeQuery struct for CommonDataprimeQuery
 type CommonDataprimeQuery struct {
 	Text *string `json:"text,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CommonDataprimeQuery CommonDataprimeQuery
 
 // NewCommonDataprimeQuery instantiates a new CommonDataprimeQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o CommonDataprimeQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CommonDataprimeQuery) UnmarshalJSON(data []byte) (err error) {
+	varCommonDataprimeQuery := _CommonDataprimeQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCommonDataprimeQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommonDataprimeQuery(varCommonDataprimeQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "text")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCommonDataprimeQuery struct {
@@ -122,5 +155,4 @@ func (v *NullableCommonDataprimeQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

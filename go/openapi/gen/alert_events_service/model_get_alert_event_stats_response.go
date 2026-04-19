@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_events_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetAlertEventStatsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertEventStatsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetAlertEventStatsResponse{}
 // GetAlertEventStatsResponse struct for GetAlertEventStatsResponse
 type GetAlertEventStatsResponse struct {
 	EventsStats *map[string]EventStats `json:"eventsStats,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAlertEventStatsResponse GetAlertEventStatsResponse
 
 // NewGetAlertEventStatsResponse instantiates a new GetAlertEventStatsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetAlertEventStatsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EventsStats) {
 		toSerialize["eventsStats"] = o.EventsStats
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAlertEventStatsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetAlertEventStatsResponse := _GetAlertEventStatsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetAlertEventStatsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAlertEventStatsResponse(varGetAlertEventStatsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "eventsStats")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAlertEventStatsResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetAlertEventStatsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

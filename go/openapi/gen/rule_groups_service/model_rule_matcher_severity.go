@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleMatcherSeverity type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleMatcherSeverity{}
 
 // RuleMatcherSeverity struct for RuleMatcherSeverity
 type RuleMatcherSeverity struct {
-	Severity *SeverityConstraint `json:"severity,omitempty"`
+	Severity SeverityConstraint `json:"severity"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleMatcherSeverity RuleMatcherSeverity
 
 // NewRuleMatcherSeverity instantiates a new RuleMatcherSeverity object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleMatcherSeverity() *RuleMatcherSeverity {
+func NewRuleMatcherSeverity(severity SeverityConstraint) *RuleMatcherSeverity {
 	this := RuleMatcherSeverity{}
+	this.Severity = severity
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleMatcherSeverityWithDefaults() *RuleMatcherSeverity {
 	return &this
 }
 
-// GetSeverity returns the Severity field value if set, zero value otherwise.
+// GetSeverity returns the Severity field value
 func (o *RuleMatcherSeverity) GetSeverity() SeverityConstraint {
-	if o == nil || IsNil(o.Severity) {
+	if o == nil {
 		var ret SeverityConstraint
 		return ret
 	}
-	return *o.Severity
+
+	return o.Severity
 }
 
-// GetSeverityOk returns a tuple with the Severity field value if set, nil otherwise
+// GetSeverityOk returns a tuple with the Severity field value
 // and a boolean to check if the value has been set.
 func (o *RuleMatcherSeverity) GetSeverityOk() (*SeverityConstraint, bool) {
-	if o == nil || IsNil(o.Severity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Severity, true
+	return &o.Severity, true
 }
 
-// HasSeverity returns a boolean if a field has been set.
-func (o *RuleMatcherSeverity) HasSeverity() bool {
-	if o != nil && !IsNil(o.Severity) {
-		return true
-	}
-
-	return false
-}
-
-// SetSeverity gets a reference to the given SeverityConstraint and assigns it to the Severity field.
+// SetSeverity sets field value
 func (o *RuleMatcherSeverity) SetSeverity(v SeverityConstraint) {
-	o.Severity = &v
+	o.Severity = v
 }
 
 func (o RuleMatcherSeverity) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleMatcherSeverity) MarshalJSON() ([]byte, error) {
 
 func (o RuleMatcherSeverity) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Severity) {
-		toSerialize["severity"] = o.Severity
+	toSerialize["severity"] = o.Severity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleMatcherSeverity) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"severity",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleMatcherSeverity := _RuleMatcherSeverity{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleMatcherSeverity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleMatcherSeverity(varRuleMatcherSeverity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "severity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleMatcherSeverity struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleMatcherSeverity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

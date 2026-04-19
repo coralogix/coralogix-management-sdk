@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionsServiceOrderActionsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionsServiceOrderActionsRequest{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ActionsServiceOrderActionsRequest{}
 type ActionsServiceOrderActionsRequest struct {
 	PrivateActionsOrder *map[string]int64 `json:"privateActionsOrder,omitempty"`
 	SharedActionsOrder *map[string]int64 `json:"sharedActionsOrder,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionsServiceOrderActionsRequest ActionsServiceOrderActionsRequest
 
 // NewActionsServiceOrderActionsRequest instantiates a new ActionsServiceOrderActionsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ActionsServiceOrderActionsRequest) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.SharedActionsOrder) {
 		toSerialize["sharedActionsOrder"] = o.SharedActionsOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionsServiceOrderActionsRequest) UnmarshalJSON(data []byte) (err error) {
+	varActionsServiceOrderActionsRequest := _ActionsServiceOrderActionsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionsServiceOrderActionsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionsServiceOrderActionsRequest(varActionsServiceOrderActionsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "privateActionsOrder")
+		delete(additionalProperties, "sharedActionsOrder")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionsServiceOrderActionsRequest struct {
@@ -158,5 +192,4 @@ func (v *NullableActionsServiceOrderActionsRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

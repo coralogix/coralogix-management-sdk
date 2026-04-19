@@ -40,8 +40,6 @@ func (r ApiApiKeysServiceCreateApiKeyRequest) Execute() (*CreateApiKeyResponse, 
 /*
 ApiKeysServiceCreateApiKey Create API Key
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiKeysServiceCreateApiKeyRequest
 */

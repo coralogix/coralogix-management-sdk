@@ -11,10 +11,13 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // SloExecutionResponse - struct for SloExecutionResponse
 type SloExecutionResponse struct {
@@ -50,7 +53,7 @@ func (dst *SloExecutionResponse) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SloExecutionResponseCreateSloResponse
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponseCreateSloResponse)
+	err = json.Unmarshal(data, &dst.SloExecutionResponseCreateSloResponse)
 	if err == nil {
 		jsonSloExecutionResponseCreateSloResponse, _ := json.Marshal(dst.SloExecutionResponseCreateSloResponse)
 		if string(jsonSloExecutionResponseCreateSloResponse) == "{}" { // empty struct
@@ -67,7 +70,7 @@ func (dst *SloExecutionResponse) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloExecutionResponseDeleteSloResponse
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponseDeleteSloResponse)
+	err = json.Unmarshal(data, &dst.SloExecutionResponseDeleteSloResponse)
 	if err == nil {
 		jsonSloExecutionResponseDeleteSloResponse, _ := json.Marshal(dst.SloExecutionResponseDeleteSloResponse)
 		if string(jsonSloExecutionResponseDeleteSloResponse) == "{}" { // empty struct
@@ -84,7 +87,7 @@ func (dst *SloExecutionResponse) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SloExecutionResponseReplaceSloResponse
-	err = newStrictDecoder(data).Decode(&dst.SloExecutionResponseReplaceSloResponse)
+	err = json.Unmarshal(data, &dst.SloExecutionResponseReplaceSloResponse)
 	if err == nil {
 		jsonSloExecutionResponseReplaceSloResponse, _ := json.Marshal(dst.SloExecutionResponseReplaceSloResponse)
 		if string(jsonSloExecutionResponseReplaceSloResponse) == "{}" { // empty struct
@@ -205,5 +208,4 @@ func (v *NullableSloExecutionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

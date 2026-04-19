@@ -11,7 +11,6 @@
           "Target Service"
         ],
         "summary": "Get target",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +51,6 @@
           "Target Service"
         ],
         "summary": "Set target",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -79,8 +77,7 @@
                 "required": [
                   "isActive",
                   "targetSpec"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -150,33 +147,6 @@
           "bucket"
         ]
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "FieldGroup": {
         "type": "object",
         "properties": {
@@ -216,9 +186,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -238,9 +208,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -302,34 +272,6 @@
           "IBM_BUCKET_TYPE_INTERNAL"
         ]
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -354,7 +296,7 @@
         "type": "object",
         "properties": {
           "target": {
-            "$ref": "#/components/schemas/Target"
+            "$ref": "#/components/schemas/v2.Target"
           }
         },
         "required": [
@@ -371,7 +313,7 @@
         "type": "object",
         "properties": {
           "target": {
-            "$ref": "#/components/schemas/Target"
+            "$ref": "#/components/schemas/v2.Target"
           }
         },
         "required": [
@@ -400,16 +342,6 @@
           "bucket"
         ]
       },
-      "Target": {
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/TargetS3"
-          },
-          {
-            "$ref": "#/components/schemas/TargetIbmCos"
-          }
-        ]
-      },
       "TargetFormat": {
         "type": "string",
         "enum": [
@@ -417,7 +349,7 @@
           "TARGET_FORMAT_CX_DATA_V1"
         ]
       },
-      "TargetIbmCos": {
+      "V2TargetIbmCos": {
         "externalDocs": {
           "description": "Find out more about archives",
           "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -434,11 +366,11 @@
           }
         },
         "required": [
-          "targetSpecarchiveSpec"
-        ],
-        "additionalProperties": false
+          "targetSpecarchiveSpec",
+          "ibmCos"
+        ]
       },
-      "TargetS3": {
+      "V2TargetS3": {
         "externalDocs": {
           "description": "Find out more about archives",
           "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -455,9 +387,9 @@
           }
         },
         "required": [
-          "targetSpecarchiveSpec"
-        ],
-        "additionalProperties": false
+          "targetSpecarchiveSpec",
+          "s3"
+        ]
       },
       "common.Group": {
         "type": "object",
@@ -484,20 +416,22 @@
           "FILTER_MATCHER_REGEXP"
         ]
       },
+      "v2.Target": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/V2TargetS3"
+          },
+          {
+            "$ref": "#/components/schemas/V2TargetIbmCos"
+          }
+        ]
+      },
       "v3.FilterOperator": {
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

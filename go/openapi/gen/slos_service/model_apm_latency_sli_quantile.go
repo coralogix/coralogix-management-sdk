@@ -11,26 +11,34 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApmLatencySliQuantile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApmLatencySliQuantile{}
 
 // ApmLatencySliQuantile Configuration for latency-based APM SLI
 type ApmLatencySliQuantile struct {
-	Quantile *ApmLatencyQuantile `json:"quantile,omitempty"`
+	Quantile ApmLatencyQuantile `json:"quantile"`
 	// Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.
 	Threshold *float32 `json:"threshold,omitempty"`
 	TimeWindow *WindowSloWindow `json:"timeWindow,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApmLatencySliQuantile ApmLatencySliQuantile
 
 // NewApmLatencySliQuantile instantiates a new ApmLatencySliQuantile object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApmLatencySliQuantile() *ApmLatencySliQuantile {
+func NewApmLatencySliQuantile(quantile ApmLatencyQuantile) *ApmLatencySliQuantile {
 	this := ApmLatencySliQuantile{}
+	this.Quantile = quantile
 	return &this
 }
 
@@ -42,36 +50,28 @@ func NewApmLatencySliQuantileWithDefaults() *ApmLatencySliQuantile {
 	return &this
 }
 
-// GetQuantile returns the Quantile field value if set, zero value otherwise.
+// GetQuantile returns the Quantile field value
 func (o *ApmLatencySliQuantile) GetQuantile() ApmLatencyQuantile {
-	if o == nil || IsNil(o.Quantile) {
+	if o == nil {
 		var ret ApmLatencyQuantile
 		return ret
 	}
-	return *o.Quantile
+
+	return o.Quantile
 }
 
-// GetQuantileOk returns a tuple with the Quantile field value if set, nil otherwise
+// GetQuantileOk returns a tuple with the Quantile field value
 // and a boolean to check if the value has been set.
 func (o *ApmLatencySliQuantile) GetQuantileOk() (*ApmLatencyQuantile, bool) {
-	if o == nil || IsNil(o.Quantile) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Quantile, true
+	return &o.Quantile, true
 }
 
-// HasQuantile returns a boolean if a field has been set.
-func (o *ApmLatencySliQuantile) HasQuantile() bool {
-	if o != nil && !IsNil(o.Quantile) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantile gets a reference to the given ApmLatencyQuantile and assigns it to the Quantile field.
+// SetQuantile sets field value
 func (o *ApmLatencySliQuantile) SetQuantile(v ApmLatencyQuantile) {
-	o.Quantile = &v
+	o.Quantile = v
 }
 
 // GetThreshold returns the Threshold field value if set, zero value otherwise.
@@ -148,16 +148,64 @@ func (o ApmLatencySliQuantile) MarshalJSON() ([]byte, error) {
 
 func (o ApmLatencySliQuantile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Quantile) {
-		toSerialize["quantile"] = o.Quantile
-	}
+	toSerialize["quantile"] = o.Quantile
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
 	if !IsNil(o.TimeWindow) {
 		toSerialize["timeWindow"] = o.TimeWindow
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApmLatencySliQuantile) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"quantile",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varApmLatencySliQuantile := _ApmLatencySliQuantile{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApmLatencySliQuantile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApmLatencySliQuantile(varApmLatencySliQuantile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "quantile")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "timeWindow")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApmLatencySliQuantile struct {
@@ -195,5 +243,4 @@ func (v *NullableApmLatencySliQuantile) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

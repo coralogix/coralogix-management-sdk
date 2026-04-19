@@ -11,8 +11,11 @@ API version: 1.0.0
 package role_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoleManagementServiceUpdateRoleRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleManagementServiceUpdateRoleRequest{}
@@ -22,7 +25,10 @@ type RoleManagementServiceUpdateRoleRequest struct {
 	NewDescription *string `json:"newDescription,omitempty"`
 	NewName *string `json:"newName,omitempty"`
 	NewPermissions *V2Permissions `json:"newPermissions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RoleManagementServiceUpdateRoleRequest RoleManagementServiceUpdateRoleRequest
 
 // NewRoleManagementServiceUpdateRoleRequest instantiates a new RoleManagementServiceUpdateRoleRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o RoleManagementServiceUpdateRoleRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.NewPermissions) {
 		toSerialize["newPermissions"] = o.NewPermissions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RoleManagementServiceUpdateRoleRequest) UnmarshalJSON(data []byte) (err error) {
+	varRoleManagementServiceUpdateRoleRequest := _RoleManagementServiceUpdateRoleRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRoleManagementServiceUpdateRoleRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RoleManagementServiceUpdateRoleRequest(varRoleManagementServiceUpdateRoleRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "newDescription")
+		delete(additionalProperties, "newName")
+		delete(additionalProperties, "newPermissions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRoleManagementServiceUpdateRoleRequest struct {
@@ -194,5 +229,4 @@ func (v *NullableRoleManagementServiceUpdateRoleRequest) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

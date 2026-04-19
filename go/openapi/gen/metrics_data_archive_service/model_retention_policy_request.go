@@ -11,8 +11,11 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RetentionPolicyRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RetentionPolicyRequest{}
@@ -22,7 +25,10 @@ type RetentionPolicyRequest struct {
 	FiveMinutesResolution *int64 `json:"fiveMinutesResolution,omitempty"`
 	OneHourResolution *int64 `json:"oneHourResolution,omitempty"`
 	RawResolution *int64 `json:"rawResolution,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RetentionPolicyRequest RetentionPolicyRequest
 
 // NewRetentionPolicyRequest instantiates a new RetentionPolicyRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o RetentionPolicyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RawResolution) {
 		toSerialize["rawResolution"] = o.RawResolution
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RetentionPolicyRequest) UnmarshalJSON(data []byte) (err error) {
+	varRetentionPolicyRequest := _RetentionPolicyRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRetentionPolicyRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RetentionPolicyRequest(varRetentionPolicyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fiveMinutesResolution")
+		delete(additionalProperties, "oneHourResolution")
+		delete(additionalProperties, "rawResolution")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRetentionPolicyRequest struct {
@@ -194,5 +229,4 @@ func (v *NullableRetentionPolicyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

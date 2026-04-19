@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataprimeSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyInstant{}
 
 // DataprimeSourceStrategyInstant struct for DataprimeSourceStrategyInstant
 type DataprimeSourceStrategyInstant struct {
-	Instant *DataprimeSourceStrategyInstant `json:"instant,omitempty"`
+	TimestampField *ObservationField `json:"timestampField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataprimeSourceStrategyInstant DataprimeSourceStrategyInstant
 
 // NewDataprimeSourceStrategyInstant instantiates a new DataprimeSourceStrategyInstant object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewDataprimeSourceStrategyInstantWithDefaults() *DataprimeSourceStrategyIns
 	return &this
 }
 
-// GetInstant returns the Instant field value if set, zero value otherwise.
-func (o *DataprimeSourceStrategyInstant) GetInstant() DataprimeSourceStrategyInstant {
-	if o == nil || IsNil(o.Instant) {
-		var ret DataprimeSourceStrategyInstant
+// GetTimestampField returns the TimestampField field value if set, zero value otherwise.
+func (o *DataprimeSourceStrategyInstant) GetTimestampField() ObservationField {
+	if o == nil || IsNil(o.TimestampField) {
+		var ret ObservationField
 		return ret
 	}
-	return *o.Instant
+	return *o.TimestampField
 }
 
-// GetInstantOk returns a tuple with the Instant field value if set, nil otherwise
+// GetTimestampFieldOk returns a tuple with the TimestampField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataprimeSourceStrategyInstant) GetInstantOk() (*DataprimeSourceStrategyInstant, bool) {
-	if o == nil || IsNil(o.Instant) {
+func (o *DataprimeSourceStrategyInstant) GetTimestampFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.TimestampField) {
 		return nil, false
 	}
-	return o.Instant, true
+	return o.TimestampField, true
 }
 
-// HasInstant returns a boolean if a field has been set.
-func (o *DataprimeSourceStrategyInstant) HasInstant() bool {
-	if o != nil && !IsNil(o.Instant) {
+// HasTimestampField returns a boolean if a field has been set.
+func (o *DataprimeSourceStrategyInstant) HasTimestampField() bool {
+	if o != nil && !IsNil(o.TimestampField) {
 		return true
 	}
 
 	return false
 }
 
-// SetInstant gets a reference to the given DataprimeSourceStrategyInstant and assigns it to the Instant field.
-func (o *DataprimeSourceStrategyInstant) SetInstant(v DataprimeSourceStrategyInstant) {
-	o.Instant = &v
+// SetTimestampField gets a reference to the given ObservationField and assigns it to the TimestampField field.
+func (o *DataprimeSourceStrategyInstant) SetTimestampField(v ObservationField) {
+	o.TimestampField = &v
 }
 
 func (o DataprimeSourceStrategyInstant) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o DataprimeSourceStrategyInstant) MarshalJSON() ([]byte, error) {
 
 func (o DataprimeSourceStrategyInstant) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Instant) {
-		toSerialize["instant"] = o.Instant
+	if !IsNil(o.TimestampField) {
+		toSerialize["timestampField"] = o.TimestampField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataprimeSourceStrategyInstant) UnmarshalJSON(data []byte) (err error) {
+	varDataprimeSourceStrategyInstant := _DataprimeSourceStrategyInstant{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataprimeSourceStrategyInstant)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataprimeSourceStrategyInstant(varDataprimeSourceStrategyInstant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timestampField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataprimeSourceStrategyInstant struct {
@@ -122,5 +155,4 @@ func (v *NullableDataprimeSourceStrategyInstant) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

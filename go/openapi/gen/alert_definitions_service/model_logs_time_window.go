@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsTimeWindow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsTimeWindow{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LogsTimeWindow{}
 // LogsTimeWindow Time window configuration for log-based alerts
 type LogsTimeWindow struct {
 	LogsTimeWindowSpecificValue *LogsTimeWindowValue `json:"logsTimeWindowSpecificValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsTimeWindow LogsTimeWindow
 
 // NewLogsTimeWindow instantiates a new LogsTimeWindow object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LogsTimeWindow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LogsTimeWindowSpecificValue) {
 		toSerialize["logsTimeWindowSpecificValue"] = o.LogsTimeWindowSpecificValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsTimeWindow) UnmarshalJSON(data []byte) (err error) {
+	varLogsTimeWindow := _LogsTimeWindow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsTimeWindow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsTimeWindow(varLogsTimeWindow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logsTimeWindowSpecificValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsTimeWindow struct {
@@ -122,5 +155,4 @@ func (v *NullableLogsTimeWindow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

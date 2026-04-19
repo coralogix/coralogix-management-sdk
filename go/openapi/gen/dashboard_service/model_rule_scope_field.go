@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleScopeField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleScopeField{}
 
 // RuleScopeField struct for RuleScopeField
 type RuleScopeField struct {
-	Field *ObservationField `json:"field,omitempty"`
+	Field ObservationField `json:"field"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleScopeField RuleScopeField
 
 // NewRuleScopeField instantiates a new RuleScopeField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleScopeField() *RuleScopeField {
+func NewRuleScopeField(field ObservationField) *RuleScopeField {
 	this := RuleScopeField{}
+	this.Field = field
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleScopeFieldWithDefaults() *RuleScopeField {
 	return &this
 }
 
-// GetField returns the Field field value if set, zero value otherwise.
+// GetField returns the Field field value
 func (o *RuleScopeField) GetField() ObservationField {
-	if o == nil || IsNil(o.Field) {
+	if o == nil {
 		var ret ObservationField
 		return ret
 	}
-	return *o.Field
+
+	return o.Field
 }
 
-// GetFieldOk returns a tuple with the Field field value if set, nil otherwise
+// GetFieldOk returns a tuple with the Field field value
 // and a boolean to check if the value has been set.
 func (o *RuleScopeField) GetFieldOk() (*ObservationField, bool) {
-	if o == nil || IsNil(o.Field) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Field, true
+	return &o.Field, true
 }
 
-// HasField returns a boolean if a field has been set.
-func (o *RuleScopeField) HasField() bool {
-	if o != nil && !IsNil(o.Field) {
-		return true
-	}
-
-	return false
-}
-
-// SetField gets a reference to the given ObservationField and assigns it to the Field field.
+// SetField sets field value
 func (o *RuleScopeField) SetField(v ObservationField) {
-	o.Field = &v
+	o.Field = v
 }
 
 func (o RuleScopeField) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleScopeField) MarshalJSON() ([]byte, error) {
 
 func (o RuleScopeField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Field) {
-		toSerialize["field"] = o.Field
+	toSerialize["field"] = o.Field
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleScopeField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"field",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleScopeField := _RuleScopeField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleScopeField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleScopeField(varRuleScopeField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleScopeField struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleScopeField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

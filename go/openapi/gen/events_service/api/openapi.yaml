@@ -7,7 +7,6 @@ servers:
 paths:
   /alerts/alerts/v3/all/events:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: EventsService_ListAlertEvents
@@ -83,7 +82,6 @@ paths:
       - Events Service
   /alerts/events/v3:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: EventsService_ListEvents
@@ -135,7 +133,6 @@ paths:
       - Events Service
   /alerts/events/v3/all/count:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: EventsService_ListEventsCount
@@ -171,7 +168,6 @@ paths:
       - Events Service
   /alerts/events/v3/all/list:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: EventsService_BatchGetEvent
@@ -232,7 +228,6 @@ paths:
       - Events Service
   /alerts/events/v3/all/statistics:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: EventsService_GetEventsStatistics
@@ -268,7 +263,6 @@ paths:
       - Events Service
   /alerts/events/v3/{id}:
     get:
-      description: No description available
       externalDocs:
         url: ""
       operationId: EventsService_GetEvent
@@ -355,24 +349,6 @@ components:
         pagination:
           $ref: "#/components/schemas/events.v3.PaginationResponse"
       type: object
-    ColorsByAggregation:
-      additionalProperties: false
-      properties:
-        aggregation:
-          $ref: "#/components/schemas/ColorsByAggregation"
-      type: object
-    ColorsByGroupBy:
-      additionalProperties: false
-      properties:
-        groupBy:
-          $ref: "#/components/schemas/ColorsByGroupBy"
-      type: object
-    ColorsByStack:
-      additionalProperties: false
-      properties:
-        stack:
-          $ref: "#/components/schemas/ColorsByStack"
-      type: object
     CxEvent:
       description: This data structure represents an event
       example:
@@ -449,17 +425,17 @@ components:
       - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
       - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
     CxEventSingleOrMultipleMultipleEvents:
-      additionalProperties: false
       description: This data structure represents a single or multiple events
       externalDocs:
         url: ""
       properties:
         multipleEvents:
           $ref: "#/components/schemas/CxEventArray"
+      required:
+      - multipleEvents
       title: CxEventSingleOrMultiple
       type: object
     CxEventSingleOrMultipleSingleEvent:
-      additionalProperties: false
       description: This data structure represents a single or multiple events
       example:
         singleEvent:
@@ -479,6 +455,8 @@ components:
       properties:
         singleEvent:
           $ref: "#/components/schemas/CxEvent"
+      required:
+      - singleEvent
       title: CxEventSingleOrMultiple
       type: object
     FieldGroup:
@@ -504,7 +482,6 @@ components:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
     FilterPathAndValuesFilters:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -515,12 +492,12 @@ components:
           example: test
           type: string
       required:
+      - filters
       - path
       - values
       title: FilterPathAndValues
       type: object
     FilterPathAndValuesMultipleValues:
-      additionalProperties: false
       description: This data structure represents a filter path and values
       externalDocs:
         url: ""
@@ -531,6 +508,7 @@ components:
           example: test
           type: string
       required:
+      - multipleValues
       - path
       - values
       title: FilterPathAndValues
@@ -637,28 +615,6 @@ components:
       - count
       - reachedLimit
       title: ListEventsCountResponse
-      type: object
-    MinMaxAuto:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        auto:
-          $ref: "#/components/schemas/MinMaxAuto"
-      title: Min-Max
-      type: object
-    MinMaxCustom:
-      additionalProperties: false
-      description: "Definition of min/max value configuration, can be automatically\
-        \ derived from data or custom"
-      externalDocs:
-        url: ""
-      properties:
-        custom:
-          $ref: "#/components/schemas/MinMaxCustom"
-      title: Min-Max
       type: object
     MultipleValues:
       properties:
@@ -844,9 +800,3 @@ components:
       properties:
         timestamp: {}
       type: object
-  securitySchemes:
-    apiKeyAuth:
-      description: API key authentication
-      in: header
-      name: Authorization
-      type: apiKey

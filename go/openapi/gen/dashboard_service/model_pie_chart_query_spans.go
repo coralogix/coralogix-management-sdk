@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PieChartQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PieChartQuerySpans{}
 
 // PieChartQuerySpans struct for PieChartQuerySpans
 type PieChartQuerySpans struct {
-	Spans *PieChartSpansQuery `json:"spans,omitempty"`
+	Spans PieChartSpansQuery `json:"spans"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PieChartQuerySpans PieChartQuerySpans
 
 // NewPieChartQuerySpans instantiates a new PieChartQuerySpans object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPieChartQuerySpans() *PieChartQuerySpans {
+func NewPieChartQuerySpans(spans PieChartSpansQuery) *PieChartQuerySpans {
 	this := PieChartQuerySpans{}
+	this.Spans = spans
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewPieChartQuerySpansWithDefaults() *PieChartQuerySpans {
 	return &this
 }
 
-// GetSpans returns the Spans field value if set, zero value otherwise.
+// GetSpans returns the Spans field value
 func (o *PieChartQuerySpans) GetSpans() PieChartSpansQuery {
-	if o == nil || IsNil(o.Spans) {
+	if o == nil {
 		var ret PieChartSpansQuery
 		return ret
 	}
-	return *o.Spans
+
+	return o.Spans
 }
 
-// GetSpansOk returns a tuple with the Spans field value if set, nil otherwise
+// GetSpansOk returns a tuple with the Spans field value
 // and a boolean to check if the value has been set.
 func (o *PieChartQuerySpans) GetSpansOk() (*PieChartSpansQuery, bool) {
-	if o == nil || IsNil(o.Spans) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Spans, true
+	return &o.Spans, true
 }
 
-// HasSpans returns a boolean if a field has been set.
-func (o *PieChartQuerySpans) HasSpans() bool {
-	if o != nil && !IsNil(o.Spans) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpans gets a reference to the given PieChartSpansQuery and assigns it to the Spans field.
+// SetSpans sets field value
 func (o *PieChartQuerySpans) SetSpans(v PieChartSpansQuery) {
-	o.Spans = &v
+	o.Spans = v
 }
 
 func (o PieChartQuerySpans) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o PieChartQuerySpans) MarshalJSON() ([]byte, error) {
 
 func (o PieChartQuerySpans) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Spans) {
-		toSerialize["spans"] = o.Spans
+	toSerialize["spans"] = o.Spans
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *PieChartQuerySpans) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spans",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPieChartQuerySpans := _PieChartQuerySpans{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPieChartQuerySpans)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PieChartQuerySpans(varPieChartQuerySpans)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "spans")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePieChartQuerySpans struct {
@@ -122,5 +168,4 @@ func (v *NullablePieChartQuerySpans) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,12 @@ API version: 1.0.0
 package slos_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateSloResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateSloResponse{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateSloResponse{}
 // CreateSloResponse Response after creating a new SLO.
 type CreateSloResponse struct {
 	Slo Slo `json:"slo"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSloResponse CreateSloResponse
@@ -79,6 +82,11 @@ func (o CreateSloResponse) MarshalJSON() ([]byte, error) {
 func (o CreateSloResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["slo"] = o.Slo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CreateSloResponse) UnmarshalJSON(data []byte) (err error) {
 	varCreateSloResponse := _CreateSloResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateSloResponse)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CreateSloResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CreateSloResponse(varCreateSloResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "slo")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCreateSloResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

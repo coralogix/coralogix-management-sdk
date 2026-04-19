@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DownloadAlertsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DownloadAlertsResponse{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &DownloadAlertsResponse{}
 type DownloadAlertsResponse struct {
 	// Base64-encoded binary data of the alert definitions
 	Content *string `json:"content,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DownloadAlertsResponse DownloadAlertsResponse
 
 // NewDownloadAlertsResponse instantiates a new DownloadAlertsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +91,34 @@ func (o DownloadAlertsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Content) {
 		toSerialize["content"] = o.Content
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DownloadAlertsResponse) UnmarshalJSON(data []byte) (err error) {
+	varDownloadAlertsResponse := _DownloadAlertsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDownloadAlertsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DownloadAlertsResponse(varDownloadAlertsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDownloadAlertsResponse struct {
@@ -123,5 +156,4 @@ func (v *NullableDownloadAlertsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

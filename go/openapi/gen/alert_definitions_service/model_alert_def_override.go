@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefOverride type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefOverride{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AlertDefOverride{}
 // AlertDefOverride struct for AlertDefOverride
 type AlertDefOverride struct {
 	Priority *AlertDefPriority `json:"priority,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefOverride AlertDefOverride
 
 // NewAlertDefOverride instantiates a new AlertDefOverride object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AlertDefOverride) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefOverride) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefOverride := _AlertDefOverride{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefOverride)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefOverride(varAlertDefOverride)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "priority")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefOverride struct {
@@ -122,5 +155,4 @@ func (v *NullableAlertDefOverride) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

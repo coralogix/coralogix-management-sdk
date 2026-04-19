@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloExecutionRequestReplaceSloRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloExecutionRequestReplaceSloRequest{}
 
 // SloExecutionRequestReplaceSloRequest Request for executing an SLO operation.
 type SloExecutionRequestReplaceSloRequest struct {
-	ReplaceSloRequest *ReplaceSloRequest `json:"replaceSloRequest,omitempty"`
+	ReplaceSloRequest ReplaceSloRequest `json:"replaceSloRequest"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloExecutionRequestReplaceSloRequest SloExecutionRequestReplaceSloRequest
 
 // NewSloExecutionRequestReplaceSloRequest instantiates a new SloExecutionRequestReplaceSloRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloExecutionRequestReplaceSloRequest() *SloExecutionRequestReplaceSloRequest {
+func NewSloExecutionRequestReplaceSloRequest(replaceSloRequest ReplaceSloRequest) *SloExecutionRequestReplaceSloRequest {
 	this := SloExecutionRequestReplaceSloRequest{}
+	this.ReplaceSloRequest = replaceSloRequest
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSloExecutionRequestReplaceSloRequestWithDefaults() *SloExecutionRequestR
 	return &this
 }
 
-// GetReplaceSloRequest returns the ReplaceSloRequest field value if set, zero value otherwise.
+// GetReplaceSloRequest returns the ReplaceSloRequest field value
 func (o *SloExecutionRequestReplaceSloRequest) GetReplaceSloRequest() ReplaceSloRequest {
-	if o == nil || IsNil(o.ReplaceSloRequest) {
+	if o == nil {
 		var ret ReplaceSloRequest
 		return ret
 	}
-	return *o.ReplaceSloRequest
+
+	return o.ReplaceSloRequest
 }
 
-// GetReplaceSloRequestOk returns a tuple with the ReplaceSloRequest field value if set, nil otherwise
+// GetReplaceSloRequestOk returns a tuple with the ReplaceSloRequest field value
 // and a boolean to check if the value has been set.
 func (o *SloExecutionRequestReplaceSloRequest) GetReplaceSloRequestOk() (*ReplaceSloRequest, bool) {
-	if o == nil || IsNil(o.ReplaceSloRequest) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReplaceSloRequest, true
+	return &o.ReplaceSloRequest, true
 }
 
-// HasReplaceSloRequest returns a boolean if a field has been set.
-func (o *SloExecutionRequestReplaceSloRequest) HasReplaceSloRequest() bool {
-	if o != nil && !IsNil(o.ReplaceSloRequest) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplaceSloRequest gets a reference to the given ReplaceSloRequest and assigns it to the ReplaceSloRequest field.
+// SetReplaceSloRequest sets field value
 func (o *SloExecutionRequestReplaceSloRequest) SetReplaceSloRequest(v ReplaceSloRequest) {
-	o.ReplaceSloRequest = &v
+	o.ReplaceSloRequest = v
 }
 
 func (o SloExecutionRequestReplaceSloRequest) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SloExecutionRequestReplaceSloRequest) MarshalJSON() ([]byte, error) {
 
 func (o SloExecutionRequestReplaceSloRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ReplaceSloRequest) {
-		toSerialize["replaceSloRequest"] = o.ReplaceSloRequest
+	toSerialize["replaceSloRequest"] = o.ReplaceSloRequest
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloExecutionRequestReplaceSloRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"replaceSloRequest",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloExecutionRequestReplaceSloRequest := _SloExecutionRequestReplaceSloRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloExecutionRequestReplaceSloRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloExecutionRequestReplaceSloRequest(varSloExecutionRequestReplaceSloRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replaceSloRequest")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloExecutionRequestReplaceSloRequest struct {
@@ -122,5 +168,4 @@ func (v *NullableSloExecutionRequestReplaceSloRequest) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

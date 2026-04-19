@@ -11,10 +11,12 @@ API version: 1.0.0
 package views_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SearchQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SearchQuery{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &SearchQuery{}
 type SearchQuery struct {
 	Query string `json:"query"`
 	SyntaxType *SyntaxType `json:"syntaxType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchQuery SearchQuery
@@ -115,6 +118,11 @@ func (o SearchQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SyntaxType) {
 		toSerialize["syntaxType"] = o.SyntaxType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -143,7 +151,6 @@ func (o *SearchQuery) UnmarshalJSON(data []byte) (err error) {
 	varSearchQuery := _SearchQuery{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSearchQuery)
 
 	if err != nil {
@@ -151,6 +158,14 @@ func (o *SearchQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = SearchQuery(varSearchQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "syntaxType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +205,4 @@ func (v *NullableSearchQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

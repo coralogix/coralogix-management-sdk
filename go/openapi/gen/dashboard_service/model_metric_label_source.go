@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricLabelSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricLabelSource{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &MetricLabelSource{}
 type MetricLabelSource struct {
 	Label *string `json:"label,omitempty"`
 	MetricName *string `json:"metricName,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricLabelSource MetricLabelSource
 
 // NewMetricLabelSource instantiates a new MetricLabelSource object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o MetricLabelSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetricName) {
 		toSerialize["metricName"] = o.MetricName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricLabelSource) UnmarshalJSON(data []byte) (err error) {
+	varMetricLabelSource := _MetricLabelSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricLabelSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricLabelSource(varMetricLabelSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "metricName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricLabelSource struct {
@@ -158,5 +192,4 @@ func (v *NullableMetricLabelSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

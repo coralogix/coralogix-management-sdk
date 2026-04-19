@@ -11,20 +11,27 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricsSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricsSource{}
 
 // MetricsSource struct for MetricsSource
 type MetricsSource struct {
+	IntervalResolution *IntervalResolution `json:"intervalResolution,omitempty"`
 	Labels []string `json:"labels,omitempty"`
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	Strategy *MetricsSourceStrategy `json:"strategy,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricsSource MetricsSource
 
 // NewMetricsSource instantiates a new MetricsSource object
 // This constructor will assign default values to properties that have it defined,
@@ -41,6 +48,38 @@ func NewMetricsSource() *MetricsSource {
 func NewMetricsSourceWithDefaults() *MetricsSource {
 	this := MetricsSource{}
 	return &this
+}
+
+// GetIntervalResolution returns the IntervalResolution field value if set, zero value otherwise.
+func (o *MetricsSource) GetIntervalResolution() IntervalResolution {
+	if o == nil || IsNil(o.IntervalResolution) {
+		var ret IntervalResolution
+		return ret
+	}
+	return *o.IntervalResolution
+}
+
+// GetIntervalResolutionOk returns a tuple with the IntervalResolution field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricsSource) GetIntervalResolutionOk() (*IntervalResolution, bool) {
+	if o == nil || IsNil(o.IntervalResolution) {
+		return nil, false
+	}
+	return o.IntervalResolution, true
+}
+
+// HasIntervalResolution returns a boolean if a field has been set.
+func (o *MetricsSource) HasIntervalResolution() bool {
+	if o != nil && !IsNil(o.IntervalResolution) {
+		return true
+	}
+
+	return false
+}
+
+// SetIntervalResolution gets a reference to the given IntervalResolution and assigns it to the IntervalResolution field.
+func (o *MetricsSource) SetIntervalResolution(v IntervalResolution) {
+	o.IntervalResolution = &v
 }
 
 // GetLabels returns the Labels field value if set, zero value otherwise.
@@ -213,6 +252,9 @@ func (o MetricsSource) MarshalJSON() ([]byte, error) {
 
 func (o MetricsSource) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.IntervalResolution) {
+		toSerialize["intervalResolution"] = o.IntervalResolution
+	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
@@ -228,7 +270,39 @@ func (o MetricsSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Strategy) {
 		toSerialize["strategy"] = o.Strategy
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricsSource) UnmarshalJSON(data []byte) (err error) {
+	varMetricsSource := _MetricsSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricsSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricsSource(varMetricsSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "intervalResolution")
+		delete(additionalProperties, "labels")
+		delete(additionalProperties, "messageTemplate")
+		delete(additionalProperties, "orientation")
+		delete(additionalProperties, "promqlQuery")
+		delete(additionalProperties, "strategy")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricsSource struct {
@@ -266,5 +340,4 @@ func (v *NullableMetricsSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

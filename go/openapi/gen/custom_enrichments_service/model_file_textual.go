@@ -11,8 +11,12 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FileTextual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileTextual{}
@@ -22,15 +26,19 @@ type FileTextual struct {
 	Extension *string `json:"extension,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Size *int64 `json:"size,omitempty"`
-	Textual *string `json:"textual,omitempty"`
+	Textual string `json:"textual"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FileTextual FileTextual
 
 // NewFileTextual instantiates a new FileTextual object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileTextual() *FileTextual {
+func NewFileTextual(textual string) *FileTextual {
 	this := FileTextual{}
+	this.Textual = textual
 	return &this
 }
 
@@ -138,36 +146,28 @@ func (o *FileTextual) SetSize(v int64) {
 	o.Size = &v
 }
 
-// GetTextual returns the Textual field value if set, zero value otherwise.
+// GetTextual returns the Textual field value
 func (o *FileTextual) GetTextual() string {
-	if o == nil || IsNil(o.Textual) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Textual
+
+	return o.Textual
 }
 
-// GetTextualOk returns a tuple with the Textual field value if set, nil otherwise
+// GetTextualOk returns a tuple with the Textual field value
 // and a boolean to check if the value has been set.
 func (o *FileTextual) GetTextualOk() (*string, bool) {
-	if o == nil || IsNil(o.Textual) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Textual, true
+	return &o.Textual, true
 }
 
-// HasTextual returns a boolean if a field has been set.
-func (o *FileTextual) HasTextual() bool {
-	if o != nil && !IsNil(o.Textual) {
-		return true
-	}
-
-	return false
-}
-
-// SetTextual gets a reference to the given string and assigns it to the Textual field.
+// SetTextual sets field value
 func (o *FileTextual) SetTextual(v string) {
-	o.Textual = &v
+	o.Textual = v
 }
 
 func (o FileTextual) MarshalJSON() ([]byte, error) {
@@ -189,10 +189,59 @@ func (o FileTextual) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !IsNil(o.Textual) {
-		toSerialize["textual"] = o.Textual
+	toSerialize["textual"] = o.Textual
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *FileTextual) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"textual",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFileTextual := _FileTextual{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFileTextual)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FileTextual(varFileTextual)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extension")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "textual")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFileTextual struct {
@@ -230,5 +279,4 @@ func (v *NullableFileTextual) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

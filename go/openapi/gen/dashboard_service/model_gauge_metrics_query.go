@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GaugeMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeMetricsQuery{}
@@ -25,7 +28,10 @@ type GaugeMetricsQuery struct {
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GaugeMetricsQuery GaugeMetricsQuery
 
 // NewGaugeMetricsQuery instantiates a new GaugeMetricsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o GaugeMetricsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GaugeMetricsQuery) UnmarshalJSON(data []byte) (err error) {
+	varGaugeMetricsQuery := _GaugeMetricsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeMetricsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeMetricsQuery(varGaugeMetricsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "editorMode")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "promqlQuery")
+		delete(additionalProperties, "promqlQueryType")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGaugeMetricsQuery struct {
@@ -302,5 +340,4 @@ func (v *NullableGaugeMetricsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

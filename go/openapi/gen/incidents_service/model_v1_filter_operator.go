@@ -11,9 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // V1FilterOperator the model 'V1FilterOperator'
 type V1FilterOperator string

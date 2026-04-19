@@ -11,9 +11,12 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DetailedDailyUnits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DetailedDailyUnits{}
@@ -34,7 +37,10 @@ type DetailedDailyUnits struct {
 	MediumTracingUnits *V2Unit `json:"mediumTracingUnits,omitempty"`
 	StatsDate *time.Time `json:"statsDate,omitempty"`
 	TotalUnits *V2Unit `json:"totalUnits,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DetailedDailyUnits DetailedDailyUnits
 
 // NewDetailedDailyUnits instantiates a new DetailedDailyUnits object
 // This constructor will assign default values to properties that have it defined,
@@ -553,7 +559,47 @@ func (o DetailedDailyUnits) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalUnits) {
 		toSerialize["totalUnits"] = o.TotalUnits
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DetailedDailyUnits) UnmarshalJSON(data []byte) (err error) {
+	varDetailedDailyUnits := _DetailedDailyUnits{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDetailedDailyUnits)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DetailedDailyUnits(varDetailedDailyUnits)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "blockedMetricsUnits")
+		delete(additionalProperties, "blockedUnits")
+		delete(additionalProperties, "cpuProfilesUnits")
+		delete(additionalProperties, "evaluationUnits")
+		delete(additionalProperties, "highLogsUnits")
+		delete(additionalProperties, "highMetricsUnits")
+		delete(additionalProperties, "highTracingUnits")
+		delete(additionalProperties, "lowLogsUnits")
+		delete(additionalProperties, "lowSessionRecordingUnits")
+		delete(additionalProperties, "lowTracingUnits")
+		delete(additionalProperties, "mediumLogsUnits")
+		delete(additionalProperties, "mediumTracingUnits")
+		delete(additionalProperties, "statsDate")
+		delete(additionalProperties, "totalUnits")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDetailedDailyUnits struct {
@@ -591,5 +637,4 @@ func (v *NullableDetailedDailyUnits) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

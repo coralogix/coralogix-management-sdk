@@ -11,8 +11,11 @@ API version: 1.0.0
 package outgoing_webhooks_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SendLogConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SendLogConfig{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &SendLogConfig{}
 type SendLogConfig struct {
 	Payload *string `json:"payload,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SendLogConfig SendLogConfig
 
 // NewSendLogConfig instantiates a new SendLogConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o SendLogConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SendLogConfig) UnmarshalJSON(data []byte) (err error) {
+	varSendLogConfig := _SendLogConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSendLogConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SendLogConfig(varSendLogConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "payload")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSendLogConfig struct {
@@ -158,5 +192,4 @@ func (v *NullableSendLogConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

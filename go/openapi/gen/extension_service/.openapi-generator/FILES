@@ -8,9 +8,6 @@ client.go
 configuration.go
 git_push.sh
 model_changelog_entry.go
-model_colors_by_aggregation.go
-model_colors_by_group_by.go
-model_colors_by_stack.go
 model_common_group.go
 model_deprecation.go
 model_events_v3_filter_matcher.go
@@ -33,8 +30,6 @@ model_get_all_extensions_response_revision.go
 model_get_all_extensions_response_revision_summary.go
 model_integration_detail.go
 model_item_counts.go
-model_min_max_auto.go
-model_min_max_custom.go
 model_multiple_values.go
 model_permission_resource.go
 model_target_domain.go

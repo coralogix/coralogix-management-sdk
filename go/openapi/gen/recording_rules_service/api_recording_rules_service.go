@@ -41,8 +41,6 @@ func (r ApiRuleGroupSetsCreateRequest) Execute() (*CreateRuleGroupSetResult, *ht
 /*
 RuleGroupSetsCreate Create Recording Rules
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupSetsCreateRequest
 */
@@ -142,8 +140,6 @@ func (r ApiRuleGroupSetsDeleteRequest) Execute() (map[string]interface{}, *http.
 
 /*
 RuleGroupSetsDelete Delete Recording Rules
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -246,8 +242,6 @@ func (r ApiRuleGroupSetsFetchRequest) Execute() (*OutRuleGroupSet, *http.Respons
 /*
 RuleGroupSetsFetch Get Recording Rules
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiRuleGroupSetsFetchRequest
@@ -347,8 +341,6 @@ func (r ApiRuleGroupSetsListRequest) Execute() (*RuleGroupSetListing, *http.Resp
 
 /*
 RuleGroupSetsList List Recording Rules
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupSetsListRequest
@@ -453,8 +445,6 @@ func (r ApiRuleGroupSetsUpdateRequest) Execute() (map[string]interface{}, *http.
 
 /*
 RuleGroupSetsUpdate Update Recording Rules
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

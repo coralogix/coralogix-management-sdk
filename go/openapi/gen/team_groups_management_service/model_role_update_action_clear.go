@@ -11,10 +11,12 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RoleUpdateActionClear type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleUpdateActionClear{}
@@ -22,7 +24,8 @@ var _ MappedNullable = &RoleUpdateActionClear{}
 // RoleUpdateActionClear struct for RoleUpdateActionClear
 type RoleUpdateActionClear struct {
 	ActionType string `json:"actionType"`
-	Clear *ClearRole `json:"clear,omitempty"`
+	Clear ClearRole `json:"clear"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RoleUpdateActionClear RoleUpdateActionClear
@@ -31,9 +34,10 @@ type _RoleUpdateActionClear RoleUpdateActionClear
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRoleUpdateActionClear(actionType string) *RoleUpdateActionClear {
+func NewRoleUpdateActionClear(actionType string, clear ClearRole) *RoleUpdateActionClear {
 	this := RoleUpdateActionClear{}
 	this.ActionType = actionType
+	this.Clear = clear
 	return &this
 }
 
@@ -69,36 +73,28 @@ func (o *RoleUpdateActionClear) SetActionType(v string) {
 	o.ActionType = v
 }
 
-// GetClear returns the Clear field value if set, zero value otherwise.
+// GetClear returns the Clear field value
 func (o *RoleUpdateActionClear) GetClear() ClearRole {
-	if o == nil || IsNil(o.Clear) {
+	if o == nil {
 		var ret ClearRole
 		return ret
 	}
-	return *o.Clear
+
+	return o.Clear
 }
 
-// GetClearOk returns a tuple with the Clear field value if set, nil otherwise
+// GetClearOk returns a tuple with the Clear field value
 // and a boolean to check if the value has been set.
 func (o *RoleUpdateActionClear) GetClearOk() (*ClearRole, bool) {
-	if o == nil || IsNil(o.Clear) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Clear, true
+	return &o.Clear, true
 }
 
-// HasClear returns a boolean if a field has been set.
-func (o *RoleUpdateActionClear) HasClear() bool {
-	if o != nil && !IsNil(o.Clear) {
-		return true
-	}
-
-	return false
-}
-
-// SetClear gets a reference to the given ClearRole and assigns it to the Clear field.
+// SetClear sets field value
 func (o *RoleUpdateActionClear) SetClear(v ClearRole) {
-	o.Clear = &v
+	o.Clear = v
 }
 
 func (o RoleUpdateActionClear) MarshalJSON() ([]byte, error) {
@@ -112,9 +108,12 @@ func (o RoleUpdateActionClear) MarshalJSON() ([]byte, error) {
 func (o RoleUpdateActionClear) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["actionType"] = o.ActionType
-	if !IsNil(o.Clear) {
-		toSerialize["clear"] = o.Clear
+	toSerialize["clear"] = o.Clear
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -124,6 +123,7 @@ func (o *RoleUpdateActionClear) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"actionType",
+		"clear",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -143,7 +143,6 @@ func (o *RoleUpdateActionClear) UnmarshalJSON(data []byte) (err error) {
 	varRoleUpdateActionClear := _RoleUpdateActionClear{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRoleUpdateActionClear)
 
 	if err != nil {
@@ -151,6 +150,14 @@ func (o *RoleUpdateActionClear) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RoleUpdateActionClear(varRoleUpdateActionClear)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actionType")
+		delete(additionalProperties, "clear")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +197,4 @@ func (v *NullableRoleUpdateActionClear) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

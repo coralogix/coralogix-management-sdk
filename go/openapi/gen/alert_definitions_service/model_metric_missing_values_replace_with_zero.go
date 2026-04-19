@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricMissingValuesReplaceWithZero type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricMissingValuesReplaceWithZero{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &MetricMissingValuesReplaceWithZero{}
 // MetricMissingValuesReplaceWithZero Configuration for handling missing values in metric threshold alerts.
 type MetricMissingValuesReplaceWithZero struct {
 	// If set to true, missing values will be replaced with zero
-	ReplaceWithZero *bool `json:"replaceWithZero,omitempty"`
+	ReplaceWithZero bool `json:"replaceWithZero"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricMissingValuesReplaceWithZero MetricMissingValuesReplaceWithZero
 
 // NewMetricMissingValuesReplaceWithZero instantiates a new MetricMissingValuesReplaceWithZero object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricMissingValuesReplaceWithZero() *MetricMissingValuesReplaceWithZero {
+func NewMetricMissingValuesReplaceWithZero(replaceWithZero bool) *MetricMissingValuesReplaceWithZero {
 	this := MetricMissingValuesReplaceWithZero{}
+	this.ReplaceWithZero = replaceWithZero
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewMetricMissingValuesReplaceWithZeroWithDefaults() *MetricMissingValuesRep
 	return &this
 }
 
-// GetReplaceWithZero returns the ReplaceWithZero field value if set, zero value otherwise.
+// GetReplaceWithZero returns the ReplaceWithZero field value
 func (o *MetricMissingValuesReplaceWithZero) GetReplaceWithZero() bool {
-	if o == nil || IsNil(o.ReplaceWithZero) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReplaceWithZero
+
+	return o.ReplaceWithZero
 }
 
-// GetReplaceWithZeroOk returns a tuple with the ReplaceWithZero field value if set, nil otherwise
+// GetReplaceWithZeroOk returns a tuple with the ReplaceWithZero field value
 // and a boolean to check if the value has been set.
 func (o *MetricMissingValuesReplaceWithZero) GetReplaceWithZeroOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReplaceWithZero) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReplaceWithZero, true
+	return &o.ReplaceWithZero, true
 }
 
-// HasReplaceWithZero returns a boolean if a field has been set.
-func (o *MetricMissingValuesReplaceWithZero) HasReplaceWithZero() bool {
-	if o != nil && !IsNil(o.ReplaceWithZero) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplaceWithZero gets a reference to the given bool and assigns it to the ReplaceWithZero field.
+// SetReplaceWithZero sets field value
 func (o *MetricMissingValuesReplaceWithZero) SetReplaceWithZero(v bool) {
-	o.ReplaceWithZero = &v
+	o.ReplaceWithZero = v
 }
 
 func (o MetricMissingValuesReplaceWithZero) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o MetricMissingValuesReplaceWithZero) MarshalJSON() ([]byte, error) {
 
 func (o MetricMissingValuesReplaceWithZero) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ReplaceWithZero) {
-		toSerialize["replaceWithZero"] = o.ReplaceWithZero
+	toSerialize["replaceWithZero"] = o.ReplaceWithZero
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricMissingValuesReplaceWithZero) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"replaceWithZero",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMetricMissingValuesReplaceWithZero := _MetricMissingValuesReplaceWithZero{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMetricMissingValuesReplaceWithZero)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricMissingValuesReplaceWithZero(varMetricMissingValuesReplaceWithZero)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replaceWithZero")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricMissingValuesReplaceWithZero struct {
@@ -123,5 +169,4 @@ func (v *NullableMetricMissingValuesReplaceWithZero) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,17 +11,19 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DashboardOffAbsoluteTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardOffAbsoluteTimeFrame{}
 
 // DashboardOffAbsoluteTimeFrame Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.
 type DashboardOffAbsoluteTimeFrame struct {
-	AbsoluteTimeFrame *TimeFrame `json:"absoluteTimeFrame,omitempty"`
+	AbsoluteTimeFrame TimeFrame `json:"absoluteTimeFrame"`
 	Actions []DashboardAction `json:"actions,omitempty"`
 	Annotations []Annotation `json:"annotations,omitempty"`
 	// A brief description or summary of the dashboard's purpose or content
@@ -34,11 +36,12 @@ type DashboardOffAbsoluteTimeFrame struct {
 	Layout Layout `json:"layout"`
 	// The display name of the dashboard
 	Name string `json:"name"`
-	Off map[string]interface{} `json:"off,omitempty"`
+	Off map[string]interface{} `json:"off"`
 	// A unique slug name serving as an alias for accessing the dashboard
 	SlugName *string `json:"slugName,omitempty"`
 	Variables []Variable `json:"variables,omitempty"`
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DashboardOffAbsoluteTimeFrame DashboardOffAbsoluteTimeFrame
@@ -47,10 +50,12 @@ type _DashboardOffAbsoluteTimeFrame DashboardOffAbsoluteTimeFrame
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDashboardOffAbsoluteTimeFrame(layout Layout, name string) *DashboardOffAbsoluteTimeFrame {
+func NewDashboardOffAbsoluteTimeFrame(absoluteTimeFrame TimeFrame, layout Layout, name string, off map[string]interface{}) *DashboardOffAbsoluteTimeFrame {
 	this := DashboardOffAbsoluteTimeFrame{}
+	this.AbsoluteTimeFrame = absoluteTimeFrame
 	this.Layout = layout
 	this.Name = name
+	this.Off = off
 	return &this
 }
 
@@ -62,36 +67,28 @@ func NewDashboardOffAbsoluteTimeFrameWithDefaults() *DashboardOffAbsoluteTimeFra
 	return &this
 }
 
-// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value if set, zero value otherwise.
+// GetAbsoluteTimeFrame returns the AbsoluteTimeFrame field value
 func (o *DashboardOffAbsoluteTimeFrame) GetAbsoluteTimeFrame() TimeFrame {
-	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+	if o == nil {
 		var ret TimeFrame
 		return ret
 	}
-	return *o.AbsoluteTimeFrame
+
+	return o.AbsoluteTimeFrame
 }
 
-// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value if set, nil otherwise
+// GetAbsoluteTimeFrameOk returns a tuple with the AbsoluteTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *DashboardOffAbsoluteTimeFrame) GetAbsoluteTimeFrameOk() (*TimeFrame, bool) {
-	if o == nil || IsNil(o.AbsoluteTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AbsoluteTimeFrame, true
+	return &o.AbsoluteTimeFrame, true
 }
 
-// HasAbsoluteTimeFrame returns a boolean if a field has been set.
-func (o *DashboardOffAbsoluteTimeFrame) HasAbsoluteTimeFrame() bool {
-	if o != nil && !IsNil(o.AbsoluteTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetAbsoluteTimeFrame gets a reference to the given TimeFrame and assigns it to the AbsoluteTimeFrame field.
+// SetAbsoluteTimeFrame sets field value
 func (o *DashboardOffAbsoluteTimeFrame) SetAbsoluteTimeFrame(v TimeFrame) {
-	o.AbsoluteTimeFrame = &v
+	o.AbsoluteTimeFrame = v
 }
 
 // GetActions returns the Actions field value if set, zero value otherwise.
@@ -366,34 +363,26 @@ func (o *DashboardOffAbsoluteTimeFrame) SetName(v string) {
 	o.Name = v
 }
 
-// GetOff returns the Off field value if set, zero value otherwise.
+// GetOff returns the Off field value
 func (o *DashboardOffAbsoluteTimeFrame) GetOff() map[string]interface{} {
-	if o == nil || IsNil(o.Off) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Off
 }
 
-// GetOffOk returns a tuple with the Off field value if set, nil otherwise
+// GetOffOk returns a tuple with the Off field value
 // and a boolean to check if the value has been set.
 func (o *DashboardOffAbsoluteTimeFrame) GetOffOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Off) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Off, true
 }
 
-// HasOff returns a boolean if a field has been set.
-func (o *DashboardOffAbsoluteTimeFrame) HasOff() bool {
-	if o != nil && !IsNil(o.Off) {
-		return true
-	}
-
-	return false
-}
-
-// SetOff gets a reference to the given map[string]interface{} and assigns it to the Off field.
+// SetOff sets field value
 func (o *DashboardOffAbsoluteTimeFrame) SetOff(v map[string]interface{}) {
 	o.Off = v
 }
@@ -504,9 +493,7 @@ func (o DashboardOffAbsoluteTimeFrame) MarshalJSON() ([]byte, error) {
 
 func (o DashboardOffAbsoluteTimeFrame) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AbsoluteTimeFrame) {
-		toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
-	}
+	toSerialize["absoluteTimeFrame"] = o.AbsoluteTimeFrame
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
@@ -530,9 +517,7 @@ func (o DashboardOffAbsoluteTimeFrame) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["layout"] = o.Layout
 	toSerialize["name"] = o.Name
-	if !IsNil(o.Off) {
-		toSerialize["off"] = o.Off
-	}
+	toSerialize["off"] = o.Off
 	if !IsNil(o.SlugName) {
 		toSerialize["slugName"] = o.SlugName
 	}
@@ -542,6 +527,11 @@ func (o DashboardOffAbsoluteTimeFrame) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VariablesV2) {
 		toSerialize["variablesV2"] = o.VariablesV2
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -550,8 +540,10 @@ func (o *DashboardOffAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"absoluteTimeFrame",
 		"layout",
 		"name",
+		"off",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -571,7 +563,6 @@ func (o *DashboardOffAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err error) {
 	varDashboardOffAbsoluteTimeFrame := _DashboardOffAbsoluteTimeFrame{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDashboardOffAbsoluteTimeFrame)
 
 	if err != nil {
@@ -579,6 +570,26 @@ func (o *DashboardOffAbsoluteTimeFrame) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DashboardOffAbsoluteTimeFrame(varDashboardOffAbsoluteTimeFrame)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "absoluteTimeFrame")
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "annotations")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "folderId")
+		delete(additionalProperties, "folderPath")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "layout")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "off")
+		delete(additionalProperties, "slugName")
+		delete(additionalProperties, "variables")
+		delete(additionalProperties, "variablesV2")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -618,5 +629,4 @@ func (v *NullableDashboardOffAbsoluteTimeFrame) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

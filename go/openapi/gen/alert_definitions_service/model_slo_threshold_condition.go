@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloThresholdCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloThresholdCondition{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SloThresholdCondition{}
 // SloThresholdCondition Condition for the SLO threshold rule
 type SloThresholdCondition struct {
 	Threshold *float64 `json:"threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloThresholdCondition SloThresholdCondition
 
 // NewSloThresholdCondition instantiates a new SloThresholdCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SloThresholdCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SloThresholdCondition) UnmarshalJSON(data []byte) (err error) {
+	varSloThresholdCondition := _SloThresholdCondition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloThresholdCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloThresholdCondition(varSloThresholdCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "threshold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloThresholdCondition struct {
@@ -122,5 +155,4 @@ func (v *NullableSloThresholdCondition) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

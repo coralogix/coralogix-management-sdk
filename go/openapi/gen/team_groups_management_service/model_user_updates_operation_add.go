@@ -11,18 +11,21 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UserUpdatesOperationAdd type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserUpdatesOperationAdd{}
 
 // UserUpdatesOperationAdd struct for UserUpdatesOperationAdd
 type UserUpdatesOperationAdd struct {
-	Add *UserIdList `json:"add,omitempty"`
+	Add UserIdList `json:"add"`
 	OperationType string `json:"operationType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserUpdatesOperationAdd UserUpdatesOperationAdd
@@ -31,8 +34,9 @@ type _UserUpdatesOperationAdd UserUpdatesOperationAdd
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserUpdatesOperationAdd(operationType string) *UserUpdatesOperationAdd {
+func NewUserUpdatesOperationAdd(add UserIdList, operationType string) *UserUpdatesOperationAdd {
 	this := UserUpdatesOperationAdd{}
+	this.Add = add
 	this.OperationType = operationType
 	return &this
 }
@@ -45,36 +49,28 @@ func NewUserUpdatesOperationAddWithDefaults() *UserUpdatesOperationAdd {
 	return &this
 }
 
-// GetAdd returns the Add field value if set, zero value otherwise.
+// GetAdd returns the Add field value
 func (o *UserUpdatesOperationAdd) GetAdd() UserIdList {
-	if o == nil || IsNil(o.Add) {
+	if o == nil {
 		var ret UserIdList
 		return ret
 	}
-	return *o.Add
+
+	return o.Add
 }
 
-// GetAddOk returns a tuple with the Add field value if set, nil otherwise
+// GetAddOk returns a tuple with the Add field value
 // and a boolean to check if the value has been set.
 func (o *UserUpdatesOperationAdd) GetAddOk() (*UserIdList, bool) {
-	if o == nil || IsNil(o.Add) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Add, true
+	return &o.Add, true
 }
 
-// HasAdd returns a boolean if a field has been set.
-func (o *UserUpdatesOperationAdd) HasAdd() bool {
-	if o != nil && !IsNil(o.Add) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdd gets a reference to the given UserIdList and assigns it to the Add field.
+// SetAdd sets field value
 func (o *UserUpdatesOperationAdd) SetAdd(v UserIdList) {
-	o.Add = &v
+	o.Add = v
 }
 
 // GetOperationType returns the OperationType field value
@@ -111,10 +107,13 @@ func (o UserUpdatesOperationAdd) MarshalJSON() ([]byte, error) {
 
 func (o UserUpdatesOperationAdd) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Add) {
-		toSerialize["add"] = o.Add
-	}
+	toSerialize["add"] = o.Add
 	toSerialize["operationType"] = o.OperationType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -123,6 +122,7 @@ func (o *UserUpdatesOperationAdd) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"add",
 		"operationType",
 	}
 
@@ -143,7 +143,6 @@ func (o *UserUpdatesOperationAdd) UnmarshalJSON(data []byte) (err error) {
 	varUserUpdatesOperationAdd := _UserUpdatesOperationAdd{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUserUpdatesOperationAdd)
 
 	if err != nil {
@@ -151,6 +150,14 @@ func (o *UserUpdatesOperationAdd) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UserUpdatesOperationAdd(varUserUpdatesOperationAdd)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "add")
+		delete(additionalProperties, "operationType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -190,5 +197,4 @@ func (v *NullableUserUpdatesOperationAdd) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

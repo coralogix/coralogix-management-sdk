@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefPropertiesFlow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefPropertiesFlow{}
@@ -29,7 +33,7 @@ type AlertDefPropertiesFlow struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Labels used to identify and categorize the alert entity
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
-	Flow *FlowType `json:"flow,omitempty"`
+	Flow FlowType `json:"flow"`
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
 	// The name of the alert definition
@@ -40,14 +44,18 @@ type AlertDefPropertiesFlow struct {
 	PhantomMode *bool `json:"phantomMode,omitempty"`
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefPropertiesFlow AlertDefPropertiesFlow
 
 // NewAlertDefPropertiesFlow instantiates a new AlertDefPropertiesFlow object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAlertDefPropertiesFlow() *AlertDefPropertiesFlow {
+func NewAlertDefPropertiesFlow(flow FlowType) *AlertDefPropertiesFlow {
 	this := AlertDefPropertiesFlow{}
+	this.Flow = flow
 	return &this
 }
 
@@ -251,36 +259,28 @@ func (o *AlertDefPropertiesFlow) SetEntityLabels(v map[string]string) {
 	o.EntityLabels = &v
 }
 
-// GetFlow returns the Flow field value if set, zero value otherwise.
+// GetFlow returns the Flow field value
 func (o *AlertDefPropertiesFlow) GetFlow() FlowType {
-	if o == nil || IsNil(o.Flow) {
+	if o == nil {
 		var ret FlowType
 		return ret
 	}
-	return *o.Flow
+
+	return o.Flow
 }
 
-// GetFlowOk returns a tuple with the Flow field value if set, nil otherwise
+// GetFlowOk returns a tuple with the Flow field value
 // and a boolean to check if the value has been set.
 func (o *AlertDefPropertiesFlow) GetFlowOk() (*FlowType, bool) {
-	if o == nil || IsNil(o.Flow) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Flow, true
+	return &o.Flow, true
 }
 
-// HasFlow returns a boolean if a field has been set.
-func (o *AlertDefPropertiesFlow) HasFlow() bool {
-	if o != nil && !IsNil(o.Flow) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlow gets a reference to the given FlowType and assigns it to the Flow field.
+// SetFlow sets field value
 func (o *AlertDefPropertiesFlow) SetFlow(v FlowType) {
-	o.Flow = &v
+	o.Flow = v
 }
 
 // GetGroupByKeys returns the GroupByKeys field value if set, zero value otherwise.
@@ -567,9 +567,7 @@ func (o AlertDefPropertiesFlow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EntityLabels) {
 		toSerialize["entityLabels"] = o.EntityLabels
 	}
-	if !IsNil(o.Flow) {
-		toSerialize["flow"] = o.Flow
-	}
+	toSerialize["flow"] = o.Flow
 	if !IsNil(o.GroupByKeys) {
 		toSerialize["groupByKeys"] = o.GroupByKeys
 	}
@@ -594,7 +592,69 @@ func (o AlertDefPropertiesFlow) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefPropertiesFlow) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"flow",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAlertDefPropertiesFlow := _AlertDefPropertiesFlow{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefPropertiesFlow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefPropertiesFlow(varAlertDefPropertiesFlow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activeOn")
+		delete(additionalProperties, "dataSources")
+		delete(additionalProperties, "deleted")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "entityLabels")
+		delete(additionalProperties, "flow")
+		delete(additionalProperties, "groupByKeys")
+		delete(additionalProperties, "incidentsSettings")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "notificationGroup")
+		delete(additionalProperties, "notificationGroupExcess")
+		delete(additionalProperties, "phantomMode")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefPropertiesFlow struct {
@@ -632,5 +692,4 @@ func (v *NullableAlertDefPropertiesFlow) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,12 @@ API version: 1.0.0
 package policies_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicOverwriteLogPoliciesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicOverwriteLogPoliciesRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &AtomicOverwriteLogPoliciesRequest{}
 // AtomicOverwriteLogPoliciesRequest In an atomic operation delete all existing log policies and create the provided list by order.
 type AtomicOverwriteLogPoliciesRequest struct {
 	Policies []CreateLogPolicyRequest `json:"policies"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AtomicOverwriteLogPoliciesRequest AtomicOverwriteLogPoliciesRequest
@@ -79,6 +82,11 @@ func (o AtomicOverwriteLogPoliciesRequest) MarshalJSON() ([]byte, error) {
 func (o AtomicOverwriteLogPoliciesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["policies"] = o.Policies
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *AtomicOverwriteLogPoliciesRequest) UnmarshalJSON(data []byte) (err erro
 	varAtomicOverwriteLogPoliciesRequest := _AtomicOverwriteLogPoliciesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAtomicOverwriteLogPoliciesRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *AtomicOverwriteLogPoliciesRequest) UnmarshalJSON(data []byte) (err erro
 	}
 
 	*o = AtomicOverwriteLogPoliciesRequest(varAtomicOverwriteLogPoliciesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "policies")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableAtomicOverwriteLogPoliciesRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

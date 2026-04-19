@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WeeklyRecurrence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WeeklyRecurrence{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &WeeklyRecurrence{}
 // WeeklyRecurrence struct for WeeklyRecurrence
 type WeeklyRecurrence struct {
 	DaysOfWeek []Weekday `json:"daysOfWeek,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WeeklyRecurrence WeeklyRecurrence
 
 // NewWeeklyRecurrence instantiates a new WeeklyRecurrence object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o WeeklyRecurrence) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DaysOfWeek) {
 		toSerialize["daysOfWeek"] = o.DaysOfWeek
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *WeeklyRecurrence) UnmarshalJSON(data []byte) (err error) {
+	varWeeklyRecurrence := _WeeklyRecurrence{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWeeklyRecurrence)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WeeklyRecurrence(varWeeklyRecurrence)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "daysOfWeek")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWeeklyRecurrence struct {
@@ -122,5 +155,4 @@ func (v *NullableWeeklyRecurrence) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

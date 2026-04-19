@@ -11,10 +11,13 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // IntegrationDetails - struct for IntegrationDetails
 type IntegrationDetails struct {
@@ -42,7 +45,7 @@ func (dst *IntegrationDetails) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into IntegrationDetailsExternal
-	err = newStrictDecoder(data).Decode(&dst.IntegrationDetailsExternal)
+	err = json.Unmarshal(data, &dst.IntegrationDetailsExternal)
 	if err == nil {
 		jsonIntegrationDetailsExternal, _ := json.Marshal(dst.IntegrationDetailsExternal)
 		if string(jsonIntegrationDetailsExternal) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *IntegrationDetails) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into IntegrationDetailsLocal
-	err = newStrictDecoder(data).Decode(&dst.IntegrationDetailsLocal)
+	err = json.Unmarshal(data, &dst.IntegrationDetailsLocal)
 	if err == nil {
 		jsonIntegrationDetailsLocal, _ := json.Marshal(dst.IntegrationDetailsLocal)
 		if string(jsonIntegrationDetailsLocal) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableIntegrationDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

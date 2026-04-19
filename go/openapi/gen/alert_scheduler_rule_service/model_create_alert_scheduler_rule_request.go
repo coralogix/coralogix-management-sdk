@@ -11,10 +11,12 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateAlertSchedulerRuleRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateAlertSchedulerRuleRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateAlertSchedulerRuleRequest{}
 // CreateAlertSchedulerRuleRequest This is a request sent to create an alert scheduler rule
 type CreateAlertSchedulerRuleRequest struct {
 	AlertSchedulerRule AlertSchedulerRule `json:"alertSchedulerRule"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAlertSchedulerRuleRequest CreateAlertSchedulerRuleRequest
@@ -79,6 +82,11 @@ func (o CreateAlertSchedulerRuleRequest) MarshalJSON() ([]byte, error) {
 func (o CreateAlertSchedulerRuleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertSchedulerRule"] = o.AlertSchedulerRule
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CreateAlertSchedulerRuleRequest) UnmarshalJSON(data []byte) (err error)
 	varCreateAlertSchedulerRuleRequest := _CreateAlertSchedulerRuleRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateAlertSchedulerRuleRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CreateAlertSchedulerRuleRequest) UnmarshalJSON(data []byte) (err error)
 	}
 
 	*o = CreateAlertSchedulerRuleRequest(varCreateAlertSchedulerRuleRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alertSchedulerRule")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCreateAlertSchedulerRuleRequest) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

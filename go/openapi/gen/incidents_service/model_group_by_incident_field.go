@@ -11,24 +11,32 @@ API version: 1.0.0
 package incidents_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GroupByIncidentField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GroupByIncidentField{}
 
 // GroupByIncidentField struct for GroupByIncidentField
 type GroupByIncidentField struct {
-	IncidentField *IncidentFields `json:"incidentField,omitempty"`
+	IncidentField IncidentFields `json:"incidentField"`
 	OrderByDirection *V1OrderByDirection `json:"orderByDirection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GroupByIncidentField GroupByIncidentField
 
 // NewGroupByIncidentField instantiates a new GroupByIncidentField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGroupByIncidentField() *GroupByIncidentField {
+func NewGroupByIncidentField(incidentField IncidentFields) *GroupByIncidentField {
 	this := GroupByIncidentField{}
+	this.IncidentField = incidentField
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewGroupByIncidentFieldWithDefaults() *GroupByIncidentField {
 	return &this
 }
 
-// GetIncidentField returns the IncidentField field value if set, zero value otherwise.
+// GetIncidentField returns the IncidentField field value
 func (o *GroupByIncidentField) GetIncidentField() IncidentFields {
-	if o == nil || IsNil(o.IncidentField) {
+	if o == nil {
 		var ret IncidentFields
 		return ret
 	}
-	return *o.IncidentField
+
+	return o.IncidentField
 }
 
-// GetIncidentFieldOk returns a tuple with the IncidentField field value if set, nil otherwise
+// GetIncidentFieldOk returns a tuple with the IncidentField field value
 // and a boolean to check if the value has been set.
 func (o *GroupByIncidentField) GetIncidentFieldOk() (*IncidentFields, bool) {
-	if o == nil || IsNil(o.IncidentField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IncidentField, true
+	return &o.IncidentField, true
 }
 
-// HasIncidentField returns a boolean if a field has been set.
-func (o *GroupByIncidentField) HasIncidentField() bool {
-	if o != nil && !IsNil(o.IncidentField) {
-		return true
-	}
-
-	return false
-}
-
-// SetIncidentField gets a reference to the given IncidentFields and assigns it to the IncidentField field.
+// SetIncidentField sets field value
 func (o *GroupByIncidentField) SetIncidentField(v IncidentFields) {
-	o.IncidentField = &v
+	o.IncidentField = v
 }
 
 // GetOrderByDirection returns the OrderByDirection field value if set, zero value otherwise.
@@ -114,13 +114,60 @@ func (o GroupByIncidentField) MarshalJSON() ([]byte, error) {
 
 func (o GroupByIncidentField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IncidentField) {
-		toSerialize["incidentField"] = o.IncidentField
-	}
+	toSerialize["incidentField"] = o.IncidentField
 	if !IsNil(o.OrderByDirection) {
 		toSerialize["orderByDirection"] = o.OrderByDirection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GroupByIncidentField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"incidentField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGroupByIncidentField := _GroupByIncidentField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGroupByIncidentField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GroupByIncidentField(varGroupByIncidentField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "incidentField")
+		delete(additionalProperties, "orderByDirection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGroupByIncidentField struct {
@@ -158,5 +205,4 @@ func (v *NullableGroupByIncidentField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the NoDataPolicy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NoDataPolicy{}
@@ -22,7 +25,10 @@ type NoDataPolicy struct {
 	// The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds
 	AutoRetireSeconds *int32 `json:"autoRetireSeconds,omitempty"`
 	State *NoDataPolicyState `json:"state,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NoDataPolicy NoDataPolicy
 
 // NewNoDataPolicy instantiates a new NoDataPolicy object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o NoDataPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NoDataPolicy) UnmarshalJSON(data []byte) (err error) {
+	varNoDataPolicy := _NoDataPolicy{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varNoDataPolicy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NoDataPolicy(varNoDataPolicy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "autoRetireSeconds")
+		delete(additionalProperties, "state")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNoDataPolicy struct {
@@ -159,5 +193,4 @@ func (v *NullableNoDataPolicy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

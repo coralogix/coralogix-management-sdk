@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VariableValueV2SingleNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2SingleNumericValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &VariableValueV2SingleNumericValue{}
 // VariableValueV2SingleNumericValue struct for VariableValueV2SingleNumericValue
 type VariableValueV2SingleNumericValue struct {
 	Value *NumericValueLabel `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VariableValueV2SingleNumericValue VariableValueV2SingleNumericValue
 
 // NewVariableValueV2SingleNumericValue instantiates a new VariableValueV2SingleNumericValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o VariableValueV2SingleNumericValue) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VariableValueV2SingleNumericValue) UnmarshalJSON(data []byte) (err error) {
+	varVariableValueV2SingleNumericValue := _VariableValueV2SingleNumericValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVariableValueV2SingleNumericValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VariableValueV2SingleNumericValue(varVariableValueV2SingleNumericValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVariableValueV2SingleNumericValue struct {
@@ -122,5 +155,4 @@ func (v *NullableVariableValueV2SingleNumericValue) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

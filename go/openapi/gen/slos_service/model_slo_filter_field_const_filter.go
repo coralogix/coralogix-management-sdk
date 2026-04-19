@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloFilterFieldConstFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloFilterFieldConstFilter{}
 
 // SloFilterFieldConstFilter Field used for filtering SLOs
 type SloFilterFieldConstFilter struct {
-	ConstFilter *SloConstantFilterField `json:"constFilter,omitempty"`
+	ConstFilter SloConstantFilterField `json:"constFilter"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloFilterFieldConstFilter SloFilterFieldConstFilter
 
 // NewSloFilterFieldConstFilter instantiates a new SloFilterFieldConstFilter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloFilterFieldConstFilter() *SloFilterFieldConstFilter {
+func NewSloFilterFieldConstFilter(constFilter SloConstantFilterField) *SloFilterFieldConstFilter {
 	this := SloFilterFieldConstFilter{}
+	this.ConstFilter = constFilter
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSloFilterFieldConstFilterWithDefaults() *SloFilterFieldConstFilter {
 	return &this
 }
 
-// GetConstFilter returns the ConstFilter field value if set, zero value otherwise.
+// GetConstFilter returns the ConstFilter field value
 func (o *SloFilterFieldConstFilter) GetConstFilter() SloConstantFilterField {
-	if o == nil || IsNil(o.ConstFilter) {
+	if o == nil {
 		var ret SloConstantFilterField
 		return ret
 	}
-	return *o.ConstFilter
+
+	return o.ConstFilter
 }
 
-// GetConstFilterOk returns a tuple with the ConstFilter field value if set, nil otherwise
+// GetConstFilterOk returns a tuple with the ConstFilter field value
 // and a boolean to check if the value has been set.
 func (o *SloFilterFieldConstFilter) GetConstFilterOk() (*SloConstantFilterField, bool) {
-	if o == nil || IsNil(o.ConstFilter) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConstFilter, true
+	return &o.ConstFilter, true
 }
 
-// HasConstFilter returns a boolean if a field has been set.
-func (o *SloFilterFieldConstFilter) HasConstFilter() bool {
-	if o != nil && !IsNil(o.ConstFilter) {
-		return true
-	}
-
-	return false
-}
-
-// SetConstFilter gets a reference to the given SloConstantFilterField and assigns it to the ConstFilter field.
+// SetConstFilter sets field value
 func (o *SloFilterFieldConstFilter) SetConstFilter(v SloConstantFilterField) {
-	o.ConstFilter = &v
+	o.ConstFilter = v
 }
 
 func (o SloFilterFieldConstFilter) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SloFilterFieldConstFilter) MarshalJSON() ([]byte, error) {
 
 func (o SloFilterFieldConstFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ConstFilter) {
-		toSerialize["constFilter"] = o.ConstFilter
+	toSerialize["constFilter"] = o.ConstFilter
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloFilterFieldConstFilter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"constFilter",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloFilterFieldConstFilter := _SloFilterFieldConstFilter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloFilterFieldConstFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloFilterFieldConstFilter(varSloFilterFieldConstFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "constFilter")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloFilterFieldConstFilter struct {
@@ -122,5 +168,4 @@ func (v *NullableSloFilterFieldConstFilter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

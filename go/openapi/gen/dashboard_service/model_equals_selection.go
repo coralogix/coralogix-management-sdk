@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // EqualsSelection - struct for EqualsSelection
 type EqualsSelection struct {
@@ -42,7 +45,7 @@ func (dst *EqualsSelection) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into EqualsSelectionAll
-	err = newStrictDecoder(data).Decode(&dst.EqualsSelectionAll)
+	err = json.Unmarshal(data, &dst.EqualsSelectionAll)
 	if err == nil {
 		jsonEqualsSelectionAll, _ := json.Marshal(dst.EqualsSelectionAll)
 		if string(jsonEqualsSelectionAll) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *EqualsSelection) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into EqualsSelectionList
-	err = newStrictDecoder(data).Decode(&dst.EqualsSelectionList)
+	err = json.Unmarshal(data, &dst.EqualsSelectionList)
 	if err == nil {
 		jsonEqualsSelectionList, _ := json.Marshal(dst.EqualsSelectionList)
 		if string(jsonEqualsSelectionList) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableEqualsSelection) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

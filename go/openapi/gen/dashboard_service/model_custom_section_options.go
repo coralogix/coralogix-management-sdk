@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CustomSectionOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomSectionOptions{}
@@ -27,7 +30,10 @@ type CustomSectionOptions struct {
 	// Section custom name
 	Name *string `json:"name,omitempty"`
 	RepetitiveVar *RepetitiveVar `json:"repetitiveVar,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CustomSectionOptions CustomSectionOptions
 
 // NewCustomSectionOptions instantiates a new CustomSectionOptions object
 // This constructor will assign default values to properties that have it defined,
@@ -231,7 +237,38 @@ func (o CustomSectionOptions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RepetitiveVar) {
 		toSerialize["repetitiveVar"] = o.RepetitiveVar
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CustomSectionOptions) UnmarshalJSON(data []byte) (err error) {
+	varCustomSectionOptions := _CustomSectionOptions{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCustomSectionOptions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CustomSectionOptions(varCustomSectionOptions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "collapsed")
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "repetitiveVar")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCustomSectionOptions struct {
@@ -269,5 +306,4 @@ func (v *NullableCustomSectionOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

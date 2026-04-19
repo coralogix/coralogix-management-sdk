@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AllOption type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AllOption{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &AllOption{}
 type AllOption struct {
 	IncludeAll *bool `json:"includeAll,omitempty"`
 	Label *string `json:"label,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AllOption AllOption
 
 // NewAllOption instantiates a new AllOption object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o AllOption) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AllOption) UnmarshalJSON(data []byte) (err error) {
+	varAllOption := _AllOption{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAllOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AllOption(varAllOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "includeAll")
+		delete(additionalProperties, "label")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAllOption struct {
@@ -158,5 +192,4 @@ func (v *NullableAllOption) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

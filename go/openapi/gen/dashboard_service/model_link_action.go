@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LinkAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LinkAction{}
@@ -26,7 +29,10 @@ type LinkAction struct {
 	ShouldOpenInNewWindow *bool `json:"shouldOpenInNewWindow,omitempty"`
 	// Static URL that may contain variables using {{variable_name}} syntax
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LinkAction LinkAction
 
 // NewLinkAction instantiates a new LinkAction object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +201,37 @@ func (o LinkAction) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LinkAction) UnmarshalJSON(data []byte) (err error) {
+	varLinkAction := _LinkAction{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLinkAction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LinkAction(varLinkAction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "shouldOpenInNewWindow")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLinkAction struct {
@@ -233,5 +269,4 @@ func (v *NullableLinkAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

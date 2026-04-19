@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TextboxDefaultValueSingleString type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueSingleString{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &TextboxDefaultValueSingleString{}
 // TextboxDefaultValueSingleString struct for TextboxDefaultValueSingleString
 type TextboxDefaultValueSingleString struct {
 	// Deprecated
-	SingleString *string `json:"singleString,omitempty"`
+	SingleString string `json:"singleString"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextboxDefaultValueSingleString TextboxDefaultValueSingleString
 
 // NewTextboxDefaultValueSingleString instantiates a new TextboxDefaultValueSingleString object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTextboxDefaultValueSingleString() *TextboxDefaultValueSingleString {
+func NewTextboxDefaultValueSingleString(singleString string) *TextboxDefaultValueSingleString {
 	this := TextboxDefaultValueSingleString{}
+	this.SingleString = singleString
 	return &this
 }
 
@@ -40,39 +48,31 @@ func NewTextboxDefaultValueSingleStringWithDefaults() *TextboxDefaultValueSingle
 	return &this
 }
 
-// GetSingleString returns the SingleString field value if set, zero value otherwise.
+// GetSingleString returns the SingleString field value
 // Deprecated
 func (o *TextboxDefaultValueSingleString) GetSingleString() string {
-	if o == nil || IsNil(o.SingleString) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SingleString
+
+	return o.SingleString
 }
 
-// GetSingleStringOk returns a tuple with the SingleString field value if set, nil otherwise
+// GetSingleStringOk returns a tuple with the SingleString field value
 // and a boolean to check if the value has been set.
 // Deprecated
 func (o *TextboxDefaultValueSingleString) GetSingleStringOk() (*string, bool) {
-	if o == nil || IsNil(o.SingleString) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SingleString, true
+	return &o.SingleString, true
 }
 
-// HasSingleString returns a boolean if a field has been set.
-func (o *TextboxDefaultValueSingleString) HasSingleString() bool {
-	if o != nil && !IsNil(o.SingleString) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleString gets a reference to the given string and assigns it to the SingleString field.
+// SetSingleString sets field value
 // Deprecated
 func (o *TextboxDefaultValueSingleString) SetSingleString(v string) {
-	o.SingleString = &v
+	o.SingleString = v
 }
 
 func (o TextboxDefaultValueSingleString) MarshalJSON() ([]byte, error) {
@@ -85,10 +85,56 @@ func (o TextboxDefaultValueSingleString) MarshalJSON() ([]byte, error) {
 
 func (o TextboxDefaultValueSingleString) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SingleString) {
-		toSerialize["singleString"] = o.SingleString
+	toSerialize["singleString"] = o.SingleString
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *TextboxDefaultValueSingleString) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singleString",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTextboxDefaultValueSingleString := _TextboxDefaultValueSingleString{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTextboxDefaultValueSingleString)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextboxDefaultValueSingleString(varTextboxDefaultValueSingleString)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "singleString")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextboxDefaultValueSingleString struct {
@@ -126,5 +172,4 @@ func (v *NullableTextboxDefaultValueSingleString) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Monthly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Monthly{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &Monthly{}
 // Monthly struct for Monthly
 type Monthly struct {
 	DaysOfMonth []int32 `json:"daysOfMonth,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Monthly Monthly
 
 // NewMonthly instantiates a new Monthly object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o Monthly) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DaysOfMonth) {
 		toSerialize["daysOfMonth"] = o.DaysOfMonth
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Monthly) UnmarshalJSON(data []byte) (err error) {
+	varMonthly := _Monthly{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varMonthly)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Monthly(varMonthly)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "daysOfMonth")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMonthly struct {
@@ -122,5 +155,4 @@ func (v *NullableMonthly) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the StatusCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StatusCount{}
@@ -22,7 +25,10 @@ type StatusCount struct {
 	// The count for this alert status
 	Count *int64 `json:"count,omitempty"`
 	Status *AlertDefStatus `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StatusCount StatusCount
 
 // NewStatusCount instantiates a new StatusCount object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o StatusCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StatusCount) UnmarshalJSON(data []byte) (err error) {
+	varStatusCount := _StatusCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varStatusCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StatusCount(varStatusCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStatusCount struct {
@@ -159,5 +193,4 @@ func (v *NullableStatusCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

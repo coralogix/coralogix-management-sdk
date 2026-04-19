@@ -11,7 +11,7 @@
           "Dashboard folders service"
         ],
         "summary": "List dashboard folders",
-        "description": "List all dashboard folders accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
+        "description": "List all dashboard folders accessible.",
         "externalDocs": {
           "url": ""
         },
@@ -55,7 +55,6 @@
           "Dashboard folders service"
         ],
         "summary": "Replace a dashboard folder",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -73,8 +72,7 @@
                   "requestId": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -118,7 +116,6 @@
           "Dashboard folders service"
         ],
         "summary": "Create a dashboard folder",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -136,8 +133,7 @@
                   "requestId": {
                     "type": "string"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -183,7 +179,7 @@
           "Dashboard folders service"
         ],
         "summary": "Get a dashboard folder",
-        "description": "Returns a dashboard folder data.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
+        "description": "Returns a dashboard folder data.",
         "externalDocs": {
           "url": ""
         },
@@ -246,7 +242,6 @@
           "Dashboard folders service"
         ],
         "summary": "Delete a dashboard folder",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -308,33 +303,6 @@
   },
   "components": {
     "schemas": {
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateDashboardFolderResponse": {
         "externalDocs": {
           "description": "Find out more Dashboards in our documentation.",
@@ -409,9 +377,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -431,9 +399,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -485,34 +453,6 @@
             }
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -567,14 +507,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

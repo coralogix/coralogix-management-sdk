@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the Annotation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Annotation{}
@@ -24,9 +27,12 @@ type Annotation struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Scope *WidgetScope `json:"scope,omitempty"`
+	Scope *AnnotationWidgetScope `json:"scope,omitempty"`
 	Source *AnnotationSource `json:"source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Annotation Annotation
 
 // NewAnnotation instantiates a new Annotation object
 // This constructor will assign default values to properties that have it defined,
@@ -206,9 +212,9 @@ func (o *Annotation) SetName(v string) {
 }
 
 // GetScope returns the Scope field value if set, zero value otherwise.
-func (o *Annotation) GetScope() WidgetScope {
+func (o *Annotation) GetScope() AnnotationWidgetScope {
 	if o == nil || IsNil(o.Scope) {
-		var ret WidgetScope
+		var ret AnnotationWidgetScope
 		return ret
 	}
 	return *o.Scope
@@ -216,7 +222,7 @@ func (o *Annotation) GetScope() WidgetScope {
 
 // GetScopeOk returns a tuple with the Scope field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Annotation) GetScopeOk() (*WidgetScope, bool) {
+func (o *Annotation) GetScopeOk() (*AnnotationWidgetScope, bool) {
 	if o == nil || IsNil(o.Scope) {
 		return nil, false
 	}
@@ -232,8 +238,8 @@ func (o *Annotation) HasScope() bool {
 	return false
 }
 
-// SetScope gets a reference to the given WidgetScope and assigns it to the Scope field.
-func (o *Annotation) SetScope(v WidgetScope) {
+// SetScope gets a reference to the given AnnotationWidgetScope and assigns it to the Scope field.
+func (o *Annotation) SetScope(v AnnotationWidgetScope) {
 	o.Scope = &v
 }
 
@@ -300,7 +306,40 @@ func (o Annotation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Source) {
 		toSerialize["source"] = o.Source
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Annotation) UnmarshalJSON(data []byte) (err error) {
+	varAnnotation := _Annotation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Annotation(varAnnotation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "color")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnnotation struct {
@@ -338,5 +377,4 @@ func (v *NullableAnnotation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

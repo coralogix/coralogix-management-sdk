@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SloExecutionResponseDeleteSloResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SloExecutionResponseDeleteSloResponse{}
 
 // SloExecutionResponseDeleteSloResponse Response for an executed SLO operation.
 type SloExecutionResponseDeleteSloResponse struct {
-	DeleteSloResponse *DeleteSloResponse `json:"deleteSloResponse,omitempty"`
+	DeleteSloResponse DeleteSloResponse `json:"deleteSloResponse"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SloExecutionResponseDeleteSloResponse SloExecutionResponseDeleteSloResponse
 
 // NewSloExecutionResponseDeleteSloResponse instantiates a new SloExecutionResponseDeleteSloResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSloExecutionResponseDeleteSloResponse() *SloExecutionResponseDeleteSloResponse {
+func NewSloExecutionResponseDeleteSloResponse(deleteSloResponse DeleteSloResponse) *SloExecutionResponseDeleteSloResponse {
 	this := SloExecutionResponseDeleteSloResponse{}
+	this.DeleteSloResponse = deleteSloResponse
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSloExecutionResponseDeleteSloResponseWithDefaults() *SloExecutionRespons
 	return &this
 }
 
-// GetDeleteSloResponse returns the DeleteSloResponse field value if set, zero value otherwise.
+// GetDeleteSloResponse returns the DeleteSloResponse field value
 func (o *SloExecutionResponseDeleteSloResponse) GetDeleteSloResponse() DeleteSloResponse {
-	if o == nil || IsNil(o.DeleteSloResponse) {
+	if o == nil {
 		var ret DeleteSloResponse
 		return ret
 	}
-	return *o.DeleteSloResponse
+
+	return o.DeleteSloResponse
 }
 
-// GetDeleteSloResponseOk returns a tuple with the DeleteSloResponse field value if set, nil otherwise
+// GetDeleteSloResponseOk returns a tuple with the DeleteSloResponse field value
 // and a boolean to check if the value has been set.
 func (o *SloExecutionResponseDeleteSloResponse) GetDeleteSloResponseOk() (*DeleteSloResponse, bool) {
-	if o == nil || IsNil(o.DeleteSloResponse) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeleteSloResponse, true
+	return &o.DeleteSloResponse, true
 }
 
-// HasDeleteSloResponse returns a boolean if a field has been set.
-func (o *SloExecutionResponseDeleteSloResponse) HasDeleteSloResponse() bool {
-	if o != nil && !IsNil(o.DeleteSloResponse) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeleteSloResponse gets a reference to the given DeleteSloResponse and assigns it to the DeleteSloResponse field.
+// SetDeleteSloResponse sets field value
 func (o *SloExecutionResponseDeleteSloResponse) SetDeleteSloResponse(v DeleteSloResponse) {
-	o.DeleteSloResponse = &v
+	o.DeleteSloResponse = v
 }
 
 func (o SloExecutionResponseDeleteSloResponse) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SloExecutionResponseDeleteSloResponse) MarshalJSON() ([]byte, error) {
 
 func (o SloExecutionResponseDeleteSloResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DeleteSloResponse) {
-		toSerialize["deleteSloResponse"] = o.DeleteSloResponse
+	toSerialize["deleteSloResponse"] = o.DeleteSloResponse
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SloExecutionResponseDeleteSloResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"deleteSloResponse",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSloExecutionResponseDeleteSloResponse := _SloExecutionResponseDeleteSloResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSloExecutionResponseDeleteSloResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SloExecutionResponseDeleteSloResponse(varSloExecutionResponseDeleteSloResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deleteSloResponse")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSloExecutionResponseDeleteSloResponse struct {
@@ -122,5 +168,4 @@ func (v *NullableSloExecutionResponseDeleteSloResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

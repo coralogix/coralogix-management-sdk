@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SingleValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SingleValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SingleValue{}
 // SingleValue struct for SingleValue
 type SingleValue struct {
 	DefaultValue *string `json:"defaultValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SingleValue SingleValue
 
 // NewSingleValue instantiates a new SingleValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SingleValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultValue) {
 		toSerialize["defaultValue"] = o.DefaultValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SingleValue) UnmarshalJSON(data []byte) (err error) {
+	varSingleValue := _SingleValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSingleValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SingleValue(varSingleValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSingleValue struct {
@@ -122,5 +155,4 @@ func (v *NullableSingleValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

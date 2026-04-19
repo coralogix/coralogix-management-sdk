@@ -11,8 +11,11 @@ API version: 1.0.0
 package policies_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LogsPolicySettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsPolicySettings{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &LogsPolicySettings{}
 // LogsPolicySettings This data structure is used to define the default priority for logs policies.
 type LogsPolicySettings struct {
 	DefaultPriority *QuotaV1Priority `json:"defaultPriority,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LogsPolicySettings LogsPolicySettings
 
 // NewLogsPolicySettings instantiates a new LogsPolicySettings object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o LogsPolicySettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DefaultPriority) {
 		toSerialize["defaultPriority"] = o.DefaultPriority
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LogsPolicySettings) UnmarshalJSON(data []byte) (err error) {
+	varLogsPolicySettings := _LogsPolicySettings{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLogsPolicySettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LogsPolicySettings(varLogsPolicySettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defaultPriority")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLogsPolicySettings struct {
@@ -122,5 +155,4 @@ func (v *NullableLogsPolicySettings) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

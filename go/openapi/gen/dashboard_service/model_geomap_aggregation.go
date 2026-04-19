@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // GeomapAggregation - struct for GeomapAggregation
 type GeomapAggregation struct {
@@ -66,7 +69,7 @@ func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into GeomapAggregationAvg
-	err = newStrictDecoder(data).Decode(&dst.GeomapAggregationAvg)
+	err = json.Unmarshal(data, &dst.GeomapAggregationAvg)
 	if err == nil {
 		jsonGeomapAggregationAvg, _ := json.Marshal(dst.GeomapAggregationAvg)
 		if string(jsonGeomapAggregationAvg) == "{}" { // empty struct
@@ -83,7 +86,7 @@ func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GeomapAggregationCount
-	err = newStrictDecoder(data).Decode(&dst.GeomapAggregationCount)
+	err = json.Unmarshal(data, &dst.GeomapAggregationCount)
 	if err == nil {
 		jsonGeomapAggregationCount, _ := json.Marshal(dst.GeomapAggregationCount)
 		if string(jsonGeomapAggregationCount) == "{}" { // empty struct
@@ -100,7 +103,7 @@ func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GeomapAggregationMax
-	err = newStrictDecoder(data).Decode(&dst.GeomapAggregationMax)
+	err = json.Unmarshal(data, &dst.GeomapAggregationMax)
 	if err == nil {
 		jsonGeomapAggregationMax, _ := json.Marshal(dst.GeomapAggregationMax)
 		if string(jsonGeomapAggregationMax) == "{}" { // empty struct
@@ -117,7 +120,7 @@ func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GeomapAggregationMin
-	err = newStrictDecoder(data).Decode(&dst.GeomapAggregationMin)
+	err = json.Unmarshal(data, &dst.GeomapAggregationMin)
 	if err == nil {
 		jsonGeomapAggregationMin, _ := json.Marshal(dst.GeomapAggregationMin)
 		if string(jsonGeomapAggregationMin) == "{}" { // empty struct
@@ -134,7 +137,7 @@ func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into GeomapAggregationSum
-	err = newStrictDecoder(data).Decode(&dst.GeomapAggregationSum)
+	err = json.Unmarshal(data, &dst.GeomapAggregationSum)
 	if err == nil {
 		jsonGeomapAggregationSum, _ := json.Marshal(dst.GeomapAggregationSum)
 		if string(jsonGeomapAggregationSum) == "{}" { // empty struct
@@ -281,5 +284,4 @@ func (v *NullableGeomapAggregation) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

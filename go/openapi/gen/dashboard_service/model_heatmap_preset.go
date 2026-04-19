@@ -11,8 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the HeatmapPreset type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HeatmapPreset{}
@@ -29,7 +33,7 @@ type HeatmapPreset struct {
 	CustomUnit *string `json:"customUnit,omitempty"`
 	// Number indicating the decimal precision of the numeric values, within range 0-15
 	DecimalPrecision *int32 `json:"decimalPrecision,omitempty"`
-	Preset *HeatmapColorPreset `json:"preset,omitempty"`
+	Preset HeatmapColorPreset `json:"preset"`
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Whether to render numeric values inside the heatmap tiles
 	ShowNumbers *bool `json:"showNumbers,omitempty"`
@@ -38,14 +42,18 @@ type HeatmapPreset struct {
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
 	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HeatmapPreset HeatmapPreset
 
 // NewHeatmapPreset instantiates a new HeatmapPreset object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHeatmapPreset() *HeatmapPreset {
+func NewHeatmapPreset(preset HeatmapColorPreset) *HeatmapPreset {
 	this := HeatmapPreset{}
+	this.Preset = preset
 	return &this
 }
 
@@ -217,36 +225,28 @@ func (o *HeatmapPreset) SetDecimalPrecision(v int32) {
 	o.DecimalPrecision = &v
 }
 
-// GetPreset returns the Preset field value if set, zero value otherwise.
+// GetPreset returns the Preset field value
 func (o *HeatmapPreset) GetPreset() HeatmapColorPreset {
-	if o == nil || IsNil(o.Preset) {
+	if o == nil {
 		var ret HeatmapColorPreset
 		return ret
 	}
-	return *o.Preset
+
+	return o.Preset
 }
 
-// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
+// GetPresetOk returns a tuple with the Preset field value
 // and a boolean to check if the value has been set.
 func (o *HeatmapPreset) GetPresetOk() (*HeatmapColorPreset, bool) {
-	if o == nil || IsNil(o.Preset) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Preset, true
+	return &o.Preset, true
 }
 
-// HasPreset returns a boolean if a field has been set.
-func (o *HeatmapPreset) HasPreset() bool {
-	if o != nil && !IsNil(o.Preset) {
-		return true
-	}
-
-	return false
-}
-
-// SetPreset gets a reference to the given HeatmapColorPreset and assigns it to the Preset field.
+// SetPreset sets field value
 func (o *HeatmapPreset) SetPreset(v HeatmapColorPreset) {
-	o.Preset = &v
+	o.Preset = v
 }
 
 // GetScaleType returns the ScaleType field value if set, zero value otherwise.
@@ -498,9 +498,7 @@ func (o HeatmapPreset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DecimalPrecision) {
 		toSerialize["decimalPrecision"] = o.DecimalPrecision
 	}
-	if !IsNil(o.Preset) {
-		toSerialize["preset"] = o.Preset
-	}
+	toSerialize["preset"] = o.Preset
 	if !IsNil(o.ScaleType) {
 		toSerialize["scaleType"] = o.ScaleType
 	}
@@ -522,7 +520,67 @@ func (o HeatmapPreset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YAxisFields) {
 		toSerialize["yAxisFields"] = o.YAxisFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HeatmapPreset) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"preset",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHeatmapPreset := _HeatmapPreset{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varHeatmapPreset)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HeatmapPreset(varHeatmapPreset)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowAbbreviation")
+		delete(additionalProperties, "colorAxisMax")
+		delete(additionalProperties, "colorAxisMin")
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "decimalPrecision")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "scaleType")
+		delete(additionalProperties, "showNumbers")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "valueField")
+		delete(additionalProperties, "xAxisFields")
+		delete(additionalProperties, "yAxisFields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHeatmapPreset struct {
@@ -560,5 +618,4 @@ func (v *NullableHeatmapPreset) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

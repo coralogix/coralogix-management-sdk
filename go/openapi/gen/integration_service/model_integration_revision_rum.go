@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IntegrationRevisionRum type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionRum{}
@@ -24,16 +28,20 @@ type IntegrationRevisionRum struct {
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	Id *string `json:"id,omitempty"`
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
-	Rum *Rum `json:"rum,omitempty"`
+	Rum Rum `json:"rum"`
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IntegrationRevisionRum IntegrationRevisionRum
 
 // NewIntegrationRevisionRum instantiates a new IntegrationRevisionRum object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationRevisionRum() *IntegrationRevisionRum {
+func NewIntegrationRevisionRum(rum Rum) *IntegrationRevisionRum {
 	this := IntegrationRevisionRum{}
+	this.Rum = rum
 	return &this
 }
 
@@ -205,36 +213,28 @@ func (o *IntegrationRevisionRum) SetRevisionDeploymentSupported(v bool) {
 	o.RevisionDeploymentSupported = &v
 }
 
-// GetRum returns the Rum field value if set, zero value otherwise.
+// GetRum returns the Rum field value
 func (o *IntegrationRevisionRum) GetRum() Rum {
-	if o == nil || IsNil(o.Rum) {
+	if o == nil {
 		var ret Rum
 		return ret
 	}
-	return *o.Rum
+
+	return o.Rum
 }
 
-// GetRumOk returns a tuple with the Rum field value if set, nil otherwise
+// GetRumOk returns a tuple with the Rum field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationRevisionRum) GetRumOk() (*Rum, bool) {
-	if o == nil || IsNil(o.Rum) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Rum, true
+	return &o.Rum, true
 }
 
-// HasRum returns a boolean if a field has been set.
-func (o *IntegrationRevisionRum) HasRum() bool {
-	if o != nil && !IsNil(o.Rum) {
-		return true
-	}
-
-	return false
-}
-
-// SetRum gets a reference to the given Rum and assigns it to the Rum field.
+// SetRum sets field value
 func (o *IntegrationRevisionRum) SetRum(v Rum) {
-	o.Rum = &v
+	o.Rum = v
 }
 
 // GetUpgradeInstructionsMd returns the UpgradeInstructionsMd field value if set, zero value otherwise.
@@ -294,13 +294,65 @@ func (o IntegrationRevisionRum) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RevisionDeploymentSupported) {
 		toSerialize["revisionDeploymentSupported"] = o.RevisionDeploymentSupported
 	}
-	if !IsNil(o.Rum) {
-		toSerialize["rum"] = o.Rum
-	}
+	toSerialize["rum"] = o.Rum
 	if !IsNil(o.UpgradeInstructionsMd) {
 		toSerialize["upgradeInstructionsMd"] = o.UpgradeInstructionsMd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IntegrationRevisionRum) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"rum",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationRevisionRum := _IntegrationRevisionRum{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIntegrationRevisionRum)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationRevisionRum(varIntegrationRevisionRum)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "featureFlag")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "groups")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "revisionDeploymentSupported")
+		delete(additionalProperties, "rum")
+		delete(additionalProperties, "upgradeInstructionsMd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIntegrationRevisionRum struct {
@@ -338,5 +390,4 @@ func (v *NullableIntegrationRevisionRum) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

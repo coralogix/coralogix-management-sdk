@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PromQlQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PromQlQuery{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &PromQlQuery{}
 // PromQlQuery struct for PromQlQuery
 type PromQlQuery struct {
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PromQlQuery PromQlQuery
 
 // NewPromQlQuery instantiates a new PromQlQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o PromQlQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PromQlQuery) UnmarshalJSON(data []byte) (err error) {
+	varPromQlQuery := _PromQlQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varPromQlQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PromQlQuery(varPromQlQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePromQlQuery struct {
@@ -122,5 +155,4 @@ func (v *NullablePromQlQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

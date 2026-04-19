@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GaugeSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeSpansQuery{}
@@ -26,7 +29,10 @@ type GaugeSpansQuery struct {
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	SpansAggregation *SpansAggregation `json:"spansAggregation,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GaugeSpansQuery GaugeSpansQuery
 
 // NewGaugeSpansQuery instantiates a new GaugeSpansQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +306,40 @@ func (o GaugeSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GaugeSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	varGaugeSpansQuery := _GaugeSpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGaugeSpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GaugeSpansQuery(varGaugeSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "groupBys")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "spansAggregation")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGaugeSpansQuery struct {
@@ -338,5 +377,4 @@ func (v *NullableGaugeSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

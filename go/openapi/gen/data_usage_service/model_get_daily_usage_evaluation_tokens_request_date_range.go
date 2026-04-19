@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetDailyUsageEvaluationTokensRequestDateRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageEvaluationTokensRequestDateRange{}
 
 // GetDailyUsageEvaluationTokensRequestDateRange struct for GetDailyUsageEvaluationTokensRequestDateRange
 type GetDailyUsageEvaluationTokensRequestDateRange struct {
-	DateRange *V2DateRange `json:"dateRange,omitempty"`
+	DateRange V2DateRange `json:"dateRange"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDailyUsageEvaluationTokensRequestDateRange GetDailyUsageEvaluationTokensRequestDateRange
 
 // NewGetDailyUsageEvaluationTokensRequestDateRange instantiates a new GetDailyUsageEvaluationTokensRequestDateRange object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDailyUsageEvaluationTokensRequestDateRange() *GetDailyUsageEvaluationTokensRequestDateRange {
+func NewGetDailyUsageEvaluationTokensRequestDateRange(dateRange V2DateRange) *GetDailyUsageEvaluationTokensRequestDateRange {
 	this := GetDailyUsageEvaluationTokensRequestDateRange{}
+	this.DateRange = dateRange
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGetDailyUsageEvaluationTokensRequestDateRangeWithDefaults() *GetDailyUsa
 	return &this
 }
 
-// GetDateRange returns the DateRange field value if set, zero value otherwise.
+// GetDateRange returns the DateRange field value
 func (o *GetDailyUsageEvaluationTokensRequestDateRange) GetDateRange() V2DateRange {
-	if o == nil || IsNil(o.DateRange) {
+	if o == nil {
 		var ret V2DateRange
 		return ret
 	}
-	return *o.DateRange
+
+	return o.DateRange
 }
 
-// GetDateRangeOk returns a tuple with the DateRange field value if set, nil otherwise
+// GetDateRangeOk returns a tuple with the DateRange field value
 // and a boolean to check if the value has been set.
 func (o *GetDailyUsageEvaluationTokensRequestDateRange) GetDateRangeOk() (*V2DateRange, bool) {
-	if o == nil || IsNil(o.DateRange) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DateRange, true
+	return &o.DateRange, true
 }
 
-// HasDateRange returns a boolean if a field has been set.
-func (o *GetDailyUsageEvaluationTokensRequestDateRange) HasDateRange() bool {
-	if o != nil && !IsNil(o.DateRange) {
-		return true
-	}
-
-	return false
-}
-
-// SetDateRange gets a reference to the given V2DateRange and assigns it to the DateRange field.
+// SetDateRange sets field value
 func (o *GetDailyUsageEvaluationTokensRequestDateRange) SetDateRange(v V2DateRange) {
-	o.DateRange = &v
+	o.DateRange = v
 }
 
 func (o GetDailyUsageEvaluationTokensRequestDateRange) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GetDailyUsageEvaluationTokensRequestDateRange) MarshalJSON() ([]byte, er
 
 func (o GetDailyUsageEvaluationTokensRequestDateRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DateRange) {
-		toSerialize["dateRange"] = o.DateRange
+	toSerialize["dateRange"] = o.DateRange
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDailyUsageEvaluationTokensRequestDateRange) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dateRange",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGetDailyUsageEvaluationTokensRequestDateRange := _GetDailyUsageEvaluationTokensRequestDateRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetDailyUsageEvaluationTokensRequestDateRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDailyUsageEvaluationTokensRequestDateRange(varGetDailyUsageEvaluationTokensRequestDateRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dateRange")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDailyUsageEvaluationTokensRequestDateRange struct {
@@ -122,5 +168,4 @@ func (v *NullableGetDailyUsageEvaluationTokensRequestDateRange) UnmarshalJSON(sr
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

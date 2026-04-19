@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SectionOptionsInternal type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SectionOptionsInternal{}
 
 // SectionOptionsInternal struct for SectionOptionsInternal
 type SectionOptionsInternal struct {
-	Internal map[string]interface{} `json:"internal,omitempty"`
+	Internal map[string]interface{} `json:"internal"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SectionOptionsInternal SectionOptionsInternal
 
 // NewSectionOptionsInternal instantiates a new SectionOptionsInternal object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSectionOptionsInternal() *SectionOptionsInternal {
+func NewSectionOptionsInternal(internal map[string]interface{}) *SectionOptionsInternal {
 	this := SectionOptionsInternal{}
+	this.Internal = internal
 	return &this
 }
 
@@ -39,34 +47,26 @@ func NewSectionOptionsInternalWithDefaults() *SectionOptionsInternal {
 	return &this
 }
 
-// GetInternal returns the Internal field value if set, zero value otherwise.
+// GetInternal returns the Internal field value
 func (o *SectionOptionsInternal) GetInternal() map[string]interface{} {
-	if o == nil || IsNil(o.Internal) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Internal
 }
 
-// GetInternalOk returns a tuple with the Internal field value if set, nil otherwise
+// GetInternalOk returns a tuple with the Internal field value
 // and a boolean to check if the value has been set.
 func (o *SectionOptionsInternal) GetInternalOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Internal) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Internal, true
 }
 
-// HasInternal returns a boolean if a field has been set.
-func (o *SectionOptionsInternal) HasInternal() bool {
-	if o != nil && !IsNil(o.Internal) {
-		return true
-	}
-
-	return false
-}
-
-// SetInternal gets a reference to the given map[string]interface{} and assigns it to the Internal field.
+// SetInternal sets field value
 func (o *SectionOptionsInternal) SetInternal(v map[string]interface{}) {
 	o.Internal = v
 }
@@ -81,10 +81,56 @@ func (o SectionOptionsInternal) MarshalJSON() ([]byte, error) {
 
 func (o SectionOptionsInternal) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Internal) {
-		toSerialize["internal"] = o.Internal
+	toSerialize["internal"] = o.Internal
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SectionOptionsInternal) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"internal",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSectionOptionsInternal := _SectionOptionsInternal{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSectionOptionsInternal)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SectionOptionsInternal(varSectionOptionsInternal)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "internal")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSectionOptionsInternal struct {
@@ -122,5 +168,4 @@ func (v *NullableSectionOptionsInternal) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

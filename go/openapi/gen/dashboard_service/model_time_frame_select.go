@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // TimeFrameSelect - struct for TimeFrameSelect
 type TimeFrameSelect struct {
@@ -42,7 +45,7 @@ func (dst *TimeFrameSelect) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into TimeFrameSelectAbsoluteTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.TimeFrameSelectAbsoluteTimeFrame)
+	err = json.Unmarshal(data, &dst.TimeFrameSelectAbsoluteTimeFrame)
 	if err == nil {
 		jsonTimeFrameSelectAbsoluteTimeFrame, _ := json.Marshal(dst.TimeFrameSelectAbsoluteTimeFrame)
 		if string(jsonTimeFrameSelectAbsoluteTimeFrame) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *TimeFrameSelect) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into TimeFrameSelectRelativeTimeFrame
-	err = newStrictDecoder(data).Decode(&dst.TimeFrameSelectRelativeTimeFrame)
+	err = json.Unmarshal(data, &dst.TimeFrameSelectRelativeTimeFrame)
 	if err == nil {
 		jsonTimeFrameSelectRelativeTimeFrame, _ := json.Marshal(dst.TimeFrameSelectRelativeTimeFrame)
 		if string(jsonTimeFrameSelectRelativeTimeFrame) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableTimeFrameSelect) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

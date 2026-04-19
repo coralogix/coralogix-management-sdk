@@ -11,16 +11,22 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the QueryLogsQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryLogsQueryTypeFieldName{}
 
 // QueryLogsQueryTypeFieldName struct for QueryLogsQueryTypeFieldName
 type QueryLogsQueryTypeFieldName struct {
-	FieldName *QueryLogsQueryTypeFieldName `json:"fieldName,omitempty"`
+	LogRegex *string `json:"logRegex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryLogsQueryTypeFieldName QueryLogsQueryTypeFieldName
 
 // NewQueryLogsQueryTypeFieldName instantiates a new QueryLogsQueryTypeFieldName object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +45,36 @@ func NewQueryLogsQueryTypeFieldNameWithDefaults() *QueryLogsQueryTypeFieldName {
 	return &this
 }
 
-// GetFieldName returns the FieldName field value if set, zero value otherwise.
-func (o *QueryLogsQueryTypeFieldName) GetFieldName() QueryLogsQueryTypeFieldName {
-	if o == nil || IsNil(o.FieldName) {
-		var ret QueryLogsQueryTypeFieldName
+// GetLogRegex returns the LogRegex field value if set, zero value otherwise.
+func (o *QueryLogsQueryTypeFieldName) GetLogRegex() string {
+	if o == nil || IsNil(o.LogRegex) {
+		var ret string
 		return ret
 	}
-	return *o.FieldName
+	return *o.LogRegex
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
+// GetLogRegexOk returns a tuple with the LogRegex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryLogsQueryTypeFieldName) GetFieldNameOk() (*QueryLogsQueryTypeFieldName, bool) {
-	if o == nil || IsNil(o.FieldName) {
+func (o *QueryLogsQueryTypeFieldName) GetLogRegexOk() (*string, bool) {
+	if o == nil || IsNil(o.LogRegex) {
 		return nil, false
 	}
-	return o.FieldName, true
+	return o.LogRegex, true
 }
 
-// HasFieldName returns a boolean if a field has been set.
-func (o *QueryLogsQueryTypeFieldName) HasFieldName() bool {
-	if o != nil && !IsNil(o.FieldName) {
+// HasLogRegex returns a boolean if a field has been set.
+func (o *QueryLogsQueryTypeFieldName) HasLogRegex() bool {
+	if o != nil && !IsNil(o.LogRegex) {
 		return true
 	}
 
 	return false
 }
 
-// SetFieldName gets a reference to the given QueryLogsQueryTypeFieldName and assigns it to the FieldName field.
-func (o *QueryLogsQueryTypeFieldName) SetFieldName(v QueryLogsQueryTypeFieldName) {
-	o.FieldName = &v
+// SetLogRegex gets a reference to the given string and assigns it to the LogRegex field.
+func (o *QueryLogsQueryTypeFieldName) SetLogRegex(v string) {
+	o.LogRegex = &v
 }
 
 func (o QueryLogsQueryTypeFieldName) MarshalJSON() ([]byte, error) {
@@ -81,10 +87,37 @@ func (o QueryLogsQueryTypeFieldName) MarshalJSON() ([]byte, error) {
 
 func (o QueryLogsQueryTypeFieldName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldName) {
-		toSerialize["fieldName"] = o.FieldName
+	if !IsNil(o.LogRegex) {
+		toSerialize["logRegex"] = o.LogRegex
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryLogsQueryTypeFieldName) UnmarshalJSON(data []byte) (err error) {
+	varQueryLogsQueryTypeFieldName := _QueryLogsQueryTypeFieldName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varQueryLogsQueryTypeFieldName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryLogsQueryTypeFieldName(varQueryLogsQueryTypeFieldName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "logRegex")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryLogsQueryTypeFieldName struct {
@@ -122,5 +155,4 @@ func (v *NullableQueryLogsQueryTypeFieldName) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

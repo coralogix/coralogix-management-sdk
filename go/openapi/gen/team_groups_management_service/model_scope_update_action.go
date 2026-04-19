@@ -11,10 +11,13 @@ API version: 1.0.0
 package team_groups_management_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // ScopeUpdateAction - struct for ScopeUpdateAction
 type ScopeUpdateAction struct {
@@ -42,7 +45,7 @@ func (dst *ScopeUpdateAction) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ScopeUpdateActionClear
-	err = newStrictDecoder(data).Decode(&dst.ScopeUpdateActionClear)
+	err = json.Unmarshal(data, &dst.ScopeUpdateActionClear)
 	if err == nil {
 		jsonScopeUpdateActionClear, _ := json.Marshal(dst.ScopeUpdateActionClear)
 		if string(jsonScopeUpdateActionClear) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *ScopeUpdateAction) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ScopeUpdateActionSetScopeId
-	err = newStrictDecoder(data).Decode(&dst.ScopeUpdateActionSetScopeId)
+	err = json.Unmarshal(data, &dst.ScopeUpdateActionSetScopeId)
 	if err == nil {
 		jsonScopeUpdateActionSetScopeId, _ := json.Marshal(dst.ScopeUpdateActionSetScopeId)
 		if string(jsonScopeUpdateActionSetScopeId) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableScopeUpdateAction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RevisionRef type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RevisionRef{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &RevisionRef{}
 type RevisionRef struct {
 	DescriptionMd *string `json:"descriptionMd,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RevisionRef RevisionRef
 
 // NewRevisionRef instantiates a new RevisionRef object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o RevisionRef) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RevisionRef) UnmarshalJSON(data []byte) (err error) {
+	varRevisionRef := _RevisionRef{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRevisionRef)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RevisionRef(varRevisionRef)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "descriptionMd")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRevisionRef struct {
@@ -158,5 +192,4 @@ func (v *NullableRevisionRef) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

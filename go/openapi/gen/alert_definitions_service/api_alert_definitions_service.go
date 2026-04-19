@@ -23,6 +23,113 @@ import (
 // AlertDefinitionsServiceAPIService AlertDefinitionsServiceAPI service
 type AlertDefinitionsServiceAPIService service
 
+type ApiAlertDefsServiceBulkDeleteAlertDefsRequest struct {
+	ctx context.Context
+	ApiService *AlertDefinitionsServiceAPIService
+	bulkDeleteAlertDefinitionsRequest *BulkDeleteAlertDefinitionsRequest
+}
+
+func (r ApiAlertDefsServiceBulkDeleteAlertDefsRequest) BulkDeleteAlertDefinitionsRequest(bulkDeleteAlertDefinitionsRequest BulkDeleteAlertDefinitionsRequest) ApiAlertDefsServiceBulkDeleteAlertDefsRequest {
+	r.bulkDeleteAlertDefinitionsRequest = &bulkDeleteAlertDefinitionsRequest
+	return r
+}
+
+func (r ApiAlertDefsServiceBulkDeleteAlertDefsRequest) Execute() (*BulkDeleteAlertDefsResponse, *http.Response, error) {
+	return r.ApiService.AlertDefsServiceBulkDeleteAlertDefsExecute(r)
+}
+
+/*
+AlertDefsServiceBulkDeleteAlertDefs Bulk delete alert definitions
+
+Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiAlertDefsServiceBulkDeleteAlertDefsRequest
+*/
+func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefs(ctx context.Context) ApiAlertDefsServiceBulkDeleteAlertDefsRequest {
+	return ApiAlertDefsServiceBulkDeleteAlertDefsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BulkDeleteAlertDefsResponse
+func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceBulkDeleteAlertDefsExecute(r ApiAlertDefsServiceBulkDeleteAlertDefsRequest) (*BulkDeleteAlertDefsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BulkDeleteAlertDefsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AlertDefinitionsServiceAPIService.AlertDefsServiceBulkDeleteAlertDefs")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/alerts/alerts/v3/all/delete"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.bulkDeleteAlertDefinitionsRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiAlertDefsServiceBulkReplaceAlertDefsRequest struct {
 	ctx context.Context
 	ApiService *AlertDefinitionsServiceAPIService
@@ -40,8 +147,6 @@ func (r ApiAlertDefsServiceBulkReplaceAlertDefsRequest) Execute() (*BulkReplaceA
 
 /*
 AlertDefsServiceBulkReplaceAlertDefs Bulk replace alert definitions
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceBulkReplaceAlertDefsRequest
@@ -148,8 +253,6 @@ func (r ApiAlertDefsServiceCreateAlertDefRequest) Execute() (*CreateAlertDefResp
 /*
 AlertDefsServiceCreateAlertDef Create an alert
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceCreateAlertDefRequest
 */
@@ -249,8 +352,6 @@ func (r ApiAlertDefsServiceDeleteAlertDefRequest) Execute() (map[string]interfac
 
 /*
 AlertDefsServiceDeleteAlertDef DeleteAlertDef
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -353,9 +454,6 @@ func (r ApiAlertDefsServiceDownloadAlertsRequest) Execute() (*DownloadAlertsResp
 AlertDefsServiceDownloadAlerts Download alerts
 
 Download a list of all accessible alert definitions in base64-encoded byte format.
-
-Requires the following permissions:
-- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceDownloadAlertsRequest
@@ -462,9 +560,6 @@ AlertDefsServiceFilterOptionCounts Get counts for filter options
 
 Returns counts for different filter options based on the provided filters
 
-Requires the following permissions:
-- `alerts:ReadConfig`
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceFilterOptionCountsRequest
 */
@@ -566,8 +661,6 @@ func (r ApiAlertDefsServiceGetAlertDefRequest) Execute() (*GetAlertDefResponse, 
 /*
 AlertDefsServiceGetAlertDef Get alert definition by ID
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
  @return ApiAlertDefsServiceGetAlertDefRequest
@@ -668,8 +761,6 @@ func (r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) Execute() (*GetAlertDe
 
 /*
 AlertDefsServiceGetAlertDefByVersionId Get alert definition by alert version ID
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param alertVersionId
@@ -789,8 +880,6 @@ func (r ApiAlertDefsServiceListAlertDefsRequest) Execute() (*ListAlertDefsRespon
 /*
 AlertDefsServiceListAlertDefs Get a list of all accessible alert definitions
 
-No description available
-
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceListAlertDefsRequest
 */
@@ -902,8 +991,6 @@ func (r ApiAlertDefsServiceReplaceAlertDefRequest) Execute() (*ReplaceAlertDefRe
 
 /*
 AlertDefsServiceReplaceAlertDef Replace an alert definition
-
-No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceReplaceAlertDefRequest

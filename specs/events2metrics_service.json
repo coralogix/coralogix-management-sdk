@@ -11,7 +11,6 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2Ms",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -34,7 +33,6 @@
           "Events2Metrics Service"
         ],
         "summary": "Replace an E2M",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -46,10 +44,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MLogsQuery"
+                    "$ref": "#/components/schemas/E2MSpansQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MSpansQuery"
+                    "$ref": "#/components/schemas/E2MLogsQuery"
                   }
                 ]
               }
@@ -74,7 +72,6 @@
           "Events2Metrics Service"
         ],
         "summary": "Create a new E2M",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -86,10 +83,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
                   }
                 ]
               }
@@ -116,7 +113,6 @@
           "Events2Metrics Service"
         ],
         "summary": "Atomic Batch Execute E2M",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,8 +129,7 @@
                       "$ref": "#/components/schemas/E2MExecutionRequest"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -159,7 +154,6 @@
           "Events2Metrics Service"
         ],
         "summary": "Get an E2M",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -194,7 +188,6 @@
           "Events2Metrics Service"
         ],
         "summary": "Delete an E2M",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -231,7 +224,6 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2M Labels Cardinality",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -382,7 +374,6 @@
           "Events2Metrics Service"
         ],
         "summary": "Get E2M Limits",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -427,33 +418,6 @@
             }
           }
         }
-      },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
       },
       "CreateE2MRequest": {
         "externalDocs": {
@@ -577,6 +541,10 @@
         "description": "This data structure is used to create a new event to metric definition",
         "type": "object",
         "properties": {
+          "dataSource": {
+            "example": "my_namespace/my_dataset",
+            "type": "string"
+          },
           "description": {
             "example": "avg and max the latency of catalog service",
             "type": "string"
@@ -610,9 +578,9 @@
           }
         },
         "required": [
-          "name"
-        ],
-        "additionalProperties": false
+          "name",
+          "logsQuery"
+        ]
       },
       "E2MCreateParamsSpansQuery": {
         "externalDocs": {
@@ -623,6 +591,10 @@
         "description": "This data structure is used to create a new event to metric definition",
         "type": "object",
         "properties": {
+          "dataSource": {
+            "example": "my_namespace/my_dataset",
+            "type": "string"
+          },
           "description": {
             "example": "avg and max the latency of catalog service",
             "type": "string"
@@ -656,9 +628,9 @@
           }
         },
         "required": [
-          "name"
-        ],
-        "additionalProperties": false
+          "name",
+          "spansQuery"
+        ]
       },
       "E2MExecutionRequest": {
         "oneOf": [
@@ -680,7 +652,9 @@
             "$ref": "#/components/schemas/CreateE2MRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "create"
+        ]
       },
       "E2MExecutionRequestDelete": {
         "type": "object",
@@ -689,7 +663,9 @@
             "$ref": "#/components/schemas/DeleteE2MRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "delete"
+        ]
       },
       "E2MExecutionRequestReplace": {
         "type": "object",
@@ -698,7 +674,9 @@
             "$ref": "#/components/schemas/ReplaceE2MRequest"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replace"
+        ]
       },
       "E2MExecutionResponse": {
         "oneOf": [
@@ -720,7 +698,9 @@
             "$ref": "#/components/schemas/CreateE2MResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "created"
+        ]
       },
       "E2MExecutionResponseDeleted": {
         "type": "object",
@@ -729,7 +709,9 @@
             "$ref": "#/components/schemas/DeleteE2MResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "deleted"
+        ]
       },
       "E2MExecutionResponseReplaced": {
         "type": "object",
@@ -738,7 +720,9 @@
             "$ref": "#/components/schemas/ReplaceE2MResponse"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "replaced"
+        ]
       },
       "E2MLogsQuery": {
         "externalDocs": {
@@ -751,6 +735,10 @@
         "properties": {
           "createTime": {
             "example": "2022-06-30T12:30:00Z'",
+            "type": "string"
+          },
+          "dataSource": {
+            "example": "my_namespace/my_dataset",
             "type": "string"
           },
           "description": {
@@ -799,9 +787,9 @@
         },
         "required": [
           "name",
-          "type"
-        ],
-        "additionalProperties": false
+          "type",
+          "logsQuery"
+        ]
       },
       "E2MPermutations": {
         "externalDocs": {
@@ -839,6 +827,10 @@
             "example": "2022-06-30T12:30:00Z'",
             "type": "string"
           },
+          "dataSource": {
+            "example": "my_namespace/my_dataset",
+            "type": "string"
+          },
           "description": {
             "example": "avg and max the latency of catalog service",
             "type": "string"
@@ -885,9 +877,9 @@
         },
         "required": [
           "name",
-          "type"
-        ],
-        "additionalProperties": false
+          "type",
+          "spansQuery"
+        ]
       },
       "E2MType": {
         "type": "string",
@@ -936,9 +928,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -958,9 +950,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -1099,34 +1091,6 @@
           "sourceField"
         ]
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1206,7 +1170,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "histogram"
+        ]
       },
       "V2AggregationNone": {
         "externalDocs": {
@@ -1231,7 +1197,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "none"
+        ]
       },
       "V2AggregationSamples": {
         "externalDocs": {
@@ -1256,7 +1224,9 @@
             "type": "string"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "samples"
+        ]
       },
       "common.Group": {
         "type": "object",
@@ -1427,14 +1397,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

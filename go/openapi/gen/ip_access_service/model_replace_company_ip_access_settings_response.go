@@ -11,8 +11,11 @@ API version: 1.0.0
 package ip_access_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ReplaceCompanyIpAccessSettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceCompanyIpAccessSettingsResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ReplaceCompanyIpAccessSettingsResponse{}
 // ReplaceCompanyIpAccessSettingsResponse This data structure represents the response to replace company IP access settings.
 type ReplaceCompanyIpAccessSettingsResponse struct {
 	Settings *CompanyIpAccessSettings `json:"settings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplaceCompanyIpAccessSettingsResponse ReplaceCompanyIpAccessSettingsResponse
 
 // NewReplaceCompanyIpAccessSettingsResponse instantiates a new ReplaceCompanyIpAccessSettingsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ReplaceCompanyIpAccessSettingsResponse) ToMap() (map[string]interface{},
 	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplaceCompanyIpAccessSettingsResponse) UnmarshalJSON(data []byte) (err error) {
+	varReplaceCompanyIpAccessSettingsResponse := _ReplaceCompanyIpAccessSettingsResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varReplaceCompanyIpAccessSettingsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplaceCompanyIpAccessSettingsResponse(varReplaceCompanyIpAccessSettingsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "settings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplaceCompanyIpAccessSettingsResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableReplaceCompanyIpAccessSettingsResponse) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

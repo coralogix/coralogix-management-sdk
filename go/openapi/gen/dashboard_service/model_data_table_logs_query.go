@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataTableLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableLogsQuery{}
@@ -23,7 +26,10 @@ type DataTableLogsQuery struct {
 	Grouping *LogsQueryGrouping `json:"grouping,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataTableLogsQuery DataTableLogsQuery
 
 // NewDataTableLogsQuery instantiates a new DataTableLogsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o DataTableLogsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataTableLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	varDataTableLogsQuery := _DataTableLogsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataTableLogsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTableLogsQuery(varDataTableLogsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "grouping")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataTableLogsQuery struct {
@@ -230,5 +266,4 @@ func (v *NullableDataTableLogsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

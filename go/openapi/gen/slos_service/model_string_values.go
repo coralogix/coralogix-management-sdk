@@ -11,8 +11,11 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the StringValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StringValues{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &StringValues{}
 // StringValues struct for StringValues
 type StringValues struct {
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StringValues StringValues
 
 // NewStringValues instantiates a new StringValues object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o StringValues) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StringValues) UnmarshalJSON(data []byte) (err error) {
+	varStringValues := _StringValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varStringValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StringValues(varStringValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStringValues struct {
@@ -122,5 +155,4 @@ func (v *NullableStringValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

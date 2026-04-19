@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleParametersExtractParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersExtractParameters{}
 
 // RuleParametersExtractParameters struct for RuleParametersExtractParameters
 type RuleParametersExtractParameters struct {
-	ExtractParameters *ExtractParameters `json:"extractParameters,omitempty"`
+	ExtractParameters ExtractParameters `json:"extractParameters"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleParametersExtractParameters RuleParametersExtractParameters
 
 // NewRuleParametersExtractParameters instantiates a new RuleParametersExtractParameters object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleParametersExtractParameters() *RuleParametersExtractParameters {
+func NewRuleParametersExtractParameters(extractParameters ExtractParameters) *RuleParametersExtractParameters {
 	this := RuleParametersExtractParameters{}
+	this.ExtractParameters = extractParameters
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleParametersExtractParametersWithDefaults() *RuleParametersExtractPara
 	return &this
 }
 
-// GetExtractParameters returns the ExtractParameters field value if set, zero value otherwise.
+// GetExtractParameters returns the ExtractParameters field value
 func (o *RuleParametersExtractParameters) GetExtractParameters() ExtractParameters {
-	if o == nil || IsNil(o.ExtractParameters) {
+	if o == nil {
 		var ret ExtractParameters
 		return ret
 	}
-	return *o.ExtractParameters
+
+	return o.ExtractParameters
 }
 
-// GetExtractParametersOk returns a tuple with the ExtractParameters field value if set, nil otherwise
+// GetExtractParametersOk returns a tuple with the ExtractParameters field value
 // and a boolean to check if the value has been set.
 func (o *RuleParametersExtractParameters) GetExtractParametersOk() (*ExtractParameters, bool) {
-	if o == nil || IsNil(o.ExtractParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExtractParameters, true
+	return &o.ExtractParameters, true
 }
 
-// HasExtractParameters returns a boolean if a field has been set.
-func (o *RuleParametersExtractParameters) HasExtractParameters() bool {
-	if o != nil && !IsNil(o.ExtractParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetExtractParameters gets a reference to the given ExtractParameters and assigns it to the ExtractParameters field.
+// SetExtractParameters sets field value
 func (o *RuleParametersExtractParameters) SetExtractParameters(v ExtractParameters) {
-	o.ExtractParameters = &v
+	o.ExtractParameters = v
 }
 
 func (o RuleParametersExtractParameters) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleParametersExtractParameters) MarshalJSON() ([]byte, error) {
 
 func (o RuleParametersExtractParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ExtractParameters) {
-		toSerialize["extractParameters"] = o.ExtractParameters
+	toSerialize["extractParameters"] = o.ExtractParameters
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleParametersExtractParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"extractParameters",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleParametersExtractParameters := _RuleParametersExtractParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleParametersExtractParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleParametersExtractParameters(varRuleParametersExtractParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "extractParameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleParametersExtractParameters struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleParametersExtractParameters) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

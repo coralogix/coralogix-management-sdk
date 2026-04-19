@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataTable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTable{}
@@ -26,7 +29,10 @@ type DataTable struct {
 	// How many results are displayed per table page
 	ResultsPerPage *int32 `json:"resultsPerPage,omitempty"`
 	RowStyle *RowStyle `json:"rowStyle,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataTable DataTable
 
 // NewDataTable instantiates a new DataTable object
 // This constructor will assign default values to properties that have it defined,
@@ -265,7 +271,39 @@ func (o DataTable) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RowStyle) {
 		toSerialize["rowStyle"] = o.RowStyle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataTable) UnmarshalJSON(data []byte) (err error) {
+	varDataTable := _DataTable{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataTable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTable(varDataTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "columns")
+		delete(additionalProperties, "dataModeType")
+		delete(additionalProperties, "orderBy")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "resultsPerPage")
+		delete(additionalProperties, "rowStyle")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataTable struct {
@@ -303,5 +341,4 @@ func (v *NullableDataTable) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

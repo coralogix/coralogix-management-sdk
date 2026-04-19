@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnabledCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnabledCount{}
@@ -23,7 +26,10 @@ type EnabledCount struct {
 	Count *int64 `json:"count,omitempty"`
 	// Whether the alert is enabled (true) or disabled (false)
 	Enabled *bool `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnabledCount EnabledCount
 
 // NewEnabledCount instantiates a new EnabledCount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +128,35 @@ func (o EnabledCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EnabledCount) UnmarshalJSON(data []byte) (err error) {
+	varEnabledCount := _EnabledCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnabledCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnabledCount(varEnabledCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnabledCount struct {
@@ -160,5 +194,4 @@ func (v *NullableEnabledCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

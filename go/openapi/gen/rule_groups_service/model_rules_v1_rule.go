@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RulesV1Rule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RulesV1Rule{}
@@ -26,7 +29,10 @@ type RulesV1Rule struct {
 	Order *int64 `json:"order,omitempty"`
 	Parameters *RuleParameters `json:"parameters,omitempty"`
 	SourceField *string `json:"sourceField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RulesV1Rule RulesV1Rule
 
 // NewRulesV1Rule instantiates a new RulesV1Rule object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +306,40 @@ func (o RulesV1Rule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SourceField) {
 		toSerialize["sourceField"] = o.SourceField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RulesV1Rule) UnmarshalJSON(data []byte) (err error) {
+	varRulesV1Rule := _RulesV1Rule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRulesV1Rule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RulesV1Rule(varRulesV1Rule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "parameters")
+		delete(additionalProperties, "sourceField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRulesV1Rule struct {
@@ -338,5 +377,4 @@ func (v *NullableRulesV1Rule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

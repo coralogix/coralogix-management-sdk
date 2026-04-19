@@ -11,15 +11,26 @@ API version: 1.0.0
 package metrics_data_archive_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // MetricsConfiguratorPublicServiceConfigureTenantRequest - struct for MetricsConfiguratorPublicServiceConfigureTenantRequest
 type MetricsConfiguratorPublicServiceConfigureTenantRequest struct {
+	ConfigureTenantRequestGcs *ConfigureTenantRequestGcs
 	ConfigureTenantRequestIbm *ConfigureTenantRequestIbm
 	ConfigureTenantRequestS3 *ConfigureTenantRequestS3
+}
+
+// ConfigureTenantRequestGcsAsMetricsConfiguratorPublicServiceConfigureTenantRequest is a convenience function that returns ConfigureTenantRequestGcs wrapped in MetricsConfiguratorPublicServiceConfigureTenantRequest
+func ConfigureTenantRequestGcsAsMetricsConfiguratorPublicServiceConfigureTenantRequest(v *ConfigureTenantRequestGcs) MetricsConfiguratorPublicServiceConfigureTenantRequest {
+	return MetricsConfiguratorPublicServiceConfigureTenantRequest{
+		ConfigureTenantRequestGcs: v,
+	}
 }
 
 // ConfigureTenantRequestIbmAsMetricsConfiguratorPublicServiceConfigureTenantRequest is a convenience function that returns ConfigureTenantRequestIbm wrapped in MetricsConfiguratorPublicServiceConfigureTenantRequest
@@ -41,8 +52,25 @@ func ConfigureTenantRequestS3AsMetricsConfiguratorPublicServiceConfigureTenantRe
 func (dst *MetricsConfiguratorPublicServiceConfigureTenantRequest) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into ConfigureTenantRequestGcs
+	err = json.Unmarshal(data, &dst.ConfigureTenantRequestGcs)
+	if err == nil {
+		jsonConfigureTenantRequestGcs, _ := json.Marshal(dst.ConfigureTenantRequestGcs)
+		if string(jsonConfigureTenantRequestGcs) == "{}" { // empty struct
+			dst.ConfigureTenantRequestGcs = nil
+		} else {
+			if err = validator.Validate(dst.ConfigureTenantRequestGcs); err != nil {
+				dst.ConfigureTenantRequestGcs = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.ConfigureTenantRequestGcs = nil
+	}
+
 	// try to unmarshal data into ConfigureTenantRequestIbm
-	err = newStrictDecoder(data).Decode(&dst.ConfigureTenantRequestIbm)
+	err = json.Unmarshal(data, &dst.ConfigureTenantRequestIbm)
 	if err == nil {
 		jsonConfigureTenantRequestIbm, _ := json.Marshal(dst.ConfigureTenantRequestIbm)
 		if string(jsonConfigureTenantRequestIbm) == "{}" { // empty struct
@@ -59,7 +87,7 @@ func (dst *MetricsConfiguratorPublicServiceConfigureTenantRequest) UnmarshalJSON
 	}
 
 	// try to unmarshal data into ConfigureTenantRequestS3
-	err = newStrictDecoder(data).Decode(&dst.ConfigureTenantRequestS3)
+	err = json.Unmarshal(data, &dst.ConfigureTenantRequestS3)
 	if err == nil {
 		jsonConfigureTenantRequestS3, _ := json.Marshal(dst.ConfigureTenantRequestS3)
 		if string(jsonConfigureTenantRequestS3) == "{}" { // empty struct
@@ -77,6 +105,7 @@ func (dst *MetricsConfiguratorPublicServiceConfigureTenantRequest) UnmarshalJSON
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.ConfigureTenantRequestGcs = nil
 		dst.ConfigureTenantRequestIbm = nil
 		dst.ConfigureTenantRequestS3 = nil
 
@@ -90,6 +119,10 @@ func (dst *MetricsConfiguratorPublicServiceConfigureTenantRequest) UnmarshalJSON
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MetricsConfiguratorPublicServiceConfigureTenantRequest) MarshalJSON() ([]byte, error) {
+	if src.ConfigureTenantRequestGcs != nil {
+		return json.Marshal(&src.ConfigureTenantRequestGcs)
+	}
+
 	if src.ConfigureTenantRequestIbm != nil {
 		return json.Marshal(&src.ConfigureTenantRequestIbm)
 	}
@@ -106,6 +139,10 @@ func (obj *MetricsConfiguratorPublicServiceConfigureTenantRequest) GetActualInst
 	if obj == nil {
 		return nil
 	}
+	if obj.ConfigureTenantRequestGcs != nil {
+		return obj.ConfigureTenantRequestGcs
+	}
+
 	if obj.ConfigureTenantRequestIbm != nil {
 		return obj.ConfigureTenantRequestIbm
 	}
@@ -120,6 +157,10 @@ func (obj *MetricsConfiguratorPublicServiceConfigureTenantRequest) GetActualInst
 
 // Get the actual instance value
 func (obj MetricsConfiguratorPublicServiceConfigureTenantRequest) GetActualInstanceValue() (interface{}) {
+	if obj.ConfigureTenantRequestGcs != nil {
+		return *obj.ConfigureTenantRequestGcs
+	}
+
 	if obj.ConfigureTenantRequestIbm != nil {
 		return *obj.ConfigureTenantRequestIbm
 	}
@@ -167,5 +208,4 @@ func (v *NullableMetricsConfiguratorPublicServiceConfigureTenantRequest) Unmarsh
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

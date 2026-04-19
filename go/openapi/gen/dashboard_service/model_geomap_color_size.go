@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapColorSize type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapColorSize{}
 
 // GeomapColorSize struct for GeomapColorSize
 type GeomapColorSize struct {
-	Size *ColorSolidType `json:"size,omitempty"`
+	Size ColorSolidType `json:"size"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapColorSize GeomapColorSize
 
 // NewGeomapColorSize instantiates a new GeomapColorSize object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeomapColorSize() *GeomapColorSize {
+func NewGeomapColorSize(size ColorSolidType) *GeomapColorSize {
 	this := GeomapColorSize{}
+	this.Size = size
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewGeomapColorSizeWithDefaults() *GeomapColorSize {
 	return &this
 }
 
-// GetSize returns the Size field value if set, zero value otherwise.
+// GetSize returns the Size field value
 func (o *GeomapColorSize) GetSize() ColorSolidType {
-	if o == nil || IsNil(o.Size) {
+	if o == nil {
 		var ret ColorSolidType
 		return ret
 	}
-	return *o.Size
+
+	return o.Size
 }
 
-// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
 func (o *GeomapColorSize) GetSizeOk() (*ColorSolidType, bool) {
-	if o == nil || IsNil(o.Size) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Size, true
+	return &o.Size, true
 }
 
-// HasSize returns a boolean if a field has been set.
-func (o *GeomapColorSize) HasSize() bool {
-	if o != nil && !IsNil(o.Size) {
-		return true
-	}
-
-	return false
-}
-
-// SetSize gets a reference to the given ColorSolidType and assigns it to the Size field.
+// SetSize sets field value
 func (o *GeomapColorSize) SetSize(v ColorSolidType) {
-	o.Size = &v
+	o.Size = v
 }
 
 func (o GeomapColorSize) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o GeomapColorSize) MarshalJSON() ([]byte, error) {
 
 func (o GeomapColorSize) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Size) {
-		toSerialize["size"] = o.Size
+	toSerialize["size"] = o.Size
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapColorSize) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"size",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeomapColorSize := _GeomapColorSize{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapColorSize)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapColorSize(varGeomapColorSize)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapColorSize struct {
@@ -122,5 +168,4 @@ func (v *NullableGeomapColorSize) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

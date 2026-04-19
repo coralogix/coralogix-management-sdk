@@ -11,8 +11,11 @@ API version: 1.0.0
 package target_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ArchiveSpec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ArchiveSpec{}
@@ -24,7 +27,10 @@ type ArchiveSpec struct {
 	EnableTags *bool `json:"enableTags,omitempty"`
 	Format *TargetFormat `json:"format,omitempty"`
 	IsActive *bool `json:"isActive,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ArchiveSpec ArchiveSpec
 
 // NewArchiveSpec instantiates a new ArchiveSpec object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +202,37 @@ func (o ArchiveSpec) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ArchiveSpec) UnmarshalJSON(data []byte) (err error) {
+	varArchiveSpec := _ArchiveSpec{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varArchiveSpec)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ArchiveSpec(varArchiveSpec)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archivingFormatId")
+		delete(additionalProperties, "enableTags")
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "isActive")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableArchiveSpec struct {
@@ -234,5 +270,4 @@ func (v *NullableArchiveSpec) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

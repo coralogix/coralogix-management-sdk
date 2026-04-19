@@ -11,10 +11,13 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // RuleParameters - struct for RuleParameters
 type RuleParameters struct {
@@ -106,7 +109,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into RuleParametersAllowParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersAllowParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersAllowParameters)
 	if err == nil {
 		jsonRuleParametersAllowParameters, _ := json.Marshal(dst.RuleParametersAllowParameters)
 		if string(jsonRuleParametersAllowParameters) == "{}" { // empty struct
@@ -123,7 +126,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersBlockParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersBlockParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersBlockParameters)
 	if err == nil {
 		jsonRuleParametersBlockParameters, _ := json.Marshal(dst.RuleParametersBlockParameters)
 		if string(jsonRuleParametersBlockParameters) == "{}" { // empty struct
@@ -140,7 +143,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersExtractParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersExtractParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersExtractParameters)
 	if err == nil {
 		jsonRuleParametersExtractParameters, _ := json.Marshal(dst.RuleParametersExtractParameters)
 		if string(jsonRuleParametersExtractParameters) == "{}" { // empty struct
@@ -157,7 +160,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersExtractTimestampParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersExtractTimestampParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersExtractTimestampParameters)
 	if err == nil {
 		jsonRuleParametersExtractTimestampParameters, _ := json.Marshal(dst.RuleParametersExtractTimestampParameters)
 		if string(jsonRuleParametersExtractTimestampParameters) == "{}" { // empty struct
@@ -174,7 +177,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersJsonExtractParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersJsonExtractParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersJsonExtractParameters)
 	if err == nil {
 		jsonRuleParametersJsonExtractParameters, _ := json.Marshal(dst.RuleParametersJsonExtractParameters)
 		if string(jsonRuleParametersJsonExtractParameters) == "{}" { // empty struct
@@ -191,7 +194,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersJsonParseParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersJsonParseParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersJsonParseParameters)
 	if err == nil {
 		jsonRuleParametersJsonParseParameters, _ := json.Marshal(dst.RuleParametersJsonParseParameters)
 		if string(jsonRuleParametersJsonParseParameters) == "{}" { // empty struct
@@ -208,7 +211,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersJsonStringifyParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersJsonStringifyParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersJsonStringifyParameters)
 	if err == nil {
 		jsonRuleParametersJsonStringifyParameters, _ := json.Marshal(dst.RuleParametersJsonStringifyParameters)
 		if string(jsonRuleParametersJsonStringifyParameters) == "{}" { // empty struct
@@ -225,7 +228,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersParseParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersParseParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersParseParameters)
 	if err == nil {
 		jsonRuleParametersParseParameters, _ := json.Marshal(dst.RuleParametersParseParameters)
 		if string(jsonRuleParametersParseParameters) == "{}" { // empty struct
@@ -242,7 +245,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersRemoveFieldsParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersRemoveFieldsParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersRemoveFieldsParameters)
 	if err == nil {
 		jsonRuleParametersRemoveFieldsParameters, _ := json.Marshal(dst.RuleParametersRemoveFieldsParameters)
 		if string(jsonRuleParametersRemoveFieldsParameters) == "{}" { // empty struct
@@ -259,7 +262,7 @@ func (dst *RuleParameters) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into RuleParametersReplaceParameters
-	err = newStrictDecoder(data).Decode(&dst.RuleParametersReplaceParameters)
+	err = json.Unmarshal(data, &dst.RuleParametersReplaceParameters)
 	if err == nil {
 		jsonRuleParametersReplaceParameters, _ := json.Marshal(dst.RuleParametersReplaceParameters)
 		if string(jsonRuleParametersReplaceParameters) == "{}" { // empty struct
@@ -471,5 +474,4 @@ func (v *NullableRuleParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

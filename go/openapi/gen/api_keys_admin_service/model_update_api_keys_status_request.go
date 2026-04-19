@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_admin_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the UpdateAPIKeysStatusRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateAPIKeysStatusRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &UpdateAPIKeysStatusRequest{}
 // UpdateAPIKeysStatusRequest This data structure is used to update the status of specified API keys.
 type UpdateAPIKeysStatusRequest struct {
 	Updates []ApiKeyStatusUpdate `json:"updates,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateAPIKeysStatusRequest UpdateAPIKeysStatusRequest
 
 // NewUpdateAPIKeysStatusRequest instantiates a new UpdateAPIKeysStatusRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o UpdateAPIKeysStatusRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Updates) {
 		toSerialize["updates"] = o.Updates
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateAPIKeysStatusRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateAPIKeysStatusRequest := _UpdateAPIKeysStatusRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varUpdateAPIKeysStatusRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateAPIKeysStatusRequest(varUpdateAPIKeysStatusRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "updates")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateAPIKeysStatusRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableUpdateAPIKeysStatusRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

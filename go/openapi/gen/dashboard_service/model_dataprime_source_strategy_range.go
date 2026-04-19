@@ -11,16 +11,23 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataprimeSourceStrategyRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyRange{}
 
 // DataprimeSourceStrategyRange struct for DataprimeSourceStrategyRange
 type DataprimeSourceStrategyRange struct {
-	Range *DataprimeSourceStrategyRange `json:"range,omitempty"`
+	EndTimestampField *ObservationField `json:"endTimestampField,omitempty"`
+	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataprimeSourceStrategyRange DataprimeSourceStrategyRange
 
 // NewDataprimeSourceStrategyRange instantiates a new DataprimeSourceStrategyRange object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +46,68 @@ func NewDataprimeSourceStrategyRangeWithDefaults() *DataprimeSourceStrategyRange
 	return &this
 }
 
-// GetRange returns the Range field value if set, zero value otherwise.
-func (o *DataprimeSourceStrategyRange) GetRange() DataprimeSourceStrategyRange {
-	if o == nil || IsNil(o.Range) {
-		var ret DataprimeSourceStrategyRange
+// GetEndTimestampField returns the EndTimestampField field value if set, zero value otherwise.
+func (o *DataprimeSourceStrategyRange) GetEndTimestampField() ObservationField {
+	if o == nil || IsNil(o.EndTimestampField) {
+		var ret ObservationField
 		return ret
 	}
-	return *o.Range
+	return *o.EndTimestampField
 }
 
-// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// GetEndTimestampFieldOk returns a tuple with the EndTimestampField field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataprimeSourceStrategyRange) GetRangeOk() (*DataprimeSourceStrategyRange, bool) {
-	if o == nil || IsNil(o.Range) {
+func (o *DataprimeSourceStrategyRange) GetEndTimestampFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.EndTimestampField) {
 		return nil, false
 	}
-	return o.Range, true
+	return o.EndTimestampField, true
 }
 
-// HasRange returns a boolean if a field has been set.
-func (o *DataprimeSourceStrategyRange) HasRange() bool {
-	if o != nil && !IsNil(o.Range) {
+// HasEndTimestampField returns a boolean if a field has been set.
+func (o *DataprimeSourceStrategyRange) HasEndTimestampField() bool {
+	if o != nil && !IsNil(o.EndTimestampField) {
 		return true
 	}
 
 	return false
 }
 
-// SetRange gets a reference to the given DataprimeSourceStrategyRange and assigns it to the Range field.
-func (o *DataprimeSourceStrategyRange) SetRange(v DataprimeSourceStrategyRange) {
-	o.Range = &v
+// SetEndTimestampField gets a reference to the given ObservationField and assigns it to the EndTimestampField field.
+func (o *DataprimeSourceStrategyRange) SetEndTimestampField(v ObservationField) {
+	o.EndTimestampField = &v
+}
+
+// GetStartTimestampField returns the StartTimestampField field value if set, zero value otherwise.
+func (o *DataprimeSourceStrategyRange) GetStartTimestampField() ObservationField {
+	if o == nil || IsNil(o.StartTimestampField) {
+		var ret ObservationField
+		return ret
+	}
+	return *o.StartTimestampField
+}
+
+// GetStartTimestampFieldOk returns a tuple with the StartTimestampField field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DataprimeSourceStrategyRange) GetStartTimestampFieldOk() (*ObservationField, bool) {
+	if o == nil || IsNil(o.StartTimestampField) {
+		return nil, false
+	}
+	return o.StartTimestampField, true
+}
+
+// HasStartTimestampField returns a boolean if a field has been set.
+func (o *DataprimeSourceStrategyRange) HasStartTimestampField() bool {
+	if o != nil && !IsNil(o.StartTimestampField) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartTimestampField gets a reference to the given ObservationField and assigns it to the StartTimestampField field.
+func (o *DataprimeSourceStrategyRange) SetStartTimestampField(v ObservationField) {
+	o.StartTimestampField = &v
 }
 
 func (o DataprimeSourceStrategyRange) MarshalJSON() ([]byte, error) {
@@ -81,10 +120,41 @@ func (o DataprimeSourceStrategyRange) MarshalJSON() ([]byte, error) {
 
 func (o DataprimeSourceStrategyRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Range) {
-		toSerialize["range"] = o.Range
+	if !IsNil(o.EndTimestampField) {
+		toSerialize["endTimestampField"] = o.EndTimestampField
 	}
+	if !IsNil(o.StartTimestampField) {
+		toSerialize["startTimestampField"] = o.StartTimestampField
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataprimeSourceStrategyRange) UnmarshalJSON(data []byte) (err error) {
+	varDataprimeSourceStrategyRange := _DataprimeSourceStrategyRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataprimeSourceStrategyRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataprimeSourceStrategyRange(varDataprimeSourceStrategyRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "endTimestampField")
+		delete(additionalProperties, "startTimestampField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataprimeSourceStrategyRange struct {
@@ -122,5 +192,4 @@ func (v *NullableDataprimeSourceStrategyRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

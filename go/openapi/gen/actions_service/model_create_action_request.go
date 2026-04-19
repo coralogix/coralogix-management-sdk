@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateActionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateActionRequest{}
@@ -25,7 +28,10 @@ type CreateActionRequest struct {
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateActionRequest CreateActionRequest
 
 // NewCreateActionRequest instantiates a new CreateActionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o CreateActionRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateActionRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateActionRequest := _CreateActionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varCreateActionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateActionRequest(varCreateActionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationNames")
+		delete(additionalProperties, "isPrivate")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sourceType")
+		delete(additionalProperties, "subsystemNames")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateActionRequest struct {
@@ -302,5 +340,4 @@ func (v *NullableCreateActionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

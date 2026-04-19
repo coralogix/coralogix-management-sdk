@@ -11,8 +11,11 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GenericIntegrationParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenericIntegrationParameters{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GenericIntegrationParameters{}
 // GenericIntegrationParameters struct for GenericIntegrationParameters
 type GenericIntegrationParameters struct {
 	Parameters []Parameter `json:"parameters,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenericIntegrationParameters GenericIntegrationParameters
 
 // NewGenericIntegrationParameters instantiates a new GenericIntegrationParameters object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GenericIntegrationParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Parameters) {
 		toSerialize["parameters"] = o.Parameters
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenericIntegrationParameters) UnmarshalJSON(data []byte) (err error) {
+	varGenericIntegrationParameters := _GenericIntegrationParameters{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGenericIntegrationParameters)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenericIntegrationParameters(varGenericIntegrationParameters)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parameters")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenericIntegrationParameters struct {
@@ -122,5 +155,4 @@ func (v *NullableGenericIntegrationParameters) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,11 +11,13 @@ API version: 1.0.0
 package events_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CxEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CxEvent{}
@@ -31,6 +33,7 @@ type CxEvent struct {
 	CxEventPayloadType string `json:"cxEventPayloadType"`
 	CxEventTimestamp time.Time `json:"cxEventTimestamp"`
 	CxEventType string `json:"cxEventType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CxEvent CxEvent
@@ -314,6 +317,11 @@ func (o CxEvent) ToMap() (map[string]interface{}, error) {
 	toSerialize["cxEventPayloadType"] = o.CxEventPayloadType
 	toSerialize["cxEventTimestamp"] = o.CxEventTimestamp
 	toSerialize["cxEventType"] = o.CxEventType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -348,7 +356,6 @@ func (o *CxEvent) UnmarshalJSON(data []byte) (err error) {
 	varCxEvent := _CxEvent{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCxEvent)
 
 	if err != nil {
@@ -356,6 +363,21 @@ func (o *CxEvent) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CxEvent(varCxEvent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "companyId")
+		delete(additionalProperties, "cxEventDedupKey")
+		delete(additionalProperties, "cxEventKey")
+		delete(additionalProperties, "cxEventLabels")
+		delete(additionalProperties, "cxEventMetadata")
+		delete(additionalProperties, "cxEventPayload")
+		delete(additionalProperties, "cxEventPayloadType")
+		delete(additionalProperties, "cxEventTimestamp")
+		delete(additionalProperties, "cxEventType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -395,5 +417,4 @@ func (v *NullableCxEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

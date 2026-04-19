@@ -11,23 +11,31 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DimensionPillar type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionPillar{}
 
 // DimensionPillar struct for DimensionPillar
 type DimensionPillar struct {
-	Pillar *V2Pillar `json:"pillar,omitempty"`
+	Pillar Pillar `json:"pillar"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DimensionPillar DimensionPillar
 
 // NewDimensionPillar instantiates a new DimensionPillar object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDimensionPillar() *DimensionPillar {
+func NewDimensionPillar(pillar Pillar) *DimensionPillar {
 	this := DimensionPillar{}
+	this.Pillar = pillar
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewDimensionPillarWithDefaults() *DimensionPillar {
 	return &this
 }
 
-// GetPillar returns the Pillar field value if set, zero value otherwise.
-func (o *DimensionPillar) GetPillar() V2Pillar {
-	if o == nil || IsNil(o.Pillar) {
-		var ret V2Pillar
+// GetPillar returns the Pillar field value
+func (o *DimensionPillar) GetPillar() Pillar {
+	if o == nil {
+		var ret Pillar
 		return ret
 	}
-	return *o.Pillar
+
+	return o.Pillar
 }
 
-// GetPillarOk returns a tuple with the Pillar field value if set, nil otherwise
+// GetPillarOk returns a tuple with the Pillar field value
 // and a boolean to check if the value has been set.
-func (o *DimensionPillar) GetPillarOk() (*V2Pillar, bool) {
-	if o == nil || IsNil(o.Pillar) {
+func (o *DimensionPillar) GetPillarOk() (*Pillar, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pillar, true
+	return &o.Pillar, true
 }
 
-// HasPillar returns a boolean if a field has been set.
-func (o *DimensionPillar) HasPillar() bool {
-	if o != nil && !IsNil(o.Pillar) {
-		return true
-	}
-
-	return false
-}
-
-// SetPillar gets a reference to the given V2Pillar and assigns it to the Pillar field.
-func (o *DimensionPillar) SetPillar(v V2Pillar) {
-	o.Pillar = &v
+// SetPillar sets field value
+func (o *DimensionPillar) SetPillar(v Pillar) {
+	o.Pillar = v
 }
 
 func (o DimensionPillar) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o DimensionPillar) MarshalJSON() ([]byte, error) {
 
 func (o DimensionPillar) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Pillar) {
-		toSerialize["pillar"] = o.Pillar
+	toSerialize["pillar"] = o.Pillar
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *DimensionPillar) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"pillar",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDimensionPillar := _DimensionPillar{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDimensionPillar)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DimensionPillar(varDimensionPillar)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pillar")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimensionPillar struct {
@@ -122,5 +168,4 @@ func (v *NullableDimensionPillar) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

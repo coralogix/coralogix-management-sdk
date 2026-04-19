@@ -11,8 +11,11 @@ API version: 1.0.0
 package api_keys_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ApiKeyUserOwner type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApiKeyUserOwner{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ApiKeyUserOwner{}
 type ApiKeyUserOwner struct {
 	UserEmail *string `json:"userEmail,omitempty"`
 	UserId *string `json:"userId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ApiKeyUserOwner ApiKeyUserOwner
 
 // NewApiKeyUserOwner instantiates a new ApiKeyUserOwner object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ApiKeyUserOwner) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ApiKeyUserOwner) UnmarshalJSON(data []byte) (err error) {
+	varApiKeyUserOwner := _ApiKeyUserOwner{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varApiKeyUserOwner)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApiKeyUserOwner(varApiKeyUserOwner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "userEmail")
+		delete(additionalProperties, "userId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableApiKeyUserOwner struct {
@@ -158,5 +192,4 @@ func (v *NullableApiKeyUserOwner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

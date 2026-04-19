@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the BurnRateTypeSingle type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BurnRateTypeSingle{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &BurnRateTypeSingle{}
 // BurnRateTypeSingle Burn rate type single definition
 type BurnRateTypeSingle struct {
 	TimeDuration *TimeDuration `json:"timeDuration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BurnRateTypeSingle BurnRateTypeSingle
 
 // NewBurnRateTypeSingle instantiates a new BurnRateTypeSingle object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o BurnRateTypeSingle) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeDuration) {
 		toSerialize["timeDuration"] = o.TimeDuration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BurnRateTypeSingle) UnmarshalJSON(data []byte) (err error) {
+	varBurnRateTypeSingle := _BurnRateTypeSingle{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varBurnRateTypeSingle)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BurnRateTypeSingle(varBurnRateTypeSingle)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timeDuration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBurnRateTypeSingle struct {
@@ -122,5 +155,4 @@ func (v *NullableBurnRateTypeSingle) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

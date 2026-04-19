@@ -11,9 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // InputType the model 'InputType'
 type InputType string
@@ -30,6 +33,9 @@ const (
 	INPUTTYPE_NUMBER InputType = "NUMBER"
 	INPUTTYPE_SENSITIVE_DATA InputType = "SENSITIVE_DATA"
 	INPUTTYPE_JSON_OBJECT_ARRAY InputType = "JSON_OBJECT_ARRAY"
+	INPUTTYPE_AWS_REGION_SELECT InputType = "AWS_REGION_SELECT"
+	INPUTTYPE_AWS_REGION_MULTISELECT InputType = "AWS_REGION_MULTISELECT"
+	INPUTTYPE_AWS_CLOUDWATCH_NAMESPACE_LIST InputType = "AWS_CLOUDWATCH_NAMESPACE_LIST"
 )
 
 // All allowed values of InputType enum
@@ -44,6 +50,9 @@ var AllowedInputTypeEnumValues = []InputType{
 	"NUMBER",
 	"SENSITIVE_DATA",
 	"JSON_OBJECT_ARRAY",
+	"AWS_REGION_SELECT",
+	"AWS_REGION_MULTISELECT",
+	"AWS_CLOUDWATCH_NAMESPACE_LIST",
 }
 
 func (v *InputType) UnmarshalJSON(src []byte) error {

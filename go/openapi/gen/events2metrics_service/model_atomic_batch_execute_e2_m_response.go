@@ -11,8 +11,11 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AtomicBatchExecuteE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicBatchExecuteE2MResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AtomicBatchExecuteE2MResponse{}
 // AtomicBatchExecuteE2MResponse struct for AtomicBatchExecuteE2MResponse
 type AtomicBatchExecuteE2MResponse struct {
 	MatchingResponses []E2MExecutionResponse `json:"matchingResponses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AtomicBatchExecuteE2MResponse AtomicBatchExecuteE2MResponse
 
 // NewAtomicBatchExecuteE2MResponse instantiates a new AtomicBatchExecuteE2MResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AtomicBatchExecuteE2MResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MatchingResponses) {
 		toSerialize["matchingResponses"] = o.MatchingResponses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AtomicBatchExecuteE2MResponse) UnmarshalJSON(data []byte) (err error) {
+	varAtomicBatchExecuteE2MResponse := _AtomicBatchExecuteE2MResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAtomicBatchExecuteE2MResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AtomicBatchExecuteE2MResponse(varAtomicBatchExecuteE2MResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "matchingResponses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAtomicBatchExecuteE2MResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableAtomicBatchExecuteE2MResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

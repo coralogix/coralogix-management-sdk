@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChartSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartSpansQuery{}
@@ -25,7 +28,10 @@ type LineChartSpansQuery struct {
 	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineChartSpansQuery LineChartSpansQuery
 
 // NewLineChartSpansQuery instantiates a new LineChartSpansQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o LineChartSpansQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LineChartSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	varLineChartSpansQuery := _LineChartSpansQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varLineChartSpansQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineChartSpansQuery(varLineChartSpansQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregations")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "groupBy")
+		delete(additionalProperties, "groupBys")
+		delete(additionalProperties, "luceneQuery")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineChartSpansQuery struct {
@@ -302,5 +340,4 @@ func (v *NullableLineChartSpansQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SpanFieldTagField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldTagField{}
 
 // SpanFieldTagField struct for SpanFieldTagField
 type SpanFieldTagField struct {
-	TagField *string `json:"tagField,omitempty"`
+	TagField string `json:"tagField"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SpanFieldTagField SpanFieldTagField
 
 // NewSpanFieldTagField instantiates a new SpanFieldTagField object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSpanFieldTagField() *SpanFieldTagField {
+func NewSpanFieldTagField(tagField string) *SpanFieldTagField {
 	this := SpanFieldTagField{}
+	this.TagField = tagField
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewSpanFieldTagFieldWithDefaults() *SpanFieldTagField {
 	return &this
 }
 
-// GetTagField returns the TagField field value if set, zero value otherwise.
+// GetTagField returns the TagField field value
 func (o *SpanFieldTagField) GetTagField() string {
-	if o == nil || IsNil(o.TagField) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TagField
+
+	return o.TagField
 }
 
-// GetTagFieldOk returns a tuple with the TagField field value if set, nil otherwise
+// GetTagFieldOk returns a tuple with the TagField field value
 // and a boolean to check if the value has been set.
 func (o *SpanFieldTagField) GetTagFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.TagField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TagField, true
+	return &o.TagField, true
 }
 
-// HasTagField returns a boolean if a field has been set.
-func (o *SpanFieldTagField) HasTagField() bool {
-	if o != nil && !IsNil(o.TagField) {
-		return true
-	}
-
-	return false
-}
-
-// SetTagField gets a reference to the given string and assigns it to the TagField field.
+// SetTagField sets field value
 func (o *SpanFieldTagField) SetTagField(v string) {
-	o.TagField = &v
+	o.TagField = v
 }
 
 func (o SpanFieldTagField) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o SpanFieldTagField) MarshalJSON() ([]byte, error) {
 
 func (o SpanFieldTagField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TagField) {
-		toSerialize["tagField"] = o.TagField
+	toSerialize["tagField"] = o.TagField
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *SpanFieldTagField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"tagField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSpanFieldTagField := _SpanFieldTagField{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSpanFieldTagField)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SpanFieldTagField(varSpanFieldTagField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tagField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSpanFieldTagField struct {
@@ -122,5 +168,4 @@ func (v *NullableSpanFieldTagField) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

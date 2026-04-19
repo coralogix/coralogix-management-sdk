@@ -11,10 +11,12 @@ API version: 1.0.0
 package incidents_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the PaginationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PaginationRequest{}
@@ -25,6 +27,7 @@ type PaginationRequest struct {
 	PageSize int64 `json:"pageSize"`
 	// Token for the next page of results
 	PageToken *string `json:"pageToken,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaginationRequest PaginationRequest
@@ -117,6 +120,11 @@ func (o PaginationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PageToken) {
 		toSerialize["pageToken"] = o.PageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,7 +153,6 @@ func (o *PaginationRequest) UnmarshalJSON(data []byte) (err error) {
 	varPaginationRequest := _PaginationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPaginationRequest)
 
 	if err != nil {
@@ -153,6 +160,14 @@ func (o *PaginationRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = PaginationRequest(varPaginationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pageSize")
+		delete(additionalProperties, "pageToken")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -192,5 +207,4 @@ func (v *NullablePaginationRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

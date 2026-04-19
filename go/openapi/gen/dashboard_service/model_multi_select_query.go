@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // MultiSelectQuery - struct for MultiSelectQuery
 type MultiSelectQuery struct {
@@ -50,7 +53,7 @@ func (dst *MultiSelectQuery) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into MultiSelectQueryLogsQuery
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectQueryLogsQuery)
+	err = json.Unmarshal(data, &dst.MultiSelectQueryLogsQuery)
 	if err == nil {
 		jsonMultiSelectQueryLogsQuery, _ := json.Marshal(dst.MultiSelectQueryLogsQuery)
 		if string(jsonMultiSelectQueryLogsQuery) == "{}" { // empty struct
@@ -67,7 +70,7 @@ func (dst *MultiSelectQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectQueryMetricsQuery
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectQueryMetricsQuery)
+	err = json.Unmarshal(data, &dst.MultiSelectQueryMetricsQuery)
 	if err == nil {
 		jsonMultiSelectQueryMetricsQuery, _ := json.Marshal(dst.MultiSelectQueryMetricsQuery)
 		if string(jsonMultiSelectQueryMetricsQuery) == "{}" { // empty struct
@@ -84,7 +87,7 @@ func (dst *MultiSelectQuery) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into MultiSelectQuerySpansQuery
-	err = newStrictDecoder(data).Decode(&dst.MultiSelectQuerySpansQuery)
+	err = json.Unmarshal(data, &dst.MultiSelectQuerySpansQuery)
 	if err == nil {
 		jsonMultiSelectQuerySpansQuery, _ := json.Marshal(dst.MultiSelectQuerySpansQuery)
 		if string(jsonMultiSelectQuerySpansQuery) == "{}" { // empty struct
@@ -205,5 +208,4 @@ func (v *NullableMultiSelectQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

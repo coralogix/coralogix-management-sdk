@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActionsServiceCreateActionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionsServiceCreateActionRequest{}
@@ -25,7 +28,10 @@ type ActionsServiceCreateActionRequest struct {
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActionsServiceCreateActionRequest ActionsServiceCreateActionRequest
 
 // NewActionsServiceCreateActionRequest instantiates a new ActionsServiceCreateActionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +270,39 @@ func (o ActionsServiceCreateActionRequest) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActionsServiceCreateActionRequest) UnmarshalJSON(data []byte) (err error) {
+	varActionsServiceCreateActionRequest := _ActionsServiceCreateActionRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActionsServiceCreateActionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActionsServiceCreateActionRequest(varActionsServiceCreateActionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationNames")
+		delete(additionalProperties, "isPrivate")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sourceType")
+		delete(additionalProperties, "subsystemNames")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActionsServiceCreateActionRequest struct {
@@ -302,5 +340,4 @@ func (v *NullableActionsServiceCreateActionRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

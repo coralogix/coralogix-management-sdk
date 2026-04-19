@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConfigurationBlock type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationBlock{}
@@ -22,7 +25,10 @@ type ConfigurationBlock struct {
 	Description *string `json:"description,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfigurationBlock ConfigurationBlock
 
 // NewConfigurationBlock instantiates a new ConfigurationBlock object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ConfigurationBlock) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfigurationBlock) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationBlock := _ConfigurationBlock{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConfigurationBlock)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigurationBlock(varConfigurationBlock)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfigurationBlock struct {
@@ -194,5 +229,4 @@ func (v *NullableConfigurationBlock) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

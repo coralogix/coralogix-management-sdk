@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the TypeCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TypeCount{}
@@ -22,7 +25,10 @@ type TypeCount struct {
 	// The count for this alert type
 	Count *int64 `json:"count,omitempty"`
 	Type *AlertDefType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TypeCount TypeCount
 
 // NewTypeCount instantiates a new TypeCount object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +127,35 @@ func (o TypeCount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TypeCount) UnmarshalJSON(data []byte) (err error) {
+	varTypeCount := _TypeCount{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varTypeCount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TypeCount(varTypeCount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTypeCount struct {
@@ -159,5 +193,4 @@ func (v *NullableTypeCount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

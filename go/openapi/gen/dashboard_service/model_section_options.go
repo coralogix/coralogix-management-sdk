@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // SectionOptions - struct for SectionOptions
 type SectionOptions struct {
@@ -42,7 +45,7 @@ func (dst *SectionOptions) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into SectionOptionsCustom
-	err = newStrictDecoder(data).Decode(&dst.SectionOptionsCustom)
+	err = json.Unmarshal(data, &dst.SectionOptionsCustom)
 	if err == nil {
 		jsonSectionOptionsCustom, _ := json.Marshal(dst.SectionOptionsCustom)
 		if string(jsonSectionOptionsCustom) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *SectionOptions) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into SectionOptionsInternal
-	err = newStrictDecoder(data).Decode(&dst.SectionOptionsInternal)
+	err = json.Unmarshal(data, &dst.SectionOptionsInternal)
 	if err == nil {
 		jsonSectionOptionsInternal, _ := json.Marshal(dst.SectionOptionsInternal)
 		if string(jsonSectionOptionsInternal) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableSectionOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

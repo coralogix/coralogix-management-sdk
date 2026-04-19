@@ -11,8 +11,11 @@ API version: 1.0.0
 package saml_configuration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetConfigurationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetConfigurationResponse{}
@@ -23,7 +26,10 @@ type GetConfigurationResponse struct {
 	IdpParameters *IDPParameters `json:"idpParameters,omitempty"`
 	SpParameters *SPParameters `json:"spParameters,omitempty"`
 	TeamId *int64 `json:"teamId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConfigurationResponse GetConfigurationResponse
 
 // NewGetConfigurationResponse instantiates a new GetConfigurationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +198,37 @@ func (o GetConfigurationResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConfigurationResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetConfigurationResponse := _GetConfigurationResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetConfigurationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConfigurationResponse(varGetConfigurationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "idpDetails")
+		delete(additionalProperties, "idpParameters")
+		delete(additionalProperties, "spParameters")
+		delete(additionalProperties, "teamId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConfigurationResponse struct {
@@ -230,5 +266,4 @@ func (v *NullableGetConfigurationResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

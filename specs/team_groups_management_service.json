@@ -11,7 +11,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Groups",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -81,7 +80,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Create Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -123,8 +121,7 @@
                       "type": "string"
                     }
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -173,7 +170,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -234,7 +230,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Group By Name",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -294,7 +289,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Update Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -340,8 +334,7 @@
                   "userUpdates": {
                     "$ref": "#/components/schemas/UserUpdates"
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -388,7 +381,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Delete Team Group",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -449,7 +441,6 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Group Users",
-        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -541,33 +532,6 @@
           }
         }
       },
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateTeamGroupResponse": {
         "externalDocs": {
           "description": "Find out more about groups",
@@ -636,9 +600,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -658,9 +622,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -777,34 +741,6 @@
           "GROUP_TYPE_RESTRICTED"
         ]
       },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -857,6 +793,13 @@
         }
       },
       "RoleUpdateAction": {
+        "discriminator": {
+          "propertyName": "action_type",
+          "mapping": {
+            "clear": "#/components/schemas/RoleUpdateActionClear",
+            "set_role_id": "#/components/schemas/RoleUpdateActionSetRoleId"
+          }
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
@@ -880,9 +823,9 @@
           }
         },
         "required": [
-          "actionType"
-        ],
-        "additionalProperties": false
+          "actionType",
+          "clear"
+        ]
       },
       "RoleUpdateActionSetRoleId": {
         "externalDocs": {
@@ -898,9 +841,9 @@
           }
         },
         "required": [
-          "actionType"
-        ],
-        "additionalProperties": false
+          "actionType",
+          "setRoleId"
+        ]
       },
       "ScopeUpdate": {
         "externalDocs": {
@@ -917,6 +860,13 @@
         }
       },
       "ScopeUpdateAction": {
+        "discriminator": {
+          "propertyName": "action_type",
+          "mapping": {
+            "clear": "#/components/schemas/ScopeUpdateActionClear",
+            "set_scope_id": "#/components/schemas/ScopeUpdateActionSetScopeId"
+          }
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/ScopeUpdateActionSetScopeId"
@@ -940,9 +890,9 @@
           }
         },
         "required": [
-          "actionType"
-        ],
-        "additionalProperties": false
+          "actionType",
+          "clear"
+        ]
       },
       "ScopeUpdateActionSetScopeId": {
         "externalDocs": {
@@ -958,9 +908,9 @@
           }
         },
         "required": [
-          "actionType"
-        ],
-        "additionalProperties": false
+          "actionType",
+          "setScopeId"
+        ]
       },
       "SetRoleId": {
         "type": "object",
@@ -1079,6 +1029,14 @@
         }
       },
       "UserUpdatesOperation": {
+        "discriminator": {
+          "propertyName": "operation_type",
+          "mapping": {
+            "add": "#/components/schemas/UserUpdatesOperationAdd",
+            "remove": "#/components/schemas/UserUpdatesOperationRemove",
+            "set": "#/components/schemas/UserUpdatesOperationSet"
+          }
+        },
         "oneOf": [
           {
             "$ref": "#/components/schemas/UserUpdatesOperationAdd"
@@ -1105,9 +1063,9 @@
           }
         },
         "required": [
-          "operationType"
-        ],
-        "additionalProperties": false
+          "operationType",
+          "add"
+        ]
       },
       "UserUpdatesOperationRemove": {
         "externalDocs": {
@@ -1123,9 +1081,9 @@
           }
         },
         "required": [
-          "operationType"
-        ],
-        "additionalProperties": false
+          "operationType",
+          "remove"
+        ]
       },
       "UserUpdatesOperationSet": {
         "externalDocs": {
@@ -1141,9 +1099,9 @@
           }
         },
         "required": [
-          "operationType"
-        ],
-        "additionalProperties": false
+          "operationType",
+          "set"
+        ]
       },
       "common.Group": {
         "type": "object",
@@ -1225,14 +1183,6 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

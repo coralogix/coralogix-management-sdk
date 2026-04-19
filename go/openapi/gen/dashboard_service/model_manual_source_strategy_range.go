@@ -11,16 +11,25 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ManualSourceStrategyRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSourceStrategyRange{}
 
 // ManualSourceStrategyRange struct for ManualSourceStrategyRange
 type ManualSourceStrategyRange struct {
-	Range *ManualSourceStrategyRange `json:"range,omitempty"`
+	CustomUnit *string `json:"customUnit,omitempty"`
+	EndValue *float64 `json:"endValue,omitempty"`
+	StartValue *float64 `json:"startValue,omitempty"`
+	Unit *CommonUnit `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ManualSourceStrategyRange ManualSourceStrategyRange
 
 // NewManualSourceStrategyRange instantiates a new ManualSourceStrategyRange object
 // This constructor will assign default values to properties that have it defined,
@@ -39,36 +48,132 @@ func NewManualSourceStrategyRangeWithDefaults() *ManualSourceStrategyRange {
 	return &this
 }
 
-// GetRange returns the Range field value if set, zero value otherwise.
-func (o *ManualSourceStrategyRange) GetRange() ManualSourceStrategyRange {
-	if o == nil || IsNil(o.Range) {
-		var ret ManualSourceStrategyRange
+// GetCustomUnit returns the CustomUnit field value if set, zero value otherwise.
+func (o *ManualSourceStrategyRange) GetCustomUnit() string {
+	if o == nil || IsNil(o.CustomUnit) {
+		var ret string
 		return ret
 	}
-	return *o.Range
+	return *o.CustomUnit
 }
 
-// GetRangeOk returns a tuple with the Range field value if set, nil otherwise
+// GetCustomUnitOk returns a tuple with the CustomUnit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ManualSourceStrategyRange) GetRangeOk() (*ManualSourceStrategyRange, bool) {
-	if o == nil || IsNil(o.Range) {
+func (o *ManualSourceStrategyRange) GetCustomUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomUnit) {
 		return nil, false
 	}
-	return o.Range, true
+	return o.CustomUnit, true
 }
 
-// HasRange returns a boolean if a field has been set.
-func (o *ManualSourceStrategyRange) HasRange() bool {
-	if o != nil && !IsNil(o.Range) {
+// HasCustomUnit returns a boolean if a field has been set.
+func (o *ManualSourceStrategyRange) HasCustomUnit() bool {
+	if o != nil && !IsNil(o.CustomUnit) {
 		return true
 	}
 
 	return false
 }
 
-// SetRange gets a reference to the given ManualSourceStrategyRange and assigns it to the Range field.
-func (o *ManualSourceStrategyRange) SetRange(v ManualSourceStrategyRange) {
-	o.Range = &v
+// SetCustomUnit gets a reference to the given string and assigns it to the CustomUnit field.
+func (o *ManualSourceStrategyRange) SetCustomUnit(v string) {
+	o.CustomUnit = &v
+}
+
+// GetEndValue returns the EndValue field value if set, zero value otherwise.
+func (o *ManualSourceStrategyRange) GetEndValue() float64 {
+	if o == nil || IsNil(o.EndValue) {
+		var ret float64
+		return ret
+	}
+	return *o.EndValue
+}
+
+// GetEndValueOk returns a tuple with the EndValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategyRange) GetEndValueOk() (*float64, bool) {
+	if o == nil || IsNil(o.EndValue) {
+		return nil, false
+	}
+	return o.EndValue, true
+}
+
+// HasEndValue returns a boolean if a field has been set.
+func (o *ManualSourceStrategyRange) HasEndValue() bool {
+	if o != nil && !IsNil(o.EndValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetEndValue gets a reference to the given float64 and assigns it to the EndValue field.
+func (o *ManualSourceStrategyRange) SetEndValue(v float64) {
+	o.EndValue = &v
+}
+
+// GetStartValue returns the StartValue field value if set, zero value otherwise.
+func (o *ManualSourceStrategyRange) GetStartValue() float64 {
+	if o == nil || IsNil(o.StartValue) {
+		var ret float64
+		return ret
+	}
+	return *o.StartValue
+}
+
+// GetStartValueOk returns a tuple with the StartValue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategyRange) GetStartValueOk() (*float64, bool) {
+	if o == nil || IsNil(o.StartValue) {
+		return nil, false
+	}
+	return o.StartValue, true
+}
+
+// HasStartValue returns a boolean if a field has been set.
+func (o *ManualSourceStrategyRange) HasStartValue() bool {
+	if o != nil && !IsNil(o.StartValue) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartValue gets a reference to the given float64 and assigns it to the StartValue field.
+func (o *ManualSourceStrategyRange) SetStartValue(v float64) {
+	o.StartValue = &v
+}
+
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *ManualSourceStrategyRange) GetUnit() CommonUnit {
+	if o == nil || IsNil(o.Unit) {
+		var ret CommonUnit
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualSourceStrategyRange) GetUnitOk() (*CommonUnit, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *ManualSourceStrategyRange) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given CommonUnit and assigns it to the Unit field.
+func (o *ManualSourceStrategyRange) SetUnit(v CommonUnit) {
+	o.Unit = &v
 }
 
 func (o ManualSourceStrategyRange) MarshalJSON() ([]byte, error) {
@@ -81,10 +186,49 @@ func (o ManualSourceStrategyRange) MarshalJSON() ([]byte, error) {
 
 func (o ManualSourceStrategyRange) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Range) {
-		toSerialize["range"] = o.Range
+	if !IsNil(o.CustomUnit) {
+		toSerialize["customUnit"] = o.CustomUnit
 	}
+	if !IsNil(o.EndValue) {
+		toSerialize["endValue"] = o.EndValue
+	}
+	if !IsNil(o.StartValue) {
+		toSerialize["startValue"] = o.StartValue
+	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ManualSourceStrategyRange) UnmarshalJSON(data []byte) (err error) {
+	varManualSourceStrategyRange := _ManualSourceStrategyRange{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varManualSourceStrategyRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ManualSourceStrategyRange(varManualSourceStrategyRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customUnit")
+		delete(additionalProperties, "endValue")
+		delete(additionalProperties, "startValue")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManualSourceStrategyRange struct {
@@ -122,5 +266,4 @@ func (v *NullableManualSourceStrategyRange) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

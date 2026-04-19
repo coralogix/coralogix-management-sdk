@@ -11,8 +11,12 @@ API version: 1.0.0
 package integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldInformationSingleBoolean type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldInformationSingleBoolean{}
@@ -28,20 +32,24 @@ type FieldInformationSingleBoolean struct {
 	Predefined *bool `json:"predefined,omitempty"`
 	Readonly *bool `json:"readonly,omitempty"`
 	Required *bool `json:"required,omitempty"`
-	SingleBoolean *SingleBooleanValue `json:"singleBoolean,omitempty"`
+	SingleBoolean SingleBooleanValue `json:"singleBoolean"`
 	TemplateParamName *string `json:"templateParamName,omitempty"`
 	Tooltip *string `json:"tooltip,omitempty"`
 	Type *InputType `json:"type,omitempty"`
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	Visible *bool `json:"visible,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldInformationSingleBoolean FieldInformationSingleBoolean
 
 // NewFieldInformationSingleBoolean instantiates a new FieldInformationSingleBoolean object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldInformationSingleBoolean() *FieldInformationSingleBoolean {
+func NewFieldInformationSingleBoolean(singleBoolean SingleBooleanValue) *FieldInformationSingleBoolean {
 	this := FieldInformationSingleBoolean{}
+	this.SingleBoolean = singleBoolean
 	return &this
 }
 
@@ -341,36 +349,28 @@ func (o *FieldInformationSingleBoolean) SetRequired(v bool) {
 	o.Required = &v
 }
 
-// GetSingleBoolean returns the SingleBoolean field value if set, zero value otherwise.
+// GetSingleBoolean returns the SingleBoolean field value
 func (o *FieldInformationSingleBoolean) GetSingleBoolean() SingleBooleanValue {
-	if o == nil || IsNil(o.SingleBoolean) {
+	if o == nil {
 		var ret SingleBooleanValue
 		return ret
 	}
-	return *o.SingleBoolean
+
+	return o.SingleBoolean
 }
 
-// GetSingleBooleanOk returns a tuple with the SingleBoolean field value if set, nil otherwise
+// GetSingleBooleanOk returns a tuple with the SingleBoolean field value
 // and a boolean to check if the value has been set.
 func (o *FieldInformationSingleBoolean) GetSingleBooleanOk() (*SingleBooleanValue, bool) {
-	if o == nil || IsNil(o.SingleBoolean) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SingleBoolean, true
+	return &o.SingleBoolean, true
 }
 
-// HasSingleBoolean returns a boolean if a field has been set.
-func (o *FieldInformationSingleBoolean) HasSingleBoolean() bool {
-	if o != nil && !IsNil(o.SingleBoolean) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleBoolean gets a reference to the given SingleBooleanValue and assigns it to the SingleBoolean field.
+// SetSingleBoolean sets field value
 func (o *FieldInformationSingleBoolean) SetSingleBoolean(v SingleBooleanValue) {
-	o.SingleBoolean = &v
+	o.SingleBoolean = v
 }
 
 // GetTemplateParamName returns the TemplateParamName field value if set, zero value otherwise.
@@ -570,9 +570,7 @@ func (o FieldInformationSingleBoolean) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Required) {
 		toSerialize["required"] = o.Required
 	}
-	if !IsNil(o.SingleBoolean) {
-		toSerialize["singleBoolean"] = o.SingleBoolean
-	}
+	toSerialize["singleBoolean"] = o.SingleBoolean
 	if !IsNil(o.TemplateParamName) {
 		toSerialize["templateParamName"] = o.TemplateParamName
 	}
@@ -588,7 +586,69 @@ func (o FieldInformationSingleBoolean) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visible) {
 		toSerialize["visible"] = o.Visible
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldInformationSingleBoolean) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"singleBoolean",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFieldInformationSingleBoolean := _FieldInformationSingleBoolean{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldInformationSingleBoolean)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldInformationSingleBoolean(varFieldInformationSingleBoolean)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowedPattern")
+		delete(additionalProperties, "applicableIf")
+		delete(additionalProperties, "documentationReference")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "placeholder")
+		delete(additionalProperties, "predefined")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "required")
+		delete(additionalProperties, "singleBoolean")
+		delete(additionalProperties, "templateParamName")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "upgradeNotice")
+		delete(additionalProperties, "visible")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldInformationSingleBoolean struct {
@@ -626,5 +686,4 @@ func (v *NullableFieldInformationSingleBoolean) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

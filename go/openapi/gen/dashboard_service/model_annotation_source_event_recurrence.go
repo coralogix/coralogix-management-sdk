@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AnnotationSourceEventRecurrence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceEventRecurrence{}
 
 // AnnotationSourceEventRecurrence struct for AnnotationSourceEventRecurrence
 type AnnotationSourceEventRecurrence struct {
-	EventRecurrence *EventRecurrenceSource `json:"eventRecurrence,omitempty"`
+	EventRecurrence EventRecurrenceSource `json:"eventRecurrence"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AnnotationSourceEventRecurrence AnnotationSourceEventRecurrence
 
 // NewAnnotationSourceEventRecurrence instantiates a new AnnotationSourceEventRecurrence object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAnnotationSourceEventRecurrence() *AnnotationSourceEventRecurrence {
+func NewAnnotationSourceEventRecurrence(eventRecurrence EventRecurrenceSource) *AnnotationSourceEventRecurrence {
 	this := AnnotationSourceEventRecurrence{}
+	this.EventRecurrence = eventRecurrence
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewAnnotationSourceEventRecurrenceWithDefaults() *AnnotationSourceEventRecu
 	return &this
 }
 
-// GetEventRecurrence returns the EventRecurrence field value if set, zero value otherwise.
+// GetEventRecurrence returns the EventRecurrence field value
 func (o *AnnotationSourceEventRecurrence) GetEventRecurrence() EventRecurrenceSource {
-	if o == nil || IsNil(o.EventRecurrence) {
+	if o == nil {
 		var ret EventRecurrenceSource
 		return ret
 	}
-	return *o.EventRecurrence
+
+	return o.EventRecurrence
 }
 
-// GetEventRecurrenceOk returns a tuple with the EventRecurrence field value if set, nil otherwise
+// GetEventRecurrenceOk returns a tuple with the EventRecurrence field value
 // and a boolean to check if the value has been set.
 func (o *AnnotationSourceEventRecurrence) GetEventRecurrenceOk() (*EventRecurrenceSource, bool) {
-	if o == nil || IsNil(o.EventRecurrence) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EventRecurrence, true
+	return &o.EventRecurrence, true
 }
 
-// HasEventRecurrence returns a boolean if a field has been set.
-func (o *AnnotationSourceEventRecurrence) HasEventRecurrence() bool {
-	if o != nil && !IsNil(o.EventRecurrence) {
-		return true
-	}
-
-	return false
-}
-
-// SetEventRecurrence gets a reference to the given EventRecurrenceSource and assigns it to the EventRecurrence field.
+// SetEventRecurrence sets field value
 func (o *AnnotationSourceEventRecurrence) SetEventRecurrence(v EventRecurrenceSource) {
-	o.EventRecurrence = &v
+	o.EventRecurrence = v
 }
 
 func (o AnnotationSourceEventRecurrence) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o AnnotationSourceEventRecurrence) MarshalJSON() ([]byte, error) {
 
 func (o AnnotationSourceEventRecurrence) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EventRecurrence) {
-		toSerialize["eventRecurrence"] = o.EventRecurrence
+	toSerialize["eventRecurrence"] = o.EventRecurrence
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *AnnotationSourceEventRecurrence) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"eventRecurrence",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAnnotationSourceEventRecurrence := _AnnotationSourceEventRecurrence{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAnnotationSourceEventRecurrence)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AnnotationSourceEventRecurrence(varAnnotationSourceEventRecurrence)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "eventRecurrence")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAnnotationSourceEventRecurrence struct {
@@ -122,5 +168,4 @@ func (v *NullableAnnotationSourceEventRecurrence) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

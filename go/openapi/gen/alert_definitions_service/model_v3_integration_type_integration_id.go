@@ -11,8 +11,12 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V3IntegrationTypeIntegrationId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3IntegrationTypeIntegrationId{}
@@ -20,15 +24,19 @@ var _ MappedNullable = &V3IntegrationTypeIntegrationId{}
 // V3IntegrationTypeIntegrationId Defines the type of integration to use for notifications
 type V3IntegrationTypeIntegrationId struct {
 	// The integration ID for the notification
-	IntegrationId *int64 `json:"integrationId,omitempty"`
+	IntegrationId int64 `json:"integrationId"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V3IntegrationTypeIntegrationId V3IntegrationTypeIntegrationId
 
 // NewV3IntegrationTypeIntegrationId instantiates a new V3IntegrationTypeIntegrationId object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV3IntegrationTypeIntegrationId() *V3IntegrationTypeIntegrationId {
+func NewV3IntegrationTypeIntegrationId(integrationId int64) *V3IntegrationTypeIntegrationId {
 	this := V3IntegrationTypeIntegrationId{}
+	this.IntegrationId = integrationId
 	return &this
 }
 
@@ -40,36 +48,28 @@ func NewV3IntegrationTypeIntegrationIdWithDefaults() *V3IntegrationTypeIntegrati
 	return &this
 }
 
-// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
+// GetIntegrationId returns the IntegrationId field value
 func (o *V3IntegrationTypeIntegrationId) GetIntegrationId() int64 {
-	if o == nil || IsNil(o.IntegrationId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.IntegrationId
+
+	return o.IntegrationId
 }
 
-// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value
 // and a boolean to check if the value has been set.
 func (o *V3IntegrationTypeIntegrationId) GetIntegrationIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.IntegrationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationId, true
+	return &o.IntegrationId, true
 }
 
-// HasIntegrationId returns a boolean if a field has been set.
-func (o *V3IntegrationTypeIntegrationId) HasIntegrationId() bool {
-	if o != nil && !IsNil(o.IntegrationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationId gets a reference to the given int64 and assigns it to the IntegrationId field.
+// SetIntegrationId sets field value
 func (o *V3IntegrationTypeIntegrationId) SetIntegrationId(v int64) {
-	o.IntegrationId = &v
+	o.IntegrationId = v
 }
 
 func (o V3IntegrationTypeIntegrationId) MarshalJSON() ([]byte, error) {
@@ -82,10 +82,56 @@ func (o V3IntegrationTypeIntegrationId) MarshalJSON() ([]byte, error) {
 
 func (o V3IntegrationTypeIntegrationId) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IntegrationId) {
-		toSerialize["integrationId"] = o.IntegrationId
+	toSerialize["integrationId"] = o.IntegrationId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *V3IntegrationTypeIntegrationId) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"integrationId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varV3IntegrationTypeIntegrationId := _V3IntegrationTypeIntegrationId{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV3IntegrationTypeIntegrationId)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V3IntegrationTypeIntegrationId(varV3IntegrationTypeIntegrationId)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV3IntegrationTypeIntegrationId struct {
@@ -123,5 +169,4 @@ func (v *NullableV3IntegrationTypeIntegrationId) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

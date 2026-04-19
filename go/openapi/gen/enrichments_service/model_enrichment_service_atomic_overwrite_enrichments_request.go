@@ -11,8 +11,11 @@ API version: 1.0.0
 package enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the EnrichmentServiceAtomicOverwriteEnrichmentsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentServiceAtomicOverwriteEnrichmentsRequest{}
@@ -22,7 +25,10 @@ type EnrichmentServiceAtomicOverwriteEnrichmentsRequest struct {
 	EnrichmentFields []EnrichmentFieldDefinition `json:"enrichmentFields,omitempty"`
 	EnrichmentType *EnrichmentType `json:"enrichmentType,omitempty"`
 	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EnrichmentServiceAtomicOverwriteEnrichmentsRequest EnrichmentServiceAtomicOverwriteEnrichmentsRequest
 
 // NewEnrichmentServiceAtomicOverwriteEnrichmentsRequest instantiates a new EnrichmentServiceAtomicOverwriteEnrichmentsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o EnrichmentServiceAtomicOverwriteEnrichmentsRequest) ToMap() (map[string]
 	if !IsNil(o.RequestEnrichments) {
 		toSerialize["requestEnrichments"] = o.RequestEnrichments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) UnmarshalJSON(data []byte) (err error) {
+	varEnrichmentServiceAtomicOverwriteEnrichmentsRequest := _EnrichmentServiceAtomicOverwriteEnrichmentsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varEnrichmentServiceAtomicOverwriteEnrichmentsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnrichmentServiceAtomicOverwriteEnrichmentsRequest(varEnrichmentServiceAtomicOverwriteEnrichmentsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enrichmentFields")
+		delete(additionalProperties, "enrichmentType")
+		delete(additionalProperties, "requestEnrichments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEnrichmentServiceAtomicOverwriteEnrichmentsRequest struct {
@@ -194,5 +229,4 @@ func (v *NullableEnrichmentServiceAtomicOverwriteEnrichmentsRequest) UnmarshalJS
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

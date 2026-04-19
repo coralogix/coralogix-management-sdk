@@ -11,8 +11,11 @@ API version: 1.0.0
 package extension_testing_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ChangelogEntry type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChangelogEntry{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ChangelogEntry{}
 type ChangelogEntry struct {
 	DescriptionMd *string `json:"descriptionMd,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ChangelogEntry ChangelogEntry
 
 // NewChangelogEntry instantiates a new ChangelogEntry object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ChangelogEntry) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ChangelogEntry) UnmarshalJSON(data []byte) (err error) {
+	varChangelogEntry := _ChangelogEntry{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varChangelogEntry)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ChangelogEntry(varChangelogEntry)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "descriptionMd")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableChangelogEntry struct {
@@ -158,5 +192,4 @@ func (v *NullableChangelogEntry) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,8 +11,11 @@ API version: 1.0.0
 package actions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the V2Action type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2Action{}
@@ -28,7 +31,10 @@ type V2Action struct {
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _V2Action V2Action
 
 // NewV2Action instantiates a new V2Action object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +378,42 @@ func (o V2Action) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *V2Action) UnmarshalJSON(data []byte) (err error) {
+	varV2Action := _V2Action{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varV2Action)
+
+	if err != nil {
+		return err
+	}
+
+	*o = V2Action(varV2Action)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationNames")
+		delete(additionalProperties, "createdBy")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isHidden")
+		delete(additionalProperties, "isPrivate")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sourceType")
+		delete(additionalProperties, "subsystemNames")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableV2Action struct {
@@ -410,5 +451,4 @@ func (v *NullableV2Action) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

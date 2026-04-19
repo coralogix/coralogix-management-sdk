@@ -11,23 +11,31 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the RuleMatcherApplicationName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleMatcherApplicationName{}
 
 // RuleMatcherApplicationName struct for RuleMatcherApplicationName
 type RuleMatcherApplicationName struct {
-	ApplicationName *ApplicationNameConstraint `json:"applicationName,omitempty"`
+	ApplicationName ApplicationNameConstraint `json:"applicationName"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RuleMatcherApplicationName RuleMatcherApplicationName
 
 // NewRuleMatcherApplicationName instantiates a new RuleMatcherApplicationName object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleMatcherApplicationName() *RuleMatcherApplicationName {
+func NewRuleMatcherApplicationName(applicationName ApplicationNameConstraint) *RuleMatcherApplicationName {
 	this := RuleMatcherApplicationName{}
+	this.ApplicationName = applicationName
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewRuleMatcherApplicationNameWithDefaults() *RuleMatcherApplicationName {
 	return &this
 }
 
-// GetApplicationName returns the ApplicationName field value if set, zero value otherwise.
+// GetApplicationName returns the ApplicationName field value
 func (o *RuleMatcherApplicationName) GetApplicationName() ApplicationNameConstraint {
-	if o == nil || IsNil(o.ApplicationName) {
+	if o == nil {
 		var ret ApplicationNameConstraint
 		return ret
 	}
-	return *o.ApplicationName
+
+	return o.ApplicationName
 }
 
-// GetApplicationNameOk returns a tuple with the ApplicationName field value if set, nil otherwise
+// GetApplicationNameOk returns a tuple with the ApplicationName field value
 // and a boolean to check if the value has been set.
 func (o *RuleMatcherApplicationName) GetApplicationNameOk() (*ApplicationNameConstraint, bool) {
-	if o == nil || IsNil(o.ApplicationName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApplicationName, true
+	return &o.ApplicationName, true
 }
 
-// HasApplicationName returns a boolean if a field has been set.
-func (o *RuleMatcherApplicationName) HasApplicationName() bool {
-	if o != nil && !IsNil(o.ApplicationName) {
-		return true
-	}
-
-	return false
-}
-
-// SetApplicationName gets a reference to the given ApplicationNameConstraint and assigns it to the ApplicationName field.
+// SetApplicationName sets field value
 func (o *RuleMatcherApplicationName) SetApplicationName(v ApplicationNameConstraint) {
-	o.ApplicationName = &v
+	o.ApplicationName = v
 }
 
 func (o RuleMatcherApplicationName) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o RuleMatcherApplicationName) MarshalJSON() ([]byte, error) {
 
 func (o RuleMatcherApplicationName) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApplicationName) {
-		toSerialize["applicationName"] = o.ApplicationName
+	toSerialize["applicationName"] = o.ApplicationName
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *RuleMatcherApplicationName) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"applicationName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRuleMatcherApplicationName := _RuleMatcherApplicationName{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varRuleMatcherApplicationName)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RuleMatcherApplicationName(varRuleMatcherApplicationName)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "applicationName")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRuleMatcherApplicationName struct {
@@ -122,5 +168,4 @@ func (v *NullableRuleMatcherApplicationName) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

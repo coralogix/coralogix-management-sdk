@@ -77,8 +77,7 @@
                 "required": [
                   "name",
                   "timeSelection"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -201,8 +200,7 @@
                   "name",
                   "id",
                   "timeSelection"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           }
@@ -261,33 +259,6 @@
   },
   "components": {
     "schemas": {
-      "ColorsByAggregation": {
-        "type": "object",
-        "properties": {
-          "aggregation": {
-            "$ref": "#/components/schemas/ColorsByAggregation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByGroupBy": {
-        "type": "object",
-        "properties": {
-          "groupBy": {
-            "$ref": "#/components/schemas/ColorsByGroupBy"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ColorsByStack": {
-        "type": "object",
-        "properties": {
-          "stack": {
-            "$ref": "#/components/schemas/ColorsByStack"
-          }
-        },
-        "additionalProperties": false
-      },
       "CustomTimeSelection": {
         "externalDocs": {
           "url": ""
@@ -354,9 +325,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "filters"
+        ]
       },
       "FilterPathAndValuesMultipleValues": {
         "externalDocs": {
@@ -376,9 +347,9 @@
         },
         "required": [
           "path",
-          "values"
-        ],
-        "additionalProperties": false
+          "values",
+          "multipleValues"
+        ]
       },
       "Filters": {
         "externalDocs": {
@@ -412,34 +383,6 @@
             }
           }
         }
-      },
-      "MinMaxAuto": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "auto": {
-            "$ref": "#/components/schemas/MinMaxAuto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MinMaxCustom": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Min-Max",
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "type": "object",
-        "properties": {
-          "custom": {
-            "$ref": "#/components/schemas/MinMaxCustom"
-          }
-        },
-        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -534,7 +477,9 @@
             "$ref": "#/components/schemas/CustomTimeSelection"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "customSelection"
+        ]
       },
       "TimeSelectionQuickSelection": {
         "type": "object",
@@ -543,7 +488,9 @@
             "$ref": "#/components/schemas/QuickTimeSelection"
           }
         },
-        "additionalProperties": false
+        "required": [
+          "quickSelection"
+        ]
       },
       "View": {
         "externalDocs": {
@@ -663,14 +610,6 @@
           "name",
           "selectedValues"
         ]
-      }
-    },
-    "securitySchemes": {
-      "apiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "Authorization",
-        "description": "API key authentication"
       }
     }
   }

@@ -11,8 +11,12 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FieldInformationMultipleSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldInformationMultipleSelection{}
@@ -23,7 +27,7 @@ type FieldInformationMultipleSelection struct {
 	ApplicableIf *FieldCondition `json:"applicableIf,omitempty"`
 	DocumentationReference *string `json:"documentationReference,omitempty"`
 	GroupId *string `json:"groupId,omitempty"`
-	MultipleSelection *MultipleSelectionValue `json:"multipleSelection,omitempty"`
+	MultipleSelection MultipleSelectionValue `json:"multipleSelection"`
 	Name *string `json:"name,omitempty"`
 	Placeholder *string `json:"placeholder,omitempty"`
 	Predefined *bool `json:"predefined,omitempty"`
@@ -34,14 +38,18 @@ type FieldInformationMultipleSelection struct {
 	Type *InputType `json:"type,omitempty"`
 	UpgradeNotice *string `json:"upgradeNotice,omitempty"`
 	Visible *bool `json:"visible,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FieldInformationMultipleSelection FieldInformationMultipleSelection
 
 // NewFieldInformationMultipleSelection instantiates a new FieldInformationMultipleSelection object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFieldInformationMultipleSelection() *FieldInformationMultipleSelection {
+func NewFieldInformationMultipleSelection(multipleSelection MultipleSelectionValue) *FieldInformationMultipleSelection {
 	this := FieldInformationMultipleSelection{}
+	this.MultipleSelection = multipleSelection
 	return &this
 }
 
@@ -181,36 +189,28 @@ func (o *FieldInformationMultipleSelection) SetGroupId(v string) {
 	o.GroupId = &v
 }
 
-// GetMultipleSelection returns the MultipleSelection field value if set, zero value otherwise.
+// GetMultipleSelection returns the MultipleSelection field value
 func (o *FieldInformationMultipleSelection) GetMultipleSelection() MultipleSelectionValue {
-	if o == nil || IsNil(o.MultipleSelection) {
+	if o == nil {
 		var ret MultipleSelectionValue
 		return ret
 	}
-	return *o.MultipleSelection
+
+	return o.MultipleSelection
 }
 
-// GetMultipleSelectionOk returns a tuple with the MultipleSelection field value if set, nil otherwise
+// GetMultipleSelectionOk returns a tuple with the MultipleSelection field value
 // and a boolean to check if the value has been set.
 func (o *FieldInformationMultipleSelection) GetMultipleSelectionOk() (*MultipleSelectionValue, bool) {
-	if o == nil || IsNil(o.MultipleSelection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MultipleSelection, true
+	return &o.MultipleSelection, true
 }
 
-// HasMultipleSelection returns a boolean if a field has been set.
-func (o *FieldInformationMultipleSelection) HasMultipleSelection() bool {
-	if o != nil && !IsNil(o.MultipleSelection) {
-		return true
-	}
-
-	return false
-}
-
-// SetMultipleSelection gets a reference to the given MultipleSelectionValue and assigns it to the MultipleSelection field.
+// SetMultipleSelection sets field value
 func (o *FieldInformationMultipleSelection) SetMultipleSelection(v MultipleSelectionValue) {
-	o.MultipleSelection = &v
+	o.MultipleSelection = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -555,9 +555,7 @@ func (o FieldInformationMultipleSelection) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.GroupId) {
 		toSerialize["groupId"] = o.GroupId
 	}
-	if !IsNil(o.MultipleSelection) {
-		toSerialize["multipleSelection"] = o.MultipleSelection
-	}
+	toSerialize["multipleSelection"] = o.MultipleSelection
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -588,7 +586,69 @@ func (o FieldInformationMultipleSelection) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Visible) {
 		toSerialize["visible"] = o.Visible
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FieldInformationMultipleSelection) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"multipleSelection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFieldInformationMultipleSelection := _FieldInformationMultipleSelection{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFieldInformationMultipleSelection)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FieldInformationMultipleSelection(varFieldInformationMultipleSelection)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowedPattern")
+		delete(additionalProperties, "applicableIf")
+		delete(additionalProperties, "documentationReference")
+		delete(additionalProperties, "groupId")
+		delete(additionalProperties, "multipleSelection")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "placeholder")
+		delete(additionalProperties, "predefined")
+		delete(additionalProperties, "readonly")
+		delete(additionalProperties, "required")
+		delete(additionalProperties, "templateParamName")
+		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "upgradeNotice")
+		delete(additionalProperties, "visible")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFieldInformationMultipleSelection struct {
@@ -626,5 +686,4 @@ func (v *NullableFieldInformationMultipleSelection) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

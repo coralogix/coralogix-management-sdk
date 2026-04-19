@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ListValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListValue{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ListValue{}
 // ListValue struct for ListValue
 type ListValue struct {
 	Values []SingleStringValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListValue ListValue
 
 // NewListValue instantiates a new ListValue object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ListValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListValue) UnmarshalJSON(data []byte) (err error) {
+	varListValue := _ListValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varListValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListValue(varListValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListValue struct {
@@ -122,5 +155,4 @@ func (v *NullableListValue) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

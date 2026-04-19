@@ -11,36 +11,39 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // QuerySourceMetricsQueryType - struct for QuerySourceMetricsQueryType
 type QuerySourceMetricsQueryType struct {
-	QuerySourceMetricsQueryTypeLabelName *QuerySourceMetricsQueryTypeLabelName
-	QuerySourceMetricsQueryTypeLabelValue *QuerySourceMetricsQueryTypeLabelValue
-	QuerySourceMetricsQueryTypeMetricName *QuerySourceMetricsQueryTypeMetricName
+	QuerySourceMetricsQueryTypeLabelNameVariant *QuerySourceMetricsQueryTypeLabelNameVariant
+	QuerySourceMetricsQueryTypeLabelValueVariant *QuerySourceMetricsQueryTypeLabelValueVariant
+	QuerySourceMetricsQueryTypeMetricNameVariant *QuerySourceMetricsQueryTypeMetricNameVariant
 }
 
-// QuerySourceMetricsQueryTypeLabelNameAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelName wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypeLabelNameAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeLabelName) QuerySourceMetricsQueryType {
+// QuerySourceMetricsQueryTypeLabelNameVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelNameVariant wrapped in QuerySourceMetricsQueryType
+func QuerySourceMetricsQueryTypeLabelNameVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeLabelNameVariant) QuerySourceMetricsQueryType {
 	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypeLabelName: v,
+		QuerySourceMetricsQueryTypeLabelNameVariant: v,
 	}
 }
 
-// QuerySourceMetricsQueryTypeLabelValueAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelValue wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypeLabelValueAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeLabelValue) QuerySourceMetricsQueryType {
+// QuerySourceMetricsQueryTypeLabelValueVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelValueVariant wrapped in QuerySourceMetricsQueryType
+func QuerySourceMetricsQueryTypeLabelValueVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeLabelValueVariant) QuerySourceMetricsQueryType {
 	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypeLabelValue: v,
+		QuerySourceMetricsQueryTypeLabelValueVariant: v,
 	}
 }
 
-// QuerySourceMetricsQueryTypeMetricNameAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeMetricName wrapped in QuerySourceMetricsQueryType
-func QuerySourceMetricsQueryTypeMetricNameAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeMetricName) QuerySourceMetricsQueryType {
+// QuerySourceMetricsQueryTypeMetricNameVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeMetricNameVariant wrapped in QuerySourceMetricsQueryType
+func QuerySourceMetricsQueryTypeMetricNameVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeMetricNameVariant) QuerySourceMetricsQueryType {
 	return QuerySourceMetricsQueryType{
-		QuerySourceMetricsQueryTypeMetricName: v,
+		QuerySourceMetricsQueryTypeMetricNameVariant: v,
 	}
 }
 
@@ -49,62 +52,62 @@ func QuerySourceMetricsQueryTypeMetricNameAsQuerySourceMetricsQueryType(v *Query
 func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelName
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQueryTypeLabelName)
+	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelNameVariant
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeLabelNameVariant)
 	if err == nil {
-		jsonQuerySourceMetricsQueryTypeLabelName, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelName)
-		if string(jsonQuerySourceMetricsQueryTypeLabelName) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypeLabelName = nil
+		jsonQuerySourceMetricsQueryTypeLabelNameVariant, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelNameVariant)
+		if string(jsonQuerySourceMetricsQueryTypeLabelNameVariant) == "{}" { // empty struct
+			dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeLabelName); err != nil {
-				dst.QuerySourceMetricsQueryTypeLabelName = nil
+			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeLabelNameVariant); err != nil {
+				dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceMetricsQueryTypeLabelName = nil
+		dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
 	}
 
-	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelValue
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQueryTypeLabelValue)
+	// try to unmarshal data into QuerySourceMetricsQueryTypeLabelValueVariant
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeLabelValueVariant)
 	if err == nil {
-		jsonQuerySourceMetricsQueryTypeLabelValue, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelValue)
-		if string(jsonQuerySourceMetricsQueryTypeLabelValue) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypeLabelValue = nil
+		jsonQuerySourceMetricsQueryTypeLabelValueVariant, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeLabelValueVariant)
+		if string(jsonQuerySourceMetricsQueryTypeLabelValueVariant) == "{}" { // empty struct
+			dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeLabelValue); err != nil {
-				dst.QuerySourceMetricsQueryTypeLabelValue = nil
+			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeLabelValueVariant); err != nil {
+				dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceMetricsQueryTypeLabelValue = nil
+		dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
 	}
 
-	// try to unmarshal data into QuerySourceMetricsQueryTypeMetricName
-	err = newStrictDecoder(data).Decode(&dst.QuerySourceMetricsQueryTypeMetricName)
+	// try to unmarshal data into QuerySourceMetricsQueryTypeMetricNameVariant
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypeMetricNameVariant)
 	if err == nil {
-		jsonQuerySourceMetricsQueryTypeMetricName, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeMetricName)
-		if string(jsonQuerySourceMetricsQueryTypeMetricName) == "{}" { // empty struct
-			dst.QuerySourceMetricsQueryTypeMetricName = nil
+		jsonQuerySourceMetricsQueryTypeMetricNameVariant, _ := json.Marshal(dst.QuerySourceMetricsQueryTypeMetricNameVariant)
+		if string(jsonQuerySourceMetricsQueryTypeMetricNameVariant) == "{}" { // empty struct
+			dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
 		} else {
-			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeMetricName); err != nil {
-				dst.QuerySourceMetricsQueryTypeMetricName = nil
+			if err = validator.Validate(dst.QuerySourceMetricsQueryTypeMetricNameVariant); err != nil {
+				dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.QuerySourceMetricsQueryTypeMetricName = nil
+		dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.QuerySourceMetricsQueryTypeLabelName = nil
-		dst.QuerySourceMetricsQueryTypeLabelValue = nil
-		dst.QuerySourceMetricsQueryTypeMetricName = nil
+		dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
+		dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
+		dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QuerySourceMetricsQueryType)")
 	} else if match == 1 {
@@ -116,16 +119,16 @@ func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src QuerySourceMetricsQueryType) MarshalJSON() ([]byte, error) {
-	if src.QuerySourceMetricsQueryTypeLabelName != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypeLabelName)
+	if src.QuerySourceMetricsQueryTypeLabelNameVariant != nil {
+		return json.Marshal(&src.QuerySourceMetricsQueryTypeLabelNameVariant)
 	}
 
-	if src.QuerySourceMetricsQueryTypeLabelValue != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypeLabelValue)
+	if src.QuerySourceMetricsQueryTypeLabelValueVariant != nil {
+		return json.Marshal(&src.QuerySourceMetricsQueryTypeLabelValueVariant)
 	}
 
-	if src.QuerySourceMetricsQueryTypeMetricName != nil {
-		return json.Marshal(&src.QuerySourceMetricsQueryTypeMetricName)
+	if src.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
+		return json.Marshal(&src.QuerySourceMetricsQueryTypeMetricNameVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -136,16 +139,16 @@ func (obj *QuerySourceMetricsQueryType) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.QuerySourceMetricsQueryTypeLabelName != nil {
-		return obj.QuerySourceMetricsQueryTypeLabelName
+	if obj.QuerySourceMetricsQueryTypeLabelNameVariant != nil {
+		return obj.QuerySourceMetricsQueryTypeLabelNameVariant
 	}
 
-	if obj.QuerySourceMetricsQueryTypeLabelValue != nil {
-		return obj.QuerySourceMetricsQueryTypeLabelValue
+	if obj.QuerySourceMetricsQueryTypeLabelValueVariant != nil {
+		return obj.QuerySourceMetricsQueryTypeLabelValueVariant
 	}
 
-	if obj.QuerySourceMetricsQueryTypeMetricName != nil {
-		return obj.QuerySourceMetricsQueryTypeMetricName
+	if obj.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
+		return obj.QuerySourceMetricsQueryTypeMetricNameVariant
 	}
 
 	// all schemas are nil
@@ -154,16 +157,16 @@ func (obj *QuerySourceMetricsQueryType) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj QuerySourceMetricsQueryType) GetActualInstanceValue() (interface{}) {
-	if obj.QuerySourceMetricsQueryTypeLabelName != nil {
-		return *obj.QuerySourceMetricsQueryTypeLabelName
+	if obj.QuerySourceMetricsQueryTypeLabelNameVariant != nil {
+		return *obj.QuerySourceMetricsQueryTypeLabelNameVariant
 	}
 
-	if obj.QuerySourceMetricsQueryTypeLabelValue != nil {
-		return *obj.QuerySourceMetricsQueryTypeLabelValue
+	if obj.QuerySourceMetricsQueryTypeLabelValueVariant != nil {
+		return *obj.QuerySourceMetricsQueryTypeLabelValueVariant
 	}
 
-	if obj.QuerySourceMetricsQueryTypeMetricName != nil {
-		return *obj.QuerySourceMetricsQueryTypeMetricName
+	if obj.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
+		return *obj.QuerySourceMetricsQueryTypeMetricNameVariant
 	}
 
 	// all schemas are nil
@@ -205,5 +208,4 @@ func (v *NullableQuerySourceMetricsQueryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

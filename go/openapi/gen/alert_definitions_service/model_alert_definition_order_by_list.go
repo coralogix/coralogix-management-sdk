@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the AlertDefinitionOrderByList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefinitionOrderByList{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &AlertDefinitionOrderByList{}
 // AlertDefinitionOrderByList List of fields to order alert definitions by
 type AlertDefinitionOrderByList struct {
 	OrderBys []AlertDefinitionOrderBy `json:"orderBys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AlertDefinitionOrderByList AlertDefinitionOrderByList
 
 // NewAlertDefinitionOrderByList instantiates a new AlertDefinitionOrderByList object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o AlertDefinitionOrderByList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderBys) {
 		toSerialize["orderBys"] = o.OrderBys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AlertDefinitionOrderByList) UnmarshalJSON(data []byte) (err error) {
+	varAlertDefinitionOrderByList := _AlertDefinitionOrderByList{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varAlertDefinitionOrderByList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AlertDefinitionOrderByList(varAlertDefinitionOrderByList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "orderBys")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAlertDefinitionOrderByList struct {
@@ -122,5 +155,4 @@ func (v *NullableAlertDefinitionOrderByList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

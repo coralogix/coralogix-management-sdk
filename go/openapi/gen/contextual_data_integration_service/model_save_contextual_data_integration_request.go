@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SaveContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveContextualDataIntegrationRequest{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SaveContextualDataIntegrationRequest{}
 // SaveContextualDataIntegrationRequest struct for SaveContextualDataIntegrationRequest
 type SaveContextualDataIntegrationRequest struct {
 	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SaveContextualDataIntegrationRequest SaveContextualDataIntegrationRequest
 
 // NewSaveContextualDataIntegrationRequest instantiates a new SaveContextualDataIntegrationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SaveContextualDataIntegrationRequest) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SaveContextualDataIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	varSaveContextualDataIntegrationRequest := _SaveContextualDataIntegrationRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSaveContextualDataIntegrationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SaveContextualDataIntegrationRequest(varSaveContextualDataIntegrationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSaveContextualDataIntegrationRequest struct {
@@ -122,5 +155,4 @@ func (v *NullableSaveContextualDataIntegrationRequest) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

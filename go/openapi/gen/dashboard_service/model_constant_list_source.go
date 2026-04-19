@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ConstantListSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConstantListSource{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &ConstantListSource{}
 // ConstantListSource struct for ConstantListSource
 type ConstantListSource struct {
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConstantListSource ConstantListSource
 
 // NewConstantListSource instantiates a new ConstantListSource object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o ConstantListSource) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConstantListSource) UnmarshalJSON(data []byte) (err error) {
+	varConstantListSource := _ConstantListSource{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varConstantListSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConstantListSource(varConstantListSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConstantListSource struct {
@@ -122,5 +155,4 @@ func (v *NullableConstantListSource) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

@@ -11,10 +11,12 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the MetricLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricLabel{}
@@ -23,6 +25,7 @@ var _ MappedNullable = &MetricLabel{}
 type MetricLabel struct {
 	SourceField string `json:"sourceField"`
 	TargetLabel string `json:"targetLabel" validate:"regexp=^[\\\\w\\/-]+$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MetricLabel MetricLabel
@@ -106,6 +109,11 @@ func (o MetricLabel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["sourceField"] = o.SourceField
 	toSerialize["targetLabel"] = o.TargetLabel
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,7 +143,6 @@ func (o *MetricLabel) UnmarshalJSON(data []byte) (err error) {
 	varMetricLabel := _MetricLabel{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varMetricLabel)
 
 	if err != nil {
@@ -143,6 +150,14 @@ func (o *MetricLabel) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = MetricLabel(varMetricLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sourceField")
+		delete(additionalProperties, "targetLabel")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -182,5 +197,4 @@ func (v *NullableMetricLabel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

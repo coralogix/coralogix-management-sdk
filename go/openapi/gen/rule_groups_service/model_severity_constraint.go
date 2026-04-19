@@ -11,8 +11,11 @@ API version: 1.0.0
 package rule_groups_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the SeverityConstraint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SeverityConstraint{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &SeverityConstraint{}
 // SeverityConstraint struct for SeverityConstraint
 type SeverityConstraint struct {
 	Value *Value `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SeverityConstraint SeverityConstraint
 
 // NewSeverityConstraint instantiates a new SeverityConstraint object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o SeverityConstraint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SeverityConstraint) UnmarshalJSON(data []byte) (err error) {
+	varSeverityConstraint := _SeverityConstraint{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varSeverityConstraint)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SeverityConstraint(varSeverityConstraint)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSeverityConstraint struct {
@@ -122,5 +155,4 @@ func (v *NullableSeverityConstraint) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

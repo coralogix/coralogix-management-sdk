@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the DataTableMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableMetricsQuery{}
@@ -24,7 +27,10 @@ type DataTableMetricsQuery struct {
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataTableMetricsQuery DataTableMetricsQuery
 
 // NewDataTableMetricsQuery instantiates a new DataTableMetricsQuery object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +234,38 @@ func (o DataTableMetricsQuery) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeFrame) {
 		toSerialize["timeFrame"] = o.TimeFrame
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataTableMetricsQuery) UnmarshalJSON(data []byte) (err error) {
+	varDataTableMetricsQuery := _DataTableMetricsQuery{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varDataTableMetricsQuery)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTableMetricsQuery(varDataTableMetricsQuery)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "editorMode")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "promqlQuery")
+		delete(additionalProperties, "promqlQueryType")
+		delete(additionalProperties, "timeFrame")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataTableMetricsQuery struct {
@@ -266,5 +303,4 @@ func (v *NullableDataTableMetricsQuery) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

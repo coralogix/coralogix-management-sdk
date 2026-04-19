@@ -11,9 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // OrderDirection the model 'OrderDirection'
 type OrderDirection string
@@ -23,6 +26,7 @@ const (
 	ORDERDIRECTION_ORDER_DIRECTION_UNSPECIFIED OrderDirection = "ORDER_DIRECTION_UNSPECIFIED"
 	ORDERDIRECTION_ORDER_DIRECTION_ASC OrderDirection = "ORDER_DIRECTION_ASC"
 	ORDERDIRECTION_ORDER_DIRECTION_DESC OrderDirection = "ORDER_DIRECTION_DESC"
+	ORDERDIRECTION_ORDER_DIRECTION_NONE OrderDirection = "ORDER_DIRECTION_NONE"
 )
 
 // All allowed values of OrderDirection enum
@@ -30,6 +34,7 @@ var AllowedOrderDirectionEnumValues = []OrderDirection{
 	"ORDER_DIRECTION_UNSPECIFIED",
 	"ORDER_DIRECTION_ASC",
 	"ORDER_DIRECTION_DESC",
+	"ORDER_DIRECTION_NONE",
 }
 
 func (v *OrderDirection) UnmarshalJSON(src []byte) error {

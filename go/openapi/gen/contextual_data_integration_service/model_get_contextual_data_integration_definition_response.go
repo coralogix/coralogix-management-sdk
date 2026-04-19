@@ -11,8 +11,11 @@ API version: 1.0.0
 package contextual_data_integration_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GetContextualDataIntegrationDefinitionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetContextualDataIntegrationDefinitionResponse{}
@@ -20,7 +23,10 @@ var _ MappedNullable = &GetContextualDataIntegrationDefinitionResponse{}
 // GetContextualDataIntegrationDefinitionResponse struct for GetContextualDataIntegrationDefinitionResponse
 type GetContextualDataIntegrationDefinitionResponse struct {
 	IntegrationDefinition *IntegrationDefinition `json:"integrationDefinition,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetContextualDataIntegrationDefinitionResponse GetContextualDataIntegrationDefinitionResponse
 
 // NewGetContextualDataIntegrationDefinitionResponse instantiates a new GetContextualDataIntegrationDefinitionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +90,34 @@ func (o GetContextualDataIntegrationDefinitionResponse) ToMap() (map[string]inte
 	if !IsNil(o.IntegrationDefinition) {
 		toSerialize["integrationDefinition"] = o.IntegrationDefinition
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetContextualDataIntegrationDefinitionResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetContextualDataIntegrationDefinitionResponse := _GetContextualDataIntegrationDefinitionResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGetContextualDataIntegrationDefinitionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetContextualDataIntegrationDefinitionResponse(varGetContextualDataIntegrationDefinitionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "integrationDefinition")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetContextualDataIntegrationDefinitionResponse struct {
@@ -122,5 +155,4 @@ func (v *NullableGetContextualDataIntegrationDefinitionResponse) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

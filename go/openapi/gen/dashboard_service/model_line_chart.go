@@ -11,10 +11,12 @@ API version: 1.0.0
 package dashboard_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the LineChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChart{}
@@ -27,6 +29,7 @@ type LineChart struct {
 	QueryDefinitions []LineChartQueryDefinition `json:"queryDefinitions"`
 	StackedLine *LineChartStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *Tooltip `json:"tooltip,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LineChart LineChart
@@ -224,6 +227,11 @@ func (o LineChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tooltip) {
 		toSerialize["tooltip"] = o.Tooltip
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,7 +260,6 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 	varLineChart := _LineChart{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varLineChart)
 
 	if err != nil {
@@ -260,6 +267,17 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LineChart(varLineChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "connectNulls")
+		delete(additionalProperties, "legend")
+		delete(additionalProperties, "queryDefinitions")
+		delete(additionalProperties, "stackedLine")
+		delete(additionalProperties, "tooltip")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -299,5 +317,4 @@ func (v *NullableLineChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

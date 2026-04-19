@@ -11,23 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the WidgetDefinitionPieChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionPieChart{}
 
 // WidgetDefinitionPieChart struct for WidgetDefinitionPieChart
 type WidgetDefinitionPieChart struct {
-	PieChart *WidgetsPieChart `json:"pieChart,omitempty"`
+	PieChart WidgetsPieChart `json:"pieChart"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _WidgetDefinitionPieChart WidgetDefinitionPieChart
 
 // NewWidgetDefinitionPieChart instantiates a new WidgetDefinitionPieChart object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWidgetDefinitionPieChart() *WidgetDefinitionPieChart {
+func NewWidgetDefinitionPieChart(pieChart WidgetsPieChart) *WidgetDefinitionPieChart {
 	this := WidgetDefinitionPieChart{}
+	this.PieChart = pieChart
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewWidgetDefinitionPieChartWithDefaults() *WidgetDefinitionPieChart {
 	return &this
 }
 
-// GetPieChart returns the PieChart field value if set, zero value otherwise.
+// GetPieChart returns the PieChart field value
 func (o *WidgetDefinitionPieChart) GetPieChart() WidgetsPieChart {
-	if o == nil || IsNil(o.PieChart) {
+	if o == nil {
 		var ret WidgetsPieChart
 		return ret
 	}
-	return *o.PieChart
+
+	return o.PieChart
 }
 
-// GetPieChartOk returns a tuple with the PieChart field value if set, nil otherwise
+// GetPieChartOk returns a tuple with the PieChart field value
 // and a boolean to check if the value has been set.
 func (o *WidgetDefinitionPieChart) GetPieChartOk() (*WidgetsPieChart, bool) {
-	if o == nil || IsNil(o.PieChart) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PieChart, true
+	return &o.PieChart, true
 }
 
-// HasPieChart returns a boolean if a field has been set.
-func (o *WidgetDefinitionPieChart) HasPieChart() bool {
-	if o != nil && !IsNil(o.PieChart) {
-		return true
-	}
-
-	return false
-}
-
-// SetPieChart gets a reference to the given WidgetsPieChart and assigns it to the PieChart field.
+// SetPieChart sets field value
 func (o *WidgetDefinitionPieChart) SetPieChart(v WidgetsPieChart) {
-	o.PieChart = &v
+	o.PieChart = v
 }
 
 func (o WidgetDefinitionPieChart) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o WidgetDefinitionPieChart) MarshalJSON() ([]byte, error) {
 
 func (o WidgetDefinitionPieChart) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PieChart) {
-		toSerialize["pieChart"] = o.PieChart
+	toSerialize["pieChart"] = o.PieChart
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *WidgetDefinitionPieChart) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"pieChart",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWidgetDefinitionPieChart := _WidgetDefinitionPieChart{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varWidgetDefinitionPieChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WidgetDefinitionPieChart(varWidgetDefinitionPieChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pieChart")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWidgetDefinitionPieChart struct {
@@ -122,5 +168,4 @@ func (v *NullableWidgetDefinitionPieChart) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

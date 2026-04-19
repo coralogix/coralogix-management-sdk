@@ -11,28 +11,31 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
 
+var _ = bytes.MinRead
+
 // MinMax - struct for MinMax
 type MinMax struct {
-	MinMaxAuto *MinMaxAuto
-	MinMaxCustom *MinMaxCustom
+	MinMaxAutoVariant *MinMaxAutoVariant
+	MinMaxCustomVariant *MinMaxCustomVariant
 }
 
-// MinMaxAutoAsMinMax is a convenience function that returns MinMaxAuto wrapped in MinMax
-func MinMaxAutoAsMinMax(v *MinMaxAuto) MinMax {
+// MinMaxAutoVariantAsMinMax is a convenience function that returns MinMaxAutoVariant wrapped in MinMax
+func MinMaxAutoVariantAsMinMax(v *MinMaxAutoVariant) MinMax {
 	return MinMax{
-		MinMaxAuto: v,
+		MinMaxAutoVariant: v,
 	}
 }
 
-// MinMaxCustomAsMinMax is a convenience function that returns MinMaxCustom wrapped in MinMax
-func MinMaxCustomAsMinMax(v *MinMaxCustom) MinMax {
+// MinMaxCustomVariantAsMinMax is a convenience function that returns MinMaxCustomVariant wrapped in MinMax
+func MinMaxCustomVariantAsMinMax(v *MinMaxCustomVariant) MinMax {
 	return MinMax{
-		MinMaxCustom: v,
+		MinMaxCustomVariant: v,
 	}
 }
 
@@ -41,44 +44,44 @@ func MinMaxCustomAsMinMax(v *MinMaxCustom) MinMax {
 func (dst *MinMax) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
-	// try to unmarshal data into MinMaxAuto
-	err = newStrictDecoder(data).Decode(&dst.MinMaxAuto)
+	// try to unmarshal data into MinMaxAutoVariant
+	err = json.Unmarshal(data, &dst.MinMaxAutoVariant)
 	if err == nil {
-		jsonMinMaxAuto, _ := json.Marshal(dst.MinMaxAuto)
-		if string(jsonMinMaxAuto) == "{}" { // empty struct
-			dst.MinMaxAuto = nil
+		jsonMinMaxAutoVariant, _ := json.Marshal(dst.MinMaxAutoVariant)
+		if string(jsonMinMaxAutoVariant) == "{}" { // empty struct
+			dst.MinMaxAutoVariant = nil
 		} else {
-			if err = validator.Validate(dst.MinMaxAuto); err != nil {
-				dst.MinMaxAuto = nil
+			if err = validator.Validate(dst.MinMaxAutoVariant); err != nil {
+				dst.MinMaxAutoVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MinMaxAuto = nil
+		dst.MinMaxAutoVariant = nil
 	}
 
-	// try to unmarshal data into MinMaxCustom
-	err = newStrictDecoder(data).Decode(&dst.MinMaxCustom)
+	// try to unmarshal data into MinMaxCustomVariant
+	err = json.Unmarshal(data, &dst.MinMaxCustomVariant)
 	if err == nil {
-		jsonMinMaxCustom, _ := json.Marshal(dst.MinMaxCustom)
-		if string(jsonMinMaxCustom) == "{}" { // empty struct
-			dst.MinMaxCustom = nil
+		jsonMinMaxCustomVariant, _ := json.Marshal(dst.MinMaxCustomVariant)
+		if string(jsonMinMaxCustomVariant) == "{}" { // empty struct
+			dst.MinMaxCustomVariant = nil
 		} else {
-			if err = validator.Validate(dst.MinMaxCustom); err != nil {
-				dst.MinMaxCustom = nil
+			if err = validator.Validate(dst.MinMaxCustomVariant); err != nil {
+				dst.MinMaxCustomVariant = nil
 			} else {
 				match++
 			}
 		}
 	} else {
-		dst.MinMaxCustom = nil
+		dst.MinMaxCustomVariant = nil
 	}
 
 	if match > 1 { // more than 1 match
 		// reset to nil
-		dst.MinMaxAuto = nil
-		dst.MinMaxCustom = nil
+		dst.MinMaxAutoVariant = nil
+		dst.MinMaxCustomVariant = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(MinMax)")
 	} else if match == 1 {
@@ -90,12 +93,12 @@ func (dst *MinMax) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src MinMax) MarshalJSON() ([]byte, error) {
-	if src.MinMaxAuto != nil {
-		return json.Marshal(&src.MinMaxAuto)
+	if src.MinMaxAutoVariant != nil {
+		return json.Marshal(&src.MinMaxAutoVariant)
 	}
 
-	if src.MinMaxCustom != nil {
-		return json.Marshal(&src.MinMaxCustom)
+	if src.MinMaxCustomVariant != nil {
+		return json.Marshal(&src.MinMaxCustomVariant)
 	}
 
 	return nil, nil // no data in oneOf schemas
@@ -106,12 +109,12 @@ func (obj *MinMax) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
-	if obj.MinMaxAuto != nil {
-		return obj.MinMaxAuto
+	if obj.MinMaxAutoVariant != nil {
+		return obj.MinMaxAutoVariant
 	}
 
-	if obj.MinMaxCustom != nil {
-		return obj.MinMaxCustom
+	if obj.MinMaxCustomVariant != nil {
+		return obj.MinMaxCustomVariant
 	}
 
 	// all schemas are nil
@@ -120,12 +123,12 @@ func (obj *MinMax) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj MinMax) GetActualInstanceValue() (interface{}) {
-	if obj.MinMaxAuto != nil {
-		return *obj.MinMaxAuto
+	if obj.MinMaxAutoVariant != nil {
+		return *obj.MinMaxAutoVariant
 	}
 
-	if obj.MinMaxCustom != nil {
-		return *obj.MinMaxCustom
+	if obj.MinMaxCustomVariant != nil {
+		return *obj.MinMaxCustomVariant
 	}
 
 	// all schemas are nil
@@ -167,5 +170,4 @@ func (v *NullableMinMax) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

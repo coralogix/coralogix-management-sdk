@@ -11,8 +11,11 @@ API version: 1.0.0
 package scopes_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ScopesV1Filter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopesV1Filter{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &ScopesV1Filter{}
 type ScopesV1Filter struct {
 	EntityType *V1EntityType `json:"entityType,omitempty"`
 	Expression *string `json:"expression,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScopesV1Filter ScopesV1Filter
 
 // NewScopesV1Filter instantiates a new ScopesV1Filter object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o ScopesV1Filter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Expression) {
 		toSerialize["expression"] = o.Expression
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScopesV1Filter) UnmarshalJSON(data []byte) (err error) {
+	varScopesV1Filter := _ScopesV1Filter{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varScopesV1Filter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScopesV1Filter(varScopesV1Filter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "entityType")
+		delete(additionalProperties, "expression")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScopesV1Filter struct {
@@ -158,5 +192,4 @@ func (v *NullableScopesV1Filter) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

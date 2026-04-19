@@ -11,10 +11,13 @@ API version: 1.0.0
 package alert_scheduler_rule_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // Schedule - struct for Schedule
 type Schedule struct {
@@ -42,7 +45,7 @@ func (dst *Schedule) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into ScheduleOneTime
-	err = newStrictDecoder(data).Decode(&dst.ScheduleOneTime)
+	err = json.Unmarshal(data, &dst.ScheduleOneTime)
 	if err == nil {
 		jsonScheduleOneTime, _ := json.Marshal(dst.ScheduleOneTime)
 		if string(jsonScheduleOneTime) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *Schedule) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into ScheduleRecurring
-	err = newStrictDecoder(data).Decode(&dst.ScheduleRecurring)
+	err = json.Unmarshal(data, &dst.ScheduleRecurring)
 	if err == nil {
 		jsonScheduleRecurring, _ := json.Marshal(dst.ScheduleRecurring)
 		if string(jsonScheduleRecurring) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableSchedule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

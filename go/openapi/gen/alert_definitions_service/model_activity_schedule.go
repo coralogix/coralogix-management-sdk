@@ -11,8 +11,11 @@ API version: 1.0.0
 package alert_definitions_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the ActivitySchedule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActivitySchedule{}
@@ -22,7 +25,10 @@ type ActivitySchedule struct {
 	DayOfWeek []DayOfWeek `json:"dayOfWeek,omitempty"`
 	EndTime *TimeOfDay `json:"endTime,omitempty"`
 	StartTime *TimeOfDay `json:"startTime,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivitySchedule ActivitySchedule
 
 // NewActivitySchedule instantiates a new ActivitySchedule object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +162,36 @@ func (o ActivitySchedule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartTime) {
 		toSerialize["startTime"] = o.StartTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivitySchedule) UnmarshalJSON(data []byte) (err error) {
+	varActivitySchedule := _ActivitySchedule{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varActivitySchedule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivitySchedule(varActivitySchedule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dayOfWeek")
+		delete(additionalProperties, "endTime")
+		delete(additionalProperties, "startTime")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivitySchedule struct {
@@ -194,5 +229,4 @@ func (v *NullableActivitySchedule) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

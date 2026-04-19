@@ -11,10 +11,13 @@ API version: 1.0.0
 package data_usage_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // DataUsageServiceGetDailyUsageProcessedGbsRequest - struct for DataUsageServiceGetDailyUsageProcessedGbsRequest
 type DataUsageServiceGetDailyUsageProcessedGbsRequest struct {
@@ -42,7 +45,7 @@ func (dst *DataUsageServiceGetDailyUsageProcessedGbsRequest) UnmarshalJSON(data 
 	var err error
 	match := 0
 	// try to unmarshal data into GetDailyUsageProcessedGbsRequestDateRange
-	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageProcessedGbsRequestDateRange)
+	err = json.Unmarshal(data, &dst.GetDailyUsageProcessedGbsRequestDateRange)
 	if err == nil {
 		jsonGetDailyUsageProcessedGbsRequestDateRange, _ := json.Marshal(dst.GetDailyUsageProcessedGbsRequestDateRange)
 		if string(jsonGetDailyUsageProcessedGbsRequestDateRange) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *DataUsageServiceGetDailyUsageProcessedGbsRequest) UnmarshalJSON(data 
 	}
 
 	// try to unmarshal data into GetDailyUsageProcessedGbsRequestRange
-	err = newStrictDecoder(data).Decode(&dst.GetDailyUsageProcessedGbsRequestRange)
+	err = json.Unmarshal(data, &dst.GetDailyUsageProcessedGbsRequestRange)
 	if err == nil {
 		jsonGetDailyUsageProcessedGbsRequestRange, _ := json.Marshal(dst.GetDailyUsageProcessedGbsRequestRange)
 		if string(jsonGetDailyUsageProcessedGbsRequestRange) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableDataUsageServiceGetDailyUsageProcessedGbsRequest) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

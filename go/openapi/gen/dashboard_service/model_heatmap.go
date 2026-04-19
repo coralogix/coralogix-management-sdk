@@ -11,10 +11,13 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"gopkg.in/validator.v2"
 )
+
+var _ = bytes.MinRead
 
 // Heatmap - struct for Heatmap
 type Heatmap struct {
@@ -42,7 +45,7 @@ func (dst *Heatmap) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into HeatmapColorRange
-	err = newStrictDecoder(data).Decode(&dst.HeatmapColorRange)
+	err = json.Unmarshal(data, &dst.HeatmapColorRange)
 	if err == nil {
 		jsonHeatmapColorRange, _ := json.Marshal(dst.HeatmapColorRange)
 		if string(jsonHeatmapColorRange) == "{}" { // empty struct
@@ -59,7 +62,7 @@ func (dst *Heatmap) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal data into HeatmapPreset
-	err = newStrictDecoder(data).Decode(&dst.HeatmapPreset)
+	err = json.Unmarshal(data, &dst.HeatmapPreset)
 	if err == nil {
 		jsonHeatmapPreset, _ := json.Marshal(dst.HeatmapPreset)
 		if string(jsonHeatmapPreset) == "{}" { // empty struct
@@ -167,5 +170,4 @@ func (v *NullableHeatmap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

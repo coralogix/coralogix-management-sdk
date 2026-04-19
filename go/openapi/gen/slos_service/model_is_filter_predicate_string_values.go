@@ -11,23 +11,31 @@ API version: 1.0.0
 package slos_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the IsFilterPredicateStringValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IsFilterPredicateStringValues{}
 
 // IsFilterPredicateStringValues Predicate for SLO filters that checks if a field is equal to one of multiple values
 type IsFilterPredicateStringValues struct {
-	StringValues *StringValues `json:"stringValues,omitempty"`
+	StringValues StringValues `json:"stringValues"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IsFilterPredicateStringValues IsFilterPredicateStringValues
 
 // NewIsFilterPredicateStringValues instantiates a new IsFilterPredicateStringValues object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIsFilterPredicateStringValues() *IsFilterPredicateStringValues {
+func NewIsFilterPredicateStringValues(stringValues StringValues) *IsFilterPredicateStringValues {
 	this := IsFilterPredicateStringValues{}
+	this.StringValues = stringValues
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewIsFilterPredicateStringValuesWithDefaults() *IsFilterPredicateStringValu
 	return &this
 }
 
-// GetStringValues returns the StringValues field value if set, zero value otherwise.
+// GetStringValues returns the StringValues field value
 func (o *IsFilterPredicateStringValues) GetStringValues() StringValues {
-	if o == nil || IsNil(o.StringValues) {
+	if o == nil {
 		var ret StringValues
 		return ret
 	}
-	return *o.StringValues
+
+	return o.StringValues
 }
 
-// GetStringValuesOk returns a tuple with the StringValues field value if set, nil otherwise
+// GetStringValuesOk returns a tuple with the StringValues field value
 // and a boolean to check if the value has been set.
 func (o *IsFilterPredicateStringValues) GetStringValuesOk() (*StringValues, bool) {
-	if o == nil || IsNil(o.StringValues) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StringValues, true
+	return &o.StringValues, true
 }
 
-// HasStringValues returns a boolean if a field has been set.
-func (o *IsFilterPredicateStringValues) HasStringValues() bool {
-	if o != nil && !IsNil(o.StringValues) {
-		return true
-	}
-
-	return false
-}
-
-// SetStringValues gets a reference to the given StringValues and assigns it to the StringValues field.
+// SetStringValues sets field value
 func (o *IsFilterPredicateStringValues) SetStringValues(v StringValues) {
-	o.StringValues = &v
+	o.StringValues = v
 }
 
 func (o IsFilterPredicateStringValues) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o IsFilterPredicateStringValues) MarshalJSON() ([]byte, error) {
 
 func (o IsFilterPredicateStringValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.StringValues) {
-		toSerialize["stringValues"] = o.StringValues
+	toSerialize["stringValues"] = o.StringValues
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *IsFilterPredicateStringValues) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"stringValues",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIsFilterPredicateStringValues := _IsFilterPredicateStringValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varIsFilterPredicateStringValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IsFilterPredicateStringValues(varIsFilterPredicateStringValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stringValues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIsFilterPredicateStringValues struct {
@@ -122,5 +168,4 @@ func (v *NullableIsFilterPredicateStringValues) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

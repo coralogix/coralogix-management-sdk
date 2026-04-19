@@ -11,26 +11,34 @@ API version: 1.0.0
 package custom_enrichments_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the FileBinary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FileBinary{}
 
 // FileBinary This data structure represents a file
 type FileBinary struct {
-	Binary *string `json:"binary,omitempty"`
+	Binary string `json:"binary"`
 	Extension *string `json:"extension,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Size *int64 `json:"size,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FileBinary FileBinary
 
 // NewFileBinary instantiates a new FileBinary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileBinary() *FileBinary {
+func NewFileBinary(binary string) *FileBinary {
 	this := FileBinary{}
+	this.Binary = binary
 	return &this
 }
 
@@ -42,36 +50,28 @@ func NewFileBinaryWithDefaults() *FileBinary {
 	return &this
 }
 
-// GetBinary returns the Binary field value if set, zero value otherwise.
+// GetBinary returns the Binary field value
 func (o *FileBinary) GetBinary() string {
-	if o == nil || IsNil(o.Binary) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Binary
+
+	return o.Binary
 }
 
-// GetBinaryOk returns a tuple with the Binary field value if set, nil otherwise
+// GetBinaryOk returns a tuple with the Binary field value
 // and a boolean to check if the value has been set.
 func (o *FileBinary) GetBinaryOk() (*string, bool) {
-	if o == nil || IsNil(o.Binary) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Binary, true
+	return &o.Binary, true
 }
 
-// HasBinary returns a boolean if a field has been set.
-func (o *FileBinary) HasBinary() bool {
-	if o != nil && !IsNil(o.Binary) {
-		return true
-	}
-
-	return false
-}
-
-// SetBinary gets a reference to the given string and assigns it to the Binary field.
+// SetBinary sets field value
 func (o *FileBinary) SetBinary(v string) {
-	o.Binary = &v
+	o.Binary = v
 }
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
@@ -180,9 +180,7 @@ func (o FileBinary) MarshalJSON() ([]byte, error) {
 
 func (o FileBinary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Binary) {
-		toSerialize["binary"] = o.Binary
-	}
+	toSerialize["binary"] = o.Binary
 	if !IsNil(o.Extension) {
 		toSerialize["extension"] = o.Extension
 	}
@@ -192,7 +190,58 @@ func (o FileBinary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FileBinary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"binary",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFileBinary := _FileBinary{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varFileBinary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FileBinary(varFileBinary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "binary")
+		delete(additionalProperties, "extension")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFileBinary struct {
@@ -230,5 +279,4 @@ func (v *NullableFileBinary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

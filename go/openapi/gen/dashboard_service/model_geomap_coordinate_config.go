@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the GeomapCoordinateConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapCoordinateConfig{}
@@ -21,7 +24,10 @@ var _ MappedNullable = &GeomapCoordinateConfig{}
 type GeomapCoordinateConfig struct {
 	LatitudeField *ObservationField `json:"latitudeField,omitempty"`
 	LongitudeField *ObservationField `json:"longitudeField,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeomapCoordinateConfig GeomapCoordinateConfig
 
 // NewGeomapCoordinateConfig instantiates a new GeomapCoordinateConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +126,35 @@ func (o GeomapCoordinateConfig) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LongitudeField) {
 		toSerialize["longitudeField"] = o.LongitudeField
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GeomapCoordinateConfig) UnmarshalJSON(data []byte) (err error) {
+	varGeomapCoordinateConfig := _GeomapCoordinateConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varGeomapCoordinateConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeomapCoordinateConfig(varGeomapCoordinateConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "latitudeField")
+		delete(additionalProperties, "longitudeField")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeomapCoordinateConfig struct {
@@ -158,5 +192,4 @@ func (v *NullableGeomapCoordinateConfig) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

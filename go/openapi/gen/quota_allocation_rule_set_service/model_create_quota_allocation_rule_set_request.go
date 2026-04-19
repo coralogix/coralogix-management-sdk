@@ -11,10 +11,12 @@ API version: 1.0.0
 package quota_allocation_rule_set_service
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the CreateQuotaAllocationRuleSetRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateQuotaAllocationRuleSetRequest{}
@@ -22,6 +24,7 @@ var _ MappedNullable = &CreateQuotaAllocationRuleSetRequest{}
 // CreateQuotaAllocationRuleSetRequest Request to create a new quota allocation rule set
 type CreateQuotaAllocationRuleSetRequest struct {
 	RuleSet QuotaAllocationEntityTypeRuleSet `json:"ruleSet"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateQuotaAllocationRuleSetRequest CreateQuotaAllocationRuleSetRequest
@@ -79,6 +82,11 @@ func (o CreateQuotaAllocationRuleSetRequest) MarshalJSON() ([]byte, error) {
 func (o CreateQuotaAllocationRuleSetRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ruleSet"] = o.RuleSet
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,7 +115,6 @@ func (o *CreateQuotaAllocationRuleSetRequest) UnmarshalJSON(data []byte) (err er
 	varCreateQuotaAllocationRuleSetRequest := _CreateQuotaAllocationRuleSetRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateQuotaAllocationRuleSetRequest)
 
 	if err != nil {
@@ -115,6 +122,13 @@ func (o *CreateQuotaAllocationRuleSetRequest) UnmarshalJSON(data []byte) (err er
 	}
 
 	*o = CreateQuotaAllocationRuleSetRequest(varCreateQuotaAllocationRuleSetRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ruleSet")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
@@ -154,5 +168,4 @@ func (v *NullableCreateQuotaAllocationRuleSetRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

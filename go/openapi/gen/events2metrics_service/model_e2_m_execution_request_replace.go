@@ -11,23 +11,31 @@ API version: 1.0.0
 package events2metrics_service
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
+
+var _ = bytes.MinRead
 
 // checks if the E2MExecutionRequestReplace type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &E2MExecutionRequestReplace{}
 
 // E2MExecutionRequestReplace struct for E2MExecutionRequestReplace
 type E2MExecutionRequestReplace struct {
-	Replace *ReplaceE2MRequest `json:"replace,omitempty"`
+	Replace ReplaceE2MRequest `json:"replace"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _E2MExecutionRequestReplace E2MExecutionRequestReplace
 
 // NewE2MExecutionRequestReplace instantiates a new E2MExecutionRequestReplace object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewE2MExecutionRequestReplace() *E2MExecutionRequestReplace {
+func NewE2MExecutionRequestReplace(replace ReplaceE2MRequest) *E2MExecutionRequestReplace {
 	this := E2MExecutionRequestReplace{}
+	this.Replace = replace
 	return &this
 }
 
@@ -39,36 +47,28 @@ func NewE2MExecutionRequestReplaceWithDefaults() *E2MExecutionRequestReplace {
 	return &this
 }
 
-// GetReplace returns the Replace field value if set, zero value otherwise.
+// GetReplace returns the Replace field value
 func (o *E2MExecutionRequestReplace) GetReplace() ReplaceE2MRequest {
-	if o == nil || IsNil(o.Replace) {
+	if o == nil {
 		var ret ReplaceE2MRequest
 		return ret
 	}
-	return *o.Replace
+
+	return o.Replace
 }
 
-// GetReplaceOk returns a tuple with the Replace field value if set, nil otherwise
+// GetReplaceOk returns a tuple with the Replace field value
 // and a boolean to check if the value has been set.
 func (o *E2MExecutionRequestReplace) GetReplaceOk() (*ReplaceE2MRequest, bool) {
-	if o == nil || IsNil(o.Replace) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Replace, true
+	return &o.Replace, true
 }
 
-// HasReplace returns a boolean if a field has been set.
-func (o *E2MExecutionRequestReplace) HasReplace() bool {
-	if o != nil && !IsNil(o.Replace) {
-		return true
-	}
-
-	return false
-}
-
-// SetReplace gets a reference to the given ReplaceE2MRequest and assigns it to the Replace field.
+// SetReplace sets field value
 func (o *E2MExecutionRequestReplace) SetReplace(v ReplaceE2MRequest) {
-	o.Replace = &v
+	o.Replace = v
 }
 
 func (o E2MExecutionRequestReplace) MarshalJSON() ([]byte, error) {
@@ -81,10 +81,56 @@ func (o E2MExecutionRequestReplace) MarshalJSON() ([]byte, error) {
 
 func (o E2MExecutionRequestReplace) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Replace) {
-		toSerialize["replace"] = o.Replace
+	toSerialize["replace"] = o.Replace
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
+}
+
+func (o *E2MExecutionRequestReplace) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"replace",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varE2MExecutionRequestReplace := _E2MExecutionRequestReplace{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varE2MExecutionRequestReplace)
+
+	if err != nil {
+		return err
+	}
+
+	*o = E2MExecutionRequestReplace(varE2MExecutionRequestReplace)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replace")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableE2MExecutionRequestReplace struct {
@@ -122,5 +168,4 @@ func (v *NullableE2MExecutionRequestReplace) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

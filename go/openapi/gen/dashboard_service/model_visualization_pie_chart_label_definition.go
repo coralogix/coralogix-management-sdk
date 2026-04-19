@@ -11,8 +11,11 @@ API version: 1.0.0
 package dashboard_service
 
 import (
+	"bytes"
 	"encoding/json"
 )
+
+var _ = bytes.MinRead
 
 // checks if the VisualizationPieChartLabelDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationPieChartLabelDefinition{}
@@ -28,7 +31,10 @@ type VisualizationPieChartLabelDefinition struct {
 	ShowPercentage *bool `json:"showPercentage,omitempty"`
 	// Whether to show value of slice in the label
 	ShowValue *bool `json:"showValue,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VisualizationPieChartLabelDefinition VisualizationPieChartLabelDefinition
 
 // NewVisualizationPieChartLabelDefinition instantiates a new VisualizationPieChartLabelDefinition object
 // This constructor will assign default values to properties that have it defined,
@@ -232,7 +238,38 @@ func (o VisualizationPieChartLabelDefinition) ToMap() (map[string]interface{}, e
 	if !IsNil(o.ShowValue) {
 		toSerialize["showValue"] = o.ShowValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VisualizationPieChartLabelDefinition) UnmarshalJSON(data []byte) (err error) {
+	varVisualizationPieChartLabelDefinition := _VisualizationPieChartLabelDefinition{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	err = decoder.Decode(&varVisualizationPieChartLabelDefinition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VisualizationPieChartLabelDefinition(varVisualizationPieChartLabelDefinition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isVisible")
+		delete(additionalProperties, "labelSource")
+		delete(additionalProperties, "showName")
+		delete(additionalProperties, "showPercentage")
+		delete(additionalProperties, "showValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVisualizationPieChartLabelDefinition struct {
@@ -270,5 +307,4 @@ func (v *NullableVisualizationPieChartLabelDefinition) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 
