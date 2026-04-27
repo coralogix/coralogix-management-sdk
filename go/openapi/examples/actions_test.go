@@ -27,7 +27,7 @@ import (
 )
 
 func TestActions(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewActionsClient(cfg)
 
 	name := "google search action " + strconv.FormatInt(time.Now().UnixMilli(), 10)

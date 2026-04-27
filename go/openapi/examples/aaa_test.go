@@ -33,7 +33,7 @@ import (
 )
 
 func TestApiKeys(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewAPIKeysClient(cfg)
 
 	teamIDEnv := os.Getenv("TEAM_ID")
@@ -83,7 +83,7 @@ func TestApiKeys(t *testing.T) {
 }
 
 func TestGroups(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewGroupsClient(cfg)
 
 	ctx := context.Background()
@@ -136,7 +136,7 @@ func TestGroups(t *testing.T) {
 }
 
 func TestIpAccess(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewIPAccessClient(cfg)
 
 	enabled := false
@@ -212,7 +212,7 @@ func TestIpAccess(t *testing.T) {
 }
 
 func TestCustomRoles(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewCustomRolesClient(cfg)
 
 	ctx := context.Background()
@@ -273,7 +273,7 @@ func TestCustomRoles(t *testing.T) {
 }
 
 func TestScopes(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewScopesClient(cfg)
 
 	ctx := context.Background()

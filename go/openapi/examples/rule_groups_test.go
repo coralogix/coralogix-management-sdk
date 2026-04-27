@@ -25,7 +25,7 @@ import (
 )
 
 func TestRuleGroups(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewRuleGroupsClient(cfg)
 
 	ctx := context.Background()

@@ -30,7 +30,7 @@ import (
 
 func TestDashboards(t *testing.T) {
 	t.Skip("Dashboards API is not OpenAPI compliant yet")
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewDashboardClient(cfg)
 
 	data, err := os.ReadFile("dashboard.json")
@@ -90,7 +90,7 @@ func TestDashboards(t *testing.T) {
 }
 
 func TestDashboardFolders(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewDashboardFoldersClient(cfg)
 
 	id := uuid.New().String()

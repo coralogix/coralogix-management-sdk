@@ -28,7 +28,7 @@ import (
 )
 
 func TestEnrichmentsGeoIp(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
@@ -69,7 +69,7 @@ func TestEnrichmentsGeoIp(t *testing.T) {
 
 func TestEnrichmentsAws(t *testing.T) {
 	t.Skip("Skipping AWS")
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
@@ -102,7 +102,7 @@ func TestEnrichmentsAws(t *testing.T) {
 }
 
 func TestEnrichmentsCustom(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	customEClient := cxsdk.NewCustomEnrichmentsClient(cfg)
 	name := fmt.Sprintf("test-%v", uuid.NewString())
 
@@ -165,7 +165,7 @@ func TestEnrichmentsCustom(t *testing.T) {
 }
 
 func TestEnrichmentsSuspiciousIp(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewEnrichmentsClient(cfg)
 
 	enrichmentType := enrichments.EnrichmentType{
