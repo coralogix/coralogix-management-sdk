@@ -24,20 +24,22 @@ import (
 // 1. CORALOGIX_URL - full URL to the API
 // 2. CORALOGIX_DOMAIN - custom domain (e.g., "api.staging.com")
 // 3. CORALOGIX_REGION - region identifier (e.g., "eu2", "us1")
+//
+// Empty values are ignored to allow fallback (e.g., CORALOGIX_URL="" with valid CORALOGIX_REGION).
 func newTestConfig() *cxsdk.Config {
 	builder := cxsdk.NewConfigBuilder().WithAPIKeyEnv()
 
-	if _, ok := os.LookupEnv("CORALOGIX_URL"); ok {
+	if url := os.Getenv("CORALOGIX_URL"); url != "" {
 		return builder.WithURLEnv().Build()
 	}
 
-	if _, ok := os.LookupEnv("CORALOGIX_DOMAIN"); ok {
+	if domain := os.Getenv("CORALOGIX_DOMAIN"); domain != "" {
 		return builder.WithDomainEnv().Build()
 	}
 
-	if _, ok := os.LookupEnv("CORALOGIX_REGION"); ok {
+	if region := os.Getenv("CORALOGIX_REGION"); region != "" {
 		return builder.WithRegionEnv().Build()
 	}
 
-	panic("one of CORALOGIX_URL, CORALOGIX_DOMAIN, or CORALOGIX_REGION environment variables must be set")
+	panic("one of CORALOGIX_URL, CORALOGIX_DOMAIN, or CORALOGIX_REGION environment variables must be set (non-empty)")
 }
