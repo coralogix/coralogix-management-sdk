@@ -28,7 +28,7 @@ import (
 )
 
 func TestViews(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewViewsClient(cfg)
 
 	createReq := views.ViewFolder{
@@ -79,7 +79,7 @@ func TestViews(t *testing.T) {
 }
 
 func TestViewsFolders(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewViewsFoldersClient(cfg)
 
 	before, httpResp, err := client.

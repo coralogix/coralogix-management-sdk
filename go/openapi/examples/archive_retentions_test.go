@@ -25,7 +25,7 @@ import (
 )
 
 func TestArchiveRetentions(t *testing.T) {
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewArchiveRetentionsClient(cfg)
 
 	ctx := context.Background()

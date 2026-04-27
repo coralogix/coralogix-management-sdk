@@ -12,7 +12,7 @@ import (
 
 func TestE2MsLogsQuery(t *testing.T) {
 	t.Skip("The API does not return the discriminating field for aggregations, and therefore we cannot deserialize the payload into any of the variants.")
-	cfg := cxsdk.NewConfigBuilder().WithAPIKeyEnv().WithRegionEnv().Build()
+	cfg := newTestConfig()
 	client := cxsdk.NewEvents2MetricsClient(cfg)
 
 	description := "E2M Logs Query created by E2M logs query test"
