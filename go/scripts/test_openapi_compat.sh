@@ -73,5 +73,23 @@ for fixture_dir in "$FIXTURES_DIR"/*; do
     --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false >/dev/null
 
   cp "$fixture_dir/compat_test.go" "$outdir/compat_test.go"
+
+  # Some openapi-generator versions emit `"bytes"` in both the hard-coded import
+  # block of model.mustache and again in the dynamically computed imports list,
+  # producing a duplicate-import compile error in test fixtures that combine
+  # `additionalProperties: false` with required props. goimports -w deduplicates
+  # safely (and is a no-op for fixtures the generator emits cleanly).
+  if command -v goimports >/dev/null 2>&1; then
+    goimports -w "$outdir"
+  else
+    GOPATH_BIN="$(go env GOPATH)/bin"
+    if [ ! -x "$GOPATH_BIN/goimports" ]; then
+      go install golang.org/x/tools/cmd/goimports@latest >/dev/null 2>&1 || true
+    fi
+    if [ -x "$GOPATH_BIN/goimports" ]; then
+      "$GOPATH_BIN/goimports" -w "$outdir"
+    fi
+  fi
+
   (cd "$REPO_ROOT" && go test "./${outdir#$REPO_ROOT/}")
 done

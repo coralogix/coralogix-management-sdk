@@ -148,9 +148,27 @@ func (o *GetBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err erro
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertSchedulerRules, rawAlertSchedulerRulesPresent := cxsdkRawFields["alertSchedulerRules"]
+	if rawAlertSchedulerRulesPresent {
+		delete(cxsdkRawFields, "alertSchedulerRules")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetBulkAlertSchedulerRuleResponse := _GetBulkAlertSchedulerRuleResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetBulkAlertSchedulerRuleResponse)
 
 	if err != nil {
@@ -158,6 +176,21 @@ func (o *GetBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err erro
 	}
 
 	*o = GetBulkAlertSchedulerRuleResponse(varGetBulkAlertSchedulerRuleResponse)
+
+	if rawAlertSchedulerRulesPresent {
+		var rawAlertSchedulerRulesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertSchedulerRules, &rawAlertSchedulerRulesElements); jerr == nil {
+			decodedAlertSchedulerRules := make([]AlertSchedulerRuleWithActiveTimeframe, 0, len(rawAlertSchedulerRulesElements))
+			for _, rawAlertSchedulerRulesElement := range rawAlertSchedulerRulesElements {
+				var elem AlertSchedulerRuleWithActiveTimeframe
+				if jerr := json.Unmarshal(rawAlertSchedulerRulesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertSchedulerRules = append(decodedAlertSchedulerRules, elem)
+			}
+			o.AlertSchedulerRules = decodedAlertSchedulerRules
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

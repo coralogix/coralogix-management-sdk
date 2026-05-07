@@ -626,9 +626,31 @@ func (o *QueryDisplaySettings) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCategoryFields, rawCategoryFieldsPresent := cxsdkRawFields["categoryFields"]
+	if rawCategoryFieldsPresent {
+		delete(cxsdkRawFields, "categoryFields")
+	}
+	rawValueFields, rawValueFieldsPresent := cxsdkRawFields["valueFields"]
+	if rawValueFieldsPresent {
+		delete(cxsdkRawFields, "valueFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varQueryDisplaySettings := _QueryDisplaySettings{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varQueryDisplaySettings)
 
 	if err != nil {
@@ -636,6 +658,36 @@ func (o *QueryDisplaySettings) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = QueryDisplaySettings(varQueryDisplaySettings)
+
+	if rawCategoryFieldsPresent {
+		var rawCategoryFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCategoryFields, &rawCategoryFieldsElements); jerr == nil {
+			decodedCategoryFields := make([]ObservationField, 0, len(rawCategoryFieldsElements))
+			for _, rawCategoryFieldsElement := range rawCategoryFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawCategoryFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCategoryFields = append(decodedCategoryFields, elem)
+			}
+			o.CategoryFields = decodedCategoryFields
+		}
+	}
+
+	if rawValueFieldsPresent {
+		var rawValueFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawValueFields, &rawValueFieldsElements); jerr == nil {
+			decodedValueFields := make([]ObservationField, 0, len(rawValueFieldsElements))
+			for _, rawValueFieldsElement := range rawValueFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawValueFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedValueFields = append(decodedValueFields, elem)
+			}
+			o.ValueFields = decodedValueFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

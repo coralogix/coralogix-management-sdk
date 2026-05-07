@@ -171,9 +171,27 @@ func (o Section) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Section) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRows, rawRowsPresent := cxsdkRawFields["rows"]
+	if rawRowsPresent {
+		delete(cxsdkRawFields, "rows")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varSection := _Section{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varSection)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *Section) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Section(varSection)
+
+	if rawRowsPresent {
+		var rawRowsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRows, &rawRowsElements); jerr == nil {
+			decodedRows := make([]Row, 0, len(rawRowsElements))
+			for _, rawRowsElement := range rawRowsElements {
+				var elem Row
+				if jerr := json.Unmarshal(rawRowsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRows = append(decodedRows, elem)
+			}
+			o.Rows = decodedRows
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

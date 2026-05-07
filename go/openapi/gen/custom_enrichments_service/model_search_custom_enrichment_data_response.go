@@ -99,9 +99,27 @@ func (o SearchCustomEnrichmentDataResponse) ToMap() (map[string]interface{}, err
 }
 
 func (o *SearchCustomEnrichmentDataResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCustomEnrichmentsData, rawCustomEnrichmentsDataPresent := cxsdkRawFields["customEnrichmentsData"]
+	if rawCustomEnrichmentsDataPresent {
+		delete(cxsdkRawFields, "customEnrichmentsData")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varSearchCustomEnrichmentDataResponse := _SearchCustomEnrichmentDataResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varSearchCustomEnrichmentDataResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *SearchCustomEnrichmentDataResponse) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = SearchCustomEnrichmentDataResponse(varSearchCustomEnrichmentDataResponse)
+
+	if rawCustomEnrichmentsDataPresent {
+		var rawCustomEnrichmentsDataElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCustomEnrichmentsData, &rawCustomEnrichmentsDataElements); jerr == nil {
+			decodedCustomEnrichmentsData := make([]CustomEnrichmentData, 0, len(rawCustomEnrichmentsDataElements))
+			for _, rawCustomEnrichmentsDataElement := range rawCustomEnrichmentsDataElements {
+				var elem CustomEnrichmentData
+				if jerr := json.Unmarshal(rawCustomEnrichmentsDataElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCustomEnrichmentsData = append(decodedCustomEnrichmentsData, elem)
+			}
+			o.CustomEnrichmentsData = decodedCustomEnrichmentsData
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

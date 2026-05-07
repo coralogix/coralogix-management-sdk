@@ -243,9 +243,43 @@ func (o TracingLabelFilters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *TracingLabelFilters) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawApplicationName, rawApplicationNamePresent := cxsdkRawFields["applicationName"]
+	if rawApplicationNamePresent {
+		delete(cxsdkRawFields, "applicationName")
+	}
+	rawOperationName, rawOperationNamePresent := cxsdkRawFields["operationName"]
+	if rawOperationNamePresent {
+		delete(cxsdkRawFields, "operationName")
+	}
+	rawServiceName, rawServiceNamePresent := cxsdkRawFields["serviceName"]
+	if rawServiceNamePresent {
+		delete(cxsdkRawFields, "serviceName")
+	}
+	rawSpanFields, rawSpanFieldsPresent := cxsdkRawFields["spanFields"]
+	if rawSpanFieldsPresent {
+		delete(cxsdkRawFields, "spanFields")
+	}
+	rawSubsystemName, rawSubsystemNamePresent := cxsdkRawFields["subsystemName"]
+	if rawSubsystemNamePresent {
+		delete(cxsdkRawFields, "subsystemName")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varTracingLabelFilters := _TracingLabelFilters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varTracingLabelFilters)
 
 	if err != nil {
@@ -253,6 +287,81 @@ func (o *TracingLabelFilters) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = TracingLabelFilters(varTracingLabelFilters)
+
+	if rawApplicationNamePresent {
+		var rawApplicationNameElements []json.RawMessage
+		if jerr := json.Unmarshal(rawApplicationName, &rawApplicationNameElements); jerr == nil {
+			decodedApplicationName := make([]TracingFilterType, 0, len(rawApplicationNameElements))
+			for _, rawApplicationNameElement := range rawApplicationNameElements {
+				var elem TracingFilterType
+				if jerr := json.Unmarshal(rawApplicationNameElement, &elem); jerr != nil {
+					continue
+				}
+				decodedApplicationName = append(decodedApplicationName, elem)
+			}
+			o.ApplicationName = decodedApplicationName
+		}
+	}
+
+	if rawOperationNamePresent {
+		var rawOperationNameElements []json.RawMessage
+		if jerr := json.Unmarshal(rawOperationName, &rawOperationNameElements); jerr == nil {
+			decodedOperationName := make([]TracingFilterType, 0, len(rawOperationNameElements))
+			for _, rawOperationNameElement := range rawOperationNameElements {
+				var elem TracingFilterType
+				if jerr := json.Unmarshal(rawOperationNameElement, &elem); jerr != nil {
+					continue
+				}
+				decodedOperationName = append(decodedOperationName, elem)
+			}
+			o.OperationName = decodedOperationName
+		}
+	}
+
+	if rawServiceNamePresent {
+		var rawServiceNameElements []json.RawMessage
+		if jerr := json.Unmarshal(rawServiceName, &rawServiceNameElements); jerr == nil {
+			decodedServiceName := make([]TracingFilterType, 0, len(rawServiceNameElements))
+			for _, rawServiceNameElement := range rawServiceNameElements {
+				var elem TracingFilterType
+				if jerr := json.Unmarshal(rawServiceNameElement, &elem); jerr != nil {
+					continue
+				}
+				decodedServiceName = append(decodedServiceName, elem)
+			}
+			o.ServiceName = decodedServiceName
+		}
+	}
+
+	if rawSpanFieldsPresent {
+		var rawSpanFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSpanFields, &rawSpanFieldsElements); jerr == nil {
+			decodedSpanFields := make([]TracingSpanFieldsFilterType, 0, len(rawSpanFieldsElements))
+			for _, rawSpanFieldsElement := range rawSpanFieldsElements {
+				var elem TracingSpanFieldsFilterType
+				if jerr := json.Unmarshal(rawSpanFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSpanFields = append(decodedSpanFields, elem)
+			}
+			o.SpanFields = decodedSpanFields
+		}
+	}
+
+	if rawSubsystemNamePresent {
+		var rawSubsystemNameElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSubsystemName, &rawSubsystemNameElements); jerr == nil {
+			decodedSubsystemName := make([]TracingFilterType, 0, len(rawSubsystemNameElements))
+			for _, rawSubsystemNameElement := range rawSubsystemNameElements {
+				var elem TracingFilterType
+				if jerr := json.Unmarshal(rawSubsystemNameElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSubsystemName = append(decodedSubsystemName, elem)
+			}
+			o.SubsystemName = decodedSubsystemName
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -99,9 +99,27 @@ func (o EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) ToMap() (map[stri
 }
 
 func (o *EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRequestEnrichments, rawRequestEnrichmentsPresent := cxsdkRawFields["requestEnrichments"]
+	if rawRequestEnrichmentsPresent {
+		delete(cxsdkRawFields, "requestEnrichments")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest := _EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) UnmarshalJSON(da
 	}
 
 	*o = EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest(varEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest)
+
+	if rawRequestEnrichmentsPresent {
+		var rawRequestEnrichmentsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRequestEnrichments, &rawRequestEnrichmentsElements); jerr == nil {
+			decodedRequestEnrichments := make([]EnrichmentRequestModel, 0, len(rawRequestEnrichmentsElements))
+			for _, rawRequestEnrichmentsElement := range rawRequestEnrichmentsElements {
+				var elem EnrichmentRequestModel
+				if jerr := json.Unmarshal(rawRequestEnrichmentsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRequestEnrichments = append(decodedRequestEnrichments, elem)
+			}
+			o.RequestEnrichments = decodedRequestEnrichments
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

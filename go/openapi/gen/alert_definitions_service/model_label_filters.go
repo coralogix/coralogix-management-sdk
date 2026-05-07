@@ -171,9 +171,31 @@ func (o LabelFilters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LabelFilters) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawApplicationName, rawApplicationNamePresent := cxsdkRawFields["applicationName"]
+	if rawApplicationNamePresent {
+		delete(cxsdkRawFields, "applicationName")
+	}
+	rawSubsystemName, rawSubsystemNamePresent := cxsdkRawFields["subsystemName"]
+	if rawSubsystemNamePresent {
+		delete(cxsdkRawFields, "subsystemName")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varLabelFilters := _LabelFilters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varLabelFilters)
 
 	if err != nil {
@@ -181,6 +203,36 @@ func (o *LabelFilters) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LabelFilters(varLabelFilters)
+
+	if rawApplicationNamePresent {
+		var rawApplicationNameElements []json.RawMessage
+		if jerr := json.Unmarshal(rawApplicationName, &rawApplicationNameElements); jerr == nil {
+			decodedApplicationName := make([]LabelFilterType, 0, len(rawApplicationNameElements))
+			for _, rawApplicationNameElement := range rawApplicationNameElements {
+				var elem LabelFilterType
+				if jerr := json.Unmarshal(rawApplicationNameElement, &elem); jerr != nil {
+					continue
+				}
+				decodedApplicationName = append(decodedApplicationName, elem)
+			}
+			o.ApplicationName = decodedApplicationName
+		}
+	}
+
+	if rawSubsystemNamePresent {
+		var rawSubsystemNameElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSubsystemName, &rawSubsystemNameElements); jerr == nil {
+			decodedSubsystemName := make([]LabelFilterType, 0, len(rawSubsystemNameElements))
+			for _, rawSubsystemNameElement := range rawSubsystemNameElements {
+				var elem LabelFilterType
+				if jerr := json.Unmarshal(rawSubsystemNameElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSubsystemName = append(decodedSubsystemName, elem)
+			}
+			o.SubsystemName = decodedSubsystemName
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

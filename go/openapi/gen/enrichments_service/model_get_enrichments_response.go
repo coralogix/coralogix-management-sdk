@@ -112,9 +112,27 @@ func (o *GetEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawEnrichments, rawEnrichmentsPresent := cxsdkRawFields["enrichments"]
+	if rawEnrichmentsPresent {
+		delete(cxsdkRawFields, "enrichments")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetEnrichmentsResponse := _GetEnrichmentsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetEnrichmentsResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *GetEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetEnrichmentsResponse(varGetEnrichmentsResponse)
+
+	if rawEnrichmentsPresent {
+		var rawEnrichmentsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEnrichments, &rawEnrichmentsElements); jerr == nil {
+			decodedEnrichments := make([]Enrichment, 0, len(rawEnrichmentsElements))
+			for _, rawEnrichmentsElement := range rawEnrichmentsElements {
+				var elem Enrichment
+				if jerr := json.Unmarshal(rawEnrichmentsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEnrichments = append(decodedEnrichments, elem)
+			}
+			o.Enrichments = decodedEnrichments
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -550,9 +550,31 @@ func (o *HeatmapColorRange) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawXAxisFields, rawXAxisFieldsPresent := cxsdkRawFields["xAxisFields"]
+	if rawXAxisFieldsPresent {
+		delete(cxsdkRawFields, "xAxisFields")
+	}
+	rawYAxisFields, rawYAxisFieldsPresent := cxsdkRawFields["yAxisFields"]
+	if rawYAxisFieldsPresent {
+		delete(cxsdkRawFields, "yAxisFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varHeatmapColorRange := _HeatmapColorRange{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varHeatmapColorRange)
 
 	if err != nil {
@@ -560,6 +582,36 @@ func (o *HeatmapColorRange) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = HeatmapColorRange(varHeatmapColorRange)
+
+	if rawXAxisFieldsPresent {
+		var rawXAxisFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawXAxisFields, &rawXAxisFieldsElements); jerr == nil {
+			decodedXAxisFields := make([]ObservationField, 0, len(rawXAxisFieldsElements))
+			for _, rawXAxisFieldsElement := range rawXAxisFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawXAxisFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedXAxisFields = append(decodedXAxisFields, elem)
+			}
+			o.XAxisFields = decodedXAxisFields
+		}
+	}
+
+	if rawYAxisFieldsPresent {
+		var rawYAxisFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawYAxisFields, &rawYAxisFieldsElements); jerr == nil {
+			decodedYAxisFields := make([]ObservationField, 0, len(rawYAxisFieldsElements))
+			for _, rawYAxisFieldsElement := range rawYAxisFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawYAxisFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedYAxisFields = append(decodedYAxisFields, elem)
+			}
+			o.YAxisFields = decodedYAxisFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

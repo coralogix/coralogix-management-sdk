@@ -171,9 +171,27 @@ func (o FlowStagesGroup) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FlowStagesGroup) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertDefs, rawAlertDefsPresent := cxsdkRawFields["alertDefs"]
+	if rawAlertDefsPresent {
+		delete(cxsdkRawFields, "alertDefs")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varFlowStagesGroup := _FlowStagesGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varFlowStagesGroup)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *FlowStagesGroup) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = FlowStagesGroup(varFlowStagesGroup)
+
+	if rawAlertDefsPresent {
+		var rawAlertDefsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertDefs, &rawAlertDefsElements); jerr == nil {
+			decodedAlertDefs := make([]FlowStagesGroupsAlertDefs, 0, len(rawAlertDefsElements))
+			for _, rawAlertDefsElement := range rawAlertDefsElements {
+				var elem FlowStagesGroupsAlertDefs
+				if jerr := json.Unmarshal(rawAlertDefsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertDefs = append(decodedAlertDefs, elem)
+			}
+			o.AlertDefs = decodedAlertDefs
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

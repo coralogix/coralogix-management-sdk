@@ -135,9 +135,27 @@ func (o AlertSchedulerRuleWithActiveTimeframe) ToMap() (map[string]interface{}, 
 }
 
 func (o *AlertSchedulerRuleWithActiveTimeframe) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawNextActiveTimeframes, rawNextActiveTimeframesPresent := cxsdkRawFields["nextActiveTimeframes"]
+	if rawNextActiveTimeframesPresent {
+		delete(cxsdkRawFields, "nextActiveTimeframes")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varAlertSchedulerRuleWithActiveTimeframe := _AlertSchedulerRuleWithActiveTimeframe{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varAlertSchedulerRuleWithActiveTimeframe)
 
 	if err != nil {
@@ -145,6 +163,21 @@ func (o *AlertSchedulerRuleWithActiveTimeframe) UnmarshalJSON(data []byte) (err 
 	}
 
 	*o = AlertSchedulerRuleWithActiveTimeframe(varAlertSchedulerRuleWithActiveTimeframe)
+
+	if rawNextActiveTimeframesPresent {
+		var rawNextActiveTimeframesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawNextActiveTimeframes, &rawNextActiveTimeframesElements); jerr == nil {
+			decodedNextActiveTimeframes := make([]ActiveTimeframe, 0, len(rawNextActiveTimeframesElements))
+			for _, rawNextActiveTimeframesElement := range rawNextActiveTimeframesElements {
+				var elem ActiveTimeframe
+				if jerr := json.Unmarshal(rawNextActiveTimeframesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedNextActiveTimeframes = append(decodedNextActiveTimeframes, elem)
+			}
+			o.NextActiveTimeframes = decodedNextActiveTimeframes
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

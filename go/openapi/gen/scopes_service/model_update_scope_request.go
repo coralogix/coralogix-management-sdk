@@ -232,9 +232,27 @@ func (o *UpdateScopeRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFilters, rawFiltersPresent := cxsdkRawFields["filters"]
+	if rawFiltersPresent {
+		delete(cxsdkRawFields, "filters")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varUpdateScopeRequest := _UpdateScopeRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varUpdateScopeRequest)
 
 	if err != nil {
@@ -242,6 +260,21 @@ func (o *UpdateScopeRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UpdateScopeRequest(varUpdateScopeRequest)
+
+	if rawFiltersPresent {
+		var rawFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFilters, &rawFiltersElements); jerr == nil {
+			decodedFilters := make([]ScopesV1Filter, 0, len(rawFiltersElements))
+			for _, rawFiltersElement := range rawFiltersElements {
+				var elem ScopesV1Filter
+				if jerr := json.Unmarshal(rawFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFilters = append(decodedFilters, elem)
+			}
+			o.Filters = decodedFilters
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

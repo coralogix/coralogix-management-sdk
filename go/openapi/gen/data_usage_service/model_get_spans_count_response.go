@@ -99,9 +99,27 @@ func (o GetSpansCountResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetSpansCountResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawSpansCount, rawSpansCountPresent := cxsdkRawFields["spansCount"]
+	if rawSpansCountPresent {
+		delete(cxsdkRawFields, "spansCount")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetSpansCountResponse := _GetSpansCountResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetSpansCountResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetSpansCountResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetSpansCountResponse(varGetSpansCountResponse)
+
+	if rawSpansCountPresent {
+		var rawSpansCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSpansCount, &rawSpansCountElements); jerr == nil {
+			decodedSpansCount := make([]SpansCount, 0, len(rawSpansCountElements))
+			for _, rawSpansCountElement := range rawSpansCountElements {
+				var elem SpansCount
+				if jerr := json.Unmarshal(rawSpansCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSpansCount = append(decodedSpansCount, elem)
+			}
+			o.SpansCount = decodedSpansCount
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

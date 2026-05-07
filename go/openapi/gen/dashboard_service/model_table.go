@@ -171,9 +171,31 @@ func (o Table) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Table) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawColumns, rawColumnsPresent := cxsdkRawFields["columns"]
+	if rawColumnsPresent {
+		delete(cxsdkRawFields, "columns")
+	}
+	rawRules, rawRulesPresent := cxsdkRawFields["rules"]
+	if rawRulesPresent {
+		delete(cxsdkRawFields, "rules")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varTable := _Table{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varTable)
 
 	if err != nil {
@@ -181,6 +203,36 @@ func (o *Table) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Table(varTable)
+
+	if rawColumnsPresent {
+		var rawColumnsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawColumns, &rawColumnsElements); jerr == nil {
+			decodedColumns := make([]TableColumn, 0, len(rawColumnsElements))
+			for _, rawColumnsElement := range rawColumnsElements {
+				var elem TableColumn
+				if jerr := json.Unmarshal(rawColumnsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedColumns = append(decodedColumns, elem)
+			}
+			o.Columns = decodedColumns
+		}
+	}
+
+	if rawRulesPresent {
+		var rawRulesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRules, &rawRulesElements); jerr == nil {
+			decodedRules := make([]TableRule, 0, len(rawRulesElements))
+			for _, rawRulesElement := range rawRulesElements {
+				var elem TableRule
+				if jerr := json.Unmarshal(rawRulesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRules = append(decodedRules, elem)
+			}
+			o.Rules = decodedRules
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

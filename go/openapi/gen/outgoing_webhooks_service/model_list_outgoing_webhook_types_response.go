@@ -99,9 +99,27 @@ func (o ListOutgoingWebhookTypesResponse) ToMap() (map[string]interface{}, error
 }
 
 func (o *ListOutgoingWebhookTypesResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawWebhooks, rawWebhooksPresent := cxsdkRawFields["webhooks"]
+	if rawWebhooksPresent {
+		delete(cxsdkRawFields, "webhooks")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListOutgoingWebhookTypesResponse := _ListOutgoingWebhookTypesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListOutgoingWebhookTypesResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListOutgoingWebhookTypesResponse) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = ListOutgoingWebhookTypesResponse(varListOutgoingWebhookTypesResponse)
+
+	if rawWebhooksPresent {
+		var rawWebhooksElements []json.RawMessage
+		if jerr := json.Unmarshal(rawWebhooks, &rawWebhooksElements); jerr == nil {
+			decodedWebhooks := make([]OutgoingWebhookType, 0, len(rawWebhooksElements))
+			for _, rawWebhooksElement := range rawWebhooksElements {
+				var elem OutgoingWebhookType
+				if jerr := json.Unmarshal(rawWebhooksElement, &elem); jerr != nil {
+					continue
+				}
+				decodedWebhooks = append(decodedWebhooks, elem)
+			}
+			o.Webhooks = decodedWebhooks
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

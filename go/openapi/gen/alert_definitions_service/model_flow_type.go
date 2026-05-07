@@ -135,9 +135,27 @@ func (o FlowType) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FlowType) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawStages, rawStagesPresent := cxsdkRawFields["stages"]
+	if rawStagesPresent {
+		delete(cxsdkRawFields, "stages")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varFlowType := _FlowType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varFlowType)
 
 	if err != nil {
@@ -145,6 +163,21 @@ func (o *FlowType) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = FlowType(varFlowType)
+
+	if rawStagesPresent {
+		var rawStagesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawStages, &rawStagesElements); jerr == nil {
+			decodedStages := make([]FlowStages, 0, len(rawStagesElements))
+			for _, rawStagesElement := range rawStagesElements {
+				var elem FlowStages
+				if jerr := json.Unmarshal(rawStagesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedStages = append(decodedStages, elem)
+			}
+			o.Stages = decodedStages
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

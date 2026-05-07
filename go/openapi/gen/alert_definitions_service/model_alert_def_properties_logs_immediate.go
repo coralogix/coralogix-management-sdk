@@ -622,9 +622,31 @@ func (o *AlertDefPropertiesLogsImmediate) UnmarshalJSON(data []byte) (err error)
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawDataSources, rawDataSourcesPresent := cxsdkRawFields["dataSources"]
+	if rawDataSourcesPresent {
+		delete(cxsdkRawFields, "dataSources")
+	}
+	rawNotificationGroupExcess, rawNotificationGroupExcessPresent := cxsdkRawFields["notificationGroupExcess"]
+	if rawNotificationGroupExcessPresent {
+		delete(cxsdkRawFields, "notificationGroupExcess")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varAlertDefPropertiesLogsImmediate := _AlertDefPropertiesLogsImmediate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varAlertDefPropertiesLogsImmediate)
 
 	if err != nil {
@@ -632,6 +654,36 @@ func (o *AlertDefPropertiesLogsImmediate) UnmarshalJSON(data []byte) (err error)
 	}
 
 	*o = AlertDefPropertiesLogsImmediate(varAlertDefPropertiesLogsImmediate)
+
+	if rawDataSourcesPresent {
+		var rawDataSourcesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawDataSources, &rawDataSourcesElements); jerr == nil {
+			decodedDataSources := make([]AlertDefDataSource, 0, len(rawDataSourcesElements))
+			for _, rawDataSourcesElement := range rawDataSourcesElements {
+				var elem AlertDefDataSource
+				if jerr := json.Unmarshal(rawDataSourcesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedDataSources = append(decodedDataSources, elem)
+			}
+			o.DataSources = decodedDataSources
+		}
+	}
+
+	if rawNotificationGroupExcessPresent {
+		var rawNotificationGroupExcessElements []json.RawMessage
+		if jerr := json.Unmarshal(rawNotificationGroupExcess, &rawNotificationGroupExcessElements); jerr == nil {
+			decodedNotificationGroupExcess := make([]AlertDefNotificationGroup, 0, len(rawNotificationGroupExcessElements))
+			for _, rawNotificationGroupExcessElement := range rawNotificationGroupExcessElements {
+				var elem AlertDefNotificationGroup
+				if jerr := json.Unmarshal(rawNotificationGroupExcessElement, &elem); jerr != nil {
+					continue
+				}
+				decodedNotificationGroupExcess = append(decodedNotificationGroupExcess, elem)
+			}
+			o.NotificationGroupExcess = decodedNotificationGroupExcess
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

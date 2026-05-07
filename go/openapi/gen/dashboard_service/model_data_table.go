@@ -280,9 +280,27 @@ func (o DataTable) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DataTable) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawColumns, rawColumnsPresent := cxsdkRawFields["columns"]
+	if rawColumnsPresent {
+		delete(cxsdkRawFields, "columns")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varDataTable := _DataTable{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varDataTable)
 
 	if err != nil {
@@ -290,6 +308,21 @@ func (o *DataTable) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DataTable(varDataTable)
+
+	if rawColumnsPresent {
+		var rawColumnsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawColumns, &rawColumnsElements); jerr == nil {
+			decodedColumns := make([]DataTableColumn, 0, len(rawColumnsElements))
+			for _, rawColumnsElement := range rawColumnsElements {
+				var elem DataTableColumn
+				if jerr := json.Unmarshal(rawColumnsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedColumns = append(decodedColumns, elem)
+			}
+			o.Columns = decodedColumns
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

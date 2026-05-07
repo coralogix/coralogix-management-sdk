@@ -351,9 +351,35 @@ func (o PieChartSpansQuery) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *PieChartSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFilters, rawFiltersPresent := cxsdkRawFields["filters"]
+	if rawFiltersPresent {
+		delete(cxsdkRawFields, "filters")
+	}
+	rawGroupNames, rawGroupNamesPresent := cxsdkRawFields["groupNames"]
+	if rawGroupNamesPresent {
+		delete(cxsdkRawFields, "groupNames")
+	}
+	rawGroupNamesFields, rawGroupNamesFieldsPresent := cxsdkRawFields["groupNamesFields"]
+	if rawGroupNamesFieldsPresent {
+		delete(cxsdkRawFields, "groupNamesFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varPieChartSpansQuery := _PieChartSpansQuery{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varPieChartSpansQuery)
 
 	if err != nil {
@@ -361,6 +387,51 @@ func (o *PieChartSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = PieChartSpansQuery(varPieChartSpansQuery)
+
+	if rawFiltersPresent {
+		var rawFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFilters, &rawFiltersElements); jerr == nil {
+			decodedFilters := make([]SpansFilter, 0, len(rawFiltersElements))
+			for _, rawFiltersElement := range rawFiltersElements {
+				var elem SpansFilter
+				if jerr := json.Unmarshal(rawFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFilters = append(decodedFilters, elem)
+			}
+			o.Filters = decodedFilters
+		}
+	}
+
+	if rawGroupNamesPresent {
+		var rawGroupNamesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupNames, &rawGroupNamesElements); jerr == nil {
+			decodedGroupNames := make([]SpanField, 0, len(rawGroupNamesElements))
+			for _, rawGroupNamesElement := range rawGroupNamesElements {
+				var elem SpanField
+				if jerr := json.Unmarshal(rawGroupNamesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupNames = append(decodedGroupNames, elem)
+			}
+			o.GroupNames = decodedGroupNames
+		}
+	}
+
+	if rawGroupNamesFieldsPresent {
+		var rawGroupNamesFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupNamesFields, &rawGroupNamesFieldsElements); jerr == nil {
+			decodedGroupNamesFields := make([]SpanObservationField, 0, len(rawGroupNamesFieldsElements))
+			for _, rawGroupNamesFieldsElement := range rawGroupNamesFieldsElements {
+				var elem SpanObservationField
+				if jerr := json.Unmarshal(rawGroupNamesFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupNamesFields = append(decodedGroupNamesFields, elem)
+			}
+			o.GroupNamesFields = decodedGroupNamesFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

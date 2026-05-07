@@ -99,9 +99,27 @@ func (o ListPresetSummariesResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListPresetSummariesResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawPresetSummaries, rawPresetSummariesPresent := cxsdkRawFields["presetSummaries"]
+	if rawPresetSummariesPresent {
+		delete(cxsdkRawFields, "presetSummaries")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListPresetSummariesResponse := _ListPresetSummariesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListPresetSummariesResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListPresetSummariesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListPresetSummariesResponse(varListPresetSummariesResponse)
+
+	if rawPresetSummariesPresent {
+		var rawPresetSummariesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPresetSummaries, &rawPresetSummariesElements); jerr == nil {
+			decodedPresetSummaries := make([]PresetSummary, 0, len(rawPresetSummariesElements))
+			for _, rawPresetSummariesElement := range rawPresetSummariesElements {
+				var elem PresetSummary
+				if jerr := json.Unmarshal(rawPresetSummariesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPresetSummaries = append(decodedPresetSummaries, elem)
+			}
+			o.PresetSummaries = decodedPresetSummaries
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

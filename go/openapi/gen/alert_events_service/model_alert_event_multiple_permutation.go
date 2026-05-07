@@ -99,9 +99,27 @@ func (o AlertEventMultiplePermutation) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AlertEventMultiplePermutation) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertEventMultiplePermutation, rawAlertEventMultiplePermutationPresent := cxsdkRawFields["alertEventMultiplePermutation"]
+	if rawAlertEventMultiplePermutationPresent {
+		delete(cxsdkRawFields, "alertEventMultiplePermutation")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varAlertEventMultiplePermutation := _AlertEventMultiplePermutation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varAlertEventMultiplePermutation)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *AlertEventMultiplePermutation) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = AlertEventMultiplePermutation(varAlertEventMultiplePermutation)
+
+	if rawAlertEventMultiplePermutationPresent {
+		var rawAlertEventMultiplePermutationElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertEventMultiplePermutation, &rawAlertEventMultiplePermutationElements); jerr == nil {
+			decodedAlertEventMultiplePermutation := make([]AlertEvent, 0, len(rawAlertEventMultiplePermutationElements))
+			for _, rawAlertEventMultiplePermutationElement := range rawAlertEventMultiplePermutationElements {
+				var elem AlertEvent
+				if jerr := json.Unmarshal(rawAlertEventMultiplePermutationElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertEventMultiplePermutation = append(decodedAlertEventMultiplePermutation, elem)
+			}
+			o.AlertEventMultiplePermutation = decodedAlertEventMultiplePermutation
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

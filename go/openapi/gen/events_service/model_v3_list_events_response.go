@@ -148,9 +148,27 @@ func (o *V3ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawEvents, rawEventsPresent := cxsdkRawFields["events"]
+	if rawEventsPresent {
+		delete(cxsdkRawFields, "events")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varV3ListEventsResponse := _V3ListEventsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varV3ListEventsResponse)
 
 	if err != nil {
@@ -158,6 +176,21 @@ func (o *V3ListEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V3ListEventsResponse(varV3ListEventsResponse)
+
+	if rawEventsPresent {
+		var rawEventsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEvents, &rawEventsElements); jerr == nil {
+			decodedEvents := make([]CxEvent, 0, len(rawEventsElements))
+			for _, rawEventsElement := range rawEventsElements {
+				var elem CxEvent
+				if jerr := json.Unmarshal(rawEventsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEvents = append(decodedEvents, elem)
+			}
+			o.Events = decodedEvents
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

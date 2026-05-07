@@ -135,9 +135,31 @@ func (o Rum) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Rum) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawBrowserSdkCommands, rawBrowserSdkCommandsPresent := cxsdkRawFields["browserSdkCommands"]
+	if rawBrowserSdkCommandsPresent {
+		delete(cxsdkRawFields, "browserSdkCommands")
+	}
+	rawSourceMapCommands, rawSourceMapCommandsPresent := cxsdkRawFields["sourceMapCommands"]
+	if rawSourceMapCommandsPresent {
+		delete(cxsdkRawFields, "sourceMapCommands")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRum := _Rum{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRum)
 
 	if err != nil {
@@ -145,6 +167,36 @@ func (o *Rum) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Rum(varRum)
+
+	if rawBrowserSdkCommandsPresent {
+		var rawBrowserSdkCommandsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawBrowserSdkCommands, &rawBrowserSdkCommandsElements); jerr == nil {
+			decodedBrowserSdkCommands := make([]CommandInformation, 0, len(rawBrowserSdkCommandsElements))
+			for _, rawBrowserSdkCommandsElement := range rawBrowserSdkCommandsElements {
+				var elem CommandInformation
+				if jerr := json.Unmarshal(rawBrowserSdkCommandsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedBrowserSdkCommands = append(decodedBrowserSdkCommands, elem)
+			}
+			o.BrowserSdkCommands = decodedBrowserSdkCommands
+		}
+	}
+
+	if rawSourceMapCommandsPresent {
+		var rawSourceMapCommandsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSourceMapCommands, &rawSourceMapCommandsElements); jerr == nil {
+			decodedSourceMapCommands := make([]CommandInformation, 0, len(rawSourceMapCommandsElements))
+			for _, rawSourceMapCommandsElement := range rawSourceMapCommandsElements {
+				var elem CommandInformation
+				if jerr := json.Unmarshal(rawSourceMapCommandsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSourceMapCommands = append(decodedSourceMapCommands, elem)
+			}
+			o.SourceMapCommands = decodedSourceMapCommands
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

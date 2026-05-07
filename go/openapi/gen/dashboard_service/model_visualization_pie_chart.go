@@ -686,9 +686,31 @@ func (o VisualizationPieChart) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *VisualizationPieChart) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCategoryFields, rawCategoryFieldsPresent := cxsdkRawFields["categoryFields"]
+	if rawCategoryFieldsPresent {
+		delete(cxsdkRawFields, "categoryFields")
+	}
+	rawSubCategoryFields, rawSubCategoryFieldsPresent := cxsdkRawFields["subCategoryFields"]
+	if rawSubCategoryFieldsPresent {
+		delete(cxsdkRawFields, "subCategoryFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varVisualizationPieChart := _VisualizationPieChart{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varVisualizationPieChart)
 
 	if err != nil {
@@ -696,6 +718,36 @@ func (o *VisualizationPieChart) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = VisualizationPieChart(varVisualizationPieChart)
+
+	if rawCategoryFieldsPresent {
+		var rawCategoryFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCategoryFields, &rawCategoryFieldsElements); jerr == nil {
+			decodedCategoryFields := make([]ObservationField, 0, len(rawCategoryFieldsElements))
+			for _, rawCategoryFieldsElement := range rawCategoryFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawCategoryFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCategoryFields = append(decodedCategoryFields, elem)
+			}
+			o.CategoryFields = decodedCategoryFields
+		}
+	}
+
+	if rawSubCategoryFieldsPresent {
+		var rawSubCategoryFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSubCategoryFields, &rawSubCategoryFieldsElements); jerr == nil {
+			decodedSubCategoryFields := make([]ObservationField, 0, len(rawSubCategoryFieldsElements))
+			for _, rawSubCategoryFieldsElement := range rawSubCategoryFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawSubCategoryFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSubCategoryFields = append(decodedSubCategoryFields, elem)
+			}
+			o.SubCategoryFields = decodedSubCategoryFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

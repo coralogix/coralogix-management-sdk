@@ -459,9 +459,27 @@ func (o ExtensionItem) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ExtensionItem) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawBinaries, rawBinariesPresent := cxsdkRawFields["binaries"]
+	if rawBinariesPresent {
+		delete(cxsdkRawFields, "binaries")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varExtensionItem := _ExtensionItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varExtensionItem)
 
 	if err != nil {
@@ -469,6 +487,21 @@ func (o *ExtensionItem) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ExtensionItem(varExtensionItem)
+
+	if rawBinariesPresent {
+		var rawBinariesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawBinaries, &rawBinariesElements); jerr == nil {
+			decodedBinaries := make([]ExtensionItemBinary, 0, len(rawBinariesElements))
+			for _, rawBinariesElement := range rawBinariesElements {
+				var elem ExtensionItemBinary
+				if jerr := json.Unmarshal(rawBinariesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedBinaries = append(decodedBinaries, elem)
+			}
+			o.Binaries = decodedBinaries
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

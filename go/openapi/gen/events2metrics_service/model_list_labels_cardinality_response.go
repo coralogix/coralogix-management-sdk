@@ -99,9 +99,27 @@ func (o ListLabelsCardinalityResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListLabelsCardinalityResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawPermutations, rawPermutationsPresent := cxsdkRawFields["permutations"]
+	if rawPermutationsPresent {
+		delete(cxsdkRawFields, "permutations")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListLabelsCardinalityResponse := _ListLabelsCardinalityResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListLabelsCardinalityResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListLabelsCardinalityResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListLabelsCardinalityResponse(varListLabelsCardinalityResponse)
+
+	if rawPermutationsPresent {
+		var rawPermutationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPermutations, &rawPermutationsElements); jerr == nil {
+			decodedPermutations := make([]LabelsPermutationsCardinalityDay, 0, len(rawPermutationsElements))
+			for _, rawPermutationsElement := range rawPermutationsElements {
+				var elem LabelsPermutationsCardinalityDay
+				if jerr := json.Unmarshal(rawPermutationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPermutations = append(decodedPermutations, elem)
+			}
+			o.Permutations = decodedPermutations
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -356,9 +356,31 @@ func (o *E2MCreateParamsLogsQuery) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawMetricFields, rawMetricFieldsPresent := cxsdkRawFields["metricFields"]
+	if rawMetricFieldsPresent {
+		delete(cxsdkRawFields, "metricFields")
+	}
+	rawMetricLabels, rawMetricLabelsPresent := cxsdkRawFields["metricLabels"]
+	if rawMetricLabelsPresent {
+		delete(cxsdkRawFields, "metricLabels")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varE2MCreateParamsLogsQuery := _E2MCreateParamsLogsQuery{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varE2MCreateParamsLogsQuery)
 
 	if err != nil {
@@ -366,6 +388,36 @@ func (o *E2MCreateParamsLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = E2MCreateParamsLogsQuery(varE2MCreateParamsLogsQuery)
+
+	if rawMetricFieldsPresent {
+		var rawMetricFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMetricFields, &rawMetricFieldsElements); jerr == nil {
+			decodedMetricFields := make([]V2MetricField, 0, len(rawMetricFieldsElements))
+			for _, rawMetricFieldsElement := range rawMetricFieldsElements {
+				var elem V2MetricField
+				if jerr := json.Unmarshal(rawMetricFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMetricFields = append(decodedMetricFields, elem)
+			}
+			o.MetricFields = decodedMetricFields
+		}
+	}
+
+	if rawMetricLabelsPresent {
+		var rawMetricLabelsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMetricLabels, &rawMetricLabelsElements); jerr == nil {
+			decodedMetricLabels := make([]MetricLabel, 0, len(rawMetricLabelsElements))
+			for _, rawMetricLabelsElement := range rawMetricLabelsElements {
+				var elem MetricLabel
+				if jerr := json.Unmarshal(rawMetricLabelsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMetricLabels = append(decodedMetricLabels, elem)
+			}
+			o.MetricLabels = decodedMetricLabels
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

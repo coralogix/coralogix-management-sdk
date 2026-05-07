@@ -279,9 +279,27 @@ func (o DataprimeSource) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DataprimeSource) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawLabelFields, rawLabelFieldsPresent := cxsdkRawFields["labelFields"]
+	if rawLabelFieldsPresent {
+		delete(cxsdkRawFields, "labelFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varDataprimeSource := _DataprimeSource{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varDataprimeSource)
 
 	if err != nil {
@@ -289,6 +307,21 @@ func (o *DataprimeSource) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DataprimeSource(varDataprimeSource)
+
+	if rawLabelFieldsPresent {
+		var rawLabelFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawLabelFields, &rawLabelFieldsElements); jerr == nil {
+			decodedLabelFields := make([]ObservationField, 0, len(rawLabelFieldsElements))
+			for _, rawLabelFieldsElement := range rawLabelFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawLabelFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedLabelFields = append(decodedLabelFields, elem)
+			}
+			o.LabelFields = decodedLabelFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

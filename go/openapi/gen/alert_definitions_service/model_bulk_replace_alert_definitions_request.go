@@ -99,9 +99,27 @@ func (o BulkReplaceAlertDefinitionsRequest) ToMap() (map[string]interface{}, err
 }
 
 func (o *BulkReplaceAlertDefinitionsRequest) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertDefsToReplace, rawAlertDefsToReplacePresent := cxsdkRawFields["alertDefsToReplace"]
+	if rawAlertDefsToReplacePresent {
+		delete(cxsdkRawFields, "alertDefsToReplace")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varBulkReplaceAlertDefinitionsRequest := _BulkReplaceAlertDefinitionsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varBulkReplaceAlertDefinitionsRequest)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *BulkReplaceAlertDefinitionsRequest) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = BulkReplaceAlertDefinitionsRequest(varBulkReplaceAlertDefinitionsRequest)
+
+	if rawAlertDefsToReplacePresent {
+		var rawAlertDefsToReplaceElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertDefsToReplace, &rawAlertDefsToReplaceElements); jerr == nil {
+			decodedAlertDefsToReplace := make([]AlertDefToReplace, 0, len(rawAlertDefsToReplaceElements))
+			for _, rawAlertDefsToReplaceElement := range rawAlertDefsToReplaceElements {
+				var elem AlertDefToReplace
+				if jerr := json.Unmarshal(rawAlertDefsToReplaceElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertDefsToReplace = append(decodedAlertDefsToReplace, elem)
+			}
+			o.AlertDefsToReplace = decodedAlertDefsToReplace
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -99,9 +99,27 @@ func (o MessageConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *MessageConfig) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFields, rawFieldsPresent := cxsdkRawFields["fields"]
+	if rawFieldsPresent {
+		delete(cxsdkRawFields, "fields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varMessageConfig := _MessageConfig{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varMessageConfig)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *MessageConfig) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = MessageConfig(varMessageConfig)
+
+	if rawFieldsPresent {
+		var rawFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFields, &rawFieldsElements); jerr == nil {
+			decodedFields := make([]NotificationCenterMessageConfigField, 0, len(rawFieldsElements))
+			for _, rawFieldsElement := range rawFieldsElements {
+				var elem NotificationCenterMessageConfigField
+				if jerr := json.Unmarshal(rawFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFields = append(decodedFields, elem)
+			}
+			o.Fields = decodedFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

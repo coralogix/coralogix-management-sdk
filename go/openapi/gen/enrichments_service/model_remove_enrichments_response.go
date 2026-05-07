@@ -99,9 +99,27 @@ func (o RemoveEnrichmentsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RemoveEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRemainingEnrichments, rawRemainingEnrichmentsPresent := cxsdkRawFields["remainingEnrichments"]
+	if rawRemainingEnrichmentsPresent {
+		delete(cxsdkRawFields, "remainingEnrichments")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRemoveEnrichmentsResponse := _RemoveEnrichmentsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRemoveEnrichmentsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *RemoveEnrichmentsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RemoveEnrichmentsResponse(varRemoveEnrichmentsResponse)
+
+	if rawRemainingEnrichmentsPresent {
+		var rawRemainingEnrichmentsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRemainingEnrichments, &rawRemainingEnrichmentsElements); jerr == nil {
+			decodedRemainingEnrichments := make([]Enrichment, 0, len(rawRemainingEnrichmentsElements))
+			for _, rawRemainingEnrichmentsElement := range rawRemainingEnrichmentsElements {
+				var elem Enrichment
+				if jerr := json.Unmarshal(rawRemainingEnrichmentsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRemainingEnrichments = append(decodedRemainingEnrichments, elem)
+			}
+			o.RemainingEnrichments = decodedRemainingEnrichments
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

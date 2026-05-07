@@ -112,9 +112,27 @@ func (o *ReorderPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawOrders, rawOrdersPresent := cxsdkRawFields["orders"]
+	if rawOrdersPresent {
+		delete(cxsdkRawFields, "orders")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varReorderPoliciesResponse := _ReorderPoliciesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varReorderPoliciesResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *ReorderPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ReorderPoliciesResponse(varReorderPoliciesResponse)
+
+	if rawOrdersPresent {
+		var rawOrdersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawOrders, &rawOrdersElements); jerr == nil {
+			decodedOrders := make([]PolicyOrder, 0, len(rawOrdersElements))
+			for _, rawOrdersElement := range rawOrdersElements {
+				var elem PolicyOrder
+				if jerr := json.Unmarshal(rawOrdersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedOrders = append(decodedOrders, elem)
+			}
+			o.Orders = decodedOrders
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

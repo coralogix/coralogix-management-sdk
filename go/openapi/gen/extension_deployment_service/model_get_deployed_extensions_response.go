@@ -99,9 +99,27 @@ func (o GetDeployedExtensionsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetDeployedExtensionsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawDeployedExtensions, rawDeployedExtensionsPresent := cxsdkRawFields["deployedExtensions"]
+	if rawDeployedExtensionsPresent {
+		delete(cxsdkRawFields, "deployedExtensions")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetDeployedExtensionsResponse := _GetDeployedExtensionsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetDeployedExtensionsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetDeployedExtensionsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetDeployedExtensionsResponse(varGetDeployedExtensionsResponse)
+
+	if rawDeployedExtensionsPresent {
+		var rawDeployedExtensionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawDeployedExtensions, &rawDeployedExtensionsElements); jerr == nil {
+			decodedDeployedExtensions := make([]DeployedExtension, 0, len(rawDeployedExtensionsElements))
+			for _, rawDeployedExtensionsElement := range rawDeployedExtensionsElements {
+				var elem DeployedExtension
+				if jerr := json.Unmarshal(rawDeployedExtensionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedDeployedExtensions = append(decodedDeployedExtensions, elem)
+			}
+			o.DeployedExtensions = decodedDeployedExtensions
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

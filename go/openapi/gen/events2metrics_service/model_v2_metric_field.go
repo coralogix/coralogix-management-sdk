@@ -168,9 +168,27 @@ func (o *V2MetricField) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAggregations, rawAggregationsPresent := cxsdkRawFields["aggregations"]
+	if rawAggregationsPresent {
+		delete(cxsdkRawFields, "aggregations")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varV2MetricField := _V2MetricField{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varV2MetricField)
 
 	if err != nil {
@@ -178,6 +196,21 @@ func (o *V2MetricField) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V2MetricField(varV2MetricField)
+
+	if rawAggregationsPresent {
+		var rawAggregationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggregations, &rawAggregationsElements); jerr == nil {
+			decodedAggregations := make([]V2Aggregation, 0, len(rawAggregationsElements))
+			for _, rawAggregationsElement := range rawAggregationsElements {
+				var elem V2Aggregation
+				if jerr := json.Unmarshal(rawAggregationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggregations = append(decodedAggregations, elem)
+			}
+			o.Aggregations = decodedAggregations
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

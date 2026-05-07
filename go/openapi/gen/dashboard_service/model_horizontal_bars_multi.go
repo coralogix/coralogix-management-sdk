@@ -721,9 +721,31 @@ func (o HorizontalBarsMulti) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *HorizontalBarsMulti) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCategoryFields, rawCategoryFieldsPresent := cxsdkRawFields["categoryFields"]
+	if rawCategoryFieldsPresent {
+		delete(cxsdkRawFields, "categoryFields")
+	}
+	rawQueryFieldSettings, rawQueryFieldSettingsPresent := cxsdkRawFields["queryFieldSettings"]
+	if rawQueryFieldSettingsPresent {
+		delete(cxsdkRawFields, "queryFieldSettings")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varHorizontalBarsMulti := _HorizontalBarsMulti{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varHorizontalBarsMulti)
 
 	if err != nil {
@@ -731,6 +753,36 @@ func (o *HorizontalBarsMulti) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = HorizontalBarsMulti(varHorizontalBarsMulti)
+
+	if rawCategoryFieldsPresent {
+		var rawCategoryFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCategoryFields, &rawCategoryFieldsElements); jerr == nil {
+			decodedCategoryFields := make([]ObservationField, 0, len(rawCategoryFieldsElements))
+			for _, rawCategoryFieldsElement := range rawCategoryFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawCategoryFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCategoryFields = append(decodedCategoryFields, elem)
+			}
+			o.CategoryFields = decodedCategoryFields
+		}
+	}
+
+	if rawQueryFieldSettingsPresent {
+		var rawQueryFieldSettingsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawQueryFieldSettings, &rawQueryFieldSettingsElements); jerr == nil {
+			decodedQueryFieldSettings := make([]HorizontalBarsMultiQueryFieldSettings, 0, len(rawQueryFieldSettingsElements))
+			for _, rawQueryFieldSettingsElement := range rawQueryFieldSettingsElements {
+				var elem HorizontalBarsMultiQueryFieldSettings
+				if jerr := json.Unmarshal(rawQueryFieldSettingsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedQueryFieldSettings = append(decodedQueryFieldSettings, elem)
+			}
+			o.QueryFieldSettings = decodedQueryFieldSettings
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

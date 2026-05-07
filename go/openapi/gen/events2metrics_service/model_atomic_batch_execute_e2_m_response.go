@@ -99,9 +99,27 @@ func (o AtomicBatchExecuteE2MResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AtomicBatchExecuteE2MResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawMatchingResponses, rawMatchingResponsesPresent := cxsdkRawFields["matchingResponses"]
+	if rawMatchingResponsesPresent {
+		delete(cxsdkRawFields, "matchingResponses")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varAtomicBatchExecuteE2MResponse := _AtomicBatchExecuteE2MResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varAtomicBatchExecuteE2MResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *AtomicBatchExecuteE2MResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = AtomicBatchExecuteE2MResponse(varAtomicBatchExecuteE2MResponse)
+
+	if rawMatchingResponsesPresent {
+		var rawMatchingResponsesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMatchingResponses, &rawMatchingResponsesElements); jerr == nil {
+			decodedMatchingResponses := make([]E2MExecutionResponse, 0, len(rawMatchingResponsesElements))
+			for _, rawMatchingResponsesElement := range rawMatchingResponsesElements {
+				var elem E2MExecutionResponse
+				if jerr := json.Unmarshal(rawMatchingResponsesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMatchingResponses = append(decodedMatchingResponses, elem)
+			}
+			o.MatchingResponses = decodedMatchingResponses
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

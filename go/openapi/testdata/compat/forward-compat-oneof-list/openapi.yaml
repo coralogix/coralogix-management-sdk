@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: Forward-Compat OneOf in List Compat
+  version: 1.0.0
+paths:
+  /alerts:
+    get:
+      operationId: listAlerts
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAlertsResponse"
+components:
+  schemas:
+    ListAlertsResponse:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Alert"
+    Alert:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - props
+      properties:
+        id:
+          type: string
+        props:
+          $ref: "#/components/schemas/AlertProps"
+    AlertProps:
+      oneOf:
+        - $ref: "#/components/schemas/LogsAlertProps"
+        - $ref: "#/components/schemas/MetricAlertProps"
+    LogsAlertProps:
+      type: object
+      additionalProperties: false
+      required:
+        - kind
+        - logsRule
+      properties:
+        kind:
+          type: string
+        logsRule:
+          type: object
+          additionalProperties: true
+    MetricAlertProps:
+      type: object
+      additionalProperties: false
+      required:
+        - kind
+        - metricRule
+      properties:
+        kind:
+          type: string
+        metricRule:
+          type: object
+          additionalProperties: true

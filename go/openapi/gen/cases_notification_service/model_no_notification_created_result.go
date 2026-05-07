@@ -112,9 +112,27 @@ func (o *NoNotificationCreatedResult) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawMatchedRouters, rawMatchedRoutersPresent := cxsdkRawFields["matchedRouters"]
+	if rawMatchedRoutersPresent {
+		delete(cxsdkRawFields, "matchedRouters")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varNoNotificationCreatedResult := _NoNotificationCreatedResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varNoNotificationCreatedResult)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *NoNotificationCreatedResult) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = NoNotificationCreatedResult(varNoNotificationCreatedResult)
+
+	if rawMatchedRoutersPresent {
+		var rawMatchedRoutersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMatchedRouters, &rawMatchedRoutersElements); jerr == nil {
+			decodedMatchedRouters := make([]RouterInfo, 0, len(rawMatchedRoutersElements))
+			for _, rawMatchedRoutersElement := range rawMatchedRoutersElements {
+				var elem RouterInfo
+				if jerr := json.Unmarshal(rawMatchedRoutersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMatchedRouters = append(decodedMatchedRouters, elem)
+			}
+			o.MatchedRouters = decodedMatchedRouters
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

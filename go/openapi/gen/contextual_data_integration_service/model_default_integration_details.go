@@ -99,9 +99,27 @@ func (o DefaultIntegrationDetails) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DefaultIntegrationDetails) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRegistered, rawRegisteredPresent := cxsdkRawFields["registered"]
+	if rawRegisteredPresent {
+		delete(cxsdkRawFields, "registered")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varDefaultIntegrationDetails := _DefaultIntegrationDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varDefaultIntegrationDetails)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *DefaultIntegrationDetails) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DefaultIntegrationDetails(varDefaultIntegrationDetails)
+
+	if rawRegisteredPresent {
+		var rawRegisteredElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRegistered, &rawRegisteredElements); jerr == nil {
+			decodedRegistered := make([]RegisteredInstance, 0, len(rawRegisteredElements))
+			for _, rawRegisteredElement := range rawRegisteredElements {
+				var elem RegisteredInstance
+				if jerr := json.Unmarshal(rawRegisteredElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRegistered = append(decodedRegistered, elem)
+			}
+			o.Registered = decodedRegistered
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

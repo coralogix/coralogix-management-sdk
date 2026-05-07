@@ -460,9 +460,27 @@ func (o Preset) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Preset) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawConfigOverrides, rawConfigOverridesPresent := cxsdkRawFields["configOverrides"]
+	if rawConfigOverridesPresent {
+		delete(cxsdkRawFields, "configOverrides")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varPreset := _Preset{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varPreset)
 
 	if err != nil {
@@ -470,6 +488,21 @@ func (o *Preset) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Preset(varPreset)
+
+	if rawConfigOverridesPresent {
+		var rawConfigOverridesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawConfigOverrides, &rawConfigOverridesElements); jerr == nil {
+			decodedConfigOverrides := make([]ConfigOverrides, 0, len(rawConfigOverridesElements))
+			for _, rawConfigOverridesElement := range rawConfigOverridesElements {
+				var elem ConfigOverrides
+				if jerr := json.Unmarshal(rawConfigOverridesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedConfigOverrides = append(decodedConfigOverrides, elem)
+			}
+			o.ConfigOverrides = decodedConfigOverrides
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

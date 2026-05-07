@@ -171,9 +171,31 @@ func (o EnrichmentServiceAtomicOverwriteEnrichmentsRequest) ToMap() (map[string]
 }
 
 func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawEnrichmentFields, rawEnrichmentFieldsPresent := cxsdkRawFields["enrichmentFields"]
+	if rawEnrichmentFieldsPresent {
+		delete(cxsdkRawFields, "enrichmentFields")
+	}
+	rawRequestEnrichments, rawRequestEnrichmentsPresent := cxsdkRawFields["requestEnrichments"]
+	if rawRequestEnrichmentsPresent {
+		delete(cxsdkRawFields, "requestEnrichments")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varEnrichmentServiceAtomicOverwriteEnrichmentsRequest := _EnrichmentServiceAtomicOverwriteEnrichmentsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varEnrichmentServiceAtomicOverwriteEnrichmentsRequest)
 
 	if err != nil {
@@ -181,6 +203,36 @@ func (o *EnrichmentServiceAtomicOverwriteEnrichmentsRequest) UnmarshalJSON(data 
 	}
 
 	*o = EnrichmentServiceAtomicOverwriteEnrichmentsRequest(varEnrichmentServiceAtomicOverwriteEnrichmentsRequest)
+
+	if rawEnrichmentFieldsPresent {
+		var rawEnrichmentFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEnrichmentFields, &rawEnrichmentFieldsElements); jerr == nil {
+			decodedEnrichmentFields := make([]EnrichmentFieldDefinition, 0, len(rawEnrichmentFieldsElements))
+			for _, rawEnrichmentFieldsElement := range rawEnrichmentFieldsElements {
+				var elem EnrichmentFieldDefinition
+				if jerr := json.Unmarshal(rawEnrichmentFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEnrichmentFields = append(decodedEnrichmentFields, elem)
+			}
+			o.EnrichmentFields = decodedEnrichmentFields
+		}
+	}
+
+	if rawRequestEnrichmentsPresent {
+		var rawRequestEnrichmentsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRequestEnrichments, &rawRequestEnrichmentsElements); jerr == nil {
+			decodedRequestEnrichments := make([]EnrichmentRequestModel, 0, len(rawRequestEnrichmentsElements))
+			for _, rawRequestEnrichmentsElement := range rawRequestEnrichmentsElements {
+				var elem EnrichmentRequestModel
+				if jerr := json.Unmarshal(rawRequestEnrichmentsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRequestEnrichments = append(decodedRequestEnrichments, elem)
+			}
+			o.RequestEnrichments = decodedRequestEnrichments
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

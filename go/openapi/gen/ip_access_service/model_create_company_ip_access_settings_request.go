@@ -135,9 +135,27 @@ func (o CreateCompanyIPAccessSettingsRequest) ToMap() (map[string]interface{}, e
 }
 
 func (o *CreateCompanyIPAccessSettingsRequest) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawIpAccess, rawIpAccessPresent := cxsdkRawFields["ipAccess"]
+	if rawIpAccessPresent {
+		delete(cxsdkRawFields, "ipAccess")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varCreateCompanyIPAccessSettingsRequest := _CreateCompanyIPAccessSettingsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varCreateCompanyIPAccessSettingsRequest)
 
 	if err != nil {
@@ -145,6 +163,21 @@ func (o *CreateCompanyIPAccessSettingsRequest) UnmarshalJSON(data []byte) (err e
 	}
 
 	*o = CreateCompanyIPAccessSettingsRequest(varCreateCompanyIPAccessSettingsRequest)
+
+	if rawIpAccessPresent {
+		var rawIpAccessElements []json.RawMessage
+		if jerr := json.Unmarshal(rawIpAccess, &rawIpAccessElements); jerr == nil {
+			decodedIpAccess := make([]IpAccess, 0, len(rawIpAccessElements))
+			for _, rawIpAccessElement := range rawIpAccessElements {
+				var elem IpAccess
+				if jerr := json.Unmarshal(rawIpAccessElement, &elem); jerr != nil {
+					continue
+				}
+				decodedIpAccess = append(decodedIpAccess, elem)
+			}
+			o.IpAccess = decodedIpAccess
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

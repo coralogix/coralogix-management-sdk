@@ -256,9 +256,31 @@ func (o *IntegrationDetailsLocal) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawDocs, rawDocsPresent := cxsdkRawFields["docs"]
+	if rawDocsPresent {
+		delete(cxsdkRawFields, "docs")
+	}
+	rawExtensions, rawExtensionsPresent := cxsdkRawFields["extensions"]
+	if rawExtensionsPresent {
+		delete(cxsdkRawFields, "extensions")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varIntegrationDetailsLocal := _IntegrationDetailsLocal{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varIntegrationDetailsLocal)
 
 	if err != nil {
@@ -266,6 +288,36 @@ func (o *IntegrationDetailsLocal) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IntegrationDetailsLocal(varIntegrationDetailsLocal)
+
+	if rawDocsPresent {
+		var rawDocsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawDocs, &rawDocsElements); jerr == nil {
+			decodedDocs := make([]IntegrationDoc, 0, len(rawDocsElements))
+			for _, rawDocsElement := range rawDocsElements {
+				var elem IntegrationDoc
+				if jerr := json.Unmarshal(rawDocsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedDocs = append(decodedDocs, elem)
+			}
+			o.Docs = decodedDocs
+		}
+	}
+
+	if rawExtensionsPresent {
+		var rawExtensionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawExtensions, &rawExtensionsElements); jerr == nil {
+			decodedExtensions := make([]V1Extension, 0, len(rawExtensionsElements))
+			for _, rawExtensionsElement := range rawExtensionsElements {
+				var elem V1Extension
+				if jerr := json.Unmarshal(rawExtensionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedExtensions = append(decodedExtensions, elem)
+			}
+			o.Extensions = decodedExtensions
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

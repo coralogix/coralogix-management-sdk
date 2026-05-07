@@ -99,9 +99,27 @@ func (o ListRuleGroupsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListRuleGroupsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRuleGroups, rawRuleGroupsPresent := cxsdkRawFields["ruleGroups"]
+	if rawRuleGroupsPresent {
+		delete(cxsdkRawFields, "ruleGroups")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListRuleGroupsResponse := _ListRuleGroupsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListRuleGroupsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListRuleGroupsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListRuleGroupsResponse(varListRuleGroupsResponse)
+
+	if rawRuleGroupsPresent {
+		var rawRuleGroupsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRuleGroups, &rawRuleGroupsElements); jerr == nil {
+			decodedRuleGroups := make([]RuleGroup, 0, len(rawRuleGroupsElements))
+			for _, rawRuleGroupsElement := range rawRuleGroupsElements {
+				var elem RuleGroup
+				if jerr := json.Unmarshal(rawRuleGroupsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRuleGroups = append(decodedRuleGroups, elem)
+			}
+			o.RuleGroups = decodedRuleGroups
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

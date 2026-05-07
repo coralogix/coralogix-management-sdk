@@ -112,9 +112,27 @@ func (o *ListE2MResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawE2m, rawE2mPresent := cxsdkRawFields["e2m"]
+	if rawE2mPresent {
+		delete(cxsdkRawFields, "e2m")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListE2MResponse := _ListE2MResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListE2MResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *ListE2MResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListE2MResponse(varListE2MResponse)
+
+	if rawE2mPresent {
+		var rawE2mElements []json.RawMessage
+		if jerr := json.Unmarshal(rawE2m, &rawE2mElements); jerr == nil {
+			decodedE2m := make([]E2M, 0, len(rawE2mElements))
+			for _, rawE2mElement := range rawE2mElements {
+				var elem E2M
+				if jerr := json.Unmarshal(rawE2mElement, &elem); jerr != nil {
+					continue
+				}
+				decodedE2m = append(decodedE2m, elem)
+			}
+			o.E2m = decodedE2m
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

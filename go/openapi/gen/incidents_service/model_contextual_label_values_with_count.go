@@ -112,9 +112,27 @@ func (o *ContextualLabelValuesWithCount) UnmarshalJSON(data []byte) (err error) 
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawValuesWithCount, rawValuesWithCountPresent := cxsdkRawFields["valuesWithCount"]
+	if rawValuesWithCountPresent {
+		delete(cxsdkRawFields, "valuesWithCount")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varContextualLabelValuesWithCount := _ContextualLabelValuesWithCount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varContextualLabelValuesWithCount)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *ContextualLabelValuesWithCount) UnmarshalJSON(data []byte) (err error) 
 	}
 
 	*o = ContextualLabelValuesWithCount(varContextualLabelValuesWithCount)
+
+	if rawValuesWithCountPresent {
+		var rawValuesWithCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawValuesWithCount, &rawValuesWithCountElements); jerr == nil {
+			decodedValuesWithCount := make([]ContextualLabelValueWithCount, 0, len(rawValuesWithCountElements))
+			for _, rawValuesWithCountElement := range rawValuesWithCountElements {
+				var elem ContextualLabelValueWithCount
+				if jerr := json.Unmarshal(rawValuesWithCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedValuesWithCount = append(decodedValuesWithCount, elem)
+			}
+			o.ValuesWithCount = decodedValuesWithCount
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

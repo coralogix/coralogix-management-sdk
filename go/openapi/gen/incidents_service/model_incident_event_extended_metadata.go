@@ -423,9 +423,27 @@ func (o IncidentEventExtendedMetadata) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *IncidentEventExtendedMetadata) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertLabels, rawAlertLabelsPresent := cxsdkRawFields["alertLabels"]
+	if rawAlertLabelsPresent {
+		delete(cxsdkRawFields, "alertLabels")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varIncidentEventExtendedMetadata := _IncidentEventExtendedMetadata{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varIncidentEventExtendedMetadata)
 
 	if err != nil {
@@ -433,6 +451,21 @@ func (o *IncidentEventExtendedMetadata) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentEventExtendedMetadata(varIncidentEventExtendedMetadata)
+
+	if rawAlertLabelsPresent {
+		var rawAlertLabelsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertLabels, &rawAlertLabelsElements); jerr == nil {
+			decodedAlertLabels := make([]IncidentsV1MetaLabel, 0, len(rawAlertLabelsElements))
+			for _, rawAlertLabelsElement := range rawAlertLabelsElements {
+				var elem IncidentsV1MetaLabel
+				if jerr := json.Unmarshal(rawAlertLabelsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertLabels = append(decodedAlertLabels, elem)
+			}
+			o.AlertLabels = decodedAlertLabels
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

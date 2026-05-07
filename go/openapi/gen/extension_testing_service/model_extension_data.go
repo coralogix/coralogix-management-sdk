@@ -639,9 +639,39 @@ func (o ExtensionData) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ExtensionData) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawBinaries, rawBinariesPresent := cxsdkRawFields["binaries"]
+	if rawBinariesPresent {
+		delete(cxsdkRawFields, "binaries")
+	}
+	rawChangelog, rawChangelogPresent := cxsdkRawFields["changelog"]
+	if rawChangelogPresent {
+		delete(cxsdkRawFields, "changelog")
+	}
+	rawIntegrationDetails, rawIntegrationDetailsPresent := cxsdkRawFields["integrationDetails"]
+	if rawIntegrationDetailsPresent {
+		delete(cxsdkRawFields, "integrationDetails")
+	}
+	rawItems, rawItemsPresent := cxsdkRawFields["items"]
+	if rawItemsPresent {
+		delete(cxsdkRawFields, "items")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varExtensionData := _ExtensionData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varExtensionData)
 
 	if err != nil {
@@ -649,6 +679,66 @@ func (o *ExtensionData) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ExtensionData(varExtensionData)
+
+	if rawBinariesPresent {
+		var rawBinariesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawBinaries, &rawBinariesElements); jerr == nil {
+			decodedBinaries := make([]ExtensionBinary, 0, len(rawBinariesElements))
+			for _, rawBinariesElement := range rawBinariesElements {
+				var elem ExtensionBinary
+				if jerr := json.Unmarshal(rawBinariesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedBinaries = append(decodedBinaries, elem)
+			}
+			o.Binaries = decodedBinaries
+		}
+	}
+
+	if rawChangelogPresent {
+		var rawChangelogElements []json.RawMessage
+		if jerr := json.Unmarshal(rawChangelog, &rawChangelogElements); jerr == nil {
+			decodedChangelog := make([]ChangelogEntry, 0, len(rawChangelogElements))
+			for _, rawChangelogElement := range rawChangelogElements {
+				var elem ChangelogEntry
+				if jerr := json.Unmarshal(rawChangelogElement, &elem); jerr != nil {
+					continue
+				}
+				decodedChangelog = append(decodedChangelog, elem)
+			}
+			o.Changelog = decodedChangelog
+		}
+	}
+
+	if rawIntegrationDetailsPresent {
+		var rawIntegrationDetailsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawIntegrationDetails, &rawIntegrationDetailsElements); jerr == nil {
+			decodedIntegrationDetails := make([]IntegrationDetail, 0, len(rawIntegrationDetailsElements))
+			for _, rawIntegrationDetailsElement := range rawIntegrationDetailsElements {
+				var elem IntegrationDetail
+				if jerr := json.Unmarshal(rawIntegrationDetailsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedIntegrationDetails = append(decodedIntegrationDetails, elem)
+			}
+			o.IntegrationDetails = decodedIntegrationDetails
+		}
+	}
+
+	if rawItemsPresent {
+		var rawItemsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawItems, &rawItemsElements); jerr == nil {
+			decodedItems := make([]ExtensionItemData, 0, len(rawItemsElements))
+			for _, rawItemsElement := range rawItemsElements {
+				var elem ExtensionItemData
+				if jerr := json.Unmarshal(rawItemsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedItems = append(decodedItems, elem)
+			}
+			o.Items = decodedItems
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

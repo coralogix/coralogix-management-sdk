@@ -601,9 +601,35 @@ func (o *Incident) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAssignments, rawAssignmentsPresent := cxsdkRawFields["assignments"]
+	if rawAssignmentsPresent {
+		delete(cxsdkRawFields, "assignments")
+	}
+	rawEvents, rawEventsPresent := cxsdkRawFields["events"]
+	if rawEventsPresent {
+		delete(cxsdkRawFields, "events")
+	}
+	rawMetaLabels, rawMetaLabelsPresent := cxsdkRawFields["metaLabels"]
+	if rawMetaLabelsPresent {
+		delete(cxsdkRawFields, "metaLabels")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varIncident := _Incident{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varIncident)
 
 	if err != nil {
@@ -611,6 +637,51 @@ func (o *Incident) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Incident(varIncident)
+
+	if rawAssignmentsPresent {
+		var rawAssignmentsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAssignments, &rawAssignmentsElements); jerr == nil {
+			decodedAssignments := make([]Assignment, 0, len(rawAssignmentsElements))
+			for _, rawAssignmentsElement := range rawAssignmentsElements {
+				var elem Assignment
+				if jerr := json.Unmarshal(rawAssignmentsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAssignments = append(decodedAssignments, elem)
+			}
+			o.Assignments = decodedAssignments
+		}
+	}
+
+	if rawEventsPresent {
+		var rawEventsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEvents, &rawEventsElements); jerr == nil {
+			decodedEvents := make([]IncidentEvent, 0, len(rawEventsElements))
+			for _, rawEventsElement := range rawEventsElements {
+				var elem IncidentEvent
+				if jerr := json.Unmarshal(rawEventsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEvents = append(decodedEvents, elem)
+			}
+			o.Events = decodedEvents
+		}
+	}
+
+	if rawMetaLabelsPresent {
+		var rawMetaLabelsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMetaLabels, &rawMetaLabelsElements); jerr == nil {
+			decodedMetaLabels := make([]IncidentsV1MetaLabel, 0, len(rawMetaLabelsElements))
+			for _, rawMetaLabelsElement := range rawMetaLabelsElements {
+				var elem IncidentsV1MetaLabel
+				if jerr := json.Unmarshal(rawMetaLabelsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMetaLabels = append(decodedMetaLabels, elem)
+			}
+			o.MetaLabels = decodedMetaLabels
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

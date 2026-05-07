@@ -99,9 +99,27 @@ func (o RegexMapping) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RegexMapping) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawSections, rawSectionsPresent := cxsdkRawFields["sections"]
+	if rawSectionsPresent {
+		delete(cxsdkRawFields, "sections")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRegexMapping := _RegexMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRegexMapping)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *RegexMapping) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RegexMapping(varRegexMapping)
+
+	if rawSectionsPresent {
+		var rawSectionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSections, &rawSectionsElements); jerr == nil {
+			decodedSections := make([]MappingSection, 0, len(rawSectionsElements))
+			for _, rawSectionsElement := range rawSectionsElements {
+				var elem MappingSection
+				if jerr := json.Unmarshal(rawSectionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSections = append(decodedSections, elem)
+			}
+			o.Sections = decodedSections
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

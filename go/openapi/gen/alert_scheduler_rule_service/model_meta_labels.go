@@ -99,9 +99,27 @@ func (o MetaLabels) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *MetaLabels) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawValue, rawValuePresent := cxsdkRawFields["value"]
+	if rawValuePresent {
+		delete(cxsdkRawFields, "value")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varMetaLabels := _MetaLabels{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varMetaLabels)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *MetaLabels) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = MetaLabels(varMetaLabels)
+
+	if rawValuePresent {
+		var rawValueElements []json.RawMessage
+		if jerr := json.Unmarshal(rawValue, &rawValueElements); jerr == nil {
+			decodedValue := make([]MetaLabelsProtobufV1MetaLabel, 0, len(rawValueElements))
+			for _, rawValueElement := range rawValueElements {
+				var elem MetaLabelsProtobufV1MetaLabel
+				if jerr := json.Unmarshal(rawValueElement, &elem); jerr != nil {
+					continue
+				}
+				decodedValue = append(decodedValue, elem)
+			}
+			o.Value = decodedValue
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

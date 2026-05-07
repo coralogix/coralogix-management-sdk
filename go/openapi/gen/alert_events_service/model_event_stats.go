@@ -279,9 +279,31 @@ func (o EventStats) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *EventStats) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawResolvedPermutationsSamples, rawResolvedPermutationsSamplesPresent := cxsdkRawFields["resolvedPermutationsSamples"]
+	if rawResolvedPermutationsSamplesPresent {
+		delete(cxsdkRawFields, "resolvedPermutationsSamples")
+	}
+	rawTriggeredPermutationsSamples, rawTriggeredPermutationsSamplesPresent := cxsdkRawFields["triggeredPermutationsSamples"]
+	if rawTriggeredPermutationsSamplesPresent {
+		delete(cxsdkRawFields, "triggeredPermutationsSamples")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varEventStats := _EventStats{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varEventStats)
 
 	if err != nil {
@@ -289,6 +311,36 @@ func (o *EventStats) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = EventStats(varEventStats)
+
+	if rawResolvedPermutationsSamplesPresent {
+		var rawResolvedPermutationsSamplesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawResolvedPermutationsSamples, &rawResolvedPermutationsSamplesElements); jerr == nil {
+			decodedResolvedPermutationsSamples := make([]V3Permutation, 0, len(rawResolvedPermutationsSamplesElements))
+			for _, rawResolvedPermutationsSamplesElement := range rawResolvedPermutationsSamplesElements {
+				var elem V3Permutation
+				if jerr := json.Unmarshal(rawResolvedPermutationsSamplesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedResolvedPermutationsSamples = append(decodedResolvedPermutationsSamples, elem)
+			}
+			o.ResolvedPermutationsSamples = decodedResolvedPermutationsSamples
+		}
+	}
+
+	if rawTriggeredPermutationsSamplesPresent {
+		var rawTriggeredPermutationsSamplesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawTriggeredPermutationsSamples, &rawTriggeredPermutationsSamplesElements); jerr == nil {
+			decodedTriggeredPermutationsSamples := make([]V3Permutation, 0, len(rawTriggeredPermutationsSamplesElements))
+			for _, rawTriggeredPermutationsSamplesElement := range rawTriggeredPermutationsSamplesElements {
+				var elem V3Permutation
+				if jerr := json.Unmarshal(rawTriggeredPermutationsSamplesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedTriggeredPermutationsSamples = append(decodedTriggeredPermutationsSamples, elem)
+			}
+			o.TriggeredPermutationsSamples = decodedTriggeredPermutationsSamples
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

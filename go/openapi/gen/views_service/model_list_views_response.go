@@ -99,9 +99,27 @@ func (o ListViewsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListViewsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawViews, rawViewsPresent := cxsdkRawFields["views"]
+	if rawViewsPresent {
+		delete(cxsdkRawFields, "views")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListViewsResponse := _ListViewsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListViewsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListViewsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListViewsResponse(varListViewsResponse)
+
+	if rawViewsPresent {
+		var rawViewsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawViews, &rawViewsElements); jerr == nil {
+			decodedViews := make([]View, 0, len(rawViewsElements))
+			for _, rawViewsElement := range rawViewsElements {
+				var elem View
+				if jerr := json.Unmarshal(rawViewsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedViews = append(decodedViews, elem)
+			}
+			o.Views = decodedViews
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

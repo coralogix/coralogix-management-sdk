@@ -500,9 +500,31 @@ func (o HexagonBins) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *HexagonBins) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCategoryFields, rawCategoryFieldsPresent := cxsdkRawFields["categoryFields"]
+	if rawCategoryFieldsPresent {
+		delete(cxsdkRawFields, "categoryFields")
+	}
+	rawThresholds, rawThresholdsPresent := cxsdkRawFields["thresholds"]
+	if rawThresholdsPresent {
+		delete(cxsdkRawFields, "thresholds")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varHexagonBins := _HexagonBins{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varHexagonBins)
 
 	if err != nil {
@@ -510,6 +532,36 @@ func (o *HexagonBins) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = HexagonBins(varHexagonBins)
+
+	if rawCategoryFieldsPresent {
+		var rawCategoryFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCategoryFields, &rawCategoryFieldsElements); jerr == nil {
+			decodedCategoryFields := make([]ObservationField, 0, len(rawCategoryFieldsElements))
+			for _, rawCategoryFieldsElement := range rawCategoryFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawCategoryFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCategoryFields = append(decodedCategoryFields, elem)
+			}
+			o.CategoryFields = decodedCategoryFields
+		}
+	}
+
+	if rawThresholdsPresent {
+		var rawThresholdsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawThresholds, &rawThresholdsElements); jerr == nil {
+			decodedThresholds := make([]CommonThreshold, 0, len(rawThresholdsElements))
+			for _, rawThresholdsElement := range rawThresholdsElements {
+				var elem CommonThreshold
+				if jerr := json.Unmarshal(rawThresholdsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedThresholds = append(decodedThresholds, elem)
+			}
+			o.Thresholds = decodedThresholds
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

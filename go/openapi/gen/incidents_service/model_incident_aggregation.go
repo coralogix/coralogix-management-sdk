@@ -393,9 +393,47 @@ func (o *IncidentAggregation) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAggAssignmentsCount, rawAggAssignmentsCountPresent := cxsdkRawFields["aggAssignmentsCount"]
+	if rawAggAssignmentsCountPresent {
+		delete(cxsdkRawFields, "aggAssignmentsCount")
+	}
+	rawAggMetaLabelsCount, rawAggMetaLabelsCountPresent := cxsdkRawFields["aggMetaLabelsCount"]
+	if rawAggMetaLabelsCountPresent {
+		delete(cxsdkRawFields, "aggMetaLabelsCount")
+	}
+	rawAggSeverityCount, rawAggSeverityCountPresent := cxsdkRawFields["aggSeverityCount"]
+	if rawAggSeverityCountPresent {
+		delete(cxsdkRawFields, "aggSeverityCount")
+	}
+	rawAggStateCount, rawAggStateCountPresent := cxsdkRawFields["aggStateCount"]
+	if rawAggStateCountPresent {
+		delete(cxsdkRawFields, "aggStateCount")
+	}
+	rawAggStatusCount, rawAggStatusCountPresent := cxsdkRawFields["aggStatusCount"]
+	if rawAggStatusCountPresent {
+		delete(cxsdkRawFields, "aggStatusCount")
+	}
+	rawGroupBysValue, rawGroupBysValuePresent := cxsdkRawFields["groupBysValue"]
+	if rawGroupBysValuePresent {
+		delete(cxsdkRawFields, "groupBysValue")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varIncidentAggregation := _IncidentAggregation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varIncidentAggregation)
 
 	if err != nil {
@@ -403,6 +441,96 @@ func (o *IncidentAggregation) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentAggregation(varIncidentAggregation)
+
+	if rawAggAssignmentsCountPresent {
+		var rawAggAssignmentsCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggAssignmentsCount, &rawAggAssignmentsCountElements); jerr == nil {
+			decodedAggAssignmentsCount := make([]IncidentAssignmentCount, 0, len(rawAggAssignmentsCountElements))
+			for _, rawAggAssignmentsCountElement := range rawAggAssignmentsCountElements {
+				var elem IncidentAssignmentCount
+				if jerr := json.Unmarshal(rawAggAssignmentsCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggAssignmentsCount = append(decodedAggAssignmentsCount, elem)
+			}
+			o.AggAssignmentsCount = decodedAggAssignmentsCount
+		}
+	}
+
+	if rawAggMetaLabelsCountPresent {
+		var rawAggMetaLabelsCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggMetaLabelsCount, &rawAggMetaLabelsCountElements); jerr == nil {
+			decodedAggMetaLabelsCount := make([]IncidentMetaLabelsCount, 0, len(rawAggMetaLabelsCountElements))
+			for _, rawAggMetaLabelsCountElement := range rawAggMetaLabelsCountElements {
+				var elem IncidentMetaLabelsCount
+				if jerr := json.Unmarshal(rawAggMetaLabelsCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggMetaLabelsCount = append(decodedAggMetaLabelsCount, elem)
+			}
+			o.AggMetaLabelsCount = decodedAggMetaLabelsCount
+		}
+	}
+
+	if rawAggSeverityCountPresent {
+		var rawAggSeverityCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggSeverityCount, &rawAggSeverityCountElements); jerr == nil {
+			decodedAggSeverityCount := make([]IncidentSeverityCount, 0, len(rawAggSeverityCountElements))
+			for _, rawAggSeverityCountElement := range rawAggSeverityCountElements {
+				var elem IncidentSeverityCount
+				if jerr := json.Unmarshal(rawAggSeverityCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggSeverityCount = append(decodedAggSeverityCount, elem)
+			}
+			o.AggSeverityCount = decodedAggSeverityCount
+		}
+	}
+
+	if rawAggStateCountPresent {
+		var rawAggStateCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggStateCount, &rawAggStateCountElements); jerr == nil {
+			decodedAggStateCount := make([]IncidentStateCount, 0, len(rawAggStateCountElements))
+			for _, rawAggStateCountElement := range rawAggStateCountElements {
+				var elem IncidentStateCount
+				if jerr := json.Unmarshal(rawAggStateCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggStateCount = append(decodedAggStateCount, elem)
+			}
+			o.AggStateCount = decodedAggStateCount
+		}
+	}
+
+	if rawAggStatusCountPresent {
+		var rawAggStatusCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggStatusCount, &rawAggStatusCountElements); jerr == nil {
+			decodedAggStatusCount := make([]IncidentStatusCount, 0, len(rawAggStatusCountElements))
+			for _, rawAggStatusCountElement := range rawAggStatusCountElements {
+				var elem IncidentStatusCount
+				if jerr := json.Unmarshal(rawAggStatusCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggStatusCount = append(decodedAggStatusCount, elem)
+			}
+			o.AggStatusCount = decodedAggStatusCount
+		}
+	}
+
+	if rawGroupBysValuePresent {
+		var rawGroupBysValueElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBysValue, &rawGroupBysValueElements); jerr == nil {
+			decodedGroupBysValue := make([]GroupByValues, 0, len(rawGroupBysValueElements))
+			for _, rawGroupBysValueElement := range rawGroupBysValueElements {
+				var elem GroupByValues
+				if jerr := json.Unmarshal(rawGroupBysValueElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBysValue = append(decodedGroupBysValue, elem)
+			}
+			o.GroupBysValue = decodedGroupBysValue
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

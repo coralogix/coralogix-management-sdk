@@ -112,9 +112,27 @@ func (o *UpdateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawUpdateAlertSchedulerRuleRequests, rawUpdateAlertSchedulerRuleRequestsPresent := cxsdkRawFields["updateAlertSchedulerRuleRequests"]
+	if rawUpdateAlertSchedulerRuleRequestsPresent {
+		delete(cxsdkRawFields, "updateAlertSchedulerRuleRequests")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varUpdateBulkAlertSchedulerRuleRequestDataStructure := _UpdateBulkAlertSchedulerRuleRequestDataStructure{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varUpdateBulkAlertSchedulerRuleRequestDataStructure)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *UpdateBulkAlertSchedulerRuleRequestDataStructure) UnmarshalJSON(data []
 	}
 
 	*o = UpdateBulkAlertSchedulerRuleRequestDataStructure(varUpdateBulkAlertSchedulerRuleRequestDataStructure)
+
+	if rawUpdateAlertSchedulerRuleRequestsPresent {
+		var rawUpdateAlertSchedulerRuleRequestsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawUpdateAlertSchedulerRuleRequests, &rawUpdateAlertSchedulerRuleRequestsElements); jerr == nil {
+			decodedUpdateAlertSchedulerRuleRequests := make([]UpdateAlertSchedulerRuleRequest, 0, len(rawUpdateAlertSchedulerRuleRequestsElements))
+			for _, rawUpdateAlertSchedulerRuleRequestsElement := range rawUpdateAlertSchedulerRuleRequestsElements {
+				var elem UpdateAlertSchedulerRuleRequest
+				if jerr := json.Unmarshal(rawUpdateAlertSchedulerRuleRequestsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedUpdateAlertSchedulerRuleRequests = append(decodedUpdateAlertSchedulerRuleRequests, elem)
+			}
+			o.UpdateAlertSchedulerRuleRequests = decodedUpdateAlertSchedulerRuleRequests
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -243,9 +243,27 @@ func (o TableRule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *TableRule) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawProperties, rawPropertiesPresent := cxsdkRawFields["properties"]
+	if rawPropertiesPresent {
+		delete(cxsdkRawFields, "properties")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varTableRule := _TableRule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varTableRule)
 
 	if err != nil {
@@ -253,6 +271,21 @@ func (o *TableRule) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = TableRule(varTableRule)
+
+	if rawPropertiesPresent {
+		var rawPropertiesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawProperties, &rawPropertiesElements); jerr == nil {
+			decodedProperties := make([]Property, 0, len(rawPropertiesElements))
+			for _, rawPropertiesElement := range rawPropertiesElements {
+				var elem Property
+				if jerr := json.Unmarshal(rawPropertiesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedProperties = append(decodedProperties, elem)
+			}
+			o.Properties = decodedProperties
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

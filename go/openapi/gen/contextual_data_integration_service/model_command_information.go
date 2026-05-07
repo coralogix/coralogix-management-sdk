@@ -279,9 +279,27 @@ func (o CommandInformation) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CommandInformation) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawLinks, rawLinksPresent := cxsdkRawFields["links"]
+	if rawLinksPresent {
+		delete(cxsdkRawFields, "links")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varCommandInformation := _CommandInformation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varCommandInformation)
 
 	if err != nil {
@@ -289,6 +307,21 @@ func (o *CommandInformation) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CommandInformation(varCommandInformation)
+
+	if rawLinksPresent {
+		var rawLinksElements []json.RawMessage
+		if jerr := json.Unmarshal(rawLinks, &rawLinksElements); jerr == nil {
+			decodedLinks := make([]Link, 0, len(rawLinksElements))
+			for _, rawLinksElement := range rawLinksElements {
+				var elem Link
+				if jerr := json.Unmarshal(rawLinksElement, &elem); jerr != nil {
+					continue
+				}
+				decodedLinks = append(decodedLinks, elem)
+			}
+			o.Links = decodedLinks
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

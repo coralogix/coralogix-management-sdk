@@ -185,9 +185,27 @@ func (o *StatVisualElementMappedValues) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawTemplateVariables, rawTemplateVariablesPresent := cxsdkRawFields["templateVariables"]
+	if rawTemplateVariablesPresent {
+		delete(cxsdkRawFields, "templateVariables")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varStatVisualElementMappedValues := _StatVisualElementMappedValues{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varStatVisualElementMappedValues)
 
 	if err != nil {
@@ -195,6 +213,21 @@ func (o *StatVisualElementMappedValues) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = StatVisualElementMappedValues(varStatVisualElementMappedValues)
+
+	if rawTemplateVariablesPresent {
+		var rawTemplateVariablesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawTemplateVariables, &rawTemplateVariablesElements); jerr == nil {
+			decodedTemplateVariables := make([]DisplayNameTemplateVariable, 0, len(rawTemplateVariablesElements))
+			for _, rawTemplateVariablesElement := range rawTemplateVariablesElements {
+				var elem DisplayNameTemplateVariable
+				if jerr := json.Unmarshal(rawTemplateVariablesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedTemplateVariables = append(decodedTemplateVariables, elem)
+			}
+			o.TemplateVariables = decodedTemplateVariables
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

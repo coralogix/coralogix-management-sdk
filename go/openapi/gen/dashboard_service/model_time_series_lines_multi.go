@@ -244,9 +244,27 @@ func (o TimeSeriesLinesMulti) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *TimeSeriesLinesMulti) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawQueryDisplaySettings, rawQueryDisplaySettingsPresent := cxsdkRawFields["queryDisplaySettings"]
+	if rawQueryDisplaySettingsPresent {
+		delete(cxsdkRawFields, "queryDisplaySettings")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varTimeSeriesLinesMulti := _TimeSeriesLinesMulti{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varTimeSeriesLinesMulti)
 
 	if err != nil {
@@ -254,6 +272,21 @@ func (o *TimeSeriesLinesMulti) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = TimeSeriesLinesMulti(varTimeSeriesLinesMulti)
+
+	if rawQueryDisplaySettingsPresent {
+		var rawQueryDisplaySettingsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawQueryDisplaySettings, &rawQueryDisplaySettingsElements); jerr == nil {
+			decodedQueryDisplaySettings := make([]QueryDisplaySettings, 0, len(rawQueryDisplaySettingsElements))
+			for _, rawQueryDisplaySettingsElement := range rawQueryDisplaySettingsElements {
+				var elem QueryDisplaySettings
+				if jerr := json.Unmarshal(rawQueryDisplaySettingsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedQueryDisplaySettings = append(decodedQueryDisplaySettings, elem)
+			}
+			o.QueryDisplaySettings = decodedQueryDisplaySettings
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

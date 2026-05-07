@@ -148,9 +148,27 @@ func (o *Filters) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawPathAndValues, rawPathAndValuesPresent := cxsdkRawFields["pathAndValues"]
+	if rawPathAndValuesPresent {
+		delete(cxsdkRawFields, "pathAndValues")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varFilters := _Filters{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varFilters)
 
 	if err != nil {
@@ -158,6 +176,21 @@ func (o *Filters) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Filters(varFilters)
+
+	if rawPathAndValuesPresent {
+		var rawPathAndValuesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPathAndValues, &rawPathAndValuesElements); jerr == nil {
+			decodedPathAndValues := make([]FilterPathAndValues, 0, len(rawPathAndValuesElements))
+			for _, rawPathAndValuesElement := range rawPathAndValuesElements {
+				var elem FilterPathAndValues
+				if jerr := json.Unmarshal(rawPathAndValuesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPathAndValues = append(decodedPathAndValues, elem)
+			}
+			o.PathAndValues = decodedPathAndValues
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -171,9 +171,27 @@ func (o GetGroupUsersResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetGroupUsersResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawUsers, rawUsersPresent := cxsdkRawFields["users"]
+	if rawUsersPresent {
+		delete(cxsdkRawFields, "users")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetGroupUsersResponse := _GetGroupUsersResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetGroupUsersResponse)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *GetGroupUsersResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetGroupUsersResponse(varGetGroupUsersResponse)
+
+	if rawUsersPresent {
+		var rawUsersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawUsers, &rawUsersElements); jerr == nil {
+			decodedUsers := make([]RbacV2User, 0, len(rawUsersElements))
+			for _, rawUsersElement := range rawUsersElements {
+				var elem RbacV2User
+				if jerr := json.Unmarshal(rawUsersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedUsers = append(decodedUsers, elem)
+			}
+			o.Users = decodedUsers
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -308,9 +308,43 @@ func (o *IncidentQueryFiltersValues) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAssigneeWithCount, rawAssigneeWithCountPresent := cxsdkRawFields["assigneeWithCount"]
+	if rawAssigneeWithCountPresent {
+		delete(cxsdkRawFields, "assigneeWithCount")
+	}
+	rawMetaLabelsWithCount, rawMetaLabelsWithCountPresent := cxsdkRawFields["metaLabelsWithCount"]
+	if rawMetaLabelsWithCountPresent {
+		delete(cxsdkRawFields, "metaLabelsWithCount")
+	}
+	rawSeverityWithCount, rawSeverityWithCountPresent := cxsdkRawFields["severityWithCount"]
+	if rawSeverityWithCountPresent {
+		delete(cxsdkRawFields, "severityWithCount")
+	}
+	rawStateWithCount, rawStateWithCountPresent := cxsdkRawFields["stateWithCount"]
+	if rawStateWithCountPresent {
+		delete(cxsdkRawFields, "stateWithCount")
+	}
+	rawStatusWithCount, rawStatusWithCountPresent := cxsdkRawFields["statusWithCount"]
+	if rawStatusWithCountPresent {
+		delete(cxsdkRawFields, "statusWithCount")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varIncidentQueryFiltersValues := _IncidentQueryFiltersValues{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varIncidentQueryFiltersValues)
 
 	if err != nil {
@@ -318,6 +352,81 @@ func (o *IncidentQueryFiltersValues) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IncidentQueryFiltersValues(varIncidentQueryFiltersValues)
+
+	if rawAssigneeWithCountPresent {
+		var rawAssigneeWithCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAssigneeWithCount, &rawAssigneeWithCountElements); jerr == nil {
+			decodedAssigneeWithCount := make([]AssigneeWithCount, 0, len(rawAssigneeWithCountElements))
+			for _, rawAssigneeWithCountElement := range rawAssigneeWithCountElements {
+				var elem AssigneeWithCount
+				if jerr := json.Unmarshal(rawAssigneeWithCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAssigneeWithCount = append(decodedAssigneeWithCount, elem)
+			}
+			o.AssigneeWithCount = decodedAssigneeWithCount
+		}
+	}
+
+	if rawMetaLabelsWithCountPresent {
+		var rawMetaLabelsWithCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMetaLabelsWithCount, &rawMetaLabelsWithCountElements); jerr == nil {
+			decodedMetaLabelsWithCount := make([]IncidentMetaLabelsWithCount, 0, len(rawMetaLabelsWithCountElements))
+			for _, rawMetaLabelsWithCountElement := range rawMetaLabelsWithCountElements {
+				var elem IncidentMetaLabelsWithCount
+				if jerr := json.Unmarshal(rawMetaLabelsWithCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMetaLabelsWithCount = append(decodedMetaLabelsWithCount, elem)
+			}
+			o.MetaLabelsWithCount = decodedMetaLabelsWithCount
+		}
+	}
+
+	if rawSeverityWithCountPresent {
+		var rawSeverityWithCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSeverityWithCount, &rawSeverityWithCountElements); jerr == nil {
+			decodedSeverityWithCount := make([]IncidentSeverityWithCount, 0, len(rawSeverityWithCountElements))
+			for _, rawSeverityWithCountElement := range rawSeverityWithCountElements {
+				var elem IncidentSeverityWithCount
+				if jerr := json.Unmarshal(rawSeverityWithCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSeverityWithCount = append(decodedSeverityWithCount, elem)
+			}
+			o.SeverityWithCount = decodedSeverityWithCount
+		}
+	}
+
+	if rawStateWithCountPresent {
+		var rawStateWithCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawStateWithCount, &rawStateWithCountElements); jerr == nil {
+			decodedStateWithCount := make([]IncidentStateWithCount, 0, len(rawStateWithCountElements))
+			for _, rawStateWithCountElement := range rawStateWithCountElements {
+				var elem IncidentStateWithCount
+				if jerr := json.Unmarshal(rawStateWithCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedStateWithCount = append(decodedStateWithCount, elem)
+			}
+			o.StateWithCount = decodedStateWithCount
+		}
+	}
+
+	if rawStatusWithCountPresent {
+		var rawStatusWithCountElements []json.RawMessage
+		if jerr := json.Unmarshal(rawStatusWithCount, &rawStatusWithCountElements); jerr == nil {
+			decodedStatusWithCount := make([]IncidentStatusWithCount, 0, len(rawStatusWithCountElements))
+			for _, rawStatusWithCountElement := range rawStatusWithCountElements {
+				var elem IncidentStatusWithCount
+				if jerr := json.Unmarshal(rawStatusWithCountElement, &elem); jerr != nil {
+					continue
+				}
+				decodedStatusWithCount = append(decodedStatusWithCount, elem)
+			}
+			o.StatusWithCount = decodedStatusWithCount
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

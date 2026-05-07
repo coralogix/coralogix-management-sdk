@@ -208,9 +208,27 @@ func (o DataUsageEntry) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DataUsageEntry) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawDimensions, rawDimensionsPresent := cxsdkRawFields["dimensions"]
+	if rawDimensionsPresent {
+		delete(cxsdkRawFields, "dimensions")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varDataUsageEntry := _DataUsageEntry{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varDataUsageEntry)
 
 	if err != nil {
@@ -218,6 +236,21 @@ func (o *DataUsageEntry) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DataUsageEntry(varDataUsageEntry)
+
+	if rawDimensionsPresent {
+		var rawDimensionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawDimensions, &rawDimensionsElements); jerr == nil {
+			decodedDimensions := make([]Dimension, 0, len(rawDimensionsElements))
+			for _, rawDimensionsElement := range rawDimensionsElements {
+				var elem Dimension
+				if jerr := json.Unmarshal(rawDimensionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedDimensions = append(decodedDimensions, elem)
+			}
+			o.Dimensions = decodedDimensions
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

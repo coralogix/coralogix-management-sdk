@@ -99,9 +99,27 @@ func (o ListViewFoldersResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListViewFoldersResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFolders, rawFoldersPresent := cxsdkRawFields["folders"]
+	if rawFoldersPresent {
+		delete(cxsdkRawFields, "folders")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListViewFoldersResponse := _ListViewFoldersResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListViewFoldersResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListViewFoldersResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListViewFoldersResponse(varListViewFoldersResponse)
+
+	if rawFoldersPresent {
+		var rawFoldersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFolders, &rawFoldersElements); jerr == nil {
+			decodedFolders := make([]ViewFolder, 0, len(rawFoldersElements))
+			for _, rawFoldersElement := range rawFoldersElements {
+				var elem ViewFolder
+				if jerr := json.Unmarshal(rawFoldersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFolders = append(decodedFolders, elem)
+			}
+			o.Folders = decodedFolders
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

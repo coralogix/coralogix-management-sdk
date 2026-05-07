@@ -148,9 +148,27 @@ func (o *BatchGetSlosResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawSlos, rawSlosPresent := cxsdkRawFields["slos"]
+	if rawSlosPresent {
+		delete(cxsdkRawFields, "slos")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varBatchGetSlosResponse := _BatchGetSlosResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varBatchGetSlosResponse)
 
 	if err != nil {
@@ -158,6 +176,21 @@ func (o *BatchGetSlosResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BatchGetSlosResponse(varBatchGetSlosResponse)
+
+	if rawSlosPresent {
+		var rawSlosElements []json.RawMessage
+		if jerr := json.Unmarshal(rawSlos, &rawSlosElements); jerr == nil {
+			decodedSlos := make([]Slo, 0, len(rawSlosElements))
+			for _, rawSlosElement := range rawSlosElements {
+				var elem Slo
+				if jerr := json.Unmarshal(rawSlosElement, &elem); jerr != nil {
+					continue
+				}
+				decodedSlos = append(decodedSlos, elem)
+			}
+			o.Slos = decodedSlos
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

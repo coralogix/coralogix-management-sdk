@@ -99,9 +99,27 @@ func (o AtomicOverwriteLogPoliciesResponse) ToMap() (map[string]interface{}, err
 }
 
 func (o *AtomicOverwriteLogPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCreateResponses, rawCreateResponsesPresent := cxsdkRawFields["createResponses"]
+	if rawCreateResponsesPresent {
+		delete(cxsdkRawFields, "createResponses")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varAtomicOverwriteLogPoliciesResponse := _AtomicOverwriteLogPoliciesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varAtomicOverwriteLogPoliciesResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *AtomicOverwriteLogPoliciesResponse) UnmarshalJSON(data []byte) (err err
 	}
 
 	*o = AtomicOverwriteLogPoliciesResponse(varAtomicOverwriteLogPoliciesResponse)
+
+	if rawCreateResponsesPresent {
+		var rawCreateResponsesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCreateResponses, &rawCreateResponsesElements); jerr == nil {
+			decodedCreateResponses := make([]CreatePolicyResponse, 0, len(rawCreateResponsesElements))
+			for _, rawCreateResponsesElement := range rawCreateResponsesElements {
+				var elem CreatePolicyResponse
+				if jerr := json.Unmarshal(rawCreateResponsesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCreateResponses = append(decodedCreateResponses, elem)
+			}
+			o.CreateResponses = decodedCreateResponses
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

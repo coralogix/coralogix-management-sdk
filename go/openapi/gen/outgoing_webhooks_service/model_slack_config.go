@@ -135,9 +135,31 @@ func (o SlackConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *SlackConfig) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAttachments, rawAttachmentsPresent := cxsdkRawFields["attachments"]
+	if rawAttachmentsPresent {
+		delete(cxsdkRawFields, "attachments")
+	}
+	rawDigests, rawDigestsPresent := cxsdkRawFields["digests"]
+	if rawDigestsPresent {
+		delete(cxsdkRawFields, "digests")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varSlackConfig := _SlackConfig{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varSlackConfig)
 
 	if err != nil {
@@ -145,6 +167,36 @@ func (o *SlackConfig) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = SlackConfig(varSlackConfig)
+
+	if rawAttachmentsPresent {
+		var rawAttachmentsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAttachments, &rawAttachmentsElements); jerr == nil {
+			decodedAttachments := make([]Attachment, 0, len(rawAttachmentsElements))
+			for _, rawAttachmentsElement := range rawAttachmentsElements {
+				var elem Attachment
+				if jerr := json.Unmarshal(rawAttachmentsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAttachments = append(decodedAttachments, elem)
+			}
+			o.Attachments = decodedAttachments
+		}
+	}
+
+	if rawDigestsPresent {
+		var rawDigestsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawDigests, &rawDigestsElements); jerr == nil {
+			decodedDigests := make([]Digest, 0, len(rawDigestsElements))
+			for _, rawDigestsElement := range rawDigestsElements {
+				var elem Digest
+				if jerr := json.Unmarshal(rawDigestsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedDigests = append(decodedDigests, elem)
+			}
+			o.Digests = decodedDigests
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

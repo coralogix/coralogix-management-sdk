@@ -279,9 +279,35 @@ func (o LineChartLogsQuery) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LineChartLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAggregations, rawAggregationsPresent := cxsdkRawFields["aggregations"]
+	if rawAggregationsPresent {
+		delete(cxsdkRawFields, "aggregations")
+	}
+	rawFilters, rawFiltersPresent := cxsdkRawFields["filters"]
+	if rawFiltersPresent {
+		delete(cxsdkRawFields, "filters")
+	}
+	rawGroupBys, rawGroupBysPresent := cxsdkRawFields["groupBys"]
+	if rawGroupBysPresent {
+		delete(cxsdkRawFields, "groupBys")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varLineChartLogsQuery := _LineChartLogsQuery{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varLineChartLogsQuery)
 
 	if err != nil {
@@ -289,6 +315,51 @@ func (o *LineChartLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LineChartLogsQuery(varLineChartLogsQuery)
+
+	if rawAggregationsPresent {
+		var rawAggregationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggregations, &rawAggregationsElements); jerr == nil {
+			decodedAggregations := make([]LogsAggregation, 0, len(rawAggregationsElements))
+			for _, rawAggregationsElement := range rawAggregationsElements {
+				var elem LogsAggregation
+				if jerr := json.Unmarshal(rawAggregationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggregations = append(decodedAggregations, elem)
+			}
+			o.Aggregations = decodedAggregations
+		}
+	}
+
+	if rawFiltersPresent {
+		var rawFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFilters, &rawFiltersElements); jerr == nil {
+			decodedFilters := make([]FilterLogsFilter, 0, len(rawFiltersElements))
+			for _, rawFiltersElement := range rawFiltersElements {
+				var elem FilterLogsFilter
+				if jerr := json.Unmarshal(rawFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFilters = append(decodedFilters, elem)
+			}
+			o.Filters = decodedFilters
+		}
+	}
+
+	if rawGroupBysPresent {
+		var rawGroupBysElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBys, &rawGroupBysElements); jerr == nil {
+			decodedGroupBys := make([]ObservationField, 0, len(rawGroupBysElements))
+			for _, rawGroupBysElement := range rawGroupBysElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawGroupBysElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBys = append(decodedGroupBys, elem)
+			}
+			o.GroupBys = decodedGroupBys
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

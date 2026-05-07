@@ -519,9 +519,33 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 {{/isMap}}
 {{/parent}}
 {{^parent}}
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	{{#vars}}
+	{{#isArray}}
+	{{#items.isModel}}
+	raw{{{name}}}, raw{{{name}}}Present := cxsdkRawFields["{{{baseName}}}"]
+	if raw{{{name}}}Present {
+		delete(cxsdkRawFields, "{{{baseName}}}")
+	}
+	{{/items.isModel}}
+	{{/isArray}}
+	{{/vars}}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	var{{{classname}}} := _{{{classname}}}{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&var{{{classname}}})
 
 	if err != nil {
@@ -529,6 +553,27 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = {{{classname}}}(var{{{classname}}})
+	{{#vars}}
+	{{#isArray}}
+	{{#items.isModel}}
+
+	if raw{{{name}}}Present {
+		var raw{{{name}}}Elements []json.RawMessage
+		if jerr := json.Unmarshal(raw{{{name}}}, &raw{{{name}}}Elements); jerr == nil {
+			decoded{{{name}}} := make([]{{{items.dataType}}}, 0, len(raw{{{name}}}Elements))
+			for _, raw{{{name}}}Element := range raw{{{name}}}Elements {
+				var elem {{{items.dataType}}}
+				if jerr := json.Unmarshal(raw{{{name}}}Element, &elem); jerr != nil {
+					continue
+				}
+				decoded{{{name}}} = append(decoded{{{name}}}, elem)
+			}
+			o.{{{name}}} = decoded{{{name}}}
+		}
+	}
+	{{/items.isModel}}
+	{{/isArray}}
+	{{/vars}}
 
 	additionalProperties := make(map[string]interface{})
 
@@ -548,9 +593,33 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 {{/isAdditionalPropertiesTrue}}
 {{^isAdditionalPropertiesTrue}}
 {{#hasRequired}}
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	{{#vars}}
+	{{#isArray}}
+	{{#items.isModel}}
+	raw{{{name}}}, raw{{{name}}}Present := cxsdkRawFields["{{{baseName}}}"]
+	if raw{{{name}}}Present {
+		delete(cxsdkRawFields, "{{{baseName}}}")
+	}
+	{{/items.isModel}}
+	{{/isArray}}
+	{{/vars}}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	var{{{classname}}} := _{{{classname}}}{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&var{{{classname}}})
 
 	if err != nil {
@@ -558,6 +627,27 @@ func (o *{{{classname}}}) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = {{{classname}}}(var{{{classname}}})
+	{{#vars}}
+	{{#isArray}}
+	{{#items.isModel}}
+
+	if raw{{{name}}}Present {
+		var raw{{{name}}}Elements []json.RawMessage
+		if jerr := json.Unmarshal(raw{{{name}}}, &raw{{{name}}}Elements); jerr == nil {
+			decoded{{{name}}} := make([]{{{items.dataType}}}, 0, len(raw{{{name}}}Elements))
+			for _, raw{{{name}}}Element := range raw{{{name}}}Elements {
+				var elem {{{items.dataType}}}
+				if jerr := json.Unmarshal(raw{{{name}}}Element, &elem); jerr != nil {
+					continue
+				}
+				decoded{{{name}}} = append(decoded{{{name}}}, elem)
+			}
+			o.{{{name}}} = decoded{{{name}}}
+		}
+	}
+	{{/items.isModel}}
+	{{/isArray}}
+	{{/vars}}
 
 	return err
 }

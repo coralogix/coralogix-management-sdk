@@ -171,9 +171,27 @@ func (o GetRuleGroupModelMappingRequestCreateRuleSubgroup) ToMap() (map[string]i
 }
 
 func (o *GetRuleGroupModelMappingRequestCreateRuleSubgroup) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRules, rawRulesPresent := cxsdkRawFields["rules"]
+	if rawRulesPresent {
+		delete(cxsdkRawFields, "rules")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetRuleGroupModelMappingRequestCreateRuleSubgroup := _GetRuleGroupModelMappingRequestCreateRuleSubgroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetRuleGroupModelMappingRequestCreateRuleSubgroup)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *GetRuleGroupModelMappingRequestCreateRuleSubgroup) UnmarshalJSON(data [
 	}
 
 	*o = GetRuleGroupModelMappingRequestCreateRuleSubgroup(varGetRuleGroupModelMappingRequestCreateRuleSubgroup)
+
+	if rawRulesPresent {
+		var rawRulesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRules, &rawRulesElements); jerr == nil {
+			decodedRules := make([]GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule, 0, len(rawRulesElements))
+			for _, rawRulesElement := range rawRulesElements {
+				var elem GetRuleGroupModelMappingRequestCreateRuleSubgroupCreateRule
+				if jerr := json.Unmarshal(rawRulesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRules = append(decodedRules, elem)
+			}
+			o.Rules = decodedRules
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

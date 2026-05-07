@@ -387,9 +387,31 @@ func (o RuleGroup) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RuleGroup) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRuleMatchers, rawRuleMatchersPresent := cxsdkRawFields["ruleMatchers"]
+	if rawRuleMatchersPresent {
+		delete(cxsdkRawFields, "ruleMatchers")
+	}
+	rawRuleSubgroups, rawRuleSubgroupsPresent := cxsdkRawFields["ruleSubgroups"]
+	if rawRuleSubgroupsPresent {
+		delete(cxsdkRawFields, "ruleSubgroups")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRuleGroup := _RuleGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRuleGroup)
 
 	if err != nil {
@@ -397,6 +419,36 @@ func (o *RuleGroup) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RuleGroup(varRuleGroup)
+
+	if rawRuleMatchersPresent {
+		var rawRuleMatchersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRuleMatchers, &rawRuleMatchersElements); jerr == nil {
+			decodedRuleMatchers := make([]RuleMatcher, 0, len(rawRuleMatchersElements))
+			for _, rawRuleMatchersElement := range rawRuleMatchersElements {
+				var elem RuleMatcher
+				if jerr := json.Unmarshal(rawRuleMatchersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRuleMatchers = append(decodedRuleMatchers, elem)
+			}
+			o.RuleMatchers = decodedRuleMatchers
+		}
+	}
+
+	if rawRuleSubgroupsPresent {
+		var rawRuleSubgroupsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRuleSubgroups, &rawRuleSubgroupsElements); jerr == nil {
+			decodedRuleSubgroups := make([]RuleSubgroup, 0, len(rawRuleSubgroupsElements))
+			for _, rawRuleSubgroupsElement := range rawRuleSubgroupsElements {
+				var elem RuleSubgroup
+				if jerr := json.Unmarshal(rawRuleSubgroupsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRuleSubgroups = append(decodedRuleSubgroups, elem)
+			}
+			o.RuleSubgroups = decodedRuleSubgroups
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

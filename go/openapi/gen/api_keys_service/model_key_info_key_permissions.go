@@ -135,9 +135,27 @@ func (o KeyInfoKeyPermissions) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *KeyInfoKeyPermissions) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawPresets, rawPresetsPresent := cxsdkRawFields["presets"]
+	if rawPresetsPresent {
+		delete(cxsdkRawFields, "presets")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varKeyInfoKeyPermissions := _KeyInfoKeyPermissions{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varKeyInfoKeyPermissions)
 
 	if err != nil {
@@ -145,6 +163,21 @@ func (o *KeyInfoKeyPermissions) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = KeyInfoKeyPermissions(varKeyInfoKeyPermissions)
+
+	if rawPresetsPresent {
+		var rawPresetsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPresets, &rawPresetsElements); jerr == nil {
+			decodedPresets := make([]PresetInfo, 0, len(rawPresetsElements))
+			for _, rawPresetsElement := range rawPresetsElements {
+				var elem PresetInfo
+				if jerr := json.Unmarshal(rawPresetsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPresets = append(decodedPresets, elem)
+			}
+			o.Presets = decodedPresets
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

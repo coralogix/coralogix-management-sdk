@@ -99,9 +99,27 @@ func (o ListSystemRolesResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListSystemRolesResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRoles, rawRolesPresent := cxsdkRawFields["roles"]
+	if rawRolesPresent {
+		delete(cxsdkRawFields, "roles")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListSystemRolesResponse := _ListSystemRolesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListSystemRolesResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListSystemRolesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListSystemRolesResponse(varListSystemRolesResponse)
+
+	if rawRolesPresent {
+		var rawRolesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRoles, &rawRolesElements); jerr == nil {
+			decodedRoles := make([]SystemRole, 0, len(rawRolesElements))
+			for _, rawRolesElement := range rawRolesElements {
+				var elem SystemRole
+				if jerr := json.Unmarshal(rawRolesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRoles = append(decodedRoles, elem)
+			}
+			o.Roles = decodedRoles
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

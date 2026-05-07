@@ -99,9 +99,27 @@ func (o GetSendDataApiKeysResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetSendDataApiKeysResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawKeys, rawKeysPresent := cxsdkRawFields["keys"]
+	if rawKeysPresent {
+		delete(cxsdkRawFields, "keys")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetSendDataApiKeysResponse := _GetSendDataApiKeysResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetSendDataApiKeysResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetSendDataApiKeysResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetSendDataApiKeysResponse(varGetSendDataApiKeysResponse)
+
+	if rawKeysPresent {
+		var rawKeysElements []json.RawMessage
+		if jerr := json.Unmarshal(rawKeys, &rawKeysElements); jerr == nil {
+			decodedKeys := make([]KeyInfo, 0, len(rawKeysElements))
+			for _, rawKeysElement := range rawKeysElements {
+				var elem KeyInfo
+				if jerr := json.Unmarshal(rawKeysElement, &elem); jerr != nil {
+					continue
+				}
+				decodedKeys = append(decodedKeys, elem)
+			}
+			o.Keys = decodedKeys
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

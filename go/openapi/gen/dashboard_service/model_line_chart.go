@@ -257,9 +257,27 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawQueryDefinitions, rawQueryDefinitionsPresent := cxsdkRawFields["queryDefinitions"]
+	if rawQueryDefinitionsPresent {
+		delete(cxsdkRawFields, "queryDefinitions")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varLineChart := _LineChart{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varLineChart)
 
 	if err != nil {
@@ -267,6 +285,21 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LineChart(varLineChart)
+
+	if rawQueryDefinitionsPresent {
+		var rawQueryDefinitionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawQueryDefinitions, &rawQueryDefinitionsElements); jerr == nil {
+			decodedQueryDefinitions := make([]LineChartQueryDefinition, 0, len(rawQueryDefinitionsElements))
+			for _, rawQueryDefinitionsElement := range rawQueryDefinitionsElements {
+				var elem LineChartQueryDefinition
+				if jerr := json.Unmarshal(rawQueryDefinitionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedQueryDefinitions = append(decodedQueryDefinitions, elem)
+			}
+			o.QueryDefinitions = decodedQueryDefinitions
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

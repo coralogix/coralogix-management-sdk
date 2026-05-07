@@ -99,9 +99,27 @@ func (o GetIncidentEventsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetIncidentEventsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawIncidentEvents, rawIncidentEventsPresent := cxsdkRawFields["incidentEvents"]
+	if rawIncidentEventsPresent {
+		delete(cxsdkRawFields, "incidentEvents")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetIncidentEventsResponse := _GetIncidentEventsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetIncidentEventsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetIncidentEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetIncidentEventsResponse(varGetIncidentEventsResponse)
+
+	if rawIncidentEventsPresent {
+		var rawIncidentEventsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawIncidentEvents, &rawIncidentEventsElements); jerr == nil {
+			decodedIncidentEvents := make([]IncidentEvent, 0, len(rawIncidentEventsElements))
+			for _, rawIncidentEventsElement := range rawIncidentEventsElements {
+				var elem IncidentEvent
+				if jerr := json.Unmarshal(rawIncidentEventsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedIncidentEvents = append(decodedIncidentEvents, elem)
+			}
+			o.IncidentEvents = decodedIncidentEvents
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

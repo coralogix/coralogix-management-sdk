@@ -171,9 +171,27 @@ func (o SpanRules) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *SpanRules) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawTagRules, rawTagRulesPresent := cxsdkRawFields["tagRules"]
+	if rawTagRulesPresent {
+		delete(cxsdkRawFields, "tagRules")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varSpanRules := _SpanRules{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varSpanRules)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *SpanRules) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = SpanRules(varSpanRules)
+
+	if rawTagRulesPresent {
+		var rawTagRulesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawTagRules, &rawTagRulesElements); jerr == nil {
+			decodedTagRules := make([]TagRule, 0, len(rawTagRulesElements))
+			for _, rawTagRulesElement := range rawTagRulesElements {
+				var elem TagRule
+				if jerr := json.Unmarshal(rawTagRulesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedTagRules = append(decodedTagRules, elem)
+			}
+			o.TagRules = decodedTagRules
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -112,9 +112,27 @@ func (o *ReplaceSloAlertsValidationsResponse) UnmarshalJSON(data []byte) (err er
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertsValidationResult, rawAlertsValidationResultPresent := cxsdkRawFields["alertsValidationResult"]
+	if rawAlertsValidationResultPresent {
+		delete(cxsdkRawFields, "alertsValidationResult")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varReplaceSloAlertsValidationsResponse := _ReplaceSloAlertsValidationsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varReplaceSloAlertsValidationsResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *ReplaceSloAlertsValidationsResponse) UnmarshalJSON(data []byte) (err er
 	}
 
 	*o = ReplaceSloAlertsValidationsResponse(varReplaceSloAlertsValidationsResponse)
+
+	if rawAlertsValidationResultPresent {
+		var rawAlertsValidationResultElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertsValidationResult, &rawAlertsValidationResultElements); jerr == nil {
+			decodedAlertsValidationResult := make([]SloAlertValidityResult, 0, len(rawAlertsValidationResultElements))
+			for _, rawAlertsValidationResultElement := range rawAlertsValidationResultElements {
+				var elem SloAlertValidityResult
+				if jerr := json.Unmarshal(rawAlertsValidationResultElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertsValidationResult = append(decodedAlertsValidationResult, elem)
+			}
+			o.AlertsValidationResult = decodedAlertsValidationResult
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

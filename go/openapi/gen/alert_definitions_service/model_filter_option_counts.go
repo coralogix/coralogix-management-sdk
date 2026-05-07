@@ -243,9 +243,43 @@ func (o FilterOptionCounts) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FilterOptionCounts) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawEnabledCounts, rawEnabledCountsPresent := cxsdkRawFields["enabledCounts"]
+	if rawEnabledCountsPresent {
+		delete(cxsdkRawFields, "enabledCounts")
+	}
+	rawEntityLabelCounts, rawEntityLabelCountsPresent := cxsdkRawFields["entityLabelCounts"]
+	if rawEntityLabelCountsPresent {
+		delete(cxsdkRawFields, "entityLabelCounts")
+	}
+	rawPriorityCounts, rawPriorityCountsPresent := cxsdkRawFields["priorityCounts"]
+	if rawPriorityCountsPresent {
+		delete(cxsdkRawFields, "priorityCounts")
+	}
+	rawStatusCounts, rawStatusCountsPresent := cxsdkRawFields["statusCounts"]
+	if rawStatusCountsPresent {
+		delete(cxsdkRawFields, "statusCounts")
+	}
+	rawTypeCounts, rawTypeCountsPresent := cxsdkRawFields["typeCounts"]
+	if rawTypeCountsPresent {
+		delete(cxsdkRawFields, "typeCounts")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varFilterOptionCounts := _FilterOptionCounts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varFilterOptionCounts)
 
 	if err != nil {
@@ -253,6 +287,81 @@ func (o *FilterOptionCounts) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = FilterOptionCounts(varFilterOptionCounts)
+
+	if rawEnabledCountsPresent {
+		var rawEnabledCountsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEnabledCounts, &rawEnabledCountsElements); jerr == nil {
+			decodedEnabledCounts := make([]EnabledCount, 0, len(rawEnabledCountsElements))
+			for _, rawEnabledCountsElement := range rawEnabledCountsElements {
+				var elem EnabledCount
+				if jerr := json.Unmarshal(rawEnabledCountsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEnabledCounts = append(decodedEnabledCounts, elem)
+			}
+			o.EnabledCounts = decodedEnabledCounts
+		}
+	}
+
+	if rawEntityLabelCountsPresent {
+		var rawEntityLabelCountsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEntityLabelCounts, &rawEntityLabelCountsElements); jerr == nil {
+			decodedEntityLabelCounts := make([]EntityLabelCount, 0, len(rawEntityLabelCountsElements))
+			for _, rawEntityLabelCountsElement := range rawEntityLabelCountsElements {
+				var elem EntityLabelCount
+				if jerr := json.Unmarshal(rawEntityLabelCountsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEntityLabelCounts = append(decodedEntityLabelCounts, elem)
+			}
+			o.EntityLabelCounts = decodedEntityLabelCounts
+		}
+	}
+
+	if rawPriorityCountsPresent {
+		var rawPriorityCountsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPriorityCounts, &rawPriorityCountsElements); jerr == nil {
+			decodedPriorityCounts := make([]PriorityCount, 0, len(rawPriorityCountsElements))
+			for _, rawPriorityCountsElement := range rawPriorityCountsElements {
+				var elem PriorityCount
+				if jerr := json.Unmarshal(rawPriorityCountsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPriorityCounts = append(decodedPriorityCounts, elem)
+			}
+			o.PriorityCounts = decodedPriorityCounts
+		}
+	}
+
+	if rawStatusCountsPresent {
+		var rawStatusCountsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawStatusCounts, &rawStatusCountsElements); jerr == nil {
+			decodedStatusCounts := make([]StatusCount, 0, len(rawStatusCountsElements))
+			for _, rawStatusCountsElement := range rawStatusCountsElements {
+				var elem StatusCount
+				if jerr := json.Unmarshal(rawStatusCountsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedStatusCounts = append(decodedStatusCounts, elem)
+			}
+			o.StatusCounts = decodedStatusCounts
+		}
+	}
+
+	if rawTypeCountsPresent {
+		var rawTypeCountsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawTypeCounts, &rawTypeCountsElements); jerr == nil {
+			decodedTypeCounts := make([]TypeCount, 0, len(rawTypeCountsElements))
+			for _, rawTypeCountsElement := range rawTypeCountsElements {
+				var elem TypeCount
+				if jerr := json.Unmarshal(rawTypeCountsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedTypeCounts = append(decodedTypeCounts, elem)
+			}
+			o.TypeCounts = decodedTypeCounts
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

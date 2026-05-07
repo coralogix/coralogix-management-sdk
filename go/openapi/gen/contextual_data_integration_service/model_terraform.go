@@ -99,9 +99,27 @@ func (o Terraform) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Terraform) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawConfigurationBlocks, rawConfigurationBlocksPresent := cxsdkRawFields["configurationBlocks"]
+	if rawConfigurationBlocksPresent {
+		delete(cxsdkRawFields, "configurationBlocks")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varTerraform := _Terraform{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varTerraform)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *Terraform) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = Terraform(varTerraform)
+
+	if rawConfigurationBlocksPresent {
+		var rawConfigurationBlocksElements []json.RawMessage
+		if jerr := json.Unmarshal(rawConfigurationBlocks, &rawConfigurationBlocksElements); jerr == nil {
+			decodedConfigurationBlocks := make([]ConfigurationBlock, 0, len(rawConfigurationBlocksElements))
+			for _, rawConfigurationBlocksElement := range rawConfigurationBlocksElements {
+				var elem ConfigurationBlock
+				if jerr := json.Unmarshal(rawConfigurationBlocksElement, &elem); jerr != nil {
+					continue
+				}
+				decodedConfigurationBlocks = append(decodedConfigurationBlocks, elem)
+			}
+			o.ConfigurationBlocks = decodedConfigurationBlocks
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -171,9 +171,31 @@ func (o LogsQueryGrouping) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LogsQueryGrouping) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAggregations, rawAggregationsPresent := cxsdkRawFields["aggregations"]
+	if rawAggregationsPresent {
+		delete(cxsdkRawFields, "aggregations")
+	}
+	rawGroupBys, rawGroupBysPresent := cxsdkRawFields["groupBys"]
+	if rawGroupBysPresent {
+		delete(cxsdkRawFields, "groupBys")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varLogsQueryGrouping := _LogsQueryGrouping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varLogsQueryGrouping)
 
 	if err != nil {
@@ -181,6 +203,36 @@ func (o *LogsQueryGrouping) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LogsQueryGrouping(varLogsQueryGrouping)
+
+	if rawAggregationsPresent {
+		var rawAggregationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggregations, &rawAggregationsElements); jerr == nil {
+			decodedAggregations := make([]LogsQueryAggregation, 0, len(rawAggregationsElements))
+			for _, rawAggregationsElement := range rawAggregationsElements {
+				var elem LogsQueryAggregation
+				if jerr := json.Unmarshal(rawAggregationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggregations = append(decodedAggregations, elem)
+			}
+			o.Aggregations = decodedAggregations
+		}
+	}
+
+	if rawGroupBysPresent {
+		var rawGroupBysElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBys, &rawGroupBysElements); jerr == nil {
+			decodedGroupBys := make([]ObservationField, 0, len(rawGroupBysElements))
+			for _, rawGroupBysElement := range rawGroupBysElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawGroupBysElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBys = append(decodedGroupBys, elem)
+			}
+			o.GroupBys = decodedGroupBys
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

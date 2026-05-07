@@ -279,9 +279,35 @@ func (o HexagonSpansQuery) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *HexagonSpansQuery) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFilters, rawFiltersPresent := cxsdkRawFields["filters"]
+	if rawFiltersPresent {
+		delete(cxsdkRawFields, "filters")
+	}
+	rawGroupBy, rawGroupByPresent := cxsdkRawFields["groupBy"]
+	if rawGroupByPresent {
+		delete(cxsdkRawFields, "groupBy")
+	}
+	rawGroupBys, rawGroupBysPresent := cxsdkRawFields["groupBys"]
+	if rawGroupBysPresent {
+		delete(cxsdkRawFields, "groupBys")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varHexagonSpansQuery := _HexagonSpansQuery{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varHexagonSpansQuery)
 
 	if err != nil {
@@ -289,6 +315,51 @@ func (o *HexagonSpansQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = HexagonSpansQuery(varHexagonSpansQuery)
+
+	if rawFiltersPresent {
+		var rawFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFilters, &rawFiltersElements); jerr == nil {
+			decodedFilters := make([]SpansFilter, 0, len(rawFiltersElements))
+			for _, rawFiltersElement := range rawFiltersElements {
+				var elem SpansFilter
+				if jerr := json.Unmarshal(rawFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFilters = append(decodedFilters, elem)
+			}
+			o.Filters = decodedFilters
+		}
+	}
+
+	if rawGroupByPresent {
+		var rawGroupByElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBy, &rawGroupByElements); jerr == nil {
+			decodedGroupBy := make([]SpanField, 0, len(rawGroupByElements))
+			for _, rawGroupByElement := range rawGroupByElements {
+				var elem SpanField
+				if jerr := json.Unmarshal(rawGroupByElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBy = append(decodedGroupBy, elem)
+			}
+			o.GroupBy = decodedGroupBy
+		}
+	}
+
+	if rawGroupBysPresent {
+		var rawGroupBysElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBys, &rawGroupBysElements); jerr == nil {
+			decodedGroupBys := make([]SpanObservationField, 0, len(rawGroupBysElements))
+			for _, rawGroupBysElement := range rawGroupBysElements {
+				var elem SpanObservationField
+				if jerr := json.Unmarshal(rawGroupBysElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBys = append(decodedGroupBys, elem)
+			}
+			o.GroupBys = decodedGroupBys
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

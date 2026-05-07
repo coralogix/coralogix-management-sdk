@@ -328,9 +328,31 @@ func (o *IntegrationRevisionHelmChart) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFields, rawFieldsPresent := cxsdkRawFields["fields"]
+	if rawFieldsPresent {
+		delete(cxsdkRawFields, "fields")
+	}
+	rawGroups, rawGroupsPresent := cxsdkRawFields["groups"]
+	if rawGroupsPresent {
+		delete(cxsdkRawFields, "groups")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varIntegrationRevisionHelmChart := _IntegrationRevisionHelmChart{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varIntegrationRevisionHelmChart)
 
 	if err != nil {
@@ -338,6 +360,36 @@ func (o *IntegrationRevisionHelmChart) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = IntegrationRevisionHelmChart(varIntegrationRevisionHelmChart)
+
+	if rawFieldsPresent {
+		var rawFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFields, &rawFieldsElements); jerr == nil {
+			decodedFields := make([]FieldInformation, 0, len(rawFieldsElements))
+			for _, rawFieldsElement := range rawFieldsElements {
+				var elem FieldInformation
+				if jerr := json.Unmarshal(rawFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFields = append(decodedFields, elem)
+			}
+			o.Fields = decodedFields
+		}
+	}
+
+	if rawGroupsPresent {
+		var rawGroupsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroups, &rawGroupsElements); jerr == nil {
+			decodedGroups := make([]IntegrationRevisionGroup, 0, len(rawGroupsElements))
+			for _, rawGroupsElement := range rawGroupsElements {
+				var elem IntegrationRevisionGroup
+				if jerr := json.Unmarshal(rawGroupsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroups = append(decodedGroups, elem)
+			}
+			o.Groups = decodedGroups
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

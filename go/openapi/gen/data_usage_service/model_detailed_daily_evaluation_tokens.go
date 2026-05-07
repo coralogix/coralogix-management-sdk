@@ -172,9 +172,27 @@ func (o DetailedDailyEvaluationTokens) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DetailedDailyEvaluationTokens) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawEvaluations, rawEvaluationsPresent := cxsdkRawFields["evaluations"]
+	if rawEvaluationsPresent {
+		delete(cxsdkRawFields, "evaluations")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varDetailedDailyEvaluationTokens := _DetailedDailyEvaluationTokens{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varDetailedDailyEvaluationTokens)
 
 	if err != nil {
@@ -182,6 +200,21 @@ func (o *DetailedDailyEvaluationTokens) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = DetailedDailyEvaluationTokens(varDetailedDailyEvaluationTokens)
+
+	if rawEvaluationsPresent {
+		var rawEvaluationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawEvaluations, &rawEvaluationsElements); jerr == nil {
+			decodedEvaluations := make([]Evaluation, 0, len(rawEvaluationsElements))
+			for _, rawEvaluationsElement := range rawEvaluationsElements {
+				var elem Evaluation
+				if jerr := json.Unmarshal(rawEvaluationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedEvaluations = append(decodedEvaluations, elem)
+			}
+			o.Evaluations = decodedEvaluations
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -99,9 +99,27 @@ func (o GetDailyUsageProcessedGbsResponse) ToMap() (map[string]interface{}, erro
 }
 
 func (o *GetDailyUsageProcessedGbsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawGbs, rawGbsPresent := cxsdkRawFields["gbs"]
+	if rawGbsPresent {
+		delete(cxsdkRawFields, "gbs")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetDailyUsageProcessedGbsResponse := _GetDailyUsageProcessedGbsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetDailyUsageProcessedGbsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetDailyUsageProcessedGbsResponse) UnmarshalJSON(data []byte) (err erro
 	}
 
 	*o = GetDailyUsageProcessedGbsResponse(varGetDailyUsageProcessedGbsResponse)
+
+	if rawGbsPresent {
+		var rawGbsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGbs, &rawGbsElements); jerr == nil {
+			decodedGbs := make([]DetailedDailyProcessedGbs, 0, len(rawGbsElements))
+			for _, rawGbsElement := range rawGbsElements {
+				var elem DetailedDailyProcessedGbs
+				if jerr := json.Unmarshal(rawGbsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGbs = append(decodedGbs, elem)
+			}
+			o.Gbs = decodedGbs
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

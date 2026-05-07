@@ -99,9 +99,27 @@ func (o Events2MetricServiceAtomicBatchExecuteE2MRequest) ToMap() (map[string]in
 }
 
 func (o *Events2MetricServiceAtomicBatchExecuteE2MRequest) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRequests, rawRequestsPresent := cxsdkRawFields["requests"]
+	if rawRequestsPresent {
+		delete(cxsdkRawFields, "requests")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varEvents2MetricServiceAtomicBatchExecuteE2MRequest := _Events2MetricServiceAtomicBatchExecuteE2MRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varEvents2MetricServiceAtomicBatchExecuteE2MRequest)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *Events2MetricServiceAtomicBatchExecuteE2MRequest) UnmarshalJSON(data []
 	}
 
 	*o = Events2MetricServiceAtomicBatchExecuteE2MRequest(varEvents2MetricServiceAtomicBatchExecuteE2MRequest)
+
+	if rawRequestsPresent {
+		var rawRequestsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRequests, &rawRequestsElements); jerr == nil {
+			decodedRequests := make([]E2MExecutionRequest, 0, len(rawRequestsElements))
+			for _, rawRequestsElement := range rawRequestsElements {
+				var elem E2MExecutionRequest
+				if jerr := json.Unmarshal(rawRequestsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRequests = append(decodedRequests, elem)
+			}
+			o.Requests = decodedRequests
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

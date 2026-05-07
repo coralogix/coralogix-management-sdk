@@ -243,9 +243,27 @@ func (o RoutingRule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RoutingRule) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawTargets, rawTargetsPresent := cxsdkRawFields["targets"]
+	if rawTargetsPresent {
+		delete(cxsdkRawFields, "targets")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRoutingRule := _RoutingRule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRoutingRule)
 
 	if err != nil {
@@ -253,6 +271,21 @@ func (o *RoutingRule) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RoutingRule(varRoutingRule)
+
+	if rawTargetsPresent {
+		var rawTargetsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawTargets, &rawTargetsElements); jerr == nil {
+			decodedTargets := make([]RoutingTarget, 0, len(rawTargetsElements))
+			for _, rawTargetsElement := range rawTargetsElements {
+				var elem RoutingTarget
+				if jerr := json.Unmarshal(rawTargetsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedTargets = append(decodedTargets, elem)
+			}
+			o.Targets = decodedTargets
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

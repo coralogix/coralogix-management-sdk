@@ -112,9 +112,27 @@ func (o *GetCompanyPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawPolicies, rawPoliciesPresent := cxsdkRawFields["policies"]
+	if rawPoliciesPresent {
+		delete(cxsdkRawFields, "policies")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetCompanyPoliciesResponse := _GetCompanyPoliciesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetCompanyPoliciesResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *GetCompanyPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetCompanyPoliciesResponse(varGetCompanyPoliciesResponse)
+
+	if rawPoliciesPresent {
+		var rawPoliciesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPolicies, &rawPoliciesElements); jerr == nil {
+			decodedPolicies := make([]Policy, 0, len(rawPoliciesElements))
+			for _, rawPoliciesElement := range rawPoliciesElements {
+				var elem Policy
+				if jerr := json.Unmarshal(rawPoliciesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPolicies = append(decodedPolicies, elem)
+			}
+			o.Policies = decodedPolicies
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

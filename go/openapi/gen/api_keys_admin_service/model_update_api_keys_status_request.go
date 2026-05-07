@@ -99,9 +99,27 @@ func (o UpdateAPIKeysStatusRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UpdateAPIKeysStatusRequest) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawUpdates, rawUpdatesPresent := cxsdkRawFields["updates"]
+	if rawUpdatesPresent {
+		delete(cxsdkRawFields, "updates")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varUpdateAPIKeysStatusRequest := _UpdateAPIKeysStatusRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varUpdateAPIKeysStatusRequest)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *UpdateAPIKeysStatusRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = UpdateAPIKeysStatusRequest(varUpdateAPIKeysStatusRequest)
+
+	if rawUpdatesPresent {
+		var rawUpdatesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawUpdates, &rawUpdatesElements); jerr == nil {
+			decodedUpdates := make([]ApiKeyStatusUpdate, 0, len(rawUpdatesElements))
+			for _, rawUpdatesElement := range rawUpdatesElements {
+				var elem ApiKeyStatusUpdate
+				if jerr := json.Unmarshal(rawUpdatesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedUpdates = append(decodedUpdates, elem)
+			}
+			o.Updates = decodedUpdates
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

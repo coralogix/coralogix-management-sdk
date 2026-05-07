@@ -112,9 +112,27 @@ func (o *GetScopesResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawScopes, rawScopesPresent := cxsdkRawFields["scopes"]
+	if rawScopesPresent {
+		delete(cxsdkRawFields, "scopes")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetScopesResponse := _GetScopesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetScopesResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *GetScopesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetScopesResponse(varGetScopesResponse)
+
+	if rawScopesPresent {
+		var rawScopesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawScopes, &rawScopesElements); jerr == nil {
+			decodedScopes := make([]V1Scope, 0, len(rawScopesElements))
+			for _, rawScopesElement := range rawScopesElements {
+				var elem V1Scope
+				if jerr := json.Unmarshal(rawScopesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedScopes = append(decodedScopes, elem)
+			}
+			o.Scopes = decodedScopes
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

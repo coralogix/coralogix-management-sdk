@@ -112,9 +112,27 @@ func (o *BatchExecuteSloRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRequests, rawRequestsPresent := cxsdkRawFields["requests"]
+	if rawRequestsPresent {
+		delete(cxsdkRawFields, "requests")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varBatchExecuteSloRequest := _BatchExecuteSloRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varBatchExecuteSloRequest)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *BatchExecuteSloRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BatchExecuteSloRequest(varBatchExecuteSloRequest)
+
+	if rawRequestsPresent {
+		var rawRequestsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRequests, &rawRequestsElements); jerr == nil {
+			decodedRequests := make([]SloExecutionRequest, 0, len(rawRequestsElements))
+			for _, rawRequestsElement := range rawRequestsElements {
+				var elem SloExecutionRequest
+				if jerr := json.Unmarshal(rawRequestsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRequests = append(decodedRequests, elem)
+			}
+			o.Requests = decodedRequests
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

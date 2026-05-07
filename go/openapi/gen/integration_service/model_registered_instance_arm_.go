@@ -365,9 +365,27 @@ func (o *RegisteredInstanceArm) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawParameters, rawParametersPresent := cxsdkRawFields["parameters"]
+	if rawParametersPresent {
+		delete(cxsdkRawFields, "parameters")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRegisteredInstanceArm := _RegisteredInstanceArm{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRegisteredInstanceArm)
 
 	if err != nil {
@@ -375,6 +393,21 @@ func (o *RegisteredInstanceArm) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RegisteredInstanceArm(varRegisteredInstanceArm)
+
+	if rawParametersPresent {
+		var rawParametersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawParameters, &rawParametersElements); jerr == nil {
+			decodedParameters := make([]Parameter, 0, len(rawParametersElements))
+			for _, rawParametersElement := range rawParametersElements {
+				var elem Parameter
+				if jerr := json.Unmarshal(rawParametersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedParameters = append(decodedParameters, elem)
+			}
+			o.Parameters = decodedParameters
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

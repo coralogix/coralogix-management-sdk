@@ -171,9 +171,27 @@ func (o GetTeamGroupsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetTeamGroupsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawGroups, rawGroupsPresent := cxsdkRawFields["groups"]
+	if rawGroupsPresent {
+		delete(cxsdkRawFields, "groups")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetTeamGroupsResponse := _GetTeamGroupsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetTeamGroupsResponse)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *GetTeamGroupsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetTeamGroupsResponse(varGetTeamGroupsResponse)
+
+	if rawGroupsPresent {
+		var rawGroupsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroups, &rawGroupsElements); jerr == nil {
+			decodedGroups := make([]TeamGroup, 0, len(rawGroupsElements))
+			for _, rawGroupsElement := range rawGroupsElements {
+				var elem TeamGroup
+				if jerr := json.Unmarshal(rawGroupsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroups = append(decodedGroups, elem)
+			}
+			o.Groups = decodedGroups
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

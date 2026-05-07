@@ -112,9 +112,27 @@ func (o *BulkTestLogPoliciesRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawMetaFieldsValuesList, rawMetaFieldsValuesListPresent := cxsdkRawFields["metaFieldsValuesList"]
+	if rawMetaFieldsValuesListPresent {
+		delete(cxsdkRawFields, "metaFieldsValuesList")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varBulkTestLogPoliciesRequest := _BulkTestLogPoliciesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varBulkTestLogPoliciesRequest)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *BulkTestLogPoliciesRequest) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BulkTestLogPoliciesRequest(varBulkTestLogPoliciesRequest)
+
+	if rawMetaFieldsValuesListPresent {
+		var rawMetaFieldsValuesListElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMetaFieldsValuesList, &rawMetaFieldsValuesListElements); jerr == nil {
+			decodedMetaFieldsValuesList := make([]LogMetaFieldsValues, 0, len(rawMetaFieldsValuesListElements))
+			for _, rawMetaFieldsValuesListElement := range rawMetaFieldsValuesListElements {
+				var elem LogMetaFieldsValues
+				if jerr := json.Unmarshal(rawMetaFieldsValuesListElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMetaFieldsValuesList = append(decodedMetaFieldsValuesList, elem)
+			}
+			o.MetaFieldsValuesList = decodedMetaFieldsValuesList
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

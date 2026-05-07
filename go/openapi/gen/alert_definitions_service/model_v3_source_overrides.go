@@ -172,9 +172,31 @@ func (o V3SourceOverrides) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V3SourceOverrides) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawConnectorConfigFields, rawConnectorConfigFieldsPresent := cxsdkRawFields["connectorConfigFields"]
+	if rawConnectorConfigFieldsPresent {
+		delete(cxsdkRawFields, "connectorConfigFields")
+	}
+	rawMessageConfigFields, rawMessageConfigFieldsPresent := cxsdkRawFields["messageConfigFields"]
+	if rawMessageConfigFieldsPresent {
+		delete(cxsdkRawFields, "messageConfigFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varV3SourceOverrides := _V3SourceOverrides{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varV3SourceOverrides)
 
 	if err != nil {
@@ -182,6 +204,36 @@ func (o *V3SourceOverrides) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V3SourceOverrides(varV3SourceOverrides)
+
+	if rawConnectorConfigFieldsPresent {
+		var rawConnectorConfigFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawConnectorConfigFields, &rawConnectorConfigFieldsElements); jerr == nil {
+			decodedConnectorConfigFields := make([]V3ConnectorConfigField, 0, len(rawConnectorConfigFieldsElements))
+			for _, rawConnectorConfigFieldsElement := range rawConnectorConfigFieldsElements {
+				var elem V3ConnectorConfigField
+				if jerr := json.Unmarshal(rawConnectorConfigFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedConnectorConfigFields = append(decodedConnectorConfigFields, elem)
+			}
+			o.ConnectorConfigFields = decodedConnectorConfigFields
+		}
+	}
+
+	if rawMessageConfigFieldsPresent {
+		var rawMessageConfigFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMessageConfigFields, &rawMessageConfigFieldsElements); jerr == nil {
+			decodedMessageConfigFields := make([]V3MessageConfigField, 0, len(rawMessageConfigFieldsElements))
+			for _, rawMessageConfigFieldsElement := range rawMessageConfigFieldsElements {
+				var elem V3MessageConfigField
+				if jerr := json.Unmarshal(rawMessageConfigFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMessageConfigFields = append(decodedMessageConfigFields, elem)
+			}
+			o.MessageConfigFields = decodedMessageConfigFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

@@ -135,9 +135,27 @@ func (o FieldCondition) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FieldCondition) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawValues, rawValuesPresent := cxsdkRawFields["values"]
+	if rawValuesPresent {
+		delete(cxsdkRawFields, "values")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varFieldCondition := _FieldCondition{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varFieldCondition)
 
 	if err != nil {
@@ -145,6 +163,21 @@ func (o *FieldCondition) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = FieldCondition(varFieldCondition)
+
+	if rawValuesPresent {
+		var rawValuesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawValues, &rawValuesElements); jerr == nil {
+			decodedValues := make([]FieldConditionFieldValue, 0, len(rawValuesElements))
+			for _, rawValuesElement := range rawValuesElements {
+				var elem FieldConditionFieldValue
+				if jerr := json.Unmarshal(rawValuesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedValues = append(decodedValues, elem)
+			}
+			o.Values = decodedValues
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

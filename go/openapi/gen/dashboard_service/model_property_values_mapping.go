@@ -99,9 +99,27 @@ func (o PropertyValuesMapping) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *PropertyValuesMapping) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawMappings, rawMappingsPresent := cxsdkRawFields["mappings"]
+	if rawMappingsPresent {
+		delete(cxsdkRawFields, "mappings")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varPropertyValuesMapping := _PropertyValuesMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varPropertyValuesMapping)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *PropertyValuesMapping) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = PropertyValuesMapping(varPropertyValuesMapping)
+
+	if rawMappingsPresent {
+		var rawMappingsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMappings, &rawMappingsElements); jerr == nil {
+			decodedMappings := make([]PropertyValuesMappingValueMapping, 0, len(rawMappingsElements))
+			for _, rawMappingsElement := range rawMappingsElements {
+				var elem PropertyValuesMappingValueMapping
+				if jerr := json.Unmarshal(rawMappingsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMappings = append(decodedMappings, elem)
+			}
+			o.Mappings = decodedMappings
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

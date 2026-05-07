@@ -171,9 +171,27 @@ func (o QueryMetricsQueryTypeLabelValue) ToMap() (map[string]interface{}, error)
 }
 
 func (o *QueryMetricsQueryTypeLabelValue) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawLabelFilters, rawLabelFiltersPresent := cxsdkRawFields["labelFilters"]
+	if rawLabelFiltersPresent {
+		delete(cxsdkRawFields, "labelFilters")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varQueryMetricsQueryTypeLabelValue := _QueryMetricsQueryTypeLabelValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varQueryMetricsQueryTypeLabelValue)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *QueryMetricsQueryTypeLabelValue) UnmarshalJSON(data []byte) (err error)
 	}
 
 	*o = QueryMetricsQueryTypeLabelValue(varQueryMetricsQueryTypeLabelValue)
+
+	if rawLabelFiltersPresent {
+		var rawLabelFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawLabelFilters, &rawLabelFiltersElements); jerr == nil {
+			decodedLabelFilters := make([]QueryMetricsQueryMetricsLabelFilter, 0, len(rawLabelFiltersElements))
+			for _, rawLabelFiltersElement := range rawLabelFiltersElements {
+				var elem QueryMetricsQueryMetricsLabelFilter
+				if jerr := json.Unmarshal(rawLabelFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedLabelFilters = append(decodedLabelFilters, elem)
+			}
+			o.LabelFilters = decodedLabelFilters
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

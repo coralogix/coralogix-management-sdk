@@ -99,9 +99,27 @@ func (o GetRetentionsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRetentions, rawRetentionsPresent := cxsdkRawFields["retentions"]
+	if rawRetentionsPresent {
+		delete(cxsdkRawFields, "retentions")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetRetentionsResponse := _GetRetentionsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetRetentionsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetRetentionsResponse(varGetRetentionsResponse)
+
+	if rawRetentionsPresent {
+		var rawRetentionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRetentions, &rawRetentionsElements); jerr == nil {
+			decodedRetentions := make([]ArchiveV1Retention, 0, len(rawRetentionsElements))
+			for _, rawRetentionsElement := range rawRetentionsElements {
+				var elem ArchiveV1Retention
+				if jerr := json.Unmarshal(rawRetentionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRetentions = append(decodedRetentions, elem)
+			}
+			o.Retentions = decodedRetentions
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

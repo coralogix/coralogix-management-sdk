@@ -112,9 +112,27 @@ func (o *CreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCreateSuppressionResponses, rawCreateSuppressionResponsesPresent := cxsdkRawFields["createSuppressionResponses"]
+	if rawCreateSuppressionResponsesPresent {
+		delete(cxsdkRawFields, "createSuppressionResponses")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varCreateBulkAlertSchedulerRuleResponse := _CreateBulkAlertSchedulerRuleResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varCreateBulkAlertSchedulerRuleResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *CreateBulkAlertSchedulerRuleResponse) UnmarshalJSON(data []byte) (err e
 	}
 
 	*o = CreateBulkAlertSchedulerRuleResponse(varCreateBulkAlertSchedulerRuleResponse)
+
+	if rawCreateSuppressionResponsesPresent {
+		var rawCreateSuppressionResponsesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCreateSuppressionResponses, &rawCreateSuppressionResponsesElements); jerr == nil {
+			decodedCreateSuppressionResponses := make([]CreateAlertSchedulerRuleResponse, 0, len(rawCreateSuppressionResponsesElements))
+			for _, rawCreateSuppressionResponsesElement := range rawCreateSuppressionResponsesElements {
+				var elem CreateAlertSchedulerRuleResponse
+				if jerr := json.Unmarshal(rawCreateSuppressionResponsesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCreateSuppressionResponses = append(decodedCreateSuppressionResponses, elem)
+			}
+			o.CreateSuppressionResponses = decodedCreateSuppressionResponses
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

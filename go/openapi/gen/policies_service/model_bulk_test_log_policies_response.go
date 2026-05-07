@@ -112,9 +112,27 @@ func (o *BulkTestLogPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawTestPoliciesBulkResult, rawTestPoliciesBulkResultPresent := cxsdkRawFields["testPoliciesBulkResult"]
+	if rawTestPoliciesBulkResultPresent {
+		delete(cxsdkRawFields, "testPoliciesBulkResult")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varBulkTestLogPoliciesResponse := _BulkTestLogPoliciesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varBulkTestLogPoliciesResponse)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *BulkTestLogPoliciesResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BulkTestLogPoliciesResponse(varBulkTestLogPoliciesResponse)
+
+	if rawTestPoliciesBulkResultPresent {
+		var rawTestPoliciesBulkResultElements []json.RawMessage
+		if jerr := json.Unmarshal(rawTestPoliciesBulkResult, &rawTestPoliciesBulkResultElements); jerr == nil {
+			decodedTestPoliciesBulkResult := make([]TestPoliciesResult, 0, len(rawTestPoliciesBulkResultElements))
+			for _, rawTestPoliciesBulkResultElement := range rawTestPoliciesBulkResultElements {
+				var elem TestPoliciesResult
+				if jerr := json.Unmarshal(rawTestPoliciesBulkResultElement, &elem); jerr != nil {
+					continue
+				}
+				decodedTestPoliciesBulkResult = append(decodedTestPoliciesBulkResult, elem)
+			}
+			o.TestPoliciesBulkResult = decodedTestPoliciesBulkResult
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

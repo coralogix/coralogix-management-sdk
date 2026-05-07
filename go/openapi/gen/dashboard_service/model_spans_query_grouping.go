@@ -171,9 +171,35 @@ func (o SpansQueryGrouping) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *SpansQueryGrouping) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAggregations, rawAggregationsPresent := cxsdkRawFields["aggregations"]
+	if rawAggregationsPresent {
+		delete(cxsdkRawFields, "aggregations")
+	}
+	rawGroupBy, rawGroupByPresent := cxsdkRawFields["groupBy"]
+	if rawGroupByPresent {
+		delete(cxsdkRawFields, "groupBy")
+	}
+	rawGroupBys, rawGroupBysPresent := cxsdkRawFields["groupBys"]
+	if rawGroupBysPresent {
+		delete(cxsdkRawFields, "groupBys")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varSpansQueryGrouping := _SpansQueryGrouping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varSpansQueryGrouping)
 
 	if err != nil {
@@ -181,6 +207,51 @@ func (o *SpansQueryGrouping) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = SpansQueryGrouping(varSpansQueryGrouping)
+
+	if rawAggregationsPresent {
+		var rawAggregationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAggregations, &rawAggregationsElements); jerr == nil {
+			decodedAggregations := make([]SpansQueryAggregation, 0, len(rawAggregationsElements))
+			for _, rawAggregationsElement := range rawAggregationsElements {
+				var elem SpansQueryAggregation
+				if jerr := json.Unmarshal(rawAggregationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAggregations = append(decodedAggregations, elem)
+			}
+			o.Aggregations = decodedAggregations
+		}
+	}
+
+	if rawGroupByPresent {
+		var rawGroupByElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBy, &rawGroupByElements); jerr == nil {
+			decodedGroupBy := make([]SpanField, 0, len(rawGroupByElements))
+			for _, rawGroupByElement := range rawGroupByElements {
+				var elem SpanField
+				if jerr := json.Unmarshal(rawGroupByElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBy = append(decodedGroupBy, elem)
+			}
+			o.GroupBy = decodedGroupBy
+		}
+	}
+
+	if rawGroupBysPresent {
+		var rawGroupBysElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupBys, &rawGroupBysElements); jerr == nil {
+			decodedGroupBys := make([]SpanObservationField, 0, len(rawGroupBysElements))
+			for _, rawGroupBysElement := range rawGroupBysElements {
+				var elem SpanObservationField
+				if jerr := json.Unmarshal(rawGroupBysElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupBys = append(decodedGroupBys, elem)
+			}
+			o.GroupBys = decodedGroupBys
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

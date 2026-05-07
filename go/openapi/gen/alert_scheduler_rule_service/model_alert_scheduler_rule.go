@@ -423,9 +423,27 @@ func (o AlertSchedulerRule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AlertSchedulerRule) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawMetaLabels, rawMetaLabelsPresent := cxsdkRawFields["metaLabels"]
+	if rawMetaLabelsPresent {
+		delete(cxsdkRawFields, "metaLabels")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varAlertSchedulerRule := _AlertSchedulerRule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varAlertSchedulerRule)
 
 	if err != nil {
@@ -433,6 +451,21 @@ func (o *AlertSchedulerRule) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = AlertSchedulerRule(varAlertSchedulerRule)
+
+	if rawMetaLabelsPresent {
+		var rawMetaLabelsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawMetaLabels, &rawMetaLabelsElements); jerr == nil {
+			decodedMetaLabels := make([]MetaLabelsProtobufV1MetaLabel, 0, len(rawMetaLabelsElements))
+			for _, rawMetaLabelsElement := range rawMetaLabelsElements {
+				var elem MetaLabelsProtobufV1MetaLabel
+				if jerr := json.Unmarshal(rawMetaLabelsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedMetaLabels = append(decodedMetaLabels, elem)
+			}
+			o.MetaLabels = decodedMetaLabels
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

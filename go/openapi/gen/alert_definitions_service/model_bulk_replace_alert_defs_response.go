@@ -207,9 +207,31 @@ func (o BulkReplaceAlertDefsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *BulkReplaceAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawAlertDefs, rawAlertDefsPresent := cxsdkRawFields["alertDefs"]
+	if rawAlertDefsPresent {
+		delete(cxsdkRawFields, "alertDefs")
+	}
+	rawFailedToReplaceAlertDefs, rawFailedToReplaceAlertDefsPresent := cxsdkRawFields["failedToReplaceAlertDefs"]
+	if rawFailedToReplaceAlertDefsPresent {
+		delete(cxsdkRawFields, "failedToReplaceAlertDefs")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varBulkReplaceAlertDefsResponse := _BulkReplaceAlertDefsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varBulkReplaceAlertDefsResponse)
 
 	if err != nil {
@@ -217,6 +239,36 @@ func (o *BulkReplaceAlertDefsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = BulkReplaceAlertDefsResponse(varBulkReplaceAlertDefsResponse)
+
+	if rawAlertDefsPresent {
+		var rawAlertDefsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAlertDefs, &rawAlertDefsElements); jerr == nil {
+			decodedAlertDefs := make([]AlertDef, 0, len(rawAlertDefsElements))
+			for _, rawAlertDefsElement := range rawAlertDefsElements {
+				var elem AlertDef
+				if jerr := json.Unmarshal(rawAlertDefsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAlertDefs = append(decodedAlertDefs, elem)
+			}
+			o.AlertDefs = decodedAlertDefs
+		}
+	}
+
+	if rawFailedToReplaceAlertDefsPresent {
+		var rawFailedToReplaceAlertDefsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFailedToReplaceAlertDefs, &rawFailedToReplaceAlertDefsElements); jerr == nil {
+			decodedFailedToReplaceAlertDefs := make([]FailedToReplaceAlertDef, 0, len(rawFailedToReplaceAlertDefsElements))
+			for _, rawFailedToReplaceAlertDefsElement := range rawFailedToReplaceAlertDefsElements {
+				var elem FailedToReplaceAlertDef
+				if jerr := json.Unmarshal(rawFailedToReplaceAlertDefsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFailedToReplaceAlertDefs = append(decodedFailedToReplaceAlertDefs, elem)
+			}
+			o.FailedToReplaceAlertDefs = decodedFailedToReplaceAlertDefs
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

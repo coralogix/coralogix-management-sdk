@@ -171,9 +171,27 @@ func (o ApiKeySummary) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ApiKeySummary) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawPresets, rawPresetsPresent := cxsdkRawFields["presets"]
+	if rawPresetsPresent {
+		delete(cxsdkRawFields, "presets")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varApiKeySummary := _ApiKeySummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varApiKeySummary)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *ApiKeySummary) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ApiKeySummary(varApiKeySummary)
+
+	if rawPresetsPresent {
+		var rawPresetsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPresets, &rawPresetsElements); jerr == nil {
+			decodedPresets := make([]PermissionsPreset, 0, len(rawPresetsElements))
+			for _, rawPresetsElement := range rawPresetsElements {
+				var elem PermissionsPreset
+				if jerr := json.Unmarshal(rawPresetsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPresets = append(decodedPresets, elem)
+			}
+			o.Presets = decodedPresets
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

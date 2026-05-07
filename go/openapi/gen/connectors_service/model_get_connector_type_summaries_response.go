@@ -99,9 +99,27 @@ func (o GetConnectorTypeSummariesResponse) ToMap() (map[string]interface{}, erro
 }
 
 func (o *GetConnectorTypeSummariesResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawConnectorTypeSummaries, rawConnectorTypeSummariesPresent := cxsdkRawFields["connectorTypeSummaries"]
+	if rawConnectorTypeSummariesPresent {
+		delete(cxsdkRawFields, "connectorTypeSummaries")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetConnectorTypeSummariesResponse := _GetConnectorTypeSummariesResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetConnectorTypeSummariesResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetConnectorTypeSummariesResponse) UnmarshalJSON(data []byte) (err erro
 	}
 
 	*o = GetConnectorTypeSummariesResponse(varGetConnectorTypeSummariesResponse)
+
+	if rawConnectorTypeSummariesPresent {
+		var rawConnectorTypeSummariesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawConnectorTypeSummaries, &rawConnectorTypeSummariesElements); jerr == nil {
+			decodedConnectorTypeSummaries := make([]ConnectorTypeSummary, 0, len(rawConnectorTypeSummariesElements))
+			for _, rawConnectorTypeSummariesElement := range rawConnectorTypeSummariesElements {
+				var elem ConnectorTypeSummary
+				if jerr := json.Unmarshal(rawConnectorTypeSummariesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedConnectorTypeSummaries = append(decodedConnectorTypeSummaries, elem)
+			}
+			o.ConnectorTypeSummaries = decodedConnectorTypeSummaries
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

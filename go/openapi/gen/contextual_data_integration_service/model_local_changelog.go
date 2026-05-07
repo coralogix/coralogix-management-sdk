@@ -99,9 +99,27 @@ func (o LocalChangelog) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LocalChangelog) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawChanges, rawChangesPresent := cxsdkRawFields["changes"]
+	if rawChangesPresent {
+		delete(cxsdkRawFields, "changes")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varLocalChangelog := _LocalChangelog{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varLocalChangelog)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *LocalChangelog) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = LocalChangelog(varLocalChangelog)
+
+	if rawChangesPresent {
+		var rawChangesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawChanges, &rawChangesElements); jerr == nil {
+			decodedChanges := make([]RevisionRef, 0, len(rawChangesElements))
+			for _, rawChangesElement := range rawChangesElements {
+				var elem RevisionRef
+				if jerr := json.Unmarshal(rawChangesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedChanges = append(decodedChanges, elem)
+			}
+			o.Changes = decodedChanges
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

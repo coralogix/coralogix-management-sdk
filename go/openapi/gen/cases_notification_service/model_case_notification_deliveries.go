@@ -112,9 +112,27 @@ func (o *CaseNotificationDeliveries) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawNotificationDeliveries, rawNotificationDeliveriesPresent := cxsdkRawFields["notificationDeliveries"]
+	if rawNotificationDeliveriesPresent {
+		delete(cxsdkRawFields, "notificationDeliveries")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varCaseNotificationDeliveries := _CaseNotificationDeliveries{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varCaseNotificationDeliveries)
 
 	if err != nil {
@@ -122,6 +140,21 @@ func (o *CaseNotificationDeliveries) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = CaseNotificationDeliveries(varCaseNotificationDeliveries)
+
+	if rawNotificationDeliveriesPresent {
+		var rawNotificationDeliveriesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawNotificationDeliveries, &rawNotificationDeliveriesElements); jerr == nil {
+			decodedNotificationDeliveries := make([]NotificationDelivery, 0, len(rawNotificationDeliveriesElements))
+			for _, rawNotificationDeliveriesElement := range rawNotificationDeliveriesElements {
+				var elem NotificationDelivery
+				if jerr := json.Unmarshal(rawNotificationDeliveriesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedNotificationDeliveries = append(decodedNotificationDeliveries, elem)
+			}
+			o.NotificationDeliveries = decodedNotificationDeliveries
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

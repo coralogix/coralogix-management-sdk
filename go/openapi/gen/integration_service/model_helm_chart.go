@@ -171,9 +171,27 @@ func (o HelmChart) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *HelmChart) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawCommands, rawCommandsPresent := cxsdkRawFields["commands"]
+	if rawCommandsPresent {
+		delete(cxsdkRawFields, "commands")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varHelmChart := _HelmChart{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varHelmChart)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *HelmChart) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = HelmChart(varHelmChart)
+
+	if rawCommandsPresent {
+		var rawCommandsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawCommands, &rawCommandsElements); jerr == nil {
+			decodedCommands := make([]CommandInformation, 0, len(rawCommandsElements))
+			for _, rawCommandsElement := range rawCommandsElements {
+				var elem CommandInformation
+				if jerr := json.Unmarshal(rawCommandsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedCommands = append(decodedCommands, elem)
+			}
+			o.Commands = decodedCommands
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

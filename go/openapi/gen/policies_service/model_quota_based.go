@@ -99,9 +99,27 @@ func (o QuotaBased) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *QuotaBased) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawUsageTiers, rawUsageTiersPresent := cxsdkRawFields["usageTiers"]
+	if rawUsageTiersPresent {
+		delete(cxsdkRawFields, "usageTiers")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varQuotaBased := _QuotaBased{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varQuotaBased)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *QuotaBased) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = QuotaBased(varQuotaBased)
+
+	if rawUsageTiersPresent {
+		var rawUsageTiersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawUsageTiers, &rawUsageTiersElements); jerr == nil {
+			decodedUsageTiers := make([]UsageTier, 0, len(rawUsageTiersElements))
+			for _, rawUsageTiersElement := range rawUsageTiersElements {
+				var elem UsageTier
+				if jerr := json.Unmarshal(rawUsageTiersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedUsageTiers = append(decodedUsageTiers, elem)
+			}
+			o.UsageTiers = decodedUsageTiers
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

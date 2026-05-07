@@ -99,9 +99,27 @@ func (o GetDashboardCatalogResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetDashboardCatalogResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawItems, rawItemsPresent := cxsdkRawFields["items"]
+	if rawItemsPresent {
+		delete(cxsdkRawFields, "items")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetDashboardCatalogResponse := _GetDashboardCatalogResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetDashboardCatalogResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetDashboardCatalogResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetDashboardCatalogResponse(varGetDashboardCatalogResponse)
+
+	if rawItemsPresent {
+		var rawItemsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawItems, &rawItemsElements); jerr == nil {
+			decodedItems := make([]DashboardCatalogItem, 0, len(rawItemsElements))
+			for _, rawItemsElement := range rawItemsElements {
+				var elem DashboardCatalogItem
+				if jerr := json.Unmarshal(rawItemsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedItems = append(decodedItems, elem)
+			}
+			o.Items = decodedItems
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

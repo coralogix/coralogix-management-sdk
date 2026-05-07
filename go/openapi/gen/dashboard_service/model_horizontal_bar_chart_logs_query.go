@@ -352,9 +352,31 @@ func (o HorizontalBarChartLogsQuery) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *HorizontalBarChartLogsQuery) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawFilters, rawFiltersPresent := cxsdkRawFields["filters"]
+	if rawFiltersPresent {
+		delete(cxsdkRawFields, "filters")
+	}
+	rawGroupNamesFields, rawGroupNamesFieldsPresent := cxsdkRawFields["groupNamesFields"]
+	if rawGroupNamesFieldsPresent {
+		delete(cxsdkRawFields, "groupNamesFields")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varHorizontalBarChartLogsQuery := _HorizontalBarChartLogsQuery{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varHorizontalBarChartLogsQuery)
 
 	if err != nil {
@@ -362,6 +384,36 @@ func (o *HorizontalBarChartLogsQuery) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = HorizontalBarChartLogsQuery(varHorizontalBarChartLogsQuery)
+
+	if rawFiltersPresent {
+		var rawFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFilters, &rawFiltersElements); jerr == nil {
+			decodedFilters := make([]FilterLogsFilter, 0, len(rawFiltersElements))
+			for _, rawFiltersElement := range rawFiltersElements {
+				var elem FilterLogsFilter
+				if jerr := json.Unmarshal(rawFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFilters = append(decodedFilters, elem)
+			}
+			o.Filters = decodedFilters
+		}
+	}
+
+	if rawGroupNamesFieldsPresent {
+		var rawGroupNamesFieldsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawGroupNamesFields, &rawGroupNamesFieldsElements); jerr == nil {
+			decodedGroupNamesFields := make([]ObservationField, 0, len(rawGroupNamesFieldsElements))
+			for _, rawGroupNamesFieldsElement := range rawGroupNamesFieldsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawGroupNamesFieldsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedGroupNamesFields = append(decodedGroupNamesFields, elem)
+			}
+			o.GroupNamesFields = decodedGroupNamesFields
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

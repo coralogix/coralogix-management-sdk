@@ -171,9 +171,27 @@ func (o RangeMapping) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RangeMapping) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawThresholds, rawThresholdsPresent := cxsdkRawFields["thresholds"]
+	if rawThresholdsPresent {
+		delete(cxsdkRawFields, "thresholds")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varRangeMapping := _RangeMapping{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varRangeMapping)
 
 	if err != nil {
@@ -181,6 +199,21 @@ func (o *RangeMapping) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = RangeMapping(varRangeMapping)
+
+	if rawThresholdsPresent {
+		var rawThresholdsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawThresholds, &rawThresholdsElements); jerr == nil {
+			decodedThresholds := make([]CommonThreshold, 0, len(rawThresholdsElements))
+			for _, rawThresholdsElement := range rawThresholdsElements {
+				var elem CommonThreshold
+				if jerr := json.Unmarshal(rawThresholdsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedThresholds = append(decodedThresholds, elem)
+			}
+			o.Thresholds = decodedThresholds
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

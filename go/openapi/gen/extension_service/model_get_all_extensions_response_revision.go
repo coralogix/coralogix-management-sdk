@@ -279,9 +279,27 @@ func (o GetAllExtensionsResponseRevision) ToMap() (map[string]interface{}, error
 }
 
 func (o *GetAllExtensionsResponseRevision) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawIntegrationDetails, rawIntegrationDetailsPresent := cxsdkRawFields["integrationDetails"]
+	if rawIntegrationDetailsPresent {
+		delete(cxsdkRawFields, "integrationDetails")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetAllExtensionsResponseRevision := _GetAllExtensionsResponseRevision{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetAllExtensionsResponseRevision)
 
 	if err != nil {
@@ -289,6 +307,21 @@ func (o *GetAllExtensionsResponseRevision) UnmarshalJSON(data []byte) (err error
 	}
 
 	*o = GetAllExtensionsResponseRevision(varGetAllExtensionsResponseRevision)
+
+	if rawIntegrationDetailsPresent {
+		var rawIntegrationDetailsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawIntegrationDetails, &rawIntegrationDetailsElements); jerr == nil {
+			decodedIntegrationDetails := make([]IntegrationDetail, 0, len(rawIntegrationDetailsElements))
+			for _, rawIntegrationDetailsElement := range rawIntegrationDetailsElements {
+				var elem IntegrationDetail
+				if jerr := json.Unmarshal(rawIntegrationDetailsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedIntegrationDetails = append(decodedIntegrationDetails, elem)
+			}
+			o.IntegrationDetails = decodedIntegrationDetails
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

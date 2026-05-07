@@ -459,9 +459,35 @@ func (o V1Extension) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V1Extension) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawChangelog, rawChangelogPresent := cxsdkRawFields["changelog"]
+	if rawChangelogPresent {
+		delete(cxsdkRawFields, "changelog")
+	}
+	rawPermissionDeniedRevisions, rawPermissionDeniedRevisionsPresent := cxsdkRawFields["permissionDeniedRevisions"]
+	if rawPermissionDeniedRevisionsPresent {
+		delete(cxsdkRawFields, "permissionDeniedRevisions")
+	}
+	rawRevisions, rawRevisionsPresent := cxsdkRawFields["revisions"]
+	if rawRevisionsPresent {
+		delete(cxsdkRawFields, "revisions")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varV1Extension := _V1Extension{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varV1Extension)
 
 	if err != nil {
@@ -469,6 +495,51 @@ func (o *V1Extension) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = V1Extension(varV1Extension)
+
+	if rawChangelogPresent {
+		var rawChangelogElements []json.RawMessage
+		if jerr := json.Unmarshal(rawChangelog, &rawChangelogElements); jerr == nil {
+			decodedChangelog := make([]ChangelogEntry, 0, len(rawChangelogElements))
+			for _, rawChangelogElement := range rawChangelogElements {
+				var elem ChangelogEntry
+				if jerr := json.Unmarshal(rawChangelogElement, &elem); jerr != nil {
+					continue
+				}
+				decodedChangelog = append(decodedChangelog, elem)
+			}
+			o.Changelog = decodedChangelog
+		}
+	}
+
+	if rawPermissionDeniedRevisionsPresent {
+		var rawPermissionDeniedRevisionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawPermissionDeniedRevisions, &rawPermissionDeniedRevisionsElements); jerr == nil {
+			decodedPermissionDeniedRevisions := make([]ExtensionRevision, 0, len(rawPermissionDeniedRevisionsElements))
+			for _, rawPermissionDeniedRevisionsElement := range rawPermissionDeniedRevisionsElements {
+				var elem ExtensionRevision
+				if jerr := json.Unmarshal(rawPermissionDeniedRevisionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedPermissionDeniedRevisions = append(decodedPermissionDeniedRevisions, elem)
+			}
+			o.PermissionDeniedRevisions = decodedPermissionDeniedRevisions
+		}
+	}
+
+	if rawRevisionsPresent {
+		var rawRevisionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRevisions, &rawRevisionsElements); jerr == nil {
+			decodedRevisions := make([]ExtensionRevision, 0, len(rawRevisionsElements))
+			for _, rawRevisionsElement := range rawRevisionsElements {
+				var elem ExtensionRevision
+				if jerr := json.Unmarshal(rawRevisionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRevisions = append(decodedRevisions, elem)
+			}
+			o.Revisions = decodedRevisions
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

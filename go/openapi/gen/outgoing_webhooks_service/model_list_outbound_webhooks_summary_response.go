@@ -99,9 +99,27 @@ func (o ListOutboundWebhooksSummaryResponse) ToMap() (map[string]interface{}, er
 }
 
 func (o *ListOutboundWebhooksSummaryResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawOutboundWebhookSummaries, rawOutboundWebhookSummariesPresent := cxsdkRawFields["outboundWebhookSummaries"]
+	if rawOutboundWebhookSummariesPresent {
+		delete(cxsdkRawFields, "outboundWebhookSummaries")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListOutboundWebhooksSummaryResponse := _ListOutboundWebhooksSummaryResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListOutboundWebhooksSummaryResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListOutboundWebhooksSummaryResponse) UnmarshalJSON(data []byte) (err er
 	}
 
 	*o = ListOutboundWebhooksSummaryResponse(varListOutboundWebhooksSummaryResponse)
+
+	if rawOutboundWebhookSummariesPresent {
+		var rawOutboundWebhookSummariesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawOutboundWebhookSummaries, &rawOutboundWebhookSummariesElements); jerr == nil {
+			decodedOutboundWebhookSummaries := make([]OutboundWebhookSummary, 0, len(rawOutboundWebhookSummariesElements))
+			for _, rawOutboundWebhookSummariesElement := range rawOutboundWebhookSummariesElements {
+				var elem OutboundWebhookSummary
+				if jerr := json.Unmarshal(rawOutboundWebhookSummariesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedOutboundWebhookSummaries = append(decodedOutboundWebhookSummaries, elem)
+			}
+			o.OutboundWebhookSummaries = decodedOutboundWebhookSummaries
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

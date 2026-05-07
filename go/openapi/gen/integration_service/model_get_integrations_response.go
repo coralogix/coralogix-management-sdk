@@ -99,9 +99,27 @@ func (o GetIntegrationsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetIntegrationsResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawIntegrations, rawIntegrationsPresent := cxsdkRawFields["integrations"]
+	if rawIntegrationsPresent {
+		delete(cxsdkRawFields, "integrations")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGetIntegrationsResponse := _GetIntegrationsResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGetIntegrationsResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *GetIntegrationsResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GetIntegrationsResponse(varGetIntegrationsResponse)
+
+	if rawIntegrationsPresent {
+		var rawIntegrationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawIntegrations, &rawIntegrationsElements); jerr == nil {
+			decodedIntegrations := make([]GetIntegrationsResponseIntegrationWithCounts, 0, len(rawIntegrationsElements))
+			for _, rawIntegrationsElement := range rawIntegrationsElements {
+				var elem GetIntegrationsResponseIntegrationWithCounts
+				if jerr := json.Unmarshal(rawIntegrationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedIntegrations = append(decodedIntegrations, elem)
+			}
+			o.Integrations = decodedIntegrations
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

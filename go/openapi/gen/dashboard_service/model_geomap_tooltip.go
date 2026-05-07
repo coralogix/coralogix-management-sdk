@@ -136,9 +136,27 @@ func (o GeomapTooltip) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GeomapTooltip) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawLabels, rawLabelsPresent := cxsdkRawFields["labels"]
+	if rawLabelsPresent {
+		delete(cxsdkRawFields, "labels")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varGeomapTooltip := _GeomapTooltip{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varGeomapTooltip)
 
 	if err != nil {
@@ -146,6 +164,21 @@ func (o *GeomapTooltip) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = GeomapTooltip(varGeomapTooltip)
+
+	if rawLabelsPresent {
+		var rawLabelsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawLabels, &rawLabelsElements); jerr == nil {
+			decodedLabels := make([]ObservationField, 0, len(rawLabelsElements))
+			for _, rawLabelsElement := range rawLabelsElements {
+				var elem ObservationField
+				if jerr := json.Unmarshal(rawLabelsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedLabels = append(decodedLabels, elem)
+			}
+			o.Labels = decodedLabels
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

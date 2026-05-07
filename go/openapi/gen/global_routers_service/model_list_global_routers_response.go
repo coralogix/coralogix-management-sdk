@@ -99,9 +99,27 @@ func (o ListGlobalRoutersResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ListGlobalRoutersResponse) UnmarshalJSON(data []byte) (err error) {
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawRouters, rawRoutersPresent := cxsdkRawFields["routers"]
+	if rawRoutersPresent {
+		delete(cxsdkRawFields, "routers")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varListGlobalRoutersResponse := _ListGlobalRoutersResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varListGlobalRoutersResponse)
 
 	if err != nil {
@@ -109,6 +127,21 @@ func (o *ListGlobalRoutersResponse) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	*o = ListGlobalRoutersResponse(varListGlobalRoutersResponse)
+
+	if rawRoutersPresent {
+		var rawRoutersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawRouters, &rawRoutersElements); jerr == nil {
+			decodedRouters := make([]GlobalRouter, 0, len(rawRoutersElements))
+			for _, rawRoutersElement := range rawRoutersElements {
+				var elem GlobalRouter
+				if jerr := json.Unmarshal(rawRoutersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedRouters = append(decodedRouters, elem)
+			}
+			o.Routers = decodedRouters
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 

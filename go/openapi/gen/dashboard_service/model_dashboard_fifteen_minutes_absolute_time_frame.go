@@ -560,9 +560,43 @@ func (o *DashboardFifteenMinutesAbsoluteTimeFrame) UnmarshalJSON(data []byte) (e
 		}
 	}
 
+	// Forward-compatibility for newly-introduced oneOf variants:
+	// peel array-of-object fields so each element can be decoded
+	// individually, dropping any element the SDK fails to recognize
+	// instead of failing the whole response.
+	cxsdkRawFields := map[string]json.RawMessage{}
+	if jerr := json.Unmarshal(data, &cxsdkRawFields); jerr != nil {
+		return jerr
+	}
+	rawActions, rawActionsPresent := cxsdkRawFields["actions"]
+	if rawActionsPresent {
+		delete(cxsdkRawFields, "actions")
+	}
+	rawAnnotations, rawAnnotationsPresent := cxsdkRawFields["annotations"]
+	if rawAnnotationsPresent {
+		delete(cxsdkRawFields, "annotations")
+	}
+	rawFilters, rawFiltersPresent := cxsdkRawFields["filters"]
+	if rawFiltersPresent {
+		delete(cxsdkRawFields, "filters")
+	}
+	rawVariables, rawVariablesPresent := cxsdkRawFields["variables"]
+	if rawVariablesPresent {
+		delete(cxsdkRawFields, "variables")
+	}
+	rawVariablesV2, rawVariablesV2Present := cxsdkRawFields["variablesV2"]
+	if rawVariablesV2Present {
+		delete(cxsdkRawFields, "variablesV2")
+	}
+
+	strippedData, jerr := json.Marshal(cxsdkRawFields)
+	if jerr != nil {
+		return jerr
+	}
+
 	varDashboardFifteenMinutesAbsoluteTimeFrame := _DashboardFifteenMinutesAbsoluteTimeFrame{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder := json.NewDecoder(bytes.NewReader(strippedData))
 	err = decoder.Decode(&varDashboardFifteenMinutesAbsoluteTimeFrame)
 
 	if err != nil {
@@ -570,6 +604,81 @@ func (o *DashboardFifteenMinutesAbsoluteTimeFrame) UnmarshalJSON(data []byte) (e
 	}
 
 	*o = DashboardFifteenMinutesAbsoluteTimeFrame(varDashboardFifteenMinutesAbsoluteTimeFrame)
+
+	if rawActionsPresent {
+		var rawActionsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawActions, &rawActionsElements); jerr == nil {
+			decodedActions := make([]DashboardAction, 0, len(rawActionsElements))
+			for _, rawActionsElement := range rawActionsElements {
+				var elem DashboardAction
+				if jerr := json.Unmarshal(rawActionsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedActions = append(decodedActions, elem)
+			}
+			o.Actions = decodedActions
+		}
+	}
+
+	if rawAnnotationsPresent {
+		var rawAnnotationsElements []json.RawMessage
+		if jerr := json.Unmarshal(rawAnnotations, &rawAnnotationsElements); jerr == nil {
+			decodedAnnotations := make([]Annotation, 0, len(rawAnnotationsElements))
+			for _, rawAnnotationsElement := range rawAnnotationsElements {
+				var elem Annotation
+				if jerr := json.Unmarshal(rawAnnotationsElement, &elem); jerr != nil {
+					continue
+				}
+				decodedAnnotations = append(decodedAnnotations, elem)
+			}
+			o.Annotations = decodedAnnotations
+		}
+	}
+
+	if rawFiltersPresent {
+		var rawFiltersElements []json.RawMessage
+		if jerr := json.Unmarshal(rawFilters, &rawFiltersElements); jerr == nil {
+			decodedFilters := make([]FiltersFilter, 0, len(rawFiltersElements))
+			for _, rawFiltersElement := range rawFiltersElements {
+				var elem FiltersFilter
+				if jerr := json.Unmarshal(rawFiltersElement, &elem); jerr != nil {
+					continue
+				}
+				decodedFilters = append(decodedFilters, elem)
+			}
+			o.Filters = decodedFilters
+		}
+	}
+
+	if rawVariablesPresent {
+		var rawVariablesElements []json.RawMessage
+		if jerr := json.Unmarshal(rawVariables, &rawVariablesElements); jerr == nil {
+			decodedVariables := make([]Variable, 0, len(rawVariablesElements))
+			for _, rawVariablesElement := range rawVariablesElements {
+				var elem Variable
+				if jerr := json.Unmarshal(rawVariablesElement, &elem); jerr != nil {
+					continue
+				}
+				decodedVariables = append(decodedVariables, elem)
+			}
+			o.Variables = decodedVariables
+		}
+	}
+
+	if rawVariablesV2Present {
+		var rawVariablesV2Elements []json.RawMessage
+		if jerr := json.Unmarshal(rawVariablesV2, &rawVariablesV2Elements); jerr == nil {
+			decodedVariablesV2 := make([]VariableV2, 0, len(rawVariablesV2Elements))
+			for _, rawVariablesV2Element := range rawVariablesV2Elements {
+				var elem VariableV2
+				if jerr := json.Unmarshal(rawVariablesV2Element, &elem); jerr != nil {
+					continue
+				}
+				decodedVariablesV2 = append(decodedVariablesV2, elem)
+			}
+			o.VariablesV2 = decodedVariablesV2
+		}
+	}
 
 	additionalProperties := make(map[string]interface{})
 
