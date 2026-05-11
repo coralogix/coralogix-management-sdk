@@ -164,8 +164,8 @@ func (dst *GeomapAggregation) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("data matches more than one schema in oneOf(GeomapAggregation)")
 	} else if match == 1 {
 		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(GeomapAggregation)")
+	} else { // no match — preserve forward-compat by leaving all variant pointers nil
+		return nil
 	}
 }
 

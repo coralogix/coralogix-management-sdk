@@ -86,8 +86,8 @@ func (dst *V2Target) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("data matches more than one schema in oneOf(V2Target)")
 	} else if match == 1 {
 		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(V2Target)")
+	} else { // no match — preserve forward-compat by leaving all variant pointers nil
+		return nil
 	}
 }
 

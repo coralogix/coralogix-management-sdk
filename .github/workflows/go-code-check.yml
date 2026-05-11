@@ -96,3 +96,20 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           make test-openapi
+  run_openapi_compat:
+    name: "[Go SDK - Linux] OpenAPI Forward-Compat Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install openapi-generator-cli
+        run: npm install -g @openapitools/openapi-generator-cli
+      - name: Run OpenAPI compat fixtures
+        run: bash go/scripts/test_openapi_compat.sh
+      - name: Run forward-compat unit tests
+        run: go test ./go/openapi/forwardcompat/...
