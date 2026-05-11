@@ -73,5 +73,21 @@ for fixture_dir in "$FIXTURES_DIR"/*; do
     --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false >/dev/null
 
   cp "$fixture_dir/compat_test.go" "$outdir/compat_test.go"
+
+  # Models with `additionalProperties: false` + required fields can emit a
+  # duplicate `"bytes"` import. goimports cleans this up so each fixture
+  # compiles. Install on demand if the binary isn't already available.
+  if ! command -v goimports >/dev/null 2>&1; then
+    GOPATH_BIN="$(go env GOPATH)/bin"
+    if [ ! -x "$GOPATH_BIN/goimports" ]; then
+      go install golang.org/x/tools/cmd/goimports@latest >/dev/null 2>&1 || true
+    fi
+    if [ -x "$GOPATH_BIN/goimports" ]; then
+      "$GOPATH_BIN/goimports" -w "$outdir"
+    fi
+  else
+    goimports -w "$outdir"
+  fi
+
   (cd "$REPO_ROOT" && go test "./${outdir#$REPO_ROOT/}")
 done

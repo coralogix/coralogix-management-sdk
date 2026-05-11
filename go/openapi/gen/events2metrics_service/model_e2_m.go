@@ -86,8 +86,8 @@ func (dst *E2M) UnmarshalJSON(data []byte) error {
 		return fmt.Errorf("data matches more than one schema in oneOf(E2M)")
 	} else if match == 1 {
 		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(E2M)")
+	} else { // no match — preserve forward-compat by leaving all variant pointers nil
+		return nil
 	}
 }
 

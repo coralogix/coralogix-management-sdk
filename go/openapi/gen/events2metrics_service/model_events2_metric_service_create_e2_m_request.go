@@ -86,8 +86,8 @@ func (dst *Events2MetricServiceCreateE2MRequest) UnmarshalJSON(data []byte) erro
 		return fmt.Errorf("data matches more than one schema in oneOf(Events2MetricServiceCreateE2MRequest)")
 	} else if match == 1 {
 		return nil // exactly one match
-	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(Events2MetricServiceCreateE2MRequest)")
+	} else { // no match — preserve forward-compat by leaving all variant pointers nil
+		return nil
 	}
 }
 
