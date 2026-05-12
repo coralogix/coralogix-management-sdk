@@ -7,6 +7,7 @@ servers:
 paths:
   /slo/slos/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ListSlos
@@ -43,6 +44,7 @@ paths:
       tags:
       - Slos Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_CreateSlo
@@ -83,6 +85,7 @@ paths:
       tags:
       - Slos Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ReplaceSlo
@@ -124,6 +127,7 @@ paths:
       - Slos Service
   /slo/slos/v1/all/execute:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_BatchExecuteSlo
@@ -156,6 +160,7 @@ paths:
       - Slos Service
   /slo/slos/v1/all/list:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_BatchGetSlos
@@ -194,6 +199,7 @@ paths:
       - Slos Service
   /slo/slos/v1/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_DeleteSlo
@@ -228,6 +234,7 @@ paths:
       tags:
       - Slos Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_GetSlo
@@ -263,6 +270,7 @@ paths:
       - Slos Service
   /slo/validated/v1:
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_ValidateReplaceSloAlerts
@@ -295,6 +303,7 @@ paths:
       - Slos Service
   /slo/zero-state/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: SlosService_GetZeroState
@@ -331,6 +340,12 @@ components:
     ApmFilter:
       description: Key-value filter for APM metrics. Supports single value (legacy)
         or multiple values (OR semantics)
+      example:
+        values:
+        - "500"
+        - "500"
+        value: production
+        key: environment
       externalDocs:
         url: ""
       properties:
@@ -423,6 +438,25 @@ components:
       - $ref: "#/components/schemas/ApmSliLatencyConfig"
     ApmSliErrorConfig:
       description: Definition of an APM-based SLI with automatic query generation
+      example:
+        groupingKeys:
+        - environment
+        - region
+        filters:
+        - values:
+          - "500"
+          - "500"
+          value: production
+          key: environment
+        - values:
+          - "500"
+          - "500"
+          value: production
+          key: environment
+        services:
+        - my-service
+        - payment-service
+        errorConfig: "{}"
       externalDocs:
         url: ""
       properties:
@@ -493,7 +527,31 @@ components:
         matchingResponses:
         - createSloResponse:
             slo:
+              ownershipTags:
+                environment:
+                  staticValues:
+                  - checkout-api
+                  labelKeys:
+                  - deployment_environment
+                  - k8s_namespace
+                service:
+                  staticValues:
+                  - checkout-api
+                  labelKeys:
+                  - deployment_environment
+                  - k8s_namespace
+                team:
+                  staticValues:
+                  - checkout-api
+                  labelKeys:
+                  - deployment_environment
+                  - k8s_namespace
               creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
@@ -508,21 +566,57 @@ components:
               revision:
                 updateTime: 2000-01-23T04:56:07.000+00:00
                 revision: 1
-              windowBasedMetricSli:
-                missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-                comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-                query:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                threshold: 0.95
-                window: WINDOW_SLO_WINDOW_UNSPECIFIED
               createTime: 2000-01-23T04:56:07.000+00:00
               name: Example Slo Name
+              apmSliMetadata:
+                groupingKeys:
+                - environment
+                - region
+                filters:
+                - values:
+                  - "500"
+                  - "500"
+                  value: production
+                  key: environment
+                - values:
+                  - "500"
+                  - "500"
+                  value: production
+                  key: environment
+                services:
+                - my-service
+                - payment-service
+                errorConfig: "{}"
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
         - createSloResponse:
             slo:
+              ownershipTags:
+                environment:
+                  staticValues:
+                  - checkout-api
+                  labelKeys:
+                  - deployment_environment
+                  - k8s_namespace
+                service:
+                  staticValues:
+                  - checkout-api
+                  labelKeys:
+                  - deployment_environment
+                  - k8s_namespace
+                team:
+                  staticValues:
+                  - checkout-api
+                  labelKeys:
+                  - deployment_environment
+                  - k8s_namespace
               creator: test@domain.com
+              requestBasedMetricSli:
+                goodEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                totalEvents:
+                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
@@ -537,15 +631,27 @@ components:
               revision:
                 updateTime: 2000-01-23T04:56:07.000+00:00
                 revision: 1
-              windowBasedMetricSli:
-                missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-                comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-                query:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                threshold: 0.95
-                window: WINDOW_SLO_WINDOW_UNSPECIFIED
               createTime: 2000-01-23T04:56:07.000+00:00
               name: Example Slo Name
+              apmSliMetadata:
+                groupingKeys:
+                - environment
+                - region
+                filters:
+                - values:
+                  - "500"
+                  - "500"
+                  value: production
+                  key: environment
+                - values:
+                  - "500"
+                  - "500"
+                  value: production
+                  key: environment
+                services:
+                - my-service
+                - payment-service
+                errorConfig: "{}"
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
@@ -574,7 +680,31 @@ components:
         - notFoundIds
         - notFoundIds
         slos:
-        - creator: test@domain.com
+        - ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -589,19 +719,55 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
-        - creator: test@domain.com
+        - ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -616,15 +782,27 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -673,36 +851,6 @@ components:
       type: string
     CreateSloRequest:
       description: Request to create a new SLO.
-      example:
-        slo:
-          creator: test@domain.com
-          description: A brief description of my SLO
-          sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          sloType: SLO_TYPE_REQUEST
-          type: request
-          grouping:
-            labels:
-            - labels
-            - labels
-          labels:
-            key: labels
-          revision:
-            updateTime: 2000-01-23T04:56:07.000+00:00
-            revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-          productType: SLO_PRODUCT_TYPE_UNSPECIFIED
-          targetThresholdPercentage: 99.999
-        silenceDataValidations: true
       externalDocs:
         url: ""
       properties:
@@ -719,7 +867,31 @@ components:
       description: Response after creating a new SLO.
       example:
         slo:
+          ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
           creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -734,15 +906,27 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -757,6 +941,8 @@ components:
       type: object
     DeleteSloRequest:
       description: Request to delete an existing SLO.
+      example:
+        id: id
       externalDocs:
         url: ""
       properties:
@@ -780,13 +966,6 @@ components:
             type: string
           type: array
       title: DeleteSloResponse
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -843,7 +1022,31 @@ components:
       description: Response containing the details of a specific SLO.
       example:
         slo:
+          ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
           creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -858,15 +1061,27 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -932,7 +1147,31 @@ components:
       description: Response containing a list of SLOs.
       example:
         slos:
-        - creator: test@domain.com
+        - ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -947,19 +1186,55 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
-        - creator: test@domain.com
+        - ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+          creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -974,15 +1249,27 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1075,7 +1362,31 @@ components:
         - effectedSloAlertIds
         - effectedSloAlertIds
         slo:
+          ownershipTags:
+            environment:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            service:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
+            team:
+              staticValues:
+              - checkout-api
+              labelKeys:
+              - deployment_environment
+              - k8s_namespace
           creator: test@domain.com
+          requestBasedMetricSli:
+            goodEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+            totalEvents:
+              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1090,15 +1401,27 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          windowBasedMetricSli:
-            missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-            comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-            query:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            threshold: 0.95
-            window: WINDOW_SLO_WINDOW_UNSPECIFIED
           createTime: 2000-01-23T04:56:07.000+00:00
           name: Example Slo Name
+          apmSliMetadata:
+            groupingKeys:
+            - environment
+            - region
+            filters:
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            - values:
+              - "500"
+              - "500"
+              value: production
+              key: environment
+            services:
+            - my-service
+            - payment-service
+            errorConfig: "{}"
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1117,6 +1440,11 @@ components:
       type: object
     RequestBasedMetricSli:
       description: Definition of a request-based SLI based on metrics
+      example:
+        goodEvents:
+          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+        totalEvents:
+          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
       externalDocs:
         url: ""
       properties:
@@ -1150,9 +1478,9 @@ components:
       type: object
     Slo:
       oneOf:
+      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
       - $ref: "#/components/schemas/SloApmSli"
-      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
     SloAlertValidityResult:
       example:
         errorMessage: errorMessage
@@ -1176,6 +1504,8 @@ components:
       properties:
         apmSli:
           $ref: "#/components/schemas/ApmSli"
+        apmSliMetadata:
+          $ref: "#/components/schemas/ApmSli"
         createTime:
           format: date-time
           type: string
@@ -1197,6 +1527,8 @@ components:
         name:
           example: Example Slo Name
           type: string
+        ownershipTags:
+          $ref: "#/components/schemas/SloOwnershipTags"
         productType:
           $ref: "#/components/schemas/SloProductType"
         revision:
@@ -1228,42 +1560,11 @@ components:
       type: string
     SloExecutionRequest:
       oneOf:
+      - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
     SloExecutionRequestCreateSloRequest:
       description: Request for executing an SLO operation.
-      example:
-        createSloRequest:
-          slo:
-            creator: test@domain.com
-            description: A brief description of my SLO
-            sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-            updateTime: 2000-01-23T04:56:07.000+00:00
-            sloType: SLO_TYPE_REQUEST
-            type: request
-            grouping:
-              labels:
-              - labels
-              - labels
-            labels:
-              key: labels
-            revision:
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              revision: 1
-            windowBasedMetricSli:
-              missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-              comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-              query:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              threshold: 0.95
-              window: WINDOW_SLO_WINDOW_UNSPECIFIED
-            createTime: 2000-01-23T04:56:07.000+00:00
-            name: Example Slo Name
-            id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-            productType: SLO_PRODUCT_TYPE_UNSPECIFIED
-            targetThresholdPercentage: 99.999
-          silenceDataValidations: true
       externalDocs:
         url: ""
       properties:
@@ -1276,6 +1577,9 @@ components:
       type: object
     SloExecutionRequestDeleteSloRequest:
       description: Request for executing an SLO operation.
+      example:
+        deleteSloRequest:
+          id: id
       externalDocs:
         url: ""
       properties:
@@ -1308,7 +1612,31 @@ components:
       example:
         createSloResponse:
           slo:
+            ownershipTags:
+              environment:
+                staticValues:
+                - checkout-api
+                labelKeys:
+                - deployment_environment
+                - k8s_namespace
+              service:
+                staticValues:
+                - checkout-api
+                labelKeys:
+                - deployment_environment
+                - k8s_namespace
+              team:
+                staticValues:
+                - checkout-api
+                labelKeys:
+                - deployment_environment
+                - k8s_namespace
             creator: test@domain.com
+            requestBasedMetricSli:
+              goodEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              totalEvents:
+                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
             description: A brief description of my SLO
             sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
             updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1323,15 +1651,27 @@ components:
             revision:
               updateTime: 2000-01-23T04:56:07.000+00:00
               revision: 1
-            windowBasedMetricSli:
-              missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-              comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-              query:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              threshold: 0.95
-              window: WINDOW_SLO_WINDOW_UNSPECIFIED
             createTime: 2000-01-23T04:56:07.000+00:00
             name: Example Slo Name
+            apmSliMetadata:
+              groupingKeys:
+              - environment
+              - region
+              filters:
+              - values:
+                - "500"
+                - "500"
+                value: production
+                key: environment
+              - values:
+                - "500"
+                - "500"
+                value: production
+                key: environment
+              services:
+              - my-service
+              - payment-service
+              errorConfig: "{}"
             id: b11919d5-ef85-4bb1-8655-02640dbe94d9
             productType: SLO_PRODUCT_TYPE_UNSPECIFIED
             targetThresholdPercentage: 99.999
@@ -1389,6 +1729,39 @@ components:
       - labelName
       title: SloFilterField
       type: object
+    SloFilterFieldOwnershipEnvironmentValues:
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        ownershipEnvironmentValues:
+          $ref: "#/components/schemas/StringValues"
+      required:
+      - ownershipEnvironmentValues
+      title: SloFilterField
+      type: object
+    SloFilterFieldOwnershipServiceValues:
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        ownershipServiceValues:
+          $ref: "#/components/schemas/StringValues"
+      required:
+      - ownershipServiceValues
+      title: SloFilterField
+      type: object
+    SloFilterFieldOwnershipTeamValues:
+      description: Field used for filtering SLOs
+      externalDocs:
+        url: ""
+      properties:
+        ownershipTeamValues:
+          $ref: "#/components/schemas/StringValues"
+      required:
+      - ownershipTeamValues
+      title: SloFilterField
+      type: object
     SloFilterFieldProductType:
       description: Field used for filtering SLOs
       externalDocs:
@@ -1406,9 +1779,11 @@ components:
         url: ""
       properties:
         serviceName:
-          description: "Filter by service name. Only applicable to product types that\
-            \ support services (e.g., APM). MUST be used together with product_type\
-            \ filter. Will throw an error if used without product_type."
+          description: "Filter by service name from the APM SLI services list (not\
+            \ ownership tags). Only valid for APM product SLOs. MUST be used together\
+            \ with a product_type filter that includes APM; the server may reject\
+            \ the request otherwise. To filter by configured ownership service on\
+            \ any SLO type, use ownership_service_values instead."
           example: payment-service
           type: string
       required:
@@ -1426,6 +1801,73 @@ components:
       - sloType
       title: SloFilterField
       type: object
+    SloOwnershipTag:
+      description: "Ownership for one dimension (service, environment, or team). static_values\
+        \ are group-wide (broad) assignments. label_keys are metric label names whose\
+        \ values are read per permutation (label-driven). Both may be set; when both\
+        \ lists are empty, that dimension is unset."
+      example:
+        staticValues:
+        - checkout-api
+        labelKeys:
+        - deployment_environment
+        - k8s_namespace
+      externalDocs:
+        url: ""
+      properties:
+        labelKeys:
+          example:
+          - deployment_environment
+          - k8s_namespace
+          items:
+            description: Metric label names to use as sources (label-driven). Actual
+              values come from series at query time. Empty if not using label-driven
+              for this dimension.
+            type: string
+          type: array
+        staticValues:
+          example:
+          - checkout-api
+          items:
+            description: Group-wide static values (broad). Empty if not using broad
+              for this dimension.
+            type: string
+          type: array
+      title: SloOwnershipTag
+      type: object
+    SloOwnershipTags:
+      description: "Service, environment, and team ownership for the SLO group. At\
+        \ most one SloOwnershipTag per dimension; omit a dimension when unset."
+      example:
+        environment:
+          staticValues:
+          - checkout-api
+          labelKeys:
+          - deployment_environment
+          - k8s_namespace
+        service:
+          staticValues:
+          - checkout-api
+          labelKeys:
+          - deployment_environment
+          - k8s_namespace
+        team:
+          staticValues:
+          - checkout-api
+          labelKeys:
+          - deployment_environment
+          - k8s_namespace
+      externalDocs:
+        url: ""
+      properties:
+        environment:
+          $ref: "#/components/schemas/SloOwnershipTag"
+        service:
+          $ref: "#/components/schemas/SloOwnershipTag"
+        team:
+          $ref: "#/components/schemas/SloOwnershipTag"
+      title: SloOwnershipTags
+      type: object
     SloProductType:
       enum:
       - SLO_PRODUCT_TYPE_UNSPECIFIED
@@ -1433,9 +1875,75 @@ components:
       type: string
     SloRequestBasedMetricSli:
       description: Definition of an SLO
+      example:
+        ownershipTags:
+          environment:
+            staticValues:
+            - checkout-api
+            labelKeys:
+            - deployment_environment
+            - k8s_namespace
+          service:
+            staticValues:
+            - checkout-api
+            labelKeys:
+            - deployment_environment
+            - k8s_namespace
+          team:
+            staticValues:
+            - checkout-api
+            labelKeys:
+            - deployment_environment
+            - k8s_namespace
+        creator: test@domain.com
+        requestBasedMetricSli:
+          goodEvents:
+            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          totalEvents:
+            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+        description: A brief description of my SLO
+        sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        sloType: SLO_TYPE_REQUEST
+        type: request
+        grouping:
+          labels:
+          - labels
+          - labels
+        labels:
+          key: labels
+        revision:
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          revision: 1
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: Example Slo Name
+        apmSliMetadata:
+          groupingKeys:
+          - environment
+          - region
+          filters:
+          - values:
+            - "500"
+            - "500"
+            value: production
+            key: environment
+          - values:
+            - "500"
+            - "500"
+            value: production
+            key: environment
+          services:
+          - my-service
+          - payment-service
+          errorConfig: "{}"
+        id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+        productType: SLO_PRODUCT_TYPE_UNSPECIFIED
+        targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
+        apmSliMetadata:
+          $ref: "#/components/schemas/ApmSli"
         createTime:
           format: date-time
           type: string
@@ -1457,6 +1965,8 @@ components:
         name:
           example: Example Slo Name
           type: string
+        ownershipTags:
+          $ref: "#/components/schemas/SloOwnershipTags"
         productType:
           $ref: "#/components/schemas/SloProductType"
         requestBasedMetricSli:
@@ -1497,37 +2007,11 @@ components:
       type: string
     SloWindowBasedMetricSli:
       description: Definition of an SLO
-      example:
-        creator: test@domain.com
-        description: A brief description of my SLO
-        sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-        updateTime: 2000-01-23T04:56:07.000+00:00
-        sloType: SLO_TYPE_REQUEST
-        type: request
-        grouping:
-          labels:
-          - labels
-          - labels
-        labels:
-          key: labels
-        revision:
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          revision: 1
-        windowBasedMetricSli:
-          missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-          comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-          query:
-            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-          threshold: 0.95
-          window: WINDOW_SLO_WINDOW_UNSPECIFIED
-        createTime: 2000-01-23T04:56:07.000+00:00
-        name: Example Slo Name
-        id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-        productType: SLO_PRODUCT_TYPE_UNSPECIFIED
-        targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
+        apmSliMetadata:
+          $ref: "#/components/schemas/ApmSli"
         createTime:
           format: date-time
           type: string
@@ -1549,6 +2033,8 @@ components:
         name:
           example: Example Slo Name
           type: string
+        ownershipTags:
+          $ref: "#/components/schemas/SloOwnershipTags"
         productType:
           $ref: "#/components/schemas/SloProductType"
         revision:
@@ -1590,13 +2076,6 @@ components:
       type: object
     WindowBasedMetricSli:
       description: Definition of a window-based SLI based on metrics
-      example:
-        missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-        comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-        query:
-          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-        threshold: 0.95
-        window: WINDOW_SLO_WINDOW_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -1620,18 +2099,6 @@ components:
       - WINDOW_SLO_WINDOW_1_MINUTE
       - WINDOW_SLO_WINDOW_5_MINUTES
       type: string
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -1677,11 +2144,14 @@ components:
       type: string
     SloFilter_field:
       oneOf:
-      - $ref: "#/components/schemas/SloFilterFieldProductType"
-      - $ref: "#/components/schemas/SloFilterFieldServiceName"
       - $ref: "#/components/schemas/SloFilterFieldConstFilter"
       - $ref: "#/components/schemas/SloFilterFieldLabelName"
       - $ref: "#/components/schemas/SloFilterFieldSloType"
+      - $ref: "#/components/schemas/SloFilterFieldProductType"
+      - $ref: "#/components/schemas/SloFilterFieldServiceName"
+      - $ref: "#/components/schemas/SloFilterFieldOwnershipServiceValues"
+      - $ref: "#/components/schemas/SloFilterFieldOwnershipEnvironmentValues"
+      - $ref: "#/components/schemas/SloFilterFieldOwnershipTeamValues"
     SloFilterPredicate_is:
       oneOf:
       - $ref: "#/components/schemas/IsFilterPredicateStringValues"
@@ -1709,80 +2179,24 @@ components:
       type: object
     SlosService_ReplaceSlo_request:
       oneOf:
+      - $ref: "#/components/schemas/SloApmSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
-      - $ref: "#/components/schemas/SloApmSli"
       type: object
     SlosService_CreateSlo_request:
       oneOf:
-      - $ref: "#/components/schemas/SloApmSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
+      - $ref: "#/components/schemas/SloApmSli"
       type: object
     BatchExecuteSloRequest:
       description: Request to batch execute multiple SLO operations.
       example:
         requests:
-        - createSloRequest:
-            slo:
-              creator: test@domain.com
-              description: A brief description of my SLO
-              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              sloType: SLO_TYPE_REQUEST
-              type: request
-              grouping:
-                labels:
-                - labels
-                - labels
-              labels:
-                key: labels
-              revision:
-                updateTime: 2000-01-23T04:56:07.000+00:00
-                revision: 1
-              windowBasedMetricSli:
-                missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-                comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-                query:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                threshold: 0.95
-                window: WINDOW_SLO_WINDOW_UNSPECIFIED
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-              productType: SLO_PRODUCT_TYPE_UNSPECIFIED
-              targetThresholdPercentage: 99.999
-            silenceDataValidations: true
-        - createSloRequest:
-            slo:
-              creator: test@domain.com
-              description: A brief description of my SLO
-              sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-              updateTime: 2000-01-23T04:56:07.000+00:00
-              sloType: SLO_TYPE_REQUEST
-              type: request
-              grouping:
-                labels:
-                - labels
-                - labels
-              labels:
-                key: labels
-              revision:
-                updateTime: 2000-01-23T04:56:07.000+00:00
-                revision: 1
-              windowBasedMetricSli:
-                missingDataStrategy: MISSING_DATA_STRATEGY_UNCOUNTED
-                comparisonOperator: COMPARISON_OPERATOR_UNSPECIFIED
-                query:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                threshold: 0.95
-                window: WINDOW_SLO_WINDOW_UNSPECIFIED
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-              productType: SLO_PRODUCT_TYPE_UNSPECIFIED
-              targetThresholdPercentage: 99.999
-            silenceDataValidations: true
+        - deleteSloRequest:
+            id: id
+        - deleteSloRequest:
+            id: id
       properties:
         requests:
           items:
@@ -1792,3 +2206,9 @@ components:
       - requests
       title: BatchExecuteSloRequest
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

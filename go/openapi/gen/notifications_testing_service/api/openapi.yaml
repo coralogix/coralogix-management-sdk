@@ -1,0 +1,585 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /notifications/notification-center/v1/connectors/tests/config:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestConnectorConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_Connector_Config_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestConnectorConfigResponse"
+          description: ""
+      summary: Test Connector Config
+      tags:
+      - Notifications testing service
+  /notifications/notification-center/v1/destinations/tests:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestDestination
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestingService_TestDestination_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestDestinationResponse"
+          description: ""
+      summary: Test Destination
+      tags:
+      - Notifications testing service
+  /notifications/notification-center/v1/notifications/tests:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestExistingConnector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestingService_TestExistingConnector_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestExistingConnectorResponse"
+          description: ""
+      summary: Test Existing Connector
+      tags:
+      - Notifications testing service
+  /notifications/notification-center/v1/presets/tests:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestExistingPreset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestingService_TestExistingPreset_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestExistingPresetResponse"
+          description: ""
+      summary: Test Existing Preset
+      tags:
+      - Notifications testing service
+  /notifications/notification-center/v1/presets/tests/config:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestPresetConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestingService_TestPresetConfig_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPresetConfigResponse"
+          description: ""
+      summary: Test Preset Config
+      tags:
+      - Notifications testing service
+  /notifications/notification-center/v1/routing-conditions/tests:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestRoutingConditionValid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_Routing_Condition_Valid_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestRoutingConditionValidResponse"
+          description: ""
+      summary: Test Routing Condition Valid
+      tags:
+      - Notifications testing service
+  /notifications/notification-center/v1/template-render/tests:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: TestingService_TestTemplateRender
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestingService_TestTemplateRender_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestTemplateRenderResponse"
+          description: ""
+      summary: Test Template Render
+      tags:
+      - Notifications testing service
+components:
+  schemas:
+    ConfigOverrides:
+      properties:
+        conditionType:
+          $ref: "#/components/schemas/notification_center.ConditionType"
+        messageConfig:
+          $ref: "#/components/schemas/MessageConfig"
+        payloadType:
+          type: string
+      type: object
+    FailureReason:
+      enum:
+      - FAILURE_REASON_UNSPECIFIED
+      - INVALID_TEMPLATE
+      - FIELD_NOT_FOUND
+      - TEMPLATE_EXCEEDS_MAX_LENGTH
+      - RENDERED_VALUE_EXCEEDS_MAX_LENGTH
+      type: string
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - filters
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - multipleValues
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    MatchEntityTypeAndSubTypeCondition:
+      properties:
+        entitySubType:
+          type: string
+      type: object
+    MatchEntityTypeCondition:
+      type: object
+    MessageConfig:
+      properties:
+        fields:
+          items:
+            $ref: "#/components/schemas/notification_center.MessageConfigField"
+          type: array
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    NotificationCenterConditionTypeMatchEntityType:
+      properties:
+        matchEntityType:
+          type: object
+      required:
+      - matchEntityType
+      type: object
+    NotificationCenterConditionTypeMatchEntityTypeAndSubType:
+      properties:
+        matchEntityTypeAndSubType:
+          $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
+      required:
+      - matchEntityTypeAndSubType
+      type: object
+    TemplatedConnectorConfigField:
+      properties:
+        fieldName:
+          type: string
+        template:
+          type: string
+      type: object
+    TestConnectorConfigResponse:
+      example:
+        result:
+          success: "{}"
+      properties:
+        result:
+          $ref: "#/components/schemas/TestResult"
+      type: object
+    TestDestinationResponse:
+      example:
+        result:
+          success: "{}"
+      properties:
+        result:
+          $ref: "#/components/schemas/TestResult"
+      type: object
+    TestExistingConnectorResponse:
+      example:
+        result:
+          success: "{}"
+      properties:
+        result:
+          $ref: "#/components/schemas/TestResult"
+      type: object
+    TestExistingPresetResponse:
+      example:
+        result:
+          success: "{}"
+      properties:
+        result:
+          $ref: "#/components/schemas/TestResult"
+      type: object
+    TestPresetConfigResponse:
+      example:
+        result:
+          success: "{}"
+      properties:
+        result:
+          $ref: "#/components/schemas/TestResult"
+      type: object
+    TestResult:
+      oneOf:
+      - $ref: "#/components/schemas/TestResultSuccessVariant"
+      - $ref: "#/components/schemas/TestResultFailureVariant"
+    TestResult.Failure:
+      properties:
+        message:
+          type: string
+        statusCode:
+          format: int64
+          type: integer
+      type: object
+    TestResult.Success:
+      type: object
+    TestResultFailureVariant:
+      properties:
+        failure:
+          $ref: "#/components/schemas/TestResult.Failure"
+      required:
+      - failure
+      type: object
+    TestResultSuccessVariant:
+      example:
+        success: "{}"
+      properties:
+        success:
+          type: object
+      required:
+      - success
+      type: object
+    TestRoutingConditionValidResponse:
+      oneOf:
+      - $ref: "#/components/schemas/TestRoutingConditionValidResponseSuccessVariant"
+      - $ref: "#/components/schemas/TestRoutingConditionValidResponseFailureVariant"
+    TestRoutingConditionValidResponse.Failure:
+      properties:
+        message:
+          example: "Invalid condition: condition should be rendered to a boolean value\
+            \ (true or false)"
+          type: string
+      type: object
+    TestRoutingConditionValidResponse.Success:
+      example:
+        result: true
+      properties:
+        result:
+          example: true
+          type: boolean
+      type: object
+    TestRoutingConditionValidResponseFailureVariant:
+      description: Response which specifies condition evaluation result or error
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        failure:
+          $ref: "#/components/schemas/TestRoutingConditionValidResponse.Failure"
+      required:
+      - failure
+      title: Test Routing Condition Valid Response
+      type: object
+    TestRoutingConditionValidResponseSuccessVariant:
+      description: Response which specifies condition evaluation result or error
+      example:
+        success:
+          result: true
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        success:
+          $ref: "#/components/schemas/TestRoutingConditionValidResponse.Success"
+      required:
+      - success
+      title: Test Routing Condition Valid Response
+      type: object
+    TestTemplateRenderResponse:
+      example:
+        result:
+          success:
+            renderedValue: Rendered template result
+      properties:
+        result:
+          $ref: "#/components/schemas/TestTemplateRenderResult"
+      type: object
+    TestTemplateRenderResult:
+      oneOf:
+      - $ref: "#/components/schemas/TestTemplateRenderResultSuccessVariant"
+      - $ref: "#/components/schemas/TestTemplateRenderResultFailureVariant"
+    TestTemplateRenderResult.Failure:
+      properties:
+        message:
+          example: Template rendering failed
+          type: string
+        reason:
+          $ref: "#/components/schemas/FailureReason"
+      type: object
+    TestTemplateRenderResult.Success:
+      example:
+        renderedValue: Rendered template result
+      properties:
+        renderedValue:
+          example: Rendered template result
+          type: string
+      type: object
+    TestTemplateRenderResultFailureVariant:
+      properties:
+        failure:
+          $ref: "#/components/schemas/TestTemplateRenderResult.Failure"
+      required:
+      - failure
+      type: object
+    TestTemplateRenderResultSuccessVariant:
+      example:
+        success:
+          renderedValue: Rendered template result
+      properties:
+        success:
+          $ref: "#/components/schemas/TestTemplateRenderResult.Success"
+      required:
+      - success
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    notification_center.ConditionType:
+      oneOf:
+      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
+      - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
+    notification_center.ConnectorConfigField:
+      properties:
+        fieldName:
+          type: string
+        value:
+          type: string
+      type: object
+    notification_center.ConnectorType:
+      enum:
+      - CONNECTOR_TYPE_UNSPECIFIED
+      - SLACK
+      - GENERIC_HTTPS
+      - PAGERDUTY
+      - IBM_EVENT_NOTIFICATIONS
+      - SERVICE_NOW
+      - EMAIL
+      type: string
+    notification_center.EntityType:
+      enum:
+      - ENTITY_TYPE_UNSPECIFIED
+      - ALERTS
+      - TEST_NOTIFICATIONS
+      - CASES
+      type: string
+    notification_center.MessageConfigField:
+      description: Message config field provides a way to define a template that can
+        be used to render the notification content
+      externalDocs:
+        description: Find out more about notification center
+        url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+      properties:
+        fieldName:
+          example: title
+          type: string
+        template:
+          example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          type: string
+      title: Message Config Field
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Test_Connector_Config_Request:
+      description: Request to test a connector configuration
+      properties:
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        fields:
+          items:
+            $ref: "#/components/schemas/notification_center.ConnectorConfigField"
+          type: array
+        payloadType:
+          example: default
+          type: string
+        type:
+          $ref: "#/components/schemas/notification_center.ConnectorType"
+      title: Test Connector Config Request
+      type: object
+    TestingService_TestDestination_request:
+      properties:
+        connectorConfigFields:
+          items:
+            $ref: "#/components/schemas/TemplatedConnectorConfigField"
+          type: array
+        connectorId:
+          type: string
+        entitySubType:
+          example: logsImmediateResolved
+          type: string
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        messageConfigFields:
+          items:
+            $ref: "#/components/schemas/notification_center.MessageConfigField"
+          type: array
+        payloadType:
+          example: default
+          type: string
+        presetId:
+          type: string
+      type: object
+    TestingService_TestExistingConnector_request:
+      properties:
+        connectorId:
+          type: string
+        payloadType:
+          example: default
+          type: string
+      type: object
+    TestingService_TestExistingPreset_request:
+      properties:
+        connectorId:
+          type: string
+        entitySubType:
+          example: logsImmediateResolved
+          type: string
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        presetId:
+          type: string
+      type: object
+    TestingService_TestPresetConfig_request:
+      properties:
+        configOverrides:
+          items:
+            $ref: "#/components/schemas/ConfigOverrides"
+          type: array
+        connectorId:
+          type: string
+        entitySubType:
+          example: metric
+          type: string
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        parentPresetId:
+          type: string
+      type: object
+    Test_Routing_Condition_Valid_Request:
+      description: Request to check that provided routing condition is valid
+      properties:
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        template:
+          example: alertDef.priority == 'P1'
+          type: string
+      title: Test Routing Condition Valid Request
+      type: object
+    TestingService_TestTemplateRender_request:
+      properties:
+        entitySubType:
+          example: logsImmediateResolved
+          type: string
+        entityType:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        template:
+          example: "{{ alertDef.name }}"
+          type: string
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

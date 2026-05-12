@@ -1,0 +1,418 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /notifications/notification-center/v1/connector-schemas:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ConnectorSchemaService_GetConnectorSchema
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.ConnectorType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetConnectorSchemaResponse"
+          description: ""
+      summary: Get Connector Schema
+      tags:
+      - Connector Schema service
+components:
+  schemas:
+    ConnectorConfigSchema:
+      example:
+        fields:
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          default: default
+          allowOverrides: true
+          fieldName: fieldName
+          description: description
+          fieldType: FIELD_TYPE_UNSPECIFIED
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          default: default
+          allowOverrides: true
+          fieldName: fieldName
+          description: description
+          fieldType: FIELD_TYPE_UNSPECIFIED
+          required: true
+      properties:
+        fields:
+          items:
+            $ref: "#/components/schemas/ConnectorConfigSchemaField"
+          type: array
+      type: object
+    ConnectorConfigSchemaField:
+      example:
+        allowedValues:
+        - allowedValues
+        - allowedValues
+        default: default
+        allowOverrides: true
+        fieldName: fieldName
+        description: description
+        fieldType: FIELD_TYPE_UNSPECIFIED
+        required: true
+      properties:
+        allowOverrides:
+          type: boolean
+        allowedValues:
+          items:
+            type: string
+          type: array
+        default:
+          type: string
+        description:
+          type: string
+        fieldName:
+          type: string
+        fieldType:
+          $ref: "#/components/schemas/FieldType"
+        required:
+          type: boolean
+      type: object
+    ConnectorSchema:
+      example:
+        connectorConfigSchema:
+          fields:
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            default: default
+            allowOverrides: true
+            fieldName: fieldName
+            description: description
+            fieldType: FIELD_TYPE_UNSPECIFIED
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            default: default
+            allowOverrides: true
+            fieldName: fieldName
+            description: description
+            fieldType: FIELD_TYPE_UNSPECIFIED
+            required: true
+        supportedPayloadTypes:
+        - supportedPayloadTypes
+        - supportedPayloadTypes
+        type: CONNECTOR_TYPE_UNSPECIFIED
+        messageConfigSchemas:
+        - payloadType: payloadType
+          fields:
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+        - payloadType: payloadType
+          fields:
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+      properties:
+        connectorConfigSchema:
+          $ref: "#/components/schemas/ConnectorConfigSchema"
+        messageConfigSchemas:
+          items:
+            $ref: "#/components/schemas/MessageConfigSchema"
+          type: array
+        supportedPayloadTypes:
+          items:
+            type: string
+          type: array
+        type:
+          $ref: "#/components/schemas/notification_center.ConnectorType"
+      type: object
+    FieldType:
+      enum:
+      - FIELD_TYPE_UNSPECIFIED
+      - STRING
+      - NON_EMPTY_STRING
+      - KEY_VALUE_PAIRS
+      - JSON_OBJECT
+      - DATE
+      - URL
+      - ARRAY_OF_STRINGS
+      - BOOLEAN
+      type: string
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+    FilterPathAndValuesFilters:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - filters
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - multipleValues
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetConnectorSchemaResponse:
+      example:
+        connectorSchema:
+          connectorConfigSchema:
+            fields:
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              default: default
+              allowOverrides: true
+              fieldName: fieldName
+              description: description
+              fieldType: FIELD_TYPE_UNSPECIFIED
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              default: default
+              allowOverrides: true
+              fieldName: fieldName
+              description: description
+              fieldType: FIELD_TYPE_UNSPECIFIED
+              required: true
+          supportedPayloadTypes:
+          - supportedPayloadTypes
+          - supportedPayloadTypes
+          type: CONNECTOR_TYPE_UNSPECIFIED
+          messageConfigSchemas:
+          - payloadType: payloadType
+            fields:
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+          - payloadType: payloadType
+            fields:
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+      properties:
+        connectorSchema:
+          $ref: "#/components/schemas/ConnectorSchema"
+      type: object
+    MessageConfigSchema:
+      example:
+        payloadType: payloadType
+        fields:
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          default: default
+          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+          fieldName: fieldName
+          disableOverride: true
+          description: description
+          fieldType: null
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          default: default
+          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+          fieldName: fieldName
+          disableOverride: true
+          description: description
+          fieldType: null
+          required: true
+      properties:
+        fields:
+          items:
+            $ref: "#/components/schemas/MessageConfigSchemaField"
+          type: array
+        payloadType:
+          type: string
+      type: object
+    MessageConfigSchemaField:
+      example:
+        allowedValues:
+        - allowedValues
+        - allowedValues
+        default: default
+        renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+        fieldName: fieldName
+        disableOverride: true
+        description: description
+        fieldType: null
+        required: true
+      properties:
+        allowedValues:
+          items:
+            type: string
+          type: array
+        default:
+          type: string
+        description:
+          type: string
+        disableOverride:
+          type: boolean
+        fieldName:
+          type: string
+        fieldType:
+          $ref: "#/components/schemas/FieldType"
+        renderingMode:
+          $ref: "#/components/schemas/TemplateRenderingMode"
+        required:
+          type: boolean
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    TemplateRenderingMode:
+      enum:
+      - TEMPLATE_RENDERING_MODE_UNSPECIFIED
+      - RELAXED
+      - STRICT
+      type: string
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    notification_center.ConnectorType:
+      enum:
+      - CONNECTOR_TYPE_UNSPECIFIED
+      - SLACK
+      - GENERIC_HTTPS
+      - PAGERDUTY
+      - IBM_EVENT_NOTIFICATIONS
+      - SERVICE_NOW
+      - EMAIL
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

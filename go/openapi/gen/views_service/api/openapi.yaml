@@ -128,6 +128,9 @@ paths:
 components:
   schemas:
     CustomTimeSelection:
+      example:
+        fromTime: 2024-01-25T11:31:43.152Z
+        toTime: 2024-01-25T11:35:43.152Z
       externalDocs:
         url: ""
       properties:
@@ -146,13 +149,6 @@ components:
       - toTime
       type: object
     DeleteViewResponse:
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -225,9 +221,9 @@ components:
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           timeSelection:
-            quickSelection:
-              seconds: 3600
-              caption: Last Hour
+            customSelection:
+              fromTime: 2024-01-25T11:31:43.152Z
+              toTime: 2024-01-25T11:35:43.152Z
         - isCompactMode: true
           searchQuery:
             query: query
@@ -245,9 +241,9 @@ components:
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           timeSelection:
-            quickSelection:
-              seconds: 3600
-              caption: Last Hour
+            customSelection:
+              fromTime: 2024-01-25T11:31:43.152Z
+              toTime: 2024-01-25T11:35:43.152Z
       properties:
         views:
           items:
@@ -264,9 +260,6 @@ components:
           type: array
       type: object
     QuickTimeSelection:
-      example:
-        seconds: 3600
-        caption: Last Hour
       externalDocs:
         url: ""
       properties:
@@ -323,9 +316,13 @@ components:
       type: string
     TimeSelection:
       oneOf:
-      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
       - $ref: "#/components/schemas/TimeSelectionCustomSelection"
+      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
     TimeSelectionCustomSelection:
+      example:
+        customSelection:
+          fromTime: 2024-01-25T11:31:43.152Z
+          toTime: 2024-01-25T11:35:43.152Z
       properties:
         customSelection:
           $ref: "#/components/schemas/CustomTimeSelection"
@@ -333,10 +330,6 @@ components:
       - customSelection
       type: object
     TimeSelectionQuickSelection:
-      example:
-        quickSelection:
-          seconds: 3600
-          caption: Last Hour
       properties:
         quickSelection:
           $ref: "#/components/schemas/QuickTimeSelection"
@@ -363,9 +356,9 @@ components:
         id: 52
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:
-          quickSelection:
-            seconds: 3600
-            caption: Last Hour
+          customSelection:
+            fromTime: 2024-01-25T11:31:43.152Z
+            toTime: 2024-01-25T11:35:43.152Z
       externalDocs:
         url: ""
       properties:
@@ -410,18 +403,6 @@ components:
       - VIEW_TYPE_ARCHIVE_LOGS
       - VIEW_TYPE_ARCHIVE_TEMPLATES
       type: string
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -474,9 +455,9 @@ components:
             name: applicationName
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:
-          quickSelection:
-            seconds: 3600
-            caption: Last Hour
+          customSelection:
+            fromTime: 2024-01-25T11:31:43.152Z
+            toTime: 2024-01-25T11:35:43.152Z
       properties:
         filters:
           $ref: "#/components/schemas/SelectedFilters"
@@ -534,3 +515,9 @@ components:
       - timeSelection
       title: View
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

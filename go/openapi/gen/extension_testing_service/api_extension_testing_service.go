@@ -40,6 +40,8 @@ func (r ApiExtensionTestingServiceCleanupTestingRevisionRequest) Execute() (map[
 /*
 ExtensionTestingServiceCleanupTestingRevision Cleanup testing extension
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionTestingServiceCleanupTestingRevisionRequest
 */
@@ -145,6 +147,8 @@ func (r ApiExtensionTestingServiceInitializeTestingRevisionRequest) Execute() (m
 /*
 ExtensionTestingServiceInitializeTestingRevision Initialize testing revision
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionTestingServiceInitializeTestingRevisionRequest
 */
@@ -249,6 +253,8 @@ func (r ApiExtensionTestingServiceTestExtensionRevisionRequest) Execute() (map[s
 
 /*
 ExtensionTestingServiceTestExtensionRevision Test extension revision
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionTestingServiceTestExtensionRevisionRequest

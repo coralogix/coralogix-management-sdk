@@ -11,6 +11,7 @@
           "Integration service"
         ],
         "summary": "Get all integrations",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -66,6 +67,7 @@
           "Integration service"
         ],
         "summary": "Get integration definition",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -131,6 +133,7 @@
           "Integration service"
         ],
         "summary": "Get deployed integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -188,6 +191,7 @@
           "Integration service"
         ],
         "summary": "Delete integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -244,6 +248,7 @@
           "Integration service"
         ],
         "summary": "Get RUM integration versions data",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -299,6 +304,7 @@
           "Integration service"
         ],
         "summary": "Trigger sync of RUM integration data",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -359,6 +365,7 @@
           "Integration service"
         ],
         "summary": "Get integration details",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -423,6 +430,7 @@
           "Integration service"
         ],
         "summary": "List managed integration keys",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -468,6 +476,7 @@
           "Integration service"
         ],
         "summary": "Get managed integration status",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -524,6 +533,7 @@
           "Integration service"
         ],
         "summary": "Update integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -586,6 +596,7 @@
           "Integration service"
         ],
         "summary": "Save integration registration metadata",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -646,6 +657,7 @@
           "Integration service"
         ],
         "summary": "Test integration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -709,6 +721,7 @@
           "Integration service"
         ],
         "summary": "Get integration template",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1241,22 +1254,8 @@
           }
         }
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FieldInformation": {
         "oneOf": [
-          {
-            "$ref": "#/components/schemas/FieldInformationSelection"
-          },
           {
             "$ref": "#/components/schemas/FieldInformationSingleNumber"
           },
@@ -1271,6 +1270,9 @@
           },
           {
             "$ref": "#/components/schemas/FieldInformationSingleBoolean"
+          },
+          {
+            "$ref": "#/components/schemas/FieldInformationSelection"
           }
         ]
       },
@@ -2098,6 +2100,12 @@
       "IntegrationRevision": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+          },
+          {
+            "$ref": "#/components/schemas/IntegrationRevisionRum"
+          },
+          {
             "$ref": "#/components/schemas/IntegrationRevisionTerraform"
           },
           {
@@ -2108,12 +2116,6 @@
           },
           {
             "$ref": "#/components/schemas/IntegrationRevisionHelmChart"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionAzureArmTemplate"
-          },
-          {
-            "$ref": "#/components/schemas/IntegrationRevisionRum"
           }
         ]
       },
@@ -2724,13 +2726,13 @@
       "RegisteredInstance": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RegisteredInstanceArm"
+          },
+          {
             "$ref": "#/components/schemas/RegisteredInstanceEmpty"
           },
           {
             "$ref": "#/components/schemas/RegisteredInstanceCloudformation"
-          },
-          {
-            "$ref": "#/components/schemas/RegisteredInstanceArm"
           }
         ]
       },
@@ -3270,24 +3272,6 @@
           "CUSTOM"
         ]
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -3367,15 +3351,6 @@
       "v1.IntegrationType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypeArm"
-          },
-          {
-            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
-          },
-          {
             "$ref": "#/components/schemas/V1IntegrationTypeContextualData"
           },
           {
@@ -3386,6 +3361,15 @@
           },
           {
             "$ref": "#/components/schemas/V1IntegrationTypeUntracked"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeCloudformation"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypeArm"
+          },
+          {
+            "$ref": "#/components/schemas/V1IntegrationTypePushBasedContextualData"
           }
         ]
       },
@@ -3406,6 +3390,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

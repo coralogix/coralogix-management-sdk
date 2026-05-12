@@ -7,6 +7,7 @@ servers:
 paths:
   /actions/actions/v2:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_ListActions
@@ -33,6 +34,7 @@ paths:
       tags:
       - Actions Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_CreateAction
@@ -64,6 +66,7 @@ paths:
       tags:
       - Actions Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_ReplaceAction
@@ -96,6 +99,7 @@ paths:
       - Actions Service
   /actions/actions/v2/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_DeleteAction
@@ -130,6 +134,7 @@ paths:
       tags:
       - Actions Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_GetAction
@@ -165,6 +170,7 @@ paths:
       - Actions Service
   /actions/batch/v2:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_AtomicBatchExecuteActions
@@ -197,6 +203,7 @@ paths:
       - Actions Service
   /actions/order/v2:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ActionsService_OrderActions
@@ -266,12 +273,35 @@ components:
       type: object
     ActionExecutionResponse:
       oneOf:
+      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
       - $ref: "#/components/schemas/ActionExecutionResponseReplace"
       - $ref: "#/components/schemas/ActionExecutionResponseDelete"
-      - $ref: "#/components/schemas/ActionExecutionResponseCreate"
     ActionExecutionResponseCreate:
       description: This data structure represents a response to an Action execution
         request.
+      example:
+        create:
+          action:
+            urlFields:
+            - name: name
+              required: true
+            - name: name
+              required: true
+            dpxlFilter: dpxlFilter
+            createdBy: createdBy
+            sourceType: SOURCE_TYPE_UNSPECIFIED
+            subsystemNames:
+            - subsystemNames
+            - subsystemNames
+            name: name
+            description: description
+            applicationNames:
+            - applicationNames
+            - applicationNames
+            id: id
+            isPrivate: true
+            url: url
+            isHidden: true
       externalDocs:
         url: ""
       properties:
@@ -297,22 +327,6 @@ components:
     ActionExecutionResponseReplace:
       description: This data structure represents a response to an Action execution
         request.
-      example:
-        replace:
-          action:
-            createdBy: createdBy
-            sourceType: SOURCE_TYPE_UNSPECIFIED
-            subsystemNames:
-            - subsystemNames
-            - subsystemNames
-            name: name
-            applicationNames:
-            - applicationNames
-            - applicationNames
-            id: id
-            isPrivate: true
-            url: url
-            isHidden: true
       externalDocs:
         url: ""
       properties:
@@ -326,14 +340,21 @@ components:
         request.
       example:
         matchingResponses:
-        - replace:
+        - create:
             action:
+              urlFields:
+              - name: name
+                required: true
+              - name: name
+                required: true
+              dpxlFilter: dpxlFilter
               createdBy: createdBy
               sourceType: SOURCE_TYPE_UNSPECIFIED
               subsystemNames:
               - subsystemNames
               - subsystemNames
               name: name
+              description: description
               applicationNames:
               - applicationNames
               - applicationNames
@@ -341,14 +362,21 @@ components:
               isPrivate: true
               url: url
               isHidden: true
-        - replace:
+        - create:
             action:
+              urlFields:
+              - name: name
+                required: true
+              - name: name
+                required: true
+              dpxlFilter: dpxlFilter
               createdBy: createdBy
               sourceType: SOURCE_TYPE_UNSPECIFIED
               subsystemNames:
               - subsystemNames
               - subsystemNames
               name: name
+              description: description
               applicationNames:
               - applicationNames
               - applicationNames
@@ -373,6 +401,10 @@ components:
           items:
             type: string
           type: array
+        description:
+          type: string
+        dpxlFilter:
+          type: string
         isPrivate:
           type: boolean
         name:
@@ -385,17 +417,28 @@ components:
           type: array
         url:
           type: string
+        urlFields:
+          items:
+            $ref: "#/components/schemas/UrlField"
+          type: array
       type: object
     CreateActionResponse:
       description: This data structure represents the response to create an Action.
       example:
         action:
+          urlFields:
+          - name: name
+            required: true
+          - name: name
+            required: true
+          dpxlFilter: dpxlFilter
           createdBy: createdBy
           sourceType: SOURCE_TYPE_UNSPECIFIED
           subsystemNames:
           - subsystemNames
           - subsystemNames
           name: name
+          description: description
           applicationNames:
           - applicationNames
           - applicationNames
@@ -421,13 +464,6 @@ components:
       description: This data structure represents the response to delete an Action.
       externalDocs:
         url: ""
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -484,12 +520,19 @@ components:
       description: This data structure represents the response to get an Action.
       example:
         action:
+          urlFields:
+          - name: name
+            required: true
+          - name: name
+            required: true
+          dpxlFilter: dpxlFilter
           createdBy: createdBy
           sourceType: SOURCE_TYPE_UNSPECIFIED
           subsystemNames:
           - subsystemNames
           - subsystemNames
           name: name
+          description: description
           applicationNames:
           - applicationNames
           - applicationNames
@@ -508,12 +551,19 @@ components:
         Actions.
       example:
         actions:
-        - createdBy: createdBy
+        - urlFields:
+          - name: name
+            required: true
+          - name: name
+            required: true
+          dpxlFilter: dpxlFilter
+          createdBy: createdBy
           sourceType: SOURCE_TYPE_UNSPECIFIED
           subsystemNames:
           - subsystemNames
           - subsystemNames
           name: name
+          description: description
           applicationNames:
           - applicationNames
           - applicationNames
@@ -521,12 +571,19 @@ components:
           isPrivate: true
           url: url
           isHidden: true
-        - createdBy: createdBy
+        - urlFields:
+          - name: name
+            required: true
+          - name: name
+            required: true
+          dpxlFilter: dpxlFilter
+          createdBy: createdBy
           sourceType: SOURCE_TYPE_UNSPECIFIED
           subsystemNames:
           - subsystemNames
           - subsystemNames
           name: name
+          description: description
           applicationNames:
           - applicationNames
           - applicationNames
@@ -568,12 +625,19 @@ components:
       description: This data structure represents the response to replace an Action.
       example:
         action:
+          urlFields:
+          - name: name
+            required: true
+          - name: name
+            required: true
+          dpxlFilter: dpxlFilter
           createdBy: createdBy
           sourceType: SOURCE_TYPE_UNSPECIFIED
           subsystemNames:
           - subsystemNames
           - subsystemNames
           name: name
+          description: description
           applicationNames:
           - applicationNames
           - applicationNames
@@ -587,17 +651,19 @@ components:
         action:
           $ref: "#/components/schemas/v2.Action"
       type: object
-    common.Group:
+    UrlField:
+      description: Declares a URL field that may be required for the Action to be
+        invokable on a log.
+      example:
+        name: name
+        required: true
+      externalDocs:
+        url: ""
       properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
+        name:
+          type: string
+        required:
+          type: boolean
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -607,12 +673,19 @@ components:
     v2.Action:
       description: This data structure represents an Action.
       example:
+        urlFields:
+        - name: name
+          required: true
+        - name: name
+          required: true
+        dpxlFilter: dpxlFilter
         createdBy: createdBy
         sourceType: SOURCE_TYPE_UNSPECIFIED
         subsystemNames:
         - subsystemNames
         - subsystemNames
         name: name
+        description: description
         applicationNames:
         - applicationNames
         - applicationNames
@@ -628,6 +701,10 @@ components:
             type: string
           type: array
         createdBy:
+          type: string
+        description:
+          type: string
+        dpxlFilter:
           type: string
         id:
           type: string
@@ -645,6 +722,10 @@ components:
           type: array
         url:
           type: string
+        urlFields:
+          items:
+            $ref: "#/components/schemas/UrlField"
+          type: array
       type: object
     v2.SourceType:
       enum:
@@ -670,6 +751,10 @@ components:
           items:
             type: string
           type: array
+        description:
+          type: string
+        dpxlFilter:
+          type: string
         isPrivate:
           type: boolean
         name:
@@ -682,6 +767,10 @@ components:
           type: array
         url:
           type: string
+        urlFields:
+          items:
+            $ref: "#/components/schemas/UrlField"
+          type: array
       type: object
     ActionsService_AtomicBatchExecuteActions_request:
       description: This data structure represents a request to execute a batch of
@@ -706,3 +795,9 @@ components:
             type: integer
           type: object
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

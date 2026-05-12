@@ -11,7 +11,7 @@
           "Cases notification service"
         ],
         "summary": "List notification deliveries for cases",
-        "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.",
+        "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -168,10 +168,10 @@
       "DeliveryOutcome": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
+            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
           },
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
+            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
           }
         ]
       },
@@ -218,17 +218,6 @@
           "evidenceUrl": {
             "example": "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456",
             "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
-            "type": "string"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
             "type": "string"
           }
         }
@@ -399,7 +388,7 @@
             "type": "string"
           },
           "timestamp": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
             "format": "date-time"
@@ -427,7 +416,7 @@
             "type": "string"
           },
           "timestamp": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
             "format": "date-time"
@@ -455,7 +444,7 @@
             "type": "string"
           },
           "timestamp": {
-            "example": "2025-09-22T10:30:00Z",
+            "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
             "format": "date-time"
@@ -513,24 +502,6 @@
           "routerName"
         ]
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -555,6 +526,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

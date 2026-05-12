@@ -11,7 +11,7 @@
           "Incidents service"
         ],
         "summary": "Get incident aggregations",
-        "description": "Retrieve aggregated incident data with support for grouping and filtering.",
+        "description": "Retrieve aggregated incident data with support for grouping and filtering.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -212,7 +212,7 @@
           "Incidents service"
         ],
         "summary": "List incident events with filters",
-        "description": "List incident events with support for filtering, pagination, and ordering.",
+        "description": "List incident events with support for filtering, pagination, and ordering.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -356,7 +356,7 @@
           "Incidents service"
         ],
         "summary": "Get total count of incident events",
-        "description": "Retrieve the total count of incident events matching a filter.",
+        "description": "Retrieve the total count of incident events matching a filter.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -451,7 +451,7 @@
           "Incidents service"
         ],
         "summary": "Get incident by event ID",
-        "description": "Retrieve detailed information about a single incident by related alert event id.",
+        "description": "Retrieve detailed information about a single incident by related alert event id.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -510,7 +510,7 @@
           "Incidents service"
         ],
         "summary": "Acknowledge incident by event id",
-        "description": "Mark incident as acknowledged by event id.",
+        "description": "Mark incident as acknowledged by event id.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -569,7 +569,7 @@
           "Incidents service"
         ],
         "summary": "Resolve incident by event id",
-        "description": "Mark incident as resolved by event id.",
+        "description": "Mark incident as resolved by event id.\n\nRequires the following permissions:\n- `incidents:close`",
         "externalDocs": {
           "url": ""
         },
@@ -628,6 +628,7 @@
           "Incidents service"
         ],
         "summary": "Get available filter values",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -689,6 +690,7 @@
           "Incidents service"
         ],
         "summary": "Get available incident event filter values",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -783,7 +785,7 @@
           "Incidents service"
         ],
         "summary": "Get multiple incidents by IDs",
-        "description": "Retrieve multiple incidents by their IDs in a single request.",
+        "description": "Retrieve multiple incidents by their IDs in a single request.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -840,7 +842,7 @@
           "Incidents service"
         ],
         "summary": "List incidents with filters",
-        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.",
+        "description": "Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -911,7 +913,7 @@
           "Incidents service"
         ],
         "summary": "Acknowledge incidents",
-        "description": "Mark one or more incidents as acknowledged.",
+        "description": "Mark one or more incidents as acknowledged.\n\nRequires the following permissions:\n- `incidents:acknowledge`",
         "externalDocs": {
           "url": ""
         },
@@ -984,7 +986,7 @@
           "Incidents service"
         ],
         "summary": "Assign incidents to a user",
-        "description": "Assign one or more incidents to a specific user.",
+        "description": "Assign one or more incidents to a specific user.\n\nRequires the following permissions:\n- `incidents:assign`",
         "externalDocs": {
           "url": ""
         },
@@ -1059,7 +1061,7 @@
           "Incidents service"
         ],
         "summary": "Remove incident user assignments",
-        "description": "Remove user assignments from one or more incidents.",
+        "description": "Remove user assignments from one or more incidents.\n\nRequires the following permissions:\n- `incidents:assign`",
         "externalDocs": {
           "url": ""
         },
@@ -1123,6 +1125,7 @@
           "Incidents service"
         ],
         "summary": "Close incidents",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -1195,7 +1198,7 @@
           "Incidents service"
         ],
         "summary": "Resolve incidents",
-        "description": "Mark one or more incidents as resolved.",
+        "description": "Mark one or more incidents as resolved.\n\nRequires the following permissions:\n- `incidents:close`",
         "externalDocs": {
           "url": ""
         },
@@ -1268,7 +1271,7 @@
           "Incidents service"
         ],
         "summary": "Get incident by ID",
-        "description": "Retrieve detailed information about a single incident by its unique identifier.",
+        "description": "Retrieve detailed information about a single incident by its unique identifier.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -1326,7 +1329,7 @@
           "Incidents service"
         ],
         "summary": "Get incident events",
-        "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.",
+        "description": "Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.\n\nRequires the following permissions:\n- `incidents:read`",
         "externalDocs": {
           "url": ""
         },
@@ -1668,17 +1671,6 @@
           "valuesWithCount"
         ]
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -1888,7 +1880,7 @@
             }
           },
           "closedAt": {
-            "example": "2024-01-01T00:00:00Z",
+            "example": "2024-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
@@ -1899,7 +1891,7 @@
             }
           },
           "createdAt": {
-            "example": "2024-01-01T00:00:00Z",
+            "example": "2024-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
@@ -1935,7 +1927,7 @@
             "type": "string"
           },
           "lastStateUpdateTime": {
-            "example": "2024-01-01T00:00:00Z",
+            "example": "2024-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
@@ -2081,16 +2073,22 @@
             "$ref": "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
           },
           {
+            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+          },
+          {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventCloseAdministrativeEvent"
@@ -2099,19 +2097,13 @@
             "$ref": "#/components/schemas/IncidentEventCloseOperationalEvent"
           },
           {
-            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
+            "$ref": "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
           },
           {
             "$ref": "#/components/schemas/IncidentEventAssignmentOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUnassignOperationalEvent"
-          },
-          {
-            "$ref": "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
           }
         ]
       },
@@ -2731,19 +2723,19 @@
       "IncidentFieldOneOf": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfId"
+            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfClosedAt"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
-          },
-          {
             "$ref": "#/components/schemas/IncidentFieldOneOfSubsystemName"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfSeverity"
+            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+          },
+          {
+            "$ref": "#/components/schemas/IncidentFieldOneOfId"
           },
           {
             "$ref": "#/components/schemas/IncidentFieldOneOfName"
@@ -2761,7 +2753,7 @@
             "$ref": "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
           },
           {
-            "$ref": "#/components/schemas/IncidentFieldOneOfDuration"
+            "$ref": "#/components/schemas/IncidentFieldOneOfApplicationName"
           }
         ]
       },
@@ -3552,24 +3544,6 @@
           "incidentField"
         ]
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -3729,6 +3703,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

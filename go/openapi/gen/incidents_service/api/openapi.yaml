@@ -7,8 +7,11 @@ servers:
 paths:
   /incidents/aggregations/v1:
     get:
-      description: Retrieve aggregated incident data with support for grouping and
-        filtering.
+      description: |-
+        Retrieve aggregated incident data with support for grouping and filtering.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentAggregations
@@ -62,8 +65,11 @@ paths:
       - incidents:read
   /incidents/events/v1:
     get:
-      description: "List incident events with support for filtering, pagination, and\
-        \ ordering."
+      description: |-
+        List incident events with support for filtering, pagination, and ordering.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEvents
@@ -115,7 +121,11 @@ paths:
       - incidents:read
   /incidents/events/v1/all/count:
     get:
-      description: Retrieve the total count of incident events matching a filter.
+      description: |-
+        Retrieve the total count of incident events matching a filter.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEventsTotalCount
@@ -153,8 +163,11 @@ paths:
       - incidents:read
   /incidents/events/v1/{event_id}:
     get:
-      description: Retrieve detailed information about a single incident by related
-        alert event id.
+      description: |-
+        Retrieve detailed information about a single incident by related alert event id.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncidentByEventId
@@ -194,7 +207,11 @@ paths:
       - incidents:read
   /incidents/events/v1/{event_id}/acknowledge:
     post:
-      description: Mark incident as acknowledged by event id.
+      description: |-
+        Mark incident as acknowledged by event id.
+
+        Requires the following permissions:
+        - `incidents:acknowledge`
       externalDocs:
         url: ""
       operationId: IncidentsService_AcknowledgeIncidentByEventId
@@ -234,7 +251,11 @@ paths:
       - incidents:acknowledge
   /incidents/events/v1/{event_id}/resolve:
     post:
-      description: Mark incident as resolved by event id.
+      description: |-
+        Mark incident as resolved by event id.
+
+        Requires the following permissions:
+        - `incidents:close`
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidentByEventId
@@ -274,6 +295,7 @@ paths:
       - incidents:close
   /incidents/filter-values/v1:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_GetFilterValues
@@ -308,6 +330,7 @@ paths:
       - incidents:read
   /incidents/filter-values/v1/events:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEventsFilterValues
@@ -345,7 +368,11 @@ paths:
       - incidents:read
   /incidents/incidents/v1:
     get:
-      description: Retrieve multiple incidents by their IDs in a single request.
+      description: |-
+        Retrieve multiple incidents by their IDs in a single request.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_BatchGetIncident
@@ -384,8 +411,11 @@ paths:
       x-coralogixPermissions:
       - incidents:read
     post:
-      description: Lists all available incidents based on specified filters and order.
-        The list is ordered in an unspecified direction and sorted by creation time.
+      description: |-
+        Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidents
@@ -420,7 +450,11 @@ paths:
       - incidents:read
   /incidents/incidents/v1/all/acknowledge:
     post:
-      description: Mark one or more incidents as acknowledged.
+      description: |-
+        Mark one or more incidents as acknowledged.
+
+        Requires the following permissions:
+        - `incidents:acknowledge`
       externalDocs:
         url: ""
       operationId: IncidentsService_AcknowledgeIncidents
@@ -455,7 +489,11 @@ paths:
       - incidents:acknowledge
   /incidents/incidents/v1/all/by-user:
     delete:
-      description: Remove user assignments from one or more incidents.
+      description: |-
+        Remove user assignments from one or more incidents.
+
+        Requires the following permissions:
+        - `incidents:assign`
       externalDocs:
         url: ""
       operationId: IncidentsService_UnassignIncidents
@@ -498,7 +536,11 @@ paths:
       x-coralogixPermissions:
       - incidents:assign
     post:
-      description: Assign one or more incidents to a specific user.
+      description: |-
+        Assign one or more incidents to a specific user.
+
+        Requires the following permissions:
+        - `incidents:assign`
       externalDocs:
         url: ""
       operationId: IncidentsService_AssignIncidents
@@ -533,6 +575,7 @@ paths:
       - incidents:assign
   /incidents/incidents/v1/all/closed:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_CloseIncidents
@@ -567,7 +610,11 @@ paths:
       - incidents:close
   /incidents/incidents/v1/all/resolve:
     post:
-      description: Mark one or more incidents as resolved.
+      description: |-
+        Mark one or more incidents as resolved.
+
+        Requires the following permissions:
+        - `incidents:close`
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidents
@@ -602,8 +649,11 @@ paths:
       - incidents:close
   /incidents/incidents/v1/{id}:
     get:
-      description: Retrieve detailed information about a single incident by its unique
-        identifier.
+      description: |-
+        Retrieve detailed information about a single incident by its unique identifier.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncident
@@ -642,9 +692,11 @@ paths:
       - incidents:read
   /incidents/incidents/v1/{incident_id}/events:
     get:
-      description: "Retrieve a chronological list of all events associated with a\
-        \ specific incident. Includes state changes, assignments, acknowledgments,\
-        \ and resolutions."
+      description: |-
+        Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncidentEvents
@@ -1334,13 +1386,6 @@ components:
       - valuesWithCount
       title: Display label values with count
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -1594,7 +1639,7 @@ components:
     GroupByValuesIncidentField:
       example:
         incidentField:
-          id: id
+          severity: null
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1731,9 +1776,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            id: id
+            severity: null
         - incidentField:
-            id: id
+            severity: null
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1851,17 +1896,17 @@ components:
     IncidentEvent:
       oneOf:
       - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
@@ -2378,17 +2423,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfId"
-      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
       - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfId"
       - $ref: "#/components/schemas/IncidentFieldOneOfName"
       - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfState"
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
       - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
-      - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
     IncidentFieldOneOfApplicationName:
       properties:
         applicationName:
@@ -2420,8 +2465,6 @@ components:
       - duration
       type: object
     IncidentFieldOneOfId:
-      example:
-        id: id
       properties:
         id:
           type: string
@@ -2444,6 +2487,8 @@ components:
       - name
       type: object
     IncidentFieldOneOfSeverity:
+      example:
+        severity: null
       properties:
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -2863,9 +2908,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              id: id
+              severity: null
           - incidentField:
-              id: id
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2906,9 +2951,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              id: id
+              severity: null
           - incidentField:
-              id: id
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3596,18 +3641,6 @@ components:
       - incidentField
       title: Incident order by
       type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -4000,3 +4033,9 @@ components:
       - incidentIds
       title: Resolve incidents request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

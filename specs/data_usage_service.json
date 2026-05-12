@@ -11,6 +11,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -29,12 +30,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -69,6 +70,12 @@
               "items": {
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/DimensionSeverity"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
                     "$ref": "#/components/schemas/DimensionPillar"
                   },
                   {
@@ -76,12 +83,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/DimensionTier"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionSeverity"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPriority"
                   }
                 ]
               }
@@ -127,6 +128,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Evaluation Tokens",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -186,6 +188,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Processed GBs",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -245,6 +248,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Units",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -304,6 +308,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage Metrics Export Status",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -344,6 +349,7 @@
           "Data Usage Service"
         ],
         "summary": "Update Data Usage Metrics Export Status",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -403,6 +409,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Logs Count",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -421,12 +428,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -527,6 +534,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Spans Count",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -545,12 +553,12 @@
               "type": "object",
               "properties": {
                 "fromDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
-                  "example": "2021-01-01T00:00:00Z",
+                  "example": "2021-01-01T00:00:00.000Z",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -787,12 +795,6 @@
       "Dimension": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DimensionSeverity"
-          },
-          {
-            "$ref": "#/components/schemas/DimensionPriority"
-          },
-          {
             "$ref": "#/components/schemas/DimensionPillar"
           },
           {
@@ -800,6 +802,12 @@
           },
           {
             "$ref": "#/components/schemas/DimensionTier"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionPriority"
           }
         ]
       },
@@ -818,7 +826,7 @@
         "type": "object",
         "properties": {
           "pillar": {
-            "$ref": "#/components/schemas/Pillar"
+            "$ref": "#/components/schemas/v2.Pillar"
           }
         },
         "required": [
@@ -865,17 +873,6 @@
             "$ref": "#/components/schemas/Token"
           },
           "evaluatorName": {
-            "type": "string"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
             "type": "string"
           }
         }
@@ -1186,17 +1183,6 @@
           }
         }
       },
-      "Pillar": {
-        "type": "string",
-        "enum": [
-          "PILLAR_UNSPECIFIED",
-          "PILLAR_METRICS",
-          "PILLAR_LOGS",
-          "PILLAR_SPANS",
-          "PILLAR_BINARY",
-          "PILLAR_PROFILES"
-        ]
-      },
       "SpansCount": {
         "externalDocs": {
           "description": "Find out more about data usage.",
@@ -1237,7 +1223,7 @@
             "format": "int64"
           },
           "timestamp": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1264,24 +1250,6 @@
           "enabled": {
             "example": true,
             "type": "boolean"
-          }
-        }
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
           }
         }
       },
@@ -1314,12 +1282,12 @@
         "type": "object",
         "properties": {
           "fromDate": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           },
           "toDate": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string",
             "format": "date-time"
           }
@@ -1333,6 +1301,17 @@
             "format": "float"
           }
         }
+      },
+      "v2.Pillar": {
+        "type": "string",
+        "enum": [
+          "PILLAR_UNSPECIFIED",
+          "PILLAR_METRICS",
+          "PILLAR_LOGS",
+          "PILLAR_SPANS",
+          "PILLAR_BINARY",
+          "PILLAR_PROFILES"
+        ]
       },
       "v2.Priority": {
         "type": "string",
@@ -1380,6 +1359,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -11,6 +11,7 @@
           "Retentions Service"
         ],
         "summary": "Get Retentions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Retentions Service"
         ],
         "summary": "Update Retentions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -115,6 +117,7 @@
           "Retentions Service"
         ],
         "summary": "Activate Retentions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -157,6 +160,7 @@
           "Retentions Service"
         ],
         "summary": "Get Retentions Enabled",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -213,17 +217,6 @@
         "required": [
           "retentions"
         ]
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -398,24 +391,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -429,6 +404,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

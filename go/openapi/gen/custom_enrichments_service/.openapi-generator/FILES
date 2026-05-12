@@ -7,7 +7,6 @@ api_custom_enrichments_service.go
 client.go
 configuration.go
 git_push.sh
-model_common_group.go
 model_create_custom_enrichment_request.go
 model_create_custom_enrichment_response.go
 model_custom_enrichment.go
@@ -17,7 +16,6 @@ model_custom_enrichment_data_textual.go
 model_custom_enrichment_service_search_custom_enrichment_data_search_clauses_parameter_inner.go
 model_delete_custom_enrichment_response.go
 model_events_v3_filter_matcher.go
-model_field_group.go
 model_file.go
 model_file_binary.go
 model_file_textual.go

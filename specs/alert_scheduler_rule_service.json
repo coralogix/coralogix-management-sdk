@@ -11,6 +11,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -107,6 +108,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -166,6 +168,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -227,6 +230,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -289,6 +293,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -353,6 +358,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -404,6 +410,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -652,17 +659,6 @@
           "DURATION_FREQUENCY_HOUR",
           "DURATION_FREQUENCY_DAY"
         ]
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterByAlertSchedulerRuleIdsAlertSchedulerIds": {
         "type": "object",
@@ -958,10 +954,10 @@
       "Schedule": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ScheduleOneTime"
+            "$ref": "#/components/schemas/ScheduleRecurring"
           },
           {
-            "$ref": "#/components/schemas/ScheduleRecurring"
+            "$ref": "#/components/schemas/ScheduleOneTime"
           }
         ]
       },
@@ -1121,24 +1117,6 @@
           }
         ]
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -1178,6 +1156,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

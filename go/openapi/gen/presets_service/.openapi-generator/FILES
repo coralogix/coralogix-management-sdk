@@ -10,12 +10,10 @@ git_push.sh
 model_attachment_config.go
 model_attachment_config_policy.go
 model_batch_get_presets_response.go
-model_common_group.go
 model_config_overrides.go
 model_create_custom_preset_request.go
 model_create_custom_preset_response.go
 model_events_v3_filter_matcher.go
-model_field_group.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go

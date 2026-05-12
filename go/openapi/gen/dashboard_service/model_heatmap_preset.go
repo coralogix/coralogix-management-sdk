@@ -41,6 +41,7 @@ type HeatmapPreset struct {
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
 	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -441,6 +442,38 @@ func (o *HeatmapPreset) SetXAxisFields(v []ObservationField) {
 	o.XAxisFields = v
 }
 
+// GetXAxisTimeFormat returns the XAxisTimeFormat field value if set, zero value otherwise.
+func (o *HeatmapPreset) GetXAxisTimeFormat() XAxisTimeFormat {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		var ret XAxisTimeFormat
+		return ret
+	}
+	return *o.XAxisTimeFormat
+}
+
+// GetXAxisTimeFormatOk returns a tuple with the XAxisTimeFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HeatmapPreset) GetXAxisTimeFormatOk() (*XAxisTimeFormat, bool) {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		return nil, false
+	}
+	return o.XAxisTimeFormat, true
+}
+
+// HasXAxisTimeFormat returns a boolean if a field has been set.
+func (o *HeatmapPreset) HasXAxisTimeFormat() bool {
+	if o != nil && !IsNil(o.XAxisTimeFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetXAxisTimeFormat gets a reference to the given XAxisTimeFormat and assigns it to the XAxisTimeFormat field.
+func (o *HeatmapPreset) SetXAxisTimeFormat(v XAxisTimeFormat) {
+	o.XAxisTimeFormat = &v
+}
+
 // GetYAxisFields returns the YAxisFields field value if set, zero value otherwise.
 func (o *HeatmapPreset) GetYAxisFields() []ObservationField {
 	if o == nil || IsNil(o.YAxisFields) {
@@ -517,6 +550,9 @@ func (o HeatmapPreset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.XAxisFields) {
 		toSerialize["xAxisFields"] = o.XAxisFields
 	}
+	if !IsNil(o.XAxisTimeFormat) {
+		toSerialize["xAxisTimeFormat"] = o.XAxisTimeFormat
+	}
 	if !IsNil(o.YAxisFields) {
 		toSerialize["yAxisFields"] = o.YAxisFields
 	}
@@ -576,6 +612,7 @@ func (o *HeatmapPreset) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "unit")
 		delete(additionalProperties, "valueField")
 		delete(additionalProperties, "xAxisFields")
+		delete(additionalProperties, "xAxisTimeFormat")
 		delete(additionalProperties, "yAxisFields")
 		o.AdditionalProperties = additionalProperties
 	}

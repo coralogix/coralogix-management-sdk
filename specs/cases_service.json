@@ -11,7 +11,7 @@
           "Cases service"
         ],
         "summary": "Get external references for a case",
-        "description": "Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.",
+        "description": "Retrieve all external references that link a case to external systems such as ServiceNow. Returns the complete list of external references associated with the specified case.\n\nRequires the following permissions:\n- `case:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -102,17 +102,6 @@
           "EXTERNAL_REFERENCE_VENDOR_UNSPECIFIED",
           "EXTERNAL_REFERENCE_VENDOR_SERVICE_NOW"
         ]
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -220,24 +209,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -251,6 +222,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

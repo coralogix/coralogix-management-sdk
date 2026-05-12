@@ -11,6 +11,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Company Usage Limits",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -53,6 +54,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group Model Mapping",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -137,6 +139,7 @@
           "Rule Groups Service"
         ],
         "summary": "List Rule Groups",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -177,6 +180,7 @@
           "Rule Groups Service"
         ],
         "summary": "Create Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -262,6 +266,7 @@
           "Rule Groups Service"
         ],
         "summary": "Bulk Delete Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -318,6 +323,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -369,6 +375,7 @@
           "Rule Groups Service"
         ],
         "summary": "Update Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -465,6 +472,7 @@
           "Rule Groups Service"
         ],
         "summary": "Delete Rule Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -645,17 +653,6 @@
           },
           "standard": {
             "$ref": "#/components/schemas/FormatStandard"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
           }
         }
       },
@@ -964,13 +961,13 @@
       "RuleMatcher": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RuleMatcherApplicationName"
-          },
-          {
             "$ref": "#/components/schemas/RuleMatcherSubsystemName"
           },
           {
             "$ref": "#/components/schemas/RuleMatcherSeverity"
+          },
+          {
+            "$ref": "#/components/schemas/RuleMatcherApplicationName"
           }
         ]
       },
@@ -1010,13 +1007,25 @@
       "RuleParameters": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/RuleParametersExtractParameters"
+          },
+          {
             "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersBlockParameters"
+            "$ref": "#/components/schemas/RuleParametersAllowParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersBlockParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
@@ -1026,18 +1035,6 @@
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersExtractParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
           }
         ]
       },
@@ -1207,24 +1204,6 @@
           "VALUE_CRITICAL"
         ]
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -1274,6 +1253,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

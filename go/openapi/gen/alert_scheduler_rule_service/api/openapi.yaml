@@ -7,6 +7,7 @@ servers:
 paths:
   /alerts/suppression-rules/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_GetBulkAlertSchedulerRule
@@ -63,6 +64,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_CreateAlertSchedulerRule
@@ -94,6 +96,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_UpdateAlertSchedulerRule
@@ -126,6 +129,7 @@ paths:
       - Alert Scheduler Rule service
   /alerts/suppression-rules/v1/all/rules:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_CreateBulkAlertSchedulerRule
@@ -157,6 +161,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_UpdateBulkAlertSchedulerRule
@@ -189,6 +194,7 @@ paths:
       - Alert Scheduler Rule service
   /alerts/suppression-rules/v1/{alert_scheduler_rule_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_DeleteAlertSchedulerRule
@@ -223,6 +229,7 @@ paths:
       tags:
       - Alert Scheduler Rule service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertSchedulerRuleService_GetAlertSchedulerRule
@@ -285,11 +292,8 @@ components:
           whatExpression: whatExpression
         createdAt: createdAt
         schedule:
-          oneTime:
-            timeframe:
-              timezone: timezone
-              startTime: startTime
-              endTime: endTime
+          recurring:
+            alwaysActive: "{}"
           scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
         name: name
         description: description
@@ -392,11 +396,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              alwaysActive: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -456,11 +457,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              alwaysActive: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -503,11 +501,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                alwaysActive: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -535,11 +530,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                alwaysActive: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -577,13 +569,6 @@ components:
       - DURATION_FREQUENCY_HOUR
       - DURATION_FREQUENCY_DAY
       type: string
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterByAlertSchedulerRuleIdsAlertSchedulerIds:
       properties:
         alertSchedulerIds:
@@ -665,11 +650,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              alwaysActive: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -720,11 +702,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                alwaysActive: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -759,11 +738,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                alwaysActive: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -825,11 +801,6 @@ components:
           type: array
       type: object
     OneTime:
-      example:
-        timeframe:
-          timezone: timezone
-          startTime: startTime
-          endTime: endTime
       properties:
         timeframe:
           $ref: "#/components/schemas/Timeframe"
@@ -844,6 +815,8 @@ components:
       - $ref: "#/components/schemas/RecurringDynamicWeekly"
       - $ref: "#/components/schemas/RecurringDynamicMonthly"
     RecurringAlwaysActive:
+      example:
+        alwaysActive: "{}"
       properties:
         alwaysActive:
           type: object
@@ -901,16 +874,9 @@ components:
       type: object
     Schedule:
       oneOf:
-      - $ref: "#/components/schemas/ScheduleOneTime"
       - $ref: "#/components/schemas/ScheduleRecurring"
+      - $ref: "#/components/schemas/ScheduleOneTime"
     ScheduleOneTime:
-      example:
-        oneTime:
-          timeframe:
-            timezone: timezone
-            startTime: startTime
-            endTime: endTime
-        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
       properties:
         oneTime:
           $ref: "#/components/schemas/OneTime"
@@ -926,6 +892,10 @@ components:
       - SCHEDULE_OPERATION_ACTIVATE
       type: string
     ScheduleRecurring:
+      example:
+        recurring:
+          alwaysActive: "{}"
+        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
       properties:
         recurring:
           $ref: "#/components/schemas/Recurring"
@@ -950,10 +920,6 @@ components:
       - duration
       type: object
     TimeframeEndTime:
-      example:
-        timezone: timezone
-        startTime: startTime
-        endTime: endTime
       properties:
         endTime:
           type: string
@@ -992,11 +958,8 @@ components:
             whatExpression: whatExpression
           createdAt: createdAt
           schedule:
-            oneTime:
-              timeframe:
-                timezone: timezone
-                startTime: startTime
-                endTime: endTime
+            recurring:
+              alwaysActive: "{}"
             scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
           name: name
           description: description
@@ -1039,11 +1002,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                alwaysActive: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1071,11 +1031,8 @@ components:
               whatExpression: whatExpression
             createdAt: createdAt
             schedule:
-              oneTime:
-                timeframe:
-                  timezone: timezone
-                  startTime: startTime
-                  endTime: endTime
+              recurring:
+                alwaysActive: "{}"
               scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
             name: name
             description: description
@@ -1114,18 +1071,6 @@ components:
       oneOf:
       - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertMetaLabels"
       - $ref: "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -1213,3 +1158,9 @@ components:
       - createAlertSchedulerRuleRequests
       title: Create bulk alert scheduler rule request data structure
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey
