@@ -1,12 +1,5 @@
-name: Generate OpenAPI Clients
+name: Sync and Generate OpenAPI SDK
 
-# TODO: rename file to sync-latest-spec.yaml and workflow to
-# "Sync and Generate OpenAPI SDK" once this branch has been verified
-# end-to-end. Filename is kept the same as on master so the new
-# workflow_dispatch path is discoverable when triggering from this
-# branch (workflow_dispatch only fires from files that exist on the
-# default branch at the same path).
-#
 # Triggered by openapi-facade's notify-spec-consumers.yml workflow
 # (event_type: facade-spec-updated) whenever may26/openapi.yaml changes
 # on master, or manually via workflow_dispatch. Fetches the spec from
