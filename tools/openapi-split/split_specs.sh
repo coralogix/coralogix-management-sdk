@@ -24,15 +24,16 @@ fi
 echo "Starting batch processing for files in '$SPEC_DIR/'..."
 echo "--------------------------------------------------------"
 
-for file in "$SPEC_DIR"/*; do
-    if [ -f "$file" ]; then
-        echo "--> Found file: $file"
-        npx @redocly/cli@latest bundle "$file" --output "$file" --remove-unused-components &
-    fi
-done
+# Use the globally-installed `redocly` binary (assumed on PATH; CI does
+# `npm install -g @redocly/cli@latest`) instead of `npx @redocly/cli@latest`.
+# Bundling files in parallel via `npx` corrupts its shared npm cache and
+# OOMs the runner with 46+ concurrent processes. Limit to 4 concurrent
+# bundles via `xargs -P 4`.
+find "$SPEC_DIR" -maxdepth 1 -type f -print0 \
+    | xargs -0 -n 1 -P 4 -I {} \
+        redocly bundle {} --output {} --remove-unused-components
 
 echo "--------------------------------------------------------"
-wait $(jobs -p)
 echo "Batch processing complete."
 
 # Remove existing specs directory if it exists

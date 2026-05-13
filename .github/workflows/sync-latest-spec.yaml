@@ -1,0 +1,135 @@
+name: Sync and Generate OpenAPI SDK
+
+# Triggered by openapi-facade's notify-spec-consumers.yml workflow
+# (event_type: facade-spec-updated) whenever may26/openapi.yaml changes
+# on master, or manually via workflow_dispatch. Fetches the spec from
+# openapi-facade at the dispatched commit, runs the split tool +
+# Go OpenAPI generator, and opens a PR with the regenerated clients.
+
+on:
+  repository_dispatch:
+    types: [facade-spec-updated]
+
+  workflow_dispatch:
+    inputs:
+      facade_ref:
+        description: 'openapi-facade ref (commit SHA or branch). Leave empty to use master HEAD.'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  FACADE_REPO: coralogix/openapi-facade
+  FACADE_SPEC_PATH: may26/openapi.yaml
+
+jobs:
+  sync:
+    name: Sync spec & generate SDK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve openapi-facade ref
+        id: facade
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          DISPATCH_SHA="${{ github.event.client_payload.commit_sha }}"
+          INPUT_REF="${{ github.event.inputs.facade_ref }}"
+          if [ -n "$DISPATCH_SHA" ]; then
+            REF="$DISPATCH_SHA"
+          elif [ -n "$INPUT_REF" ]; then
+            REF="$INPUT_REF"
+          else
+            REF=$(gh api "repos/${FACADE_REPO}/commits/master" --jq .sha)
+          fi
+          if [ -z "$REF" ]; then
+            echo "::error::Could not resolve openapi-facade ref"
+            exit 1
+          fi
+          SHA=$(gh api "repos/${FACADE_REPO}/commits/${REF}" --jq .sha)
+          echo "Using openapi-facade SHA: $SHA"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${SHA:0:7}" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch openapi.yaml from openapi-facade
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          # Raw media type so files >1MB don't come back base64-empty.
+          gh api -H "Accept: application/vnd.github.raw" \
+            "repos/${FACADE_REPO}/contents/${FACADE_SPEC_PATH}?ref=${{ steps.facade.outputs.sha }}" \
+            > openapi.yaml
+          if [ ! -s openapi.yaml ]; then
+            echo "::error::Fetched openapi.yaml is empty"
+            exit 1
+          fi
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Node.js (for redocly CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Redocly + OpenAPI Generator CLIs
+        run: |
+          npm install -g @redocly/cli@latest
+          npm install -g @openapitools/openapi-generator-cli
+          openapi-generator-cli version
+
+      - name: Run OpenAPI split tool
+        run: |
+          rm -Rf specs
+          chmod +x ./tools/openapi-split/split_specs.sh
+          ./tools/openapi-split/split_specs.sh
+
+      - name: Generate Go OpenAPI client
+        run: |
+          chmod +x ./go/scripts/generate_openapi.sh
+          ./go/scripts/generate_openapi.sh
+
+      - name: Open Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          # GH_TOKEN (not the default GITHUB_TOKEN) so CI workflows
+          # trigger on the auto-opened PR. GITHUB_TOKEN-opened PRs are
+          # blocked by GitHub's anti-loop protection.
+          token: ${{ secrets.GH_TOKEN }}
+          base: master
+          branch: auto/facade-sync-${{ steps.facade.outputs.short_sha }}
+          delete-branch: true
+          add-paths: |
+            openapi.yaml
+            specs/**
+            go/openapi/gen/**
+          commit-message: "chore: sync OpenAPI SDK from openapi-facade ${{ steps.facade.outputs.short_sha }}"
+          title: "Sync OpenAPI SDK from openapi-facade ${{ steps.facade.outputs.short_sha }}"
+          body: |
+            Automated sync of OpenAPI clients from `${{ env.FACADE_REPO }}` `${{ env.FACADE_SPEC_PATH }}`.
+
+            Jira: [CX-42158](https://coralogix.atlassian.net/browse/CX-42158) (umbrella ticket for automated OpenAPI SDK syncs)
+
+            Source commit: [`${{ steps.facade.outputs.short_sha }}`](https://github.com/${{ env.FACADE_REPO }}/commit/${{ steps.facade.outputs.sha }})
+
+            Regenerated:
+            - `openapi.yaml`
+            - `specs/**` (via `tools/openapi-split`)
+            - `go/openapi/gen/**` (via `go/scripts/generate_openapi.sh`)
+          labels: |
+            sync
+            facade-sync
