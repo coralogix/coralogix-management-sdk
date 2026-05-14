@@ -23,7 +23,7 @@ var _ MappedNullable = &DimensionPillar{}
 
 // DimensionPillar struct for DimensionPillar
 type DimensionPillar struct {
-	Pillar Pillar `json:"pillar"`
+	Pillar V2Pillar `json:"pillar"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +33,7 @@ type _DimensionPillar DimensionPillar
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDimensionPillar(pillar Pillar) *DimensionPillar {
+func NewDimensionPillar(pillar V2Pillar) *DimensionPillar {
 	this := DimensionPillar{}
 	this.Pillar = pillar
 	return &this
@@ -48,9 +48,9 @@ func NewDimensionPillarWithDefaults() *DimensionPillar {
 }
 
 // GetPillar returns the Pillar field value
-func (o *DimensionPillar) GetPillar() Pillar {
+func (o *DimensionPillar) GetPillar() V2Pillar {
 	if o == nil {
-		var ret Pillar
+		var ret V2Pillar
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *DimensionPillar) GetPillar() Pillar {
 
 // GetPillarOk returns a tuple with the Pillar field value
 // and a boolean to check if the value has been set.
-func (o *DimensionPillar) GetPillarOk() (*Pillar, bool) {
+func (o *DimensionPillar) GetPillarOk() (*V2Pillar, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *DimensionPillar) GetPillarOk() (*Pillar, bool) {
 }
 
 // SetPillar sets field value
-func (o *DimensionPillar) SetPillar(v Pillar) {
+func (o *DimensionPillar) SetPillar(v V2Pillar) {
 	o.Pillar = v
 }
 

@@ -11,6 +11,7 @@
           "Users Management Service"
         ],
         "summary": "Update Users",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -89,6 +90,7 @@
           "Users Management Service"
         ],
         "summary": "Create Users",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -173,6 +175,7 @@
           "Users Management Service"
         ],
         "summary": "Activate/Revoke Users",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -258,6 +261,7 @@
           "Users Management Service"
         ],
         "summary": "Get User",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -330,6 +334,7 @@
           "Users Management Service"
         ],
         "summary": "Search Users",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -502,17 +507,6 @@
         "description": "Empty response indicating successful processing of all user creation and invitation requests. Ensure failures are returned via gRPC status codes.",
         "type": "object"
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -669,7 +663,7 @@
         "type": "object",
         "properties": {
           "expireAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
             "type": "string",
             "format": "date-time"
@@ -757,24 +751,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -822,6 +798,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

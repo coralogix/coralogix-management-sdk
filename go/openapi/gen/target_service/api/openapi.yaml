@@ -7,6 +7,7 @@ servers:
 paths:
   /logs/data-setup/v2:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: S3TargetService_GetTarget
@@ -33,6 +34,7 @@ paths:
       tags:
       - Target Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: S3TargetService_SetTarget
@@ -91,13 +93,6 @@ components:
       required:
       - bucket
       title: Archive Spec
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -193,6 +188,8 @@ components:
         target:
           s3:
             bucket: bucket
+            roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
+            externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
             region: us-west-2
           archiveSpec:
             enableTags: true
@@ -216,6 +213,8 @@ components:
         target:
           s3:
             bucket: bucket
+            roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
+            externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
             region: us-west-2
           archiveSpec:
             enableTags: true
@@ -236,6 +235,8 @@ components:
       description: This data structure represents an S3 target.
       example:
         bucket: bucket
+        roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
+        externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
         region: us-west-2
       externalDocs:
         description: Find out more about archives
@@ -244,8 +245,14 @@ components:
         bucket:
           example: bucket
           type: string
+        externalId:
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          type: string
         region:
           example: us-west-2
+          type: string
+        roleArn:
+          example: arn:aws:iam::123456789012:role/CoralogixArchive
           type: string
       required:
       - bucket
@@ -276,6 +283,8 @@ components:
       example:
         s3:
           bucket: bucket
+          roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
+          externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
           region: us-west-2
         archiveSpec:
           enableTags: true
@@ -294,18 +303,6 @@ components:
       - s3
       - targetSpecarchiveSpec
       title: Target
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -336,3 +333,9 @@ components:
       - targetSpec
       title: Set Target Response
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

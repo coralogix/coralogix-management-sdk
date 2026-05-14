@@ -1,0 +1,311 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/notifications/notification-center/v1/connector-schemas": {
+      "get": {
+        "tags": [
+          "Connector Schema service"
+        ],
+        "summary": "Get Connector Schema",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ConnectorSchemaService_GetConnectorSchema",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "$ref": "#/components/schemas/notification_center.ConnectorType"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConnectorSchemaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConnectorConfigSchema": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectorConfigSchemaField"
+            }
+          }
+        }
+      },
+      "ConnectorConfigSchemaField": {
+        "type": "object",
+        "properties": {
+          "allowOverrides": {
+            "type": "boolean"
+          },
+          "allowedValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fieldName": {
+            "type": "string"
+          },
+          "fieldType": {
+            "$ref": "#/components/schemas/FieldType"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ConnectorSchema": {
+        "type": "object",
+        "properties": {
+          "connectorConfigSchema": {
+            "$ref": "#/components/schemas/ConnectorConfigSchema"
+          },
+          "messageConfigSchemas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageConfigSchema"
+            }
+          },
+          "supportedPayloadTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "$ref": "#/components/schemas/notification_center.ConnectorType"
+          }
+        }
+      },
+      "FieldType": {
+        "type": "string",
+        "enum": [
+          "FIELD_TYPE_UNSPECIFIED",
+          "STRING",
+          "NON_EMPTY_STRING",
+          "KEY_VALUE_PAIRS",
+          "JSON_OBJECT",
+          "DATE",
+          "URL",
+          "ARRAY_OF_STRINGS",
+          "BOOLEAN"
+        ]
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+          },
+          {
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+          }
+        ]
+      },
+      "FilterPathAndValuesFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values",
+          "filters"
+        ]
+      },
+      "FilterPathAndValuesMultipleValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "example": "test",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "values",
+          "multipleValues"
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetConnectorSchemaResponse": {
+        "type": "object",
+        "properties": {
+          "connectorSchema": {
+            "$ref": "#/components/schemas/ConnectorSchema"
+          }
+        }
+      },
+      "MessageConfigSchema": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageConfigSchemaField"
+            }
+          },
+          "payloadType": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageConfigSchemaField": {
+        "type": "object",
+        "properties": {
+          "allowedValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "disableOverride": {
+            "type": "boolean"
+          },
+          "fieldName": {
+            "type": "string"
+          },
+          "fieldType": {
+            "$ref": "#/components/schemas/FieldType"
+          },
+          "renderingMode": {
+            "$ref": "#/components/schemas/TemplateRenderingMode"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TemplateRenderingMode": {
+        "type": "string",
+        "enum": [
+          "TEMPLATE_RENDERING_MODE_UNSPECIFIED",
+          "RELAXED",
+          "STRICT"
+        ]
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "notification_center.ConnectorType": {
+        "type": "string",
+        "enum": [
+          "CONNECTOR_TYPE_UNSPECIFIED",
+          "SLACK",
+          "GENERIC_HTTPS",
+          "PAGERDUTY",
+          "IBM_EVENT_NOTIFICATIONS",
+          "SERVICE_NOW",
+          "EMAIL"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
+    }
+  }
+}

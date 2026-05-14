@@ -37,6 +37,9 @@ DashboardCatalogServiceGetDashboardCatalog Get dashboard catalog
 
 Get a list of all dashboards accessible.
 
+Requires the following permissions:
+- `team-dashboards:Read`
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardCatalogServiceGetDashboardCatalogRequest
 */
@@ -62,7 +65,7 @@ func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogE
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/catalog"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/catalog/list"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -140,6 +143,8 @@ func (r ApiDashboardsServiceAssignDashboardFolderRequest) Execute() (map[string]
 
 /*
 DashboardsServiceAssignDashboardFolder Assign a dashboard to a folder
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
@@ -249,6 +254,8 @@ func (r ApiDashboardsServiceCreateDashboardRequest) Execute() (*CreateDashboardR
 /*
 DashboardsServiceCreateDashboard Create a new dashboard
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceCreateDashboardRequest
 */
@@ -355,6 +362,8 @@ func (r ApiDashboardsServiceDeleteDashboardRequest) Execute() (map[string]interf
 /*
 DashboardsServiceDeleteDashboard Delete a dashboard
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
  @return ApiDashboardsServiceDeleteDashboardRequest
@@ -459,6 +468,8 @@ func (r ApiDashboardsServiceGetDashboardRequest) Execute() (*GetDashboardRespons
 /*
 DashboardsServiceGetDashboard Get a dashboard
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
  @return ApiDashboardsServiceGetDashboardRequest
@@ -560,6 +571,8 @@ func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardB
 /*
 DashboardsServiceGetDashboardBySlug Get a dashboard by URL slug
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param slug
  @return ApiDashboardsServiceGetDashboardBySlugRequest
@@ -587,7 +600,7 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/dashboards/dashboards/v1/slugs/{slug}"
+	localVarPath := localBasePath + "/dashboards/dashboards/v1/slugs/lookup/{slug}"
 	localVarPath = strings.Replace(localVarPath, "{"+"slug"+"}", url.PathEscape(parameterValueToString(r.slug, "slug")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -666,6 +679,8 @@ func (r ApiDashboardsServicePinDashboardRequest) Execute() (map[string]interface
 
 /*
 DashboardsServicePinDashboard Add dashboard to favorites
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
@@ -776,6 +791,8 @@ func (r ApiDashboardsServiceReplaceDashboardRequest) Execute() (map[string]inter
 /*
 DashboardsServiceReplaceDashboard Replace a dashboard
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceReplaceDashboardRequest
 */
@@ -881,6 +898,8 @@ func (r ApiDashboardsServiceReplaceDefaultDashboardRequest) Execute() (map[strin
 
 /*
 DashboardsServiceReplaceDefaultDashboard Replace the default dashboard
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId
@@ -990,6 +1009,8 @@ func (r ApiDashboardsServiceUnpinDashboardRequest) Execute() (map[string]interfa
 
 /*
 DashboardsServiceUnpinDashboard Remove dashboard from favorites
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId

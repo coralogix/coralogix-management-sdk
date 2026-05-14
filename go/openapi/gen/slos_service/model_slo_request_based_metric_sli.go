@@ -24,6 +24,7 @@ var _ MappedNullable = &SloRequestBasedMetricSli{}
 
 // SloRequestBasedMetricSli Definition of an SLO
 type SloRequestBasedMetricSli struct {
+	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	Creator *string `json:"creator,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -31,6 +32,7 @@ type SloRequestBasedMetricSli struct {
 	Id *string `json:"id,omitempty"`
 	Labels *map[string]string `json:"labels,omitempty"`
 	Name *string `json:"name,omitempty"`
+	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
 	ProductType *SloProductType `json:"productType,omitempty"`
 	RequestBasedMetricSli RequestBasedMetricSli `json:"requestBasedMetricSli"`
 	Revision *V1Revision `json:"revision,omitempty"`
@@ -61,6 +63,38 @@ func NewSloRequestBasedMetricSli(requestBasedMetricSli RequestBasedMetricSli) *S
 func NewSloRequestBasedMetricSliWithDefaults() *SloRequestBasedMetricSli {
 	this := SloRequestBasedMetricSli{}
 	return &this
+}
+
+// GetApmSliMetadata returns the ApmSliMetadata field value if set, zero value otherwise.
+func (o *SloRequestBasedMetricSli) GetApmSliMetadata() ApmSli {
+	if o == nil || IsNil(o.ApmSliMetadata) {
+		var ret ApmSli
+		return ret
+	}
+	return *o.ApmSliMetadata
+}
+
+// GetApmSliMetadataOk returns a tuple with the ApmSliMetadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloRequestBasedMetricSli) GetApmSliMetadataOk() (*ApmSli, bool) {
+	if o == nil || IsNil(o.ApmSliMetadata) {
+		return nil, false
+	}
+	return o.ApmSliMetadata, true
+}
+
+// HasApmSliMetadata returns a boolean if a field has been set.
+func (o *SloRequestBasedMetricSli) HasApmSliMetadata() bool {
+	if o != nil && !IsNil(o.ApmSliMetadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetApmSliMetadata gets a reference to the given ApmSli and assigns it to the ApmSliMetadata field.
+func (o *SloRequestBasedMetricSli) SetApmSliMetadata(v ApmSli) {
+	o.ApmSliMetadata = &v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -285,6 +319,38 @@ func (o *SloRequestBasedMetricSli) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *SloRequestBasedMetricSli) SetName(v string) {
 	o.Name = &v
+}
+
+// GetOwnershipTags returns the OwnershipTags field value if set, zero value otherwise.
+func (o *SloRequestBasedMetricSli) GetOwnershipTags() SloOwnershipTags {
+	if o == nil || IsNil(o.OwnershipTags) {
+		var ret SloOwnershipTags
+		return ret
+	}
+	return *o.OwnershipTags
+}
+
+// GetOwnershipTagsOk returns a tuple with the OwnershipTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloRequestBasedMetricSli) GetOwnershipTagsOk() (*SloOwnershipTags, bool) {
+	if o == nil || IsNil(o.OwnershipTags) {
+		return nil, false
+	}
+	return o.OwnershipTags, true
+}
+
+// HasOwnershipTags returns a boolean if a field has been set.
+func (o *SloRequestBasedMetricSli) HasOwnershipTags() bool {
+	if o != nil && !IsNil(o.OwnershipTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetOwnershipTags gets a reference to the given SloOwnershipTags and assigns it to the OwnershipTags field.
+func (o *SloRequestBasedMetricSli) SetOwnershipTags(v SloOwnershipTags) {
+	o.OwnershipTags = &v
 }
 
 // GetProductType returns the ProductType field value if set, zero value otherwise.
@@ -548,6 +614,9 @@ func (o SloRequestBasedMetricSli) MarshalJSON() ([]byte, error) {
 
 func (o SloRequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ApmSliMetadata) {
+		toSerialize["apmSliMetadata"] = o.ApmSliMetadata
+	}
 	if !IsNil(o.CreateTime) {
 		toSerialize["createTime"] = o.CreateTime
 	}
@@ -568,6 +637,9 @@ func (o SloRequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.OwnershipTags) {
+		toSerialize["ownershipTags"] = o.OwnershipTags
 	}
 	if !IsNil(o.ProductType) {
 		toSerialize["productType"] = o.ProductType
@@ -635,6 +707,7 @@ func (o *SloRequestBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "apmSliMetadata")
 		delete(additionalProperties, "createTime")
 		delete(additionalProperties, "creator")
 		delete(additionalProperties, "description")
@@ -642,6 +715,7 @@ func (o *SloRequestBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "ownershipTags")
 		delete(additionalProperties, "productType")
 		delete(additionalProperties, "requestBasedMetricSli")
 		delete(additionalProperties, "revision")

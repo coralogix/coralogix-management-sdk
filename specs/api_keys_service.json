@@ -52,6 +52,7 @@
           "API Keys Service"
         ],
         "summary": "Create API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -120,12 +121,56 @@
         }
       }
     },
+    "/aaa/api-keys/v3/list": {
+      "get": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Get API Keys",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_GetApiKeys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
     "/aaa/api-keys/v3/{key_id}": {
       "get": {
         "tags": [
           "API Keys Service"
         ],
         "summary": "Get API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -178,6 +223,7 @@
           "API Keys Service"
         ],
         "summary": "Update API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -262,6 +308,7 @@
           "API Keys Service"
         ],
         "summary": "Delete API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -315,6 +362,7 @@
           "API Keys Service"
         ],
         "summary": "Get \"Send Data\" API Keys",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -465,17 +513,6 @@
       "DeleteApiKeyResponse": {
         "type": "object"
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -563,6 +600,23 @@
         "properties": {
           "keyInfo": {
             "$ref": "#/components/schemas/KeyInfo"
+          }
+        }
+      },
+      "GetApiKeysResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Get Api Keys Response",
+        "description": "This data structure is the response obtained when retrieving all API keys.",
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyInfo"
+            }
           }
         }
       },
@@ -810,24 +864,6 @@
       "UpdateApiKeyResponse": {
         "type": "object"
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -876,6 +912,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -11,6 +11,7 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichments",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,6 +34,7 @@
           "Enrichments Service"
         ],
         "summary": "Atomic Overwrite for CustomEnrichments only.",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -81,6 +83,7 @@
           "Enrichments Service"
         ],
         "summary": "Add Enrichments",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -125,6 +128,7 @@
           "Enrichments Service"
         ],
         "summary": "Delete Enrichments",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -168,6 +172,7 @@
           "Enrichments Service"
         ],
         "summary": "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -209,6 +214,7 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichment Limit",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -233,6 +239,7 @@
           "Enrichments Service"
         ],
         "summary": "Get Company Enrichment Settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -496,17 +503,6 @@
           "suspiciousIp"
         ]
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -678,24 +674,6 @@
       "SuspiciousIpType": {
         "type": "object"
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -709,6 +687,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

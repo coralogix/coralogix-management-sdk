@@ -11,6 +11,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Get Custom Enrichments",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,6 +34,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Update Custom Enrichment",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -90,6 +92,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Create Custom Enrichments",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -143,6 +146,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Search Custom Enrichment Data",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -187,6 +191,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Get Custom Enrichment",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -222,6 +227,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Delete Custom Enrichments",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -306,10 +312,10 @@
       "CustomEnrichmentData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
+            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
           },
           {
-            "$ref": "#/components/schemas/CustomEnrichmentDataBinary"
+            "$ref": "#/components/schemas/CustomEnrichmentDataTextual"
           }
         ]
       },
@@ -352,17 +358,6 @@
           },
           "message": {
             "example": "Custom enrichment deleted successfully",
-            "type": "string"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
             "type": "string"
           }
         }
@@ -630,24 +625,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -661,6 +638,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }
