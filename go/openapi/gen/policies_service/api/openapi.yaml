@@ -7,6 +7,7 @@ servers:
 paths:
   /dataplans/log-policies/v1:
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_AtomicOverwriteLogPolicies
@@ -39,6 +40,7 @@ paths:
       - Policies Service
   /dataplans/policies/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_GetCompanyPolicies
@@ -81,6 +83,7 @@ paths:
       tags:
       - Policies Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_CreatePolicy
@@ -112,6 +115,7 @@ paths:
       tags:
       - Policies Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_UpdatePolicy
@@ -144,6 +148,7 @@ paths:
       - Policies Service
   /dataplans/policies/v1/all/reorder:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_ReorderPolicies
@@ -176,6 +181,7 @@ paths:
       - Policies Service
   /dataplans/policies/v1/all/test-policies:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_BulkTestLogPolicies
@@ -208,6 +214,7 @@ paths:
       - Policies Service
   /dataplans/policies/v1/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_DeletePolicy
@@ -243,6 +250,7 @@ paths:
       tags:
       - Policies Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_GetPolicy
@@ -279,6 +287,7 @@ paths:
       - Policies Service
   /dataplans/policiy-settings/v1:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_ReplacePolicySettings
@@ -311,6 +320,7 @@ paths:
       - Policies Service
   /dataplans/policy-settings/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_GetPolicySettings
@@ -338,6 +348,7 @@ paths:
       - Policies Service
   /dataplans/span-policies/v1:
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PoliciesService_AtomicOverwriteSpanPolicies
@@ -396,20 +407,12 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
+            - dataset: dataset1
+            - dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
-            createdAt: 2021-01-01T00:00:00Z
+            createdAt: 2021-01-01T00:00:00.000Z
             companyId: 1234
             deleted: false
             name: My Policy
@@ -427,7 +430,7 @@ components:
                 currentUsage: 0.8008281904610115
             id: policy_id
             order: 1
-            updatedAt: 2021-01-01T00:00:00Z
+            updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -443,20 +446,12 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
+            - dataset: dataset1
+            - dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
-            createdAt: 2021-01-01T00:00:00Z
+            createdAt: 2021-01-01T00:00:00.000Z
             companyId: 1234
             deleted: false
             name: My Policy
@@ -474,7 +469,7 @@ components:
                 currentUsage: 0.8008281904610115
             id: policy_id
             order: 1
-            updatedAt: 2021-01-01T00:00:00Z
+            updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -504,20 +499,12 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
+            - dataset: dataset1
+            - dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
-            createdAt: 2021-01-01T00:00:00Z
+            createdAt: 2021-01-01T00:00:00.000Z
             companyId: 1234
             deleted: false
             name: My Policy
@@ -535,7 +522,7 @@ components:
                 currentUsage: 0.8008281904610115
             id: policy_id
             order: 1
-            updatedAt: 2021-01-01T00:00:00Z
+            updatedAt: 2021-01-01T00:00:00.000Z
         - policy:
             subsystemRule:
               ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
@@ -551,20 +538,12 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
+            - dataset: dataset1
+            - dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
-            createdAt: 2021-01-01T00:00:00Z
+            createdAt: 2021-01-01T00:00:00.000Z
             companyId: 1234
             deleted: false
             name: My Policy
@@ -582,7 +561,7 @@ components:
                 currentUsage: 0.8008281904610115
             id: policy_id
             order: 1
-            updatedAt: 2021-01-01T00:00:00Z
+            updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -617,20 +596,12 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
+            - dataset: dataset1
+            - dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
-            createdAt: 2021-01-01T00:00:00Z
+            createdAt: 2021-01-01T00:00:00.000Z
             companyId: 1234
             deleted: false
             name: My Policy
@@ -648,7 +619,7 @@ components:
                 currentUsage: 0.8008281904610115
             id: policy_id
             order: 1
-            updatedAt: 2021-01-01T00:00:00Z
+            updatedAt: 2021-01-01T00:00:00.000Z
         - metaFieldsValues:
             subsystemNameValues: subsystem_name
             applicationNameValues: application_name
@@ -669,20 +640,12 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
-            - archiveRetention:
-                id: id
-              name: My Target
-              priority: null
-              dataset: dataset1
+            - dataset: dataset1
+            - dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
-            createdAt: 2021-01-01T00:00:00Z
+            createdAt: 2021-01-01T00:00:00.000Z
             companyId: 1234
             deleted: false
             name: My Policy
@@ -700,7 +663,7 @@ components:
                 currentUsage: 0.8008281904610115
             id: policy_id
             order: 1
-            updatedAt: 2021-01-01T00:00:00Z
+            updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -856,20 +819,12 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
-          createdAt: 2021-01-01T00:00:00Z
+          createdAt: 2021-01-01T00:00:00.000Z
           companyId: 1234
           deleted: false
           name: My Policy
@@ -887,7 +842,7 @@ components:
               currentUsage: 0.8008281904610115
           id: policy_id
           order: 1
-          updatedAt: 2021-01-01T00:00:00Z
+          updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -927,13 +882,6 @@ components:
       required:
       - id
       title: Delete Policy Response
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -1007,20 +955,12 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
-          createdAt: 2021-01-01T00:00:00Z
+          createdAt: 2021-01-01T00:00:00.000Z
           companyId: 1234
           deleted: false
           name: My Policy
@@ -1038,7 +978,7 @@ components:
               currentUsage: 0.8008281904610115
           id: policy_id
           order: 1
-          updatedAt: 2021-01-01T00:00:00Z
+          updatedAt: 2021-01-01T00:00:00.000Z
         - subsystemRule:
             ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
             name: name
@@ -1053,20 +993,12 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
-          createdAt: 2021-01-01T00:00:00Z
+          createdAt: 2021-01-01T00:00:00.000Z
           companyId: 1234
           deleted: false
           name: My Policy
@@ -1084,7 +1016,7 @@ components:
               currentUsage: 0.8008281904610115
           id: policy_id
           order: 1
-          updatedAt: 2021-01-01T00:00:00Z
+          updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1116,20 +1048,12 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
-          createdAt: 2021-01-01T00:00:00Z
+          createdAt: 2021-01-01T00:00:00.000Z
           companyId: 1234
           deleted: false
           name: My Policy
@@ -1147,7 +1071,7 @@ components:
               currentUsage: 0.8008281904610115
           id: policy_id
           order: 1
-          updatedAt: 2021-01-01T00:00:00Z
+          updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1283,20 +1207,12 @@ components:
           name: name
         priority: PRIORITY_TYPE_UNSPECIFIED
         targets:
-        - archiveRetention:
-            id: id
-          name: My Target
-          priority: null
-          dataset: dataset1
-        - archiveRetention:
-            id: id
-          name: My Target
-          priority: null
-          dataset: dataset1
+        - dataset: dataset1
+        - dataset: dataset1
         enabled: true
         archiveRetention:
           id: id
-        createdAt: 2021-01-01T00:00:00Z
+        createdAt: 2021-01-01T00:00:00.000Z
         companyId: 1234
         deleted: false
         name: My Policy
@@ -1314,7 +1230,7 @@ components:
             currentUsage: 0.8008281904610115
         id: policy_id
         order: 1
-        updatedAt: 2021-01-01T00:00:00Z
+        updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1328,7 +1244,7 @@ components:
           format: int32
           type: integer
         createdAt:
-          example: 2021-01-01T00:00:00Z
+          example: 2021-01-01T00:00:00.000Z
           type: string
         deleted:
           example: false
@@ -1364,7 +1280,7 @@ components:
             $ref: "#/components/schemas/v1.Target"
           type: array
         updatedAt:
-          example: 2021-01-01T00:00:00Z
+          example: 2021-01-01T00:00:00.000Z
           type: string
       required:
       - companyId
@@ -1414,7 +1330,7 @@ components:
           format: int32
           type: integer
         createdAt:
-          example: 2021-01-01T00:00:00Z
+          example: 2021-01-01T00:00:00.000Z
           type: string
         deleted:
           example: false
@@ -1450,7 +1366,7 @@ components:
             $ref: "#/components/schemas/v1.Target"
           type: array
         updatedAt:
-          example: 2021-01-01T00:00:00Z
+          example: 2021-01-01T00:00:00.000Z
           type: string
       required:
       - companyId
@@ -1624,20 +1540,12 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
-          createdAt: 2021-01-01T00:00:00Z
+          createdAt: 2021-01-01T00:00:00.000Z
           companyId: 1234
           deleted: false
           name: My Policy
@@ -1655,7 +1563,7 @@ components:
               currentUsage: 0.8008281904610115
           id: policy_id
           order: 1
-          updatedAt: 2021-01-01T00:00:00Z
+          updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1769,20 +1677,12 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
-          - archiveRetention:
-              id: id
-            name: My Target
-            priority: null
-            dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
-          createdAt: 2021-01-01T00:00:00Z
+          createdAt: 2021-01-01T00:00:00.000Z
           companyId: 1234
           deleted: false
           name: My Policy
@@ -1800,7 +1700,7 @@ components:
               currentUsage: 0.8008281904610115
           id: policy_id
           order: 1
-          updatedAt: 2021-01-01T00:00:00Z
+          updatedAt: 2021-01-01T00:00:00.000Z
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1822,18 +1722,6 @@ components:
           type: number
         priority:
           $ref: "#/components/schemas/quota.v1.Priority"
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -1879,25 +1767,14 @@ components:
         defines a named group of datasets with a priority level and optional archive
         retention configuration.
       example:
-        archiveRetention:
-          id: id
-        name: My Target
-        priority: null
         dataset: dataset1
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
-        archiveRetention:
-          $ref: "#/components/schemas/ArchiveRetention"
         dataset:
           example: dataset1
           type: string
-        name:
-          example: My Target
-          type: string
-        priority:
-          $ref: "#/components/schemas/quota.v1.Priority"
       title: Target
       type: object
     v3.FilterOperator:
@@ -1919,8 +1796,8 @@ components:
       type: object
     PoliciesService_UpdatePolicy_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
       - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
+      - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
       type: object
     PoliciesService_CreatePolicy_request:
       oneOf:
@@ -1975,3 +1852,9 @@ components:
       - policies
       title: Atomic Overwrite Span Policies Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

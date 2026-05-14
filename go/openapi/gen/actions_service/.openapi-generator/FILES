@@ -20,12 +20,10 @@ model_actions_service_create_action_request.go
 model_actions_service_order_actions_request.go
 model_actions_service_replace_action_request.go
 model_atomic_batch_execute_actions_response.go
-model_common_group.go
 model_create_action_request.go
 model_create_action_response.go
 model_delete_action_request.go
 model_events_v3_filter_matcher.go
-model_field_group.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go
@@ -35,6 +33,7 @@ model_list_actions_response.go
 model_multiple_values.go
 model_replace_action_request.go
 model_replace_action_response.go
+model_url_field.go
 model_v2_action.go
 model_v2_source_type.go
 model_v3_filter_operator.go

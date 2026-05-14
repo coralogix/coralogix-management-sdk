@@ -34,6 +34,7 @@ paths:
       tags:
       - API Keys Admin Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_CreateApiKey
@@ -64,8 +65,37 @@ paths:
       summary: Create API Key
       tags:
       - API Keys Service
+  /aaa/api-keys/v3/list:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_GetApiKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiKeysResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get API Keys
+      tags:
+      - API Keys Service
   /aaa/api-keys/v3/{key_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_DeleteApiKey
@@ -100,6 +130,7 @@ paths:
       tags:
       - API Keys Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_GetApiKey
@@ -135,6 +166,7 @@ paths:
       tags:
       - API Keys Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_UpdateApiKey
@@ -176,6 +208,7 @@ paths:
       - API Keys Service
   /aaa/send-data-keys/v3:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_GetSendDataApiKeys
@@ -322,13 +355,6 @@ components:
       type: object
     DeleteApiKeyResponse:
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -416,6 +442,69 @@ components:
         keyInfo:
           $ref: "#/components/schemas/KeyInfo"
       title: Get Api Key Response
+      type: object
+    GetApiKeysResponse:
+      description: This data structure is the response obtained when retrieving all
+        API keys.
+      example:
+        keys:
+        - owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          accessPolicy: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\"\
+            :{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\"\
+            :\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\"\
+            :\"grant\"}},\"rules\":[]}"
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+        - owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          accessPolicy: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\"\
+            :{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\"\
+            :\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\"\
+            :\"grant\"}},\"rules\":[]}"
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            - permissions:
+              - read_logs
+              - read_logs
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keys:
+          items:
+            $ref: "#/components/schemas/KeyInfo"
+          type: array
+      title: Get Api Keys Response
       type: object
     GetSendDataApiKeysResponse:
       description: This data structure is the response obtained when retrieving an
@@ -744,18 +833,6 @@ components:
       type: object
     UpdateApiKeyResponse:
       type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -847,3 +924,9 @@ components:
           $ref: "#/components/schemas/Presets"
       title: Update Api Key Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

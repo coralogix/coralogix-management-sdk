@@ -11,6 +11,7 @@
           "Actions Service"
         ],
         "summary": "List Actions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Actions Service"
         ],
         "summary": "Replace Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -106,6 +108,7 @@
           "Actions Service"
         ],
         "summary": "Create Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -122,6 +125,12 @@
                     "items": {
                       "type": "string"
                     }
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "dpxlFilter": {
+                    "type": "string"
                   },
                   "isPrivate": {
                     "type": "boolean"
@@ -140,6 +149,12 @@
                   },
                   "url": {
                     "type": "string"
+                  },
+                  "urlFields": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UrlField"
+                    }
                   }
                 }
               }
@@ -184,6 +199,7 @@
           "Actions Service"
         ],
         "summary": "Get Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -235,6 +251,7 @@
           "Actions Service"
         ],
         "summary": "Delete Action",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -288,6 +305,7 @@
           "Actions Service"
         ],
         "summary": "Atomic Batch Execute Actions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -348,6 +366,7 @@
           "Actions Service"
         ],
         "summary": "Order Actions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -474,13 +493,13 @@
       "ActionExecutionResponse": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
+          },
+          {
             "$ref": "#/components/schemas/ActionExecutionResponseReplace"
           },
           {
             "$ref": "#/components/schemas/ActionExecutionResponseDelete"
-          },
-          {
-            "$ref": "#/components/schemas/ActionExecutionResponseCreate"
           }
         ]
       },
@@ -557,6 +576,12 @@
               "type": "string"
             }
           },
+          "description": {
+            "type": "string"
+          },
+          "dpxlFilter": {
+            "type": "string"
+          },
           "isPrivate": {
             "type": "boolean"
           },
@@ -574,6 +599,12 @@
           },
           "url": {
             "type": "string"
+          },
+          "urlFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UrlField"
+            }
           }
         }
       },
@@ -607,17 +638,6 @@
         },
         "description": "This data structure represents the response to delete an Action.",
         "type": "object"
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -767,21 +787,18 @@
           }
         }
       },
-      "common.Group": {
+      "UrlField": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Declares a URL field that may be required for the Action to be invokable on a log.",
         "type": "object",
         "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
+          "name": {
+            "type": "string"
           },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
+          "required": {
+            "type": "boolean"
           }
         }
       },
@@ -808,6 +825,12 @@
           "createdBy": {
             "type": "string"
           },
+          "description": {
+            "type": "string"
+          },
+          "dpxlFilter": {
+            "type": "string"
+          },
           "id": {
             "type": "string"
           },
@@ -831,6 +854,12 @@
           },
           "url": {
             "type": "string"
+          },
+          "urlFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UrlField"
+            }
           }
         }
       },
@@ -848,6 +877,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -42,6 +42,8 @@ func (r ApiUsersMgmtServiceCreateUsersRequest) Execute() (map[string]interface{}
 /*
 UsersMgmtServiceCreateUsers Create Users
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param teamId
  @return ApiUsersMgmtServiceCreateUsersRequest
@@ -145,6 +147,8 @@ func (r ApiUsersMgmtServiceGetUserRequest) Execute() (*GetUserResponse, *http.Re
 
 /*
 UsersMgmtServiceGetUser Get User
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param teamId
@@ -274,6 +278,8 @@ func (r ApiUsersMgmtServiceSearchUsersRequest) Execute() (*SearchUsersResponse, 
 /*
 UsersMgmtServiceSearchUsers Search Users
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param teamId
  @return ApiUsersMgmtServiceSearchUsersRequest
@@ -393,6 +399,8 @@ func (r ApiUsersMgmtServiceUpdateUsersRequest) Execute() (*UpdateUsersResponse, 
 /*
 UsersMgmtServiceUpdateUsers Update Users
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param teamId
  @return ApiUsersMgmtServiceUpdateUsersRequest
@@ -501,6 +509,8 @@ func (r ApiUsersMgmtServiceUpdateUsersStatusesRequest) Execute() (*UpdateUsersSt
 
 /*
 UsersMgmtServiceUpdateUsersStatuses Activate/Revoke Users
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param teamId

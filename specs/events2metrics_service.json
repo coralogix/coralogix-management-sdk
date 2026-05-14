@@ -11,6 +11,7 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2Ms",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -33,6 +34,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Replace an E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -72,6 +74,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Create a new E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -113,6 +116,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Atomic Batch Execute E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -154,6 +158,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Get an E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -188,6 +193,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Delete an E2M",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -224,6 +230,7 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2M Labels Cardinality",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -374,6 +381,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Get E2M Limits",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -889,17 +897,6 @@
           "E2M_TYPE_SPANS2METRICS"
         ]
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -1228,24 +1225,6 @@
           "samples"
         ]
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -1397,6 +1376,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

@@ -23,11 +23,14 @@ var _ MappedNullable = &CreateActionRequest{}
 // CreateActionRequest This data structure represents the request to create an Action.
 type CreateActionRequest struct {
 	ApplicationNames []string `json:"applicationNames,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DpxlFilter *string `json:"dpxlFilter,omitempty"`
 	IsPrivate *bool `json:"isPrivate,omitempty"`
 	Name *string `json:"name,omitempty"`
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
 	Url *string `json:"url,omitempty"`
+	UrlFields []UrlField `json:"urlFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -80,6 +83,70 @@ func (o *CreateActionRequest) HasApplicationNames() bool {
 // SetApplicationNames gets a reference to the given []string and assigns it to the ApplicationNames field.
 func (o *CreateActionRequest) SetApplicationNames(v []string) {
 	o.ApplicationNames = v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *CreateActionRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateActionRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateActionRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *CreateActionRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetDpxlFilter returns the DpxlFilter field value if set, zero value otherwise.
+func (o *CreateActionRequest) GetDpxlFilter() string {
+	if o == nil || IsNil(o.DpxlFilter) {
+		var ret string
+		return ret
+	}
+	return *o.DpxlFilter
+}
+
+// GetDpxlFilterOk returns a tuple with the DpxlFilter field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateActionRequest) GetDpxlFilterOk() (*string, bool) {
+	if o == nil || IsNil(o.DpxlFilter) {
+		return nil, false
+	}
+	return o.DpxlFilter, true
+}
+
+// HasDpxlFilter returns a boolean if a field has been set.
+func (o *CreateActionRequest) HasDpxlFilter() bool {
+	if o != nil && !IsNil(o.DpxlFilter) {
+		return true
+	}
+
+	return false
+}
+
+// SetDpxlFilter gets a reference to the given string and assigns it to the DpxlFilter field.
+func (o *CreateActionRequest) SetDpxlFilter(v string) {
+	o.DpxlFilter = &v
 }
 
 // GetIsPrivate returns the IsPrivate field value if set, zero value otherwise.
@@ -242,6 +309,38 @@ func (o *CreateActionRequest) SetUrl(v string) {
 	o.Url = &v
 }
 
+// GetUrlFields returns the UrlFields field value if set, zero value otherwise.
+func (o *CreateActionRequest) GetUrlFields() []UrlField {
+	if o == nil || IsNil(o.UrlFields) {
+		var ret []UrlField
+		return ret
+	}
+	return o.UrlFields
+}
+
+// GetUrlFieldsOk returns a tuple with the UrlFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateActionRequest) GetUrlFieldsOk() ([]UrlField, bool) {
+	if o == nil || IsNil(o.UrlFields) {
+		return nil, false
+	}
+	return o.UrlFields, true
+}
+
+// HasUrlFields returns a boolean if a field has been set.
+func (o *CreateActionRequest) HasUrlFields() bool {
+	if o != nil && !IsNil(o.UrlFields) {
+		return true
+	}
+
+	return false
+}
+
+// SetUrlFields gets a reference to the given []UrlField and assigns it to the UrlFields field.
+func (o *CreateActionRequest) SetUrlFields(v []UrlField) {
+	o.UrlFields = v
+}
+
 func (o CreateActionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -254,6 +353,12 @@ func (o CreateActionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.ApplicationNames) {
 		toSerialize["applicationNames"] = o.ApplicationNames
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.DpxlFilter) {
+		toSerialize["dpxlFilter"] = o.DpxlFilter
 	}
 	if !IsNil(o.IsPrivate) {
 		toSerialize["isPrivate"] = o.IsPrivate
@@ -269,6 +374,9 @@ func (o CreateActionRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
+	}
+	if !IsNil(o.UrlFields) {
+		toSerialize["urlFields"] = o.UrlFields
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -294,11 +402,14 @@ func (o *CreateActionRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "applicationNames")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "dpxlFilter")
 		delete(additionalProperties, "isPrivate")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "sourceType")
 		delete(additionalProperties, "subsystemNames")
 		delete(additionalProperties, "url")
+		delete(additionalProperties, "urlFields")
 		o.AdditionalProperties = additionalProperties
 	}
 

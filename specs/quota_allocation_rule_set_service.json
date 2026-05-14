@@ -11,6 +11,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Get quota allocation rule set",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -71,6 +72,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Replace quota allocation rule set",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -139,6 +141,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Create quota allocation rule set",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -207,6 +210,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Delete quota allocation rule set",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -277,17 +281,6 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
             "type": "string"
           }
         }
@@ -459,24 +452,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -490,6 +465,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

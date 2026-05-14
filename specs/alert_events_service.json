@@ -11,6 +11,7 @@
           "Alert events service"
         ],
         "summary": "Get alert events statistics",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -88,6 +89,7 @@
           "Alert events service"
         ],
         "summary": "Get alert event by ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -326,17 +328,6 @@
           }
         }
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -416,10 +407,10 @@
       "GetAlertEventResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/GetAlertEventResponseSinglePermutation"
+            "$ref": "#/components/schemas/GetAlertEventResponseMultiplePermutation"
           },
           {
-            "$ref": "#/components/schemas/GetAlertEventResponseMultiplePermutation"
+            "$ref": "#/components/schemas/GetAlertEventResponseSinglePermutation"
           }
         ]
       },
@@ -521,24 +512,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -567,6 +540,14 @@
             }
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

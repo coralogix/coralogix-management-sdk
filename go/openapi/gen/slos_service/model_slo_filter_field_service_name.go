@@ -23,7 +23,7 @@ var _ MappedNullable = &SloFilterFieldServiceName{}
 
 // SloFilterFieldServiceName Field used for filtering SLOs
 type SloFilterFieldServiceName struct {
-	// Filter by service name. Only applicable to product types that support services (e.g., APM). MUST be used together with product_type filter. Will throw an error if used without product_type.
+	// Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.
 	ServiceName string `json:"serviceName"`
 	AdditionalProperties map[string]interface{}
 }

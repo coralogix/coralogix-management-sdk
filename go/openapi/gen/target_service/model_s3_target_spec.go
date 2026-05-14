@@ -24,7 +24,9 @@ var _ MappedNullable = &S3TargetSpec{}
 // S3TargetSpec This data structure represents an S3 target.
 type S3TargetSpec struct {
 	Bucket string `json:"bucket"`
+	ExternalId *string `json:"externalId,omitempty"`
 	Region *string `json:"region,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -72,6 +74,38 @@ func (o *S3TargetSpec) SetBucket(v string) {
 	o.Bucket = v
 }
 
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+func (o *S3TargetSpec) GetExternalId() string {
+	if o == nil || IsNil(o.ExternalId) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalId
+}
+
+// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *S3TargetSpec) GetExternalIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalId) {
+		return nil, false
+	}
+	return o.ExternalId, true
+}
+
+// HasExternalId returns a boolean if a field has been set.
+func (o *S3TargetSpec) HasExternalId() bool {
+	if o != nil && !IsNil(o.ExternalId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
+func (o *S3TargetSpec) SetExternalId(v string) {
+	o.ExternalId = &v
+}
+
 // GetRegion returns the Region field value if set, zero value otherwise.
 func (o *S3TargetSpec) GetRegion() string {
 	if o == nil || IsNil(o.Region) {
@@ -104,6 +138,38 @@ func (o *S3TargetSpec) SetRegion(v string) {
 	o.Region = &v
 }
 
+// GetRoleArn returns the RoleArn field value if set, zero value otherwise.
+func (o *S3TargetSpec) GetRoleArn() string {
+	if o == nil || IsNil(o.RoleArn) {
+		var ret string
+		return ret
+	}
+	return *o.RoleArn
+}
+
+// GetRoleArnOk returns a tuple with the RoleArn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *S3TargetSpec) GetRoleArnOk() (*string, bool) {
+	if o == nil || IsNil(o.RoleArn) {
+		return nil, false
+	}
+	return o.RoleArn, true
+}
+
+// HasRoleArn returns a boolean if a field has been set.
+func (o *S3TargetSpec) HasRoleArn() bool {
+	if o != nil && !IsNil(o.RoleArn) {
+		return true
+	}
+
+	return false
+}
+
+// SetRoleArn gets a reference to the given string and assigns it to the RoleArn field.
+func (o *S3TargetSpec) SetRoleArn(v string) {
+	o.RoleArn = &v
+}
+
 func (o S3TargetSpec) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -115,8 +181,14 @@ func (o S3TargetSpec) MarshalJSON() ([]byte, error) {
 func (o S3TargetSpec) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["bucket"] = o.Bucket
+	if !IsNil(o.ExternalId) {
+		toSerialize["externalId"] = o.ExternalId
+	}
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
+	}
+	if !IsNil(o.RoleArn) {
+		toSerialize["roleArn"] = o.RoleArn
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -163,7 +235,9 @@ func (o *S3TargetSpec) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "bucket")
+		delete(additionalProperties, "externalId")
 		delete(additionalProperties, "region")
+		delete(additionalProperties, "roleArn")
 		o.AdditionalProperties = additionalProperties
 	}
 

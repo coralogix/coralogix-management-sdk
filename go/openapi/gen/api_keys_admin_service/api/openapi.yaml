@@ -34,6 +34,7 @@ paths:
       tags:
       - API Keys Admin Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ApiKeysService_CreateApiKey
@@ -272,13 +273,6 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       title: Delete API Keys Response
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -464,18 +458,6 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       title: Update API Keys Status Response
       type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -564,3 +546,9 @@ components:
           type: array
       title: Update API Keys Status Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

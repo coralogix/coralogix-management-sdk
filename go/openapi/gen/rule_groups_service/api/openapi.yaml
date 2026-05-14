@@ -7,6 +7,7 @@ servers:
 paths:
   /parsing-rules/limits/v1:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetCompanyUsageLimits
@@ -34,6 +35,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/mapping/v1:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroupModelMapping
@@ -66,6 +68,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_BulkDeleteRuleGroup
@@ -103,6 +106,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_ListRuleGroups
@@ -129,6 +133,7 @@ paths:
       tags:
       - Rule Groups Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_CreateRuleGroup
@@ -161,6 +166,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/{group_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_DeleteRuleGroup
@@ -195,6 +201,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroup
@@ -229,6 +236,7 @@ paths:
       tags:
       - Rule Groups Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupsService_UpdateRuleGroup
@@ -346,10 +354,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -357,10 +364,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -372,10 +378,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -383,10 +388,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -430,13 +434,6 @@ components:
           type: string
         standard:
           $ref: "#/components/schemas/FormatStandard"
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -563,10 +560,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -574,10 +570,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -589,10 +584,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -600,10 +594,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -626,10 +619,6 @@ components:
           $ref: "#/components/schemas/RuleGroup"
       type: object
     JsonExtractParameters:
-      example:
-        destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
-        rule: rule
-        destinationFieldText: destinationFieldText
       properties:
         destinationFieldText:
           type: string
@@ -666,10 +655,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -677,10 +665,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -692,10 +679,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -703,10 +689,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -731,10 +716,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -742,10 +726,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -757,10 +740,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -768,10 +750,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -805,6 +786,9 @@ components:
           type: array
       type: object
     ParseParameters:
+      example:
+        rule: rule
+        destinationField: destinationField
       properties:
         destinationField:
           type: string
@@ -836,10 +820,9 @@ components:
             description: description
             id: id
             parameters:
-              jsonExtractParameters:
-                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+              parseParameters:
                 rule: rule
-                destinationFieldText: destinationFieldText
+                destinationField: destinationField
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -847,10 +830,9 @@ components:
             description: description
             id: id
             parameters:
-              jsonExtractParameters:
-                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+              parseParameters:
                 rule: rule
-                destinationFieldText: destinationFieldText
+                destinationField: destinationField
             enabled: true
             order: 1
           id: id
@@ -862,10 +844,9 @@ components:
             description: description
             id: id
             parameters:
-              jsonExtractParameters:
-                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+              parseParameters:
                 rule: rule
-                destinationFieldText: destinationFieldText
+                destinationField: destinationField
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -873,10 +854,9 @@ components:
             description: description
             id: id
             parameters:
-              jsonExtractParameters:
-                destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+              parseParameters:
                 rule: rule
-                destinationFieldText: destinationFieldText
+                destinationField: destinationField
             enabled: true
             order: 1
           id: id
@@ -950,16 +930,16 @@ components:
       type: object
     RuleParameters:
       oneOf:
-      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
       - $ref: "#/components/schemas/RuleParametersBlockParameters"
       - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
       - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
       - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractParameters"
       - $ref: "#/components/schemas/RuleParametersReplaceParameters"
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
       - $ref: "#/components/schemas/RuleParametersAllowParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
     RuleParametersAllowParameters:
       properties:
         allowParameters:
@@ -989,11 +969,6 @@ components:
       - extractTimestampParameters
       type: object
     RuleParametersJsonExtractParameters:
-      example:
-        jsonExtractParameters:
-          destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
-          rule: rule
-          destinationFieldText: destinationFieldText
       properties:
         jsonExtractParameters:
           $ref: "#/components/schemas/JsonExtractParameters"
@@ -1015,6 +990,10 @@ components:
       - jsonStringifyParameters
       type: object
     RuleParametersParseParameters:
+      example:
+        parseParameters:
+          rule: rule
+          destinationField: destinationField
       properties:
         parseParameters:
           $ref: "#/components/schemas/ParseParameters"
@@ -1043,10 +1022,9 @@ components:
           description: description
           id: id
           parameters:
-            jsonExtractParameters:
-              destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+            parseParameters:
               rule: rule
-              destinationFieldText: destinationFieldText
+              destinationField: destinationField
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1054,10 +1032,9 @@ components:
           description: description
           id: id
           parameters:
-            jsonExtractParameters:
-              destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+            parseParameters:
               rule: rule
-              destinationFieldText: destinationFieldText
+              destinationField: destinationField
           enabled: true
           order: 1
         id: id
@@ -1096,10 +1073,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1107,10 +1083,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -1122,10 +1097,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1133,10 +1107,9 @@ components:
               description: description
               id: id
               parameters:
-                jsonExtractParameters:
-                  destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+                parseParameters:
                   rule: rule
-                  destinationFieldText: destinationFieldText
+                  destinationField: destinationField
               enabled: true
               order: 1
             id: id
@@ -1167,18 +1140,6 @@ components:
       - VALUE_ERROR
       - VALUE_CRITICAL
       type: string
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -1191,10 +1152,9 @@ components:
         description: description
         id: id
         parameters:
-          jsonExtractParameters:
-            destinationFieldType: DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+          parseParameters:
             rule: rule
-            destinationFieldText: destinationFieldText
+            destinationField: destinationField
         enabled: true
         order: 1
       properties:
@@ -1275,3 +1235,9 @@ components:
         teamId:
           $ref: "#/components/schemas/v1.TeamId"
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

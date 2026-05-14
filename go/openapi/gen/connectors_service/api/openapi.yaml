@@ -7,6 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/connectors:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_ListConnectors
@@ -36,6 +37,7 @@ paths:
       tags:
       - Connectors service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_CreateConnector
@@ -55,6 +57,7 @@ paths:
       tags:
       - Connectors service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_ReplaceConnector
@@ -75,6 +78,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/all/list:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_BatchGetConnectors
@@ -103,6 +107,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/all/summaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_BatchGetConnectorSummaries
@@ -129,6 +134,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/list/summaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_ListConnectorSummaries
@@ -159,6 +165,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/types/summaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_GetConnectorTypeSummaries
@@ -182,6 +189,7 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_DeleteConnector
@@ -204,6 +212,7 @@ paths:
       tags:
       - Connectors service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ConnectorsService_GetConnector
@@ -561,13 +570,6 @@ components:
             $ref: "#/components/schemas/TemplatedConnectorConfigField"
           type: array
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -872,18 +874,6 @@ components:
         template:
           type: string
       type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -935,3 +925,9 @@ components:
           $ref: "#/components/schemas/Connector"
       title: Create Connector Request
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

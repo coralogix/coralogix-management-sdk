@@ -45,6 +45,7 @@ type TimeSeriesBars struct {
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
@@ -583,6 +584,38 @@ func (o *TimeSeriesBars) SetValueFields(v []ObservationField) {
 	o.ValueFields = v
 }
 
+// GetXAxisTimeFormat returns the XAxisTimeFormat field value if set, zero value otherwise.
+func (o *TimeSeriesBars) GetXAxisTimeFormat() XAxisTimeFormat {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		var ret XAxisTimeFormat
+		return ret
+	}
+	return *o.XAxisTimeFormat
+}
+
+// GetXAxisTimeFormatOk returns a tuple with the XAxisTimeFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeSeriesBars) GetXAxisTimeFormatOk() (*XAxisTimeFormat, bool) {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		return nil, false
+	}
+	return o.XAxisTimeFormat, true
+}
+
+// HasXAxisTimeFormat returns a boolean if a field has been set.
+func (o *TimeSeriesBars) HasXAxisTimeFormat() bool {
+	if o != nil && !IsNil(o.XAxisTimeFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetXAxisTimeFormat gets a reference to the given XAxisTimeFormat and assigns it to the XAxisTimeFormat field.
+func (o *TimeSeriesBars) SetXAxisTimeFormat(v XAxisTimeFormat) {
+	o.XAxisTimeFormat = &v
+}
+
 // GetYAxisMax returns the YAxisMax field value if set, zero value otherwise.
 func (o *TimeSeriesBars) GetYAxisMax() float32 {
 	if o == nil || IsNil(o.YAxisMax) {
@@ -705,6 +738,9 @@ func (o TimeSeriesBars) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueFields) {
 		toSerialize["valueFields"] = o.ValueFields
 	}
+	if !IsNil(o.XAxisTimeFormat) {
+		toSerialize["xAxisTimeFormat"] = o.XAxisTimeFormat
+	}
 	if !IsNil(o.YAxisMax) {
 		toSerialize["yAxisMax"] = o.YAxisMax
 	}
@@ -750,6 +786,7 @@ func (o *TimeSeriesBars) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "tooltip")
 		delete(additionalProperties, "unit")
 		delete(additionalProperties, "valueFields")
+		delete(additionalProperties, "xAxisTimeFormat")
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties

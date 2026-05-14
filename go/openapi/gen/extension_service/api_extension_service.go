@@ -41,6 +41,8 @@ func (r ApiExtensionServiceGetAllExtensionsRequest) Execute() (*GetAllExtensions
 /*
 ExtensionServiceGetAllExtensions Get all extensions
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionServiceGetAllExtensionsRequest
 */
@@ -152,6 +154,8 @@ func (r ApiExtensionServiceGetExtensionRequest) Execute() (*V1Extension, *http.R
 
 /*
 ExtensionServiceGetExtension Get extension by ID
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id

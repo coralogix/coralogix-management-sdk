@@ -11,6 +11,7 @@
           "Alert definitions service"
         ],
         "summary": "Get a list of all accessible alert definitions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -132,6 +133,7 @@
           "Alert definitions service"
         ],
         "summary": "Replace an alert definition",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -196,6 +198,7 @@
           "Alert definitions service"
         ],
         "summary": "Create an alert",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -257,7 +260,7 @@
           "Alert definitions service"
         ],
         "summary": "Get counts for filter options",
-        "description": "Returns counts for different filter options based on the provided filters",
+        "description": "Returns counts for different filter options based on the provided filters\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -326,7 +329,7 @@
           "Alert definitions service"
         ],
         "summary": "Bulk delete alert definitions",
-        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.",
+        "description": "Delete multiple alert definitions by their IDs. The operation is atomic - either all alerts are deleted or none are.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -394,7 +397,7 @@
           "Alert definitions service"
         ],
         "summary": "Download alerts",
-        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.",
+        "description": "Download a list of all accessible alert definitions in base64-encoded byte format.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -440,6 +443,7 @@
           "Alert definitions service"
         ],
         "summary": "Bulk replace alert definitions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -504,6 +508,7 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by alert version ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -562,6 +567,7 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -618,6 +624,7 @@
           "Alert definitions service"
         ],
         "summary": "DeleteAlertDef",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -715,7 +722,7 @@
             "type": "string"
           },
           "createdTime": {
-            "example": "2023-10-01T12:00:00Z",
+            "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was created",
             "type": "string",
             "format": "date-time"
@@ -726,7 +733,7 @@
             "type": "string"
           },
           "lastTriggeredTime": {
-            "example": "2023-10-01T12:00:00Z",
+            "example": "2023-10-01T12:00:00.000Z",
             "description": "The last time the alert definition was triggered",
             "type": "string",
             "format": "date-time"
@@ -735,7 +742,7 @@
             "$ref": "#/components/schemas/AlertDefStatus"
           },
           "updatedTime": {
-            "example": "2023-10-01T12:00:00Z",
+            "example": "2023-10-01T12:00:00.000Z",
             "description": "The time when the alert definition was last updated",
             "type": "string",
             "format": "date-time"
@@ -850,13 +857,13 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
@@ -865,19 +872,16 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
-          },
-          {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
@@ -886,7 +890,10 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
           }
         ]
       },
@@ -2383,17 +2390,6 @@
           }
         }
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterOptionCounts": {
         "externalDocs": {
           "url": ""
@@ -3632,10 +3628,10 @@
       "MetricTimeWindow": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MetricTimeWindowMetricTimeWindowSpecificValue"
+            "$ref": "#/components/schemas/MetricTimeWindowMetricTimeWindowDynamicDuration"
           },
           {
-            "$ref": "#/components/schemas/MetricTimeWindowMetricTimeWindowDynamicDuration"
+            "$ref": "#/components/schemas/MetricTimeWindowMetricTimeWindowSpecificValue"
           }
         ]
       },
@@ -4315,24 +4311,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -4480,6 +4458,14 @@
             "type": "boolean"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

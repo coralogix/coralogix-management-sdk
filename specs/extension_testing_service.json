@@ -11,6 +11,7 @@
           "Extension testing service"
         ],
         "summary": "Test extension revision",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -72,6 +73,7 @@
           "Extension testing service"
         ],
         "summary": "Cleanup testing extension",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -132,6 +134,7 @@
           "Extension testing service"
         ],
         "summary": "Initialize testing revision",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -407,17 +410,6 @@
           }
         }
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -573,24 +565,6 @@
         "title": "Test extension revision response",
         "type": "object"
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -604,6 +578,14 @@
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
         ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
       }
     }
   }

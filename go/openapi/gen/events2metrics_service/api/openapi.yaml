@@ -7,6 +7,7 @@ servers:
 paths:
   /events2metrics/events2metrics/v2:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_ListE2M
@@ -21,6 +22,7 @@ paths:
       tags:
       - Events2Metrics Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_CreateE2M
@@ -40,6 +42,7 @@ paths:
       tags:
       - Events2Metrics Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_ReplaceE2M
@@ -60,6 +63,7 @@ paths:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/all/execute:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_AtomicBatchExecuteE2M
@@ -80,6 +84,7 @@ paths:
       - Events2Metrics Service
   /events2metrics/events2metrics/v2/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_DeleteE2M
@@ -103,6 +108,7 @@ paths:
       tags:
       - Events2Metrics Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_GetE2M
@@ -127,6 +133,7 @@ paths:
       - Events2Metrics Service
   /events2metrics/labels/v2/cardinalities:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_ListLabelsCardinality
@@ -166,6 +173,7 @@ paths:
       - Events2Metrics Service
   /events2metrics/limits/v2:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: Events2MetricService_GetLimits
@@ -803,13 +811,6 @@ components:
       - E2M_TYPE_LOGS2METRICS
       - E2M_TYPE_SPANS2METRICS
       type: string
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -1288,18 +1289,6 @@ components:
       - samples
       title: Aggregation
       type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -1527,3 +1516,9 @@ components:
       - targetLabel
       title: Metric Label
       type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey
