@@ -11,6 +11,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Activate/Deactivate SAML",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -73,6 +74,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SAML Configuration",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -126,6 +128,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Set IDP Parameters",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -188,6 +191,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SP Parameters",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -239,17 +243,6 @@
   },
   "components": {
     "schemas": {
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -500,24 +493,6 @@
       },
       "SetIDPParametersResponse": {
         "type": "object"
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

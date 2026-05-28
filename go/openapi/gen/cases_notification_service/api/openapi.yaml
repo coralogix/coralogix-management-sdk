@@ -7,8 +7,11 @@ servers:
 paths:
   /cases/notifications/v1/deliveries:
     post:
-      description: "Retrieve notification delivery records for one or more cases,\
-        \ including routing, target, and outcome information."
+      description: |-
+        Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.
+
+        Requires the following permissions:
+        - `case:Read`
       externalDocs:
         url: ""
       operationId: CasesNotificationService_ListNotificationDeliveries
@@ -149,13 +152,6 @@ components:
           example: https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456
           type: string
       title: Delivery success
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -373,18 +369,6 @@ components:
       - routerId
       - routerName
       title: Router info
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

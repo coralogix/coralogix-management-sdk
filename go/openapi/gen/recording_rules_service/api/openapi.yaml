@@ -7,6 +7,7 @@ servers:
 paths:
   /recording-rules/recording-rules/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupSets_List
@@ -33,6 +34,7 @@ paths:
       tags:
       - Recording Rules Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Create
@@ -65,6 +67,7 @@ paths:
       - Recording Rules Service
   /recording-rules/recording-rules/v1/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Delete
@@ -99,6 +102,7 @@ paths:
       tags:
       - Recording Rules Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Fetch
@@ -133,6 +137,7 @@ paths:
       tags:
       - Recording Rules Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Update
@@ -184,13 +189,6 @@ components:
         id:
           type: string
       title: Create Rule Group Set Result
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -523,18 +521,6 @@ components:
             $ref: "#/components/schemas/OutRuleGroupSet"
           type: array
       title: Rule Group Set Listing
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

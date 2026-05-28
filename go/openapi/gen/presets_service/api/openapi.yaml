@@ -7,6 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/presets:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_BatchGetPresets
@@ -33,6 +34,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/custom:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_CreateCustomPreset
@@ -52,6 +54,7 @@ paths:
       tags:
       - Presets service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_ReplaceCustomPreset
@@ -72,6 +75,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/custom/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_DeleteCustomPreset
@@ -95,6 +99,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/custom/{id}/default:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_SetCustomPresetAsDefault
@@ -118,6 +123,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/summaries:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_GetDefaultPresetSummary
@@ -148,6 +154,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/summaries/system:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_GetSystemDefaultPresetSummary
@@ -178,6 +185,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_GetPreset
@@ -201,6 +209,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/{id}/default:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_SetPresetAsDefault
@@ -224,6 +233,7 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets:summariesList:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: PresetsService_ListPresetSummaries
@@ -381,13 +391,6 @@ components:
       title: Create Custom Preset Response
       type: object
     DeleteCustomPresetResponse:
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -757,18 +760,6 @@ components:
     SetCustomPresetAsDefaultResponse:
       type: object
     SetPresetAsDefaultResponse:
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

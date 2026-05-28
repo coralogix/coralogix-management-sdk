@@ -57,7 +57,6 @@ model_colors_by_stack_variant.go
 model_column_width_entry.go
 model_common_aggregation.go
 model_common_dataprime_query.go
-model_common_group.go
 model_common_threshold.go
 model_common_threshold_by.go
 model_common_unit.go
@@ -128,7 +127,6 @@ model_event_recurrence_source_strategy_instant.go
 model_event_recurrence_source_strategy_instant_variant.go
 model_events_v3_filter_matcher.go
 model_field_data_type.go
-model_field_group.go
 model_filter_equals.go
 model_filter_logs_filter.go
 model_filter_not_equals.go
@@ -584,6 +582,7 @@ model_x_axis.go
 model_x_axis_by_time.go
 model_x_axis_time.go
 model_x_axis_time_buckets.go
+model_x_axis_time_format.go
 model_x_axis_value.go
 response.go
 utils.go

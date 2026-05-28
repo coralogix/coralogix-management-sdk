@@ -7,6 +7,7 @@ servers:
 paths:
   /dataplan/quota-rules/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_DeleteQuotaAllocationRuleSet
@@ -39,6 +40,7 @@ paths:
       x-coralogixPermissions:
       - team-quota-rules:Manage
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_GetQuotaAllocationRuleSet
@@ -80,6 +82,7 @@ paths:
       x-coralogixPermissions:
       - team-quota-rules:Read
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_CreateQuotaAllocationRuleSet
@@ -117,6 +120,7 @@ paths:
       x-coralogixPermissions:
       - team-quota-rules:Manage
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_ReplaceQuotaAllocationRuleSet
@@ -188,13 +192,6 @@ components:
         id:
           type: string
       title: Delete quota allocation rule set response
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -350,18 +347,6 @@ components:
         ruleSet:
           $ref: "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
       title: Replace quota allocation rule set response
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

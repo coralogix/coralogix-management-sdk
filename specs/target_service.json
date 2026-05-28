@@ -11,6 +11,7 @@
           "Target Service"
         ],
         "summary": "Get target",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Target Service"
         ],
         "summary": "Set target",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -146,17 +148,6 @@
         "required": [
           "bucket"
         ]
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -333,8 +324,16 @@
             "example": "bucket",
             "type": "string"
           },
+          "externalId": {
+            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "type": "string"
+          },
           "region": {
             "example": "us-west-2",
+            "type": "string"
+          },
+          "roleArn": {
+            "example": "arn:aws:iam::123456789012:role/CoralogixArchive",
             "type": "string"
           }
         },
@@ -390,24 +389,6 @@
           "targetSpecarchiveSpec",
           "s3"
         ]
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

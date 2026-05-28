@@ -11,6 +11,7 @@
           "Global routers service"
         ],
         "summary": "List Global Routers",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -63,6 +64,7 @@
           "Global routers service"
         ],
         "summary": "Replace Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -101,6 +103,7 @@
           "Global routers service"
         ],
         "summary": "Create Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -141,6 +144,7 @@
           "Global routers service"
         ],
         "summary": "Batch Get Global Routers",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -173,12 +177,52 @@
         }
       }
     },
+    "/notifications/notification-center/v1/routers/matcher/validate": {
+      "post": {
+        "tags": [
+          "Global routers service"
+        ],
+        "summary": "Validate Entity Label Matcher",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "GlobalRoutersService_ValidateEntityLabelMatcher",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "entity_label_matcher",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "example": "",
+                "type": "string"
+              }
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateEntityLabelMatcherResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/notifications/notification-center/v1/routers/{id}": {
       "get": {
         "tags": [
           "Global routers service"
         ],
         "summary": "Get Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -212,6 +256,7 @@
           "Global routers service"
         ],
         "summary": "Delete Global Router",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -301,17 +346,6 @@
           },
           "target": {
             "$ref": "#/components/schemas/RoutingTarget"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
           }
         }
       },
@@ -593,23 +627,62 @@
           }
         }
       },
-      "common.Group": {
+      "ValidateEntityLabelMatcherResponse": {
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+        },
+        "title": "Validate Entity Label Matcher Response",
+        "description": "Response which contains whether the given entity label matcher is valid",
         "type": "object",
         "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
+          "result": {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult"
           }
         }
+      },
+      "ValidateEntityLabelMatcherResult": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultSuccessVariant"
+          },
+          {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultFailureVariant"
+          }
+        ]
+      },
+      "ValidateEntityLabelMatcherResult.Failure": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidateEntityLabelMatcherResult.Success": {
+        "type": "object"
+      },
+      "ValidateEntityLabelMatcherResultFailureVariant": {
+        "type": "object",
+        "properties": {
+          "failure": {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Failure"
+          }
+        },
+        "required": [
+          "failure"
+        ]
+      },
+      "ValidateEntityLabelMatcherResultSuccessVariant": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Success"
+          }
+        },
+        "required": [
+          "success"
+        ]
       },
       "events.v3.FilterMatcher": {
         "type": "string",

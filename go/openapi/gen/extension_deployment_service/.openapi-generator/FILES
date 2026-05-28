@@ -7,14 +7,12 @@ api_extension_deployment_service.go
 client.go
 configuration.go
 git_push.sh
-model_common_group.go
 model_deploy_extension_response.go
 model_deployed_extension.go
 model_deployed_extension_summary.go
 model_events_v3_filter_matcher.go
 model_extension_deployment.go
 model_failed_item.go
-model_field_group.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go

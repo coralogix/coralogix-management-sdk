@@ -122,13 +122,6 @@ components:
   schemas:
     DeleteViewFolderResponse:
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -225,18 +218,6 @@ components:
       required:
       - name
       title: ViewFolder
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

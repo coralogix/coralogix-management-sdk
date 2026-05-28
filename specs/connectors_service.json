@@ -11,6 +11,7 @@
           "Connectors service"
         ],
         "summary": "List Connectors",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -51,6 +52,7 @@
           "Connectors service"
         ],
         "summary": "Replace a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -89,6 +91,7 @@
           "Connectors service"
         ],
         "summary": "Create a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -129,6 +132,7 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -170,6 +174,7 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -208,6 +213,7 @@
           "Connectors service"
         ],
         "summary": "List Connector Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -250,6 +256,7 @@
           "Connectors service"
         ],
         "summary": "Get Connector Type Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -284,6 +291,7 @@
           "Connectors service"
         ],
         "summary": "Get a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -317,6 +325,7 @@
           "Connectors service"
         ],
         "summary": "Delete a Connector",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -581,17 +590,6 @@
           }
         }
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -769,24 +767,6 @@
           },
           "template": {
             "type": "string"
-          }
-        }
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
           }
         }
       },

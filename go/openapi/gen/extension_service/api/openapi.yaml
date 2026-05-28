@@ -7,6 +7,7 @@ servers:
 paths:
   /integrations/extensions/v1:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionService_GetAllExtensions
@@ -41,6 +42,7 @@ paths:
       - extensions:ReadConfig
   /integrations/extensions/v1/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ExtensionService_GetExtension
@@ -332,13 +334,6 @@ components:
         version:
           type: string
       title: Extension revision
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -812,18 +807,6 @@ components:
       - EVENTS_TO_METRICS
       - ALERT_V3
       type: string
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED

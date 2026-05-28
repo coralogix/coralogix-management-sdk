@@ -50,7 +50,6 @@ model_burn_rate_threshold_dual.go
 model_burn_rate_threshold_single.go
 model_burn_rate_type_dual.go
 model_burn_rate_type_single.go
-model_common_group.go
 model_create_alert_def_response.go
 model_create_alert_definition_request.go
 model_day_of_week.go
@@ -61,7 +60,6 @@ model_entity_label_count.go
 model_error_budget_threshold.go
 model_events_v3_filter_matcher.go
 model_failed_to_replace_alert_def.go
-model_field_group.go
 model_filter_option_counts.go
 model_filter_option_counts_filter.go
 model_filter_option_counts_response.go

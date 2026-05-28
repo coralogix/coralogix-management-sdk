@@ -11,6 +11,7 @@
           "Events Service"
         ],
         "summary": "List Alert Events",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -148,6 +149,7 @@
           "Events Service"
         ],
         "summary": "List Events",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -271,6 +273,7 @@
           "Events Service"
         ],
         "summary": "List Events Count",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -356,6 +359,7 @@
           "Events Service"
         ],
         "summary": "Batch Get Event",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -460,6 +464,7 @@
           "Events Service"
         ],
         "summary": "Get Events Statistics",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -545,6 +550,7 @@
           "Events Service"
         ],
         "summary": "Get Event",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -777,17 +783,6 @@
           "singleEvent"
         ]
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FieldStatistics": {
         "type": "object",
         "properties": {
@@ -957,24 +952,6 @@
             "items": {
               "type": "string"
             }
-          }
-        }
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
           }
         }
       },

@@ -11,6 +11,7 @@
           "IP access service"
         ],
         "summary": "Get company IP access settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -63,6 +64,7 @@
           "IP access service"
         ],
         "summary": "Replace company IP access settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -129,6 +131,7 @@
           "IP access service"
         ],
         "summary": "Create company IP access settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -191,6 +194,7 @@
           "IP access service"
         ],
         "summary": "Delete company IP access settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -294,17 +298,6 @@
         "title": "Delete company IP access settings response",
         "description": "This data structure represents the response to delete company IP access settings.",
         "type": "object"
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -445,24 +438,6 @@
         "properties": {
           "settings": {
             "$ref": "#/components/schemas/CompanyIpAccessSettings"
-          }
-        }
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
           }
         }
       },

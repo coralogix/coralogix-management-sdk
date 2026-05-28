@@ -11,6 +11,7 @@
           "Extension service"
         ],
         "summary": "Get all extensions",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -75,6 +76,7 @@
           "Extension service"
         ],
         "summary": "Get extension by ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -318,17 +320,6 @@
             }
           },
           "version": {
-            "type": "string"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
             "type": "string"
           }
         }
@@ -647,24 +638,6 @@
           "EVENTS_TO_METRICS",
           "ALERT_V3"
         ]
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

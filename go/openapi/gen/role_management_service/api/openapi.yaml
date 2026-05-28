@@ -7,6 +7,7 @@ servers:
 paths:
   /aaa/custom-roles/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_ListCustomRoles
@@ -42,6 +43,7 @@ paths:
       tags:
       - Role Management Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_CreateRole
@@ -82,6 +84,7 @@ paths:
       - Role Management Service
   /aaa/custom-roles/v1/{role_id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_DeleteRole
@@ -125,6 +128,7 @@ paths:
       tags:
       - Role Management Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_GetCustomRole
@@ -164,6 +168,7 @@ paths:
       tags:
       - Role Management Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_UpdateRole
@@ -209,6 +214,7 @@ paths:
       - Role Management Service
   /aaa/system-roles/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: RoleManagementService_ListSystemRoles
@@ -314,13 +320,6 @@ components:
           type: integer
       type: object
     DeleteRoleResponse:
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -468,18 +467,6 @@ components:
           type: integer
       type: object
     UpdateRoleResponse:
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

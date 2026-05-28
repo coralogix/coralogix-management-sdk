@@ -11,6 +11,7 @@
           "Slos Service"
         ],
         "summary": "List Slos",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -32,10 +33,7 @@
                   "field": {
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/SloFilterFieldProductType"
-                      },
-                      {
-                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
+                        "$ref": "#/components/schemas/SloFilterFieldOwnershipTeamValues"
                       },
                       {
                         "$ref": "#/components/schemas/SloFilterFieldConstFilter"
@@ -45,6 +43,18 @@
                       },
                       {
                         "$ref": "#/components/schemas/SloFilterFieldSloType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldProductType"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldServiceName"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldOwnershipServiceValues"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SloFilterFieldOwnershipEnvironmentValues"
                       }
                     ]
                   },
@@ -113,6 +123,7 @@
           "Slos Service"
         ],
         "summary": "Replace Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -184,6 +195,7 @@
           "Slos Service"
         ],
         "summary": "Create Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -206,13 +218,13 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/SloApmSli"
-                  },
-                  {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SloApmSli"
                   }
                 ]
               }
@@ -257,6 +269,7 @@
           "Slos Service"
         ],
         "summary": "Batch Execute Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -321,6 +334,7 @@
           "Slos Service"
         ],
         "summary": "Batch Get Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -377,6 +391,7 @@
           "Slos Service"
         ],
         "summary": "Get Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -428,6 +443,7 @@
           "Slos Service"
         ],
         "summary": "Delete Slo",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -481,6 +497,7 @@
           "Slos Service"
         ],
         "summary": "Replace Slo Pre-Validate Alerts",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -492,13 +509,13 @@
                 "type": "object",
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
+                  },
+                  {
                     "$ref": "#/components/schemas/SloApmSli"
                   },
                   {
                     "$ref": "#/components/schemas/SloRequestBasedMetricSli"
-                  },
-                  {
-                    "$ref": "#/components/schemas/SloWindowBasedMetricSli"
                   }
                 ]
               }
@@ -543,6 +560,7 @@
           "Slos Service"
         ],
         "summary": "Get Slo Zero State",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -706,10 +724,10 @@
       "ApmSli": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ApmSliErrorConfig"
+            "$ref": "#/components/schemas/ApmSliLatencyConfig"
           },
           {
-            "$ref": "#/components/schemas/ApmSliLatencyConfig"
+            "$ref": "#/components/schemas/ApmSliErrorConfig"
           }
         ]
       },
@@ -945,17 +963,6 @@
             "items": {
               "type": "string"
             }
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
           }
         }
       },
@@ -1286,13 +1293,13 @@
       "Slo": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
+          },
+          {
             "$ref": "#/components/schemas/SloWindowBasedMetricSli"
           },
           {
             "$ref": "#/components/schemas/SloApmSli"
-          },
-          {
-            "$ref": "#/components/schemas/SloRequestBasedMetricSli"
           }
         ]
       },
@@ -1324,6 +1331,9 @@
           "apmSli": {
             "$ref": "#/components/schemas/ApmSli"
           },
+          "apmSliMetadata": {
+            "$ref": "#/components/schemas/ApmSli"
+          },
           "createTime": {
             "type": "string",
             "format": "date-time"
@@ -1352,6 +1362,9 @@
           "name": {
             "example": "Example Slo Name",
             "type": "string"
+          },
+          "ownershipTags": {
+            "$ref": "#/components/schemas/SloOwnershipTags"
           },
           "productType": {
             "$ref": "#/components/schemas/SloProductType"
@@ -1550,6 +1563,54 @@
           "labelName"
         ]
       },
+      "SloFilterFieldOwnershipEnvironmentValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloFilterField",
+        "description": "Field used for filtering SLOs",
+        "type": "object",
+        "properties": {
+          "ownershipEnvironmentValues": {
+            "$ref": "#/components/schemas/StringValues"
+          }
+        },
+        "required": [
+          "ownershipEnvironmentValues"
+        ]
+      },
+      "SloFilterFieldOwnershipServiceValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloFilterField",
+        "description": "Field used for filtering SLOs",
+        "type": "object",
+        "properties": {
+          "ownershipServiceValues": {
+            "$ref": "#/components/schemas/StringValues"
+          }
+        },
+        "required": [
+          "ownershipServiceValues"
+        ]
+      },
+      "SloFilterFieldOwnershipTeamValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloFilterField",
+        "description": "Field used for filtering SLOs",
+        "type": "object",
+        "properties": {
+          "ownershipTeamValues": {
+            "$ref": "#/components/schemas/StringValues"
+          }
+        },
+        "required": [
+          "ownershipTeamValues"
+        ]
+      },
       "SloFilterFieldProductType": {
         "externalDocs": {
           "url": ""
@@ -1576,7 +1637,7 @@
         "properties": {
           "serviceName": {
             "example": "payment-service",
-            "description": "Filter by service name. Only applicable to product types that support services (e.g., APM). MUST be used together with product_type filter. Will throw an error if used without product_type.",
+            "description": "Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.",
             "type": "string"
           }
         },
@@ -1600,6 +1661,56 @@
           "sloType"
         ]
       },
+      "SloOwnershipTag": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloOwnershipTag",
+        "description": "Ownership for one dimension (service, environment, or team). static_values are group-wide (broad) assignments. label_keys are metric label names whose values are read per permutation (label-driven). Both may be set; when both lists are empty, that dimension is unset.",
+        "type": "object",
+        "properties": {
+          "labelKeys": {
+            "example": [
+              "deployment_environment",
+              "k8s_namespace"
+            ],
+            "type": "array",
+            "items": {
+              "description": "Metric label names to use as sources (label-driven). Actual values come from series at query time. Empty if not using label-driven for this dimension.",
+              "type": "string"
+            }
+          },
+          "staticValues": {
+            "example": [
+              "checkout-api"
+            ],
+            "type": "array",
+            "items": {
+              "description": "Group-wide static values (broad). Empty if not using broad for this dimension.",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SloOwnershipTags": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "SloOwnershipTags",
+        "description": "Service, environment, and team ownership for the SLO group. At most one SloOwnershipTag per dimension; omit a dimension when unset.",
+        "type": "object",
+        "properties": {
+          "environment": {
+            "$ref": "#/components/schemas/SloOwnershipTag"
+          },
+          "service": {
+            "$ref": "#/components/schemas/SloOwnershipTag"
+          },
+          "team": {
+            "$ref": "#/components/schemas/SloOwnershipTag"
+          }
+        }
+      },
       "SloProductType": {
         "type": "string",
         "enum": [
@@ -1615,6 +1726,9 @@
         "description": "Definition of an SLO",
         "type": "object",
         "properties": {
+          "apmSliMetadata": {
+            "$ref": "#/components/schemas/ApmSli"
+          },
           "createTime": {
             "type": "string",
             "format": "date-time"
@@ -1643,6 +1757,9 @@
           "name": {
             "example": "Example Slo Name",
             "type": "string"
+          },
+          "ownershipTags": {
+            "$ref": "#/components/schemas/SloOwnershipTags"
           },
           "productType": {
             "$ref": "#/components/schemas/SloProductType"
@@ -1703,6 +1820,9 @@
         "description": "Definition of an SLO",
         "type": "object",
         "properties": {
+          "apmSliMetadata": {
+            "$ref": "#/components/schemas/ApmSli"
+          },
           "createTime": {
             "type": "string",
             "format": "date-time"
@@ -1731,6 +1851,9 @@
           "name": {
             "example": "Example Slo Name",
             "type": "string"
+          },
+          "ownershipTags": {
+            "$ref": "#/components/schemas/SloOwnershipTags"
           },
           "productType": {
             "$ref": "#/components/schemas/SloProductType"
@@ -1822,24 +1945,6 @@
           "WINDOW_SLO_WINDOW_1_MINUTE",
           "WINDOW_SLO_WINDOW_5_MINUTES"
         ]
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

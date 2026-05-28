@@ -23,6 +23,9 @@ var _ = bytes.MinRead
 type SloFilterField struct {
 	SloFilterFieldConstFilter *SloFilterFieldConstFilter
 	SloFilterFieldLabelName *SloFilterFieldLabelName
+	SloFilterFieldOwnershipEnvironmentValues *SloFilterFieldOwnershipEnvironmentValues
+	SloFilterFieldOwnershipServiceValues *SloFilterFieldOwnershipServiceValues
+	SloFilterFieldOwnershipTeamValues *SloFilterFieldOwnershipTeamValues
 	SloFilterFieldProductType *SloFilterFieldProductType
 	SloFilterFieldServiceName *SloFilterFieldServiceName
 	SloFilterFieldSloType *SloFilterFieldSloType
@@ -39,6 +42,27 @@ func SloFilterFieldConstFilterAsSloFilterField(v *SloFilterFieldConstFilter) Slo
 func SloFilterFieldLabelNameAsSloFilterField(v *SloFilterFieldLabelName) SloFilterField {
 	return SloFilterField{
 		SloFilterFieldLabelName: v,
+	}
+}
+
+// SloFilterFieldOwnershipEnvironmentValuesAsSloFilterField is a convenience function that returns SloFilterFieldOwnershipEnvironmentValues wrapped in SloFilterField
+func SloFilterFieldOwnershipEnvironmentValuesAsSloFilterField(v *SloFilterFieldOwnershipEnvironmentValues) SloFilterField {
+	return SloFilterField{
+		SloFilterFieldOwnershipEnvironmentValues: v,
+	}
+}
+
+// SloFilterFieldOwnershipServiceValuesAsSloFilterField is a convenience function that returns SloFilterFieldOwnershipServiceValues wrapped in SloFilterField
+func SloFilterFieldOwnershipServiceValuesAsSloFilterField(v *SloFilterFieldOwnershipServiceValues) SloFilterField {
+	return SloFilterField{
+		SloFilterFieldOwnershipServiceValues: v,
+	}
+}
+
+// SloFilterFieldOwnershipTeamValuesAsSloFilterField is a convenience function that returns SloFilterFieldOwnershipTeamValues wrapped in SloFilterField
+func SloFilterFieldOwnershipTeamValuesAsSloFilterField(v *SloFilterFieldOwnershipTeamValues) SloFilterField {
+	return SloFilterField{
+		SloFilterFieldOwnershipTeamValues: v,
 	}
 }
 
@@ -102,6 +126,57 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 		dst.SloFilterFieldLabelName = nil
 	}
 
+	// try to unmarshal data into SloFilterFieldOwnershipEnvironmentValues
+	err = json.Unmarshal(data, &dst.SloFilterFieldOwnershipEnvironmentValues)
+	if err == nil {
+		jsonSloFilterFieldOwnershipEnvironmentValues, _ := json.Marshal(dst.SloFilterFieldOwnershipEnvironmentValues)
+		if string(jsonSloFilterFieldOwnershipEnvironmentValues) == "{}" { // empty struct
+			dst.SloFilterFieldOwnershipEnvironmentValues = nil
+		} else {
+			if err = validator.Validate(dst.SloFilterFieldOwnershipEnvironmentValues); err != nil {
+				dst.SloFilterFieldOwnershipEnvironmentValues = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.SloFilterFieldOwnershipEnvironmentValues = nil
+	}
+
+	// try to unmarshal data into SloFilterFieldOwnershipServiceValues
+	err = json.Unmarshal(data, &dst.SloFilterFieldOwnershipServiceValues)
+	if err == nil {
+		jsonSloFilterFieldOwnershipServiceValues, _ := json.Marshal(dst.SloFilterFieldOwnershipServiceValues)
+		if string(jsonSloFilterFieldOwnershipServiceValues) == "{}" { // empty struct
+			dst.SloFilterFieldOwnershipServiceValues = nil
+		} else {
+			if err = validator.Validate(dst.SloFilterFieldOwnershipServiceValues); err != nil {
+				dst.SloFilterFieldOwnershipServiceValues = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.SloFilterFieldOwnershipServiceValues = nil
+	}
+
+	// try to unmarshal data into SloFilterFieldOwnershipTeamValues
+	err = json.Unmarshal(data, &dst.SloFilterFieldOwnershipTeamValues)
+	if err == nil {
+		jsonSloFilterFieldOwnershipTeamValues, _ := json.Marshal(dst.SloFilterFieldOwnershipTeamValues)
+		if string(jsonSloFilterFieldOwnershipTeamValues) == "{}" { // empty struct
+			dst.SloFilterFieldOwnershipTeamValues = nil
+		} else {
+			if err = validator.Validate(dst.SloFilterFieldOwnershipTeamValues); err != nil {
+				dst.SloFilterFieldOwnershipTeamValues = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.SloFilterFieldOwnershipTeamValues = nil
+	}
+
 	// try to unmarshal data into SloFilterFieldProductType
 	err = json.Unmarshal(data, &dst.SloFilterFieldProductType)
 	if err == nil {
@@ -157,6 +232,9 @@ func (dst *SloFilterField) UnmarshalJSON(data []byte) error {
 		// reset to nil
 		dst.SloFilterFieldConstFilter = nil
 		dst.SloFilterFieldLabelName = nil
+		dst.SloFilterFieldOwnershipEnvironmentValues = nil
+		dst.SloFilterFieldOwnershipServiceValues = nil
+		dst.SloFilterFieldOwnershipTeamValues = nil
 		dst.SloFilterFieldProductType = nil
 		dst.SloFilterFieldServiceName = nil
 		dst.SloFilterFieldSloType = nil
@@ -177,6 +255,18 @@ func (src SloFilterField) MarshalJSON() ([]byte, error) {
 
 	if src.SloFilterFieldLabelName != nil {
 		return json.Marshal(&src.SloFilterFieldLabelName)
+	}
+
+	if src.SloFilterFieldOwnershipEnvironmentValues != nil {
+		return json.Marshal(&src.SloFilterFieldOwnershipEnvironmentValues)
+	}
+
+	if src.SloFilterFieldOwnershipServiceValues != nil {
+		return json.Marshal(&src.SloFilterFieldOwnershipServiceValues)
+	}
+
+	if src.SloFilterFieldOwnershipTeamValues != nil {
+		return json.Marshal(&src.SloFilterFieldOwnershipTeamValues)
 	}
 
 	if src.SloFilterFieldProductType != nil {
@@ -207,6 +297,18 @@ func (obj *SloFilterField) GetActualInstance() (interface{}) {
 		return obj.SloFilterFieldLabelName
 	}
 
+	if obj.SloFilterFieldOwnershipEnvironmentValues != nil {
+		return obj.SloFilterFieldOwnershipEnvironmentValues
+	}
+
+	if obj.SloFilterFieldOwnershipServiceValues != nil {
+		return obj.SloFilterFieldOwnershipServiceValues
+	}
+
+	if obj.SloFilterFieldOwnershipTeamValues != nil {
+		return obj.SloFilterFieldOwnershipTeamValues
+	}
+
 	if obj.SloFilterFieldProductType != nil {
 		return obj.SloFilterFieldProductType
 	}
@@ -231,6 +333,18 @@ func (obj SloFilterField) GetActualInstanceValue() (interface{}) {
 
 	if obj.SloFilterFieldLabelName != nil {
 		return *obj.SloFilterFieldLabelName
+	}
+
+	if obj.SloFilterFieldOwnershipEnvironmentValues != nil {
+		return *obj.SloFilterFieldOwnershipEnvironmentValues
+	}
+
+	if obj.SloFilterFieldOwnershipServiceValues != nil {
+		return *obj.SloFilterFieldOwnershipServiceValues
+	}
+
+	if obj.SloFilterFieldOwnershipTeamValues != nil {
+		return *obj.SloFilterFieldOwnershipTeamValues
 	}
 
 	if obj.SloFilterFieldProductType != nil {

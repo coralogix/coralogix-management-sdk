@@ -11,6 +11,7 @@
           "Policies Service"
         ],
         "summary": "Atomic Overwrite Log Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -75,6 +76,7 @@
           "Policies Service"
         ],
         "summary": "Get Company Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -134,6 +136,7 @@
           "Policies Service"
         ],
         "summary": "Update Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -145,10 +148,10 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
                   },
                   {
-                    "$ref": "#/components/schemas/UpdatePolicyRequestSpanRules"
+                    "$ref": "#/components/schemas/UpdatePolicyRequestLogRules"
                   }
                 ]
               }
@@ -191,6 +194,7 @@
           "Policies Service"
         ],
         "summary": "Create Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -250,6 +254,7 @@
           "Policies Service"
         ],
         "summary": "Reorder Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -318,6 +323,7 @@
           "Policies Service"
         ],
         "summary": "Bulk Test Log Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -382,6 +388,7 @@
           "Policies Service"
         ],
         "summary": "Get Policy by ID",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -434,6 +441,7 @@
           "Policies Service"
         ],
         "summary": "Delete Policy",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -488,6 +496,7 @@
           "Policies Service"
         ],
         "summary": "Replace Policy Settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -549,6 +558,7 @@
           "Policies Service"
         ],
         "summary": "Get Policy Priority Settings",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -591,6 +601,7 @@
           "Policies Service"
         ],
         "summary": "Atomic Overwrite Span Policies",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -947,17 +958,6 @@
           "id"
         ]
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -1234,7 +1234,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           },
           "deleted": {
@@ -1284,7 +1284,7 @@
             }
           },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           }
         },
@@ -1344,7 +1344,7 @@
             "format": "int32"
           },
           "createdAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           },
           "deleted": {
@@ -1394,7 +1394,7 @@
             }
           },
           "updatedAt": {
-            "example": "2021-01-01T00:00:00Z",
+            "example": "2021-01-01T00:00:00.000Z",
             "type": "string"
           }
         },
@@ -1721,24 +1721,6 @@
           }
         }
       },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
       "events.v3.FilterMatcher": {
         "type": "string",
         "enum": [
@@ -1796,19 +1778,9 @@
         "description": "This data structure represents a target for quota policies. It defines a named group of datasets with a priority level and optional archive retention configuration.",
         "type": "object",
         "properties": {
-          "archiveRetention": {
-            "$ref": "#/components/schemas/ArchiveRetention"
-          },
           "dataset": {
             "example": "dataset1",
             "type": "string"
-          },
-          "name": {
-            "example": "My Target",
-            "type": "string"
-          },
-          "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
           }
         }
       },

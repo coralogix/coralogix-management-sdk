@@ -7,6 +7,7 @@ servers:
 paths:
   /aaa/team-sec-ip-access/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IpAccessService_DeleteCompanyIpAccessSettings
@@ -42,6 +43,7 @@ paths:
       tags:
       - IP access service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IpAccessService_GetCompanyIpAccessSettings
@@ -79,6 +81,7 @@ paths:
       tags:
       - IP access service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IpAccessService_CreateCompanyIpAccessSettings
@@ -110,6 +113,7 @@ paths:
       tags:
       - IP access service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IpAccessService_ReplaceCompanyIpAccessSettings
@@ -200,13 +204,6 @@ components:
       externalDocs:
         url: ""
       title: Delete company IP access settings response
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
       type: object
     FilterPathAndValues:
       oneOf:
@@ -329,18 +326,6 @@ components:
         settings:
           $ref: "#/components/schemas/CompanyIpAccessSettings"
       title: Replace company IP access settings response
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

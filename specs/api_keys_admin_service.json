@@ -52,6 +52,7 @@
           "API Keys Service"
         ],
         "summary": "Create API Key",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -384,17 +385,6 @@
         "description": "This data structure is the response obtained after deleting API keys.",
         "type": "object"
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterPathAndValues": {
         "oneOf": [
           {
@@ -584,24 +574,6 @@
         "title": "Update API Keys Status Response",
         "description": "This data structure is the response obtained after updating API keys status.",
         "type": "object"
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",
