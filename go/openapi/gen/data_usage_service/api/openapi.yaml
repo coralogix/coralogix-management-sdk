@@ -7,6 +7,7 @@ servers:
 paths:
   /dataplans/data-usage/v2:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDataUsage
@@ -67,6 +68,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily/evaluation-tokens:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageEvaluationTokens
@@ -99,6 +101,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily/processed-gbs:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageProcessedGbs
@@ -131,6 +134,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily/units:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageUnits
@@ -163,6 +167,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/export-status:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDataUsageMetricsExportStatus
@@ -189,6 +194,7 @@ paths:
       tags:
       - Data Usage Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_UpdateDataUsageMetricsExportStatus
@@ -221,6 +227,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/logs/count:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetLogsCount
@@ -284,6 +291,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/spans/count:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: DataUsageService_GetSpansCount
@@ -349,8 +357,8 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - severity: SEVERITY_UNSPECIFIED
-        - severity: SEVERITY_UNSPECIFIED
+        - pillar: PILLAR_UNSPECIFIED
+        - pillar: PILLAR_UNSPECIFIED
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -512,11 +520,11 @@ components:
       type: object
     Dimension:
       oneOf:
-      - $ref: "#/components/schemas/DimensionSeverity"
-      - $ref: "#/components/schemas/DimensionPriority"
       - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPriority"
     DimensionGenericDimension:
       properties:
         genericDimension:
@@ -525,9 +533,11 @@ components:
       - genericDimension
       type: object
     DimensionPillar:
+      example:
+        pillar: PILLAR_UNSPECIFIED
       properties:
         pillar:
-          $ref: "#/components/schemas/Pillar"
+          $ref: "#/components/schemas/v2.Pillar"
       required:
       - pillar
       type: object
@@ -539,8 +549,6 @@ components:
       - priority
       type: object
     DimensionSeverity:
-      example:
-        severity: SEVERITY_UNSPECIFIED
       properties:
         severity:
           $ref: "#/components/schemas/datausage.v2.Severity"
@@ -563,13 +571,6 @@ components:
         evaluationTokens:
           $ref: "#/components/schemas/Token"
         evaluatorName:
-          type: string
-      type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
           type: string
       type: object
     FilterPathAndValues:
@@ -851,14 +852,14 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - severity: SEVERITY_UNSPECIFIED
-          - severity: SEVERITY_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - severity: SEVERITY_UNSPECIFIED
-          - severity: SEVERITY_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
@@ -963,15 +964,6 @@ components:
             type: string
           type: array
       type: object
-    Pillar:
-      enum:
-      - PILLAR_UNSPECIFIED
-      - PILLAR_METRICS
-      - PILLAR_LOGS
-      - PILLAR_SPANS
-      - PILLAR_BINARY
-      - PILLAR_PROFILES
-      type: string
     SpansCount:
       description: This data structure represents a spans count.
       example:
@@ -1038,18 +1030,6 @@ components:
           type: boolean
       title: Update Data Usage Metrics Export Status Response
       type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     datausage.v2.Severity:
       enum:
       - SEVERITY_UNSPECIFIED
@@ -1089,6 +1069,15 @@ components:
           format: float
           type: number
       type: object
+    v2.Pillar:
+      enum:
+      - PILLAR_UNSPECIFIED
+      - PILLAR_METRICS
+      - PILLAR_LOGS
+      - PILLAR_SPANS
+      - PILLAR_BINARY
+      - PILLAR_PROFILES
+      type: string
     v2.Priority:
       enum:
       - PRIORITY_UNSPECIFIED
@@ -1145,11 +1134,11 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/DimensionPillar"
-      - $ref: "#/components/schemas/DimensionGenericDimension"
       - $ref: "#/components/schemas/DimensionTier"
       - $ref: "#/components/schemas/DimensionSeverity"
       - $ref: "#/components/schemas/DimensionPriority"
+      - $ref: "#/components/schemas/DimensionPillar"
+      - $ref: "#/components/schemas/DimensionGenericDimension"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"

@@ -14,7 +14,6 @@ model_atomic_overwrite_span_policies_request.go
 model_atomic_overwrite_span_policies_response.go
 model_bulk_test_log_policies_request.go
 model_bulk_test_log_policies_response.go
-model_common_group.go
 model_create_generic_policy_request.go
 model_create_log_policy_request.go
 model_create_policy_request_log_rules.go
@@ -23,7 +22,6 @@ model_create_policy_response.go
 model_create_span_policy_request.go
 model_delete_policy_response.go
 model_events_v3_filter_matcher.go
-model_field_group.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go

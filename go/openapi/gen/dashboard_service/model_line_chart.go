@@ -29,6 +29,7 @@ type LineChart struct {
 	QueryDefinitions []LineChartQueryDefinition `json:"queryDefinitions"`
 	StackedLine *LineChartStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *Tooltip `json:"tooltip,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -204,6 +205,38 @@ func (o *LineChart) SetTooltip(v Tooltip) {
 	o.Tooltip = &v
 }
 
+// GetXAxisTimeFormat returns the XAxisTimeFormat field value if set, zero value otherwise.
+func (o *LineChart) GetXAxisTimeFormat() XAxisTimeFormat {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		var ret XAxisTimeFormat
+		return ret
+	}
+	return *o.XAxisTimeFormat
+}
+
+// GetXAxisTimeFormatOk returns a tuple with the XAxisTimeFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LineChart) GetXAxisTimeFormatOk() (*XAxisTimeFormat, bool) {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		return nil, false
+	}
+	return o.XAxisTimeFormat, true
+}
+
+// HasXAxisTimeFormat returns a boolean if a field has been set.
+func (o *LineChart) HasXAxisTimeFormat() bool {
+	if o != nil && !IsNil(o.XAxisTimeFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetXAxisTimeFormat gets a reference to the given XAxisTimeFormat and assigns it to the XAxisTimeFormat field.
+func (o *LineChart) SetXAxisTimeFormat(v XAxisTimeFormat) {
+	o.XAxisTimeFormat = &v
+}
+
 func (o LineChart) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -226,6 +259,9 @@ func (o LineChart) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tooltip) {
 		toSerialize["tooltip"] = o.Tooltip
+	}
+	if !IsNil(o.XAxisTimeFormat) {
+		toSerialize["xAxisTimeFormat"] = o.XAxisTimeFormat
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -276,6 +312,7 @@ func (o *LineChart) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "queryDefinitions")
 		delete(additionalProperties, "stackedLine")
 		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "xAxisTimeFormat")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -11,6 +11,7 @@
           "Role Management Service"
         ],
         "summary": "List Custom Roles",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -62,6 +63,7 @@
           "Role Management Service"
         ],
         "summary": "Create Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -133,6 +135,7 @@
           "Role Management Service"
         ],
         "summary": "Get Custom Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -191,6 +194,7 @@
           "Role Management Service"
         ],
         "summary": "Update Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -269,6 +273,7 @@
           "Role Management Service"
         ],
         "summary": "Delete Role",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -335,6 +340,7 @@
           "Role Management Service"
         ],
         "summary": "List System Roles",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -472,17 +478,6 @@
       },
       "DeleteRoleResponse": {
         "type": "object"
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -627,24 +622,6 @@
       },
       "UpdateRoleResponse": {
         "type": "object"
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

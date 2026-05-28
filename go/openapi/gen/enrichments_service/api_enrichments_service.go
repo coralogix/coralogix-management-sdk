@@ -41,6 +41,8 @@ func (r ApiEnrichmentServiceAddEnrichmentsRequest) Execute() (*AddEnrichmentsRes
 /*
 EnrichmentServiceAddEnrichments Add Enrichments
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceAddEnrichmentsRequest
 */
@@ -145,6 +147,8 @@ func (r ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) Execute() (*At
 
 /*
 EnrichmentServiceAtomicOverwriteAllEnrichments Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
@@ -251,6 +255,8 @@ func (r ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest) Execute() (*Atomi
 /*
 EnrichmentServiceAtomicOverwriteEnrichments Atomic Overwrite for CustomEnrichments only.
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest
 */
@@ -350,6 +356,8 @@ func (r ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest) Execute() (*Get
 /*
 EnrichmentServiceGetCompanyEnrichmentSettings Get Company Enrichment Settings
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest
 */
@@ -447,6 +455,8 @@ func (r ApiEnrichmentServiceGetEnrichmentLimitRequest) Execute() (*GetEnrichment
 /*
 EnrichmentServiceGetEnrichmentLimit Get Enrichment Limit
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceGetEnrichmentLimitRequest
 */
@@ -543,6 +553,8 @@ func (r ApiEnrichmentServiceGetEnrichmentsRequest) Execute() (*GetEnrichmentsRes
 
 /*
 EnrichmentServiceGetEnrichments Get Enrichments
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceGetEnrichmentsRequest
@@ -646,6 +658,8 @@ func (r ApiEnrichmentServiceRemoveEnrichmentsRequest) Execute() (*RemoveEnrichme
 
 /*
 EnrichmentServiceRemoveEnrichments Delete Enrichments
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceRemoveEnrichmentsRequest

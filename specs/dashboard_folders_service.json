@@ -11,7 +11,7 @@
           "Dashboard folders service"
         ],
         "summary": "List dashboard folders",
-        "description": "List all dashboard folders accessible.",
+        "description": "List all dashboard folders accessible.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -55,6 +55,7 @@
           "Dashboard folders service"
         ],
         "summary": "Replace a dashboard folder",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -116,6 +117,7 @@
           "Dashboard folders service"
         ],
         "summary": "Create a dashboard folder",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -179,7 +181,7 @@
           "Dashboard folders service"
         ],
         "summary": "Get a dashboard folder",
-        "description": "Returns a dashboard folder data.",
+        "description": "Returns a dashboard folder data.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -242,6 +244,7 @@
           "Dashboard folders service"
         ],
         "summary": "Delete a dashboard folder",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -337,17 +340,6 @@
         },
         "title": "Delete dashboard folder response data structure",
         "type": "object"
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -475,24 +467,6 @@
         },
         "title": "Replace dashboard folder response data structure",
         "type": "object"
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

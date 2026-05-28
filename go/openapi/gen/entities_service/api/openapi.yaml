@@ -7,6 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/entity-types:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EntitiesService_ListEntityTypes
@@ -22,6 +23,7 @@ paths:
       - Entities service
   /notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EntitiesService_ListEntitySubTypes
@@ -45,13 +47,6 @@ paths:
       - Entities service
 components:
   schemas:
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -133,18 +128,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

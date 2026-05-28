@@ -11,6 +11,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Groups",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -80,6 +81,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Create Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -170,6 +172,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -230,6 +233,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Group By Name",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -289,6 +293,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Update Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -381,6 +386,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Delete Team Group",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -441,6 +447,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Group Users",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -558,17 +565,6 @@
           "groupId": {
             "type": "integer",
             "format": "int64"
-          }
-        }
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
           }
         }
       },
@@ -802,10 +798,10 @@
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
+            "$ref": "#/components/schemas/RoleUpdateActionClear"
           },
           {
-            "$ref": "#/components/schemas/RoleUpdateActionClear"
+            "$ref": "#/components/schemas/RoleUpdateActionSetRoleId"
           }
         ]
       },
@@ -869,10 +865,10 @@
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ScopeUpdateActionSetScopeId"
+            "$ref": "#/components/schemas/ScopeUpdateActionClear"
           },
           {
-            "$ref": "#/components/schemas/ScopeUpdateActionClear"
+            "$ref": "#/components/schemas/ScopeUpdateActionSetScopeId"
           }
         ]
       },
@@ -1039,13 +1035,13 @@
         },
         "oneOf": [
           {
-            "$ref": "#/components/schemas/UserUpdatesOperationAdd"
-          },
-          {
             "$ref": "#/components/schemas/UserUpdatesOperationRemove"
           },
           {
             "$ref": "#/components/schemas/UserUpdatesOperationSet"
+          },
+          {
+            "$ref": "#/components/schemas/UserUpdatesOperationAdd"
           }
         ]
       },
@@ -1102,24 +1098,6 @@
           "operationType",
           "set"
         ]
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

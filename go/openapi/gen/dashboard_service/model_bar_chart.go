@@ -46,6 +46,7 @@ type BarChart struct {
 	StackDefinition *BarChartStackDefinition `json:"stackDefinition,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	XAxis *XAxis `json:"xAxis,omitempty"`
+	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`
 	// Number indicating the lower band for y axis
@@ -616,6 +617,38 @@ func (o *BarChart) SetXAxis(v XAxis) {
 	o.XAxis = &v
 }
 
+// GetXAxisTimeFormat returns the XAxisTimeFormat field value if set, zero value otherwise.
+func (o *BarChart) GetXAxisTimeFormat() XAxisTimeFormat {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		var ret XAxisTimeFormat
+		return ret
+	}
+	return *o.XAxisTimeFormat
+}
+
+// GetXAxisTimeFormatOk returns a tuple with the XAxisTimeFormat field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BarChart) GetXAxisTimeFormatOk() (*XAxisTimeFormat, bool) {
+	if o == nil || IsNil(o.XAxisTimeFormat) {
+		return nil, false
+	}
+	return o.XAxisTimeFormat, true
+}
+
+// HasXAxisTimeFormat returns a boolean if a field has been set.
+func (o *BarChart) HasXAxisTimeFormat() bool {
+	if o != nil && !IsNil(o.XAxisTimeFormat) {
+		return true
+	}
+
+	return false
+}
+
+// SetXAxisTimeFormat gets a reference to the given XAxisTimeFormat and assigns it to the XAxisTimeFormat field.
+func (o *BarChart) SetXAxisTimeFormat(v XAxisTimeFormat) {
+	o.XAxisTimeFormat = &v
+}
+
 // GetYAxisMax returns the YAxisMax field value if set, zero value otherwise.
 func (o *BarChart) GetYAxisMax() float32 {
 	if o == nil || IsNil(o.YAxisMax) {
@@ -741,6 +774,9 @@ func (o BarChart) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.XAxis) {
 		toSerialize["xAxis"] = o.XAxis
 	}
+	if !IsNil(o.XAxisTimeFormat) {
+		toSerialize["xAxisTimeFormat"] = o.XAxisTimeFormat
+	}
 	if !IsNil(o.YAxisMax) {
 		toSerialize["yAxisMax"] = o.YAxisMax
 	}
@@ -787,6 +823,7 @@ func (o *BarChart) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "stackDefinition")
 		delete(additionalProperties, "unit")
 		delete(additionalProperties, "xAxis")
+		delete(additionalProperties, "xAxisTimeFormat")
 		delete(additionalProperties, "yAxisMax")
 		delete(additionalProperties, "yAxisMin")
 		o.AdditionalProperties = additionalProperties

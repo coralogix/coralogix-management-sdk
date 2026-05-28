@@ -14,7 +14,6 @@ model_changelog_entry.go
 model_cloud_formation_stack.go
 model_cloud_formation_template.go
 model_command_information.go
-model_common_group.go
 model_configuration_block.go
 model_connection_status.go
 model_default_integration_details.go
@@ -30,7 +29,6 @@ model_external_url.go
 model_field_condition.go
 model_field_condition_condition_type.go
 model_field_condition_field_value.go
-model_field_group.go
 model_field_information.go
 model_field_information_multi_text.go
 model_field_information_multiple_selection.go

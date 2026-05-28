@@ -42,6 +42,8 @@ func (r ApiConnectorsServiceBatchGetConnectorSummariesRequest) Execute() (*Batch
 /*
 ConnectorsServiceBatchGetConnectorSummaries Batch Get Connectors Summaries
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceBatchGetConnectorSummariesRequest
 */
@@ -155,6 +157,8 @@ func (r ApiConnectorsServiceBatchGetConnectorsRequest) Execute() (*BatchGetConne
 
 /*
 ConnectorsServiceBatchGetConnectors Batch Get Connectors
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceBatchGetConnectorsRequest
@@ -270,6 +274,8 @@ func (r ApiConnectorsServiceCreateConnectorRequest) Execute() (*CreateConnectorR
 /*
 ConnectorsServiceCreateConnector Create a Connector
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceCreateConnectorRequest
 */
@@ -369,6 +375,8 @@ func (r ApiConnectorsServiceDeleteConnectorRequest) Execute() (map[string]interf
 
 /*
 ConnectorsServiceDeleteConnector Delete a Connector
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -470,6 +478,8 @@ func (r ApiConnectorsServiceGetConnectorRequest) Execute() (*GetConnectorRespons
 
 /*
 ConnectorsServiceGetConnector Get a Connector
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id
@@ -576,6 +586,8 @@ func (r ApiConnectorsServiceGetConnectorTypeSummariesRequest) Execute() (*GetCon
 
 /*
 ConnectorsServiceGetConnectorTypeSummaries Get Connector Type Summaries
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceGetConnectorTypeSummariesRequest
@@ -688,6 +700,8 @@ func (r ApiConnectorsServiceListConnectorSummariesRequest) Execute() (*ListConne
 
 /*
 ConnectorsServiceListConnectorSummaries List Connector Summaries
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceListConnectorSummariesRequest
@@ -804,6 +818,8 @@ func (r ApiConnectorsServiceListConnectorsRequest) Execute() (*ListConnectorsRes
 /*
 ConnectorsServiceListConnectors List Connectors
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceListConnectorsRequest
 */
@@ -912,6 +928,8 @@ func (r ApiConnectorsServiceReplaceConnectorRequest) Execute() (*ReplaceConnecto
 
 /*
 ConnectorsServiceReplaceConnector Replace a Connector
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceReplaceConnectorRequest

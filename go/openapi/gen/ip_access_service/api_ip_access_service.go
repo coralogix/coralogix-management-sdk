@@ -40,6 +40,8 @@ func (r ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest) Execute() (*Crea
 /*
 IpAccessServiceCreateCompanyIpAccessSettings Create company IP access settings
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest
 */
@@ -144,6 +146,8 @@ func (r ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest) Execute() (map[s
 
 /*
 IpAccessServiceDeleteCompanyIpAccessSettings Delete company IP access settings
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest
@@ -251,6 +255,8 @@ func (r ApiIpAccessServiceGetCompanyIpAccessSettingsRequest) Execute() (*GetComp
 /*
 IpAccessServiceGetCompanyIpAccessSettings Get company IP access settings
 
+No description available
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceGetCompanyIpAccessSettingsRequest
 */
@@ -356,6 +362,8 @@ func (r ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest) Execute() (*Rep
 
 /*
 IpAccessServiceReplaceCompanyIpAccessSettings Replace company IP access settings
+
+No description available
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest

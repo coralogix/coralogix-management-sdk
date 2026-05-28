@@ -7,6 +7,7 @@ servers:
 paths:
   /enrichment-rules/enrichment-rules/v1:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_RemoveEnrichments
@@ -36,6 +37,7 @@ paths:
       tags:
       - Enrichments Service
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetEnrichments
@@ -50,6 +52,7 @@ paths:
       tags:
       - Enrichments Service
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_AddEnrichments
@@ -69,6 +72,7 @@ paths:
       tags:
       - Enrichments Service
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_AtomicOverwriteEnrichments
@@ -89,6 +93,7 @@ paths:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/all:
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_AtomicOverwriteAllEnrichments
@@ -112,6 +117,7 @@ paths:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/limit:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetEnrichmentLimit
@@ -127,6 +133,7 @@ paths:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/settings:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetCompanyEnrichmentSettings
@@ -384,13 +391,6 @@ components:
       required:
       - suspiciousIp
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -560,18 +560,6 @@ components:
       title: Encrichments Delettion Response
       type: object
     SuspiciousIpType:
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

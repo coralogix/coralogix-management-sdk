@@ -11,6 +11,7 @@
           "Presets service"
         ],
         "summary": "Batch Get Presets",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -49,6 +50,7 @@
           "Presets service"
         ],
         "summary": "Replace Custom Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -87,6 +89,7 @@
           "Presets service"
         ],
         "summary": "Create Custom Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -127,6 +130,7 @@
           "Presets service"
         ],
         "summary": "Delete Custom Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -162,6 +166,7 @@
           "Presets service"
         ],
         "summary": "Set Custom Preset As Default",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -197,6 +202,7 @@
           "Presets service"
         ],
         "summary": "Get Default Preset Summary",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -239,6 +245,7 @@
           "Presets service"
         ],
         "summary": "Get System Default Preset Summary",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -281,6 +288,7 @@
           "Presets service"
         ],
         "summary": "Get Preset",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -316,6 +324,7 @@
           "Presets service"
         ],
         "summary": "Set Preset As Default",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -351,6 +360,7 @@
           "Presets service"
         ],
         "summary": "List Preset Summaries",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -459,17 +469,6 @@
       },
       "DeleteCustomPresetResponse": {
         "type": "object"
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -769,24 +768,6 @@
       },
       "SetPresetAsDefaultResponse": {
         "type": "object"
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

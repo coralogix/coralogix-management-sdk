@@ -7,6 +7,7 @@ servers:
 paths:
   /v3/alert-event-stats:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertEventService_GetAlertEventsStats
@@ -55,6 +56,7 @@ paths:
       - alerts:ReadConfig
   /v3/alert-event/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: AlertEventService_GetAlertEvent
@@ -202,6 +204,42 @@ components:
       title: Alert event
       type: object
     AlertEventMultiplePermutation:
+      example:
+        alertEventMultiplePermutation:
+        - preGroupingEventId: preGroupingEventId
+          incidentCorrelationKey: incidentCorrelationKey
+          groupLabels:
+            key: groupLabels
+          payloadType: payloadType
+          payload: "{}"
+          alertId: alertId
+          activityAnalysis:
+            rules:
+            - rules
+            - rules
+            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          permutationLabels:
+            key: permutationLabels
+          permutationId: permutationId
+          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - preGroupingEventId: preGroupingEventId
+          incidentCorrelationKey: incidentCorrelationKey
+          groupLabels:
+            key: groupLabels
+          payloadType: payloadType
+          payload: "{}"
+          alertId: alertId
+          activityAnalysis:
+            rules:
+            - rules
+            - rules
+            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          permutationLabels:
+            key: permutationLabels
+          permutationId: permutationId
+          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         alertEventMultiplePermutation:
           items:
@@ -258,13 +296,6 @@ components:
           type: array
       title: Alert event statistics data structure
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -318,9 +349,50 @@ components:
       type: object
     GetAlertEventResponse:
       oneOf:
-      - $ref: "#/components/schemas/GetAlertEventResponseSinglePermutation"
       - $ref: "#/components/schemas/GetAlertEventResponseMultiplePermutation"
+      - $ref: "#/components/schemas/GetAlertEventResponseSinglePermutation"
     GetAlertEventResponseMultiplePermutation:
+      example:
+        pagination:
+          totalSize: 0
+          nextPageToken: nextPageToken
+        multiplePermutation:
+          alertEventMultiplePermutation:
+          - preGroupingEventId: preGroupingEventId
+            incidentCorrelationKey: incidentCorrelationKey
+            groupLabels:
+              key: groupLabels
+            payloadType: payloadType
+            payload: "{}"
+            alertId: alertId
+            activityAnalysis:
+              rules:
+              - rules
+              - rules
+              status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+            permutationLabels:
+              key: permutationLabels
+            permutationId: permutationId
+            status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - preGroupingEventId: preGroupingEventId
+            incidentCorrelationKey: incidentCorrelationKey
+            groupLabels:
+              key: groupLabels
+            payloadType: payloadType
+            payload: "{}"
+            alertId: alertId
+            activityAnalysis:
+              rules:
+              - rules
+              - rules
+              status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+            permutationLabels:
+              key: permutationLabels
+            permutationId: permutationId
+            status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        id: id
       externalDocs:
         url: ""
       properties:
@@ -335,29 +407,6 @@ components:
       title: Get alert event response
       type: object
     GetAlertEventResponseSinglePermutation:
-      example:
-        pagination:
-          totalSize: 0
-          nextPageToken: nextPageToken
-        singlePermutation:
-          preGroupingEventId: preGroupingEventId
-          incidentCorrelationKey: incidentCorrelationKey
-          groupLabels:
-            key: groupLabels
-          payloadType: payloadType
-          payload: "{}"
-          alertId: alertId
-          activityAnalysis:
-            rules:
-            - rules
-            - rules
-            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
-          permutationLabels:
-            key: permutationLabels
-          permutationId: permutationId
-          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
-          timestamp: 2000-01-23T04:56:07.000+00:00
-        id: id
       externalDocs:
         url: ""
       properties:
@@ -432,18 +481,6 @@ components:
         totalSize:
           format: int64
           type: integer
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:

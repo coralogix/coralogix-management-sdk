@@ -11,6 +11,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -107,6 +108,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -166,6 +168,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -227,6 +230,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -289,6 +293,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -353,6 +358,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -404,6 +410,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -653,17 +660,6 @@
           "DURATION_FREQUENCY_DAY"
         ]
       },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
-      },
       "FilterByAlertSchedulerRuleIdsAlertSchedulerIds": {
         "type": "object",
         "properties": {
@@ -860,13 +856,13 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamicDaily"
-          },
-          {
             "$ref": "#/components/schemas/RecurringDynamicWeekly"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicMonthly"
+          },
+          {
+            "$ref": "#/components/schemas/RecurringDynamicDaily"
           }
         ]
       },
@@ -1120,24 +1116,6 @@
             "$ref": "#/components/schemas/AlertSchedulerRuleProtobufV1FilterAlertUniqueIds"
           }
         ]
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

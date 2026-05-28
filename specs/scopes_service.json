@@ -11,6 +11,7 @@
           "Scopes Service"
         ],
         "summary": "Get Team Scopes By Ids",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -65,6 +66,7 @@
           "Scopes Service"
         ],
         "summary": "Update Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -146,6 +148,7 @@
           "Scopes Service"
         ],
         "summary": "Create Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -223,6 +226,7 @@
           "Scopes Service"
         ],
         "summary": "Get Team Scopes",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -265,6 +269,7 @@
           "Scopes Service"
         ],
         "summary": "Delete Scope",
+        "description": "No description available",
         "externalDocs": {
           "url": ""
         },
@@ -335,17 +340,6 @@
       },
       "DeleteScopeResponse": {
         "type": "object"
-      },
-      "FieldGroup": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          }
-        }
       },
       "FilterPathAndValues": {
         "oneOf": [
@@ -473,24 +467,6 @@
         "required": [
           "scope"
         ]
-      },
-      "common.Group": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "$ref": "#/components/schemas/FieldGroup"
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/common.Group"
-            }
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
       },
       "events.v3.FilterMatcher": {
         "type": "string",

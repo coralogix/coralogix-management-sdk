@@ -7,8 +7,11 @@ servers:
 paths:
   /incidents/aggregations/v1:
     get:
-      description: Retrieve aggregated incident data with support for grouping and
-        filtering.
+      description: |-
+        Retrieve aggregated incident data with support for grouping and filtering.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentAggregations
@@ -62,8 +65,11 @@ paths:
       - incidents:read
   /incidents/events/v1:
     get:
-      description: "List incident events with support for filtering, pagination, and\
-        \ ordering."
+      description: |-
+        List incident events with support for filtering, pagination, and ordering.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEvents
@@ -115,7 +121,11 @@ paths:
       - incidents:read
   /incidents/events/v1/all/count:
     get:
-      description: Retrieve the total count of incident events matching a filter.
+      description: |-
+        Retrieve the total count of incident events matching a filter.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEventsTotalCount
@@ -153,8 +163,11 @@ paths:
       - incidents:read
   /incidents/events/v1/{event_id}:
     get:
-      description: Retrieve detailed information about a single incident by related
-        alert event id.
+      description: |-
+        Retrieve detailed information about a single incident by related alert event id.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncidentByEventId
@@ -194,7 +207,11 @@ paths:
       - incidents:read
   /incidents/events/v1/{event_id}/acknowledge:
     post:
-      description: Mark incident as acknowledged by event id.
+      description: |-
+        Mark incident as acknowledged by event id.
+
+        Requires the following permissions:
+        - `incidents:acknowledge`
       externalDocs:
         url: ""
       operationId: IncidentsService_AcknowledgeIncidentByEventId
@@ -234,7 +251,11 @@ paths:
       - incidents:acknowledge
   /incidents/events/v1/{event_id}/resolve:
     post:
-      description: Mark incident as resolved by event id.
+      description: |-
+        Mark incident as resolved by event id.
+
+        Requires the following permissions:
+        - `incidents:close`
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidentByEventId
@@ -274,6 +295,7 @@ paths:
       - incidents:close
   /incidents/filter-values/v1:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_GetFilterValues
@@ -308,6 +330,7 @@ paths:
       - incidents:read
   /incidents/filter-values/v1/events:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidentEventsFilterValues
@@ -345,7 +368,11 @@ paths:
       - incidents:read
   /incidents/incidents/v1:
     get:
-      description: Retrieve multiple incidents by their IDs in a single request.
+      description: |-
+        Retrieve multiple incidents by their IDs in a single request.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_BatchGetIncident
@@ -384,8 +411,11 @@ paths:
       x-coralogixPermissions:
       - incidents:read
     post:
-      description: Lists all available incidents based on specified filters and order.
-        The list is ordered in an unspecified direction and sorted by creation time.
+      description: |-
+        Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_ListIncidents
@@ -420,7 +450,11 @@ paths:
       - incidents:read
   /incidents/incidents/v1/all/acknowledge:
     post:
-      description: Mark one or more incidents as acknowledged.
+      description: |-
+        Mark one or more incidents as acknowledged.
+
+        Requires the following permissions:
+        - `incidents:acknowledge`
       externalDocs:
         url: ""
       operationId: IncidentsService_AcknowledgeIncidents
@@ -455,7 +489,11 @@ paths:
       - incidents:acknowledge
   /incidents/incidents/v1/all/by-user:
     delete:
-      description: Remove user assignments from one or more incidents.
+      description: |-
+        Remove user assignments from one or more incidents.
+
+        Requires the following permissions:
+        - `incidents:assign`
       externalDocs:
         url: ""
       operationId: IncidentsService_UnassignIncidents
@@ -498,7 +536,11 @@ paths:
       x-coralogixPermissions:
       - incidents:assign
     post:
-      description: Assign one or more incidents to a specific user.
+      description: |-
+        Assign one or more incidents to a specific user.
+
+        Requires the following permissions:
+        - `incidents:assign`
       externalDocs:
         url: ""
       operationId: IncidentsService_AssignIncidents
@@ -533,6 +575,7 @@ paths:
       - incidents:assign
   /incidents/incidents/v1/all/closed:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: IncidentsService_CloseIncidents
@@ -567,7 +610,11 @@ paths:
       - incidents:close
   /incidents/incidents/v1/all/resolve:
     post:
-      description: Mark one or more incidents as resolved.
+      description: |-
+        Mark one or more incidents as resolved.
+
+        Requires the following permissions:
+        - `incidents:close`
       externalDocs:
         url: ""
       operationId: IncidentsService_ResolveIncidents
@@ -602,8 +649,11 @@ paths:
       - incidents:close
   /incidents/incidents/v1/{id}:
     get:
-      description: Retrieve detailed information about a single incident by its unique
-        identifier.
+      description: |-
+        Retrieve detailed information about a single incident by its unique identifier.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncident
@@ -642,9 +692,11 @@ paths:
       - incidents:read
   /incidents/incidents/v1/{incident_id}/events:
     get:
-      description: "Retrieve a chronological list of all events associated with a\
-        \ specific incident. Includes state changes, assignments, acknowledgments,\
-        \ and resolutions."
+      description: |-
+        Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.
+
+        Requires the following permissions:
+        - `incidents:read`
       externalDocs:
         url: ""
       operationId: IncidentsService_GetIncidentEvents
@@ -717,9 +769,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -727,9 +779,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -781,9 +833,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -791,9 +843,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -832,9 +884,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -842,9 +894,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -898,9 +950,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -908,9 +960,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -949,9 +1001,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -959,9 +1011,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1059,9 +1111,9 @@ components:
             state: INCIDENT_STATE_UNSPECIFIED
             closedAt: 2024-01-01T00:00:00Z
             events:
-            - operationalEvent:
-                systemName: systemName
-              id: incident_event_id
+            - id: incident_event_id
+              administrativeEvent:
+                userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               upsertState:
                 payload:
@@ -1069,9 +1121,9 @@ components:
                 stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
                 isMuted: true
               incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-            - operationalEvent:
-                systemName: systemName
-              id: incident_event_id
+            - id: incident_event_id
+              administrativeEvent:
+                userId: userId
               originatorType: ORIGINATOR_TYPE_UNSPECIFIED
               upsertState:
                 payload:
@@ -1135,9 +1187,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1145,9 +1197,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1186,9 +1238,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1196,9 +1248,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1334,13 +1386,6 @@ components:
       - valuesWithCount
       title: Display label values with count
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FilterPathAndValues:
       oneOf:
       - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
@@ -1425,9 +1470,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1435,9 +1480,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1460,9 +1505,9 @@ components:
       description: Response containing all events associated with the requested incident
       example:
         incidentEvents:
-        - operationalEvent:
-            systemName: systemName
-          id: incident_event_id
+        - id: incident_event_id
+          administrativeEvent:
+            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           upsertState:
             payload:
@@ -1470,9 +1515,9 @@ components:
             stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
             isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - operationalEvent:
-            systemName: systemName
-          id: incident_event_id
+        - id: incident_event_id
+          administrativeEvent:
+            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           upsertState:
             payload:
@@ -1522,9 +1567,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1532,9 +1577,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -1594,7 +1639,7 @@ components:
     GroupByValuesIncidentField:
       example:
         incidentField:
-          id: id
+          severity: null
       properties:
         incidentField:
           $ref: "#/components/schemas/IncidentFieldOneOf"
@@ -1632,9 +1677,9 @@ components:
         state: INCIDENT_STATE_UNSPECIFIED
         closedAt: 2024-01-01T00:00:00Z
         events:
-        - operationalEvent:
-            systemName: systemName
-          id: incident_event_id
+        - id: incident_event_id
+          administrativeEvent:
+            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           upsertState:
             payload:
@@ -1642,9 +1687,9 @@ components:
             stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
             isMuted: true
           incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-        - operationalEvent:
-            systemName: systemName
-          id: incident_event_id
+        - id: incident_event_id
+          administrativeEvent:
+            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           upsertState:
             payload:
@@ -1731,9 +1776,9 @@ components:
       example:
         groupBysValue:
         - incidentField:
-            id: id
+            severity: null
         - incidentField:
-            id: id
+            severity: null
         aggAssignmentsCount:
         - count: 10
           assignedTo:
@@ -1850,18 +1895,18 @@ components:
       type: object
     IncidentEvent:
       oneOf:
+      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventUpsertStateOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAcknowledgeAdministrativeEvent"
-      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventAcknowledgeOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventCloseAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventCloseOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorAdministrativeEvent"
+      - $ref: "#/components/schemas/IncidentEventSnoozeIndicatorOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentAdministrativeEvent"
       - $ref: "#/components/schemas/IncidentEventAssignmentOperationalEvent"
       - $ref: "#/components/schemas/IncidentEventUnassignOperationalEvent"
-      - $ref: "#/components/schemas/IncidentEventUpsertStateAdministrativeEvent"
     IncidentEventAcknowledge:
       properties:
         acknowledgedBy:
@@ -2051,9 +2096,9 @@ components:
     IncidentEventExtended:
       example:
         incidentEvent:
-          operationalEvent:
-            systemName: systemName
           id: incident_event_id
+          administrativeEvent:
+            userId: userId
           originatorType: ORIGINATOR_TYPE_UNSPECIFIED
           upsertState:
             payload:
@@ -2151,13 +2196,13 @@ components:
       - INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
       type: string
     IncidentEventOriginatorAdministrative:
+      example:
+        userId: userId
       properties:
         userId:
           type: string
       type: object
     IncidentEventOriginatorOperational:
-      example:
-        systemName: systemName
       properties:
         systemName:
           type: string
@@ -2314,6 +2359,17 @@ components:
       title: Incident event upsert state
       type: object
     IncidentEventUpsertStateAdministrativeEvent:
+      example:
+        id: incident_event_id
+        administrativeEvent:
+          userId: userId
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        upsertState:
+          payload:
+            cxEventKey: cxEventKey
+          stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+          isMuted: true
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2340,17 +2396,6 @@ components:
       title: Incident event
       type: object
     IncidentEventUpsertStateOperationalEvent:
-      example:
-        operationalEvent:
-          systemName: systemName
-        id: incident_event_id
-        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
-        upsertState:
-          payload:
-            cxEventKey: cxEventKey
-          stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
-          isMuted: true
-        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -2378,17 +2423,17 @@ components:
       type: object
     IncidentFieldOneOf:
       oneOf:
-      - $ref: "#/components/schemas/IncidentFieldOneOfId"
-      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
-      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
       - $ref: "#/components/schemas/IncidentFieldOneOfSeverity"
-      - $ref: "#/components/schemas/IncidentFieldOneOfName"
       - $ref: "#/components/schemas/IncidentFieldOneOfCreatedAt"
-      - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfClosedAt"
       - $ref: "#/components/schemas/IncidentFieldOneOfStatus"
       - $ref: "#/components/schemas/IncidentFieldOneOfLastStateUpdateTime"
+      - $ref: "#/components/schemas/IncidentFieldOneOfSubsystemName"
       - $ref: "#/components/schemas/IncidentFieldOneOfDuration"
+      - $ref: "#/components/schemas/IncidentFieldOneOfId"
+      - $ref: "#/components/schemas/IncidentFieldOneOfName"
+      - $ref: "#/components/schemas/IncidentFieldOneOfState"
+      - $ref: "#/components/schemas/IncidentFieldOneOfApplicationName"
     IncidentFieldOneOfApplicationName:
       properties:
         applicationName:
@@ -2420,8 +2465,6 @@ components:
       - duration
       type: object
     IncidentFieldOneOfId:
-      example:
-        id: id
       properties:
         id:
           type: string
@@ -2444,6 +2487,8 @@ components:
       - name
       type: object
     IncidentFieldOneOfSeverity:
+      example:
+        severity: null
       properties:
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -2863,9 +2908,9 @@ components:
         incidentAggs:
         - groupBysValue:
           - incidentField:
-              id: id
+              severity: null
           - incidentField:
-              id: id
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -2906,9 +2951,9 @@ components:
           lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
         - groupBysValue:
           - incidentField:
-              id: id
+              severity: null
           - incidentField:
-              id: id
+              severity: null
           aggAssignmentsCount:
           - count: 10
             assignedTo:
@@ -3025,9 +3070,9 @@ components:
           nextPageToken: next_page_token
         items:
         - incidentEvent:
-            operationalEvent:
-              systemName: systemName
             id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3056,9 +3101,9 @@ components:
             incidentStatus: INCIDENT_STATUS_UNSPECIFIED
           cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
         - incidentEvent:
-            operationalEvent:
-              systemName: systemName
             id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3155,9 +3200,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3165,9 +3210,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3206,9 +3251,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3216,9 +3261,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3290,9 +3335,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3300,9 +3345,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3354,9 +3399,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3364,9 +3409,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3405,9 +3450,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3415,9 +3460,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3471,9 +3516,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3481,9 +3526,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3522,9 +3567,9 @@ components:
           state: INCIDENT_STATE_UNSPECIFIED
           closedAt: 2024-01-01T00:00:00Z
           events:
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3532,9 +3577,9 @@ components:
               stateType: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
               isMuted: true
             incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
-          - operationalEvent:
-              systemName: systemName
-            id: incident_event_id
+          - id: incident_event_id
+            administrativeEvent:
+              userId: userId
             originatorType: ORIGINATOR_TYPE_UNSPECIFIED
             upsertState:
               payload:
@@ -3595,18 +3640,6 @@ components:
       - field
       - incidentField
       title: Incident order by
-      type: object
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -3744,8 +3777,8 @@ components:
       type: string
     v1.OrderBy:
       oneOf:
-      - $ref: "#/components/schemas/V1OrderByIncidentField"
       - $ref: "#/components/schemas/V1OrderByContextualLabel"
+      - $ref: "#/components/schemas/V1OrderByIncidentField"
     v1.OrderByDirection:
       enum:
       - ORDER_BY_DIRECTION_UNSPECIFIED

@@ -7,6 +7,7 @@ servers:
 paths:
   /integrations/contextual-data/v1:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_GetContextualDataIntegrations
@@ -43,6 +44,7 @@ paths:
       x-coralogixPermissions:
       - contextual-data:ReadConfig
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_SaveContextualDataIntegration
@@ -76,6 +78,7 @@ paths:
       x-coralogixPermissions:
       - contextual-data:UpdateConfig
     put:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_UpdateContextualDataIntegration
@@ -110,6 +113,7 @@ paths:
       - contextual-data:UpdateConfig
   /integrations/contextual-data/v1/definitions/{id}:
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_GetContextualDataIntegrationDefinition
@@ -154,6 +158,7 @@ paths:
       - contextual-data:ReadConfig
   /integrations/contextual-data/v1/{id}:
     delete:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_DeleteContextualDataIntegration
@@ -191,6 +196,7 @@ paths:
       x-coralogixPermissions:
       - contextual-data:UpdateConfig
     get:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_GetContextualDataIntegrationDetails
@@ -236,6 +242,7 @@ paths:
       - contextual-data:ReadConfig
   /integrations/contextual-data/v1/{integration_id}/test:
     post:
+      description: No description available
       externalDocs:
         url: ""
       operationId: ContextualDataIntegrationService_TestContextualDataIntegration
@@ -432,9 +439,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringValue: stringValue
+          - sensitiveData: "{}"
             key: key
-          - stringValue: stringValue
+          - sensitiveData: "{}"
             key: key
           isTesting: true
           empty: "{}"
@@ -450,9 +457,9 @@ components:
               key: details
           id: id
           parameters:
-          - stringValue: stringValue
+          - sensitiveData: "{}"
             key: key
-          - stringValue: stringValue
+          - sensitiveData: "{}"
             key: key
           isTesting: true
           empty: "{}"
@@ -744,22 +751,43 @@ components:
           type: string
       title: Field value
       type: object
-    FieldGroup:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      type: object
     FieldInformation:
       oneOf:
-      - $ref: "#/components/schemas/FieldInformationSelection"
-      - $ref: "#/components/schemas/FieldInformationSingleNumber"
-      - $ref: "#/components/schemas/FieldInformationSingle"
       - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
       - $ref: "#/components/schemas/FieldInformationSingleBoolean"
+      - $ref: "#/components/schemas/FieldInformationSelection"
+      - $ref: "#/components/schemas/FieldInformationSingleNumber"
+      - $ref: "#/components/schemas/FieldInformationSingle"
     FieldInformationMultiText:
+      example:
+        visible: true
+        groupId: groupId
+        tooltip: tooltip
+        multiText:
+          options:
+          - options
+          - options
+          defaultValues:
+          - defaultValues
+          - defaultValues
+        type: API_KEY
+        upgradeNotice: upgradeNotice
+        predefined: true
+        required: true
+        templateParamName: templateParamName
+        readonly: true
+        documentationReference: documentationReference
+        name: name
+        placeholder: placeholder
+        applicableIf:
+          values:
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          - fieldName: fieldName
+            valuePattern: valuePattern
+          type: UNKNOWN
+        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -836,32 +864,6 @@ components:
       title: Field information
       type: object
     FieldInformationSelection:
-      example:
-        visible: true
-        groupId: groupId
-        tooltip: tooltip
-        type: API_KEY
-        upgradeNotice: upgradeNotice
-        predefined: true
-        required: true
-        templateParamName: templateParamName
-        readonly: true
-        selection:
-          defaultValue: defaultValue
-          options:
-          - options
-          - options
-        documentationReference: documentationReference
-        name: name
-        placeholder: placeholder
-        applicableIf:
-          values:
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          - fieldName: fieldName
-            valuePattern: valuePattern
-          type: UNKNOWN
-        allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
@@ -1085,7 +1087,7 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            cloudformation: "{}"
+            untracked: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
@@ -1108,17 +1110,19 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
               readonly: true
-              selection:
-                defaultValue: defaultValue
-                options:
-                - options
-                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1133,17 +1137,19 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
               readonly: true
-              selection:
-                defaultValue: defaultValue
-                options:
-                - options
-                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1176,17 +1182,19 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
               readonly: true
-              selection:
-                defaultValue: defaultValue
-                options:
-                - options
-                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1201,17 +1209,19 @@ components:
             - visible: true
               groupId: groupId
               tooltip: tooltip
+              multiText:
+                options:
+                - options
+                - options
+                defaultValues:
+                - defaultValues
+                - defaultValues
               type: API_KEY
               upgradeNotice: upgradeNotice
               predefined: true
               required: true
               templateParamName: templateParamName
               readonly: true
-              selection:
-                defaultValue: defaultValue
-                options:
-                - options
-                - options
               documentationReference: documentationReference
               name: name
               placeholder: placeholder
@@ -1248,9 +1258,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringValue: stringValue
+              - sensitiveData: "{}"
                 key: key
-              - stringValue: stringValue
+              - sensitiveData: "{}"
                 key: key
               isTesting: true
               empty: "{}"
@@ -1266,9 +1276,9 @@ components:
                   key: details
               id: id
               parameters:
-              - stringValue: stringValue
+              - sensitiveData: "{}"
                 key: key
-              - stringValue: stringValue
+              - sensitiveData: "{}"
                 key: key
               isTesting: true
               empty: "{}"
@@ -2023,7 +2033,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              cloudformation: "{}"
+              untracked: "{}"
             versions:
             - versions
             - versions
@@ -2060,7 +2070,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              cloudformation: "{}"
+              untracked: "{}"
             versions:
             - versions
             - versions
@@ -2087,7 +2097,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              cloudformation: "{}"
+              untracked: "{}"
             versions:
             - versions
             - versions
@@ -2125,7 +2135,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            cloudformation: "{}"
+            untracked: "{}"
           versions:
           - versions
           - versions
@@ -2204,7 +2214,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          cloudformation: "{}"
+          untracked: "{}"
         versions:
         - versions
         - versions
@@ -2257,7 +2267,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          cloudformation: "{}"
+          untracked: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
@@ -2280,17 +2290,19 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
             readonly: true
-            selection:
-              defaultValue: defaultValue
-              options:
-              - options
-              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2305,17 +2317,19 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
             readonly: true
-            selection:
-              defaultValue: defaultValue
-              options:
-              - options
-              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2348,17 +2362,19 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
             readonly: true
-            selection:
-              defaultValue: defaultValue
-              options:
-              - options
-              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2373,17 +2389,19 @@ components:
           - visible: true
             groupId: groupId
             tooltip: tooltip
+            multiText:
+              options:
+              - options
+              - options
+              defaultValues:
+              - defaultValues
+              - defaultValues
             type: API_KEY
             upgradeNotice: upgradeNotice
             predefined: true
             required: true
             templateParamName: templateParamName
             readonly: true
-            selection:
-              defaultValue: defaultValue
-              options:
-              - options
-              - options
             documentationReference: documentationReference
             name: name
             placeholder: placeholder
@@ -2468,9 +2486,9 @@ components:
                 key: details
             id: id
             parameters:
-            - stringValue: stringValue
+            - sensitiveData: "{}"
               key: key
-            - stringValue: stringValue
+            - sensitiveData: "{}"
               key: key
             isTesting: true
             empty: "{}"
@@ -2486,9 +2504,9 @@ components:
                 key: details
             id: id
             parameters:
-            - stringValue: stringValue
+            - sensitiveData: "{}"
               key: key
-            - stringValue: stringValue
+            - sensitiveData: "{}"
               key: key
             isTesting: true
             empty: "{}"
@@ -3243,7 +3261,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            cloudformation: "{}"
+            untracked: "{}"
           versions:
           - versions
           - versions
@@ -3517,17 +3535,19 @@ components:
         - visible: true
           groupId: groupId
           tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
           type: API_KEY
           upgradeNotice: upgradeNotice
           predefined: true
           required: true
           templateParamName: templateParamName
           readonly: true
-          selection:
-            defaultValue: defaultValue
-            options:
-            - options
-            - options
           documentationReference: documentationReference
           name: name
           placeholder: placeholder
@@ -3542,17 +3562,19 @@ components:
         - visible: true
           groupId: groupId
           tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
           type: API_KEY
           upgradeNotice: upgradeNotice
           predefined: true
           required: true
           templateParamName: templateParamName
           readonly: true
-          selection:
-            defaultValue: defaultValue
-            options:
-            - options
-            - options
           documentationReference: documentationReference
           name: name
           placeholder: placeholder
@@ -3632,6 +3654,13 @@ components:
       title: Link
       type: object
     ListTextValue:
+      example:
+        options:
+        - options
+        - options
+        defaultValues:
+        - defaultValues
+        - defaultValues
       externalDocs:
         url: ""
       properties:
@@ -3704,12 +3733,12 @@ components:
       type: object
     Parameter:
       oneOf:
+      - $ref: "#/components/schemas/ParameterSensitiveData"
       - $ref: "#/components/schemas/ParameterStringValue"
       - $ref: "#/components/schemas/ParameterBooleanValue"
       - $ref: "#/components/schemas/ParameterStringList"
       - $ref: "#/components/schemas/ParameterApiKey"
       - $ref: "#/components/schemas/ParameterNumericValue"
-      - $ref: "#/components/schemas/ParameterSensitiveData"
     ParameterApiKey:
       externalDocs:
         url: ""
@@ -3748,6 +3777,9 @@ components:
       title: Parameter
       type: object
     ParameterSensitiveData:
+      example:
+        sensitiveData: "{}"
+        key: key
       externalDocs:
         url: ""
       properties:
@@ -3775,9 +3807,6 @@ components:
       title: Parameter
       type: object
     ParameterStringValue:
-      example:
-        stringValue: stringValue
-        key: key
       externalDocs:
         url: ""
       properties:
@@ -3886,9 +3915,9 @@ components:
             key: details
         id: id
         parameters:
-        - stringValue: stringValue
+        - sensitiveData: "{}"
           key: key
-        - stringValue: stringValue
+        - sensitiveData: "{}"
           key: key
         isTesting: true
         empty: "{}"
@@ -3971,11 +4000,6 @@ components:
       title: Save contextual data integration response
       type: object
     SelectionValue:
-      example:
-        defaultValue: defaultValue
-        options:
-        - options
-        - options
       externalDocs:
         url: ""
       properties:
@@ -4124,8 +4148,6 @@ components:
       type: object
     V1IntegrationTypeCloudformation:
       description: This data structure represents an integration type.
-      example:
-        cloudformation: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4198,6 +4220,8 @@ components:
       type: object
     V1IntegrationTypeUntracked:
       description: This data structure represents an integration type.
+      example:
+        untracked: "{}"
       externalDocs:
         url: ""
       properties:
@@ -4218,18 +4242,6 @@ components:
       - OAUTH
       - CUSTOM
       type: string
-    common.Group:
-      properties:
-        field:
-          $ref: "#/components/schemas/FieldGroup"
-        groups:
-          items:
-            $ref: "#/components/schemas/common.Group"
-          type: array
-        value:
-          format: double
-          type: number
-      type: object
     events.v3.FilterMatcher:
       enum:
       - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
@@ -4655,13 +4667,13 @@ components:
       type: object
     v1.IntegrationType:
       oneOf:
+      - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
       - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
       - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
-      - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
     v1.RevisionSummary:
       example:
         lifecycle: REVISION_LIFECYCLE_UNSPECIFIED

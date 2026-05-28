@@ -8,7 +8,6 @@ client.go
 configuration.go
 git_push.sh
 model_case_notification_deliveries.go
-model_common_group.go
 model_connector_details.go
 model_delivery_attempt.go
 model_delivery_failure.go
@@ -17,7 +16,6 @@ model_delivery_outcome_failure.go
 model_delivery_outcome_success.go
 model_delivery_success.go
 model_events_v3_filter_matcher.go
-model_field_group.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go
