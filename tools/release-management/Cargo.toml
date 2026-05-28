@@ -18,7 +18,7 @@ toml_edit = "0.22"
 tokio = { version = "1", features = ["full"] }
 eyre = "0"
 git_cmd = "0.6"
-time = { version = "0.3.36", features = ["formatting"] }
+time = { version = "0.3.47", features = ["formatting"] }
 clap = { version = "4.5", features = ["derive"] }
 tracing = "*"
 tracing-subscriber = { features = ["env-filter"], version = "*" }
