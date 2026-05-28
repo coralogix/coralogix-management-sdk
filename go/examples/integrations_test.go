@@ -263,7 +263,6 @@ func TestWebhooks(t *testing.T) {
 	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("sendlog-webhook"),
-			Url:  wrapperspb.String("https://example.com"),
 			Type: cxsdk.WebhookTypeSendLog,
 			Config: &cxsdk.SendLogWebhookInputData{
 				SendLog: &cxsdk.SendLogConfig{

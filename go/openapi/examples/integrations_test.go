@@ -239,7 +239,6 @@ func TestWebhooks(t *testing.T) {
 				&webhooks.OutgoingWebhookInputDataSendLog{
 					Name: webhooks.PtrString("sendlog-webhook"),
 					Type: webhooks.WEBHOOKTYPE_SEND_LOG.Ptr(),
-					Url:  webhooks.PtrString("https://example.com"),
 					SendLog: webhooks.SendLogConfig{
 						Uuid:    webhooks.PtrString(uuid.NewString()),
 						Payload: webhooks.PtrString("Hello from $ALERT_NAME, a coralogix alert"),
