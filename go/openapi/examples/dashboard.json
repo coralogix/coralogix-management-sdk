@@ -1,6 +1,8 @@
 {
   "name": "from json",
   "description": "dashboards template from json",
+  "relativeTimeFrame": "900s",
+  "off": {},
   "layout": {
     "sections": [
       {
