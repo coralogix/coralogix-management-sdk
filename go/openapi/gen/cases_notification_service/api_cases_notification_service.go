@@ -75,6 +75,9 @@ func (a *CasesNotificationServiceAPIService) CasesNotificationServiceListNotific
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.listNotificationDeliveriesRequest == nil {
+		return localVarReturnValue, nil, reportError("listNotificationDeliveriesRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

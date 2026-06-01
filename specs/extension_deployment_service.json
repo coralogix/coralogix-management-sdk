@@ -11,7 +11,7 @@
           "Extension deployment service"
         ],
         "summary": "Get deployed extensions",
-        "description": "No description available",
+        "description": "Returns all deployed extensions.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -55,7 +55,7 @@
           "Extension deployment service"
         ],
         "summary": "Deploy extension",
-        "description": "No description available",
+        "description": "Deploys an extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -64,7 +64,9 @@
           {
             "in": "query",
             "name": "id",
+            "description": "Unique identifier.",
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "form"
@@ -72,7 +74,9 @@
           {
             "in": "query",
             "name": "version",
+            "description": "Version number.",
             "schema": {
+              "description": "Version number.",
               "type": "string"
             },
             "style": "form"
@@ -80,9 +84,12 @@
           {
             "in": "query",
             "name": "item_ids",
+            "description": "The item ids.",
             "schema": {
+              "description": "The item ids.",
               "type": "array",
               "items": {
+                "description": "The item ids.",
                 "type": "string"
               }
             },
@@ -91,9 +98,12 @@
           {
             "in": "query",
             "name": "applications",
+            "description": "The applications.",
             "schema": {
+              "description": "The applications.",
               "type": "array",
               "items": {
+                "description": "The applications.",
                 "type": "string"
               }
             },
@@ -102,9 +112,12 @@
           {
             "in": "query",
             "name": "subsystems",
+            "description": "The subsystems.",
             "schema": {
+              "description": "The subsystems.",
               "type": "array",
               "items": {
+                "description": "The subsystems.",
                 "type": "string"
               }
             },
@@ -113,35 +126,45 @@
           {
             "in": "query",
             "name": "extension_deployment",
+            "description": "The extension deployment configuration.",
             "schema": {
               "externalDocs": {
                 "url": ""
               },
               "title": "Extension deployment",
+              "description": "Extension deployment.",
               "type": "object",
               "properties": {
                 "applications": {
+                  "description": "The applications.",
                   "type": "array",
                   "items": {
+                    "description": "The applications.",
                     "type": "string"
                   }
                 },
                 "id": {
+                  "description": "Unique identifier.",
                   "type": "string"
                 },
                 "itemIds": {
+                  "description": "The item ids.",
                   "type": "array",
                   "items": {
+                    "description": "The item ids.",
                     "type": "string"
                   }
                 },
                 "subsystems": {
+                  "description": "The subsystems.",
                   "type": "array",
                   "items": {
+                    "description": "The subsystems.",
                     "type": "string"
                   }
                 },
                 "version": {
+                  "description": "Version number.",
                   "type": "string"
                 }
               }
@@ -188,7 +211,7 @@
           "Extension deployment service"
         ],
         "summary": "Update extension",
-        "description": "No description available",
+        "description": "Updates a deployed extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -197,7 +220,9 @@
           {
             "in": "query",
             "name": "id",
+            "description": "Unique identifier.",
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "form"
@@ -205,7 +230,9 @@
           {
             "in": "query",
             "name": "version",
+            "description": "Version number.",
             "schema": {
+              "description": "Version number.",
               "type": "string"
             },
             "style": "form"
@@ -213,9 +240,12 @@
           {
             "in": "query",
             "name": "item_ids",
+            "description": "The item ids.",
             "schema": {
+              "description": "The item ids.",
               "type": "array",
               "items": {
+                "description": "The item ids.",
                 "type": "string"
               }
             },
@@ -224,9 +254,12 @@
           {
             "in": "query",
             "name": "applications",
+            "description": "The applications.",
             "schema": {
+              "description": "The applications.",
               "type": "array",
               "items": {
+                "description": "The applications.",
                 "type": "string"
               }
             },
@@ -235,9 +268,12 @@
           {
             "in": "query",
             "name": "subsystems",
+            "description": "The subsystems.",
             "schema": {
+              "description": "The subsystems.",
               "type": "array",
               "items": {
+                "description": "The subsystems.",
                 "type": "string"
               }
             },
@@ -246,35 +282,45 @@
           {
             "in": "query",
             "name": "extension_deployment",
+            "description": "The extension deployment configuration to update.",
             "schema": {
               "externalDocs": {
                 "url": ""
               },
               "title": "Extension deployment",
+              "description": "Extension deployment.",
               "type": "object",
               "properties": {
                 "applications": {
+                  "description": "The applications.",
                   "type": "array",
                   "items": {
+                    "description": "The applications.",
                     "type": "string"
                   }
                 },
                 "id": {
+                  "description": "Unique identifier.",
                   "type": "string"
                 },
                 "itemIds": {
+                  "description": "The item ids.",
                   "type": "array",
                   "items": {
+                    "description": "The item ids.",
                     "type": "string"
                   }
                 },
                 "subsystems": {
+                  "description": "The subsystems.",
                   "type": "array",
                   "items": {
+                    "description": "The subsystems.",
                     "type": "string"
                   }
                 },
                 "version": {
+                  "description": "Version number.",
                   "type": "string"
                 }
               }
@@ -321,7 +367,7 @@
           "Extension deployment service"
         ],
         "summary": "Revert deployment of extension",
-        "description": "No description available",
+        "description": "Undeploys the specified extension.\n\nRequires the following permissions:\n- `extensions:Deploy`",
         "externalDocs": {
           "url": ""
         },
@@ -331,14 +377,18 @@
             "application/json": {
               "schema": {
                 "title": "Revert deployment of extension request",
+                "description": "Request for undeploying an extension.",
                 "type": "object",
                 "properties": {
                   "id": {
+                    "description": "Unique identifier.",
                     "type": "string"
                   },
                   "keptExtensionItems": {
+                    "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
                     "type": "array",
                     "items": {
+                      "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
                       "type": "string"
                     }
                   }
@@ -390,6 +440,7 @@
           "url": ""
         },
         "title": "Deploy extension response",
+        "description": "Response returned after successfully deploying an extension.",
         "type": "object",
         "properties": {
           "extensionDeployment": {
@@ -405,23 +456,30 @@
         "type": "object",
         "properties": {
           "applications": {
+            "description": "The applications.",
             "type": "array",
             "items": {
+              "description": "The applications.",
               "type": "string"
             }
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "itemIds": {
+            "description": "The item ids.",
             "type": "array",
             "items": {
+              "description": "The item ids.",
               "type": "string"
             }
           },
           "subsystems": {
+            "description": "The subsystems.",
             "type": "array",
             "items": {
+              "description": "The subsystems.",
               "type": "string"
             }
           },
@@ -429,6 +487,7 @@
             "$ref": "#/components/schemas/DeployedExtensionSummary"
           },
           "version": {
+            "description": "Version number.",
             "type": "string"
           }
         }
@@ -438,6 +497,7 @@
           "url": ""
         },
         "title": "Deployed extension summary",
+        "description": "Deployed extension summary.",
         "type": "object",
         "properties": {
           "deployedItemCounts": {
@@ -450,30 +510,39 @@
           "url": ""
         },
         "title": "Extension deployment",
+        "description": "Extension deployment.",
         "type": "object",
         "properties": {
           "applications": {
+            "description": "The applications.",
             "type": "array",
             "items": {
+              "description": "The applications.",
               "type": "string"
             }
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "itemIds": {
+            "description": "The item ids.",
             "type": "array",
             "items": {
+              "description": "The item ids.",
               "type": "string"
             }
           },
           "subsystems": {
+            "description": "The subsystems.",
             "type": "array",
             "items": {
+              "description": "The subsystems.",
               "type": "string"
             }
           },
           "version": {
+            "description": "Version number.",
             "type": "string"
           }
         }
@@ -486,12 +555,15 @@
         "type": "object",
         "properties": {
           "itemId": {
+            "description": "The item id.",
             "type": "string"
           },
           "reason": {
+            "description": "Reason.",
             "type": "string"
           },
           "remoteId": {
+            "description": "The remote id.",
             "type": "string"
           }
         }
@@ -499,10 +571,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -577,9 +649,11 @@
           "url": ""
         },
         "title": "Get deployed extensions response",
+        "description": "Response containing a list of deployed extensions.",
         "type": "object",
         "properties": {
           "deployedExtensions": {
+            "description": "The deployed extensions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeployedExtension"
@@ -592,45 +666,56 @@
           "url": ""
         },
         "title": "Item counts",
+        "description": "Item counts.",
         "type": "object",
         "properties": {
           "actions": {
+            "description": "List of actions.",
             "type": "integer",
             "format": "int64"
           },
           "alerts": {
+            "description": "List of alerts.",
             "type": "integer",
             "format": "int64"
           },
           "customDashboards": {
+            "description": "The custom dashboards.",
             "type": "integer",
             "format": "int64"
           },
           "enrichments": {
+            "description": "List of enrichments.",
             "type": "integer",
             "format": "int64"
           },
           "eventsToMetrics": {
+            "description": "The events to metrics.",
             "type": "integer",
             "format": "int64"
           },
           "grafanaDashboards": {
+            "description": "The grafana dashboards.",
             "type": "integer",
             "format": "int64"
           },
           "kibanaDashboards": {
+            "description": "The kibana dashboards.",
             "type": "integer",
             "format": "int64"
           },
           "metricsRuleGroup": {
+            "description": "The metrics rule group.",
             "type": "integer",
             "format": "int64"
           },
           "parsingRules": {
+            "description": "The parsing rules.",
             "type": "integer",
             "format": "int64"
           },
           "savedViews": {
+            "description": "The saved views.",
             "type": "integer",
             "format": "int64"
           }
@@ -655,12 +740,14 @@
           "url": ""
         },
         "title": "Revert deployment of extension response",
+        "description": "Response returned after successfully undeploying an extension.",
         "type": "object",
         "properties": {
           "extensionDeployment": {
             "$ref": "#/components/schemas/ExtensionDeployment"
           },
           "failedItems": {
+            "description": "The failed items.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FailedItem"
@@ -673,6 +760,7 @@
           "url": ""
         },
         "title": "Update extension response",
+        "description": "Response returned after successfully updating a deployed extension.",
         "type": "object",
         "properties": {
           "extensionDeployment": {
@@ -688,6 +776,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

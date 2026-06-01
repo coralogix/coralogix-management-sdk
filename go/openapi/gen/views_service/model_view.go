@@ -28,6 +28,7 @@ type View struct {
 	FolderId *string `json:"folderId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// id
 	Id int32 `json:"id"`
+	// The is compact mode.
 	IsCompactMode *bool `json:"isCompactMode,omitempty"`
 	// View name
 	Name string `json:"name"`

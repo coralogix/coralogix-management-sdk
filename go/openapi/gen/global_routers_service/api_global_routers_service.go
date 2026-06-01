@@ -30,6 +30,7 @@ type ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest struct {
 	globalRouterIds *[]string
 }
 
+// The unique identifiers of the global routers to retrieve summaries for.
 func (r ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest) GlobalRouterIds(globalRouterIds []string) ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest {
 	r.globalRouterIds = &globalRouterIds
 	return r
@@ -42,7 +43,7 @@ func (r ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest) Execute() (*BatchGe
 /*
 GlobalRoutersServiceBatchGetGlobalRouters Batch Get Global Routers
 
-No description available
+Returns summary information for all notification routers.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceBatchGetGlobalRoutersRequest
@@ -158,7 +159,7 @@ func (r ApiGlobalRoutersServiceCreateGlobalRouterRequest) Execute() (*CreateGlob
 /*
 GlobalRoutersServiceCreateGlobalRouter Create Global Router
 
-No description available
+Creates a new notification router.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceCreateGlobalRouterRequest
@@ -260,10 +261,10 @@ func (r ApiGlobalRoutersServiceDeleteGlobalRouterRequest) Execute() (map[string]
 /*
 GlobalRoutersServiceDeleteGlobalRouter Delete Global Router
 
-No description available
+Deletes the notification router with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiGlobalRoutersServiceDeleteGlobalRouterRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceDeleteGlobalRouter(ctx context.Context, id string) ApiGlobalRoutersServiceDeleteGlobalRouterRequest {
@@ -363,10 +364,10 @@ func (r ApiGlobalRoutersServiceGetGlobalRouterRequest) Execute() (*GetGlobalRout
 /*
 GlobalRoutersServiceGetGlobalRouter Get Global Router
 
-No description available
+Returns the details of the specified notification router.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the global router to retrieve.
  @return ApiGlobalRoutersServiceGetGlobalRouterRequest
 */
 func (a *GlobalRoutersServiceAPIService) GlobalRoutersServiceGetGlobalRouter(ctx context.Context, id string) ApiGlobalRoutersServiceGetGlobalRouterRequest {
@@ -460,11 +461,13 @@ type ApiGlobalRoutersServiceListGlobalRoutersRequest struct {
 	sourceEntityLabels *map[string]GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 }
 
+// Deprecated. Filter routers by entity type.
 func (r ApiGlobalRoutersServiceListGlobalRoutersRequest) EntityType(entityType NotificationCenterEntityType) ApiGlobalRoutersServiceListGlobalRoutersRequest {
 	r.entityType = &entityType
 	return r
 }
 
+// Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.
 func (r ApiGlobalRoutersServiceListGlobalRoutersRequest) SourceEntityLabels(sourceEntityLabels map[string]GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue) ApiGlobalRoutersServiceListGlobalRoutersRequest {
 	r.sourceEntityLabels = &sourceEntityLabels
 	return r
@@ -477,7 +480,7 @@ func (r ApiGlobalRoutersServiceListGlobalRoutersRequest) Execute() (*ListGlobalR
 /*
 GlobalRoutersServiceListGlobalRouters List Global Routers
 
-No description available
+Returns all notification routers for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceListGlobalRoutersRequest
@@ -588,7 +591,7 @@ func (r ApiGlobalRoutersServiceReplaceGlobalRouterRequest) Execute() (*ReplaceGl
 /*
 GlobalRoutersServiceReplaceGlobalRouter Replace Global Router
 
-No description available
+Updates an existing notification router.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceReplaceGlobalRouterRequest
@@ -683,6 +686,7 @@ type ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest struct {
 	entityLabelMatcher *map[string]string
 }
 
+// Entity label matcher to validate, expressed as a map of label keys to expected values.
 func (r ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest) EntityLabelMatcher(entityLabelMatcher map[string]string) ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest {
 	r.entityLabelMatcher = &entityLabelMatcher
 	return r
@@ -695,7 +699,7 @@ func (r ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest) Execute() (*Va
 /*
 GlobalRoutersServiceValidateEntityLabelMatcher Validate Entity Label Matcher
 
-No description available
+Validates a notification router matcher configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGlobalRoutersServiceValidateEntityLabelMatcherRequest

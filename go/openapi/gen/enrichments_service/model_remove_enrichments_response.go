@@ -22,6 +22,7 @@ var _ MappedNullable = &RemoveEnrichmentsResponse{}
 
 // RemoveEnrichmentsResponse Response data structure for enrichments deletion
 type RemoveEnrichmentsResponse struct {
+	// The remaining enrichments.
 	RemainingEnrichments []Enrichment `json:"remainingEnrichments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

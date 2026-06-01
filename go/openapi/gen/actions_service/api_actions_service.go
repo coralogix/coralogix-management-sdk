@@ -41,7 +41,7 @@ func (r ApiActionsServiceAtomicBatchExecuteActionsRequest) Execute() (*AtomicBat
 /*
 ActionsServiceAtomicBatchExecuteActions Atomic Batch Execute Actions
 
-No description available
+Creates multiple actions in a single request.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceAtomicBatchExecuteActionsRequest
@@ -148,7 +148,7 @@ func (r ApiActionsServiceCreateActionRequest) Execute() (*CreateActionResponse, 
 /*
 ActionsServiceCreateAction Create Action
 
-No description available
+Creates a new action.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceCreateActionRequest
@@ -250,10 +250,10 @@ func (r ApiActionsServiceDeleteActionRequest) Execute() (map[string]interface{},
 /*
 ActionsServiceDeleteAction Delete Action
 
-No description available
+Deletes the action with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiActionsServiceDeleteActionRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceDeleteAction(ctx context.Context, id string) ApiActionsServiceDeleteActionRequest {
@@ -353,10 +353,10 @@ func (r ApiActionsServiceGetActionRequest) Execute() (*GetActionResponse, *http.
 /*
 ActionsServiceGetAction Get Action
 
-No description available
+Returns the details of a specific action.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiActionsServiceGetActionRequest
 */
 func (a *ActionsServiceAPIService) ActionsServiceGetAction(ctx context.Context, id string) ApiActionsServiceGetActionRequest {
@@ -455,7 +455,7 @@ func (r ApiActionsServiceListActionsRequest) Execute() (*ListActionsResponse, *h
 /*
 ActionsServiceListActions List Actions
 
-No description available
+Returns all actions for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceListActionsRequest
@@ -560,7 +560,7 @@ func (r ApiActionsServiceOrderActionsRequest) Execute() (map[string]interface{},
 /*
 ActionsServiceOrderActions Order Actions
 
-No description available
+Updates the display order of actions.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceOrderActionsRequest
@@ -667,7 +667,7 @@ func (r ApiActionsServiceReplaceActionRequest) Execute() (*ReplaceActionResponse
 /*
 ActionsServiceReplaceAction Replace Action
 
-No description available
+Replaces all actions with the provided set.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceReplaceActionRequest

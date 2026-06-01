@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TestRoutingConditionValidResponseFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestRoutingConditionValidResponseFailure{}
 
-// TestRoutingConditionValidResponseFailure struct for TestRoutingConditionValidResponseFailure
+// TestRoutingConditionValidResponseFailure Indicates the routing condition is invalid, with a human-readable error message.
 type TestRoutingConditionValidResponseFailure struct {
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

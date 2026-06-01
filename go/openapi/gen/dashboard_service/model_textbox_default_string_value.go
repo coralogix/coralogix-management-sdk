@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TextboxDefaultStringValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultStringValue{}
 
-// TextboxDefaultStringValue struct for TextboxDefaultStringValue
+// TextboxDefaultStringValue Textbox default string value.
 type TextboxDefaultStringValue struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

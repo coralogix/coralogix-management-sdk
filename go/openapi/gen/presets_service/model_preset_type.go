@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// PresetType the model 'PresetType'
+// PresetType Preset type.
 type PresetType string
 
 // List of PresetType

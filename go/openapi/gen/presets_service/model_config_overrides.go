@@ -24,6 +24,7 @@ var _ MappedNullable = &ConfigOverrides{}
 type ConfigOverrides struct {
 	ConditionType *NotificationCenterConditionType `json:"conditionType,omitempty"`
 	MessageConfig *MessageConfig `json:"messageConfig,omitempty"`
+	// Type of the payload.
 	PayloadType *string `json:"payloadType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

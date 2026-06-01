@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the IncidentEventClose type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventClose{}
 
-// IncidentEventClose struct for IncidentEventClose
+// IncidentEventClose Incident event close.
 type IncidentEventClose struct {
 	ClosedBy *IncidentsV1UserDetails `json:"closedBy,omitempty"`
 	AdditionalProperties map[string]interface{}

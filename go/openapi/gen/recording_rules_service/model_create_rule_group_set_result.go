@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateRuleGroupSetResult{}
 
 // CreateRuleGroupSetResult Result of creating a rule group set.
 type CreateRuleGroupSetResult struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

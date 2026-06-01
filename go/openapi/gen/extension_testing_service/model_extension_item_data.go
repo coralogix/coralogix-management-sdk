@@ -22,15 +22,23 @@ var _ MappedNullable = &ExtensionItemData{}
 
 // ExtensionItemData struct for ExtensionItemData
 type ExtensionItemData struct {
+	// The binaries.
 	Binaries []ExtensionItemBinary `json:"binaries,omitempty"`
+	// Data payload.
 	Data map[string]interface{} `json:"data,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The internal id.
 	InternalId *int32 `json:"internalId,omitempty"`
+	// The is mandatory.
 	IsMandatory *bool `json:"isMandatory,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	PermissionResource *PermissionResource `json:"permissionResource,omitempty"`
+	// The stable id.
 	StableId *string `json:"stableId,omitempty"`
 	TargetDomain *TargetDomain `json:"targetDomain,omitempty"`
+	// The unique id.
 	UniqueId *string `json:"uniqueId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

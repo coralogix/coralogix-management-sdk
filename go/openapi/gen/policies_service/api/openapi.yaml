@@ -7,7 +7,7 @@ servers:
 paths:
   /dataplans/log-policies/v1:
     put:
-      description: No description available
+      description: Updates the log data retention policies.
       externalDocs:
         url: ""
       operationId: PoliciesService_AtomicOverwriteLogPolicies
@@ -16,6 +16,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Atomic_Overwrite_Log_Policies_Request"
+        required: true
       responses:
         "200":
           content:
@@ -40,20 +41,23 @@ paths:
       - Policies Service
   /dataplans/policies/v1:
     get:
-      description: No description available
+      description: Returns all data policies for the team.
       externalDocs:
         url: ""
       operationId: PoliciesService_GetCompanyPolicies
       parameters:
-      - explode: true
+      - description: "When true, return only policies that are currently enabled."
+        explode: true
         in: query
         name: enabled_only
         required: false
         schema:
+          description: "When true, return only policies that are currently enabled."
           example: true
           type: boolean
         style: form
-      - explode: true
+      - description: Filter policies by data source type (for example logs or spans).
+        explode: true
         in: query
         name: source_type
         required: false
@@ -83,7 +87,7 @@ paths:
       tags:
       - Policies Service
     post:
-      description: No description available
+      description: Creates a new data policy.
       externalDocs:
         url: ""
       operationId: PoliciesService_CreatePolicy
@@ -92,6 +96,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PoliciesService_CreatePolicy_request"
+        required: true
       responses:
         "200":
           content:
@@ -115,7 +120,7 @@ paths:
       tags:
       - Policies Service
     put:
-      description: No description available
+      description: Updates an existing data policy.
       externalDocs:
         url: ""
       operationId: PoliciesService_UpdatePolicy
@@ -124,6 +129,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PoliciesService_UpdatePolicy_request"
+        required: true
       responses:
         "200":
           content:
@@ -146,9 +152,46 @@ paths:
       summary: Update Policy
       tags:
       - Policies Service
+  /dataplans/policies/v1/all/forecast-usage:
+    post:
+      description: "Forecasts the usage in bytes that a draft TCO policy would match\
+        \ over the requested time window, given its application/subsystem rules and\
+        \ log or span filters. Use this before saving a new or modified policy to\
+        \ see the impact on your quota."
+      externalDocs:
+        url: ""
+      operationId: PoliciesService_ForecastPolicyUsage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PoliciesService_ForecastPolicyUsage_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastPolicyUsageResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Forecast Policy Usage
+      tags:
+      - Policies Service
   /dataplans/policies/v1/all/reorder:
     post:
-      description: No description available
+      description: Reorders all data policies.
       externalDocs:
         url: ""
       operationId: PoliciesService_ReorderPolicies
@@ -157,6 +200,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Reorder_Policies_Request"
+        required: true
       responses:
         "200":
           content:
@@ -181,7 +225,7 @@ paths:
       - Policies Service
   /dataplans/policies/v1/all/test-policies:
     post:
-      description: No description available
+      description: Tests the data policies against sample data.
       externalDocs:
         url: ""
       operationId: PoliciesService_BulkTestLogPolicies
@@ -190,6 +234,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Bulk_Test_Log_Policies_Request"
+        required: true
       responses:
         "200":
           content:
@@ -214,16 +259,18 @@ paths:
       - Policies Service
   /dataplans/policies/v1/{id}:
     delete:
-      description: No description available
+      description: Deletes the data policy with the specified ID.
       externalDocs:
         url: ""
       operationId: PoliciesService_DeletePolicy
       parameters:
-      - explode: false
+      - description: The unique identifier of the data policy to delete.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the data policy to delete.
           example: id
           type: string
         style: simple
@@ -250,16 +297,18 @@ paths:
       tags:
       - Policies Service
     get:
-      description: No description available
+      description: Returns the details of the specified data policy.
       externalDocs:
         url: ""
       operationId: PoliciesService_GetPolicy
       parameters:
-      - explode: false
+      - description: The unique identifier of the data policy to retrieve.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the data policy to retrieve.
           example: id
           type: string
         style: simple
@@ -287,7 +336,7 @@ paths:
       - Policies Service
   /dataplans/policiy-settings/v1:
     post:
-      description: No description available
+      description: Updates data policy settings.
       externalDocs:
         url: ""
       operationId: PoliciesService_ReplacePolicySettings
@@ -320,7 +369,7 @@ paths:
       - Policies Service
   /dataplans/policy-settings/v1:
     get:
-      description: No description available
+      description: Returns the current data policy settings.
       externalDocs:
         url: ""
       operationId: PoliciesService_GetPolicySettings
@@ -348,7 +397,7 @@ paths:
       - Policies Service
   /dataplans/span-policies/v1:
     put:
-      description: No description available
+      description: Updates span data retention policies.
       externalDocs:
         url: ""
       operationId: PoliciesService_AtomicOverwriteSpanPolicies
@@ -357,6 +406,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Atomic_Overwrite_Span_Policies_Request"
+        required: true
       responses:
         "200":
           content:
@@ -382,10 +432,14 @@ paths:
 components:
   schemas:
     ArchiveRetention:
+      description: Archive retention.
       example:
         id: id
+      externalDocs:
+        url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
       type: object
     AtomicOverwriteLogPoliciesResponse:
@@ -407,8 +461,30 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - dataset: dataset1
-            - dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
@@ -446,8 +522,30 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - dataset: dataset1
-            - dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
@@ -475,6 +573,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         createResponses:
+          description: The create responses.
           items:
             $ref: "#/components/schemas/CreatePolicyResponse"
           type: array
@@ -499,8 +598,30 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - dataset: dataset1
-            - dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
@@ -538,8 +659,30 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - dataset: dataset1
-            - dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
@@ -567,6 +710,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         createResponses:
+          description: The create responses.
           items:
             $ref: "#/components/schemas/CreatePolicyResponse"
           type: array
@@ -596,8 +740,30 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - dataset: dataset1
-            - dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
@@ -640,8 +806,30 @@ components:
               name: name
             priority: PRIORITY_TYPE_UNSPECIFIED
             targets:
-            - dataset: dataset1
-            - dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
+            - archiveRetention:
+                id: id
+              dataspace: dataspace1
+              priorityOverride:
+                quotaBased:
+                  usageTiers:
+                  - dailyQuotaPercentage: 80
+                    priority: null
+                  - dailyQuotaPercentage: 80
+                    priority: null
+              priority: null
+              dataset: dataset1
             enabled: true
             archiveRetention:
               id: id
@@ -669,6 +857,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         testPoliciesBulkResult:
+          description: The test policies bulk result.
           items:
             $ref: "#/components/schemas/TestPoliciesResult"
           type: array
@@ -687,11 +876,14 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         description:
+          description: Human-readable description.
           example: My Policy Description
           type: string
         disabled:
+          description: The disabled.
           type: boolean
         name:
+          description: Display name.
           example: My Policy
           type: string
         priority:
@@ -701,6 +893,7 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of targets.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
@@ -736,13 +929,16 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         description:
+          description: Optional free-text description of the policy's purpose.
           example: My Policy Description
           type: string
         disabled:
+          description: "When true, the policy is disabled and will not be evaluated."
           type: boolean
         logRules:
           $ref: "#/components/schemas/LogRules"
         name:
+          description: Human-readable name for the policy.
           example: My Policy
           type: string
         placement:
@@ -754,6 +950,8 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of data targets/destinations to which this policy routes
+            data.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
@@ -774,11 +972,14 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         description:
+          description: Optional free-text description of the policy's purpose.
           example: My Policy Description
           type: string
         disabled:
+          description: "When true, the policy is disabled and will not be evaluated."
           type: boolean
         name:
+          description: Human-readable name for the policy.
           example: My Policy
           type: string
         placement:
@@ -792,6 +993,8 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of data targets/destinations to which this policy routes
+            data.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
@@ -819,8 +1022,30 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - dataset: dataset1
-          - dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
@@ -868,6 +1093,13 @@ components:
       - spanRules
       title: Create Span Policy Request
       type: object
+    Day:
+      additionalProperties: false
+      description: Marker selecting a one-day forecast window.
+      externalDocs:
+        url: ""
+      title: Day
+      type: object
     DeletePolicyResponse:
       description: This data structue is obtained when deleting a policy by its ID.
       example:
@@ -877,6 +1109,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         id:
+          description: Unique identifier.
           example: id
           type: string
       required:
@@ -885,8 +1118,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -935,6 +1168,131 @@ components:
       title: Filters
       type: object
     First:
+      additionalProperties: false
+      description: First.
+      externalDocs:
+        url: ""
+      type: object
+    ForecastPolicyUsageRequestLogRulesDay:
+      description: "Request to forecast the usage in bytes of a draft TCO policy,\
+        \ based on the bytes matched by its filter rules over a given time window."
+      externalDocs:
+        description: Find out more about DPXL expressions.
+        url: https://coralogix.com/docs/dataprime/user-guide/dpxl/
+      properties:
+        applicationRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+        day:
+          additionalProperties: false
+          description: Marker selecting a one-day forecast window.
+          externalDocs:
+            url: ""
+          title: Day
+          type: object
+        logRules:
+          $ref: "#/components/schemas/LogRules"
+        subsystemRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+      required:
+      - day
+      - logRules
+      title: Forecast Policy Usage Request
+      type: object
+    ForecastPolicyUsageRequestLogRulesWeek:
+      description: "Request to forecast the usage in bytes of a draft TCO policy,\
+        \ based on the bytes matched by its filter rules over a given time window."
+      externalDocs:
+        description: Find out more about DPXL expressions.
+        url: https://coralogix.com/docs/dataprime/user-guide/dpxl/
+      properties:
+        applicationRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+        logRules:
+          $ref: "#/components/schemas/LogRules"
+        subsystemRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+        week:
+          additionalProperties: false
+          description: Marker selecting a one-week forecast window.
+          externalDocs:
+            url: ""
+          title: Week
+          type: object
+      required:
+      - logRules
+      - week
+      title: Forecast Policy Usage Request
+      type: object
+    ForecastPolicyUsageRequestSpanRulesDay:
+      description: "Request to forecast the usage in bytes of a draft TCO policy,\
+        \ based on the bytes matched by its filter rules over a given time window."
+      externalDocs:
+        description: Find out more about DPXL expressions.
+        url: https://coralogix.com/docs/dataprime/user-guide/dpxl/
+      properties:
+        applicationRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+        day:
+          additionalProperties: false
+          description: Marker selecting a one-day forecast window.
+          externalDocs:
+            url: ""
+          title: Day
+          type: object
+        spanRules:
+          $ref: "#/components/schemas/SpanRules"
+        subsystemRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+      required:
+      - day
+      - spanRules
+      title: Forecast Policy Usage Request
+      type: object
+    ForecastPolicyUsageRequestSpanRulesWeek:
+      description: "Request to forecast the usage in bytes of a draft TCO policy,\
+        \ based on the bytes matched by its filter rules over a given time window."
+      externalDocs:
+        description: Find out more about DPXL expressions.
+        url: https://coralogix.com/docs/dataprime/user-guide/dpxl/
+      properties:
+        applicationRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+        spanRules:
+          $ref: "#/components/schemas/SpanRules"
+        subsystemRule:
+          $ref: "#/components/schemas/quota.v1.Rule"
+        week:
+          additionalProperties: false
+          description: Marker selecting a one-week forecast window.
+          externalDocs:
+            url: ""
+          title: Week
+          type: object
+      required:
+      - spanRules
+      - week
+      title: Forecast Policy Usage Request
+      type: object
+    ForecastPolicyUsageResponse:
+      description: "Forecasted usage in bytes for a draft TCO policy, based on bytes\
+        \ matched over a given time window."
+      example:
+        estimatedBytes: 13251739648
+      externalDocs:
+        description: Find out more about quota management.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
+      properties:
+        estimatedBytes:
+          description: Estimated number of bytes the draft policy would match over
+            the requested time window.
+          example: 13251739648
+          format: int64
+          maximum: 9007199254740991
+          minimum: 1
+          type: integer
+      required:
+      - estimatedBytes
+      title: Forecast Policy Usage Response
       type: object
     GetCompanyPoliciesResponse:
       description: This data structue is obtained when retrieving all policies of
@@ -955,8 +1313,30 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - dataset: dataset1
-          - dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
@@ -993,8 +1373,30 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - dataset: dataset1
-          - dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
@@ -1022,6 +1424,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         policies:
+          description: List of policies.
           items:
             $ref: "#/components/schemas/Policy"
           type: array
@@ -1048,8 +1451,30 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - dataset: dataset1
-          - dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
@@ -1099,6 +1524,10 @@ components:
       title: Get Policy Priority Settings Response
       type: object
     Last:
+      additionalProperties: false
+      description: Last.
+      externalDocs:
+        url: ""
       type: object
     LogMetaFieldsValues:
       description: Values for log meta fields.
@@ -1111,12 +1540,15 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         applicationNameValues:
+          description: The application name values.
           example: application_name
           type: string
         severityValues:
+          description: The severity values.
           example: severity
           type: string
         subsystemNameValues:
+          description: The subsystem name values.
           example: subsystem_name
           type: string
       required:
@@ -1137,8 +1569,10 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         dpxlExpression:
+          description: The dpxl expression.
           type: string
         severities:
+          description: The severities.
           items:
             $ref: "#/components/schemas/quota.v1.Severity"
           type: array
@@ -1172,15 +1606,29 @@ components:
       - $ref: "#/components/schemas/PlacementFirst"
       - $ref: "#/components/schemas/PlacementLast"
     PlacementFirst:
+      description: Placement.
+      externalDocs:
+        url: ""
       properties:
         first:
+          additionalProperties: false
+          description: First.
+          externalDocs:
+            url: ""
           type: object
       required:
       - first
       type: object
     PlacementLast:
+      description: Placement.
+      externalDocs:
+        url: ""
       properties:
         last:
+          additionalProperties: false
+          description: Last.
+          externalDocs:
+            url: ""
           type: object
       required:
       - last
@@ -1207,8 +1655,30 @@ components:
           name: name
         priority: PRIORITY_TYPE_UNSPECIFIED
         targets:
-        - dataset: dataset1
-        - dataset: dataset1
+        - archiveRetention:
+            id: id
+          dataspace: dataspace1
+          priorityOverride:
+            quotaBased:
+              usageTiers:
+              - dailyQuotaPercentage: 80
+                priority: null
+              - dailyQuotaPercentage: 80
+                priority: null
+          priority: null
+          dataset: dataset1
+        - archiveRetention:
+            id: id
+          dataspace: dataspace1
+          priorityOverride:
+            quotaBased:
+              usageTiers:
+              - dailyQuotaPercentage: 80
+                priority: null
+              - dailyQuotaPercentage: 80
+                priority: null
+          priority: null
+          dataset: dataset1
         enabled: true
         archiveRetention:
           id: id
@@ -1240,30 +1710,40 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         companyId:
+          description: Internal Coralogix company/team identifier that owns this policy.
           example: 1234
           format: int32
           type: integer
         createdAt:
+          description: Timestamp (RFC 3339) when the policy was created.
           example: 2021-01-01T00:00:00.000Z
           type: string
         deleted:
+          description: Soft-delete marker; when true the policy has been deleted and
+            is no longer applied.
           example: false
           type: boolean
         description:
+          description: Optional free-text description of the policy's purpose.
           example: My Policy Description
           type: string
         enabled:
+          description: Indicates whether the policy is actively evaluated and applied.
           example: true
           type: boolean
         id:
+          description: Unique identifier for the policy.
           example: policy_id
           type: string
         logRules:
           $ref: "#/components/schemas/LogRules"
         name:
+          description: Human-readable name for the policy.
           example: My Policy
           type: string
         order:
+          description: Ordering priority that determines the sequence in which policies
+            are evaluated.
           example: 1
           format: int32
           type: integer
@@ -1276,10 +1756,13 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of data targets/destinations to which this policy routes
+            data.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
         updatedAt:
+          description: Timestamp (RFC 3339) when the policy was last updated.
           example: 2021-01-01T00:00:00.000Z
           type: string
       required:
@@ -1303,9 +1786,11 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         id:
+          description: Unique identifier.
           example: id
           type: string
         order:
+          description: Sort order.
           example: 1
           format: int32
           type: integer
@@ -1326,28 +1811,38 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         companyId:
+          description: Internal Coralogix company/team identifier that owns this policy.
           example: 1234
           format: int32
           type: integer
         createdAt:
+          description: Timestamp (RFC 3339) when the policy was created.
           example: 2021-01-01T00:00:00.000Z
           type: string
         deleted:
+          description: Soft-delete marker; when true the policy has been deleted and
+            is no longer applied.
           example: false
           type: boolean
         description:
+          description: Optional free-text description of the policy's purpose.
           example: My Policy Description
           type: string
         enabled:
+          description: Indicates whether the policy is actively evaluated and applied.
           example: true
           type: boolean
         id:
+          description: Unique identifier for the policy.
           example: policy_id
           type: string
         name:
+          description: Human-readable name for the policy.
           example: My Policy
           type: string
         order:
+          description: Ordering priority that determines the sequence in which policies
+            are evaluated.
           example: 1
           format: int32
           type: integer
@@ -1362,10 +1857,13 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of data targets/destinations to which this policy routes
+            data.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
         updatedAt:
+          description: Timestamp (RFC 3339) when the policy was last updated.
           example: 2021-01-01T00:00:00.000Z
           type: string
       required:
@@ -1380,6 +1878,7 @@ components:
       title: Policy
       type: object
     PriorityOverride:
+      description: Priority override.
       example:
         quotaBased:
           usageTiers:
@@ -1387,45 +1886,60 @@ components:
             priority: null
           - dailyQuotaPercentage: 80
             priority: null
+      externalDocs:
+        url: ""
       properties:
         quotaBased:
           $ref: "#/components/schemas/QuotaBased"
       type: object
     PriorityOverrideStatus:
+      description: Priority override status.
       example:
         quotaBased:
           currentPriority: null
           dailyLimit: 6.027456183070403
           currentUsage: 0.8008281904610115
+      externalDocs:
+        url: ""
       properties:
         quotaBased:
           $ref: "#/components/schemas/QuotaBasedStatus"
       type: object
     QuotaBased:
+      description: Quota based.
       example:
         usageTiers:
         - dailyQuotaPercentage: 80
           priority: null
         - dailyQuotaPercentage: 80
           priority: null
+      externalDocs:
+        url: ""
       properties:
         usageTiers:
+          description: Ordered list of usage tiers that map daily quota consumption
+            percentages to priority levels.
           items:
             $ref: "#/components/schemas/UsageTier"
           type: array
       type: object
     QuotaBasedStatus:
+      description: Quota based status.
       example:
         currentPriority: null
         dailyLimit: 6.027456183070403
         currentUsage: 0.8008281904610115
+      externalDocs:
+        url: ""
       properties:
         currentPriority:
           $ref: "#/components/schemas/quota.v1.Priority"
         currentUsage:
+          description: The current usage.
           format: double
           type: number
         dailyLimit:
+          description: The daily limit.
           format: double
           type: number
       type: object
@@ -1442,6 +1956,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         orders:
+          description: The orders.
           items:
             $ref: "#/components/schemas/PolicyOrder"
           type: array
@@ -1467,6 +1982,7 @@ components:
       title: Replace Policy Settings Response
       type: object
     RuleTypeId:
+      description: Rule type id.
       enum:
       - RULE_TYPE_ID_UNSPECIFIED
       - RULE_TYPE_ID_IS
@@ -1475,12 +1991,16 @@ components:
       - RULE_TYPE_ID_INCLUDES
       type: string
     SpanRules:
+      description: Span rules.
+      externalDocs:
+        url: ""
       properties:
         actionRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         serviceRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         tagRules:
+          description: The tag rules.
           items:
             $ref: "#/components/schemas/TagRule"
           type: array
@@ -1506,9 +2026,11 @@ components:
         ruleTypeId:
           $ref: "#/components/schemas/RuleTypeId"
         tagName:
+          description: The tag name.
           example: tag_name
           type: string
         tagValue:
+          description: The tag value.
           example: tag_value
           type: string
       required:
@@ -1540,8 +2062,30 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - dataset: dataset1
-          - dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
@@ -1569,6 +2113,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
         matched:
+          description: The matched.
           example: true
           type: boolean
         metaFieldsValues:
@@ -1592,17 +2137,22 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         description:
+          description: Optional free-text description of the policy's purpose.
           example: My Policy Description
           type: string
         enabled:
+          description: Indicates whether the policy should be actively evaluated and
+            applied.
           example: true
           type: boolean
         id:
+          description: Unique identifier of the policy to update.
           example: policy_id
           type: string
         logRules:
           $ref: "#/components/schemas/LogRules"
         name:
+          description: Human-readable name for the policy.
           example: My Policy
           type: string
         priority:
@@ -1612,6 +2162,8 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of data targets/destinations to which this policy routes
+            data.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
@@ -1631,15 +2183,20 @@ components:
         archiveRetention:
           $ref: "#/components/schemas/ArchiveRetention"
         description:
+          description: Optional free-text description of the policy's purpose.
           example: My Policy Description
           type: string
         enabled:
+          description: Indicates whether the policy should be actively evaluated and
+            applied.
           example: true
           type: boolean
         id:
+          description: Unique identifier of the policy to update.
           example: policy_id
           type: string
         name:
+          description: Human-readable name for the policy.
           example: My Policy
           type: string
         priority:
@@ -1651,6 +2208,8 @@ components:
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
         targets:
+          description: List of data targets/destinations to which this policy routes
+            data.
           items:
             $ref: "#/components/schemas/v1.Target"
           type: array
@@ -1677,8 +2236,30 @@ components:
             name: name
           priority: PRIORITY_TYPE_UNSPECIFIED
           targets:
-          - dataset: dataset1
-          - dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
+          - archiveRetention:
+              id: id
+            dataspace: dataspace1
+            priorityOverride:
+              quotaBased:
+                usageTiers:
+                - dailyQuotaPercentage: 80
+                  priority: null
+                - dailyQuotaPercentage: 80
+                  priority: null
+            priority: null
+            dataset: dataset1
           enabled: true
           archiveRetention:
             id: id
@@ -1717,11 +2298,19 @@ components:
         priority: null
       properties:
         dailyQuotaPercentage:
+          description: The daily quota percentage.
           example: 80
           format: double
           type: number
         priority:
           $ref: "#/components/schemas/quota.v1.Priority"
+      type: object
+    Week:
+      additionalProperties: false
+      description: Marker selecting a one-week forecast window.
+      externalDocs:
+        url: ""
+      title: Week
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -1729,6 +2318,8 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     quota.v1.Priority:
+      description: "TCO priority level assigned to a policy, controlling how data\
+        \ is routed and archived."
       enum:
       - PRIORITY_TYPE_UNSPECIFIED
       - PRIORITY_TYPE_BLOCK
@@ -1737,11 +2328,15 @@ components:
       - PRIORITY_TYPE_HIGH
       type: string
     quota.v1.Rule:
+      description: Rule.
       example:
         ruleTypeId: RULE_TYPE_ID_UNSPECIFIED
         name: name
+      externalDocs:
+        url: ""
       properties:
         name:
+          description: Display name.
           type: string
         ruleTypeId:
           $ref: "#/components/schemas/RuleTypeId"
@@ -1757,6 +2352,7 @@ components:
       - SEVERITY_CRITICAL
       type: string
     v1.SourceType:
+      description: Source type.
       enum:
       - SOURCE_TYPE_UNSPECIFIED
       - SOURCE_TYPE_LOGS
@@ -1767,17 +2363,43 @@ components:
         defines a named group of datasets with a priority level and optional archive
         retention configuration.
       example:
+        archiveRetention:
+          id: id
+        dataspace: dataspace1
+        priorityOverride:
+          quotaBased:
+            usageTiers:
+            - dailyQuotaPercentage: 80
+              priority: null
+            - dailyQuotaPercentage: 80
+              priority: null
+        priority: null
         dataset: dataset1
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
       properties:
+        archiveRetention:
+          $ref: "#/components/schemas/ArchiveRetention"
         dataset:
+          description: The dataset.
           example: dataset1
           type: string
+        dataspace:
+          description: The dataspace.
+          example: dataspace1
+          maxLength: 50
+          minLength: 1
+          pattern: "^[A-Za-z](?:[A-Za-z0-9_]|\\.[A-Za-z0-9_])*$"
+          type: string
+        priority:
+          $ref: "#/components/schemas/quota.v1.Priority"
+        priorityOverride:
+          $ref: "#/components/schemas/PriorityOverride"
       title: Target
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -1787,6 +2409,7 @@ components:
         the provided list by order.
       properties:
         policies:
+          description: Policies.
           items:
             $ref: "#/components/schemas/CreateLogPolicyRequest"
           type: array
@@ -1796,18 +2419,26 @@ components:
       type: object
     PoliciesService_UpdatePolicy_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       - $ref: "#/components/schemas/UpdatePolicyRequestLogRules"
+      - $ref: "#/components/schemas/UpdatePolicyRequestSpanRules"
       type: object
     PoliciesService_CreatePolicy_request:
       oneOf:
       - $ref: "#/components/schemas/CreatePolicyRequestLogRules"
       - $ref: "#/components/schemas/CreatePolicyRequestSpanRules"
       type: object
+    PoliciesService_ForecastPolicyUsage_request:
+      oneOf:
+      - $ref: "#/components/schemas/ForecastPolicyUsageRequestLogRulesDay"
+      - $ref: "#/components/schemas/ForecastPolicyUsageRequestLogRulesWeek"
+      - $ref: "#/components/schemas/ForecastPolicyUsageRequestSpanRulesDay"
+      - $ref: "#/components/schemas/ForecastPolicyUsageRequestSpanRulesWeek"
+      type: object
     Reorder_Policies_Request:
       description: This data structue is used to reorder policies.
       properties:
         orders:
+          description: The orders.
           items:
             $ref: "#/components/schemas/PolicyOrder"
           type: array
@@ -1822,6 +2453,7 @@ components:
       description: Request to test multiple log policies.
       properties:
         metaFieldsValuesList:
+          description: The meta fields values list.
           items:
             $ref: "#/components/schemas/LogMetaFieldsValues"
           type: array
@@ -1845,6 +2477,7 @@ components:
         the provided list by order.
       properties:
         policies:
+          description: List of span policies to create as part of the atomic overwrite.
           items:
             $ref: "#/components/schemas/CreateSpanPolicyRequest"
           type: array

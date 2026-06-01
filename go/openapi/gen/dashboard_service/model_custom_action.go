@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the CustomAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomAction{}
 
-// CustomAction struct for CustomAction
+// CustomAction Custom action.
 type CustomAction struct {
 	// Static URL that may contain variables using {{variable_name}} syntax
 	Url *string `json:"url,omitempty"`

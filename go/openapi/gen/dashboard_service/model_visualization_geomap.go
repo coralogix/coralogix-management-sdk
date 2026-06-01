@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationGeomap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationGeomap{}
 
-// VisualizationGeomap struct for VisualizationGeomap
+// VisualizationGeomap Visualization.
 type VisualizationGeomap struct {
 	Geomap Geomap `json:"geomap"`
 	AdditionalProperties map[string]interface{}

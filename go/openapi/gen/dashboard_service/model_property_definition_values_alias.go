@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionValuesAlias type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionValuesAlias{}
 
-// PropertyDefinitionValuesAlias struct for PropertyDefinitionValuesAlias
+// PropertyDefinitionValuesAlias Property definition.
 type PropertyDefinitionValuesAlias struct {
 	// Value alias property, used to give alias names to selected fields
 	ValuesAlias string `json:"valuesAlias"`

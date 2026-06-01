@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TracingTimeWindowValue the model 'TracingTimeWindowValue'
+// TracingTimeWindowValue Tracing time window value.
 type TracingTimeWindowValue string
 
 // List of TracingTimeWindowValue

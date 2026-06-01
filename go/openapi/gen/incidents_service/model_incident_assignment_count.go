@@ -24,6 +24,7 @@ var _ MappedNullable = &IncidentAssignmentCount{}
 // IncidentAssignmentCount struct for IncidentAssignmentCount
 type IncidentAssignmentCount struct {
 	AssignedTo IncidentsV1UserDetails `json:"assignedTo"`
+	// Number of items.
 	Count int64 `json:"count"`
 	AdditionalProperties map[string]interface{}
 }

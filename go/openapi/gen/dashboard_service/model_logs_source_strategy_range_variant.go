@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LogsSourceStrategyRangeVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSourceStrategyRangeVariant{}
 
-// LogsSourceStrategyRangeVariant struct for LogsSourceStrategyRangeVariant
+// LogsSourceStrategyRangeVariant Determines the time strategy for fetching logs (instant snapshot, fixed range, or sliding window).
 type LogsSourceStrategyRangeVariant struct {
 	Range LogsSourceStrategyRange `json:"range"`
 	AdditionalProperties map[string]interface{}

@@ -22,6 +22,7 @@ var _ MappedNullable = &SloThresholdCondition{}
 
 // SloThresholdCondition Condition for the SLO threshold rule
 type SloThresholdCondition struct {
+	// Threshold value.
 	Threshold *float64 `json:"threshold,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

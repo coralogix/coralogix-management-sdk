@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the FilterWidgetScope type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FilterWidgetScope{}
 
-// FilterWidgetScope struct for FilterWidgetScope
+// FilterWidgetScope Annotation.widget scope.
 type FilterWidgetScope struct {
+	// Annotation.widget scope.all widgets.
 	AllWidgets map[string]interface{} `json:"allWidgets,omitempty"`
 	SpecificWidgets *FilterWidgetScopeSpecificWidgets `json:"specificWidgets,omitempty"`
 	AdditionalProperties map[string]interface{}

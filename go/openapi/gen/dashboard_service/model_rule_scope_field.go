@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the RuleScopeField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleScopeField{}
 
-// RuleScopeField struct for RuleScopeField
+// RuleScopeField Rule scope.
 type RuleScopeField struct {
 	Field ObservationField `json:"field"`
 	AdditionalProperties map[string]interface{}

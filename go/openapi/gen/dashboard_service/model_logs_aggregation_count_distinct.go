@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LogsAggregationCountDistinct type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationCountDistinct{}
 
-// LogsAggregationCountDistinct struct for LogsAggregationCountDistinct
+// LogsAggregationCountDistinct Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile.
 type LogsAggregationCountDistinct struct {
 	CountDistinct CountDistinct `json:"countDistinct"`
 	AdditionalProperties map[string]interface{}

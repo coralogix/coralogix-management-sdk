@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestOutgoingWebhookRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestOutgoingWebhookRequest{}
 
-// TestOutgoingWebhookRequest struct for TestOutgoingWebhookRequest
+// TestOutgoingWebhookRequest Request for testing an outgoing webhook configuration.
 type TestOutgoingWebhookRequest struct {
 	Data *OutgoingWebhookInputData `json:"data,omitempty"`
 	AdditionalProperties map[string]interface{}

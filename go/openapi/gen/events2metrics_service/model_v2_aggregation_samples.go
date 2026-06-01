@@ -24,8 +24,10 @@ var _ MappedNullable = &V2AggregationSamples{}
 // V2AggregationSamples This data structure represents an aggregation
 type V2AggregationSamples struct {
 	AggType *AggType `json:"aggType,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	Samples E2MAggSamples `json:"samples"`
+	// Name of the target metric produced by this aggregation.
 	TargetMetricName *string `json:"targetMetricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

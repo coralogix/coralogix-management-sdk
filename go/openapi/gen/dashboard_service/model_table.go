@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the Table type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Table{}
 
-// Table struct for Table
+// Table Visualization configuration for displaying query results as a structured table with columns, rules, and display settings.
 type Table struct {
+	// List of columns.
 	Columns []TableColumn `json:"columns,omitempty"`
+	// List of rules.
 	Rules []TableRule `json:"rules,omitempty"`
 	Settings *TableSettings `json:"settings,omitempty"`
 	AdditionalProperties map[string]interface{}

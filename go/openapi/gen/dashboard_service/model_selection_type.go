@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SelectionType the model 'SelectionType'
+// SelectionType Selection type.
 type SelectionType string
 
 // List of SelectionType

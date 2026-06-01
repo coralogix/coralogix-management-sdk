@@ -30,6 +30,7 @@ type ApiRuleGroupsServiceBulkDeleteRuleGroupRequest struct {
 	groupIds *[]string
 }
 
+// The unique identifiers of the parsing rule groups to delete.
 func (r ApiRuleGroupsServiceBulkDeleteRuleGroupRequest) GroupIds(groupIds []string) ApiRuleGroupsServiceBulkDeleteRuleGroupRequest {
 	r.groupIds = &groupIds
 	return r
@@ -42,7 +43,7 @@ func (r ApiRuleGroupsServiceBulkDeleteRuleGroupRequest) Execute() (map[string]in
 /*
 RuleGroupsServiceBulkDeleteRuleGroup Bulk Delete Rule Group
 
-No description available
+Deletes all parsing rule groups.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceBulkDeleteRuleGroupRequest
@@ -158,7 +159,7 @@ func (r ApiRuleGroupsServiceCreateRuleGroupRequest) Execute() (*CreateRuleGroupR
 /*
 RuleGroupsServiceCreateRuleGroup Create Rule Group
 
-No description available
+Creates a new parsing rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceCreateRuleGroupRequest
@@ -260,10 +261,10 @@ func (r ApiRuleGroupsServiceDeleteRuleGroupRequest) Execute() (map[string]interf
 /*
 RuleGroupsServiceDeleteRuleGroup Delete Rule Group
 
-No description available
+Deletes the parsing rule group with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId The unique identifier of the parsing rule group to delete.
  @return ApiRuleGroupsServiceDeleteRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroup(ctx context.Context, groupId string) ApiRuleGroupsServiceDeleteRuleGroupRequest {
@@ -362,7 +363,7 @@ func (r ApiRuleGroupsServiceGetCompanyUsageLimitsRequest) Execute() (*GetCompany
 /*
 RuleGroupsServiceGetCompanyUsageLimits Get Company Usage Limits
 
-No description available
+Returns parsing rule usage limits.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceGetCompanyUsageLimitsRequest
@@ -462,10 +463,10 @@ func (r ApiRuleGroupsServiceGetRuleGroupRequest) Execute() (*GetRuleGroupRespons
 /*
 RuleGroupsServiceGetRuleGroup Get Rule Group
 
-No description available
+Returns the details of the specified parsing rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId The unique identifier of the parsing rule group to retrieve.
  @return ApiRuleGroupsServiceGetRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroup(ctx context.Context, groupId string) ApiRuleGroupsServiceGetRuleGroupRequest {
@@ -570,7 +571,7 @@ func (r ApiRuleGroupsServiceGetRuleGroupModelMappingRequest) Execute() (*GetRule
 /*
 RuleGroupsServiceGetRuleGroupModelMapping Get Rule Group Model Mapping
 
-No description available
+Returns the model mapping for a parsing rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceGetRuleGroupModelMappingRequest
@@ -671,7 +672,7 @@ func (r ApiRuleGroupsServiceListRuleGroupsRequest) Execute() (*ListRuleGroupsRes
 /*
 RuleGroupsServiceListRuleGroups List Rule Groups
 
-No description available
+Returns all parsing rule groups for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupsServiceListRuleGroupsRequest
@@ -777,10 +778,10 @@ func (r ApiRuleGroupsServiceUpdateRuleGroupRequest) Execute() (*UpdateRuleGroupR
 /*
 RuleGroupsServiceUpdateRuleGroup Update Rule Group
 
-No description available
+Updates the specified parsing rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId The unique identifier of the parsing rule group to update.
  @return ApiRuleGroupsServiceUpdateRuleGroupRequest
 */
 func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroup(ctx context.Context, groupId string) ApiRuleGroupsServiceUpdateRuleGroupRequest {

@@ -22,6 +22,7 @@ var _ MappedNullable = &Terraform{}
 
 // Terraform This data structure represents a Terraform integration.
 type Terraform struct {
+	// The configuration blocks.
 	ConfigurationBlocks []ConfigurationBlock `json:"configurationBlocks,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

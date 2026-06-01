@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableValueV2Lucene type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2Lucene{}
 
-// VariableValueV2Lucene struct for VariableValueV2Lucene
+// VariableValueV2Lucene Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2Lucene struct {
 	Lucene LuceneQueryValue `json:"lucene"`
 	AdditionalProperties map[string]interface{}

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertDefOrderByDirection the model 'AlertDefOrderByDirection'
+// AlertDefOrderByDirection Alert def order by direction.
 type AlertDefOrderByDirection string
 
 // List of AlertDefOrderByDirection

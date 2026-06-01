@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TextAlignment the model 'TextAlignment'
+// TextAlignment Text alignment.
 type TextAlignment string
 
 // List of TextAlignment

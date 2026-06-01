@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the LogsPathSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsPathSource{}
 
-// LogsPathSource struct for LogsPathSource
+// LogsPathSource Logs path source.
 type LogsPathSource struct {
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

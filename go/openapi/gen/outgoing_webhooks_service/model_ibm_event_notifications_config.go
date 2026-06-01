@@ -20,12 +20,16 @@ var _ = bytes.MinRead
 // checks if the IbmEventNotificationsConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IbmEventNotificationsConfig{}
 
-// IbmEventNotificationsConfig struct for IbmEventNotificationsConfig
+// IbmEventNotificationsConfig Ibm event notifications config.
 type IbmEventNotificationsConfig struct {
 	EndpointType *EndpointType `json:"endpointType,omitempty"`
+	// The event notifications instance id.
 	EventNotificationsInstanceId *string `json:"eventNotificationsInstanceId,omitempty"`
+	// The region id.
 	RegionId *string `json:"regionId,omitempty"`
+	// The source id.
 	SourceId *string `json:"sourceId,omitempty"`
+	// The source name.
 	SourceName *string `json:"sourceName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

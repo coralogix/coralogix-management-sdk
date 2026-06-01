@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetDailyUsageProcessedGbsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageProcessedGbsResponse{}
 
-// GetDailyUsageProcessedGbsResponse struct for GetDailyUsageProcessedGbsResponse
+// GetDailyUsageProcessedGbsResponse Response containing daily processed gigabytes usage data.
 type GetDailyUsageProcessedGbsResponse struct {
+	// The gbs.
 	Gbs []DetailedDailyProcessedGbs `json:"gbs,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

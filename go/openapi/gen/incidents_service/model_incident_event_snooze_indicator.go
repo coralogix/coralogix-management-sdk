@@ -21,10 +21,13 @@ var _ = bytes.MinRead
 // checks if the IncidentEventSnoozeIndicator type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventSnoozeIndicator{}
 
-// IncidentEventSnoozeIndicator struct for IncidentEventSnoozeIndicator
+// IncidentEventSnoozeIndicator Incident event snooze indicator.
 type IncidentEventSnoozeIndicator struct {
+	// The duration minutes.
 	DurationMinutes *int32 `json:"durationMinutes,omitempty"`
+	// Start time.
 	StartTime *time.Time `json:"startTime,omitempty"`
+	// The user id.
 	UserId *string `json:"userId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

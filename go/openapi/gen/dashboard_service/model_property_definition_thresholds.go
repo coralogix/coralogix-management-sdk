@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionThresholds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionThresholds{}
 
-// PropertyDefinitionThresholds struct for PropertyDefinitionThresholds
+// PropertyDefinitionThresholds Property definition.
 type PropertyDefinitionThresholds struct {
 	Thresholds PropertyThresholds `json:"thresholds"`
 	AdditionalProperties map[string]interface{}

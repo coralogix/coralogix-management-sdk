@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DataprimeSourceStrategyRangeVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyRangeVariant{}
 
-// DataprimeSourceStrategyRangeVariant struct for DataprimeSourceStrategyRangeVariant
+// DataprimeSourceStrategyRangeVariant Determines the time strategy for fetching Dataprime results (instant snapshot, fixed range, or sliding window).
 type DataprimeSourceStrategyRangeVariant struct {
 	Range DataprimeSourceStrategyRange `json:"range"`
 	AdditionalProperties map[string]interface{}

@@ -22,8 +22,10 @@ var _ MappedNullable = &HelmChart{}
 
 // HelmChart This data structure represents a Helm chart.
 type HelmChart struct {
+	// The commands.
 	Commands []CommandInformation `json:"commands,omitempty"`
 	Guide *IntegrationGuide `json:"guide,omitempty"`
+	// The template.
 	Template *string `json:"template,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

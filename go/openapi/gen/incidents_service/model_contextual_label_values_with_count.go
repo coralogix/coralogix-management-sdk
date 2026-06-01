@@ -23,6 +23,7 @@ var _ MappedNullable = &ContextualLabelValuesWithCount{}
 
 // ContextualLabelValuesWithCount struct for ContextualLabelValuesWithCount
 type ContextualLabelValuesWithCount struct {
+	// The values with count.
 	ValuesWithCount []ContextualLabelValueWithCount `json:"valuesWithCount"`
 	AdditionalProperties map[string]interface{}
 }

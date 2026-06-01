@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V2Priority the model 'V2Priority'
+// V2Priority Priority.
 type V2Priority string
 
 // List of v2.Priority

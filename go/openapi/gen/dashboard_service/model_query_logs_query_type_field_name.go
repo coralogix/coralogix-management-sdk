@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QueryLogsQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryLogsQueryTypeFieldName{}
 
-// QueryLogsQueryTypeFieldName struct for QueryLogsQueryTypeFieldName
+// QueryLogsQueryTypeFieldName Fetches distinct log field names matching the given regex pattern.
 type QueryLogsQueryTypeFieldName struct {
+	// The log regex.
 	LogRegex *string `json:"logRegex,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

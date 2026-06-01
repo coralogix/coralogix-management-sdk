@@ -36,10 +36,13 @@ func (r ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationReques
 /*
 ContextualDataIntegrationServiceDeleteContextualDataIntegration Delete contextual data integration
 
-No description available
+Deletes the specified contextual data integration.
+
+Requires the following permissions:
+- `contextual-data:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The integration id.
  @return ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceDeleteContextualDataIntegration(ctx context.Context, id string) ApiContextualDataIntegrationServiceDeleteContextualDataIntegrationRequest {
@@ -133,6 +136,7 @@ type ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRe
 	includeTestingIntegrations *bool
 }
 
+// Whether to include testing integrations in the results.
 func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest) IncludeTestingIntegrations(includeTestingIntegrations bool) ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest {
 	r.includeTestingIntegrations = &includeTestingIntegrations
 	return r
@@ -145,10 +149,13 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitio
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition Get contextual data integration definition
 
-No description available
+Returns the definition for the specified contextual data integration type.
+
+Requires the following permissions:
+- `contextual-data:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the contextual data integration definition.
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationDefinition(ctx context.Context, id string) ApiContextualDataIntegrationServiceGetContextualDataIntegrationDefinitionRequest {
@@ -245,6 +252,7 @@ type ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsReque
 	includeTestingRevisions *bool
 }
 
+// Whether to include testing revisions in the results.
 func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest) IncludeTestingRevisions(includeTestingRevisions bool) ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest {
 	r.includeTestingRevisions = &includeTestingRevisions
 	return r
@@ -257,10 +265,13 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRe
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrationDetails Get contextual data integration details
 
-No description available
+Returns the details of the specified contextual data integration.
+
+Requires the following permissions:
+- `contextual-data:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the contextual data integration.
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceGetContextualDataIntegrationDetails(ctx context.Context, id string) ApiContextualDataIntegrationServiceGetContextualDataIntegrationDetailsRequest {
@@ -356,6 +367,7 @@ type ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest str
 	includeTestingIntegrations *bool
 }
 
+// Whether to include testing integrations in the results.
 func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest) IncludeTestingIntegrations(includeTestingIntegrations bool) ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest {
 	r.includeTestingIntegrations = &includeTestingIntegrations
 	return r
@@ -368,7 +380,10 @@ func (r ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest)
 /*
 ContextualDataIntegrationServiceGetContextualDataIntegrations Get all contextual data integrations accessible
 
-No description available
+Returns all contextual data integrations for the team.
+
+Requires the following permissions:
+- `contextual-data:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceGetContextualDataIntegrationsRequest
@@ -476,7 +491,10 @@ func (r ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest)
 /*
 ContextualDataIntegrationServiceSaveContextualDataIntegration Save contextual data integration
 
-No description available
+Creates a new contextual data integration.
+
+Requires the following permissions:
+- `contextual-data:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceSaveContextualDataIntegrationRequest
@@ -584,10 +602,13 @@ func (r ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest)
 /*
 ContextualDataIntegrationServiceTestContextualDataIntegration Test contextual data integration
 
-No description available
+Tests the specified contextual data integration.
+
+Requires the following permissions:
+- `contextual-data:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param integrationId
+ @param integrationId The unique identifier of the contextual data integration to test.
  @return ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest
 */
 func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationServiceTestContextualDataIntegration(ctx context.Context, integrationId string) ApiContextualDataIntegrationServiceTestContextualDataIntegrationRequest {
@@ -613,7 +634,7 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/contextual-data/v1/{integration_id}/test"
+	localVarPath := localBasePath + "/integrations/contextual-data/v1/test/{integration_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"integration_id"+"}", url.PathEscape(parameterValueToString(r.integrationId, "integrationId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -694,7 +715,10 @@ func (r ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationReques
 /*
 ContextualDataIntegrationServiceUpdateContextualDataIntegration Update contextual data integration
 
-No description available
+Updates an existing contextual data integration.
+
+Requires the following permissions:
+- `contextual-data:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiContextualDataIntegrationServiceUpdateContextualDataIntegrationRequest

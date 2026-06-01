@@ -22,14 +22,22 @@ var _ MappedNullable = &CreateActionRequest{}
 
 // CreateActionRequest This data structure represents the request to create an Action.
 type CreateActionRequest struct {
+	// The application names.
 	ApplicationNames []string `json:"applicationNames,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The dpxl filter.
 	DpxlFilter *string `json:"dpxlFilter,omitempty"`
+	// The is private.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
+	// The subsystem names.
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
+	// The url fields.
 	UrlFields []UrlField `json:"urlFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

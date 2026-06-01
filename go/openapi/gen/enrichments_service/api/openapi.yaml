@@ -7,21 +7,24 @@ servers:
 paths:
   /enrichment-rules/enrichment-rules/v1:
     delete:
-      description: No description available
+      description: Deletes all enrichment rules for the team.
       externalDocs:
         url: ""
       operationId: EnrichmentService_RemoveEnrichments
       parameters:
-      - explode: true
+      - description: The unique identifiers of the enrichment rules to delete.
+        explode: true
         in: query
         name: enrichment_ids
         required: false
         schema:
+          description: The unique identifiers of the enrichment rules to delete.
           example:
           - 1
           - 2
           - 3
           items:
+            description: The unique identifiers of the enrichment rules to delete.
             format: int64
             type: integer
           type: array
@@ -37,7 +40,7 @@ paths:
       tags:
       - Enrichments Service
     get:
-      description: No description available
+      description: Returns all enrichment rules for the team.
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetEnrichments
@@ -52,7 +55,7 @@ paths:
       tags:
       - Enrichments Service
     post:
-      description: No description available
+      description: Creates new enrichment rules.
       externalDocs:
         url: ""
       operationId: EnrichmentService_AddEnrichments
@@ -61,6 +64,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Enrichments_Creation_Request"
+        required: true
       responses:
         "200":
           content:
@@ -72,7 +76,7 @@ paths:
       tags:
       - Enrichments Service
     put:
-      description: No description available
+      description: Updates enrichment rules.
       externalDocs:
         url: ""
       operationId: EnrichmentService_AtomicOverwriteEnrichments
@@ -88,12 +92,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/AtomicOverwriteEnrichmentsResponse"
           description: ""
-      summary: Atomic Overwrite for CustomEnrichments only.
+      summary: Atomic Overwrite for CustomEnrichments only
       tags:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/all:
     put:
-      description: No description available
+      description: "Atomic Overwrite for ALL types of enrichments. The request is\
+        \ the desired state which will override ALL enrichments. WARNING: This operation\
+        \ will delete all existing enrichments and replace them with the provided\
+        \ ones."
       externalDocs:
         url: ""
       operationId: EnrichmentService_AtomicOverwriteAllEnrichments
@@ -109,15 +116,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AtomicOverwriteAllEnrichmentsResponse"
           description: ""
-      summary: "Atomic Overwrite for ALL types of enrichments. The request is the\
-        \ desired state which will override ALL enrichments. WARNING: This operation\
-        \ will delete all existing enrichments and replace them with the provided\
-        \ ones."
+      summary: Atomic Overwrite for ALL types of enrichments
       tags:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/limit:
     get:
-      description: No description available
+      description: Returns the maximum number of enrichment rules allowed.
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetEnrichmentLimit
@@ -133,7 +137,7 @@ paths:
       - Enrichments Service
   /enrichment-rules/enrichment-rules/v1/settings:
     get:
-      description: No description available
+      description: Returns the current enrichment settings for the team.
       externalDocs:
         url: ""
       operationId: EnrichmentService_GetCompanyEnrichmentSettings
@@ -154,28 +158,41 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         enrichments:
+          description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
           type: array
@@ -184,66 +201,105 @@ components:
       title: Encrichments Creation Response
       type: object
     AtomicOverwriteAllEnrichmentsResponse:
+      description: Response returned after atomically replacing all enrichment rules.
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+      externalDocs:
+        url: ""
       properties:
         enrichments:
+          description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
           type: array
       type: object
     AtomicOverwriteEnrichmentsResponse:
+      description: Response returned after atomically updating enrichment rules.
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+      externalDocs:
+        url: ""
       properties:
         enrichments:
+          description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
           type: array
       type: object
     AwsType:
+      description: Aws type.
+      example:
+        resourceType: ec2
+      externalDocs:
+        url: ""
       properties:
         resourceType:
+          description: The resource type.
           example: ec2
           type: string
       type: object
     CompanyEnrichmentSettings:
+      description: Company enrichment settings.
       example:
         rowLimit: 5
         sizeLimitBytes: ""
@@ -251,69 +307,116 @@ components:
         queryOnlyRowLimit: 1
         enrichmentAmountLimit: 0
         queryOnlySizeLimitBytes: ""
+      externalDocs:
+        url: ""
       properties:
         enrichmentAmountLimit:
+          description: The enrichment amount limit.
           format: int64
           type: integer
         enrichmentsInUse:
+          description: The enrichments in use.
           format: int64
           type: integer
         queryOnlyRowLimit:
+          description: The query only row limit.
           format: int64
           type: integer
         queryOnlySizeLimitBytes:
+          description: The query only size limit bytes.
           example: ""
           format: int64
           type: string
         rowLimit:
+          description: The row limit.
           format: int64
           type: integer
         sizeLimitBytes:
+          description: The size limit bytes.
           example: ""
           format: int64
           type: string
       type: object
     CustomEnrichmentType:
+      description: Custom enrichment type.
+      externalDocs:
+        url: ""
       properties:
         id:
+          description: Unique identifier.
           example: 1
           format: int64
           type: integer
+      type: object
+    DatasetTarget:
+      description: This data structure represents a target for enrichments. It defines
+        a dataset in which the enrichment will be applied to.
+      example:
+        dataset: dataset1
+      externalDocs:
+        url: ""
+      properties:
+        dataset:
+          description: The dataset name in which the enrichment will be applied.
+          example: dataset1
+          maxLength: 100
+          minLength: 1
+          pattern: "^[a-zA-Z0-9_][a-zA-Z0-9_./-]*$"
+          type: string
+      title: Dataset Target
       type: object
     Enrichment:
       description: This data structure represents an enrichment
       example:
         enrichmentType:
-          geoIp:
-            withAsn: true
+          aws:
+            resourceType: ec2
         selectedColumns:
         - city
         - population
         fieldName: "1"
         enrichedFieldName: "1"
         id: 1
+        targets:
+        - dataset: dataset1
+        - dataset: dataset1
+        - dataset: dataset1
+        - dataset: dataset1
+        - dataset: dataset1
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         enrichedFieldName:
+          description: The enriched field name.
           example: "1"
           type: string
         enrichmentType:
           $ref: "#/components/schemas/EnrichmentType"
         fieldName:
+          description: The field name.
           example: "1"
           type: string
         id:
+          description: Unique identifier.
           example: 1
           format: int64
           type: integer
         selectedColumns:
+          description: The selected columns.
           example:
           - city
           - population
           items:
+            description: The selected columns.
             type: string
+          type: array
+        targets:
+          description: The targets for the enrichment
+          items:
+            $ref: "#/components/schemas/DatasetTarget"
+          maxItems: 10
+          minItems: 1
           type: array
       required:
       - enrichmentType
@@ -324,12 +427,23 @@ components:
     EnrichmentFieldDefinition:
       properties:
         enrichedFieldName:
+          description: The enriched field name.
           type: string
         fieldName:
+          description: The field name.
           type: string
         selectedColumns:
+          description: The selected columns.
           items:
+            description: The selected columns.
             type: string
+          type: array
+        targets:
+          description: The targets for the enrichment
+          items:
+            $ref: "#/components/schemas/DatasetTarget"
+          maxItems: 10
+          minItems: 1
           type: array
       type: object
     EnrichmentRequestModel:
@@ -339,15 +453,26 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         enrichedFieldName:
+          description: The enriched field name.
           type: string
         enrichmentType:
           $ref: "#/components/schemas/EnrichmentType"
         fieldName:
+          description: The field name.
           example: sourceIPs
           type: string
         selectedColumns:
+          description: The selected columns.
           items:
+            description: The selected columns.
             type: string
+          type: array
+        targets:
+          description: The targets for the enrichment
+          items:
+            $ref: "#/components/schemas/DatasetTarget"
+          maxItems: 10
+          minItems: 1
           type: array
       required:
       - enrichmentType
@@ -356,11 +481,17 @@ components:
       type: object
     EnrichmentType:
       oneOf:
-      - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
-      - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
       - $ref: "#/components/schemas/EnrichmentTypeAws"
       - $ref: "#/components/schemas/EnrichmentTypeCustomEnrichment"
+      - $ref: "#/components/schemas/EnrichmentTypeGeoIp"
+      - $ref: "#/components/schemas/EnrichmentTypeSuspiciousIp"
     EnrichmentTypeAws:
+      description: Enrichment type.
+      example:
+        aws:
+          resourceType: ec2
+      externalDocs:
+        url: ""
       properties:
         aws:
           $ref: "#/components/schemas/AwsType"
@@ -368,6 +499,9 @@ components:
       - aws
       type: object
     EnrichmentTypeCustomEnrichment:
+      description: Enrichment type.
+      externalDocs:
+        url: ""
       properties:
         customEnrichment:
           $ref: "#/components/schemas/CustomEnrichmentType"
@@ -375,9 +509,9 @@ components:
       - customEnrichment
       type: object
     EnrichmentTypeGeoIp:
-      example:
-        geoIp:
-          withAsn: true
+      description: Enrichment type.
+      externalDocs:
+        url: ""
       properties:
         geoIp:
           $ref: "#/components/schemas/GeoIpType"
@@ -385,16 +519,23 @@ components:
       - geoIp
       type: object
     EnrichmentTypeSuspiciousIp:
+      description: Enrichment type.
+      externalDocs:
+        url: ""
       properties:
         suspiciousIp:
+          additionalProperties: false
+          description: Suspicious ip type.
+          externalDocs:
+            url: ""
           type: object
       required:
       - suspiciousIp
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -443,13 +584,16 @@ components:
       title: Filters
       type: object
     GeoIpType:
-      example:
-        withAsn: true
+      description: Geo ip type.
+      externalDocs:
+        url: ""
       properties:
         withAsn:
+          description: The with asn.
           type: boolean
       type: object
     GetCompanyEnrichmentSettingsResponse:
+      description: Response containing the company-level enrichment settings.
       example:
         enrichmentSettings:
           rowLimit: 5
@@ -458,6 +602,8 @@ components:
           queryOnlyRowLimit: 1
           enrichmentAmountLimit: 0
           queryOnlySizeLimitBytes: ""
+      externalDocs:
+        url: ""
       properties:
         enrichmentSettings:
           $ref: "#/components/schemas/CompanyEnrichmentSettings"
@@ -472,10 +618,12 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         limit:
+          description: Limit.
           example: 10
           format: int64
           type: integer
         used:
+          description: The used.
           example: 5
           format: int64
           type: integer
@@ -489,28 +637,41 @@ components:
       example:
         enrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         enrichments:
+          description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
           type: array
@@ -532,34 +693,51 @@ components:
       example:
         remainingEnrichments:
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
         - enrichmentType:
-            geoIp:
-              withAsn: true
+            aws:
+              resourceType: ec2
           selectedColumns:
           - city
           - population
           fieldName: "1"
           enrichedFieldName: "1"
           id: 1
+          targets:
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
+          - dataset: dataset1
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         remainingEnrichments:
+          description: The remaining enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
           type: array
       title: Encrichments Delettion Response
       type: object
     SuspiciousIpType:
+      additionalProperties: false
+      description: Suspicious ip type.
+      externalDocs:
+        url: ""
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -567,19 +745,23 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     EnrichmentService_AtomicOverwriteEnrichments_request:
+      description: Request to atomically update enrichment rules.
       properties:
         enrichmentFields:
+          description: "Deprecated: enrichment field definitions."
           items:
             $ref: "#/components/schemas/EnrichmentFieldDefinition"
           type: array
         enrichmentType:
           $ref: "#/components/schemas/EnrichmentType"
         requestEnrichments:
+          description: List of enrichment rules to atomically replace existing rules.
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
           type: array
@@ -588,6 +770,7 @@ components:
       description: This response data structure represents a collection of enrichments
       properties:
         requestEnrichments:
+          description: The request enrichments.
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
           type: array
@@ -596,8 +779,10 @@ components:
       title: Enrichments Creation Request
       type: object
     EnrichmentService_AtomicOverwriteAllEnrichments_request:
+      description: Request to atomically replace all enrichment rules.
       properties:
         requestEnrichments:
+          description: Complete list of enrichment rules to replace all existing rules.
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
           type: array

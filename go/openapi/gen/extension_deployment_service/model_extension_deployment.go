@@ -20,12 +20,17 @@ var _ = bytes.MinRead
 // checks if the ExtensionDeployment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtensionDeployment{}
 
-// ExtensionDeployment struct for ExtensionDeployment
+// ExtensionDeployment Extension deployment.
 type ExtensionDeployment struct {
+	// The applications.
 	Applications []string `json:"applications,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// The item ids.
 	ItemIds []string `json:"itemIds,omitempty"`
+	// The subsystems.
 	Subsystems []string `json:"subsystems,omitempty"`
+	// Version number.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

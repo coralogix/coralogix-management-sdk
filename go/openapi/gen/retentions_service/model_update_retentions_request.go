@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateRetentionsRequest{}
 
 // UpdateRetentionsRequest This data structure is used to update retentions
 type UpdateRetentionsRequest struct {
+	// List of retention tag updates to apply.
 	RetentionUpdateElements []RetentionUpdateElement `json:"retentionUpdateElements"`
 	AdditionalProperties map[string]interface{}
 }

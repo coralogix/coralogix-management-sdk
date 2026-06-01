@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the NotificationRouting type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationRouting{}
 
-// NotificationRouting struct for NotificationRouting
+// NotificationRouting Notification routing.
 type NotificationRouting struct {
 	ConfigOverrides *V3SourceOverrides `json:"configOverrides,omitempty"`
 	AdditionalProperties map[string]interface{}

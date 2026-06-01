@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the FieldCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FieldCondition{}
 
-// FieldCondition struct for FieldCondition
+// FieldCondition Field condition.
 type FieldCondition struct {
 	Type *FieldConditionConditionType `json:"type,omitempty"`
+	// List of values.
 	Values []FieldConditionFieldValue `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

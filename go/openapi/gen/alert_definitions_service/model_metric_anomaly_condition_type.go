@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricAnomalyConditionType the model 'MetricAnomalyConditionType'
+// MetricAnomalyConditionType Metric anomaly condition type.
 type MetricAnomalyConditionType string
 
 // List of MetricAnomalyConditionType

@@ -11,7 +11,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Get quota allocation rule set",
-        "description": "No description available",
+        "description": "Returns the current quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Read`",
         "externalDocs": {
           "url": ""
         },
@@ -20,8 +20,10 @@
           {
             "in": "query",
             "name": "id",
+            "description": "Unique identifier.",
             "schema": {
               "example": "",
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "form"
@@ -72,7 +74,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Replace quota allocation rule set",
-        "description": "No description available",
+        "description": "Updates the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
         "externalDocs": {
           "url": ""
         },
@@ -94,7 +96,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -141,7 +144,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Create quota allocation rule set",
-        "description": "No description available",
+        "description": "Creates new quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
         "externalDocs": {
           "url": ""
         },
@@ -163,7 +166,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -210,7 +214,7 @@
           "Quota Allocation Rule Set service"
         ],
         "summary": "Delete quota allocation rule set",
-        "description": "No description available",
+        "description": "Deletes the quota allocation rules.\n\nRequires the following permissions:\n- `team-quota-rules:Manage`",
         "externalDocs": {
           "url": ""
         },
@@ -281,6 +285,7 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           }
         }
@@ -288,10 +293,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -397,16 +402,28 @@
         "type": "object",
         "properties": {
           "allocation": {
+            "description": "The allocation.",
             "type": "number",
             "format": "float"
           },
+          "allocationType": {
+            "$ref": "#/components/schemas/QuotaAllocationType"
+          },
           "canOverflow": {
+            "description": "The can overflow.",
+            "type": "boolean"
+          },
+          "cxManaged": {
+            "readOnly": true,
+            "description": "Indicates whether the quota allocation rule is managed by Coralogix. This field is returned by the service and must not be sent in Create or Replace requests.",
             "type": "boolean"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "entityType": {
+            "description": "The entity type.",
             "type": "string"
           }
         },
@@ -426,9 +443,11 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuotaAllocationEntityTypeRule"
@@ -437,6 +456,16 @@
         },
         "required": [
           "rules"
+        ]
+      },
+      "QuotaAllocationType": {
+        "title": "Quota allocation type",
+        "description": "Specifies whether the allocation value is interpreted as a percentage or as locked units.",
+        "type": "string",
+        "enum": [
+          "QUOTA_ALLOCATION_TYPE_UNSPECIFIED",
+          "QUOTA_ALLOCATION_TYPE_PERCENTAGE",
+          "QUOTA_ALLOCATION_TYPE_LOCKED_UNITS"
         ]
       },
       "ReplaceQuotaAllocationRuleSetResponse": {
@@ -460,6 +489,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

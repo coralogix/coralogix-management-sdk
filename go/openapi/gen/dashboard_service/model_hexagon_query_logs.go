@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the HexagonQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonQueryLogs{}
 
-// HexagonQueryLogs struct for HexagonQueryLogs
+// HexagonQueryLogs Discriminated union of possible query types for the hexagon widget.
 type HexagonQueryLogs struct {
 	Logs HexagonLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 *UsersManagementServiceAPI* | [**UsersMgmtServiceGetUser**](docs/UsersManagementServiceAPI.md#usersmgmtservicegetuser) | **Get** /aaa/teams/v2/{team_id}/members/{user_account_id} | Get User
 *UsersManagementServiceAPI* | [**UsersMgmtServiceSearchUsers**](docs/UsersManagementServiceAPI.md#usersmgmtservicesearchusers) | **Get** /aaa/teams/v2/{team_id}/search | Search Users
 *UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsers**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusers) | **Put** /aaa/teams/v2/{team_id}/members | Update Users
-*UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsersStatuses**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusersstatuses) | **Patch** /aaa/teams/v2/{team_id}/members/status | Activate/Revoke Users
+*UsersManagementServiceAPI* | [**UsersMgmtServiceUpdateUsersStatuses**](docs/UsersManagementServiceAPI.md#usersmgmtserviceupdateusersstatuses) | **Patch** /aaa/teams/v2/{team_id}/members:updateStatuses | Activate/Revoke Users
 
 
 ## Documentation For Models

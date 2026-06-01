@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateBulkAlertSchedulerRuleRequestDataStructure{}
 
 // UpdateBulkAlertSchedulerRuleRequestDataStructure This is a request sent to update multiple alert scheduler rules
 type UpdateBulkAlertSchedulerRuleRequestDataStructure struct {
+	// The update alert scheduler rule requests.
 	UpdateAlertSchedulerRuleRequests []UpdateAlertSchedulerRuleRequest `json:"updateAlertSchedulerRuleRequests"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,6 +23,7 @@ var _ MappedNullable = &ListIncidentEventsResponse{}
 
 // ListIncidentEventsResponse A response containing a list of incident events and pagination information
 type ListIncidentEventsResponse struct {
+	// List of incident events
 	Items []IncidentEventExtended `json:"items"`
 	Pagination *IncidentsV1PaginationResponse `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}

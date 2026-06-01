@@ -23,6 +23,7 @@ var _ MappedNullable = &ListIncidentsRequest{}
 // ListIncidentsRequest Request to list incidents with filtering, pagination and ordering options
 type ListIncidentsRequest struct {
 	Filter *IncidentQueryFilter `json:"filter,omitempty"`
+	// Order by fields
 	OrderBys []V1OrderBy `json:"orderBys,omitempty"`
 	Pagination *IncidentsV1PaginationRequest `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}

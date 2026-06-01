@@ -20,15 +20,23 @@ var _ = bytes.MinRead
 // checks if the RuleGroupsServiceGetRuleGroupModelMappingRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroupsServiceGetRuleGroupModelMappingRequest{}
 
-// RuleGroupsServiceGetRuleGroupModelMappingRequest struct for RuleGroupsServiceGetRuleGroupModelMappingRequest
+// RuleGroupsServiceGetRuleGroupModelMappingRequest Request for retrieving the model mapping for a parsing rule group.
 type RuleGroupsServiceGetRuleGroupModelMappingRequest struct {
+	// Creator.
 	Creator *string `json:"creator,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Whether to hide this rule group from the standard view.
 	Hidden *bool `json:"hidden,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Sort order.
 	Order *int64 `json:"order,omitempty"`
+	// List of rule matchers that determine which logs this group applies to.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
+	// List of rule subgroups defining the ordered set of rules in this group.
 	RuleSubgroups []GetRuleGroupModelMappingRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TestExtensionRevisionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestExtensionRevisionRequest{}
 
-// TestExtensionRevisionRequest struct for TestExtensionRevisionRequest
+// TestExtensionRevisionRequest Request for testing an extension revision.
 type TestExtensionRevisionRequest struct {
+	// Whether to automatically clean up the testing extension revision after the test run completes.
 	CleanupAfterTest *bool `json:"cleanupAfterTest,omitempty"`
 	ExtensionData *ExtensionData `json:"extensionData,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -22,6 +22,7 @@ var _ MappedNullable = &DataTableSpansQuery{}
 
 // DataTableSpansQuery A spans variant of the query
 type DataTableSpansQuery struct {
+	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
 	Grouping *SpansQueryGrouping `json:"grouping,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Min type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Min{}
 
-// Min struct for Min
+// Min Min.
 type Min struct {
+	// The field.
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	AdditionalProperties map[string]interface{}

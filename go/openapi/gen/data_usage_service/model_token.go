@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Token type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Token{}
 
-// Token struct for Token
+// Token Token.
 type Token struct {
+	// The value.
 	Value *float32 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

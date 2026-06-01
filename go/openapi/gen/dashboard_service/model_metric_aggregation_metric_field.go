@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricAggregationMetricField the model 'MetricAggregationMetricField'
+// MetricAggregationMetricField Span metric field to aggregate, currently supports duration.
 type MetricAggregationMetricField string
 
 // List of MetricAggregation.MetricField

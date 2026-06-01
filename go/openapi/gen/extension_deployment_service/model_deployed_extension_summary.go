@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the DeployedExtensionSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeployedExtensionSummary{}
 
-// DeployedExtensionSummary struct for DeployedExtensionSummary
+// DeployedExtensionSummary Deployed extension summary.
 type DeployedExtensionSummary struct {
 	DeployedItemCounts *ItemCounts `json:"deployedItemCounts,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -20,11 +20,15 @@ var _ = bytes.MinRead
 // checks if the LineChartLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartLogsQuery{}
 
-// LineChartLogsQuery struct for LineChartLogsQuery
+// LineChartLogsQuery Logs query.
 type LineChartLogsQuery struct {
+	// List of query aggregation functions, it should contain only one element
 	Aggregations []LogsAggregation `json:"aggregations,omitempty"`
+	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
+	// List of field names to group the query results
 	GroupBy []string `json:"groupBy,omitempty"`
+	// A list of observation fields to group the query results
 	GroupBys []ObservationField `json:"groupBys,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`

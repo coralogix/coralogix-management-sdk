@@ -28,6 +28,7 @@ type ApiSamlConfigurationServiceGetConfigurationRequest struct {
 	teamId *int64
 }
 
+// The unique identifier of the team whose SAML configuration to retrieve.
 func (r ApiSamlConfigurationServiceGetConfigurationRequest) TeamId(teamId int64) ApiSamlConfigurationServiceGetConfigurationRequest {
 	r.teamId = &teamId
 	return r
@@ -40,7 +41,7 @@ func (r ApiSamlConfigurationServiceGetConfigurationRequest) Execute() (*GetConfi
 /*
 SamlConfigurationServiceGetConfiguration Get SAML Configuration
 
-No description available
+Returns the current SAML configuration for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceGetConfigurationRequest
@@ -136,6 +137,7 @@ type ApiSamlConfigurationServiceGetSPParametersRequest struct {
 	teamId *int64
 }
 
+// Team identifier.
 func (r ApiSamlConfigurationServiceGetSPParametersRequest) TeamId(teamId int64) ApiSamlConfigurationServiceGetSPParametersRequest {
 	r.teamId = &teamId
 	return r
@@ -148,7 +150,7 @@ func (r ApiSamlConfigurationServiceGetSPParametersRequest) Execute() (*GetSPPara
 /*
 SamlConfigurationServiceGetSPParameters Get SP Parameters
 
-No description available
+Returns the service provider parameters for SAML.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceGetSPParametersRequest
@@ -256,7 +258,7 @@ func (r ApiSamlConfigurationServiceSetActiveRequest) Execute() (map[string]inter
 /*
 SamlConfigurationServiceSetActive Activate/Deactivate SAML
 
-No description available
+Activates or deactivates SAML for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceSetActiveRequest
@@ -363,7 +365,7 @@ func (r ApiSamlConfigurationServiceSetIDPParametersRequest) Execute() (map[strin
 /*
 SamlConfigurationServiceSetIDPParameters Set IDP Parameters
 
-No description available
+Sets the identity provider parameters for SAML.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSamlConfigurationServiceSetIDPParametersRequest

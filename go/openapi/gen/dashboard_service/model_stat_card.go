@@ -24,6 +24,7 @@ var _ MappedNullable = &StatCard{}
 type StatCard struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// Fields to use for categorizing the stat card data
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	ColorLabelMapping *ColorLabelMapping `json:"colorLabelMapping,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
@@ -36,6 +37,7 @@ type StatCard struct {
 	PrimaryValue *StatVisualElement `json:"primaryValue,omitempty"`
 	Title *StatVisualElement `json:"title,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// Fields to use for the stat card value
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

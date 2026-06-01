@@ -20,11 +20,12 @@ var _ = bytes.MinRead
 // checks if the VerticalBarsMulti type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VerticalBarsMulti{}
 
-// VerticalBarsMulti struct for VerticalBarsMulti
+// VerticalBarsMulti Visualization configuration for vertical bars with multiple queries.
 type VerticalBarsMulti struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
+	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`
@@ -40,6 +41,7 @@ type VerticalBarsMulti struct {
 	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
 	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
+	// Per-query field settings
 	QueryFieldSettings []VerticalBarsMultiQueryFieldSettings `json:"queryFieldSettings,omitempty"`
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	SortOrder *VisualizationSortOrder `json:"sortOrder,omitempty"`

@@ -21,11 +21,13 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataDemisto type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataDemisto{}
 
-// OutgoingWebhookInputDataDemisto struct for OutgoingWebhookInputDataDemisto
+// OutgoingWebhookInputDataDemisto Outgoing webhook input data.
 type OutgoingWebhookInputDataDemisto struct {
 	Demisto DemistoConfig `json:"demisto"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

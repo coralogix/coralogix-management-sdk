@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the CreateOutgoingWebhookResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateOutgoingWebhookResponse{}
 
-// CreateOutgoingWebhookResponse struct for CreateOutgoingWebhookResponse
+// CreateOutgoingWebhookResponse Response returned after successfully creating an outgoing webhook.
 type CreateOutgoingWebhookResponse struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

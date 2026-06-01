@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AttachmentType the model 'AttachmentType'
+// AttachmentType Attachment type.
 type AttachmentType string
 
 // List of AttachmentType

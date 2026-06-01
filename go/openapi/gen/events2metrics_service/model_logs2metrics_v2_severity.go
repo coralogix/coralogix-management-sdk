@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Logs2metricsV2Severity the model 'Logs2metricsV2Severity'
+// Logs2metricsV2Severity Severity.
 type Logs2metricsV2Severity string
 
 // List of logs2metrics.v2.Severity

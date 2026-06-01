@@ -13,6 +13,7 @@ model_atomic_overwrite_enrichments_response.go
 model_aws_type.go
 model_company_enrichment_settings.go
 model_custom_enrichment_type.go
+model_dataset_target.go
 model_enrichment.go
 model_enrichment_field_definition.go
 model_enrichment_request_model.go

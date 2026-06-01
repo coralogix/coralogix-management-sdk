@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the IntegrationRevisionSingleNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationRevisionSingleNumericValue{}
 
-// IntegrationRevisionSingleNumericValue struct for IntegrationRevisionSingleNumericValue
+// IntegrationRevisionSingleNumericValue Single numeric value.
 type IntegrationRevisionSingleNumericValue struct {
+	// The default value.
 	DefaultValue *float64 `json:"defaultValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

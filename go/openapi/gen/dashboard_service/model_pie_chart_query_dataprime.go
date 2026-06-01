@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PieChartQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PieChartQueryDataprime{}
 
-// PieChartQueryDataprime struct for PieChartQueryDataprime
+// PieChartQueryDataprime Discriminated union of possible query types for the pie chart widget.
 type PieChartQueryDataprime struct {
 	Dataprime PieChartDataprimeQuery `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

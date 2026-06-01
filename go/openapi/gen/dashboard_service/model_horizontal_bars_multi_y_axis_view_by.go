@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// HorizontalBarsMultiYAxisViewBy the model 'HorizontalBarsMultiYAxisViewBy'
+// HorizontalBarsMultiYAxisViewBy Y axis view by - group category or value.
 type HorizontalBarsMultiYAxisViewBy string
 
 // List of HorizontalBarsMulti.YAxisViewBy

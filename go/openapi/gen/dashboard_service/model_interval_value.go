@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the IntervalValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntervalValue{}
 
-// IntervalValue struct for IntervalValue
+// IntervalValue Interval value.
 type IntervalValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}

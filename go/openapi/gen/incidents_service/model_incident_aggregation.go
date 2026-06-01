@@ -24,16 +24,27 @@ var _ MappedNullable = &IncidentAggregation{}
 
 // IncidentAggregation struct for IncidentAggregation
 type IncidentAggregation struct {
+	// The agg assignments count.
 	AggAssignmentsCount []IncidentAssignmentCount `json:"aggAssignmentsCount"`
+	// The agg meta labels count.
 	AggMetaLabelsCount []IncidentMetaLabelsCount `json:"aggMetaLabelsCount"`
+	// The agg severity count.
 	AggSeverityCount []IncidentSeverityCount `json:"aggSeverityCount"`
+	// The agg state count.
 	AggStateCount []IncidentStateCount `json:"aggStateCount"`
+	// The agg status count.
 	AggStatusCount []IncidentStatusCount `json:"aggStatusCount"`
+	// The all values count.
 	AllValuesCount int64 `json:"allValuesCount"`
+	// The first created at.
 	FirstCreatedAt time.Time `json:"firstCreatedAt"`
+	// The group bys value.
 	GroupBysValue []GroupByValues `json:"groupBysValue"`
+	// The last closed at.
 	LastClosedAt time.Time `json:"lastClosedAt"`
+	// The last state update time.
 	LastStateUpdateTime time.Time `json:"lastStateUpdateTime"`
+	// The list incidents id.
 	ListIncidentsId []string `json:"listIncidentsId"`
 	AdditionalProperties map[string]interface{}
 }

@@ -25,13 +25,19 @@ var _ MappedNullable = &PresetSummary{}
 type PresetSummary struct {
 	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
 	ConnectorType *NotificationCenterConnectorType `json:"connectorType,omitempty"`
+	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The parent id.
 	ParentId *string `json:"parentId,omitempty"`
 	PresetType *PresetType `json:"presetType,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

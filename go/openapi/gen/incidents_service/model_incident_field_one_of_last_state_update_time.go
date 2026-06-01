@@ -22,8 +22,9 @@ var _ = bytes.MinRead
 // checks if the IncidentFieldOneOfLastStateUpdateTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfLastStateUpdateTime{}
 
-// IncidentFieldOneOfLastStateUpdateTime struct for IncidentFieldOneOfLastStateUpdateTime
+// IncidentFieldOneOfLastStateUpdateTime Incident field one of.
 type IncidentFieldOneOfLastStateUpdateTime struct {
+	// Timestamp of the most recent state change.
 	LastStateUpdateTime time.Time `json:"lastStateUpdateTime"`
 	AdditionalProperties map[string]interface{}
 }

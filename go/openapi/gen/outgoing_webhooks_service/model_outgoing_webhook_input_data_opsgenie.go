@@ -21,11 +21,14 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataOpsgenie type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataOpsgenie{}
 
-// OutgoingWebhookInputDataOpsgenie struct for OutgoingWebhookInputDataOpsgenie
+// OutgoingWebhookInputDataOpsgenie Outgoing webhook input data.
 type OutgoingWebhookInputDataOpsgenie struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Opsgenie config.
 	Opsgenie map[string]interface{} `json:"opsgenie"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

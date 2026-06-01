@@ -20,11 +20,12 @@ var _ = bytes.MinRead
 // checks if the TimeSeriesBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSeriesBars{}
 
-// TimeSeriesBars struct for TimeSeriesBars
+// TimeSeriesBars Time series bars.
 type TimeSeriesBars struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
 	BarValueDisplay *VisualizationBarValueDisplay `json:"barValueDisplay,omitempty"`
+	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme for this query, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`
@@ -44,6 +45,7 @@ type TimeSeriesBars struct {
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	// Number indicating the upper band for y axis

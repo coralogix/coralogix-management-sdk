@@ -23,10 +23,13 @@ var _ MappedNullable = &DashboardOffRelativeTimeFrame{}
 
 // DashboardOffRelativeTimeFrame Dashboard represents the structure and configuration of a Coralogix Custom Dashboard.
 type DashboardOffRelativeTimeFrame struct {
+	// A list of public actions that are available within the dashboard context
 	Actions []DashboardAction `json:"actions,omitempty"`
+	// A list of annotations that can be used within the dashboard's visualizations
 	Annotations []Annotation `json:"annotations,omitempty"`
 	// A brief description or summary of the dashboard's purpose or content
 	Description *string `json:"description,omitempty"`
+	// A list of filters that can be applied to the dashboard's data
 	Filters []FiltersFilter `json:"filters,omitempty"`
 	FolderId *UUID `json:"folderId,omitempty"`
 	FolderPath *FolderPath `json:"folderPath,omitempty"`
@@ -35,12 +38,15 @@ type DashboardOffRelativeTimeFrame struct {
 	Layout Layout `json:"layout"`
 	// The display name of the dashboard
 	Name string `json:"name"`
+	// Auto refresh off.
 	Off map[string]interface{} `json:"off"`
 	// Relative time frame specifying a duration from the current time
 	RelativeTimeFrame string `json:"relativeTimeFrame"`
 	// A unique slug name serving as an alias for accessing the dashboard
 	SlugName *string `json:"slugName,omitempty"`
+	// A list of variables that can be used within the dashboard for dynamic content
 	Variables []Variable `json:"variables,omitempty"`
+	// A list of variables that can be used within the dashboard for dynamic content
 	VariablesV2 []VariableV2 `json:"variablesV2,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

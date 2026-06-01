@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ConstantListSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConstantListSource{}
 
-// ConstantListSource struct for ConstantListSource
+// ConstantListSource Constant list source.
 type ConstantListSource struct {
+	// List of values.
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

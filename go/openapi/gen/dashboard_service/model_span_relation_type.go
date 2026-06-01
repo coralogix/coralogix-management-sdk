@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SpanRelationType the model 'SpanRelationType'
+// SpanRelationType Span relation type.
 type SpanRelationType string
 
 // List of SpanRelationType

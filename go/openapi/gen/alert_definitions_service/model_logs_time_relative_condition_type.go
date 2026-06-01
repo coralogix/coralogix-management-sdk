@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsTimeRelativeConditionType the model 'LogsTimeRelativeConditionType'
+// LogsTimeRelativeConditionType Logs time relative condition type.
 type LogsTimeRelativeConditionType string
 
 // List of LogsTimeRelativeConditionType

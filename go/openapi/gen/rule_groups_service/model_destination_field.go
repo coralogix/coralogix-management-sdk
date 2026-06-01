@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DestinationField the model 'DestinationField'
+// DestinationField Destination field.
 type DestinationField string
 
 // List of DestinationField

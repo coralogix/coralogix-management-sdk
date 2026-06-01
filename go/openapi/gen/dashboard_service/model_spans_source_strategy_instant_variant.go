@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the SpansSourceStrategyInstantVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansSourceStrategyInstantVariant{}
 
-// SpansSourceStrategyInstantVariant struct for SpansSourceStrategyInstantVariant
+// SpansSourceStrategyInstantVariant Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window).
 type SpansSourceStrategyInstantVariant struct {
 	Instant SpansSourceStrategyInstant `json:"instant"`
 	AdditionalProperties map[string]interface{}

@@ -23,7 +23,9 @@ var _ MappedNullable = &LogsNewValueType{}
 // LogsNewValueType Configuration for alerts triggered by new values appearing in logs
 type LogsNewValueType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
+	// The filter to specify which fields to include in the notification payload.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// The rules for the log new value alert.
 	Rules []LogsNewValueRule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

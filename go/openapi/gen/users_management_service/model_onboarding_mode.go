@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// OnboardingMode the model 'OnboardingMode'
+// OnboardingMode Onboarding mode.
 type OnboardingMode string
 
 // List of OnboardingMode

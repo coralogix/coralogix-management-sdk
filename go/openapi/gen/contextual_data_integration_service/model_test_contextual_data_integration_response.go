@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestContextualDataIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestContextualDataIntegrationResponse{}
 
-// TestContextualDataIntegrationResponse struct for TestContextualDataIntegrationResponse
+// TestContextualDataIntegrationResponse Response containing the results of a contextual data integration test.
 type TestContextualDataIntegrationResponse struct {
 	Result *TestIntegrationResult `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}

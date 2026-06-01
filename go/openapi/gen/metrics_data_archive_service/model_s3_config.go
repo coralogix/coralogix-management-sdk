@@ -22,7 +22,9 @@ var _ MappedNullable = &S3Config{}
 
 // S3Config This data structure represents the S3 configuration for a tenant.
 type S3Config struct {
+	// Bucket name.
 	Bucket *string `json:"bucket,omitempty"`
+	// Region.
 	Region *string `json:"region,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

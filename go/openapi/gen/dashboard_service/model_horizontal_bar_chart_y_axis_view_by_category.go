@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the HorizontalBarChartYAxisViewByCategory type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartYAxisViewByCategory{}
 
-// HorizontalBarChartYAxisViewByCategory struct for HorizontalBarChartYAxisViewByCategory
+// HorizontalBarChartYAxisViewByCategory Horizontal bar chart.y axis view by.
 type HorizontalBarChartYAxisViewByCategory struct {
+	// Y axis view by category.
 	Category map[string]interface{} `json:"category"`
 	AdditionalProperties map[string]interface{}
 }

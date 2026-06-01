@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DataTableQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableQuerySpans{}
 
-// DataTableQuerySpans struct for DataTableQuerySpans
+// DataTableQuerySpans Discriminated union of possible query types for the data table widget.
 type DataTableQuerySpans struct {
 	Spans DataTableSpansQuery `json:"spans"`
 	AdditionalProperties map[string]interface{}

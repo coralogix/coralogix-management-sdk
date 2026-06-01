@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableSourceV2Textbox type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2Textbox{}
 
-// VariableSourceV2Textbox struct for VariableSourceV2Textbox
+// VariableSourceV2Textbox Variable source v2.
 type VariableSourceV2Textbox struct {
 	Textbox TextboxSource `json:"textbox"`
 	AdditionalProperties map[string]interface{}

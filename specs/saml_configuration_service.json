@@ -11,7 +11,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Activate/Deactivate SAML",
-        "description": "No description available",
+        "description": "Activates or deactivates SAML for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -25,9 +25,11 @@
                 "type": "object",
                 "properties": {
                   "isActive": {
+                    "description": "The is active.",
                     "type": "boolean"
                   },
                   "teamId": {
+                    "description": "Team identifier.",
                     "type": "integer",
                     "format": "int64"
                   }
@@ -74,7 +76,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SAML Configuration",
-        "description": "No description available",
+        "description": "Returns the current SAML configuration for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -83,7 +85,9 @@
           {
             "in": "query",
             "name": "team_id",
+            "description": "The unique identifier of the team whose SAML configuration to retrieve.",
             "schema": {
+              "description": "The unique identifier of the team whose SAML configuration to retrieve.",
               "type": "integer",
               "format": "int64"
             },
@@ -128,7 +132,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Set IDP Parameters",
-        "description": "No description available",
+        "description": "Sets the identity provider parameters for SAML.",
         "externalDocs": {
           "url": ""
         },
@@ -145,6 +149,7 @@
                     "$ref": "#/components/schemas/IDPParameters"
                   },
                   "teamId": {
+                    "description": "Team identifier.",
                     "type": "integer",
                     "format": "int64"
                   }
@@ -191,7 +196,7 @@
           "SAML Configuration Service"
         ],
         "summary": "Get SP Parameters",
-        "description": "No description available",
+        "description": "Returns the service provider parameters for SAML.",
         "externalDocs": {
           "url": ""
         },
@@ -200,8 +205,10 @@
           {
             "in": "query",
             "name": "team_id",
+            "description": "Team identifier.",
             "schema": {
               "example": 1234567,
+              "description": "Team identifier.",
               "type": "integer",
               "format": "int64"
             },
@@ -246,10 +253,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -338,6 +345,7 @@
             "$ref": "#/components/schemas/SPParameters"
           },
           "teamId": {
+            "description": "The team id.",
             "type": "integer",
             "format": "int64"
           }
@@ -358,12 +366,18 @@
         }
       },
       "IDPDetails": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Idp details.",
         "type": "object",
         "properties": {
           "icon": {
+            "description": "Icon identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           }
         }
@@ -371,10 +385,10 @@
       "IDPParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
+            "$ref": "#/components/schemas/IDPParametersMetadataContent"
           },
           {
-            "$ref": "#/components/schemas/IDPParametersMetadataContent"
+            "$ref": "#/components/schemas/IDPParametersMetadataUrl"
           }
         ]
       },
@@ -389,21 +403,26 @@
         "properties": {
           "active": {
             "example": true,
+            "description": "Whether SAML SSO is currently active for this team.",
             "type": "boolean"
           },
           "groupNames": {
+            "description": "List of group names mapped from the identity provider for role-based access.",
             "type": "array",
             "items": {
               "example": "group1",
+              "description": "List of group names mapped from the identity provider for role-based access.",
               "type": "string"
             }
           },
           "metadataContent": {
             "example": "<?xml version= ...",
+            "description": "Raw XML content of the identity provider SAML metadata document.",
             "type": "string"
           },
           "teamEntityId": {
             "example": 1234567,
+            "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
             "type": "integer",
             "format": "int64"
           }
@@ -423,21 +442,26 @@
         "properties": {
           "active": {
             "example": true,
+            "description": "Whether SAML SSO is currently active for this team.",
             "type": "boolean"
           },
           "groupNames": {
+            "description": "List of group names mapped from the identity provider for role-based access.",
             "type": "array",
             "items": {
               "example": "group1",
+              "description": "List of group names mapped from the identity provider for role-based access.",
               "type": "string"
             }
           },
           "metadataUrl": {
             "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
+            "description": "URL to the identity provider SAML metadata XML document.",
             "type": "string"
           },
           "teamEntityId": {
             "example": 1234567,
+            "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
             "type": "integer",
             "format": "int64"
           }
@@ -471,28 +495,38 @@
         "properties": {
           "assertionConsumerServiceUrl": {
             "example": "assertion",
+            "description": "The assertion consumer service url.",
             "type": "string"
           },
           "binding": {
             "example": "binding",
+            "description": "The binding.",
             "type": "string"
           },
           "metadataUrl": {
             "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
+            "description": "The metadata url.",
             "type": "string"
           },
           "nameIdFormat": {
             "example": "name_id",
+            "description": "The name id format.",
             "type": "string"
           },
           "signingCertPem": {
             "example": "certificate",
+            "description": "The signing cert pem.",
             "type": "string"
           }
         }
       },
       "SetIDPParametersResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully setting the identity provider parameters.",
+        "type": "object",
+        "additionalProperties": false
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -502,9 +536,15 @@
         ]
       },
       "v2.SetActiveResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after updating the SAML active state.",
+        "type": "object",
+        "additionalProperties": false
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

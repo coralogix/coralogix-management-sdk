@@ -11,7 +11,7 @@
           "Alert events service"
         ],
         "summary": "Get alert events statistics",
-        "description": "No description available",
+        "description": "Returns statistical data for alert events.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -20,9 +20,12 @@
           {
             "in": "query",
             "name": "ids",
+            "description": "The ids.",
             "schema": {
+              "description": "The ids.",
               "type": "array",
               "items": {
+                "description": "The ids.",
                 "type": "string"
               }
             },
@@ -31,7 +34,9 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "The order bys.",
             "schema": {
+              "description": "The order bys.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -89,7 +94,7 @@
           "Alert events service"
         ],
         "summary": "Get alert event by ID",
-        "description": "No description available",
+        "description": "Returns the alert event with the specified ID.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -98,8 +103,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -107,7 +114,9 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "Ordering applied to the alert event occurrences in the response.",
             "schema": {
+              "description": "Ordering applied to the alert event occurrences in the response.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -126,14 +135,17 @@
           {
             "in": "query",
             "name": "pagination",
+            "description": "Pagination parameters (page size and page token) for the returned occurrences.",
             "schema": {
               "type": "object",
               "properties": {
                 "pageSize": {
+                  "description": "Page size.",
                   "type": "integer",
                   "format": "int64"
                 },
                 "pageToken": {
+                  "description": "The page token.",
                   "type": "string"
                 }
               }
@@ -188,8 +200,10 @@
         "type": "object",
         "properties": {
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
+              "description": "List of rules.",
               "type": "string"
             }
           },
@@ -203,21 +217,26 @@
           "url": ""
         },
         "title": "Event activity analysis statistics",
+        "description": "Activity analysis stats.",
         "type": "object",
         "properties": {
           "isMutedCount": {
+            "description": "Number of muted items.",
             "type": "integer",
             "format": "int64"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
+              "description": "List of rules.",
               "type": "string"
             }
           }
         }
       },
       "ActivityAnalysisStatus": {
+        "description": "Activity analysis status.",
         "type": "string",
         "enum": [
           "ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED",
@@ -229,54 +248,69 @@
           "url": ""
         },
         "title": "Alert event",
+        "description": "Alert event.",
         "type": "object",
         "properties": {
           "activityAnalysis": {
             "$ref": "#/components/schemas/ActivityAnalysis"
           },
           "alertId": {
+            "description": "Unique identifier of the alert.",
             "type": "string"
           },
           "groupLabels": {
+            "description": "Labels for the group.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "incidentCorrelationKey": {
+            "description": "Key used to correlate incidents.",
             "type": "string"
           },
           "payload": {
+            "description": "Raw payload data.",
             "type": "object"
           },
           "payloadType": {
+            "description": "Type of the payload.",
             "type": "string"
           },
           "permutationId": {
+            "description": "Unique identifier of the permutation.",
             "type": "string"
           },
           "permutationLabels": {
+            "description": "Labels for the permutation.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "preGroupingEventId": {
+            "description": "Identifier of the event before grouping.",
             "type": "string"
           },
           "status": {
             "$ref": "#/components/schemas/AlertStatus"
           },
           "timestamp": {
+            "description": "Timestamp of the event.",
             "type": "string",
             "format": "date-time"
           }
         }
       },
       "AlertEventMultiplePermutation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert event multiple permutation.",
         "type": "object",
         "properties": {
           "alertEventMultiplePermutation": {
+            "description": "List of alert events for multiple permutations.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertEvent"
@@ -285,6 +319,7 @@
         }
       },
       "AlertStatus": {
+        "description": "Alert status.",
         "type": "string",
         "enum": [
           "ALERT_STATUS_RESOLVED_OR_UNSPECIFIED",
@@ -303,24 +338,29 @@
             "$ref": "#/components/schemas/ActivityAnalysisStats"
           },
           "count": {
+            "description": "Number of items.",
             "type": "integer",
             "format": "int64"
           },
           "resolvedCount": {
+            "description": "The resolved count.",
             "type": "integer",
             "format": "int64"
           },
           "resolvedPermutationsSamples": {
+            "description": "The resolved permutations samples.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v3.Permutation"
             }
           },
           "triggeredCount": {
+            "description": "The triggered count.",
             "type": "integer",
             "format": "int64"
           },
           "triggeredPermutationsSamples": {
+            "description": "The triggered permutations samples.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v3.Permutation"
@@ -331,10 +371,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -419,9 +459,11 @@
           "url": ""
         },
         "title": "Get alert event response",
+        "description": "Response containing the details of an alert event.",
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier of the alert event.",
             "type": "string"
           },
           "multiplePermutation": {
@@ -440,9 +482,11 @@
           "url": ""
         },
         "title": "Get alert event response",
+        "description": "Response containing the details of an alert event.",
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier of the alert event.",
             "type": "string"
           },
           "pagination": {
@@ -461,9 +505,11 @@
           "url": ""
         },
         "title": "Get alert event statistics response",
+        "description": "Response containing statistical data for alert events.",
         "type": "object",
         "properties": {
           "eventsStats": {
+            "description": "The events stats.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/EventStats"
@@ -486,6 +532,7 @@
         }
       },
       "OrderByAlertEventDirection": {
+        "description": "Order by alert event direction.",
         "type": "string",
         "enum": [
           "ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED",
@@ -494,6 +541,7 @@
         ]
       },
       "OrderByAlertEventFields": {
+        "description": "Order by alert event fields.",
         "type": "string",
         "enum": [
           "ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED",
@@ -501,12 +549,18 @@
         ]
       },
       "alerts.v3.PaginationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Pagination response.",
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "type": "string"
           },
           "totalSize": {
+            "description": "Total number of results.",
             "type": "integer",
             "format": "int64"
           }
@@ -520,6 +574,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
@@ -534,6 +589,7 @@
         "type": "object",
         "properties": {
           "permutationLabels": {
+            "description": "Labels for the permutation.",
             "type": "object",
             "additionalProperties": {
               "type": "string"

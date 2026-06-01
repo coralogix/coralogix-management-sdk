@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the VariableSourceV2ValueDisplayOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2ValueDisplayOptions{}
 
-// VariableSourceV2ValueDisplayOptions struct for VariableSourceV2ValueDisplayOptions
+// VariableSourceV2ValueDisplayOptions Value display options.
 type VariableSourceV2ValueDisplayOptions struct {
+	// The label regex.
 	LabelRegex *string `json:"labelRegex,omitempty"`
+	// The value regex.
 	ValueRegex *string `json:"valueRegex,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

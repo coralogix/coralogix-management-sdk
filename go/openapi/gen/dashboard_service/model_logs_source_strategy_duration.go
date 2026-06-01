@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the LogsSourceStrategyDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSourceStrategyDuration{}
 
-// LogsSourceStrategyDuration struct for LogsSourceStrategyDuration
+// LogsSourceStrategyDuration Duration strategy: uses a start timestamp and a duration field to define the annotation span.
 type LogsSourceStrategyDuration struct {
 	DurationField *ObservationField `json:"durationField,omitempty"`
 	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`

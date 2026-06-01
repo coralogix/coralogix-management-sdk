@@ -25,12 +25,16 @@ var _ MappedNullable = &CreateGenericPolicyRequest{}
 type CreateGenericPolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
+	// Human-readable description.
 	Description string `json:"description"`
+	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
+	// Display name.
 	Name string `json:"name"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// List of targets.
 	Targets []V1Target `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

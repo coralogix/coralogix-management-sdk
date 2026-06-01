@@ -20,10 +20,11 @@ var _ = bytes.MinRead
 // checks if the HorizontalBars type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBars{}
 
-// HorizontalBars struct for HorizontalBars
+// HorizontalBars Horizontal bars.
 type HorizontalBars struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`
@@ -47,6 +48,7 @@ type HorizontalBars struct {
 	SortBy *SortByType `json:"sortBy,omitempty"`
 	// Custom template name of an individual stack
 	StackNameTemplate *string `json:"stackNameTemplate,omitempty"`
+	// The sub category fields.
 	SubCategoryFields []ObservationField `json:"subCategoryFields,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`

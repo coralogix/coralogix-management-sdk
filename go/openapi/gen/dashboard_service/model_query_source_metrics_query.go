@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQuery{}
 
-// QuerySourceMetricsQuery struct for QuerySourceMetricsQuery
+// QuerySourceMetricsQuery Variable query source that fetches metric names, label names, or label values from the metrics store.
 type QuerySourceMetricsQuery struct {
 	Type *QuerySourceMetricsQueryType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

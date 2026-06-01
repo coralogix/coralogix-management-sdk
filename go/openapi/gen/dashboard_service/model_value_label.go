@@ -22,8 +22,11 @@ var _ MappedNullable = &ValueLabel{}
 
 // ValueLabel struct for ValueLabel
 type ValueLabel struct {
+	// The is default.
 	IsDefault *bool `json:"isDefault,omitempty"`
+	// The label.
 	Label *string `json:"label,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

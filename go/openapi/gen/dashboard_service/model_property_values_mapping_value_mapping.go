@@ -22,7 +22,9 @@ var _ MappedNullable = &PropertyValuesMappingValueMapping{}
 
 // PropertyValuesMappingValueMapping struct for PropertyValuesMappingValueMapping
 type PropertyValuesMappingValueMapping struct {
+	// The input value.
 	InputValue *string `json:"inputValue,omitempty"`
+	// The replace value.
 	ReplaceValue *string `json:"replaceValue,omitempty"`
 	Type *ValuesMappingType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

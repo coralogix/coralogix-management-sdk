@@ -42,7 +42,7 @@ func (r ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest) Execute() (*AtomicB
 /*
 Events2MetricServiceAtomicBatchExecuteE2M Atomic Batch Execute E2M
 
-No description available
+Atomically executes a batch of events-to-metrics rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceAtomicBatchExecuteE2MRequest
@@ -149,7 +149,7 @@ func (r ApiEvents2MetricServiceCreateE2MRequest) Execute() (*CreateE2MResponse, 
 /*
 Events2MetricServiceCreateE2M Create a new E2M
 
-No description available
+Creates a new events-to-metrics rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceCreateE2MRequest
@@ -181,6 +181,9 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceCreateE2MExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.events2MetricServiceCreateE2MRequest == nil {
+		return localVarReturnValue, nil, reportError("events2MetricServiceCreateE2MRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -251,10 +254,10 @@ func (r ApiEvents2MetricServiceDeleteE2MRequest) Execute() (*DeleteE2MResponse, 
 /*
 Events2MetricServiceDeleteE2M Delete an E2M
 
-No description available
+Deletes the events-to-metrics rule with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiEvents2MetricServiceDeleteE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceDeleteE2M(ctx context.Context, id string) ApiEvents2MetricServiceDeleteE2MRequest {
@@ -354,10 +357,10 @@ func (r ApiEvents2MetricServiceGetE2MRequest) Execute() (*GetE2MResponse, *http.
 /*
 Events2MetricServiceGetE2M Get an E2M
 
-No description available
+Returns the details of the specified events-to-metrics rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiEvents2MetricServiceGetE2MRequest
 */
 func (a *Events2MetricsServiceAPIService) Events2MetricServiceGetE2M(ctx context.Context, id string) ApiEvents2MetricServiceGetE2MRequest {
@@ -456,7 +459,7 @@ func (r ApiEvents2MetricServiceGetLimitsRequest) Execute() (*GetLimitsResponse, 
 /*
 Events2MetricServiceGetLimits Get E2M Limits
 
-No description available
+Returns the events-to-metrics quota limits for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceGetLimitsRequest
@@ -555,7 +558,7 @@ func (r ApiEvents2MetricServiceListE2MRequest) Execute() (*ListE2MResponse, *htt
 /*
 Events2MetricServiceListE2M List E2Ms
 
-No description available
+Returns all events-to-metrics rules for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceListE2MRequest
@@ -650,16 +653,19 @@ type ApiEvents2MetricServiceListLabelsCardinalityRequest struct {
 	metricLabels *[]MetricLabel
 }
 
+// Spans-based query used to evaluate label cardinality.
 func (r ApiEvents2MetricServiceListLabelsCardinalityRequest) SpansQuery(spansQuery SpansQuery) ApiEvents2MetricServiceListLabelsCardinalityRequest {
 	r.spansQuery = &spansQuery
 	return r
 }
 
+// Logs-based query used to evaluate label cardinality.
 func (r ApiEvents2MetricServiceListLabelsCardinalityRequest) LogsQuery(logsQuery SpansQuery1) ApiEvents2MetricServiceListLabelsCardinalityRequest {
 	r.logsQuery = &logsQuery
 	return r
 }
 
+// The metric labels to evaluate cardinality for.
 func (r ApiEvents2MetricServiceListLabelsCardinalityRequest) MetricLabels(metricLabels []MetricLabel) ApiEvents2MetricServiceListLabelsCardinalityRequest {
 	r.metricLabels = &metricLabels
 	return r
@@ -672,7 +678,7 @@ func (r ApiEvents2MetricServiceListLabelsCardinalityRequest) Execute() (*ListLab
 /*
 Events2MetricServiceListLabelsCardinality List E2M Labels Cardinality
 
-No description available
+Returns cardinality information for events-to-metrics labels.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceListLabelsCardinalityRequest
@@ -794,7 +800,7 @@ func (r ApiEvents2MetricServiceReplaceE2MRequest) Execute() (*ReplaceE2MResponse
 /*
 Events2MetricServiceReplaceE2M Replace an E2M
 
-No description available
+Updates an existing events-to-metrics rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEvents2MetricServiceReplaceE2MRequest
@@ -826,6 +832,9 @@ func (a *Events2MetricsServiceAPIService) Events2MetricServiceReplaceE2MExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.events2MetricServiceReplaceE2MRequest == nil {
+		return localVarReturnValue, nil, reportError("events2MetricServiceReplaceE2MRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

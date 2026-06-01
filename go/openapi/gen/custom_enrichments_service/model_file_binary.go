@@ -23,9 +23,13 @@ var _ MappedNullable = &FileBinary{}
 
 // FileBinary This data structure represents a file
 type FileBinary struct {
+	// Binary content of the file encoded as base64.
 	Binary string `json:"binary"`
+	// File extension indicating the file format (e.g., csv, json).
 	Extension *string `json:"extension,omitempty"`
+	// Name of the file.
 	Name *string `json:"name,omitempty"`
+	// Size of the file in bytes.
 	Size *int64 `json:"size,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

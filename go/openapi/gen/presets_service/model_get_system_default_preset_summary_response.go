@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetSystemDefaultPresetSummaryResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetSystemDefaultPresetSummaryResponse{}
 
-// GetSystemDefaultPresetSummaryResponse struct for GetSystemDefaultPresetSummaryResponse
+// GetSystemDefaultPresetSummaryResponse Response containing a summary of the system default notification preset.
 type GetSystemDefaultPresetSummaryResponse struct {
 	PresetSummary *PresetSummary `json:"presetSummary,omitempty"`
 	AdditionalProperties map[string]interface{}

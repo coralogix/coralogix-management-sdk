@@ -23,6 +23,7 @@ var _ MappedNullable = &ScopesV1Filter{}
 // ScopesV1Filter This data structure represents a filter
 type ScopesV1Filter struct {
 	EntityType *V1EntityType `json:"entityType,omitempty"`
+	// The expression.
 	Expression *string `json:"expression,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

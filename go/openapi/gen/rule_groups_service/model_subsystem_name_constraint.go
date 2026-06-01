@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SubsystemNameConstraint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SubsystemNameConstraint{}
 
-// SubsystemNameConstraint struct for SubsystemNameConstraint
+// SubsystemNameConstraint Subsystem name constraint.
 type SubsystemNameConstraint struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

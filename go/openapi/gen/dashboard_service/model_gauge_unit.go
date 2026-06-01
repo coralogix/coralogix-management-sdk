@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// GaugeUnit the model 'GaugeUnit'
+// GaugeUnit Unit.
 type GaugeUnit string
 
 // List of Gauge.Unit

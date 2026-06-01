@@ -22,10 +22,15 @@ var _ MappedNullable = &OutRule{}
 
 // OutRule struct for OutRule
 type OutRule struct {
+	// The evaluation delay ms.
 	EvaluationDelayMs *int64 `json:"evaluationDelayMs,omitempty"`
+	// The expr.
 	Expr *string `json:"expr,omitempty"`
+	// List of labels.
 	Labels *map[string]string `json:"labels,omitempty"`
+	// The last eval duration ms.
 	LastEvalDurationMs *string `json:"lastEvalDurationMs,omitempty"`
+	// Record.
 	Record *string `json:"record,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

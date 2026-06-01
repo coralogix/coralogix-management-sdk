@@ -23,6 +23,7 @@ var _ MappedNullable = &EnrichmentsCreationRequest{}
 
 // EnrichmentsCreationRequest This response data structure represents a collection of enrichments
 type EnrichmentsCreationRequest struct {
+	// The request enrichments.
 	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,11 +21,13 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataGenericWebhook type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataGenericWebhook{}
 
-// OutgoingWebhookInputDataGenericWebhook struct for OutgoingWebhookInputDataGenericWebhook
+// OutgoingWebhookInputDataGenericWebhook Outgoing webhook input data.
 type OutgoingWebhookInputDataGenericWebhook struct {
 	GenericWebhook GenericWebhookConfig `json:"genericWebhook"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

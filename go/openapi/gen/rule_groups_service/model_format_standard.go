@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// FormatStandard the model 'FormatStandard'
+// FormatStandard Format standard.
 type FormatStandard string
 
 // List of FormatStandard

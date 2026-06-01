@@ -41,7 +41,7 @@ func (r ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest) Execute() (
 /*
 AlertSchedulerRuleServiceCreateAlertSchedulerRule Create an alert scheduler rule
 
-No description available
+Creates a new alert suppression rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertSchedulerRuleServiceCreateAlertSchedulerRuleRequest
@@ -73,6 +73,9 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateAle
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createAlertSchedulerRuleRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("createAlertSchedulerRuleRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -148,7 +151,7 @@ func (r ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest) Execute
 /*
 AlertSchedulerRuleServiceCreateBulkAlertSchedulerRule Create multiple alert scheduler rules
 
-No description available
+Returns all alert suppression rules matching the given criteria.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertSchedulerRuleServiceCreateBulkAlertSchedulerRuleRequest
@@ -180,6 +183,9 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceCreateBul
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createBulkAlertSchedulerRuleRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("createBulkAlertSchedulerRuleRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -250,10 +256,10 @@ func (r ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest) Execute() (
 /*
 AlertSchedulerRuleServiceDeleteAlertSchedulerRule Delete an alert scheduler rule
 
-No description available
+Deletes the alert suppression rule with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param alertSchedulerRuleId
+ @param alertSchedulerRuleId The unique identifier of the alert scheduler (suppression) rule to delete.
  @return ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAlertSchedulerRule(ctx context.Context, alertSchedulerRuleId string) ApiAlertSchedulerRuleServiceDeleteAlertSchedulerRuleRequest {
@@ -353,10 +359,10 @@ func (r ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest) Execute() (*Ge
 /*
 AlertSchedulerRuleServiceGetAlertSchedulerRule Get an alert scheduler rule
 
-No description available
+Returns the details of the specified alert suppression rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param alertSchedulerRuleId
+ @param alertSchedulerRuleId The unique identifier of the alert scheduler (suppression) rule.
  @return ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest
 */
 func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertSchedulerRule(ctx context.Context, alertSchedulerRuleId string) ApiAlertSchedulerRuleServiceGetAlertSchedulerRuleRequest {
@@ -452,21 +458,25 @@ type ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest struct {
 	nextPageToken *string
 }
 
+// Active timeframe filter to limit results to rules active in the given window.
 func (r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) ActiveTimeframe(activeTimeframe AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter) ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest {
 	r.activeTimeframe = &activeTimeframe
 	return r
 }
 
+// Whether this resource is enabled.
 func (r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) Enabled(enabled bool) ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest {
 	r.enabled = &enabled
 	return r
 }
 
+// Filter results to the specified alert scheduler rule or rule version IDs.
 func (r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) AlertSchedulerRulesIds(alertSchedulerRulesIds AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleAlertSchedulerRulesIdsParameter) ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest {
 	r.alertSchedulerRulesIds = &alertSchedulerRulesIds
 	return r
 }
 
+// Token for fetching the next page of results.
 func (r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) NextPageToken(nextPageToken string) ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest {
 	r.nextPageToken = &nextPageToken
 	return r
@@ -479,7 +489,7 @@ func (r ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest) Execute() 
 /*
 AlertSchedulerRuleServiceGetBulkAlertSchedulerRule Get multiple alert scheduler rules
 
-No description available
+Returns alert suppression rules with optional pagination.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertSchedulerRuleServiceGetBulkAlertSchedulerRuleRequest
@@ -596,7 +606,7 @@ func (r ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest) Execute() (
 /*
 AlertSchedulerRuleServiceUpdateAlertSchedulerRule Update an alert scheduler rule
 
-No description available
+Updates an existing alert suppression rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertSchedulerRuleServiceUpdateAlertSchedulerRuleRequest
@@ -628,6 +638,9 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateAle
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateAlertSchedulerRuleRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("updateAlertSchedulerRuleRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -703,7 +716,7 @@ func (r ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest) Execute
 /*
 AlertSchedulerRuleServiceUpdateBulkAlertSchedulerRule Update multiple alert scheduler rules
 
-No description available
+Replaces all alert suppression rules with the provided set.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertSchedulerRuleServiceUpdateBulkAlertSchedulerRuleRequest
@@ -735,6 +748,9 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceUpdateBul
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateBulkAlertSchedulerRuleRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("updateBulkAlertSchedulerRuleRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

@@ -24,7 +24,9 @@ var _ MappedNullable = &TagRule{}
 // TagRule Tag rule for a policy.
 type TagRule struct {
 	RuleTypeId RuleTypeId `json:"ruleTypeId"`
+	// The tag name.
 	TagName string `json:"tagName"`
+	// The tag value.
 	TagValue string `json:"tagValue"`
 	AdditionalProperties map[string]interface{}
 }

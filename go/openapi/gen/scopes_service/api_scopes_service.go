@@ -42,7 +42,7 @@ func (r ApiScopesServiceCreateScopeRequest) Execute() (*CreateScopeResponse, *ht
 /*
 ScopesServiceCreateScope Create Scope
 
-No description available
+Creates a new data access scope.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceCreateScopeRequest
@@ -74,6 +74,9 @@ func (a *ScopesServiceAPIService) ScopesServiceCreateScopeExecute(r ApiScopesSer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createScopeRequest == nil {
+		return localVarReturnValue, nil, reportError("createScopeRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -144,10 +147,10 @@ func (r ApiScopesServiceDeleteScopeRequest) Execute() (map[string]interface{}, *
 /*
 ScopesServiceDeleteScope Delete Scope
 
-No description available
+Deletes the data access scope with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiScopesServiceDeleteScopeRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceDeleteScope(ctx context.Context, id string) ApiScopesServiceDeleteScopeRequest {
@@ -246,7 +249,7 @@ func (r ApiScopesServiceGetTeamScopesRequest) Execute() (*GetScopesResponse, *ht
 /*
 ScopesServiceGetTeamScopes Get Team Scopes
 
-No description available
+Returns all data access scopes for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceGetTeamScopesRequest
@@ -339,6 +342,7 @@ type ApiScopesServiceGetTeamScopesByIdsRequest struct {
 	ids *[]string
 }
 
+// List of team scope identifiers to retrieve.
 func (r ApiScopesServiceGetTeamScopesByIdsRequest) Ids(ids []string) ApiScopesServiceGetTeamScopesByIdsRequest {
 	r.ids = &ids
 	return r
@@ -351,7 +355,7 @@ func (r ApiScopesServiceGetTeamScopesByIdsRequest) Execute() (*GetScopesResponse
 /*
 ScopesServiceGetTeamScopesByIds Get Team Scopes By Ids
 
-No description available
+Returns a data access scope by ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceGetTeamScopesByIdsRequest
@@ -467,7 +471,7 @@ func (r ApiScopesServiceUpdateScopeRequest) Execute() (*UpdateScopeResponse, *ht
 /*
 ScopesServiceUpdateScope Update Scope
 
-No description available
+Updates an existing data access scope.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceUpdateScopeRequest
@@ -499,6 +503,9 @@ func (a *ScopesServiceAPIService) ScopesServiceUpdateScopeExecute(r ApiScopesSer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateScopeRequest == nil {
+		return localVarReturnValue, nil, reportError("updateScopeRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

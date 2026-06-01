@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetConnectorSchemaResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetConnectorSchemaResponse{}
 
-// GetConnectorSchemaResponse struct for GetConnectorSchemaResponse
+// GetConnectorSchemaResponse Response containing the schema definition for a notification connector type.
 type GetConnectorSchemaResponse struct {
 	ConnectorSchema *ConnectorSchema `json:"connectorSchema,omitempty"`
 	AdditionalProperties map[string]interface{}

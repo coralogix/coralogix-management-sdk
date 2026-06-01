@@ -20,6 +20,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/List_notification_deliveries_request"
+        required: true
       responses:
         "200":
           content:
@@ -50,16 +51,53 @@ components:
       description: Notification deliveries for a single case.
       example:
         notificationDeliveries:
-        - noRouterMatched: "{}"
-          requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+        - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          attempted:
+            router:
+              routerName: Production alerts router
+              routerId: d4e5f678-90ab-cdef-1234-567890abcdef
+            attempts:
+            - connector:
+                connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                connectorName: Production Slack
+              outcome:
+                failure:
+                  errorMessage: Connection timeout after 30s
+            - connector:
+                connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                connectorName: Production Slack
+              outcome:
+                failure:
+                  errorMessage: Connection timeout after 30s
           timestamp: 2025-09-22T10:30:00Z
-        - noRouterMatched: "{}"
-          requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+        - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          attempted:
+            router:
+              routerName: Production alerts router
+              routerId: d4e5f678-90ab-cdef-1234-567890abcdef
+            attempts:
+            - connector:
+                connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                connectorName: Production Slack
+              outcome:
+                failure:
+                  errorMessage: Connection timeout after 30s
+            - connector:
+                connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                connectorName: Production Slack
+              outcome:
+                failure:
+                  errorMessage: Connection timeout after 30s
           timestamp: 2025-09-22T10:30:00Z
       externalDocs:
         url: ""
       properties:
         notificationDeliveries:
+          description: Notification deliveries for the case
           items:
             $ref: "#/components/schemas/NotificationDelivery"
           type: array
@@ -69,6 +107,10 @@ components:
       type: object
     ConnectorDetails:
       description: Details of a notification connector.
+      example:
+        connectorType: CONNECTOR_TYPE_UNSPECIFIED
+        connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+        connectorName: Production Slack
       externalDocs:
         url: ""
       properties:
@@ -90,6 +132,14 @@ components:
       type: object
     DeliveryAttempt:
       description: A single delivery attempt to a specific connector.
+      example:
+        connector:
+          connectorType: CONNECTOR_TYPE_UNSPECIFIED
+          connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+          connectorName: Production Slack
+        outcome:
+          failure:
+            errorMessage: Connection timeout after 30s
       externalDocs:
         url: ""
       properties:
@@ -104,6 +154,8 @@ components:
       type: object
     DeliveryFailure:
       description: Failed delivery outcome with error details.
+      example:
+        errorMessage: Connection timeout after 30s
       externalDocs:
         url: ""
       properties:
@@ -117,10 +169,13 @@ components:
       type: object
     DeliveryOutcome:
       oneOf:
-      - $ref: "#/components/schemas/DeliveryOutcomeSuccess"
       - $ref: "#/components/schemas/DeliveryOutcomeFailure"
+      - $ref: "#/components/schemas/DeliveryOutcomeSuccess"
     DeliveryOutcomeFailure:
       description: Outcome of a notification delivery attempt.
+      example:
+        failure:
+          errorMessage: Connection timeout after 30s
       externalDocs:
         url: ""
       properties:
@@ -155,8 +210,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -205,15 +260,53 @@ components:
       title: Filters
       type: object
     ListNotificationDeliveriesResponse:
+      description: Response containing a list of notification delivery records for
+        cases.
       example:
         deliveriesByCase:
           key:
             notificationDeliveries:
-            - noRouterMatched: "{}"
-              requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+            - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+              attempted:
+                router:
+                  routerName: Production alerts router
+                  routerId: d4e5f678-90ab-cdef-1234-567890abcdef
+                attempts:
+                - connector:
+                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                    connectorName: Production Slack
+                  outcome:
+                    failure:
+                      errorMessage: Connection timeout after 30s
+                - connector:
+                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                    connectorName: Production Slack
+                  outcome:
+                    failure:
+                      errorMessage: Connection timeout after 30s
               timestamp: 2025-09-22T10:30:00Z
-            - noRouterMatched: "{}"
-              requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+            - requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+              attempted:
+                router:
+                  routerName: Production alerts router
+                  routerId: d4e5f678-90ab-cdef-1234-567890abcdef
+                attempts:
+                - connector:
+                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                    connectorName: Production Slack
+                  outcome:
+                    failure:
+                      errorMessage: Connection timeout after 30s
+                - connector:
+                    connectorType: CONNECTOR_TYPE_UNSPECIFIED
+                    connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+                    connectorName: Production Slack
+                  outcome:
+                    failure:
+                      errorMessage: Connection timeout after 30s
               timestamp: 2025-09-22T10:30:00Z
       externalDocs:
         url: ""
@@ -243,6 +336,7 @@ components:
         url: ""
       properties:
         matchedRouters:
+          description: Routers that matched the notification request
           items:
             $ref: "#/components/schemas/RouterInfo"
           type: array
@@ -251,6 +345,7 @@ components:
       title: No notification created result
       type: object
     NoRouterMatchedResult:
+      additionalProperties: false
       description: Indicates that no router matched the notification request.
       externalDocs:
         url: ""
@@ -258,11 +353,33 @@ components:
       type: object
     NotificationDelivery:
       oneOf:
-      - $ref: "#/components/schemas/NotificationDeliveryNoRouterMatched"
-      - $ref: "#/components/schemas/NotificationDeliveryNoNotificationCreated"
       - $ref: "#/components/schemas/NotificationDeliveryAttempted"
+      - $ref: "#/components/schemas/NotificationDeliveryNoNotificationCreated"
+      - $ref: "#/components/schemas/NotificationDeliveryNoRouterMatched"
     NotificationDeliveryAttempted:
       description: Delivery results for a single notification.
+      example:
+        requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
+        attempted:
+          router:
+            routerName: Production alerts router
+            routerId: d4e5f678-90ab-cdef-1234-567890abcdef
+          attempts:
+          - connector:
+              connectorType: CONNECTOR_TYPE_UNSPECIFIED
+              connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+              connectorName: Production Slack
+            outcome:
+              failure:
+                errorMessage: Connection timeout after 30s
+          - connector:
+              connectorType: CONNECTOR_TYPE_UNSPECIFIED
+              connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+              connectorName: Production Slack
+            outcome:
+              failure:
+                errorMessage: Connection timeout after 30s
+        timestamp: 2025-09-22T10:30:00Z
       externalDocs:
         url: ""
       properties:
@@ -307,14 +424,11 @@ components:
       type: object
     NotificationDeliveryNoRouterMatched:
       description: Delivery results for a single notification.
-      example:
-        noRouterMatched: "{}"
-        requestNotificationId: a1b2c3d4-5678-90ab-cdef-1234567890ab
-        timestamp: 2025-09-22T10:30:00Z
       externalDocs:
         url: ""
       properties:
         noRouterMatched:
+          additionalProperties: false
           description: Indicates that no router matched the notification request.
           externalDocs:
             url: ""
@@ -338,10 +452,30 @@ components:
     RoutedDelivery:
       description: Delivery attempts routed through a single router to one or more
         connectors.
+      example:
+        router:
+          routerName: Production alerts router
+          routerId: d4e5f678-90ab-cdef-1234-567890abcdef
+        attempts:
+        - connector:
+            connectorType: CONNECTOR_TYPE_UNSPECIFIED
+            connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+            connectorName: Production Slack
+          outcome:
+            failure:
+              errorMessage: Connection timeout after 30s
+        - connector:
+            connectorType: CONNECTOR_TYPE_UNSPECIFIED
+            connectorId: c1d2e3f4-5678-90ab-cdef-1234567890ab
+            connectorName: Production Slack
+          outcome:
+            failure:
+              errorMessage: Connection timeout after 30s
       externalDocs:
         url: ""
       properties:
         attempts:
+          description: Individual delivery attempts to connectors
           items:
             $ref: "#/components/schemas/DeliveryAttempt"
           type: array
@@ -354,6 +488,9 @@ components:
       type: object
     RouterInfo:
       description: Information about a notification router.
+      example:
+        routerName: Production alerts router
+        routerId: d4e5f678-90ab-cdef-1234-567890abcdef
       externalDocs:
         url: ""
       properties:
@@ -376,6 +513,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v1.ConnectorType:
+      description: Connector type.
       enum:
       - CONNECTOR_TYPE_UNSPECIFIED
       - CONNECTOR_TYPE_SLACK
@@ -385,13 +523,17 @@ components:
       - CONNECTOR_TYPE_GENERIC_HTTPS
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     List_notification_deliveries_request:
+      description: Request to retrieve notification delivery records for one or more
+        cases.
       properties:
         caseIds:
+          description: Case IDs to retrieve notification deliveries for
           example:
           - 3f166e9f-3c88-4af2-b52e-138f339dab3e
           - a1b2c3d4-e5f6-7890-abcd-ef1234567890

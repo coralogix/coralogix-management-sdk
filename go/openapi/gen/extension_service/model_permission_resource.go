@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// PermissionResource the model 'PermissionResource'
+// PermissionResource Permission resource.
 type PermissionResource string
 
 // List of PermissionResource

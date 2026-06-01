@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// GaugeThresholdBy the model 'GaugeThresholdBy'
+// GaugeThresholdBy Threshold by.
 type GaugeThresholdBy string
 
 // List of Gauge.ThresholdBy

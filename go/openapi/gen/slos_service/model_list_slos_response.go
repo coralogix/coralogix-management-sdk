@@ -23,6 +23,7 @@ var _ MappedNullable = &ListSlosResponse{}
 
 // ListSlosResponse Response containing a list of SLOs.
 type ListSlosResponse struct {
+	// The slos.
 	Slos []Slo `json:"slos"`
 	AdditionalProperties map[string]interface{}
 }

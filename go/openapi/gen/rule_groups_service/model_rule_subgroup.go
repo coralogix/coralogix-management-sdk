@@ -22,9 +22,13 @@ var _ MappedNullable = &RuleSubgroup{}
 
 // RuleSubgroup struct for RuleSubgroup
 type RuleSubgroup struct {
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Sort order.
 	Order *int64 `json:"order,omitempty"`
+	// List of rules.
 	Rules []RulesV1Rule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

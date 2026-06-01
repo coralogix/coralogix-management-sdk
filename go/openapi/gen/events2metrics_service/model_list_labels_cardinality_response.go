@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListLabelsCardinalityResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListLabelsCardinalityResponse{}
 
-// ListLabelsCardinalityResponse struct for ListLabelsCardinalityResponse
+// ListLabelsCardinalityResponse Response containing label cardinality data for events-to-metrics rules.
 type ListLabelsCardinalityResponse struct {
+	// List of permutations.
 	Permutations []LabelsPermutationsCardinalityDay `json:"permutations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

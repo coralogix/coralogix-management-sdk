@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest{}
 
-// EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest struct for EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
+// EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest Request to atomically replace all enrichment rules.
 type EnrichmentServiceAtomicOverwriteAllEnrichmentsRequest struct {
+	// Complete list of enrichment rules to replace all existing rules.
 	RequestEnrichments []EnrichmentRequestModel `json:"requestEnrichments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

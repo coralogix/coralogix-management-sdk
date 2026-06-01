@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateIntegrationRequest{}
 
 // UpdateIntegrationRequest This data structure represents a list of outgoing webhook types.
 type UpdateIntegrationRequest struct {
+	// Integration metadata ID generated at creation time.
 	Id *string `json:"id,omitempty"`
 	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}

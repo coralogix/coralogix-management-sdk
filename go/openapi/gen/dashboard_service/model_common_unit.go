@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// CommonUnit the model 'CommonUnit'
+// CommonUnit Unit.
 type CommonUnit string
 
 // List of common.Unit

@@ -22,6 +22,7 @@ var _ MappedNullable = &Attachment{}
 
 // Attachment struct for Attachment
 type Attachment struct {
+	// Whether this resource is active.
 	IsActive *bool `json:"isActive,omitempty"`
 	Type *AttachmentType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

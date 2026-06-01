@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ScheduleRecurring type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScheduleRecurring{}
 
-// ScheduleRecurring struct for ScheduleRecurring
+// ScheduleRecurring Schedule.
 type ScheduleRecurring struct {
 	Recurring Recurring `json:"recurring"`
 	ScheduleOperation *ScheduleOperation `json:"scheduleOperation,omitempty"`

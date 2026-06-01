@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableValueV2Regex type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2Regex{}
 
-// VariableValueV2Regex struct for VariableValueV2Regex
+// VariableValueV2Regex Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2Regex struct {
 	Regex RegexValue `json:"regex"`
 	AdditionalProperties map[string]interface{}

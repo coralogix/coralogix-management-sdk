@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the GetAlertEventResponseSinglePermutation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertEventResponseSinglePermutation{}
 
-// GetAlertEventResponseSinglePermutation struct for GetAlertEventResponseSinglePermutation
+// GetAlertEventResponseSinglePermutation Response containing the details of an alert event.
 type GetAlertEventResponseSinglePermutation struct {
+	// Unique identifier of the alert event.
 	Id *string `json:"id,omitempty"`
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
 	SinglePermutation AlertEvent `json:"singlePermutation"`

@@ -79,15 +79,15 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *PresetsServiceAPI* | [**PresetsServiceBatchGetPresets**](docs/PresetsServiceAPI.md#presetsservicebatchgetpresets) | **Get** /notifications/notification-center/v1/presets | Batch Get Presets
-*PresetsServiceAPI* | [**PresetsServiceCreateCustomPreset**](docs/PresetsServiceAPI.md#presetsservicecreatecustompreset) | **Post** /notifications/notification-center/v1/presets/custom | Create Custom Preset
+*PresetsServiceAPI* | [**PresetsServiceCreateCustomPreset**](docs/PresetsServiceAPI.md#presetsservicecreatecustompreset) | **Post** /notifications/notification-center/v1/presets:createCustom | Create Custom Preset
 *PresetsServiceAPI* | [**PresetsServiceDeleteCustomPreset**](docs/PresetsServiceAPI.md#presetsservicedeletecustompreset) | **Delete** /notifications/notification-center/v1/presets/custom/{id} | Delete Custom Preset
-*PresetsServiceAPI* | [**PresetsServiceGetDefaultPresetSummary**](docs/PresetsServiceAPI.md#presetsservicegetdefaultpresetsummary) | **Get** /notifications/notification-center/v1/presets/summaries | Get Default Preset Summary
+*PresetsServiceAPI* | [**PresetsServiceGetDefaultPresetSummary**](docs/PresetsServiceAPI.md#presetsservicegetdefaultpresetsummary) | **Get** /notifications/notification-center/v1/presets:getDefaultSummary | Get Default Preset Summary
 *PresetsServiceAPI* | [**PresetsServiceGetPreset**](docs/PresetsServiceAPI.md#presetsservicegetpreset) | **Get** /notifications/notification-center/v1/presets/{id} | Get Preset
 *PresetsServiceAPI* | [**PresetsServiceGetSystemDefaultPresetSummary**](docs/PresetsServiceAPI.md#presetsservicegetsystemdefaultpresetsummary) | **Get** /notifications/notification-center/v1/presets/summaries/system | Get System Default Preset Summary
 *PresetsServiceAPI* | [**PresetsServiceListPresetSummaries**](docs/PresetsServiceAPI.md#presetsservicelistpresetsummaries) | **Get** /notifications/notification-center/v1/presets:summariesList | List Preset Summaries
-*PresetsServiceAPI* | [**PresetsServiceReplaceCustomPreset**](docs/PresetsServiceAPI.md#presetsservicereplacecustompreset) | **Put** /notifications/notification-center/v1/presets/custom | Replace Custom Preset
+*PresetsServiceAPI* | [**PresetsServiceReplaceCustomPreset**](docs/PresetsServiceAPI.md#presetsservicereplacecustompreset) | **Put** /notifications/notification-center/v1/presets:replaceCustom | Replace Custom Preset
 *PresetsServiceAPI* | [**PresetsServiceSetCustomPresetAsDefault**](docs/PresetsServiceAPI.md#presetsservicesetcustompresetasdefault) | **Post** /notifications/notification-center/v1/presets/custom/{id}/default | Set Custom Preset As Default
-*PresetsServiceAPI* | [**PresetsServiceSetPresetAsDefault**](docs/PresetsServiceAPI.md#presetsservicesetpresetasdefault) | **Post** /notifications/notification-center/v1/presets/{id}/default | Set Preset As Default
+*PresetsServiceAPI* | [**PresetsServiceSetPresetAsDefault**](docs/PresetsServiceAPI.md#presetsservicesetpresetasdefault) | **Post** /notifications/notification-center/v1/presets/{id}/default/apply | Set Preset As Default
 
 
 ## Documentation For Models

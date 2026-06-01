@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ExternalUrl type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExternalUrl{}
 
-// ExternalUrl struct for ExternalUrl
+// ExternalUrl External url.
 type ExternalUrl struct {
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

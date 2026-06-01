@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the IncidentEventAcknowledgeOperationalEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventAcknowledgeOperationalEvent{}
 
-// IncidentEventAcknowledgeOperationalEvent struct for IncidentEventAcknowledgeOperationalEvent
+// IncidentEventAcknowledgeOperationalEvent Incident event.
 type IncidentEventAcknowledgeOperationalEvent struct {
 	Acknowledge IncidentEventAcknowledge `json:"acknowledge"`
 	// The ID of the incident event

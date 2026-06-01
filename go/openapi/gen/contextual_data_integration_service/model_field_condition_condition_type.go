@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// FieldConditionConditionType the model 'FieldConditionConditionType'
+// FieldConditionConditionType Condition type.
 type FieldConditionConditionType string
 
 // List of FieldCondition.ConditionType

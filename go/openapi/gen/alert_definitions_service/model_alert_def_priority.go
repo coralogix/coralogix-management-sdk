@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertDefPriority the model 'AlertDefPriority'
+// AlertDefPriority Alert def priority.
 type AlertDefPriority string
 
 // List of AlertDefPriority

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the AnnotationSourceLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceLogs{}
 
-// AnnotationSourceLogs struct for AnnotationSourceLogs
+// AnnotationSourceLogs Source.
 type AnnotationSourceLogs struct {
 	Logs LogsSource `json:"logs"`
 	AdditionalProperties map[string]interface{}

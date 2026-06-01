@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapAggregationMax type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationMax{}
 
-// GeomapAggregationMax struct for GeomapAggregationMax
+// GeomapAggregationMax Geomap aggregation.
 type GeomapAggregationMax struct {
 	Max GeomapAggregationFieldBased `json:"max"`
 	AdditionalProperties map[string]interface{}

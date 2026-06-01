@@ -22,7 +22,9 @@ var _ MappedNullable = &FieldConditionFieldValue{}
 
 // FieldConditionFieldValue struct for FieldConditionFieldValue
 type FieldConditionFieldValue struct {
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
+	// The value pattern.
 	ValuePattern *string `json:"valuePattern,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

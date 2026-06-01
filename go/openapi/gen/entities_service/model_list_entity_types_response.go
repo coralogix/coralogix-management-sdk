@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListEntityTypesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListEntityTypesResponse{}
 
-// ListEntityTypesResponse struct for ListEntityTypesResponse
+// ListEntityTypesResponse Response containing a list of notification entity types.
 type ListEntityTypesResponse struct {
+	// The entity types.
 	EntityTypes []NotificationCenterEntityType `json:"entityTypes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

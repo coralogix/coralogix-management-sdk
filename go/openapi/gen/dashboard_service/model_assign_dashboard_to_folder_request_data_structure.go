@@ -23,7 +23,9 @@ var _ MappedNullable = &AssignDashboardToFolderRequestDataStructure{}
 
 // AssignDashboardToFolderRequestDataStructure This is a request for assigning a folder to a dashboard
 type AssignDashboardToFolderRequestDataStructure struct {
+	// The ID of the folder to assign the dashboard to. Set to null to assign to the root folder.
 	FolderId *string `json:"folderId,omitempty"`
+	// Idempotency key for the assign folder request, used to prevent duplicate operations.
 	RequestId string `json:"requestId"`
 	AdditionalProperties map[string]interface{}
 }

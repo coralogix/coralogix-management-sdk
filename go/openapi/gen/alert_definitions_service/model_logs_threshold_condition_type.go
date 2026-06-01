@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsThresholdConditionType the model 'LogsThresholdConditionType'
+// LogsThresholdConditionType Logs threshold condition type.
 type LogsThresholdConditionType string
 
 // List of LogsThresholdConditionType

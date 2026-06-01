@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ActionDefinitionCustomAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActionDefinitionCustomAction{}
 
-// ActionDefinitionCustomAction struct for ActionDefinitionCustomAction
+// ActionDefinitionCustomAction Defines the behavior of a dashboard action, either a custom URL or a built-in template.
 type ActionDefinitionCustomAction struct {
 	CustomAction CustomAction `json:"customAction"`
 	AdditionalProperties map[string]interface{}

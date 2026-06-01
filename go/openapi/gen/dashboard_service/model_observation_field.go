@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ObservationField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ObservationField{}
 
-// ObservationField struct for ObservationField
+// ObservationField Observation field.
 type ObservationField struct {
+	// The keypath.
 	Keypath []string `json:"keypath,omitempty"`
 	Scope *DatasetScope `json:"scope,omitempty"`
 	AdditionalProperties map[string]interface{}

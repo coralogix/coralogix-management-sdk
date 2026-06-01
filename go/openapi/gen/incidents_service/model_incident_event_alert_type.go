@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// IncidentEventAlertType the model 'IncidentEventAlertType'
+// IncidentEventAlertType Incident event alert type.
 type IncidentEventAlertType string
 
 // List of IncidentEventAlertType

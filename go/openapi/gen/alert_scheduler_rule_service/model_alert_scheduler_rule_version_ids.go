@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AlertSchedulerRuleVersionIds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleVersionIds{}
 
-// AlertSchedulerRuleVersionIds struct for AlertSchedulerRuleVersionIds
+// AlertSchedulerRuleVersionIds Alert scheduler rule version ids.
 type AlertSchedulerRuleVersionIds struct {
+	// The alert scheduler rule version ids.
 	AlertSchedulerRuleVersionIds []string `json:"alertSchedulerRuleVersionIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MultiSelectRefreshStrategy the model 'MultiSelectRefreshStrategy'
+// MultiSelectRefreshStrategy Refresh strategy.
 type MultiSelectRefreshStrategy string
 
 // List of MultiSelect.RefreshStrategy

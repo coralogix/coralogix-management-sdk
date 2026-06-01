@@ -20,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the MetricsSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricsSource{}
 
-// MetricsSource struct for MetricsSource
+// MetricsSource Annotation source backed by a PromQL metrics query with a configurable time strategy.
 type MetricsSource struct {
 	IntervalResolution *IntervalResolution `json:"intervalResolution,omitempty"`
+	// List of labels.
 	Labels []string `json:"labels,omitempty"`
+	// The message template.
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`

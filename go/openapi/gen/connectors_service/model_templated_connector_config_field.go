@@ -22,7 +22,9 @@ var _ MappedNullable = &TemplatedConnectorConfigField{}
 
 // TemplatedConnectorConfigField struct for TemplatedConnectorConfigField
 type TemplatedConnectorConfigField struct {
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
+	// Template.
 	Template *string `json:"template,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogFilterOperationType the model 'LogFilterOperationType'
+// LogFilterOperationType Log filter operation type.
 type LogFilterOperationType string
 
 // List of LogFilterOperationType

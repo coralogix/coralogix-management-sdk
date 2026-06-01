@@ -23,6 +23,7 @@ var _ MappedNullable = &AcknowledgeIncidentsRequest{}
 
 // AcknowledgeIncidentsRequest Request to acknowledge one or more incidents
 type AcknowledgeIncidentsRequest struct {
+	// List of incident IDs to acknowledge
 	IncidentIds []string `json:"incidentIds"`
 	AdditionalProperties map[string]interface{}
 }

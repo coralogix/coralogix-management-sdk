@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AnnotationOrientation the model 'AnnotationOrientation'
+// AnnotationOrientation Annotation orientation.
 type AnnotationOrientation string
 
 // List of AnnotationOrientation

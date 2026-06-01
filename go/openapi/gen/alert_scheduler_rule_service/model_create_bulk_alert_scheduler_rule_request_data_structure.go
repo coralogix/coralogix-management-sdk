@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateBulkAlertSchedulerRuleRequestDataStructure{}
 
 // CreateBulkAlertSchedulerRuleRequestDataStructure This is a request sent to create multiple alert scheduler rules
 type CreateBulkAlertSchedulerRuleRequestDataStructure struct {
+	// The create alert scheduler rule requests.
 	CreateAlertSchedulerRuleRequests []CreateAlertSchedulerRuleRequest `json:"createAlertSchedulerRuleRequests"`
 	AdditionalProperties map[string]interface{}
 }

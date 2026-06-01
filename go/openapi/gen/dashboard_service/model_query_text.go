@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QueryText type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryText{}
 
-// QueryText struct for QueryText
+// QueryText Query text.
 type QueryText struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
 	Query *CommonDataprimeQuery `json:"query,omitempty"`

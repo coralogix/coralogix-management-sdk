@@ -20,12 +20,17 @@ var _ = bytes.MinRead
 // checks if the AwsEventBridgeConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsEventBridgeConfig{}
 
-// AwsEventBridgeConfig struct for AwsEventBridgeConfig
+// AwsEventBridgeConfig Aws event bridge config.
 type AwsEventBridgeConfig struct {
+	// Detail.
 	Detail *string `json:"detail,omitempty"`
+	// The detail type.
 	DetailType *string `json:"detailType,omitempty"`
+	// The event bus arn.
 	EventBusArn *string `json:"eventBusArn,omitempty"`
+	// The role name.
 	RoleName *string `json:"roleName,omitempty"`
+	// Source.
 	Source *string `json:"source,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

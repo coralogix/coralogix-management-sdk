@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricsSeriesLimitType the model 'MetricsSeriesLimitType'
+// MetricsSeriesLimitType Metrics series limit type.
 type MetricsSeriesLimitType string
 
 // List of MetricsSeriesLimitType

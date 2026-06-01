@@ -22,7 +22,9 @@ var _ MappedNullable = &ExtensionItemBinary{}
 
 // ExtensionItemBinary struct for ExtensionItemBinary
 type ExtensionItemBinary struct {
+	// Data payload.
 	Data *string `json:"data,omitempty"`
+	// The file name.
 	FileName *string `json:"fileName,omitempty"`
 	Type *ExtensionItemBinaryBinaryType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

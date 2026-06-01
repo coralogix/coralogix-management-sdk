@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// NoDataPolicyState the model 'NoDataPolicyState'
+// NoDataPolicyState No data policy state.
 type NoDataPolicyState string
 
 // List of NoDataPolicyState

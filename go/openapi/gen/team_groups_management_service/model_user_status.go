@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// UserStatus the model 'UserStatus'
+// UserStatus User status.
 type UserStatus string
 
 // List of UserStatus

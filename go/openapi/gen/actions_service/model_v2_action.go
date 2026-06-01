@@ -22,17 +22,28 @@ var _ MappedNullable = &V2Action{}
 
 // V2Action This data structure represents an Action.
 type V2Action struct {
+	// The application names.
 	ApplicationNames []string `json:"applicationNames,omitempty"`
+	// The created by.
 	CreatedBy *string `json:"createdBy,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The dpxl filter.
 	DpxlFilter *string `json:"dpxlFilter,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// The is hidden.
 	IsHidden *bool `json:"isHidden,omitempty"`
+	// The is private.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	SourceType *V2SourceType `json:"sourceType,omitempty"`
+	// The subsystem names.
 	SubsystemNames []string `json:"subsystemNames,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
+	// The url fields.
 	UrlFields []UrlField `json:"urlFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ScaleType the model 'ScaleType'
+// ScaleType Scale type.
 type ScaleType string
 
 // List of ScaleType

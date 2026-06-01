@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ListNotificationDeliveriesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListNotificationDeliveriesRequest{}
 
-// ListNotificationDeliveriesRequest struct for ListNotificationDeliveriesRequest
+// ListNotificationDeliveriesRequest Request to retrieve notification delivery records for one or more cases.
 type ListNotificationDeliveriesRequest struct {
+	// Case IDs to retrieve notification deliveries for
 	CaseIds []string `json:"caseIds"`
 	AdditionalProperties map[string]interface{}
 }

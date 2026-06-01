@@ -23,6 +23,7 @@ var _ MappedNullable = &ReorderPoliciesResponse{}
 
 // ReorderPoliciesResponse This data structure is obtained when reordering policies.
 type ReorderPoliciesResponse struct {
+	// The orders.
 	Orders []PolicyOrder `json:"orders"`
 	AdditionalProperties map[string]interface{}
 }

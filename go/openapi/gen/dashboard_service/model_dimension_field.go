@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DimensionField the model 'DimensionField'
+// DimensionField Dimension field.
 type DimensionField string
 
 // List of DimensionField

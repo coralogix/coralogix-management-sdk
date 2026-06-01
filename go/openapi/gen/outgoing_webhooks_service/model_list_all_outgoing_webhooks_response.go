@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListAllOutgoingWebhooksResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListAllOutgoingWebhooksResponse{}
 
-// ListAllOutgoingWebhooksResponse struct for ListAllOutgoingWebhooksResponse
+// ListAllOutgoingWebhooksResponse Response containing a list of all outgoing webhooks.
 type ListAllOutgoingWebhooksResponse struct {
+	// The deployed.
 	Deployed []OutgoingWebhookExtendedSummary `json:"deployed,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

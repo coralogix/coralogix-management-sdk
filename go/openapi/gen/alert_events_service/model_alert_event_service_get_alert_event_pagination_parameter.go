@@ -22,7 +22,9 @@ var _ MappedNullable = &AlertEventServiceGetAlertEventPaginationParameter{}
 
 // AlertEventServiceGetAlertEventPaginationParameter struct for AlertEventServiceGetAlertEventPaginationParameter
 type AlertEventServiceGetAlertEventPaginationParameter struct {
+	// Page size.
 	PageSize *int64 `json:"pageSize,omitempty"`
+	// The page token.
 	PageToken *string `json:"pageToken,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

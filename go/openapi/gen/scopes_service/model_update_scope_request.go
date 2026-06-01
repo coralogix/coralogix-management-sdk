@@ -23,10 +23,15 @@ var _ MappedNullable = &UpdateScopeRequest{}
 
 // UpdateScopeRequest This data structure represents a request to update a scope
 type UpdateScopeRequest struct {
+	// The default expression.
 	DefaultExpression string `json:"defaultExpression"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The display name.
 	DisplayName string `json:"displayName"`
+	// List of filters.
 	Filters []ScopesV1Filter `json:"filters"`
+	// Unique identifier.
 	Id string `json:"id"`
 	AdditionalProperties map[string]interface{}
 }

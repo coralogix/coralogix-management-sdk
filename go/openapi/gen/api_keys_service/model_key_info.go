@@ -24,12 +24,17 @@ var _ MappedNullable = &KeyInfo{}
 type KeyInfo struct {
 	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups.
 	AccessPolicy *string `json:"accessPolicy,omitempty"`
+	// Whether this resource is active.
 	Active *bool `json:"active,omitempty"`
+	// Whether the value is stored as a one-way hash.
 	Hashed *bool `json:"hashed,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	KeyPermissions *KeyInfoKeyPermissions `json:"keyPermissions,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Owner *Owner `json:"owner,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

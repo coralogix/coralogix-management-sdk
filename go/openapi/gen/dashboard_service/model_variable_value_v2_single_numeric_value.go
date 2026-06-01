@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the VariableValueV2SingleNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2SingleNumericValue{}
 
-// VariableValueV2SingleNumericValue struct for VariableValueV2SingleNumericValue
+// VariableValueV2SingleNumericValue Integration revision.single numeric value.
 type VariableValueV2SingleNumericValue struct {
 	Value *NumericValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}

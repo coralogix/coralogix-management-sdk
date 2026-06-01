@@ -22,8 +22,11 @@ var _ MappedNullable = &CreateRuleGroupRequestCreateRuleSubgroup{}
 
 // CreateRuleGroupRequestCreateRuleSubgroup struct for CreateRuleGroupRequestCreateRuleSubgroup
 type CreateRuleGroupRequestCreateRuleSubgroup struct {
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Sort order.
 	Order *int64 `json:"order,omitempty"`
+	// List of rules.
 	Rules []CreateRuleGroupRequestCreateRuleSubgroupCreateRule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

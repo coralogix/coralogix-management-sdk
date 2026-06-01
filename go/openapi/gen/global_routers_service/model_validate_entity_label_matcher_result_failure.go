@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ValidateEntityLabelMatcherResultFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValidateEntityLabelMatcherResultFailure{}
 
-// ValidateEntityLabelMatcherResultFailure struct for ValidateEntityLabelMatcherResultFailure
+// ValidateEntityLabelMatcherResultFailure Test outgoing webhook response.failure.
 type ValidateEntityLabelMatcherResultFailure struct {
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

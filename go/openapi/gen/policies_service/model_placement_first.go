@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the PlacementFirst type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PlacementFirst{}
 
-// PlacementFirst struct for PlacementFirst
+// PlacementFirst Placement.
 type PlacementFirst struct {
+	// First.
 	First map[string]interface{} `json:"first"`
 	AdditionalProperties map[string]interface{}
 }

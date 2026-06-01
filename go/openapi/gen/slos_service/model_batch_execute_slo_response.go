@@ -23,6 +23,7 @@ var _ MappedNullable = &BatchExecuteSloResponse{}
 
 // BatchExecuteSloResponse Response containing the results of batch executed SLO operations.
 type BatchExecuteSloResponse struct {
+	// The matching responses.
 	MatchingResponses []SloExecutionResponse `json:"matchingResponses"`
 	Status *ResponseStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}

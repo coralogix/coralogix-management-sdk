@@ -23,6 +23,7 @@ var _ MappedNullable = &DeleteE2MResponse{}
 
 // DeleteE2MResponse This data structure is obtained when deleting an existing event to metric definition
 type DeleteE2MResponse struct {
+	// Unique identifier.
 	Id string `json:"id"`
 	AdditionalProperties map[string]interface{}
 }

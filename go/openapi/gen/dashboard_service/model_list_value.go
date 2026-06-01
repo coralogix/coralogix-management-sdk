@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListValue{}
 
-// ListValue struct for ListValue
+// ListValue List value.
 type ListValue struct {
+	// List of values.
 	Values []SingleStringValue `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

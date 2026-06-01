@@ -22,21 +22,35 @@ var _ = bytes.MinRead
 // checks if the Incident type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Incident{}
 
-// Incident struct for Incident
+// Incident Incident.
 type Incident struct {
+	// The assignments.
 	Assignments []Assignment `json:"assignments"`
+	// The closed at.
 	ClosedAt *time.Time `json:"closedAt,omitempty"`
+	// The contextual labels.
 	ContextualLabels map[string]string `json:"contextualLabels"`
+	// Creation timestamp.
 	CreatedAt time.Time `json:"createdAt"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The display labels.
 	DisplayLabels map[string]string `json:"displayLabels"`
+	// Duration.
 	Duration string `json:"duration"`
+	// List of events.
 	Events []IncidentEvent `json:"events"`
+	// Unique identifier.
 	Id string `json:"id"`
+	// The is muted.
 	IsMuted *bool `json:"isMuted,omitempty"`
+	// The last state update key.
 	LastStateUpdateKey string `json:"lastStateUpdateKey"`
+	// The last state update time.
 	LastStateUpdateTime time.Time `json:"lastStateUpdateTime"`
+	// Metadata labels.
 	MetaLabels []IncidentsV1MetaLabel `json:"metaLabels,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Severity IncidentSeverity `json:"severity"`
 	State IncidentState `json:"state"`

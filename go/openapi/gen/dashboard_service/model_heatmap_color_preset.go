@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// HeatmapColorPreset the model 'HeatmapColorPreset'
+// HeatmapColorPreset Heatmap color preset.
 type HeatmapColorPreset string
 
 // List of HeatmapColorPreset

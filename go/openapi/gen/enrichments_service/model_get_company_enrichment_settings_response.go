@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetCompanyEnrichmentSettingsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCompanyEnrichmentSettingsResponse{}
 
-// GetCompanyEnrichmentSettingsResponse struct for GetCompanyEnrichmentSettingsResponse
+// GetCompanyEnrichmentSettingsResponse Response containing the company-level enrichment settings.
 type GetCompanyEnrichmentSettingsResponse struct {
 	EnrichmentSettings *CompanyEnrichmentSettings `json:"enrichmentSettings,omitempty"`
 	AdditionalProperties map[string]interface{}

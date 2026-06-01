@@ -20,11 +20,12 @@ var _ = bytes.MinRead
 // checks if the TimeSeriesLinesMulti type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSeriesLinesMulti{}
 
-// TimeSeriesLinesMulti struct for TimeSeriesLinesMulti
+// TimeSeriesLinesMulti Time series lines multi.
 type TimeSeriesLinesMulti struct {
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
 	ConnectNulls *bool `json:"connectNulls,omitempty"`
 	Legend *Legend `json:"legend,omitempty"`
+	// Definitions of widget queries
 	QueryDisplaySettings []QueryDisplaySettings `json:"queryDisplaySettings,omitempty"`
 	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`

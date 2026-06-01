@@ -22,6 +22,7 @@ var _ MappedNullable = &FieldStatistics{}
 
 // FieldStatistics struct for FieldStatistics
 type FieldStatistics struct {
+	// The field statistics.
 	FieldStatistics *map[string]string `json:"fieldStatistics,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

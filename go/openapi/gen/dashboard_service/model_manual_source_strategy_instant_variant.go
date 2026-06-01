@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ManualSourceStrategyInstantVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSourceStrategyInstantVariant{}
 
-// ManualSourceStrategyInstantVariant struct for ManualSourceStrategyInstantVariant
+// ManualSourceStrategyInstantVariant Defines the time positioning strategy for manually placed annotations (instant point or range).
 type ManualSourceStrategyInstantVariant struct {
 	Instant ManualSourceStrategyInstant `json:"instant"`
 	AdditionalProperties map[string]interface{}

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableSourceV2QuerySourceSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2QuerySourceSpansQuery{}
 
-// VariableSourceV2QuerySourceSpansQuery struct for VariableSourceV2QuerySourceSpansQuery
+// VariableSourceV2QuerySourceSpansQuery Variable source backed by a query against logs, metrics, spans, or Dataprime data.
 type VariableSourceV2QuerySourceSpansQuery struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
 	RefreshStrategy *VariableSourceV2RefreshStrategy `json:"refreshStrategy,omitempty"`

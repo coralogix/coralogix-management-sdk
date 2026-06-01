@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QueryMetricsQuerySelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQuerySelection{}
 
-// QueryMetricsQuerySelection struct for QueryMetricsQuerySelection
+// QueryMetricsQuerySelection Discriminated union of selection types for the filter operator.
 type QueryMetricsQuerySelection struct {
 	List *QueryMetricsQuerySelectionListSelection `json:"list,omitempty"`
 	AdditionalProperties map[string]interface{}

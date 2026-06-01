@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SaveContextualDataIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveContextualDataIntegrationResponse{}
 
-// SaveContextualDataIntegrationResponse struct for SaveContextualDataIntegrationResponse
+// SaveContextualDataIntegrationResponse Response returned after successfully saving a contextual data integration.
 type SaveContextualDataIntegrationResponse struct {
+	// The integration id.
 	IntegrationId *string `json:"integrationId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

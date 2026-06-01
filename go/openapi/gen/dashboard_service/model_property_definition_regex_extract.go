@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionRegexExtract type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionRegexExtract{}
 
-// PropertyDefinitionRegexExtract struct for PropertyDefinitionRegexExtract
+// PropertyDefinitionRegexExtract Property definition.
 type PropertyDefinitionRegexExtract struct {
 	// Value of Regex Extract property, a regex string
 	RegexExtract string `json:"regexExtract"`

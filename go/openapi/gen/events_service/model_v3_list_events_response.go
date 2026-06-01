@@ -23,6 +23,7 @@ var _ MappedNullable = &V3ListEventsResponse{}
 
 // V3ListEventsResponse This data structure represents a response to list events
 type V3ListEventsResponse struct {
+	// List of events.
 	Events []CxEvent `json:"events"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}

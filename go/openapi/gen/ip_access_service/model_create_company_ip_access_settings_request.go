@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateCompanyIPAccessSettingsRequest{}
 // CreateCompanyIPAccessSettingsRequest This data structure represents the request to create company IP access settings.
 type CreateCompanyIPAccessSettingsRequest struct {
 	EnableCoralogixCustomerSupportAccess *CoralogixCustomerSupportAccess `json:"enableCoralogixCustomerSupportAccess,omitempty"`
+	// List of IP access entries to create.
 	IpAccess []IpAccess `json:"ipAccess,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

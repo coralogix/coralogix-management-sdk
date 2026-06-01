@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Value the model 'Value'
+// Value Value.
 type Value string
 
 // List of Value

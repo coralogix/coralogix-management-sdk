@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Average type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Average{}
 
-// Average struct for Average
+// Average Average.
 type Average struct {
+	// The field.
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	AdditionalProperties map[string]interface{}

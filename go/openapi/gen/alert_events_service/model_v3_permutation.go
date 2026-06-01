@@ -22,6 +22,7 @@ var _ MappedNullable = &V3Permutation{}
 
 // V3Permutation struct for V3Permutation
 type V3Permutation struct {
+	// Labels for the permutation.
 	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

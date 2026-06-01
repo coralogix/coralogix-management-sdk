@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the QuerySpansQueryTypeFieldValueVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySpansQueryTypeFieldValueVariant{}
 
-// QuerySpansQueryTypeFieldValueVariant struct for QuerySpansQueryTypeFieldValueVariant
+// QuerySpansQueryTypeFieldValueVariant Discriminated union specifying whether to query span field names or span field values.
 type QuerySpansQueryTypeFieldValueVariant struct {
 	FieldValue QuerySpansQueryTypeFieldValue `json:"fieldValue"`
 	AdditionalProperties map[string]interface{}

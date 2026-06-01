@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the TimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeFrame{}
 
-// TimeFrame struct for TimeFrame
+// TimeFrame Time frame.
 type TimeFrame struct {
+	// The from.
 	From *time.Time `json:"from,omitempty"`
+	// The to.
 	To *time.Time `json:"to,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

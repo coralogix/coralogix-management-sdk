@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PieChartQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PieChartQueryLogs{}
 
-// PieChartQueryLogs struct for PieChartQueryLogs
+// PieChartQueryLogs Discriminated union of possible query types for the pie chart widget.
 type PieChartQueryLogs struct {
 	Logs PieChartLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

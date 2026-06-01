@@ -11,7 +11,7 @@
           "IP access service"
         ],
         "summary": "Get company IP access settings",
-        "description": "No description available",
+        "description": "Returns the current IP access settings for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "query",
             "name": "id",
+            "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
             "schema": {
               "example": "",
               "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
@@ -64,7 +65,7 @@
           "IP access service"
         ],
         "summary": "Replace company IP access settings",
-        "description": "No description available",
+        "description": "Updates the IP access restrictions for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -82,9 +83,11 @@
                   },
                   "id": {
                     "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
+                    "description": "Unique identifier of the existing IP access settings resource to replace.",
                     "type": "string"
                   },
                   "ipAccess": {
+                    "description": "List of IP access entries to replace.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/IpAccess"
@@ -131,7 +134,7 @@
           "IP access service"
         ],
         "summary": "Create company IP access settings",
-        "description": "No description available",
+        "description": "Sets the IP access restrictions for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -148,6 +151,7 @@
                     "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
                   },
                   "ipAccess": {
+                    "description": "List of IP access entries to create.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/IpAccess"
@@ -194,7 +198,7 @@
           "IP access service"
         ],
         "summary": "Delete company IP access settings",
-        "description": "No description available",
+        "description": "Removes the IP access restrictions for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -203,8 +207,10 @@
           {
             "in": "query",
             "name": "id",
+            "description": "The unique identifier of the company IP access settings to delete.",
             "schema": {
               "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
+              "description": "The unique identifier of the company IP access settings to delete.",
               "type": "string"
             },
             "style": "form"
@@ -271,6 +277,7 @@
         }
       },
       "CoralogixCustomerSupportAccess": {
+        "description": "Coralogix customer support access.",
         "type": "string",
         "enum": [
           "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
@@ -297,15 +304,16 @@
         },
         "title": "Delete company IP access settings response",
         "description": "This data structure represents the response to delete company IP access settings.",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -449,6 +457,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

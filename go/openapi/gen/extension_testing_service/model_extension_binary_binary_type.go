@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ExtensionBinaryBinaryType the model 'ExtensionBinaryBinaryType'
+// ExtensionBinaryBinaryType Type of binary content stored in the extension.
 type ExtensionBinaryBinaryType string
 
 // List of ExtensionBinary.BinaryType

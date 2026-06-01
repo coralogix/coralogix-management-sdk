@@ -22,11 +22,17 @@ var _ MappedNullable = &V1Scope{}
 
 // V1Scope This data structure represents a scope
 type V1Scope struct {
+	// The default expression.
 	DefaultExpression *string `json:"defaultExpression,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The display name.
 	DisplayName *string `json:"displayName,omitempty"`
+	// List of filters.
 	Filters []ScopesV1Filter `json:"filters,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Team identifier.
 	TeamId *int32 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

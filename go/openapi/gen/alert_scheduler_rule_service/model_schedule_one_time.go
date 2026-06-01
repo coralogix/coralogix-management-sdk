@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ScheduleOneTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScheduleOneTime{}
 
-// ScheduleOneTime struct for ScheduleOneTime
+// ScheduleOneTime Schedule.
 type ScheduleOneTime struct {
 	OneTime OneTime `json:"oneTime"`
 	ScheduleOperation *ScheduleOperation `json:"scheduleOperation,omitempty"`

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ColorSolidType the model 'ColorSolidType'
+// ColorSolidType Color solid type.
 type ColorSolidType string
 
 // List of ColorSolidType

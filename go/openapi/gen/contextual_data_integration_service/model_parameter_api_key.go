@@ -24,6 +24,7 @@ var _ MappedNullable = &ParameterApiKey{}
 // ParameterApiKey struct for ParameterApiKey
 type ParameterApiKey struct {
 	ApiKey ApiKeyData `json:"apiKey"`
+	// The key.
 	Key *string `json:"key,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

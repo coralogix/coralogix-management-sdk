@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the V1Duration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Duration{}
 
-// V1Duration struct for V1Duration
+// V1Duration Duration.
 type V1Duration struct {
+	// The for over.
 	ForOver *int32 `json:"forOver,omitempty"`
 	Frequency *DurationFrequency `json:"frequency,omitempty"`
 	AdditionalProperties map[string]interface{}

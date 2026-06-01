@@ -23,7 +23,9 @@ var _ MappedNullable = &ListEventsCountResponse{}
 
 // ListEventsCountResponse This data structure represents a response to list events count
 type ListEventsCountResponse struct {
+	// Number of items.
 	Count string `json:"count"`
+	// The reached limit.
 	ReachedLimit bool `json:"reachedLimit"`
 	AdditionalProperties map[string]interface{}
 }

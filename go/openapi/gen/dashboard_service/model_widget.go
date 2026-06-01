@@ -24,6 +24,7 @@ var _ MappedNullable = &Widget{}
 // Widget This data structure represents a dashboard widget.
 type Widget struct {
 	Appearance *WidgetAppearance `json:"appearance,omitempty"`
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	Definition *WidgetDefinition `json:"definition,omitempty"`
 	// Short description of the widget
@@ -32,6 +33,7 @@ type Widget struct {
 	Reference *WidgetReference `json:"reference,omitempty"`
 	// Name of the widget
 	Title *string `json:"title,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

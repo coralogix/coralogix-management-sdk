@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetOutgoingWebhookResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetOutgoingWebhookResponse{}
 
-// GetOutgoingWebhookResponse struct for GetOutgoingWebhookResponse
+// GetOutgoingWebhookResponse Response containing the details of an outgoing webhook.
 type GetOutgoingWebhookResponse struct {
 	Webhook *OutgoingWebhook `json:"webhook,omitempty"`
 	AdditionalProperties map[string]interface{}

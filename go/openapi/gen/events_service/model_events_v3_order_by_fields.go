@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// EventsV3OrderByFields the model 'EventsV3OrderByFields'
+// EventsV3OrderByFields Order by fields.
 type EventsV3OrderByFields string
 
 // List of events.v3.OrderByFields

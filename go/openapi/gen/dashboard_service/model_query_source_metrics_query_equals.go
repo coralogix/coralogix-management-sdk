@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceMetricsQueryEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryEquals{}
 
-// QuerySourceMetricsQueryEquals struct for QuerySourceMetricsQueryEquals
+// QuerySourceMetricsQueryEquals Equals.
 type QuerySourceMetricsQueryEquals struct {
 	Selection *QuerySourceMetricsQuerySelection `json:"selection,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the AnnotationWidgetScopeAllWidgetsVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationWidgetScopeAllWidgetsVariant{}
 
-// AnnotationWidgetScopeAllWidgetsVariant struct for AnnotationWidgetScopeAllWidgetsVariant
+// AnnotationWidgetScopeAllWidgetsVariant Widget scope.
 type AnnotationWidgetScopeAllWidgetsVariant struct {
+	// Indicates that the annotation applies to all widgets in the dashboard.
 	AllWidgets map[string]interface{} `json:"allWidgets"`
 	AdditionalProperties map[string]interface{}
 }

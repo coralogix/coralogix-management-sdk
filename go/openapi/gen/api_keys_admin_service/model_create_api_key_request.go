@@ -24,8 +24,10 @@ var _ MappedNullable = &CreateApiKeyRequest{}
 type CreateApiKeyRequest struct {
 	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups.
 	AccessPolicy *string `json:"accessPolicy,omitempty"`
+	// Whether the value is stored as a one-way hash.
 	Hashed *bool `json:"hashed,omitempty"`
 	KeyPermissions *CreateApiKeyRequestKeyPermissions `json:"keyPermissions,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Owner *Owner `json:"owner,omitempty"`
 	AdditionalProperties map[string]interface{}

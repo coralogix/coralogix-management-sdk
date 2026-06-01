@@ -23,12 +23,18 @@ var _ MappedNullable = &IntegrationRevisionHelmChart{}
 
 // IntegrationRevisionHelmChart This data structure represents an integration revision.
 type IntegrationRevisionHelmChart struct {
+	// The feature flag.
 	FeatureFlag *string `json:"featureFlag,omitempty"`
+	// Configuration fields that users must fill in to deploy this integration revision.
 	Fields []FieldInformation `json:"fields,omitempty"`
+	// UI groups used to organize configuration fields into logical sections.
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
 	HelmChart HelmChart `json:"helmChart"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Whether this revision supports automated deployment through the Coralogix platform.
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
+	// Markdown-formatted upgrade instructions shown when upgrading from a previous revision.
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

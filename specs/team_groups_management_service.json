@@ -11,7 +11,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Groups",
-        "description": "No description available",
+        "description": "Returns all team groups.",
         "externalDocs": {
           "url": ""
         },
@@ -20,7 +20,9 @@
           {
             "in": "query",
             "name": "team_id",
+            "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
             "schema": {
+              "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
               "type": "integer",
               "format": "int64"
             },
@@ -29,7 +31,9 @@
           {
             "in": "query",
             "name": "page_size",
+            "description": "Page size.",
             "schema": {
+              "description": "Page size.",
               "type": "integer",
               "format": "int64"
             },
@@ -38,8 +42,10 @@
           {
             "in": "query",
             "name": "page_token",
+            "description": "The page token.",
             "schema": {
               "example": "",
+              "description": "The page token.",
               "type": "string"
             },
             "style": "form"
@@ -81,7 +87,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Create Team Group",
-        "description": "No description available",
+        "description": "Creates a new team group.",
         "externalDocs": {
           "url": ""
         },
@@ -95,18 +101,22 @@
                 "type": "object",
                 "properties": {
                   "description": {
+                    "description": "Human-readable description of the team group.",
                     "type": "string"
                   },
                   "externalId": {
+                    "description": "External identifier for the group, used when the group is managed by an external identity provider.",
                     "type": "string"
                   },
                   "groupType": {
                     "$ref": "#/components/schemas/GroupType"
                   },
                   "name": {
+                    "description": "Unique display name for the new team group.",
                     "type": "string"
                   },
                   "roleId": {
+                    "description": "Identifier of the role to assign to this group.",
                     "type": "integer",
                     "format": "int64"
                   },
@@ -114,12 +124,15 @@
                     "$ref": "#/components/schemas/v2.Scope"
                   },
                   "teamId": {
+                    "description": "Team to associate the group with. If not set, uses the authenticated team.",
                     "type": "integer",
                     "format": "int64"
                   },
                   "userIds": {
+                    "description": "The user ids.",
                     "type": "array",
                     "items": {
+                      "description": "The user ids.",
                       "type": "string"
                     }
                   }
@@ -172,7 +185,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Group",
-        "description": "No description available",
+        "description": "Returns the team group with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -181,8 +194,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "The unique identifier of the team group.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the team group.",
               "type": "integer",
               "format": "int64"
             },
@@ -233,7 +248,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Get Team Group By Name",
-        "description": "No description available",
+        "description": "Returns the team group with the specified name.",
         "externalDocs": {
           "url": ""
         },
@@ -242,8 +257,10 @@
           {
             "in": "path",
             "name": "name",
+            "description": "The name of the team group to retrieve.",
             "required": true,
             "schema": {
+              "description": "The name of the team group to retrieve.",
               "type": "string"
             },
             "style": "simple"
@@ -293,7 +310,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Update Team Group",
-        "description": "No description available",
+        "description": "Updates the specified team group.",
         "externalDocs": {
           "url": ""
         },
@@ -302,8 +319,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "Unique identifier of the team group to update.",
             "required": true,
             "schema": {
+              "description": "Unique identifier of the team group to update.",
               "type": "integer",
               "format": "int64"
             },
@@ -319,15 +338,18 @@
                 "type": "object",
                 "properties": {
                   "description": {
+                    "description": "New human-readable description for the team group.",
                     "type": "string"
                   },
                   "externalId": {
+                    "description": "New external identifier for the group.",
                     "type": "string"
                   },
                   "groupType": {
                     "$ref": "#/components/schemas/GroupType"
                   },
                   "name": {
+                    "description": "New display name for the team group.",
                     "type": "string"
                   },
                   "roleUpdate": {
@@ -386,7 +408,7 @@
           "Team Groups Management Service"
         ],
         "summary": "Delete Team Group",
-        "description": "No description available",
+        "description": "Deletes the team group with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -395,8 +417,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "The unique identifier of the team group to delete.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the team group to delete.",
               "type": "integer",
               "format": "int64"
             },
@@ -441,13 +465,13 @@
         }
       }
     },
-    "/aaa/team-groups/v2/{group_id}/users": {
+    "/aaa/team-groups/v2/{group_id}/users/list": {
       "get": {
         "tags": [
           "Team Groups Management Service"
         ],
         "summary": "Get Group Users",
-        "description": "No description available",
+        "description": "Returns all users in the specified team group.",
         "externalDocs": {
           "url": ""
         },
@@ -456,8 +480,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "The unique identifier of the team group whose users to list.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the team group whose users to list.",
               "type": "integer",
               "format": "int64"
             },
@@ -466,7 +492,9 @@
           {
             "in": "query",
             "name": "page_size",
+            "description": "Pagination size. Defaults to 100 if empty.",
             "schema": {
+              "description": "Pagination size. Defaults to 100 if empty.",
               "type": "integer",
               "format": "int64"
             },
@@ -475,8 +503,10 @@
           {
             "in": "query",
             "name": "page_token",
+            "description": "Optional pagination continuation token.",
             "schema": {
               "example": "",
+              "description": "Optional pagination continuation token.",
               "type": "string"
             },
             "style": "form"
@@ -524,17 +554,27 @@
   "components": {
     "schemas": {
       "ClearRole": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Clear role.",
         "type": "object",
         "properties": {
           "clear": {
+            "description": "The clear.",
             "type": "boolean"
           }
         }
       },
       "ClearScope": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Clear scope.",
         "type": "object",
         "properties": {
           "clear": {
+            "description": "The clear.",
             "type": "boolean"
           }
         }
@@ -563,6 +603,7 @@
         "type": "object",
         "properties": {
           "groupId": {
+            "description": "The group id.",
             "type": "integer",
             "format": "int64"
           }
@@ -571,10 +612,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -654,13 +695,16 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "type": "string"
           },
           "totalCount": {
+            "description": "The total count.",
             "type": "integer",
             "format": "int64"
           },
           "users": {
+            "description": "List of users.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
@@ -706,21 +750,25 @@
         "type": "object",
         "properties": {
           "groups": {
+            "description": "List of groups.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TeamGroup"
             }
           },
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "type": "string"
           },
           "totalCount": {
+            "description": "The total count.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "GroupOrigin": {
+        "description": "Group origin.",
         "type": "string",
         "enum": [
           "GROUP_ORIGIN_UNSPECIFIED",
@@ -729,6 +777,7 @@
         ]
       },
       "GroupType": {
+        "description": "Group type.",
         "type": "string",
         "enum": [
           "GROUP_TYPE_UNSPECIFIED",
@@ -809,9 +858,11 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "Clear role.",
         "type": "object",
         "properties": {
           "actionType": {
+            "description": "Discriminator indicating the role update action type (set_role_id or clear).",
             "type": "string"
           },
           "clear": {
@@ -827,9 +878,11 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "Clear role.",
         "type": "object",
         "properties": {
           "actionType": {
+            "description": "Discriminator indicating the role update action type (set_role_id or clear).",
             "type": "string"
           },
           "setRoleId": {
@@ -876,9 +929,11 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "Set scope id.",
         "type": "object",
         "properties": {
           "actionType": {
+            "description": "Discriminator indicating the scope update action type (set_scope_id or clear).",
             "type": "string"
           },
           "clear": {
@@ -894,9 +949,11 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "Set scope id.",
         "type": "object",
         "properties": {
           "actionType": {
+            "description": "Discriminator indicating the scope update action type (set_scope_id or clear).",
             "type": "string"
           },
           "setScopeId": {
@@ -909,18 +966,28 @@
         ]
       },
       "SetRoleId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Set role id.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "SetScopeId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Set scope id.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "string"
           }
         }
@@ -934,6 +1001,7 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
@@ -972,6 +1040,7 @@
             "format": "int64"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           }
@@ -992,17 +1061,24 @@
         }
       },
       "UserIdList": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "User id list.",
         "type": "object",
         "properties": {
           "userIds": {
+            "description": "The user ids.",
             "type": "array",
             "items": {
+              "description": "The user ids.",
               "type": "string"
             }
           }
         }
       },
       "UserStatus": {
+        "description": "User status.",
         "type": "string",
         "enum": [
           "USER_STATUS_UNSPECIFIED",
@@ -1035,13 +1111,13 @@
         },
         "oneOf": [
           {
+            "$ref": "#/components/schemas/UserUpdatesOperationAdd"
+          },
+          {
             "$ref": "#/components/schemas/UserUpdatesOperationRemove"
           },
           {
             "$ref": "#/components/schemas/UserUpdatesOperationSet"
-          },
-          {
-            "$ref": "#/components/schemas/UserUpdatesOperationAdd"
           }
         ]
       },
@@ -1049,12 +1125,14 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "User id list.",
         "type": "object",
         "properties": {
           "add": {
             "$ref": "#/components/schemas/UserIdList"
           },
           "operationType": {
+            "description": "Discriminator indicating the user update operation type (add, remove, or set).",
             "type": "string"
           }
         },
@@ -1067,9 +1145,11 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "User id list.",
         "type": "object",
         "properties": {
           "operationType": {
+            "description": "Discriminator indicating the user update operation type (add, remove, or set).",
             "type": "string"
           },
           "remove": {
@@ -1085,9 +1165,11 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "User id list.",
         "type": "object",
         "properties": {
           "operationType": {
+            "description": "Discriminator indicating the user update operation type (add, remove, or set).",
             "type": "string"
           },
           "set": {
@@ -1156,6 +1238,7 @@
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

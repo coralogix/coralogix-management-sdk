@@ -22,7 +22,9 @@ var _ MappedNullable = &BatchGetPresetsResponse{}
 
 // BatchGetPresetsResponse Response containing the requested presets and any IDs not found
 type BatchGetPresetsResponse struct {
+	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	// List of permission presets.
 	Presets *map[string]Preset `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

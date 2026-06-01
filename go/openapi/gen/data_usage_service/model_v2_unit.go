@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the V2Unit type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2Unit{}
 
-// V2Unit struct for V2Unit
+// V2Unit A quantity expressed in units of data consumption.
 type V2Unit struct {
+	// Numeric value representing the amount in units.
 	Value *float32 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

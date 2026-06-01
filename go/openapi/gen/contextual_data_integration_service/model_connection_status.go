@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ConnectionStatus the model 'ConnectionStatus'
+// ConnectionStatus Connection status.
 type ConnectionStatus string
 
 // List of ConnectionStatus

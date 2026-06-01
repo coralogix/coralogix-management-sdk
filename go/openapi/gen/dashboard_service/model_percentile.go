@@ -20,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the Percentile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Percentile{}
 
-// Percentile struct for Percentile
+// Percentile Percentile.
 type Percentile struct {
+	// The field.
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
+	// The percent.
 	Percent *float64 `json:"percent,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -11,7 +11,7 @@
           "Alert definitions service"
         ],
         "summary": "Get a list of all accessible alert definitions",
-        "description": "No description available",
+        "description": "Returns all alert definitions for the team.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "query",
             "name": "query_filter",
+            "description": "Filter to apply to the list of alert definitions",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -45,14 +46,17 @@
           {
             "in": "query",
             "name": "pagination",
+            "description": "Pagination settings for the list of alert definitions",
             "schema": {
               "type": "object",
               "properties": {
                 "pageSize": {
+                  "description": "Page size.",
                   "type": "integer",
                   "format": "int64"
                 },
                 "pageToken": {
+                  "description": "The page token.",
                   "type": "string"
                 }
               }
@@ -62,6 +66,7 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "Ordering settings for the list of alert definitions",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -71,6 +76,7 @@
               "type": "object",
               "properties": {
                 "orderBys": {
+                  "description": "Order by fields for alert definitions",
                   "type": "array",
                   "items": {
                     "externalDocs": {
@@ -87,7 +93,8 @@
                         "$ref": "#/components/schemas/AlertDefOrderByFields"
                       }
                     }
-                  }
+                  },
+                  "minItems": 1
                 }
               }
             },
@@ -133,7 +140,7 @@
           "Alert definitions service"
         ],
         "summary": "Replace an alert definition",
-        "description": "No description available",
+        "description": "Updates an existing alert definition.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -198,7 +205,7 @@
           "Alert definitions service"
         ],
         "summary": "Create an alert",
-        "description": "No description available",
+        "description": "Creates a new alert definition.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -269,6 +276,7 @@
           {
             "in": "query",
             "name": "query_filter",
+            "description": "The filter to apply when counting options",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -346,8 +354,10 @@
                     "example": [
                       "123e4567-e89b-12d3-a456-426614174000"
                     ],
+                    "description": "List of alert definition IDs to delete.",
                     "type": "array",
                     "items": {
+                      "description": "List of alert definition IDs to delete.",
                       "type": "string"
                     }
                   }
@@ -443,7 +453,7 @@
           "Alert definitions service"
         ],
         "summary": "Bulk replace alert definitions",
-        "description": "No description available",
+        "description": "Replaces all alert definitions with the provided set.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -457,6 +467,7 @@
                 "type": "object",
                 "properties": {
                   "alertDefsToReplace": {
+                    "description": "List of alert definitions to replace",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/AlertDefToReplace"
@@ -508,7 +519,7 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by alert version ID",
-        "description": "No description available",
+        "description": "Returns the alert definition with the specified version ID.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -517,6 +528,7 @@
           {
             "in": "path",
             "name": "alert_version_id",
+            "description": "Alert version ID",
             "required": true,
             "schema": {
               "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -567,7 +579,7 @@
           "Alert definitions service"
         ],
         "summary": "Get alert definition by ID",
-        "description": "No description available",
+        "description": "Returns the details of the specified alert definition.\n\nRequires the following permissions:\n- `alerts:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -576,6 +588,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Alert definition ID",
             "required": true,
             "schema": {
               "example": "123e4567-e89b-12d3-a456-426614174000",
@@ -624,7 +637,7 @@
           "Alert definitions service"
         ],
         "summary": "DeleteAlertDef",
-        "description": "No description available",
+        "description": "Deletes the alert definition with the specified ID.\n\nRequires the following permissions:\n- `alerts:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -633,9 +646,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The unique identifier of the alert definition to delete.",
             "required": true,
             "schema": {
               "example": "123e4567-e89b-12d3-a456-426614174000",
+              "description": "The unique identifier of the alert definition to delete.",
               "type": "string"
             },
             "style": "simple"
@@ -692,6 +707,7 @@
               "DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED",
               "DAY_OF_WEEK_TUESDAY"
             ],
+            "description": "Day of the week.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DayOfWeek"
@@ -767,6 +783,7 @@
           "url": ""
         },
         "title": "Alert definition incident settings",
+        "description": "Alert def incident settings.",
         "type": "object",
         "properties": {
           "minutes": {
@@ -785,9 +802,11 @@
           "url": ""
         },
         "title": "Alert definition notification group",
+        "description": "Alert def notification group.",
         "type": "object",
         "properties": {
           "destinations": {
+            "description": "The destinations for notifications.  (Notification Center feature)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotificationDestination"
@@ -798,6 +817,7 @@
               "key1",
               "key2"
             ],
+            "description": "The keys to group the alerts by",
             "type": "array",
             "items": {
               "description": "The keys to group the alerts by",
@@ -808,6 +828,7 @@
             "$ref": "#/components/schemas/NotificationRouter"
           },
           "webhooks": {
+            "description": "The settings for webhooks associated with the alert definition",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefWebhooksSettings"
@@ -816,6 +837,7 @@
         }
       },
       "AlertDefOrderByDirection": {
+        "description": "Alert def order by direction.",
         "type": "string",
         "enum": [
           "ALERT_DEF_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED",
@@ -823,6 +845,7 @@
         ]
       },
       "AlertDefOrderByFields": {
+        "description": "Alert def order by fields.",
         "type": "string",
         "enum": [
           "ALERT_DEF_ORDER_BY_FIELDS_UNSPECIFIED",
@@ -837,6 +860,7 @@
           "url": ""
         },
         "title": "Alert definition priority update",
+        "description": "Alert def override.",
         "type": "object",
         "properties": {
           "priority": {
@@ -845,6 +869,7 @@
         }
       },
       "AlertDefPriority": {
+        "description": "Alert def priority.",
         "type": "string",
         "enum": [
           "ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED",
@@ -857,19 +882,19 @@
       "AlertDefProperties": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
+            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsRatioThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesLogsThreshold"
@@ -878,22 +903,22 @@
             "$ref": "#/components/schemas/AlertDefPropertiesLogsTimeRelativeThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
-          },
-          {
-            "$ref": "#/components/schemas/AlertDefPropertiesFlow"
+            "$ref": "#/components/schemas/AlertDefPropertiesLogsUniqueCount"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesMetricAnomaly"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsNewValue"
+            "$ref": "#/components/schemas/AlertDefPropertiesMetricThreshold"
           },
           {
             "$ref": "#/components/schemas/AlertDefPropertiesSloThreshold"
           },
           {
-            "$ref": "#/components/schemas/AlertDefPropertiesLogsImmediate"
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingImmediate"
+          },
+          {
+            "$ref": "#/components/schemas/AlertDefPropertiesTracingThreshold"
           }
         ]
       },
@@ -909,6 +934,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -944,6 +970,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -962,6 +989,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -995,6 +1023,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1027,6 +1056,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1048,6 +1078,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1081,6 +1112,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1113,6 +1145,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1134,6 +1167,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1167,6 +1201,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1199,6 +1234,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1220,6 +1256,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1253,6 +1290,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1285,6 +1323,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1306,6 +1345,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1339,6 +1379,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1371,6 +1412,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1392,6 +1434,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1425,6 +1468,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1457,6 +1501,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1478,6 +1523,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1511,6 +1557,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1543,6 +1590,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1564,6 +1612,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1597,6 +1646,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1629,6 +1679,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1650,6 +1701,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1683,6 +1735,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1715,6 +1768,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1736,6 +1790,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1769,6 +1824,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1801,6 +1857,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1819,6 +1876,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1855,6 +1913,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1887,6 +1946,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1905,6 +1965,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -1941,6 +2002,7 @@
             "$ref": "#/components/schemas/ActivitySchedule"
           },
           "dataSources": {
+            "description": "The sources from which to sample logs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefDataSource"
@@ -1973,6 +2035,7 @@
               "key1",
               "key2"
             ],
+            "description": "Keys used to group and aggregate alert data",
             "type": "array",
             "items": {
               "description": "Keys used to group and aggregate alert data",
@@ -1991,6 +2054,7 @@
             "$ref": "#/components/schemas/AlertDefNotificationGroup"
           },
           "notificationGroupExcess": {
+            "description": "Additional notification groups for alerts (deprecated)",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDefNotificationGroup"
@@ -2016,6 +2080,7 @@
         ]
       },
       "AlertDefStatus": {
+        "description": "Alert def status.",
         "type": "string",
         "enum": [
           "ALERT_DEF_STATUS_UNSPECIFIED",
@@ -2043,6 +2108,7 @@
         }
       },
       "AlertDefType": {
+        "description": "Alert def type.",
         "type": "string",
         "enum": [
           "ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED",
@@ -2083,6 +2149,7 @@
         }
       },
       "AlertsOp": {
+        "description": "Alerts op.",
         "type": "string",
         "enum": [
           "ALERTS_OP_AND_OR_UNSPECIFIED",
@@ -2116,6 +2183,7 @@
             "example": [
               "123e4567-e89b-12d3-a456-426614174000"
             ],
+            "description": "IDs of alert definitions that were successfully deleted",
             "type": "array",
             "items": {
               "description": "IDs of alert definitions that were successfully deleted",
@@ -2126,6 +2194,7 @@
             "example": [
               "123e4567-e89b-12d3-a456-426614174000"
             ],
+            "description": "IDs of alert definitions that were not found",
             "type": "array",
             "items": {
               "description": "IDs of alert definitions that were not found",
@@ -2143,12 +2212,14 @@
         "type": "object",
         "properties": {
           "alertDefs": {
+            "description": "List of successfully replaced alert definitions",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDef"
             }
           },
           "failedToReplaceAlertDefs": {
+            "description": "List of alert definitions that failed to be replaced",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FailedToReplaceAlertDef"
@@ -2158,6 +2229,7 @@
             "example": [
               "123e4567-e89b-12d3-a456-426614174000"
             ],
+            "description": "List of alert definition IDs that were not found",
             "type": "array",
             "items": {
               "description": "List of alert definition IDs that were not found",
@@ -2168,6 +2240,7 @@
             "example": [
               "123e4567-e89b-12d3-a456-426614174000"
             ],
+            "description": "List of alert definition IDs that were skipped (no changes detected)",
             "type": "array",
             "items": {
               "description": "List of alert definition IDs that were skipped (no changes detected)",
@@ -2198,10 +2271,13 @@
             "$ref": "#/components/schemas/BurnRateTypeDual"
           },
           "rules": {
+            "description": "The rules for the burn rate threshold",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloThresholdRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           }
         },
         "required": [
@@ -2217,10 +2293,13 @@
         "type": "object",
         "properties": {
           "rules": {
+            "description": "The rules for the burn rate threshold",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloThresholdRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           },
           "single": {
             "$ref": "#/components/schemas/BurnRateTypeSingle"
@@ -2287,7 +2366,8 @@
         },
         "title": "Delete alert definition response",
         "description": "A response to the deletion of an alert definition",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "DownloadAlertsResponse": {
         "externalDocs": {
@@ -2306,6 +2386,7 @@
         }
       },
       "DurationUnit": {
+        "description": "Duration unit.",
         "type": "string",
         "enum": [
           "DURATION_UNIT_UNSPECIFIED",
@@ -2368,10 +2449,13 @@
         "type": "object",
         "properties": {
           "rules": {
+            "description": "The rules for the error budget threshold",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloThresholdRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           }
         }
       },
@@ -2399,30 +2483,35 @@
         "type": "object",
         "properties": {
           "enabledCounts": {
+            "description": "Counts for different alert enabled statuses",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EnabledCount"
             }
           },
           "entityLabelCounts": {
+            "description": "Counts for different entity label values",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityLabelCount"
             }
           },
           "priorityCounts": {
+            "description": "Counts for different alert priorities",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PriorityCount"
             }
           },
           "statusCounts": {
+            "description": "Counts for different alert statuses",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/StatusCount"
             }
           },
           "typeCounts": {
+            "description": "Counts for different alert types",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TypeCount"
@@ -2446,10 +2535,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -2531,6 +2620,7 @@
             "$ref": "#/components/schemas/FlowStagesGroups"
           },
           "timeframeMs": {
+            "description": "The timeframe ms.",
             "type": "string",
             "format": "int64"
           },
@@ -2548,10 +2638,12 @@
         "type": "object",
         "properties": {
           "alertDefs": {
+            "description": "The alert definitions for the flow stage group.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FlowStagesGroupsAlertDefs"
-            }
+            },
+            "minItems": 1
           },
           "alertsOp": {
             "$ref": "#/components/schemas/AlertsOp"
@@ -2570,6 +2662,7 @@
         "type": "object",
         "properties": {
           "groups": {
+            "description": "List of groups.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FlowStagesGroup"
@@ -2607,13 +2700,16 @@
         "type": "object",
         "properties": {
           "enforceSuppression": {
+            "description": "The enforce suppression.",
             "type": "boolean"
           },
           "stages": {
+            "description": "The stages of the flow alert.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FlowStages"
-            }
+            },
+            "minItems": 1
           }
         }
       },
@@ -2670,18 +2766,21 @@
         "type": "object",
         "properties": {
           "applicationName": {
+            "description": "The application name.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LabelFilterType"
             }
           },
           "severities": {
+            "description": "The severities.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogSeverity"
             }
           },
           "subsystemName": {
+            "description": "The subsystem name.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LabelFilterType"
@@ -2698,6 +2797,7 @@
         "type": "object",
         "properties": {
           "alertDefs": {
+            "description": "List of alert definitions",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertDef"
@@ -2709,6 +2809,7 @@
         }
       },
       "LogFilterOperationType": {
+        "description": "Log filter operation type.",
         "type": "string",
         "enum": [
           "LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED",
@@ -2751,6 +2852,7 @@
         }
       },
       "LogsAnomalyConditionType": {
+        "description": "Logs anomaly condition type.",
         "type": "string",
         "enum": [
           "LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED"
@@ -2794,6 +2896,7 @@
             "example": [
               "obj.field"
             ],
+            "description": "The filter to specify which fields to include in the notification payload",
             "type": "array",
             "items": {
               "description": "The filter to specify which fields to include in the notification payload",
@@ -2801,10 +2904,13 @@
             }
           },
           "rules": {
+            "description": "The rules for the log anomaly alert",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsAnomalyRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 1
           }
         }
       },
@@ -2824,8 +2930,10 @@
             "example": [
               "obj.field"
             ],
+            "description": "The notification payload filter.",
             "type": "array",
             "items": {
+              "description": "The notification payload filter.",
               "type": "string"
             }
           }
@@ -2876,6 +2984,7 @@
         }
       },
       "LogsNewValueTimeWindowValue": {
+        "description": "Logs new value time window value.",
         "type": "string",
         "enum": [
           "LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED",
@@ -2903,6 +3012,7 @@
             "example": [
               "obj.field"
             ],
+            "description": "The filter to specify which fields to include in the notification payload.",
             "type": "array",
             "items": {
               "description": "The filter to specify which fields to include in the notification payload.",
@@ -2910,10 +3020,13 @@
             }
           },
           "rules": {
+            "description": "The rules for the log new value alert.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsNewValueRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 1
           }
         }
       },
@@ -2940,6 +3053,7 @@
         }
       },
       "LogsRatioConditionType": {
+        "description": "Logs ratio condition type.",
         "type": "string",
         "enum": [
           "LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
@@ -2947,6 +3061,7 @@
         ]
       },
       "LogsRatioGroupByFor": {
+        "description": "Logs ratio group by for.",
         "type": "string",
         "enum": [
           "LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED",
@@ -3005,8 +3120,10 @@
             "example": [
               "obj.field"
             ],
+            "description": "The notification payload filter.",
             "type": "array",
             "items": {
+              "description": "The notification payload filter.",
               "type": "string"
             }
           },
@@ -3019,10 +3136,13 @@
             "type": "string"
           },
           "rules": {
+            "description": "The rules for the ratio alert",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsRatioRules"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           },
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
@@ -3044,6 +3164,7 @@
         }
       },
       "LogsRatioTimeWindowValue": {
+        "description": "Logs ratio time window value.",
         "type": "string",
         "enum": [
           "LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
@@ -3071,6 +3192,7 @@
             "$ref": "#/components/schemas/LabelFilters"
           },
           "luceneQuery": {
+            "description": "The lucene query.",
             "type": "string"
           }
         }
@@ -3098,6 +3220,7 @@
         }
       },
       "LogsThresholdConditionType": {
+        "description": "Logs threshold condition type.",
         "type": "string",
         "enum": [
           "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
@@ -3145,6 +3268,7 @@
             "example": [
               "obj.field"
             ],
+            "description": "The filter to specify which fields to include in the notification payload",
             "type": "array",
             "items": {
               "description": "The filter to specify which fields to include in the notification payload",
@@ -3152,10 +3276,13 @@
             }
           },
           "rules": {
+            "description": "The rules for the threshold alert",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsThresholdRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           },
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
@@ -3163,6 +3290,7 @@
         }
       },
       "LogsTimeRelativeComparedTo": {
+        "description": "Logs time relative compared to.",
         "type": "string",
         "enum": [
           "LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED",
@@ -3195,6 +3323,7 @@
         }
       },
       "LogsTimeRelativeConditionType": {
+        "description": "Logs time relative condition type.",
         "type": "string",
         "enum": [
           "LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
@@ -3244,16 +3373,21 @@
             "example": [
               "obj.field"
             ],
+            "description": "The notification payload filter.",
             "type": "array",
             "items": {
+              "description": "The notification payload filter.",
               "type": "string"
             }
           },
           "rules": {
+            "description": "The rules for the time-relative alert",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsTimeRelativeRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           },
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
@@ -3274,6 +3408,7 @@
         }
       },
       "LogsTimeWindowValue": {
+        "description": "Logs time window value.",
         "type": "string",
         "enum": [
           "LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
@@ -3344,6 +3479,7 @@
             "example": [
               "obj.field"
             ],
+            "description": "The filter to specify which fields to include in the notification payload",
             "type": "array",
             "items": {
               "description": "The filter to specify which fields to include in the notification payload",
@@ -3351,10 +3487,13 @@
             }
           },
           "rules": {
+            "description": "The rules for the log unique count alert",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsUniqueCountRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 1
           },
           "uniqueCountKeypath": {
             "example": "obj.field",
@@ -3377,6 +3516,7 @@
         }
       },
       "LogsUniqueValueTimeWindowValue": {
+        "description": "Logs unique value time window value.",
         "type": "string",
         "enum": [
           "LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED",
@@ -3399,6 +3539,7 @@
           "url": ""
         },
         "title": "Metric-based anomaly condition",
+        "description": "Metric anomaly condition.",
         "type": "object",
         "properties": {
           "conditionType": {
@@ -3428,6 +3569,7 @@
         }
       },
       "MetricAnomalyConditionType": {
+        "description": "Metric anomaly condition type.",
         "type": "string",
         "enum": [
           "METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED",
@@ -3469,10 +3611,13 @@
             "$ref": "#/components/schemas/MetricFilter"
           },
           "rules": {
+            "description": "The rules for the metric anomaly alert.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricAnomalyRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 1
           }
         }
       },
@@ -3481,6 +3626,7 @@
           "url": ""
         },
         "title": "Metric filter configuration in alerts",
+        "description": "Metric filter.",
         "type": "object",
         "properties": {
           "promql": {
@@ -3493,10 +3639,10 @@
       "MetricMissingValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
+            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
           },
           {
-            "$ref": "#/components/schemas/MetricMissingValuesMinNonNullValuesPct"
+            "$ref": "#/components/schemas/MetricMissingValuesReplaceWithZero"
           }
         ]
       },
@@ -3566,6 +3712,7 @@
         }
       },
       "MetricThresholdConditionType": {
+        "description": "Metric threshold condition type.",
         "type": "string",
         "enum": [
           "METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED",
@@ -3615,10 +3762,13 @@
             "$ref": "#/components/schemas/NoDataPolicy"
           },
           "rules": {
+            "description": "The rules for the metric threshold alert",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricThresholdRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 5
           },
           "undetectedValuesManagement": {
             "$ref": "#/components/schemas/v3.UndetectedValuesManagement"
@@ -3640,6 +3790,7 @@
           "url": ""
         },
         "title": "Metric time window",
+        "description": "Metric time window.",
         "type": "object",
         "properties": {
           "metricTimeWindowDynamicDuration": {
@@ -3657,6 +3808,7 @@
           "url": ""
         },
         "title": "Metric time window",
+        "description": "Metric time window.",
         "type": "object",
         "properties": {
           "metricTimeWindowSpecificValue": {
@@ -3668,6 +3820,7 @@
         ]
       },
       "MetricTimeWindowValue": {
+        "description": "Metric time window value.",
         "type": "string",
         "enum": [
           "METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED",
@@ -3700,6 +3853,7 @@
         }
       },
       "NextOp": {
+        "description": "Next op.",
         "type": "string",
         "enum": [
           "NEXT_OP_AND_OR_UNSPECIFIED",
@@ -3707,6 +3861,10 @@
         ]
       },
       "NoDataPolicy": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "No data policy.",
         "type": "object",
         "properties": {
           "autoRetireSeconds": {
@@ -3721,6 +3879,7 @@
         }
       },
       "NoDataPolicyState": {
+        "description": "No data policy state.",
         "type": "string",
         "enum": [
           "NO_DATA_POLICY_STATE_UNSPECIFIED",
@@ -3789,6 +3948,7 @@
           "url": ""
         },
         "title": "Notification routing",
+        "description": "Notification routing.",
         "type": "object",
         "properties": {
           "configOverrides": {
@@ -3797,6 +3957,7 @@
         }
       },
       "NotifyOn": {
+        "description": "Notify on.",
         "type": "string",
         "enum": [
           "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED",
@@ -3834,11 +3995,13 @@
             "example": [
               "mail@gmail.com"
             ],
+            "description": "The list of email recipients for alert notifications",
             "type": "array",
             "items": {
               "description": "The list of email recipients for alert notifications",
               "type": "string"
-            }
+            },
+            "minItems": 1
           }
         }
       },
@@ -3864,6 +4027,7 @@
         "type": "object",
         "properties": {
           "threshold": {
+            "description": "Threshold value.",
             "type": "number",
             "format": "double"
           }
@@ -3888,10 +4052,10 @@
       "SloThresholdType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/SloThresholdTypeErrorBudget"
+            "$ref": "#/components/schemas/SloThresholdTypeBurnRate"
           },
           {
-            "$ref": "#/components/schemas/SloThresholdTypeBurnRate"
+            "$ref": "#/components/schemas/SloThresholdTypeErrorBudget"
           }
         ]
       },
@@ -3981,17 +4145,20 @@
         "properties": {
           "hours": {
             "example": 14,
+            "description": "The hours.",
             "type": "integer",
             "format": "int32"
           },
           "minutes": {
             "example": 30,
+            "description": "The minutes.",
             "type": "integer",
             "format": "int32"
           }
         }
       },
       "TimeframeType": {
+        "description": "Timeframe type.",
         "type": "string",
         "enum": [
           "TIMEFRAME_TYPE_UNSPECIFIED",
@@ -4012,6 +4179,7 @@
         }
       },
       "TracingFilterOperationType": {
+        "description": "Tracing filter operation type.",
         "type": "string",
         "enum": [
           "TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED",
@@ -4037,11 +4205,13 @@
               "value1",
               "value2"
             ],
+            "description": "The values of the label to filter by",
             "type": "array",
             "items": {
               "description": "The values of the label to filter by",
               "type": "string"
-            }
+            },
+            "minItems": 1
           }
         }
       },
@@ -4058,6 +4228,7 @@
             "example": [
               "obj.field"
             ],
+            "description": "Notification payload field filter",
             "type": "array",
             "items": {
               "description": "Notification payload field filter",
@@ -4078,30 +4249,35 @@
         "type": "object",
         "properties": {
           "applicationName": {
+            "description": "Filter by application names",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TracingFilterType"
             }
           },
           "operationName": {
+            "description": "Filter by operation names",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TracingFilterType"
             }
           },
           "serviceName": {
+            "description": "Filter by service names",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TracingFilterType"
             }
           },
           "spanFields": {
+            "description": "Filter by span fields",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TracingSpanFieldsFilterType"
             }
           },
           "subsystemName": {
+            "description": "Filter by subsystem names",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TracingFilterType"
@@ -4151,6 +4327,7 @@
           "url": ""
         },
         "title": "Trace-based alert threshold condition",
+        "description": "Tracing threshold condition.",
         "type": "object",
         "properties": {
           "conditionType": {
@@ -4168,6 +4345,7 @@
         }
       },
       "TracingThresholdConditionType": {
+        "description": "Tracing threshold condition type.",
         "type": "string",
         "enum": [
           "TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
@@ -4199,6 +4377,7 @@
             "example": [
               "obj.field"
             ],
+            "description": "Notification payload field filter",
             "type": "array",
             "items": {
               "description": "Notification payload field filter",
@@ -4206,10 +4385,13 @@
             }
           },
           "rules": {
+            "description": "The rules for the trace threshold alert.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TracingThresholdRule"
-            }
+            },
+            "minItems": 1,
+            "maxItems": 1
           },
           "tracingFilter": {
             "$ref": "#/components/schemas/TracingFilter"
@@ -4221,6 +4403,7 @@
           "url": ""
         },
         "title": "Tracing time window",
+        "description": "Tracing time window.",
         "type": "object",
         "properties": {
           "tracingTimeWindowValue": {
@@ -4229,6 +4412,7 @@
         }
       },
       "TracingTimeWindowValue": {
+        "description": "Tracing time window value.",
         "type": "string",
         "enum": [
           "TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED",
@@ -4300,12 +4484,18 @@
         ]
       },
       "alerts.v3.PaginationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Pagination response.",
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "type": "string"
           },
           "totalSize": {
+            "description": "Total number of results.",
             "type": "integer",
             "format": "int64"
           }
@@ -4319,6 +4509,7 @@
         ]
       },
       "v3.AutoRetireTimeframe": {
+        "description": "Auto retire timeframe.",
         "type": "string",
         "enum": [
           "AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED",
@@ -4351,6 +4542,7 @@
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
@@ -4420,15 +4612,18 @@
           "url": ""
         },
         "title": "Source overrides",
+        "description": "Source overrides.",
         "type": "object",
         "properties": {
           "connectorConfigFields": {
+            "description": "Connector configuration fields",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v3.ConnectorConfigField"
             }
           },
           "messageConfigFields": {
+            "description": "Notification message configuration fields",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v3.MessageConfigField"

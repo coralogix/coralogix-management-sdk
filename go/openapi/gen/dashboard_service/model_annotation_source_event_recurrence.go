@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the AnnotationSourceEventRecurrence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceEventRecurrence{}
 
-// AnnotationSourceEventRecurrence struct for AnnotationSourceEventRecurrence
+// AnnotationSourceEventRecurrence Source.
 type AnnotationSourceEventRecurrence struct {
 	EventRecurrence EventRecurrenceSource `json:"eventRecurrence"`
 	AdditionalProperties map[string]interface{}

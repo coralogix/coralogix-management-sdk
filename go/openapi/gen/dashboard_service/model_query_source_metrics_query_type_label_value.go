@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QuerySourceMetricsQueryTypeLabelValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryTypeLabelValue{}
 
-// QuerySourceMetricsQueryTypeLabelValue struct for QuerySourceMetricsQueryTypeLabelValue
+// QuerySourceMetricsQueryTypeLabelValue Query.metrics query.type.label value.
 type QuerySourceMetricsQueryTypeLabelValue struct {
+	// The label filters.
 	LabelFilters []QuerySourceMetricsQueryMetricsLabelFilter `json:"labelFilters,omitempty"`
 	LabelName *QuerySourceMetricsQueryStringOrVariable `json:"labelName,omitempty"`
 	MetricName *QuerySourceMetricsQueryStringOrVariable `json:"metricName,omitempty"`

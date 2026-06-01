@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DatausageV2Severity the model 'DatausageV2Severity'
+// DatausageV2Severity Severity.
 type DatausageV2Severity string
 
 // List of datausage.v2.Severity

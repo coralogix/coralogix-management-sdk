@@ -23,6 +23,7 @@ var _ MappedNullable = &TestPoliciesResult{}
 
 // TestPoliciesResult Result of testing policies.
 type TestPoliciesResult struct {
+	// The matched.
 	Matched bool `json:"matched"`
 	MetaFieldsValues LogMetaFieldsValues `json:"metaFieldsValues"`
 	Policy Policy `json:"policy"`

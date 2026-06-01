@@ -23,6 +23,7 @@ var _ MappedNullable = &DataTableDataprimeQuery{}
 // DataTableDataprimeQuery A Dataprime variant of the query
 type DataTableDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	// List of query filters
 	Filters []FilterSource `json:"filters,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}

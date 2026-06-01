@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapColorSize type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapColorSize{}
 
-// GeomapColorSize struct for GeomapColorSize
+// GeomapColorSize Geomap color.
 type GeomapColorSize struct {
 	Size ColorSolidType `json:"size"`
 	AdditionalProperties map[string]interface{}

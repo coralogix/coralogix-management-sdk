@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the EnrichmentTypeGeoIp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeGeoIp{}
 
-// EnrichmentTypeGeoIp struct for EnrichmentTypeGeoIp
+// EnrichmentTypeGeoIp Enrichment type.
 type EnrichmentTypeGeoIp struct {
 	GeoIp GeoIpType `json:"geoIp"`
 	AdditionalProperties map[string]interface{}

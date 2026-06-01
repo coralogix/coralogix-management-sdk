@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the TestIntegrationResultFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestIntegrationResultFailure{}
 
-// TestIntegrationResultFailure struct for TestIntegrationResultFailure
+// TestIntegrationResultFailure Test integration result.
 type TestIntegrationResultFailure struct {
 	Failure V1Failure `json:"failure"`
 	AdditionalProperties map[string]interface{}

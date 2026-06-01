@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestPresetConfigResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestPresetConfigResponse{}
 
-// TestPresetConfigResponse struct for TestPresetConfigResponse
+// TestPresetConfigResponse Response containing the results of a notification preset configuration test.
 type TestPresetConfigResponse struct {
 	Result *TestResult `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}

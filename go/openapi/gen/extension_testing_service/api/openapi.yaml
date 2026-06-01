@@ -7,7 +7,11 @@ servers:
 paths:
   /integrations/testing/v1/extensions:
     delete:
-      description: No description available
+      description: |-
+        Removes the testing revision of an extension.
+
+        Requires the following permissions:
+        - `extensions:UpdateConfig`
       externalDocs:
         url: ""
       operationId: ExtensionTestingService_CleanupTestingRevision
@@ -41,7 +45,11 @@ paths:
       x-coralogixPermissions:
       - extensions:UpdateConfig
     post:
-      description: No description available
+      description: |-
+        Tests an extension revision.
+
+        Requires the following permissions:
+        - `extensions:UpdateConfig`
       externalDocs:
         url: ""
       operationId: ExtensionTestingService_TestExtensionRevision
@@ -76,7 +84,11 @@ paths:
       - extensions:UpdateConfig
   /integrations/testing/v1/extensions/initialize:
     post:
-      description: No description available
+      description: |-
+        Initializes a testing revision for an extension.
+
+        Requires the following permissions:
+        - `extensions:UpdateConfig`
       externalDocs:
         url: ""
       operationId: ExtensionTestingService_InitializeTestingRevision
@@ -116,24 +128,33 @@ components:
         url: ""
       properties:
         descriptionMd:
+          description: The description md.
           type: string
         version:
+          description: Version.
           type: string
       title: Changelog entry
       type: object
     CleanupTestingRevisionResponse:
+      additionalProperties: false
+      description: Response returned after successfully cleaning up an extension testing
+        revision.
       externalDocs:
         url: ""
       title: Cleanup testing revision response
       type: object
     Deprecation:
+      description: Deprecation.
       externalDocs:
         url: ""
       properties:
         reason:
+          description: Reason.
           type: string
         replacementExtensions:
+          description: The replacement extensions.
           items:
+            description: The replacement extensions.
             type: string
           type: array
       title: Deprecation
@@ -143,12 +164,14 @@ components:
         url: ""
       properties:
         data:
+          description: Data payload.
           type: string
         type:
           $ref: "#/components/schemas/ExtensionBinary.BinaryType"
       title: Extension binary
       type: object
     ExtensionBinary.BinaryType:
+      description: Type of binary content stored in the extension.
       enum:
       - KIBANA_INDEX_PATTERN
       type: string
@@ -158,54 +181,72 @@ components:
         url: ""
       properties:
         binaries:
+          description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionBinary"
           type: array
         changelog:
+          description: The changelog.
           items:
             $ref: "#/components/schemas/ChangelogEntry"
           type: array
         darkModeImage:
+          description: The dark mode image.
           type: string
         deprecation:
           $ref: "#/components/schemas/Deprecation"
         description:
+          description: Human-readable description.
           example: Integration with AWS CloudWatch for monitoring and logging
           type: string
         excerpt:
+          description: The excerpt.
           example: Monitor AWS resources and analyze logs with CloudWatch integration
           type: string
         id:
+          description: Unique identifier.
           example: 076f4188-05e0-4ed3-afeb-653ad182ccb7
           type: string
         image:
+          description: Image reference.
           type: string
         integrationDetails:
+          description: The integration details.
           items:
             $ref: "#/components/schemas/IntegrationDetail"
           type: array
         integrations:
+          description: The integrations.
           items:
+            description: The integrations.
             type: string
           type: array
         isHidden:
+          description: The is hidden.
           type: boolean
         items:
+          description: List of items.
           items:
             $ref: "#/components/schemas/ExtensionItemData"
           type: array
         keywords:
+          description: The keywords.
           items:
+            description: The keywords.
             type: string
           type: array
         labels:
+          description: List of labels.
           items:
+            description: List of labels.
             type: string
           type: array
         name:
+          description: Display name.
           example: AWS CloudWatch Extension
           type: string
         version:
+          description: Version number.
           example: v1.0.13
           type: string
       title: Extension data
@@ -215,14 +256,17 @@ components:
         url: ""
       properties:
         data:
+          description: Data payload.
           type: string
         fileName:
+          description: The file name.
           type: string
         type:
           $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
       title: Extension item binary
       type: object
     ExtensionItemBinary.BinaryType:
+      description: Binary type.
       enum:
       - PREVIEW_IMAGE
       - KIBANA_DASHBOARD_DEFINITION
@@ -235,36 +279,44 @@ components:
         url: ""
       properties:
         binaries:
+          description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionItemBinary"
           type: array
         data:
+          description: Data payload.
           type: object
         description:
+          description: Human-readable description.
           example: Less than 60% cocoa
           type: string
         internalId:
+          description: The internal id.
           format: int32
           type: integer
         isMandatory:
+          description: The is mandatory.
           type: boolean
         name:
+          description: Display name.
           example: Low cocoa content
           type: string
         permissionResource:
           $ref: "#/components/schemas/PermissionResource"
         stableId:
+          description: The stable id.
           type: string
         targetDomain:
           $ref: "#/components/schemas/TargetDomain"
         uniqueId:
+          description: The unique id.
           type: string
       title: Extension item data
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -313,6 +365,9 @@ components:
       title: Filters
       type: object
     InitializeTestingRevisionResponse:
+      additionalProperties: false
+      description: Response returned after successfully initializing an extension
+        testing revision.
       externalDocs:
         url: ""
       title: Initialize testing revision response
@@ -322,8 +377,10 @@ components:
         url: ""
       properties:
         link:
+          description: Link.
           type: string
         name:
+          description: Display name.
           type: string
       title: Integration detail
       type: object
@@ -337,6 +394,7 @@ components:
           type: array
       type: object
     PermissionResource:
+      description: Permission resource.
       enum:
       - UNKNOWN
       - ACTION
@@ -355,6 +413,7 @@ components:
       - LOGS_EVENTS_TO_METRICS
       type: string
     TargetDomain:
+      description: Target domain.
       enum:
       - ACTION
       - ALERT
@@ -369,6 +428,8 @@ components:
       - ALERT_V3
       type: string
     TestExtensionRevisionResponse:
+      additionalProperties: false
+      description: Response containing the results of an extension revision test.
       externalDocs:
         url: ""
       title: Test extension revision response
@@ -379,25 +440,32 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     Test_extension_revision_request:
+      description: Request for testing an extension revision.
       properties:
         cleanupAfterTest:
+          description: Whether to automatically clean up the testing extension revision
+            after the test run completes.
           type: boolean
         extensionData:
           $ref: "#/components/schemas/ExtensionData"
       title: Test extension revision request
       type: object
     Cleanup_testing_revision_request:
+      description: Request for cleaning up an extension testing revision.
       properties:
         id:
+          description: ID of the testing extension revision to delete.
           type: string
       title: Cleanup testing revision request
       type: object
     Initialize_testing_revision_request:
+      description: Request for initializing an extension testing revision.
       properties:
         extensionData:
           $ref: "#/components/schemas/ExtensionData"

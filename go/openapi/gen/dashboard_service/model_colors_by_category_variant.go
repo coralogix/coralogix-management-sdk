@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ColorsByCategoryVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ColorsByCategoryVariant{}
 
-// ColorsByCategoryVariant struct for ColorsByCategoryVariant
+// ColorsByCategoryVariant Defines the coloring strategy applied to widget data series.
 type ColorsByCategoryVariant struct {
+	// Colors by category.
 	Category map[string]interface{} `json:"category"`
 	AdditionalProperties map[string]interface{}
 }

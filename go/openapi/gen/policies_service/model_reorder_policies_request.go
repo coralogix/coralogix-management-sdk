@@ -23,6 +23,7 @@ var _ MappedNullable = &ReorderPoliciesRequest{}
 
 // ReorderPoliciesRequest This data structue is used to reorder policies.
 type ReorderPoliciesRequest struct {
+	// The orders.
 	Orders []PolicyOrder `json:"orders"`
 	SourceType V1SourceType `json:"sourceType"`
 	AdditionalProperties map[string]interface{}

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Layout type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Layout{}
 
-// Layout struct for Layout
+// Layout Layout.
 type Layout struct {
+	// The list of sections in the dashboard
 	Sections []Section `json:"sections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

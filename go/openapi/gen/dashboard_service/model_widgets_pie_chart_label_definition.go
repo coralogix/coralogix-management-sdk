@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the WidgetsPieChartLabelDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsPieChartLabelDefinition{}
 
-// WidgetsPieChartLabelDefinition struct for WidgetsPieChartLabelDefinition
+// WidgetsPieChartLabelDefinition Label definition.
 type WidgetsPieChartLabelDefinition struct {
 	// Are labels visible
 	IsVisible *bool `json:"isVisible,omitempty"`

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the QueryMetricsQueryOperatorNotEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryOperatorNotEquals{}
 
-// QueryMetricsQueryOperatorNotEquals struct for QueryMetricsQueryOperatorNotEquals
+// QueryMetricsQueryOperatorNotEquals Operator.
 type QueryMetricsQueryOperatorNotEquals struct {
 	NotEquals QueryMetricsQueryNotEquals `json:"notEquals"`
 	AdditionalProperties map[string]interface{}

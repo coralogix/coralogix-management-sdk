@@ -52,7 +52,7 @@
           "API Keys Service"
         ],
         "summary": "Create API Key",
-        "description": "No description available",
+        "description": "Creates a new API key for the authenticated team.",
         "externalDocs": {
           "url": ""
         },
@@ -72,6 +72,7 @@
                   },
                   "hashed": {
                     "example": true,
+                    "description": "Whether the value is stored as a one-way hash.",
                     "type": "boolean"
                   },
                   "keyPermissions": {
@@ -79,6 +80,7 @@
                   },
                   "name": {
                     "example": "my_api_key",
+                    "description": "Display name.",
                     "type": "string"
                   },
                   "owner": {
@@ -141,9 +143,11 @@
                 "type": "object",
                 "properties": {
                   "keyIds": {
+                    "description": "List of API key IDs to delete.",
                     "type": "array",
                     "items": {
                       "example": "key_abc123",
+                      "description": "List of API key IDs to delete.",
                       "type": "string"
                     }
                   }
@@ -204,6 +208,7 @@
                 "type": "object",
                 "properties": {
                   "updates": {
+                    "description": "The updates.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ApiKeyStatusUpdate"
@@ -274,10 +279,12 @@
         "properties": {
           "active": {
             "example": true,
+            "description": "Whether this resource is active.",
             "type": "boolean"
           },
           "keyId": {
             "example": "key_abc123",
+            "description": "Key identifier.",
             "type": "string"
           }
         }
@@ -295,13 +302,16 @@
             "$ref": "#/components/schemas/v3.ApiKey"
           },
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
               "example": "logs:read",
+              "description": "List of permissions.",
               "type": "string"
             }
           },
           "presets": {
+            "description": "List of permission presets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PermissionsPreset"
@@ -320,10 +330,12 @@
         "properties": {
           "userEmail": {
             "example": "test@example.com",
+            "description": "The user email.",
             "type": "string"
           },
           "userId": {
             "example": "user_123",
+            "description": "The user id.",
             "type": "string"
           }
         }
@@ -338,16 +350,20 @@
         "type": "object",
         "properties": {
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
               "example": "read_logs",
+              "description": "List of permissions.",
               "type": "string"
             }
           },
           "presets": {
+            "description": "List of permission presets.",
             "type": "array",
             "items": {
               "example": "my_preset",
+              "description": "List of permission presets.",
               "type": "string"
             }
           }
@@ -364,14 +380,17 @@
         "properties": {
           "keyId": {
             "example": "my_key_id",
+            "description": "Key identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_api_key",
+            "description": "Display name.",
             "type": "string"
           },
           "value": {
             "example": "my_api_key_value",
+            "description": "The value.",
             "type": "string"
           }
         }
@@ -383,15 +402,16 @@
         },
         "title": "Delete API Keys Response",
         "description": "This data structure is the response obtained after deleting API keys.",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -471,6 +491,7 @@
         "type": "object",
         "properties": {
           "keys": {
+            "description": "The keys.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiKeySummary"
@@ -495,20 +516,25 @@
       "Owner": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OwnerUserId"
+            "$ref": "#/components/schemas/OwnerOrganisationId"
           },
           {
             "$ref": "#/components/schemas/OwnerTeamId"
           },
           {
-            "$ref": "#/components/schemas/OwnerOrganisationId"
+            "$ref": "#/components/schemas/OwnerUserId"
           }
         ]
       },
       "OwnerOrganisationId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Owner.",
         "type": "object",
         "properties": {
           "organisationId": {
+            "description": "Organisation identifier of the API key owner.",
             "type": "string"
           }
         },
@@ -517,9 +543,14 @@
         ]
       },
       "OwnerTeamId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Owner.",
         "type": "object",
         "properties": {
           "teamId": {
+            "description": "The team id.",
             "type": "integer",
             "format": "int64"
           }
@@ -529,9 +560,14 @@
         ]
       },
       "OwnerUserId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Owner.",
         "type": "object",
         "properties": {
           "userId": {
+            "description": "User identifier of the API key owner.",
             "type": "string"
           }
         },
@@ -550,17 +586,21 @@
         "properties": {
           "id": {
             "example": 1,
+            "description": "Unique identifier.",
             "type": "integer",
             "format": "int32"
           },
           "name": {
             "example": "my_preset",
+            "description": "Display name.",
             "type": "string"
           },
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
               "example": "logs:read",
+              "description": "List of permissions.",
               "type": "string"
             }
           }
@@ -573,7 +613,8 @@
         },
         "title": "Update API Keys Status Response",
         "description": "This data structure is the response obtained after updating API keys status.",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -598,13 +639,16 @@
           },
           "id": {
             "example": "key_abc123",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "isActive": {
+            "description": "Whether this resource is active.",
             "type": "boolean"
           },
           "keyName": {
             "example": "my_api_key",
+            "description": "The key name.",
             "type": "string"
           },
           "lastActivated": {
@@ -618,6 +662,7 @@
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

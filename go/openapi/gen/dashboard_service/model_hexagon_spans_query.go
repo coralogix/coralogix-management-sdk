@@ -22,8 +22,11 @@ var _ MappedNullable = &HexagonSpansQuery{}
 
 // HexagonSpansQuery A spans variant of the query
 type HexagonSpansQuery struct {
+	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
+	// List of field names to group the span records
 	GroupBy []SpanField `json:"groupBy,omitempty"`
+	// A list of observation fields to group the records by
 	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	SpansAggregation *SpansAggregation `json:"spansAggregation,omitempty"`

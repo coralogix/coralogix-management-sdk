@@ -23,9 +23,12 @@ var _ MappedNullable = &UpdateCustomEnrichmentRequest{}
 
 // UpdateCustomEnrichmentRequest This request data structure is used to update a custom enrichment
 type UpdateCustomEnrichmentRequest struct {
+	// The custom enrichment id.
 	CustomEnrichmentId int64 `json:"customEnrichmentId"`
+	// New human-readable description of the custom enrichment.
 	Description string `json:"description"`
 	File File `json:"file"`
+	// New human-readable name for the custom enrichment.
 	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the LogsSourceStrategyRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSourceStrategyRange{}
 
-// LogsSourceStrategyRange struct for LogsSourceStrategyRange
+// LogsSourceStrategyRange Range strategy: uses start and end timestamp fields to define the annotation span.
 type LogsSourceStrategyRange struct {
 	EndTimestampField *ObservationField `json:"endTimestampField,omitempty"`
 	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`

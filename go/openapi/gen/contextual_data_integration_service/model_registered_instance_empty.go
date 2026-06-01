@@ -24,13 +24,18 @@ var _ MappedNullable = &RegisteredInstanceEmpty{}
 
 // RegisteredInstanceEmpty struct for RegisteredInstanceEmpty
 type RegisteredInstanceEmpty struct {
+	// The definition version.
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
 	// This data structure represents an integration that does not require deployment.
 	Empty map[string]interface{} `json:"empty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
+	// Whether this is a testing instance used for validation purposes only.
 	IsTesting *bool `json:"isTesting,omitempty"`
+	// Timestamp of the last update to this integration instance.
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
+	// The parameters.
 	Parameters []Parameter `json:"parameters,omitempty"`
 	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
 	AdditionalProperties map[string]interface{}

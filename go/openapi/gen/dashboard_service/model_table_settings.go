@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TableSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TableSettings{}
 
-// TableSettings struct for TableSettings
+// TableSettings Table settings.
 type TableSettings struct {
+	// List of configured column widths
 	ColumnWidths []ColumnWidthEntry `json:"columnWidths,omitempty"`
 	RowStyle *RowStyle `json:"rowStyle,omitempty"`
 	AdditionalProperties map[string]interface{}

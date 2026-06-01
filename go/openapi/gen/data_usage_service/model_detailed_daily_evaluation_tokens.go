@@ -23,7 +23,9 @@ var _ MappedNullable = &DetailedDailyEvaluationTokens{}
 
 // DetailedDailyEvaluationTokens struct for DetailedDailyEvaluationTokens
 type DetailedDailyEvaluationTokens struct {
+	// The evaluations.
 	Evaluations []Evaluation `json:"evaluations,omitempty"`
+	// The stats date.
 	StatsDate *time.Time `json:"statsDate,omitempty"`
 	TotalTokens *Token `json:"totalTokens,omitempty"`
 	AdditionalProperties map[string]interface{}

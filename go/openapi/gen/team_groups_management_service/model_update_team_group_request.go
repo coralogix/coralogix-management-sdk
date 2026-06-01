@@ -22,9 +22,12 @@ var _ MappedNullable = &UpdateTeamGroupRequest{}
 
 // UpdateTeamGroupRequest Request to modify an existing team group's details, including its name, description, roles, users, and scope settings.
 type UpdateTeamGroupRequest struct {
+	// New human-readable description for the team group.
 	Description *string `json:"description,omitempty"`
+	// New external identifier for the group.
 	ExternalId *string `json:"externalId,omitempty"`
 	GroupType *GroupType `json:"groupType,omitempty"`
+	// New display name for the team group.
 	Name *string `json:"name,omitempty"`
 	RoleUpdate *RoleUpdate `json:"roleUpdate,omitempty"`
 	ScopeUpdate *ScopeUpdate `json:"scopeUpdate,omitempty"`

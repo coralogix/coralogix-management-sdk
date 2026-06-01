@@ -23,6 +23,7 @@ var _ MappedNullable = &SearchClauseName{}
 
 // SearchClauseName This data structure represents a search clause
 type SearchClauseName struct {
+	// Search by the name of the custom enrichment.
 	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }

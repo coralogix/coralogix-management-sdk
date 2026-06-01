@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DataTableQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableQueryDataprime{}
 
-// DataTableQueryDataprime struct for DataTableQueryDataprime
+// DataTableQueryDataprime Discriminated union of possible query types for the data table widget.
 type DataTableQueryDataprime struct {
 	Dataprime DataTableDataprimeQuery `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

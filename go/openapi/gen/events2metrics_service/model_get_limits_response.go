@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the GetLimitsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetLimitsResponse{}
 
-// GetLimitsResponse struct for GetLimitsResponse
+// GetLimitsResponse Response containing the events-to-metrics quota limits.
 type GetLimitsResponse struct {
+	// The company id.
 	CompanyId *string `json:"companyId,omitempty"`
+	// The labels limit.
 	LabelsLimit *int32 `json:"labelsLimit,omitempty"`
 	MetricsLimit *LimitUsage `json:"metricsLimit,omitempty"`
 	PermutationsLimit *LimitUsage `json:"permutationsLimit,omitempty"`

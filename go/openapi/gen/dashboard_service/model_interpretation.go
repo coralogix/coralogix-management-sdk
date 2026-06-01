@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Interpretation the model 'Interpretation'
+// Interpretation Interpretation.
 type Interpretation string
 
 // List of Interpretation

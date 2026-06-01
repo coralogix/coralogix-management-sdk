@@ -24,7 +24,9 @@ var _ MappedNullable = &PieChartMetricsQuery{}
 type PieChartMetricsQuery struct {
 	Aggregation *CommonAggregation `json:"aggregation,omitempty"`
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
+	// List of field names by which metric results are grouped
 	GroupNames []string `json:"groupNames,omitempty"`
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`

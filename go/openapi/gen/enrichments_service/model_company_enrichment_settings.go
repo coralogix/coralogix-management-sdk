@@ -20,13 +20,19 @@ var _ = bytes.MinRead
 // checks if the CompanyEnrichmentSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CompanyEnrichmentSettings{}
 
-// CompanyEnrichmentSettings struct for CompanyEnrichmentSettings
+// CompanyEnrichmentSettings Company enrichment settings.
 type CompanyEnrichmentSettings struct {
+	// The enrichment amount limit.
 	EnrichmentAmountLimit *int64 `json:"enrichmentAmountLimit,omitempty"`
+	// The enrichments in use.
 	EnrichmentsInUse *int64 `json:"enrichmentsInUse,omitempty"`
+	// The query only row limit.
 	QueryOnlyRowLimit *int64 `json:"queryOnlyRowLimit,omitempty"`
+	// The query only size limit bytes.
 	QueryOnlySizeLimitBytes *string `json:"queryOnlySizeLimitBytes,omitempty"`
+	// The row limit.
 	RowLimit *int64 `json:"rowLimit,omitempty"`
+	// The size limit bytes.
 	SizeLimitBytes *string `json:"sizeLimitBytes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

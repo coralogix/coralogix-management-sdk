@@ -23,6 +23,7 @@ var _ MappedNullable = &DeleteE2MRequest{}
 
 // DeleteE2MRequest This data structure is used to delete an existing event to metric definition
 type DeleteE2MRequest struct {
+	// Unique identifier.
 	Id string `json:"id"`
 	AdditionalProperties map[string]interface{}
 }

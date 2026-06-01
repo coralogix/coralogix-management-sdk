@@ -11,7 +11,7 @@
           "Connectors service"
         ],
         "summary": "List Connectors",
-        "description": "No description available",
+        "description": "Returns notification connectors with optional pagination.",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "query",
             "name": "connector_type",
+            "description": "Filter connectors by their type.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
@@ -28,6 +29,7 @@
           {
             "in": "query",
             "name": "supported_by_entity_type",
+            "description": "Filter connectors by the entity type they support.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.EntityType"
             },
@@ -52,7 +54,7 @@
           "Connectors service"
         ],
         "summary": "Replace a Connector",
-        "description": "No description available",
+        "description": "Updates an existing notification connector.",
         "externalDocs": {
           "url": ""
         },
@@ -91,7 +93,7 @@
           "Connectors service"
         ],
         "summary": "Create a Connector",
-        "description": "No description available",
+        "description": "Creates a new notification connector.",
         "externalDocs": {
           "url": ""
         },
@@ -132,7 +134,7 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors",
-        "description": "No description available",
+        "description": "Returns all notification connectors for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -141,13 +143,16 @@
           {
             "in": "query",
             "name": "connector_ids",
+            "description": "The unique identifiers of the connectors to retrieve.",
             "schema": {
               "example": [
                 "connector-id-1",
                 "connector-id-2"
               ],
+              "description": "The unique identifiers of the connectors to retrieve.",
               "type": "array",
               "items": {
+                "description": "The unique identifiers of the connectors to retrieve.",
                 "type": "string"
               }
             },
@@ -174,7 +179,7 @@
           "Connectors service"
         ],
         "summary": "Batch Get Connectors Summaries",
-        "description": "No description available",
+        "description": "Returns summary information for all notification connectors.",
         "externalDocs": {
           "url": ""
         },
@@ -183,10 +188,13 @@
           {
             "in": "query",
             "name": "connector_ids",
+            "description": "The unique identifiers of the connectors whose summaries to retrieve.",
             "schema": {
+              "description": "The unique identifiers of the connectors whose summaries to retrieve.",
               "type": "array",
               "items": {
                 "example": "",
+                "description": "The unique identifiers of the connectors whose summaries to retrieve.",
                 "type": "string"
               }
             },
@@ -213,7 +221,7 @@
           "Connectors service"
         ],
         "summary": "List Connector Summaries",
-        "description": "No description available",
+        "description": "Returns a paginated list of notification connector summaries.",
         "externalDocs": {
           "url": ""
         },
@@ -222,6 +230,7 @@
           {
             "in": "query",
             "name": "connector_type",
+            "description": "Filter connector summaries by their type.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
@@ -230,6 +239,7 @@
           {
             "in": "query",
             "name": "supported_by_entity_type",
+            "description": "Filter connector summaries by the entity type they support.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.EntityType"
             },
@@ -256,7 +266,7 @@
           "Connectors service"
         ],
         "summary": "Get Connector Type Summaries",
-        "description": "No description available",
+        "description": "Returns summary information for all available connector types.",
         "externalDocs": {
           "url": ""
         },
@@ -265,6 +275,7 @@
           {
             "in": "query",
             "name": "supported_by_entity_type",
+            "description": "Filter connector types by the entity type they support.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.EntityType"
             },
@@ -291,7 +302,7 @@
           "Connectors service"
         ],
         "summary": "Get a Connector",
-        "description": "No description available",
+        "description": "Returns the details of the specified notification connector.",
         "externalDocs": {
           "url": ""
         },
@@ -300,8 +311,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The unique identifier of the connector.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the connector.",
               "type": "string"
             },
             "style": "simple"
@@ -325,7 +338,7 @@
           "Connectors service"
         ],
         "summary": "Delete a Connector",
-        "description": "No description available",
+        "description": "Deletes the notification connector with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -334,8 +347,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -368,6 +383,7 @@
         "type": "object",
         "properties": {
           "connectorSummaries": {
+            "description": "The connector summaries.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ConnectorSummary"
@@ -377,8 +393,10 @@
             "example": [
               "connector-id-3"
             ],
+            "description": "The not found ids.",
             "type": "array",
             "items": {
+              "description": "The not found ids.",
               "type": "string"
             }
           }
@@ -394,6 +412,7 @@
         "type": "object",
         "properties": {
           "connectors": {
+            "description": "The connectors.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/Connector"
@@ -403,8 +422,10 @@
             "example": [
               "connector-id-3"
             ],
+            "description": "The not found ids.",
             "type": "array",
             "items": {
+              "description": "The not found ids.",
               "type": "string"
             }
           }
@@ -420,6 +441,7 @@
         "type": "object",
         "properties": {
           "configOverrides": {
+            "description": "The config overrides.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
@@ -429,11 +451,13 @@
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "createTime": {
+            "description": "The create time.",
             "type": "string",
             "format": "date-time"
           },
           "description": {
             "example": "Connector for team notifications",
+            "description": "Human-readable description.",
             "type": "string",
             "maxLength": 5000
           },
@@ -442,15 +466,18 @@
           },
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "My Slack Connector",
+            "description": "Display name.",
             "type": "string",
             "maxLength": 200
           },
           "teamId": {
             "example": 12345,
+            "description": "Team identifier.",
             "type": "integer",
             "format": "int64"
           },
@@ -458,6 +485,7 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
             "type": "string",
             "format": "date-time"
           }
@@ -473,6 +501,7 @@
         "type": "object",
         "properties": {
           "fields": {
+            "description": "List of fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
@@ -484,6 +513,7 @@
         "type": "object",
         "properties": {
           "configOverrides": {
+            "description": "The config overrides.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
@@ -493,19 +523,24 @@
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "createTime": {
+            "description": "The create time.",
             "type": "string",
             "format": "date-time"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "teamId": {
+            "description": "The team id.",
             "type": "integer",
             "format": "int64"
           },
@@ -513,6 +548,7 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
             "type": "string",
             "format": "date-time"
           }
@@ -529,6 +565,7 @@
         "properties": {
           "count": {
             "example": 5,
+            "description": "Number of items.",
             "type": "integer",
             "format": "int64"
           },
@@ -552,9 +589,15 @@
         }
       },
       "DeleteConnectorResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a notification connector.",
+        "type": "object",
+        "additionalProperties": false
       },
       "Delivery": {
+        "description": "Delivery.",
         "type": "string",
         "enum": [
           "DELIVERY_UNSPECIFIED",
@@ -583,6 +626,7 @@
             "$ref": "#/components/schemas/notification_center.EntityType"
           },
           "fields": {
+            "description": "List of fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TemplatedConnectorConfigField"
@@ -593,10 +637,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -690,6 +734,7 @@
         "type": "object",
         "properties": {
           "connectorTypeSummaries": {
+            "description": "The connector type summaries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorTypeSummary"
@@ -707,6 +752,7 @@
         "type": "object",
         "properties": {
           "connectors": {
+            "description": "The connectors.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorSummary"
@@ -724,6 +770,7 @@
         "type": "object",
         "properties": {
           "connectors": {
+            "description": "The connectors.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Connector"
@@ -763,9 +810,11 @@
         "type": "object",
         "properties": {
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "template": {
+            "description": "Template.",
             "type": "string"
           }
         }
@@ -781,14 +830,17 @@
         "type": "object",
         "properties": {
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "value": {
+            "description": "The value.",
             "type": "string"
           }
         }
       },
       "notification_center.ConnectorType": {
+        "description": "Connector type.",
         "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
@@ -797,10 +849,12 @@
           "PAGERDUTY",
           "IBM_EVENT_NOTIFICATIONS",
           "SERVICE_NOW",
-          "EMAIL"
+          "EMAIL",
+          "PAGERDUTY_INCIDENTS"
         ]
       },
       "notification_center.EntityType": {
+        "description": "Entity type.",
         "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
@@ -810,6 +864,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

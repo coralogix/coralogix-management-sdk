@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V3AutoRetireTimeframe the model 'V3AutoRetireTimeframe'
+// V3AutoRetireTimeframe Auto retire timeframe.
 type V3AutoRetireTimeframe string
 
 // List of v3.AutoRetireTimeframe

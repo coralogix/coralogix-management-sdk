@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SloType the model 'SloType'
+// SloType Slo type.
 type SloType string
 
 // List of SloType

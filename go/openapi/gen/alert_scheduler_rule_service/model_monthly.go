@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Monthly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Monthly{}
 
-// Monthly struct for Monthly
+// Monthly Monthly.
 type Monthly struct {
+	// The days of month.
 	DaysOfMonth []int32 `json:"daysOfMonth,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

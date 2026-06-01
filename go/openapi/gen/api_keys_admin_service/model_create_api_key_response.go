@@ -22,8 +22,11 @@ var _ MappedNullable = &CreateApiKeyResponse{}
 
 // CreateApiKeyResponse This data structure is the response obtained when creating an API key.
 type CreateApiKeyResponse struct {
+	// Key identifier.
 	KeyId *string `json:"keyId,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

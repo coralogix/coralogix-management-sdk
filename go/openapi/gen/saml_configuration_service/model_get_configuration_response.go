@@ -25,6 +25,7 @@ type GetConfigurationResponse struct {
 	IdpDetails *IDPDetails `json:"idpDetails,omitempty"`
 	IdpParameters *IDPParameters `json:"idpParameters,omitempty"`
 	SpParameters *SPParameters `json:"spParameters,omitempty"`
+	// The team id.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

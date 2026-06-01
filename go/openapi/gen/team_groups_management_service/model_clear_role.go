@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ClearRole type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClearRole{}
 
-// ClearRole struct for ClearRole
+// ClearRole Clear role.
 type ClearRole struct {
+	// The clear.
 	Clear *bool `json:"clear,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -33,21 +33,25 @@ type ApiEventsServiceBatchGetEventRequest struct {
 	filter *EventsServiceBatchGetEventFilterParameter
 }
 
+// The ids.
 func (r ApiEventsServiceBatchGetEventRequest) Ids(ids []string) ApiEventsServiceBatchGetEventRequest {
 	r.ids = &ids
 	return r
 }
 
+// Ordering criteria for the returned events.
 func (r ApiEventsServiceBatchGetEventRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceBatchGetEventRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
+// Pagination parameters for the response.
 func (r ApiEventsServiceBatchGetEventRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceBatchGetEventRequest {
 	r.pagination = &pagination
 	return r
 }
 
+// Optional filter to narrow the set of returned events.
 func (r ApiEventsServiceBatchGetEventRequest) Filter(filter EventsServiceBatchGetEventFilterParameter) ApiEventsServiceBatchGetEventRequest {
 	r.filter = &filter
 	return r
@@ -60,7 +64,7 @@ func (r ApiEventsServiceBatchGetEventRequest) Execute() (*BatchGetEventResponse,
 /*
 EventsServiceBatchGetEvent Batch Get Event
 
-No description available
+Returns a list of alert events matching the given filters.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceBatchGetEventRequest
@@ -183,11 +187,13 @@ type ApiEventsServiceGetEventRequest struct {
 	pagination *EventsServiceListAlertEventsPaginationParameter
 }
 
+// The order bys.
 func (r ApiEventsServiceGetEventRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceGetEventRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
+// Pagination parameters for the response.
 func (r ApiEventsServiceGetEventRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceGetEventRequest {
 	r.pagination = &pagination
 	return r
@@ -200,10 +206,10 @@ func (r ApiEventsServiceGetEventRequest) Execute() (*V3GetEventResponse, *http.R
 /*
 EventsServiceGetEvent Get Event
 
-No description available
+Returns the alert event with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier of the alert event to retrieve.
  @return ApiEventsServiceGetEventRequest
 */
 func (a *EventsServiceAPIService) EventsServiceGetEvent(ctx context.Context, id string) ApiEventsServiceGetEventRequest {
@@ -310,6 +316,7 @@ type ApiEventsServiceGetEventsStatisticsRequest struct {
 	filter *EventsFilter
 }
 
+// Filter criteria for events.
 func (r ApiEventsServiceGetEventsStatisticsRequest) Filter(filter EventsFilter) ApiEventsServiceGetEventsStatisticsRequest {
 	r.filter = &filter
 	return r
@@ -322,7 +329,7 @@ func (r ApiEventsServiceGetEventsStatisticsRequest) Execute() (*GetEventsStatist
 /*
 EventsServiceGetEventsStatistics Get Events Statistics
 
-No description available
+Returns statistical aggregates for alert events.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceGetEventsStatisticsRequest
@@ -422,26 +429,31 @@ type ApiEventsServiceListAlertEventsRequest struct {
 	pagination *EventsServiceListAlertEventsPaginationParameter
 }
 
+// Alert version IDs to filter events by
 func (r ApiEventsServiceListAlertEventsRequest) AlertIds(alertIds []string) ApiEventsServiceListAlertEventsRequest {
 	r.alertIds = &alertIds
 	return r
 }
 
+// Time range to search for events
 func (r ApiEventsServiceListAlertEventsRequest) TimestampRange(timestampRange TimestampRange) ApiEventsServiceListAlertEventsRequest {
 	r.timestampRange = &timestampRange
 	return r
 }
 
+// Optional event labels to filter by (e.g., app, subsystem, region)
 func (r ApiEventsServiceListAlertEventsRequest) CxEventLabels(cxEventLabels map[string]string) ApiEventsServiceListAlertEventsRequest {
 	r.cxEventLabels = &cxEventLabels
 	return r
 }
 
+// Ordering criteria for the returned events.
 func (r ApiEventsServiceListAlertEventsRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceListAlertEventsRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
+// Pagination parameters for the response.
 func (r ApiEventsServiceListAlertEventsRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceListAlertEventsRequest {
 	r.pagination = &pagination
 	return r
@@ -454,7 +466,7 @@ func (r ApiEventsServiceListAlertEventsRequest) Execute() (*ListAlertEventsRespo
 /*
 EventsServiceListAlertEvents List Alert Events
 
-No description available
+Returns all alert events.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListAlertEventsRequest
@@ -580,16 +592,19 @@ type ApiEventsServiceListEventsRequest struct {
 	pagination *EventsServiceListAlertEventsPaginationParameter
 }
 
+// Filter criteria for events.
 func (r ApiEventsServiceListEventsRequest) Filter(filter EventsFilter) ApiEventsServiceListEventsRequest {
 	r.filter = &filter
 	return r
 }
 
+// Ordering criteria for the returned events.
 func (r ApiEventsServiceListEventsRequest) OrderBys(orderBys []EventsServiceListAlertEventsOrderBysParameterInner) ApiEventsServiceListEventsRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
+// Pagination parameters for the response.
 func (r ApiEventsServiceListEventsRequest) Pagination(pagination EventsServiceListAlertEventsPaginationParameter) ApiEventsServiceListEventsRequest {
 	r.pagination = &pagination
 	return r
@@ -602,7 +617,7 @@ func (r ApiEventsServiceListEventsRequest) Execute() (*V3ListEventsResponse, *ht
 /*
 EventsServiceListEvents List Events
 
-No description available
+Returns a list of alert events matching the specified filters.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListEventsRequest
@@ -712,6 +727,7 @@ type ApiEventsServiceListEventsCountRequest struct {
 	filter *EventsFilter
 }
 
+// Filter criteria for events.
 func (r ApiEventsServiceListEventsCountRequest) Filter(filter EventsFilter) ApiEventsServiceListEventsCountRequest {
 	r.filter = &filter
 	return r
@@ -724,7 +740,7 @@ func (r ApiEventsServiceListEventsCountRequest) Execute() (*ListEventsCountRespo
 /*
 EventsServiceListEventsCount List Events Count
 
-No description available
+Returns the count of alert events matching the given filters.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEventsServiceListEventsCountRequest

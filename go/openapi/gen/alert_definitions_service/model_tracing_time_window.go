@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TracingTimeWindow type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingTimeWindow{}
 
-// TracingTimeWindow struct for TracingTimeWindow
+// TracingTimeWindow Tracing time window.
 type TracingTimeWindow struct {
 	TracingTimeWindowValue *TracingTimeWindowValue `json:"tracingTimeWindowValue,omitempty"`
 	AdditionalProperties map[string]interface{}

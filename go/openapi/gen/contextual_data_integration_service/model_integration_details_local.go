@@ -24,7 +24,9 @@ var _ MappedNullable = &IntegrationDetailsLocal{}
 // IntegrationDetailsLocal This data structure represents a set of integration details.
 type IntegrationDetailsLocal struct {
 	Default *DefaultIntegrationDetails `json:"default,omitempty"`
+	// Documentation links associated with this integration.
 	Docs []IntegrationDoc `json:"docs,omitempty"`
+	// Extensions bundled with this integration for pre-built dashboards and alerts.
 	Extensions []V1Extension `json:"extensions,omitempty"`
 	Integration *Integration `json:"integration,omitempty"`
 	Local LocalChangelog `json:"local"`

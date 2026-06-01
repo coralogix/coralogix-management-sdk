@@ -23,8 +23,11 @@ var _ MappedNullable = &BarChartLogsQuery{}
 // BarChartLogsQuery A logs variant of the query
 type BarChartLogsQuery struct {
 	Aggregation *LogsAggregation `json:"aggregation,omitempty"`
+	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
+	// List of field names to group the query results
 	GroupNames []string `json:"groupNames,omitempty"`
+	// List of observation fields to group the results
 	GroupNamesFields []ObservationField `json:"groupNamesFields,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	// Field name by which results are stacked in individual group

@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the IntegrationGuide type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationGuide{}
 
-// IntegrationGuide struct for IntegrationGuide
+// IntegrationGuide Integration guide.
 type IntegrationGuide struct {
+	// The installation requirements.
 	InstallationRequirements *string `json:"installationRequirements,omitempty"`
+	// The introduction.
 	Introduction *string `json:"introduction,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

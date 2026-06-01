@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListManagedIntegrationKeysResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListManagedIntegrationKeysResponse{}
 
-// ListManagedIntegrationKeysResponse struct for ListManagedIntegrationKeysResponse
+// ListManagedIntegrationKeysResponse Response containing a list of managed integration keys.
 type ListManagedIntegrationKeysResponse struct {
+	// The integration keys.
 	IntegrationKeys []string `json:"integrationKeys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

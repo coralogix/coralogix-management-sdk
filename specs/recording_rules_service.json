@@ -11,7 +11,7 @@
           "Recording Rules Service"
         ],
         "summary": "List Recording Rules",
-        "description": "No description available",
+        "description": "Returns all recording rule groups for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +52,7 @@
           "Recording Rules Service"
         ],
         "summary": "Create Recording Rules",
-        "description": "No description available",
+        "description": "Creates a new recording rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -66,12 +66,14 @@
                 "type": "object",
                 "properties": {
                   "groups": {
+                    "description": "List of groups.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     }
                   },
                   "name": {
+                    "description": "Display name.",
                     "type": "string"
                   }
                 }
@@ -117,7 +119,7 @@
           "Recording Rules Service"
         ],
         "summary": "Get Recording Rules",
-        "description": "No description available",
+        "description": "Returns the details of the specified recording rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -126,8 +128,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -169,7 +173,7 @@
           "Recording Rules Service"
         ],
         "summary": "Update Recording Rules",
-        "description": "No description available",
+        "description": "Updates the specified recording rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -178,8 +182,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -194,12 +200,14 @@
                 "type": "object",
                 "properties": {
                   "groups": {
+                    "description": "List of groups.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     }
                   },
                   "name": {
+                    "description": "Display name.",
                     "type": "string"
                   }
                 }
@@ -243,7 +251,7 @@
           "Recording Rules Service"
         ],
         "summary": "Delete Recording Rules",
-        "description": "No description available",
+        "description": "Deletes the recording rule group with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -252,8 +260,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -304,6 +314,7 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           }
         }
@@ -311,10 +322,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -400,15 +411,18 @@
             "format": "int64"
           },
           "expr": {
+            "description": "The expr.",
             "type": "string"
           },
           "labels": {
+            "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "record": {
+            "description": "Record.",
             "type": "string"
           }
         }
@@ -423,27 +437,33 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "interval": {
+            "description": "Interval.",
             "type": "integer",
             "format": "int64"
           },
           "limit": {
             "example": "",
+            "description": "Limit.",
             "type": "string",
             "format": "int64"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InRule"
             }
           },
           "version": {
+            "description": "Version number.",
             "type": "integer",
             "format": "int64"
           }
@@ -467,13 +487,16 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
+            "description": "The evaluation delay ms.",
             "type": "integer",
             "format": "int64"
           },
           "expr": {
+            "description": "The expr.",
             "type": "string"
           },
           "labels": {
+            "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -481,10 +504,12 @@
           },
           "lastEvalDurationMs": {
             "example": "",
+            "description": "The last eval duration ms.",
             "type": "string",
             "format": "int64"
           },
           "record": {
+            "description": "Record.",
             "type": "string"
           }
         }
@@ -493,32 +518,39 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "interval": {
+            "description": "Interval.",
             "type": "integer",
             "format": "int64"
           },
           "lastEvalAt": {
             "example": "",
+            "description": "The last eval at.",
             "type": "string",
             "format": "int64"
           },
           "limit": {
             "example": "",
+            "description": "Limit.",
             "type": "string",
             "format": "int64"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRule"
             }
           },
           "version": {
+            "description": "Version number.",
             "type": "integer",
             "format": "int64"
           }
@@ -534,15 +566,18 @@
         "type": "object",
         "properties": {
           "groups": {
+            "description": "List of groups.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRuleGroup"
             }
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           }
         }
@@ -557,6 +592,7 @@
         "type": "object",
         "properties": {
           "sets": {
+            "description": "The sets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRuleGroupSet"
@@ -572,6 +608,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

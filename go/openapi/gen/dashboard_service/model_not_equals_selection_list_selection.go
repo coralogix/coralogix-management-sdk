@@ -22,6 +22,7 @@ var _ MappedNullable = &NotEqualsSelectionListSelection{}
 
 // NotEqualsSelectionListSelection This data structure represents a selection from a list of specific values.
 type NotEqualsSelectionListSelection struct {
+	// A list of values for the selection.
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

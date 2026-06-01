@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// OriginatorType the model 'OriginatorType'
+// OriginatorType Originator type.
 type OriginatorType string
 
 // List of OriginatorType

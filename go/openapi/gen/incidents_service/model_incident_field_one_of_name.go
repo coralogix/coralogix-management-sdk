@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the IncidentFieldOneOfName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfName{}
 
-// IncidentFieldOneOfName struct for IncidentFieldOneOfName
+// IncidentFieldOneOfName Incident field one of.
 type IncidentFieldOneOfName struct {
+	// Display name of the incident.
 	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }

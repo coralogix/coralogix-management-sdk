@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableSourceV2Query type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2Query{}
 
-// VariableSourceV2Query struct for VariableSourceV2Query
+// VariableSourceV2Query Variable source v2.
 type VariableSourceV2Query struct {
 	Query VariableSourceV2QuerySource `json:"query"`
 	AdditionalProperties map[string]interface{}

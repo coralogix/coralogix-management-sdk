@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ColorsByStackVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ColorsByStackVariant{}
 
-// ColorsByStackVariant struct for ColorsByStackVariant
+// ColorsByStackVariant Defines the coloring strategy applied to widget data series.
 type ColorsByStackVariant struct {
+	// Colors by stack.
 	Stack map[string]interface{} `json:"stack"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,12 +22,18 @@ var _ MappedNullable = &ConnectorConfigSchemaField{}
 
 // ConnectorConfigSchemaField struct for ConnectorConfigSchemaField
 type ConnectorConfigSchemaField struct {
+	// The allow overrides.
 	AllowOverrides *bool `json:"allowOverrides,omitempty"`
+	// The allowed values.
 	AllowedValues []string `json:"allowedValues,omitempty"`
+	// The default.
 	Default *string `json:"default,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
 	FieldType *FieldType `json:"fieldType,omitempty"`
+	// The required.
 	Required *bool `json:"required,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

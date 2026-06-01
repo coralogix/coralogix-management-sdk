@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ClearScope type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ClearScope{}
 
-// ClearScope struct for ClearScope
+// ClearScope Clear scope.
 type ClearScope struct {
+	// The clear.
 	Clear *bool `json:"clear,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

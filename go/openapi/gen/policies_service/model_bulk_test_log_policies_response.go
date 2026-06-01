@@ -23,6 +23,7 @@ var _ MappedNullable = &BulkTestLogPoliciesResponse{}
 
 // BulkTestLogPoliciesResponse Response to test multiple log policies.
 type BulkTestLogPoliciesResponse struct {
+	// The test policies bulk result.
 	TestPoliciesBulkResult []TestPoliciesResult `json:"testPoliciesBulkResult"`
 	AdditionalProperties map[string]interface{}
 }

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertDefType the model 'AlertDefType'
+// AlertDefType Alert def type.
 type AlertDefType string
 
 // List of AlertDefType

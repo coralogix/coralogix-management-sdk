@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the CustomEnrichmentType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichmentType{}
 
-// CustomEnrichmentType struct for CustomEnrichmentType
+// CustomEnrichmentType Custom enrichment type.
 type CustomEnrichmentType struct {
+	// Unique identifier.
 	Id *int64 `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

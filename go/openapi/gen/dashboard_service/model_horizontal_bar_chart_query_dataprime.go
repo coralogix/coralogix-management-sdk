@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the HorizontalBarChartQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartQueryDataprime{}
 
-// HorizontalBarChartQueryDataprime struct for HorizontalBarChartQueryDataprime
+// HorizontalBarChartQueryDataprime Query.
 type HorizontalBarChartQueryDataprime struct {
 	Dataprime HorizontalBarChartDataprimeQuery `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

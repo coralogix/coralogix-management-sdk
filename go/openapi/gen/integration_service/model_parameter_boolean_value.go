@@ -23,7 +23,9 @@ var _ MappedNullable = &ParameterBooleanValue{}
 
 // ParameterBooleanValue struct for ParameterBooleanValue
 type ParameterBooleanValue struct {
+	// Boolean value for this integration parameter.
 	BooleanValue bool `json:"booleanValue"`
+	// The key.
 	Key *string `json:"key,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

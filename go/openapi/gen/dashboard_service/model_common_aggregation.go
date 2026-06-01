@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// CommonAggregation the model 'CommonAggregation'
+// CommonAggregation Aggregation.
 type CommonAggregation string
 
 // List of common.Aggregation

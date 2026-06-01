@@ -20,17 +20,23 @@ var _ = bytes.MinRead
 // checks if the IncidentEventExtendedMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventExtendedMetadata{}
 
-// IncidentEventExtendedMetadata struct for IncidentEventExtendedMetadata
+// IncidentEventExtendedMetadata Incident event extended metadata.
 type IncidentEventExtendedMetadata struct {
+	// The alert group by fields.
 	AlertGroupByFields []string `json:"alertGroupByFields,omitempty"`
+	// Unique identifier of the alert.
 	AlertId *string `json:"alertId,omitempty"`
+	// The alert labels.
 	AlertLabels []IncidentsV1MetaLabel `json:"alertLabels,omitempty"`
+	// The alert name.
 	AlertName *string `json:"alertName,omitempty"`
 	AlertType *IncidentEventAlertType `json:"alertType,omitempty"`
+	// The incident permutation.
 	IncidentPermutation *map[string]string `json:"incidentPermutation,omitempty"`
 	IncidentSeverity *IncidentSeverity `json:"incidentSeverity,omitempty"`
 	IncidentState *IncidentState `json:"incidentState,omitempty"`
 	IncidentStatus *IncidentStatus `json:"incidentStatus,omitempty"`
+	// The is muted.
 	IsMuted *bool `json:"isMuted,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

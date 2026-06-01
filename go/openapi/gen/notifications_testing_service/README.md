@@ -78,13 +78,13 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*NotificationsTestingServiceAPI* | [**TestingServiceTestConnectorConfig**](docs/NotificationsTestingServiceAPI.md#testingservicetestconnectorconfig) | **Post** /notifications/notification-center/v1/connectors/tests/config | Test Connector Config
-*NotificationsTestingServiceAPI* | [**TestingServiceTestDestination**](docs/NotificationsTestingServiceAPI.md#testingservicetestdestination) | **Post** /notifications/notification-center/v1/destinations/tests | Test Destination
-*NotificationsTestingServiceAPI* | [**TestingServiceTestExistingConnector**](docs/NotificationsTestingServiceAPI.md#testingservicetestexistingconnector) | **Post** /notifications/notification-center/v1/notifications/tests | Test Existing Connector
-*NotificationsTestingServiceAPI* | [**TestingServiceTestExistingPreset**](docs/NotificationsTestingServiceAPI.md#testingservicetestexistingpreset) | **Post** /notifications/notification-center/v1/presets/tests | Test Existing Preset
-*NotificationsTestingServiceAPI* | [**TestingServiceTestPresetConfig**](docs/NotificationsTestingServiceAPI.md#testingservicetestpresetconfig) | **Post** /notifications/notification-center/v1/presets/tests/config | Test Preset Config
-*NotificationsTestingServiceAPI* | [**TestingServiceTestRoutingConditionValid**](docs/NotificationsTestingServiceAPI.md#testingservicetestroutingconditionvalid) | **Post** /notifications/notification-center/v1/routing-conditions/tests | Test Routing Condition Valid
-*NotificationsTestingServiceAPI* | [**TestingServiceTestTemplateRender**](docs/NotificationsTestingServiceAPI.md#testingservicetesttemplaterender) | **Post** /notifications/notification-center/v1/template-render/tests | Test Template Render
+*NotificationsTestingServiceAPI* | [**TestingServiceTestConnectorConfig**](docs/NotificationsTestingServiceAPI.md#testingservicetestconnectorconfig) | **Post** /notifications/notification-center/v1/connectors:testConfig | Test Connector Config
+*NotificationsTestingServiceAPI* | [**TestingServiceTestDestination**](docs/NotificationsTestingServiceAPI.md#testingservicetestdestination) | **Post** /notifications/notification-center/v1/destinations:test | Test Destination
+*NotificationsTestingServiceAPI* | [**TestingServiceTestExistingConnector**](docs/NotificationsTestingServiceAPI.md#testingservicetestexistingconnector) | **Post** /notifications/notification-center/v1/connectors:test | Test Existing Connector
+*NotificationsTestingServiceAPI* | [**TestingServiceTestExistingPreset**](docs/NotificationsTestingServiceAPI.md#testingservicetestexistingpreset) | **Post** /notifications/notification-center/v1/presets:test | Test Existing Preset
+*NotificationsTestingServiceAPI* | [**TestingServiceTestPresetConfig**](docs/NotificationsTestingServiceAPI.md#testingservicetestpresetconfig) | **Post** /notifications/notification-center/v1/presets:testConfig | Test Preset Config
+*NotificationsTestingServiceAPI* | [**TestingServiceTestRoutingConditionValid**](docs/NotificationsTestingServiceAPI.md#testingservicetestroutingconditionvalid) | **Post** /notifications/notification-center/v1/routers:testCondition | Test Routing Condition Valid
+*NotificationsTestingServiceAPI* | [**TestingServiceTestTemplateRender**](docs/NotificationsTestingServiceAPI.md#testingservicetesttemplaterender) | **Post** /notifications/notification-center/v1/templates:test | Test Template Render
 
 
 ## Documentation For Models

@@ -23,7 +23,9 @@ var _ MappedNullable = &V2DateRange{}
 
 // V2DateRange This data structure represents a date range.
 type V2DateRange struct {
+	// The from date.
 	FromDate *time.Time `json:"fromDate,omitempty"`
+	// The to date.
 	ToDate *time.Time `json:"toDate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

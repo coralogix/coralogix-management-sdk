@@ -20,10 +20,11 @@ var _ = bytes.MinRead
 // checks if the WidgetsDynamic type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsDynamic{}
 
-// WidgetsDynamic struct for WidgetsDynamic
+// WidgetsDynamic Dynamic.
 type WidgetsDynamic struct {
 	Interpretation *Interpretation `json:"interpretation,omitempty"`
 	Query *DynamicQuery `json:"query,omitempty"`
+	// Definitions of widget queries
 	QueryDefinitions []DynamicQueryDefinition `json:"queryDefinitions,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	Visualization *Visualization `json:"visualization,omitempty"`

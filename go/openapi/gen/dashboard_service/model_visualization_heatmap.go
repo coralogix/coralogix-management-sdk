@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationHeatmap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationHeatmap{}
 
-// VisualizationHeatmap struct for VisualizationHeatmap
+// VisualizationHeatmap Visualization.
 type VisualizationHeatmap struct {
 	Heatmap Heatmap `json:"heatmap"`
 	AdditionalProperties map[string]interface{}

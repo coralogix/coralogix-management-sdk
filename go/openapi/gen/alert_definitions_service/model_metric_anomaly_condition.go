@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the MetricAnomalyCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricAnomalyCondition{}
 
-// MetricAnomalyCondition struct for MetricAnomalyCondition
+// MetricAnomalyCondition Metric anomaly condition.
 type MetricAnomalyCondition struct {
 	ConditionType *MetricAnomalyConditionType `json:"conditionType,omitempty"`
 	// The percentage of the metric that must exceed the threshold to trigger the alert

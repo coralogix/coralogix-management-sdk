@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the AllOption type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AllOption{}
 
-// AllOption struct for AllOption
+// AllOption All option.
 type AllOption struct {
+	// The include all.
 	IncludeAll *bool `json:"includeAll,omitempty"`
+	// The label.
 	Label *string `json:"label,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

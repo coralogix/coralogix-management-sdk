@@ -20,13 +20,14 @@ var _ = bytes.MinRead
 // checks if the PropertyThresholds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyThresholds{}
 
-// PropertyThresholds struct for PropertyThresholds
+// PropertyThresholds Property thresholds.
 type PropertyThresholds struct {
 	// A maximum value used in relative thresholds to calculate the threshold levels
 	Max *float64 `json:"max,omitempty"`
 	// A minimum value used in relative thresholds to calculate the threshold levels
 	Min *float64 `json:"min,omitempty"`
 	Type *ThresholdType `json:"type,omitempty"`
+	// List of thresholds
 	Values []CommonThreshold `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

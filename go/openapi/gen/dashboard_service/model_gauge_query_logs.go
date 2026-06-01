@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GaugeQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQueryLogs{}
 
-// GaugeQueryLogs struct for GaugeQueryLogs
+// GaugeQueryLogs Discriminated union of possible query types for the gauge widget.
 type GaugeQueryLogs struct {
 	Logs GaugeLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

@@ -22,8 +22,11 @@ var _ MappedNullable = &GetTeamGroupsResponse{}
 
 // GetTeamGroupsResponse Response containing a paginated list of team groups.
 type GetTeamGroupsResponse struct {
+	// List of groups.
 	Groups []TeamGroup `json:"groups,omitempty"`
+	// Token for fetching the next page of results.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
+	// The total count.
 	TotalCount *int64 `json:"totalCount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

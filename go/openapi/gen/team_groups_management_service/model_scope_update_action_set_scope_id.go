@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ScopeUpdateActionSetScopeId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ScopeUpdateActionSetScopeId{}
 
-// ScopeUpdateActionSetScopeId struct for ScopeUpdateActionSetScopeId
+// ScopeUpdateActionSetScopeId Set scope id.
 type ScopeUpdateActionSetScopeId struct {
+	// Discriminator indicating the scope update action type (set_scope_id or clear).
 	ActionType string `json:"actionType"`
 	SetScopeId SetScopeId `json:"setScopeId"`
 	AdditionalProperties map[string]interface{}

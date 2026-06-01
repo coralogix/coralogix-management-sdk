@@ -20,10 +20,11 @@ var _ = bytes.MinRead
 // checks if the SpanRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanRules{}
 
-// SpanRules struct for SpanRules
+// SpanRules Span rules.
 type SpanRules struct {
 	ActionRule *QuotaV1Rule `json:"actionRule,omitempty"`
 	ServiceRule *QuotaV1Rule `json:"serviceRule,omitempty"`
+	// The tag rules.
 	TagRules []TagRule `json:"tagRules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

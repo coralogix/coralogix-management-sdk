@@ -40,7 +40,10 @@ func (r ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest) Exe
 /*
 QuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSet Create quota allocation rule set
 
-No description available
+Creates new quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Manage`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceCreateQuotaAllocationRuleSetRequest
@@ -72,6 +75,9 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createQuotaAllocationRuleSetRequest == nil {
+		return localVarReturnValue, nil, reportError("createQuotaAllocationRuleSetRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -141,7 +147,10 @@ func (r ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest) Exe
 /*
 QuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSet Delete quota allocation rule set
 
-No description available
+Deletes the quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Manage`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceDeleteQuotaAllocationRuleSetRequest
@@ -234,6 +243,7 @@ type ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest struct {
 	id *string
 }
 
+// Unique identifier.
 func (r ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest) Id(id string) ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest {
 	r.id = &id
 	return r
@@ -246,7 +256,10 @@ func (r ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest) Execut
 /*
 QuotaAllocationRuleSetServiceGetQuotaAllocationRuleSet Get quota allocation rule set
 
-No description available
+Returns the current quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceGetQuotaAllocationRuleSetRequest
@@ -354,7 +367,10 @@ func (r ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest) Ex
 /*
 QuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSet Replace quota allocation rule set
 
-No description available
+Updates the quota allocation rules.
+
+Requires the following permissions:
+- `team-quota-rules:Manage`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiQuotaAllocationRuleSetServiceReplaceQuotaAllocationRuleSetRequest
@@ -386,6 +402,9 @@ func (a *QuotaAllocationRuleSetServiceAPIService) QuotaAllocationRuleSetServiceR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.replaceQuotaAllocationRuleSetRequest == nil {
+		return localVarReturnValue, nil, reportError("replaceQuotaAllocationRuleSetRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

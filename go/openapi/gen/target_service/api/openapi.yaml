@@ -7,7 +7,7 @@ servers:
 paths:
   /logs/data-setup/v2:
     get:
-      description: No description available
+      description: Returns the current log archive target configuration.
       externalDocs:
         url: ""
       operationId: S3TargetService_GetTarget
@@ -34,7 +34,7 @@ paths:
       tags:
       - Target Service
     post:
-      description: No description available
+      description: Sets the log archive target configuration.
       externalDocs:
         url: ""
       operationId: S3TargetService_SetTarget
@@ -43,6 +43,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Set_Target_Response"
+        required: true
       responses:
         "200":
           content:
@@ -80,14 +81,17 @@ components:
       properties:
         archivingFormatId:
           deprecated: true
+          description: The archiving format ID.
           example: json_id
           type: string
         enableTags:
+          description: The enable tags.
           example: true
           type: boolean
         format:
           $ref: "#/components/schemas/TargetFormat"
         isActive:
+          description: The archiving format id.
           example: true
           type: boolean
       required:
@@ -96,8 +100,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -147,19 +151,27 @@ components:
       type: object
     IBMCosTargetSpec:
       description: This data structure represents an IBM COS target.
+      example:
+        endpoint: http://some.endpoint.com:8081
+        bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
+        bucketCrn: bucket_crn
+        serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         bucketCrn:
+          description: The bucket crn.
           example: bucket_crn
           type: string
         bucketType:
           $ref: "#/components/schemas/IbmBucketType"
         endpoint:
+          description: Endpoint.
           example: http://some.endpoint.com:8081
           type: string
         serviceCrn:
+          description: The service crn.
           example: service_crn
           type: string
       required:
@@ -168,6 +180,7 @@ components:
       title: IBM COS Target Spec
       type: object
     IbmBucketType:
+      description: Ibm bucket type.
       enum:
       - IBM_BUCKET_TYPE_UNSPECIFIED
       - IBM_BUCKET_TYPE_EXTERNAL
@@ -186,16 +199,16 @@ components:
       description: This data structure is used to retrieve a storage target for logs.
       example:
         target:
-          s3:
-            bucket: bucket
-            roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
-            externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
-            region: us-west-2
           archiveSpec:
             enableTags: true
             archivingFormatId: json_id
             format: TARGET_FORMAT_UNSPECIFIED
             isActive: true
+          ibmCos:
+            endpoint: http://some.endpoint.com:8081
+            bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
+            bucketCrn: bucket_crn
+            serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -211,16 +224,16 @@ components:
         for logs.
       example:
         target:
-          s3:
-            bucket: bucket
-            roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
-            externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
-            region: us-west-2
           archiveSpec:
             enableTags: true
             archivingFormatId: json_id
             format: TARGET_FORMAT_UNSPECIFIED
             isActive: true
+          ibmCos:
+            endpoint: http://some.endpoint.com:8081
+            bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
+            bucketCrn: bucket_crn
+            serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -233,25 +246,24 @@ components:
       type: object
     S3TargetSpec:
       description: This data structure represents an S3 target.
-      example:
-        bucket: bucket
-        roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
-        externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
-        region: us-west-2
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         bucket:
+          description: Bucket name.
           example: bucket
           type: string
         externalId:
+          description: External identifier.
           example: f47ac10b-58cc-4372-a567-0e02b2c3d479
           type: string
         region:
+          description: Region.
           example: us-west-2
           type: string
         roleArn:
+          description: The role arn.
           example: arn:aws:iam::123456789012:role/CoralogixArchive
           type: string
       required:
@@ -259,12 +271,24 @@ components:
       title: S3 Target Spec
       type: object
     TargetFormat:
+      description: Target format.
       enum:
       - TARGET_FORMAT_UNSPECIFIED
       - TARGET_FORMAT_CX_DATA_V1
       type: string
     V2TargetIbmCos:
       description: This data structure represents a target to archive logs.
+      example:
+        archiveSpec:
+          enableTags: true
+          archivingFormatId: json_id
+          format: TARGET_FORMAT_UNSPECIFIED
+          isActive: true
+        ibmCos:
+          endpoint: http://some.endpoint.com:8081
+          bucketType: IBM_BUCKET_TYPE_UNSPECIFIED
+          bucketCrn: bucket_crn
+          serviceCrn: service_crn
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -280,17 +304,6 @@ components:
       type: object
     V2TargetS3:
       description: This data structure represents a target to archive logs.
-      example:
-        s3:
-          bucket: bucket
-          roleArn: arn:aws:iam::123456789012:role/CoralogixArchive
-          externalId: f47ac10b-58cc-4372-a567-0e02b2c3d479
-          region: us-west-2
-        archiveSpec:
-          enableTags: true
-          archivingFormatId: json_id
-          format: TARGET_FORMAT_UNSPECIFIED
-          isActive: true
       externalDocs:
         description: Find out more about archives
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
@@ -311,9 +324,10 @@ components:
       type: string
     v2.Target:
       oneOf:
-      - $ref: "#/components/schemas/V2TargetS3"
       - $ref: "#/components/schemas/V2TargetIbmCos"
+      - $ref: "#/components/schemas/V2TargetS3"
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -324,12 +338,12 @@ components:
         format:
           $ref: "#/components/schemas/TargetFormat"
         isActive:
+          description: Whether archiving to this target is active.
           example: true
           type: boolean
         s3:
           $ref: "#/components/schemas/S3TargetSpec"
       required:
       - isActive
-      - targetSpec
       title: Set Target Response
       type: object

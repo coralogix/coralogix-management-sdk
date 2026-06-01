@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// OrderByAlertEventDirection the model 'OrderByAlertEventDirection'
+// OrderByAlertEventDirection Order by alert event direction.
 type OrderByAlertEventDirection string
 
 // List of OrderByAlertEventDirection

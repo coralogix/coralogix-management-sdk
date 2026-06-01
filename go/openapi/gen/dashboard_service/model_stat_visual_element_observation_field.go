@@ -26,6 +26,7 @@ type StatVisualElementObservationField struct {
 	ObservationField ObservationField `json:"observationField"`
 	// Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'
 	TemplateText *string `json:"templateText,omitempty"`
+	// Variables available for use in the display name template, each referencing either a datashape field or mapped values
 	TemplateVariables []DisplayNameTemplateVariable `json:"templateVariables,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

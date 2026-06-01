@@ -22,8 +22,11 @@ var _ MappedNullable = &RoutingLabels{}
 
 // RoutingLabels Allows to configure routing labels which are used for routers resolution
 type RoutingLabels struct {
+	// The environment.
 	Environment *string `json:"environment,omitempty"`
+	// Service name.
 	Service *string `json:"service,omitempty"`
+	// Team.
 	Team *string `json:"team,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

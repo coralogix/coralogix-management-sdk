@@ -20,11 +20,13 @@ var _ = bytes.MinRead
 // checks if the SpansSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansSource{}
 
-// SpansSource struct for SpansSource
+// SpansSource Spans source.
 type SpansSource struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
+	// The label fields.
 	LabelFields []ObservationField `json:"labelFields,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// The message template.
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Strategy *SpansSourceStrategy `json:"strategy,omitempty"`
 	AdditionalProperties map[string]interface{}

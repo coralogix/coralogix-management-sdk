@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the HeatmapPreset type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HeatmapPreset{}
 
-// HeatmapPreset struct for HeatmapPreset
+// HeatmapPreset Heatmap.
 type HeatmapPreset struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
@@ -40,8 +40,10 @@ type HeatmapPreset struct {
 	Tooltip *HeatmapTooltip `json:"tooltip,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
+	// List of observation fields used as x-axis categories in the heatmap grid.
 	XAxisFields []ObservationField `json:"xAxisFields,omitempty"`
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
+	// List of observation fields used as y-axis categories in the heatmap grid.
 	YAxisFields []ObservationField `json:"yAxisFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

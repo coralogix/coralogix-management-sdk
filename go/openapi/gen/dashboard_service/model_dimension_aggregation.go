@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the DimensionAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DimensionAggregation{}
 
-// DimensionAggregation struct for DimensionAggregation
+// DimensionAggregation Dimension aggregation.
 type DimensionAggregation struct {
 	AggregationType *DimensionAggregationType `json:"aggregationType,omitempty"`
 	DimensionField *DimensionField `json:"dimensionField,omitempty"`

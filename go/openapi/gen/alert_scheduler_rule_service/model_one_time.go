@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the OneTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OneTime{}
 
-// OneTime struct for OneTime
+// OneTime One time.
 type OneTime struct {
 	Timeframe *Timeframe `json:"timeframe,omitempty"`
 	AdditionalProperties map[string]interface{}

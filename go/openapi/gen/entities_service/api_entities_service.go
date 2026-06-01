@@ -36,10 +36,10 @@ func (r ApiEntitiesServiceListEntitySubTypesRequest) Execute() (*ListEntitySubTy
 /*
 EntitiesServiceListEntitySubTypes List Entity Subtypes
 
-No description available
+Returns all sub-types for the specified entity type.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param entityType
+ @param entityType Entity type whose sub-types to list.
  @return ApiEntitiesServiceListEntitySubTypesRequest
 */
 func (a *EntitiesServiceAPIService) EntitiesServiceListEntitySubTypes(ctx context.Context, entityType NotificationCenterEntityType) ApiEntitiesServiceListEntitySubTypesRequest {
@@ -138,7 +138,7 @@ func (r ApiEntitiesServiceListEntityTypesRequest) Execute() (*ListEntityTypesRes
 /*
 EntitiesServiceListEntityTypes List Entity Types
 
-No description available
+Returns all available notification entity types.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEntitiesServiceListEntityTypesRequest

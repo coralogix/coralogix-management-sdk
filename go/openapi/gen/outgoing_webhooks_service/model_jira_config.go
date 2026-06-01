@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the JiraConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JiraConfig{}
 
-// JiraConfig struct for JiraConfig
+// JiraConfig Jira config.
 type JiraConfig struct {
+	// The api token.
 	ApiToken *string `json:"apiToken,omitempty"`
+	// Email address.
 	Email *string `json:"email,omitempty"`
+	// The project key.
 	ProjectKey *string `json:"projectKey,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

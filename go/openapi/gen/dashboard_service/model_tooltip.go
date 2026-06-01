@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Tooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Tooltip{}
 
-// Tooltip struct for Tooltip
+// Tooltip Tooltip.
 type Tooltip struct {
+	// The show labels.
 	ShowLabels *bool `json:"showLabels,omitempty"`
 	Type *TooltipType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

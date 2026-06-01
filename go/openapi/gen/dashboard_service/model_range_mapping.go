@@ -24,6 +24,7 @@ var _ MappedNullable = &RangeMapping{}
 type RangeMapping struct {
 	MinMax *MinMax `json:"minMax,omitempty"`
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
+	// List of color thresholds defining color ranges
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

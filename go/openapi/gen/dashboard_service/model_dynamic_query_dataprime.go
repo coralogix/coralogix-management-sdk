@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DynamicQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryDataprime{}
 
-// DynamicQueryDataprime struct for DynamicQueryDataprime
+// DynamicQueryDataprime Discriminated union of possible query types for the dynamic widget.
 type DynamicQueryDataprime struct {
 	Dataprime Dataprime `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

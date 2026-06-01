@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the CountDistinct type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CountDistinct{}
 
-// CountDistinct struct for CountDistinct
+// CountDistinct Count distinct.
 type CountDistinct struct {
+	// The field.
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	AdditionalProperties map[string]interface{}

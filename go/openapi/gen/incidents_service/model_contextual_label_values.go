@@ -23,6 +23,7 @@ var _ MappedNullable = &ContextualLabelValues{}
 
 // ContextualLabelValues Represents contextual label values for filtering incidents
 type ContextualLabelValues struct {
+	// The contextual label values.
 	ContextualLabelValues []string `json:"contextualLabelValues"`
 	AdditionalProperties map[string]interface{}
 }

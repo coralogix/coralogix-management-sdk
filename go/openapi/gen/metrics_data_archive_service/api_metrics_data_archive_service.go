@@ -38,9 +38,9 @@ func (r ApiMetricsConfiguratorPublicServiceConfigureTenantRequest) Execute() (ma
 }
 
 /*
-MetricsConfiguratorPublicServiceConfigureTenant ConfigureTenant
+MetricsConfiguratorPublicServiceConfigureTenant Configure Tenant
 
-No description available
+Creates the metrics storage configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceConfigureTenantRequest
@@ -72,6 +72,9 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceCo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.metricsConfiguratorPublicServiceConfigureTenantRequest == nil {
+		return localVarReturnValue, nil, reportError("metricsConfiguratorPublicServiceConfigureTenantRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -139,9 +142,9 @@ func (r ApiMetricsConfiguratorPublicServiceDisableArchiveRequest) Execute() (map
 }
 
 /*
-MetricsConfiguratorPublicServiceDisableArchive DisableArchive
+MetricsConfiguratorPublicServiceDisableArchive Disable Metrics Archive
 
-No description available
+Disables the metrics storage configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceDisableArchiveRequest
@@ -238,9 +241,9 @@ func (r ApiMetricsConfiguratorPublicServiceEnableArchiveRequest) Execute() (map[
 }
 
 /*
-MetricsConfiguratorPublicServiceEnableArchive EnableArchive
+MetricsConfiguratorPublicServiceEnableArchive Enable Metrics Archive
 
-No description available
+Enables the metrics storage configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceEnableArchiveRequest
@@ -337,9 +340,9 @@ func (r ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest) Execute() (*G
 }
 
 /*
-MetricsConfiguratorPublicServiceGetTenantConfig GetTenantConfig
+MetricsConfiguratorPublicServiceGetTenantConfig Get Metrics Storage Configuration
 
-No description available
+Returns the current metrics storage configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceGetTenantConfigRequest
@@ -442,9 +445,9 @@ func (r ApiMetricsConfiguratorPublicServiceUpdateRequest) Execute() (map[string]
 }
 
 /*
-MetricsConfiguratorPublicServiceUpdate Update
+MetricsConfiguratorPublicServiceUpdate Update Metrics Storage Configuration
 
-No description available
+Updates the metrics storage configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceUpdateRequest
@@ -476,6 +479,9 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceUp
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.metricsConfiguratorPublicServiceUpdateRequest == nil {
+		return localVarReturnValue, nil, reportError("metricsConfiguratorPublicServiceUpdateRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -549,9 +555,9 @@ func (r ApiMetricsConfiguratorPublicServiceValidateBucketRequest) Execute() (map
 }
 
 /*
-MetricsConfiguratorPublicServiceValidateBucket ValidateBucket
+MetricsConfiguratorPublicServiceValidateBucket Validate Metrics Storage Bucket
 
-No description available
+Validates the provided metrics storage configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiMetricsConfiguratorPublicServiceValidateBucketRequest
@@ -583,6 +589,9 @@ func (a *MetricsDataArchiveServiceAPIService) MetricsConfiguratorPublicServiceVa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.metricsConfiguratorPublicServiceValidateBucketRequest == nil {
+		return localVarReturnValue, nil, reportError("metricsConfiguratorPublicServiceValidateBucketRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

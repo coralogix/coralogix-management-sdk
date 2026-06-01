@@ -23,9 +23,13 @@ var _ MappedNullable = &S3TargetSpec{}
 
 // S3TargetSpec This data structure represents an S3 target.
 type S3TargetSpec struct {
+	// Bucket name.
 	Bucket string `json:"bucket"`
+	// External identifier.
 	ExternalId *string `json:"externalId,omitempty"`
+	// Region.
 	Region *string `json:"region,omitempty"`
+	// The role arn.
 	RoleArn *string `json:"roleArn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

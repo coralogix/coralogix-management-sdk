@@ -23,7 +23,9 @@ var _ MappedNullable = &IncidentQueryFilter{}
 
 // IncidentQueryFilter Filter configuration for incidents
 type IncidentQueryFilter struct {
+	// Filter by application names
 	ApplicationName []string `json:"applicationName,omitempty"`
+	// Filter by assignee
 	Assignee []string `json:"assignee,omitempty"`
 	// Filter by contextual labels
 	ContextualLabels map[string]interface{} `json:"contextualLabels,omitempty"`
@@ -36,15 +38,20 @@ type IncidentQueryFilter struct {
 	IncidentDurationRange interface{} `json:"incidentDurationRange,omitempty"`
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
+	// Filters all incidents with the given meta labels
 	MetaLabels []IncidentMetaLabel `json:"metaLabels,omitempty"`
 	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
-	SearchQuery interface{} `json:"searchQuery,omitempty"`
+	SearchQuery *IncidentQueryFilterSearchQuery `json:"searchQuery,omitempty"`
+	// Filter by incident severity
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)
 	// Deprecated
 	StartTime *time.Time `json:"startTime,omitempty"`
+	// Filter by incident state
 	State []IncidentState `json:"state,omitempty"`
+	// Filter by incident status
 	Status []IncidentStatus `json:"status,omitempty"`
+	// Filter by subsystem names
 	SubsystemName []string `json:"subsystemName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -393,23 +400,22 @@ func (o *IncidentQueryFilter) SetMetaLabelsOp(v V1FilterOperator) {
 	o.MetaLabelsOp = &v
 }
 
-// GetSearchQuery returns the SearchQuery field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IncidentQueryFilter) GetSearchQuery() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetSearchQuery returns the SearchQuery field value if set, zero value otherwise.
+func (o *IncidentQueryFilter) GetSearchQuery() IncidentQueryFilterSearchQuery {
+	if o == nil || IsNil(o.SearchQuery) {
+		var ret IncidentQueryFilterSearchQuery
 		return ret
 	}
-	return o.SearchQuery
+	return *o.SearchQuery
 }
 
 // GetSearchQueryOk returns a tuple with the SearchQuery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IncidentQueryFilter) GetSearchQueryOk() (*interface{}, bool) {
+func (o *IncidentQueryFilter) GetSearchQueryOk() (*IncidentQueryFilterSearchQuery, bool) {
 	if o == nil || IsNil(o.SearchQuery) {
 		return nil, false
 	}
-	return &o.SearchQuery, true
+	return o.SearchQuery, true
 }
 
 // HasSearchQuery returns a boolean if a field has been set.
@@ -421,9 +427,9 @@ func (o *IncidentQueryFilter) HasSearchQuery() bool {
 	return false
 }
 
-// SetSearchQuery gets a reference to the given interface{} and assigns it to the SearchQuery field.
-func (o *IncidentQueryFilter) SetSearchQuery(v interface{}) {
-	o.SearchQuery = v
+// SetSearchQuery gets a reference to the given IncidentQueryFilterSearchQuery and assigns it to the SearchQuery field.
+func (o *IncidentQueryFilter) SetSearchQuery(v IncidentQueryFilterSearchQuery) {
+	o.SearchQuery = &v
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
@@ -629,7 +635,7 @@ func (o IncidentQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetaLabelsOp) {
 		toSerialize["metaLabelsOp"] = o.MetaLabelsOp
 	}
-	if o.SearchQuery != nil {
+	if !IsNil(o.SearchQuery) {
 		toSerialize["searchQuery"] = o.SearchQuery
 	}
 	if !IsNil(o.Severity) {

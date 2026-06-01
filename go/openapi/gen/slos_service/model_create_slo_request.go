@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateSloRequest{}
 
 // CreateSloRequest Request to create a new SLO.
 type CreateSloRequest struct {
+	// Whether to silence data validations.
 	// Deprecated
 	SilenceDataValidations *bool `json:"silenceDataValidations,omitempty"`
 	Slo Slo `json:"slo"`

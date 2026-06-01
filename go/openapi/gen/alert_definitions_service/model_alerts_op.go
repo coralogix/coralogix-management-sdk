@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertsOp the model 'AlertsOp'
+// AlertsOp Alerts op.
 type AlertsOp string
 
 // List of AlertsOp

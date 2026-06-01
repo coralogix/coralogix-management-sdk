@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetDailyUsageEvaluationTokensResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageEvaluationTokensResponse{}
 
-// GetDailyUsageEvaluationTokensResponse struct for GetDailyUsageEvaluationTokensResponse
+// GetDailyUsageEvaluationTokensResponse Response containing daily evaluation token usage data.
 type GetDailyUsageEvaluationTokensResponse struct {
+	// List of tokens.
 	Tokens []DetailedDailyEvaluationTokens `json:"tokens,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,11 +22,17 @@ var _ MappedNullable = &InRuleGroup{}
 
 // InRuleGroup A group of recording rules.
 type InRuleGroup struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Interval.
 	Interval *int64 `json:"interval,omitempty"`
+	// Limit.
 	Limit *string `json:"limit,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// List of rules.
 	Rules []InRule `json:"rules,omitempty"`
+	// Version number.
 	Version *int64 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

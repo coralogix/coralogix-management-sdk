@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapColorColorRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapColorColorRange{}
 
-// GeomapColorColorRange struct for GeomapColorColorRange
+// GeomapColorColorRange Geomap color.
 type GeomapColorColorRange struct {
 	ColorRange ColorGradientType `json:"colorRange"`
 	AdditionalProperties map[string]interface{}

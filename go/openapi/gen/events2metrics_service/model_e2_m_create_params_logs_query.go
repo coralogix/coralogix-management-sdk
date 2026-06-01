@@ -23,12 +23,18 @@ var _ MappedNullable = &E2MCreateParamsLogsQuery{}
 
 // E2MCreateParamsLogsQuery This data structure is used to create a new event to metric definition
 type E2MCreateParamsLogsQuery struct {
+	// Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.
 	DataSource *string `json:"dataSource,omitempty"`
+	// Human-readable description for the new E2M.
 	Description *string `json:"description,omitempty"`
 	LogsQuery V2LogsQuery `json:"logsQuery"`
+	// Metric fields to create and aggregate from the events.
 	MetricFields []V2MetricField `json:"metricFields,omitempty"`
+	// Metric labels to attach to the generated metrics.
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
+	// Human-readable name for the new E2M.
 	Name string `json:"name"`
+	// Maximum number of unique metric permutations allowed for this E2M.
 	PermutationsLimit *int32 `json:"permutationsLimit,omitempty"`
 	Type *E2MType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

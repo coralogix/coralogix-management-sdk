@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the MultiStringValueSelectedAll type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiStringValueSelectedAll{}
 
-// MultiStringValueSelectedAll struct for MultiStringValueSelectedAll
+// MultiStringValueSelectedAll A variable value representing multiple selected string values: all, a specific list, or selected-all.
 type MultiStringValueSelectedAll struct {
+	// Selected all value.
 	SelectedAll map[string]interface{} `json:"selectedAll"`
 	AdditionalProperties map[string]interface{}
 }

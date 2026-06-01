@@ -23,6 +23,7 @@ var _ MappedNullable = &SloFilterFieldLabelName{}
 
 // SloFilterFieldLabelName Field used for filtering SLOs
 type SloFilterFieldLabelName struct {
+	// Filter by a specific SLO label key.
 	LabelName string `json:"labelName"`
 	AdditionalProperties map[string]interface{}
 }

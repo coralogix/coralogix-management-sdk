@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AnnotationWidgetScopeSpecificWidgets type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationWidgetScopeSpecificWidgets{}
 
-// AnnotationWidgetScopeSpecificWidgets struct for AnnotationWidgetScopeSpecificWidgets
+// AnnotationWidgetScopeSpecificWidgets Specific widgets.
 type AnnotationWidgetScopeSpecificWidgets struct {
+	// The widget ids.
 	WidgetIds []string `json:"widgetIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

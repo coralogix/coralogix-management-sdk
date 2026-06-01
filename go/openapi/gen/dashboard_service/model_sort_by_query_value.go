@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SortByQueryValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SortByQueryValue{}
 
-// SortByQueryValue struct for SortByQueryValue
+// SortByQueryValue Sort by query value.
 type SortByQueryValue struct {
 	// Reference to the query id from Dynamic.query_display_settings
 	QueryId *string `json:"queryId,omitempty"`

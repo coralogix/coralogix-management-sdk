@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the Counts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Counts{}
 
-// Counts struct for Counts
+// Counts Counts.
 type Counts struct {
+	// List of groups.
 	Groups *int32 `json:"groups,omitempty"`
+	// The parsing themes.
 	ParsingThemes *int32 `json:"parsingThemes,omitempty"`
+	// List of rules.
 	Rules *int32 `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

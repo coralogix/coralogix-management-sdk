@@ -22,11 +22,16 @@ var _ MappedNullable = &DeployedExtension{}
 
 // DeployedExtension struct for DeployedExtension
 type DeployedExtension struct {
+	// The applications.
 	Applications []string `json:"applications,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// The item ids.
 	ItemIds []string `json:"itemIds,omitempty"`
+	// The subsystems.
 	Subsystems []string `json:"subsystems,omitempty"`
 	Summary *DeployedExtensionSummary `json:"summary,omitempty"`
+	// Version number.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

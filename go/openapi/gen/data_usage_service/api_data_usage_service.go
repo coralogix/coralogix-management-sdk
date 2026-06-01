@@ -41,7 +41,7 @@ func (r ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest) Execute() (*Get
 /*
 DataUsageServiceGetDailyUsageEvaluationTokens Get Daily Usage Evaluation Tokens
 
-No description available
+Returns daily evaluation token usage data for the specified period.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDailyUsageEvaluationTokensRequest
@@ -73,6 +73,9 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageEvaluationToke
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.dataUsageServiceGetDailyUsageEvaluationTokensRequest == nil {
+		return localVarReturnValue, nil, reportError("dataUsageServiceGetDailyUsageEvaluationTokensRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -148,7 +151,7 @@ func (r ApiDataUsageServiceGetDailyUsageProcessedGbsRequest) Execute() (*GetDail
 /*
 DataUsageServiceGetDailyUsageProcessedGbs Get Daily Usage Processed GBs
 
-No description available
+Returns daily processed gigabytes usage data for the specified period.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDailyUsageProcessedGbsRequest
@@ -180,6 +183,9 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageProcessedGbsEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.dataUsageServiceGetDailyUsageProcessedGbsRequest == nil {
+		return localVarReturnValue, nil, reportError("dataUsageServiceGetDailyUsageProcessedGbsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -255,7 +261,7 @@ func (r ApiDataUsageServiceGetDailyUsageUnitsRequest) Execute() (*GetDailyUsageU
 /*
 DataUsageServiceGetDailyUsageUnits Get Daily Usage Units
 
-No description available
+Returns daily units usage data for the specified period.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDailyUsageUnitsRequest
@@ -287,6 +293,9 @@ func (a *DataUsageServiceAPIService) DataUsageServiceGetDailyUsageUnitsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.dataUsageServiceGetDailyUsageUnitsRequest == nil {
+		return localVarReturnValue, nil, reportError("dataUsageServiceGetDailyUsageUnitsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -353,21 +362,25 @@ type ApiDataUsageServiceGetDataUsageRequest struct {
 	dimensionFilters *[]DataUsageServiceGetDataUsageDimensionFiltersParameterInner
 }
 
+// Date interval to query data usage over.
 func (r ApiDataUsageServiceGetDataUsageRequest) DateRange(dateRange DateRange) ApiDataUsageServiceGetDataUsageRequest {
 	r.dateRange = &dateRange
 	return r
 }
 
+// Aggregation resolution. Minimum supported value is 1h. Must be between 1 hour and the date_range interval.
 func (r ApiDataUsageServiceGetDataUsageRequest) Resolution(resolution string) ApiDataUsageServiceGetDataUsageRequest {
 	r.resolution = &resolution
 	return r
 }
 
+// List of fields to aggregate results by (for example pillar and priority).
 func (r ApiDataUsageServiceGetDataUsageRequest) Aggregate(aggregate []AggregateBy) ApiDataUsageServiceGetDataUsageRequest {
 	r.aggregate = &aggregate
 	return r
 }
 
+// Dimensions to filter results by; only entries that contain all listed dimensions are returned.
 func (r ApiDataUsageServiceGetDataUsageRequest) DimensionFilters(dimensionFilters []DataUsageServiceGetDataUsageDimensionFiltersParameterInner) ApiDataUsageServiceGetDataUsageRequest {
 	r.dimensionFilters = &dimensionFilters
 	return r
@@ -380,7 +393,7 @@ func (r ApiDataUsageServiceGetDataUsageRequest) Execute() (*GetDataUsageResponse
 /*
 DataUsageServiceGetDataUsage Get Data Usage
 
-No description available
+Returns data usage summary for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDataUsageRequest
@@ -507,7 +520,7 @@ func (r ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest) Execute() (*G
 /*
 DataUsageServiceGetDataUsageMetricsExportStatus Get Data Usage Metrics Export Status
 
-No description available
+Returns the current export status for data usage.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetDataUsageMetricsExportStatusRequest
@@ -604,26 +617,31 @@ type ApiDataUsageServiceGetLogsCountRequest struct {
 	applicationAggregation *bool
 }
 
+// Date interval to query log ingestion counts over.
 func (r ApiDataUsageServiceGetLogsCountRequest) DateRange(dateRange DateRange) ApiDataUsageServiceGetLogsCountRequest {
 	r.dateRange = &dateRange
 	return r
 }
 
+// Aggregation resolution with second precision. Must be between 1 second and the date_range interval.
 func (r ApiDataUsageServiceGetLogsCountRequest) Resolution(resolution string) ApiDataUsageServiceGetLogsCountRequest {
 	r.resolution = &resolution
 	return r
 }
 
+// Optional scope filter that restricts results to the listed applications and subsystems (full match).
 func (r ApiDataUsageServiceGetLogsCountRequest) Filters(filters ScopesFilter) ApiDataUsageServiceGetLogsCountRequest {
 	r.filters = &filters
 	return r
 }
 
+// When true, aggregate the returned counts by subsystem name.
 func (r ApiDataUsageServiceGetLogsCountRequest) SubsystemAggregation(subsystemAggregation bool) ApiDataUsageServiceGetLogsCountRequest {
 	r.subsystemAggregation = &subsystemAggregation
 	return r
 }
 
+// When true, aggregate the returned counts by application name.
 func (r ApiDataUsageServiceGetLogsCountRequest) ApplicationAggregation(applicationAggregation bool) ApiDataUsageServiceGetLogsCountRequest {
 	r.applicationAggregation = &applicationAggregation
 	return r
@@ -636,7 +654,7 @@ func (r ApiDataUsageServiceGetLogsCountRequest) Execute() (*GetLogsCountResponse
 /*
 DataUsageServiceGetLogsCount Get Logs Count
 
-No description available
+Returns the log ingestion count for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetLogsCountRequest
@@ -746,16 +764,19 @@ type ApiDataUsageServiceGetSpansCountRequest struct {
 	filters *ScopesFilter
 }
 
+// Date interval to query span ingestion counts over.
 func (r ApiDataUsageServiceGetSpansCountRequest) DateRange(dateRange DateRange) ApiDataUsageServiceGetSpansCountRequest {
 	r.dateRange = &dateRange
 	return r
 }
 
+// Aggregation resolution with second precision. Must be between 1 second and the date_range interval.
 func (r ApiDataUsageServiceGetSpansCountRequest) Resolution(resolution string) ApiDataUsageServiceGetSpansCountRequest {
 	r.resolution = &resolution
 	return r
 }
 
+// Optional scope filter that restricts results to the listed applications and subsystems (full match).
 func (r ApiDataUsageServiceGetSpansCountRequest) Filters(filters ScopesFilter) ApiDataUsageServiceGetSpansCountRequest {
 	r.filters = &filters
 	return r
@@ -768,7 +789,7 @@ func (r ApiDataUsageServiceGetSpansCountRequest) Execute() (*GetSpansCountRespon
 /*
 DataUsageServiceGetSpansCount Get Spans Count
 
-No description available
+Returns the span ingestion count for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceGetSpansCountRequest
@@ -882,7 +903,7 @@ func (r ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest) Execute() 
 /*
 DataUsageServiceUpdateDataUsageMetricsExportStatus Update Data Usage Metrics Export Status
 
-No description available
+Triggers a data usage export.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDataUsageServiceUpdateDataUsageMetricsExportStatusRequest

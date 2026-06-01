@@ -22,6 +22,7 @@ var _ MappedNullable = &GetIncidentEventsResponse{}
 
 // GetIncidentEventsResponse Response containing all events associated with the requested incident
 type GetIncidentEventsResponse struct {
+	// List of incident events
 	IncidentEvents []IncidentEvent `json:"incidentEvents,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

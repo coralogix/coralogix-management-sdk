@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the UpdateRuleGroupResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateRuleGroupResponse{}
 
-// UpdateRuleGroupResponse struct for UpdateRuleGroupResponse
+// UpdateRuleGroupResponse Response returned after successfully updating a parsing rule group.
 type UpdateRuleGroupResponse struct {
 	RuleGroup *RuleGroup `json:"ruleGroup,omitempty"`
 	AdditionalProperties map[string]interface{}

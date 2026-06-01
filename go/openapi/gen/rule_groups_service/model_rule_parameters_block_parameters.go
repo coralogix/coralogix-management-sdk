@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the RuleParametersBlockParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersBlockParameters{}
 
-// RuleParametersBlockParameters struct for RuleParametersBlockParameters
+// RuleParametersBlockParameters Rule parameters.
 type RuleParametersBlockParameters struct {
 	BlockParameters BlockParameters `json:"blockParameters"`
 	AdditionalProperties map[string]interface{}

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GetDailyUsageProcessedGbsRequestRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageProcessedGbsRequestRange{}
 
-// GetDailyUsageProcessedGbsRequestRange struct for GetDailyUsageProcessedGbsRequestRange
+// GetDailyUsageProcessedGbsRequestRange Request for daily processed gigabytes usage data for the specified period.
 type GetDailyUsageProcessedGbsRequestRange struct {
 	Range V2Range `json:"range"`
 	AdditionalProperties map[string]interface{}

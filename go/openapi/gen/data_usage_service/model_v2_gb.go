@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the V2GB type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2GB{}
 
-// V2GB struct for V2GB
+// V2GB A quantity expressed in gigabytes.
 type V2GB struct {
+	// Numeric value representing the amount in gigabytes.
 	Value *float32 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

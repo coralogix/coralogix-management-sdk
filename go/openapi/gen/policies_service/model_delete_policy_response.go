@@ -23,6 +23,7 @@ var _ MappedNullable = &DeletePolicyResponse{}
 
 // DeletePolicyResponse This data structue is obtained when deleting a policy by its ID.
 type DeletePolicyResponse struct {
+	// Unique identifier.
 	Id string `json:"id"`
 	AdditionalProperties map[string]interface{}
 }

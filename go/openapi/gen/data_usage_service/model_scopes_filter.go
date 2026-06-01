@@ -22,7 +22,9 @@ var _ MappedNullable = &ScopesFilter{}
 
 // ScopesFilter This data structure represents a filter for scopes.
 type ScopesFilter struct {
+	// List of application names to filter on (OR logic, full match).
 	Application []string `json:"application,omitempty"`
+	// List of subsystem names to filter on (OR logic, full match).
 	Subsystem []string `json:"subsystem,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,11 +20,15 @@ var _ = bytes.MinRead
 // checks if the LineChartSpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartSpansQuery{}
 
-// LineChartSpansQuery struct for LineChartSpansQuery
+// LineChartSpansQuery Spans query.
 type LineChartSpansQuery struct {
+	// List of span query aggregation functions, it should contain only one element
 	Aggregations []SpansAggregation `json:"aggregations,omitempty"`
+	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
+	// List of field names to group the span records
 	GroupBy []SpanField `json:"groupBy,omitempty"`
+	// A list of observation fields to group the records by
 	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricAggregationType the model 'MetricAggregationType'
+// MetricAggregationType Metric aggregation type.
 type MetricAggregationType string
 
 // List of MetricAggregationType

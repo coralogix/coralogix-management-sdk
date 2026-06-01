@@ -7,19 +7,21 @@ servers:
 paths:
   /notifications/notification-center/v1/connectors:
     get:
-      description: No description available
+      description: Returns notification connectors with optional pagination.
       externalDocs:
         url: ""
       operationId: ConnectorsService_ListConnectors
       parameters:
-      - explode: true
+      - description: Filter connectors by their type.
+        explode: true
         in: query
         name: connector_type
         required: false
         schema:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         style: form
-      - explode: true
+      - description: Filter connectors by the entity type they support.
+        explode: true
         in: query
         name: supported_by_entity_type
         required: false
@@ -37,7 +39,7 @@ paths:
       tags:
       - Connectors service
     post:
-      description: No description available
+      description: Creates a new notification connector.
       externalDocs:
         url: ""
       operationId: ConnectorsService_CreateConnector
@@ -57,7 +59,7 @@ paths:
       tags:
       - Connectors service
     put:
-      description: No description available
+      description: Updates an existing notification connector.
       externalDocs:
         url: ""
       operationId: ConnectorsService_ReplaceConnector
@@ -78,20 +80,23 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/all/list:
     get:
-      description: No description available
+      description: Returns all notification connectors for the team.
       externalDocs:
         url: ""
       operationId: ConnectorsService_BatchGetConnectors
       parameters:
-      - explode: true
+      - description: The unique identifiers of the connectors to retrieve.
+        explode: true
         in: query
         name: connector_ids
         required: false
         schema:
+          description: The unique identifiers of the connectors to retrieve.
           example:
           - connector-id-1
           - connector-id-2
           items:
+            description: The unique identifiers of the connectors to retrieve.
             type: string
           type: array
         style: form
@@ -107,17 +112,22 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/all/summaries:
     get:
-      description: No description available
+      description: Returns summary information for all notification connectors.
       externalDocs:
         url: ""
       operationId: ConnectorsService_BatchGetConnectorSummaries
       parameters:
-      - explode: true
+      - description: The unique identifiers of the connectors whose summaries to retrieve.
+        explode: true
         in: query
         name: connector_ids
         required: false
         schema:
+          description: The unique identifiers of the connectors whose summaries to
+            retrieve.
           items:
+            description: The unique identifiers of the connectors whose summaries
+              to retrieve.
             example: ""
             type: string
           type: array
@@ -134,19 +144,21 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/list/summaries:
     get:
-      description: No description available
+      description: Returns a paginated list of notification connector summaries.
       externalDocs:
         url: ""
       operationId: ConnectorsService_ListConnectorSummaries
       parameters:
-      - explode: true
+      - description: Filter connector summaries by their type.
+        explode: true
         in: query
         name: connector_type
         required: false
         schema:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         style: form
-      - explode: true
+      - description: Filter connector summaries by the entity type they support.
+        explode: true
         in: query
         name: supported_by_entity_type
         required: false
@@ -165,12 +177,13 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/types/summaries:
     get:
-      description: No description available
+      description: Returns summary information for all available connector types.
       externalDocs:
         url: ""
       operationId: ConnectorsService_GetConnectorTypeSummaries
       parameters:
-      - explode: true
+      - description: Filter connector types by the entity type they support.
+        explode: true
         in: query
         name: supported_by_entity_type
         required: false
@@ -189,16 +202,18 @@ paths:
       - Connectors service
   /notifications/notification-center/v1/connectors/{id}:
     delete:
-      description: No description available
+      description: Deletes the notification connector with the specified ID.
       externalDocs:
         url: ""
       operationId: ConnectorsService_DeleteConnector
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -212,16 +227,18 @@ paths:
       tags:
       - Connectors service
     get:
-      description: No description available
+      description: Returns the details of the specified notification connector.
       externalDocs:
         url: ""
       operationId: ConnectorsService_GetConnector
       parameters:
-      - explode: false
+      - description: The unique identifier of the connector.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the connector.
           type: string
         style: simple
       responses:
@@ -277,11 +294,14 @@ components:
         connectorSummaries:
           additionalProperties:
             $ref: "#/components/schemas/ConnectorSummary"
+          description: The connector summaries.
           type: object
         notFoundIds:
+          description: The not found ids.
           example:
           - connector-id-3
           items:
+            description: The not found ids.
             type: string
           type: array
       title: Batch Get Connector Summaries Response
@@ -328,11 +348,14 @@ components:
         connectors:
           additionalProperties:
             $ref: "#/components/schemas/Connector"
+          description: The connectors.
           type: object
         notFoundIds:
+          description: The not found ids.
           example:
           - connector-id-3
           items:
+            description: The not found ids.
             type: string
           type: array
       title: Batch Get Connectors Response
@@ -373,34 +396,41 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         configOverrides:
+          description: The config overrides.
           items:
             $ref: "#/components/schemas/EntityTypeConfigOverrides"
           type: array
         connectorConfig:
           $ref: "#/components/schemas/ConnectorConfig"
         createTime:
+          description: The create time.
           format: date-time
           type: string
         description:
+          description: Human-readable description.
           example: Connector for team notifications
           maxLength: 5000
           type: string
         diagnostics:
           $ref: "#/components/schemas/Diagnostics"
         id:
+          description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: string
         name:
+          description: Display name.
           example: My Slack Connector
           maxLength: 200
           type: string
         teamId:
+          description: Team identifier.
           example: 12345
           format: int64
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       title: Connector
@@ -418,6 +448,7 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         fields:
+          description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.ConnectorConfigField"
           type: array
@@ -453,26 +484,33 @@ components:
         type: CONNECTOR_TYPE_UNSPECIFIED
       properties:
         configOverrides:
+          description: The config overrides.
           items:
             $ref: "#/components/schemas/EntityTypeConfigOverrides"
           type: array
         connectorConfig:
           $ref: "#/components/schemas/ConnectorConfig"
         createTime:
+          description: The create time.
           format: date-time
           type: string
         description:
+          description: Human-readable description.
           type: string
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
         teamId:
+          description: The team id.
           format: int64
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       type: object
@@ -486,6 +524,7 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         count:
+          description: Number of items.
           example: 5
           format: int64
           type: integer
@@ -534,8 +573,13 @@ components:
       title: Create Connector Response
       type: object
     DeleteConnectorResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a notification connector.
+      externalDocs:
+        url: ""
       type: object
     Delivery:
+      description: Delivery.
       enum:
       - DELIVERY_UNSPECIFIED
       - DISABLED
@@ -566,14 +610,15 @@ components:
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         fields:
+          description: List of fields.
           items:
             $ref: "#/components/schemas/TemplatedConnectorConfigField"
           type: array
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -674,6 +719,7 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         connectorTypeSummaries:
+          description: The connector type summaries.
           items:
             $ref: "#/components/schemas/ConnectorTypeSummary"
           type: array
@@ -740,6 +786,7 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         connectors:
+          description: The connectors.
           items:
             $ref: "#/components/schemas/ConnectorSummary"
           type: array
@@ -810,6 +857,7 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         connectors:
+          description: The connectors.
           items:
             $ref: "#/components/schemas/Connector"
           type: array
@@ -870,8 +918,10 @@ components:
         fieldName: fieldName
       properties:
         fieldName:
+          description: The field name.
           type: string
         template:
+          description: Template.
           type: string
       type: object
     events.v3.FilterMatcher:
@@ -885,11 +935,14 @@ components:
         value: value
       properties:
         fieldName:
+          description: The field name.
           type: string
         value:
+          description: The value.
           type: string
       type: object
     notification_center.ConnectorType:
+      description: Connector type.
       enum:
       - CONNECTOR_TYPE_UNSPECIFIED
       - SLACK
@@ -898,8 +951,10 @@ components:
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
       - EMAIL
+      - PAGERDUTY_INCIDENTS
       type: string
     notification_center.EntityType:
+      description: Entity type.
       enum:
       - ENTITY_TYPE_UNSPECIFIED
       - ALERTS
@@ -907,6 +962,7 @@ components:
       - CASES
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR

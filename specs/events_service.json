@@ -11,7 +11,7 @@
           "Events Service"
         ],
         "summary": "List Alert Events",
-        "description": "No description available",
+        "description": "Returns all alert events.",
         "externalDocs": {
           "url": ""
         },
@@ -20,10 +20,12 @@
           {
             "in": "query",
             "name": "alert_ids",
+            "description": "Alert version IDs to filter events by",
             "schema": {
               "example": [
                 "32144a8a-7ee0-4c16-a093-2bf1f9c12e1e"
               ],
+              "description": "Alert version IDs to filter events by",
               "type": "array",
               "items": {
                 "description": "Alert version IDs to filter events by",
@@ -35,6 +37,7 @@
           {
             "in": "query",
             "name": "timestamp_range",
+            "description": "Time range to search for events",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -44,10 +47,12 @@
               "type": "object",
               "properties": {
                 "from": {
+                  "description": "Inclusive start of the time range.",
                   "type": "string",
                   "format": "date-time"
                 },
                 "to": {
+                  "description": "Inclusive end of the time range.",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -62,6 +67,7 @@
           {
             "in": "query",
             "name": "cx_event_labels",
+            "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
             "schema": {
               "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
               "type": "object",
@@ -75,7 +81,9 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "Ordering criteria for the returned events.",
             "schema": {
+              "description": "Ordering criteria for the returned events.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -94,16 +102,19 @@
           {
             "in": "query",
             "name": "pagination",
+            "description": "Pagination parameters for the response.",
             "schema": {
               "type": "object",
               "properties": {
                 "pageSize": {
                   "example": 10,
+                  "description": "Maximum number of results to return per page.",
                   "type": "integer",
                   "format": "int64"
                 },
                 "pageToken": {
                   "example": "test",
+                  "description": "Opaque token for fetching the next page of results.",
                   "type": "string"
                 }
               }
@@ -149,7 +160,7 @@
           "Events Service"
         ],
         "summary": "List Events",
-        "description": "No description available",
+        "description": "Returns a list of alert events matching the specified filters.",
         "externalDocs": {
           "url": ""
         },
@@ -158,6 +169,7 @@
           {
             "in": "query",
             "name": "filter",
+            "description": "Filter criteria for events.",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -170,8 +182,10 @@
                   "example": [
                     "test_key"
                   ],
+                  "description": "List of event attribute keys to include when retrieving event data.",
                   "type": "array",
                   "items": {
+                    "description": "List of event attribute keys to include when retrieving event data.",
                     "type": "string"
                   }
                 },
@@ -181,8 +195,10 @@
                   "example": [
                     "test_type"
                   ],
+                  "description": "List of event type identifiers to include in the results.",
                   "type": "array",
                   "items": {
+                    "description": "List of event type identifiers to include in the results.",
                     "type": "string"
                   }
                 },
@@ -199,7 +215,9 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "Ordering criteria for the returned events.",
             "schema": {
+              "description": "Ordering criteria for the returned events.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -218,16 +236,19 @@
           {
             "in": "query",
             "name": "pagination",
+            "description": "Pagination parameters for the response.",
             "schema": {
               "type": "object",
               "properties": {
                 "pageSize": {
                   "example": 10,
+                  "description": "Maximum number of results to return per page.",
                   "type": "integer",
                   "format": "int64"
                 },
                 "pageToken": {
                   "example": "test",
+                  "description": "Opaque token for fetching the next page of results.",
                   "type": "string"
                 }
               }
@@ -273,7 +294,7 @@
           "Events Service"
         ],
         "summary": "List Events Count",
-        "description": "No description available",
+        "description": "Returns the count of alert events matching the given filters.",
         "externalDocs": {
           "url": ""
         },
@@ -282,6 +303,7 @@
           {
             "in": "query",
             "name": "filter",
+            "description": "Filter criteria for events.",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -294,8 +316,10 @@
                   "example": [
                     "test_key"
                   ],
+                  "description": "List of event attribute keys to include when retrieving event data.",
                   "type": "array",
                   "items": {
+                    "description": "List of event attribute keys to include when retrieving event data.",
                     "type": "string"
                   }
                 },
@@ -305,8 +329,10 @@
                   "example": [
                     "test_type"
                   ],
+                  "description": "List of event type identifiers to include in the results.",
                   "type": "array",
                   "items": {
+                    "description": "List of event type identifiers to include in the results.",
                     "type": "string"
                   }
                 },
@@ -359,7 +385,7 @@
           "Events Service"
         ],
         "summary": "Batch Get Event",
-        "description": "No description available",
+        "description": "Returns a list of alert events matching the given filters.",
         "externalDocs": {
           "url": ""
         },
@@ -368,9 +394,12 @@
           {
             "in": "query",
             "name": "ids",
+            "description": "The ids.",
             "schema": {
+              "description": "The ids.",
               "type": "array",
               "items": {
+                "description": "The ids.",
                 "type": "string"
               }
             },
@@ -379,7 +408,9 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "Ordering criteria for the returned events.",
             "schema": {
+              "description": "Ordering criteria for the returned events.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -398,16 +429,19 @@
           {
             "in": "query",
             "name": "pagination",
+            "description": "Pagination parameters for the response.",
             "schema": {
               "type": "object",
               "properties": {
                 "pageSize": {
                   "example": 10,
+                  "description": "Maximum number of results to return per page.",
                   "type": "integer",
                   "format": "int64"
                 },
                 "pageToken": {
                   "example": "test",
+                  "description": "Opaque token for fetching the next page of results.",
                   "type": "string"
                 }
               }
@@ -417,6 +451,7 @@
           {
             "in": "query",
             "name": "filter",
+            "description": "Optional filter to narrow the set of returned events.",
             "schema": {
               "type": "object",
               "properties": {
@@ -464,7 +499,7 @@
           "Events Service"
         ],
         "summary": "Get Events Statistics",
-        "description": "No description available",
+        "description": "Returns statistical aggregates for alert events.",
         "externalDocs": {
           "url": ""
         },
@@ -473,6 +508,7 @@
           {
             "in": "query",
             "name": "filter",
+            "description": "Filter criteria for events.",
             "schema": {
               "externalDocs": {
                 "url": ""
@@ -485,8 +521,10 @@
                   "example": [
                     "test_key"
                   ],
+                  "description": "List of event attribute keys to include when retrieving event data.",
                   "type": "array",
                   "items": {
+                    "description": "List of event attribute keys to include when retrieving event data.",
                     "type": "string"
                   }
                 },
@@ -496,8 +534,10 @@
                   "example": [
                     "test_type"
                   ],
+                  "description": "List of event type identifiers to include in the results.",
                   "type": "array",
                   "items": {
+                    "description": "List of event type identifiers to include in the results.",
                     "type": "string"
                   }
                 },
@@ -550,7 +590,7 @@
           "Events Service"
         ],
         "summary": "Get Event",
-        "description": "No description available",
+        "description": "Returns the alert event with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -559,9 +599,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier of the alert event to retrieve.",
             "required": true,
             "schema": {
               "example": "test",
+              "description": "Unique identifier of the alert event to retrieve.",
               "type": "string"
             },
             "style": "simple"
@@ -569,7 +611,9 @@
           {
             "in": "query",
             "name": "order_bys",
+            "description": "The order bys.",
             "schema": {
+              "description": "The order bys.",
               "type": "array",
               "items": {
                 "type": "object",
@@ -588,16 +632,19 @@
           {
             "in": "query",
             "name": "pagination",
+            "description": "Pagination parameters for the response.",
             "schema": {
               "type": "object",
               "properties": {
                 "pageSize": {
                   "example": 10,
+                  "description": "Maximum number of results to return per page.",
                   "type": "integer",
                   "format": "int64"
                 },
                 "pageToken": {
                   "example": "test",
+                  "description": "Opaque token for fetching the next page of results.",
                   "type": "string"
                 }
               }
@@ -641,17 +688,24 @@
   "components": {
     "schemas": {
       "BatchGetEventResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the details of an alert event.",
         "type": "object",
         "properties": {
           "events": {
+            "description": "List of events.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/CxEventSingleOrMultiple"
             }
           },
           "notFoundIds": {
+            "description": "The not found ids.",
             "type": "array",
             "items": {
+              "description": "The not found ids.",
               "type": "string"
             }
           },
@@ -671,43 +725,52 @@
         "properties": {
           "companyId": {
             "example": 1,
+            "description": "The company id.",
             "type": "integer",
             "format": "int32"
           },
           "cxEventDedupKey": {
             "example": "test_dedup_key",
+            "description": "The cx event dedup key.",
             "type": "string"
           },
           "cxEventKey": {
             "example": "test",
+            "description": "The cx event key.",
             "type": "string"
           },
           "cxEventLabels": {
+            "description": "The cx event labels.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "cxEventMetadata": {
+            "description": "The cx event metadata.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
             }
           },
           "cxEventPayload": {
+            "description": "The cx event payload.",
             "type": "object"
           },
           "cxEventPayloadType": {
             "example": "test_payload_type",
+            "description": "The cx event payload type.",
             "type": "string"
           },
           "cxEventTimestamp": {
-            "example": "1714857600",
+            "example": "2024-05-05T00:00:00.000Z",
+            "description": "The cx event timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "cxEventType": {
             "example": "test_type",
+            "description": "The cx event type.",
             "type": "string"
           }
         },
@@ -731,6 +794,7 @@
         "type": "object",
         "properties": {
           "events": {
+            "description": "List of events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
@@ -744,10 +808,10 @@
       "CxEventSingleOrMultiple": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
           },
           {
-            "$ref": "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+            "$ref": "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
           }
         ]
       },
@@ -787,6 +851,7 @@
         "type": "object",
         "properties": {
           "fieldStatistics": {
+            "description": "The field statistics.",
             "type": "object",
             "additionalProperties": {
               "type": "string",
@@ -798,10 +863,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -880,12 +945,14 @@
         "type": "object",
         "properties": {
           "cxEventLabelsFieldStatistics": {
+            "description": "The cx event labels field statistics.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/FieldStatistics"
             }
           },
           "cxEventMetadataFieldStatistics": {
+            "description": "The cx event metadata field statistics.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/FieldStatistics"
@@ -905,6 +972,7 @@
         "type": "object",
         "properties": {
           "events": {
+            "description": "List of events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
@@ -928,11 +996,13 @@
         "properties": {
           "count": {
             "example": "10",
+            "description": "Number of items.",
             "type": "string",
             "format": "uint64"
           },
           "reachedLimit": {
             "example": false,
+            "description": "The reached limit.",
             "type": "boolean"
           }
         },
@@ -963,6 +1033,7 @@
         ]
       },
       "events.v3.OrderByDirection": {
+        "description": "Order by direction.",
         "type": "string",
         "enum": [
           "ORDER_BY_DIRECTION_UNSPECIFIED",
@@ -971,6 +1042,7 @@
         ]
       },
       "events.v3.OrderByFields": {
+        "description": "Order by fields.",
         "type": "string",
         "enum": [
           "ORDER_BY_FIELDS_UNSPECIFIED",
@@ -978,20 +1050,27 @@
         ]
       },
       "events.v3.PaginationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Pagination metadata returned alongside paginated list responses.",
         "type": "object",
         "properties": {
           "nextPageToken": {
             "example": "test",
+            "description": "Token for fetching the next page of results.",
             "type": "string"
           },
           "totalSize": {
             "example": 10,
+            "description": "Total number of results.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
@@ -999,6 +1078,10 @@
         ]
       },
       "v3.GetEventResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the details of an alert event.",
         "type": "object",
         "properties": {
           "event": {
@@ -1018,6 +1101,7 @@
         "type": "object",
         "properties": {
           "events": {
+            "description": "List of events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"

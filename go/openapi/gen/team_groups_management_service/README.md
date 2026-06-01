@@ -80,7 +80,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceCreateTeamGroup**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicecreateteamgroup) | **Post** /aaa/team-groups/v2 | Create Team Group
 *TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceDeleteTeamGroup**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicedeleteteamgroup) | **Delete** /aaa/team-groups/v2/{group_id} | Delete Team Group
-*TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceGetGroupUsers**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicegetgroupusers) | **Get** /aaa/team-groups/v2/{group_id}/users | Get Group Users
+*TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceGetGroupUsers**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicegetgroupusers) | **Get** /aaa/team-groups/v2/{group_id}/users/list | Get Group Users
 *TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceGetTeamGroup**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicegetteamgroup) | **Get** /aaa/team-groups/v2/id/{group_id} | Get Team Group
 *TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceGetTeamGroupByName**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicegetteamgroupbyname) | **Get** /aaa/team-groups/v2/name/{name} | Get Team Group By Name
 *TeamGroupsManagementServiceAPI* | [**GroupsMgmtServiceGetTeamGroups**](docs/TeamGroupsManagementServiceAPI.md#groupsmgmtservicegetteamgroups) | **Get** /aaa/team-groups/v2 | Get Team Groups

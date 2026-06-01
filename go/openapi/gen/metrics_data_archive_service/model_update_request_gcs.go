@@ -24,6 +24,7 @@ var _ MappedNullable = &UpdateRequestGcs{}
 // UpdateRequestGcs This data structure is used to update the configuration of a tenant.
 type UpdateRequestGcs struct {
 	Gcs GcsConfig `json:"gcs"`
+	// Archive retention period in days.
 	RetentionDays *int64 `json:"retentionDays,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AlertUniqueIds type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertUniqueIds{}
 
-// AlertUniqueIds struct for AlertUniqueIds
+// AlertUniqueIds Alert unique ids.
 type AlertUniqueIds struct {
+	// The value.
 	Value []string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

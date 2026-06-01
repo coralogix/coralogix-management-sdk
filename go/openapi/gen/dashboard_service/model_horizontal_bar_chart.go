@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the HorizontalBarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChart{}
 
-// HorizontalBarChart struct for HorizontalBarChart
+// HorizontalBarChart Horizontal bar chart.
 type HorizontalBarChart struct {
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`

@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the RecurringDynamicWeekly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringDynamicWeekly{}
 
-// RecurringDynamicWeekly struct for RecurringDynamicWeekly
+// RecurringDynamicWeekly Dynamic.
 type RecurringDynamicWeekly struct {
+	// Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
+	// ISO 8601 date after which the recurring rule stops being applied.
 	TerminationDate *string `json:"terminationDate,omitempty"`
 	Timeframe *Timeframe `json:"timeframe,omitempty"`
 	Weekly Weekly `json:"weekly"`

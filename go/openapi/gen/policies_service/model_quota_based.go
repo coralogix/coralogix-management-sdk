@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QuotaBased type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaBased{}
 
-// QuotaBased struct for QuotaBased
+// QuotaBased Quota based.
 type QuotaBased struct {
+	// Ordered list of usage tiers that map daily quota consumption percentages to priority levels.
 	UsageTiers []UsageTier `json:"usageTiers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

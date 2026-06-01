@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the IDPDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IDPDetails{}
 
-// IDPDetails struct for IDPDetails
+// IDPDetails Idp details.
 type IDPDetails struct {
+	// Icon identifier.
 	Icon *string `json:"icon,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

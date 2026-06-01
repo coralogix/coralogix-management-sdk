@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertDefStatus the model 'AlertDefStatus'
+// AlertDefStatus Alert def status.
 type AlertDefStatus string
 
 // List of AlertDefStatus

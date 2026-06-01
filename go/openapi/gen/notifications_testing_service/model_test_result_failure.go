@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the TestResultFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestResultFailure{}
 
-// TestResultFailure struct for TestResultFailure
+// TestResultFailure Failure.
 type TestResultFailure struct {
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
+	// The status code.
 	StatusCode *int64 `json:"statusCode,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

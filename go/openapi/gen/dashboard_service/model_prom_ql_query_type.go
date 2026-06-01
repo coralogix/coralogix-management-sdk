@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// PromQLQueryType the model 'PromQLQueryType'
+// PromQLQueryType Prom ql query type.
 type PromQLQueryType string
 
 // List of PromQLQueryType

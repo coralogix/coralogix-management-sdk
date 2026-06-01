@@ -22,14 +22,23 @@ var _ MappedNullable = &ExtensionRevision{}
 
 // ExtensionRevision struct for ExtensionRevision
 type ExtensionRevision struct {
+	// The binaries.
 	Binaries []ExtensionBinary `json:"binaries,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The excerpt.
 	Excerpt *string `json:"excerpt,omitempty"`
+	// The integration details.
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
+	// The is testing.
 	IsTesting *bool `json:"isTesting,omitempty"`
+	// List of items.
 	Items []ExtensionItem `json:"items,omitempty"`
+	// List of labels.
 	Labels []string `json:"labels,omitempty"`
+	// The permission denied items.
 	PermissionDeniedItems []ExtensionItem `json:"permissionDeniedItems,omitempty"`
+	// Version.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

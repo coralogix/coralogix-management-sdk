@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TracingFilterOperationType the model 'TracingFilterOperationType'
+// TracingFilterOperationType Tracing filter operation type.
 type TracingFilterOperationType string
 
 // List of TracingFilterOperationType

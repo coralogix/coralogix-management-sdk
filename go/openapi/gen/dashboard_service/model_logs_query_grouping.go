@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the LogsQueryGrouping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsQueryGrouping{}
 
-// LogsQueryGrouping struct for LogsQueryGrouping
+// LogsQueryGrouping Logs query.grouping.
 type LogsQueryGrouping struct {
+	// List of aggregations
 	Aggregations []LogsQueryAggregation `json:"aggregations,omitempty"`
+	// List of field names to group the query results
 	GroupBy []string `json:"groupBy,omitempty"`
+	// List of observation fields to group the results
 	GroupBys []ObservationField `json:"groupBys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

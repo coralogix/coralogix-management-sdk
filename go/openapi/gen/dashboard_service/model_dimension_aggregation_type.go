@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DimensionAggregationType the model 'DimensionAggregationType'
+// DimensionAggregationType Dimension aggregation type.
 type DimensionAggregationType string
 
 // List of DimensionAggregationType

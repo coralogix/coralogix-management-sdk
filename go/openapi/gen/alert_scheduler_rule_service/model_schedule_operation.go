@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ScheduleOperation the model 'ScheduleOperation'
+// ScheduleOperation Schedule operation.
 type ScheduleOperation string
 
 // List of ScheduleOperation

@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the StringValueLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StringValueLabel{}
 
-// StringValueLabel struct for StringValueLabel
+// StringValueLabel String value label.
 type StringValueLabel struct {
+	// The label.
 	Label *string `json:"label,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSourceConstantList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceConstantList{}
 
-// MultiSelectSourceConstantList struct for MultiSelectSourceConstantList
+// MultiSelectSourceConstantList Source.
 type MultiSelectSourceConstantList struct {
 	ConstantList ConstantListSource `json:"constantList"`
 	AdditionalProperties map[string]interface{}

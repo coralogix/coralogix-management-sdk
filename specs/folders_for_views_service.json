@@ -67,7 +67,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -140,6 +141,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier for folders",
             "required": true,
             "schema": {
               "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
@@ -179,6 +181,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier for folders",
             "required": true,
             "schema": {
               "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
@@ -209,15 +212,20 @@
   "components": {
     "schemas": {
       "DeleteViewFolderResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a view folder.",
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -288,9 +296,14 @@
         ]
       },
       "ListViewFoldersResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of view folders.",
         "type": "object",
         "properties": {
           "folders": {
+            "description": "The folders.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ViewFolder"
@@ -347,6 +360,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

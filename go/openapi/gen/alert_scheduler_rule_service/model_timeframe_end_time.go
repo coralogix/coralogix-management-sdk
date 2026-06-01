@@ -21,10 +21,13 @@ var _ = bytes.MinRead
 // checks if the TimeframeEndTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeframeEndTime{}
 
-// TimeframeEndTime struct for TimeframeEndTime
+// TimeframeEndTime Timeframe.
 type TimeframeEndTime struct {
+	// End time.
 	EndTime string `json:"endTime"`
+	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
+	// Timezone.
 	Timezone *string `json:"timezone,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

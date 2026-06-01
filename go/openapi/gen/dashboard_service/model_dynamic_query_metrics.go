@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DynamicQueryMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryMetrics{}
 
-// DynamicQueryMetrics struct for DynamicQueryMetrics
+// DynamicQueryMetrics Discriminated union of possible query types for the dynamic widget.
 type DynamicQueryMetrics struct {
 	Metrics Metrics `json:"metrics"`
 	AdditionalProperties map[string]interface{}

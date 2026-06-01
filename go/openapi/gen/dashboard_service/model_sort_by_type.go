@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SortByType the model 'SortByType'
+// SortByType Sort by type.
 type SortByType string
 
 // List of SortByType

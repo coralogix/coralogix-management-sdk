@@ -26,6 +26,7 @@ type View1 struct {
 	Filters *SelectedFilters `json:"filters,omitempty"`
 	// Unique identifier for folders
 	FolderId *string `json:"folderId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	// The is compact mode.
 	IsCompactMode *bool `json:"isCompactMode,omitempty"`
 	// View name
 	Name string `json:"name"`

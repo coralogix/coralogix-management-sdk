@@ -22,6 +22,7 @@ var _ MappedNullable = &RegexMapping{}
 
 // RegexMapping Regex pattern-based color and label mapping
 type RegexMapping struct {
+	// List of regex pattern-to-display mapping sections
 	Sections []MappingSection `json:"sections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

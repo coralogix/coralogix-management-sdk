@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableSourceV2Static type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSourceV2Static{}
 
-// VariableSourceV2Static struct for VariableSourceV2Static
+// VariableSourceV2Static Variable source v2.
 type VariableSourceV2Static struct {
 	Static StaticSource `json:"static"`
 	AdditionalProperties map[string]interface{}

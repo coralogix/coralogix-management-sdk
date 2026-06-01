@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the StaticSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StaticSource{}
 
-// StaticSource struct for StaticSource
+// StaticSource Static source.
 type StaticSource struct {
 	AllOption *AllOption `json:"allOption,omitempty"`
+	// List of values.
 	Values []ValueLabel `json:"values,omitempty"`
 	ValuesOrderDirection *OrderDirection `json:"valuesOrderDirection,omitempty"`
 	AdditionalProperties map[string]interface{}

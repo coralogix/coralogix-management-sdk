@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AttachmentConfigPolicy the model 'AttachmentConfigPolicy'
+// AttachmentConfigPolicy Attachment config policy.
 type AttachmentConfigPolicy string
 
 // List of AttachmentConfigPolicy

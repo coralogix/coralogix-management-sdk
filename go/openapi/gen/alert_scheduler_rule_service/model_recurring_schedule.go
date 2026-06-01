@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the RecurringSchedule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringSchedule{}
 
-// RecurringSchedule struct for RecurringSchedule
+// RecurringSchedule Recurring schedule that activates the alert scheduler rule on a repeating cadence.
 type RecurringSchedule struct {
 	Schedule RecurringDynamic `json:"schedule"`
 	AdditionalProperties map[string]interface{}

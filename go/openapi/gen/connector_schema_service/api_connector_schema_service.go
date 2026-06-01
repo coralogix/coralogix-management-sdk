@@ -28,6 +28,7 @@ type ApiConnectorSchemaServiceGetConnectorSchemaRequest struct {
 	type_ *NotificationCenterConnectorType
 }
 
+// Connector type whose schema to retrieve.
 func (r ApiConnectorSchemaServiceGetConnectorSchemaRequest) Type_(type_ NotificationCenterConnectorType) ApiConnectorSchemaServiceGetConnectorSchemaRequest {
 	r.type_ = &type_
 	return r
@@ -40,7 +41,7 @@ func (r ApiConnectorSchemaServiceGetConnectorSchemaRequest) Execute() (*GetConne
 /*
 ConnectorSchemaServiceGetConnectorSchema Get Connector Schema
 
-No description available
+Returns the schema definition for notification connectors.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorSchemaServiceGetConnectorSchemaRequest

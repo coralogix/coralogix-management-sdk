@@ -22,8 +22,11 @@ var _ MappedNullable = &ConfigurationBlock{}
 
 // ConfigurationBlock struct for ConfigurationBlock
 type ConfigurationBlock struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

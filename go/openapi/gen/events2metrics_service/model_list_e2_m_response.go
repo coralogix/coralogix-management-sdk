@@ -23,6 +23,7 @@ var _ MappedNullable = &ListE2MResponse{}
 
 // ListE2MResponse This is the response obtained when listing all event to metric definitions
 type ListE2MResponse struct {
+	// The e2m.
 	E2m []E2M `json:"e2m"`
 	AdditionalProperties map[string]interface{}
 }

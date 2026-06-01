@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricTimeWindowValue the model 'MetricTimeWindowValue'
+// MetricTimeWindowValue Metric time window value.
 type MetricTimeWindowValue string
 
 // List of MetricTimeWindowValue

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the MatchEntityTypeAndSubTypeCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MatchEntityTypeAndSubTypeCondition{}
 
-// MatchEntityTypeAndSubTypeCondition struct for MatchEntityTypeAndSubTypeCondition
+// MatchEntityTypeAndSubTypeCondition Match entity type and sub type condition.
 type MatchEntityTypeAndSubTypeCondition struct {
+	// The entity sub type.
 	EntitySubType *string `json:"entitySubType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

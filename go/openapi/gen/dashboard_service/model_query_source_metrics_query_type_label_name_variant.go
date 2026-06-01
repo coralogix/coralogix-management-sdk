@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceMetricsQueryTypeLabelNameVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryTypeLabelNameVariant{}
 
-// QuerySourceMetricsQueryTypeLabelNameVariant struct for QuerySourceMetricsQueryTypeLabelNameVariant
+// QuerySourceMetricsQueryTypeLabelNameVariant Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.
 type QuerySourceMetricsQueryTypeLabelNameVariant struct {
 	LabelName QuerySourceMetricsQueryTypeLabelName `json:"labelName"`
 	AdditionalProperties map[string]interface{}

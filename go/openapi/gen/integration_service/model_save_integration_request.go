@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SaveIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveIntegrationRequest{}
 
-// SaveIntegrationRequest struct for SaveIntegrationRequest
+// SaveIntegrationRequest Request for creating an integration deployment.
 type SaveIntegrationRequest struct {
 	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}

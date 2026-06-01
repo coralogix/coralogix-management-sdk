@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ViewType the model 'ViewType'
+// ViewType View type.
 type ViewType string
 
 // List of ViewType

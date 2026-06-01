@@ -23,6 +23,7 @@ var _ MappedNullable = &DeleteSloRequest{}
 
 // DeleteSloRequest Request to delete an existing SLO.
 type DeleteSloRequest struct {
+	// Unique identifier.
 	Id string `json:"id"`
 	AdditionalProperties map[string]interface{}
 }

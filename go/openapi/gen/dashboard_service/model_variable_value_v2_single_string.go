@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableValueV2SingleString type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2SingleString{}
 
-// VariableValueV2SingleString struct for VariableValueV2SingleString
+// VariableValueV2SingleString Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2SingleString struct {
 	SingleString SingleStringValue `json:"singleString"`
 	AdditionalProperties map[string]interface{}

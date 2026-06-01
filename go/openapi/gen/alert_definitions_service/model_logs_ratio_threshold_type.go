@@ -30,10 +30,12 @@ type LogsRatioThresholdType struct {
 	GroupByFor *LogsRatioGroupByFor `json:"groupByFor,omitempty"`
 	// The configuration for ignoring infinity values in the ratio
 	IgnoreInfinity *bool `json:"ignoreInfinity,omitempty"`
+	// The notification payload filter.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	Numerator *V3LogsFilter `json:"numerator,omitempty"`
 	// The alias for the numerator filter, used for display purposes
 	NumeratorAlias *string `json:"numeratorAlias,omitempty"`
+	// The rules for the ratio alert
 	Rules []LogsRatioRules `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 	AdditionalProperties map[string]interface{}

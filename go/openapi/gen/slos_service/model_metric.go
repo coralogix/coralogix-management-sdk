@@ -22,6 +22,7 @@ var _ MappedNullable = &Metric{}
 
 // Metric Definition of a metric used in SLOs
 type Metric struct {
+	// Query string.
 	Query *string `json:"query,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

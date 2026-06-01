@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the SpanFieldMetadataField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldMetadataField{}
 
-// SpanFieldMetadataField struct for SpanFieldMetadataField
+// SpanFieldMetadataField Span field.
 type SpanFieldMetadataField struct {
 	MetadataField MetadataField `json:"metadataField"`
 	AdditionalProperties map[string]interface{}

@@ -22,7 +22,9 @@ var _ MappedNullable = &PresetInfo{}
 
 // PresetInfo This data structure represents a preset set of permissions on an API key.
 type PresetInfo struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the LineChartDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartDataprimeQuery{}
 
-// LineChartDataprimeQuery struct for LineChartDataprimeQuery
+// LineChartDataprimeQuery A Dataprime variant of the query
 type LineChartDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	// List of query filters
 	Filters []FilterSource `json:"filters,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}

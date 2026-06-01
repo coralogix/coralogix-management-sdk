@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateAPIKeysStatusRequest{}
 
 // UpdateAPIKeysStatusRequest This data structure is used to update the status of specified API keys.
 type UpdateAPIKeysStatusRequest struct {
+	// The updates.
 	Updates []ApiKeyStatusUpdate `json:"updates,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

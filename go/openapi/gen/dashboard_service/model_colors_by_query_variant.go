@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ColorsByQueryVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ColorsByQueryVariant{}
 
-// ColorsByQueryVariant struct for ColorsByQueryVariant
+// ColorsByQueryVariant Defines the coloring strategy applied to widget data series.
 type ColorsByQueryVariant struct {
+	// Colors by query.
 	Query map[string]interface{} `json:"query"`
 	AdditionalProperties map[string]interface{}
 }

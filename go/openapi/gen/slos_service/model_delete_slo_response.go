@@ -22,6 +22,7 @@ var _ MappedNullable = &DeleteSloResponse{}
 
 // DeleteSloResponse Response after deleting an existing SLO.
 type DeleteSloResponse struct {
+	// The effected slo alert ids.
 	EffectedSloAlertIds []string `json:"effectedSloAlertIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

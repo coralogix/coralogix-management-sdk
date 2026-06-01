@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSourceMetricLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceMetricLabel{}
 
-// MultiSelectSourceMetricLabel struct for MultiSelectSourceMetricLabel
+// MultiSelectSourceMetricLabel Source.
 type MultiSelectSourceMetricLabel struct {
 	MetricLabel MetricLabelSource `json:"metricLabel"`
 	AdditionalProperties map[string]interface{}

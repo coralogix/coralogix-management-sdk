@@ -20,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the DataprimeSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSource{}
 
-// DataprimeSource struct for DataprimeSource
+// DataprimeSource Dataprime source.
 type DataprimeSource struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
+	// The label fields.
 	LabelFields []ObservationField `json:"labelFields,omitempty"`
+	// The message template.
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
 	Query *CommonDataprimeQuery `json:"query,omitempty"`

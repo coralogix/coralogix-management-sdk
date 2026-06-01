@@ -23,6 +23,7 @@ var _ MappedNullable = &AlertSchedulerRuleWithActiveTimeframe{}
 // AlertSchedulerRuleWithActiveTimeframe struct for AlertSchedulerRuleWithActiveTimeframe
 type AlertSchedulerRuleWithActiveTimeframe struct {
 	AlertSchedulerRule *AlertSchedulerRule `json:"alertSchedulerRule,omitempty"`
+	// The next active timeframes.
 	NextActiveTimeframes []ActiveTimeframe `json:"nextActiveTimeframes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

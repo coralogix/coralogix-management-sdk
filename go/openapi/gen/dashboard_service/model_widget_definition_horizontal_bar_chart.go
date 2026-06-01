@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionHorizontalBarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionHorizontalBarChart{}
 
-// WidgetDefinitionHorizontalBarChart struct for WidgetDefinitionHorizontalBarChart
+// WidgetDefinitionHorizontalBarChart Definition.
 type WidgetDefinitionHorizontalBarChart struct {
 	HorizontalBarChart HorizontalBarChart `json:"horizontalBarChart"`
 	AdditionalProperties map[string]interface{}

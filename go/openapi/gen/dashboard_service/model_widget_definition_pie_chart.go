@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionPieChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionPieChart{}
 
-// WidgetDefinitionPieChart struct for WidgetDefinitionPieChart
+// WidgetDefinitionPieChart Definition.
 type WidgetDefinitionPieChart struct {
 	PieChart WidgetsPieChart `json:"pieChart"`
 	AdditionalProperties map[string]interface{}

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetRetentionsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRetentionsResponse{}
 
-// GetRetentionsResponse struct for GetRetentionsResponse
+// GetRetentionsResponse Response containing the current data retention settings.
 type GetRetentionsResponse struct {
+	// The retentions.
 	Retentions []ArchiveV1Retention `json:"retentions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

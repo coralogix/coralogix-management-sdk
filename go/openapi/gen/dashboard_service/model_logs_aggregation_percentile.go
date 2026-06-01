@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LogsAggregationPercentile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationPercentile{}
 
-// LogsAggregationPercentile struct for LogsAggregationPercentile
+// LogsAggregationPercentile Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile.
 type LogsAggregationPercentile struct {
 	Percentile Percentile `json:"percentile"`
 	AdditionalProperties map[string]interface{}

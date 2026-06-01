@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AggType the model 'AggType'
+// AggType Agg type.
 type AggType string
 
 // List of AggType

@@ -24,7 +24,9 @@ var _ MappedNullable = &UpdateApiKeyRequest{}
 type UpdateApiKeyRequest struct {
 	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.
 	AccessPolicy *string `json:"accessPolicy,omitempty"`
+	// Whether the API key is active. Set to false to deactivate without deleting.
 	IsActive *bool `json:"isActive,omitempty"`
+	// New display name for the API key.
 	NewName *string `json:"newName,omitempty"`
 	Permissions *UpdateApiKeyRequestPermissions `json:"permissions,omitempty"`
 	Presets *Presets `json:"presets,omitempty"`

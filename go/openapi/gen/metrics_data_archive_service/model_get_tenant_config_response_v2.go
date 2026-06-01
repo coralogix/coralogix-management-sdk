@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetTenantConfigResponseV2 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTenantConfigResponseV2{}
 
-// GetTenantConfigResponseV2 struct for GetTenantConfigResponseV2
+// GetTenantConfigResponseV2 Response containing the current metrics tenant configuration.
 type GetTenantConfigResponseV2 struct {
 	TenantConfig *TenantConfigV2 `json:"tenantConfig,omitempty"`
 	AdditionalProperties map[string]interface{}

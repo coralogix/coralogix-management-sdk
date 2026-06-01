@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TooltipType the model 'TooltipType'
+// TooltipType Tooltip type.
 type TooltipType string
 
 // List of TooltipType

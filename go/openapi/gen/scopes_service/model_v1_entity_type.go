@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V1EntityType the model 'V1EntityType'
+// V1EntityType Entity type.
 type V1EntityType string
 
 // List of v1.EntityType

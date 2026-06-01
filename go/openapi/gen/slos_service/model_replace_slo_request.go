@@ -23,6 +23,7 @@ var _ MappedNullable = &ReplaceSloRequest{}
 
 // ReplaceSloRequest Request to replace an existing SLO.
 type ReplaceSloRequest struct {
+	// Whether to silence data validations.
 	// Deprecated
 	SilenceDataValidations *bool `json:"silenceDataValidations,omitempty"`
 	Slo Slo `json:"slo"`

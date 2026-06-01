@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TestTemplateRenderResultFailure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestTemplateRenderResultFailure{}
 
-// TestTemplateRenderResultFailure struct for TestTemplateRenderResultFailure
+// TestTemplateRenderResultFailure Indicates the template render test failed, with a message and failure reason.
 type TestTemplateRenderResultFailure struct {
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	Reason *FailureReason `json:"reason,omitempty"`
 	AdditionalProperties map[string]interface{}

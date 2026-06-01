@@ -22,8 +22,11 @@ var _ MappedNullable = &IbmConfigV2{}
 
 // IbmConfigV2 This data structure is used to configure an IBM bucket.
 type IbmConfigV2 struct {
+	// The crn.
 	Crn *string `json:"crn,omitempty"`
+	// Endpoint.
 	Endpoint *string `json:"endpoint,omitempty"`
+	// The service crn.
 	ServiceCrn *string `json:"serviceCrn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

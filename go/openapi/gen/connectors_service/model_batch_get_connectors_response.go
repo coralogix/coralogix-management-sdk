@@ -22,7 +22,9 @@ var _ MappedNullable = &BatchGetConnectorsResponse{}
 
 // BatchGetConnectorsResponse Response containing the requested connectors and any IDs not found
 type BatchGetConnectorsResponse struct {
+	// The connectors.
 	Connectors *map[string]Connector `json:"connectors,omitempty"`
+	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

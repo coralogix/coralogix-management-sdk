@@ -23,6 +23,7 @@ var _ MappedNullable = &LogsSimpleFilter{}
 // LogsSimpleFilter Basic filter configuration using a Lucene query and label filters
 type LogsSimpleFilter struct {
 	LabelFilters *LabelFilters `json:"labelFilters,omitempty"`
+	// The lucene query.
 	LuceneQuery *string `json:"luceneQuery,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

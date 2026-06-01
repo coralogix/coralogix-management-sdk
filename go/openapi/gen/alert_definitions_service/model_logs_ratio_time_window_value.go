@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsRatioTimeWindowValue the model 'LogsRatioTimeWindowValue'
+// LogsRatioTimeWindowValue Logs ratio time window value.
 type LogsRatioTimeWindowValue string
 
 // List of LogsRatioTimeWindowValue

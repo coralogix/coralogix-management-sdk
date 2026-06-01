@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the RevertDeploymentOfExtensionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RevertDeploymentOfExtensionRequest{}
 
-// RevertDeploymentOfExtensionRequest struct for RevertDeploymentOfExtensionRequest
+// RevertDeploymentOfExtensionRequest Request for undeploying an extension.
 type RevertDeploymentOfExtensionRequest struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// List of extension item IDs to retain after undeploying; all other items will be removed.
 	KeptExtensionItems []string `json:"keptExtensionItems,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

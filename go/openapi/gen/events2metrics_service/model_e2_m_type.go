@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// E2MType the model 'E2MType'
+// E2MType E2 m type.
 type E2MType string
 
 // List of E2MType

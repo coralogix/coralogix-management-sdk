@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the SyncRumDataResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SyncRumDataResponse{}
 
-// SyncRumDataResponse struct for SyncRumDataResponse
+// SyncRumDataResponse Response returned after syncing RUM data.
 type SyncRumDataResponse struct {
+	// The sync executed.
 	SyncExecuted *bool `json:"syncExecuted,omitempty"`
+	// The synced at.
 	SyncedAt *time.Time `json:"syncedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

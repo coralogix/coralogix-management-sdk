@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ActivityAnalysisStatus the model 'ActivityAnalysisStatus'
+// ActivityAnalysisStatus Activity analysis status.
 type ActivityAnalysisStatus string
 
 // List of ActivityAnalysisStatus

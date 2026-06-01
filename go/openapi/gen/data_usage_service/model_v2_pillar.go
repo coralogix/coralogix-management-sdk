@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V2Pillar the model 'V2Pillar'
+// V2Pillar Pillar.
 type V2Pillar string
 
 // List of v2.Pillar

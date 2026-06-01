@@ -7,39 +7,52 @@ servers:
 paths:
   /dataplans/data-usage/v2:
     get:
-      description: No description available
+      description: Returns data usage summary for the team.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDataUsage
       parameters:
-      - explode: true
+      - description: Date interval to query data usage over.
+        explode: true
         in: query
         name: date_range
         required: false
         schema:
           $ref: "#/components/schemas/Date_Range"
         style: form
-      - explode: true
+      - description: Aggregation resolution. Minimum supported value is 1h. Must be
+          between 1 hour and the date_range interval.
+        explode: true
         in: query
         name: resolution
         required: false
         schema:
+          description: Aggregation resolution. Minimum supported value is 1h. Must
+            be between 1 hour and the date_range interval.
           type: string
         style: form
-      - explode: true
+      - description: List of fields to aggregate results by (for example pillar and
+          priority).
+        explode: true
         in: query
         name: aggregate
         required: false
         schema:
+          description: List of fields to aggregate results by (for example pillar
+            and priority).
           items:
             $ref: "#/components/schemas/AggregateBy"
           type: array
         style: form
-      - explode: true
+      - description: Dimensions to filter results by; only entries that contain all
+          listed dimensions are returned.
+        explode: true
         in: query
         name: dimension_filters
         required: false
         schema:
+          description: Dimensions to filter results by; only entries that contain
+            all listed dimensions are returned.
           items:
             $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner"
           type: array
@@ -68,7 +81,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily/evaluation-tokens:
     post:
-      description: No description available
+      description: Returns daily evaluation token usage data for the specified period.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageEvaluationTokens
@@ -77,6 +90,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request"
+        required: true
       responses:
         "200":
           content:
@@ -101,7 +115,8 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily/processed-gbs:
     post:
-      description: No description available
+      description: Returns daily processed gigabytes usage data for the specified
+        period.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageProcessedGbs
@@ -110,6 +125,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DataUsageService_GetDailyUsageProcessedGbs_request"
+        required: true
       responses:
         "200":
           content:
@@ -134,7 +150,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/daily/units:
     post:
-      description: No description available
+      description: Returns daily units usage data for the specified period.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDailyUsageUnits
@@ -143,6 +159,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DataUsageService_GetDailyUsageUnits_request"
+        required: true
       responses:
         "200":
           content:
@@ -167,7 +184,7 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/export-status:
     get:
-      description: No description available
+      description: Returns the current export status for data usage.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetDataUsageMetricsExportStatus
@@ -194,7 +211,7 @@ paths:
       tags:
       - Data Usage Service
     post:
-      description: No description available
+      description: Triggers a data usage export.
       externalDocs:
         url: ""
       operationId: DataUsageService_UpdateDataUsageMetricsExportStatus
@@ -227,44 +244,55 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/logs/count:
     get:
-      description: No description available
+      description: Returns the log ingestion count for the team.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetLogsCount
       parameters:
-      - explode: true
+      - description: Date interval to query log ingestion counts over.
+        explode: true
         in: query
         name: date_range
         required: false
         schema:
           $ref: "#/components/schemas/Date_Range"
         style: form
-      - explode: true
+      - description: Aggregation resolution with second precision. Must be between
+          1 second and the date_range interval.
+        explode: true
         in: query
         name: resolution
         required: false
         schema:
+          description: Aggregation resolution with second precision. Must be between
+            1 second and the date_range interval.
           type: string
         style: form
-      - explode: true
+      - description: Optional scope filter that restricts results to the listed applications
+          and subsystems (full match).
+        explode: true
         in: query
         name: filters
         required: false
         schema:
           $ref: "#/components/schemas/Scopes_Filter"
         style: form
-      - explode: true
+      - description: "When true, aggregate the returned counts by subsystem name."
+        explode: true
         in: query
         name: subsystem_aggregation
         required: false
         schema:
+          description: "When true, aggregate the returned counts by subsystem name."
           type: boolean
         style: form
-      - explode: true
+      - description: "When true, aggregate the returned counts by application name."
+        explode: true
         in: query
         name: application_aggregation
         required: false
         schema:
+          description: "When true, aggregate the returned counts by application name."
           type: boolean
         style: form
       responses:
@@ -291,26 +319,33 @@ paths:
       - Data Usage Service
   /dataplans/data-usage/v2/spans/count:
     get:
-      description: No description available
+      description: Returns the span ingestion count for the team.
       externalDocs:
         url: ""
       operationId: DataUsageService_GetSpansCount
       parameters:
-      - explode: true
+      - description: Date interval to query span ingestion counts over.
+        explode: true
         in: query
         name: date_range
         required: false
         schema:
           $ref: "#/components/schemas/Date_Range"
         style: form
-      - explode: true
+      - description: Aggregation resolution with second precision. Must be between
+          1 second and the date_range interval.
+        explode: true
         in: query
         name: resolution
         required: false
         schema:
+          description: Aggregation resolution with second precision. Must be between
+            1 second and the date_range interval.
           type: string
         style: form
-      - explode: true
+      - description: Optional scope filter that restricts results to the listed applications
+          and subsystems (full match).
+        explode: true
         in: query
         name: filters
         required: false
@@ -357,24 +392,32 @@ components:
         sizeGb: 0.8008282
         units: 6.0274563
         dimensions:
-        - pillar: PILLAR_UNSPECIFIED
-        - pillar: PILLAR_UNSPECIFIED
+        - genericDimension:
+            value: value
+            key: key
+        - genericDimension:
+            value: value
+            key: key
         timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         dimensions:
+          description: The dimensions.
           items:
             $ref: "#/components/schemas/Dimension"
           type: array
         sizeGb:
+          description: The size gb.
           format: float
           type: number
         timestamp:
+          description: Timestamp.
           format: date-time
           type: string
         units:
+          description: The units.
           format: float
           type: number
       title: Data Usage Entry
@@ -393,10 +436,12 @@ components:
           value: 0.8008282
       properties:
         evaluations:
+          description: The evaluations.
           items:
             $ref: "#/components/schemas/Evaluation"
           type: array
         statsDate:
+          description: The stats date.
           format: date-time
           type: string
         totalTokens:
@@ -453,6 +498,7 @@ components:
         mediumTracingGbs:
           $ref: "#/components/schemas/v2.GB"
         statsDate:
+          description: The stats date.
           format: date-time
           type: string
         totalGbs:
@@ -513,6 +559,7 @@ components:
         mediumTracingUnits:
           $ref: "#/components/schemas/v2.Unit"
         statsDate:
+          description: The stats date.
           format: date-time
           type: string
         totalUnits:
@@ -520,12 +567,16 @@ components:
       type: object
     Dimension:
       oneOf:
-      - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
-      - $ref: "#/components/schemas/DimensionTier"
-      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionPriority"
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionTier"
     DimensionGenericDimension:
+      example:
+        genericDimension:
+          value: value
+          key: key
       properties:
         genericDimension:
           $ref: "#/components/schemas/GenericDimension"
@@ -533,8 +584,6 @@ components:
       - genericDimension
       type: object
     DimensionPillar:
-      example:
-        pillar: PILLAR_UNSPECIFIED
       properties:
         pillar:
           $ref: "#/components/schemas/v2.Pillar"
@@ -571,12 +620,13 @@ components:
         evaluationTokens:
           $ref: "#/components/schemas/Token"
         evaluatorName:
+          description: The evaluator name.
           type: string
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -626,19 +676,28 @@ components:
       type: object
     GenericDimension:
       description: This data structure represents a generic dimension.
+      example:
+        value: value
+        key: key
       externalDocs:
         description: Find out more about data usage.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         key:
+          description: The key.
           example: key
           type: string
         value:
+          description: The value.
           example: value
           type: string
       title: Generic Dimension
       type: object
     GetDailyUsageEvaluationTokensRequestDateRange:
+      description: Request for daily evaluation token usage data for the specified
+        period.
+      externalDocs:
+        url: ""
       properties:
         dateRange:
           $ref: "#/components/schemas/v2.DateRange"
@@ -646,6 +705,10 @@ components:
       - dateRange
       type: object
     GetDailyUsageEvaluationTokensRequestRange:
+      description: Request for daily evaluation token usage data for the specified
+        period.
+      externalDocs:
+        url: ""
       properties:
         range:
           $ref: "#/components/schemas/v2.Range"
@@ -653,6 +716,7 @@ components:
       - range
       type: object
     GetDailyUsageEvaluationTokensResponse:
+      description: Response containing daily evaluation token usage data.
       example:
         tokens:
         - evaluations:
@@ -675,13 +739,20 @@ components:
           statsDate: 2000-01-23T04:56:07.000+00:00
           totalTokens:
             value: 0.8008282
+      externalDocs:
+        url: ""
       properties:
         tokens:
+          description: List of tokens.
           items:
             $ref: "#/components/schemas/DetailedDailyEvaluationTokens"
           type: array
       type: object
     GetDailyUsageProcessedGbsRequestDateRange:
+      description: Request for daily processed gigabytes usage data for the specified
+        period.
+      externalDocs:
+        url: ""
       properties:
         dateRange:
           $ref: "#/components/schemas/v2.DateRange"
@@ -689,6 +760,10 @@ components:
       - dateRange
       type: object
     GetDailyUsageProcessedGbsRequestRange:
+      description: Request for daily processed gigabytes usage data for the specified
+        period.
+      externalDocs:
+        url: ""
       properties:
         range:
           $ref: "#/components/schemas/v2.Range"
@@ -696,6 +771,7 @@ components:
       - range
       type: object
     GetDailyUsageProcessedGbsResponse:
+      description: Response containing daily processed gigabytes usage data.
       example:
         gbs:
         - blockedMetricsGbs:
@@ -748,13 +824,19 @@ components:
             value: 0.8008282
           mediumTracingGbs:
             value: 0.8008282
+      externalDocs:
+        url: ""
       properties:
         gbs:
+          description: The gbs.
           items:
             $ref: "#/components/schemas/DetailedDailyProcessedGbs"
           type: array
       type: object
     GetDailyUsageUnitsRequestDateRange:
+      description: Request for daily units usage data for the specified period.
+      externalDocs:
+        url: ""
       properties:
         dateRange:
           $ref: "#/components/schemas/v2.DateRange"
@@ -762,6 +844,9 @@ components:
       - dateRange
       type: object
     GetDailyUsageUnitsRequestRange:
+      description: Request for daily units usage data for the specified period.
+      externalDocs:
+        url: ""
       properties:
         range:
           $ref: "#/components/schemas/v2.Range"
@@ -769,6 +854,7 @@ components:
       - range
       type: object
     GetDailyUsageUnitsResponse:
+      description: Response containing daily units usage data.
       example:
         units:
         - statsDate: 2000-01-23T04:56:07.000+00:00
@@ -825,8 +911,11 @@ components:
             value: 0.8008282
           lowSessionRecordingUnits:
             value: 0.8008282
+      externalDocs:
+        url: ""
       properties:
         units:
+          description: The units.
           items:
             $ref: "#/components/schemas/DetailedDailyUnits"
           type: array
@@ -841,6 +930,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         enabled:
+          description: Whether this resource is enabled.
           example: true
           type: boolean
       title: Get Data Usage Metrics Export Status Response
@@ -852,20 +942,29 @@ components:
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - genericDimension:
+              value: value
+              key: key
+          - genericDimension:
+              value: value
+              key: key
           timestamp: 2000-01-23T04:56:07.000+00:00
         - sizeGb: 0.8008282
           units: 6.0274563
           dimensions:
-          - pillar: PILLAR_UNSPECIFIED
-          - pillar: PILLAR_UNSPECIFIED
+          - genericDimension:
+              value: value
+              key: key
+          - genericDimension:
+              value: value
+              key: key
           timestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         description: Find out more about data usage.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         entries:
+          description: List of entries.
           items:
             $ref: "#/components/schemas/DataUsageEntry"
           type: array
@@ -892,6 +991,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         logsCount:
+          description: The logs count.
           items:
             $ref: "#/components/schemas/LogsCount"
           type: array
@@ -920,6 +1020,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         spansCount:
+          description: The spans count.
           items:
             $ref: "#/components/schemas/SpansCount"
           type: array
@@ -939,8 +1040,10 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         applicationName:
+          description: The application name.
           type: string
         logsCount:
+          description: The logs count.
           example: "100"
           format: int64
           type: string
@@ -949,8 +1052,10 @@ components:
         severity:
           $ref: "#/components/schemas/datausage.v2.Severity"
         subsystemName:
+          description: The subsystem name.
           type: string
         timestamp:
+          description: Timestamp.
           format: date-time
           type: string
       title: Logs Count
@@ -979,40 +1084,51 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         errorSpanCount:
+          description: The error span count.
           example: "10"
           format: int64
           type: string
         lowErrorSpanCount:
+          description: The low error span count.
           example: "5"
           format: int64
           type: string
         lowSuccessSpanCount:
+          description: The low success span count.
           example: "50"
           format: int64
           type: string
         mediumErrorSpanCount:
+          description: The medium error span count.
           example: "20"
           format: int64
           type: string
         mediumSuccessSpanCount:
+          description: The medium success span count.
           example: "200"
           format: int64
           type: string
         successSpanCount:
+          description: The success span count.
           example: "100"
           format: int64
           type: string
         timestamp:
+          description: Timestamp of the event.
           example: 2021-01-01T00:00:00Z
           format: date-time
           type: string
       title: Spans Count
       type: object
     Token:
+      description: Token.
       example:
         value: 0.8008282
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: The value.
           format: float
           type: number
       type: object
@@ -1026,11 +1142,13 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         enabled:
+          description: Whether this resource is enabled.
           example: true
           type: boolean
       title: Update Data Usage Metrics Export Status Response
       type: object
     datausage.v2.Severity:
+      description: Severity.
       enum:
       - SEVERITY_UNSPECIFIED
       - SEVERITY_DEBUG
@@ -1052,24 +1170,31 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         fromDate:
+          description: The from date.
           example: 2021-01-01T00:00:00Z
           format: date-time
           type: string
         toDate:
+          description: The to date.
           example: 2021-01-01T00:00:00Z
           format: date-time
           type: string
       title: Date Range
       type: object
     v2.GB:
+      description: A quantity expressed in gigabytes.
       example:
         value: 0.8008282
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: Numeric value representing the amount in gigabytes.
           format: float
           type: number
       type: object
     v2.Pillar:
+      description: Pillar.
       enum:
       - PILLAR_UNSPECIFIED
       - PILLAR_METRICS
@@ -1079,6 +1204,7 @@ components:
       - PILLAR_PROFILES
       type: string
     v2.Priority:
+      description: Priority.
       enum:
       - PRIORITY_UNSPECIFIED
       - PRIORITY_LOW
@@ -1087,6 +1213,7 @@ components:
       - PRIORITY_BLOCKED
       type: string
     v2.Range:
+      description: Time range for data usage queries.
       enum:
       - RANGE_UNSPECIFIED
       - RANGE_CURRENT_MONTH
@@ -1096,6 +1223,7 @@ components:
       - RANGE_LAST_YEAR
       type: string
     v2.TcoTier:
+      description: Deprecated TCO tier classification.
       enum:
       - TCO_TIER_UNSPECIFIED
       - TCO_TIER_LOW
@@ -1104,14 +1232,19 @@ components:
       - TCO_TIER_BLOCKED
       type: string
     v2.Unit:
+      description: A quantity expressed in units of data consumption.
       example:
         value: 0.8008282
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: Numeric value representing the amount in units.
           format: float
           type: number
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -1123,10 +1256,12 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         fromDate:
+          description: The from date.
           example: 2021-01-01T00:00:00Z
           format: date-time
           type: string
         toDate:
+          description: The to date.
           example: 2021-01-01T00:00:00Z
           format: date-time
           type: string
@@ -1134,31 +1269,32 @@ components:
       type: object
     DataUsageService_GetDataUsage_dimension_filters_parameter_inner:
       oneOf:
-      - $ref: "#/components/schemas/DimensionTier"
-      - $ref: "#/components/schemas/DimensionSeverity"
-      - $ref: "#/components/schemas/DimensionPriority"
-      - $ref: "#/components/schemas/DimensionPillar"
       - $ref: "#/components/schemas/DimensionGenericDimension"
+      - $ref: "#/components/schemas/DimensionPillar"
+      - $ref: "#/components/schemas/DimensionPriority"
+      - $ref: "#/components/schemas/DimensionSeverity"
+      - $ref: "#/components/schemas/DimensionTier"
     DataUsageService_GetDailyUsageEvaluationTokens_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
       type: object
     DataUsageService_GetDailyUsageProcessedGbs_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
       type: object
     DataUsageService_GetDailyUsageUnits_request:
       oneOf:
-      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       - $ref: "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+      - $ref: "#/components/schemas/GetDailyUsageUnitsRequestRange"
       type: object
     Update_Data_Usage_Metrics_Export_Status_Request:
       description: This data structure is used to update data usage metrics export
         status.
       properties:
         enabled:
+          description: Whether this resource is enabled.
           example: true
           type: boolean
       title: Update Data Usage Metrics Export Status Request
@@ -1170,12 +1306,16 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
       properties:
         application:
+          description: "List of application names to filter on (OR logic, full match)."
           items:
+            description: "List of application names to filter on (OR logic, full match)."
             example: application1
             type: string
           type: array
         subsystem:
+          description: "List of subsystem names to filter on (OR logic, full match)."
           items:
+            description: "List of subsystem names to filter on (OR logic, full match)."
             example: subsystem1
             type: string
           type: array

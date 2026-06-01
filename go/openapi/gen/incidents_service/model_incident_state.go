@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// IncidentState the model 'IncidentState'
+// IncidentState Incident state.
 type IncidentState string
 
 // List of IncidentState

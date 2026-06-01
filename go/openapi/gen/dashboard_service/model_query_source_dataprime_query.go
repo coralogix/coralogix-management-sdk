@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceDataprimeQuery{}
 
-// QuerySourceDataprimeQuery struct for QuerySourceDataprimeQuery
+// QuerySourceDataprimeQuery Variable query source that executes a Dataprime query to populate variable values.
 type QuerySourceDataprimeQuery struct {
 	Type *DataprimeQueryType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

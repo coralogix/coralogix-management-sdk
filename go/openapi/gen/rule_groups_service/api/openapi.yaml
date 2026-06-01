@@ -7,7 +7,7 @@ servers:
 paths:
   /parsing-rules/limits/v1:
     post:
-      description: No description available
+      description: Returns parsing rule usage limits.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetCompanyUsageLimits
@@ -35,7 +35,7 @@ paths:
       - Rule Groups Service
   /parsing-rules/mapping/v1:
     post:
-      description: No description available
+      description: Returns the model mapping for a parsing rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroupModelMapping
@@ -68,17 +68,20 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1:
     delete:
-      description: No description available
+      description: Deletes all parsing rule groups.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_BulkDeleteRuleGroup
       parameters:
-      - explode: true
+      - description: The unique identifiers of the parsing rule groups to delete.
+        explode: true
         in: query
         name: group_ids
         required: false
         schema:
+          description: The unique identifiers of the parsing rule groups to delete.
           items:
+            description: The unique identifiers of the parsing rule groups to delete.
             example: ""
             type: string
           type: array
@@ -106,7 +109,7 @@ paths:
       tags:
       - Rule Groups Service
     get:
-      description: No description available
+      description: Returns all parsing rule groups for the team.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_ListRuleGroups
@@ -133,7 +136,7 @@ paths:
       tags:
       - Rule Groups Service
     post:
-      description: No description available
+      description: Creates a new parsing rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_CreateRuleGroup
@@ -166,16 +169,18 @@ paths:
       - Rule Groups Service
   /parsing-rules/rule-groups/v1/{group_id}:
     delete:
-      description: No description available
+      description: Deletes the parsing rule group with the specified ID.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_DeleteRuleGroup
       parameters:
-      - explode: false
+      - description: The unique identifier of the parsing rule group to delete.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: The unique identifier of the parsing rule group to delete.
           type: string
         style: simple
       responses:
@@ -201,16 +206,18 @@ paths:
       tags:
       - Rule Groups Service
     get:
-      description: No description available
+      description: Returns the details of the specified parsing rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_GetRuleGroup
       parameters:
-      - explode: false
+      - description: The unique identifier of the parsing rule group to retrieve.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: The unique identifier of the parsing rule group to retrieve.
           type: string
         style: simple
       responses:
@@ -236,16 +243,18 @@ paths:
       tags:
       - Rule Groups Service
     put:
-      description: No description available
+      description: Updates the specified parsing rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupsService_UpdateRuleGroup
       parameters:
-      - explode: false
+      - description: The unique identifier of the parsing rule group to update.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: The unique identifier of the parsing rule group to update.
           type: string
         style: simple
       requestBody:
@@ -278,52 +287,82 @@ paths:
 components:
   schemas:
     AllowParameters:
+      description: Allow parameters.
+      example:
+        rule: rule
+        keepBlockedLogs: true
+      externalDocs:
+        url: ""
       properties:
         keepBlockedLogs:
+          description: The keep blocked logs.
           type: boolean
         rule:
+          description: Rule.
           type: string
       type: object
     ApplicationNameConstraint:
+      description: Application name constraint.
       example:
         value: value
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: The value.
           type: string
       type: object
     BlockParameters:
+      description: Block parameters.
+      externalDocs:
+        url: ""
       properties:
         keepBlockedLogs:
+          description: The keep blocked logs.
           type: boolean
         rule:
+          description: Rule.
           type: string
       type: object
     BulkDeleteRuleGroupResponse:
+      additionalProperties: false
+      description: Response returned after deleting all parsing rule groups.
+      externalDocs:
+        url: ""
       type: object
     Counts:
+      description: Counts.
       example:
         parsingThemes: 6
         groups: 0
         rules: 1
+      externalDocs:
+        url: ""
       properties:
         groups:
+          description: List of groups.
           format: int32
           type: integer
         parsingThemes:
+          description: The parsing themes.
           format: int32
           type: integer
         rules:
+          description: List of rules.
           format: int32
           type: integer
       type: object
     CreateRuleGroupRequest.CreateRuleSubgroup:
       properties:
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         order:
+          description: Sort order.
           format: int64
           type: integer
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule"
           type: array
@@ -331,20 +370,26 @@ components:
     CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule:
       properties:
         description:
+          description: Human-readable description.
           type: string
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         parameters:
           $ref: "#/components/schemas/RuleParameters"
         sourceField:
+          description: The source field.
           type: string
       type: object
     CreateRuleGroupResponse:
+      description: Response returned after successfully creating a parsing rule group.
       example:
         ruleGroup:
           ruleSubgroups:
@@ -354,9 +399,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -364,9 +409,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -378,9 +423,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -388,9 +433,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -408,13 +453,20 @@ components:
           id: id
           enabled: true
           order: 0
+      externalDocs:
+        url: ""
       properties:
         ruleGroup:
           $ref: "#/components/schemas/RuleGroup"
       type: object
     DeleteRuleGroupResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a parsing rule group.
+      externalDocs:
+        url: ""
       type: object
     DestinationField:
+      description: Destination field.
       enum:
       - DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
       - DESTINATION_FIELD_CLASSNAME
@@ -424,21 +476,29 @@ components:
       - DESTINATION_FIELD_TEXT
       type: string
     ExtractParameters:
+      description: Extract parameters.
+      externalDocs:
+        url: ""
       properties:
         rule:
+          description: Rule.
           type: string
       type: object
     ExtractTimestampParameters:
+      description: Extract timestamp parameters.
+      externalDocs:
+        url: ""
       properties:
         format:
+          description: The format.
           type: string
         standard:
           $ref: "#/components/schemas/FormatStandard"
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -487,6 +547,7 @@ components:
       title: Filters
       type: object
     FormatStandard:
+      description: Format standard.
       enum:
       - FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED
       - FORMAT_STANDARD_JAVASDF
@@ -497,6 +558,7 @@ components:
       - FORMAT_STANDARD_NANOTS
       type: string
     GetCompanyUsageLimitsResponse:
+      description: Response containing the company-level rule usage limits.
       example:
         companyId: companyId
         usage:
@@ -507,8 +569,11 @@ components:
           parsingThemes: 6
           groups: 0
           rules: 1
+      externalDocs:
+        url: ""
       properties:
         companyId:
+          description: The company id.
           type: string
         limits:
           $ref: "#/components/schemas/Counts"
@@ -518,11 +583,14 @@ components:
     GetRuleGroupModelMappingRequest.CreateRuleSubgroup:
       properties:
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         order:
+          description: Sort order.
           format: int64
           type: integer
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule"
           type: array
@@ -530,27 +598,37 @@ components:
     GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule:
       properties:
         description:
+          description: Human-readable description.
           type: string
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         parameters:
           $ref: "#/components/schemas/RuleParameters"
         sourceField:
+          description: The source field.
           type: string
       type: object
     GetRuleGroupModelMappingResponse:
+      description: Response containing the model mapping for a parsing rule group.
       example:
         ruleDefinition: "{}"
+      externalDocs:
+        url: ""
       properties:
         ruleDefinition:
+          description: The rule definition.
           type: object
       type: object
     GetRuleGroupResponse:
+      description: Response containing the details of a parsing rule group.
       example:
         ruleGroup:
           ruleSubgroups:
@@ -560,9 +638,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -570,9 +648,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -584,9 +662,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -594,9 +672,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -614,38 +692,58 @@ components:
           id: id
           enabled: true
           order: 0
+      externalDocs:
+        url: ""
       properties:
         ruleGroup:
           $ref: "#/components/schemas/RuleGroup"
       type: object
     JsonExtractParameters:
+      description: Json extract parameters.
+      externalDocs:
+        url: ""
       properties:
         destinationFieldText:
+          description: The destination field text.
           type: string
         destinationFieldType:
           $ref: "#/components/schemas/DestinationField"
         rule:
+          description: Rule.
           type: string
       type: object
     JsonParseParameters:
+      description: Json parse parameters.
+      externalDocs:
+        url: ""
       properties:
         deleteSource:
+          description: The delete source.
           type: boolean
         destinationField:
+          description: The destination field.
           type: string
         escapedValue:
+          description: The escaped value.
           type: boolean
         overrideDest:
+          description: The override dest.
           type: boolean
       type: object
     JsonStringifyParameters:
+      description: Json stringify parameters.
+      externalDocs:
+        url: ""
       properties:
         deleteSource:
+          description: The delete source.
           type: boolean
         destinationField:
+          description: The destination field.
           type: string
       type: object
     ListRuleGroupsResponse:
+      description: Response containing a list of parsing rule groups.
       example:
         ruleGroups:
         - ruleSubgroups:
@@ -655,9 +753,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -665,9 +763,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -679,9 +777,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -689,9 +787,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -716,9 +814,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -726,9 +824,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -740,9 +838,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -750,9 +848,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -770,8 +868,11 @@ components:
           id: id
           enabled: true
           order: 0
+      externalDocs:
+        url: ""
       properties:
         ruleGroups:
+          description: The rule groups.
           items:
             $ref: "#/components/schemas/RuleGroup"
           type: array
@@ -786,32 +887,46 @@ components:
           type: array
       type: object
     ParseParameters:
-      example:
-        rule: rule
-        destinationField: destinationField
+      description: Parse parameters.
+      externalDocs:
+        url: ""
       properties:
         destinationField:
+          description: The destination field.
           type: string
         rule:
+          description: Rule.
           type: string
       type: object
     RemoveFieldsParameters:
+      description: Remove fields parameters.
+      externalDocs:
+        url: ""
       properties:
         fields:
+          description: List of fields.
           items:
+            description: List of fields.
             type: string
           type: array
       type: object
     ReplaceParameters:
+      description: Replace parameters.
+      externalDocs:
+        url: ""
       properties:
         destinationField:
+          description: The destination field.
           type: string
         replaceNewVal:
+          description: The replace new val.
           type: string
         rule:
+          description: Rule.
           type: string
       type: object
     RuleGroup:
+      description: Rule group.
       example:
         ruleSubgroups:
         - rules:
@@ -820,9 +935,9 @@ components:
             description: description
             id: id
             parameters:
-              parseParameters:
+              allowParameters:
                 rule: rule
-                destinationField: destinationField
+                keepBlockedLogs: true
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -830,9 +945,9 @@ components:
             description: description
             id: id
             parameters:
-              parseParameters:
+              allowParameters:
                 rule: rule
-                destinationField: destinationField
+                keepBlockedLogs: true
             enabled: true
             order: 1
           id: id
@@ -844,9 +959,9 @@ components:
             description: description
             id: id
             parameters:
-              parseParameters:
+              allowParameters:
                 rule: rule
-                destinationField: destinationField
+                keepBlockedLogs: true
             enabled: true
             order: 1
           - sourceField: sourceField
@@ -854,9 +969,9 @@ components:
             description: description
             id: id
             parameters:
-              parseParameters:
+              allowParameters:
                 rule: rule
-                destinationField: destinationField
+                keepBlockedLogs: true
             enabled: true
             order: 1
           id: id
@@ -874,27 +989,38 @@ components:
         id: id
         enabled: true
         order: 0
+      externalDocs:
+        url: ""
       properties:
         creator:
+          description: Creator.
           type: string
         description:
+          description: Human-readable description.
           type: string
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         hidden:
+          description: The hidden.
           type: boolean
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         ruleMatchers:
+          description: The rule matchers.
           items:
             $ref: "#/components/schemas/RuleMatcher"
           type: array
         ruleSubgroups:
+          description: The rule subgroups.
           items:
             $ref: "#/components/schemas/RuleSubgroup"
           type: array
@@ -902,8 +1028,8 @@ components:
     RuleMatcher:
       oneOf:
       - $ref: "#/components/schemas/RuleMatcherApplicationName"
-      - $ref: "#/components/schemas/RuleMatcherSubsystemName"
       - $ref: "#/components/schemas/RuleMatcherSeverity"
+      - $ref: "#/components/schemas/RuleMatcherSubsystemName"
     RuleMatcherApplicationName:
       example:
         applicationName:
@@ -930,17 +1056,24 @@ components:
       type: object
     RuleParameters:
       oneOf:
-      - $ref: "#/components/schemas/RuleParametersParseParameters"
-      - $ref: "#/components/schemas/RuleParametersBlockParameters"
-      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
-      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
-      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
       - $ref: "#/components/schemas/RuleParametersAllowParameters"
-      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersBlockParameters"
       - $ref: "#/components/schemas/RuleParametersExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersExtractTimestampParameters"
       - $ref: "#/components/schemas/RuleParametersJsonExtractParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonParseParameters"
+      - $ref: "#/components/schemas/RuleParametersJsonStringifyParameters"
+      - $ref: "#/components/schemas/RuleParametersParseParameters"
+      - $ref: "#/components/schemas/RuleParametersRemoveFieldsParameters"
+      - $ref: "#/components/schemas/RuleParametersReplaceParameters"
     RuleParametersAllowParameters:
+      description: Rule parameters.
+      example:
+        allowParameters:
+          rule: rule
+          keepBlockedLogs: true
+      externalDocs:
+        url: ""
       properties:
         allowParameters:
           $ref: "#/components/schemas/AllowParameters"
@@ -948,6 +1081,9 @@ components:
       - allowParameters
       type: object
     RuleParametersBlockParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         blockParameters:
           $ref: "#/components/schemas/BlockParameters"
@@ -955,6 +1091,9 @@ components:
       - blockParameters
       type: object
     RuleParametersExtractParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         extractParameters:
           $ref: "#/components/schemas/ExtractParameters"
@@ -962,6 +1101,9 @@ components:
       - extractParameters
       type: object
     RuleParametersExtractTimestampParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         extractTimestampParameters:
           $ref: "#/components/schemas/ExtractTimestampParameters"
@@ -969,6 +1111,9 @@ components:
       - extractTimestampParameters
       type: object
     RuleParametersJsonExtractParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         jsonExtractParameters:
           $ref: "#/components/schemas/JsonExtractParameters"
@@ -976,6 +1121,9 @@ components:
       - jsonExtractParameters
       type: object
     RuleParametersJsonParseParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         jsonParseParameters:
           $ref: "#/components/schemas/JsonParseParameters"
@@ -983,6 +1131,9 @@ components:
       - jsonParseParameters
       type: object
     RuleParametersJsonStringifyParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         jsonStringifyParameters:
           $ref: "#/components/schemas/JsonStringifyParameters"
@@ -990,10 +1141,9 @@ components:
       - jsonStringifyParameters
       type: object
     RuleParametersParseParameters:
-      example:
-        parseParameters:
-          rule: rule
-          destinationField: destinationField
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         parseParameters:
           $ref: "#/components/schemas/ParseParameters"
@@ -1001,6 +1151,9 @@ components:
       - parseParameters
       type: object
     RuleParametersRemoveFieldsParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         removeFieldsParameters:
           $ref: "#/components/schemas/RemoveFieldsParameters"
@@ -1008,6 +1161,9 @@ components:
       - removeFieldsParameters
       type: object
     RuleParametersReplaceParameters:
+      description: Rule parameters.
+      externalDocs:
+        url: ""
       properties:
         replaceParameters:
           $ref: "#/components/schemas/ReplaceParameters"
@@ -1022,9 +1178,9 @@ components:
           description: description
           id: id
           parameters:
-            parseParameters:
+            allowParameters:
               rule: rule
-              destinationField: destinationField
+              keepBlockedLogs: true
           enabled: true
           order: 1
         - sourceField: sourceField
@@ -1032,9 +1188,9 @@ components:
           description: description
           id: id
           parameters:
-            parseParameters:
+            allowParameters:
               rule: rule
-              destinationField: destinationField
+              keepBlockedLogs: true
           enabled: true
           order: 1
         id: id
@@ -1042,28 +1198,40 @@ components:
         order: 6
       properties:
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         id:
+          description: Unique identifier.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/rules.v1.Rule"
           type: array
       type: object
     SeverityConstraint:
+      description: Severity constraint.
+      externalDocs:
+        url: ""
       properties:
         value:
           $ref: "#/components/schemas/Value"
       type: object
     SubsystemNameConstraint:
+      description: Subsystem name constraint.
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: The value.
           type: string
       type: object
     UpdateRuleGroupResponse:
+      description: Response returned after successfully updating a parsing rule group.
       example:
         ruleGroup:
           ruleSubgroups:
@@ -1073,9 +1241,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1083,9 +1251,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -1097,9 +1265,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             - sourceField: sourceField
@@ -1107,9 +1275,9 @@ components:
               description: description
               id: id
               parameters:
-                parseParameters:
+                allowParameters:
                   rule: rule
-                  destinationField: destinationField
+                  keepBlockedLogs: true
               enabled: true
               order: 1
             id: id
@@ -1127,11 +1295,14 @@ components:
           id: id
           enabled: true
           order: 0
+      externalDocs:
+        url: ""
       properties:
         ruleGroup:
           $ref: "#/components/schemas/RuleGroup"
       type: object
     Value:
+      description: Value.
       enum:
       - VALUE_DEBUG_OR_UNSPECIFIED
       - VALUE_VERBOSE
@@ -1152,83 +1323,114 @@ components:
         description: description
         id: id
         parameters:
-          parseParameters:
+          allowParameters:
             rule: rule
-            destinationField: destinationField
+            keepBlockedLogs: true
         enabled: true
         order: 1
       properties:
         description:
+          description: Human-readable description.
           type: string
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         parameters:
           $ref: "#/components/schemas/RuleParameters"
         sourceField:
+          description: The source field.
           type: string
       type: object
     v1.TeamId:
+      description: Team id.
+      externalDocs:
+        url: ""
       properties:
         id:
+          description: Unique identifier.
           format: int64
           type: integer
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     RuleGroupsService_GetRuleGroupModelMapping_request:
+      description: Request for retrieving the model mapping for a parsing rule group.
       properties:
         creator:
+          description: Creator.
           type: string
         description:
+          description: Human-readable description.
           type: string
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         hidden:
+          description: Whether to hide this rule group from the standard view.
           type: boolean
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         ruleMatchers:
+          description: List of rule matchers that determine which logs this group
+            applies to.
           items:
             $ref: "#/components/schemas/RuleMatcher"
           type: array
         ruleSubgroups:
+          description: List of rule subgroups defining the ordered set of rules in
+            this group.
           items:
             $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
           type: array
       type: object
     RuleGroupsService_CreateRuleGroup_request:
+      description: Request to create a new parsing rule group.
       properties:
         creator:
+          description: Creator.
           type: string
         description:
+          description: Human-readable description.
           type: string
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         hidden:
+          description: The hidden.
           type: boolean
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int64
           type: integer
         ruleMatchers:
+          description: The rule matchers.
           items:
             $ref: "#/components/schemas/RuleMatcher"
           type: array
         ruleSubgroups:
+          description: The rule subgroups.
           items:
             $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
           type: array

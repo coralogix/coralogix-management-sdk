@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListDashboardFoldersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListDashboardFoldersResponse{}
 
-// ListDashboardFoldersResponse struct for ListDashboardFoldersResponse
+// ListDashboardFoldersResponse Response containing a list of dashboard folders.
 type ListDashboardFoldersResponse struct {
+	// The folder.
 	Folder []DashboardFolder `json:"folder,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

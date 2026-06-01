@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// NextOp the model 'NextOp'
+// NextOp Next op.
 type NextOp string
 
 // List of NextOp

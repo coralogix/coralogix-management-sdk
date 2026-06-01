@@ -22,6 +22,7 @@ var _ MappedNullable = &GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsP
 
 // GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct for GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue
 type GlobalRoutersServiceListGlobalRoutersSourceEntityLabelsParameterValue struct {
+	// The values.
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

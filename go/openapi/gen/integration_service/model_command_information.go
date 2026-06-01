@@ -22,11 +22,16 @@ var _ MappedNullable = &CommandInformation{}
 
 // CommandInformation struct for CommandInformation
 type CommandInformation struct {
+	// The command.
 	Command *string `json:"command,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	Language *Language `json:"language,omitempty"`
+	// List of links.
 	Links []Link `json:"links,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The tooltip text.
 	TooltipText *string `json:"tooltipText,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

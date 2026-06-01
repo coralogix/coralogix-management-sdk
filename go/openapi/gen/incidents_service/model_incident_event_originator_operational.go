@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the IncidentEventOriginatorOperational type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventOriginatorOperational{}
 
-// IncidentEventOriginatorOperational struct for IncidentEventOriginatorOperational
+// IncidentEventOriginatorOperational Incident event originator operational.
 type IncidentEventOriginatorOperational struct {
+	// The system name.
 	SystemName *string `json:"systemName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

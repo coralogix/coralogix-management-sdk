@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the TimeFrameSelectAbsoluteTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeFrameSelectAbsoluteTimeFrame{}
 
-// TimeFrameSelectAbsoluteTimeFrame struct for TimeFrameSelectAbsoluteTimeFrame
+// TimeFrameSelectAbsoluteTimeFrame Time frame select.
 type TimeFrameSelectAbsoluteTimeFrame struct {
 	AbsoluteTimeFrame TimeFrame `json:"absoluteTimeFrame"`
 	AdditionalProperties map[string]interface{}

@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestExistingPresetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestExistingPresetResponse{}
 
-// TestExistingPresetResponse struct for TestExistingPresetResponse
+// TestExistingPresetResponse Response containing the results of testing an existing preset.
 type TestExistingPresetResponse struct {
 	Result *TestResult `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}

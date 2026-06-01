@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the EventRecurrenceSourceStrategyInstantVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventRecurrenceSourceStrategyInstantVariant{}
 
-// EventRecurrenceSourceStrategyInstantVariant struct for EventRecurrenceSourceStrategyInstantVariant
+// EventRecurrenceSourceStrategyInstantVariant Determines how the recurrence event is rendered: as an instant point or a sliding window duration.
 type EventRecurrenceSourceStrategyInstantVariant struct {
 	Instant EventRecurrenceSourceStrategyInstant `json:"instant"`
 	AdditionalProperties map[string]interface{}

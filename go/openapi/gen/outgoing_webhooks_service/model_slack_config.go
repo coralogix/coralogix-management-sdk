@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the SlackConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SlackConfig{}
 
-// SlackConfig struct for SlackConfig
+// SlackConfig Slack config.
 type SlackConfig struct {
+	// The attachments.
 	Attachments []Attachment `json:"attachments,omitempty"`
+	// The digests.
 	Digests []Digest `json:"digests,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

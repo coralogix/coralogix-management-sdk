@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AnnotationColor the model 'AnnotationColor'
+// AnnotationColor Annotation color.
 type AnnotationColor string
 
 // List of AnnotationColor

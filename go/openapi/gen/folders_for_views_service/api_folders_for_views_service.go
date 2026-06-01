@@ -146,7 +146,7 @@ ViewsFoldersServiceDeleteViewFolder Delete View Folder service
 Deletes a view folder by ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier for folders
  @return ApiViewsFoldersServiceDeleteViewFolderRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceDeleteViewFolder(ctx context.Context, id string) ApiViewsFoldersServiceDeleteViewFolderRequest {
@@ -255,7 +255,7 @@ ViewsFoldersServiceGetViewFolder Get View Folder service
 Create view folder
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier for folders
  @return ApiViewsFoldersServiceGetViewFolderRequest
 */
 func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceGetViewFolder(ctx context.Context, id string) ApiViewsFoldersServiceGetViewFolderRequest {
@@ -497,6 +497,9 @@ func (a *FoldersForViewsServiceAPIService) ViewsFoldersServiceReplaceViewFolderE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.viewFolder1 == nil {
+		return localVarReturnValue, nil, reportError("viewFolder1 is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

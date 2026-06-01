@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsAnomalyConditionType the model 'LogsAnomalyConditionType'
+// LogsAnomalyConditionType Logs anomaly condition type.
 type LogsAnomalyConditionType string
 
 // List of LogsAnomalyConditionType

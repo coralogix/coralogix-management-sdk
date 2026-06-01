@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionAlignment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionAlignment{}
 
-// PropertyDefinitionAlignment struct for PropertyDefinitionAlignment
+// PropertyDefinitionAlignment Property definition.
 type PropertyDefinitionAlignment struct {
 	Alignment TextAlignment `json:"alignment"`
 	AdditionalProperties map[string]interface{}

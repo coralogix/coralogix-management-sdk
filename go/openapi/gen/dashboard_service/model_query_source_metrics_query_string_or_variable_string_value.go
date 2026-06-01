@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the QuerySourceMetricsQueryStringOrVariableStringValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceMetricsQueryStringOrVariableStringValue{}
 
-// QuerySourceMetricsQueryStringOrVariableStringValue struct for QuerySourceMetricsQueryStringOrVariableStringValue
+// QuerySourceMetricsQueryStringOrVariableStringValue Query.metrics query.string or variable.
 type QuerySourceMetricsQueryStringOrVariableStringValue struct {
+	// A literal string value.
 	StringValue string `json:"stringValue"`
 	AdditionalProperties map[string]interface{}
 }

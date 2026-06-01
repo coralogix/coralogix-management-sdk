@@ -22,8 +22,11 @@ var _ MappedNullable = &GetGroupUsersResponse{}
 
 // GetGroupUsersResponse Response containing the list of all users currently assigned to the requested team group.
 type GetGroupUsersResponse struct {
+	// Token for fetching the next page of results.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
+	// The total count.
 	TotalCount *int64 `json:"totalCount,omitempty"`
+	// List of users.
 	Users []RbacV2User `json:"users,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

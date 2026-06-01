@@ -73,6 +73,9 @@ func (a *ViewsServiceAPIService) ViewsServiceCreateViewExecute(r ApiViewsService
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.viewFolder == nil {
+		return localVarReturnValue, nil, reportError("viewFolder is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -146,7 +149,7 @@ ViewsServiceDeleteView Delete view service
 Deletes a view by ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id id
  @return ApiViewsServiceDeleteViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceDeleteView(ctx context.Context, id int32) ApiViewsServiceDeleteViewRequest {
@@ -249,7 +252,7 @@ ViewsServiceGetView Get view service
 Gets a view by ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id id
  @return ApiViewsServiceGetViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceGetView(ctx context.Context, id int32) ApiViewsServiceGetViewRequest {
@@ -457,7 +460,7 @@ ViewsServiceReplaceView Replace a view service
 Replaces an existing view
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id id
  @return ApiViewsServiceReplaceViewRequest
 */
 func (a *ViewsServiceAPIService) ViewsServiceReplaceView(ctx context.Context, id int32) ApiViewsServiceReplaceViewRequest {
@@ -489,6 +492,9 @@ func (a *ViewsServiceAPIService) ViewsServiceReplaceViewExecute(r ApiViewsServic
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.view1 == nil {
+		return localVarReturnValue, nil, reportError("view1 is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

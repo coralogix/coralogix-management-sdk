@@ -41,7 +41,7 @@ func (r ApiRoleManagementServiceCreateRoleRequest) Execute() (*CreateRoleRespons
 /*
 RoleManagementServiceCreateRole Create Role
 
-No description available
+Creates a new custom role.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRoleManagementServiceCreateRoleRequest
@@ -73,6 +73,9 @@ func (a *RoleManagementServiceAPIService) RoleManagementServiceCreateRoleExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.roleManagementServiceCreateRoleRequest == nil {
+		return localVarReturnValue, nil, reportError("roleManagementServiceCreateRoleRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -143,10 +146,10 @@ func (r ApiRoleManagementServiceDeleteRoleRequest) Execute() (map[string]interfa
 /*
 RoleManagementServiceDeleteRole Delete Role
 
-No description available
+Deletes the custom role with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId
+ @param roleId The role id.
  @return ApiRoleManagementServiceDeleteRoleRequest
 */
 func (a *RoleManagementServiceAPIService) RoleManagementServiceDeleteRole(ctx context.Context, roleId int64) ApiRoleManagementServiceDeleteRoleRequest {
@@ -246,10 +249,10 @@ func (r ApiRoleManagementServiceGetCustomRoleRequest) Execute() (*GetCustomRoleR
 /*
 RoleManagementServiceGetCustomRole Get Custom Role
 
-No description available
+Returns the details of the specified custom role.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId
+ @param roleId The role id.
  @return ApiRoleManagementServiceGetCustomRoleRequest
 */
 func (a *RoleManagementServiceAPIService) RoleManagementServiceGetCustomRole(ctx context.Context, roleId int64) ApiRoleManagementServiceGetCustomRoleRequest {
@@ -342,6 +345,7 @@ type ApiRoleManagementServiceListCustomRolesRequest struct {
 	teamId *int64
 }
 
+// Team identifier.
 func (r ApiRoleManagementServiceListCustomRolesRequest) TeamId(teamId int64) ApiRoleManagementServiceListCustomRolesRequest {
 	r.teamId = &teamId
 	return r
@@ -354,7 +358,7 @@ func (r ApiRoleManagementServiceListCustomRolesRequest) Execute() (*ListCustomRo
 /*
 RoleManagementServiceListCustomRoles List Custom Roles
 
-No description available
+Returns all custom roles for the authenticated team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRoleManagementServiceListCustomRolesRequest
@@ -456,7 +460,7 @@ func (r ApiRoleManagementServiceListSystemRolesRequest) Execute() (*ListSystemRo
 /*
 RoleManagementServiceListSystemRoles List System Roles
 
-No description available
+Returns all built-in system roles.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRoleManagementServiceListSystemRolesRequest
@@ -562,10 +566,10 @@ func (r ApiRoleManagementServiceUpdateRoleRequest) Execute() (map[string]interfa
 /*
 RoleManagementServiceUpdateRole Update Role
 
-No description available
+Updates the specified custom role.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param roleId
+ @param roleId The role id.
  @return ApiRoleManagementServiceUpdateRoleRequest
 */
 func (a *RoleManagementServiceAPIService) RoleManagementServiceUpdateRole(ctx context.Context, roleId int64) ApiRoleManagementServiceUpdateRoleRequest {

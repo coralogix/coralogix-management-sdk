@@ -23,6 +23,7 @@ var _ MappedNullable = &Evaluation{}
 // Evaluation struct for Evaluation
 type Evaluation struct {
 	EvaluationTokens *Token `json:"evaluationTokens,omitempty"`
+	// The evaluator name.
 	EvaluatorName *string `json:"evaluatorName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

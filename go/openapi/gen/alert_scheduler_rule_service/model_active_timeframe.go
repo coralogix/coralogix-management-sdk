@@ -22,8 +22,11 @@ var _ MappedNullable = &ActiveTimeframe{}
 
 // ActiveTimeframe struct for ActiveTimeframe
 type ActiveTimeframe struct {
+	// End time.
 	EndTime *string `json:"endTime,omitempty"`
+	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
+	// Timezone.
 	Timezone *string `json:"timezone,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

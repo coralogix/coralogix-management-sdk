@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SectionPredefinedColor the model 'SectionPredefinedColor'
+// SectionPredefinedColor Section predefined color.
 type SectionPredefinedColor string
 
 // List of SectionPredefinedColor

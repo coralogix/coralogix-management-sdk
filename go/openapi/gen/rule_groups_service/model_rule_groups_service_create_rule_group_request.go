@@ -20,15 +20,23 @@ var _ = bytes.MinRead
 // checks if the RuleGroupsServiceCreateRuleGroupRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroupsServiceCreateRuleGroupRequest{}
 
-// RuleGroupsServiceCreateRuleGroupRequest struct for RuleGroupsServiceCreateRuleGroupRequest
+// RuleGroupsServiceCreateRuleGroupRequest Request to create a new parsing rule group.
 type RuleGroupsServiceCreateRuleGroupRequest struct {
+	// Creator.
 	Creator *string `json:"creator,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// The hidden.
 	Hidden *bool `json:"hidden,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Sort order.
 	Order *int64 `json:"order,omitempty"`
+	// The rule matchers.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
+	// The rule subgroups.
 	RuleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
 	TeamId *V1TeamId `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}

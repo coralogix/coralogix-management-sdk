@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the OwnerOrganisationId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OwnerOrganisationId{}
 
-// OwnerOrganisationId struct for OwnerOrganisationId
+// OwnerOrganisationId Owner.
 type OwnerOrganisationId struct {
+	// Organisation identifier of the API key owner.
 	OrganisationId string `json:"organisationId"`
 	AdditionalProperties map[string]interface{}
 }

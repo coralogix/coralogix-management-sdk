@@ -23,7 +23,9 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRuleSet{}
 
 // QuotaAllocationEntityTypeRuleSet Contains a collection of quota allocation rules for entity types
 type QuotaAllocationEntityTypeRuleSet struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// List of rules.
 	Rules []QuotaAllocationEntityTypeRule `json:"rules"`
 	AdditionalProperties map[string]interface{}
 }

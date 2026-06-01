@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the RegexValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RegexValue{}
 
-// RegexValue struct for RegexValue
+// RegexValue Regex value.
 type RegexValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}

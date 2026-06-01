@@ -20,11 +20,14 @@ var _ = bytes.MinRead
 // checks if the AlertDefNotificationGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefNotificationGroup{}
 
-// AlertDefNotificationGroup struct for AlertDefNotificationGroup
+// AlertDefNotificationGroup Alert def notification group.
 type AlertDefNotificationGroup struct {
+	// The destinations for notifications.  (Notification Center feature)
 	Destinations []NotificationDestination `json:"destinations,omitempty"`
+	// The keys to group the alerts by
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	Router *NotificationRouter `json:"router,omitempty"`
+	// The settings for webhooks associated with the alert definition
 	Webhooks []AlertDefWebhooksSettings `json:"webhooks,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

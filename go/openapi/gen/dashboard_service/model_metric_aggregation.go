@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the MetricAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricAggregation{}
 
-// MetricAggregation struct for MetricAggregation
+// MetricAggregation Metric aggregation.
 type MetricAggregation struct {
 	AggregationType *MetricAggregationType `json:"aggregationType,omitempty"`
 	MetricField *MetricAggregationMetricField `json:"metricField,omitempty"`

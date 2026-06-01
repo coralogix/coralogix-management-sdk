@@ -24,6 +24,7 @@ type QuerySourceMetricsQueryType struct {
 	QuerySourceMetricsQueryTypeLabelNameVariant *QuerySourceMetricsQueryTypeLabelNameVariant
 	QuerySourceMetricsQueryTypeLabelValueVariant *QuerySourceMetricsQueryTypeLabelValueVariant
 	QuerySourceMetricsQueryTypeMetricNameVariant *QuerySourceMetricsQueryTypeMetricNameVariant
+	QuerySourceMetricsQueryTypePromqlQuery *QuerySourceMetricsQueryTypePromqlQuery
 }
 
 // QuerySourceMetricsQueryTypeLabelNameVariantAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypeLabelNameVariant wrapped in QuerySourceMetricsQueryType
@@ -44,6 +45,13 @@ func QuerySourceMetricsQueryTypeLabelValueVariantAsQuerySourceMetricsQueryType(v
 func QuerySourceMetricsQueryTypeMetricNameVariantAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypeMetricNameVariant) QuerySourceMetricsQueryType {
 	return QuerySourceMetricsQueryType{
 		QuerySourceMetricsQueryTypeMetricNameVariant: v,
+	}
+}
+
+// QuerySourceMetricsQueryTypePromqlQueryAsQuerySourceMetricsQueryType is a convenience function that returns QuerySourceMetricsQueryTypePromqlQuery wrapped in QuerySourceMetricsQueryType
+func QuerySourceMetricsQueryTypePromqlQueryAsQuerySourceMetricsQueryType(v *QuerySourceMetricsQueryTypePromqlQuery) QuerySourceMetricsQueryType {
+	return QuerySourceMetricsQueryType{
+		QuerySourceMetricsQueryTypePromqlQuery: v,
 	}
 }
 
@@ -103,11 +111,29 @@ func (dst *QuerySourceMetricsQueryType) UnmarshalJSON(data []byte) error {
 		dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
 	}
 
+	// try to unmarshal data into QuerySourceMetricsQueryTypePromqlQuery
+	err = json.Unmarshal(data, &dst.QuerySourceMetricsQueryTypePromqlQuery)
+	if err == nil {
+		jsonQuerySourceMetricsQueryTypePromqlQuery, _ := json.Marshal(dst.QuerySourceMetricsQueryTypePromqlQuery)
+		if string(jsonQuerySourceMetricsQueryTypePromqlQuery) == "{}" { // empty struct
+			dst.QuerySourceMetricsQueryTypePromqlQuery = nil
+		} else {
+			if err = validator.Validate(dst.QuerySourceMetricsQueryTypePromqlQuery); err != nil {
+				dst.QuerySourceMetricsQueryTypePromqlQuery = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.QuerySourceMetricsQueryTypePromqlQuery = nil
+	}
+
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.QuerySourceMetricsQueryTypeLabelNameVariant = nil
 		dst.QuerySourceMetricsQueryTypeLabelValueVariant = nil
 		dst.QuerySourceMetricsQueryTypeMetricNameVariant = nil
+		dst.QuerySourceMetricsQueryTypePromqlQuery = nil
 
 		return fmt.Errorf("data matches more than one schema in oneOf(QuerySourceMetricsQueryType)")
 	} else if match == 1 {
@@ -131,6 +157,10 @@ func (src QuerySourceMetricsQueryType) MarshalJSON() ([]byte, error) {
 		return json.Marshal(&src.QuerySourceMetricsQueryTypeMetricNameVariant)
 	}
 
+	if src.QuerySourceMetricsQueryTypePromqlQuery != nil {
+		return json.Marshal(&src.QuerySourceMetricsQueryTypePromqlQuery)
+	}
+
 	return nil, nil // no data in oneOf schemas
 }
 
@@ -151,6 +181,10 @@ func (obj *QuerySourceMetricsQueryType) GetActualInstance() (interface{}) {
 		return obj.QuerySourceMetricsQueryTypeMetricNameVariant
 	}
 
+	if obj.QuerySourceMetricsQueryTypePromqlQuery != nil {
+		return obj.QuerySourceMetricsQueryTypePromqlQuery
+	}
+
 	// all schemas are nil
 	return nil
 }
@@ -167,6 +201,10 @@ func (obj QuerySourceMetricsQueryType) GetActualInstanceValue() (interface{}) {
 
 	if obj.QuerySourceMetricsQueryTypeMetricNameVariant != nil {
 		return *obj.QuerySourceMetricsQueryTypeMetricNameVariant
+	}
+
+	if obj.QuerySourceMetricsQueryTypePromqlQuery != nil {
+		return *obj.QuerySourceMetricsQueryTypePromqlQuery
 	}
 
 	// all schemas are nil

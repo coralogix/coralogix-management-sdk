@@ -41,7 +41,7 @@ func (r ApiRuleGroupSetsCreateRequest) Execute() (*CreateRuleGroupSetResult, *ht
 /*
 RuleGroupSetsCreate Create Recording Rules
 
-No description available
+Creates a new recording rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupSetsCreateRequest
@@ -143,10 +143,10 @@ func (r ApiRuleGroupSetsDeleteRequest) Execute() (map[string]interface{}, *http.
 /*
 RuleGroupSetsDelete Delete Recording Rules
 
-No description available
+Deletes the recording rule group with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiRuleGroupSetsDeleteRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsDelete(ctx context.Context, id string) ApiRuleGroupSetsDeleteRequest {
@@ -246,10 +246,10 @@ func (r ApiRuleGroupSetsFetchRequest) Execute() (*OutRuleGroupSet, *http.Respons
 /*
 RuleGroupSetsFetch Get Recording Rules
 
-No description available
+Returns the details of the specified recording rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiRuleGroupSetsFetchRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetch(ctx context.Context, id string) ApiRuleGroupSetsFetchRequest {
@@ -348,7 +348,7 @@ func (r ApiRuleGroupSetsListRequest) Execute() (*RuleGroupSetListing, *http.Resp
 /*
 RuleGroupSetsList List Recording Rules
 
-No description available
+Returns all recording rule groups for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupSetsListRequest
@@ -454,10 +454,10 @@ func (r ApiRuleGroupSetsUpdateRequest) Execute() (map[string]interface{}, *http.
 /*
 RuleGroupSetsUpdate Update Recording Rules
 
-No description available
+Updates the specified recording rule group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiRuleGroupSetsUpdateRequest
 */
 func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdate(ctx context.Context, id string) ApiRuleGroupSetsUpdateRequest {

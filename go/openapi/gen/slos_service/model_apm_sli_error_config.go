@@ -25,8 +25,11 @@ var _ MappedNullable = &ApmSliErrorConfig{}
 type ApmSliErrorConfig struct {
 	// Configuration for error-based APM SLI
 	ErrorConfig map[string]interface{} `json:"errorConfig"`
+	// Additional label-based filters to apply to the metrics
 	Filters []ApmFilter `json:"filters,omitempty"`
+	// Labels to group SLO results by
 	GroupingKeys []string `json:"groupingKeys,omitempty"`
+	// List of service names to monitor
 	Services []string `json:"services,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,7 +22,9 @@ var _ MappedNullable = &ColumnWidthEntry{}
 
 // ColumnWidthEntry struct for ColumnWidthEntry
 type ColumnWidthEntry struct {
+	// The column name.
 	ColumnName *string `json:"columnName,omitempty"`
+	// The width.
 	Width *int32 `json:"width,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

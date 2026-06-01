@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateUsersStatusesResponse{}
 
 // UpdateUsersStatusesResponse Response confirming the successful status update of users. Contains the user account IDs of all users whose status was changed.
 type UpdateUsersStatusesResponse struct {
+	// List of user account IDs for users whose status was successfully updated
 	UserAccountIds []int64 `json:"userAccountIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

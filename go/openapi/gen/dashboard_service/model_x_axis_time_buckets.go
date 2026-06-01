@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the XAxisTimeBuckets type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &XAxisTimeBuckets{}
 
-// XAxisTimeBuckets struct for XAxisTimeBuckets
+// XAxisTimeBuckets X axis.
 type XAxisTimeBuckets struct {
 	TimeBuckets IntervalResolution `json:"timeBuckets"`
 	AdditionalProperties map[string]interface{}

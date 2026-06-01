@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the V1Failure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Failure{}
 
-// V1Failure struct for V1Failure
+// V1Failure Failure.
 type V1Failure struct {
+	// The error message.
 	ErrorMessage *string `json:"errorMessage,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

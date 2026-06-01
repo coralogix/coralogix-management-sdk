@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the ReplaceParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceParameters{}
 
-// ReplaceParameters struct for ReplaceParameters
+// ReplaceParameters Replace parameters.
 type ReplaceParameters struct {
+	// The destination field.
 	DestinationField *string `json:"destinationField,omitempty"`
+	// The replace new val.
 	ReplaceNewVal *string `json:"replaceNewVal,omitempty"`
+	// Rule.
 	Rule *string `json:"rule,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

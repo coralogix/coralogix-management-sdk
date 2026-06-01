@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionDynamic type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionDynamic{}
 
-// WidgetDefinitionDynamic struct for WidgetDefinitionDynamic
+// WidgetDefinitionDynamic Definition.
 type WidgetDefinitionDynamic struct {
 	Dynamic WidgetsDynamic `json:"dynamic"`
 	AdditionalProperties map[string]interface{}

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectQuerySpansQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectQuerySpansQuery{}
 
-// MultiSelectQuerySpansQuery struct for MultiSelectQuerySpansQuery
+// MultiSelectQuerySpansQuery Discriminated union specifying whether to query logs, metrics, or spans for variable values.
 type MultiSelectQuerySpansQuery struct {
 	SpansQuery QuerySpansQuery `json:"spansQuery"`
 	AdditionalProperties map[string]interface{}

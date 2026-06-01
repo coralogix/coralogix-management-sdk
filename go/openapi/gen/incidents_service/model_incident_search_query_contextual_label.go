@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the IncidentSearchQueryContextualLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentSearchQueryContextualLabel{}
 
-// IncidentSearchQueryContextualLabel struct for IncidentSearchQueryContextualLabel
+// IncidentSearchQueryContextualLabel Incident search query.
 type IncidentSearchQueryContextualLabel struct {
 	// The contextual label to search in.
 	ContextualLabel string `json:"contextualLabel"`

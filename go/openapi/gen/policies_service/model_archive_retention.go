@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ArchiveRetention type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ArchiveRetention{}
 
-// ArchiveRetention struct for ArchiveRetention
+// ArchiveRetention Archive retention.
 type ArchiveRetention struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

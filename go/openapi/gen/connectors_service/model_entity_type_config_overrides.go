@@ -23,6 +23,7 @@ var _ MappedNullable = &EntityTypeConfigOverrides{}
 // EntityTypeConfigOverrides struct for EntityTypeConfigOverrides
 type EntityTypeConfigOverrides struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// List of fields.
 	Fields []TemplatedConnectorConfigField `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

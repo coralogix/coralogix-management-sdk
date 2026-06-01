@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// RuleTypeId the model 'RuleTypeId'
+// RuleTypeId Rule type id.
 type RuleTypeId string
 
 // List of RuleTypeId

@@ -20,11 +20,15 @@ var _ = bytes.MinRead
 // checks if the TextboxDefaultNumericValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultNumericValue{}
 
-// TextboxDefaultNumericValue struct for TextboxDefaultNumericValue
+// TextboxDefaultNumericValue Textbox default numeric value.
 type TextboxDefaultNumericValue struct {
+	// The is integer.
 	IsInteger *bool `json:"isInteger,omitempty"`
+	// Maximum value.
 	Max *float32 `json:"max,omitempty"`
+	// Minimum value.
 	Min *float32 `json:"min,omitempty"`
+	// The value.
 	Value *float32 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -11,7 +11,7 @@
           "Users Management Service"
         ],
         "summary": "Update Users",
-        "description": "No description available",
+        "description": "Updates team members for the specified team.",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "path",
             "name": "team_id",
+            "description": "Team ID containing the users to update",
             "required": true,
             "schema": {
               "description": "Team ID containing the users to update",
@@ -90,7 +91,7 @@
           "Users Management Service"
         ],
         "summary": "Create Users",
-        "description": "No description available",
+        "description": "Adds members to the specified team.",
         "externalDocs": {
           "url": ""
         },
@@ -99,6 +100,7 @@
           {
             "in": "path",
             "name": "team_id",
+            "description": "Team ID where the users will be created",
             "required": true,
             "schema": {
               "description": "Team ID where the users will be created",
@@ -169,13 +171,88 @@
         }
       }
     },
-    "/aaa/teams/v2/{team_id}/members/status": {
+    "/aaa/teams/v2/{team_id}/members/{user_account_id}": {
+      "get": {
+        "tags": [
+          "Users Management Service"
+        ],
+        "summary": "Get User",
+        "description": "Returns the details of a specific team member.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "UsersMgmtService_GetUser",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "team_id",
+            "description": "Team ID to search within",
+            "required": true,
+            "schema": {
+              "description": "Team ID to search within",
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "path",
+            "name": "user_account_id",
+            "description": "User account ID to retrieve",
+            "required": true,
+            "schema": {
+              "description": "User account ID to retrieve",
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/aaa/teams/v2/{team_id}/members:updateStatuses": {
       "patch": {
         "tags": [
           "Users Management Service"
         ],
         "summary": "Activate/Revoke Users",
-        "description": "No description available",
+        "description": "Updates the active status of multiple team members.",
         "externalDocs": {
           "url": ""
         },
@@ -184,6 +261,7 @@
           {
             "in": "path",
             "name": "team_id",
+            "description": "Team ID containing the users to update",
             "required": true,
             "schema": {
               "description": "Team ID containing the users to update",
@@ -205,6 +283,7 @@
                     "$ref": "#/components/schemas/UserStatus"
                   },
                   "userAccountIds": {
+                    "description": "List of user account IDs to update. All users will be set to the same status.",
                     "type": "array",
                     "items": {
                       "description": "List of user account IDs to update. All users will be set to the same status.",
@@ -255,86 +334,13 @@
         }
       }
     },
-    "/aaa/teams/v2/{team_id}/members/{user_account_id}": {
-      "get": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Get User",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "UsersMgmtService_GetUser",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "team_id",
-            "required": true,
-            "schema": {
-              "description": "Team ID to search within",
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          },
-          {
-            "in": "path",
-            "name": "user_account_id",
-            "required": true,
-            "schema": {
-              "description": "User account ID to retrieve",
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUserResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "401": {
-            "description": "Unauthorized request",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "content": {
-              "application/json": {}
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
     "/aaa/teams/v2/{team_id}/search": {
       "get": {
         "tags": [
           "Users Management Service"
         ],
         "summary": "Search Users",
-        "description": "No description available",
+        "description": "Searches for team members by query.",
         "externalDocs": {
           "url": ""
         },
@@ -343,6 +349,7 @@
           {
             "in": "path",
             "name": "team_id",
+            "description": "Team ID to search within",
             "required": true,
             "schema": {
               "description": "Team ID to search within",
@@ -354,6 +361,7 @@
           {
             "in": "query",
             "name": "username",
+            "description": "Optional filter by username (partial match supported)",
             "schema": {
               "example": "",
               "description": "Optional filter by username (partial match supported)",
@@ -364,6 +372,7 @@
           {
             "in": "query",
             "name": "status",
+            "description": "Optional filter by user status (e.g., 'active', 'inactive')",
             "schema": {
               "$ref": "#/components/schemas/UserStatus"
             },
@@ -372,6 +381,7 @@
           {
             "in": "query",
             "name": "page_size",
+            "description": "Number of results per page",
             "schema": {
               "description": "Number of results per page",
               "type": "integer",
@@ -382,6 +392,7 @@
           {
             "in": "query",
             "name": "page_token",
+            "description": "Token for pagination to retrieve the next page of results",
             "schema": {
               "description": "Token for pagination to retrieve the next page of results",
               "type": "integer",
@@ -505,15 +516,16 @@
         },
         "title": "CreateUsersResponse",
         "description": "Empty response indicating successful processing of all user creation and invitation requests. Ensure failures are returned via gRPC status codes.",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -612,6 +624,7 @@
         }
       },
       "OnboardingMode": {
+        "description": "Onboarding mode.",
         "type": "string",
         "enum": [
           "ONBOARDING_MODE_UNSPECIFIED",
@@ -625,7 +638,8 @@
         },
         "title": "PermanentAccess",
         "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "SearchUsersResponse": {
         "externalDocs": {
@@ -647,6 +661,7 @@
             "format": "int64"
           },
           "users": {
+            "description": "List of users matching the search criteria",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
@@ -680,6 +695,7 @@
         "type": "object",
         "properties": {
           "userAccountIds": {
+            "description": "List of user account IDs for the successfully updated users",
             "type": "array",
             "items": {
               "description": "List of user account IDs for the successfully updated users",
@@ -699,6 +715,7 @@
         "type": "object",
         "properties": {
           "userAccountIds": {
+            "description": "List of user account IDs for users whose status was successfully updated",
             "type": "array",
             "items": {
               "description": "List of user account IDs for users whose status was successfully updated",
@@ -709,6 +726,7 @@
         }
       },
       "UserStatus": {
+        "description": "User status.",
         "type": "string",
         "enum": [
           "USER_STATUS_UNSPECIFIED",
@@ -729,6 +747,7 @@
             "$ref": "#/components/schemas/AccessType"
           },
           "allowedLoginMode": {
+            "description": "List of allowed login modes. Can include SSO, local authentication, or both. Not supported in invite onboarding mode",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AllowedLoginMode"
@@ -793,6 +812,7 @@
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

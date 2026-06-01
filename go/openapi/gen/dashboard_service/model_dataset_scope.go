@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DatasetScope the model 'DatasetScope'
+// DatasetScope Dataset scope.
 type DatasetScope string
 
 // List of DatasetScope

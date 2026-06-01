@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the AnnotationSourceSpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceSpans{}
 
-// AnnotationSourceSpans struct for AnnotationSourceSpans
+// AnnotationSourceSpans Source.
 type AnnotationSourceSpans struct {
 	Spans SpansSource `json:"spans"`
 	AdditionalProperties map[string]interface{}

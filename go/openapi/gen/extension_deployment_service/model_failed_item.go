@@ -22,8 +22,11 @@ var _ MappedNullable = &FailedItem{}
 
 // FailedItem struct for FailedItem
 type FailedItem struct {
+	// The item id.
 	ItemId *string `json:"itemId,omitempty"`
+	// Reason.
 	Reason *string `json:"reason,omitempty"`
+	// The remote id.
 	RemoteId *string `json:"remoteId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

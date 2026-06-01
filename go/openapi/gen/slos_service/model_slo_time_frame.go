@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SloTimeFrame the model 'SloTimeFrame'
+// SloTimeFrame Slo time frame.
 type SloTimeFrame string
 
 // List of SloTimeFrame

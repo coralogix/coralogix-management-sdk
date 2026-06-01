@@ -22,6 +22,7 @@ var _ MappedNullable = &GetAllExtensionsResponse{}
 
 // GetAllExtensionsResponse Response to list all extensions
 type GetAllExtensionsResponse struct {
+	// The extensions.
 	Extensions []GetAllExtensionsResponseExtension `json:"extensions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

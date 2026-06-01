@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationGaugeVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationGaugeVariant{}
 
-// VisualizationGaugeVariant struct for VisualizationGaugeVariant
+// VisualizationGaugeVariant Visualization.
 type VisualizationGaugeVariant struct {
 	Gauge VisualizationGauge `json:"gauge"`
 	AdditionalProperties map[string]interface{}

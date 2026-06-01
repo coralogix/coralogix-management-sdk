@@ -22,6 +22,7 @@ var _ MappedNullable = &FlowStagesGroups{}
 
 // FlowStagesGroups Groups of stages in a flow alert
 type FlowStagesGroups struct {
+	// List of groups.
 	Groups []FlowStagesGroup `json:"groups,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

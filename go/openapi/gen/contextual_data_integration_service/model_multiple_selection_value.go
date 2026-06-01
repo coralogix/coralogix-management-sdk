@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the MultipleSelectionValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultipleSelectionValue{}
 
-// MultipleSelectionValue struct for MultipleSelectionValue
+// MultipleSelectionValue Multiple selection value.
 type MultipleSelectionValue struct {
+	// Options.
 	Options []string `json:"options,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

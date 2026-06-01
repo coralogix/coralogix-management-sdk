@@ -23,17 +23,27 @@ var _ MappedNullable = &GlobalRouter{}
 
 // GlobalRouter Defines a set of pre-configured routing rules for directing notifications
 type GlobalRouter struct {
+	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
+	// The entity labels.
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// The fallback destinations to be used if no rule matches.
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
+	// The fallback targets.
 	FallbackTargets []FallbackTarget `json:"fallbackTargets,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
+	// List of rules.
 	Rules []RoutingRule `json:"rules,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

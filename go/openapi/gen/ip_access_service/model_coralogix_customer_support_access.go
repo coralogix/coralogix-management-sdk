@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// CoralogixCustomerSupportAccess the model 'CoralogixCustomerSupportAccess'
+// CoralogixCustomerSupportAccess Coralogix customer support access.
 type CoralogixCustomerSupportAccess string
 
 // List of CoralogixCustomerSupportAccess

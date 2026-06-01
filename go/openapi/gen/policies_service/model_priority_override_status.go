@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the PriorityOverrideStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PriorityOverrideStatus{}
 
-// PriorityOverrideStatus struct for PriorityOverrideStatus
+// PriorityOverrideStatus Priority override status.
 type PriorityOverrideStatus struct {
 	QuotaBased *QuotaBasedStatus `json:"quotaBased,omitempty"`
 	AdditionalProperties map[string]interface{}

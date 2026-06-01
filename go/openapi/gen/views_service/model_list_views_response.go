@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListViewsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListViewsResponse{}
 
-// ListViewsResponse struct for ListViewsResponse
+// ListViewsResponse Response containing a list of views.
 type ListViewsResponse struct {
+	// The views.
 	Views []View `json:"views,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

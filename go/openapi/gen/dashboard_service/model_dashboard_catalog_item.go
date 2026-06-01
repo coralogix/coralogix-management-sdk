@@ -23,17 +23,28 @@ var _ MappedNullable = &DashboardCatalogItem{}
 
 // DashboardCatalogItem struct for DashboardCatalogItem
 type DashboardCatalogItem struct {
+	// The author id.
 	AuthorId *string `json:"authorId,omitempty"`
+	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	Folder *DashboardFolder `json:"folder,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// The is default.
 	IsDefault *bool `json:"isDefault,omitempty"`
+	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`
+	// The is pinned.
 	IsPinned *bool `json:"isPinned,omitempty"`
+	// The locker author id.
 	LockerAuthorId *string `json:"lockerAuthorId,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The slug name.
 	SlugName *string `json:"slugName,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

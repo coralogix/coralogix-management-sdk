@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the V3SourceOverrides type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V3SourceOverrides{}
 
-// V3SourceOverrides struct for V3SourceOverrides
+// V3SourceOverrides Source overrides.
 type V3SourceOverrides struct {
+	// Connector configuration fields
 	ConnectorConfigFields []V3ConnectorConfigField `json:"connectorConfigFields,omitempty"`
+	// Notification message configuration fields
 	MessageConfigFields []V3MessageConfigField `json:"messageConfigFields,omitempty"`
 	// the payload type for the notification
 	PayloadType *string `json:"payloadType,omitempty"`

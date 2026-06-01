@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// IncidentSeverity the model 'IncidentSeverity'
+// IncidentSeverity Incident severity.
 type IncidentSeverity string
 
 // List of IncidentSeverity

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the SpansSourceStrategyRangeVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansSourceStrategyRangeVariant{}
 
-// SpansSourceStrategyRangeVariant struct for SpansSourceStrategyRangeVariant
+// SpansSourceStrategyRangeVariant Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window).
 type SpansSourceStrategyRangeVariant struct {
 	Range SpansSourceStrategyRange `json:"range"`
 	AdditionalProperties map[string]interface{}

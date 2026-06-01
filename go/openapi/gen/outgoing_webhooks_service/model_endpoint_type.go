@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// EndpointType the model 'EndpointType'
+// EndpointType Endpoint type.
 type EndpointType string
 
 // List of EndpointType

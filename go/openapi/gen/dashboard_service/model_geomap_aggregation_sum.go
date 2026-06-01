@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapAggregationSum type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationSum{}
 
-// GeomapAggregationSum struct for GeomapAggregationSum
+// GeomapAggregationSum Geomap aggregation.
 type GeomapAggregationSum struct {
 	Sum GeomapAggregationFieldBased `json:"sum"`
 	AdditionalProperties map[string]interface{}

@@ -11,7 +11,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage",
-        "description": "No description available",
+        "description": "Returns data usage summary for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "query",
             "name": "date_range",
+            "description": "Date interval to query data usage over.",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about data usage.",
@@ -31,11 +32,13 @@
               "properties": {
                 "fromDate": {
                   "example": "2021-01-01T00:00:00.000Z",
+                  "description": "The from date.",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
                   "example": "2021-01-01T00:00:00.000Z",
+                  "description": "The to date.",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -46,7 +49,9 @@
           {
             "in": "query",
             "name": "resolution",
+            "description": "Aggregation resolution. Minimum supported value is 1h. Must be between 1 hour and the date_range interval.",
             "schema": {
+              "description": "Aggregation resolution. Minimum supported value is 1h. Must be between 1 hour and the date_range interval.",
               "type": "string"
             },
             "style": "form"
@@ -54,7 +59,9 @@
           {
             "in": "query",
             "name": "aggregate",
+            "description": "List of fields to aggregate results by (for example pillar and priority).",
             "schema": {
+              "description": "List of fields to aggregate results by (for example pillar and priority).",
               "type": "array",
               "items": {
                 "$ref": "#/components/schemas/AggregateBy"
@@ -65,24 +72,26 @@
           {
             "in": "query",
             "name": "dimension_filters",
+            "description": "Dimensions to filter results by; only entries that contain all listed dimensions are returned.",
             "schema": {
+              "description": "Dimensions to filter results by; only entries that contain all listed dimensions are returned.",
               "type": "array",
               "items": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/DimensionTier"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionSeverity"
-                  },
-                  {
-                    "$ref": "#/components/schemas/DimensionPriority"
+                    "$ref": "#/components/schemas/DimensionGenericDimension"
                   },
                   {
                     "$ref": "#/components/schemas/DimensionPillar"
                   },
                   {
-                    "$ref": "#/components/schemas/DimensionGenericDimension"
+                    "$ref": "#/components/schemas/DimensionPriority"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionSeverity"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DimensionTier"
                   }
                 ]
               }
@@ -128,7 +137,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Evaluation Tokens",
-        "description": "No description available",
+        "description": "Returns daily evaluation token usage data for the specified period.",
         "externalDocs": {
           "url": ""
         },
@@ -140,15 +149,16 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageEvaluationTokensRequestRange"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -188,7 +198,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Processed GBs",
-        "description": "No description available",
+        "description": "Returns daily processed gigabytes usage data for the specified period.",
         "externalDocs": {
           "url": ""
         },
@@ -200,15 +210,16 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageProcessedGbsRequestRange"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -248,7 +259,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Daily Usage Units",
-        "description": "No description available",
+        "description": "Returns daily units usage data for the specified period.",
         "externalDocs": {
           "url": ""
         },
@@ -260,15 +271,16 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
                   },
                   {
-                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestDateRange"
+                    "$ref": "#/components/schemas/GetDailyUsageUnitsRequestRange"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -308,7 +320,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Data Usage Metrics Export Status",
-        "description": "No description available",
+        "description": "Returns the current export status for data usage.",
         "externalDocs": {
           "url": ""
         },
@@ -349,7 +361,7 @@
           "Data Usage Service"
         ],
         "summary": "Update Data Usage Metrics Export Status",
-        "description": "No description available",
+        "description": "Triggers a data usage export.",
         "externalDocs": {
           "url": ""
         },
@@ -364,6 +376,7 @@
                 "properties": {
                   "enabled": {
                     "example": true,
+                    "description": "Whether this resource is enabled.",
                     "type": "boolean"
                   }
                 }
@@ -409,7 +422,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Logs Count",
-        "description": "No description available",
+        "description": "Returns the log ingestion count for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -418,6 +431,7 @@
           {
             "in": "query",
             "name": "date_range",
+            "description": "Date interval to query log ingestion counts over.",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about data usage.",
@@ -429,11 +443,13 @@
               "properties": {
                 "fromDate": {
                   "example": "2021-01-01T00:00:00.000Z",
+                  "description": "The from date.",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
                   "example": "2021-01-01T00:00:00.000Z",
+                  "description": "The to date.",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -444,7 +460,9 @@
           {
             "in": "query",
             "name": "resolution",
+            "description": "Aggregation resolution with second precision. Must be between 1 second and the date_range interval.",
             "schema": {
+              "description": "Aggregation resolution with second precision. Must be between 1 second and the date_range interval.",
               "type": "string"
             },
             "style": "form"
@@ -452,6 +470,7 @@
           {
             "in": "query",
             "name": "filters",
+            "description": "Optional scope filter that restricts results to the listed applications and subsystems (full match).",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about data usage.",
@@ -462,16 +481,20 @@
               "type": "object",
               "properties": {
                 "application": {
+                  "description": "List of application names to filter on (OR logic, full match).",
                   "type": "array",
                   "items": {
                     "example": "application1",
+                    "description": "List of application names to filter on (OR logic, full match).",
                     "type": "string"
                   }
                 },
                 "subsystem": {
+                  "description": "List of subsystem names to filter on (OR logic, full match).",
                   "type": "array",
                   "items": {
                     "example": "subsystem1",
+                    "description": "List of subsystem names to filter on (OR logic, full match).",
                     "type": "string"
                   }
                 }
@@ -482,7 +505,9 @@
           {
             "in": "query",
             "name": "subsystem_aggregation",
+            "description": "When true, aggregate the returned counts by subsystem name.",
             "schema": {
+              "description": "When true, aggregate the returned counts by subsystem name.",
               "type": "boolean"
             },
             "style": "form"
@@ -490,7 +515,9 @@
           {
             "in": "query",
             "name": "application_aggregation",
+            "description": "When true, aggregate the returned counts by application name.",
             "schema": {
+              "description": "When true, aggregate the returned counts by application name.",
               "type": "boolean"
             },
             "style": "form"
@@ -534,7 +561,7 @@
           "Data Usage Service"
         ],
         "summary": "Get Spans Count",
-        "description": "No description available",
+        "description": "Returns the span ingestion count for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -543,6 +570,7 @@
           {
             "in": "query",
             "name": "date_range",
+            "description": "Date interval to query span ingestion counts over.",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about data usage.",
@@ -554,11 +582,13 @@
               "properties": {
                 "fromDate": {
                   "example": "2021-01-01T00:00:00.000Z",
+                  "description": "The from date.",
                   "type": "string",
                   "format": "date-time"
                 },
                 "toDate": {
                   "example": "2021-01-01T00:00:00.000Z",
+                  "description": "The to date.",
                   "type": "string",
                   "format": "date-time"
                 }
@@ -569,7 +599,9 @@
           {
             "in": "query",
             "name": "resolution",
+            "description": "Aggregation resolution with second precision. Must be between 1 second and the date_range interval.",
             "schema": {
+              "description": "Aggregation resolution with second precision. Must be between 1 second and the date_range interval.",
               "type": "string"
             },
             "style": "form"
@@ -577,6 +609,7 @@
           {
             "in": "query",
             "name": "filters",
+            "description": "Optional scope filter that restricts results to the listed applications and subsystems (full match).",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about data usage.",
@@ -587,16 +620,20 @@
               "type": "object",
               "properties": {
                 "application": {
+                  "description": "List of application names to filter on (OR logic, full match).",
                   "type": "array",
                   "items": {
                     "example": "application1",
+                    "description": "List of application names to filter on (OR logic, full match).",
                     "type": "string"
                   }
                 },
                 "subsystem": {
+                  "description": "List of subsystem names to filter on (OR logic, full match).",
                   "type": "array",
                   "items": {
                     "example": "subsystem1",
+                    "description": "List of subsystem names to filter on (OR logic, full match).",
                     "type": "string"
                   }
                 }
@@ -662,20 +699,24 @@
         "type": "object",
         "properties": {
           "dimensions": {
+            "description": "The dimensions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dimension"
             }
           },
           "sizeGb": {
+            "description": "The size gb.",
             "type": "number",
             "format": "float"
           },
           "timestamp": {
+            "description": "Timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "units": {
+            "description": "The units.",
             "type": "number",
             "format": "float"
           }
@@ -685,12 +726,14 @@
         "type": "object",
         "properties": {
           "evaluations": {
+            "description": "The evaluations.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Evaluation"
             }
           },
           "statsDate": {
+            "description": "The stats date.",
             "type": "string",
             "format": "date-time"
           },
@@ -736,6 +779,7 @@
             "$ref": "#/components/schemas/v2.GB"
           },
           "statsDate": {
+            "description": "The stats date.",
             "type": "string",
             "format": "date-time"
           },
@@ -784,6 +828,7 @@
             "$ref": "#/components/schemas/v2.Unit"
           },
           "statsDate": {
+            "description": "The stats date.",
             "type": "string",
             "format": "date-time"
           },
@@ -795,19 +840,19 @@
       "Dimension": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DimensionPillar"
-          },
-          {
             "$ref": "#/components/schemas/DimensionGenericDimension"
           },
           {
-            "$ref": "#/components/schemas/DimensionTier"
+            "$ref": "#/components/schemas/DimensionPillar"
+          },
+          {
+            "$ref": "#/components/schemas/DimensionPriority"
           },
           {
             "$ref": "#/components/schemas/DimensionSeverity"
           },
           {
-            "$ref": "#/components/schemas/DimensionPriority"
+            "$ref": "#/components/schemas/DimensionTier"
           }
         ]
       },
@@ -873,6 +918,7 @@
             "$ref": "#/components/schemas/Token"
           },
           "evaluatorName": {
+            "description": "The evaluator name.",
             "type": "string"
           }
         }
@@ -880,10 +926,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -964,15 +1010,21 @@
         "properties": {
           "key": {
             "example": "key",
+            "description": "The key.",
             "type": "string"
           },
           "value": {
             "example": "value",
+            "description": "The value.",
             "type": "string"
           }
         }
       },
       "GetDailyUsageEvaluationTokensRequestDateRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for daily evaluation token usage data for the specified period.",
         "type": "object",
         "properties": {
           "dateRange": {
@@ -984,6 +1036,10 @@
         ]
       },
       "GetDailyUsageEvaluationTokensRequestRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for daily evaluation token usage data for the specified period.",
         "type": "object",
         "properties": {
           "range": {
@@ -995,9 +1051,14 @@
         ]
       },
       "GetDailyUsageEvaluationTokensResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing daily evaluation token usage data.",
         "type": "object",
         "properties": {
           "tokens": {
+            "description": "List of tokens.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DetailedDailyEvaluationTokens"
@@ -1006,6 +1067,10 @@
         }
       },
       "GetDailyUsageProcessedGbsRequestDateRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for daily processed gigabytes usage data for the specified period.",
         "type": "object",
         "properties": {
           "dateRange": {
@@ -1017,6 +1082,10 @@
         ]
       },
       "GetDailyUsageProcessedGbsRequestRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for daily processed gigabytes usage data for the specified period.",
         "type": "object",
         "properties": {
           "range": {
@@ -1028,9 +1097,14 @@
         ]
       },
       "GetDailyUsageProcessedGbsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing daily processed gigabytes usage data.",
         "type": "object",
         "properties": {
           "gbs": {
+            "description": "The gbs.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DetailedDailyProcessedGbs"
@@ -1039,6 +1113,10 @@
         }
       },
       "GetDailyUsageUnitsRequestDateRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for daily units usage data for the specified period.",
         "type": "object",
         "properties": {
           "dateRange": {
@@ -1050,6 +1128,10 @@
         ]
       },
       "GetDailyUsageUnitsRequestRange": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for daily units usage data for the specified period.",
         "type": "object",
         "properties": {
           "range": {
@@ -1061,9 +1143,14 @@
         ]
       },
       "GetDailyUsageUnitsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing daily units usage data.",
         "type": "object",
         "properties": {
           "units": {
+            "description": "The units.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DetailedDailyUnits"
@@ -1082,6 +1169,7 @@
         "properties": {
           "enabled": {
             "example": true,
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           }
         }
@@ -1096,6 +1184,7 @@
         "type": "object",
         "properties": {
           "entries": {
+            "description": "List of entries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataUsageEntry"
@@ -1113,6 +1202,7 @@
         "type": "object",
         "properties": {
           "logsCount": {
+            "description": "The logs count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsCount"
@@ -1130,6 +1220,7 @@
         "type": "object",
         "properties": {
           "spansCount": {
+            "description": "The spans count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansCount"
@@ -1147,10 +1238,12 @@
         "type": "object",
         "properties": {
           "applicationName": {
+            "description": "The application name.",
             "type": "string"
           },
           "logsCount": {
             "example": "100",
+            "description": "The logs count.",
             "type": "string",
             "format": "int64"
           },
@@ -1161,9 +1254,11 @@
             "$ref": "#/components/schemas/datausage.v2.Severity"
           },
           "subsystemName": {
+            "description": "The subsystem name.",
             "type": "string"
           },
           "timestamp": {
+            "description": "Timestamp.",
             "type": "string",
             "format": "date-time"
           }
@@ -1194,45 +1289,57 @@
         "properties": {
           "errorSpanCount": {
             "example": "10",
+            "description": "The error span count.",
             "type": "string",
             "format": "int64"
           },
           "lowErrorSpanCount": {
             "example": "5",
+            "description": "The low error span count.",
             "type": "string",
             "format": "int64"
           },
           "lowSuccessSpanCount": {
             "example": "50",
+            "description": "The low success span count.",
             "type": "string",
             "format": "int64"
           },
           "mediumErrorSpanCount": {
             "example": "20",
+            "description": "The medium error span count.",
             "type": "string",
             "format": "int64"
           },
           "mediumSuccessSpanCount": {
             "example": "200",
+            "description": "The medium success span count.",
             "type": "string",
             "format": "int64"
           },
           "successSpanCount": {
             "example": "100",
+            "description": "The success span count.",
             "type": "string",
             "format": "int64"
           },
           "timestamp": {
             "example": "2021-01-01T00:00:00.000Z",
+            "description": "Timestamp of the event.",
             "type": "string",
             "format": "date-time"
           }
         }
       },
       "Token": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Token.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "number",
             "format": "float"
           }
@@ -1249,11 +1356,13 @@
         "properties": {
           "enabled": {
             "example": true,
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           }
         }
       },
       "datausage.v2.Severity": {
+        "description": "Severity.",
         "type": "string",
         "enum": [
           "SEVERITY_UNSPECIFIED",
@@ -1283,26 +1392,34 @@
         "properties": {
           "fromDate": {
             "example": "2021-01-01T00:00:00.000Z",
+            "description": "The from date.",
             "type": "string",
             "format": "date-time"
           },
           "toDate": {
             "example": "2021-01-01T00:00:00.000Z",
+            "description": "The to date.",
             "type": "string",
             "format": "date-time"
           }
         }
       },
       "v2.GB": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A quantity expressed in gigabytes.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "Numeric value representing the amount in gigabytes.",
             "type": "number",
             "format": "float"
           }
         }
       },
       "v2.Pillar": {
+        "description": "Pillar.",
         "type": "string",
         "enum": [
           "PILLAR_UNSPECIFIED",
@@ -1314,6 +1431,7 @@
         ]
       },
       "v2.Priority": {
+        "description": "Priority.",
         "type": "string",
         "enum": [
           "PRIORITY_UNSPECIFIED",
@@ -1324,6 +1442,7 @@
         ]
       },
       "v2.Range": {
+        "description": "Time range for data usage queries.",
         "type": "string",
         "enum": [
           "RANGE_UNSPECIFIED",
@@ -1335,6 +1454,7 @@
         ]
       },
       "v2.TcoTier": {
+        "description": "Deprecated TCO tier classification.",
         "type": "string",
         "enum": [
           "TCO_TIER_UNSPECIFIED",
@@ -1345,15 +1465,21 @@
         ]
       },
       "v2.Unit": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "A quantity expressed in units of data consumption.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "Numeric value representing the amount in units.",
             "type": "number",
             "format": "float"
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

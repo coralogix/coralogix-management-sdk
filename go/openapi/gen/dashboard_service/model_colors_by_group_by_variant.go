@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ColorsByGroupByVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ColorsByGroupByVariant{}
 
-// ColorsByGroupByVariant struct for ColorsByGroupByVariant
+// ColorsByGroupByVariant Defines the coloring strategy applied to widget data series.
 type ColorsByGroupByVariant struct {
+	// Colors by group by.
 	GroupBy map[string]interface{} `json:"groupBy"`
 	AdditionalProperties map[string]interface{}
 }

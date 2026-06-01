@@ -22,8 +22,11 @@ var _ MappedNullable = &RetentionPolicyRequest{}
 
 // RetentionPolicyRequest This data structure is used to set the retention policy for a tenant.
 type RetentionPolicyRequest struct {
+	// The five minutes resolution.
 	FiveMinutesResolution *int64 `json:"fiveMinutesResolution,omitempty"`
+	// The one hour resolution.
 	OneHourResolution *int64 `json:"oneHourResolution,omitempty"`
+	// The raw resolution.
 	RawResolution *int64 `json:"rawResolution,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

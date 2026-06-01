@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapFieldConfigAwsRegionConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapFieldConfigAwsRegionConfig{}
 
-// GeomapFieldConfigAwsRegionConfig struct for GeomapFieldConfigAwsRegionConfig
+// GeomapFieldConfigAwsRegionConfig Geomap field config.
 type GeomapFieldConfigAwsRegionConfig struct {
 	AwsRegionConfig GeomapAwsRegionConfig `json:"awsRegionConfig"`
 	AdditionalProperties map[string]interface{}

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// GroupType the model 'GroupType'
+// GroupType Group type.
 type GroupType string
 
 // List of GroupType

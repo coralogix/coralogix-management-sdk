@@ -22,6 +22,7 @@ var _ MappedNullable = &ListAlertDefsResponse{}
 
 // ListAlertDefsResponse A response that contains a list of alert definitions
 type ListAlertDefsResponse struct {
+	// List of alert definitions
 	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
 	Pagination *AlertsV3PaginationResponse `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}

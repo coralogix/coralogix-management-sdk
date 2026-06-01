@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SampleType the model 'SampleType'
+// SampleType Sample type.
 type SampleType string
 
 // List of SampleType

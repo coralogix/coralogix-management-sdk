@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// OrderByAlertEventFields the model 'OrderByAlertEventFields'
+// OrderByAlertEventFields Order by alert event fields.
 type OrderByAlertEventFields string
 
 // List of OrderByAlertEventFields

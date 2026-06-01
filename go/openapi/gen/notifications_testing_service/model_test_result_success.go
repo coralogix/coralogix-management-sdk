@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TestResultSuccess type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestResultSuccess{}
 
-// TestResultSuccess struct for TestResultSuccess
+// TestResultSuccess Indicates the notification test succeeded.
 type TestResultSuccess struct {
+	// Metadata.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,6 +22,7 @@ var _ MappedNullable = &V1Grouping{}
 
 // V1Grouping Definition of the SLO grouping fields
 type V1Grouping struct {
+	// List of labels.
 	Labels []string `json:"labels,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

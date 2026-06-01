@@ -23,6 +23,7 @@ var _ MappedNullable = &GetEnrichmentsResponse{}
 
 // GetEnrichmentsResponse This response data structure represents a collection of enrichments
 type GetEnrichmentsResponse struct {
+	// List of enrichments.
 	Enrichments []Enrichment `json:"enrichments"`
 	AdditionalProperties map[string]interface{}
 }

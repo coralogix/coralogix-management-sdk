@@ -22,15 +22,24 @@ var _ MappedNullable = &Integration{}
 
 // Integration This data structure represents an integration
 type Integration struct {
+	// The dark icon.
 	DarkIcon *string `json:"darkIcon,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The feature flag.
 	FeatureFlag *string `json:"featureFlag,omitempty"`
+	// Icon identifier.
 	Icon *string `json:"icon,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	IntegrationType *V1IntegrationType `json:"integrationType,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The revisions.
 	Revisions []V1RevisionSummary `json:"revisions,omitempty"`
+	// List of tags.
 	Tags []string `json:"tags,omitempty"`
+	// The versions.
 	Versions []string `json:"versions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

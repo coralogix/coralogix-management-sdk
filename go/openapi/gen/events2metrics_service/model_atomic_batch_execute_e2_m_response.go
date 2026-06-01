@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AtomicBatchExecuteE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicBatchExecuteE2MResponse{}
 
-// AtomicBatchExecuteE2MResponse struct for AtomicBatchExecuteE2MResponse
+// AtomicBatchExecuteE2MResponse Response returned after atomically executing a batch of events-to-metrics rules.
 type AtomicBatchExecuteE2MResponse struct {
+	// The matching responses.
 	MatchingResponses []E2MExecutionResponse `json:"matchingResponses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the EventsV3PaginationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventsV3PaginationResponse{}
 
-// EventsV3PaginationResponse struct for EventsV3PaginationResponse
+// EventsV3PaginationResponse Pagination metadata returned alongside paginated list responses.
 type EventsV3PaginationResponse struct {
+	// Token for fetching the next page of results.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
+	// Total number of results.
 	TotalSize *int64 `json:"totalSize,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

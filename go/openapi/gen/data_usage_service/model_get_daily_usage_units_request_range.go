@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GetDailyUsageUnitsRequestRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageUnitsRequestRange{}
 
-// GetDailyUsageUnitsRequestRange struct for GetDailyUsageUnitsRequestRange
+// GetDailyUsageUnitsRequestRange Request for daily units usage data for the specified period.
 type GetDailyUsageUnitsRequestRange struct {
 	Range V2Range `json:"range"`
 	AdditionalProperties map[string]interface{}

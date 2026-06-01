@@ -23,9 +23,11 @@ var _ MappedNullable = &StatVisualElementMappedValues{}
 
 // StatVisualElementMappedValues A configurable display element that can show either a query field value or the result of color label mapping, with an optional display name template
 type StatVisualElementMappedValues struct {
+	// Mapped values.
 	MappedValues map[string]interface{} `json:"mappedValues"`
 	// Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'
 	TemplateText *string `json:"templateText,omitempty"`
+	// Variables available for use in the display name template, each referencing either a datashape field or mapped values
 	TemplateVariables []DisplayNameTemplateVariable `json:"templateVariables,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

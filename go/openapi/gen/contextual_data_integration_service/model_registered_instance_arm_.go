@@ -25,11 +25,16 @@ var _ MappedNullable = &RegisteredInstanceArm{}
 // RegisteredInstanceArm struct for RegisteredInstanceArm
 type RegisteredInstanceArm struct {
 	Arm ARMStack `json:"arm"`
+	// The definition version.
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
+	// Whether this is a testing instance used for validation purposes only.
 	IsTesting *bool `json:"isTesting,omitempty"`
+	// Timestamp of the last update to this integration instance.
 	LastUpdated *time.Time `json:"lastUpdated,omitempty"`
+	// The parameters.
 	Parameters []Parameter `json:"parameters,omitempty"`
 	RevisionLifecycle *RevisionLifecycle `json:"revisionLifecycle,omitempty"`
 	AdditionalProperties map[string]interface{}

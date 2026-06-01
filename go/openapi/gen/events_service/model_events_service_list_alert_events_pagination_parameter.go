@@ -22,7 +22,9 @@ var _ MappedNullable = &EventsServiceListAlertEventsPaginationParameter{}
 
 // EventsServiceListAlertEventsPaginationParameter struct for EventsServiceListAlertEventsPaginationParameter
 type EventsServiceListAlertEventsPaginationParameter struct {
+	// Maximum number of results to return per page.
 	PageSize *int64 `json:"pageSize,omitempty"`
+	// Opaque token for fetching the next page of results.
 	PageToken *string `json:"pageToken,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

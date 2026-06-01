@@ -23,7 +23,9 @@ var _ MappedNullable = &GaugeLogsQuery{}
 // GaugeLogsQuery A logs variant of the query
 type GaugeLogsQuery struct {
 	Aggregation *GaugeAggregation `json:"aggregation,omitempty"`
+	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
+	// A list of observation fields by which to group the results
 	GroupBy []ObservationField `json:"groupBy,omitempty"`
 	LogsAggregation *LogsAggregation `json:"logsAggregation,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`

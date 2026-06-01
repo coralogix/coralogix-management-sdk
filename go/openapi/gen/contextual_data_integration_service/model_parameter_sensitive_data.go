@@ -23,7 +23,9 @@ var _ MappedNullable = &ParameterSensitiveData{}
 
 // ParameterSensitiveData struct for ParameterSensitiveData
 type ParameterSensitiveData struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
+	// Sensitive data placeholder.
 	SensitiveData map[string]interface{} `json:"sensitiveData"`
 	AdditionalProperties map[string]interface{}
 }

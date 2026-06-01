@@ -22,7 +22,9 @@ var _ MappedNullable = &MessageConfigSchema{}
 
 // MessageConfigSchema struct for MessageConfigSchema
 type MessageConfigSchema struct {
+	// List of fields.
 	Fields []MessageConfigSchemaField `json:"fields,omitempty"`
+	// Type of the payload.
 	PayloadType *string `json:"payloadType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

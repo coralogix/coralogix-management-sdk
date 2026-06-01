@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DataTableQueryMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableQueryMetrics{}
 
-// DataTableQueryMetrics struct for DataTableQueryMetrics
+// DataTableQueryMetrics Discriminated union of possible query types for the data table widget.
 type DataTableQueryMetrics struct {
 	Metrics DataTableMetricsQuery `json:"metrics"`
 	AdditionalProperties map[string]interface{}

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DurationUnit the model 'DurationUnit'
+// DurationUnit Duration unit.
 type DurationUnit string
 
 // List of DurationUnit

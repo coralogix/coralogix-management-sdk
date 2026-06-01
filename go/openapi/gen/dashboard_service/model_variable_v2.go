@@ -22,11 +22,15 @@ var _ MappedNullable = &VariableV2{}
 
 // VariableV2 struct for VariableV2
 type VariableV2 struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The display full row.
 	DisplayFullRow *bool `json:"displayFullRow,omitempty"`
+	// The display name.
 	DisplayName *string `json:"displayName,omitempty"`
 	DisplayType *VariableDisplayTypeV2 `json:"displayType,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Source *VariableSourceV2 `json:"source,omitempty"`
 	Value *VariableValueV2 `json:"value,omitempty"`

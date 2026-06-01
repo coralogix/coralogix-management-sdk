@@ -40,7 +40,11 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Read
     post:
-      description: No description available
+      description: |-
+        Creates a new dashboard folder.
+
+        Requires the following permissions:
+        - `team-dashboards:Update`
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_CreateDashboardFolder
@@ -74,7 +78,11 @@ paths:
       x-coralogixPermissions:
       - team-dashboards:Update
     put:
-      description: No description available
+      description: |-
+        Replaces an existing dashboard folder.
+
+        Requires the following permissions:
+        - `team-dashboards:Update`
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_ReplaceDashboardFolder
@@ -109,23 +117,33 @@ paths:
       - team-dashboards:Update
   /dashboards/folders/v1/{folder_id}:
     delete:
-      description: No description available
+      description: |-
+        Deletes the dashboard folder with the specified ID.
+
+        Requires the following permissions:
+        - `team-dashboards:Update`
       externalDocs:
         url: ""
       operationId: DashboardFoldersService_DeleteDashboardFolder
       parameters:
-      - explode: false
+      - description: The folder id.
+        explode: false
         in: path
         name: folder_id
         required: true
         schema:
+          description: The folder id.
           type: string
         style: simple
-      - explode: true
+      - description: "Idempotency key for the delete folder request, used to prevent\
+          \ duplicate operations."
+        explode: true
         in: query
         name: request_id
         required: false
         schema:
+          description: "Idempotency key for the delete folder request, used to prevent\
+            \ duplicate operations."
           type: string
         style: form
       responses:
@@ -162,18 +180,24 @@ paths:
         url: ""
       operationId: DashboardFoldersService_GetDashboardFolder
       parameters:
-      - explode: false
+      - description: The folder id.
+        explode: false
         in: path
         name: folder_id
         required: true
         schema:
+          description: The folder id.
           type: string
         style: simple
-      - explode: true
+      - description: Optional client-supplied request identifier used to correlate
+          the get folder request.
+        explode: true
         in: query
         name: request_id
         required: false
         schema:
+          description: Optional client-supplied request identifier used to correlate
+            the get folder request.
           type: string
         style: form
       responses:
@@ -203,6 +227,7 @@ paths:
 components:
   schemas:
     CreateDashboardFolderResponse:
+      description: Response returned after successfully creating a dashboard folder.
       example:
         folderId: folderId
       externalDocs:
@@ -210,23 +235,32 @@ components:
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
       properties:
         folderId:
+          description: The folder id.
           type: string
       title: Create dashboard folder response data structure
       type: object
     DashboardFolder:
+      description: Dashboard folder.
       example:
         name: name
         id: id
         parentId: parentId
+      externalDocs:
+        url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
         parentId:
+          description: The parent id.
           type: string
       type: object
     DeleteDashboardFolderResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a dashboard folder.
       externalDocs:
         description: Find out more Dashboards in our documentation.
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
@@ -234,8 +268,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -284,6 +318,7 @@ components:
       title: Filters
       type: object
     GetDashboardFolderResponse:
+      description: Response containing the details of a dashboard folder.
       example:
         folder:
           name: name
@@ -298,6 +333,7 @@ components:
       title: Get dashboard folder response data structure
       type: object
     ListDashboardFoldersResponse:
+      description: Response containing a list of dashboard folders.
       example:
         folder:
         - name: name
@@ -311,6 +347,7 @@ components:
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
       properties:
         folder:
+          description: The folder.
           items:
             $ref: "#/components/schemas/DashboardFolder"
           type: array
@@ -326,6 +363,8 @@ components:
           type: array
       type: object
     ReplaceDashboardFolderResponse:
+      additionalProperties: false
+      description: Response returned after successfully replacing a dashboard folder.
       externalDocs:
         description: Find out more Dashboards in our documentation.
         url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
@@ -337,23 +376,29 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     Replace_dashboard_folder_request_data_structure:
+      description: Request to replace an existing dashboard folder.
       properties:
         folder:
           $ref: "#/components/schemas/DashboardFolder"
         requestId:
+          description: "Idempotency key for the replace folder request, used to prevent\
+            \ duplicate updates."
           type: string
       title: Replace dashboard folder request data structure
       type: object
     Create_dashboard_folder_request_data_structure:
+      description: Request to create a new dashboard folder.
       properties:
         folder:
           $ref: "#/components/schemas/DashboardFolder"
         requestId:
+          description: The request id.
           type: string
       title: Create dashboard folder request data structure
       type: object

@@ -24,6 +24,7 @@ var _ MappedNullable = &AlertDefPropertiesLogsNewValue{}
 // AlertDefPropertiesLogsNewValue User-configurable properties of an alert definition
 type AlertDefPropertiesLogsNewValue struct {
 	ActiveOn *ActivitySchedule `json:"activeOn,omitempty"`
+	// The sources from which to sample logs
 	DataSources []AlertDefDataSource `json:"dataSources,omitempty"`
 	// Whether the alert has been marked as deleted
 	Deleted *bool `json:"deleted,omitempty"`
@@ -33,12 +34,14 @@ type AlertDefPropertiesLogsNewValue struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Labels used to identify and categorize the alert entity
 	EntityLabels *map[string]string `json:"entityLabels,omitempty"`
+	// Keys used to group and aggregate alert data
 	GroupByKeys []string `json:"groupByKeys,omitempty"`
 	IncidentsSettings *AlertDefIncidentSettings `json:"incidentsSettings,omitempty"`
 	LogsNewValue LogsNewValueType `json:"logsNewValue"`
 	// The name of the alert definition
 	Name *string `json:"name,omitempty"`
 	NotificationGroup *AlertDefNotificationGroup `json:"notificationGroup,omitempty"`
+	// Additional notification groups for alerts (deprecated)
 	NotificationGroupExcess []AlertDefNotificationGroup `json:"notificationGroupExcess,omitempty"`
 	// Whether the alert is in phantom mode (creating incidents or not)
 	PhantomMode *bool `json:"phantomMode,omitempty"`

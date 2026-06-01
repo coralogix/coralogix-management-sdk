@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the DefaultIntegrationDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DefaultIntegrationDetails{}
 
-// DefaultIntegrationDetails struct for DefaultIntegrationDetails
+// DefaultIntegrationDetails Default integration details.
 type DefaultIntegrationDetails struct {
+	// The registered.
 	Registered []RegisteredInstance `json:"registered,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

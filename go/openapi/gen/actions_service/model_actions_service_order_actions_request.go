@@ -22,7 +22,9 @@ var _ MappedNullable = &ActionsServiceOrderActionsRequest{}
 
 // ActionsServiceOrderActionsRequest This data structure represents the request to order Actions.
 type ActionsServiceOrderActionsRequest struct {
+	// The private actions order.
 	PrivateActionsOrder *map[string]int64 `json:"privateActionsOrder,omitempty"`
+	// The shared actions order.
 	SharedActionsOrder *map[string]int64 `json:"sharedActionsOrder,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

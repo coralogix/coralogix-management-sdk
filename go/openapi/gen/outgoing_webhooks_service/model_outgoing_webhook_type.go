@@ -22,7 +22,9 @@ var _ MappedNullable = &OutgoingWebhookType{}
 
 // OutgoingWebhookType struct for OutgoingWebhookType
 type OutgoingWebhookType struct {
+	// Number of items.
 	Count *int64 `json:"count,omitempty"`
+	// The label.
 	Label *string `json:"label,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

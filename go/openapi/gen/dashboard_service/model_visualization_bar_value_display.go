@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// VisualizationBarValueDisplay the model 'VisualizationBarValueDisplay'
+// VisualizationBarValueDisplay Bar value display.
 type VisualizationBarValueDisplay string
 
 // List of Visualization.BarValueDisplay

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the CreateDashboardFolderResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateDashboardFolderResponse{}
 
-// CreateDashboardFolderResponse struct for CreateDashboardFolderResponse
+// CreateDashboardFolderResponse Response returned after successfully creating a dashboard folder.
 type CreateDashboardFolderResponse struct {
+	// The folder id.
 	FolderId *string `json:"folderId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

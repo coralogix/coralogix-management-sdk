@@ -22,10 +22,13 @@ var _ MappedNullable = &ArchiveSpec{}
 
 // ArchiveSpec This data structure contains metadata about the archive.
 type ArchiveSpec struct {
+	// The archiving format ID.
 	// Deprecated
 	ArchivingFormatId *string `json:"archivingFormatId,omitempty"`
+	// The enable tags.
 	EnableTags *bool `json:"enableTags,omitempty"`
 	Format *TargetFormat `json:"format,omitempty"`
+	// The archiving format id.
 	IsActive *bool `json:"isActive,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LineChartQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartQueryLogs{}
 
-// LineChartQueryLogs struct for LineChartQueryLogs
+// LineChartQueryLogs Discriminated union of possible query types for the line chart widget.
 type LineChartQueryLogs struct {
 	Logs LineChartLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

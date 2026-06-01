@@ -23,6 +23,7 @@ var _ MappedNullable = &GetZeroStateResponse{}
 
 // GetZeroStateResponse Response with Zero State.
 type GetZeroStateResponse struct {
+	// The zero state.
 	ZeroState bool `json:"zeroState"`
 	AdditionalProperties map[string]interface{}
 }

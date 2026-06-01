@@ -22,14 +22,22 @@ var _ MappedNullable = &GetAllExtensionsResponseExtension{}
 
 // GetAllExtensionsResponseExtension struct for GetAllExtensionsResponseExtension
 type GetAllExtensionsResponseExtension struct {
+	// The dark mode image.
 	DarkModeImage *string `json:"darkModeImage,omitempty"`
 	Deprecation *Deprecation `json:"deprecation,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Image reference.
 	Image *string `json:"image,omitempty"`
+	// The integrations.
 	Integrations []string `json:"integrations,omitempty"`
+	// The is hidden.
 	IsHidden *bool `json:"isHidden,omitempty"`
+	// The keywords.
 	Keywords []string `json:"keywords,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The revisions.
 	Revisions []GetAllExtensionsResponseRevision `json:"revisions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

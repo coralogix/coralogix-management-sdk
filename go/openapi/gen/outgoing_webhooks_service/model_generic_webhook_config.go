@@ -20,11 +20,14 @@ var _ = bytes.MinRead
 // checks if the GenericWebhookConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenericWebhookConfig{}
 
-// GenericWebhookConfig struct for GenericWebhookConfig
+// GenericWebhookConfig Generic webhook config.
 type GenericWebhookConfig struct {
+	// The headers.
 	Headers *map[string]string `json:"headers,omitempty"`
 	Method *MethodType `json:"method,omitempty"`
+	// Raw payload data.
 	Payload *string `json:"payload,omitempty"`
+	// The uuid.
 	Uuid *string `json:"uuid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

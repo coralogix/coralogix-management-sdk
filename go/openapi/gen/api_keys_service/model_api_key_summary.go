@@ -23,7 +23,9 @@ var _ MappedNullable = &ApiKeySummary{}
 // ApiKeySummary This data structure represents summary about an API key including its permissions.
 type ApiKeySummary struct {
 	ApiKey *V3ApiKey `json:"apiKey,omitempty"`
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
+	// List of permission presets.
 	Presets []PermissionsPreset `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AwsType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AwsType{}
 
-// AwsType struct for AwsType
+// AwsType Aws type.
 type AwsType struct {
+	// The resource type.
 	ResourceType *string `json:"resourceType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

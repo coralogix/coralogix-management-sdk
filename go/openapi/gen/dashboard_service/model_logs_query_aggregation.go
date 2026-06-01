@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the LogsQueryAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsQueryAggregation{}
 
-// LogsQueryAggregation struct for LogsQueryAggregation
+// LogsQueryAggregation Aggregation.
 type LogsQueryAggregation struct {
 	Aggregation *LogsAggregation `json:"aggregation,omitempty"`
 	// Aggregation unique identifier

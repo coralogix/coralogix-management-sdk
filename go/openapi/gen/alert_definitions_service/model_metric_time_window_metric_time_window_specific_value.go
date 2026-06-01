@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MetricTimeWindowMetricTimeWindowSpecificValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricTimeWindowMetricTimeWindowSpecificValue{}
 
-// MetricTimeWindowMetricTimeWindowSpecificValue struct for MetricTimeWindowMetricTimeWindowSpecificValue
+// MetricTimeWindowMetricTimeWindowSpecificValue Metric time window.
 type MetricTimeWindowMetricTimeWindowSpecificValue struct {
 	MetricTimeWindowSpecificValue MetricTimeWindowValue `json:"metricTimeWindowSpecificValue"`
 	AdditionalProperties map[string]interface{}

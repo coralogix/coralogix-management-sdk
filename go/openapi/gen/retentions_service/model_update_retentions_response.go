@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateRetentionsResponse{}
 
 // UpdateRetentionsResponse This data structure is obtained after updating retentions
 type UpdateRetentionsResponse struct {
+	// The retentions.
 	Retentions []ArchiveV1Retention `json:"retentions"`
 	AdditionalProperties map[string]interface{}
 }

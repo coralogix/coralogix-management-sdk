@@ -22,7 +22,9 @@ var _ MappedNullable = &CreateRuleGroupSet{}
 
 // CreateRuleGroupSet A set of rule groups to create.
 type CreateRuleGroupSet struct {
+	// List of groups.
 	Groups []InRuleGroup `json:"groups,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

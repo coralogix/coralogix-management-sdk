@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSelectionListSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSelectionListSelection{}
 
-// MultiSelectSelectionListSelection struct for MultiSelectSelectionListSelection
+// MultiSelectSelectionListSelection A list-based selection specifying the currently selected values and their display labels.
 type MultiSelectSelectionListSelection struct {
+	// List of labels.
 	Labels []string `json:"labels,omitempty"`
+	// List of values.
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

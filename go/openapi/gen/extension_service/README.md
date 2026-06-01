@@ -79,7 +79,7 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ExtensionServiceAPI* | [**ExtensionServiceGetAllExtensions**](docs/ExtensionServiceAPI.md#extensionservicegetallextensions) | **Post** /integrations/extensions/v1 | Get all extensions
-*ExtensionServiceAPI* | [**ExtensionServiceGetExtension**](docs/ExtensionServiceAPI.md#extensionservicegetextension) | **Get** /integrations/extensions/v1/{id} | Get extension by ID
+*ExtensionServiceAPI* | [**ExtensionServiceGetExtension**](docs/ExtensionServiceAPI.md#extensionservicegetextension) | **Get** /integrations/extensions/v1/catalog/{id} | Get extension by ID
 
 
 ## Documentation For Models

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// AlertDefOrderByFields the model 'AlertDefOrderByFields'
+// AlertDefOrderByFields Alert def order by fields.
 type AlertDefOrderByFields string
 
 // List of AlertDefOrderByFields

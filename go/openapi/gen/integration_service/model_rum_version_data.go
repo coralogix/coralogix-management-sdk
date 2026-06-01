@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the RumVersionData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RumVersionData{}
 
-// RumVersionData struct for RumVersionData
+// RumVersionData Rum version data.
 type RumVersionData struct {
+	// The synced at.
 	SyncedAt *time.Time `json:"syncedAt,omitempty"`
+	// The versions.
 	Versions []RumVersionDataVersion `json:"versions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

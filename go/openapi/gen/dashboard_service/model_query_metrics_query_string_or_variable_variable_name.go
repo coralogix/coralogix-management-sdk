@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the QueryMetricsQueryStringOrVariableVariableName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryStringOrVariableVariableName{}
 
-// QueryMetricsQueryStringOrVariableVariableName struct for QueryMetricsQueryStringOrVariableVariableName
+// QueryMetricsQueryStringOrVariableVariableName String or variable.
 type QueryMetricsQueryStringOrVariableVariableName struct {
+	// The name of a dashboard variable whose current value will be substituted.
 	VariableName string `json:"variableName"`
 	AdditionalProperties map[string]interface{}
 }

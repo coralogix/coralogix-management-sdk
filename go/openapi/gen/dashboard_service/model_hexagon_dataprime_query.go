@@ -23,6 +23,7 @@ var _ MappedNullable = &HexagonDataprimeQuery{}
 // HexagonDataprimeQuery A Dataprime variant of the query
 type HexagonDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	// List of query filters
 	Filters []FilterSource `json:"filters,omitempty"`
 	TimeFrame *TimeFrameSelect `json:"timeFrame,omitempty"`
 	AdditionalProperties map[string]interface{}

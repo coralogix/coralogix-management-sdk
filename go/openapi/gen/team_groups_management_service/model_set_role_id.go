@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SetRoleId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetRoleId{}
 
-// SetRoleId struct for SetRoleId
+// SetRoleId Set role id.
 type SetRoleId struct {
+	// The value.
 	Value *int64 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

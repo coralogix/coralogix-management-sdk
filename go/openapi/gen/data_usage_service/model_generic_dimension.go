@@ -22,7 +22,9 @@ var _ MappedNullable = &GenericDimension{}
 
 // GenericDimension This data structure represents a generic dimension.
 type GenericDimension struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

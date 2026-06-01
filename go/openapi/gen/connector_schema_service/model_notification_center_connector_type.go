@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// NotificationCenterConnectorType the model 'NotificationCenterConnectorType'
+// NotificationCenterConnectorType Connector type.
 type NotificationCenterConnectorType string
 
 // List of notification_center.ConnectorType
@@ -30,6 +30,7 @@ const (
 	NOTIFICATIONCENTERCONNECTORTYPE_IBM_EVENT_NOTIFICATIONS NotificationCenterConnectorType = "IBM_EVENT_NOTIFICATIONS"
 	NOTIFICATIONCENTERCONNECTORTYPE_SERVICE_NOW NotificationCenterConnectorType = "SERVICE_NOW"
 	NOTIFICATIONCENTERCONNECTORTYPE_EMAIL NotificationCenterConnectorType = "EMAIL"
+	NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS NotificationCenterConnectorType = "PAGERDUTY_INCIDENTS"
 )
 
 // All allowed values of NotificationCenterConnectorType enum
@@ -41,6 +42,7 @@ var AllowedNotificationCenterConnectorTypeEnumValues = []NotificationCenterConne
 	"IBM_EVENT_NOTIFICATIONS",
 	"SERVICE_NOW",
 	"EMAIL",
+	"PAGERDUTY_INCIDENTS",
 }
 
 func (v *NotificationCenterConnectorType) UnmarshalJSON(src []byte) error {

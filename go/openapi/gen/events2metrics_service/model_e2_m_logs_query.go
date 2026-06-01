@@ -23,17 +23,26 @@ var _ MappedNullable = &E2MLogsQuery{}
 
 // E2MLogsQuery This data structure represents an Event to Metrics (E2M) object.
 type E2MLogsQuery struct {
+	// RFC3339 timestamp of when this E2M was created.
 	CreateTime *string `json:"createTime,omitempty"`
+	// Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.
 	DataSource *string `json:"dataSource,omitempty"`
+	// Human-readable description of this E2M.
 	Description *string `json:"description,omitempty"`
+	// Unique identifier for this E2M. Required on update requests.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
+	// Indicates whether this E2M is for internal use only.
 	IsInternal *bool `json:"isInternal,omitempty"`
 	LogsQuery V2LogsQuery `json:"logsQuery"`
+	// Metric fields to extract and aggregate from the events.
 	MetricFields []V2MetricField `json:"metricFields,omitempty"`
+	// Metric labels to attach to the generated metrics.
 	MetricLabels []MetricLabel `json:"metricLabels,omitempty"`
+	// Human-readable name for this E2M.
 	Name string `json:"name"`
 	Permutations *E2MPermutations `json:"permutations,omitempty"`
 	Type E2MType `json:"type"`
+	// RFC3339 timestamp of when this E2M was last updated.
 	UpdateTime *string `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

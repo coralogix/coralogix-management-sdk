@@ -21,10 +21,12 @@ var _ = bytes.MinRead
 // checks if the TimeframeDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeframeDuration{}
 
-// TimeframeDuration struct for TimeframeDuration
+// TimeframeDuration Timeframe.
 type TimeframeDuration struct {
 	Duration V1Duration `json:"duration"`
+	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
+	// Timezone.
 	Timezone *string `json:"timezone,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

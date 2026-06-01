@@ -83,6 +83,7 @@ Class | Method | HTTP request | Description
 *PoliciesServiceAPI* | [**PoliciesServiceBulkTestLogPolicies**](docs/PoliciesServiceAPI.md#policiesservicebulktestlogpolicies) | **Post** /dataplans/policies/v1/all/test-policies | Bulk Test Log Policies
 *PoliciesServiceAPI* | [**PoliciesServiceCreatePolicy**](docs/PoliciesServiceAPI.md#policiesservicecreatepolicy) | **Post** /dataplans/policies/v1 | Create Policy
 *PoliciesServiceAPI* | [**PoliciesServiceDeletePolicy**](docs/PoliciesServiceAPI.md#policiesservicedeletepolicy) | **Delete** /dataplans/policies/v1/{id} | Delete Policy
+*PoliciesServiceAPI* | [**PoliciesServiceForecastPolicyUsage**](docs/PoliciesServiceAPI.md#policiesserviceforecastpolicyusage) | **Post** /dataplans/policies/v1/all/forecast-usage | Forecast Policy Usage
 *PoliciesServiceAPI* | [**PoliciesServiceGetCompanyPolicies**](docs/PoliciesServiceAPI.md#policiesservicegetcompanypolicies) | **Get** /dataplans/policies/v1 | Get Company Policies
 *PoliciesServiceAPI* | [**PoliciesServiceGetPolicy**](docs/PoliciesServiceAPI.md#policiesservicegetpolicy) | **Get** /dataplans/policies/v1/{id} | Get Policy by ID
 *PoliciesServiceAPI* | [**PoliciesServiceGetPolicySettings**](docs/PoliciesServiceAPI.md#policiesservicegetpolicysettings) | **Get** /dataplans/policy-settings/v1 | Get Policy Priority Settings
@@ -112,6 +113,11 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
+ - [ForecastPolicyUsageRequestLogRulesDay](docs/ForecastPolicyUsageRequestLogRulesDay.md)
+ - [ForecastPolicyUsageRequestLogRulesWeek](docs/ForecastPolicyUsageRequestLogRulesWeek.md)
+ - [ForecastPolicyUsageRequestSpanRulesDay](docs/ForecastPolicyUsageRequestSpanRulesDay.md)
+ - [ForecastPolicyUsageRequestSpanRulesWeek](docs/ForecastPolicyUsageRequestSpanRulesWeek.md)
+ - [ForecastPolicyUsageResponse](docs/ForecastPolicyUsageResponse.md)
  - [GetCompanyPoliciesResponse](docs/GetCompanyPoliciesResponse.md)
  - [GetPolicyResponse](docs/GetPolicyResponse.md)
  - [GetPolicySettingsResponse](docs/GetPolicySettingsResponse.md)
@@ -123,6 +129,7 @@ Class | Method | HTTP request | Description
  - [PlacementFirst](docs/PlacementFirst.md)
  - [PlacementLast](docs/PlacementLast.md)
  - [PoliciesServiceCreatePolicyRequest](docs/PoliciesServiceCreatePolicyRequest.md)
+ - [PoliciesServiceForecastPolicyUsageRequest](docs/PoliciesServiceForecastPolicyUsageRequest.md)
  - [PoliciesServiceUpdatePolicyRequest](docs/PoliciesServiceUpdatePolicyRequest.md)
  - [Policy](docs/Policy.md)
  - [PolicyLogRules](docs/PolicyLogRules.md)

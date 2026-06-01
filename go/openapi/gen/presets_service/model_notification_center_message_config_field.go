@@ -22,7 +22,9 @@ var _ MappedNullable = &NotificationCenterMessageConfigField{}
 
 // NotificationCenterMessageConfigField Message config field provides a way to define a template that can be used to render the notification content
 type NotificationCenterMessageConfigField struct {
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
+	// The template.
 	Template *string `json:"template,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

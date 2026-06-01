@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SpanFieldSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldSource{}
 
-// SpanFieldSource struct for SpanFieldSource
+// SpanFieldSource Span field source.
 type SpanFieldSource struct {
 	Value *SpanField `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}

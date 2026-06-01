@@ -22,6 +22,7 @@ var _ MappedNullable = &GetLogsCountResponse{}
 
 // GetLogsCountResponse This data structure is used to return logs count.
 type GetLogsCountResponse struct {
+	// The logs count.
 	LogsCount []LogsCount `json:"logsCount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

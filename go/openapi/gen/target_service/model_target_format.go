@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TargetFormat the model 'TargetFormat'
+// TargetFormat Target format.
 type TargetFormat string
 
 // List of TargetFormat

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TokenOriginType the model 'TokenOriginType'
+// TokenOriginType Token origin type.
 type TokenOriginType string
 
 // List of TokenOriginType
