@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the EnrichmentTypeSuspiciousIp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeSuspiciousIp{}
 
-// EnrichmentTypeSuspiciousIp struct for EnrichmentTypeSuspiciousIp
+// EnrichmentTypeSuspiciousIp Enrichment type.
 type EnrichmentTypeSuspiciousIp struct {
+	// Suspicious ip type.
 	SuspiciousIp map[string]interface{} `json:"suspiciousIp"`
 	AdditionalProperties map[string]interface{}
 }

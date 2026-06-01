@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// XAxisTimeFormat the model 'XAxisTimeFormat'
+// XAxisTimeFormat X axis time format.
 type XAxisTimeFormat string
 
 // List of XAxisTimeFormat

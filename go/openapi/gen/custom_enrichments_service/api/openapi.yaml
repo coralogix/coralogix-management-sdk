@@ -7,7 +7,7 @@ servers:
 paths:
   /enrichment-rules/custom-enrichment-rules/v1:
     get:
-      description: No description available
+      description: Returns all custom enrichment rules.
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_GetCustomEnrichments
@@ -22,7 +22,7 @@ paths:
       tags:
       - Custom Enrichments Service
     post:
-      description: No description available
+      description: Creates a new custom enrichment rule.
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_CreateCustomEnrichment
@@ -31,6 +31,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Create_Custom_Enrichment_Request"
+        required: true
       responses:
         "200":
           content:
@@ -42,7 +43,7 @@ paths:
       tags:
       - Custom Enrichments Service
     put:
-      description: No description available
+      description: Updates a custom enrichment rule.
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_UpdateCustomEnrichment
@@ -51,6 +52,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Update_Custom_Enrichment_Request"
+        required: true
       responses:
         "200":
           content:
@@ -63,16 +65,18 @@ paths:
       - Custom Enrichments Service
   /enrichment-rules/custom-enrichment-rules/v1/all/contents:
     post:
-      description: No description available
+      description: Returns the contents of all custom enrichment data.
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_SearchCustomEnrichmentData
       parameters:
-      - explode: true
+      - description: Search clauses used to filter custom enrichment data.
+        explode: true
         in: query
         name: search_clauses
         required: false
         schema:
+          description: Search clauses used to filter custom enrichment data.
           items:
             $ref: "#/components/schemas/CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner"
           type: array
@@ -89,16 +93,18 @@ paths:
       - Custom Enrichments Service
   /enrichment-rules/custom-enrichment-rules/v1/{id}:
     delete:
-      description: No description available
+      description: Deletes the custom enrichment rule with the specified ID.
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_DeleteCustomEnrichment
       parameters:
-      - explode: false
+      - description: The unique identifier of the custom enrichment rule to delete.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the custom enrichment rule to delete.
           example: 1
           format: int64
           type: integer
@@ -114,16 +120,18 @@ paths:
       tags:
       - Custom Enrichments Service
     get:
-      description: No description available
+      description: Returns the details of the specified custom enrichment rule.
       externalDocs:
         url: ""
       operationId: CustomEnrichmentService_GetCustomEnrichment
       parameters:
-      - explode: false
+      - description: The unique identifier of the custom enrichment rule.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the custom enrichment rule.
           example: 1
           format: int64
           type: integer
@@ -160,11 +168,13 @@ components:
         customEnrichment:
           $ref: "#/components/schemas/CustomEnrichment"
         message:
+          description: Human-readable message.
           example: Custom enrichment created successfully
           type: string
       title: Create Custom Enrichment Response
       type: object
     CustomEnrichment:
+      description: Custom enrichment.
       example:
         fileName: fileName
         isQueryOnly: true
@@ -173,22 +183,31 @@ components:
         description: description
         id: 6
         version: 1
+      externalDocs:
+        url: ""
       properties:
         description:
+          description: Human-readable description.
           type: string
         fileName:
+          description: The file name.
           type: string
         fileSize:
+          description: The file size.
           format: int64
           type: integer
         id:
+          description: Unique identifier.
           format: int64
           type: integer
         isQueryOnly:
+          description: The is query only.
           type: boolean
         name:
+          description: Display name.
           type: string
         version:
+          description: Version number.
           format: int64
           type: integer
       type: object
@@ -197,6 +216,7 @@ components:
       - $ref: "#/components/schemas/CustomEnrichmentDataBinary"
       - $ref: "#/components/schemas/CustomEnrichmentDataTextual"
     CustomEnrichmentDataBinary:
+      description: Custom enrichment data including definition and raw content.
       example:
         binary: binary
         definition:
@@ -207,8 +227,11 @@ components:
           description: description
           id: 6
           version: 1
+      externalDocs:
+        url: ""
       properties:
         binary:
+          description: Binary content of the enrichment data file encoded as base64.
           format: byte
           type: string
         definition:
@@ -217,31 +240,41 @@ components:
       - binary
       type: object
     CustomEnrichmentDataTextual:
+      description: Custom enrichment data including definition and raw content.
+      externalDocs:
+        url: ""
       properties:
         definition:
           $ref: "#/components/schemas/CustomEnrichment"
         textual:
+          description: Textual content of the enrichment data file as a UTF-8 string.
           type: string
       required:
       - textual
       type: object
     DeleteCustomEnrichmentResponse:
+      description: Response returned after successfully deleting a custom enrichment
+        rule.
       example:
         customEnrichmentId: 1
         message: Custom enrichment deleted successfully
+      externalDocs:
+        url: ""
       properties:
         customEnrichmentId:
+          description: The custom enrichment id.
           example: 1
           format: int64
           type: integer
         message:
+          description: Human-readable message.
           example: Custom enrichment deleted successfully
           type: string
       type: object
     File:
       oneOf:
-      - $ref: "#/components/schemas/FileTextual"
       - $ref: "#/components/schemas/FileBinary"
+      - $ref: "#/components/schemas/FileTextual"
     FileBinary:
       description: This data structure represents a file
       externalDocs:
@@ -249,17 +282,21 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         binary:
+          description: Binary content of the file encoded as base64.
           example: !!binary |-
             MHhGQUJCMzI=
           format: byte
           type: string
         extension:
+          description: "File extension indicating the file format (e.g., csv, json)."
           example: csv
           type: string
         name:
+          description: Name of the file.
           example: file_name
           type: string
         size:
+          description: Size of the file in bytes.
           example: 100
           format: int64
           type: integer
@@ -274,16 +311,20 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         extension:
+          description: "File extension indicating the file format (e.g., csv, json)."
           example: csv
           type: string
         name:
+          description: Name of the file.
           example: file_name
           type: string
         size:
+          description: Size of the file in bytes.
           example: 100
           format: int64
           type: integer
         textual:
+          description: Textual content of the file as a UTF-8 string.
           example: "row1,row2 value1,value2"
           type: string
       required:
@@ -292,8 +333,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -387,6 +428,7 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         customEnrichments:
+          description: The custom enrichments.
           items:
             $ref: "#/components/schemas/CustomEnrichment"
           type: array
@@ -408,6 +450,7 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         id:
+          description: Search by the numeric ID of the custom enrichment.
           example: 1
           format: int64
           type: integer
@@ -422,6 +465,7 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         name:
+          description: Search by the name of the custom enrichment.
           example: custom_enrichment_name
           type: string
       required:
@@ -429,6 +473,7 @@ components:
       title: Search Clause
       type: object
     SearchCustomEnrichmentDataResponse:
+      description: Response containing custom enrichment data search results.
       example:
         customEnrichmentsData:
         - binary: binary
@@ -449,8 +494,11 @@ components:
             description: description
             id: 6
             version: 1
+      externalDocs:
+        url: ""
       properties:
         customEnrichmentsData:
+          description: The custom enrichments data.
           items:
             $ref: "#/components/schemas/CustomEnrichmentData"
           type: array
@@ -475,6 +523,7 @@ components:
         customEnrichment:
           $ref: "#/components/schemas/CustomEnrichment"
         message:
+          description: Human-readable message.
           example: Custom enrichment updated successfully
           type: string
       title: Update Custom Enrichment Response
@@ -485,6 +534,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -493,15 +543,18 @@ components:
       description: This request data structure is used to update a custom enrichment
       properties:
         customEnrichmentId:
+          description: The custom enrichment id.
           example: 1
           format: int64
           type: integer
         description:
+          description: New human-readable description of the custom enrichment.
           example: custom_enrichment_description
           type: string
         file:
           $ref: "#/components/schemas/File"
         name:
+          description: New human-readable name for the custom enrichment.
           example: custom_enrichment_name
           type: string
       required:
@@ -515,11 +568,13 @@ components:
       description: This request data structure is used to create a custom enrichment
       properties:
         description:
+          description: Human-readable description of the custom enrichment.
           example: custom_enrichment_description
           type: string
         file:
           $ref: "#/components/schemas/File"
         name:
+          description: Human-readable name for the custom enrichment.
           example: custom_enrichment_name
           type: string
       required:

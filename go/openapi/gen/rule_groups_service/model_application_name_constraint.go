@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ApplicationNameConstraint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApplicationNameConstraint{}
 
-// ApplicationNameConstraint struct for ApplicationNameConstraint
+// ApplicationNameConstraint Application name constraint.
 type ApplicationNameConstraint struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

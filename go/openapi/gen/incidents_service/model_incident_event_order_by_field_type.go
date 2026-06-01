@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// IncidentEventOrderByFieldType the model 'IncidentEventOrderByFieldType'
+// IncidentEventOrderByFieldType Incident event order by field type.
 type IncidentEventOrderByFieldType string
 
 // List of IncidentEventOrderByFieldType

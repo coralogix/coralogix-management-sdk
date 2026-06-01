@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the AttachmentConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AttachmentConfig{}
 
-// AttachmentConfig struct for AttachmentConfig
+// AttachmentConfig Attachment config.
 type AttachmentConfig struct {
 	Policy *AttachmentConfigPolicy `json:"policy,omitempty"`
 	AdditionalProperties map[string]interface{}

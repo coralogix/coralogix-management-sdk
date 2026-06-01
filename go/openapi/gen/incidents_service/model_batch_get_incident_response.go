@@ -25,6 +25,7 @@ var _ MappedNullable = &BatchGetIncidentResponse{}
 type BatchGetIncidentResponse struct {
 	// Map of incident IDs to their corresponding incidents
 	Incidents map[string]Incident `json:"incidents"`
+	// List of IDs that were not found
 	NotFoundIds []string `json:"notFoundIds"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,7 +23,9 @@ var _ MappedNullable = &BatchGetSlosResponse{}
 
 // BatchGetSlosResponse Response containing a batch of SLOs and any IDs not found.
 type BatchGetSlosResponse struct {
+	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	// The slos.
 	Slos []Slo `json:"slos"`
 	AdditionalProperties map[string]interface{}
 }

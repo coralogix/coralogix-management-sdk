@@ -11,7 +11,7 @@
           "Connector Schema service"
         ],
         "summary": "Get Connector Schema",
-        "description": "No description available",
+        "description": "Returns the schema definition for notification connectors.",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "query",
             "name": "type",
+            "description": "Connector type whose schema to retrieve.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.ConnectorType"
             },
@@ -44,9 +45,14 @@
   "components": {
     "schemas": {
       "ConnectorConfigSchema": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Connector config schema.",
         "type": "object",
         "properties": {
           "fields": {
+            "description": "List of fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorConfigSchemaField"
@@ -58,46 +64,60 @@
         "type": "object",
         "properties": {
           "allowOverrides": {
+            "description": "The allow overrides.",
             "type": "boolean"
           },
           "allowedValues": {
+            "description": "The allowed values.",
             "type": "array",
             "items": {
+              "description": "The allowed values.",
               "type": "string"
             }
           },
           "default": {
+            "description": "The default.",
             "type": "string"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"
           },
           "required": {
+            "description": "The required.",
             "type": "boolean"
           }
         }
       },
       "ConnectorSchema": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Connector schema.",
         "type": "object",
         "properties": {
           "connectorConfigSchema": {
             "$ref": "#/components/schemas/ConnectorConfigSchema"
           },
           "messageConfigSchemas": {
+            "description": "The message config schemas.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchema"
             }
           },
           "supportedPayloadTypes": {
+            "description": "The supported payload types.",
             "type": "array",
             "items": {
+              "description": "The supported payload types.",
               "type": "string"
             }
           },
@@ -107,6 +127,7 @@
         }
       },
       "FieldType": {
+        "description": "Field type.",
         "type": "string",
         "enum": [
           "FIELD_TYPE_UNSPECIFIED",
@@ -123,10 +144,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -197,6 +218,10 @@
         ]
       },
       "GetConnectorSchemaResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the schema definition for a notification connector type.",
         "type": "object",
         "properties": {
           "connectorSchema": {
@@ -208,12 +233,14 @@
         "type": "object",
         "properties": {
           "fields": {
+            "description": "List of fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchemaField"
             }
           },
           "payloadType": {
+            "description": "Type of the payload.",
             "type": "string"
           }
         }
@@ -222,21 +249,27 @@
         "type": "object",
         "properties": {
           "allowedValues": {
+            "description": "The allowed values.",
             "type": "array",
             "items": {
+              "description": "The allowed values.",
               "type": "string"
             }
           },
           "default": {
+            "description": "The default.",
             "type": "string"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "disableOverride": {
+            "description": "The disable override.",
             "type": "boolean"
           },
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "fieldType": {
@@ -246,6 +279,7 @@
             "$ref": "#/components/schemas/TemplateRenderingMode"
           },
           "required": {
+            "description": "The required.",
             "type": "boolean"
           }
         }
@@ -265,6 +299,7 @@
         }
       },
       "TemplateRenderingMode": {
+        "description": "Template rendering mode.",
         "type": "string",
         "enum": [
           "TEMPLATE_RENDERING_MODE_UNSPECIFIED",
@@ -280,6 +315,7 @@
         ]
       },
       "notification_center.ConnectorType": {
+        "description": "Connector type.",
         "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
@@ -288,10 +324,12 @@
           "PAGERDUTY",
           "IBM_EVENT_NOTIFICATIONS",
           "SERVICE_NOW",
-          "EMAIL"
+          "EMAIL",
+          "PAGERDUTY_INCIDENTS"
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

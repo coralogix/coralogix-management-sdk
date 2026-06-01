@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionLink type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionLink{}
 
-// PropertyDefinitionLink struct for PropertyDefinitionLink
+// PropertyDefinitionLink Property definition.
 type PropertyDefinitionLink struct {
 	Link PropertyLinks `json:"link"`
 	AdditionalProperties map[string]interface{}

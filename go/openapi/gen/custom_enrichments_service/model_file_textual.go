@@ -23,9 +23,13 @@ var _ MappedNullable = &FileTextual{}
 
 // FileTextual This data structure represents a file
 type FileTextual struct {
+	// File extension indicating the file format (e.g., csv, json).
 	Extension *string `json:"extension,omitempty"`
+	// Name of the file.
 	Name *string `json:"name,omitempty"`
+	// Size of the file in bytes.
 	Size *int64 `json:"size,omitempty"`
+	// Textual content of the file as a UTF-8 string.
 	Textual string `json:"textual"`
 	AdditionalProperties map[string]interface{}
 }

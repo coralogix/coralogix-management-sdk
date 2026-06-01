@@ -22,7 +22,9 @@ var _ MappedNullable = &LabelsPermutationsCardinalityDay{}
 
 // LabelsPermutationsCardinalityDay struct for LabelsPermutationsCardinalityDay
 type LabelsPermutationsCardinalityDay struct {
+	// The day.
 	Day *string `json:"day,omitempty"`
+	// List of permutations.
 	Permutations *int32 `json:"permutations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

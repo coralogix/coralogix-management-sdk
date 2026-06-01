@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsTimeRelativeComparedTo the model 'LogsTimeRelativeComparedTo'
+// LogsTimeRelativeComparedTo Logs time relative compared to.
 type LogsTimeRelativeComparedTo string
 
 // List of LogsTimeRelativeComparedTo

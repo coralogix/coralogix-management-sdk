@@ -23,6 +23,7 @@ var _ MappedNullable = &FlowStages{}
 // FlowStages Defines stages in a flow alert
 type FlowStages struct {
 	FlowStagesGroups *FlowStagesGroups `json:"flowStagesGroups,omitempty"`
+	// The timeframe ms.
 	TimeframeMs *string `json:"timeframeMs,omitempty"`
 	TimeframeType *TimeframeType `json:"timeframeType,omitempty"`
 	AdditionalProperties map[string]interface{}

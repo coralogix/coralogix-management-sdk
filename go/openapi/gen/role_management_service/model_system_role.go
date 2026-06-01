@@ -22,9 +22,13 @@ var _ MappedNullable = &SystemRole{}
 
 // SystemRole struct for SystemRole
 type SystemRole struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
+	// The role id.
 	RoleId *int64 `json:"roleId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

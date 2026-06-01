@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the CreateE2MResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateE2MResponse{}
 
-// CreateE2MResponse struct for CreateE2MResponse
+// CreateE2MResponse Create e2m response.
 type CreateE2MResponse struct {
 	E2m *E2M `json:"e2m,omitempty"`
 	AdditionalProperties map[string]interface{}

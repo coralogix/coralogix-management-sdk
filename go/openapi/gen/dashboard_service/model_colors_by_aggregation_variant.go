@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ColorsByAggregationVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ColorsByAggregationVariant{}
 
-// ColorsByAggregationVariant struct for ColorsByAggregationVariant
+// ColorsByAggregationVariant Defines the coloring strategy applied to widget data series.
 type ColorsByAggregationVariant struct {
+	// Colors by aggregation.
 	Aggregation map[string]interface{} `json:"aggregation"`
 	AdditionalProperties map[string]interface{}
 }

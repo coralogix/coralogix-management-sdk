@@ -144,10 +144,13 @@ func (r ApiDashboardsServiceAssignDashboardFolderRequest) Execute() (map[string]
 /*
 DashboardsServiceAssignDashboardFolder Assign a dashboard to a folder
 
-No description available
+Assigns the dashboard to a folder.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId
+ @param dashboardId The dashboard id.
  @return ApiDashboardsServiceAssignDashboardFolderRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolder(ctx context.Context, dashboardId string) ApiDashboardsServiceAssignDashboardFolderRequest {
@@ -179,6 +182,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceAssignDashboardFolderExecu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.assignDashboardToFolderRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("assignDashboardToFolderRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -254,7 +260,10 @@ func (r ApiDashboardsServiceCreateDashboardRequest) Execute() (*CreateDashboardR
 /*
 DashboardsServiceCreateDashboard Create a new dashboard
 
-No description available
+Creates a new dashboard.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceCreateDashboardRequest
@@ -286,6 +295,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceCreateDashboardExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createDashboardRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("createDashboardRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -350,6 +362,7 @@ type ApiDashboardsServiceDeleteDashboardRequest struct {
 	requestId *string
 }
 
+// Optional client-supplied request identifier used to correlate the deletion request.
 func (r ApiDashboardsServiceDeleteDashboardRequest) RequestId(requestId string) ApiDashboardsServiceDeleteDashboardRequest {
 	r.requestId = &requestId
 	return r
@@ -362,10 +375,13 @@ func (r ApiDashboardsServiceDeleteDashboardRequest) Execute() (map[string]interf
 /*
 DashboardsServiceDeleteDashboard Delete a dashboard
 
-No description available
+Deletes the dashboard with the specified ID.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId
+ @param dashboardId The dashboard id.
  @return ApiDashboardsServiceDeleteDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceDeleteDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceDeleteDashboardRequest {
@@ -468,10 +484,13 @@ func (r ApiDashboardsServiceGetDashboardRequest) Execute() (*GetDashboardRespons
 /*
 DashboardsServiceGetDashboard Get a dashboard
 
-No description available
+Returns the details of the specified dashboard.
+
+Requires the following permissions:
+- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId
+ @param dashboardId The dashboard id.
  @return ApiDashboardsServiceGetDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceGetDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceGetDashboardRequest {
@@ -571,10 +590,13 @@ func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardB
 /*
 DashboardsServiceGetDashboardBySlug Get a dashboard by URL slug
 
-No description available
+Returns the dashboard associated with the specified slug.
+
+Requires the following permissions:
+- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param slug
+ @param slug The URL slug identifying the dashboard to retrieve.
  @return ApiDashboardsServiceGetDashboardBySlugRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlug(ctx context.Context, slug string) ApiDashboardsServiceGetDashboardBySlugRequest {
@@ -668,6 +690,7 @@ type ApiDashboardsServicePinDashboardRequest struct {
 	requestId *string
 }
 
+// Idempotency key for the pin request, used to prevent duplicate operations.
 func (r ApiDashboardsServicePinDashboardRequest) RequestId(requestId string) ApiDashboardsServicePinDashboardRequest {
 	r.requestId = &requestId
 	return r
@@ -680,10 +703,13 @@ func (r ApiDashboardsServicePinDashboardRequest) Execute() (map[string]interface
 /*
 DashboardsServicePinDashboard Add dashboard to favorites
 
-No description available
+Pins the specified dashboard.
+
+Requires the following permissions:
+- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId
+ @param dashboardId The dashboard id.
  @return ApiDashboardsServicePinDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServicePinDashboard(ctx context.Context, dashboardId string) ApiDashboardsServicePinDashboardRequest {
@@ -791,7 +817,10 @@ func (r ApiDashboardsServiceReplaceDashboardRequest) Execute() (map[string]inter
 /*
 DashboardsServiceReplaceDashboard Replace a dashboard
 
-No description available
+Replaces an existing dashboard.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceReplaceDashboardRequest
@@ -823,6 +852,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.replaceDashboardRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("replaceDashboardRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -899,10 +931,13 @@ func (r ApiDashboardsServiceReplaceDefaultDashboardRequest) Execute() (map[strin
 /*
 DashboardsServiceReplaceDefaultDashboard Replace the default dashboard
 
-No description available
+Sets the specified dashboard as the default.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId
+ @param dashboardId The dashboard id.
  @return ApiDashboardsServiceReplaceDefaultDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceReplaceDefaultDashboardRequest {
@@ -934,6 +969,9 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDefaultDashboardExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.replaceDefaultDashboardRequestDataStructure == nil {
+		return localVarReturnValue, nil, reportError("replaceDefaultDashboardRequestDataStructure is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -998,6 +1036,7 @@ type ApiDashboardsServiceUnpinDashboardRequest struct {
 	requestId *string
 }
 
+// Idempotency key for the unpin request, used to prevent duplicate operations.
 func (r ApiDashboardsServiceUnpinDashboardRequest) RequestId(requestId string) ApiDashboardsServiceUnpinDashboardRequest {
 	r.requestId = &requestId
 	return r
@@ -1010,10 +1049,13 @@ func (r ApiDashboardsServiceUnpinDashboardRequest) Execute() (map[string]interfa
 /*
 DashboardsServiceUnpinDashboard Remove dashboard from favorites
 
-No description available
+Unpins the specified dashboard.
+
+Requires the following permissions:
+- `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param dashboardId
+ @param dashboardId The dashboard id.
  @return ApiDashboardsServiceUnpinDashboardRequest
 */
 func (a *DashboardServiceAPIService) DashboardsServiceUnpinDashboard(ctx context.Context, dashboardId string) ApiDashboardsServiceUnpinDashboardRequest {

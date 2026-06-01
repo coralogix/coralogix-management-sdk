@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the InitializeTestingRevisionRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &InitializeTestingRevisionRequest{}
 
-// InitializeTestingRevisionRequest struct for InitializeTestingRevisionRequest
+// InitializeTestingRevisionRequest Request for initializing an extension testing revision.
 type InitializeTestingRevisionRequest struct {
 	ExtensionData *ExtensionData `json:"extensionData,omitempty"`
 	AdditionalProperties map[string]interface{}

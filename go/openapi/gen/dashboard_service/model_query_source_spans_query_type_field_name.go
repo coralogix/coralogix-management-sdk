@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QuerySourceSpansQueryTypeFieldName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceSpansQueryTypeFieldName{}
 
-// QuerySourceSpansQueryTypeFieldName struct for QuerySourceSpansQueryTypeFieldName
+// QuerySourceSpansQueryTypeFieldName Fetches distinct span field names matching the given regex pattern.
 type QuerySourceSpansQueryTypeFieldName struct {
+	// The span regex.
 	SpanRegex *string `json:"spanRegex,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,7 +22,9 @@ var _ MappedNullable = &BulkDeleteAlertDefsResponse{}
 
 // BulkDeleteAlertDefsResponse A response to the bulk deletion of alert definitions. The operation is atomic - either all alerts are deleted or none are.
 type BulkDeleteAlertDefsResponse struct {
+	// IDs of alert definitions that were successfully deleted
 	DeletedIds []string `json:"deletedIds,omitempty"`
+	// IDs of alert definitions that were not found
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

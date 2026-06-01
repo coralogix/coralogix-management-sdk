@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SearchCustomEnrichmentDataResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SearchCustomEnrichmentDataResponse{}
 
-// SearchCustomEnrichmentDataResponse struct for SearchCustomEnrichmentDataResponse
+// SearchCustomEnrichmentDataResponse Response containing custom enrichment data search results.
 type SearchCustomEnrichmentDataResponse struct {
+	// The custom enrichments data.
 	CustomEnrichmentsData []CustomEnrichmentData `json:"customEnrichmentsData,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

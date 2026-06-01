@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the HorizontalBarChartStackDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartStackDefinition{}
 
-// HorizontalBarChartStackDefinition struct for HorizontalBarChartStackDefinition
+// HorizontalBarChartStackDefinition Stack definition.
 type HorizontalBarChartStackDefinition struct {
 	// How many slices can fit in a single bar
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`

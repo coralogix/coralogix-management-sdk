@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the SectionOptionsCustom type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SectionOptionsCustom{}
 
-// SectionOptionsCustom struct for SectionOptionsCustom
+// SectionOptionsCustom Section options.
 type SectionOptionsCustom struct {
 	Custom CustomSectionOptions `json:"custom"`
 	AdditionalProperties map[string]interface{}

@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestDestinationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestDestinationResponse{}
 
-// TestDestinationResponse struct for TestDestinationResponse
+// TestDestinationResponse Response containing the results of a notification destination test.
 type TestDestinationResponse struct {
 	Result *TestResult `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}

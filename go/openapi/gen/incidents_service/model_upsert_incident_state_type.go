@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// UpsertIncidentStateType the model 'UpsertIncidentStateType'
+// UpsertIncidentStateType Upsert incident state type.
 type UpsertIncidentStateType string
 
 // List of UpsertIncidentStateType

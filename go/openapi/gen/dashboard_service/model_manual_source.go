@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ManualSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSource{}
 
-// ManualSource struct for ManualSource
+// ManualSource Manual source.
 type ManualSource struct {
+	// The message template.
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Orientation *AnnotationOrientation `json:"orientation,omitempty"`
 	Strategy *ManualSourceStrategy `json:"strategy,omitempty"`

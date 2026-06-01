@@ -25,8 +25,11 @@ var _ MappedNullable = &V3ApiKey{}
 type V3ApiKey struct {
 	// The timestamp when the API key was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Whether this resource is active.
 	IsActive *bool `json:"isActive,omitempty"`
+	// The key name.
 	KeyName *string `json:"keyName,omitempty"`
 	// The timestamp when the API key was last activated.
 	LastActivated *time.Time `json:"lastActivated,omitempty"`

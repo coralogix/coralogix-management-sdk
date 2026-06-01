@@ -43,7 +43,7 @@ Requires the following permissions:
 - `incidents:acknowledge`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId
+ @param eventId Event ID associated to the Incident to acknowledge
  @return ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventId(ctx context.Context, eventId string) ApiIncidentsServiceAcknowledgeIncidentByEventIdRequest {
@@ -183,6 +183,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentsExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.acknowledgeIncidentsRequest == nil {
+		return localVarReturnValue, nil, reportError("acknowledgeIncidentsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -293,6 +296,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAssignIncidentsExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.assignIncidentsRequest == nil {
+		return localVarReturnValue, nil, reportError("assignIncidentsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -356,6 +362,7 @@ type ApiIncidentsServiceBatchGetIncidentRequest struct {
 	ids *[]string
 }
 
+// The ids.
 func (r ApiIncidentsServiceBatchGetIncidentRequest) Ids(ids []string) ApiIncidentsServiceBatchGetIncidentRequest {
 	r.ids = &ids
 	return r
@@ -487,7 +494,10 @@ func (r ApiIncidentsServiceCloseIncidentsRequest) Execute() (*CloseIncidentsResp
 /*
 IncidentsServiceCloseIncidents Close incidents
 
-No description available
+Closes all incidents matching the given criteria.
+
+Requires the following permissions:
+- `incidents:close`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceCloseIncidentsRequest
@@ -519,6 +529,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceCloseIncidentsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.closeIncidentsRequest == nil {
+		return localVarReturnValue, nil, reportError("closeIncidentsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -594,7 +607,10 @@ func (r ApiIncidentsServiceGetFilterValuesRequest) Execute() (*IncidentsV1GetFil
 /*
 IncidentsServiceGetFilterValues Get available filter values
 
-No description available
+Returns filter values for incidents based on the provided criteria.
+
+Requires the following permissions:
+- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceGetFilterValuesRequest
@@ -702,7 +718,7 @@ Requires the following permissions:
 - `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiIncidentsServiceGetIncidentRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncident(ctx context.Context, id string) ApiIncidentsServiceGetIncidentRequest {
@@ -808,7 +824,7 @@ Requires the following permissions:
 - `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId
+ @param eventId Event ID associated to the Incident to acknowledge
  @return ApiIncidentsServiceGetIncidentByEventIdRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventId(ctx context.Context, eventId string) ApiIncidentsServiceGetIncidentByEventIdRequest {
@@ -914,7 +930,7 @@ Requires the following permissions:
 - `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param incidentId
+ @param incidentId ID of the incident to retrieve events for
  @return ApiIncidentsServiceGetIncidentEventsRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEvents(ctx context.Context, incidentId string) ApiIncidentsServiceGetIncidentEventsRequest {
@@ -1009,16 +1025,19 @@ type ApiIncidentsServiceListIncidentAggregationsRequest struct {
 	pagination *PaginationRequest
 }
 
+// Filter for incidents
 func (r ApiIncidentsServiceListIncidentAggregationsRequest) Filter(filter IncidentQueryFilter) ApiIncidentsServiceListIncidentAggregationsRequest {
 	r.filter = &filter
 	return r
 }
 
+// Group by fields for aggregation
 func (r ApiIncidentsServiceListIncidentAggregationsRequest) GroupBys(groupBys []IncidentsServiceListIncidentAggregationsGroupBysParameterInner) ApiIncidentsServiceListIncidentAggregationsRequest {
 	r.groupBys = &groupBys
 	return r
 }
 
+// Pagination parameters
 func (r ApiIncidentsServiceListIncidentAggregationsRequest) Pagination(pagination PaginationRequest) ApiIncidentsServiceListIncidentAggregationsRequest {
 	r.pagination = &pagination
 	return r
@@ -1146,16 +1165,19 @@ type ApiIncidentsServiceListIncidentEventsRequest struct {
 	orderBy *ListIncidentEventsOrderByRequest
 }
 
+// Filter for incident events
 func (r ApiIncidentsServiceListIncidentEventsRequest) Filter(filter IncidentEventQueryFilter) ApiIncidentsServiceListIncidentEventsRequest {
 	r.filter = &filter
 	return r
 }
 
+// Pagination parameters
 func (r ApiIncidentsServiceListIncidentEventsRequest) Pagination(pagination PaginationRequest) ApiIncidentsServiceListIncidentEventsRequest {
 	r.pagination = &pagination
 	return r
 }
 
+// Order by fields for incident events
 func (r ApiIncidentsServiceListIncidentEventsRequest) OrderBy(orderBy ListIncidentEventsOrderByRequest) ApiIncidentsServiceListIncidentEventsRequest {
 	r.orderBy = &orderBy
 	return r
@@ -1273,6 +1295,7 @@ type ApiIncidentsServiceListIncidentEventsFilterValuesRequest struct {
 	filter *IncidentEventQueryFilter
 }
 
+// Filter for incident events
 func (r ApiIncidentsServiceListIncidentEventsFilterValuesRequest) Filter(filter IncidentEventQueryFilter) ApiIncidentsServiceListIncidentEventsFilterValuesRequest {
 	r.filter = &filter
 	return r
@@ -1285,7 +1308,10 @@ func (r ApiIncidentsServiceListIncidentEventsFilterValuesRequest) Execute() (*Li
 /*
 IncidentsServiceListIncidentEventsFilterValues Get available incident event filter values
 
-No description available
+Returns available filter values for incident events.
+
+Requires the following permissions:
+- `incidents:read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIncidentsServiceListIncidentEventsFilterValuesRequest
@@ -1381,6 +1407,7 @@ type ApiIncidentsServiceListIncidentEventsTotalCountRequest struct {
 	filter *IncidentEventQueryFilter
 }
 
+// Filter for incident events
 func (r ApiIncidentsServiceListIncidentEventsTotalCountRequest) Filter(filter IncidentEventQueryFilter) ApiIncidentsServiceListIncidentEventsTotalCountRequest {
 	r.filter = &filter
 	return r
@@ -1615,7 +1642,7 @@ Requires the following permissions:
 - `incidents:close`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param eventId
+ @param eventId Event ID associated to the Incident to resolve
  @return ApiIncidentsServiceResolveIncidentByEventIdRequest
 */
 func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventId(ctx context.Context, eventId string) ApiIncidentsServiceResolveIncidentByEventIdRequest {
@@ -1755,6 +1782,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentsExecute(r A
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.resolveIncidentsRequest == nil {
+		return localVarReturnValue, nil, reportError("resolveIncidentsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1818,6 +1848,7 @@ type ApiIncidentsServiceUnassignIncidentsRequest struct {
 	incidentIds *[]string
 }
 
+// List of incident IDs to unassign
 func (r ApiIncidentsServiceUnassignIncidentsRequest) IncidentIds(incidentIds []string) ApiIncidentsServiceUnassignIncidentsRequest {
 	r.incidentIds = &incidentIds
 	return r

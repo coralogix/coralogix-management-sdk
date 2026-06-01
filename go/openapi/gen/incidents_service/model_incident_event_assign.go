@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the IncidentEventAssign type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventAssign{}
 
-// IncidentEventAssign struct for IncidentEventAssign
+// IncidentEventAssign Incident event assign.
 type IncidentEventAssign struct {
 	Assignment *Assignment `json:"assignment,omitempty"`
 	AdditionalProperties map[string]interface{}

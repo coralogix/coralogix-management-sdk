@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionUnits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionUnits{}
 
-// PropertyDefinitionUnits struct for PropertyDefinitionUnits
+// PropertyDefinitionUnits Property definition.
 type PropertyDefinitionUnits struct {
 	Units PropertyUnits `json:"units"`
 	AdditionalProperties map[string]interface{}

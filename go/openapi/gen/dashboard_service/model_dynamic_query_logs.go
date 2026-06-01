@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DynamicQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQueryLogs{}
 
-// DynamicQueryLogs struct for DynamicQueryLogs
+// DynamicQueryLogs Discriminated union of possible query types for the dynamic widget.
 type DynamicQueryLogs struct {
 	Logs Logs `json:"logs"`
 	AdditionalProperties map[string]interface{}

@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the MetricLabelSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricLabelSource{}
 
-// MetricLabelSource struct for MetricLabelSource
+// MetricLabelSource Metric label source.
 type MetricLabelSource struct {
+	// The label.
 	Label *string `json:"label,omitempty"`
+	// The metric name.
 	MetricName *string `json:"metricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

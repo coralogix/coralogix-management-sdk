@@ -34,7 +34,7 @@ func (r ApiS3TargetServiceGetTargetRequest) Execute() (*S3TargetServiceGetTarget
 /*
 S3TargetServiceGetTarget Get target
 
-No description available
+Returns the current log archive target configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiS3TargetServiceGetTargetRequest
@@ -139,7 +139,7 @@ func (r ApiS3TargetServiceSetTargetRequest) Execute() (*S3TargetServiceSetTarget
 /*
 S3TargetServiceSetTarget Set target
 
-No description available
+Sets the log archive target configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiS3TargetServiceSetTargetRequest
@@ -171,6 +171,9 @@ func (a *TargetServiceAPIService) S3TargetServiceSetTargetExecute(r ApiS3TargetS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.setTargetResponse == nil {
+		return localVarReturnValue, nil, reportError("setTargetResponse is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

@@ -20,14 +20,20 @@ var _ = bytes.MinRead
 // checks if the TestingServiceTestDestinationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestingServiceTestDestinationRequest{}
 
-// TestingServiceTestDestinationRequest struct for TestingServiceTestDestinationRequest
+// TestingServiceTestDestinationRequest Request for testing a notification destination.
 type TestingServiceTestDestinationRequest struct {
+	// The connector config fields.
 	ConnectorConfigFields []TemplatedConnectorConfigField `json:"connectorConfigFields,omitempty"`
+	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty"`
+	// Entity sub-type to use when testing the destination.
 	EntitySubType *string `json:"entitySubType,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// The message config fields.
 	MessageConfigFields []NotificationCenterMessageConfigField `json:"messageConfigFields,omitempty"`
+	// Payload type to use when testing the destination.
 	PayloadType *string `json:"payloadType,omitempty"`
+	// The preset id.
 	PresetId *string `json:"presetId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

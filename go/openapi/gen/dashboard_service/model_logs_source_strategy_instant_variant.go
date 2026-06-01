@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LogsSourceStrategyInstantVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSourceStrategyInstantVariant{}
 
-// LogsSourceStrategyInstantVariant struct for LogsSourceStrategyInstantVariant
+// LogsSourceStrategyInstantVariant Determines the time strategy for fetching logs (instant snapshot, fixed range, or sliding window).
 type LogsSourceStrategyInstantVariant struct {
 	Instant LogsSourceStrategyInstant `json:"instant"`
 	AdditionalProperties map[string]interface{}

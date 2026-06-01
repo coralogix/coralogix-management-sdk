@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the RepetitiveVar type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RepetitiveVar{}
 
-// RepetitiveVar struct for RepetitiveVar
+// RepetitiveVar Repetitive var.
 type RepetitiveVar struct {
 	// Variable name that can be applied on section making it repetitive section
 	Name *string `json:"name,omitempty"`

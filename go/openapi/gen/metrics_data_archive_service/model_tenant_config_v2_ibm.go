@@ -21,12 +21,15 @@ var _ = bytes.MinRead
 // checks if the TenantConfigV2Ibm type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantConfigV2Ibm{}
 
-// TenantConfigV2Ibm struct for TenantConfigV2Ibm
+// TenantConfigV2Ibm Tenant config v2.
 type TenantConfigV2Ibm struct {
+	// Whether metrics archiving is disabled for this tenant.
 	Disabled *bool `json:"disabled,omitempty"`
 	Ibm IbmConfigV2 `json:"ibm"`
+	// Storage path prefix applied to all archived objects.
 	Prefix *string `json:"prefix,omitempty"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
+	// Tenant identifier.
 	TenantId *int64 `json:"tenantId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

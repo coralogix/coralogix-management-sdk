@@ -23,6 +23,7 @@ var _ MappedNullable = &ReplaceDefaultDashboardRequestDataStructure{}
 
 // ReplaceDefaultDashboardRequestDataStructure This is a request to replace a default dashboard
 type ReplaceDefaultDashboardRequestDataStructure struct {
+	// Idempotency key for the replace default dashboard request, used to prevent duplicate operations.
 	RequestId string `json:"requestId"`
 	AdditionalProperties map[string]interface{}
 }

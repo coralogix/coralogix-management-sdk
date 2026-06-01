@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Events2MetricServiceAtomicBatchExecuteE2MRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Events2MetricServiceAtomicBatchExecuteE2MRequest{}
 
-// Events2MetricServiceAtomicBatchExecuteE2MRequest struct for Events2MetricServiceAtomicBatchExecuteE2MRequest
+// Events2MetricServiceAtomicBatchExecuteE2MRequest Request containing an atomic list of events-to-metrics actions to execute.
 type Events2MetricServiceAtomicBatchExecuteE2MRequest struct {
+	// The requests.
 	Requests []E2MExecutionRequest `json:"requests,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

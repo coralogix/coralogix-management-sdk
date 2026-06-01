@@ -22,6 +22,7 @@ var _ MappedNullable = &DeleteTeamGroupResponse{}
 
 // DeleteTeamGroupResponse Response confirming the successful deletion of a team group and its associated configurations.
 type DeleteTeamGroupResponse struct {
+	// The group id.
 	GroupId *int64 `json:"groupId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

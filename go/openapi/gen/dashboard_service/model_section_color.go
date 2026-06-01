@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SectionColor type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SectionColor{}
 
-// SectionColor struct for SectionColor
+// SectionColor Section color.
 type SectionColor struct {
 	Predefined *SectionPredefinedColor `json:"predefined,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the LineChartMetricsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartMetricsQuery{}
 
-// LineChartMetricsQuery struct for LineChartMetricsQuery
+// LineChartMetricsQuery Metrics query.
 type LineChartMetricsQuery struct {
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	SeriesLimitType *MetricsSeriesLimitType `json:"seriesLimitType,omitempty"`

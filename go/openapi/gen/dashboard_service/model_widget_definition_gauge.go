@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionGauge type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionGauge{}
 
-// WidgetDefinitionGauge struct for WidgetDefinitionGauge
+// WidgetDefinitionGauge Definition.
 type WidgetDefinitionGauge struct {
 	Gauge WidgetsGauge `json:"gauge"`
 	AdditionalProperties map[string]interface{}

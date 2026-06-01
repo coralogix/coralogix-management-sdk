@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetDailyUsageUnitsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageUnitsResponse{}
 
-// GetDailyUsageUnitsResponse struct for GetDailyUsageUnitsResponse
+// GetDailyUsageUnitsResponse Response containing daily units usage data.
 type GetDailyUsageUnitsResponse struct {
+	// The units.
 	Units []DetailedDailyUnits `json:"units,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetDashboardCatalogResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDashboardCatalogResponse{}
 
-// GetDashboardCatalogResponse struct for GetDashboardCatalogResponse
+// GetDashboardCatalogResponse Response containing the dashboard catalog.
 type GetDashboardCatalogResponse struct {
+	// List of items.
 	Items []DashboardCatalogItem `json:"items,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

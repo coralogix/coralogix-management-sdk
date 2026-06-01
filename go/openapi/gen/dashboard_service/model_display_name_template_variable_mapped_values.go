@@ -23,6 +23,7 @@ var _ MappedNullable = &DisplayNameTemplateVariableMappedValues{}
 
 // DisplayNameTemplateVariableMappedValues A variable that can be referenced inside the display name template, backed by either an observation field or mapped values
 type DisplayNameTemplateVariableMappedValues struct {
+	// Mapped values.
 	MappedValues map[string]interface{} `json:"mappedValues"`
 	AdditionalProperties map[string]interface{}
 }

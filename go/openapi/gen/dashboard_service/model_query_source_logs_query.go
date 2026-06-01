@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceLogsQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceLogsQuery{}
 
-// QuerySourceLogsQuery struct for QuerySourceLogsQuery
+// QuerySourceLogsQuery Logs query.
 type QuerySourceLogsQuery struct {
 	Type *QuerySourceLogsQueryType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

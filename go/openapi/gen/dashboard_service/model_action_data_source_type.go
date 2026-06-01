@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ActionDataSourceType the model 'ActionDataSourceType'
+// ActionDataSourceType Action data source type.
 type ActionDataSourceType string
 
 // List of ActionDataSourceType

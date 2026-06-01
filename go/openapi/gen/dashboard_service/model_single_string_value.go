@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SingleStringValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SingleStringValue{}
 
-// SingleStringValue struct for SingleStringValue
+// SingleStringValue Single string value.
 type SingleStringValue struct {
 	Value *StringValueLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}

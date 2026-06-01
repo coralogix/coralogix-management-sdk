@@ -11,7 +11,7 @@
           "Target Service"
         ],
         "summary": "Get target",
-        "description": "No description available",
+        "description": "Returns the current log archive target configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +52,7 @@
           "Target Service"
         ],
         "summary": "Set target",
-        "description": "No description available",
+        "description": "Sets the log archive target configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -70,6 +70,7 @@
                   },
                   "isActive": {
                     "example": true,
+                    "description": "Whether archiving to this target is active.",
                     "type": "boolean"
                   },
                   "s3": {
@@ -77,12 +78,12 @@
                   }
                 },
                 "required": [
-                  "isActive",
-                  "targetSpec"
+                  "isActive"
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -131,10 +132,12 @@
           "archivingFormatId": {
             "deprecated": true,
             "example": "json_id",
+            "description": "The archiving format ID.",
             "type": "string"
           },
           "enableTags": {
             "example": true,
+            "description": "The enable tags.",
             "type": "boolean"
           },
           "format": {
@@ -142,6 +145,7 @@
           },
           "isActive": {
             "example": true,
+            "description": "The archiving format id.",
             "type": "boolean"
           }
         },
@@ -152,10 +156,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -236,6 +240,7 @@
         "properties": {
           "bucketCrn": {
             "example": "bucket_crn",
+            "description": "The bucket crn.",
             "type": "string"
           },
           "bucketType": {
@@ -243,10 +248,12 @@
           },
           "endpoint": {
             "example": "http://some.endpoint.com:8081",
+            "description": "Endpoint.",
             "type": "string"
           },
           "serviceCrn": {
             "example": "service_crn",
+            "description": "The service crn.",
             "type": "string"
           }
         },
@@ -256,6 +263,7 @@
         ]
       },
       "IbmBucketType": {
+        "description": "Ibm bucket type.",
         "type": "string",
         "enum": [
           "IBM_BUCKET_TYPE_UNSPECIFIED",
@@ -322,18 +330,22 @@
         "properties": {
           "bucket": {
             "example": "bucket",
+            "description": "Bucket name.",
             "type": "string"
           },
           "externalId": {
             "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "description": "External identifier.",
             "type": "string"
           },
           "region": {
             "example": "us-west-2",
+            "description": "Region.",
             "type": "string"
           },
           "roleArn": {
             "example": "arn:aws:iam::123456789012:role/CoralogixArchive",
+            "description": "The role arn.",
             "type": "string"
           }
         },
@@ -342,6 +354,7 @@
         ]
       },
       "TargetFormat": {
+        "description": "Target format.",
         "type": "string",
         "enum": [
           "TARGET_FORMAT_UNSPECIFIED",
@@ -400,14 +413,15 @@
       "v2.Target": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/V2TargetS3"
+            "$ref": "#/components/schemas/V2TargetIbmCos"
           },
           {
-            "$ref": "#/components/schemas/V2TargetIbmCos"
+            "$ref": "#/components/schemas/V2TargetS3"
           }
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -20,12 +20,16 @@ var _ = bytes.MinRead
 // checks if the DeployedIntegrationInformation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeployedIntegrationInformation{}
 
-// DeployedIntegrationInformation struct for DeployedIntegrationInformation
+// DeployedIntegrationInformation Deployed integration information.
 type DeployedIntegrationInformation struct {
+	// The definition key.
 	DefinitionKey *string `json:"definitionKey,omitempty"`
+	// The definition version.
 	DefinitionVersion *string `json:"definitionVersion,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
+	// The parameters.
 	Parameters []Parameter `json:"parameters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

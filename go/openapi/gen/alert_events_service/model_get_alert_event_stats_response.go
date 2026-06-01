@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetAlertEventStatsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAlertEventStatsResponse{}
 
-// GetAlertEventStatsResponse struct for GetAlertEventStatsResponse
+// GetAlertEventStatsResponse Response containing statistical data for alert events.
 type GetAlertEventStatsResponse struct {
+	// The events stats.
 	EventsStats *map[string]EventStats `json:"eventsStats,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

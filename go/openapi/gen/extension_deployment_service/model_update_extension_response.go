@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the UpdateExtensionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateExtensionResponse{}
 
-// UpdateExtensionResponse struct for UpdateExtensionResponse
+// UpdateExtensionResponse Response returned after successfully updating a deployed extension.
 type UpdateExtensionResponse struct {
 	ExtensionDeployment *ExtensionDeployment `json:"extensionDeployment,omitempty"`
 	AdditionalProperties map[string]interface{}

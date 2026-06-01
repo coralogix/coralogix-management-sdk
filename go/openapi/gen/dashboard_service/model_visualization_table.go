@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationTable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationTable{}
 
-// VisualizationTable struct for VisualizationTable
+// VisualizationTable Visualization.
 type VisualizationTable struct {
 	Table Table `json:"table"`
 	AdditionalProperties map[string]interface{}

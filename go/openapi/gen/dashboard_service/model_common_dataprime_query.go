@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the CommonDataprimeQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommonDataprimeQuery{}
 
-// CommonDataprimeQuery struct for CommonDataprimeQuery
+// CommonDataprimeQuery Line chart.dataprime query.
 type CommonDataprimeQuery struct {
+	// The text.
 	Text *string `json:"text,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

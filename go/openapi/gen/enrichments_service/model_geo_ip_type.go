@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GeoIpType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeoIpType{}
 
-// GeoIpType struct for GeoIpType
+// GeoIpType Geo ip type.
 type GeoIpType struct {
+	// The with asn.
 	WithAsn *bool `json:"withAsn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

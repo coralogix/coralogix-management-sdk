@@ -22,6 +22,7 @@ var _ MappedNullable = &ErrorBudgetThreshold{}
 
 // ErrorBudgetThreshold Error budget threshold definition
 type ErrorBudgetThreshold struct {
+	// The rules for the error budget threshold
 	Rules []SloThresholdRule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

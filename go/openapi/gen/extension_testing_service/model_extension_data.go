@@ -22,21 +22,36 @@ var _ MappedNullable = &ExtensionData{}
 
 // ExtensionData Extension details for ingestion
 type ExtensionData struct {
+	// The binaries.
 	Binaries []ExtensionBinary `json:"binaries,omitempty"`
+	// The changelog.
 	Changelog []ChangelogEntry `json:"changelog,omitempty"`
+	// The dark mode image.
 	DarkModeImage *string `json:"darkModeImage,omitempty"`
 	Deprecation *Deprecation `json:"deprecation,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The excerpt.
 	Excerpt *string `json:"excerpt,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Image reference.
 	Image *string `json:"image,omitempty"`
+	// The integration details.
 	IntegrationDetails []IntegrationDetail `json:"integrationDetails,omitempty"`
+	// The integrations.
 	Integrations []string `json:"integrations,omitempty"`
+	// The is hidden.
 	IsHidden *bool `json:"isHidden,omitempty"`
+	// List of items.
 	Items []ExtensionItemData `json:"items,omitempty"`
+	// The keywords.
 	Keywords []string `json:"keywords,omitempty"`
+	// List of labels.
 	Labels []string `json:"labels,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Version number.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

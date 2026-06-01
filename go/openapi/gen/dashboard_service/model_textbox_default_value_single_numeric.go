@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the TextboxDefaultValueSingleNumeric type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueSingleNumeric{}
 
-// TextboxDefaultValueSingleNumeric struct for TextboxDefaultValueSingleNumeric
+// TextboxDefaultValueSingleNumeric Textbox default value.
 type TextboxDefaultValueSingleNumeric struct {
+	// Deprecated. Default numeric value for the textbox variable.
 	// Deprecated
 	SingleNumeric float32 `json:"singleNumeric"`
 	AdditionalProperties map[string]interface{}

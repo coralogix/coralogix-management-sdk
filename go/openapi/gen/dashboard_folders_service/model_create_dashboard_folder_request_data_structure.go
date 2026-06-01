@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the CreateDashboardFolderRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateDashboardFolderRequestDataStructure{}
 
-// CreateDashboardFolderRequestDataStructure struct for CreateDashboardFolderRequestDataStructure
+// CreateDashboardFolderRequestDataStructure Request to create a new dashboard folder.
 type CreateDashboardFolderRequestDataStructure struct {
 	Folder *DashboardFolder `json:"folder,omitempty"`
+	// The request id.
 	RequestId *string `json:"requestId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

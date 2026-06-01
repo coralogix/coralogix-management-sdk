@@ -22,6 +22,7 @@ var _ MappedNullable = &ActivityAnalysis{}
 
 // ActivityAnalysis Configuration for alert activity analysis, containing rules and status.
 type ActivityAnalysis struct {
+	// List of rules.
 	Rules []string `json:"rules,omitempty"`
 	Status *ActivityAnalysisStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}

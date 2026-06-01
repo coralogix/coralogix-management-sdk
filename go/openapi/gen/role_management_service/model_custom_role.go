@@ -20,14 +20,21 @@ var _ = bytes.MinRead
 // checks if the CustomRole type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomRole{}
 
-// CustomRole struct for CustomRole
+// CustomRole Custom role.
 type CustomRole struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The parent role id.
 	ParentRoleId *int64 `json:"parentRoleId,omitempty"`
+	// The parent role name.
 	ParentRoleName *string `json:"parentRoleName,omitempty"`
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
+	// The role id.
 	RoleId *int64 `json:"roleId,omitempty"`
+	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

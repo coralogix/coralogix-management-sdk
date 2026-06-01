@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableValueV2MultiString type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2MultiString{}
 
-// VariableValueV2MultiString struct for VariableValueV2MultiString
+// VariableValueV2MultiString Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2MultiString struct {
 	MultiString MultiStringValue `json:"multiString"`
 	AdditionalProperties map[string]interface{}

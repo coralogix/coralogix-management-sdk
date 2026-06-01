@@ -22,6 +22,7 @@ var _ MappedNullable = &EqualsSelectionListSelection{}
 
 // EqualsSelectionListSelection This data structure represents a selection from a list of specific values.
 type EqualsSelectionListSelection struct {
+	// A list of selected values.
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

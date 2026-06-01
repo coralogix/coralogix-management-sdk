@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SetScopeId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SetScopeId{}
 
-// SetScopeId struct for SetScopeId
+// SetScopeId Set scope id.
 type SetScopeId struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

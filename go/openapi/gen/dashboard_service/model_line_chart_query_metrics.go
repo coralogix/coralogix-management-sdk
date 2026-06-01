@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LineChartQueryMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartQueryMetrics{}
 
-// LineChartQueryMetrics struct for LineChartQueryMetrics
+// LineChartQueryMetrics Discriminated union of possible query types for the line chart widget.
 type LineChartQueryMetrics struct {
 	Metrics LineChartMetricsQuery `json:"metrics"`
 	AdditionalProperties map[string]interface{}

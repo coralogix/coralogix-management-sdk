@@ -23,12 +23,18 @@ var _ MappedNullable = &OutgoingWebhookExtendedSummary{}
 
 // OutgoingWebhookExtendedSummary struct for OutgoingWebhookExtendedSummary
 type OutgoingWebhookExtendedSummary struct {
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// External identifier.
 	ExternalId *int64 `json:"externalId,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

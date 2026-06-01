@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GoToDashboardTemplateAction type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GoToDashboardTemplateAction{}
 
-// GoToDashboardTemplateAction struct for GoToDashboardTemplateAction
+// GoToDashboardTemplateAction Go to dashboard template action.
 type GoToDashboardTemplateAction struct {
 	// Reference to specific dashboard
 	DashboardId *string `json:"dashboardId,omitempty"`

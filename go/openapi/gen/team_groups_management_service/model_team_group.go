@@ -23,6 +23,7 @@ var _ MappedNullable = &TeamGroup{}
 
 // TeamGroup A Team Group entity.
 type TeamGroup struct {
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Group description
 	Description *string `json:"description,omitempty"`
@@ -38,6 +39,7 @@ type TeamGroup struct {
 	Scope *V2Scope `json:"scope,omitempty"`
 	// Team this group belongs to
 	TeamId *int64 `json:"teamId,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

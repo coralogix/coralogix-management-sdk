@@ -22,6 +22,7 @@ var _ MappedNullable = &DeleteAPIKeysRequest{}
 
 // DeleteAPIKeysRequest This data structure is used to delete specified API keys.
 type DeleteAPIKeysRequest struct {
+	// List of API key IDs to delete.
 	KeyIds []string `json:"keyIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

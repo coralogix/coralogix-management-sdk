@@ -25,7 +25,9 @@ type LogsUniqueCountType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The maximum unique count per group by key
 	MaxUniqueCountPerGroupByKey *string `json:"maxUniqueCountPerGroupByKey,omitempty"`
+	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// The rules for the log unique count alert
 	Rules []LogsUniqueCountRule `json:"rules,omitempty"`
 	// The keypath in the logs to be used for unique count
 	UniqueCountKeypath *string `json:"uniqueCountKeypath,omitempty"`

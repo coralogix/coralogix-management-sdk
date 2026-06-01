@@ -24,8 +24,11 @@ var _ MappedNullable = &V2AggregationNone{}
 // V2AggregationNone This data structure represents an aggregation
 type V2AggregationNone struct {
 	AggType *AggType `json:"aggType,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Marker indicating no additional metadata is needed for this aggregation type.
 	None map[string]interface{} `json:"none"`
+	// Name of the target metric produced by this aggregation.
 	TargetMetricName *string `json:"targetMetricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

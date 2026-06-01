@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// RevisionLifecycle the model 'RevisionLifecycle'
+// RevisionLifecycle Revision lifecycle.
 type RevisionLifecycle string
 
 // List of RevisionLifecycle

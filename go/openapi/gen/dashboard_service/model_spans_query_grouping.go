@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the SpansQueryGrouping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansQueryGrouping{}
 
-// SpansQueryGrouping struct for SpansQueryGrouping
+// SpansQueryGrouping Grouping configuration for span query results, defining group-by fields and aggregation functions.
 type SpansQueryGrouping struct {
+	// List of aggregations applied to span records
 	Aggregations []SpansQueryAggregation `json:"aggregations,omitempty"`
+	// List of field names to group the span records
 	GroupBy []SpanField `json:"groupBy,omitempty"`
+	// A list of observation fields definitions to group the records by
 	GroupBys []SpanObservationField `json:"groupBys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

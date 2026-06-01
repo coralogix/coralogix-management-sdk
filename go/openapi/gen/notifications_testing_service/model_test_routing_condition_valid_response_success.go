@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TestRoutingConditionValidResponseSuccess type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestRoutingConditionValidResponseSuccess{}
 
-// TestRoutingConditionValidResponseSuccess struct for TestRoutingConditionValidResponseSuccess
+// TestRoutingConditionValidResponseSuccess Indicates the routing condition is valid, with the evaluated result.
 type TestRoutingConditionValidResponseSuccess struct {
+	// Result.
 	Result *bool `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

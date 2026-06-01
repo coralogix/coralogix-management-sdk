@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ColorApplyTarget the model 'ColorApplyTarget'
+// ColorApplyTarget Color apply target.
 type ColorApplyTarget string
 
 // List of ColorApplyTarget

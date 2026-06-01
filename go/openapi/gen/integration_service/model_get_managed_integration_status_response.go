@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetManagedIntegrationStatusResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetManagedIntegrationStatusResponse{}
 
-// GetManagedIntegrationStatusResponse struct for GetManagedIntegrationStatusResponse
+// GetManagedIntegrationStatusResponse Response containing the status of a managed integration.
 type GetManagedIntegrationStatusResponse struct {
+	// The integration id.
 	IntegrationId *string `json:"integrationId,omitempty"`
 	Status *IntegrationStatus `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}

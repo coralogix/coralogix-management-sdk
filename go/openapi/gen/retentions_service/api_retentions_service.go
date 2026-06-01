@@ -34,7 +34,7 @@ func (r ApiRetentionsServiceActivateRetentionsRequest) Execute() (*ActivateReten
 /*
 RetentionsServiceActivateRetentions Activate Retentions
 
-No description available
+Activates the specified retention tags.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceActivateRetentionsRequest
@@ -133,7 +133,7 @@ func (r ApiRetentionsServiceGetRetentionsRequest) Execute() (*GetRetentionsRespo
 /*
 RetentionsServiceGetRetentions Get Retentions
 
-No description available
+Returns all available retention tags.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceGetRetentionsRequest
@@ -232,7 +232,7 @@ func (r ApiRetentionsServiceGetRetentionsEnabledRequest) Execute() (*GetRetentio
 /*
 RetentionsServiceGetRetentionsEnabled Get Retentions Enabled
 
-No description available
+Returns the enabled retention tags for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceGetRetentionsEnabledRequest
@@ -337,7 +337,7 @@ func (r ApiRetentionsServiceUpdateRetentionsRequest) Execute() (*UpdateRetention
 /*
 RetentionsServiceUpdateRetentions Update Retentions
 
-No description available
+Creates a new retention tag.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceUpdateRetentionsRequest
@@ -369,6 +369,9 @@ func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentionsExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateRetentionsRequest == nil {
+		return localVarReturnValue, nil, reportError("updateRetentionsRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

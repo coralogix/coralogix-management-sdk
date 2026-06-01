@@ -7,32 +7,40 @@ servers:
 paths:
   /aaa/team-groups/v2:
     get:
-      description: No description available
+      description: Returns all team groups.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_GetTeamGroups
       parameters:
-      - explode: true
+      - description: "Team to fetch team groups for. If not set, fetches groups associated\
+          \ with the logged in team."
+        explode: true
         in: query
         name: team_id
         required: false
         schema:
+          description: "Team to fetch team groups for. If not set, fetches groups\
+            \ associated with the logged in team."
           format: int64
           type: integer
         style: form
-      - explode: true
+      - description: Page size.
+        explode: true
         in: query
         name: page_size
         required: false
         schema:
+          description: Page size.
           format: int64
           type: integer
         style: form
-      - explode: true
+      - description: The page token.
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
+          description: The page token.
           example: ""
           type: string
         style: form
@@ -59,7 +67,7 @@ paths:
       tags:
       - Team Groups Management Service
     post:
-      description: No description available
+      description: Creates a new team group.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_CreateTeamGroup
@@ -96,16 +104,18 @@ paths:
       - Team Groups Management Service
   /aaa/team-groups/v2/id/{group_id}:
     get:
-      description: No description available
+      description: Returns the team group with the specified ID.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_GetTeamGroup
       parameters:
-      - explode: false
+      - description: The unique identifier of the team group.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: The unique identifier of the team group.
           format: int64
           type: integer
         style: simple
@@ -137,16 +147,18 @@ paths:
       - Team Groups Management Service
   /aaa/team-groups/v2/name/{name}:
     get:
-      description: No description available
+      description: Returns the team group with the specified name.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_GetTeamGroupByName
       parameters:
-      - explode: false
+      - description: The name of the team group to retrieve.
+        explode: false
         in: path
         name: name
         required: true
         schema:
+          description: The name of the team group to retrieve.
           type: string
         style: simple
       responses:
@@ -177,16 +189,18 @@ paths:
       - Team Groups Management Service
   /aaa/team-groups/v2/{group_id}:
     delete:
-      description: No description available
+      description: Deletes the team group with the specified ID.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_DeleteTeamGroup
       parameters:
-      - explode: false
+      - description: The unique identifier of the team group to delete.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: The unique identifier of the team group to delete.
           format: int64
           type: integer
         style: simple
@@ -217,16 +231,18 @@ paths:
       tags:
       - Team Groups Management Service
     put:
-      description: No description available
+      description: Updates the specified team group.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_UpdateTeamGroup
       parameters:
-      - explode: false
+      - description: Unique identifier of the team group to update.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: Unique identifier of the team group to update.
           format: int64
           type: integer
         style: simple
@@ -261,34 +277,40 @@ paths:
       summary: Update Team Group
       tags:
       - Team Groups Management Service
-  /aaa/team-groups/v2/{group_id}/users:
+  /aaa/team-groups/v2/{group_id}/users/list:
     get:
-      description: No description available
+      description: Returns all users in the specified team group.
       externalDocs:
         url: ""
       operationId: GroupsMgmtService_GetGroupUsers
       parameters:
-      - explode: false
+      - description: The unique identifier of the team group whose users to list.
+        explode: false
         in: path
         name: group_id
         required: true
         schema:
+          description: The unique identifier of the team group whose users to list.
           format: int64
           type: integer
         style: simple
-      - explode: true
+      - description: Pagination size. Defaults to 100 if empty.
+        explode: true
         in: query
         name: page_size
         required: false
         schema:
+          description: Pagination size. Defaults to 100 if empty.
           format: int64
           type: integer
         style: form
-      - explode: true
+      - description: Optional pagination continuation token.
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
+          description: Optional pagination continuation token.
           example: ""
           type: string
         style: form
@@ -321,17 +343,25 @@ paths:
 components:
   schemas:
     ClearRole:
+      description: Clear role.
       example:
         clear: true
+      externalDocs:
+        url: ""
       properties:
         clear:
+          description: The clear.
           type: boolean
       type: object
     ClearScope:
+      description: Clear scope.
       example:
         clear: true
+      externalDocs:
+        url: ""
       properties:
         clear:
+          description: The clear.
           type: boolean
       type: object
     CreateTeamGroupResponse:
@@ -371,14 +401,15 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       properties:
         groupId:
+          description: The group id.
           format: int64
           type: integer
       title: DeleteTeamGroupResponse
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -450,11 +481,14 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       properties:
         nextPageToken:
+          description: Token for fetching the next page of results.
           type: string
         totalCount:
+          description: The total count.
           format: int64
           type: integer
         users:
+          description: List of users.
           items:
             $ref: "#/components/schemas/rbac.v2.User"
           type: array
@@ -557,23 +591,28 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       properties:
         groups:
+          description: List of groups.
           items:
             $ref: "#/components/schemas/TeamGroup"
           type: array
         nextPageToken:
+          description: Token for fetching the next page of results.
           type: string
         totalCount:
+          description: The total count.
           format: int64
           type: integer
       title: GetTeamGroupsResponse
       type: object
     GroupOrigin:
+      description: Group origin.
       enum:
       - GROUP_ORIGIN_UNSPECIFIED
       - GROUP_ORIGIN_BUILT_IN
       - GROUP_ORIGIN_USER_DEFINED
       type: string
     GroupType:
+      description: Group type.
       enum:
       - GROUP_TYPE_UNSPECIFIED
       - GROUP_TYPE_OPEN
@@ -637,6 +676,7 @@ components:
       - $ref: "#/components/schemas/RoleUpdateActionClear"
       - $ref: "#/components/schemas/RoleUpdateActionSetRoleId"
     RoleUpdateActionClear:
+      description: Clear role.
       example:
         actionType: actionType
         clear:
@@ -645,6 +685,8 @@ components:
         url: ""
       properties:
         actionType:
+          description: Discriminator indicating the role update action type (set_role_id
+            or clear).
           type: string
         clear:
           $ref: "#/components/schemas/ClearRole"
@@ -653,10 +695,13 @@ components:
       - clear
       type: object
     RoleUpdateActionSetRoleId:
+      description: Clear role.
       externalDocs:
         url: ""
       properties:
         actionType:
+          description: Discriminator indicating the role update action type (set_role_id
+            or clear).
           type: string
         setRoleId:
           $ref: "#/components/schemas/SetRoleId"
@@ -690,6 +735,7 @@ components:
       - $ref: "#/components/schemas/ScopeUpdateActionClear"
       - $ref: "#/components/schemas/ScopeUpdateActionSetScopeId"
     ScopeUpdateActionClear:
+      description: Set scope id.
       example:
         actionType: actionType
         clear:
@@ -698,6 +744,8 @@ components:
         url: ""
       properties:
         actionType:
+          description: Discriminator indicating the scope update action type (set_scope_id
+            or clear).
           type: string
         clear:
           $ref: "#/components/schemas/ClearScope"
@@ -706,10 +754,13 @@ components:
       - clear
       type: object
     ScopeUpdateActionSetScopeId:
+      description: Set scope id.
       externalDocs:
         url: ""
       properties:
         actionType:
+          description: Discriminator indicating the scope update action type (set_scope_id
+            or clear).
           type: string
         setScopeId:
           $ref: "#/components/schemas/SetScopeId"
@@ -718,14 +769,22 @@ components:
       - setScopeId
       type: object
     SetRoleId:
+      description: Set role id.
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: The value.
           format: int64
           type: integer
       type: object
     SetScopeId:
+      description: Set scope id.
+      externalDocs:
+        url: ""
       properties:
         value:
+          description: The value.
           type: string
       type: object
     TeamGroup:
@@ -750,6 +809,7 @@ components:
         url: ""
       properties:
         createdAt:
+          description: Creation timestamp.
           format: date-time
           type: string
         description:
@@ -778,6 +838,7 @@ components:
           format: int64
           type: integer
         updatedAt:
+          description: Last-updated timestamp.
           format: date-time
           type: string
       title: TeamGroup
@@ -810,17 +871,23 @@ components:
       title: UpdateTeamGroupResponse
       type: object
     UserIdList:
+      description: User id list.
       example:
         userIds:
         - userIds
         - userIds
+      externalDocs:
+        url: ""
       properties:
         userIds:
+          description: The user ids.
           items:
+            description: The user ids.
             type: string
           type: array
       type: object
     UserStatus:
+      description: User status.
       enum:
       - USER_STATUS_UNSPECIFIED
       - USER_STATUS_ACTIVE
@@ -831,11 +898,11 @@ components:
         \ add, remove, or replace all users."
       example:
         operation:
-          operationType: operationType
-          remove:
+          add:
             userIds:
             - userIds
             - userIds
+          operationType: operationType
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
@@ -852,32 +919,38 @@ components:
           set: "#/components/schemas/UserUpdatesOperationSet"
         propertyName: operation_type
       oneOf:
+      - $ref: "#/components/schemas/UserUpdatesOperationAdd"
       - $ref: "#/components/schemas/UserUpdatesOperationRemove"
       - $ref: "#/components/schemas/UserUpdatesOperationSet"
-      - $ref: "#/components/schemas/UserUpdatesOperationAdd"
     UserUpdatesOperationAdd:
+      description: User id list.
+      example:
+        add:
+          userIds:
+          - userIds
+          - userIds
+        operationType: operationType
       externalDocs:
         url: ""
       properties:
         add:
           $ref: "#/components/schemas/UserIdList"
         operationType:
+          description: "Discriminator indicating the user update operation type (add,\
+            \ remove, or set)."
           type: string
       required:
       - add
       - operationType
       type: object
     UserUpdatesOperationRemove:
-      example:
-        operationType: operationType
-        remove:
-          userIds:
-          - userIds
-          - userIds
+      description: User id list.
       externalDocs:
         url: ""
       properties:
         operationType:
+          description: "Discriminator indicating the user update operation type (add,\
+            \ remove, or set)."
           type: string
         remove:
           $ref: "#/components/schemas/UserIdList"
@@ -886,10 +959,13 @@ components:
       - remove
       type: object
     UserUpdatesOperationSet:
+      description: User id list.
       externalDocs:
         url: ""
       properties:
         operationType:
+          description: "Discriminator indicating the user update operation type (add,\
+            \ remove, or set)."
           type: string
         set:
           $ref: "#/components/schemas/UserIdList"
@@ -950,6 +1026,7 @@ components:
       title: Scope
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -972,23 +1049,32 @@ components:
         externalId: externalId
       properties:
         description:
+          description: Human-readable description of the team group.
           type: string
         externalId:
+          description: "External identifier for the group, used when the group is\
+            \ managed by an external identity provider."
           type: string
         groupType:
           $ref: "#/components/schemas/GroupType"
         name:
+          description: Unique display name for the new team group.
           type: string
         roleId:
+          description: Identifier of the role to assign to this group.
           format: int64
           type: integer
         scope:
           $ref: "#/components/schemas/v2.Scope"
         teamId:
+          description: "Team to associate the group with. If not set, uses the authenticated\
+            \ team."
           format: int64
           type: integer
         userIds:
+          description: The user ids.
           items:
+            description: The user ids.
             type: string
           type: array
       title: CreateTeamGroupRequest
@@ -1010,22 +1096,25 @@ components:
               clear: true
         userUpdates:
           operation:
-            operationType: operationType
-            remove:
+            add:
               userIds:
               - userIds
               - userIds
+            operationType: operationType
         name: name
         description: description
         externalId: externalId
       properties:
         description:
+          description: New human-readable description for the team group.
           type: string
         externalId:
+          description: New external identifier for the group.
           type: string
         groupType:
           $ref: "#/components/schemas/GroupType"
         name:
+          description: New display name for the team group.
           type: string
         roleUpdate:
           $ref: "#/components/schemas/RoleUpdate"

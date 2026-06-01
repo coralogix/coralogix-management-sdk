@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the MultiSelect type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelect{}
 
-// MultiSelect struct for MultiSelect
+// MultiSelect A dashboard variable that allows selecting one or more values from a dynamically or statically populated list.
 type MultiSelect struct {
+	// The selected values.
 	Selected []string `json:"selected,omitempty"`
 	Selection *MultiSelectSelection `json:"selection,omitempty"`
 	SelectionOptions *VariableSelectionOptions `json:"selectionOptions,omitempty"`

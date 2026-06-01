@@ -7,17 +7,20 @@ servers:
 paths:
   /notifications/notification-center/v1/presets:
     get:
-      description: No description available
+      description: Returns all notification presets.
       externalDocs:
         url: ""
       operationId: PresetsService_BatchGetPresets
       parameters:
-      - explode: true
+      - description: The unique identifiers of the presets to retrieve.
+        explode: true
         in: query
         name: preset_ids
         required: false
         schema:
+          description: The unique identifiers of the presets to retrieve.
           items:
+            description: The unique identifiers of the presets to retrieve.
             example: ""
             type: string
           type: array
@@ -32,59 +35,20 @@ paths:
       summary: Batch Get Presets
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets/custom:
-    post:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_CreateCustomPreset
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Create_Custom_Preset_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateCustomPresetResponse"
-          description: ""
-      summary: Create Custom Preset
-      tags:
-      - Presets service
-    put:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_ReplaceCustomPreset
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Replace_Custom_Preset_Request"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ReplaceCustomPresetResponse"
-          description: ""
-      summary: Replace Custom Preset
-      tags:
-      - Presets service
   /notifications/notification-center/v1/presets/custom/{id}:
     delete:
-      description: No description available
+      description: Deletes the custom notification preset with the specified ID.
       externalDocs:
         url: ""
       operationId: PresetsService_DeleteCustomPreset
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -99,16 +63,18 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/custom/{id}/default:
     post:
-      description: No description available
+      description: Sets a custom preset as the default.
       externalDocs:
         url: ""
       operationId: PresetsService_SetCustomPresetAsDefault
       parameters:
-      - explode: false
+      - description: The unique identifier of the custom preset to set as default.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the custom preset to set as default.
           type: string
         style: simple
       responses:
@@ -121,52 +87,23 @@ paths:
       summary: Set Custom Preset As Default
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets/summaries:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: PresetsService_GetDefaultPresetSummary
-      parameters:
-      - explode: true
-        in: query
-        name: connector_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.ConnectorType"
-        style: form
-      - explode: true
-        in: query
-        name: entity_type
-        required: false
-        schema:
-          $ref: "#/components/schemas/notification_center.EntityType"
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDefaultPresetSummaryResponse"
-          description: ""
-      summary: Get Default Preset Summary
-      tags:
-      - Presets service
   /notifications/notification-center/v1/presets/summaries/system:
     get:
-      description: No description available
+      description: Returns summaries for all system-defined notification presets.
       externalDocs:
         url: ""
       operationId: PresetsService_GetSystemDefaultPresetSummary
       parameters:
-      - explode: true
+      - description: The connector type whose system default preset summary is requested.
+        explode: true
         in: query
         name: connector_type
         required: false
         schema:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         style: form
-      - explode: true
+      - description: The entity type whose system default preset summary is requested.
+        explode: true
         in: query
         name: entity_type
         required: false
@@ -185,16 +122,18 @@ paths:
       - Presets service
   /notifications/notification-center/v1/presets/{id}:
     get:
-      description: No description available
+      description: Returns the details of the specified notification preset.
       externalDocs:
         url: ""
       operationId: PresetsService_GetPreset
       parameters:
-      - explode: false
+      - description: The unique identifier of the preset to retrieve.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the preset to retrieve.
           type: string
         style: simple
       responses:
@@ -207,18 +146,20 @@ paths:
       summary: Get Preset
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets/{id}/default:
+  /notifications/notification-center/v1/presets/{id}/default/apply:
     post:
-      description: No description available
+      description: Sets the specified preset as the default for an entity.
       externalDocs:
         url: ""
       operationId: PresetsService_SetPresetAsDefault
       parameters:
-      - explode: false
+      - description: The unique identifier of the preset to set as default.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the preset to set as default.
           type: string
         style: simple
       responses:
@@ -231,21 +172,98 @@ paths:
       summary: Set Preset As Default
       tags:
       - Presets service
-  /notifications/notification-center/v1/presets:summariesList:
-    get:
-      description: No description available
+  /notifications/notification-center/v1/presets:createCustom:
+    post:
+      description: Creates a new custom notification preset.
       externalDocs:
         url: ""
-      operationId: PresetsService_ListPresetSummaries
+      operationId: PresetsService_CreateCustomPreset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Custom_Preset_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateCustomPresetResponse"
+          description: ""
+      summary: Create Custom Preset
+      tags:
+      - Presets service
+  /notifications/notification-center/v1/presets:getDefaultSummary:
+    get:
+      description: Returns a summary of the default notification preset.
+      externalDocs:
+        url: ""
+      operationId: PresetsService_GetDefaultPresetSummary
       parameters:
-      - explode: true
+      - description: The connector type whose default preset summary is requested.
+        explode: true
         in: query
         name: connector_type
         required: false
         schema:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         style: form
-      - explode: true
+      - description: The entity type whose default preset summary is requested.
+        explode: true
+        in: query
+        name: entity_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.EntityType"
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDefaultPresetSummaryResponse"
+          description: ""
+      summary: Get Default Preset Summary
+      tags:
+      - Presets service
+  /notifications/notification-center/v1/presets:replaceCustom:
+    put:
+      description: Replaces an existing custom notification preset.
+      externalDocs:
+        url: ""
+      operationId: PresetsService_ReplaceCustomPreset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_Custom_Preset_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceCustomPresetResponse"
+          description: ""
+      summary: Replace Custom Preset
+      tags:
+      - Presets service
+  /notifications/notification-center/v1/presets:summariesList:
+    get:
+      description: Returns a list of notification preset summaries.
+      externalDocs:
+        url: ""
+      operationId: PresetsService_ListPresetSummaries
+      parameters:
+      - description: Filter preset summaries by their connector type.
+        explode: true
+        in: query
+        name: connector_type
+        required: false
+        schema:
+          $ref: "#/components/schemas/notification_center.ConnectorType"
+        style: form
+      - description: Filter preset summaries by their entity type.
+        explode: true
         in: query
         name: entity_type
         required: false
@@ -265,13 +283,17 @@ paths:
 components:
   schemas:
     AttachmentConfig:
+      description: Attachment config.
       example:
         policy: AUTO
+      externalDocs:
+        url: ""
       properties:
         policy:
           $ref: "#/components/schemas/AttachmentConfigPolicy"
       type: object
     AttachmentConfigPolicy:
+      description: Attachment config policy.
       enum:
       - AUTO
       - ENABLED
@@ -320,12 +342,15 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         notFoundIds:
+          description: The not found ids.
           items:
+            description: The not found ids.
             type: string
           type: array
         presets:
           additionalProperties:
             $ref: "#/components/schemas/Preset"
+          description: List of permission presets.
           type: object
       title: Batch Get Presets Response
       type: object
@@ -346,6 +371,7 @@ components:
         messageConfig:
           $ref: "#/components/schemas/MessageConfig"
         payloadType:
+          description: Type of the payload.
           type: string
       type: object
     CreateCustomPresetResponse:
@@ -391,11 +417,16 @@ components:
       title: Create Custom Preset Response
       type: object
     DeleteCustomPresetResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a custom notification
+        preset.
+      externalDocs:
+        url: ""
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -444,6 +475,7 @@ components:
       title: Filters
       type: object
     GetDefaultPresetSummaryResponse:
+      description: Response containing a summary of the default notification preset.
       example:
         presetSummary:
           connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -457,11 +489,14 @@ components:
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
           parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
+      externalDocs:
+        url: ""
       properties:
         presetSummary:
           $ref: "#/components/schemas/PresetSummary"
       type: object
     GetPresetResponse:
+      description: Response containing the details of a notification preset.
       example:
         preset:
           connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -494,11 +529,15 @@ components:
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
           parentId: preset_system_slack_alerts_basic
+      externalDocs:
+        url: ""
       properties:
         preset:
           $ref: "#/components/schemas/Preset"
       type: object
     GetSystemDefaultPresetSummaryResponse:
+      description: Response containing a summary of the system default notification
+        preset.
       example:
         presetSummary:
           connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -512,11 +551,14 @@ components:
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
           parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
+      externalDocs:
+        url: ""
       properties:
         presetSummary:
           $ref: "#/components/schemas/PresetSummary"
       type: object
     ListPresetSummariesResponse:
+      description: Response containing a list of notification preset summaries.
       example:
         presetSummaries:
         - connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -541,28 +583,43 @@ components:
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
           parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
+      externalDocs:
+        url: ""
       properties:
         presetSummaries:
+          description: The preset summaries.
           items:
             $ref: "#/components/schemas/PresetSummary"
           type: array
       type: object
     MatchEntityTypeAndSubTypeCondition:
+      description: Match entity type and sub type condition.
+      externalDocs:
+        url: ""
       properties:
         entitySubType:
+          description: The entity sub type.
           type: string
       type: object
     MatchEntityTypeCondition:
+      additionalProperties: false
+      description: Match entity type condition.
+      externalDocs:
+        url: ""
       type: object
     MessageConfig:
+      description: Message config.
       example:
         fields:
         - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
           fieldName: title
         - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
           fieldName: title
+      externalDocs:
+        url: ""
       properties:
         fields:
+          description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.MessageConfigField"
           type: array
@@ -577,15 +634,25 @@ components:
           type: array
       type: object
     NotificationCenterConditionTypeMatchEntityType:
+      description: Field condition.condition type.
       example:
         matchEntityType: "{}"
+      externalDocs:
+        url: ""
       properties:
         matchEntityType:
+          additionalProperties: false
+          description: Match entity type condition.
+          externalDocs:
+            url: ""
           type: object
       required:
       - matchEntityType
       type: object
     NotificationCenterConditionTypeMatchEntityTypeAndSubType:
+      description: Field condition.condition type.
+      externalDocs:
+        url: ""
       properties:
         matchEntityTypeAndSubType:
           $ref: "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
@@ -632,31 +699,38 @@ components:
         attachmentConfig:
           $ref: "#/components/schemas/AttachmentConfig"
         configOverrides:
+          description: The config overrides.
           items:
             $ref: "#/components/schemas/ConfigOverrides"
           type: array
         connectorType:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         createTime:
+          description: The create time.
           format: date-time
           type: string
         description:
+          description: Human-readable description.
           example: Custom preset for alerts
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         id:
+          description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: string
         name:
+          description: Display name.
           example: My Preset
           type: string
         parentId:
+          description: The parent id.
           example: preset_system_slack_alerts_basic
           type: string
         presetType:
           $ref: "#/components/schemas/PresetType"
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       title: Preset
@@ -684,32 +758,39 @@ components:
         connectorType:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         createTime:
+          description: The create time.
           format: date-time
           type: string
         description:
+          description: Human-readable description.
           example: Custom preset for alerts
           maxLength: 5000
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         id:
+          description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: string
         name:
+          description: Display name.
           example: My Preset
           maxLength: 200
           type: string
         parentId:
+          description: The parent id.
           example: c246e826-10c2-405e-8d3f-afcc24ad4d15
           type: string
         presetType:
           $ref: "#/components/schemas/PresetType"
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       title: Preset Summary
       type: object
     PresetType:
+      description: Preset type.
       enum:
       - PRESET_TYPE_UNSPECIFIED
       - SYSTEM
@@ -758,8 +839,16 @@ components:
       title: Replace Custom Preset Response
       type: object
     SetCustomPresetAsDefaultResponse:
+      additionalProperties: false
+      description: Response returned after setting a custom preset as the default.
+      externalDocs:
+        url: ""
       type: object
     SetPresetAsDefaultResponse:
+      additionalProperties: false
+      description: Response returned after setting a preset as the default.
+      externalDocs:
+        url: ""
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -771,6 +860,7 @@ components:
       - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityType"
       - $ref: "#/components/schemas/NotificationCenterConditionTypeMatchEntityTypeAndSubType"
     notification_center.ConnectorType:
+      description: Connector type.
       enum:
       - CONNECTOR_TYPE_UNSPECIFIED
       - SLACK
@@ -779,8 +869,10 @@ components:
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
       - EMAIL
+      - PAGERDUTY_INCIDENTS
       type: string
     notification_center.EntityType:
+      description: Entity type.
       enum:
       - ENTITY_TYPE_UNSPECIFIED
       - ALERTS
@@ -798,29 +890,32 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         fieldName:
+          description: The field name.
           example: title
           type: string
         template:
+          description: The template.
           example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
           type: string
       title: Message Config Field
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-    Replace_Custom_Preset_Request:
-      description: Request to replace an existing custom preset
-      properties:
-        preset:
-          $ref: "#/components/schemas/Preset"
-      title: Replace Custom Preset Request
-      type: object
     Create_Custom_Preset_Request:
       description: Request to create a new custom preset
       properties:
         preset:
           $ref: "#/components/schemas/Preset"
       title: Create Custom Preset Request
+      type: object
+    Replace_Custom_Preset_Request:
+      description: Request to replace an existing custom preset
+      properties:
+        preset:
+          $ref: "#/components/schemas/Preset"
+      title: Replace Custom Preset Request
       type: object

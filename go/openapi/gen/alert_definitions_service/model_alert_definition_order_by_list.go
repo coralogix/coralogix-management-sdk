@@ -22,6 +22,7 @@ var _ MappedNullable = &AlertDefinitionOrderByList{}
 
 // AlertDefinitionOrderByList List of fields to order alert definitions by
 type AlertDefinitionOrderByList struct {
+	// Order by fields for alert definitions
 	OrderBys []AlertDefinitionOrderBy `json:"orderBys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

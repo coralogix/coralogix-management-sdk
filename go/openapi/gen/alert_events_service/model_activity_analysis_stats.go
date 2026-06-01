@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the ActivityAnalysisStats type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActivityAnalysisStats{}
 
-// ActivityAnalysisStats struct for ActivityAnalysisStats
+// ActivityAnalysisStats Activity analysis stats.
 type ActivityAnalysisStats struct {
+	// Number of muted items.
 	IsMutedCount *int64 `json:"isMutedCount,omitempty"`
+	// List of rules.
 	Rules []string `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

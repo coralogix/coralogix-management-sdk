@@ -22,12 +22,18 @@ var _ MappedNullable = &RulesV1Rule{}
 
 // RulesV1Rule struct for RulesV1Rule
 type RulesV1Rule struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Sort order.
 	Order *int64 `json:"order,omitempty"`
 	Parameters *RuleParameters `json:"parameters,omitempty"`
+	// The source field.
 	SourceField *string `json:"sourceField,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

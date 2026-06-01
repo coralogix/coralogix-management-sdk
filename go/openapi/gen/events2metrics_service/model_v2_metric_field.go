@@ -23,8 +23,11 @@ var _ MappedNullable = &V2MetricField{}
 
 // V2MetricField This data structure represents a metric field
 type V2MetricField struct {
+	// The aggregations.
 	Aggregations []V2Aggregation `json:"aggregations"`
+	// The source field.
 	SourceField string `json:"sourceField"`
+	// The target base metric name.
 	TargetBaseMetricName string `json:"targetBaseMetricName" validate:"regexp=^[\\\\w\\/-]+$"`
 	AdditionalProperties map[string]interface{}
 }

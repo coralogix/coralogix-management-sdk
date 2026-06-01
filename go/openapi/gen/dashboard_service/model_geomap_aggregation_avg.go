@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapAggregationAvg type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationAvg{}
 
-// GeomapAggregationAvg struct for GeomapAggregationAvg
+// GeomapAggregationAvg Geomap aggregation.
 type GeomapAggregationAvg struct {
 	Avg GeomapAggregationFieldBased `json:"avg"`
 	AdditionalProperties map[string]interface{}

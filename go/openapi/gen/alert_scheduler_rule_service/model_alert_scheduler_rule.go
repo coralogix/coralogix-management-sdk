@@ -20,17 +20,25 @@ var _ = bytes.MinRead
 // checks if the AlertSchedulerRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRule{}
 
-// AlertSchedulerRule struct for AlertSchedulerRule
+// AlertSchedulerRule Alert scheduler rule.
 type AlertSchedulerRule struct {
+	// Creation timestamp.
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	Filter *AlertSchedulerRuleProtobufV1Filter `json:"filter,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Metadata labels.
 	MetaLabels []MetaLabelsProtobufV1MetaLabel `json:"metaLabels,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Schedule *Schedule `json:"schedule,omitempty"`
+	// Unique identifier.
 	UniqueIdentifier *string `json:"uniqueIdentifier,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

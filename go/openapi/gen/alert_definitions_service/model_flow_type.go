@@ -22,7 +22,9 @@ var _ MappedNullable = &FlowType{}
 
 // FlowType Configuration for flow-based alerts with multiple stages
 type FlowType struct {
+	// The enforce suppression.
 	EnforceSuppression *bool `json:"enforceSuppression,omitempty"`
+	// The stages of the flow alert.
 	Stages []FlowStages `json:"stages,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

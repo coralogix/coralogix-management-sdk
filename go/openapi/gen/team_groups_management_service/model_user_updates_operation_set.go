@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the UserUpdatesOperationSet type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserUpdatesOperationSet{}
 
-// UserUpdatesOperationSet struct for UserUpdatesOperationSet
+// UserUpdatesOperationSet User id list.
 type UserUpdatesOperationSet struct {
+	// Discriminator indicating the user update operation type (add, remove, or set).
 	OperationType string `json:"operationType"`
 	Set UserIdList `json:"set"`
 	AdditionalProperties map[string]interface{}

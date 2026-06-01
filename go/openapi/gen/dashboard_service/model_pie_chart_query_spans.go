@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PieChartQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PieChartQuerySpans{}
 
-// PieChartQuerySpans struct for PieChartQuerySpans
+// PieChartQuerySpans Discriminated union of possible query types for the pie chart widget.
 type PieChartQuerySpans struct {
 	Spans PieChartSpansQuery `json:"spans"`
 	AdditionalProperties map[string]interface{}

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LogsAggregationMax type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationMax{}
 
-// LogsAggregationMax struct for LogsAggregationMax
+// LogsAggregationMax Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile.
 type LogsAggregationMax struct {
 	Max Max `json:"max"`
 	AdditionalProperties map[string]interface{}

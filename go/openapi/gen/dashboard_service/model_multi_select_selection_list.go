@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSelectionList type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSelectionList{}
 
-// MultiSelectSelectionList struct for MultiSelectSelectionList
+// MultiSelectSelectionList Discriminated union defining the current selection state: all values or a specific list of values.
 type MultiSelectSelectionList struct {
 	List MultiSelectSelectionListSelection `json:"list"`
 	AdditionalProperties map[string]interface{}

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DigestType the model 'DigestType'
+// DigestType Digest type.
 type DigestType string
 
 // List of DigestType

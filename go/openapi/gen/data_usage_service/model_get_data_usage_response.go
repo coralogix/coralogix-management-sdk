@@ -22,6 +22,7 @@ var _ MappedNullable = &GetDataUsageResponse{}
 
 // GetDataUsageResponse This data structure is used to return data usage.
 type GetDataUsageResponse struct {
+	// List of entries.
 	Entries []DataUsageEntry `json:"entries,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

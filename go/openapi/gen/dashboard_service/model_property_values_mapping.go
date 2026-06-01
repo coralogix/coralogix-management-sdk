@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the PropertyValuesMapping type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyValuesMapping{}
 
-// PropertyValuesMapping struct for PropertyValuesMapping
+// PropertyValuesMapping Property values mapping.
 type PropertyValuesMapping struct {
+	// The mappings.
 	Mappings []PropertyValuesMappingValueMapping `json:"mappings,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

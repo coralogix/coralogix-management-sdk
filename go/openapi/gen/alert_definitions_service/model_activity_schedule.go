@@ -22,6 +22,7 @@ var _ MappedNullable = &ActivitySchedule{}
 
 // ActivitySchedule Defines when an alert should be active based on days of the week and time windows
 type ActivitySchedule struct {
+	// Day of the week.
 	DayOfWeek []DayOfWeek `json:"dayOfWeek,omitempty"`
 	EndTime *TimeOfDay `json:"endTime,omitempty"`
 	StartTime *TimeOfDay `json:"startTime,omitempty"`

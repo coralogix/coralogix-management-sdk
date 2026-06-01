@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Variant the model 'Variant'
+// Variant Variant.
 type Variant string
 
 // List of Variant

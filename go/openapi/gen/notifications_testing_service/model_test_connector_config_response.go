@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestConnectorConfigResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestConnectorConfigResponse{}
 
-// TestConnectorConfigResponse struct for TestConnectorConfigResponse
+// TestConnectorConfigResponse Response containing the results of a connector configuration test.
 type TestConnectorConfigResponse struct {
 	Result *TestResult `json:"result,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the TimeFrameSelectRelativeTimeFrame type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeFrameSelectRelativeTimeFrame{}
 
-// TimeFrameSelectRelativeTimeFrame struct for TimeFrameSelectRelativeTimeFrame
+// TimeFrameSelectRelativeTimeFrame Time frame select.
 type TimeFrameSelectRelativeTimeFrame struct {
+	// Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes).
 	RelativeTimeFrame string `json:"relativeTimeFrame"`
 	AdditionalProperties map[string]interface{}
 }

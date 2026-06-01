@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSourceLogsPath type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceLogsPath{}
 
-// MultiSelectSourceLogsPath struct for MultiSelectSourceLogsPath
+// MultiSelectSourceLogsPath Source.
 type MultiSelectSourceLogsPath struct {
 	LogsPath LogsPathSource `json:"logsPath"`
 	AdditionalProperties map[string]interface{}

@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateBulkAlertSchedulerRuleResponse{}
 
 // CreateBulkAlertSchedulerRuleResponse This is a response sent after creating multiple alert scheduler rules
 type CreateBulkAlertSchedulerRuleResponse struct {
+	// The create suppression responses.
 	CreateSuppressionResponses []CreateAlertSchedulerRuleResponse `json:"createSuppressionResponses"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,10 +22,15 @@ var _ MappedNullable = &V2LogsQuery{}
 
 // V2LogsQuery This data structure represents a query for logs.
 type V2LogsQuery struct {
+	// The alias.
 	Alias *string `json:"alias,omitempty"`
+	// The applicationname filters.
 	ApplicationnameFilters []string `json:"applicationnameFilters,omitempty"`
+	// The lucene.
 	Lucene *string `json:"lucene,omitempty"`
+	// The severity filters.
 	SeverityFilters []Logs2metricsV2Severity `json:"severityFilters,omitempty"`
+	// The subsystemname filters.
 	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

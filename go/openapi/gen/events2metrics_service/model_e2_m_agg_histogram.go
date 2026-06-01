@@ -22,6 +22,7 @@ var _ MappedNullable = &E2MAggHistogram{}
 
 // E2MAggHistogram This data structure represents the e2m aggregate histogram
 type E2MAggHistogram struct {
+	// The buckets.
 	Buckets []float32 `json:"buckets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

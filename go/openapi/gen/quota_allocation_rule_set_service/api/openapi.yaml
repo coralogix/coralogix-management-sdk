@@ -7,7 +7,11 @@ servers:
 paths:
   /dataplan/quota-rules/v1:
     delete:
-      description: No description available
+      description: |-
+        Deletes the quota allocation rules.
+
+        Requires the following permissions:
+        - `team-quota-rules:Manage`
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_DeleteQuotaAllocationRuleSet
@@ -40,16 +44,22 @@ paths:
       x-coralogixPermissions:
       - team-quota-rules:Manage
     get:
-      description: No description available
+      description: |-
+        Returns the current quota allocation rules.
+
+        Requires the following permissions:
+        - `team-quota-rules:Read`
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_GetQuotaAllocationRuleSet
       parameters:
-      - explode: true
+      - description: Unique identifier.
+        explode: true
         in: query
         name: id
         required: false
         schema:
+          description: Unique identifier.
           example: ""
           type: string
         style: form
@@ -82,7 +92,11 @@ paths:
       x-coralogixPermissions:
       - team-quota-rules:Read
     post:
-      description: No description available
+      description: |-
+        Creates new quota allocation rules.
+
+        Requires the following permissions:
+        - `team-quota-rules:Manage`
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_CreateQuotaAllocationRuleSet
@@ -91,6 +105,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Create_quota_allocation_rule_set_request"
+        required: true
       responses:
         "200":
           content:
@@ -120,7 +135,11 @@ paths:
       x-coralogixPermissions:
       - team-quota-rules:Manage
     put:
-      description: No description available
+      description: |-
+        Updates the quota allocation rules.
+
+        Requires the following permissions:
+        - `team-quota-rules:Manage`
       externalDocs:
         url: ""
       operationId: QuotaAllocationRuleSetService_ReplaceQuotaAllocationRuleSet
@@ -129,6 +148,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Replace_quota_allocation_rule_set_request"
+        required: true
       responses:
         "200":
           content:
@@ -168,11 +188,15 @@ components:
           - allocation: 0.8008282
             entityType: entityType
             canOverflow: true
+            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
             enabled: true
+            cxManaged: true
           - allocation: 0.8008282
             entityType: entityType
             canOverflow: true
+            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
             enabled: true
+            cxManaged: true
           id: id
       externalDocs:
         url: ""
@@ -190,13 +214,14 @@ components:
         url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
       title: Delete quota allocation rule set response
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -252,11 +277,15 @@ components:
           - allocation: 0.8008282
             entityType: entityType
             canOverflow: true
+            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
             enabled: true
+            cxManaged: true
           - allocation: 0.8008282
             entityType: entityType
             canOverflow: true
+            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
             enabled: true
+            cxManaged: true
           id: id
       externalDocs:
         url: ""
@@ -280,18 +309,32 @@ components:
         allocation: 0.8008282
         entityType: entityType
         canOverflow: true
+        allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
         enabled: true
+        cxManaged: true
       externalDocs:
         url: ""
       properties:
         allocation:
+          description: The allocation.
           format: float
           type: number
+        allocationType:
+          $ref: "#/components/schemas/QuotaAllocationType"
         canOverflow:
+          description: The can overflow.
+          type: boolean
+        cxManaged:
+          description: Indicates whether the quota allocation rule is managed by Coralogix.
+            This field is returned by the service and must not be sent in Create or
+            Replace requests.
+          readOnly: true
           type: boolean
         enabled:
+          description: Whether this resource is enabled.
           type: boolean
         entityType:
+          description: The entity type.
           type: string
       required:
       - allocation
@@ -307,18 +350,24 @@ components:
         - allocation: 0.8008282
           entityType: entityType
           canOverflow: true
+          allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
           enabled: true
+          cxManaged: true
         - allocation: 0.8008282
           entityType: entityType
           canOverflow: true
+          allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
           enabled: true
+          cxManaged: true
         id: id
       externalDocs:
         url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/QuotaAllocationEntityTypeRule"
           type: array
@@ -326,6 +375,15 @@ components:
       - rules
       title: Quota allocation entity type rule set
       type: object
+    QuotaAllocationType:
+      description: Specifies whether the allocation value is interpreted as a percentage
+        or as locked units.
+      enum:
+      - QUOTA_ALLOCATION_TYPE_UNSPECIFIED
+      - QUOTA_ALLOCATION_TYPE_PERCENTAGE
+      - QUOTA_ALLOCATION_TYPE_LOCKED_UNITS
+      title: Quota allocation type
+      type: string
     ReplaceQuotaAllocationRuleSetResponse:
       description: Response confirming quota allocation rule set has been successfully
         replaced
@@ -335,11 +393,15 @@ components:
           - allocation: 0.8008282
             entityType: entityType
             canOverflow: true
+            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
             enabled: true
+            cxManaged: true
           - allocation: 0.8008282
             entityType: entityType
             canOverflow: true
+            allocationType: QUOTA_ALLOCATION_TYPE_UNSPECIFIED
             enabled: true
+            cxManaged: true
           id: id
       externalDocs:
         url: ""
@@ -354,6 +416,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR

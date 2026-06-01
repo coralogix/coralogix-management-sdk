@@ -31,7 +31,9 @@ type IncidentEventQueryFilter struct {
 	Labels interface{} `json:"labels,omitempty"`
 	// The name of the incident
 	Name *string `json:"name,omitempty"`
+	// The severity of the incident
 	Severity []IncidentSeverity `json:"severity,omitempty"`
+	// The status of the incident
 	Status []IncidentStatus `json:"status,omitempty"`
 	Timestamp interface{} `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}

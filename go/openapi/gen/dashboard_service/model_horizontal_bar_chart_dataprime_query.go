@@ -23,7 +23,9 @@ var _ MappedNullable = &HorizontalBarChartDataprimeQuery{}
 // HorizontalBarChartDataprimeQuery A Dataprime variant of the query
 type HorizontalBarChartDataprimeQuery struct {
 	DataprimeQuery *CommonDataprimeQuery `json:"dataprimeQuery,omitempty"`
+	// List of query filters
 	Filters []FilterSource `json:"filters,omitempty"`
+	// List of field names by which results are grouped
 	GroupNames []string `json:"groupNames,omitempty"`
 	// Field name by which results in groups are divided into subgroups
 	StackedGroupName *string `json:"stackedGroupName,omitempty"`

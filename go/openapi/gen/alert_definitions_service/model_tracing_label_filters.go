@@ -22,10 +22,15 @@ var _ MappedNullable = &TracingLabelFilters{}
 
 // TracingLabelFilters Filters for application name, subsystem name, service name, operation name and span fields
 type TracingLabelFilters struct {
+	// Filter by application names
 	ApplicationName []TracingFilterType `json:"applicationName,omitempty"`
+	// Filter by operation names
 	OperationName []TracingFilterType `json:"operationName,omitempty"`
+	// Filter by service names
 	ServiceName []TracingFilterType `json:"serviceName,omitempty"`
+	// Filter by span fields
 	SpanFields []TracingSpanFieldsFilterType `json:"spanFields,omitempty"`
+	// Filter by subsystem names
 	SubsystemName []TracingFilterType `json:"subsystemName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

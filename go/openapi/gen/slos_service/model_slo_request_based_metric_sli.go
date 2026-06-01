@@ -25,12 +25,18 @@ var _ MappedNullable = &SloRequestBasedMetricSli{}
 // SloRequestBasedMetricSli Definition of an SLO
 type SloRequestBasedMetricSli struct {
 	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
+	// RFC3339 timestamp of when the SLO was created.
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Email or identifier of the user who created the SLO.
 	Creator *string `json:"creator,omitempty"`
+	// Human-readable description of the SLO.
 	Description *string `json:"description,omitempty"`
 	Grouping *V1Grouping `json:"grouping,omitempty"`
+	// Unique identifier of the SLO.
 	Id *string `json:"id,omitempty"`
+	// List of labels.
 	Labels *map[string]string `json:"labels,omitempty"`
+	// Human-readable display name for the SLO.
 	Name *string `json:"name,omitempty"`
 	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
 	ProductType *SloProductType `json:"productType,omitempty"`
@@ -38,9 +44,12 @@ type SloRequestBasedMetricSli struct {
 	Revision *V1Revision `json:"revision,omitempty"`
 	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
 	SloType *SloType `json:"sloType,omitempty"`
+	// Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).
 	TargetThresholdPercentage *float32 `json:"targetThresholdPercentage,omitempty"`
+	// Deprecated: SLO type string. Use slo_type instead.
 	// Deprecated
 	Type *string `json:"type,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,6 +23,7 @@ var _ MappedNullable = &IncidentMetaLabelsWithCount{}
 
 // IncidentMetaLabelsWithCount struct for IncidentMetaLabelsWithCount
 type IncidentMetaLabelsWithCount struct {
+	// Number of items.
 	Count int32 `json:"count"`
 	MetaLabel IncidentsV1MetaLabel `json:"metaLabel"`
 	AdditionalProperties map[string]interface{}

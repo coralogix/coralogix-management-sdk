@@ -32,11 +32,13 @@ type ApiAlertEventServiceGetAlertEventRequest struct {
 	pagination *AlertEventServiceGetAlertEventPaginationParameter
 }
 
+// Ordering applied to the alert event occurrences in the response.
 func (r ApiAlertEventServiceGetAlertEventRequest) OrderBys(orderBys []AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) ApiAlertEventServiceGetAlertEventRequest {
 	r.orderBys = &orderBys
 	return r
 }
 
+// Pagination parameters (page size and page token) for the returned occurrences.
 func (r ApiAlertEventServiceGetAlertEventRequest) Pagination(pagination AlertEventServiceGetAlertEventPaginationParameter) ApiAlertEventServiceGetAlertEventRequest {
 	r.pagination = &pagination
 	return r
@@ -49,10 +51,13 @@ func (r ApiAlertEventServiceGetAlertEventRequest) Execute() (*GetAlertEventRespo
 /*
 AlertEventServiceGetAlertEvent Get alert event by ID
 
-No description available
+Returns the alert event with the specified ID.
+
+Requires the following permissions:
+- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiAlertEventServiceGetAlertEventRequest
 */
 func (a *AlertEventsServiceAPIService) AlertEventServiceGetAlertEvent(ctx context.Context, id string) ApiAlertEventServiceGetAlertEventRequest {
@@ -160,11 +165,13 @@ type ApiAlertEventServiceGetAlertEventsStatsRequest struct {
 	orderBys *[]AlertEventServiceGetAlertEventsStatsOrderBysParameterInner
 }
 
+// The ids.
 func (r ApiAlertEventServiceGetAlertEventsStatsRequest) Ids(ids []string) ApiAlertEventServiceGetAlertEventsStatsRequest {
 	r.ids = &ids
 	return r
 }
 
+// The order bys.
 func (r ApiAlertEventServiceGetAlertEventsStatsRequest) OrderBys(orderBys []AlertEventServiceGetAlertEventsStatsOrderBysParameterInner) ApiAlertEventServiceGetAlertEventsStatsRequest {
 	r.orderBys = &orderBys
 	return r
@@ -177,7 +184,10 @@ func (r ApiAlertEventServiceGetAlertEventsStatsRequest) Execute() (*GetAlertEven
 /*
 AlertEventServiceGetAlertEventsStats Get alert events statistics
 
-No description available
+Returns statistical data for alert events.
+
+Requires the following permissions:
+- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertEventServiceGetAlertEventsStatsRequest

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Constant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Constant{}
 
-// Constant struct for Constant
+// Constant Constant.
 type Constant struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

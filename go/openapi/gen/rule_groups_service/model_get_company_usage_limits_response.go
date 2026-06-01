@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetCompanyUsageLimitsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCompanyUsageLimitsResponse{}
 
-// GetCompanyUsageLimitsResponse struct for GetCompanyUsageLimitsResponse
+// GetCompanyUsageLimitsResponse Response containing the company-level rule usage limits.
 type GetCompanyUsageLimitsResponse struct {
+	// The company id.
 	CompanyId *string `json:"companyId,omitempty"`
 	Limits *Counts `json:"limits,omitempty"`
 	Usage *Counts `json:"usage,omitempty"`

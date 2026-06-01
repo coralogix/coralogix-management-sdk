@@ -20,11 +20,14 @@ var _ = bytes.MinRead
 // checks if the TableRule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TableRule{}
 
-// TableRule struct for TableRule
+// TableRule Rule.
 type TableRule struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The properties.
 	Properties []Property `json:"properties,omitempty"`
 	RuleScope *RuleScope `json:"ruleScope,omitempty"`
 	AdditionalProperties map[string]interface{}

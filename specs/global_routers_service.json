@@ -11,7 +11,7 @@
           "Global routers service"
         ],
         "summary": "List Global Routers",
-        "description": "No description available",
+        "description": "Returns all notification routers for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -20,6 +20,7 @@
           {
             "in": "query",
             "name": "entity_type",
+            "description": "Deprecated. Filter routers by entity type.",
             "schema": {
               "$ref": "#/components/schemas/notification_center.EntityType"
             },
@@ -28,15 +29,19 @@
           {
             "in": "query",
             "name": "source_entity_labels",
+            "description": "Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.",
             "schema": {
+              "description": "Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.",
               "type": "object",
               "additionalProperties": {
                 "type": "object",
                 "properties": {
                   "values": {
+                    "description": "The values.",
                     "type": "array",
                     "items": {
                       "example": "",
+                      "description": "The values.",
                       "type": "string"
                     }
                   }
@@ -64,7 +69,7 @@
           "Global routers service"
         ],
         "summary": "Replace Global Router",
-        "description": "No description available",
+        "description": "Updates an existing notification router.",
         "externalDocs": {
           "url": ""
         },
@@ -103,7 +108,7 @@
           "Global routers service"
         ],
         "summary": "Create Global Router",
-        "description": "No description available",
+        "description": "Creates a new notification router.",
         "externalDocs": {
           "url": ""
         },
@@ -144,7 +149,7 @@
           "Global routers service"
         ],
         "summary": "Batch Get Global Routers",
-        "description": "No description available",
+        "description": "Returns summary information for all notification routers.",
         "externalDocs": {
           "url": ""
         },
@@ -153,10 +158,13 @@
           {
             "in": "query",
             "name": "global_router_ids",
+            "description": "The unique identifiers of the global routers to retrieve summaries for.",
             "schema": {
+              "description": "The unique identifiers of the global routers to retrieve summaries for.",
               "type": "array",
               "items": {
                 "example": "",
+                "description": "The unique identifiers of the global routers to retrieve summaries for.",
                 "type": "string"
               }
             },
@@ -183,7 +191,7 @@
           "Global routers service"
         ],
         "summary": "Validate Entity Label Matcher",
-        "description": "No description available",
+        "description": "Validates a notification router matcher configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -192,7 +200,9 @@
           {
             "in": "query",
             "name": "entity_label_matcher",
+            "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
             "schema": {
+              "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
               "type": "object",
               "additionalProperties": {
                 "example": "",
@@ -222,7 +232,7 @@
           "Global routers service"
         ],
         "summary": "Get Global Router",
-        "description": "No description available",
+        "description": "Returns the details of the specified notification router.",
         "externalDocs": {
           "url": ""
         },
@@ -231,8 +241,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The unique identifier of the global router to retrieve.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the global router to retrieve.",
               "type": "string"
             },
             "style": "simple"
@@ -256,7 +268,7 @@
           "Global routers service"
         ],
         "summary": "Delete Global Router",
-        "description": "No description available",
+        "description": "Deletes the notification router with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -265,8 +277,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -302,12 +316,15 @@
             "example": [
               "global-router-id-3"
             ],
+            "description": "The not found ids.",
             "type": "array",
             "items": {
+              "description": "The not found ids.",
               "type": "string"
             }
           },
           "routers": {
+            "description": "The routers.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/GlobalRouter"
@@ -330,7 +347,12 @@
         }
       },
       "DeleteGlobalRouterResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a notification router.",
+        "type": "object",
+        "additionalProperties": false
       },
       "FallbackTarget": {
         "externalDocs": {
@@ -352,10 +374,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -449,16 +471,20 @@
         "type": "object",
         "properties": {
           "createTime": {
+            "description": "The create time.",
             "type": "string",
             "format": "date-time"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "disabled": {
+            "description": "The disabled.",
             "type": "boolean"
           },
           "entityLabels": {
+            "description": "The entity labels.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -468,12 +494,14 @@
             "$ref": "#/components/schemas/notification_center.EntityType"
           },
           "fallback": {
+            "description": "The fallback destinations to be used if no rule matches.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             }
           },
           "fallbackTargets": {
+            "description": "The fallback targets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FallbackTarget"
@@ -481,22 +509,26 @@
           },
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "My Router",
+            "description": "Display name.",
             "type": "string"
           },
           "routingLabels": {
             "$ref": "#/components/schemas/RoutingLabels"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingRule"
             }
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
             "type": "string",
             "format": "date-time"
           }
@@ -512,6 +544,7 @@
         "type": "object",
         "properties": {
           "routers": {
+            "description": "The routers.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GlobalRouter"
@@ -557,12 +590,15 @@
         "type": "object",
         "properties": {
           "environment": {
+            "description": "The environment.",
             "type": "string"
           },
           "service": {
+            "description": "Service name.",
             "type": "string"
           },
           "team": {
+            "description": "Team.",
             "type": "string"
           }
         }
@@ -578,9 +614,11 @@
         "properties": {
           "condition": {
             "example": "alertDef.priority == 'P3'",
+            "description": "Condition.",
             "type": "string"
           },
           "customDetails": {
+            "description": "The custom details.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -590,9 +628,11 @@
             "$ref": "#/components/schemas/notification_center.EntityType"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "targets": {
+            "description": "List of targets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
@@ -610,9 +650,11 @@
         "type": "object",
         "properties": {
           "connectorId": {
+            "description": "The connector id.",
             "type": "string"
           },
           "customDetails": {
+            "description": "The custom details.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -620,9 +662,11 @@
           },
           "id": {
             "example": "d4b56246-64bb-4714-a8bd-97c999f1d801",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "presetId": {
+            "description": "The preset id.",
             "type": "string"
           }
         }
@@ -644,25 +688,39 @@
       "ValidateEntityLabelMatcherResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultSuccessVariant"
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultFailureVariant"
           },
           {
-            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultFailureVariant"
+            "$ref": "#/components/schemas/ValidateEntityLabelMatcherResultSuccessVariant"
           }
         ]
       },
       "ValidateEntityLabelMatcherResult.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Test outgoing webhook response.failure.",
         "type": "object",
         "properties": {
           "message": {
+            "description": "Human-readable message.",
             "type": "string"
           }
         }
       },
       "ValidateEntityLabelMatcherResult.Success": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Test integration result.success.",
+        "type": "object",
+        "additionalProperties": false
       },
       "ValidateEntityLabelMatcherResultFailureVariant": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
         "type": "object",
         "properties": {
           "failure": {
@@ -674,6 +732,10 @@
         ]
       },
       "ValidateEntityLabelMatcherResultSuccessVariant": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
         "type": "object",
         "properties": {
           "success": {
@@ -692,6 +754,7 @@
         ]
       },
       "notification_center.EntityType": {
+        "description": "Entity type.",
         "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
@@ -701,6 +764,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

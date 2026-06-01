@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceSpansQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceSpansQueryTypeFieldValue{}
 
-// QuerySourceSpansQueryTypeFieldValue struct for QuerySourceSpansQueryTypeFieldValue
+// QuerySourceSpansQueryTypeFieldValue Fetches distinct values for a specific span observation field.
 type QuerySourceSpansQueryTypeFieldValue struct {
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	Value *SpanField `json:"value,omitempty"`

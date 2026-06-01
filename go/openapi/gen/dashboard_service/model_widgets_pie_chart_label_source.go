@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// WidgetsPieChartLabelSource the model 'WidgetsPieChartLabelSource'
+// WidgetsPieChartLabelSource Label source.
 type WidgetsPieChartLabelSource string
 
 // List of widgets.PieChart.LabelSource

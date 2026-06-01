@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetPresetResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetPresetResponse{}
 
-// GetPresetResponse struct for GetPresetResponse
+// GetPresetResponse Response containing the details of a notification preset.
 type GetPresetResponse struct {
 	Preset *Preset `json:"preset,omitempty"`
 	AdditionalProperties map[string]interface{}

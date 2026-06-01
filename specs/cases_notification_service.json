@@ -21,6 +21,7 @@
             "application/json": {
               "schema": {
                 "title": "List notification deliveries request",
+                "description": "Request to retrieve notification delivery records for one or more cases.",
                 "type": "object",
                 "properties": {
                   "caseIds": {
@@ -28,6 +29,7 @@
                       "3f166e9f-3c88-4af2-b52e-138f339dab3e",
                       "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
                     ],
+                    "description": "Case IDs to retrieve notification deliveries for",
                     "type": "array",
                     "items": {
                       "description": "Case IDs to retrieve notification deliveries for",
@@ -40,7 +42,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -89,6 +92,7 @@
         "type": "object",
         "properties": {
           "notificationDeliveries": {
+            "description": "Notification deliveries for the case",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotificationDelivery"
@@ -168,10 +172,10 @@
       "DeliveryOutcome": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
+            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
           },
           {
-            "$ref": "#/components/schemas/DeliveryOutcomeFailure"
+            "$ref": "#/components/schemas/DeliveryOutcomeSuccess"
           }
         ]
       },
@@ -225,10 +229,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -303,6 +307,7 @@
           "url": ""
         },
         "title": "List notification deliveries response",
+        "description": "Response containing a list of notification delivery records for cases.",
         "type": "object",
         "properties": {
           "deliveriesByCase": {
@@ -340,6 +345,7 @@
         "type": "object",
         "properties": {
           "matchedRouters": {
+            "description": "Routers that matched the notification request",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RouterInfo"
@@ -356,18 +362,19 @@
         },
         "title": "No router matched result",
         "description": "Indicates that no router matched the notification request.",
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false
       },
       "NotificationDelivery": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/NotificationDeliveryNoRouterMatched"
+            "$ref": "#/components/schemas/NotificationDeliveryAttempted"
           },
           {
             "$ref": "#/components/schemas/NotificationDeliveryNoNotificationCreated"
           },
           {
-            "$ref": "#/components/schemas/NotificationDeliveryAttempted"
+            "$ref": "#/components/schemas/NotificationDeliveryNoRouterMatched"
           }
         ]
       },
@@ -464,6 +471,7 @@
         "type": "object",
         "properties": {
           "attempts": {
+            "description": "Individual delivery attempts to connectors",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeliveryAttempt"
@@ -510,6 +518,7 @@
         ]
       },
       "v1.ConnectorType": {
+        "description": "Connector type.",
         "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
@@ -521,6 +530,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the SpanFieldProcessTagField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldProcessTagField{}
 
-// SpanFieldProcessTagField struct for SpanFieldProcessTagField
+// SpanFieldProcessTagField Span field.
 type SpanFieldProcessTagField struct {
+	// Name of a process-level tag field to use as the data source.
 	ProcessTagField string `json:"processTagField"`
 	AdditionalProperties map[string]interface{}
 }

@@ -11,7 +11,7 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichments",
-        "description": "No description available",
+        "description": "Returns all enrichment rules for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -33,8 +33,8 @@
         "tags": [
           "Enrichments Service"
         ],
-        "summary": "Atomic Overwrite for CustomEnrichments only.",
-        "description": "No description available",
+        "summary": "Atomic Overwrite for CustomEnrichments only",
+        "description": "Updates enrichment rules.",
         "externalDocs": {
           "url": ""
         },
@@ -43,9 +43,11 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request to atomically update enrichment rules.",
                 "type": "object",
                 "properties": {
                   "enrichmentFields": {
+                    "description": "Deprecated: enrichment field definitions.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentFieldDefinition"
@@ -55,6 +57,7 @@
                     "$ref": "#/components/schemas/EnrichmentType"
                   },
                   "requestEnrichments": {
+                    "description": "List of enrichment rules to atomically replace existing rules.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
@@ -83,7 +86,7 @@
           "Enrichments Service"
         ],
         "summary": "Add Enrichments",
-        "description": "No description available",
+        "description": "Creates new enrichment rules.",
         "externalDocs": {
           "url": ""
         },
@@ -97,6 +100,7 @@
                 "type": "object",
                 "properties": {
                   "requestEnrichments": {
+                    "description": "The request enrichments.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
@@ -108,7 +112,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -128,7 +133,7 @@
           "Enrichments Service"
         ],
         "summary": "Delete Enrichments",
-        "description": "No description available",
+        "description": "Deletes all enrichment rules for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -137,14 +142,17 @@
           {
             "in": "query",
             "name": "enrichment_ids",
+            "description": "The unique identifiers of the enrichment rules to delete.",
             "schema": {
               "example": [
                 1,
                 2,
                 3
               ],
+              "description": "The unique identifiers of the enrichment rules to delete.",
               "type": "array",
               "items": {
+                "description": "The unique identifiers of the enrichment rules to delete.",
                 "type": "integer",
                 "format": "int64"
               }
@@ -171,8 +179,8 @@
         "tags": [
           "Enrichments Service"
         ],
-        "summary": "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.",
-        "description": "No description available",
+        "summary": "Atomic Overwrite for ALL types of enrichments",
+        "description": "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.",
         "externalDocs": {
           "url": ""
         },
@@ -181,9 +189,11 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request to atomically replace all enrichment rules.",
                 "type": "object",
                 "properties": {
                   "requestEnrichments": {
+                    "description": "Complete list of enrichment rules to replace all existing rules.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
@@ -214,7 +224,7 @@
           "Enrichments Service"
         ],
         "summary": "Get Enrichment Limit",
-        "description": "No description available",
+        "description": "Returns the maximum number of enrichment rules allowed.",
         "externalDocs": {
           "url": ""
         },
@@ -239,7 +249,7 @@
           "Enrichments Service"
         ],
         "summary": "Get Company Enrichment Settings",
-        "description": "No description available",
+        "description": "Returns the current enrichment settings for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -271,6 +281,7 @@
         "type": "object",
         "properties": {
           "enrichments": {
+            "description": "List of enrichments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
@@ -282,9 +293,14 @@
         ]
       },
       "AtomicOverwriteAllEnrichmentsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after atomically replacing all enrichment rules.",
         "type": "object",
         "properties": {
           "enrichments": {
+            "description": "List of enrichments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
@@ -293,9 +309,14 @@
         }
       },
       "AtomicOverwriteEnrichmentsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after atomically updating enrichment rules.",
         "type": "object",
         "properties": {
           "enrichments": {
+            "description": "List of enrichments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
@@ -304,52 +325,90 @@
         }
       },
       "AwsType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Aws type.",
         "type": "object",
         "properties": {
           "resourceType": {
             "example": "ec2",
+            "description": "The resource type.",
             "type": "string"
           }
         }
       },
       "CompanyEnrichmentSettings": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Company enrichment settings.",
         "type": "object",
         "properties": {
           "enrichmentAmountLimit": {
+            "description": "The enrichment amount limit.",
             "type": "integer",
             "format": "int64"
           },
           "enrichmentsInUse": {
+            "description": "The enrichments in use.",
             "type": "integer",
             "format": "int64"
           },
           "queryOnlyRowLimit": {
+            "description": "The query only row limit.",
             "type": "integer",
             "format": "int64"
           },
           "queryOnlySizeLimitBytes": {
             "example": "",
+            "description": "The query only size limit bytes.",
             "type": "string",
             "format": "int64"
           },
           "rowLimit": {
+            "description": "The row limit.",
             "type": "integer",
             "format": "int64"
           },
           "sizeLimitBytes": {
             "example": "",
+            "description": "The size limit bytes.",
             "type": "string",
             "format": "int64"
           }
         }
       },
       "CustomEnrichmentType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom enrichment type.",
         "type": "object",
         "properties": {
           "id": {
             "example": 1,
+            "description": "Unique identifier.",
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "DatasetTarget": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Dataset Target",
+        "description": "This data structure represents a target for enrichments. It defines a dataset in which the enrichment will be applied to.",
+        "type": "object",
+        "properties": {
+          "dataset": {
+            "example": "dataset1",
+            "description": "The dataset name in which the enrichment will be applied.",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_./-]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         }
       },
@@ -364,6 +423,7 @@
         "properties": {
           "enrichedFieldName": {
             "example": "1",
+            "description": "The enriched field name.",
             "type": "string"
           },
           "enrichmentType": {
@@ -371,10 +431,12 @@
           },
           "fieldName": {
             "example": "1",
+            "description": "The field name.",
             "type": "string"
           },
           "id": {
             "example": 1,
+            "description": "Unique identifier.",
             "type": "integer",
             "format": "int64"
           },
@@ -383,10 +445,21 @@
               "city",
               "population"
             ],
+            "description": "The selected columns.",
             "type": "array",
             "items": {
+              "description": "The selected columns.",
               "type": "string"
             }
+          },
+          "targets": {
+            "description": "The targets for the enrichment",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetTarget"
+            },
+            "minItems": 1,
+            "maxItems": 10
           }
         },
         "required": [
@@ -399,16 +472,29 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
+            "description": "The enriched field name.",
             "type": "string"
           },
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "selectedColumns": {
+            "description": "The selected columns.",
             "type": "array",
             "items": {
+              "description": "The selected columns.",
               "type": "string"
             }
+          },
+          "targets": {
+            "description": "The targets for the enrichment",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetTarget"
+            },
+            "minItems": 1,
+            "maxItems": 10
           }
         }
       },
@@ -422,6 +508,7 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
+            "description": "The enriched field name.",
             "type": "string"
           },
           "enrichmentType": {
@@ -429,13 +516,25 @@
           },
           "fieldName": {
             "example": "sourceIPs",
+            "description": "The field name.",
             "type": "string"
           },
           "selectedColumns": {
+            "description": "The selected columns.",
             "type": "array",
             "items": {
+              "description": "The selected columns.",
               "type": "string"
             }
+          },
+          "targets": {
+            "description": "The targets for the enrichment",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatasetTarget"
+            },
+            "minItems": 1,
+            "maxItems": 10
           }
         },
         "required": [
@@ -446,20 +545,24 @@
       "EnrichmentType": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/EnrichmentTypeGeoIp"
-          },
-          {
-            "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
-          },
-          {
             "$ref": "#/components/schemas/EnrichmentTypeAws"
           },
           {
             "$ref": "#/components/schemas/EnrichmentTypeCustomEnrichment"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeGeoIp"
+          },
+          {
+            "$ref": "#/components/schemas/EnrichmentTypeSuspiciousIp"
           }
         ]
       },
       "EnrichmentTypeAws": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Enrichment type.",
         "type": "object",
         "properties": {
           "aws": {
@@ -471,6 +574,10 @@
         ]
       },
       "EnrichmentTypeCustomEnrichment": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Enrichment type.",
         "type": "object",
         "properties": {
           "customEnrichment": {
@@ -482,6 +589,10 @@
         ]
       },
       "EnrichmentTypeGeoIp": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Enrichment type.",
         "type": "object",
         "properties": {
           "geoIp": {
@@ -493,6 +604,10 @@
         ]
       },
       "EnrichmentTypeSuspiciousIp": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Enrichment type.",
         "type": "object",
         "properties": {
           "suspiciousIp": {
@@ -506,10 +621,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -580,14 +695,23 @@
         ]
       },
       "GeoIpType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Geo ip type.",
         "type": "object",
         "properties": {
           "withAsn": {
+            "description": "The with asn.",
             "type": "boolean"
           }
         }
       },
       "GetCompanyEnrichmentSettingsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the company-level enrichment settings.",
         "type": "object",
         "properties": {
           "enrichmentSettings": {
@@ -606,11 +730,13 @@
         "properties": {
           "limit": {
             "example": 10,
+            "description": "Limit.",
             "type": "integer",
             "format": "int64"
           },
           "used": {
             "example": 5,
+            "description": "The used.",
             "type": "integer",
             "format": "int64"
           }
@@ -630,6 +756,7 @@
         "type": "object",
         "properties": {
           "enrichments": {
+            "description": "List of enrichments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
@@ -664,6 +791,7 @@
         "type": "object",
         "properties": {
           "remainingEnrichments": {
+            "description": "The remaining enrichments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
@@ -672,7 +800,12 @@
         }
       },
       "SuspiciousIpType": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Suspicious ip type.",
+        "type": "object",
+        "additionalProperties": false
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -682,6 +815,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the AlertDefOverride type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefOverride{}
 
-// AlertDefOverride struct for AlertDefOverride
+// AlertDefOverride Alert def override.
 type AlertDefOverride struct {
 	Priority *AlertDefPriority `json:"priority,omitempty"`
 	AdditionalProperties map[string]interface{}

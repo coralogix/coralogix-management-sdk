@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V1SourceType the model 'V1SourceType'
+// V1SourceType Source type.
 type V1SourceType string
 
 // List of v1.SourceType

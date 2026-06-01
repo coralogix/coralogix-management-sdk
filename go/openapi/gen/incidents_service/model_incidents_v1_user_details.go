@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the IncidentsV1UserDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentsV1UserDetails{}
 
-// IncidentsV1UserDetails struct for IncidentsV1UserDetails
+// IncidentsV1UserDetails User details.
 type IncidentsV1UserDetails struct {
+	// The user id.
 	UserId string `json:"userId"`
 	AdditionalProperties map[string]interface{}
 }

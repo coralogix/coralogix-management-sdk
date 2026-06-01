@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionHexagon type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionHexagon{}
 
-// WidgetDefinitionHexagon struct for WidgetDefinitionHexagon
+// WidgetDefinitionHexagon Definition.
 type WidgetDefinitionHexagon struct {
 	Hexagon Hexagon `json:"hexagon"`
 	AdditionalProperties map[string]interface{}

@@ -11,7 +11,7 @@
           "Entities service"
         ],
         "summary": "List Entity Types",
-        "description": "No description available",
+        "description": "Returns all available notification entity types.",
         "externalDocs": {
           "url": ""
         },
@@ -36,7 +36,7 @@
           "Entities service"
         ],
         "summary": "List Entity Subtypes",
-        "description": "No description available",
+        "description": "Returns all sub-types for the specified entity type.",
         "externalDocs": {
           "url": ""
         },
@@ -45,6 +45,7 @@
           {
             "in": "path",
             "name": "entity_type",
+            "description": "Entity type whose sub-types to list.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/notification_center.EntityType"
@@ -72,10 +73,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -146,20 +147,31 @@
         ]
       },
       "ListEntitySubTypesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of notification entity sub-types.",
         "type": "object",
         "properties": {
           "entitySubTypes": {
+            "description": "The entity sub types.",
             "type": "array",
             "items": {
+              "description": "The entity sub types.",
               "type": "string"
             }
           }
         }
       },
       "ListEntityTypesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of notification entity types.",
         "type": "object",
         "properties": {
           "entityTypes": {
+            "description": "The entity types.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.EntityType"
@@ -189,6 +201,7 @@
         ]
       },
       "notification_center.EntityType": {
+        "description": "Entity type.",
         "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
@@ -198,6 +211,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

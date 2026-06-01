@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsRatioConditionType the model 'LogsRatioConditionType'
+// LogsRatioConditionType Logs ratio condition type.
 type LogsRatioConditionType string
 
 // List of LogsRatioConditionType

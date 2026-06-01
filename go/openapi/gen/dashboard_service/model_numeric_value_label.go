@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the NumericValueLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NumericValueLabel{}
 
-// NumericValueLabel struct for NumericValueLabel
+// NumericValueLabel Numeric value label.
 type NumericValueLabel struct {
+	// The label.
 	Label *string `json:"label,omitempty"`
+	// The value.
 	Value *float32 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

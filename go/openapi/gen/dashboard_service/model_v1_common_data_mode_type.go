@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V1CommonDataModeType the model 'V1CommonDataModeType'
+// V1CommonDataModeType Data mode type.
 type V1CommonDataModeType string
 
 // List of v1.common.DataModeType

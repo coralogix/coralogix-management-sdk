@@ -41,7 +41,7 @@ func (r ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest) Execute() (*AtomicO
 /*
 PoliciesServiceAtomicOverwriteLogPolicies Atomic Overwrite Log Policies
 
-No description available
+Updates the log data retention policies.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceAtomicOverwriteLogPoliciesRequest
@@ -73,6 +73,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteLogPoliciesExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.atomicOverwriteLogPoliciesRequest == nil {
+		return localVarReturnValue, nil, reportError("atomicOverwriteLogPoliciesRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -148,7 +151,7 @@ func (r ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest) Execute() (*Atomic
 /*
 PoliciesServiceAtomicOverwriteSpanPolicies Atomic Overwrite Span Policies
 
-No description available
+Updates span data retention policies.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceAtomicOverwriteSpanPoliciesRequest
@@ -180,6 +183,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceAtomicOverwriteSpanPoliciesEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.atomicOverwriteSpanPoliciesRequest == nil {
+		return localVarReturnValue, nil, reportError("atomicOverwriteSpanPoliciesRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -255,7 +261,7 @@ func (r ApiPoliciesServiceBulkTestLogPoliciesRequest) Execute() (*BulkTestLogPol
 /*
 PoliciesServiceBulkTestLogPolicies Bulk Test Log Policies
 
-No description available
+Tests the data policies against sample data.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceBulkTestLogPoliciesRequest
@@ -287,6 +293,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceBulkTestLogPoliciesExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.bulkTestLogPoliciesRequest == nil {
+		return localVarReturnValue, nil, reportError("bulkTestLogPoliciesRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -362,7 +371,7 @@ func (r ApiPoliciesServiceCreatePolicyRequest) Execute() (*CreatePolicyResponse,
 /*
 PoliciesServiceCreatePolicy Create Policy
 
-No description available
+Creates a new data policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceCreatePolicyRequest
@@ -394,6 +403,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceCreatePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.policiesServiceCreatePolicyRequest == nil {
+		return localVarReturnValue, nil, reportError("policiesServiceCreatePolicyRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -464,10 +476,10 @@ func (r ApiPoliciesServiceDeletePolicyRequest) Execute() (*DeletePolicyResponse,
 /*
 PoliciesServiceDeletePolicy Delete Policy
 
-No description available
+Deletes the data policy with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the data policy to delete.
  @return ApiPoliciesServiceDeletePolicyRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicy(ctx context.Context, id string) ApiPoliciesServiceDeletePolicyRequest {
@@ -554,6 +566,116 @@ func (a *PoliciesServiceAPIService) PoliciesServiceDeletePolicyExecute(r ApiPoli
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiPoliciesServiceForecastPolicyUsageRequest struct {
+	ctx context.Context
+	ApiService *PoliciesServiceAPIService
+	policiesServiceForecastPolicyUsageRequest *PoliciesServiceForecastPolicyUsageRequest
+}
+
+func (r ApiPoliciesServiceForecastPolicyUsageRequest) PoliciesServiceForecastPolicyUsageRequest(policiesServiceForecastPolicyUsageRequest PoliciesServiceForecastPolicyUsageRequest) ApiPoliciesServiceForecastPolicyUsageRequest {
+	r.policiesServiceForecastPolicyUsageRequest = &policiesServiceForecastPolicyUsageRequest
+	return r
+}
+
+func (r ApiPoliciesServiceForecastPolicyUsageRequest) Execute() (*ForecastPolicyUsageResponse, *http.Response, error) {
+	return r.ApiService.PoliciesServiceForecastPolicyUsageExecute(r)
+}
+
+/*
+PoliciesServiceForecastPolicyUsage Forecast Policy Usage
+
+Forecasts the usage in bytes that a draft TCO policy would match over the requested time window, given its application/subsystem rules and log or span filters. Use this before saving a new or modified policy to see the impact on your quota.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiPoliciesServiceForecastPolicyUsageRequest
+*/
+func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsage(ctx context.Context) ApiPoliciesServiceForecastPolicyUsageRequest {
+	return ApiPoliciesServiceForecastPolicyUsageRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ForecastPolicyUsageResponse
+func (a *PoliciesServiceAPIService) PoliciesServiceForecastPolicyUsageExecute(r ApiPoliciesServiceForecastPolicyUsageRequest) (*ForecastPolicyUsageResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ForecastPolicyUsageResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PoliciesServiceAPIService.PoliciesServiceForecastPolicyUsage")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/dataplans/policies/v1/all/forecast-usage"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.policiesServiceForecastPolicyUsageRequest == nil {
+		return localVarReturnValue, nil, reportError("policiesServiceForecastPolicyUsageRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.policiesServiceForecastPolicyUsageRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiPoliciesServiceGetCompanyPoliciesRequest struct {
 	ctx context.Context
 	ApiService *PoliciesServiceAPIService
@@ -561,11 +683,13 @@ type ApiPoliciesServiceGetCompanyPoliciesRequest struct {
 	sourceType *V1SourceType
 }
 
+// When true, return only policies that are currently enabled.
 func (r ApiPoliciesServiceGetCompanyPoliciesRequest) EnabledOnly(enabledOnly bool) ApiPoliciesServiceGetCompanyPoliciesRequest {
 	r.enabledOnly = &enabledOnly
 	return r
 }
 
+// Filter policies by data source type (for example logs or spans).
 func (r ApiPoliciesServiceGetCompanyPoliciesRequest) SourceType(sourceType V1SourceType) ApiPoliciesServiceGetCompanyPoliciesRequest {
 	r.sourceType = &sourceType
 	return r
@@ -578,7 +702,7 @@ func (r ApiPoliciesServiceGetCompanyPoliciesRequest) Execute() (*GetCompanyPolic
 /*
 PoliciesServiceGetCompanyPolicies Get Company Policies
 
-No description available
+Returns all data policies for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceGetCompanyPoliciesRequest
@@ -684,10 +808,10 @@ func (r ApiPoliciesServiceGetPolicyRequest) Execute() (*GetPolicyResponse, *http
 /*
 PoliciesServiceGetPolicy Get Policy by ID
 
-No description available
+Returns the details of the specified data policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the data policy to retrieve.
  @return ApiPoliciesServiceGetPolicyRequest
 */
 func (a *PoliciesServiceAPIService) PoliciesServiceGetPolicy(ctx context.Context, id string) ApiPoliciesServiceGetPolicyRequest {
@@ -786,7 +910,7 @@ func (r ApiPoliciesServiceGetPolicySettingsRequest) Execute() (*GetPolicySetting
 /*
 PoliciesServiceGetPolicySettings Get Policy Priority Settings
 
-No description available
+Returns the current data policy settings.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceGetPolicySettingsRequest
@@ -891,7 +1015,7 @@ func (r ApiPoliciesServiceReorderPoliciesRequest) Execute() (*ReorderPoliciesRes
 /*
 PoliciesServiceReorderPolicies Reorder Policies
 
-No description available
+Reorders all data policies.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceReorderPoliciesRequest
@@ -923,6 +1047,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceReorderPoliciesExecute(r ApiP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.reorderPoliciesRequest == nil {
+		return localVarReturnValue, nil, reportError("reorderPoliciesRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -998,7 +1125,7 @@ func (r ApiPoliciesServiceReplacePolicySettingsRequest) Execute() (*ReplacePolic
 /*
 PoliciesServiceReplacePolicySettings Replace Policy Settings
 
-No description available
+Updates data policy settings.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceReplacePolicySettingsRequest
@@ -1105,7 +1232,7 @@ func (r ApiPoliciesServiceUpdatePolicyRequest) Execute() (*UpdatePolicyResponse,
 /*
 PoliciesServiceUpdatePolicy Update Policy
 
-No description available
+Updates an existing data policy.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPoliciesServiceUpdatePolicyRequest
@@ -1137,6 +1264,9 @@ func (a *PoliciesServiceAPIService) PoliciesServiceUpdatePolicyExecute(r ApiPoli
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.policiesServiceUpdatePolicyRequest == nil {
+		return localVarReturnValue, nil, reportError("policiesServiceUpdatePolicyRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

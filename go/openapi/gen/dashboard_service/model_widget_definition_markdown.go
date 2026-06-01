@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionMarkdown type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionMarkdown{}
 
-// WidgetDefinitionMarkdown struct for WidgetDefinitionMarkdown
+// WidgetDefinitionMarkdown Definition.
 type WidgetDefinitionMarkdown struct {
 	Markdown Markdown `json:"markdown"`
 	AdditionalProperties map[string]interface{}

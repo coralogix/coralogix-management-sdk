@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// VariableDisplayType the model 'VariableDisplayType'
+// VariableDisplayType Variable display type.
 type VariableDisplayType string
 
 // List of VariableDisplayType

@@ -23,6 +23,7 @@ var _ MappedNullable = &SloFilterFieldProductType{}
 
 // SloFilterFieldProductType Field used for filtering SLOs
 type SloFilterFieldProductType struct {
+	// Filter discriminator for SLO product type values.
 	ProductType bool `json:"productType"`
 	AdditionalProperties map[string]interface{}
 }

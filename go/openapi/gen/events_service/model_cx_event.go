@@ -24,14 +24,23 @@ var _ MappedNullable = &CxEvent{}
 
 // CxEvent This data structure represents an event
 type CxEvent struct {
+	// The company id.
 	CompanyId int32 `json:"companyId"`
+	// The cx event dedup key.
 	CxEventDedupKey *string `json:"cxEventDedupKey,omitempty"`
+	// The cx event key.
 	CxEventKey string `json:"cxEventKey"`
+	// The cx event labels.
 	CxEventLabels map[string]string `json:"cxEventLabels"`
+	// The cx event metadata.
 	CxEventMetadata *map[string]string `json:"cxEventMetadata,omitempty"`
+	// The cx event payload.
 	CxEventPayload map[string]interface{} `json:"cxEventPayload"`
+	// The cx event payload type.
 	CxEventPayloadType string `json:"cxEventPayloadType"`
+	// The cx event timestamp.
 	CxEventTimestamp time.Time `json:"cxEventTimestamp"`
+	// The cx event type.
 	CxEventType string `json:"cxEventType"`
 	AdditionalProperties map[string]interface{}
 }

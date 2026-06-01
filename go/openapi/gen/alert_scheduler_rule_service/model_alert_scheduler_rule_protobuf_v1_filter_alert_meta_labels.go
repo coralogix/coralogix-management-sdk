@@ -21,9 +21,10 @@ var _ = bytes.MinRead
 // checks if the AlertSchedulerRuleProtobufV1FilterAlertMetaLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertSchedulerRuleProtobufV1FilterAlertMetaLabels{}
 
-// AlertSchedulerRuleProtobufV1FilterAlertMetaLabels struct for AlertSchedulerRuleProtobufV1FilterAlertMetaLabels
+// AlertSchedulerRuleProtobufV1FilterAlertMetaLabels Alert scheduler rule protobuf.v1.filter.
 type AlertSchedulerRuleProtobufV1FilterAlertMetaLabels struct {
 	AlertMetaLabels MetaLabels `json:"alertMetaLabels"`
+	// Dataprime expression that filters the alerts by group-by values.
 	WhatExpression *string `json:"whatExpression,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

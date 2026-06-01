@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GeomapAggregationMin type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationMin{}
 
-// GeomapAggregationMin struct for GeomapAggregationMin
+// GeomapAggregationMin Geomap aggregation.
 type GeomapAggregationMin struct {
 	Min GeomapAggregationFieldBased `json:"min"`
 	AdditionalProperties map[string]interface{}

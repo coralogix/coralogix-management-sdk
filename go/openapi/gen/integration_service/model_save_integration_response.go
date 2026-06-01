@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SaveIntegrationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveIntegrationResponse{}
 
-// SaveIntegrationResponse struct for SaveIntegrationResponse
+// SaveIntegrationResponse Response returned after successfully saving an integration deployment.
 type SaveIntegrationResponse struct {
+	// The integration id.
 	IntegrationId *string `json:"integrationId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

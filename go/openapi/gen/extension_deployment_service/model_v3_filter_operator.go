@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V3FilterOperator the model 'V3FilterOperator'
+// V3FilterOperator Filter operator.
 type V3FilterOperator string
 
 // List of v3.FilterOperator

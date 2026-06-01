@@ -27,6 +27,7 @@ type ApmFilter struct {
 	// Deprecated: use values instead. Single value to match (kept for backward compatibility)
 	// Deprecated
 	Value *string `json:"value,omitempty"`
+	// Preferred: multiple values to match (OR semantics, e.g. status IN [500, 503])
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

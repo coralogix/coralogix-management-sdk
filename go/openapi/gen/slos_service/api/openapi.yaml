@@ -7,16 +7,18 @@ servers:
 paths:
   /slo/slos/v1:
     get:
-      description: No description available
+      description: Returns SLOs matching the given criteria.
       externalDocs:
         url: ""
       operationId: SlosService_ListSlos
       parameters:
-      - explode: true
+      - description: The filters.
+        explode: true
         in: query
         name: filters
         required: false
         schema:
+          description: The filters.
           items:
             $ref: "#/components/schemas/SloFilter"
           type: array
@@ -44,17 +46,19 @@ paths:
       tags:
       - Slos Service
     post:
-      description: No description available
+      description: Creates a new SLO.
       externalDocs:
         url: ""
       operationId: SlosService_CreateSlo
       parameters:
-      - explode: true
+      - description: Whether to silence data validations.
+        explode: true
         in: query
         name: silence_data_validations
         required: false
         schema:
           deprecated: true
+          description: Whether to silence data validations.
           type: boolean
         style: form
       requestBody:
@@ -62,6 +66,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+        required: true
       responses:
         "200":
           content:
@@ -85,17 +90,19 @@ paths:
       tags:
       - Slos Service
     put:
-      description: No description available
+      description: Updates an existing SLO.
       externalDocs:
         url: ""
       operationId: SlosService_ReplaceSlo
       parameters:
-      - explode: true
+      - description: Whether to silence data validations.
+        explode: true
         in: query
         name: silence_data_validations
         required: false
         schema:
           deprecated: true
+          description: Whether to silence data validations.
           type: boolean
         style: form
       requestBody:
@@ -103,6 +110,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+        required: true
       responses:
         "200":
           content:
@@ -127,7 +135,7 @@ paths:
       - Slos Service
   /slo/slos/v1/all/execute:
     post:
-      description: No description available
+      description: Triggers execution for all SLOs.
       externalDocs:
         url: ""
       operationId: SlosService_BatchExecuteSlo
@@ -136,6 +144,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchExecuteSloRequest"
+        required: true
       responses:
         "200":
           content:
@@ -160,17 +169,20 @@ paths:
       - Slos Service
   /slo/slos/v1/all/list:
     get:
-      description: No description available
+      description: Returns all SLOs for the team.
       externalDocs:
         url: ""
       operationId: SlosService_BatchGetSlos
       parameters:
-      - explode: true
+      - description: The ids.
+        explode: true
         in: query
         name: ids
         required: false
         schema:
+          description: The ids.
           items:
+            description: The ids.
             example: ""
             type: string
           type: array
@@ -199,16 +211,18 @@ paths:
       - Slos Service
   /slo/slos/v1/{id}:
     delete:
-      description: No description available
+      description: Deletes the SLO with the specified ID.
       externalDocs:
         url: ""
       operationId: SlosService_DeleteSlo
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -234,16 +248,18 @@ paths:
       tags:
       - Slos Service
     get:
-      description: No description available
+      description: Returns the details of the specified SLO.
       externalDocs:
         url: ""
       operationId: SlosService_GetSlo
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -270,7 +286,7 @@ paths:
       - Slos Service
   /slo/validated/v1:
     put:
-      description: No description available
+      description: Validates and updates an SLO.
       externalDocs:
         url: ""
       operationId: SlosService_ValidateReplaceSloAlerts
@@ -278,7 +294,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SlosService_ValidateReplaceSloAlerts_request"
+              $ref: "#/components/schemas/SlosService_ReplaceSlo_request"
+        required: true
       responses:
         "200":
           content:
@@ -303,7 +320,7 @@ paths:
       - Slos Service
   /slo/zero-state/v1:
     get:
-      description: No description available
+      description: Returns the zero-state configuration for SLOs.
       externalDocs:
         url: ""
       operationId: SlosService_GetZeroState
@@ -332,6 +349,7 @@ paths:
 components:
   schemas:
     ApmErrorSli:
+      additionalProperties: false
       description: Configuration for error-based APM SLI
       externalDocs:
         url: ""
@@ -360,6 +378,8 @@ components:
           example: production
           type: string
         values:
+          description: "Preferred: multiple values to match (OR semantics, e.g. status\
+            \ IN [500, 503])"
           items:
             description: "Preferred: multiple values to match (OR semantics, e.g.\
               \ status IN [500, 503])"
@@ -369,6 +389,7 @@ components:
       title: ApmFilter
       type: object
     ApmLatencyAverage:
+      additionalProperties: false
       description: Average/mean-based latency measurement
       externalDocs:
         url: ""
@@ -376,8 +397,6 @@ components:
       type: object
     ApmLatencyQuantile:
       description: Quantile/percentile-based latency measurement
-      example:
-        percentile: 0.95
       externalDocs:
         url: ""
       properties:
@@ -390,14 +409,15 @@ components:
       type: object
     ApmLatencySli:
       oneOf:
-      - $ref: "#/components/schemas/ApmLatencySliQuantile"
       - $ref: "#/components/schemas/ApmLatencySliAverage"
+      - $ref: "#/components/schemas/ApmLatencySliQuantile"
     ApmLatencySliAverage:
       description: Configuration for latency-based APM SLI
       externalDocs:
         url: ""
       properties:
         average:
+          additionalProperties: false
           description: Average/mean-based latency measurement
           externalDocs:
             url: ""
@@ -417,11 +437,6 @@ components:
       type: object
     ApmLatencySliQuantile:
       description: Configuration for latency-based APM SLI
-      example:
-        timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-        quantile:
-          percentile: 0.95
-        threshold: 500
       externalDocs:
         url: ""
       properties:
@@ -441,54 +456,14 @@ components:
       type: object
     ApmSli:
       oneOf:
-      - $ref: "#/components/schemas/ApmSliLatencyConfig"
       - $ref: "#/components/schemas/ApmSliErrorConfig"
+      - $ref: "#/components/schemas/ApmSliLatencyConfig"
     ApmSliErrorConfig:
-      description: Definition of an APM-based SLI with automatic query generation
-      externalDocs:
-        url: ""
-      properties:
-        errorConfig:
-          description: Configuration for error-based APM SLI
-          externalDocs:
-            url: ""
-          title: ApmErrorSli
-          type: object
-        filters:
-          items:
-            $ref: "#/components/schemas/ApmFilter"
-          type: array
-        groupingKeys:
-          example:
-          - environment
-          - region
-          items:
-            description: Labels to group SLO results by
-            type: string
-          type: array
-        services:
-          example:
-          - my-service
-          - payment-service
-          items:
-            description: List of service names to monitor
-            type: string
-          type: array
-      required:
-      - errorConfig
-      title: ApmSli
-      type: object
-    ApmSliLatencyConfig:
       description: Definition of an APM-based SLI with automatic query generation
       example:
         groupingKeys:
         - environment
         - region
-        latencyConfig:
-          timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-          quantile:
-            percentile: 0.95
-          threshold: 500
         filters:
         - values:
           - "500"
@@ -503,14 +478,56 @@ components:
         services:
         - my-service
         - payment-service
+        errorConfig: "{}"
       externalDocs:
         url: ""
       properties:
+        errorConfig:
+          additionalProperties: false
+          description: Configuration for error-based APM SLI
+          externalDocs:
+            url: ""
+          title: ApmErrorSli
+          type: object
         filters:
+          description: Additional label-based filters to apply to the metrics
           items:
             $ref: "#/components/schemas/ApmFilter"
           type: array
         groupingKeys:
+          description: Labels to group SLO results by
+          example:
+          - environment
+          - region
+          items:
+            description: Labels to group SLO results by
+            type: string
+          type: array
+        services:
+          description: List of service names to monitor
+          example:
+          - my-service
+          - payment-service
+          items:
+            description: List of service names to monitor
+            type: string
+          type: array
+      required:
+      - errorConfig
+      title: ApmSli
+      type: object
+    ApmSliLatencyConfig:
+      description: Definition of an APM-based SLI with automatic query generation
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          description: Additional label-based filters to apply to the metrics
+          items:
+            $ref: "#/components/schemas/ApmFilter"
+          type: array
+        groupingKeys:
+          description: Labels to group SLO results by
           example:
           - environment
           - region
@@ -521,6 +538,7 @@ components:
         latencyConfig:
           $ref: "#/components/schemas/ApmLatencySli"
         services:
+          description: List of service names to monitor
           example:
           - my-service
           - payment-service
@@ -542,27 +560,37 @@ components:
                 environment:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 service:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 team:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
               creator: test@domain.com
-              requestBasedMetricSli:
-                goodEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                totalEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
@@ -577,17 +605,10 @@ components:
               revision:
                 updateTime: 2000-01-23T04:56:07.000+00:00
                 revision: 1
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              apmSliMetadata:
+              apmSli:
                 groupingKeys:
                 - environment
                 - region
-                latencyConfig:
-                  timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-                  quantile:
-                    percentile: 0.95
-                  threshold: 500
                 filters:
                 - values:
                   - "500"
@@ -602,6 +623,10 @@ components:
                 services:
                 - my-service
                 - payment-service
+                errorConfig: "{}"
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              apmSliMetadata: null
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
@@ -611,27 +636,37 @@ components:
                 environment:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 service:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 team:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
               creator: test@domain.com
-              requestBasedMetricSli:
-                goodEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                totalEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
@@ -646,17 +681,10 @@ components:
               revision:
                 updateTime: 2000-01-23T04:56:07.000+00:00
                 revision: 1
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              apmSliMetadata:
+              apmSli:
                 groupingKeys:
                 - environment
                 - region
-                latencyConfig:
-                  timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-                  quantile:
-                    percentile: 0.95
-                  threshold: 500
                 filters:
                 - values:
                   - "500"
@@ -671,6 +699,10 @@ components:
                 services:
                 - my-service
                 - payment-service
+                errorConfig: "{}"
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              apmSliMetadata: null
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
@@ -683,6 +715,7 @@ components:
         url: ""
       properties:
         matchingResponses:
+          description: The matching responses.
           items:
             $ref: "#/components/schemas/SloExecutionResponse"
           type: array
@@ -703,27 +736,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -738,17 +781,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -763,6 +799,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -770,27 +810,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -805,17 +855,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -830,6 +873,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -837,10 +884,13 @@ components:
         url: ""
       properties:
         notFoundIds:
+          description: The not found ids.
           items:
+            description: The not found ids.
             type: string
           type: array
         slos:
+          description: The slos.
           items:
             $ref: "#/components/schemas/Slo"
           type: array
@@ -869,6 +919,7 @@ components:
       - DATA_LOSS
       type: string
     ComparisonOperator:
+      description: Comparison operator.
       enum:
       - COMPARISON_OPERATOR_UNSPECIFIED
       - COMPARISON_OPERATOR_GREATER_THAN
@@ -884,27 +935,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -919,17 +980,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -944,6 +998,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -953,6 +1011,7 @@ components:
       properties:
         silenceDataValidations:
           deprecated: true
+          description: Whether to silence data validations.
           type: boolean
         slo:
           $ref: "#/components/schemas/Slo"
@@ -968,27 +1027,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1003,17 +1072,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -1028,6 +1090,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1046,6 +1112,7 @@ components:
         url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
       required:
       - id
@@ -1061,15 +1128,17 @@ components:
         url: ""
       properties:
         effectedSloAlertIds:
+          description: The effected slo alert ids.
           items:
+            description: The effected slo alert ids.
             type: string
           type: array
       title: DeleteSloResponse
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -1125,27 +1194,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1160,17 +1239,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -1185,6 +1257,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1205,6 +1281,7 @@ components:
         url: ""
       properties:
         zeroState:
+          description: The zero state.
           type: boolean
       required:
       - zeroState
@@ -1254,27 +1331,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1289,17 +1376,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -1314,6 +1394,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1321,27 +1405,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1356,17 +1450,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -1381,6 +1468,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1388,6 +1479,7 @@ components:
         url: ""
       properties:
         slos:
+          description: The slos.
           items:
             $ref: "#/components/schemas/Slo"
           type: array
@@ -1397,17 +1489,17 @@ components:
       type: object
     Metric:
       description: Definition of a metric used in SLOs
-      example:
-        query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
       externalDocs:
         url: ""
       properties:
         query:
+          description: Query string.
           example: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           type: string
       title: Metric
       type: object
     MissingDataStrategy:
+      description: Missing data strategy.
       enum:
       - MISSING_DATA_STRATEGY_UNCOUNTED
       - MISSING_DATA_STRATEGY_GOOD
@@ -1423,8 +1515,12 @@ components:
           type: array
       type: object
     ProductTypeValues:
+      description: Product type values.
+      externalDocs:
+        url: ""
       properties:
         values:
+          description: The values.
           items:
             $ref: "#/components/schemas/SloProductType"
           type: array
@@ -1445,6 +1541,7 @@ components:
         url: ""
       properties:
         alertsValidationResult:
+          description: The alerts validation result.
           items:
             $ref: "#/components/schemas/SloAlertValidityResult"
           type: array
@@ -1459,6 +1556,7 @@ components:
       properties:
         silenceDataValidations:
           deprecated: true
+          description: Whether to silence data validations.
           type: boolean
         slo:
           $ref: "#/components/schemas/Slo"
@@ -1477,27 +1575,37 @@ components:
             environment:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             service:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
             team:
               staticValues:
               - checkout-api
+              resolvedValues:
+              - checkout-api
+              - production
+              - staging
+              - payments-ns
               labelKeys:
               - deployment_environment
               - k8s_namespace
           creator: test@domain.com
-          requestBasedMetricSli:
-            goodEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-            totalEvents:
-              query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
           description: A brief description of my SLO
           sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
           updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1512,17 +1620,10 @@ components:
           revision:
             updateTime: 2000-01-23T04:56:07.000+00:00
             revision: 1
-          createTime: 2000-01-23T04:56:07.000+00:00
-          name: Example Slo Name
-          apmSliMetadata:
+          apmSli:
             groupingKeys:
             - environment
             - region
-            latencyConfig:
-              timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-              quantile:
-                percentile: 0.95
-              threshold: 500
             filters:
             - values:
               - "500"
@@ -1537,6 +1638,10 @@ components:
             services:
             - my-service
             - payment-service
+            errorConfig: "{}"
+          createTime: 2000-01-23T04:56:07.000+00:00
+          name: Example Slo Name
+          apmSliMetadata: null
           id: b11919d5-ef85-4bb1-8655-02640dbe94d9
           productType: SLO_PRODUCT_TYPE_UNSPECIFIED
           targetThresholdPercentage: 99.999
@@ -1544,7 +1649,9 @@ components:
         url: ""
       properties:
         effectedSloAlertIds:
+          description: The effected slo alert ids.
           items:
+            description: The effected slo alert ids.
             type: string
           type: array
         slo:
@@ -1555,11 +1662,6 @@ components:
       type: object
     RequestBasedMetricSli:
       description: Definition of a request-based SLI based on metrics
-      example:
-        goodEvents:
-          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-        totalEvents:
-          query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
       externalDocs:
         url: ""
       properties:
@@ -1582,8 +1684,10 @@ components:
         details:
           additionalProperties:
             type: string
+          description: List of details.
           type: object
         message:
+          description: Human-readable message.
           type: string
         statusCode:
           $ref: "#/components/schemas/Code"
@@ -1593,9 +1697,9 @@ components:
       type: object
     Slo:
       oneOf:
+      - $ref: "#/components/schemas/SloApmSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
-      - $ref: "#/components/schemas/SloApmSli"
     SloAlertValidityResult:
       example:
         errorMessage: errorMessage
@@ -1604,16 +1708,95 @@ components:
         alertVersionId: alertVersionId
       properties:
         alertVersionId:
+          description: The alert version id.
           type: string
         errorMessage:
+          description: The error message.
           type: string
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
       type: object
     SloApmSli:
       description: Definition of an SLO
+      example:
+        ownershipTags:
+          environment:
+            staticValues:
+            - checkout-api
+            resolvedValues:
+            - checkout-api
+            - production
+            - staging
+            - payments-ns
+            labelKeys:
+            - deployment_environment
+            - k8s_namespace
+          service:
+            staticValues:
+            - checkout-api
+            resolvedValues:
+            - checkout-api
+            - production
+            - staging
+            - payments-ns
+            labelKeys:
+            - deployment_environment
+            - k8s_namespace
+          team:
+            staticValues:
+            - checkout-api
+            resolvedValues:
+            - checkout-api
+            - production
+            - staging
+            - payments-ns
+            labelKeys:
+            - deployment_environment
+            - k8s_namespace
+        creator: test@domain.com
+        description: A brief description of my SLO
+        sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
+        updateTime: 2000-01-23T04:56:07.000+00:00
+        sloType: SLO_TYPE_REQUEST
+        type: request
+        grouping:
+          labels:
+          - labels
+          - labels
+        labels:
+          key: labels
+        revision:
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          revision: 1
+        apmSli:
+          groupingKeys:
+          - environment
+          - region
+          filters:
+          - values:
+            - "500"
+            - "500"
+            value: production
+            key: environment
+          - values:
+            - "500"
+            - "500"
+            value: production
+            key: environment
+          services:
+          - my-service
+          - payment-service
+          errorConfig: "{}"
+        createTime: 2000-01-23T04:56:07.000+00:00
+        name: Example Slo Name
+        apmSliMetadata: null
+        id: b11919d5-ef85-4bb1-8655-02640dbe94d9
+        productType: SLO_PRODUCT_TYPE_UNSPECIFIED
+        targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
@@ -1622,24 +1805,30 @@ components:
         apmSliMetadata:
           $ref: "#/components/schemas/ApmSli"
         createTime:
+          description: RFC3339 timestamp of when the SLO was created.
           format: date-time
           type: string
         creator:
+          description: Email or identifier of the user who created the SLO.
           example: test@domain.com
           type: string
         description:
+          description: Human-readable description of the SLO.
           example: A brief description of my SLO
           type: string
         grouping:
           $ref: "#/components/schemas/v1.Grouping"
         id:
+          description: Unique identifier of the SLO.
           example: b11919d5-ef85-4bb1-8655-02640dbe94d9
           type: string
         labels:
           additionalProperties:
             type: string
+          description: List of labels.
           type: object
         name:
+          description: Human-readable display name for the SLO.
           example: Example Slo Name
           type: string
         ownershipTags:
@@ -1653,14 +1842,18 @@ components:
         sloType:
           $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
+          description: "Target compliance percentage threshold for the SLO (e.g.,\
+            \ 99.9 for three nines)."
           example: 99.999
           format: float
           type: number
         type:
           deprecated: true
+          description: "Deprecated: SLO type string. Use slo_type instead."
           example: request
           type: string
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       required:
@@ -1668,6 +1861,7 @@ components:
       title: Slo
       type: object
     SloConstantFilterField:
+      description: Slo constant filter field.
       enum:
       - SLO_CONST_FILTER_FIELD_UNSPECIFIED
       - SLO_CONST_FILTER_FIELD_USER_NAME
@@ -1676,8 +1870,8 @@ components:
     SloExecutionRequest:
       oneOf:
       - $ref: "#/components/schemas/SloExecutionRequestCreateSloRequest"
-      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
       - $ref: "#/components/schemas/SloExecutionRequestDeleteSloRequest"
+      - $ref: "#/components/schemas/SloExecutionRequestReplaceSloRequest"
     SloExecutionRequestCreateSloRequest:
       description: Request for executing an SLO operation.
       example:
@@ -1687,27 +1881,37 @@ components:
               environment:
                 staticValues:
                 - checkout-api
+                resolvedValues:
+                - checkout-api
+                - production
+                - staging
+                - payments-ns
                 labelKeys:
                 - deployment_environment
                 - k8s_namespace
               service:
                 staticValues:
                 - checkout-api
+                resolvedValues:
+                - checkout-api
+                - production
+                - staging
+                - payments-ns
                 labelKeys:
                 - deployment_environment
                 - k8s_namespace
               team:
                 staticValues:
                 - checkout-api
+                resolvedValues:
+                - checkout-api
+                - production
+                - staging
+                - payments-ns
                 labelKeys:
                 - deployment_environment
                 - k8s_namespace
             creator: test@domain.com
-            requestBasedMetricSli:
-              goodEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              totalEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
             description: A brief description of my SLO
             sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
             updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1722,17 +1926,10 @@ components:
             revision:
               updateTime: 2000-01-23T04:56:07.000+00:00
               revision: 1
-            createTime: 2000-01-23T04:56:07.000+00:00
-            name: Example Slo Name
-            apmSliMetadata:
+            apmSli:
               groupingKeys:
               - environment
               - region
-              latencyConfig:
-                timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-                quantile:
-                  percentile: 0.95
-                threshold: 500
               filters:
               - values:
                 - "500"
@@ -1747,6 +1944,10 @@ components:
               services:
               - my-service
               - payment-service
+              errorConfig: "{}"
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: Example Slo Name
+            apmSliMetadata: null
             id: b11919d5-ef85-4bb1-8655-02640dbe94d9
             productType: SLO_PRODUCT_TYPE_UNSPECIFIED
             targetThresholdPercentage: 99.999
@@ -1788,8 +1989,8 @@ components:
     SloExecutionResponse:
       oneOf:
       - $ref: "#/components/schemas/SloExecutionResponseCreateSloResponse"
-      - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
       - $ref: "#/components/schemas/SloExecutionResponseDeleteSloResponse"
+      - $ref: "#/components/schemas/SloExecutionResponseReplaceSloResponse"
     SloExecutionResponseCreateSloResponse:
       description: Response for an executed SLO operation.
       example:
@@ -1799,27 +2000,37 @@ components:
               environment:
                 staticValues:
                 - checkout-api
+                resolvedValues:
+                - checkout-api
+                - production
+                - staging
+                - payments-ns
                 labelKeys:
                 - deployment_environment
                 - k8s_namespace
               service:
                 staticValues:
                 - checkout-api
+                resolvedValues:
+                - checkout-api
+                - production
+                - staging
+                - payments-ns
                 labelKeys:
                 - deployment_environment
                 - k8s_namespace
               team:
                 staticValues:
                 - checkout-api
+                resolvedValues:
+                - checkout-api
+                - production
+                - staging
+                - payments-ns
                 labelKeys:
                 - deployment_environment
                 - k8s_namespace
             creator: test@domain.com
-            requestBasedMetricSli:
-              goodEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-              totalEvents:
-                query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
             description: A brief description of my SLO
             sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
             updateTime: 2000-01-23T04:56:07.000+00:00
@@ -1834,17 +2045,10 @@ components:
             revision:
               updateTime: 2000-01-23T04:56:07.000+00:00
               revision: 1
-            createTime: 2000-01-23T04:56:07.000+00:00
-            name: Example Slo Name
-            apmSliMetadata:
+            apmSli:
               groupingKeys:
               - environment
               - region
-              latencyConfig:
-                timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-                quantile:
-                  percentile: 0.95
-                threshold: 500
               filters:
               - values:
                 - "500"
@@ -1859,6 +2063,10 @@ components:
               services:
               - my-service
               - payment-service
+              errorConfig: "{}"
+            createTime: 2000-01-23T04:56:07.000+00:00
+            name: Example Slo Name
+            apmSliMetadata: null
             id: b11919d5-ef85-4bb1-8655-02640dbe94d9
             productType: SLO_PRODUCT_TYPE_UNSPECIFIED
             targetThresholdPercentage: 99.999
@@ -1910,6 +2118,7 @@ components:
         url: ""
       properties:
         labelName:
+          description: Filter by a specific SLO label key.
           example: environment
           type: string
       required:
@@ -1955,6 +2164,7 @@ components:
         url: ""
       properties:
         productType:
+          description: Filter discriminator for SLO product type values.
           type: boolean
       required:
       - productType
@@ -1983,6 +2193,7 @@ components:
         url: ""
       properties:
         sloType:
+          description: Filter discriminator for SLO type values.
           type: boolean
       required:
       - sloType
@@ -1996,6 +2207,11 @@ components:
       example:
         staticValues:
         - checkout-api
+        resolvedValues:
+        - checkout-api
+        - production
+        - staging
+        - payments-ns
         labelKeys:
         - deployment_environment
         - k8s_namespace
@@ -2003,6 +2219,9 @@ components:
         url: ""
       properties:
         labelKeys:
+          description: Metric label names to use as sources (label-driven). Actual
+            values come from series at query time. Empty if not using label-driven
+            for this dimension.
           example:
           - deployment_environment
           - k8s_namespace
@@ -2012,7 +2231,26 @@ components:
               for this dimension.
             type: string
           type: array
+        resolvedValues:
+          description: "Flat, deduplicated union of static_values and the values resolved\
+            \ from label_keys across observed permutations (empties excluded). Empty\
+            \ when neither source yields any value. Provides a single searchable list\
+            \ of values for this ownership tag, regardless of source."
+          example:
+          - checkout-api
+          - production
+          - staging
+          - payments-ns
+          items:
+            description: "Flat, deduplicated union of static_values and the values\
+              \ resolved from label_keys across observed permutations (empties excluded).\
+              \ Empty when neither source yields any value. Provides a single searchable\
+              \ list of values for this ownership tag, regardless of source."
+            type: string
+          type: array
         staticValues:
+          description: Group-wide static values (broad). Empty if not using broad
+            for this dimension.
           example:
           - checkout-api
           items:
@@ -2029,18 +2267,33 @@ components:
         environment:
           staticValues:
           - checkout-api
+          resolvedValues:
+          - checkout-api
+          - production
+          - staging
+          - payments-ns
           labelKeys:
           - deployment_environment
           - k8s_namespace
         service:
           staticValues:
           - checkout-api
+          resolvedValues:
+          - checkout-api
+          - production
+          - staging
+          - payments-ns
           labelKeys:
           - deployment_environment
           - k8s_namespace
         team:
           staticValues:
           - checkout-api
+          resolvedValues:
+          - checkout-api
+          - production
+          - staging
+          - payments-ns
           labelKeys:
           - deployment_environment
           - k8s_namespace
@@ -2056,104 +2309,43 @@ components:
       title: SloOwnershipTags
       type: object
     SloProductType:
+      description: Slo product type.
       enum:
       - SLO_PRODUCT_TYPE_UNSPECIFIED
       - SLO_PRODUCT_TYPE_APM
       type: string
     SloRequestBasedMetricSli:
       description: Definition of an SLO
-      example:
-        ownershipTags:
-          environment:
-            staticValues:
-            - checkout-api
-            labelKeys:
-            - deployment_environment
-            - k8s_namespace
-          service:
-            staticValues:
-            - checkout-api
-            labelKeys:
-            - deployment_environment
-            - k8s_namespace
-          team:
-            staticValues:
-            - checkout-api
-            labelKeys:
-            - deployment_environment
-            - k8s_namespace
-        creator: test@domain.com
-        requestBasedMetricSli:
-          goodEvents:
-            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-          totalEvents:
-            query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-        description: A brief description of my SLO
-        sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
-        updateTime: 2000-01-23T04:56:07.000+00:00
-        sloType: SLO_TYPE_REQUEST
-        type: request
-        grouping:
-          labels:
-          - labels
-          - labels
-        labels:
-          key: labels
-        revision:
-          updateTime: 2000-01-23T04:56:07.000+00:00
-          revision: 1
-        createTime: 2000-01-23T04:56:07.000+00:00
-        name: Example Slo Name
-        apmSliMetadata:
-          groupingKeys:
-          - environment
-          - region
-          latencyConfig:
-            timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-            quantile:
-              percentile: 0.95
-            threshold: 500
-          filters:
-          - values:
-            - "500"
-            - "500"
-            value: production
-            key: environment
-          - values:
-            - "500"
-            - "500"
-            value: production
-            key: environment
-          services:
-          - my-service
-          - payment-service
-        id: b11919d5-ef85-4bb1-8655-02640dbe94d9
-        productType: SLO_PRODUCT_TYPE_UNSPECIFIED
-        targetThresholdPercentage: 99.999
       externalDocs:
         url: ""
       properties:
         apmSliMetadata:
           $ref: "#/components/schemas/ApmSli"
         createTime:
+          description: RFC3339 timestamp of when the SLO was created.
           format: date-time
           type: string
         creator:
+          description: Email or identifier of the user who created the SLO.
           example: test@domain.com
           type: string
         description:
+          description: Human-readable description of the SLO.
           example: A brief description of my SLO
           type: string
         grouping:
           $ref: "#/components/schemas/v1.Grouping"
         id:
+          description: Unique identifier of the SLO.
           example: b11919d5-ef85-4bb1-8655-02640dbe94d9
           type: string
         labels:
           additionalProperties:
             type: string
+          description: List of labels.
           type: object
         name:
+          description: Human-readable display name for the SLO.
           example: Example Slo Name
           type: string
         ownershipTags:
@@ -2169,14 +2361,18 @@ components:
         sloType:
           $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
+          description: "Target compliance percentage threshold for the SLO (e.g.,\
+            \ 99.9 for three nines)."
           example: 99.999
           format: float
           type: number
         type:
           deprecated: true
+          description: "Deprecated: SLO type string. Use slo_type instead."
           example: request
           type: string
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       required:
@@ -2184,6 +2380,7 @@ components:
       title: Slo
       type: object
     SloTimeFrame:
+      description: Slo time frame.
       enum:
       - SLO_TIME_FRAME_UNSPECIFIED
       - SLO_TIME_FRAME_7_DAYS
@@ -2192,6 +2389,7 @@ components:
       - SLO_TIME_FRAME_28_DAYS
       type: string
     SloType:
+      description: Slo type.
       enum:
       - SLO_TYPE_REQUEST
       - SLO_TYPE_WINDOW
@@ -2204,24 +2402,30 @@ components:
         apmSliMetadata:
           $ref: "#/components/schemas/ApmSli"
         createTime:
+          description: RFC3339 timestamp of when the SLO was created.
           format: date-time
           type: string
         creator:
+          description: Email or identifier of the user who created the SLO.
           example: test@domain.com
           type: string
         description:
+          description: Human-readable description of the SLO.
           example: A brief description of my SLO
           type: string
         grouping:
           $ref: "#/components/schemas/v1.Grouping"
         id:
+          description: Unique identifier of the SLO.
           example: b11919d5-ef85-4bb1-8655-02640dbe94d9
           type: string
         labels:
           additionalProperties:
             type: string
+          description: List of labels.
           type: object
         name:
+          description: Human-readable display name for the SLO.
           example: Example Slo Name
           type: string
         ownershipTags:
@@ -2235,14 +2439,18 @@ components:
         sloType:
           $ref: "#/components/schemas/SloType"
         targetThresholdPercentage:
+          description: "Target compliance percentage threshold for the SLO (e.g.,\
+            \ 99.9 for three nines)."
           example: 99.999
           format: float
           type: number
         type:
           deprecated: true
+          description: "Deprecated: SLO type string. Use slo_type instead."
           example: request
           type: string
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
         windowBasedMetricSli:
@@ -2252,15 +2460,24 @@ components:
       title: Slo
       type: object
     StringValues:
+      description: String values.
+      externalDocs:
+        url: ""
       properties:
         values:
+          description: The values.
           items:
+            description: The values.
             type: string
           type: array
       type: object
     TypeValues:
+      description: Type values.
+      externalDocs:
+        url: ""
       properties:
         values:
+          description: The values.
           items:
             $ref: "#/components/schemas/SloType"
           type: array
@@ -2277,6 +2494,7 @@ components:
         query:
           $ref: "#/components/schemas/Metric"
         threshold:
+          description: Threshold value.
           example: 0.95
           format: float
           type: number
@@ -2285,6 +2503,7 @@ components:
       title: WindowBasedMetricSli
       type: object
     WindowSloWindow:
+      description: Window slo window.
       enum:
       - WINDOW_SLO_WINDOW_UNSPECIFIED
       - WINDOW_SLO_WINDOW_1_MINUTE
@@ -2305,7 +2524,9 @@ components:
         url: ""
       properties:
         labels:
+          description: List of labels.
           items:
+            description: List of labels.
             type: string
           type: array
       title: Grouping
@@ -2320,34 +2541,37 @@ components:
         url: ""
       properties:
         revision:
+          description: The revision.
           example: 1
           format: int32
           type: integer
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       title: Revision
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     SloFilter_field:
       oneOf:
-      - $ref: "#/components/schemas/SloFilterFieldOwnershipTeamValues"
       - $ref: "#/components/schemas/SloFilterFieldConstFilter"
       - $ref: "#/components/schemas/SloFilterFieldLabelName"
-      - $ref: "#/components/schemas/SloFilterFieldSloType"
+      - $ref: "#/components/schemas/SloFilterFieldOwnershipEnvironmentValues"
+      - $ref: "#/components/schemas/SloFilterFieldOwnershipServiceValues"
+      - $ref: "#/components/schemas/SloFilterFieldOwnershipTeamValues"
       - $ref: "#/components/schemas/SloFilterFieldProductType"
       - $ref: "#/components/schemas/SloFilterFieldServiceName"
-      - $ref: "#/components/schemas/SloFilterFieldOwnershipServiceValues"
-      - $ref: "#/components/schemas/SloFilterFieldOwnershipEnvironmentValues"
+      - $ref: "#/components/schemas/SloFilterFieldSloType"
     SloFilterPredicate_is:
       oneOf:
+      - $ref: "#/components/schemas/IsFilterPredicateProductTypeValues"
       - $ref: "#/components/schemas/IsFilterPredicateStringValues"
       - $ref: "#/components/schemas/IsFilterPredicateTypeValues"
-      - $ref: "#/components/schemas/IsFilterPredicateProductTypeValues"
     SloFilterPredicate:
       description: Predicate used for filtering SLOs
       externalDocs:
@@ -2370,9 +2594,9 @@ components:
       type: object
     SlosService_ReplaceSlo_request:
       oneOf:
+      - $ref: "#/components/schemas/SloApmSli"
       - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       - $ref: "#/components/schemas/SloWindowBasedMetricSli"
-      - $ref: "#/components/schemas/SloApmSli"
       type: object
     BatchExecuteSloRequest:
       description: Request to batch execute multiple SLO operations.
@@ -2384,27 +2608,37 @@ components:
                 environment:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 service:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 team:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
               creator: test@domain.com
-              requestBasedMetricSli:
-                goodEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                totalEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
@@ -2419,17 +2653,10 @@ components:
               revision:
                 updateTime: 2000-01-23T04:56:07.000+00:00
                 revision: 1
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              apmSliMetadata:
+              apmSli:
                 groupingKeys:
                 - environment
                 - region
-                latencyConfig:
-                  timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-                  quantile:
-                    percentile: 0.95
-                  threshold: 500
                 filters:
                 - values:
                   - "500"
@@ -2444,6 +2671,10 @@ components:
                 services:
                 - my-service
                 - payment-service
+                errorConfig: "{}"
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              apmSliMetadata: null
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
@@ -2454,27 +2685,37 @@ components:
                 environment:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 service:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
                 team:
                   staticValues:
                   - checkout-api
+                  resolvedValues:
+                  - checkout-api
+                  - production
+                  - staging
+                  - payments-ns
                   labelKeys:
                   - deployment_environment
                   - k8s_namespace
               creator: test@domain.com
-              requestBasedMetricSli:
-                goodEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
-                totalEvents:
-                  query: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
               description: A brief description of my SLO
               sloTimeFrame: SLO_TIME_FRAME_UNSPECIFIED
               updateTime: 2000-01-23T04:56:07.000+00:00
@@ -2489,17 +2730,10 @@ components:
               revision:
                 updateTime: 2000-01-23T04:56:07.000+00:00
                 revision: 1
-              createTime: 2000-01-23T04:56:07.000+00:00
-              name: Example Slo Name
-              apmSliMetadata:
+              apmSli:
                 groupingKeys:
                 - environment
                 - region
-                latencyConfig:
-                  timeWindow: WINDOW_SLO_WINDOW_UNSPECIFIED
-                  quantile:
-                    percentile: 0.95
-                  threshold: 500
                 filters:
                 - values:
                   - "500"
@@ -2514,22 +2748,21 @@ components:
                 services:
                 - my-service
                 - payment-service
+                errorConfig: "{}"
+              createTime: 2000-01-23T04:56:07.000+00:00
+              name: Example Slo Name
+              apmSliMetadata: null
               id: b11919d5-ef85-4bb1-8655-02640dbe94d9
               productType: SLO_PRODUCT_TYPE_UNSPECIFIED
               targetThresholdPercentage: 99.999
             silenceDataValidations: true
       properties:
         requests:
+          description: The requests.
           items:
             $ref: "#/components/schemas/SloExecutionRequest"
           type: array
       required:
       - requests
       title: BatchExecuteSloRequest
-      type: object
-    SlosService_ValidateReplaceSloAlerts_request:
-      oneOf:
-      - $ref: "#/components/schemas/SloWindowBasedMetricSli"
-      - $ref: "#/components/schemas/SloApmSli"
-      - $ref: "#/components/schemas/SloRequestBasedMetricSli"
       type: object

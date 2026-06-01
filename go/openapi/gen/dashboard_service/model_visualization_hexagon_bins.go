@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationHexagonBins type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationHexagonBins{}
 
-// VisualizationHexagonBins struct for VisualizationHexagonBins
+// VisualizationHexagonBins Visualization.
 type VisualizationHexagonBins struct {
 	HexagonBins HexagonBins `json:"hexagonBins"`
 	AdditionalProperties map[string]interface{}

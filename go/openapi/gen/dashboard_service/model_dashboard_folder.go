@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the DashboardFolder type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardFolder{}
 
-// DashboardFolder struct for DashboardFolder
+// DashboardFolder Dashboard folder.
 type DashboardFolder struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The parent id.
 	ParentId *string `json:"parentId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,11 +21,13 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataIbmEventNotifications type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataIbmEventNotifications{}
 
-// OutgoingWebhookInputDataIbmEventNotifications struct for OutgoingWebhookInputDataIbmEventNotifications
+// OutgoingWebhookInputDataIbmEventNotifications Outgoing webhook input data.
 type OutgoingWebhookInputDataIbmEventNotifications struct {
 	IbmEventNotifications IbmEventNotificationsConfig `json:"ibmEventNotifications"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

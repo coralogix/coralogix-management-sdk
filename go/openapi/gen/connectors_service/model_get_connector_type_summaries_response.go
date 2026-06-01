@@ -22,6 +22,7 @@ var _ MappedNullable = &GetConnectorTypeSummariesResponse{}
 
 // GetConnectorTypeSummariesResponse Response containing summaries of connector types
 type GetConnectorTypeSummariesResponse struct {
+	// The connector type summaries.
 	ConnectorTypeSummaries []ConnectorTypeSummary `json:"connectorTypeSummaries,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

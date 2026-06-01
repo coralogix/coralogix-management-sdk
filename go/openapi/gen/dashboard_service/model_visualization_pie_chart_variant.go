@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationPieChartVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationPieChartVariant{}
 
-// VisualizationPieChartVariant struct for VisualizationPieChartVariant
+// VisualizationPieChartVariant Visualization.
 type VisualizationPieChartVariant struct {
 	PieChart VisualizationPieChart `json:"pieChart"`
 	AdditionalProperties map[string]interface{}

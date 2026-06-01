@@ -21,11 +21,13 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataSlack type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataSlack{}
 
-// OutgoingWebhookInputDataSlack struct for OutgoingWebhookInputDataSlack
+// OutgoingWebhookInputDataSlack Outgoing webhook input data.
 type OutgoingWebhookInputDataSlack struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Slack SlackConfig `json:"slack"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,10 +23,15 @@ var _ MappedNullable = &EnrichmentRequestModel{}
 
 // EnrichmentRequestModel The enrichment request model
 type EnrichmentRequestModel struct {
+	// The enriched field name.
 	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
 	EnrichmentType EnrichmentType `json:"enrichmentType"`
+	// The field name.
 	FieldName string `json:"fieldName"`
+	// The selected columns.
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
+	// The targets for the enrichment
+	Targets []DatasetTarget `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -163,6 +168,38 @@ func (o *EnrichmentRequestModel) SetSelectedColumns(v []string) {
 	o.SelectedColumns = v
 }
 
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *EnrichmentRequestModel) GetTargets() []DatasetTarget {
+	if o == nil || IsNil(o.Targets) {
+		var ret []DatasetTarget
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnrichmentRequestModel) GetTargetsOk() ([]DatasetTarget, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *EnrichmentRequestModel) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []DatasetTarget and assigns it to the Targets field.
+func (o *EnrichmentRequestModel) SetTargets(v []DatasetTarget) {
+	o.Targets = v
+}
+
 func (o EnrichmentRequestModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -180,6 +217,9 @@ func (o EnrichmentRequestModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["fieldName"] = o.FieldName
 	if !IsNil(o.SelectedColumns) {
 		toSerialize["selectedColumns"] = o.SelectedColumns
+	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -230,6 +270,7 @@ func (o *EnrichmentRequestModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "enrichmentType")
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "selectedColumns")
+		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
 	}
 

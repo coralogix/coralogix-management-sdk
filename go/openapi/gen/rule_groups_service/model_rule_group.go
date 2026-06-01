@@ -20,16 +20,25 @@ var _ = bytes.MinRead
 // checks if the RuleGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroup{}
 
-// RuleGroup struct for RuleGroup
+// RuleGroup Rule group.
 type RuleGroup struct {
+	// Creator.
 	Creator *string `json:"creator,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// The hidden.
 	Hidden *bool `json:"hidden,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Sort order.
 	Order *int64 `json:"order,omitempty"`
+	// The rule matchers.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
+	// The rule subgroups.
 	RuleSubgroups []RuleSubgroup `json:"ruleSubgroups,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

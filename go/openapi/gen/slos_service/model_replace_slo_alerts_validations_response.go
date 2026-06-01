@@ -23,6 +23,7 @@ var _ MappedNullable = &ReplaceSloAlertsValidationsResponse{}
 
 // ReplaceSloAlertsValidationsResponse Response with validated alerts before replacing an existing SLO.
 type ReplaceSloAlertsValidationsResponse struct {
+	// The alerts validation result.
 	AlertsValidationResult []SloAlertValidityResult `json:"alertsValidationResult"`
 	AdditionalProperties map[string]interface{}
 }

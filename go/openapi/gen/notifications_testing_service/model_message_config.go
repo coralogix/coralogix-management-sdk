@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the MessageConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MessageConfig{}
 
-// MessageConfig struct for MessageConfig
+// MessageConfig Message config.
 type MessageConfig struct {
+	// List of fields.
 	Fields []NotificationCenterMessageConfigField `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

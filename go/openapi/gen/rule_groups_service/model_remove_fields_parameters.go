@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the RemoveFieldsParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RemoveFieldsParameters{}
 
-// RemoveFieldsParameters struct for RemoveFieldsParameters
+// RemoveFieldsParameters Remove fields parameters.
 type RemoveFieldsParameters struct {
+	// List of fields.
 	Fields []string `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

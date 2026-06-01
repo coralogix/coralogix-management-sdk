@@ -25,20 +25,30 @@ var _ MappedNullable = &PolicyLogRules{}
 type PolicyLogRules struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
+	// Internal Coralogix company/team identifier that owns this policy.
 	CompanyId int32 `json:"companyId"`
+	// Timestamp (RFC 3339) when the policy was created.
 	CreatedAt *string `json:"createdAt,omitempty"`
+	// Soft-delete marker; when true the policy has been deleted and is no longer applied.
 	Deleted bool `json:"deleted"`
+	// Optional free-text description of the policy's purpose.
 	Description *string `json:"description,omitempty"`
+	// Indicates whether the policy is actively evaluated and applied.
 	Enabled bool `json:"enabled"`
+	// Unique identifier for the policy.
 	Id string `json:"id"`
 	LogRules LogRules `json:"logRules"`
+	// Human-readable name for the policy.
 	Name string `json:"name"`
+	// Ordering priority that determines the sequence in which policies are evaluated.
 	Order int32 `json:"order"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	PriorityOverrideStatus *PriorityOverrideStatus `json:"priorityOverrideStatus,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// List of data targets/destinations to which this policy routes data.
 	Targets []V1Target `json:"targets,omitempty"`
+	// Timestamp (RFC 3339) when the policy was last updated.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

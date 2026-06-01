@@ -21,13 +21,14 @@ var _ = bytes.MinRead
 // checks if the IncidentEventUnassignAdministrativeEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventUnassignAdministrativeEvent{}
 
-// IncidentEventUnassignAdministrativeEvent struct for IncidentEventUnassignAdministrativeEvent
+// IncidentEventUnassignAdministrativeEvent Incident event.
 type IncidentEventUnassignAdministrativeEvent struct {
 	AdministrativeEvent IncidentEventOriginatorAdministrative `json:"administrativeEvent"`
 	// The ID of the incident event
 	Id string `json:"id"`
 	IncidentEventType IncidentEventType `json:"incidentEventType"`
 	OriginatorType OriginatorType `json:"originatorType"`
+	// Incident event unassign.
 	Unassign map[string]interface{} `json:"unassign"`
 	AdditionalProperties map[string]interface{}
 }

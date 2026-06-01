@@ -23,9 +23,12 @@ var _ MappedNullable = &ApmSliLatencyConfig{}
 
 // ApmSliLatencyConfig Definition of an APM-based SLI with automatic query generation
 type ApmSliLatencyConfig struct {
+	// Additional label-based filters to apply to the metrics
 	Filters []ApmFilter `json:"filters,omitempty"`
+	// Labels to group SLO results by
 	GroupingKeys []string `json:"groupingKeys,omitempty"`
 	LatencyConfig ApmLatencySli `json:"latencyConfig"`
+	// List of service names to monitor
 	Services []string `json:"services,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

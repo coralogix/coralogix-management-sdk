@@ -22,8 +22,11 @@ var _ MappedNullable = &LabelFilters{}
 
 // LabelFilters Filters for application name, subsystem name, and log severities
 type LabelFilters struct {
+	// The application name.
 	ApplicationName []LabelFilterType `json:"applicationName,omitempty"`
+	// The severities.
 	Severities []LogSeverity `json:"severities,omitempty"`
+	// The subsystem name.
 	SubsystemName []LabelFilterType `json:"subsystemName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

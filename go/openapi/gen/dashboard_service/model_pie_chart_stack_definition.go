@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the PieChartStackDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PieChartStackDefinition{}
 
-// PieChartStackDefinition struct for PieChartStackDefinition
+// PieChartStackDefinition Configuration of stacked slices in the pie chart, including max slices and naming template.
 type PieChartStackDefinition struct {
 	// How many slices can fit in a single slice stack
 	MaxSlicesPerStack *int32 `json:"maxSlicesPerStack,omitempty"`

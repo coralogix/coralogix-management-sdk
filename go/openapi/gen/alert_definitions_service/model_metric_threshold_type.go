@@ -27,6 +27,7 @@ type MetricThresholdType struct {
 	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
 	MissingValues *MetricMissingValues `json:"missingValues,omitempty"`
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
+	// The rules for the metric threshold alert
 	Rules []MetricThresholdRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 	AdditionalProperties map[string]interface{}

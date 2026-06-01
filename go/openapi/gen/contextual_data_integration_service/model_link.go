@@ -22,8 +22,11 @@ var _ MappedNullable = &Link{}
 
 // Link struct for Link
 type Link struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
+	// The text.
 	Text *string `json:"text,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

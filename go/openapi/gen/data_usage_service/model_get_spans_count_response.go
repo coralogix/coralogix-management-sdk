@@ -22,6 +22,7 @@ var _ MappedNullable = &GetSpansCountResponse{}
 
 // GetSpansCountResponse This data structure is used to return spans count.
 type GetSpansCountResponse struct {
+	// The spans count.
 	SpansCount []SpansCount `json:"spansCount,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

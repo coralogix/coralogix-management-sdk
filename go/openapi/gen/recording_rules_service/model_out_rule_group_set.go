@@ -22,8 +22,11 @@ var _ MappedNullable = &OutRuleGroupSet{}
 
 // OutRuleGroupSet An output set of rule groups.
 type OutRuleGroupSet struct {
+	// List of groups.
 	Groups []OutRuleGroup `json:"groups,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

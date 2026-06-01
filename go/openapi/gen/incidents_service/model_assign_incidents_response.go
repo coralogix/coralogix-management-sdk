@@ -23,6 +23,7 @@ var _ MappedNullable = &AssignIncidentsResponse{}
 
 // AssignIncidentsResponse Response containing the updated incidents after assignment
 type AssignIncidentsResponse struct {
+	// List of incidents after assignment
 	Incidents []Incident `json:"incidents"`
 	AdditionalProperties map[string]interface{}
 }

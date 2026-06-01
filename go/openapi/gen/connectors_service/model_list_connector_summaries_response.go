@@ -22,6 +22,7 @@ var _ MappedNullable = &ListConnectorSummariesResponse{}
 
 // ListConnectorSummariesResponse Response containing summaries of connectors
 type ListConnectorSummariesResponse struct {
+	// The connectors.
 	Connectors []ConnectorSummary `json:"connectors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

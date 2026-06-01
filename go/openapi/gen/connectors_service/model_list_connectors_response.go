@@ -22,6 +22,7 @@ var _ MappedNullable = &ListConnectorsResponse{}
 
 // ListConnectorsResponse Response containing a list of connectors
 type ListConnectorsResponse struct {
+	// The connectors.
 	Connectors []Connector `json:"connectors,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

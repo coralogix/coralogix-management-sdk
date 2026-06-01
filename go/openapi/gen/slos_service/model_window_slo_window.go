@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// WindowSloWindow the model 'WindowSloWindow'
+// WindowSloWindow Window slo window.
 type WindowSloWindow string
 
 // List of WindowSloWindow

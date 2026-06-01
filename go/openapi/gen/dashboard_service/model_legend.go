@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Legend type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Legend{}
 
-// Legend struct for Legend
+// Legend Legend.
 type Legend struct {
+	// List of columns to display in legend
 	Columns []LegendColumn `json:"columns,omitempty"`
 	// In case of multiple queries, whether legend items should be grouped by their respective queries
 	GroupByQuery *bool `json:"groupByQuery,omitempty"`

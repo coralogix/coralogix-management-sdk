@@ -21,9 +21,10 @@ var _ = bytes.MinRead
 // checks if the CustomEnrichmentDataTextual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichmentDataTextual{}
 
-// CustomEnrichmentDataTextual struct for CustomEnrichmentDataTextual
+// CustomEnrichmentDataTextual Custom enrichment data including definition and raw content.
 type CustomEnrichmentDataTextual struct {
 	Definition *CustomEnrichment `json:"definition,omitempty"`
+	// Textual content of the enrichment data file as a UTF-8 string.
 	Textual string `json:"textual"`
 	AdditionalProperties map[string]interface{}
 }

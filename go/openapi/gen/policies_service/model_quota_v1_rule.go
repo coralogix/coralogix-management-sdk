@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QuotaV1Rule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaV1Rule{}
 
-// QuotaV1Rule struct for QuotaV1Rule
+// QuotaV1Rule Rule.
 type QuotaV1Rule struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	RuleTypeId *RuleTypeId `json:"ruleTypeId,omitempty"`
 	AdditionalProperties map[string]interface{}

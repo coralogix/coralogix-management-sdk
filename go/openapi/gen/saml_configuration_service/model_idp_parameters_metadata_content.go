@@ -23,9 +23,13 @@ var _ MappedNullable = &IDPParametersMetadataContent{}
 
 // IDPParametersMetadataContent This data structure represents a set of SAML identity provider parameters
 type IDPParametersMetadataContent struct {
+	// Whether SAML SSO is currently active for this team.
 	Active *bool `json:"active,omitempty"`
+	// List of group names mapped from the identity provider for role-based access.
 	GroupNames []string `json:"groupNames,omitempty"`
+	// Raw XML content of the identity provider SAML metadata document.
 	MetadataContent string `json:"metadataContent"`
+	// Coralogix team entity identifier used as the SAML service provider entity ID.
 	TeamEntityId *int64 `json:"teamEntityId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

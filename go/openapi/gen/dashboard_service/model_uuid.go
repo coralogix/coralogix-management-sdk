@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the UUID type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UUID{}
 
-// UUID struct for UUID
+// UUID Uuid.
 type UUID struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

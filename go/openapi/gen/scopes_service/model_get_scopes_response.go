@@ -23,6 +23,7 @@ var _ MappedNullable = &GetScopesResponse{}
 
 // GetScopesResponse This data structure represents a response to get scopes
 type GetScopesResponse struct {
+	// List of scopes.
 	Scopes []V1Scope `json:"scopes"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the AnnotationSourceMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceMetrics{}
 
-// AnnotationSourceMetrics struct for AnnotationSourceMetrics
+// AnnotationSourceMetrics Source.
 type AnnotationSourceMetrics struct {
 	Metrics MetricsSource `json:"metrics"`
 	AdditionalProperties map[string]interface{}

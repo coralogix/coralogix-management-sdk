@@ -22,6 +22,7 @@ var _ MappedNullable = &ListGlobalRoutersResponse{}
 
 // ListGlobalRoutersResponse Response containing requested global routers
 type ListGlobalRoutersResponse struct {
+	// The routers.
 	Routers []GlobalRouter `json:"routers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

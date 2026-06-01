@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ComparisonOperator the model 'ComparisonOperator'
+// ComparisonOperator Comparison operator.
 type ComparisonOperator string
 
 // List of ComparisonOperator

@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the TestIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestIntegrationRequest{}
 
-// TestIntegrationRequest struct for TestIntegrationRequest
+// TestIntegrationRequest Request for testing an integration configuration.
 type TestIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
+	// ID of the existing integration instance to test.
 	IntegrationId *string `json:"integrationId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

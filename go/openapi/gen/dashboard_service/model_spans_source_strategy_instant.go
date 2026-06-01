@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SpansSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansSourceStrategyInstant{}
 
-// SpansSourceStrategyInstant struct for SpansSourceStrategyInstant
+// SpansSourceStrategyInstant Instant snapshot strategy: uses a single timestamp field to define the annotation point.
 type SpansSourceStrategyInstant struct {
 	TimestampField *ObservationField `json:"timestampField,omitempty"`
 	AdditionalProperties map[string]interface{}

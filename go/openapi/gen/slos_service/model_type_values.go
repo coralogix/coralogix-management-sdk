@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TypeValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TypeValues{}
 
-// TypeValues struct for TypeValues
+// TypeValues Type values.
 type TypeValues struct {
+	// The values.
 	Values []SloType `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

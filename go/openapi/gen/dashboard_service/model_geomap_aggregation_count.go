@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the GeomapAggregationCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationCount{}
 
-// GeomapAggregationCount struct for GeomapAggregationCount
+// GeomapAggregationCount Geomap aggregation.
 type GeomapAggregationCount struct {
+	// Geomap aggregation simple.
 	Count map[string]interface{} `json:"count"`
 	AdditionalProperties map[string]interface{}
 }

@@ -26,7 +26,9 @@ type LogsThresholdType struct {
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
+	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// The rules for the threshold alert
 	Rules []LogsThresholdRule `json:"rules,omitempty"`
 	UndetectedValuesManagement *V3UndetectedValuesManagement `json:"undetectedValuesManagement,omitempty"`
 	AdditionalProperties map[string]interface{}

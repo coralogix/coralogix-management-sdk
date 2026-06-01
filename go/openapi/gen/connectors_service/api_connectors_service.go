@@ -30,6 +30,7 @@ type ApiConnectorsServiceBatchGetConnectorSummariesRequest struct {
 	connectorIds *[]string
 }
 
+// The unique identifiers of the connectors whose summaries to retrieve.
 func (r ApiConnectorsServiceBatchGetConnectorSummariesRequest) ConnectorIds(connectorIds []string) ApiConnectorsServiceBatchGetConnectorSummariesRequest {
 	r.connectorIds = &connectorIds
 	return r
@@ -42,7 +43,7 @@ func (r ApiConnectorsServiceBatchGetConnectorSummariesRequest) Execute() (*Batch
 /*
 ConnectorsServiceBatchGetConnectorSummaries Batch Get Connectors Summaries
 
-No description available
+Returns summary information for all notification connectors.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceBatchGetConnectorSummariesRequest
@@ -146,6 +147,7 @@ type ApiConnectorsServiceBatchGetConnectorsRequest struct {
 	connectorIds *[]string
 }
 
+// The unique identifiers of the connectors to retrieve.
 func (r ApiConnectorsServiceBatchGetConnectorsRequest) ConnectorIds(connectorIds []string) ApiConnectorsServiceBatchGetConnectorsRequest {
 	r.connectorIds = &connectorIds
 	return r
@@ -158,7 +160,7 @@ func (r ApiConnectorsServiceBatchGetConnectorsRequest) Execute() (*BatchGetConne
 /*
 ConnectorsServiceBatchGetConnectors Batch Get Connectors
 
-No description available
+Returns all notification connectors for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceBatchGetConnectorsRequest
@@ -274,7 +276,7 @@ func (r ApiConnectorsServiceCreateConnectorRequest) Execute() (*CreateConnectorR
 /*
 ConnectorsServiceCreateConnector Create a Connector
 
-No description available
+Creates a new notification connector.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceCreateConnectorRequest
@@ -376,10 +378,10 @@ func (r ApiConnectorsServiceDeleteConnectorRequest) Execute() (map[string]interf
 /*
 ConnectorsServiceDeleteConnector Delete a Connector
 
-No description available
+Deletes the notification connector with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiConnectorsServiceDeleteConnectorRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceDeleteConnector(ctx context.Context, id string) ApiConnectorsServiceDeleteConnectorRequest {
@@ -479,10 +481,10 @@ func (r ApiConnectorsServiceGetConnectorRequest) Execute() (*GetConnectorRespons
 /*
 ConnectorsServiceGetConnector Get a Connector
 
-No description available
+Returns the details of the specified notification connector.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the connector.
  @return ApiConnectorsServiceGetConnectorRequest
 */
 func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnector(ctx context.Context, id string) ApiConnectorsServiceGetConnectorRequest {
@@ -575,6 +577,7 @@ type ApiConnectorsServiceGetConnectorTypeSummariesRequest struct {
 	supportedByEntityType *NotificationCenterEntityType
 }
 
+// Filter connector types by the entity type they support.
 func (r ApiConnectorsServiceGetConnectorTypeSummariesRequest) SupportedByEntityType(supportedByEntityType NotificationCenterEntityType) ApiConnectorsServiceGetConnectorTypeSummariesRequest {
 	r.supportedByEntityType = &supportedByEntityType
 	return r
@@ -587,7 +590,7 @@ func (r ApiConnectorsServiceGetConnectorTypeSummariesRequest) Execute() (*GetCon
 /*
 ConnectorsServiceGetConnectorTypeSummaries Get Connector Type Summaries
 
-No description available
+Returns summary information for all available connector types.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceGetConnectorTypeSummariesRequest
@@ -684,11 +687,13 @@ type ApiConnectorsServiceListConnectorSummariesRequest struct {
 	supportedByEntityType *NotificationCenterEntityType
 }
 
+// Filter connector summaries by their type.
 func (r ApiConnectorsServiceListConnectorSummariesRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiConnectorsServiceListConnectorSummariesRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
+// Filter connector summaries by the entity type they support.
 func (r ApiConnectorsServiceListConnectorSummariesRequest) SupportedByEntityType(supportedByEntityType NotificationCenterEntityType) ApiConnectorsServiceListConnectorSummariesRequest {
 	r.supportedByEntityType = &supportedByEntityType
 	return r
@@ -701,7 +706,7 @@ func (r ApiConnectorsServiceListConnectorSummariesRequest) Execute() (*ListConne
 /*
 ConnectorsServiceListConnectorSummaries List Connector Summaries
 
-No description available
+Returns a paginated list of notification connector summaries.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceListConnectorSummariesRequest
@@ -801,11 +806,13 @@ type ApiConnectorsServiceListConnectorsRequest struct {
 	supportedByEntityType *NotificationCenterEntityType
 }
 
+// Filter connectors by their type.
 func (r ApiConnectorsServiceListConnectorsRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiConnectorsServiceListConnectorsRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
+// Filter connectors by the entity type they support.
 func (r ApiConnectorsServiceListConnectorsRequest) SupportedByEntityType(supportedByEntityType NotificationCenterEntityType) ApiConnectorsServiceListConnectorsRequest {
 	r.supportedByEntityType = &supportedByEntityType
 	return r
@@ -818,7 +825,7 @@ func (r ApiConnectorsServiceListConnectorsRequest) Execute() (*ListConnectorsRes
 /*
 ConnectorsServiceListConnectors List Connectors
 
-No description available
+Returns notification connectors with optional pagination.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceListConnectorsRequest
@@ -929,7 +936,7 @@ func (r ApiConnectorsServiceReplaceConnectorRequest) Execute() (*ReplaceConnecto
 /*
 ConnectorsServiceReplaceConnector Replace a Connector
 
-No description available
+Updates an existing notification connector.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConnectorsServiceReplaceConnectorRequest

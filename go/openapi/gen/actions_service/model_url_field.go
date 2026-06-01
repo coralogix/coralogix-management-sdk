@@ -22,7 +22,9 @@ var _ MappedNullable = &UrlField{}
 
 // UrlField Declares a URL field that may be required for the Action to be invokable on a log.
 type UrlField struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The required.
 	Required *bool `json:"required,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

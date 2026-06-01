@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GenericIntegrationParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenericIntegrationParameters{}
 
-// GenericIntegrationParameters struct for GenericIntegrationParameters
+// GenericIntegrationParameters Generic integration parameters.
 type GenericIntegrationParameters struct {
+	// The parameters.
 	Parameters []Parameter `json:"parameters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

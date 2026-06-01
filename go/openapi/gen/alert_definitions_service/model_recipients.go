@@ -22,6 +22,7 @@ var _ MappedNullable = &Recipients{}
 
 // Recipients List of email recipients for alert notifications
 type Recipients struct {
+	// The list of email recipients for alert notifications
 	Emails []string `json:"emails,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

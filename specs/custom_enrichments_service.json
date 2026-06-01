@@ -11,7 +11,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Get Custom Enrichments",
-        "description": "No description available",
+        "description": "Returns all custom enrichment rules.",
         "externalDocs": {
           "url": ""
         },
@@ -34,7 +34,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Update Custom Enrichment",
-        "description": "No description available",
+        "description": "Updates a custom enrichment rule.",
         "externalDocs": {
           "url": ""
         },
@@ -49,11 +49,13 @@
                 "properties": {
                   "customEnrichmentId": {
                     "example": 1,
+                    "description": "The custom enrichment id.",
                     "type": "integer",
                     "format": "int64"
                   },
                   "description": {
                     "example": "custom_enrichment_description",
+                    "description": "New human-readable description of the custom enrichment.",
                     "type": "string"
                   },
                   "file": {
@@ -61,6 +63,7 @@
                   },
                   "name": {
                     "example": "custom_enrichment_name",
+                    "description": "New human-readable name for the custom enrichment.",
                     "type": "string"
                   }
                 },
@@ -72,7 +75,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -92,7 +96,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Create Custom Enrichments",
-        "description": "No description available",
+        "description": "Creates a new custom enrichment rule.",
         "externalDocs": {
           "url": ""
         },
@@ -107,6 +111,7 @@
                 "properties": {
                   "description": {
                     "example": "custom_enrichment_description",
+                    "description": "Human-readable description of the custom enrichment.",
                     "type": "string"
                   },
                   "file": {
@@ -114,6 +119,7 @@
                   },
                   "name": {
                     "example": "custom_enrichment_name",
+                    "description": "Human-readable name for the custom enrichment.",
                     "type": "string"
                   }
                 },
@@ -124,7 +130,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -146,7 +153,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Search Custom Enrichment Data",
-        "description": "No description available",
+        "description": "Returns the contents of all custom enrichment data.",
         "externalDocs": {
           "url": ""
         },
@@ -155,7 +162,9 @@
           {
             "in": "query",
             "name": "search_clauses",
+            "description": "Search clauses used to filter custom enrichment data.",
             "schema": {
+              "description": "Search clauses used to filter custom enrichment data.",
               "type": "array",
               "items": {
                 "oneOf": [
@@ -191,7 +200,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Get Custom Enrichment",
-        "description": "No description available",
+        "description": "Returns the details of the specified custom enrichment rule.",
         "externalDocs": {
           "url": ""
         },
@@ -200,9 +209,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The unique identifier of the custom enrichment rule.",
             "required": true,
             "schema": {
               "example": 1,
+              "description": "The unique identifier of the custom enrichment rule.",
               "type": "integer",
               "format": "int64"
             },
@@ -227,7 +238,7 @@
           "Custom Enrichments Service"
         ],
         "summary": "Delete Custom Enrichments",
-        "description": "No description available",
+        "description": "Deletes the custom enrichment rule with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -236,9 +247,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The unique identifier of the custom enrichment rule to delete.",
             "required": true,
             "schema": {
               "example": 1,
+              "description": "The unique identifier of the custom enrichment rule to delete.",
               "type": "integer",
               "format": "int64"
             },
@@ -276,34 +289,46 @@
           },
           "message": {
             "example": "Custom enrichment created successfully",
+            "description": "Human-readable message.",
             "type": "string"
           }
         }
       },
       "CustomEnrichment": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom enrichment.",
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "fileName": {
+            "description": "The file name.",
             "type": "string"
           },
           "fileSize": {
+            "description": "The file size.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "integer",
             "format": "int64"
           },
           "isQueryOnly": {
+            "description": "The is query only.",
             "type": "boolean"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "version": {
+            "description": "Version number.",
             "type": "integer",
             "format": "int64"
           }
@@ -320,9 +345,14 @@
         ]
       },
       "CustomEnrichmentDataBinary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom enrichment data including definition and raw content.",
         "type": "object",
         "properties": {
           "binary": {
+            "description": "Binary content of the enrichment data file encoded as base64.",
             "type": "string",
             "format": "byte"
           },
@@ -335,12 +365,17 @@
         ]
       },
       "CustomEnrichmentDataTextual": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom enrichment data including definition and raw content.",
         "type": "object",
         "properties": {
           "definition": {
             "$ref": "#/components/schemas/CustomEnrichment"
           },
           "textual": {
+            "description": "Textual content of the enrichment data file as a UTF-8 string.",
             "type": "string"
           }
         },
@@ -349,15 +384,21 @@
         ]
       },
       "DeleteCustomEnrichmentResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a custom enrichment rule.",
         "type": "object",
         "properties": {
           "customEnrichmentId": {
             "example": 1,
+            "description": "The custom enrichment id.",
             "type": "integer",
             "format": "int64"
           },
           "message": {
             "example": "Custom enrichment deleted successfully",
+            "description": "Human-readable message.",
             "type": "string"
           }
         }
@@ -365,10 +406,10 @@
       "File": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FileTextual"
+            "$ref": "#/components/schemas/FileBinary"
           },
           {
-            "$ref": "#/components/schemas/FileBinary"
+            "$ref": "#/components/schemas/FileTextual"
           }
         ]
       },
@@ -383,19 +424,23 @@
         "properties": {
           "binary": {
             "example": "0xFABB32",
+            "description": "Binary content of the file encoded as base64.",
             "type": "string",
             "format": "byte"
           },
           "extension": {
             "example": "csv",
+            "description": "File extension indicating the file format (e.g., csv, json).",
             "type": "string"
           },
           "name": {
             "example": "file_name",
+            "description": "Name of the file.",
             "type": "string"
           },
           "size": {
             "example": 100,
+            "description": "Size of the file in bytes.",
             "type": "integer",
             "format": "int64"
           }
@@ -415,19 +460,23 @@
         "properties": {
           "extension": {
             "example": "csv",
+            "description": "File extension indicating the file format (e.g., csv, json).",
             "type": "string"
           },
           "name": {
             "example": "file_name",
+            "description": "Name of the file.",
             "type": "string"
           },
           "size": {
             "example": 100,
+            "description": "Size of the file in bytes.",
             "type": "integer",
             "format": "int64"
           },
           "textual": {
             "example": "row1,row2 value1,value2",
+            "description": "Textual content of the file as a UTF-8 string.",
             "type": "string"
           }
         },
@@ -438,10 +487,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -538,6 +587,7 @@
         "type": "object",
         "properties": {
           "customEnrichments": {
+            "description": "The custom enrichments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEnrichment"
@@ -570,6 +620,7 @@
         "properties": {
           "id": {
             "example": 1,
+            "description": "Search by the numeric ID of the custom enrichment.",
             "type": "integer",
             "format": "int64"
           }
@@ -589,6 +640,7 @@
         "properties": {
           "name": {
             "example": "custom_enrichment_name",
+            "description": "Search by the name of the custom enrichment.",
             "type": "string"
           }
         },
@@ -597,9 +649,14 @@
         ]
       },
       "SearchCustomEnrichmentDataResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing custom enrichment data search results.",
         "type": "object",
         "properties": {
           "customEnrichmentsData": {
+            "description": "The custom enrichments data.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEnrichmentData"
@@ -621,6 +678,7 @@
           },
           "message": {
             "example": "Custom enrichment updated successfully",
+            "description": "Human-readable message.",
             "type": "string"
           }
         }
@@ -633,6 +691,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

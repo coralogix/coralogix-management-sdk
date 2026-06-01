@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V2Range the model 'V2Range'
+// V2Range Time range for data usage queries.
 type V2Range string
 
 // List of v2.Range

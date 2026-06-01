@@ -23,6 +23,7 @@ var _ MappedNullable = &DataTableMetricsQuery{}
 // DataTableMetricsQuery A metrics variant of the query
 type DataTableMetricsQuery struct {
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`

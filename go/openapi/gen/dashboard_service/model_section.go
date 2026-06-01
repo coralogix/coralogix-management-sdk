@@ -24,6 +24,7 @@ var _ MappedNullable = &Section{}
 type Section struct {
 	Id *UUID `json:"id,omitempty"`
 	Options *SectionOptions `json:"options,omitempty"`
+	// Definition of a section's rows (one row represents a single row of visualizations)
 	Rows []Row `json:"rows,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

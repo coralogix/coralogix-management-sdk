@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LineChartStackedLine the model 'LineChartStackedLine'
+// LineChartStackedLine Stacked line.
 type LineChartStackedLine string
 
 // List of LineChart.StackedLine

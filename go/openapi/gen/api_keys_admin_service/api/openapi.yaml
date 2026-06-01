@@ -34,7 +34,7 @@ paths:
       tags:
       - API Keys Admin Service
     post:
-      description: No description available
+      description: Creates a new API key for the authenticated team.
       externalDocs:
         url: ""
       operationId: ApiKeysService_CreateApiKey
@@ -155,9 +155,11 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
         active:
+          description: Whether this resource is active.
           example: true
           type: boolean
         keyId:
+          description: Key identifier.
           example: key_abc123
           type: string
       title: API Key Status Update
@@ -197,11 +199,14 @@ components:
         apiKey:
           $ref: "#/components/schemas/v3.ApiKey"
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             example: logs:read
             type: string
           type: array
         presets:
+          description: List of permission presets.
           items:
             $ref: "#/components/schemas/PermissionsPreset"
           type: array
@@ -217,9 +222,11 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
         userEmail:
+          description: The user email.
           example: test@example.com
           type: string
         userId:
+          description: The user id.
           example: user_123
           type: string
       title: API Key User Owner
@@ -232,12 +239,16 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             example: read_logs
             type: string
           type: array
         presets:
+          description: List of permission presets.
           items:
+            description: List of permission presets.
             example: my_preset
             type: string
           type: array
@@ -255,17 +266,21 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
         keyId:
+          description: Key identifier.
           example: my_key_id
           type: string
         name:
+          description: Display name.
           example: my_api_key
           type: string
         value:
+          description: The value.
           example: my_api_key_value
           type: string
       title: Create Api Key Response
       type: object
     DeleteApiKeysResponse:
+      additionalProperties: false
       description: This data structure is the response obtained after deleting API
         keys.
       externalDocs:
@@ -275,8 +290,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -382,6 +397,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
         keys:
+          description: The keys.
           items:
             $ref: "#/components/schemas/ApiKeySummary"
           type: array
@@ -398,27 +414,39 @@ components:
       type: object
     Owner:
       oneOf:
-      - $ref: "#/components/schemas/OwnerUserId"
-      - $ref: "#/components/schemas/OwnerTeamId"
       - $ref: "#/components/schemas/OwnerOrganisationId"
+      - $ref: "#/components/schemas/OwnerTeamId"
+      - $ref: "#/components/schemas/OwnerUserId"
     OwnerOrganisationId:
+      description: Owner.
+      externalDocs:
+        url: ""
       properties:
         organisationId:
+          description: Organisation identifier of the API key owner.
           type: string
       required:
       - organisationId
       type: object
     OwnerTeamId:
+      description: Owner.
+      externalDocs:
+        url: ""
       properties:
         teamId:
+          description: The team id.
           format: int64
           type: integer
       required:
       - teamId
       type: object
     OwnerUserId:
+      description: Owner.
+      externalDocs:
+        url: ""
       properties:
         userId:
+          description: User identifier of the API key owner.
           type: string
       required:
       - userId
@@ -437,20 +465,25 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       properties:
         id:
+          description: Unique identifier.
           example: 1
           format: int32
           type: integer
         name:
+          description: Display name.
           example: my_preset
           type: string
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             example: logs:read
             type: string
           type: array
       title: Permissions Preset
       type: object
     UpdateApiKeysStatusResponse:
+      additionalProperties: false
       description: This data structure is the response obtained after updating API
         keys status.
       externalDocs:
@@ -484,11 +517,14 @@ components:
           format: date-time
           type: string
         id:
+          description: Unique identifier.
           example: key_abc123
           type: string
         isActive:
+          description: Whether this resource is active.
           type: boolean
         keyName:
+          description: The key name.
           example: my_api_key
           type: string
         lastActivated:
@@ -500,6 +536,7 @@ components:
       title: API Key
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -515,11 +552,13 @@ components:
             :\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
           type: string
         hashed:
+          description: Whether the value is stored as a one-way hash.
           example: true
           type: boolean
         keyPermissions:
           $ref: "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
         name:
+          description: Display name.
           example: my_api_key
           type: string
         owner:
@@ -530,7 +569,9 @@ components:
       description: This data structure is used to delete specified API keys.
       properties:
         keyIds:
+          description: List of API key IDs to delete.
           items:
+            description: List of API key IDs to delete.
             example: key_abc123
             type: string
           type: array
@@ -541,6 +582,7 @@ components:
         keys.
       properties:
         updates:
+          description: The updates.
           items:
             $ref: "#/components/schemas/ApiKeyStatusUpdate"
           type: array

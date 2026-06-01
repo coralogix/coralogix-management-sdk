@@ -23,6 +23,7 @@ var _ MappedNullable = &SetIDPParametersRequest{}
 // SetIDPParametersRequest This data structure is used to set the parameters of a SAML identity provider
 type SetIDPParametersRequest struct {
 	Params *IDPParameters `json:"params,omitempty"`
+	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

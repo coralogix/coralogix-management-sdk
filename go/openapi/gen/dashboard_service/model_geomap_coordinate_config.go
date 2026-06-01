@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GeomapCoordinateConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapCoordinateConfig{}
 
-// GeomapCoordinateConfig struct for GeomapCoordinateConfig
+// GeomapCoordinateConfig Geomap coordinate config.
 type GeomapCoordinateConfig struct {
 	LatitudeField *ObservationField `json:"latitudeField,omitempty"`
 	LongitudeField *ObservationField `json:"longitudeField,omitempty"`

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsRatioGroupByFor the model 'LogsRatioGroupByFor'
+// LogsRatioGroupByFor Logs ratio group by for.
 type LogsRatioGroupByFor string
 
 // List of LogsRatioGroupByFor

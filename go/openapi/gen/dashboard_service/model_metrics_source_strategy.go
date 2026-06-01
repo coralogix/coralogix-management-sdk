@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the MetricsSourceStrategy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricsSourceStrategy{}
 
-// MetricsSourceStrategy struct for MetricsSourceStrategy
+// MetricsSourceStrategy Dataprime source.strategy.
 type MetricsSourceStrategy struct {
+	// Start time metric.
 	StartTimeMetric map[string]interface{} `json:"startTimeMetric,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

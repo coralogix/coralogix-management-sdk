@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the OrderingField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderingField{}
 
-// OrderingField struct for OrderingField
+// OrderingField Ordering field.
 type OrderingField struct {
 	// Field name to order by
 	Field *string `json:"field,omitempty"`

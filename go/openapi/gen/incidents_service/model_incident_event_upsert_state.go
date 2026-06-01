@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the IncidentEventUpsertState type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentEventUpsertState{}
 
-// IncidentEventUpsertState struct for IncidentEventUpsertState
+// IncidentEventUpsertState Incident event upsert state.
 type IncidentEventUpsertState struct {
+	// The is muted.
 	IsMuted *bool `json:"isMuted,omitempty"`
 	Payload UpsertIncidentStatePayload `json:"payload"`
 	StateType UpsertIncidentStateType `json:"stateType"`

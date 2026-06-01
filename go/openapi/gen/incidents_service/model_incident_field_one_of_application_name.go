@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the IncidentFieldOneOfApplicationName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfApplicationName{}
 
-// IncidentFieldOneOfApplicationName struct for IncidentFieldOneOfApplicationName
+// IncidentFieldOneOfApplicationName Incident field one of.
 type IncidentFieldOneOfApplicationName struct {
+	// Application associated with the incident.
 	ApplicationName string `json:"applicationName"`
 	AdditionalProperties map[string]interface{}
 }

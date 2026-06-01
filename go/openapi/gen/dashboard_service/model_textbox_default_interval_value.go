@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the TextboxDefaultIntervalValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultIntervalValue{}
 
-// TextboxDefaultIntervalValue struct for TextboxDefaultIntervalValue
+// TextboxDefaultIntervalValue Textbox default interval value.
 type TextboxDefaultIntervalValue struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

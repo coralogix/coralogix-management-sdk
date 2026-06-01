@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the AlertDefIncidentSettings type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertDefIncidentSettings{}
 
-// AlertDefIncidentSettings struct for AlertDefIncidentSettings
+// AlertDefIncidentSettings Alert def incident settings.
 type AlertDefIncidentSettings struct {
 	// The time in minutes before the alert can be retriggered
 	Minutes *int64 `json:"minutes,omitempty"`

@@ -22,6 +22,7 @@ var _ MappedNullable = &GcsConfig{}
 
 // GcsConfig This data structure represents the GCS configuration for a tenant.
 type GcsConfig struct {
+	// Bucket name.
 	Bucket *string `json:"bucket,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

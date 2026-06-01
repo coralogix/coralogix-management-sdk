@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the LimitUsage type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LimitUsage{}
 
-// LimitUsage struct for LimitUsage
+// LimitUsage Limit usage.
 type LimitUsage struct {
+	// Limit.
 	Limit *int32 `json:"limit,omitempty"`
+	// The used.
 	Used *int32 `json:"used,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,6 +23,7 @@ var _ MappedNullable = &LogsImmediateType{}
 // LogsImmediateType Configuration for immediate alerts triggered on log entries matching specific filters.
 type LogsImmediateType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
+	// The notification payload filter.
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

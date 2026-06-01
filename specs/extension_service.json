@@ -11,7 +11,7 @@
           "Extension service"
         ],
         "summary": "Get all extensions",
-        "description": "No description available",
+        "description": "Creates a new extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -28,6 +28,7 @@
                     "$ref": "#/components/schemas/GetAllExtensionsRequest.Filter"
                   },
                   "includeHiddenExtensions": {
+                    "description": "Whether to include hidden extensions that are not publicly listed in the catalog.",
                     "type": "boolean"
                   }
                 }
@@ -70,13 +71,13 @@
         ]
       }
     },
-    "/integrations/extensions/v1/{id}": {
+    "/integrations/extensions/v1/catalog/{id}": {
       "get": {
         "tags": [
           "Extension service"
         ],
         "summary": "Get extension by ID",
-        "description": "No description available",
+        "description": "Returns the details of the specified extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -85,8 +86,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -94,7 +97,9 @@
           {
             "in": "query",
             "name": "include_dashboard_binaries",
+            "description": "Whether to include dashboard binaries in the response.",
             "schema": {
+              "description": "Whether to include dashboard binaries in the response.",
               "type": "boolean"
             },
             "style": "form"
@@ -102,7 +107,9 @@
           {
             "in": "query",
             "name": "include_testing_revision",
+            "description": "Whether to include testing revisions in the response.",
             "schema": {
+              "description": "Whether to include testing revisions in the response.",
               "type": "boolean"
             },
             "style": "form"
@@ -154,9 +161,11 @@
         "type": "object",
         "properties": {
           "descriptionMd": {
+            "description": "The description md.",
             "type": "string"
           },
           "version": {
+            "description": "Version.",
             "type": "string"
           }
         }
@@ -166,14 +175,18 @@
           "url": ""
         },
         "title": "Deprecation",
+        "description": "Deprecation.",
         "type": "object",
         "properties": {
           "reason": {
+            "description": "Reason.",
             "type": "string"
           },
           "replacementExtensions": {
+            "description": "The replacement extensions.",
             "type": "array",
             "items": {
+              "description": "The replacement extensions.",
               "type": "string"
             }
           }
@@ -187,6 +200,7 @@
         "type": "object",
         "properties": {
           "data": {
+            "description": "Data payload.",
             "type": "string"
           },
           "type": {
@@ -195,6 +209,7 @@
         }
       },
       "ExtensionBinary.BinaryType": {
+        "description": "Type of binary content stored in the extension.",
         "type": "string",
         "enum": [
           "KIBANA_INDEX_PATTERN"
@@ -208,39 +223,48 @@
         "type": "object",
         "properties": {
           "binaries": {
+            "description": "The binaries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             }
           },
           "data": {
+            "description": "Data payload.",
             "type": "object"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "extendedInternalId": {
+            "description": "The extended internal id.",
             "type": "string"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "isMandatory": {
+            "description": "The is mandatory.",
             "type": "boolean"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
+            "description": "The stable id.",
             "type": "string"
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
+            "description": "The unique id.",
             "type": "string"
           }
         }
@@ -253,9 +277,11 @@
         "type": "object",
         "properties": {
           "data": {
+            "description": "Data payload.",
             "type": "string"
           },
           "fileName": {
+            "description": "The file name.",
             "type": "string"
           },
           "type": {
@@ -264,6 +290,7 @@
         }
       },
       "ExtensionItemBinary.BinaryType": {
+        "description": "Binary type.",
         "type": "string",
         "enum": [
           "PREVIEW_IMAGE",
@@ -281,45 +308,55 @@
         "type": "object",
         "properties": {
           "binaries": {
+            "description": "The binaries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             }
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "excerpt": {
+            "description": "The excerpt.",
             "type": "string"
           },
           "integrationDetails": {
+            "description": "The integration details.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             }
           },
           "isTesting": {
+            "description": "The is testing.",
             "type": "boolean"
           },
           "items": {
+            "description": "List of items.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             }
           },
           "labels": {
+            "description": "List of labels.",
             "type": "array",
             "items": {
+              "description": "List of labels.",
               "type": "string"
             }
           },
           "permissionDeniedItems": {
+            "description": "The permission denied items.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             }
           },
           "version": {
+            "description": "Version.",
             "type": "string"
           }
         }
@@ -327,10 +364,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -409,8 +446,10 @@
         "type": "object",
         "properties": {
           "integrations": {
+            "description": "The integrations.",
             "type": "array",
             "items": {
+              "description": "The integrations.",
               "type": "string"
             }
           }
@@ -425,6 +464,7 @@
         "type": "object",
         "properties": {
           "extensions": {
+            "description": "The extensions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Extension"
@@ -440,36 +480,46 @@
         "type": "object",
         "properties": {
           "darkModeImage": {
+            "description": "The dark mode image.",
             "type": "string"
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "image": {
+            "description": "Image reference.",
             "type": "string"
           },
           "integrations": {
+            "description": "The integrations.",
             "type": "array",
             "items": {
+              "description": "The integrations.",
               "type": "string"
             }
           },
           "isHidden": {
+            "description": "The is hidden.",
             "type": "boolean"
           },
           "keywords": {
+            "description": "The keywords.",
             "type": "array",
             "items": {
+              "description": "The keywords.",
               "type": "string"
             }
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "revisions": {
+            "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Revision"
@@ -485,20 +535,25 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "excerpt": {
+            "description": "The excerpt.",
             "type": "string"
           },
           "integrationDetails": {
+            "description": "The integration details.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             }
           },
           "labels": {
+            "description": "List of labels.",
             "type": "array",
             "items": {
+              "description": "List of labels.",
               "type": "string"
             }
           },
@@ -506,6 +561,7 @@
             "$ref": "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
           },
           "version": {
+            "description": "Version number.",
             "type": "string"
           }
         }
@@ -515,9 +571,11 @@
           "url": ""
         },
         "title": "Revision summary",
+        "description": "Revision summary.",
         "type": "object",
         "properties": {
           "isNew": {
+            "description": "The is new.",
             "type": "boolean"
           },
           "itemCounts": {
@@ -533,9 +591,11 @@
         "type": "object",
         "properties": {
           "link": {
+            "description": "Link.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           }
         }
@@ -545,45 +605,56 @@
           "url": ""
         },
         "title": "Item counts",
+        "description": "Item counts.",
         "type": "object",
         "properties": {
           "actions": {
+            "description": "List of actions.",
             "type": "integer",
             "format": "int64"
           },
           "alerts": {
+            "description": "List of alerts.",
             "type": "integer",
             "format": "int64"
           },
           "customDashboards": {
+            "description": "The custom dashboards.",
             "type": "integer",
             "format": "int64"
           },
           "enrichments": {
+            "description": "List of enrichments.",
             "type": "integer",
             "format": "int64"
           },
           "eventsToMetrics": {
+            "description": "The events to metrics.",
             "type": "integer",
             "format": "int64"
           },
           "grafanaDashboards": {
+            "description": "The grafana dashboards.",
             "type": "integer",
             "format": "int64"
           },
           "kibanaDashboards": {
+            "description": "The kibana dashboards.",
             "type": "integer",
             "format": "int64"
           },
           "metricsRuleGroup": {
+            "description": "The metrics rule group.",
             "type": "integer",
             "format": "int64"
           },
           "parsingRules": {
+            "description": "The parsing rules.",
             "type": "integer",
             "format": "int64"
           },
           "savedViews": {
+            "description": "The saved views.",
             "type": "integer",
             "format": "int64"
           }
@@ -604,6 +675,7 @@
         }
       },
       "PermissionResource": {
+        "description": "Permission resource.",
         "type": "string",
         "enum": [
           "UNKNOWN",
@@ -624,6 +696,7 @@
         ]
       },
       "TargetDomain": {
+        "description": "Target domain.",
         "type": "string",
         "enum": [
           "ACTION",
@@ -651,51 +724,64 @@
           "url": ""
         },
         "title": "Extension metadata",
+        "description": "Represents a Coralogix extension package containing pre-built resources.",
         "type": "object",
         "properties": {
           "changelog": {
+            "description": "The changelog.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
             }
           },
           "darkModeImage": {
+            "description": "The dark mode image.",
             "type": "string"
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
+            "description": "Unique identifier of the extension.",
             "type": "string"
           },
           "image": {
+            "description": "Image reference.",
             "type": "string"
           },
           "integrations": {
+            "description": "The integrations.",
             "type": "array",
             "items": {
+              "description": "The integrations.",
               "type": "string"
             }
           },
           "isHidden": {
+            "description": "The is hidden.",
             "type": "boolean"
           },
           "keywords": {
+            "description": "The keywords.",
             "type": "array",
             "items": {
+              "description": "The keywords.",
               "type": "string"
             }
           },
           "name": {
+            "description": "Display name of the extension.",
             "type": "string"
           },
           "permissionDeniedRevisions": {
+            "description": "The permission denied revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             }
           },
           "revisions": {
+            "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
@@ -704,6 +790,7 @@
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

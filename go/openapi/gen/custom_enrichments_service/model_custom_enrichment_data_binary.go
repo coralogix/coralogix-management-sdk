@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the CustomEnrichmentDataBinary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichmentDataBinary{}
 
-// CustomEnrichmentDataBinary struct for CustomEnrichmentDataBinary
+// CustomEnrichmentDataBinary Custom enrichment data including definition and raw content.
 type CustomEnrichmentDataBinary struct {
+	// Binary content of the enrichment data file encoded as base64.
 	Binary string `json:"binary"`
 	Definition *CustomEnrichment `json:"definition,omitempty"`
 	AdditionalProperties map[string]interface{}

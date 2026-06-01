@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetadataField the model 'MetadataField'
+// MetadataField Metadata field.
 type MetadataField string
 
 // List of MetadataField

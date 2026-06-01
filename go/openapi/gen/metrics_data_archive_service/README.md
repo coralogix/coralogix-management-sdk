@@ -78,12 +78,12 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceConfigureTenant**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicserviceconfiguretenant) | **Post** /metrics/data-setup/v1 | ConfigureTenant
-*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceDisableArchive**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicservicedisablearchive) | **Post** /metrics/data-setup/v1/disable | DisableArchive
-*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceEnableArchive**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicserviceenablearchive) | **Post** /metrics/data-setup/v1/enable | EnableArchive
-*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceGetTenantConfig**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicservicegettenantconfig) | **Get** /metrics/data-setup/v1 | GetTenantConfig
-*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceUpdate**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicserviceupdate) | **Put** /metrics/data-setup/v1 | Update
-*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceValidateBucket**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicservicevalidatebucket) | **Post** /metrics/data-setup/v1/validate | ValidateBucket
+*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceConfigureTenant**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicserviceconfiguretenant) | **Post** /metrics/data-setup/v1 | Configure Tenant
+*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceDisableArchive**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicservicedisablearchive) | **Post** /metrics/data-setup/v1/disable | Disable Metrics Archive
+*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceEnableArchive**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicserviceenablearchive) | **Post** /metrics/data-setup/v1/enable | Enable Metrics Archive
+*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceGetTenantConfig**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicservicegettenantconfig) | **Get** /metrics/data-setup/v1 | Get Metrics Storage Configuration
+*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceUpdate**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicserviceupdate) | **Put** /metrics/data-setup/v1 | Update Metrics Storage Configuration
+*MetricsDataArchiveServiceAPI* | [**MetricsConfiguratorPublicServiceValidateBucket**](docs/MetricsDataArchiveServiceAPI.md#metricsconfiguratorpublicservicevalidatebucket) | **Post** /metrics/data-setup/v1/validate | Validate Metrics Storage Bucket
 
 
 ## Documentation For Models

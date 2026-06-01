@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetTemplateResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTemplateResponse{}
 
-// GetTemplateResponse struct for GetTemplateResponse
+// GetTemplateResponse Response containing an integration template.
 type GetTemplateResponse struct {
+	// The template url.
 	TemplateUrl *string `json:"templateUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,11 +23,15 @@ var _ MappedNullable = &LogsCount{}
 
 // LogsCount This data structure represents a logs count.
 type LogsCount struct {
+	// The application name.
 	ApplicationName *string `json:"applicationName,omitempty"`
+	// The logs count.
 	LogsCount *string `json:"logsCount,omitempty"`
 	Priority *V2Priority `json:"priority,omitempty"`
 	Severity *DatausageV2Severity `json:"severity,omitempty"`
+	// The subsystem name.
 	SubsystemName *string `json:"subsystemName,omitempty"`
+	// Timestamp.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

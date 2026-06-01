@@ -23,7 +23,9 @@ var _ MappedNullable = &ParameterNumericValue{}
 
 // ParameterNumericValue struct for ParameterNumericValue
 type ParameterNumericValue struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
+	// Numeric value for this integration parameter.
 	NumericValue float64 `json:"numericValue"`
 	AdditionalProperties map[string]interface{}
 }

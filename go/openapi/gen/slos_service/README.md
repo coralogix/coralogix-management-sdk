@@ -160,7 +160,6 @@ Class | Method | HTTP request | Description
  - [SloType](docs/SloType.md)
  - [SloWindowBasedMetricSli](docs/SloWindowBasedMetricSli.md)
  - [SlosServiceReplaceSloRequest](docs/SlosServiceReplaceSloRequest.md)
- - [SlosServiceValidateReplaceSloAlertsRequest](docs/SlosServiceValidateReplaceSloAlertsRequest.md)
  - [StringValues](docs/StringValues.md)
  - [TypeValues](docs/TypeValues.md)
  - [V1Grouping](docs/V1Grouping.md)

@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the SearchQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SearchQuery{}
 
-// SearchQuery struct for SearchQuery
+// SearchQuery Search query.
 type SearchQuery struct {
+	// Query string.
 	Query string `json:"query"`
 	SyntaxType *SyntaxType `json:"syntaxType,omitempty"`
 	AdditionalProperties map[string]interface{}

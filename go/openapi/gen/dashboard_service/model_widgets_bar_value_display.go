@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// WidgetsBarValueDisplay the model 'WidgetsBarValueDisplay'
+// WidgetsBarValueDisplay Bar value display.
 type WidgetsBarValueDisplay string
 
 // List of widgets.BarValueDisplay

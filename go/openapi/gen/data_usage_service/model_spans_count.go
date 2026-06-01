@@ -23,12 +23,19 @@ var _ MappedNullable = &SpansCount{}
 
 // SpansCount This data structure represents a spans count.
 type SpansCount struct {
+	// The error span count.
 	ErrorSpanCount *string `json:"errorSpanCount,omitempty"`
+	// The low error span count.
 	LowErrorSpanCount *string `json:"lowErrorSpanCount,omitempty"`
+	// The low success span count.
 	LowSuccessSpanCount *string `json:"lowSuccessSpanCount,omitempty"`
+	// The medium error span count.
 	MediumErrorSpanCount *string `json:"mediumErrorSpanCount,omitempty"`
+	// The medium success span count.
 	MediumSuccessSpanCount *string `json:"mediumSuccessSpanCount,omitempty"`
+	// The success span count.
 	SuccessSpanCount *string `json:"successSpanCount,omitempty"`
+	// Timestamp of the event.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

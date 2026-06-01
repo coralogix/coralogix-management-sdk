@@ -22,6 +22,7 @@ var _ MappedNullable = &ColorLabelMappingValueMapping{}
 
 // ColorLabelMappingValueMapping Exact value-based color and label mapping
 type ColorLabelMappingValueMapping struct {
+	// List of exact value-to-display mapping sections
 	Sections []MappingSection `json:"sections,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

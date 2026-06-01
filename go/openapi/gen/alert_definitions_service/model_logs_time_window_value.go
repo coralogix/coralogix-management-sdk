@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LogsTimeWindowValue the model 'LogsTimeWindowValue'
+// LogsTimeWindowValue Logs time window value.
 type LogsTimeWindowValue string
 
 // List of LogsTimeWindowValue

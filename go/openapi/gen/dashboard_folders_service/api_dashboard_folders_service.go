@@ -41,7 +41,10 @@ func (r ApiDashboardFoldersServiceCreateDashboardFolderRequest) Execute() (*Crea
 /*
 DashboardFoldersServiceCreateDashboardFolder Create a dashboard folder
 
-No description available
+Creates a new dashboard folder.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardFoldersServiceCreateDashboardFolderRequest
@@ -137,6 +140,7 @@ type ApiDashboardFoldersServiceDeleteDashboardFolderRequest struct {
 	requestId *string
 }
 
+// Idempotency key for the delete folder request, used to prevent duplicate operations.
 func (r ApiDashboardFoldersServiceDeleteDashboardFolderRequest) RequestId(requestId string) ApiDashboardFoldersServiceDeleteDashboardFolderRequest {
 	r.requestId = &requestId
 	return r
@@ -149,10 +153,13 @@ func (r ApiDashboardFoldersServiceDeleteDashboardFolderRequest) Execute() (map[s
 /*
 DashboardFoldersServiceDeleteDashboardFolder Delete a dashboard folder
 
-No description available
+Deletes the dashboard folder with the specified ID.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param folderId
+ @param folderId The folder id.
  @return ApiDashboardFoldersServiceDeleteDashboardFolderRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboardFolder(ctx context.Context, folderId string) ApiDashboardFoldersServiceDeleteDashboardFolderRequest {
@@ -249,6 +256,7 @@ type ApiDashboardFoldersServiceGetDashboardFolderRequest struct {
 	requestId *string
 }
 
+// Optional client-supplied request identifier used to correlate the get folder request.
 func (r ApiDashboardFoldersServiceGetDashboardFolderRequest) RequestId(requestId string) ApiDashboardFoldersServiceGetDashboardFolderRequest {
 	r.requestId = &requestId
 	return r
@@ -267,7 +275,7 @@ Requires the following permissions:
 - `team-dashboards:Read`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param folderId
+ @param folderId The folder id.
  @return ApiDashboardFoldersServiceGetDashboardFolderRequest
 */
 func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardFolder(ctx context.Context, folderId string) ApiDashboardFoldersServiceGetDashboardFolderRequest {
@@ -477,7 +485,10 @@ func (r ApiDashboardFoldersServiceReplaceDashboardFolderRequest) Execute() (map[
 /*
 DashboardFoldersServiceReplaceDashboardFolder Replace a dashboard folder
 
-No description available
+Replaces an existing dashboard folder.
+
+Requires the following permissions:
+- `team-dashboards:Update`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardFoldersServiceReplaceDashboardFolderRequest

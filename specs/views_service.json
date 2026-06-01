@@ -80,7 +80,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -111,6 +112,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "id",
             "required": true,
             "schema": {
               "example": 52,
@@ -148,6 +150,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "id",
             "required": true,
             "schema": {
               "example": 52,
@@ -178,6 +181,7 @@
                     "maxLength": 36
                   },
                   "isCompactMode": {
+                    "description": "The is compact mode.",
                     "type": "boolean"
                   },
                   "name": {
@@ -198,12 +202,12 @@
                 },
                 "required": [
                   "name",
-                  "id",
                   "timeSelection"
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -232,6 +236,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "id",
             "required": true,
             "schema": {
               "example": 52,
@@ -263,16 +268,19 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "Custom time selection.",
         "type": "object",
         "properties": {
           "fromTime": {
             "example": "2024-01-25T11:31:43.152Z",
+            "description": "The from time.",
             "type": "string",
             "format": "date-time",
             "minLength": 1
           },
           "toTime": {
             "example": "2024-01-25T11:35:43.152Z",
+            "description": "The to time.",
             "type": "string",
             "format": "date-time",
             "minLength": 1
@@ -284,15 +292,20 @@
         ]
       },
       "DeleteViewResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a view.",
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -363,9 +376,14 @@
         ]
       },
       "ListViewsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of views.",
         "type": "object",
         "properties": {
           "views": {
+            "description": "The views.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/View"
@@ -391,6 +409,7 @@
         "externalDocs": {
           "url": ""
         },
+        "description": "Quick time selection.",
         "type": "object",
         "properties": {
           "caption": {
@@ -416,9 +435,11 @@
           "url": ""
         },
         "title": "SearchQuery",
+        "description": "Search query.",
         "type": "object",
         "properties": {
           "query": {
+            "description": "Query string.",
             "type": "string",
             "minLength": 1
           },
@@ -431,17 +452,24 @@
         ]
       },
       "SelectedFilters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Selected filters.",
         "type": "object",
         "properties": {
           "filters": {
+            "description": "List of filters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/views.v1.Filter"
-            }
+            },
+            "minItems": 1
           }
         }
       },
       "SyntaxType": {
+        "description": "Syntax type.",
         "type": "string",
         "enum": [
           "SYNTAX_TYPE_UNSPECIFIED",
@@ -452,14 +480,18 @@
       "TimeSelection": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
+            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
           },
           {
-            "$ref": "#/components/schemas/TimeSelectionCustomSelection"
+            "$ref": "#/components/schemas/TimeSelectionQuickSelection"
           }
         ]
       },
       "TimeSelectionCustomSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Time selection.",
         "type": "object",
         "properties": {
           "customSelection": {
@@ -471,6 +503,10 @@
         ]
       },
       "TimeSelectionQuickSelection": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Time selection.",
         "type": "object",
         "properties": {
           "quickSelection": {
@@ -507,6 +543,7 @@
             "format": "int32"
           },
           "isCompactMode": {
+            "description": "The is compact mode.",
             "type": "boolean"
           },
           "name": {
@@ -532,6 +569,7 @@
         ]
       },
       "ViewType": {
+        "description": "View type.",
         "type": "string",
         "enum": [
           "VIEW_TYPE_UNSPECIFIED",
@@ -549,6 +587,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -23,8 +23,12 @@ var _ MappedNullable = &ReplaceDashboardRequestDataStructure{}
 
 // ReplaceDashboardRequestDataStructure This is a request sent to update an existing dashboard with new information
 type ReplaceDashboardRequestDataStructure struct {
+	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
+	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
 	Dashboard Dashboard `json:"dashboard"`
+	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`
+	// Idempotency key for the replace request, used to prevent duplicate updates.
 	RequestId string `json:"requestId"`
 	AdditionalProperties map[string]interface{}
 }
@@ -48,6 +52,38 @@ func NewReplaceDashboardRequestDataStructure(dashboard Dashboard, requestId stri
 func NewReplaceDashboardRequestDataStructureWithDefaults() *ReplaceDashboardRequestDataStructure {
 	this := ReplaceDashboardRequestDataStructure{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *ReplaceDashboardRequestDataStructure) GetAccessPolicy() string {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReplaceDashboardRequestDataStructure) GetAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *ReplaceDashboardRequestDataStructure) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given string and assigns it to the AccessPolicy field.
+func (o *ReplaceDashboardRequestDataStructure) SetAccessPolicy(v string) {
+	o.AccessPolicy = &v
 }
 
 // GetDashboard returns the Dashboard field value
@@ -140,6 +176,9 @@ func (o ReplaceDashboardRequestDataStructure) MarshalJSON() ([]byte, error) {
 
 func (o ReplaceDashboardRequestDataStructure) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	toSerialize["dashboard"] = o.Dashboard
 	if !IsNil(o.IsLocked) {
 		toSerialize["isLocked"] = o.IsLocked
@@ -190,6 +229,7 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessPolicy")
 		delete(additionalProperties, "dashboard")
 		delete(additionalProperties, "isLocked")
 		delete(additionalProperties, "requestId")

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionDataTable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionDataTable{}
 
-// WidgetDefinitionDataTable struct for WidgetDefinitionDataTable
+// WidgetDefinitionDataTable Definition.
 type WidgetDefinitionDataTable struct {
 	DataTable DataTable `json:"dataTable"`
 	AdditionalProperties map[string]interface{}

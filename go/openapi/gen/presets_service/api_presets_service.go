@@ -30,6 +30,7 @@ type ApiPresetsServiceBatchGetPresetsRequest struct {
 	presetIds *[]string
 }
 
+// The unique identifiers of the presets to retrieve.
 func (r ApiPresetsServiceBatchGetPresetsRequest) PresetIds(presetIds []string) ApiPresetsServiceBatchGetPresetsRequest {
 	r.presetIds = &presetIds
 	return r
@@ -42,7 +43,7 @@ func (r ApiPresetsServiceBatchGetPresetsRequest) Execute() (*BatchGetPresetsResp
 /*
 PresetsServiceBatchGetPresets Batch Get Presets
 
-No description available
+Returns all notification presets.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceBatchGetPresetsRequest
@@ -158,7 +159,7 @@ func (r ApiPresetsServiceCreateCustomPresetRequest) Execute() (*CreateCustomPres
 /*
 PresetsServiceCreateCustomPreset Create Custom Preset
 
-No description available
+Creates a new custom notification preset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceCreateCustomPresetRequest
@@ -185,7 +186,7 @@ func (a *PresetsServiceAPIService) PresetsServiceCreateCustomPresetExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/custom"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:createCustom"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -260,10 +261,10 @@ func (r ApiPresetsServiceDeleteCustomPresetRequest) Execute() (map[string]interf
 /*
 PresetsServiceDeleteCustomPreset Delete Custom Preset
 
-No description available
+Deletes the custom notification preset with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiPresetsServiceDeleteCustomPresetRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceDeleteCustomPreset(ctx context.Context, id string) ApiPresetsServiceDeleteCustomPresetRequest {
@@ -357,11 +358,13 @@ type ApiPresetsServiceGetDefaultPresetSummaryRequest struct {
 	entityType *NotificationCenterEntityType
 }
 
+// The connector type whose default preset summary is requested.
 func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiPresetsServiceGetDefaultPresetSummaryRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
+// The entity type whose default preset summary is requested.
 func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) EntityType(entityType NotificationCenterEntityType) ApiPresetsServiceGetDefaultPresetSummaryRequest {
 	r.entityType = &entityType
 	return r
@@ -374,7 +377,7 @@ func (r ApiPresetsServiceGetDefaultPresetSummaryRequest) Execute() (*GetDefaultP
 /*
 PresetsServiceGetDefaultPresetSummary Get Default Preset Summary
 
-No description available
+Returns a summary of the default notification preset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceGetDefaultPresetSummaryRequest
@@ -401,7 +404,7 @@ func (a *PresetsServiceAPIService) PresetsServiceGetDefaultPresetSummaryExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/summaries"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:getDefaultSummary"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -480,10 +483,10 @@ func (r ApiPresetsServiceGetPresetRequest) Execute() (*GetPresetResponse, *http.
 /*
 PresetsServiceGetPreset Get Preset
 
-No description available
+Returns the details of the specified notification preset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the preset to retrieve.
  @return ApiPresetsServiceGetPresetRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceGetPreset(ctx context.Context, id string) ApiPresetsServiceGetPresetRequest {
@@ -577,11 +580,13 @@ type ApiPresetsServiceGetSystemDefaultPresetSummaryRequest struct {
 	entityType *NotificationCenterEntityType
 }
 
+// The connector type whose system default preset summary is requested.
 func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
+// The entity type whose system default preset summary is requested.
 func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) EntityType(entityType NotificationCenterEntityType) ApiPresetsServiceGetSystemDefaultPresetSummaryRequest {
 	r.entityType = &entityType
 	return r
@@ -594,7 +599,7 @@ func (r ApiPresetsServiceGetSystemDefaultPresetSummaryRequest) Execute() (*GetSy
 /*
 PresetsServiceGetSystemDefaultPresetSummary Get System Default Preset Summary
 
-No description available
+Returns summaries for all system-defined notification presets.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceGetSystemDefaultPresetSummaryRequest
@@ -694,11 +699,13 @@ type ApiPresetsServiceListPresetSummariesRequest struct {
 	entityType *NotificationCenterEntityType
 }
 
+// Filter preset summaries by their connector type.
 func (r ApiPresetsServiceListPresetSummariesRequest) ConnectorType(connectorType NotificationCenterConnectorType) ApiPresetsServiceListPresetSummariesRequest {
 	r.connectorType = &connectorType
 	return r
 }
 
+// Filter preset summaries by their entity type.
 func (r ApiPresetsServiceListPresetSummariesRequest) EntityType(entityType NotificationCenterEntityType) ApiPresetsServiceListPresetSummariesRequest {
 	r.entityType = &entityType
 	return r
@@ -711,7 +718,7 @@ func (r ApiPresetsServiceListPresetSummariesRequest) Execute() (*ListPresetSumma
 /*
 PresetsServiceListPresetSummaries List Preset Summaries
 
-No description available
+Returns a list of notification preset summaries.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceListPresetSummariesRequest
@@ -822,7 +829,7 @@ func (r ApiPresetsServiceReplaceCustomPresetRequest) Execute() (*ReplaceCustomPr
 /*
 PresetsServiceReplaceCustomPreset Replace Custom Preset
 
-No description available
+Replaces an existing custom notification preset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiPresetsServiceReplaceCustomPresetRequest
@@ -849,7 +856,7 @@ func (a *PresetsServiceAPIService) PresetsServiceReplaceCustomPresetExecute(r Ap
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/custom"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:replaceCustom"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -924,10 +931,10 @@ func (r ApiPresetsServiceSetCustomPresetAsDefaultRequest) Execute() (map[string]
 /*
 PresetsServiceSetCustomPresetAsDefault Set Custom Preset As Default
 
-No description available
+Sets a custom preset as the default.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the custom preset to set as default.
  @return ApiPresetsServiceSetCustomPresetAsDefaultRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceSetCustomPresetAsDefault(ctx context.Context, id string) ApiPresetsServiceSetCustomPresetAsDefaultRequest {
@@ -1027,10 +1034,10 @@ func (r ApiPresetsServiceSetPresetAsDefaultRequest) Execute() (map[string]interf
 /*
 PresetsServiceSetPresetAsDefault Set Preset As Default
 
-No description available
+Sets the specified preset as the default for an entity.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the preset to set as default.
  @return ApiPresetsServiceSetPresetAsDefaultRequest
 */
 func (a *PresetsServiceAPIService) PresetsServiceSetPresetAsDefault(ctx context.Context, id string) ApiPresetsServiceSetPresetAsDefaultRequest {
@@ -1056,7 +1063,7 @@ func (a *PresetsServiceAPIService) PresetsServiceSetPresetAsDefaultExecute(r Api
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/{id}/default"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/{id}/default/apply"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

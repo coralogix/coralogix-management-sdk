@@ -24,8 +24,11 @@ var _ MappedNullable = &InRule{}
 type InRule struct {
 	// The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.
 	EvaluationDelayMs *int64 `json:"evaluationDelayMs,omitempty"`
+	// The expr.
 	Expr *string `json:"expr,omitempty"`
+	// List of labels.
 	Labels *map[string]string `json:"labels,omitempty"`
+	// Record.
 	Record *string `json:"record,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

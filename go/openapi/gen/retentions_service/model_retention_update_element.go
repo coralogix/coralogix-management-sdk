@@ -22,7 +22,9 @@ var _ MappedNullable = &RetentionUpdateElement{}
 
 // RetentionUpdateElement struct for RetentionUpdateElement
 type RetentionUpdateElement struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricThresholdConditionType the model 'MetricThresholdConditionType'
+// MetricThresholdConditionType Metric threshold condition type.
 type MetricThresholdConditionType string
 
 // List of MetricThresholdConditionType

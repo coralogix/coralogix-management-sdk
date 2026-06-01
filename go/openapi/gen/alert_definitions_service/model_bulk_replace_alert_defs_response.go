@@ -22,9 +22,13 @@ var _ MappedNullable = &BulkReplaceAlertDefsResponse{}
 
 // BulkReplaceAlertDefsResponse A response that contains the results of the bulk replace operation
 type BulkReplaceAlertDefsResponse struct {
+	// List of successfully replaced alert definitions
 	AlertDefs []AlertDef `json:"alertDefs,omitempty"`
+	// List of alert definitions that failed to be replaced
 	FailedToReplaceAlertDefs []FailedToReplaceAlertDef `json:"failedToReplaceAlertDefs,omitempty"`
+	// List of alert definition IDs that were not found
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	// List of alert definition IDs that were skipped (no changes detected)
 	SkippedIds []string `json:"skippedIds,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the IncidentSearchQueryIncidentField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentSearchQueryIncidentField{}
 
-// IncidentSearchQueryIncidentField struct for IncidentSearchQueryIncidentField
+// IncidentSearchQueryIncidentField Incident search query.
 type IncidentSearchQueryIncidentField struct {
 	IncidentField IncidentFields `json:"incidentField"`
 	// The search query

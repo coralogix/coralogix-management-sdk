@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TestContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestContextualDataIntegrationRequest{}
 
-// TestContextualDataIntegrationRequest struct for TestContextualDataIntegrationRequest
+// TestContextualDataIntegrationRequest Request for testing a contextual data integration.
 type TestContextualDataIntegrationRequest struct {
 	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
 	AdditionalProperties map[string]interface{}

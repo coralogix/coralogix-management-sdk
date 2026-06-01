@@ -25,6 +25,7 @@ var _ MappedNullable = &QueryDisplaySettings{}
 type QueryDisplaySettings struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// A list of category fields for grouping the query results
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme for this query, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`
@@ -43,6 +44,7 @@ type QueryDisplaySettings struct {
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// A list of numeric/value observation fields to display from the query results
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
 	// Number indicating the upper band for y axis
 	YAxisMax *float32 `json:"yAxisMax,omitempty"`

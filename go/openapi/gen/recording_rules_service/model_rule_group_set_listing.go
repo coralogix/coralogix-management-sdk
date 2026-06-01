@@ -22,6 +22,7 @@ var _ MappedNullable = &RuleGroupSetListing{}
 
 // RuleGroupSetListing A listing of rule group sets.
 type RuleGroupSetListing struct {
+	// The sets.
 	Sets []OutRuleGroupSet `json:"sets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

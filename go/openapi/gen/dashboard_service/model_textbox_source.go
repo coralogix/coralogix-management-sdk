@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TextboxSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxSource{}
 
-// TextboxSource struct for TextboxSource
+// TextboxSource Variable source backed by a free-text input box, with an optional default value.
 type TextboxSource struct {
 	DefaultValue *TextboxDefaultValue `json:"defaultValue,omitempty"`
 	AdditionalProperties map[string]interface{}

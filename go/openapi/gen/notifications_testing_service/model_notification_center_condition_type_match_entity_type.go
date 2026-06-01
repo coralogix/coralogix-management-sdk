@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the NotificationCenterConditionTypeMatchEntityType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationCenterConditionTypeMatchEntityType{}
 
-// NotificationCenterConditionTypeMatchEntityType struct for NotificationCenterConditionTypeMatchEntityType
+// NotificationCenterConditionTypeMatchEntityType Field condition.condition type.
 type NotificationCenterConditionTypeMatchEntityType struct {
+	// Match entity type condition.
 	MatchEntityType map[string]interface{} `json:"matchEntityType"`
 	AdditionalProperties map[string]interface{}
 }

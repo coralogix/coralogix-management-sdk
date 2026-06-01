@@ -23,19 +23,30 @@ var _ MappedNullable = &GetDashboardResponse{}
 
 // GetDashboardResponse This is a response containing the requested dashboard
 type GetDashboardResponse struct {
+	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
+	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	// The author id.
 	AuthorId *string `json:"authorId,omitempty"`
+	// The author name.
 	AuthorName *string `json:"authorName,omitempty"`
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	CreatedOriginType *TokenOriginType `json:"createdOriginType,omitempty"`
 	Dashboard *Dashboard `json:"dashboard,omitempty"`
+	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`
+	// The locker author id.
 	LockerAuthorId *string `json:"lockerAuthorId,omitempty"`
+	// The locker name.
 	LockerName *string `json:"lockerName,omitempty"`
 	// Map of resolved widget references for widgets with references in the dashboard
 	ResolvedWidgets *map[string]Widget `json:"resolvedWidgets,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	UpdatedOriginType *TokenOriginType `json:"updatedOriginType,omitempty"`
+	// The updater author id.
 	UpdaterAuthorId *string `json:"updaterAuthorId,omitempty"`
+	// The updater name.
 	UpdaterName *string `json:"updaterName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -57,6 +68,38 @@ func NewGetDashboardResponse() *GetDashboardResponse {
 func NewGetDashboardResponseWithDefaults() *GetDashboardResponse {
 	this := GetDashboardResponse{}
 	return &this
+}
+
+// GetAccessPolicy returns the AccessPolicy field value if set, zero value otherwise.
+func (o *GetDashboardResponse) GetAccessPolicy() string {
+	if o == nil || IsNil(o.AccessPolicy) {
+		var ret string
+		return ret
+	}
+	return *o.AccessPolicy
+}
+
+// GetAccessPolicyOk returns a tuple with the AccessPolicy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetDashboardResponse) GetAccessPolicyOk() (*string, bool) {
+	if o == nil || IsNil(o.AccessPolicy) {
+		return nil, false
+	}
+	return o.AccessPolicy, true
+}
+
+// HasAccessPolicy returns a boolean if a field has been set.
+func (o *GetDashboardResponse) HasAccessPolicy() bool {
+	if o != nil && !IsNil(o.AccessPolicy) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPolicy gets a reference to the given string and assigns it to the AccessPolicy field.
+func (o *GetDashboardResponse) SetAccessPolicy(v string) {
+	o.AccessPolicy = &v
 }
 
 // GetAuthorId returns the AuthorId field value if set, zero value otherwise.
@@ -485,6 +528,9 @@ func (o GetDashboardResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetDashboardResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPolicy) {
+		toSerialize["accessPolicy"] = o.AccessPolicy
+	}
 	if !IsNil(o.AuthorId) {
 		toSerialize["authorId"] = o.AuthorId
 	}
@@ -547,6 +593,7 @@ func (o *GetDashboardResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "accessPolicy")
 		delete(additionalProperties, "authorId")
 		delete(additionalProperties, "authorName")
 		delete(additionalProperties, "createdAt")

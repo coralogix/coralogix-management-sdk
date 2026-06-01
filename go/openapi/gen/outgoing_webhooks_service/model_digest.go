@@ -22,6 +22,7 @@ var _ MappedNullable = &Digest{}
 
 // Digest struct for Digest
 type Digest struct {
+	// Whether this resource is active.
 	IsActive *bool `json:"isActive,omitempty"`
 	Type *DigestType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

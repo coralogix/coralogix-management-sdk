@@ -20,10 +20,13 @@ var _ = bytes.MinRead
 // checks if the ManualSourceStrategyRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSourceStrategyRange{}
 
-// ManualSourceStrategyRange struct for ManualSourceStrategyRange
+// ManualSourceStrategyRange Range strategy: places the annotation spanning between two absolute timestamp values.
 type ManualSourceStrategyRange struct {
+	// The custom unit.
 	CustomUnit *string `json:"customUnit,omitempty"`
+	// The end value.
 	EndValue *float64 `json:"endValue,omitempty"`
+	// The start value.
 	StartValue *float64 `json:"startValue,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// GroupOrigin the model 'GroupOrigin'
+// GroupOrigin Group origin.
 type GroupOrigin string
 
 // List of GroupOrigin

@@ -24,6 +24,7 @@ var _ MappedNullable = &GaugeMetricsQuery{}
 type GaugeMetricsQuery struct {
 	Aggregation *GaugeAggregation `json:"aggregation,omitempty"`
 	EditorMode *MetricsQueryEditorMode `json:"editorMode,omitempty"`
+	// List of metrics filters
 	Filters []MetricsFilter `json:"filters,omitempty"`
 	PromqlQuery *PromQlQuery `json:"promqlQuery,omitempty"`
 	PromqlQueryType *PromQLQueryType `json:"promqlQueryType,omitempty"`

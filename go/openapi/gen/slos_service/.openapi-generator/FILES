@@ -76,7 +76,6 @@ model_slo_time_frame.go
 model_slo_type.go
 model_slo_window_based_metric_sli.go
 model_slos_service_replace_slo_request.go
-model_slos_service_validate_replace_slo_alerts_request.go
 model_string_values.go
 model_type_values.go
 model_v1_grouping.go

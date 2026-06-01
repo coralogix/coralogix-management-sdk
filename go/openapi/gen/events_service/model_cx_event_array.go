@@ -23,6 +23,7 @@ var _ MappedNullable = &CxEventArray{}
 
 // CxEventArray This data structure represents an array of events
 type CxEventArray struct {
+	// List of events.
 	Events []CxEvent `json:"events"`
 	AdditionalProperties map[string]interface{}
 }

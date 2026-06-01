@@ -22,8 +22,9 @@ var _ = bytes.MinRead
 // checks if the IncidentFieldOneOfCreatedAt type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfCreatedAt{}
 
-// IncidentFieldOneOfCreatedAt struct for IncidentFieldOneOfCreatedAt
+// IncidentFieldOneOfCreatedAt Incident field one of.
 type IncidentFieldOneOfCreatedAt struct {
+	// Timestamp when the incident was created.
 	CreatedAt time.Time `json:"createdAt"`
 	AdditionalProperties map[string]interface{}
 }

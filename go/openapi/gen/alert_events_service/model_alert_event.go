@@ -21,18 +21,27 @@ var _ = bytes.MinRead
 // checks if the AlertEvent type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertEvent{}
 
-// AlertEvent struct for AlertEvent
+// AlertEvent Alert event.
 type AlertEvent struct {
 	ActivityAnalysis *ActivityAnalysis `json:"activityAnalysis,omitempty"`
+	// Unique identifier of the alert.
 	AlertId *string `json:"alertId,omitempty"`
+	// Labels for the group.
 	GroupLabels *map[string]string `json:"groupLabels,omitempty"`
+	// Key used to correlate incidents.
 	IncidentCorrelationKey *string `json:"incidentCorrelationKey,omitempty"`
+	// Raw payload data.
 	Payload map[string]interface{} `json:"payload,omitempty"`
+	// Type of the payload.
 	PayloadType *string `json:"payloadType,omitempty"`
+	// Unique identifier of the permutation.
 	PermutationId *string `json:"permutationId,omitempty"`
+	// Labels for the permutation.
 	PermutationLabels *map[string]string `json:"permutationLabels,omitempty"`
+	// Identifier of the event before grouping.
 	PreGroupingEventId *string `json:"preGroupingEventId,omitempty"`
 	Status *AlertStatus `json:"status,omitempty"`
+	// Timestamp of the event.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -7,25 +7,32 @@ servers:
 paths:
   /notifications/notification-center/v1/routers:
     get:
-      description: No description available
+      description: Returns all notification routers for the team.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_ListGlobalRouters
       parameters:
-      - explode: true
+      - description: Deprecated. Filter routers by entity type.
+        explode: true
         in: query
         name: entity_type
         required: false
         schema:
           $ref: "#/components/schemas/notification_center.EntityType"
         style: form
-      - explode: true
+      - description: "Filter routers by source entity labels. Each entry restricts\
+          \ results to routers whose source entity has the matching label values.\
+          \ If empty, all routers are returned."
+        explode: true
         in: query
         name: source_entity_labels
         required: false
         schema:
           additionalProperties:
             $ref: "#/components/schemas/GlobalRoutersService_ListGlobalRouters_source_entity_labels_parameter_value"
+          description: "Filter routers by source entity labels. Each entry restricts\
+            \ results to routers whose source entity has the matching label values.\
+            \ If empty, all routers are returned."
           type: object
         style: form
       responses:
@@ -39,7 +46,7 @@ paths:
       tags:
       - Global routers service
     post:
-      description: No description available
+      description: Creates a new notification router.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_CreateGlobalRouter
@@ -59,7 +66,7 @@ paths:
       tags:
       - Global routers service
     put:
-      description: No description available
+      description: Updates an existing notification router.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_ReplaceGlobalRouter
@@ -80,17 +87,23 @@ paths:
       - Global routers service
   /notifications/notification-center/v1/routers/all/summaries:
     get:
-      description: No description available
+      description: Returns summary information for all notification routers.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_BatchGetGlobalRouters
       parameters:
-      - explode: true
+      - description: The unique identifiers of the global routers to retrieve summaries
+          for.
+        explode: true
         in: query
         name: global_router_ids
         required: false
         schema:
+          description: The unique identifiers of the global routers to retrieve summaries
+            for.
           items:
+            description: The unique identifiers of the global routers to retrieve
+              summaries for.
             example: ""
             type: string
           type: array
@@ -107,12 +120,14 @@ paths:
       - Global routers service
   /notifications/notification-center/v1/routers/matcher/validate:
     post:
-      description: No description available
+      description: Validates a notification router matcher configuration.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_ValidateEntityLabelMatcher
       parameters:
-      - explode: true
+      - description: "Entity label matcher to validate, expressed as a map of label\
+          \ keys to expected values."
+        explode: true
         in: query
         name: entity_label_matcher
         required: false
@@ -120,6 +135,8 @@ paths:
           additionalProperties:
             example: ""
             type: string
+          description: "Entity label matcher to validate, expressed as a map of label\
+            \ keys to expected values."
           type: object
         style: form
       responses:
@@ -134,16 +151,18 @@ paths:
       - Global routers service
   /notifications/notification-center/v1/routers/{id}:
     delete:
-      description: No description available
+      description: Deletes the notification router with the specified ID.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_DeleteGlobalRouter
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -157,16 +176,18 @@ paths:
       tags:
       - Global routers service
     get:
-      description: No description available
+      description: Returns the details of the specified notification router.
       externalDocs:
         url: ""
       operationId: GlobalRoutersService_GetGlobalRouter
       parameters:
-      - explode: false
+      - description: The unique identifier of the global router to retrieve.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the global router to retrieve.
           type: string
         style: simple
       responses:
@@ -266,14 +287,17 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         notFoundIds:
+          description: The not found ids.
           example:
           - global-router-id-3
           items:
+            description: The not found ids.
             type: string
           type: array
         routers:
           additionalProperties:
             $ref: "#/components/schemas/GlobalRouter"
+          description: The routers.
           type: object
       title: Batch Get Global Routers Response
       type: object
@@ -362,6 +386,10 @@ components:
       title: Create Global Router Response
       type: object
     DeleteGlobalRouterResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a notification router.
+      externalDocs:
+        url: ""
       type: object
     FallbackTarget:
       description: Defines fallback target for notifications not matching any routing
@@ -386,8 +414,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -599,39 +627,49 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         createTime:
+          description: The create time.
           format: date-time
           type: string
         description:
+          description: Human-readable description.
           type: string
         disabled:
+          description: The disabled.
           type: boolean
         entityLabels:
           additionalProperties:
             type: string
+          description: The entity labels.
           type: object
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         fallback:
+          description: The fallback destinations to be used if no rule matches.
           items:
             $ref: "#/components/schemas/RoutingTarget"
           type: array
         fallbackTargets:
+          description: The fallback targets.
           items:
             $ref: "#/components/schemas/FallbackTarget"
           type: array
         id:
+          description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: string
         name:
+          description: Display name.
           example: My Router
           type: string
         routingLabels:
           $ref: "#/components/schemas/RoutingLabels"
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/RoutingRule"
           type: array
         updateTime:
+          description: Timestamp of the last update.
           format: date-time
           type: string
       title: Global Router
@@ -789,6 +827,7 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         routers:
+          description: The routers.
           items:
             $ref: "#/components/schemas/GlobalRouter"
           type: array
@@ -898,10 +937,13 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work
       properties:
         environment:
+          description: The environment.
           type: string
         service:
+          description: Service name.
           type: string
         team:
+          description: Team.
           type: string
       title: Routing Labels
       type: object
@@ -929,17 +971,21 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         condition:
+          description: Condition.
           example: alertDef.priority == 'P3'
           type: string
         customDetails:
           additionalProperties:
             type: string
+          description: The custom details.
           type: object
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         name:
+          description: Display name.
           type: string
         targets:
+          description: List of targets.
           items:
             $ref: "#/components/schemas/RoutingTarget"
           type: array
@@ -958,15 +1004,19 @@ components:
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
       properties:
         connectorId:
+          description: The connector id.
           type: string
         customDetails:
           additionalProperties:
             type: string
+          description: The custom details.
           type: object
         id:
+          description: Unique identifier.
           example: d4b56246-64bb-4714-a8bd-97c999f1d801
           type: string
         presetId:
+          description: The preset id.
           type: string
       title: Routing Target
       type: object
@@ -975,7 +1025,8 @@ components:
         is valid
       example:
         result:
-          success: "{}"
+          failure:
+            message: message
       externalDocs:
         description: Find out more about notification center
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
@@ -986,16 +1037,33 @@ components:
       type: object
     ValidateEntityLabelMatcherResult:
       oneOf:
-      - $ref: "#/components/schemas/ValidateEntityLabelMatcherResultSuccessVariant"
       - $ref: "#/components/schemas/ValidateEntityLabelMatcherResultFailureVariant"
+      - $ref: "#/components/schemas/ValidateEntityLabelMatcherResultSuccessVariant"
     ValidateEntityLabelMatcherResult.Failure:
+      description: Test outgoing webhook response.failure.
+      example:
+        message: message
+      externalDocs:
+        url: ""
       properties:
         message:
+          description: Human-readable message.
           type: string
       type: object
     ValidateEntityLabelMatcherResult.Success:
+      additionalProperties: false
+      description: Test integration result.success.
+      externalDocs:
+        url: ""
       type: object
     ValidateEntityLabelMatcherResultFailureVariant:
+      description: "Result of validating an entity label matcher, indicating whether\
+        \ it is valid or contains errors."
+      example:
+        failure:
+          message: message
+      externalDocs:
+        url: ""
       properties:
         failure:
           $ref: "#/components/schemas/ValidateEntityLabelMatcherResult.Failure"
@@ -1003,10 +1071,16 @@ components:
       - failure
       type: object
     ValidateEntityLabelMatcherResultSuccessVariant:
-      example:
-        success: "{}"
+      description: "Result of validating an entity label matcher, indicating whether\
+        \ it is valid or contains errors."
+      externalDocs:
+        url: ""
       properties:
         success:
+          additionalProperties: false
+          description: Test integration result.success.
+          externalDocs:
+            url: ""
           type: object
       required:
       - success
@@ -1017,6 +1091,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     notification_center.EntityType:
+      description: Entity type.
       enum:
       - ENTITY_TYPE_UNSPECIFIED
       - ALERTS
@@ -1024,6 +1099,7 @@ components:
       - CASES
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -1031,7 +1107,9 @@ components:
     GlobalRoutersService_ListGlobalRouters_source_entity_labels_parameter_value:
       properties:
         values:
+          description: The values.
           items:
+            description: The values.
             example: ""
             type: string
           type: array

@@ -20,11 +20,15 @@ var _ = bytes.MinRead
 // checks if the JsonParseParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonParseParameters{}
 
-// JsonParseParameters struct for JsonParseParameters
+// JsonParseParameters Json parse parameters.
 type JsonParseParameters struct {
+	// The delete source.
 	DeleteSource *bool `json:"deleteSource,omitempty"`
+	// The destination field.
 	DestinationField *string `json:"destinationField,omitempty"`
+	// The escaped value.
 	EscapedValue *bool `json:"escapedValue,omitempty"`
+	// The override dest.
 	OverrideDest *bool `json:"overrideDest,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

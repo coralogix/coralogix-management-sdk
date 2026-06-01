@@ -23,6 +23,7 @@ var _ MappedNullable = &BulkTestLogPoliciesRequest{}
 
 // BulkTestLogPoliciesRequest Request to test multiple log policies.
 type BulkTestLogPoliciesRequest struct {
+	// The meta fields values list.
 	MetaFieldsValuesList []LogMetaFieldsValues `json:"metaFieldsValuesList"`
 	AdditionalProperties map[string]interface{}
 }

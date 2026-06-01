@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the RowAppearance type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RowAppearance{}
 
-// RowAppearance struct for RowAppearance
+// RowAppearance Appearance.
 type RowAppearance struct {
 	// Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc
 	Height *int32 `json:"height,omitempty"`

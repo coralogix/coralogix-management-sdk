@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the CustomSectionOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomSectionOptions{}
 
-// CustomSectionOptions struct for CustomSectionOptions
+// CustomSectionOptions Custom section options.
 type CustomSectionOptions struct {
 	// Indicator if the section is collapsed
 	Collapsed *bool `json:"collapsed,omitempty"`

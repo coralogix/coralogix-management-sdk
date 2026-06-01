@@ -23,7 +23,9 @@ var _ MappedNullable = &GetBulkAlertSchedulerRuleResponse{}
 
 // GetBulkAlertSchedulerRuleResponse This is a response sent after getting multiple alert scheduler rules
 type GetBulkAlertSchedulerRuleResponse struct {
+	// The alert scheduler rules.
 	AlertSchedulerRules []AlertSchedulerRuleWithActiveTimeframe `json:"alertSchedulerRules"`
+	// Token for fetching the next page of results.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

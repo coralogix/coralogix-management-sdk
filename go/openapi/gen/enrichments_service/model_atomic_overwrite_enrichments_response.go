@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AtomicOverwriteEnrichmentsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AtomicOverwriteEnrichmentsResponse{}
 
-// AtomicOverwriteEnrichmentsResponse struct for AtomicOverwriteEnrichmentsResponse
+// AtomicOverwriteEnrichmentsResponse Response returned after atomically updating enrichment rules.
 type AtomicOverwriteEnrichmentsResponse struct {
+	// List of enrichments.
 	Enrichments []Enrichment `json:"enrichments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

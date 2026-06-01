@@ -20,11 +20,13 @@ var _ = bytes.MinRead
 // checks if the LogsSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsSource{}
 
-// LogsSource struct for LogsSource
+// LogsSource Logs source.
 type LogsSource struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
+	// The label fields.
 	LabelFields []ObservationField `json:"labelFields,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
+	// The message template.
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Strategy *LogsSourceStrategy `json:"strategy,omitempty"`
 	AdditionalProperties map[string]interface{}

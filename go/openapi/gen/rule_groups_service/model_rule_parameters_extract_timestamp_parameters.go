@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the RuleParametersExtractTimestampParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersExtractTimestampParameters{}
 
-// RuleParametersExtractTimestampParameters struct for RuleParametersExtractTimestampParameters
+// RuleParametersExtractTimestampParameters Rule parameters.
 type RuleParametersExtractTimestampParameters struct {
 	ExtractTimestampParameters ExtractTimestampParameters `json:"extractTimestampParameters"`
 	AdditionalProperties map[string]interface{}

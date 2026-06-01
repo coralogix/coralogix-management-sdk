@@ -23,6 +23,7 @@ var _ MappedNullable = &CreateCustomEnrichmentResponse{}
 // CreateCustomEnrichmentResponse This response data structure is obtained when a custom enrichment is created
 type CreateCustomEnrichmentResponse struct {
 	CustomEnrichment *CustomEnrichment `json:"customEnrichment,omitempty"`
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

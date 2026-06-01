@@ -22,8 +22,11 @@ var _ MappedNullable = &AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActive
 
 // AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter struct for AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter
 type AlertSchedulerRuleServiceGetBulkAlertSchedulerRuleActiveTimeframeParameter struct {
+	// End time.
 	EndTime *string `json:"endTime,omitempty"`
+	// Start time.
 	StartTime *string `json:"startTime,omitempty"`
+	// Timezone.
 	Timezone *string `json:"timezone,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

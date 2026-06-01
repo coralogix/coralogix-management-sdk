@@ -31,6 +31,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ViewFolder"
+        required: true
       responses:
         "200":
           content:
@@ -48,7 +49,8 @@ paths:
         url: ""
       operationId: ViewsService_DeleteView
       parameters:
-      - explode: false
+      - description: id
+        explode: false
         in: path
         name: id
         required: true
@@ -74,7 +76,8 @@ paths:
         url: ""
       operationId: ViewsService_GetView
       parameters:
-      - explode: false
+      - description: id
+        explode: false
         in: path
         name: id
         required: true
@@ -100,7 +103,8 @@ paths:
         url: ""
       operationId: ViewsService_ReplaceView
       parameters:
-      - explode: false
+      - description: id
+        explode: false
         in: path
         name: id
         required: true
@@ -115,6 +119,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/View_1"
+        required: true
       responses:
         "200":
           content:
@@ -128,15 +133,21 @@ paths:
 components:
   schemas:
     CustomTimeSelection:
+      description: Custom time selection.
+      example:
+        fromTime: 2024-01-25T11:31:43.152Z
+        toTime: 2024-01-25T11:35:43.152Z
       externalDocs:
         url: ""
       properties:
         fromTime:
+          description: The from time.
           example: 2024-01-25T11:31:43.152Z
           format: date-time
           minLength: 1
           type: string
         toTime:
+          description: The to time.
           example: 2024-01-25T11:35:43.152Z
           format: date-time
           minLength: 1
@@ -146,11 +157,15 @@ components:
       - toTime
       type: object
     DeleteViewResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a view.
+      externalDocs:
+        url: ""
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -199,6 +214,7 @@ components:
       title: Filters
       type: object
     ListViewsResponse:
+      description: Response containing a list of views.
       example:
         views:
         - isCompactMode: true
@@ -218,9 +234,9 @@ components:
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           timeSelection:
-            quickSelection:
-              seconds: 3600
-              caption: Last Hour
+            customSelection:
+              fromTime: 2024-01-25T11:31:43.152Z
+              toTime: 2024-01-25T11:35:43.152Z
         - isCompactMode: true
           searchQuery:
             query: query
@@ -238,11 +254,14 @@ components:
           id: 52
           folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           timeSelection:
-            quickSelection:
-              seconds: 3600
-              caption: Last Hour
+            customSelection:
+              fromTime: 2024-01-25T11:31:43.152Z
+              toTime: 2024-01-25T11:35:43.152Z
+      externalDocs:
+        url: ""
       properties:
         views:
+          description: The views.
           items:
             $ref: "#/components/schemas/View"
           type: array
@@ -257,9 +276,7 @@ components:
           type: array
       type: object
     QuickTimeSelection:
-      example:
-        seconds: 3600
-        caption: Last Hour
+      description: Quick time selection.
       externalDocs:
         url: ""
       properties:
@@ -278,6 +295,7 @@ components:
       - seconds
       type: object
     SearchQuery:
+      description: Search query.
       example:
         query: query
         syntaxType: SYNTAX_TYPE_UNSPECIFIED
@@ -285,6 +303,7 @@ components:
         url: ""
       properties:
         query:
+          description: Query string.
           minLength: 1
           type: string
         syntaxType:
@@ -294,6 +313,7 @@ components:
       title: SearchQuery
       type: object
     SelectedFilters:
+      description: Selected filters.
       example:
         filters:
         - selectedValues:
@@ -302,13 +322,18 @@ components:
         - selectedValues:
             key: true
           name: applicationName
+      externalDocs:
+        url: ""
       properties:
         filters:
+          description: List of filters.
           items:
             $ref: "#/components/schemas/views.v1.Filter"
+          minItems: 1
           type: array
       type: object
     SyntaxType:
+      description: Syntax type.
       enum:
       - SYNTAX_TYPE_UNSPECIFIED
       - SYNTAX_TYPE_LUCENE
@@ -316,9 +341,16 @@ components:
       type: string
     TimeSelection:
       oneOf:
-      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
       - $ref: "#/components/schemas/TimeSelectionCustomSelection"
+      - $ref: "#/components/schemas/TimeSelectionQuickSelection"
     TimeSelectionCustomSelection:
+      description: Time selection.
+      example:
+        customSelection:
+          fromTime: 2024-01-25T11:31:43.152Z
+          toTime: 2024-01-25T11:35:43.152Z
+      externalDocs:
+        url: ""
       properties:
         customSelection:
           $ref: "#/components/schemas/CustomTimeSelection"
@@ -326,10 +358,9 @@ components:
       - customSelection
       type: object
     TimeSelectionQuickSelection:
-      example:
-        quickSelection:
-          seconds: 3600
-          caption: Last Hour
+      description: Time selection.
+      externalDocs:
+        url: ""
       properties:
         quickSelection:
           $ref: "#/components/schemas/QuickTimeSelection"
@@ -356,9 +387,9 @@ components:
         id: 52
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:
-          quickSelection:
-            seconds: 3600
-            caption: Last Hour
+          customSelection:
+            fromTime: 2024-01-25T11:31:43.152Z
+            toTime: 2024-01-25T11:35:43.152Z
       externalDocs:
         url: ""
       properties:
@@ -377,6 +408,7 @@ components:
           format: int32
           type: integer
         isCompactMode:
+          description: The is compact mode.
           type: boolean
         name:
           description: View name
@@ -396,6 +428,7 @@ components:
       title: View
       type: object
     ViewType:
+      description: View type.
       enum:
       - VIEW_TYPE_UNSPECIFIED
       - VIEW_TYPE_LOGS
@@ -409,6 +442,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -455,9 +489,9 @@ components:
             name: applicationName
         folderId: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         timeSelection:
-          quickSelection:
-            seconds: 3600
-            caption: Last Hour
+          customSelection:
+            fromTime: 2024-01-25T11:31:43.152Z
+            toTime: 2024-01-25T11:35:43.152Z
       properties:
         filters:
           $ref: "#/components/schemas/SelectedFilters"
@@ -497,6 +531,7 @@ components:
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
           type: string
         isCompactMode:
+          description: The is compact mode.
           type: boolean
         name:
           description: View name
@@ -510,7 +545,6 @@ components:
         viewType:
           $ref: "#/components/schemas/ViewType"
       required:
-      - id
       - name
       - timeSelection
       title: View

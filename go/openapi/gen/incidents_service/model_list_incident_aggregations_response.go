@@ -23,6 +23,7 @@ var _ MappedNullable = &ListIncidentAggregationsResponse{}
 
 // ListIncidentAggregationsResponse Response containing aggregated incident data and pagination information
 type ListIncidentAggregationsResponse struct {
+	// List of incident aggregations
 	IncidentAggs []IncidentAggregation `json:"incidentAggs"`
 	Pagination IncidentsV1PaginationResponse `json:"pagination"`
 	AdditionalProperties map[string]interface{}

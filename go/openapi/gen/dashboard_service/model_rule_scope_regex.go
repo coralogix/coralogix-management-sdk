@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the RuleScopeRegex type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleScopeRegex{}
 
-// RuleScopeRegex struct for RuleScopeRegex
+// RuleScopeRegex Rule scope.
 type RuleScopeRegex struct {
+	// Regular expression pattern used to scope the rule.
 	Regex string `json:"regex"`
 	AdditionalProperties map[string]interface{}
 }

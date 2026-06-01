@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the AlertsV3PaginationResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertsV3PaginationResponse{}
 
-// AlertsV3PaginationResponse struct for AlertsV3PaginationResponse
+// AlertsV3PaginationResponse Pagination response.
 type AlertsV3PaginationResponse struct {
+	// Token for fetching the next page of results.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
+	// Total number of results.
 	TotalSize *int64 `json:"totalSize,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

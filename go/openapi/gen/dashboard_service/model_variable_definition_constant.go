@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableDefinitionConstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableDefinitionConstant{}
 
-// VariableDefinitionConstant struct for VariableDefinitionConstant
+// VariableDefinitionConstant Discriminated union defining the variable type: either a constant value or a multi-select query-driven variable.
 type VariableDefinitionConstant struct {
 	Constant Constant `json:"constant"`
 	AdditionalProperties map[string]interface{}

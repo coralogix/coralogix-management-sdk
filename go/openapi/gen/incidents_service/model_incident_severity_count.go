@@ -23,6 +23,7 @@ var _ MappedNullable = &IncidentSeverityCount{}
 
 // IncidentSeverityCount struct for IncidentSeverityCount
 type IncidentSeverityCount struct {
+	// Number of items.
 	Count int64 `json:"count"`
 	Severity IncidentSeverity `json:"severity"`
 	AdditionalProperties map[string]interface{}

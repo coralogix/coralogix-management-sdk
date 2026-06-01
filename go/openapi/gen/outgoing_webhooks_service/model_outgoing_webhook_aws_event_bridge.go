@@ -22,15 +22,21 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookAwsEventBridge type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookAwsEventBridge{}
 
-// OutgoingWebhookAwsEventBridge struct for OutgoingWebhookAwsEventBridge
+// OutgoingWebhookAwsEventBridge Outgoing webhook.
 type OutgoingWebhookAwsEventBridge struct {
 	AwsEventBridge AwsEventBridgeConfig `json:"awsEventBridge"`
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// External identifier.
 	ExternalId *int64 `json:"externalId,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,7 +23,9 @@ var _ MappedNullable = &E2MPermutations{}
 
 // E2MPermutations This data structure represents the limit of events2metrics permutations and if the limit was exceeded
 type E2MPermutations struct {
+	// The has exceeded limit.
 	HasExceededLimit bool `json:"hasExceededLimit"`
+	// Limit.
 	Limit int32 `json:"limit"`
 	AdditionalProperties map[string]interface{}
 }

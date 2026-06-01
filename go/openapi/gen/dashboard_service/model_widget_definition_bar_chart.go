@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the WidgetDefinitionBarChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetDefinitionBarChart{}
 
-// WidgetDefinitionBarChart struct for WidgetDefinitionBarChart
+// WidgetDefinitionBarChart Definition.
 type WidgetDefinitionBarChart struct {
 	BarChart BarChart `json:"barChart"`
 	AdditionalProperties map[string]interface{}

@@ -7,16 +7,19 @@ servers:
 paths:
   /aaa/team-sec-ip-access/v1:
     delete:
-      description: No description available
+      description: Removes the IP access restrictions for the team.
       externalDocs:
         url: ""
       operationId: IpAccessService_DeleteCompanyIpAccessSettings
       parameters:
-      - explode: true
+      - description: The unique identifier of the company IP access settings to delete.
+        explode: true
         in: query
         name: id
         required: false
         schema:
+          description: The unique identifier of the company IP access settings to
+            delete.
           example: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
           type: string
         style: form
@@ -43,12 +46,14 @@ paths:
       tags:
       - IP access service
     get:
-      description: No description available
+      description: Returns the current IP access settings for the team.
       externalDocs:
         url: ""
       operationId: IpAccessService_GetCompanyIpAccessSettings
       parameters:
-      - explode: true
+      - description: "The ID of the company IP access settings to get. If it's not\
+          \ provided, the id will be derived from the authorization header."
+        explode: true
         in: query
         name: id
         required: false
@@ -81,7 +86,7 @@ paths:
       tags:
       - IP access service
     post:
-      description: No description available
+      description: Sets the IP access restrictions for the team.
       externalDocs:
         url: ""
       operationId: IpAccessService_CreateCompanyIpAccessSettings
@@ -113,7 +118,7 @@ paths:
       tags:
       - IP access service
     put:
-      description: No description available
+      description: Updates the IP access restrictions for the team.
       externalDocs:
         url: ""
       operationId: IpAccessService_ReplaceCompanyIpAccessSettings
@@ -174,6 +179,7 @@ components:
       title: Company IP access settings
       type: object
     CoralogixCustomerSupportAccess:
+      description: Coralogix customer support access.
       enum:
       - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
       - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED
@@ -199,6 +205,7 @@ components:
       title: Create company IP access settings response
       type: object
     DeleteCompanyIpAccessSettingsResponse:
+      additionalProperties: false
       description: This data structure represents the response to delete company IP
         access settings.
       externalDocs:
@@ -207,8 +214,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -333,6 +340,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -344,9 +352,12 @@ components:
         enableCoralogixCustomerSupportAccess:
           $ref: "#/components/schemas/CoralogixCustomerSupportAccess"
         id:
+          description: Unique identifier of the existing IP access settings resource
+            to replace.
           example: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
           type: string
         ipAccess:
+          description: List of IP access entries to replace.
           items:
             $ref: "#/components/schemas/IpAccess"
           type: array
@@ -359,6 +370,7 @@ components:
         enableCoralogixCustomerSupportAccess:
           $ref: "#/components/schemas/CoralogixCustomerSupportAccess"
         ipAccess:
+          description: List of IP access entries to create.
           items:
             $ref: "#/components/schemas/IpAccess"
           type: array

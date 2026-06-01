@@ -23,9 +23,12 @@ var _ MappedNullable = &Variable{}
 // Variable struct for Variable
 type Variable struct {
 	Definition *VariableDefinition `json:"definition,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The display name.
 	DisplayName *string `json:"displayName,omitempty"`
 	DisplayType *VariableDisplayType `json:"displayType,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

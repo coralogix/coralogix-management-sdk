@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ThresholdType the model 'ThresholdType'
+// ThresholdType Threshold type.
 type ThresholdType string
 
 // List of ThresholdType

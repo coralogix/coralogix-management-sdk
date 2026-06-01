@@ -11,7 +11,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get multiple alert scheduler rules",
-        "description": "No description available",
+        "description": "Returns alert suppression rules with optional pagination.",
         "externalDocs": {
           "url": ""
         },
@@ -20,19 +20,23 @@
           {
             "in": "query",
             "name": "active_timeframe",
+            "description": "Active timeframe filter to limit results to rules active in the given window.",
             "schema": {
               "type": "object",
               "properties": {
                 "endTime": {
                   "example": "",
+                  "description": "End time.",
                   "type": "string"
                 },
                 "startTime": {
                   "example": "",
+                  "description": "Start time.",
                   "type": "string"
                 },
                 "timezone": {
                   "example": "",
+                  "description": "Timezone.",
                   "type": "string"
                 }
               }
@@ -42,7 +46,9 @@
           {
             "in": "query",
             "name": "enabled",
+            "description": "Whether this resource is enabled.",
             "schema": {
+              "description": "Whether this resource is enabled.",
               "type": "boolean"
             },
             "style": "form"
@@ -50,6 +56,7 @@
           {
             "in": "query",
             "name": "alert_scheduler_rules_ids",
+            "description": "Filter results to the specified alert scheduler rule or rule version IDs.",
             "schema": {
               "oneOf": [
                 {
@@ -65,8 +72,10 @@
           {
             "in": "query",
             "name": "next_page_token",
+            "description": "Token for fetching the next page of results.",
             "schema": {
               "example": "",
+              "description": "Token for fetching the next page of results.",
               "type": "string"
             },
             "style": "form"
@@ -108,7 +117,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update an alert scheduler rule",
-        "description": "No description available",
+        "description": "Updates an existing alert suppression rule.",
         "externalDocs": {
           "url": ""
         },
@@ -130,7 +139,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -168,7 +178,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create an alert scheduler rule",
-        "description": "No description available",
+        "description": "Creates a new alert suppression rule.",
         "externalDocs": {
           "url": ""
         },
@@ -190,7 +200,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -230,7 +241,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Update multiple alert scheduler rules",
-        "description": "No description available",
+        "description": "Replaces all alert suppression rules with the provided set.",
         "externalDocs": {
           "url": ""
         },
@@ -244,6 +255,7 @@
                 "type": "object",
                 "properties": {
                   "updateAlertSchedulerRuleRequests": {
+                    "description": "The update alert scheduler rule requests.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/UpdateAlertSchedulerRuleRequest"
@@ -255,7 +267,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -293,7 +306,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Create multiple alert scheduler rules",
-        "description": "No description available",
+        "description": "Returns all alert suppression rules matching the given criteria.",
         "externalDocs": {
           "url": ""
         },
@@ -307,6 +320,7 @@
                 "type": "object",
                 "properties": {
                   "createAlertSchedulerRuleRequests": {
+                    "description": "The create alert scheduler rule requests.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateAlertSchedulerRuleRequest"
@@ -318,7 +332,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -358,7 +373,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Get an alert scheduler rule",
-        "description": "No description available",
+        "description": "Returns the details of the specified alert suppression rule.",
         "externalDocs": {
           "url": ""
         },
@@ -367,8 +382,10 @@
           {
             "in": "path",
             "name": "alert_scheduler_rule_id",
+            "description": "The unique identifier of the alert scheduler (suppression) rule.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the alert scheduler (suppression) rule.",
               "type": "string"
             },
             "style": "simple"
@@ -410,7 +427,7 @@
           "Alert Scheduler Rule service"
         ],
         "summary": "Delete an alert scheduler rule",
-        "description": "No description available",
+        "description": "Deletes the alert suppression rule with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -419,8 +436,10 @@
           {
             "in": "path",
             "name": "alert_scheduler_rule_id",
+            "description": "The unique identifier of the alert scheduler (suppression) rule to delete.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the alert scheduler (suppression) rule to delete.",
               "type": "string"
             },
             "style": "simple"
@@ -465,72 +484,98 @@
         "type": "object",
         "properties": {
           "endTime": {
+            "description": "End time.",
             "type": "string"
           },
           "startTime": {
+            "description": "Start time.",
             "type": "string"
           },
           "timezone": {
+            "description": "Timezone.",
             "type": "string"
           }
         }
       },
       "AlertSchedulerRule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert scheduler rule.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "filter": {
             "$ref": "#/components/schemas/alert_scheduler_rule_protobuf.v1.Filter"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "metaLabels": {
+            "description": "Metadata labels.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
             }
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "schedule": {
             "$ref": "#/components/schemas/Schedule"
           },
           "uniqueIdentifier": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string"
           }
         }
       },
       "AlertSchedulerRuleIds": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert scheduler rule ids.",
         "type": "object",
         "properties": {
           "alertSchedulerRuleIds": {
+            "description": "List of alert scheduler rule IDs.",
             "type": "array",
             "items": {
+              "description": "List of alert scheduler rule IDs.",
               "type": "string"
             }
           }
         }
       },
       "AlertSchedulerRuleProtobufV1FilterAlertMetaLabels": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert scheduler rule protobuf.v1.filter.",
         "type": "object",
         "properties": {
           "alertMetaLabels": {
             "$ref": "#/components/schemas/MetaLabels"
           },
           "whatExpression": {
+            "description": "Dataprime expression that filters the alerts by group-by values.",
             "type": "string"
           }
         },
@@ -539,12 +584,17 @@
         ]
       },
       "AlertSchedulerRuleProtobufV1FilterAlertUniqueIds": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert scheduler rule protobuf.v1.filter.",
         "type": "object",
         "properties": {
           "alertUniqueIds": {
             "$ref": "#/components/schemas/AlertUniqueIds"
           },
           "whatExpression": {
+            "description": "Dataprime expression that filters the alerts by group-by values.",
             "type": "string"
           }
         },
@@ -553,11 +603,17 @@
         ]
       },
       "AlertSchedulerRuleVersionIds": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert scheduler rule version ids.",
         "type": "object",
         "properties": {
           "alertSchedulerRuleVersionIds": {
+            "description": "The alert scheduler rule version ids.",
             "type": "array",
             "items": {
+              "description": "The alert scheduler rule version ids.",
               "type": "string"
             }
           }
@@ -570,6 +626,7 @@
             "$ref": "#/components/schemas/AlertSchedulerRule"
           },
           "nextActiveTimeframes": {
+            "description": "The next active timeframes.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ActiveTimeframe"
@@ -578,18 +635,29 @@
         }
       },
       "AlertUniqueIds": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Alert unique ids.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "array",
             "items": {
+              "description": "The value.",
               "type": "string"
             }
           }
         }
       },
       "Always": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Always.",
+        "type": "object",
+        "additionalProperties": false
       },
       "CreateAlertSchedulerRuleRequest": {
         "externalDocs": {
@@ -635,6 +703,7 @@
         "type": "object",
         "properties": {
           "createSuppressionResponses": {
+            "description": "The create suppression responses.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateAlertSchedulerRuleResponse"
@@ -646,12 +715,23 @@
         ]
       },
       "Daily": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Daily.",
+        "type": "object",
+        "additionalProperties": false
       },
       "DeleteAlertSchedulerRuleResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting an alert suppression rule.",
+        "type": "object",
+        "additionalProperties": false
       },
       "DurationFrequency": {
+        "description": "Duration frequency.",
         "type": "string",
         "enum": [
           "DURATION_FREQUENCY_UNSPECIFIED",
@@ -685,10 +765,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -785,12 +865,14 @@
         "type": "object",
         "properties": {
           "alertSchedulerRules": {
+            "description": "The alert scheduler rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertSchedulerRuleWithActiveTimeframe"
             }
           },
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "type": "string"
           }
         },
@@ -799,9 +881,14 @@
         ]
       },
       "MetaLabels": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Meta labels.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
@@ -810,11 +897,17 @@
         }
       },
       "Monthly": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Monthly.",
         "type": "object",
         "properties": {
           "daysOfMonth": {
+            "description": "The days of month.",
             "type": "array",
             "items": {
+              "description": "The days of month.",
               "type": "integer",
               "format": "int32"
             }
@@ -836,6 +929,10 @@
         }
       },
       "OneTime": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "One time.",
         "type": "object",
         "properties": {
           "timeframe": {
@@ -856,17 +953,21 @@
       "Recurring.Dynamic": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RecurringDynamicWeekly"
+            "$ref": "#/components/schemas/RecurringDynamicDaily"
           },
           {
             "$ref": "#/components/schemas/RecurringDynamicMonthly"
           },
           {
-            "$ref": "#/components/schemas/RecurringDynamicDaily"
+            "$ref": "#/components/schemas/RecurringDynamicWeekly"
           }
         ]
       },
       "RecurringAlwaysActive": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Recurring schedule that activates the alert scheduler rule on a repeating cadence.",
         "type": "object",
         "properties": {
           "alwaysActive": {
@@ -878,16 +979,22 @@
         ]
       },
       "RecurringDynamicDaily": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Dynamic.",
         "type": "object",
         "properties": {
           "daily": {
             "$ref": "#/components/schemas/Daily"
           },
           "repeatEvery": {
+            "description": "Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).",
             "type": "integer",
             "format": "int32"
           },
           "terminationDate": {
+            "description": "ISO 8601 date after which the recurring rule stops being applied.",
             "type": "string"
           },
           "timeframe": {
@@ -899,16 +1006,22 @@
         ]
       },
       "RecurringDynamicMonthly": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Dynamic.",
         "type": "object",
         "properties": {
           "monthly": {
             "$ref": "#/components/schemas/Monthly"
           },
           "repeatEvery": {
+            "description": "Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).",
             "type": "integer",
             "format": "int32"
           },
           "terminationDate": {
+            "description": "ISO 8601 date after which the recurring rule stops being applied.",
             "type": "string"
           },
           "timeframe": {
@@ -920,13 +1033,19 @@
         ]
       },
       "RecurringDynamicWeekly": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Dynamic.",
         "type": "object",
         "properties": {
           "repeatEvery": {
+            "description": "Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).",
             "type": "integer",
             "format": "int32"
           },
           "terminationDate": {
+            "description": "ISO 8601 date after which the recurring rule stops being applied.",
             "type": "string"
           },
           "timeframe": {
@@ -941,6 +1060,10 @@
         ]
       },
       "RecurringSchedule": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Recurring schedule that activates the alert scheduler rule on a repeating cadence.",
         "type": "object",
         "properties": {
           "schedule": {
@@ -962,6 +1085,10 @@
         ]
       },
       "ScheduleOneTime": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Schedule.",
         "type": "object",
         "properties": {
           "oneTime": {
@@ -976,6 +1103,7 @@
         ]
       },
       "ScheduleOperation": {
+        "description": "Schedule operation.",
         "type": "string",
         "enum": [
           "SCHEDULE_OPERATION_UNSPECIFIED",
@@ -984,6 +1112,10 @@
         ]
       },
       "ScheduleRecurring": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Schedule.",
         "type": "object",
         "properties": {
           "recurring": {
@@ -1000,23 +1132,29 @@
       "Timeframe": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TimeframeEndTime"
+            "$ref": "#/components/schemas/TimeframeDuration"
           },
           {
-            "$ref": "#/components/schemas/TimeframeDuration"
+            "$ref": "#/components/schemas/TimeframeEndTime"
           }
         ]
       },
       "TimeframeDuration": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Timeframe.",
         "type": "object",
         "properties": {
           "duration": {
             "$ref": "#/components/schemas/v1.Duration"
           },
           "startTime": {
+            "description": "Start time.",
             "type": "string"
           },
           "timezone": {
+            "description": "Timezone.",
             "type": "string"
           }
         },
@@ -1025,15 +1163,22 @@
         ]
       },
       "TimeframeEndTime": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Timeframe.",
         "type": "object",
         "properties": {
           "endTime": {
+            "description": "End time.",
             "type": "string"
           },
           "startTime": {
+            "description": "Start time.",
             "type": "string"
           },
           "timezone": {
+            "description": "Timezone.",
             "type": "string"
           }
         },
@@ -1085,6 +1230,7 @@
         "type": "object",
         "properties": {
           "updateSuppressionResponses": {
+            "description": "The update suppression responses.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UpdateAlertSchedulerRuleResponse"
@@ -1096,11 +1242,17 @@
         ]
       },
       "Weekly": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Weekly.",
         "type": "object",
         "properties": {
           "daysOfWeek": {
+            "description": "The days of week.",
             "type": "array",
             "items": {
+              "description": "The days of week.",
               "type": "integer",
               "format": "int32"
             }
@@ -1125,23 +1277,35 @@
         ]
       },
       "meta_labels_protobuf.v1.MetaLabel": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Meta label.",
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "key": {
+            "description": "The key.",
             "type": "string"
           },
           "value": {
+            "description": "The value.",
             "type": "string"
           }
         }
       },
       "v1.Duration": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Duration.",
         "type": "object",
         "properties": {
           "forOver": {
+            "description": "The for over.",
             "type": "integer",
             "format": "int32"
           },
@@ -1151,6 +1315,7 @@
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

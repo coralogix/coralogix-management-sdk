@@ -23,12 +23,18 @@ var _ MappedNullable = &IntegrationRevisionTerraform{}
 
 // IntegrationRevisionTerraform This data structure represents an integration revision.
 type IntegrationRevisionTerraform struct {
+	// The feature flag.
 	FeatureFlag *string `json:"featureFlag,omitempty"`
+	// Configuration fields that users must fill in to deploy this integration revision.
 	Fields []FieldInformation `json:"fields,omitempty"`
+	// UI groups used to organize configuration fields into logical sections.
 	Groups []IntegrationRevisionGroup `json:"groups,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Whether this revision supports automated deployment through the Coralogix platform.
 	RevisionDeploymentSupported *bool `json:"revisionDeploymentSupported,omitempty"`
 	Terraform Terraform `json:"terraform"`
+	// Markdown-formatted upgrade instructions shown when upgrading from a previous revision.
 	UpgradeInstructionsMd *string `json:"upgradeInstructionsMd,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

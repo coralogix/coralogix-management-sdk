@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the WidgetAppearance type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetAppearance{}
 
-// WidgetAppearance struct for WidgetAppearance
+// WidgetAppearance Appearance.
 type WidgetAppearance struct {
+	// The width.
 	Width *int32 `json:"width,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

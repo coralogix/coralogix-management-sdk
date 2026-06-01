@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the MetricFilter type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricFilter{}
 
-// MetricFilter struct for MetricFilter
+// MetricFilter Metric filter.
 type MetricFilter struct {
 	// A PromQL filter for metrics
 	Promql *string `json:"promql,omitempty"`

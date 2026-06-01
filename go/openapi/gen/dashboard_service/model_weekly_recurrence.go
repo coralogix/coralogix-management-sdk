@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the WeeklyRecurrence type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WeeklyRecurrence{}
 
-// WeeklyRecurrence struct for WeeklyRecurrence
+// WeeklyRecurrence Weekly recurrence.
 type WeeklyRecurrence struct {
+	// The days of week.
 	DaysOfWeek []Weekday `json:"daysOfWeek,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

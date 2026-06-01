@@ -42,10 +42,10 @@ func (r ApiUsersMgmtServiceCreateUsersRequest) Execute() (map[string]interface{}
 /*
 UsersMgmtServiceCreateUsers Create Users
 
-No description available
+Adds members to the specified team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId
+ @param teamId Team ID where the users will be created
  @return ApiUsersMgmtServiceCreateUsersRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceCreateUsersRequest {
@@ -148,11 +148,11 @@ func (r ApiUsersMgmtServiceGetUserRequest) Execute() (*GetUserResponse, *http.Re
 /*
 UsersMgmtServiceGetUser Get User
 
-No description available
+Returns the details of a specific team member.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId
- @param userAccountId
+ @param teamId Team ID to search within
+ @param userAccountId User account ID to retrieve
  @return ApiUsersMgmtServiceGetUserRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUser(ctx context.Context, teamId int64, userAccountId int64) ApiUsersMgmtServiceGetUserRequest {
@@ -251,21 +251,25 @@ type ApiUsersMgmtServiceSearchUsersRequest struct {
 	pageToken *int64
 }
 
+// Optional filter by username (partial match supported)
 func (r ApiUsersMgmtServiceSearchUsersRequest) Username(username string) ApiUsersMgmtServiceSearchUsersRequest {
 	r.username = &username
 	return r
 }
 
+// Optional filter by user status (e.g., &#39;active&#39;, &#39;inactive&#39;)
 func (r ApiUsersMgmtServiceSearchUsersRequest) Status(status UserStatus) ApiUsersMgmtServiceSearchUsersRequest {
 	r.status = &status
 	return r
 }
 
+// Number of results per page
 func (r ApiUsersMgmtServiceSearchUsersRequest) PageSize(pageSize int64) ApiUsersMgmtServiceSearchUsersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
+// Token for pagination to retrieve the next page of results
 func (r ApiUsersMgmtServiceSearchUsersRequest) PageToken(pageToken int64) ApiUsersMgmtServiceSearchUsersRequest {
 	r.pageToken = &pageToken
 	return r
@@ -278,10 +282,10 @@ func (r ApiUsersMgmtServiceSearchUsersRequest) Execute() (*SearchUsersResponse, 
 /*
 UsersMgmtServiceSearchUsers Search Users
 
-No description available
+Searches for team members by query.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId
+ @param teamId Team ID to search within
  @return ApiUsersMgmtServiceSearchUsersRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceSearchUsersRequest {
@@ -399,10 +403,10 @@ func (r ApiUsersMgmtServiceUpdateUsersRequest) Execute() (*UpdateUsersResponse, 
 /*
 UsersMgmtServiceUpdateUsers Update Users
 
-No description available
+Updates team members for the specified team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId
+ @param teamId Team ID containing the users to update
  @return ApiUsersMgmtServiceUpdateUsersRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsers(ctx context.Context, teamId int64) ApiUsersMgmtServiceUpdateUsersRequest {
@@ -510,10 +514,10 @@ func (r ApiUsersMgmtServiceUpdateUsersStatusesRequest) Execute() (*UpdateUsersSt
 /*
 UsersMgmtServiceUpdateUsersStatuses Activate/Revoke Users
 
-No description available
+Updates the active status of multiple team members.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param teamId
+ @param teamId Team ID containing the users to update
  @return ApiUsersMgmtServiceUpdateUsersStatusesRequest
 */
 func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatuses(ctx context.Context, teamId int64) ApiUsersMgmtServiceUpdateUsersStatusesRequest {
@@ -539,7 +543,7 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/members/status"
+	localVarPath := localBasePath + "/aaa/teams/v2/{team_id}/members:updateStatuses"
 	localVarPath = strings.Replace(localVarPath, "{"+"team_id"+"}", url.PathEscape(parameterValueToString(r.teamId, "teamId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

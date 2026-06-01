@@ -25,14 +25,18 @@ var _ MappedNullable = &CreatePolicyRequestSpanRules{}
 type CreatePolicyRequestSpanRules struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
+	// Optional free-text description of the policy's purpose.
 	Description *string `json:"description,omitempty"`
+	// When true, the policy is disabled and will not be evaluated.
 	Disabled *bool `json:"disabled,omitempty"`
+	// Human-readable name for the policy.
 	Name string `json:"name"`
 	Placement *Placement `json:"placement,omitempty"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	SpanRules SpanRules `json:"spanRules"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// List of data targets/destinations to which this policy routes data.
 	Targets []V1Target `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

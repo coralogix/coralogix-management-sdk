@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the PagerDutyConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PagerDutyConfig{}
 
-// PagerDutyConfig struct for PagerDutyConfig
+// PagerDutyConfig Pager duty config.
 type PagerDutyConfig struct {
+	// The service key.
 	ServiceKey *string `json:"serviceKey,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

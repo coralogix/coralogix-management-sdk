@@ -22,6 +22,7 @@ var _ MappedNullable = &GetRetentionsEnabledResponse{}
 
 // GetRetentionsEnabledResponse This data structure is obtained when retrieving the active status of retentions
 type GetRetentionsEnabledResponse struct {
+	// The enable tags.
 	EnableTags *bool `json:"enableTags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

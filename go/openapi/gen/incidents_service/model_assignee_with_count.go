@@ -23,7 +23,9 @@ var _ MappedNullable = &AssigneeWithCount{}
 
 // AssigneeWithCount struct for AssigneeWithCount
 type AssigneeWithCount struct {
+	// Assignee.
 	Assignee string `json:"assignee"`
+	// Number of items.
 	Count int32 `json:"count"`
 	AdditionalProperties map[string]interface{}
 }

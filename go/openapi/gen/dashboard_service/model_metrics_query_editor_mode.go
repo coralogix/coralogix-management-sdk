@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MetricsQueryEditorMode the model 'MetricsQueryEditorMode'
+// MetricsQueryEditorMode Metrics query editor mode.
 type MetricsQueryEditorMode string
 
 // List of MetricsQueryEditorMode

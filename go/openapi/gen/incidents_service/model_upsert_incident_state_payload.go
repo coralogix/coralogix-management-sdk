@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the UpsertIncidentStatePayload type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpsertIncidentStatePayload{}
 
-// UpsertIncidentStatePayload struct for UpsertIncidentStatePayload
+// UpsertIncidentStatePayload Upsert incident state payload.
 type UpsertIncidentStatePayload struct {
+	// The cx event key.
 	CxEventKey *string `json:"cxEventKey,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

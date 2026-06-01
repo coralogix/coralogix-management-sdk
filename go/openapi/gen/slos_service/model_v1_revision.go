@@ -23,7 +23,9 @@ var _ MappedNullable = &V1Revision{}
 
 // V1Revision The revision of the slo, used to differentiate between different versions of the same SLO
 type V1Revision struct {
+	// The revision.
 	Revision *int32 `json:"revision,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

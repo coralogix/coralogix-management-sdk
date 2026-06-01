@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TemplateRenderingMode the model 'TemplateRenderingMode'
+// TemplateRenderingMode Template rendering mode.
 type TemplateRenderingMode string
 
 // List of TemplateRenderingMode

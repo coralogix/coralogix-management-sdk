@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SloConstantFilterField the model 'SloConstantFilterField'
+// SloConstantFilterField Slo constant filter field.
 type SloConstantFilterField string
 
 // List of SloConstantFilterField

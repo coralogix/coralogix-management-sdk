@@ -23,7 +23,9 @@ var _ MappedNullable = &DisplayLabelValueWithCount{}
 
 // DisplayLabelValueWithCount struct for DisplayLabelValueWithCount
 type DisplayLabelValueWithCount struct {
+	// Number of items.
 	Count int32 `json:"count"`
+	// The display label value.
 	DisplayLabelValue string `json:"displayLabelValue"`
 	AdditionalProperties map[string]interface{}
 }

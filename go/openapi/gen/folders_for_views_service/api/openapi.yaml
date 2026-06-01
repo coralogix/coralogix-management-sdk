@@ -51,6 +51,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ViewFolder_1"
+        required: true
       responses:
         "200":
           content:
@@ -68,7 +69,8 @@ paths:
         url: ""
       operationId: ViewsFoldersService_DeleteViewFolder
       parameters:
-      - explode: false
+      - description: Unique identifier for folders
+        explode: false
         in: path
         name: id
         required: true
@@ -96,7 +98,8 @@ paths:
         url: ""
       operationId: ViewsFoldersService_GetViewFolder
       parameters:
-      - explode: false
+      - description: Unique identifier for folders
+        explode: false
         in: path
         name: id
         required: true
@@ -121,11 +124,15 @@ paths:
 components:
   schemas:
     DeleteViewFolderResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a view folder.
+      externalDocs:
+        url: ""
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -174,14 +181,18 @@ components:
       title: Filters
       type: object
     ListViewFoldersResponse:
+      description: Response containing a list of view folders.
       example:
         folders:
         - name: My Folder
           id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
         - name: My Folder
           id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+      externalDocs:
+        url: ""
       properties:
         folders:
+          description: The folders.
           items:
             $ref: "#/components/schemas/ViewFolder"
           type: array
@@ -225,6 +236,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR

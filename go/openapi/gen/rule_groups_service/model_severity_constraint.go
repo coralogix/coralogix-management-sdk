@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SeverityConstraint type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SeverityConstraint{}
 
-// SeverityConstraint struct for SeverityConstraint
+// SeverityConstraint Severity constraint.
 type SeverityConstraint struct {
 	Value *Value `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}

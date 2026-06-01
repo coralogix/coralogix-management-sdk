@@ -25,6 +25,7 @@ type WindowBasedMetricSli struct {
 	ComparisonOperator *ComparisonOperator `json:"comparisonOperator,omitempty"`
 	MissingDataStrategy *MissingDataStrategy `json:"missingDataStrategy,omitempty"`
 	Query *Metric `json:"query,omitempty"`
+	// Threshold value.
 	Threshold *float32 `json:"threshold,omitempty"`
 	Window *WindowSloWindow `json:"window,omitempty"`
 	AdditionalProperties map[string]interface{}

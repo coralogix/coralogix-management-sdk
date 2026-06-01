@@ -23,6 +23,7 @@ var _ MappedNullable = &ResolveIncidentsRequest{}
 
 // ResolveIncidentsRequest Request to resolve one or more incidents
 type ResolveIncidentsRequest struct {
+	// List of incident IDs to resolve
 	IncidentIds []string `json:"incidentIds"`
 	AdditionalProperties map[string]interface{}
 }

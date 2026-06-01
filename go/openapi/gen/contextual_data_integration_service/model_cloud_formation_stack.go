@@ -22,7 +22,9 @@ var _ MappedNullable = &CloudFormationStack{}
 
 // CloudFormationStack This data structure represents a CloudFormation stack.
 type CloudFormationStack struct {
+	// The arn.
 	Arn *string `json:"arn,omitempty"`
+	// Region.
 	Region *string `json:"region,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

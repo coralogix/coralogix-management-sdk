@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListPresetSummariesResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListPresetSummariesResponse{}
 
-// ListPresetSummariesResponse struct for ListPresetSummariesResponse
+// ListPresetSummariesResponse Response containing a list of notification preset summaries.
 type ListPresetSummariesResponse struct {
+	// The preset summaries.
 	PresetSummaries []PresetSummary `json:"presetSummaries,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

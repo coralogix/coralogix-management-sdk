@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// QuotaV1Priority the model 'QuotaV1Priority'
+// QuotaV1Priority TCO priority level assigned to a policy, controlling how data is routed and archived.
 type QuotaV1Priority string
 
 // List of quota.v1.Priority

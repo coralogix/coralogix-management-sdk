@@ -23,7 +23,9 @@ var _ MappedNullable = &PolicyOrder{}
 
 // PolicyOrder Order of a policy.
 type PolicyOrder struct {
+	// Unique identifier.
 	Id string `json:"id"`
+	// Sort order.
 	Order int32 `json:"order"`
 	AdditionalProperties map[string]interface{}
 }

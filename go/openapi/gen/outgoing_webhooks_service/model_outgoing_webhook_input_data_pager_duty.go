@@ -21,11 +21,13 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataPagerDuty type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataPagerDuty{}
 
-// OutgoingWebhookInputDataPagerDuty struct for OutgoingWebhookInputDataPagerDuty
+// OutgoingWebhookInputDataPagerDuty Outgoing webhook input data.
 type OutgoingWebhookInputDataPagerDuty struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	PagerDuty PagerDutyConfig `json:"pagerDuty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

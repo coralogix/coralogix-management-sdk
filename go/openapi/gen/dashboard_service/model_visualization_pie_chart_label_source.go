@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// VisualizationPieChartLabelSource the model 'VisualizationPieChartLabelSource'
+// VisualizationPieChartLabelSource Label source.
 type VisualizationPieChartLabelSource string
 
 // List of Visualization.PieChart.LabelSource

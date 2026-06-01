@@ -22,12 +22,19 @@ var _ MappedNullable = &OutRuleGroup{}
 
 // OutRuleGroup struct for OutRuleGroup
 type OutRuleGroup struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Interval.
 	Interval *int64 `json:"interval,omitempty"`
+	// The last eval at.
 	LastEvalAt *string `json:"lastEvalAt,omitempty"`
+	// Limit.
 	Limit *string `json:"limit,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// List of rules.
 	Rules []OutRule `json:"rules,omitempty"`
+	// Version number.
 	Version *int64 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

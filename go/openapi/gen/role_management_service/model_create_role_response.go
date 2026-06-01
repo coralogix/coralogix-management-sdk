@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the CreateRoleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRoleResponse{}
 
-// CreateRoleResponse struct for CreateRoleResponse
+// CreateRoleResponse Response returned after successfully creating a custom role.
 type CreateRoleResponse struct {
+	// Unique identifier.
 	Id *int64 `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

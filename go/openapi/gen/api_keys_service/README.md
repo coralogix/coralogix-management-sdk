@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 *APIKeysServiceAPI* | [**ApiKeysServiceCreateApiKey**](docs/APIKeysServiceAPI.md#apikeysservicecreateapikey) | **Post** /aaa/api-keys/v3 | Create API Key
 *APIKeysServiceAPI* | [**ApiKeysServiceDeleteApiKey**](docs/APIKeysServiceAPI.md#apikeysservicedeleteapikey) | **Delete** /aaa/api-keys/v3/{key_id} | Delete API Key
 *APIKeysServiceAPI* | [**ApiKeysServiceGetApiKey**](docs/APIKeysServiceAPI.md#apikeysservicegetapikey) | **Get** /aaa/api-keys/v3/{key_id} | Get API Key
-*APIKeysServiceAPI* | [**ApiKeysServiceGetApiKeys**](docs/APIKeysServiceAPI.md#apikeysservicegetapikeys) | **Get** /aaa/api-keys/v3/list | Get API Keys
+*APIKeysServiceAPI* | [**ApiKeysServiceGetApiKeys**](docs/APIKeysServiceAPI.md#apikeysservicegetapikeys) | **Get** /aaa/api-keys/v3/list/all | Get API Keys
 *APIKeysServiceAPI* | [**ApiKeysServiceGetSendDataApiKeys**](docs/APIKeysServiceAPI.md#apikeysservicegetsenddataapikeys) | **Get** /aaa/send-data-keys/v3 | Get \&quot;Send Data\&quot; API Keys
 *APIKeysServiceAPI* | [**ApiKeysServiceUpdateApiKey**](docs/APIKeysServiceAPI.md#apikeysserviceupdateapikey) | **Put** /aaa/api-keys/v3/{key_id} | Update API Key
 

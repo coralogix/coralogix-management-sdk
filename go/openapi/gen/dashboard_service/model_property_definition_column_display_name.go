@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the PropertyDefinitionColumnDisplayName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyDefinitionColumnDisplayName{}
 
-// PropertyDefinitionColumnDisplayName struct for PropertyDefinitionColumnDisplayName
+// PropertyDefinitionColumnDisplayName Property definition.
 type PropertyDefinitionColumnDisplayName struct {
 	// Column display name property, allows renaming the column header name
 	ColumnDisplayName string `json:"columnDisplayName"`

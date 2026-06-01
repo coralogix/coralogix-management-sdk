@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V2TcoTier the model 'V2TcoTier'
+// V2TcoTier Deprecated TCO tier classification.
 type V2TcoTier string
 
 // List of v2.TcoTier

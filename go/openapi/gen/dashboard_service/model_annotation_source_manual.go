@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the AnnotationSourceManual type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceManual{}
 
-// AnnotationSourceManual struct for AnnotationSourceManual
+// AnnotationSourceManual Source.
 type AnnotationSourceManual struct {
 	Manual ManualSource `json:"manual"`
 	AdditionalProperties map[string]interface{}

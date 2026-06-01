@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TracingThresholdConditionType the model 'TracingThresholdConditionType'
+// TracingThresholdConditionType Tracing threshold condition type.
 type TracingThresholdConditionType string
 
 // List of TracingThresholdConditionType

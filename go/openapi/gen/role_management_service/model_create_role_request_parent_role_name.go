@@ -21,12 +21,17 @@ var _ = bytes.MinRead
 // checks if the CreateRoleRequestParentRoleName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRoleRequestParentRoleName{}
 
-// CreateRoleRequestParentRoleName struct for CreateRoleRequestParentRoleName
+// CreateRoleRequestParentRoleName Request for creating a custom role.
 type CreateRoleRequestParentRoleName struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The parent role name.
 	ParentRoleName string `json:"parentRoleName"`
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
+	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

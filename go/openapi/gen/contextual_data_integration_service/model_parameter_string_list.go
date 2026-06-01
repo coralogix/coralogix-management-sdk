@@ -23,6 +23,7 @@ var _ MappedNullable = &ParameterStringList{}
 
 // ParameterStringList struct for ParameterStringList
 type ParameterStringList struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
 	StringList StringList `json:"stringList"`
 	AdditionalProperties map[string]interface{}

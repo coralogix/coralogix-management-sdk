@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ConnectorConfigSchema type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConnectorConfigSchema{}
 
-// ConnectorConfigSchema struct for ConnectorConfigSchema
+// ConnectorConfigSchema Connector config schema.
 type ConnectorConfigSchema struct {
+	// List of fields.
 	Fields []ConnectorConfigSchemaField `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

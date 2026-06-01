@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// GaugeAggregation the model 'GaugeAggregation'
+// GaugeAggregation Aggregation.
 type GaugeAggregation string
 
 // List of Gauge.Aggregation

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableDefinitionMultiSelect type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableDefinitionMultiSelect{}
 
-// VariableDefinitionMultiSelect struct for VariableDefinitionMultiSelect
+// VariableDefinitionMultiSelect Discriminated union defining the variable type: either a constant value or a multi-select query-driven variable.
 type VariableDefinitionMultiSelect struct {
 	MultiSelect MultiSelect `json:"multiSelect"`
 	AdditionalProperties map[string]interface{}

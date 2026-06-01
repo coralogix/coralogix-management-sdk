@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the EnrichmentTypeAws type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EnrichmentTypeAws{}
 
-// EnrichmentTypeAws struct for EnrichmentTypeAws
+// EnrichmentTypeAws Enrichment type.
 type EnrichmentTypeAws struct {
 	Aws AwsType `json:"aws"`
 	AdditionalProperties map[string]interface{}

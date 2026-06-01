@@ -20,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the ManualSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ManualSourceStrategyInstant{}
 
-// ManualSourceStrategyInstant struct for ManualSourceStrategyInstant
+// ManualSourceStrategyInstant Instant strategy: places the annotation at a specific absolute timestamp value.
 type ManualSourceStrategyInstant struct {
+	// The custom unit.
 	CustomUnit *string `json:"customUnit,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// The value.
 	Value *float64 `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

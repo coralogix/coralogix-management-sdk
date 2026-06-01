@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the EmailGroupConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EmailGroupConfig{}
 
-// EmailGroupConfig struct for EmailGroupConfig
+// EmailGroupConfig Email group config.
 type EmailGroupConfig struct {
+	// The email addresses.
 	EmailAddresses []string `json:"emailAddresses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

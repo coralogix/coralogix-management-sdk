@@ -55,7 +55,7 @@
           "Dashboard folders service"
         ],
         "summary": "Replace a dashboard folder",
-        "description": "No description available",
+        "description": "Replaces an existing dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -65,12 +65,14 @@
             "application/json": {
               "schema": {
                 "title": "Replace dashboard folder request data structure",
+                "description": "Request to replace an existing dashboard folder.",
                 "type": "object",
                 "properties": {
                   "folder": {
                     "$ref": "#/components/schemas/DashboardFolder"
                   },
                   "requestId": {
+                    "description": "Idempotency key for the replace folder request, used to prevent duplicate updates.",
                     "type": "string"
                   }
                 }
@@ -117,7 +119,7 @@
           "Dashboard folders service"
         ],
         "summary": "Create a dashboard folder",
-        "description": "No description available",
+        "description": "Creates a new dashboard folder.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -127,12 +129,14 @@
             "application/json": {
               "schema": {
                 "title": "Create dashboard folder request data structure",
+                "description": "Request to create a new dashboard folder.",
                 "type": "object",
                 "properties": {
                   "folder": {
                     "$ref": "#/components/schemas/DashboardFolder"
                   },
                   "requestId": {
+                    "description": "The request id.",
                     "type": "string"
                   }
                 }
@@ -190,8 +194,10 @@
           {
             "in": "path",
             "name": "folder_id",
+            "description": "The folder id.",
             "required": true,
             "schema": {
+              "description": "The folder id.",
               "type": "string"
             },
             "style": "simple"
@@ -199,7 +205,9 @@
           {
             "in": "query",
             "name": "request_id",
+            "description": "Optional client-supplied request identifier used to correlate the get folder request.",
             "schema": {
+              "description": "Optional client-supplied request identifier used to correlate the get folder request.",
               "type": "string"
             },
             "style": "form"
@@ -244,7 +252,7 @@
           "Dashboard folders service"
         ],
         "summary": "Delete a dashboard folder",
-        "description": "No description available",
+        "description": "Deletes the dashboard folder with the specified ID.\n\nRequires the following permissions:\n- `team-dashboards:Update`",
         "externalDocs": {
           "url": ""
         },
@@ -253,8 +261,10 @@
           {
             "in": "path",
             "name": "folder_id",
+            "description": "The folder id.",
             "required": true,
             "schema": {
+              "description": "The folder id.",
               "type": "string"
             },
             "style": "simple"
@@ -262,7 +272,9 @@
           {
             "in": "query",
             "name": "request_id",
+            "description": "Idempotency key for the delete folder request, used to prevent duplicate operations.",
             "schema": {
+              "description": "Idempotency key for the delete folder request, used to prevent duplicate operations.",
               "type": "string"
             },
             "style": "form"
@@ -312,23 +324,32 @@
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
         },
         "title": "Create dashboard folder response data structure",
+        "description": "Response returned after successfully creating a dashboard folder.",
         "type": "object",
         "properties": {
           "folderId": {
+            "description": "The folder id.",
             "type": "string"
           }
         }
       },
       "DashboardFolder": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Dashboard folder.",
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "parentId": {
+            "description": "The parent id.",
             "type": "string"
           }
         }
@@ -339,15 +360,17 @@
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
         },
         "title": "Delete dashboard folder response data structure",
-        "type": "object"
+        "description": "Response returned after successfully deleting a dashboard folder.",
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -423,6 +446,7 @@
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
         },
         "title": "Get dashboard folder response data structure",
+        "description": "Response containing the details of a dashboard folder.",
         "type": "object",
         "properties": {
           "folder": {
@@ -436,9 +460,11 @@
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
         },
         "title": "List dashboard folders response data structure",
+        "description": "Response containing a list of dashboard folders.",
         "type": "object",
         "properties": {
           "folder": {
+            "description": "The folder.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardFolder"
@@ -466,7 +492,9 @@
           "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
         },
         "title": "Replace dashboard folder response data structure",
-        "type": "object"
+        "description": "Response returned after successfully replacing a dashboard folder.",
+        "type": "object",
+        "additionalProperties": false
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -476,6 +504,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

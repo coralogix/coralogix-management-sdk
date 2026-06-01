@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the HexagonQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonQueryDataprime{}
 
-// HexagonQueryDataprime struct for HexagonQueryDataprime
+// HexagonQueryDataprime Discriminated union of possible query types for the hexagon widget.
 type HexagonQueryDataprime struct {
 	Dataprime HexagonDataprimeQuery `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

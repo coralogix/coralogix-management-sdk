@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the PropertyLinks type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyLinks{}
 
-// PropertyLinks struct for PropertyLinks
+// PropertyLinks Property links.
 type PropertyLinks struct {
+	// Collection of link actions
 	Actions []LinkAction `json:"actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

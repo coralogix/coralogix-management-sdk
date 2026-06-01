@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the SpansAggregationDimensionAggregation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpansAggregationDimensionAggregation{}
 
-// SpansAggregationDimensionAggregation struct for SpansAggregationDimensionAggregation
+// SpansAggregationDimensionAggregation Spans aggregation.
 type SpansAggregationDimensionAggregation struct {
 	DimensionAggregation DimensionAggregation `json:"dimensionAggregation"`
 	AdditionalProperties map[string]interface{}

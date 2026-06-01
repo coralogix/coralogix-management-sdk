@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookDetails type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookDetails{}
 
-// OutgoingWebhookDetails struct for OutgoingWebhookDetails
+// OutgoingWebhookDetails Outgoing webhook details.
 type OutgoingWebhookDetails struct {
+	// The label.
 	Label *string `json:"label,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Sum type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Sum{}
 
-// Sum struct for Sum
+// Sum Sum.
 type Sum struct {
+	// The field.
 	Field *string `json:"field,omitempty"`
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	AdditionalProperties map[string]interface{}

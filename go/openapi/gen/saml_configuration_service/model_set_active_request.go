@@ -22,7 +22,9 @@ var _ MappedNullable = &SetActiveRequest{}
 
 // SetActiveRequest This data structure is used to activate or deactivate a SAML identity provider
 type SetActiveRequest struct {
+	// The is active.
 	IsActive *bool `json:"isActive,omitempty"`
+	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

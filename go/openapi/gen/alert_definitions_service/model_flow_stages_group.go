@@ -22,6 +22,7 @@ var _ MappedNullable = &FlowStagesGroup{}
 
 // FlowStagesGroup Defines a group of stages in a flow alert
 type FlowStagesGroup struct {
+	// The alert definitions for the flow stage group.
 	AlertDefs []FlowStagesGroupsAlertDefs `json:"alertDefs,omitempty"`
 	AlertsOp *AlertsOp `json:"alertsOp,omitempty"`
 	NextOp *NextOp `json:"nextOp,omitempty"`

@@ -21,12 +21,15 @@ var _ = bytes.MinRead
 // checks if the TenantConfigV2Gcs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantConfigV2Gcs{}
 
-// TenantConfigV2Gcs struct for TenantConfigV2Gcs
+// TenantConfigV2Gcs Tenant config v2.
 type TenantConfigV2Gcs struct {
+	// Whether metrics archiving is disabled for this tenant.
 	Disabled *bool `json:"disabled,omitempty"`
 	Gcs GcsConfig `json:"gcs"`
+	// Storage path prefix applied to all archived objects.
 	Prefix *string `json:"prefix,omitempty"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
+	// Tenant identifier.
 	TenantId *int64 `json:"tenantId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

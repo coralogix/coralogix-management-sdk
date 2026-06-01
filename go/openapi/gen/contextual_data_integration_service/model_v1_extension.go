@@ -20,18 +20,28 @@ var _ = bytes.MinRead
 // checks if the V1Extension type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1Extension{}
 
-// V1Extension struct for V1Extension
+// V1Extension Represents a Coralogix extension package containing pre-built resources.
 type V1Extension struct {
+	// The changelog.
 	Changelog []ChangelogEntry `json:"changelog,omitempty"`
+	// The dark mode image.
 	DarkModeImage *string `json:"darkModeImage,omitempty"`
 	Deprecation *Deprecation `json:"deprecation,omitempty"`
+	// Unique identifier of the extension.
 	Id *string `json:"id,omitempty"`
+	// Image reference.
 	Image *string `json:"image,omitempty"`
+	// The integrations.
 	Integrations []string `json:"integrations,omitempty"`
+	// The is hidden.
 	IsHidden *bool `json:"isHidden,omitempty"`
+	// The keywords.
 	Keywords []string `json:"keywords,omitempty"`
+	// Display name of the extension.
 	Name *string `json:"name,omitempty"`
+	// The permission denied revisions.
 	PermissionDeniedRevisions []ExtensionRevision `json:"permissionDeniedRevisions,omitempty"`
+	// The revisions.
 	Revisions []ExtensionRevision `json:"revisions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,6 +23,7 @@ var _ MappedNullable = &ListAlertEventsResponse{}
 
 // ListAlertEventsResponse Response containing events associated with the alert
 type ListAlertEventsResponse struct {
+	// List of events.
 	Events []CxEvent `json:"events"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}

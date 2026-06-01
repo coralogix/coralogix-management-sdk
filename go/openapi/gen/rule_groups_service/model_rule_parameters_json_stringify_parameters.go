@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the RuleParametersJsonStringifyParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParametersJsonStringifyParameters{}
 
-// RuleParametersJsonStringifyParameters struct for RuleParametersJsonStringifyParameters
+// RuleParametersJsonStringifyParameters Rule parameters.
 type RuleParametersJsonStringifyParameters struct {
 	JsonStringifyParameters JsonStringifyParameters `json:"jsonStringifyParameters"`
 	AdditionalProperties map[string]interface{}

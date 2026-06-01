@@ -22,7 +22,9 @@ var _ MappedNullable = &NotificationCenterConnectorConfigField{}
 
 // NotificationCenterConnectorConfigField struct for NotificationCenterConnectorConfigField
 type NotificationCenterConnectorConfigField struct {
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

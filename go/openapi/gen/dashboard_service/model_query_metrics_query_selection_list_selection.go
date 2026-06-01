@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QueryMetricsQuerySelectionListSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQuerySelectionListSelection{}
 
-// QueryMetricsQuerySelectionListSelection struct for QueryMetricsQuerySelectionListSelection
+// QueryMetricsQuerySelectionListSelection A list-based selection of string-or-variable values for metrics label filtering.
 type QueryMetricsQuerySelectionListSelection struct {
+	// List of values.
 	Values []QueryMetricsQueryStringOrVariable `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,9 +22,14 @@ var _ MappedNullable = &EnrichmentFieldDefinition{}
 
 // EnrichmentFieldDefinition struct for EnrichmentFieldDefinition
 type EnrichmentFieldDefinition struct {
+	// The enriched field name.
 	EnrichedFieldName *string `json:"enrichedFieldName,omitempty"`
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
+	// The selected columns.
 	SelectedColumns []string `json:"selectedColumns,omitempty"`
+	// The targets for the enrichment
+	Targets []DatasetTarget `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -143,6 +148,38 @@ func (o *EnrichmentFieldDefinition) SetSelectedColumns(v []string) {
 	o.SelectedColumns = v
 }
 
+// GetTargets returns the Targets field value if set, zero value otherwise.
+func (o *EnrichmentFieldDefinition) GetTargets() []DatasetTarget {
+	if o == nil || IsNil(o.Targets) {
+		var ret []DatasetTarget
+		return ret
+	}
+	return o.Targets
+}
+
+// GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *EnrichmentFieldDefinition) GetTargetsOk() ([]DatasetTarget, bool) {
+	if o == nil || IsNil(o.Targets) {
+		return nil, false
+	}
+	return o.Targets, true
+}
+
+// HasTargets returns a boolean if a field has been set.
+func (o *EnrichmentFieldDefinition) HasTargets() bool {
+	if o != nil && !IsNil(o.Targets) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargets gets a reference to the given []DatasetTarget and assigns it to the Targets field.
+func (o *EnrichmentFieldDefinition) SetTargets(v []DatasetTarget) {
+	o.Targets = v
+}
+
 func (o EnrichmentFieldDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -161,6 +198,9 @@ func (o EnrichmentFieldDefinition) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SelectedColumns) {
 		toSerialize["selectedColumns"] = o.SelectedColumns
+	}
+	if !IsNil(o.Targets) {
+		toSerialize["targets"] = o.Targets
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -188,6 +228,7 @@ func (o *EnrichmentFieldDefinition) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "enrichedFieldName")
 		delete(additionalProperties, "fieldName")
 		delete(additionalProperties, "selectedColumns")
+		delete(additionalProperties, "targets")
 		o.AdditionalProperties = additionalProperties
 	}
 

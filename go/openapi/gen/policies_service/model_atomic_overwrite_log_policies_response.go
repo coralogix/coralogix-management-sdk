@@ -22,6 +22,7 @@ var _ MappedNullable = &AtomicOverwriteLogPoliciesResponse{}
 
 // AtomicOverwriteLogPoliciesResponse This data structue is obtained when overwriting log policies atomically.
 type AtomicOverwriteLogPoliciesResponse struct {
+	// The create responses.
 	CreateResponses []CreatePolicyResponse `json:"createResponses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

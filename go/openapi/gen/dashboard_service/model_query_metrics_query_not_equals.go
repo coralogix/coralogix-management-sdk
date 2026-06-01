@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QueryMetricsQueryNotEquals type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryNotEquals{}
 
-// QueryMetricsQueryNotEquals struct for QueryMetricsQueryNotEquals
+// QueryMetricsQueryNotEquals Non-equality filter operator: includes metrics whose label does not match the selection.
 type QueryMetricsQueryNotEquals struct {
 	Selection *QueryMetricsQuerySelection `json:"selection,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the TextboxDefaultValueDefaultRegexValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultValueDefaultRegexValue{}
 
-// TextboxDefaultValueDefaultRegexValue struct for TextboxDefaultValueDefaultRegexValue
+// TextboxDefaultValueDefaultRegexValue Textbox default value.
 type TextboxDefaultValueDefaultRegexValue struct {
 	DefaultRegexValue TextboxDefaultRegexValue `json:"defaultRegexValue"`
 	AdditionalProperties map[string]interface{}

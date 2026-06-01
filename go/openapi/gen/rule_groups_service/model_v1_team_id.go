@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the V1TeamId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V1TeamId{}
 
-// V1TeamId struct for V1TeamId
+// V1TeamId Team id.
 type V1TeamId struct {
+	// Unique identifier.
 	Id *int64 `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

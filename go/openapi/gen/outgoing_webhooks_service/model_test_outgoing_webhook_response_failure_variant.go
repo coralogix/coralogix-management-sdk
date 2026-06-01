@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the TestOutgoingWebhookResponseFailureVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestOutgoingWebhookResponseFailureVariant{}
 
-// TestOutgoingWebhookResponseFailureVariant struct for TestOutgoingWebhookResponseFailureVariant
+// TestOutgoingWebhookResponseFailureVariant Response containing the results of an outgoing webhook test.
 type TestOutgoingWebhookResponseFailureVariant struct {
 	Failure TestOutgoingWebhookResponseFailure `json:"failure"`
 	AdditionalProperties map[string]interface{}

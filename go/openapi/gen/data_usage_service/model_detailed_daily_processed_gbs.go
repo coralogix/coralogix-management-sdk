@@ -34,6 +34,7 @@ type DetailedDailyProcessedGbs struct {
 	LowTracingGbs *V2GB `json:"lowTracingGbs,omitempty"`
 	MediumLogsGbs *V2GB `json:"mediumLogsGbs,omitempty"`
 	MediumTracingGbs *V2GB `json:"mediumTracingGbs,omitempty"`
+	// The stats date.
 	StatsDate *time.Time `json:"statsDate,omitempty"`
 	TotalGbs *V2GB `json:"totalGbs,omitempty"`
 	AdditionalProperties map[string]interface{}

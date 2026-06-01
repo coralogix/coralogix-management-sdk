@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LogsAggregationSum type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsAggregationSum{}
 
-// LogsAggregationSum struct for LogsAggregationSum
+// LogsAggregationSum Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile.
 type LogsAggregationSum struct {
 	Sum Sum `json:"sum"`
 	AdditionalProperties map[string]interface{}

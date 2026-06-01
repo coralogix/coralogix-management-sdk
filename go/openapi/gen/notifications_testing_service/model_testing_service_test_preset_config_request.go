@@ -20,12 +20,16 @@ var _ = bytes.MinRead
 // checks if the TestingServiceTestPresetConfigRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestingServiceTestPresetConfigRequest{}
 
-// TestingServiceTestPresetConfigRequest struct for TestingServiceTestPresetConfigRequest
+// TestingServiceTestPresetConfigRequest Request for testing a notification preset configuration.
 type TestingServiceTestPresetConfigRequest struct {
+	// The config overrides.
 	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
+	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty"`
+	// Entity sub-type to use when testing the preset configuration.
 	EntitySubType *string `json:"entitySubType,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// The parent preset id.
 	ParentPresetId *string `json:"parentPresetId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

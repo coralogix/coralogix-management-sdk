@@ -23,9 +23,12 @@ var _ MappedNullable = &IBMCosTargetSpec{}
 
 // IBMCosTargetSpec This data structure represents an IBM COS target.
 type IBMCosTargetSpec struct {
+	// The bucket crn.
 	BucketCrn string `json:"bucketCrn"`
 	BucketType *IbmBucketType `json:"bucketType,omitempty"`
+	// Endpoint.
 	Endpoint string `json:"endpoint"`
+	// The service crn.
 	ServiceCrn *string `json:"serviceCrn,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

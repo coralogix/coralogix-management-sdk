@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// NotifyOn the model 'NotifyOn'
+// NotifyOn Notify on.
 type NotifyOn string
 
 // List of NotifyOn

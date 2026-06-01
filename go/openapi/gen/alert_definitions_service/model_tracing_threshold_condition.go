@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the TracingThresholdCondition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TracingThresholdCondition{}
 
-// TracingThresholdCondition struct for TracingThresholdCondition
+// TracingThresholdCondition Tracing threshold condition.
 type TracingThresholdCondition struct {
 	ConditionType *TracingThresholdConditionType `json:"conditionType,omitempty"`
 	// The threshold value for the alert condition

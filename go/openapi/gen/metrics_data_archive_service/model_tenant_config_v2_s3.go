@@ -21,12 +21,15 @@ var _ = bytes.MinRead
 // checks if the TenantConfigV2S3 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TenantConfigV2S3{}
 
-// TenantConfigV2S3 struct for TenantConfigV2S3
+// TenantConfigV2S3 Tenant config v2.
 type TenantConfigV2S3 struct {
+	// Whether metrics archiving is disabled for this tenant.
 	Disabled *bool `json:"disabled,omitempty"`
+	// Storage path prefix applied to all archived objects.
 	Prefix *string `json:"prefix,omitempty"`
 	RetentionPolicy *RetentionPolicyRequest `json:"retentionPolicy,omitempty"`
 	S3 S3Config `json:"s3"`
+	// Tenant identifier.
 	TenantId *int64 `json:"tenantId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

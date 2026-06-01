@@ -24,6 +24,7 @@ var _ MappedNullable = &SetTargetResponse{}
 // SetTargetResponse This data structure is used to set a storage target for logs.
 type SetTargetResponse struct {
 	Format *TargetFormat `json:"format,omitempty"`
+	// Whether archiving to this target is active.
 	IsActive bool `json:"isActive"`
 	S3 *S3TargetSpec `json:"s3,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// NotificationCenterEntityType the model 'NotificationCenterEntityType'
+// NotificationCenterEntityType Entity type.
 type NotificationCenterEntityType string
 
 // List of notification_center.EntityType

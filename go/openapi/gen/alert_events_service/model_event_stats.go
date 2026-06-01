@@ -23,10 +23,15 @@ var _ MappedNullable = &EventStats{}
 // EventStats struct for EventStats
 type EventStats struct {
 	ActivityAnalysisStats *ActivityAnalysisStats `json:"activityAnalysisStats,omitempty"`
+	// Number of items.
 	Count *int64 `json:"count,omitempty"`
+	// The resolved count.
 	ResolvedCount *int64 `json:"resolvedCount,omitempty"`
+	// The resolved permutations samples.
 	ResolvedPermutationsSamples []V3Permutation `json:"resolvedPermutationsSamples,omitempty"`
+	// The triggered count.
 	TriggeredCount *int64 `json:"triggeredCount,omitempty"`
+	// The triggered permutations samples.
 	TriggeredPermutationsSamples []V3Permutation `json:"triggeredPermutationsSamples,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

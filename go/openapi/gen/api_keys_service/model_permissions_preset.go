@@ -22,8 +22,11 @@ var _ MappedNullable = &PermissionsPreset{}
 
 // PermissionsPreset This data structure represents a preset set of permissions on an API key.
 type PermissionsPreset struct {
+	// Unique identifier.
 	Id *int32 `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

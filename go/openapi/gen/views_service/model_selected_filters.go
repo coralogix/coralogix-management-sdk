@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SelectedFilters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SelectedFilters{}
 
-// SelectedFilters struct for SelectedFilters
+// SelectedFilters Selected filters.
 type SelectedFilters struct {
+	// List of filters.
 	Filters []ViewsV1Filter `json:"filters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

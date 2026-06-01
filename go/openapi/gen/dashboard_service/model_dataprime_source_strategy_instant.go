@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the DataprimeSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyInstant{}
 
-// DataprimeSourceStrategyInstant struct for DataprimeSourceStrategyInstant
+// DataprimeSourceStrategyInstant Instant snapshot strategy: uses a single timestamp field to define the annotation point.
 type DataprimeSourceStrategyInstant struct {
 	TimestampField *ObservationField `json:"timestampField,omitempty"`
 	AdditionalProperties map[string]interface{}

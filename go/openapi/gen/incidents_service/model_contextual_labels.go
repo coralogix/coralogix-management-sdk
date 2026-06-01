@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the ContextualLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContextualLabels{}
 
-// ContextualLabels struct for ContextualLabels
+// ContextualLabels Contextual labels.
 type ContextualLabels struct {
+	// The field name.
 	FieldName string `json:"fieldName"`
+	// The field value.
 	FieldValue string `json:"fieldValue"`
 	AdditionalProperties map[string]interface{}
 }

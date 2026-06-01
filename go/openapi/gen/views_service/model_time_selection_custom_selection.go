@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the TimeSelectionCustomSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSelectionCustomSelection{}
 
-// TimeSelectionCustomSelection struct for TimeSelectionCustomSelection
+// TimeSelectionCustomSelection Time selection.
 type TimeSelectionCustomSelection struct {
 	CustomSelection CustomTimeSelection `json:"customSelection"`
 	AdditionalProperties map[string]interface{}

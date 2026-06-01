@@ -23,7 +23,9 @@ var _ MappedNullable = &MetricLabel{}
 
 // MetricLabel This data structure represents a metric label
 type MetricLabel struct {
+	// The source field.
 	SourceField string `json:"sourceField"`
+	// The target label.
 	TargetLabel string `json:"targetLabel" validate:"regexp=^[\\\\w\\/-]+$"`
 	AdditionalProperties map[string]interface{}
 }

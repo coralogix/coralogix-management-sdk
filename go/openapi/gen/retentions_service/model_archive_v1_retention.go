@@ -22,9 +22,13 @@ var _ MappedNullable = &ArchiveV1Retention{}
 
 // ArchiveV1Retention This data structure represents a retention
 type ArchiveV1Retention struct {
+	// The editable.
 	Editable *bool `json:"editable,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Sort order.
 	Order *int32 `json:"order,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

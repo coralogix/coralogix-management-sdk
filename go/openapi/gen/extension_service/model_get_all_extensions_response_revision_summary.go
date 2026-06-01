@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetAllExtensionsResponseRevisionSummary type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAllExtensionsResponseRevisionSummary{}
 
-// GetAllExtensionsResponseRevisionSummary struct for GetAllExtensionsResponseRevisionSummary
+// GetAllExtensionsResponseRevisionSummary Revision summary.
 type GetAllExtensionsResponseRevisionSummary struct {
+	// The is new.
 	IsNew *bool `json:"isNew,omitempty"`
 	ItemCounts *ItemCounts `json:"itemCounts,omitempty"`
 	AdditionalProperties map[string]interface{}

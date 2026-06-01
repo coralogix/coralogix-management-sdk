@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the TextboxDefaultLuceneValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TextboxDefaultLuceneValue{}
 
-// TextboxDefaultLuceneValue struct for TextboxDefaultLuceneValue
+// TextboxDefaultLuceneValue Textbox default lucene value.
 type TextboxDefaultLuceneValue struct {
 	DataModeType *V1CommonDataModeType `json:"dataModeType,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

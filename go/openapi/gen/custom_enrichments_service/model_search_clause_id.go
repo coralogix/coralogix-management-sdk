@@ -23,6 +23,7 @@ var _ MappedNullable = &SearchClauseId{}
 
 // SearchClauseId This data structure represents a search clause
 type SearchClauseId struct {
+	// Search by the numeric ID of the custom enrichment.
 	Id int64 `json:"id"`
 	AdditionalProperties map[string]interface{}
 }

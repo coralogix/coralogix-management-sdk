@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the FolderPath type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FolderPath{}
 
-// FolderPath struct for FolderPath
+// FolderPath Folder path.
 type FolderPath struct {
+	// The segments.
 	Segments []string `json:"segments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

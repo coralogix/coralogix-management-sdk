@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Language the model 'Language'
+// Language Language.
 type Language string
 
 // List of Language

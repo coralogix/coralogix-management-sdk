@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSourceSpanField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceSpanField{}
 
-// MultiSelectSourceSpanField struct for MultiSelectSourceSpanField
+// MultiSelectSourceSpanField Source.
 type MultiSelectSourceSpanField struct {
 	SpanField SpanFieldSource `json:"spanField"`
 	AdditionalProperties map[string]interface{}

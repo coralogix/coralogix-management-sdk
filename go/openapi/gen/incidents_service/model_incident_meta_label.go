@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the IncidentMetaLabel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentMetaLabel{}
 
-// IncidentMetaLabel struct for IncidentMetaLabel
+// IncidentMetaLabel Meta label.
 type IncidentMetaLabel struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

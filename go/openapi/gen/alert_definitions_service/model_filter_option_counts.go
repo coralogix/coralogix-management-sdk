@@ -22,10 +22,15 @@ var _ MappedNullable = &FilterOptionCounts{}
 
 // FilterOptionCounts Counts for different filter options
 type FilterOptionCounts struct {
+	// Counts for different alert enabled statuses
 	EnabledCounts []EnabledCount `json:"enabledCounts,omitempty"`
+	// Counts for different entity label values
 	EntityLabelCounts []EntityLabelCount `json:"entityLabelCounts,omitempty"`
+	// Counts for different alert priorities
 	PriorityCounts []PriorityCount `json:"priorityCounts,omitempty"`
+	// Counts for different alert statuses
 	StatusCounts []StatusCount `json:"statusCounts,omitempty"`
+	// Counts for different alert types
 	TypeCounts []TypeCount `json:"typeCounts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

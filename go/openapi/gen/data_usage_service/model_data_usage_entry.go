@@ -23,9 +23,13 @@ var _ MappedNullable = &DataUsageEntry{}
 
 // DataUsageEntry This data structure represents a data usage entry.
 type DataUsageEntry struct {
+	// The dimensions.
 	Dimensions []Dimension `json:"dimensions,omitempty"`
+	// The size gb.
 	SizeGb *float32 `json:"sizeGb,omitempty"`
+	// Timestamp.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	// The units.
 	Units *float32 `json:"units,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

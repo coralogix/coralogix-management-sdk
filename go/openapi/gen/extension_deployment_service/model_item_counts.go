@@ -20,17 +20,27 @@ var _ = bytes.MinRead
 // checks if the ItemCounts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ItemCounts{}
 
-// ItemCounts struct for ItemCounts
+// ItemCounts Item counts.
 type ItemCounts struct {
+	// List of actions.
 	Actions *int64 `json:"actions,omitempty"`
+	// List of alerts.
 	Alerts *int64 `json:"alerts,omitempty"`
+	// The custom dashboards.
 	CustomDashboards *int64 `json:"customDashboards,omitempty"`
+	// List of enrichments.
 	Enrichments *int64 `json:"enrichments,omitempty"`
+	// The events to metrics.
 	EventsToMetrics *int64 `json:"eventsToMetrics,omitempty"`
+	// The grafana dashboards.
 	GrafanaDashboards *int64 `json:"grafanaDashboards,omitempty"`
+	// The kibana dashboards.
 	KibanaDashboards *int64 `json:"kibanaDashboards,omitempty"`
+	// The metrics rule group.
 	MetricsRuleGroup *int64 `json:"metricsRuleGroup,omitempty"`
+	// The parsing rules.
 	ParsingRules *int64 `json:"parsingRules,omitempty"`
+	// The saved views.
 	SavedViews *int64 `json:"savedViews,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

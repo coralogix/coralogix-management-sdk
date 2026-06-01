@@ -22,6 +22,7 @@ var _ MappedNullable = &GetTeamMembersApiKeysResponse{}
 
 // GetTeamMembersApiKeysResponse This data structure is the response obtained when retrieving team members API keys.
 type GetTeamMembersApiKeysResponse struct {
+	// The keys.
 	Keys []ApiKeySummary `json:"keys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

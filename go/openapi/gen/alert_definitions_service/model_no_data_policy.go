@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the NoDataPolicy type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NoDataPolicy{}
 
-// NoDataPolicy struct for NoDataPolicy
+// NoDataPolicy No data policy.
 type NoDataPolicy struct {
 	// The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds
 	AutoRetireSeconds *int32 `json:"autoRetireSeconds,omitempty"`

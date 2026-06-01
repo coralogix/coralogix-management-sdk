@@ -23,6 +23,7 @@ var _ MappedNullable = &V1RevisionSummary{}
 // V1RevisionSummary struct for V1RevisionSummary
 type V1RevisionSummary struct {
 	Lifecycle *RevisionLifecycle `json:"lifecycle,omitempty"`
+	// Version number.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

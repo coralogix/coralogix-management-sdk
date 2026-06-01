@@ -329,6 +329,7 @@ model_pie_chart_spans_query.go
 model_pie_chart_stack_definition.go
 model_prom_ql_query.go
 model_prom_ql_query_type.go
+model_promql_query_0.go
 model_property.go
 model_property_definition.go
 model_property_definition_alignment.go
@@ -396,6 +397,7 @@ model_query_source_metrics_query_type_label_value.go
 model_query_source_metrics_query_type_label_value_variant.go
 model_query_source_metrics_query_type_metric_name.go
 model_query_source_metrics_query_type_metric_name_variant.go
+model_query_source_metrics_query_type_promql_query.go
 model_query_source_spans_query.go
 model_query_source_spans_query_type.go
 model_query_source_spans_query_type_field_name.go

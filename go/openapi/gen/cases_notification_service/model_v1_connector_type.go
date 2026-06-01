@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V1ConnectorType the model 'V1ConnectorType'
+// V1ConnectorType Connector type.
 type V1ConnectorType string
 
 // List of v1.ConnectorType

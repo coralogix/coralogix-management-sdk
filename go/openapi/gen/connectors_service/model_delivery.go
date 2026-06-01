@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Delivery the model 'Delivery'
+// Delivery Delivery.
 type Delivery string
 
 // List of Delivery

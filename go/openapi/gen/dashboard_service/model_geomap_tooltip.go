@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GeomapTooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapTooltip{}
 
-// GeomapTooltip struct for GeomapTooltip
+// GeomapTooltip Geomap tooltip.
 type GeomapTooltip struct {
+	// Labels to display on the tooltip, should reference fields from clusters or points on the map.
 	Labels []ObservationField `json:"labels,omitempty"`
 	// Custom template for the geomap tooltip
 	MessageTemplate *string `json:"messageTemplate,omitempty"`

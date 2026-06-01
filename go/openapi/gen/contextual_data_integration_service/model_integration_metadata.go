@@ -22,8 +22,10 @@ var _ MappedNullable = &IntegrationMetadata{}
 
 // IntegrationMetadata This data structure represents the metadata of an integration.
 type IntegrationMetadata struct {
+	// The integration key.
 	IntegrationKey *string `json:"integrationKey,omitempty"`
 	IntegrationParameters *GenericIntegrationParameters `json:"integrationParameters,omitempty"`
+	// Version number.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

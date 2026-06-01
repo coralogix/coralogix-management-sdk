@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
  - [MultipleValues](docs/MultipleValues.md)
  - [QuotaAllocationEntityTypeRule](docs/QuotaAllocationEntityTypeRule.md)
  - [QuotaAllocationEntityTypeRuleSet](docs/QuotaAllocationEntityTypeRuleSet.md)
+ - [QuotaAllocationType](docs/QuotaAllocationType.md)
  - [ReplaceQuotaAllocationRuleSetRequest](docs/ReplaceQuotaAllocationRuleSetRequest.md)
  - [ReplaceQuotaAllocationRuleSetResponse](docs/ReplaceQuotaAllocationRuleSetResponse.md)
  - [V3FilterOperator](docs/V3FilterOperator.md)

@@ -20,10 +20,11 @@ var _ = bytes.MinRead
 // checks if the Stat type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Stat{}
 
-// Stat struct for Stat
+// Stat Stat.
 type Stat struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)
 	CustomUnit *string `json:"customUnit,omitempty"`
@@ -39,9 +40,11 @@ type Stat struct {
 	Min *float64 `json:"min,omitempty"`
 	ThresholdBy *CommonThresholdBy `json:"thresholdBy,omitempty"`
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
+	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []CommonThreshold `json:"thresholds,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
 	ValueField *ObservationField `json:"valueField,omitempty"`
+	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

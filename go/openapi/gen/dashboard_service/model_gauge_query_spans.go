@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GaugeQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQuerySpans{}
 
-// GaugeQuerySpans struct for GaugeQuerySpans
+// GaugeQuerySpans Discriminated union of possible query types for the gauge widget.
 type GaugeQuerySpans struct {
 	Spans GaugeSpansQuery `json:"spans"`
 	AdditionalProperties map[string]interface{}

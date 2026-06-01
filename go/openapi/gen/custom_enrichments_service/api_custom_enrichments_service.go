@@ -42,7 +42,7 @@ func (r ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest) Execute() (*Cre
 /*
 CustomEnrichmentServiceCreateCustomEnrichment Create Custom Enrichments
 
-No description available
+Creates a new custom enrichment rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceCreateCustomEnrichmentRequest
@@ -74,6 +74,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceCreateCustom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createCustomEnrichmentRequest == nil {
+		return localVarReturnValue, nil, reportError("createCustomEnrichmentRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -144,10 +147,10 @@ func (r ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest) Execute() (*Del
 /*
 CustomEnrichmentServiceDeleteCustomEnrichment Delete Custom Enrichments
 
-No description available
+Deletes the custom enrichment rule with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the custom enrichment rule to delete.
  @return ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustomEnrichment(ctx context.Context, id int64) ApiCustomEnrichmentServiceDeleteCustomEnrichmentRequest {
@@ -247,10 +250,10 @@ func (r ApiCustomEnrichmentServiceGetCustomEnrichmentRequest) Execute() (*GetCus
 /*
 CustomEnrichmentServiceGetCustomEnrichment Get Custom Enrichment
 
-No description available
+Returns the details of the specified custom enrichment rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the custom enrichment rule.
  @return ApiCustomEnrichmentServiceGetCustomEnrichmentRequest
 */
 func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnrichment(ctx context.Context, id int64) ApiCustomEnrichmentServiceGetCustomEnrichmentRequest {
@@ -349,7 +352,7 @@ func (r ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest) Execute() (*GetCu
 /*
 CustomEnrichmentServiceGetCustomEnrichments Get Custom Enrichments
 
-No description available
+Returns all custom enrichment rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceGetCustomEnrichmentsRequest
@@ -442,6 +445,7 @@ type ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest struct {
 	searchClauses *[]CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner
 }
 
+// Search clauses used to filter custom enrichment data.
 func (r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) SearchClauses(searchClauses []CustomEnrichmentServiceSearchCustomEnrichmentDataSearchClausesParameterInner) ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest {
 	r.searchClauses = &searchClauses
 	return r
@@ -454,7 +458,7 @@ func (r ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest) Execute() (
 /*
 CustomEnrichmentServiceSearchCustomEnrichmentData Search Custom Enrichment Data
 
-No description available
+Returns the contents of all custom enrichment data.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceSearchCustomEnrichmentDataRequest
@@ -570,7 +574,7 @@ func (r ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest) Execute() (*Upd
 /*
 CustomEnrichmentServiceUpdateCustomEnrichment Update Custom Enrichment
 
-No description available
+Updates a custom enrichment rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCustomEnrichmentServiceUpdateCustomEnrichmentRequest
@@ -602,6 +606,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceUpdateCustom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateCustomEnrichmentRequest == nil {
+		return localVarReturnValue, nil, reportError("updateCustomEnrichmentRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

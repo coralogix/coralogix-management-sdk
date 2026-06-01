@@ -23,8 +23,11 @@ var _ MappedNullable = &PieChartSpansQuery{}
 // PieChartSpansQuery A spans variant of the query
 type PieChartSpansQuery struct {
 	Aggregation *SpansAggregation `json:"aggregation,omitempty"`
+	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
+	// List of field names to group the span records
 	GroupNames []SpanField `json:"groupNames,omitempty"`
+	// A list of observation fields definitions to group the records by
 	GroupNamesFields []SpanObservationField `json:"groupNamesFields,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	StackedGroupName *SpanField `json:"stackedGroupName,omitempty"`

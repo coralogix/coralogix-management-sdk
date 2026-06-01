@@ -24,6 +24,7 @@ var _ MappedNullable = &Row{}
 type Row struct {
 	Appearance *RowAppearance `json:"appearance,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	// The list of widgets in the row
 	Widgets []Widget `json:"widgets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

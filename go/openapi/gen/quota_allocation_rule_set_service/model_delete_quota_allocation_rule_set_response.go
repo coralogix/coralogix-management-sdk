@@ -22,6 +22,7 @@ var _ MappedNullable = &DeleteQuotaAllocationRuleSetResponse{}
 
 // DeleteQuotaAllocationRuleSetResponse Response confirming quota allocation rule set has been successfully deleted
 type DeleteQuotaAllocationRuleSetResponse struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

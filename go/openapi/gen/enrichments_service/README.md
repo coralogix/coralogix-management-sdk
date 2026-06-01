@@ -79,8 +79,8 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *EnrichmentsServiceAPI* | [**EnrichmentServiceAddEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceaddenrichments) | **Post** /enrichment-rules/enrichment-rules/v1 | Add Enrichments
-*EnrichmentsServiceAPI* | [**EnrichmentServiceAtomicOverwriteAllEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceatomicoverwriteallenrichments) | **Put** /enrichment-rules/enrichment-rules/v1/all | Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.
-*EnrichmentsServiceAPI* | [**EnrichmentServiceAtomicOverwriteEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceatomicoverwriteenrichments) | **Put** /enrichment-rules/enrichment-rules/v1 | Atomic Overwrite for CustomEnrichments only.
+*EnrichmentsServiceAPI* | [**EnrichmentServiceAtomicOverwriteAllEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceatomicoverwriteallenrichments) | **Put** /enrichment-rules/enrichment-rules/v1/all | Atomic Overwrite for ALL types of enrichments
+*EnrichmentsServiceAPI* | [**EnrichmentServiceAtomicOverwriteEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentserviceatomicoverwriteenrichments) | **Put** /enrichment-rules/enrichment-rules/v1 | Atomic Overwrite for CustomEnrichments only
 *EnrichmentsServiceAPI* | [**EnrichmentServiceGetCompanyEnrichmentSettings**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetcompanyenrichmentsettings) | **Get** /enrichment-rules/enrichment-rules/v1/settings | Get Company Enrichment Settings
 *EnrichmentsServiceAPI* | [**EnrichmentServiceGetEnrichmentLimit**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetenrichmentlimit) | **Get** /enrichment-rules/enrichment-rules/v1/limit | Get Enrichment Limit
 *EnrichmentsServiceAPI* | [**EnrichmentServiceGetEnrichments**](docs/EnrichmentsServiceAPI.md#enrichmentservicegetenrichments) | **Get** /enrichment-rules/enrichment-rules/v1 | Get Enrichments
@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
  - [AwsType](docs/AwsType.md)
  - [CompanyEnrichmentSettings](docs/CompanyEnrichmentSettings.md)
  - [CustomEnrichmentType](docs/CustomEnrichmentType.md)
+ - [DatasetTarget](docs/DatasetTarget.md)
  - [Enrichment](docs/Enrichment.md)
  - [EnrichmentFieldDefinition](docs/EnrichmentFieldDefinition.md)
  - [EnrichmentRequestModel](docs/EnrichmentRequestModel.md)

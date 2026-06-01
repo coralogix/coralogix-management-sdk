@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DataprimeSourceStrategyDurationVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyDurationVariant{}
 
-// DataprimeSourceStrategyDurationVariant struct for DataprimeSourceStrategyDurationVariant
+// DataprimeSourceStrategyDurationVariant Determines the time strategy for fetching Dataprime results (instant snapshot, fixed range, or sliding window).
 type DataprimeSourceStrategyDurationVariant struct {
 	Duration DataprimeSourceStrategyDuration `json:"duration"`
 	AdditionalProperties map[string]interface{}

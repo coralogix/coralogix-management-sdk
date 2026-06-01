@@ -7,12 +7,13 @@ servers:
 paths:
   /aaa/teams/v2/{team_id}/members:
     post:
-      description: No description available
+      description: Adds members to the specified team.
       externalDocs:
         url: ""
       operationId: UsersMgmtService_CreateUsers
       parameters:
-      - explode: false
+      - description: Team ID where the users will be created
+        explode: false
         in: path
         name: team_id
         required: true
@@ -57,12 +58,13 @@ paths:
       tags:
       - Users Management Service
     put:
-      description: No description available
+      description: Updates team members for the specified team.
       externalDocs:
         url: ""
       operationId: UsersMgmtService_UpdateUsers
       parameters:
-      - explode: false
+      - description: Team ID containing the users to update
+        explode: false
         in: path
         name: team_id
         required: true
@@ -102,14 +104,68 @@ paths:
       summary: Update Users
       tags:
       - Users Management Service
-  /aaa/teams/v2/{team_id}/members/status:
+  /aaa/teams/v2/{team_id}/members/{user_account_id}:
+    get:
+      description: Returns the details of a specific team member.
+      externalDocs:
+        url: ""
+      operationId: UsersMgmtService_GetUser
+      parameters:
+      - description: Team ID to search within
+        explode: false
+        in: path
+        name: team_id
+        required: true
+        schema:
+          description: Team ID to search within
+          format: int64
+          type: integer
+        style: simple
+      - description: User account ID to retrieve
+        explode: false
+        in: path
+        name: user_account_id
+        required: true
+        schema:
+          description: User account ID to retrieve
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: User not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get User
+      tags:
+      - Users Management Service
+  /aaa/teams/v2/{team_id}/members:updateStatuses:
     patch:
-      description: No description available
+      description: Updates the active status of multiple team members.
       externalDocs:
         url: ""
       operationId: UsersMgmtService_UpdateUsersStatuses
       parameters:
-      - explode: false
+      - description: Team ID containing the users to update
+        explode: false
         in: path
         name: team_id
         required: true
@@ -149,65 +205,15 @@ paths:
       summary: Activate/Revoke Users
       tags:
       - Users Management Service
-  /aaa/teams/v2/{team_id}/members/{user_account_id}:
-    get:
-      description: No description available
-      externalDocs:
-        url: ""
-      operationId: UsersMgmtService_GetUser
-      parameters:
-      - explode: false
-        in: path
-        name: team_id
-        required: true
-        schema:
-          description: Team ID to search within
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: user_account_id
-        required: true
-        schema:
-          description: User account ID to retrieve
-          format: int64
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetUserResponse"
-          description: ""
-        "400":
-          content:
-            application/json: {}
-          description: Bad Request
-        "401":
-          content:
-            application/json: {}
-          description: Unauthorized request
-        "404":
-          content:
-            application/json: {}
-          description: User not found
-        "500":
-          content:
-            application/json: {}
-          description: Internal server error
-      summary: Get User
-      tags:
-      - Users Management Service
   /aaa/teams/v2/{team_id}/search:
     get:
-      description: No description available
+      description: Searches for team members by query.
       externalDocs:
         url: ""
       operationId: UsersMgmtService_SearchUsers
       parameters:
-      - explode: false
+      - description: Team ID to search within
+        explode: false
         in: path
         name: team_id
         required: true
@@ -216,7 +222,8 @@ paths:
           format: int64
           type: integer
         style: simple
-      - explode: true
+      - description: Optional filter by username (partial match supported)
+        explode: true
         in: query
         name: username
         required: false
@@ -225,14 +232,16 @@ paths:
           example: ""
           type: string
         style: form
-      - explode: true
+      - description: "Optional filter by user status (e.g., 'active', 'inactive')"
+        explode: true
         in: query
         name: status
         required: false
         schema:
           $ref: "#/components/schemas/UserStatus"
         style: form
-      - explode: true
+      - description: Number of results per page
+        explode: true
         in: query
         name: page_size
         required: false
@@ -241,7 +250,8 @@ paths:
           format: int64
           type: integer
         style: form
-      - explode: true
+      - description: Token for pagination to retrieve the next page of results
+        explode: true
         in: query
         name: page_token
         required: false
@@ -297,6 +307,7 @@ components:
           description: "Type of access: 'permanent' or 'temporary'"
           type: string
         permanentAccess:
+          additionalProperties: false
           description: User with permanent access. The user's access does not expire
             and remains active until manually revoked or deactivated.
           externalDocs:
@@ -331,6 +342,7 @@ components:
       - ALLOWED_LOGIN_MODE_LOCAL
       type: string
     CreateUsersResponse:
+      additionalProperties: false
       description: Empty response indicating successful processing of all user creation
         and invitation requests. Ensure failures are returned via gRPC status codes.
       externalDocs:
@@ -340,8 +352,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -418,12 +430,14 @@ components:
           type: array
       type: object
     OnboardingMode:
+      description: Onboarding mode.
       enum:
       - ONBOARDING_MODE_UNSPECIFIED
       - ONBOARDING_MODE_INVITE_LINK
       - ONBOARDING_MODE_NO_INVITE
       type: string
     PermanentAccess:
+      additionalProperties: false
       description: User with permanent access. The user's access does not expire and
         remains active until manually revoked or deactivated.
       externalDocs:
@@ -464,6 +478,7 @@ components:
           format: int64
           type: integer
         users:
+          description: List of users matching the search criteria
           items:
             $ref: "#/components/schemas/rbac.v2.User"
           type: array
@@ -495,6 +510,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       properties:
         userAccountIds:
+          description: List of user account IDs for the successfully updated users
           items:
             description: List of user account IDs for the successfully updated users
             format: int64
@@ -514,6 +530,8 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       properties:
         userAccountIds:
+          description: List of user account IDs for users whose status was successfully
+            updated
           items:
             description: List of user account IDs for users whose status was successfully
               updated
@@ -523,6 +541,7 @@ components:
       title: UpdateUserStatusResponse
       type: object
     UserStatus:
+      description: User status.
       enum:
       - USER_STATUS_UNSPECIFIED
       - USER_STATUS_ACTIVE
@@ -539,6 +558,8 @@ components:
         accessType:
           $ref: "#/components/schemas/AccessType"
         allowedLoginMode:
+          description: "List of allowed login modes. Can include SSO, local authentication,\
+            \ or both. Not supported in invite onboarding mode"
           items:
             $ref: "#/components/schemas/AllowedLoginMode"
           type: array
@@ -595,6 +616,7 @@ components:
       title: User
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -628,6 +650,8 @@ components:
         status:
           $ref: "#/components/schemas/UserStatus"
         userAccountIds:
+          description: List of user account IDs to update. All users will be set to
+            the same status.
           items:
             description: List of user account IDs to update. All users will be set
               to the same status.

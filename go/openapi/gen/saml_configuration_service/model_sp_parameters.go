@@ -22,10 +22,15 @@ var _ MappedNullable = &SPParameters{}
 
 // SPParameters This data structure represents the parameters of a SAML service provider
 type SPParameters struct {
+	// The assertion consumer service url.
 	AssertionConsumerServiceUrl *string `json:"assertionConsumerServiceUrl,omitempty"`
+	// The binding.
 	Binding *string `json:"binding,omitempty"`
+	// The metadata url.
 	MetadataUrl *string `json:"metadataUrl,omitempty"`
+	// The name id format.
 	NameIdFormat *string `json:"nameIdFormat,omitempty"`
+	// The signing cert pem.
 	SigningCertPem *string `json:"signingCertPem,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

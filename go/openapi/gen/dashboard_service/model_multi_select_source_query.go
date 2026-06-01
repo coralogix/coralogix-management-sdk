@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectSourceQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectSourceQuery{}
 
-// MultiSelectSourceQuery struct for MultiSelectSourceQuery
+// MultiSelectSourceQuery Source.
 type MultiSelectSourceQuery struct {
 	Query MultiSelectQuerySource `json:"query"`
 	AdditionalProperties map[string]interface{}

@@ -23,6 +23,7 @@ var _ MappedNullable = &CaseNotificationDeliveries{}
 
 // CaseNotificationDeliveries Notification deliveries for a single case.
 type CaseNotificationDeliveries struct {
+	// Notification deliveries for the case
 	NotificationDeliveries []NotificationDelivery `json:"notificationDeliveries"`
 	AdditionalProperties map[string]interface{}
 }

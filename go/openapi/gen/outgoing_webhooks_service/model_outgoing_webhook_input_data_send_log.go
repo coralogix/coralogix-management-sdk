@@ -21,11 +21,13 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputDataSendLog type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputDataSendLog{}
 
-// OutgoingWebhookInputDataSendLog struct for OutgoingWebhookInputDataSendLog
+// OutgoingWebhookInputDataSendLog Outgoing webhook input data.
 type OutgoingWebhookInputDataSendLog struct {
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	SendLog SendLogConfig `json:"sendLog"`
 	Type *WebhookType `json:"type,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

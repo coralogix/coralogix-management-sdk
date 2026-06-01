@@ -22,8 +22,9 @@ var _ = bytes.MinRead
 // checks if the IncidentFieldOneOfClosedAt type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentFieldOneOfClosedAt{}
 
-// IncidentFieldOneOfClosedAt struct for IncidentFieldOneOfClosedAt
+// IncidentFieldOneOfClosedAt Incident field one of.
 type IncidentFieldOneOfClosedAt struct {
+	// Timestamp when the incident was closed.
 	ClosedAt time.Time `json:"closedAt"`
 	AdditionalProperties map[string]interface{}
 }

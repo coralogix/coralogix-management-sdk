@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the DataprimeSourceStrategyRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeSourceStrategyRange{}
 
-// DataprimeSourceStrategyRange struct for DataprimeSourceStrategyRange
+// DataprimeSourceStrategyRange Range strategy: uses start and end timestamp fields to define the annotation span.
 type DataprimeSourceStrategyRange struct {
 	EndTimestampField *ObservationField `json:"endTimestampField,omitempty"`
 	StartTimestampField *ObservationField `json:"startTimestampField,omitempty"`

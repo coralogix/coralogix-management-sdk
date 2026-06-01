@@ -26,7 +26,9 @@ type LogsAnomalyType struct {
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
+	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// The rules for the log anomaly alert
 	Rules []LogsAnomalyRule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

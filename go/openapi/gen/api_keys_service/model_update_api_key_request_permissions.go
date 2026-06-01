@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateApiKeyRequestPermissions{}
 
 // UpdateApiKeyRequestPermissions This data structure represents a set of permissions on an API key.
 type UpdateApiKeyRequestPermissions struct {
+	// List of individual permissions to grant to the API key.
 	Permissions []string `json:"permissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

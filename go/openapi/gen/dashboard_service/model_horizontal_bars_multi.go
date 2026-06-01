@@ -20,10 +20,11 @@ var _ = bytes.MinRead
 // checks if the HorizontalBarsMulti type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarsMulti{}
 
-// HorizontalBarsMulti struct for HorizontalBarsMulti
+// HorizontalBarsMulti Visualization configuration for horizontal bars with multiple queries.
 type HorizontalBarsMulti struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`
+	// The category fields.
 	CategoryFields []ObservationField `json:"categoryFields,omitempty"`
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`
@@ -41,6 +42,7 @@ type HorizontalBarsMulti struct {
 	Legend *Legend `json:"legend,omitempty"`
 	// Maximum number of bars on a chart
 	MaxBarsPerChart *int32 `json:"maxBarsPerChart,omitempty"`
+	// Per-query field settings
 	QueryFieldSettings []HorizontalBarsMultiQueryFieldSettings `json:"queryFieldSettings,omitempty"`
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	SortOrder *VisualizationSortOrder `json:"sortOrder,omitempty"`

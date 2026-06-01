@@ -22,7 +22,9 @@ var _ MappedNullable = &BatchGetGlobalRoutersResponse{}
 
 // BatchGetGlobalRoutersResponse Response containing requested global routers and missing global routers ids
 type BatchGetGlobalRoutersResponse struct {
+	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
+	// The routers.
 	Routers *map[string]GlobalRouter `json:"routers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

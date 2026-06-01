@@ -22,6 +22,7 @@ var _ MappedNullable = &CreateDashboardResponse{}
 
 // CreateDashboardResponse This is a response received when a custom dashboard is successfully created
 type CreateDashboardResponse struct {
+	// The dashboard id.
 	DashboardId *string `json:"dashboardId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

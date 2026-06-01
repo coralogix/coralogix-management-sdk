@@ -22,7 +22,9 @@ var _ MappedNullable = &ApiKeyUserOwner{}
 
 // ApiKeyUserOwner This data structure represents the user owner of an API key.
 type ApiKeyUserOwner struct {
+	// The user email.
 	UserEmail *string `json:"userEmail,omitempty"`
+	// The user id.
 	UserId *string `json:"userId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

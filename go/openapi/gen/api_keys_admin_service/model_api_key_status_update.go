@@ -22,7 +22,9 @@ var _ MappedNullable = &ApiKeyStatusUpdate{}
 
 // ApiKeyStatusUpdate This data structure represents the status update for a specific API key.
 type ApiKeyStatusUpdate struct {
+	// Whether this resource is active.
 	Active *bool `json:"active,omitempty"`
+	// Key identifier.
 	KeyId *string `json:"keyId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

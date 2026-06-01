@@ -23,9 +23,11 @@ var _ MappedNullable = &EventsFilter{}
 
 // EventsFilter This data structure represents an events filter
 type EventsFilter struct {
+	// List of event attribute keys to include when retrieving event data.
 	CxEventKeys []string `json:"cxEventKeys"`
 	CxEventLabelsFilters interface{} `json:"cxEventLabelsFilters,omitempty"`
 	CxEventMetadataFilters interface{} `json:"cxEventMetadataFilters,omitempty"`
+	// List of event type identifiers to include in the results.
 	CxEventTypes []string `json:"cxEventTypes"`
 	Timestamp interface{} `json:"timestamp"`
 	AdditionalProperties map[string]interface{}

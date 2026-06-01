@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the ApiKeyData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ApiKeyData{}
 
-// ApiKeyData struct for ApiKeyData
+// ApiKeyData Api key data.
 type ApiKeyData struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -7,7 +7,7 @@ servers:
 paths:
   /actions/actions/v2:
     get:
-      description: No description available
+      description: Returns all actions for the team.
       externalDocs:
         url: ""
       operationId: ActionsService_ListActions
@@ -34,7 +34,7 @@ paths:
       tags:
       - Actions Service
     post:
-      description: No description available
+      description: Creates a new action.
       externalDocs:
         url: ""
       operationId: ActionsService_CreateAction
@@ -66,7 +66,7 @@ paths:
       tags:
       - Actions Service
     put:
-      description: No description available
+      description: Replaces all actions with the provided set.
       externalDocs:
         url: ""
       operationId: ActionsService_ReplaceAction
@@ -99,16 +99,18 @@ paths:
       - Actions Service
   /actions/actions/v2/{id}:
     delete:
-      description: No description available
+      description: Deletes the action with the specified ID.
       externalDocs:
         url: ""
       operationId: ActionsService_DeleteAction
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -134,16 +136,18 @@ paths:
       tags:
       - Actions Service
     get:
-      description: No description available
+      description: Returns the details of a specific action.
       externalDocs:
         url: ""
       operationId: ActionsService_GetAction
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -170,7 +174,7 @@ paths:
       - Actions Service
   /actions/batch/v2:
     post:
-      description: No description available
+      description: Creates multiple actions in a single request.
       externalDocs:
         url: ""
       operationId: ActionsService_AtomicBatchExecuteActions
@@ -203,7 +207,7 @@ paths:
       - Actions Service
   /actions/order/v2:
     post:
-      description: No description available
+      description: Updates the display order of actions.
       externalDocs:
         url: ""
       operationId: ActionsService_OrderActions
@@ -239,8 +243,8 @@ components:
     ActionExecutionRequest:
       oneOf:
       - $ref: "#/components/schemas/ActionExecutionRequestCreate"
-      - $ref: "#/components/schemas/ActionExecutionRequestReplace"
       - $ref: "#/components/schemas/ActionExecutionRequestDelete"
+      - $ref: "#/components/schemas/ActionExecutionRequestReplace"
     ActionExecutionRequestCreate:
       description: This data structure represents a request to execute an Action operation.
       externalDocs:
@@ -274,8 +278,8 @@ components:
     ActionExecutionResponse:
       oneOf:
       - $ref: "#/components/schemas/ActionExecutionResponseCreate"
-      - $ref: "#/components/schemas/ActionExecutionResponseReplace"
       - $ref: "#/components/schemas/ActionExecutionResponseDelete"
+      - $ref: "#/components/schemas/ActionExecutionResponseReplace"
     ActionExecutionResponseCreate:
       description: This data structure represents a response to an Action execution
         request.
@@ -317,6 +321,7 @@ components:
         url: ""
       properties:
         delete:
+          additionalProperties: false
           description: This data structure represents the response to delete an Action.
           externalDocs:
             url: ""
@@ -388,6 +393,7 @@ components:
         url: ""
       properties:
         matchingResponses:
+          description: The matching responses.
           items:
             $ref: "#/components/schemas/ActionExecutionResponse"
           type: array
@@ -398,26 +404,36 @@ components:
         url: ""
       properties:
         applicationNames:
+          description: The application names.
           items:
+            description: The application names.
             type: string
           type: array
         description:
+          description: Human-readable description.
           type: string
         dpxlFilter:
+          description: The dpxl filter.
           type: string
         isPrivate:
+          description: The is private.
           type: boolean
         name:
+          description: Display name.
           type: string
         sourceType:
           $ref: "#/components/schemas/v2.SourceType"
         subsystemNames:
+          description: The subsystem names.
           items:
+            description: The subsystem names.
             type: string
           type: array
         url:
+          description: URL.
           type: string
         urlFields:
+          description: The url fields.
           items:
             $ref: "#/components/schemas/UrlField"
           type: array
@@ -458,17 +474,19 @@ components:
         url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
       type: object
     DeleteActionResponse:
+      additionalProperties: false
       description: This data structure represents the response to delete an Action.
       externalDocs:
         url: ""
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -595,6 +613,7 @@ components:
         url: ""
       properties:
         actions:
+          description: List of actions.
           items:
             $ref: "#/components/schemas/v2.Action"
           type: array
@@ -609,6 +628,7 @@ components:
           type: array
       type: object
     OrderActionsResponse:
+      additionalProperties: false
       description: This data structure represents the response to order Actions.
       externalDocs:
         url: ""
@@ -661,8 +681,10 @@ components:
         url: ""
       properties:
         name:
+          description: Display name.
           type: string
         required:
+          description: The required.
           type: boolean
       type: object
     events.v3.FilterMatcher:
@@ -697,43 +719,58 @@ components:
         url: ""
       properties:
         applicationNames:
+          description: The application names.
           items:
+            description: The application names.
             type: string
           type: array
         createdBy:
+          description: The created by.
           type: string
         description:
+          description: Human-readable description.
           type: string
         dpxlFilter:
+          description: The dpxl filter.
           type: string
         id:
+          description: Unique identifier.
           type: string
         isHidden:
+          description: The is hidden.
           type: boolean
         isPrivate:
+          description: The is private.
           type: boolean
         name:
+          description: Display name.
           type: string
         sourceType:
           $ref: "#/components/schemas/v2.SourceType"
         subsystemNames:
+          description: The subsystem names.
           items:
+            description: The subsystem names.
             type: string
           type: array
         url:
+          description: URL.
           type: string
         urlFields:
+          description: The url fields.
           items:
             $ref: "#/components/schemas/UrlField"
           type: array
       type: object
     v2.SourceType:
+      description: Source type.
       enum:
       - SOURCE_TYPE_UNSPECIFIED
       - SOURCE_TYPE_LOG
       - SOURCE_TYPE_DATA_MAP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -748,26 +785,36 @@ components:
       description: This data structure represents the request to create an Action.
       properties:
         applicationNames:
+          description: The application names.
           items:
+            description: The application names.
             type: string
           type: array
         description:
+          description: Human-readable description.
           type: string
         dpxlFilter:
+          description: The dpxl filter.
           type: string
         isPrivate:
+          description: The is private.
           type: boolean
         name:
+          description: Display name.
           type: string
         sourceType:
           $ref: "#/components/schemas/v2.SourceType"
         subsystemNames:
+          description: The subsystem names.
           items:
+            description: The subsystem names.
             type: string
           type: array
         url:
+          description: URL.
           type: string
         urlFields:
+          description: The url fields.
           items:
             $ref: "#/components/schemas/UrlField"
           type: array
@@ -777,6 +824,7 @@ components:
         Action operations atomically.
       properties:
         requests:
+          description: The requests.
           items:
             $ref: "#/components/schemas/ActionExecutionRequest"
           type: array
@@ -788,10 +836,12 @@ components:
           additionalProperties:
             format: int64
             type: integer
+          description: The private actions order.
           type: object
         sharedActionsOrder:
           additionalProperties:
             format: int64
             type: integer
+          description: The shared actions order.
           type: object
       type: object

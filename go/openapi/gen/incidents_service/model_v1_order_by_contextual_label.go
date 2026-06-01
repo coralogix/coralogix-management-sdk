@@ -23,6 +23,7 @@ var _ MappedNullable = &V1OrderByContextualLabel{}
 
 // V1OrderByContextualLabel struct for V1OrderByContextualLabel
 type V1OrderByContextualLabel struct {
+	// A contextual label key to order by.
 	ContextualLabel string `json:"contextualLabel"`
 	Direction V1OrderByDirection `json:"direction"`
 	AdditionalProperties map[string]interface{}

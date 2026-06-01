@@ -24,15 +24,22 @@ var _ MappedNullable = &Preset{}
 // Preset Set of preconfigured templates for notification content rendering
 type Preset struct {
 	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
+	// The config overrides.
 	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
 	ConnectorType *NotificationCenterConnectorType `json:"connectorType,omitempty"`
+	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// The parent id.
 	ParentId *string `json:"parentId,omitempty"`
 	PresetType *PresetType `json:"presetType,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

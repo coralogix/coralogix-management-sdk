@@ -23,9 +23,13 @@ var _ MappedNullable = &Annotation{}
 // Annotation struct for Annotation
 type Annotation struct {
 	Color *AnnotationColor `json:"color,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Scope *AnnotationWidgetScope `json:"scope,omitempty"`
 	Source *AnnotationSource `json:"source,omitempty"`

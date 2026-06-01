@@ -23,6 +23,7 @@ var _ MappedNullable = &ReplaceSloResponse{}
 
 // ReplaceSloResponse Response after replacing an existing SLO.
 type ReplaceSloResponse struct {
+	// The effected slo alert ids.
 	EffectedSloAlertIds []string `json:"effectedSloAlertIds,omitempty"`
 	Slo Slo `json:"slo"`
 	AdditionalProperties map[string]interface{}

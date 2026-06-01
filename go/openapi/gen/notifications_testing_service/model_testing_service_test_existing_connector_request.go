@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the TestingServiceTestExistingConnectorRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestingServiceTestExistingConnectorRequest{}
 
-// TestingServiceTestExistingConnectorRequest struct for TestingServiceTestExistingConnectorRequest
+// TestingServiceTestExistingConnectorRequest Request for sending a test notification.
 type TestingServiceTestExistingConnectorRequest struct {
+	// The connector id.
 	ConnectorId *string `json:"connectorId,omitempty"`
+	// Payload type to use when testing the connector.
 	PayloadType *string `json:"payloadType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

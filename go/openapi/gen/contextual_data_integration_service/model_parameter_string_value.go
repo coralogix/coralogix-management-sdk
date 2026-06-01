@@ -23,7 +23,9 @@ var _ MappedNullable = &ParameterStringValue{}
 
 // ParameterStringValue struct for ParameterStringValue
 type ParameterStringValue struct {
+	// The key.
 	Key *string `json:"key,omitempty"`
+	// String value for this integration parameter.
 	StringValue string `json:"stringValue"`
 	AdditionalProperties map[string]interface{}
 }

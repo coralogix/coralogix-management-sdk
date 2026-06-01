@@ -11,7 +11,7 @@
           "Retentions Service"
         ],
         "summary": "Get Retentions",
-        "description": "No description available",
+        "description": "Returns all available retention tags.",
         "externalDocs": {
           "url": ""
         },
@@ -52,7 +52,7 @@
           "Retentions Service"
         ],
         "summary": "Update Retentions",
-        "description": "No description available",
+        "description": "Creates a new retention tag.",
         "externalDocs": {
           "url": ""
         },
@@ -66,6 +66,7 @@
                 "type": "object",
                 "properties": {
                   "retentionUpdateElements": {
+                    "description": "List of retention tag updates to apply.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RetentionUpdateElement"
@@ -77,7 +78,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -117,7 +119,7 @@
           "Retentions Service"
         ],
         "summary": "Activate Retentions",
-        "description": "No description available",
+        "description": "Activates the specified retention tags.",
         "externalDocs": {
           "url": ""
         },
@@ -160,7 +162,7 @@
           "Retentions Service"
         ],
         "summary": "Get Retentions Enabled",
-        "description": "No description available",
+        "description": "Returns the enabled retention tags for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -211,6 +213,7 @@
         "properties": {
           "activateRetentions": {
             "example": true,
+            "description": "List of retentions to activate.",
             "type": "boolean"
           }
         },
@@ -221,10 +224,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -304,6 +307,7 @@
         "type": "object",
         "properties": {
           "enableTags": {
+            "description": "The enable tags.",
             "type": "boolean"
           }
         },
@@ -312,9 +316,14 @@
         ]
       },
       "GetRetentionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the current data retention settings.",
         "type": "object",
         "properties": {
           "retentions": {
+            "description": "The retentions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/archive.v1.Retention"
@@ -340,9 +349,11 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           }
         }
@@ -357,6 +368,7 @@
         "type": "object",
         "properties": {
           "retentions": {
+            "description": "The retentions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/archive.v1.Retention"
@@ -377,15 +389,19 @@
         "type": "object",
         "properties": {
           "editable": {
+            "description": "The editable.",
             "type": "boolean"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int32"
           }
@@ -399,6 +415,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

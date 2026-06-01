@@ -23,7 +23,9 @@ var _ MappedNullable = &TestConnectorConfigRequest{}
 // TestConnectorConfigRequest Request to test a connector configuration
 type TestConnectorConfigRequest struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// Fields.
 	Fields []NotificationCenterConnectorConfigField `json:"fields,omitempty"`
+	// Payload type to use when testing the connector.
 	PayloadType *string `json:"payloadType,omitempty"`
 	Type *NotificationCenterConnectorType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -7,7 +7,7 @@ servers:
 paths:
   /notifications/notification-center/v1/entity-types:
     get:
-      description: No description available
+      description: Returns all available notification entity types.
       externalDocs:
         url: ""
       operationId: EntitiesService_ListEntityTypes
@@ -23,12 +23,13 @@ paths:
       - Entities service
   /notifications/notification-center/v1/entity-types/{entity_type}/entity-subtypes:
     get:
-      description: No description available
+      description: Returns all sub-types for the specified entity type.
       externalDocs:
         url: ""
       operationId: EntitiesService_ListEntitySubTypes
       parameters:
-      - explode: false
+      - description: Entity type whose sub-types to list.
+        explode: false
         in: path
         name: entity_type
         required: true
@@ -49,8 +50,8 @@ components:
   schemas:
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -99,23 +100,32 @@ components:
       title: Filters
       type: object
     ListEntitySubTypesResponse:
+      description: Response containing a list of notification entity sub-types.
       example:
         entitySubTypes:
         - entitySubTypes
         - entitySubTypes
+      externalDocs:
+        url: ""
       properties:
         entitySubTypes:
+          description: The entity sub types.
           items:
+            description: The entity sub types.
             type: string
           type: array
       type: object
     ListEntityTypesResponse:
+      description: Response containing a list of notification entity types.
       example:
         entityTypes:
         - ENTITY_TYPE_UNSPECIFIED
         - ENTITY_TYPE_UNSPECIFIED
+      externalDocs:
+        url: ""
       properties:
         entityTypes:
+          description: The entity types.
           items:
             $ref: "#/components/schemas/notification_center.EntityType"
           type: array
@@ -135,6 +145,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     notification_center.EntityType:
+      description: Entity type.
       enum:
       - ENTITY_TYPE_UNSPECIFIED
       - ALERTS
@@ -142,6 +153,7 @@ components:
       - CASES
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR

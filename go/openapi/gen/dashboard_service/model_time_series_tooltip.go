@@ -20,10 +20,11 @@ var _ = bytes.MinRead
 // checks if the TimeSeriesTooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TimeSeriesTooltip{}
 
-// TimeSeriesTooltip struct for TimeSeriesTooltip
+// TimeSeriesTooltip Time series tooltip.
 type TimeSeriesTooltip struct {
 	// Type of the tooltip display, can be showing single series value or all series values at once
 	ShowAllSeries *bool `json:"showAllSeries,omitempty"`
+	// The show labels.
 	ShowLabels *bool `json:"showLabels,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

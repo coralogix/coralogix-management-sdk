@@ -22,7 +22,11 @@ var _ MappedNullable = &SloOwnershipTag{}
 
 // SloOwnershipTag Ownership for one dimension (service, environment, or team). static_values are group-wide (broad) assignments. label_keys are metric label names whose values are read per permutation (label-driven). Both may be set; when both lists are empty, that dimension is unset.
 type SloOwnershipTag struct {
+	// Metric label names to use as sources (label-driven). Actual values come from series at query time. Empty if not using label-driven for this dimension.
 	LabelKeys []string `json:"labelKeys,omitempty"`
+	// Flat, deduplicated union of static_values and the values resolved from label_keys across observed permutations (empties excluded). Empty when neither source yields any value. Provides a single searchable list of values for this ownership tag, regardless of source.
+	ResolvedValues []string `json:"resolvedValues,omitempty"`
+	// Group-wide static values (broad). Empty if not using broad for this dimension.
 	StaticValues []string `json:"staticValues,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -78,6 +82,38 @@ func (o *SloOwnershipTag) SetLabelKeys(v []string) {
 	o.LabelKeys = v
 }
 
+// GetResolvedValues returns the ResolvedValues field value if set, zero value otherwise.
+func (o *SloOwnershipTag) GetResolvedValues() []string {
+	if o == nil || IsNil(o.ResolvedValues) {
+		var ret []string
+		return ret
+	}
+	return o.ResolvedValues
+}
+
+// GetResolvedValuesOk returns a tuple with the ResolvedValues field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SloOwnershipTag) GetResolvedValuesOk() ([]string, bool) {
+	if o == nil || IsNil(o.ResolvedValues) {
+		return nil, false
+	}
+	return o.ResolvedValues, true
+}
+
+// HasResolvedValues returns a boolean if a field has been set.
+func (o *SloOwnershipTag) HasResolvedValues() bool {
+	if o != nil && !IsNil(o.ResolvedValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolvedValues gets a reference to the given []string and assigns it to the ResolvedValues field.
+func (o *SloOwnershipTag) SetResolvedValues(v []string) {
+	o.ResolvedValues = v
+}
+
 // GetStaticValues returns the StaticValues field value if set, zero value otherwise.
 func (o *SloOwnershipTag) GetStaticValues() []string {
 	if o == nil || IsNil(o.StaticValues) {
@@ -123,6 +159,9 @@ func (o SloOwnershipTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LabelKeys) {
 		toSerialize["labelKeys"] = o.LabelKeys
 	}
+	if !IsNil(o.ResolvedValues) {
+		toSerialize["resolvedValues"] = o.ResolvedValues
+	}
 	if !IsNil(o.StaticValues) {
 		toSerialize["staticValues"] = o.StaticValues
 	}
@@ -150,6 +189,7 @@ func (o *SloOwnershipTag) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "labelKeys")
+		delete(additionalProperties, "resolvedValues")
 		delete(additionalProperties, "staticValues")
 		o.AdditionalProperties = additionalProperties
 	}

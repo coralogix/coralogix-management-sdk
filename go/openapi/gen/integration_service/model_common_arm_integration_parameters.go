@@ -22,8 +22,11 @@ var _ MappedNullable = &CommonARMIntegrationParameters{}
 
 // CommonARMIntegrationParameters struct for CommonARMIntegrationParameters
 type CommonARMIntegrationParameters struct {
+	// API key used to authenticate requests for template access.
 	ApiKey *string `json:"apiKey,omitempty"`
+	// The cgx domain.
 	CgxDomain *string `json:"cgxDomain,omitempty"`
+	// The logs url.
 	LogsUrl *string `json:"logsUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GetDailyUsageEvaluationTokensRequestDateRange type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDailyUsageEvaluationTokensRequestDateRange{}
 
-// GetDailyUsageEvaluationTokensRequestDateRange struct for GetDailyUsageEvaluationTokensRequestDateRange
+// GetDailyUsageEvaluationTokensRequestDateRange Request for daily evaluation token usage data for the specified period.
 type GetDailyUsageEvaluationTokensRequestDateRange struct {
 	DateRange V2DateRange `json:"dateRange"`
 	AdditionalProperties map[string]interface{}

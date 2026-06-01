@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GaugeQueryDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQueryDataprime{}
 
-// GaugeQueryDataprime struct for GaugeQueryDataprime
+// GaugeQueryDataprime Discriminated union of possible query types for the gauge widget.
 type GaugeQueryDataprime struct {
 	Dataprime GaugeDataprimeQuery `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

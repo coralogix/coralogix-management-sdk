@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the V2Permissions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &V2Permissions{}
 
-// V2Permissions struct for V2Permissions
+// V2Permissions Permissions.
 type V2Permissions struct {
+	// List of permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

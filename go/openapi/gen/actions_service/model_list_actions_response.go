@@ -22,6 +22,7 @@ var _ MappedNullable = &ListActionsResponse{}
 
 // ListActionsResponse This data structure represents the response containing a list of Actions.
 type ListActionsResponse struct {
+	// List of actions.
 	Actions []V2Action `json:"actions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

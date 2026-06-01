@@ -20,14 +20,21 @@ var _ = bytes.MinRead
 // checks if the CustomEnrichment type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomEnrichment{}
 
-// CustomEnrichment struct for CustomEnrichment
+// CustomEnrichment Custom enrichment.
 type CustomEnrichment struct {
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The file name.
 	FileName *string `json:"fileName,omitempty"`
+	// The file size.
 	FileSize *int64 `json:"fileSize,omitempty"`
+	// Unique identifier.
 	Id *int64 `json:"id,omitempty"`
+	// The is query only.
 	IsQueryOnly *bool `json:"isQueryOnly,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Version number.
 	Version *int64 `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

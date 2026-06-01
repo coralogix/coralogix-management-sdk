@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// CommonThresholdBy the model 'CommonThresholdBy'
+// CommonThresholdBy Threshold by.
 type CommonThresholdBy string
 
 // List of common.ThresholdBy

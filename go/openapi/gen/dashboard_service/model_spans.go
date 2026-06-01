@@ -22,9 +22,12 @@ var _ MappedNullable = &Spans{}
 
 // Spans A spans variant of the query
 type Spans struct {
+	// Span query aggregation function
 	Aggregation []LogsAggregation `json:"aggregation,omitempty"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
+	// List of span query filters
 	Filters []SpansFilter `json:"filters,omitempty"`
+	// A list of fields to group the records by
 	GroupBy []SpanObservationField `json:"groupBy,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`
 	AdditionalProperties map[string]interface{}

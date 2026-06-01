@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the LineChartQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LineChartQuerySpans{}
 
-// LineChartQuerySpans struct for LineChartQuerySpans
+// LineChartQuerySpans Discriminated union of possible query types for the line chart widget.
 type LineChartQuerySpans struct {
 	Spans LineChartSpansQuery `json:"spans"`
 	AdditionalProperties map[string]interface{}

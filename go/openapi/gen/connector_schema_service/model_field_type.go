@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// FieldType the model 'FieldType'
+// FieldType Field type.
 type FieldType string
 
 // List of FieldType

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the AlertEventMultiplePermutation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AlertEventMultiplePermutation{}
 
-// AlertEventMultiplePermutation struct for AlertEventMultiplePermutation
+// AlertEventMultiplePermutation Alert event multiple permutation.
 type AlertEventMultiplePermutation struct {
+	// List of alert events for multiple permutations.
 	AlertEventMultiplePermutation []AlertEvent `json:"alertEventMultiplePermutation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

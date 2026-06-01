@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the VariableSelectionOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableSelectionOptions{}
 
-// VariableSelectionOptions struct for VariableSelectionOptions
+// VariableSelectionOptions Variable selection options.
 type VariableSelectionOptions struct {
 	SelectionType *SelectionType `json:"selectionType,omitempty"`
 	AdditionalProperties map[string]interface{}

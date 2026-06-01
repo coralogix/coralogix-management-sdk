@@ -22,7 +22,9 @@ var _ MappedNullable = &GetEventsStatisticsResponse{}
 
 // GetEventsStatisticsResponse This data structure represents a response to get events statistics
 type GetEventsStatisticsResponse struct {
+	// The cx event labels field statistics.
 	CxEventLabelsFieldStatistics *map[string]FieldStatistics `json:"cxEventLabelsFieldStatistics,omitempty"`
+	// The cx event metadata field statistics.
 	CxEventMetadataFieldStatistics *map[string]FieldStatistics `json:"cxEventMetadataFieldStatistics,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

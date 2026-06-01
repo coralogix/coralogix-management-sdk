@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the QuickTimeSelection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuickTimeSelection{}
 
-// QuickTimeSelection struct for QuickTimeSelection
+// QuickTimeSelection Quick time selection.
 type QuickTimeSelection struct {
 	// Folder name
 	// Deprecated

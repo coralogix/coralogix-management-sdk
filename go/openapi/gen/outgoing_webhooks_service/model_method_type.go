@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MethodType the model 'MethodType'
+// MethodType Method type.
 type MethodType string
 
 // List of MethodType

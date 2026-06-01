@@ -21,15 +21,22 @@ var _ = bytes.MinRead
 // checks if the IncidentQueryFiltersValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IncidentQueryFiltersValues{}
 
-// IncidentQueryFiltersValues struct for IncidentQueryFiltersValues
+// IncidentQueryFiltersValues Incident query filters values.
 type IncidentQueryFiltersValues struct {
+	// The assignee with count.
 	AssigneeWithCount []AssigneeWithCount `json:"assigneeWithCount"`
+	// The contextual labels.
 	ContextualLabels map[string]ContextualLabelValuesWithCount `json:"contextualLabels"`
+	// The display labels.
 	DisplayLabels map[string]DisplayLabelValuesWithCount `json:"displayLabels"`
 	MetaLabelsOp V1FilterOperator `json:"metaLabelsOp"`
+	// The meta labels with count.
 	MetaLabelsWithCount []IncidentMetaLabelsWithCount `json:"metaLabelsWithCount"`
+	// The severity with count.
 	SeverityWithCount []IncidentSeverityWithCount `json:"severityWithCount"`
+	// The state with count.
 	StateWithCount []IncidentStateWithCount `json:"stateWithCount"`
+	// The status with count.
 	StatusWithCount []IncidentStatusWithCount `json:"statusWithCount"`
 	AdditionalProperties map[string]interface{}
 }

@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the RecurringAlwaysActive type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringAlwaysActive{}
 
-// RecurringAlwaysActive struct for RecurringAlwaysActive
+// RecurringAlwaysActive Recurring schedule that activates the alert scheduler rule on a repeating cadence.
 type RecurringAlwaysActive struct {
+	// Always.
 	AlwaysActive map[string]interface{} `json:"alwaysActive"`
 	AdditionalProperties map[string]interface{}
 }

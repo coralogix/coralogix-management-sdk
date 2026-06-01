@@ -22,7 +22,9 @@ var _ MappedNullable = &TimeOfDay{}
 
 // TimeOfDay Represents a specific time in a 24-hour format
 type TimeOfDay struct {
+	// The hours.
 	Hours *int32 `json:"hours,omitempty"`
+	// The minutes.
 	Minutes *int32 `json:"minutes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

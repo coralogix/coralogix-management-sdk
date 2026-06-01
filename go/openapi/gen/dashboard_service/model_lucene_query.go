@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the LuceneQuery type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LuceneQuery{}
 
-// LuceneQuery struct for LuceneQuery
+// LuceneQuery Lucene query.
 type LuceneQuery struct {
+	// The value.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

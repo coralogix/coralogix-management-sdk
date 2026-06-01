@@ -20,11 +20,15 @@ var _ = bytes.MinRead
 // checks if the CloudFormationTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CloudFormationTemplate{}
 
-// CloudFormationTemplate struct for CloudFormationTemplate
+// CloudFormationTemplate Cloud formation template.
 type CloudFormationTemplate struct {
+	// The commands.
 	Commands []CommandInformation `json:"commands,omitempty"`
+	// The parameters.
 	Parameters *map[string]string `json:"parameters,omitempty"`
+	// The post installation steps.
 	PostInstallationSteps *map[string]string `json:"postInstallationSteps,omitempty"`
+	// The template url.
 	TemplateUrl *string `json:"templateUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

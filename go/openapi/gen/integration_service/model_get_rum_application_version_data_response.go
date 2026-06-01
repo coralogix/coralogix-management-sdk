@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetRumApplicationVersionDataResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRumApplicationVersionDataResponse{}
 
-// GetRumApplicationVersionDataResponse struct for GetRumApplicationVersionDataResponse
+// GetRumApplicationVersionDataResponse Response containing RUM application version data.
 type GetRumApplicationVersionDataResponse struct {
 	VersionData *RumVersionData `json:"versionData,omitempty"`
 	AdditionalProperties map[string]interface{}

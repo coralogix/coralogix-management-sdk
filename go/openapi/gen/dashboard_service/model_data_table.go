@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the DataTable type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTable{}
 
-// DataTable struct for DataTable
+// DataTable Data table.
 type DataTable struct {
+	// List of column definitions
 	Columns []DataTableColumn `json:"columns,omitempty"`
 	DataModeType *WidgetsCommonDataModeType `json:"dataModeType,omitempty"`
 	OrderBy *OrderingField `json:"orderBy,omitempty"`

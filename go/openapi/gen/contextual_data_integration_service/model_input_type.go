@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// InputType the model 'InputType'
+// InputType Input type.
 type InputType string
 
 // List of InputType

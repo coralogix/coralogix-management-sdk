@@ -23,9 +23,16 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRule{}
 
 // QuotaAllocationEntityTypeRule Defines quota allocation rule for a specific entity type
 type QuotaAllocationEntityTypeRule struct {
+	// The allocation.
 	Allocation float32 `json:"allocation"`
+	AllocationType *QuotaAllocationType `json:"allocationType,omitempty"`
+	// The can overflow.
 	CanOverflow bool `json:"canOverflow"`
+	// Indicates whether the quota allocation rule is managed by Coralogix. This field is returned by the service and must not be sent in Create or Replace requests.
+	CxManaged *bool `json:"cxManaged,omitempty"`
+	// Whether this resource is enabled.
 	Enabled bool `json:"enabled"`
+	// The entity type.
 	EntityType string `json:"entityType"`
 	AdditionalProperties map[string]interface{}
 }
@@ -77,6 +84,38 @@ func (o *QuotaAllocationEntityTypeRule) SetAllocation(v float32) {
 	o.Allocation = v
 }
 
+// GetAllocationType returns the AllocationType field value if set, zero value otherwise.
+func (o *QuotaAllocationEntityTypeRule) GetAllocationType() QuotaAllocationType {
+	if o == nil || IsNil(o.AllocationType) {
+		var ret QuotaAllocationType
+		return ret
+	}
+	return *o.AllocationType
+}
+
+// GetAllocationTypeOk returns a tuple with the AllocationType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuotaAllocationEntityTypeRule) GetAllocationTypeOk() (*QuotaAllocationType, bool) {
+	if o == nil || IsNil(o.AllocationType) {
+		return nil, false
+	}
+	return o.AllocationType, true
+}
+
+// HasAllocationType returns a boolean if a field has been set.
+func (o *QuotaAllocationEntityTypeRule) HasAllocationType() bool {
+	if o != nil && !IsNil(o.AllocationType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllocationType gets a reference to the given QuotaAllocationType and assigns it to the AllocationType field.
+func (o *QuotaAllocationEntityTypeRule) SetAllocationType(v QuotaAllocationType) {
+	o.AllocationType = &v
+}
+
 // GetCanOverflow returns the CanOverflow field value
 func (o *QuotaAllocationEntityTypeRule) GetCanOverflow() bool {
 	if o == nil {
@@ -99,6 +138,38 @@ func (o *QuotaAllocationEntityTypeRule) GetCanOverflowOk() (*bool, bool) {
 // SetCanOverflow sets field value
 func (o *QuotaAllocationEntityTypeRule) SetCanOverflow(v bool) {
 	o.CanOverflow = v
+}
+
+// GetCxManaged returns the CxManaged field value if set, zero value otherwise.
+func (o *QuotaAllocationEntityTypeRule) GetCxManaged() bool {
+	if o == nil || IsNil(o.CxManaged) {
+		var ret bool
+		return ret
+	}
+	return *o.CxManaged
+}
+
+// GetCxManagedOk returns a tuple with the CxManaged field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *QuotaAllocationEntityTypeRule) GetCxManagedOk() (*bool, bool) {
+	if o == nil || IsNil(o.CxManaged) {
+		return nil, false
+	}
+	return o.CxManaged, true
+}
+
+// HasCxManaged returns a boolean if a field has been set.
+func (o *QuotaAllocationEntityTypeRule) HasCxManaged() bool {
+	if o != nil && !IsNil(o.CxManaged) {
+		return true
+	}
+
+	return false
+}
+
+// SetCxManaged gets a reference to the given bool and assigns it to the CxManaged field.
+func (o *QuotaAllocationEntityTypeRule) SetCxManaged(v bool) {
+	o.CxManaged = &v
 }
 
 // GetEnabled returns the Enabled field value
@@ -160,7 +231,13 @@ func (o QuotaAllocationEntityTypeRule) MarshalJSON() ([]byte, error) {
 func (o QuotaAllocationEntityTypeRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["allocation"] = o.Allocation
+	if !IsNil(o.AllocationType) {
+		toSerialize["allocationType"] = o.AllocationType
+	}
 	toSerialize["canOverflow"] = o.CanOverflow
+	if !IsNil(o.CxManaged) {
+		toSerialize["cxManaged"] = o.CxManaged
+	}
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["entityType"] = o.EntityType
 
@@ -211,7 +288,9 @@ func (o *QuotaAllocationEntityTypeRule) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "allocation")
+		delete(additionalProperties, "allocationType")
 		delete(additionalProperties, "canOverflow")
+		delete(additionalProperties, "cxManaged")
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "entityType")
 		o.AdditionalProperties = additionalProperties

@@ -20,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the QuotaBasedStatus type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuotaBasedStatus{}
 
-// QuotaBasedStatus struct for QuotaBasedStatus
+// QuotaBasedStatus Quota based status.
 type QuotaBasedStatus struct {
 	CurrentPriority *QuotaV1Priority `json:"currentPriority,omitempty"`
+	// The current usage.
 	CurrentUsage *float64 `json:"currentUsage,omitempty"`
+	// The daily limit.
 	DailyLimit *float64 `json:"dailyLimit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

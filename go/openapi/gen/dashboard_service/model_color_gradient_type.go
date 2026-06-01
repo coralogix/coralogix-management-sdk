@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ColorGradientType the model 'ColorGradientType'
+// ColorGradientType Color gradient type.
 type ColorGradientType string
 
 // List of ColorGradientType

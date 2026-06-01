@@ -21,10 +21,13 @@ var _ = bytes.MinRead
 // checks if the RecurringDynamicDaily type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RecurringDynamicDaily{}
 
-// RecurringDynamicDaily struct for RecurringDynamicDaily
+// RecurringDynamicDaily Dynamic.
 type RecurringDynamicDaily struct {
+	// Daily.
 	Daily map[string]interface{} `json:"daily"`
+	// Interval multiplier controlling how often the rule recurs (e.g., every N days, weeks, or months).
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
+	// ISO 8601 date after which the recurring rule stops being applied.
 	TerminationDate *string `json:"terminationDate,omitempty"`
 	Timeframe *Timeframe `json:"timeframe,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -23,6 +23,7 @@ var _ MappedNullable = &BatchExecuteSloRequest{}
 
 // BatchExecuteSloRequest Request to batch execute multiple SLO operations.
 type BatchExecuteSloRequest struct {
+	// The requests.
 	Requests []SloExecutionRequest `json:"requests"`
 	AdditionalProperties map[string]interface{}
 }

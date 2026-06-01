@@ -22,7 +22,9 @@ var _ MappedNullable = &HexagonLogsQuery{}
 
 // HexagonLogsQuery A logs variant of the query
 type HexagonLogsQuery struct {
+	// List of filters that narrow down query results
 	Filters []FilterLogsFilter `json:"filters,omitempty"`
+	// A list of observation fields by which to group the results
 	GroupBy []ObservationField `json:"groupBy,omitempty"`
 	LogsAggregation *LogsAggregation `json:"logsAggregation,omitempty"`
 	LuceneQuery *LuceneQuery `json:"luceneQuery,omitempty"`

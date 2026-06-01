@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the ValidateEntityLabelMatcherResultSuccessVariant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ValidateEntityLabelMatcherResultSuccessVariant{}
 
-// ValidateEntityLabelMatcherResultSuccessVariant struct for ValidateEntityLabelMatcherResultSuccessVariant
+// ValidateEntityLabelMatcherResultSuccessVariant Result of validating an entity label matcher, indicating whether it is valid or contains errors.
 type ValidateEntityLabelMatcherResultSuccessVariant struct {
+	// Test integration result.success.
 	Success map[string]interface{} `json:"success"`
 	AdditionalProperties map[string]interface{}
 }

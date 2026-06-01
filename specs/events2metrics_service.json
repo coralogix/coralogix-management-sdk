@@ -11,7 +11,7 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2Ms",
-        "description": "No description available",
+        "description": "Returns all events-to-metrics rules for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -34,7 +34,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Replace an E2M",
-        "description": "No description available",
+        "description": "Updates an existing events-to-metrics rule.",
         "externalDocs": {
           "url": ""
         },
@@ -46,15 +46,16 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MSpansQuery"
+                    "$ref": "#/components/schemas/E2MLogsQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MLogsQuery"
+                    "$ref": "#/components/schemas/E2MSpansQuery"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -74,7 +75,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Create a new E2M",
-        "description": "No description available",
+        "description": "Creates a new events-to-metrics rule.",
         "externalDocs": {
           "url": ""
         },
@@ -86,15 +87,16 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
                   },
                   {
-                    "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+                    "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -116,7 +118,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Atomic Batch Execute E2M",
-        "description": "No description available",
+        "description": "Atomically executes a batch of events-to-metrics rules.",
         "externalDocs": {
           "url": ""
         },
@@ -125,9 +127,11 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request containing an atomic list of events-to-metrics actions to execute.",
                 "type": "object",
                 "properties": {
                   "requests": {
+                    "description": "The requests.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/E2MExecutionRequest"
@@ -158,7 +162,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Get an E2M",
-        "description": "No description available",
+        "description": "Returns the details of the specified events-to-metrics rule.",
         "externalDocs": {
           "url": ""
         },
@@ -167,9 +171,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -193,7 +199,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Delete an E2M",
-        "description": "No description available",
+        "description": "Deletes the events-to-metrics rule with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -202,9 +208,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -230,7 +238,7 @@
           "Events2Metrics Service"
         ],
         "summary": "List E2M Labels Cardinality",
-        "description": "No description available",
+        "description": "Returns cardinality information for events-to-metrics labels.",
         "externalDocs": {
           "url": ""
         },
@@ -239,6 +247,7 @@
           {
             "in": "query",
             "name": "spans_query",
+            "description": "Spans-based query used to evaluate label cardinality.",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about events2metrics",
@@ -249,34 +258,43 @@
               "type": "object",
               "properties": {
                 "actionFilters": {
+                  "description": "The action filters.",
                   "type": "array",
                   "items": {
                     "example": "myAction",
+                    "description": "The action filters.",
                     "type": "string"
                   }
                 },
                 "applicationnameFilters": {
+                  "description": "The applicationname filters.",
                   "type": "array",
                   "items": {
                     "example": "myApp",
+                    "description": "The applicationname filters.",
                     "type": "string"
                   }
                 },
                 "lucene": {
                   "example": "applicationName:myApp",
+                  "description": "The lucene.",
                   "type": "string"
                 },
                 "serviceFilters": {
+                  "description": "The service filters.",
                   "type": "array",
                   "items": {
                     "example": "myService",
+                    "description": "The service filters.",
                     "type": "string"
                   }
                 },
                 "subsystemnameFilters": {
+                  "description": "The subsystemname filters.",
                   "type": "array",
                   "items": {
                     "example": "mySubsystem",
+                    "description": "The subsystemname filters.",
                     "type": "string"
                   }
                 }
@@ -287,6 +305,7 @@
           {
             "in": "query",
             "name": "logs_query",
+            "description": "Logs-based query used to evaluate label cardinality.",
             "schema": {
               "externalDocs": {
                 "description": "Find out more about events2metrics",
@@ -298,29 +317,36 @@
               "properties": {
                 "alias": {
                   "example": "new_query",
+                  "description": "The alias.",
                   "type": "string"
                 },
                 "applicationnameFilters": {
+                  "description": "The applicationname filters.",
                   "type": "array",
                   "items": {
                     "example": "app_name",
+                    "description": "The applicationname filters.",
                     "type": "string"
                   }
                 },
                 "lucene": {
                   "example": "log_obj.numeric_field: [50 TO 100]",
+                  "description": "The lucene.",
                   "type": "string"
                 },
                 "severityFilters": {
+                  "description": "The severity filters.",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/logs2metrics.v2.Severity"
                   }
                 },
                 "subsystemnameFilters": {
+                  "description": "The subsystemname filters.",
                   "type": "array",
                   "items": {
                     "example": "sub_name",
+                    "description": "The subsystemname filters.",
                     "type": "string"
                   }
                 }
@@ -331,7 +357,9 @@
           {
             "in": "query",
             "name": "metric_labels",
+            "description": "The metric labels to evaluate cardinality for.",
             "schema": {
+              "description": "The metric labels to evaluate cardinality for.",
               "type": "array",
               "items": {
                 "externalDocs": {
@@ -344,10 +372,12 @@
                 "properties": {
                   "sourceField": {
                     "example": "log_obj.string_value",
+                    "description": "The source field.",
                     "type": "string"
                   },
                   "targetLabel": {
                     "example": "alias_label_name",
+                    "description": "The target label.",
                     "type": "string",
                     "pattern": "^[\\w/-]+$"
                   }
@@ -381,7 +411,7 @@
           "Events2Metrics Service"
         ],
         "summary": "Get E2M Limits",
-        "description": "No description available",
+        "description": "Returns the events-to-metrics quota limits for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -404,6 +434,7 @@
   "components": {
     "schemas": {
       "AggType": {
+        "description": "Agg type.",
         "type": "string",
         "enum": [
           "AGG_TYPE_UNSPECIFIED",
@@ -417,9 +448,14 @@
         ]
       },
       "AtomicBatchExecuteE2MResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after atomically executing a batch of events-to-metrics rules.",
         "type": "object",
         "properties": {
           "matchingResponses": {
+            "description": "The matching responses.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/E2MExecutionResponse"
@@ -445,6 +481,10 @@
         ]
       },
       "CreateE2MResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Create e2m response.",
         "type": "object",
         "properties": {
           "e2m": {
@@ -463,6 +503,7 @@
         "properties": {
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+            "description": "Unique identifier.",
             "type": "string"
           }
         },
@@ -480,6 +521,7 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           }
         },
@@ -490,10 +532,10 @@
       "E2M": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MSpansQuery"
+            "$ref": "#/components/schemas/E2MLogsQuery"
           },
           {
-            "$ref": "#/components/schemas/E2MLogsQuery"
+            "$ref": "#/components/schemas/E2MSpansQuery"
           }
         ]
       },
@@ -507,9 +549,11 @@
         "type": "object",
         "properties": {
           "buckets": {
+            "description": "The buckets.",
             "type": "array",
             "items": {
               "example": 2,
+              "description": "The buckets.",
               "type": "number",
               "format": "float"
             }
@@ -533,10 +577,10 @@
       "E2MCreateParams": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
+            "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
           },
           {
-            "$ref": "#/components/schemas/E2MCreateParamsLogsQuery"
+            "$ref": "#/components/schemas/E2MCreateParamsSpansQuery"
           }
         ]
       },
@@ -551,22 +595,26 @@
         "properties": {
           "dataSource": {
             "example": "my_namespace/my_dataset",
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
             "type": "string"
           },
           "description": {
             "example": "avg and max the latency of catalog service",
+            "description": "Human-readable description for the new E2M.",
             "type": "string"
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
           },
           "metricFields": {
+            "description": "Metric fields to create and aggregate from the events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
             }
           },
           "metricLabels": {
+            "description": "Metric labels to attach to the generated metrics.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
@@ -574,10 +622,12 @@
           },
           "name": {
             "example": "Service catalog latency",
+            "description": "Human-readable name for the new E2M.",
             "type": "string"
           },
           "permutationsLimit": {
             "example": 30000,
+            "description": "Maximum number of unique metric permutations allowed for this E2M.",
             "type": "integer",
             "format": "int32"
           },
@@ -601,19 +651,23 @@
         "properties": {
           "dataSource": {
             "example": "my_namespace/my_dataset",
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
             "type": "string"
           },
           "description": {
             "example": "avg and max the latency of catalog service",
+            "description": "Human-readable description for the new E2M.",
             "type": "string"
           },
           "metricFields": {
+            "description": "Metric fields to create and aggregate from the events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
             }
           },
           "metricLabels": {
+            "description": "Metric labels to attach to the generated metrics.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
@@ -621,10 +675,12 @@
           },
           "name": {
             "example": "Service catalog latency",
+            "description": "Human-readable name for the new E2M.",
             "type": "string"
           },
           "permutationsLimit": {
             "example": 30000,
+            "description": "Maximum number of unique metric permutations allowed for this E2M.",
             "type": "integer",
             "format": "int32"
           },
@@ -646,10 +702,10 @@
             "$ref": "#/components/schemas/E2MExecutionRequestCreate"
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionRequestReplace"
+            "$ref": "#/components/schemas/E2MExecutionRequestDelete"
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionRequestDelete"
+            "$ref": "#/components/schemas/E2MExecutionRequestReplace"
           }
         ]
       },
@@ -692,10 +748,10 @@
             "$ref": "#/components/schemas/E2MExecutionResponseCreated"
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
+            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
           },
           {
-            "$ref": "#/components/schemas/E2MExecutionResponseDeleted"
+            "$ref": "#/components/schemas/E2MExecutionResponseReplaced"
           }
         ]
       },
@@ -742,37 +798,45 @@
         "type": "object",
         "properties": {
           "createTime": {
-            "example": "2022-06-30T12:30:00Z'",
+            "example": "2022-06-30T12:30:00.000Z",
+            "description": "RFC3339 timestamp of when this E2M was created.",
             "type": "string"
           },
           "dataSource": {
             "example": "my_namespace/my_dataset",
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
             "type": "string"
           },
           "description": {
             "example": "avg and max the latency of catalog service",
+            "description": "Human-readable description of this E2M.",
             "type": "string"
           },
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+            "description": "Unique identifier for this E2M. Required on update requests.",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "minLength": 36,
             "maxLength": 36
           },
           "isInternal": {
+            "description": "Indicates whether this E2M is for internal use only.",
             "type": "boolean"
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
           },
           "metricFields": {
+            "description": "Metric fields to extract and aggregate from the events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
-            }
+            },
+            "maxItems": 10
           },
           "metricLabels": {
+            "description": "Metric labels to attach to the generated metrics.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
@@ -780,6 +844,7 @@
           },
           "name": {
             "example": "Service_catalog_latency",
+            "description": "Human-readable name for this E2M.",
             "type": "string"
           },
           "permutations": {
@@ -789,7 +854,8 @@
             "$ref": "#/components/schemas/E2MType"
           },
           "updateTime": {
-            "example": "2022-06-30T12:30:00Z'",
+            "example": "2022-06-30T12:30:00.000Z",
+            "description": "RFC3339 timestamp of when this E2M was last updated.",
             "type": "string"
           }
         },
@@ -809,10 +875,12 @@
         "type": "object",
         "properties": {
           "hasExceededLimit": {
+            "description": "The has exceeded limit.",
             "type": "boolean"
           },
           "limit": {
             "example": 30000,
+            "description": "Limit.",
             "type": "integer",
             "format": "int32"
           }
@@ -832,34 +900,42 @@
         "type": "object",
         "properties": {
           "createTime": {
-            "example": "2022-06-30T12:30:00Z'",
+            "example": "2022-06-30T12:30:00.000Z",
+            "description": "RFC3339 timestamp of when this E2M was created.",
             "type": "string"
           },
           "dataSource": {
             "example": "my_namespace/my_dataset",
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
             "type": "string"
           },
           "description": {
             "example": "avg and max the latency of catalog service",
+            "description": "Human-readable description of this E2M.",
             "type": "string"
           },
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+            "description": "Unique identifier for this E2M. Required on update requests.",
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "minLength": 36,
             "maxLength": 36
           },
           "isInternal": {
+            "description": "Indicates whether this E2M is for internal use only.",
             "type": "boolean"
           },
           "metricFields": {
+            "description": "Metric fields to extract and aggregate from the events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
-            }
+            },
+            "maxItems": 10
           },
           "metricLabels": {
+            "description": "Metric labels to attach to the generated metrics.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
@@ -867,6 +943,7 @@
           },
           "name": {
             "example": "Service_catalog_latency",
+            "description": "Human-readable name for this E2M.",
             "type": "string"
           },
           "permutations": {
@@ -879,7 +956,8 @@
             "$ref": "#/components/schemas/E2MType"
           },
           "updateTime": {
-            "example": "2022-06-30T12:30:00Z'",
+            "example": "2022-06-30T12:30:00.000Z",
+            "description": "RFC3339 timestamp of when this E2M was last updated.",
             "type": "string"
           }
         },
@@ -890,6 +968,7 @@
         ]
       },
       "E2MType": {
+        "description": "E2 m type.",
         "type": "string",
         "enum": [
           "E2M_TYPE_UNSPECIFIED",
@@ -900,10 +979,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -991,12 +1070,18 @@
         ]
       },
       "GetLimitsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the events-to-metrics quota limits.",
         "type": "object",
         "properties": {
           "companyId": {
+            "description": "The company id.",
             "type": "string"
           },
           "labelsLimit": {
+            "description": "The labels limit.",
             "type": "integer",
             "format": "int32"
           },
@@ -1012,22 +1097,30 @@
         "type": "object",
         "properties": {
           "day": {
+            "description": "The day.",
             "type": "string"
           },
           "permutations": {
+            "description": "List of permutations.",
             "type": "integer",
             "format": "int32"
           }
         }
       },
       "LimitUsage": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Limit usage.",
         "type": "object",
         "properties": {
           "limit": {
+            "description": "Limit.",
             "type": "integer",
             "format": "int32"
           },
           "used": {
+            "description": "The used.",
             "type": "integer",
             "format": "int32"
           }
@@ -1043,6 +1136,7 @@
         "type": "object",
         "properties": {
           "e2m": {
+            "description": "The e2m.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/E2M"
@@ -1054,9 +1148,14 @@
         ]
       },
       "ListLabelsCardinalityResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing label cardinality data for events-to-metrics rules.",
         "type": "object",
         "properties": {
           "permutations": {
+            "description": "List of permutations.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LabelsPermutationsCardinalityDay"
@@ -1075,10 +1174,12 @@
         "properties": {
           "sourceField": {
             "example": "log_obj.string_value",
+            "description": "The source field.",
             "type": "string"
           },
           "targetLabel": {
             "example": "alias_label_name",
+            "description": "The target label.",
             "type": "string",
             "pattern": "^[\\w/-]+$"
           }
@@ -1137,6 +1238,7 @@
         ]
       },
       "SampleType": {
+        "description": "Sample type.",
         "type": "string",
         "enum": [
           "SAMPLE_TYPE_UNSPECIFIED",
@@ -1157,6 +1259,7 @@
             "$ref": "#/components/schemas/AggType"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "histogram": {
@@ -1164,6 +1267,7 @@
           },
           "targetMetricName": {
             "example": "alias_field_name_agg_func",
+            "description": "Name of the target metric produced by this aggregation.",
             "type": "string"
           }
         },
@@ -1184,13 +1288,16 @@
             "$ref": "#/components/schemas/AggType"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "none": {
+            "description": "Marker indicating no additional metadata is needed for this aggregation type.",
             "type": "object"
           },
           "targetMetricName": {
             "example": "alias_field_name_agg_func",
+            "description": "Name of the target metric produced by this aggregation.",
             "type": "string"
           }
         },
@@ -1211,6 +1318,7 @@
             "$ref": "#/components/schemas/AggType"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "samples": {
@@ -1218,6 +1326,7 @@
           },
           "targetMetricName": {
             "example": "alias_field_name_agg_func",
+            "description": "Name of the target metric produced by this aggregation.",
             "type": "string"
           }
         },
@@ -1233,6 +1342,7 @@
         ]
       },
       "logs2metrics.v2.Severity": {
+        "description": "Severity.",
         "type": "string",
         "enum": [
           "SEVERITY_UNSPECIFIED",
@@ -1247,13 +1357,13 @@
       "v2.Aggregation": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/V2AggregationHistogram"
+          },
+          {
             "$ref": "#/components/schemas/V2AggregationNone"
           },
           {
             "$ref": "#/components/schemas/V2AggregationSamples"
-          },
-          {
-            "$ref": "#/components/schemas/V2AggregationHistogram"
           }
         ]
       },
@@ -1268,29 +1378,36 @@
         "properties": {
           "alias": {
             "example": "new_query",
+            "description": "The alias.",
             "type": "string"
           },
           "applicationnameFilters": {
+            "description": "The applicationname filters.",
             "type": "array",
             "items": {
               "example": "app_name",
+              "description": "The applicationname filters.",
               "type": "string"
             }
           },
           "lucene": {
             "example": "log_obj.numeric_field: [50 TO 100]",
+            "description": "The lucene.",
             "type": "string"
           },
           "severityFilters": {
+            "description": "The severity filters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/logs2metrics.v2.Severity"
             }
           },
           "subsystemnameFilters": {
+            "description": "The subsystemname filters.",
             "type": "array",
             "items": {
               "example": "sub_name",
+              "description": "The subsystemname filters.",
               "type": "string"
             }
           }
@@ -1306,6 +1423,7 @@
         "type": "object",
         "properties": {
           "aggregations": {
+            "description": "The aggregations.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.Aggregation"
@@ -1313,10 +1431,12 @@
           },
           "sourceField": {
             "example": "log_obj.numeric_field",
+            "description": "The source field.",
             "type": "string"
           },
           "targetBaseMetricName": {
             "example": "alias_field_name",
+            "description": "The target base metric name.",
             "type": "string",
             "pattern": "^[\\w/-]+$"
           }
@@ -1337,40 +1457,50 @@
         "type": "object",
         "properties": {
           "actionFilters": {
+            "description": "The action filters.",
             "type": "array",
             "items": {
               "example": "myAction",
+              "description": "The action filters.",
               "type": "string"
             }
           },
           "applicationnameFilters": {
+            "description": "The applicationname filters.",
             "type": "array",
             "items": {
               "example": "myApp",
+              "description": "The applicationname filters.",
               "type": "string"
             }
           },
           "lucene": {
             "example": "applicationName:myApp",
+            "description": "The lucene.",
             "type": "string"
           },
           "serviceFilters": {
+            "description": "The service filters.",
             "type": "array",
             "items": {
               "example": "myService",
+              "description": "The service filters.",
               "type": "string"
             }
           },
           "subsystemnameFilters": {
+            "description": "The subsystemname filters.",
             "type": "array",
             "items": {
               "example": "mySubsystem",
+              "description": "The subsystemname filters.",
               "type": "string"
             }
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

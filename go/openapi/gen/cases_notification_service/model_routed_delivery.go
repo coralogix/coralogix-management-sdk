@@ -23,6 +23,7 @@ var _ MappedNullable = &RoutedDelivery{}
 
 // RoutedDelivery Delivery attempts routed through a single router to one or more connectors.
 type RoutedDelivery struct {
+	// Individual delivery attempts to connectors
 	Attempts []DeliveryAttempt `json:"attempts"`
 	Router RouterInfo `json:"router"`
 	AdditionalProperties map[string]interface{}

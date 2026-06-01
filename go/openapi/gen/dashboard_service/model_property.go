@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the Property type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Property{}
 
-// Property struct for Property
+// Property Property.
 type Property struct {
 	Definition *PropertyDefinition `json:"definition,omitempty"`
 	Id *UUID `json:"id,omitempty"`

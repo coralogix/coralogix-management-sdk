@@ -26,6 +26,7 @@ type MetricAnomalyType struct {
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	MetricFilter *MetricFilter `json:"metricFilter,omitempty"`
+	// The rules for the metric anomaly alert.
 	Rules []MetricAnomalyRule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

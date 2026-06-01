@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the MultiSelectQuerySource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectQuerySource{}
 
-// MultiSelectQuerySource struct for MultiSelectQuerySource
+// MultiSelectQuerySource Variable source that populates multi-select values by executing a query against logs, metrics, or spans.
 type MultiSelectQuerySource struct {
 	Query *MultiSelectQuery `json:"query,omitempty"`
 	RefreshStrategy *MultiSelectRefreshStrategy `json:"refreshStrategy,omitempty"`

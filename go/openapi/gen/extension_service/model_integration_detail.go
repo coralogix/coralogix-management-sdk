@@ -22,7 +22,9 @@ var _ MappedNullable = &IntegrationDetail{}
 
 // IntegrationDetail struct for IntegrationDetail
 type IntegrationDetail struct {
+	// Link.
 	Link *string `json:"link,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

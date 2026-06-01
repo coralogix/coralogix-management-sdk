@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the GetContextualDataIntegrationsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetContextualDataIntegrationsResponse{}
 
-// GetContextualDataIntegrationsResponse struct for GetContextualDataIntegrationsResponse
+// GetContextualDataIntegrationsResponse Response containing a list of contextual data integrations.
 type GetContextualDataIntegrationsResponse struct {
+	// The integrations.
 	Integrations []GetContextualDataIntegrationsResponseIntegrationWithCounts `json:"integrations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

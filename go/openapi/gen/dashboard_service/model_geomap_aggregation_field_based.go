@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GeomapAggregationFieldBased type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GeomapAggregationFieldBased{}
 
-// GeomapAggregationFieldBased struct for GeomapAggregationFieldBased
+// GeomapAggregationFieldBased Geomap aggregation field based.
 type GeomapAggregationFieldBased struct {
 	Field *ObservationField `json:"field,omitempty"`
 	AdditionalProperties map[string]interface{}

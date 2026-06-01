@@ -22,6 +22,7 @@ var _ MappedNullable = &ConnectorTypeSummary{}
 
 // ConnectorTypeSummary Summary information about a connector type
 type ConnectorTypeSummary struct {
+	// Number of items.
 	Count *int64 `json:"count,omitempty"`
 	Type *NotificationCenterConnectorType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

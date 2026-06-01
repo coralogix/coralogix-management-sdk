@@ -11,7 +11,7 @@
           "Extension testing service"
         ],
         "summary": "Test extension revision",
-        "description": "No description available",
+        "description": "Tests an extension revision.\n\nRequires the following permissions:\n- `extensions:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -21,9 +21,11 @@
             "application/json": {
               "schema": {
                 "title": "Test extension revision request",
+                "description": "Request for testing an extension revision.",
                 "type": "object",
                 "properties": {
                   "cleanupAfterTest": {
+                    "description": "Whether to automatically clean up the testing extension revision after the test run completes.",
                     "type": "boolean"
                   },
                   "extensionData": {
@@ -73,7 +75,7 @@
           "Extension testing service"
         ],
         "summary": "Cleanup testing extension",
-        "description": "No description available",
+        "description": "Removes the testing revision of an extension.\n\nRequires the following permissions:\n- `extensions:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -83,9 +85,11 @@
             "application/json": {
               "schema": {
                 "title": "Cleanup testing revision request",
+                "description": "Request for cleaning up an extension testing revision.",
                 "type": "object",
                 "properties": {
                   "id": {
+                    "description": "ID of the testing extension revision to delete.",
                     "type": "string"
                   }
                 }
@@ -134,7 +138,7 @@
           "Extension testing service"
         ],
         "summary": "Initialize testing revision",
-        "description": "No description available",
+        "description": "Initializes a testing revision for an extension.\n\nRequires the following permissions:\n- `extensions:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -144,6 +148,7 @@
             "application/json": {
               "schema": {
                 "title": "Initialize testing revision request",
+                "description": "Request for initializing an extension testing revision.",
                 "type": "object",
                 "properties": {
                   "extensionData": {
@@ -200,9 +205,11 @@
         "type": "object",
         "properties": {
           "descriptionMd": {
+            "description": "The description md.",
             "type": "string"
           },
           "version": {
+            "description": "Version.",
             "type": "string"
           }
         }
@@ -212,21 +219,27 @@
           "url": ""
         },
         "title": "Cleanup testing revision response",
-        "type": "object"
+        "description": "Response returned after successfully cleaning up an extension testing revision.",
+        "type": "object",
+        "additionalProperties": false
       },
       "Deprecation": {
         "externalDocs": {
           "url": ""
         },
         "title": "Deprecation",
+        "description": "Deprecation.",
         "type": "object",
         "properties": {
           "reason": {
+            "description": "Reason.",
             "type": "string"
           },
           "replacementExtensions": {
+            "description": "The replacement extensions.",
             "type": "array",
             "items": {
+              "description": "The replacement extensions.",
               "type": "string"
             }
           }
@@ -240,6 +253,7 @@
         "type": "object",
         "properties": {
           "data": {
+            "description": "Data payload.",
             "type": "string"
           },
           "type": {
@@ -248,6 +262,7 @@
         }
       },
       "ExtensionBinary.BinaryType": {
+        "description": "Type of binary content stored in the extension.",
         "type": "string",
         "enum": [
           "KIBANA_INDEX_PATTERN"
@@ -262,18 +277,21 @@
         "type": "object",
         "properties": {
           "binaries": {
+            "description": "The binaries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             }
           },
           "changelog": {
+            "description": "The changelog.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
             }
           },
           "darkModeImage": {
+            "description": "The dark mode image.",
             "type": "string"
           },
           "deprecation": {
@@ -281,58 +299,73 @@
           },
           "description": {
             "example": "Integration with AWS CloudWatch for monitoring and logging",
+            "description": "Human-readable description.",
             "type": "string"
           },
           "excerpt": {
             "example": "Monitor AWS resources and analyze logs with CloudWatch integration",
+            "description": "The excerpt.",
             "type": "string"
           },
           "id": {
             "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "image": {
+            "description": "Image reference.",
             "type": "string"
           },
           "integrationDetails": {
+            "description": "The integration details.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             }
           },
           "integrations": {
+            "description": "The integrations.",
             "type": "array",
             "items": {
+              "description": "The integrations.",
               "type": "string"
             }
           },
           "isHidden": {
+            "description": "The is hidden.",
             "type": "boolean"
           },
           "items": {
+            "description": "List of items.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemData"
             }
           },
           "keywords": {
+            "description": "The keywords.",
             "type": "array",
             "items": {
+              "description": "The keywords.",
               "type": "string"
             }
           },
           "labels": {
+            "description": "List of labels.",
             "type": "array",
             "items": {
+              "description": "List of labels.",
               "type": "string"
             }
           },
           "name": {
             "example": "AWS CloudWatch Extension",
+            "description": "Display name.",
             "type": "string"
           },
           "version": {
             "example": "v1.0.13",
+            "description": "Version number.",
             "type": "string"
           }
         }
@@ -345,9 +378,11 @@
         "type": "object",
         "properties": {
           "data": {
+            "description": "Data payload.",
             "type": "string"
           },
           "fileName": {
+            "description": "The file name.",
             "type": "string"
           },
           "type": {
@@ -356,6 +391,7 @@
         }
       },
       "ExtensionItemBinary.BinaryType": {
+        "description": "Binary type.",
         "type": "string",
         "enum": [
           "PREVIEW_IMAGE",
@@ -373,39 +409,47 @@
         "type": "object",
         "properties": {
           "binaries": {
+            "description": "The binaries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             }
           },
           "data": {
+            "description": "Data payload.",
             "type": "object"
           },
           "description": {
             "example": "Less than 60% cocoa",
+            "description": "Human-readable description.",
             "type": "string"
           },
           "internalId": {
+            "description": "The internal id.",
             "type": "integer",
             "format": "int32"
           },
           "isMandatory": {
+            "description": "The is mandatory.",
             "type": "boolean"
           },
           "name": {
             "example": "Low cocoa content",
+            "description": "Display name.",
             "type": "string"
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
+            "description": "The stable id.",
             "type": "string"
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
+            "description": "The unique id.",
             "type": "string"
           }
         }
@@ -413,10 +457,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -491,7 +535,9 @@
           "url": ""
         },
         "title": "Initialize testing revision response",
-        "type": "object"
+        "description": "Response returned after successfully initializing an extension testing revision.",
+        "type": "object",
+        "additionalProperties": false
       },
       "IntegrationDetail": {
         "externalDocs": {
@@ -501,9 +547,11 @@
         "type": "object",
         "properties": {
           "link": {
+            "description": "Link.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           }
         }
@@ -523,6 +571,7 @@
         }
       },
       "PermissionResource": {
+        "description": "Permission resource.",
         "type": "string",
         "enum": [
           "UNKNOWN",
@@ -543,6 +592,7 @@
         ]
       },
       "TargetDomain": {
+        "description": "Target domain.",
         "type": "string",
         "enum": [
           "ACTION",
@@ -563,7 +613,9 @@
           "url": ""
         },
         "title": "Test extension revision response",
-        "type": "object"
+        "description": "Response containing the results of an extension revision test.",
+        "type": "object",
+        "additionalProperties": false
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -573,6 +625,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -22,13 +22,19 @@ var _ MappedNullable = &MessageConfigSchemaField{}
 
 // MessageConfigSchemaField struct for MessageConfigSchemaField
 type MessageConfigSchemaField struct {
+	// The allowed values.
 	AllowedValues []string `json:"allowedValues,omitempty"`
+	// The default.
 	Default *string `json:"default,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The disable override.
 	DisableOverride *bool `json:"disableOverride,omitempty"`
+	// The field name.
 	FieldName *string `json:"fieldName,omitempty"`
 	FieldType *FieldType `json:"fieldType,omitempty"`
 	RenderingMode *TemplateRenderingMode `json:"renderingMode,omitempty"`
+	// The required.
 	Required *bool `json:"required,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

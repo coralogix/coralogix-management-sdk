@@ -20,10 +20,12 @@ var _ = bytes.MinRead
 // checks if the TestingServiceTestTemplateRenderRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TestingServiceTestTemplateRenderRequest{}
 
-// TestingServiceTestTemplateRenderRequest struct for TestingServiceTestTemplateRenderRequest
+// TestingServiceTestTemplateRenderRequest Request for testing notification template rendering.
 type TestingServiceTestTemplateRenderRequest struct {
+	// Entity sub-type to use when testing template rendering.
 	EntitySubType *string `json:"entitySubType,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// Template string to test rendering for.
 	Template *string `json:"template,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -22,6 +22,7 @@ var _ MappedNullable = &Presets{}
 
 // Presets This data structure represents a set of permissions presets on an API key.
 type Presets struct {
+	// Presets.
 	Presets []string `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

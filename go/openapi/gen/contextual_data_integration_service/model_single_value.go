@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SingleValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SingleValue{}
 
-// SingleValue struct for SingleValue
+// SingleValue Single value.
 type SingleValue struct {
+	// The default value.
 	DefaultValue *string `json:"defaultValue,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

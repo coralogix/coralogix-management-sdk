@@ -11,7 +11,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook types",
-        "description": "No description available",
+        "description": "Returns all available outgoing webhook types.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -57,7 +57,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook type details",
-        "description": "No description available",
+        "description": "Returns the details for the specified outgoing webhook type.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -66,6 +66,7 @@
           {
             "in": "path",
             "name": "type",
+            "description": "The outgoing webhook type to fetch details for.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/WebhookType"
@@ -114,7 +115,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Test an outgoing webhook",
-        "description": "No description available",
+        "description": "Tests an outgoing webhook configuration.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -124,6 +125,7 @@
             "application/json": {
               "schema": {
                 "title": "Test outgoing webhook request",
+                "description": "Request for testing an outgoing webhook configuration.",
                 "type": "object",
                 "properties": {
                   "data": {
@@ -175,7 +177,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List all outgoing webhooks",
-        "description": "No description available",
+        "description": "Returns all outgoing webhooks for the team.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -219,7 +221,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Update an outgoing webhook",
-        "description": "No description available",
+        "description": "Updates an existing outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -229,6 +231,7 @@
             "application/json": {
               "schema": {
                 "title": "Update outgoing webhook request",
+                "description": "Request for updating an outgoing webhook.",
                 "type": "object",
                 "properties": {
                   "data": {
@@ -236,6 +239,7 @@
                   },
                   "id": {
                     "example": "example_id",
+                    "description": "Unique identifier.",
                     "type": "string"
                   }
                 }
@@ -282,7 +286,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Create an outgoing webhook",
-        "description": "No description available",
+        "description": "Creates a new outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -292,6 +296,7 @@
             "application/json": {
               "schema": {
                 "title": "Create outgoing webhook request",
+                "description": "Request for creating an outgoing webhook.",
                 "type": "object",
                 "properties": {
                   "data": {
@@ -343,7 +348,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List outgoing webhooks",
-        "description": "No description available",
+        "description": "Returns outgoing webhooks grouped by type.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -352,6 +357,7 @@
           {
             "in": "query",
             "name": "type",
+            "description": "The outgoing webhook type to filter the listing by.",
             "schema": {
               "$ref": "#/components/schemas/WebhookType"
             },
@@ -399,7 +405,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "List outbound webhooks summary",
-        "description": "No description available",
+        "description": "Returns summary information for all outgoing webhooks.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadSummary`",
         "externalDocs": {
           "url": ""
         },
@@ -445,7 +451,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Get outgoing webhook",
-        "description": "No description available",
+        "description": "Returns the details of the specified outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -454,8 +460,10 @@
           {
             "in": "path",
             "name": "id",
+            "description": "The unique identifier of the outgoing webhook.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the outgoing webhook.",
               "type": "string"
             },
             "style": "simple"
@@ -500,7 +508,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Delete an outgoing webhook",
-        "description": "No description available",
+        "description": "Deletes the outgoing webhook with the specified ID.\n\nRequires the following permissions:\n- `outbound-webhooks:UpdateConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -509,9 +517,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "example": "example_id",
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -558,7 +568,7 @@
           "Outgoing webhooks service"
         ],
         "summary": "Test an existing outgoing webhook",
-        "description": "No description available",
+        "description": "Tests the specified outgoing webhook.\n\nRequires the following permissions:\n- `outbound-webhooks:ReadConfig`",
         "externalDocs": {
           "url": ""
         },
@@ -567,9 +577,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "example": "example_id",
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -621,6 +633,7 @@
         "type": "object",
         "properties": {
           "isActive": {
+            "description": "Whether this resource is active.",
             "type": "boolean"
           },
           "type": {
@@ -629,6 +642,7 @@
         }
       },
       "AttachmentType": {
+        "description": "Attachment type.",
         "type": "string",
         "enum": [
           "EMPTY",
@@ -641,25 +655,31 @@
           "url": ""
         },
         "title": "AWS EventBridge configuration",
+        "description": "Aws event bridge config.",
         "type": "object",
         "properties": {
           "detail": {
+            "description": "Detail.",
             "type": "string"
           },
           "detailType": {
             "example": "detail_type",
+            "description": "The detail type.",
             "type": "string"
           },
           "eventBusArn": {
             "example": "arn:aws:events:us-east-1:123456789012:event-bus/default",
+            "description": "The event bus arn.",
             "type": "string"
           },
           "roleName": {
             "example": "role_name",
+            "description": "The role name.",
             "type": "string"
           },
           "source": {
             "example": "source",
+            "description": "Source.",
             "type": "string"
           }
         }
@@ -669,10 +689,12 @@
           "url": ""
         },
         "title": "Create outgoing webhook response",
+        "description": "Response returned after successfully creating an outgoing webhook.",
         "type": "object",
         "properties": {
           "id": {
             "example": "example_id",
+            "description": "Unique identifier.",
             "type": "string"
           }
         }
@@ -682,20 +704,25 @@
           "url": ""
         },
         "title": "Delete outgoing webhook response",
-        "type": "object"
+        "description": "Response returned after successfully deleting an outgoing webhook.",
+        "type": "object",
+        "additionalProperties": false
       },
       "DemistoConfig": {
         "externalDocs": {
           "url": ""
         },
         "title": "Demisto configuration",
+        "description": "Demisto config.",
         "type": "object",
         "properties": {
           "payload": {
+            "description": "Raw payload data.",
             "type": "string"
           },
           "uuid": {
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
+            "description": "The uuid.",
             "type": "string"
           }
         }
@@ -708,6 +735,7 @@
         "type": "object",
         "properties": {
           "isActive": {
+            "description": "Whether this resource is active.",
             "type": "boolean"
           },
           "type": {
@@ -716,6 +744,7 @@
         }
       },
       "DigestType": {
+        "description": "Digest type.",
         "type": "string",
         "enum": [
           "UNKNOWN",
@@ -730,20 +759,24 @@
           "url": ""
         },
         "title": "Email group configuration",
+        "description": "Email group config.",
         "type": "object",
         "properties": {
           "emailAddresses": {
             "example": [
               "example@coralogix.com"
             ],
+            "description": "The email addresses.",
             "type": "array",
             "items": {
+              "description": "The email addresses.",
               "type": "string"
             }
           }
         }
       },
       "EndpointType": {
+        "description": "Endpoint type.",
         "type": "string",
         "enum": [
           "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC",
@@ -753,10 +786,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -831,9 +864,11 @@
           "url": ""
         },
         "title": "Generic webhook configuration",
+        "description": "Generic webhook config.",
         "type": "object",
         "properties": {
           "headers": {
+            "description": "The headers.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -843,10 +878,12 @@
             "$ref": "#/components/schemas/MethodType"
           },
           "payload": {
+            "description": "Raw payload data.",
             "type": "string"
           },
           "uuid": {
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
+            "description": "The uuid.",
             "type": "string"
           }
         }
@@ -856,6 +893,7 @@
           "url": ""
         },
         "title": "Get outgoing webhook response",
+        "description": "Response containing the details of an outgoing webhook.",
         "type": "object",
         "properties": {
           "webhook": {
@@ -868,6 +906,7 @@
           "url": ""
         },
         "title": "Get outgoing webhook type details response",
+        "description": "Response containing the details of an outgoing webhook type.",
         "type": "object",
         "properties": {
           "details": {
@@ -880,21 +919,26 @@
           "url": ""
         },
         "title": "IBM event notification configuration",
+        "description": "Ibm event notifications config.",
         "type": "object",
         "properties": {
           "endpointType": {
             "$ref": "#/components/schemas/EndpointType"
           },
           "eventNotificationsInstanceId": {
+            "description": "The event notifications instance id.",
             "type": "string"
           },
           "regionId": {
+            "description": "The region id.",
             "type": "string"
           },
           "sourceId": {
+            "description": "The source id.",
             "type": "string"
           },
           "sourceName": {
+            "description": "The source name.",
             "type": "string"
           }
         }
@@ -904,18 +948,22 @@
           "url": ""
         },
         "title": "Jira configuration",
+        "description": "Jira config.",
         "type": "object",
         "properties": {
           "apiToken": {
             "example": "jira_api_token",
+            "description": "The api token.",
             "type": "string"
           },
           "email": {
             "example": "jira_email",
+            "description": "Email address.",
             "type": "string"
           },
           "projectKey": {
             "example": "jira_project_key",
+            "description": "The project key.",
             "type": "string"
           }
         }
@@ -925,9 +973,11 @@
           "url": ""
         },
         "title": "List all outgoing webhooks response",
+        "description": "Response containing a list of all outgoing webhooks.",
         "type": "object",
         "properties": {
           "deployed": {
+            "description": "The deployed.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutgoingWebhookExtendedSummary"
@@ -940,9 +990,11 @@
           "url": ""
         },
         "title": "List outbound webhooks summary response",
+        "description": "Response containing summary information for outgoing webhooks.",
         "type": "object",
         "properties": {
           "outboundWebhookSummaries": {
+            "description": "The outbound webhook summaries.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutboundWebhookSummary"
@@ -955,9 +1007,11 @@
           "url": ""
         },
         "title": "List outgoing webhook types response",
+        "description": "Response containing a list of available outgoing webhook types.",
         "type": "object",
         "properties": {
           "webhooks": {
+            "description": "List of webhooks.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutgoingWebhookType"
@@ -970,9 +1024,11 @@
           "url": ""
         },
         "title": "List outgoing webhooks response",
+        "description": "Response containing a list of outgoing webhooks.",
         "type": "object",
         "properties": {
           "deployed": {
+            "description": "The deployed.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutgoingWebhookSummary"
@@ -985,9 +1041,12 @@
           "url": ""
         },
         "title": "Microsoft Teams workflow configuration",
-        "type": "object"
+        "description": "Ms teams workflow config.",
+        "type": "object",
+        "additionalProperties": false
       },
       "MethodType": {
+        "description": "Method type.",
         "type": "string",
         "enum": [
           "UNKNOWN",
@@ -1001,7 +1060,9 @@
           "url": ""
         },
         "title": "Microsoft Teams configuration",
-        "type": "object"
+        "description": "Microsoft teams config.",
+        "type": "object",
+        "additionalProperties": false
       },
       "MultipleValues": {
         "type": "object",
@@ -1022,7 +1083,9 @@
           "url": ""
         },
         "title": "Opsgenie configuration",
-        "type": "object"
+        "description": "Opsgenie config.",
+        "type": "object",
+        "additionalProperties": false
       },
       "OutboundWebhookSummary": {
         "externalDocs": {
@@ -1032,23 +1095,28 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
+            "description": "The external id.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           }
@@ -1057,31 +1125,31 @@
       "OutgoingWebhook": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookSlack"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookJira"
+            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookDemisto"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookAwsEventBridge"
+            "$ref": "#/components/schemas/OutgoingWebhookEmailGroup"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookIbmEventNotifications"
           },
           {
+            "$ref": "#/components/schemas/OutgoingWebhookJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookMicrosoftTeams"
+          },
+          {
             "$ref": "#/components/schemas/OutgoingWebhookMsTeamsWorkflow"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookGenericWebhook"
+            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookPagerDuty"
@@ -1090,7 +1158,7 @@
             "$ref": "#/components/schemas/OutgoingWebhookSendLog"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookOpsgenie"
+            "$ref": "#/components/schemas/OutgoingWebhookSlack"
           }
         ]
       },
@@ -1099,37 +1167,44 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "awsEventBridge": {
             "$ref": "#/components/schemas/AwsEventBridgeConfig"
           },
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1142,9 +1217,11 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
@@ -1153,26 +1230,31 @@
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1185,10 +1267,12 @@
           "url": ""
         },
         "title": "Outgoing webhook details",
+        "description": "Outgoing webhook details.",
         "type": "object",
         "properties": {
           "label": {
             "example": "example_label",
+            "description": "The label.",
             "type": "string"
           },
           "type": {
@@ -1201,9 +1285,11 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
@@ -1212,26 +1298,31 @@
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1247,31 +1338,37 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         }
@@ -1281,14 +1378,17 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
@@ -1297,21 +1397,25 @@
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1324,14 +1428,17 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
@@ -1340,21 +1447,25 @@
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1365,40 +1476,40 @@
       "OutgoingWebhookInputData": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataDemisto"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
-          },
-          {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataEmailGroup"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
-          },
-          {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataAwsEventBridge"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataGenericWebhook"
           },
           {
-            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataIbmEventNotifications"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataJira"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMicrosoftTeams"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataMsTeamsWorkflow"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataOpsgenie"
           },
           {
             "$ref": "#/components/schemas/OutgoingWebhookInputDataPagerDuty"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSendLog"
+          },
+          {
+            "$ref": "#/components/schemas/OutgoingWebhookInputDataSlack"
           }
         ]
       },
@@ -1407,6 +1518,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "awsEventBridge": {
@@ -1414,6 +1526,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1421,6 +1534,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1433,6 +1547,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "demisto": {
@@ -1440,6 +1555,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1447,6 +1563,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1459,6 +1576,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "emailGroup": {
@@ -1466,6 +1584,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1473,6 +1592,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1485,6 +1605,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "genericWebhook": {
@@ -1492,6 +1613,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1499,6 +1621,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1511,6 +1634,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "ibmEventNotifications": {
@@ -1518,6 +1642,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1525,6 +1650,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1537,6 +1663,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "jira": {
@@ -1544,6 +1671,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1551,6 +1679,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1563,6 +1692,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "microsoftTeams": {
@@ -1570,6 +1700,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1577,6 +1708,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1589,6 +1721,7 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "msTeamsWorkflow": {
@@ -1596,6 +1729,7 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
@@ -1603,6 +1737,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1615,10 +1750,12 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "opsgenie": {
@@ -1629,6 +1766,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1641,10 +1779,12 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "pagerDuty": {
@@ -1655,6 +1795,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1667,10 +1808,12 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "sendLog": {
@@ -1681,6 +1824,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1693,10 +1837,12 @@
           "url": ""
         },
         "title": "Outgoing webhook input data",
+        "description": "Outgoing webhook input data.",
         "type": "object",
         "properties": {
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "slack": {
@@ -1707,6 +1853,7 @@
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1719,19 +1866,23 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "jira": {
@@ -1739,17 +1890,20 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1762,19 +1916,23 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "microsoftTeams": {
@@ -1782,17 +1940,20 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1805,19 +1966,23 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "msTeamsWorkflow": {
@@ -1825,17 +1990,20 @@
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1848,23 +2016,28 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "opsgenie": {
@@ -1874,11 +2047,13 @@
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1891,23 +2066,28 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "pagerDuty": {
@@ -1917,11 +2097,13 @@
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1934,23 +2116,28 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "sendLog": {
@@ -1960,11 +2147,13 @@
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -1977,23 +2166,28 @@
           "url": ""
         },
         "title": "Outgoing webhook",
+        "description": "Outgoing webhook.",
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "slack": {
@@ -2003,11 +2197,13 @@
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         },
@@ -2023,28 +2219,34 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "externalId": {
             "example": 123456,
+            "description": "External identifier.",
             "type": "integer",
             "format": "int64"
           },
           "id": {
             "example": "webhook_id",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
             "example": "my_webhook",
+            "description": "Display name.",
             "type": "string"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
             "type": "string",
             "format": "date-time"
           },
           "url": {
             "example": "slack.webhook.com",
+            "description": "URL.",
             "type": "string"
           }
         }
@@ -2058,11 +2260,13 @@
         "properties": {
           "count": {
             "example": 3,
+            "description": "Number of items.",
             "type": "integer",
             "format": "int64"
           },
           "label": {
             "example": "example_label",
+            "description": "The label.",
             "type": "string"
           },
           "type": {
@@ -2075,10 +2279,12 @@
           "url": ""
         },
         "title": "PagerDuty configuration",
+        "description": "Pager duty config.",
         "type": "object",
         "properties": {
           "serviceKey": {
             "example": "pager_duty_service_key",
+            "description": "The service key.",
             "type": "string"
           }
         }
@@ -2088,13 +2294,16 @@
           "url": ""
         },
         "title": "Send log configuration",
+        "description": "Send log config.",
         "type": "object",
         "properties": {
           "payload": {
+            "description": "Raw payload data.",
             "type": "string"
           },
           "uuid": {
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
+            "description": "The uuid.",
             "type": "string"
           }
         }
@@ -2104,15 +2313,18 @@
           "url": ""
         },
         "title": "Slack configuration",
+        "description": "Slack config.",
         "type": "object",
         "properties": {
           "attachments": {
+            "description": "The attachments.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Attachment"
             }
           },
           "digests": {
+            "description": "The digests.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Digest"
@@ -2123,10 +2335,10 @@
       "TestOutgoingWebhookResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccessVariant"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailureVariant"
           },
           {
-            "$ref": "#/components/schemas/TestOutgoingWebhookResponseFailureVariant"
+            "$ref": "#/components/schemas/TestOutgoingWebhookResponseSuccessVariant"
           }
         ]
       },
@@ -2135,18 +2347,22 @@
           "url": ""
         },
         "title": "Test outgoing webhook failure",
+        "description": "Failure.",
         "type": "object",
         "properties": {
           "displayMessage": {
             "example": "example_display_message",
+            "description": "The display message.",
             "type": "string"
           },
           "errorMessage": {
             "example": "example_error_message",
+            "description": "The error message.",
             "type": "string"
           },
           "statusCode": {
             "example": 400,
+            "description": "The status code.",
             "type": "integer",
             "format": "int64"
           }
@@ -2157,13 +2373,16 @@
           "url": ""
         },
         "title": "Test outgoing webhook success",
-        "type": "object"
+        "description": "Success.",
+        "type": "object",
+        "additionalProperties": false
       },
       "TestOutgoingWebhookResponseFailureVariant": {
         "externalDocs": {
           "url": ""
         },
         "title": "Test outgoing webhook response",
+        "description": "Response containing the results of an outgoing webhook test.",
         "type": "object",
         "properties": {
           "failure": {
@@ -2179,6 +2398,7 @@
           "url": ""
         },
         "title": "Test outgoing webhook response",
+        "description": "Response containing the results of an outgoing webhook test.",
         "type": "object",
         "properties": {
           "success": {
@@ -2194,9 +2414,12 @@
           "url": ""
         },
         "title": "Update outgoing webhook response",
-        "type": "object"
+        "description": "Response returned after successfully updating an outgoing webhook.",
+        "type": "object",
+        "additionalProperties": false
       },
       "WebhookType": {
+        "description": "Webhook type.",
         "type": "string",
         "enum": [
           "UNKNOWN",
@@ -2222,6 +2445,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -23,6 +23,7 @@ var _ MappedNullable = &CloseIncidentsRequest{}
 
 // CloseIncidentsRequest Request to close one or more incidents
 type CloseIncidentsRequest struct {
+	// List of incident IDs to close
 	IncidentIds []string `json:"incidentIds"`
 	AdditionalProperties map[string]interface{}
 }

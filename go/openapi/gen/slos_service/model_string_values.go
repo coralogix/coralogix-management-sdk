@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the StringValues type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &StringValues{}
 
-// StringValues struct for StringValues
+// StringValues String values.
 type StringValues struct {
+	// The values.
 	Values []string `json:"values,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

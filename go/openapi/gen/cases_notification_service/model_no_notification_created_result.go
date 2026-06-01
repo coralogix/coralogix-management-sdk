@@ -23,6 +23,7 @@ var _ MappedNullable = &NoNotificationCreatedResult{}
 
 // NoNotificationCreatedResult Indicates that routers matched but no notification was ultimately created.
 type NoNotificationCreatedResult struct {
+	// Routers that matched the notification request
 	MatchedRouters []RouterInfo `json:"matchedRouters"`
 	AdditionalProperties map[string]interface{}
 }

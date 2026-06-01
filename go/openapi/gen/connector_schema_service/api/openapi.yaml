@@ -7,12 +7,13 @@ servers:
 paths:
   /notifications/notification-center/v1/connector-schemas:
     get:
-      description: No description available
+      description: Returns the schema definition for notification connectors.
       externalDocs:
         url: ""
       operationId: ConnectorSchemaService_GetConnectorSchema
       parameters:
-      - explode: true
+      - description: Connector type whose schema to retrieve.
+        explode: true
         in: query
         name: type
         required: false
@@ -32,6 +33,7 @@ paths:
 components:
   schemas:
     ConnectorConfigSchema:
+      description: Connector config schema.
       example:
         fields:
         - allowedValues:
@@ -52,8 +54,11 @@ components:
           description: description
           fieldType: FIELD_TYPE_UNSPECIFIED
           required: true
+      externalDocs:
+        url: ""
       properties:
         fields:
+          description: List of fields.
           items:
             $ref: "#/components/schemas/ConnectorConfigSchemaField"
           type: array
@@ -71,23 +76,31 @@ components:
         required: true
       properties:
         allowOverrides:
+          description: The allow overrides.
           type: boolean
         allowedValues:
+          description: The allowed values.
           items:
+            description: The allowed values.
             type: string
           type: array
         default:
+          description: The default.
           type: string
         description:
+          description: Human-readable description.
           type: string
         fieldName:
+          description: The field name.
           type: string
         fieldType:
           $ref: "#/components/schemas/FieldType"
         required:
+          description: The required.
           type: boolean
       type: object
     ConnectorSchema:
+      description: Connector schema.
       example:
         connectorConfigSchema:
           fields:
@@ -158,21 +171,27 @@ components:
             description: description
             fieldType: null
             required: true
+      externalDocs:
+        url: ""
       properties:
         connectorConfigSchema:
           $ref: "#/components/schemas/ConnectorConfigSchema"
         messageConfigSchemas:
+          description: The message config schemas.
           items:
             $ref: "#/components/schemas/MessageConfigSchema"
           type: array
         supportedPayloadTypes:
+          description: The supported payload types.
           items:
+            description: The supported payload types.
             type: string
           type: array
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
       type: object
     FieldType:
+      description: Field type.
       enum:
       - FIELD_TYPE_UNSPECIFIED
       - STRING
@@ -186,8 +205,8 @@ components:
       type: string
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -236,6 +255,8 @@ components:
       title: Filters
       type: object
     GetConnectorSchemaResponse:
+      description: Response containing the schema definition for a notification connector
+        type.
       example:
         connectorSchema:
           connectorConfigSchema:
@@ -307,6 +328,8 @@ components:
               description: description
               fieldType: null
               required: true
+      externalDocs:
+        url: ""
       properties:
         connectorSchema:
           $ref: "#/components/schemas/ConnectorSchema"
@@ -337,10 +360,12 @@ components:
           required: true
       properties:
         fields:
+          description: List of fields.
           items:
             $ref: "#/components/schemas/MessageConfigSchemaField"
           type: array
         payloadType:
+          description: Type of the payload.
           type: string
       type: object
     MessageConfigSchemaField:
@@ -357,22 +382,29 @@ components:
         required: true
       properties:
         allowedValues:
+          description: The allowed values.
           items:
+            description: The allowed values.
             type: string
           type: array
         default:
+          description: The default.
           type: string
         description:
+          description: Human-readable description.
           type: string
         disableOverride:
+          description: The disable override.
           type: boolean
         fieldName:
+          description: The field name.
           type: string
         fieldType:
           $ref: "#/components/schemas/FieldType"
         renderingMode:
           $ref: "#/components/schemas/TemplateRenderingMode"
         required:
+          description: The required.
           type: boolean
       type: object
     MultipleValues:
@@ -385,6 +417,7 @@ components:
           type: array
       type: object
     TemplateRenderingMode:
+      description: Template rendering mode.
       enum:
       - TEMPLATE_RENDERING_MODE_UNSPECIFIED
       - RELAXED
@@ -396,6 +429,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     notification_center.ConnectorType:
+      description: Connector type.
       enum:
       - CONNECTOR_TYPE_UNSPECIFIED
       - SLACK
@@ -404,8 +438,10 @@ components:
       - IBM_EVENT_NOTIFICATIONS
       - SERVICE_NOW
       - EMAIL
+      - PAGERDUTY_INCIDENTS
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR

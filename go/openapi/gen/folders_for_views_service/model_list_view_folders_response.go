@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the ListViewFoldersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListViewFoldersResponse{}
 
-// ListViewFoldersResponse struct for ListViewFoldersResponse
+// ListViewFoldersResponse Response containing a list of view folders.
 type ListViewFoldersResponse struct {
+	// The folders.
 	Folders []ViewFolder `json:"folders,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

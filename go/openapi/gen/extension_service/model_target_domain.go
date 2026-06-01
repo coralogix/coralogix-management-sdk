@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TargetDomain the model 'TargetDomain'
+// TargetDomain Target domain.
 type TargetDomain string
 
 // List of TargetDomain

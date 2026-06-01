@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// RowStyle the model 'RowStyle'
+// RowStyle Row style.
 type RowStyle string
 
 // List of RowStyle

@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the MetricTimeWindowMetricTimeWindowDynamicDuration type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetricTimeWindowMetricTimeWindowDynamicDuration{}
 
-// MetricTimeWindowMetricTimeWindowDynamicDuration struct for MetricTimeWindowMetricTimeWindowDynamicDuration
+// MetricTimeWindowMetricTimeWindowDynamicDuration Metric time window.
 type MetricTimeWindowMetricTimeWindowDynamicDuration struct {
 	// The time window as a dynamic value
 	MetricTimeWindowDynamicDuration string `json:"metricTimeWindowDynamicDuration"`

@@ -23,6 +23,7 @@ var _ MappedNullable = &TestRoutingConditionValidRequest{}
 // TestRoutingConditionValidRequest Request to check that provided routing condition is valid
 type TestRoutingConditionValidRequest struct {
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	// Routing condition expression to validate.
 	Template *string `json:"template,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

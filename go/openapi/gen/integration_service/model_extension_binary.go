@@ -22,6 +22,7 @@ var _ MappedNullable = &ExtensionBinary{}
 
 // ExtensionBinary struct for ExtensionBinary
 type ExtensionBinary struct {
+	// Data payload.
 	Data *string `json:"data,omitempty"`
 	Type *ExtensionBinaryBinaryType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}

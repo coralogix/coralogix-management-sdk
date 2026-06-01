@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SpanObservationField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanObservationField{}
 
-// SpanObservationField struct for SpanObservationField
+// SpanObservationField Span observation field.
 type SpanObservationField struct {
+	// The keypath.
 	Keypath []string `json:"keypath,omitempty"`
 	RelationType *SpanRelationType `json:"relationType,omitempty"`
 	Scope *DatasetScope `json:"scope,omitempty"`

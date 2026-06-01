@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// V1OrderByDirection the model 'V1OrderByDirection'
+// V1OrderByDirection Order by direction.
 type V1OrderByDirection string
 
 // List of v1.OrderByDirection

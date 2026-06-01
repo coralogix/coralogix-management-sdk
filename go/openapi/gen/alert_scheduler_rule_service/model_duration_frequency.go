@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DurationFrequency the model 'DurationFrequency'
+// DurationFrequency Duration frequency.
 type DurationFrequency string
 
 // List of DurationFrequency

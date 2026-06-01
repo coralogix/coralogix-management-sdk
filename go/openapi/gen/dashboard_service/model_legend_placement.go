@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LegendPlacement the model 'LegendPlacement'
+// LegendPlacement Legend placement.
 type LegendPlacement string
 
 // List of LegendPlacement

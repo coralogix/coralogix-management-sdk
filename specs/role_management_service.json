@@ -11,7 +11,7 @@
           "Role Management Service"
         ],
         "summary": "List Custom Roles",
-        "description": "No description available",
+        "description": "Returns all custom roles for the authenticated team.",
         "externalDocs": {
           "url": ""
         },
@@ -20,7 +20,9 @@
           {
             "in": "query",
             "name": "team_id",
+            "description": "Team identifier.",
             "schema": {
+              "description": "Team identifier.",
               "type": "integer",
               "format": "int64"
             },
@@ -63,7 +65,7 @@
           "Role Management Service"
         ],
         "summary": "Create Role",
-        "description": "No description available",
+        "description": "Creates a new custom role.",
         "externalDocs": {
           "url": ""
         },
@@ -83,7 +85,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -135,7 +138,7 @@
           "Role Management Service"
         ],
         "summary": "Get Custom Role",
-        "description": "No description available",
+        "description": "Returns the details of the specified custom role.",
         "externalDocs": {
           "url": ""
         },
@@ -144,8 +147,10 @@
           {
             "in": "path",
             "name": "role_id",
+            "description": "The role id.",
             "required": true,
             "schema": {
+              "description": "The role id.",
               "type": "integer",
               "format": "int64"
             },
@@ -194,7 +199,7 @@
           "Role Management Service"
         ],
         "summary": "Update Role",
-        "description": "No description available",
+        "description": "Updates the specified custom role.",
         "externalDocs": {
           "url": ""
         },
@@ -203,8 +208,10 @@
           {
             "in": "path",
             "name": "role_id",
+            "description": "The role id.",
             "required": true,
             "schema": {
+              "description": "The role id.",
               "type": "integer",
               "format": "int64"
             },
@@ -215,12 +222,15 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for updating a custom role.",
                 "type": "object",
                 "properties": {
                   "newDescription": {
+                    "description": "The new description.",
                     "type": "string"
                   },
                   "newName": {
+                    "description": "The new name.",
                     "type": "string"
                   },
                   "newPermissions": {
@@ -273,7 +283,7 @@
           "Role Management Service"
         ],
         "summary": "Delete Role",
-        "description": "No description available",
+        "description": "Deletes the custom role with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -282,8 +292,10 @@
           {
             "in": "path",
             "name": "role_id",
+            "description": "The role id.",
             "required": true,
             "schema": {
+              "description": "The role id.",
               "type": "integer",
               "format": "int64"
             },
@@ -340,7 +352,7 @@
           "Role Management Service"
         ],
         "summary": "List System Roles",
-        "description": "No description available",
+        "description": "Returns all built-in system roles.",
         "externalDocs": {
           "url": ""
         },
@@ -381,25 +393,35 @@
   "components": {
     "schemas": {
       "CreateRoleRequestParentRoleId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for creating a custom role.",
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "parentRoleId": {
+            "description": "The parent role id.",
             "type": "integer",
             "format": "int64"
           },
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
+              "description": "List of permissions.",
               "type": "string"
             }
           },
           "teamId": {
+            "description": "Team identifier.",
             "type": "integer",
             "format": "int64"
           }
@@ -409,24 +431,34 @@
         ]
       },
       "CreateRoleRequestParentRoleName": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Request for creating a custom role.",
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "parentRoleName": {
+            "description": "The parent role name.",
             "type": "string"
           },
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
+              "description": "List of permissions.",
               "type": "string"
             }
           },
           "teamId": {
+            "description": "Team identifier.",
             "type": "integer",
             "format": "int64"
           }
@@ -436,56 +468,78 @@
         ]
       },
       "CreateRoleResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully creating a custom role.",
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "CustomRole": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Custom role.",
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "parentRoleId": {
+            "description": "The parent role id.",
             "type": "integer",
             "format": "int64"
           },
           "parentRoleName": {
+            "description": "The parent role name.",
             "type": "string"
           },
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
+              "description": "List of permissions.",
               "type": "string"
             }
           },
           "roleId": {
+            "description": "The role id.",
             "type": "integer",
             "format": "int64"
           },
           "teamId": {
+            "description": "Team identifier.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "DeleteRoleResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a custom role.",
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -556,6 +610,10 @@
         ]
       },
       "GetCustomRoleResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the details of a custom role.",
         "type": "object",
         "properties": {
           "role": {
@@ -564,9 +622,14 @@
         }
       },
       "ListCustomRolesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of custom roles.",
         "type": "object",
         "properties": {
           "roles": {
+            "description": "List of roles.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomRole"
@@ -575,9 +638,14 @@
         }
       },
       "ListSystemRolesResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of system roles.",
         "type": "object",
         "properties": {
           "roles": {
+            "description": "List of roles.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SystemRole"
@@ -603,25 +671,35 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
+              "description": "List of permissions.",
               "type": "string"
             }
           },
           "roleId": {
+            "description": "The role id.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "UpdateRoleResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully updating a custom role.",
+        "type": "object",
+        "additionalProperties": false
       },
       "events.v3.FilterMatcher": {
         "type": "string",
@@ -631,17 +709,24 @@
         ]
       },
       "v2.Permissions": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Permissions.",
         "type": "object",
         "properties": {
           "permissions": {
+            "description": "List of permissions.",
             "type": "array",
             "items": {
+              "description": "List of permissions.",
               "type": "string"
             }
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

@@ -22,11 +22,16 @@ var _ MappedNullable = &GetContextualDataIntegrationsResponseIntegrationWithCoun
 
 // GetContextualDataIntegrationsResponseIntegrationWithCounts struct for GetContextualDataIntegrationsResponseIntegrationWithCounts
 type GetContextualDataIntegrationsResponseIntegrationWithCounts struct {
+	// The amount integrations.
 	AmountIntegrations *int64 `json:"amountIntegrations,omitempty"`
+	// List of errors.
 	Errors []string `json:"errors,omitempty"`
 	Integration *Integration `json:"integration,omitempty"`
+	// The is deprecated.
 	IsDeprecated *bool `json:"isDeprecated,omitempty"`
+	// The is new.
 	IsNew *bool `json:"isNew,omitempty"`
+	// The upgrade available.
 	UpgradeAvailable *bool `json:"upgradeAvailable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

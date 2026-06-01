@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// OrderDirection the model 'OrderDirection'
+// OrderDirection Order direction.
 type OrderDirection string
 
 // List of OrderDirection

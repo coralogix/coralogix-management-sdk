@@ -22,7 +22,9 @@ var _ MappedNullable = &ChangelogEntry{}
 
 // ChangelogEntry struct for ChangelogEntry
 type ChangelogEntry struct {
+	// The description md.
 	DescriptionMd *string `json:"descriptionMd,omitempty"`
+	// Version.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

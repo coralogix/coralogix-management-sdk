@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the XAxisTime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &XAxisTime{}
 
-// XAxisTime struct for XAxisTime
+// XAxisTime X axis.
 type XAxisTime struct {
 	Time XAxisByTime `json:"time"`
 	AdditionalProperties map[string]interface{}

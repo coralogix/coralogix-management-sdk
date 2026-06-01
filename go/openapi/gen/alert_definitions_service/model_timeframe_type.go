@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// TimeframeType the model 'TimeframeType'
+// TimeframeType Timeframe type.
 type TimeframeType string
 
 // List of TimeframeType

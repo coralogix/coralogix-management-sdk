@@ -151,7 +151,10 @@ func (r ApiAlertDefsServiceBulkReplaceAlertDefsRequest) Execute() (*BulkReplaceA
 /*
 AlertDefsServiceBulkReplaceAlertDefs Bulk replace alert definitions
 
-No description available
+Replaces all alert definitions with the provided set.
+
+Requires the following permissions:
+- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceBulkReplaceAlertDefsRequest
@@ -258,7 +261,10 @@ func (r ApiAlertDefsServiceCreateAlertDefRequest) Execute() (*CreateAlertDefResp
 /*
 AlertDefsServiceCreateAlertDef Create an alert
 
-No description available
+Creates a new alert definition.
+
+Requires the following permissions:
+- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceCreateAlertDefRequest
@@ -360,10 +366,13 @@ func (r ApiAlertDefsServiceDeleteAlertDefRequest) Execute() (map[string]interfac
 /*
 AlertDefsServiceDeleteAlertDef DeleteAlertDef
 
-No description available
+Deletes the alert definition with the specified ID.
+
+Requires the following permissions:
+- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id The unique identifier of the alert definition to delete.
  @return ApiAlertDefsServiceDeleteAlertDefRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDef(ctx context.Context, id string) ApiAlertDefsServiceDeleteAlertDefRequest {
@@ -558,6 +567,7 @@ type ApiAlertDefsServiceFilterOptionCountsRequest struct {
 	queryFilter *FilterOptionCountsFilter
 }
 
+// The filter to apply when counting options
 func (r ApiAlertDefsServiceFilterOptionCountsRequest) QueryFilter(queryFilter FilterOptionCountsFilter) ApiAlertDefsServiceFilterOptionCountsRequest {
 	r.queryFilter = &queryFilter
 	return r
@@ -676,10 +686,13 @@ func (r ApiAlertDefsServiceGetAlertDefRequest) Execute() (*GetAlertDefResponse, 
 /*
 AlertDefsServiceGetAlertDef Get alert definition by ID
 
-No description available
+Returns the details of the specified alert definition.
+
+Requires the following permissions:
+- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Alert definition ID
  @return ApiAlertDefsServiceGetAlertDefRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDef(ctx context.Context, id string) ApiAlertDefsServiceGetAlertDefRequest {
@@ -779,10 +792,13 @@ func (r ApiAlertDefsServiceGetAlertDefByVersionIdRequest) Execute() (*GetAlertDe
 /*
 AlertDefsServiceGetAlertDefByVersionId Get alert definition by alert version ID
 
-No description available
+Returns the alert definition with the specified version ID.
+
+Requires the following permissions:
+- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param alertVersionId
+ @param alertVersionId Alert version ID
  @return ApiAlertDefsServiceGetAlertDefByVersionIdRequest
 */
 func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersionId(ctx context.Context, alertVersionId string) ApiAlertDefsServiceGetAlertDefByVersionIdRequest {
@@ -877,16 +893,19 @@ type ApiAlertDefsServiceListAlertDefsRequest struct {
 	orderBys *AlertDefinitionOrderByList
 }
 
+// Filter to apply to the list of alert definitions
 func (r ApiAlertDefsServiceListAlertDefsRequest) QueryFilter(queryFilter AlertDefQueryFilter) ApiAlertDefsServiceListAlertDefsRequest {
 	r.queryFilter = &queryFilter
 	return r
 }
 
+// Pagination settings for the list of alert definitions
 func (r ApiAlertDefsServiceListAlertDefsRequest) Pagination(pagination AlertDefsServiceListAlertDefsPaginationParameter) ApiAlertDefsServiceListAlertDefsRequest {
 	r.pagination = &pagination
 	return r
 }
 
+// Ordering settings for the list of alert definitions
 func (r ApiAlertDefsServiceListAlertDefsRequest) OrderBys(orderBys AlertDefinitionOrderByList) ApiAlertDefsServiceListAlertDefsRequest {
 	r.orderBys = &orderBys
 	return r
@@ -899,7 +918,10 @@ func (r ApiAlertDefsServiceListAlertDefsRequest) Execute() (*ListAlertDefsRespon
 /*
 AlertDefsServiceListAlertDefs Get a list of all accessible alert definitions
 
-No description available
+Returns all alert definitions for the team.
+
+Requires the following permissions:
+- `alerts:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceListAlertDefsRequest
@@ -1013,7 +1035,10 @@ func (r ApiAlertDefsServiceReplaceAlertDefRequest) Execute() (*ReplaceAlertDefRe
 /*
 AlertDefsServiceReplaceAlertDef Replace an alert definition
 
-No description available
+Updates an existing alert definition.
+
+Requires the following permissions:
+- `alerts:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiAlertDefsServiceReplaceAlertDefRequest

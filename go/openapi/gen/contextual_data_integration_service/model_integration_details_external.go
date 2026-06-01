@@ -24,7 +24,9 @@ var _ MappedNullable = &IntegrationDetailsExternal{}
 // IntegrationDetailsExternal This data structure represents a set of integration details.
 type IntegrationDetailsExternal struct {
 	Default *DefaultIntegrationDetails `json:"default,omitempty"`
+	// Documentation links associated with this integration.
 	Docs []IntegrationDoc `json:"docs,omitempty"`
+	// Extensions bundled with this integration for pre-built dashboards and alerts.
 	Extensions []V1Extension `json:"extensions,omitempty"`
 	External ExternalUrl `json:"external"`
 	Integration *Integration `json:"integration,omitempty"`

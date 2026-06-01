@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DataTableQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataTableQueryLogs{}
 
-// DataTableQueryLogs struct for DataTableQueryLogs
+// DataTableQueryLogs Discriminated union of possible query types for the data table widget.
 type DataTableQueryLogs struct {
 	Logs DataTableLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

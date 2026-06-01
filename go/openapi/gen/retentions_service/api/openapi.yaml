@@ -7,7 +7,7 @@ servers:
 paths:
   /dataengine/retention-tags/v1:
     get:
-      description: No description available
+      description: Returns all available retention tags.
       externalDocs:
         url: ""
       operationId: RetentionsService_GetRetentions
@@ -34,7 +34,7 @@ paths:
       tags:
       - Retentions Service
     post:
-      description: No description available
+      description: Creates a new retention tag.
       externalDocs:
         url: ""
       operationId: RetentionsService_UpdateRetentions
@@ -43,6 +43,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Update_Retentions_Request"
+        required: true
       responses:
         "200":
           content:
@@ -67,7 +68,7 @@ paths:
       - Retentions Service
   /dataengine/retention-tags/v1/activate:
     post:
-      description: No description available
+      description: Activates the specified retention tags.
       externalDocs:
         url: ""
       operationId: RetentionsService_ActivateRetentions
@@ -95,7 +96,7 @@ paths:
       - Retentions Service
   /dataengine/retention-tags/v1/enabled:
     get:
-      description: No description available
+      description: Returns the enabled retention tags for the team.
       externalDocs:
         url: ""
       operationId: RetentionsService_GetRetentionsEnabled
@@ -133,6 +134,7 @@ components:
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         activateRetentions:
+          description: List of retentions to activate.
           example: true
           type: boolean
       required:
@@ -141,8 +143,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -200,12 +202,14 @@ components:
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         enableTags:
+          description: The enable tags.
           type: boolean
       required:
       - retentions
       title: Get Retentions Enabled Response
       type: object
     GetRetentionsResponse:
+      description: Response containing the current data retention settings.
       example:
         retentions:
         - editable: true
@@ -216,8 +220,11 @@ components:
           name: name
           id: id
           order: 0
+      externalDocs:
+        url: ""
       properties:
         retentions:
+          description: The retentions.
           items:
             $ref: "#/components/schemas/archive.v1.Retention"
           type: array
@@ -234,8 +241,10 @@ components:
     RetentionUpdateElement:
       properties:
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
       type: object
     UpdateRetentionsResponse:
@@ -255,6 +264,7 @@ components:
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         retentions:
+          description: The retentions.
           items:
             $ref: "#/components/schemas/archive.v1.Retention"
           type: array
@@ -274,12 +284,16 @@ components:
         url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       properties:
         editable:
+          description: The editable.
           type: boolean
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
         order:
+          description: Sort order.
           format: int32
           type: integer
       title: Retention
@@ -290,6 +304,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -298,6 +313,7 @@ components:
       description: This data structure is used to update retentions
       properties:
         retentionUpdateElements:
+          description: List of retention tag updates to apply.
           items:
             $ref: "#/components/schemas/RetentionUpdateElement"
           type: array

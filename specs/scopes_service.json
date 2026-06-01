@@ -11,7 +11,7 @@
           "Scopes Service"
         ],
         "summary": "Get Team Scopes By Ids",
-        "description": "No description available",
+        "description": "Returns a data access scope by ID.",
         "externalDocs": {
           "url": ""
         },
@@ -20,10 +20,13 @@
           {
             "in": "query",
             "name": "ids",
+            "description": "List of team scope identifiers to retrieve.",
             "schema": {
+              "description": "List of team scope identifiers to retrieve.",
               "type": "array",
               "items": {
                 "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
+                "description": "List of team scope identifiers to retrieve.",
                 "type": "string"
               }
             },
@@ -66,7 +69,7 @@
           "Scopes Service"
         ],
         "summary": "Update Scope",
-        "description": "No description available",
+        "description": "Updates an existing data access scope.",
         "externalDocs": {
           "url": ""
         },
@@ -81,17 +84,21 @@
                 "properties": {
                   "defaultExpression": {
                     "example": "<v1>true",
+                    "description": "The default expression.",
                     "type": "string"
                   },
                   "description": {
                     "example": "The best scope",
+                    "description": "Human-readable description.",
                     "type": "string"
                   },
                   "displayName": {
                     "example": "my-scope",
+                    "description": "The display name.",
                     "type": "string"
                   },
                   "filters": {
+                    "description": "List of filters.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
@@ -99,6 +106,7 @@
                   },
                   "id": {
                     "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
+                    "description": "Unique identifier.",
                     "type": "string"
                   }
                 },
@@ -110,7 +118,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -148,7 +157,7 @@
           "Scopes Service"
         ],
         "summary": "Create Scope",
-        "description": "No description available",
+        "description": "Creates a new data access scope.",
         "externalDocs": {
           "url": ""
         },
@@ -163,17 +172,21 @@
                 "properties": {
                   "defaultExpression": {
                     "example": "<v1>true",
+                    "description": "The default expression.",
                     "type": "string"
                   },
                   "description": {
                     "example": "The best scope",
+                    "description": "Human-readable description.",
                     "type": "string"
                   },
                   "displayName": {
                     "example": "my-scope",
+                    "description": "The display name.",
                     "type": "string"
                   },
                   "filters": {
+                    "description": "List of filters.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
@@ -186,7 +199,8 @@
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -226,7 +240,7 @@
           "Scopes Service"
         ],
         "summary": "Get Team Scopes",
-        "description": "No description available",
+        "description": "Returns all data access scopes for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -269,7 +283,7 @@
           "Scopes Service"
         ],
         "summary": "Delete Scope",
-        "description": "No description available",
+        "description": "Deletes the data access scope with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -278,9 +292,11 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
+              "description": "Unique identifier.",
               "type": "string"
             },
             "style": "simple"
@@ -339,15 +355,20 @@
         ]
       },
       "DeleteScopeResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a data access scope.",
+        "type": "object",
+        "additionalProperties": false
       },
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -427,6 +448,7 @@
         "type": "object",
         "properties": {
           "scopes": {
+            "description": "List of scopes.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Scope"
@@ -489,11 +511,13 @@
           },
           "expression": {
             "example": "<v1>true",
+            "description": "The expression.",
             "type": "string"
           }
         }
       },
       "v1.EntityType": {
+        "description": "Entity type.",
         "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
@@ -512,17 +536,21 @@
         "properties": {
           "defaultExpression": {
             "example": "<v1>true",
+            "description": "The default expression.",
             "type": "string"
           },
           "description": {
             "example": "The best scope",
+            "description": "Human-readable description.",
             "type": "string"
           },
           "displayName": {
             "example": "my-scope",
+            "description": "The display name.",
             "type": "string"
           },
           "filters": {
+            "description": "List of filters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/scopes.v1.Filter"
@@ -530,16 +558,19 @@
           },
           "id": {
             "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
+            "description": "Unique identifier.",
             "type": "string"
           },
           "teamId": {
             "example": 1234,
+            "description": "Team identifier.",
             "type": "integer",
             "format": "int32"
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

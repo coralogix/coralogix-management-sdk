@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the Weekly type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Weekly{}
 
-// Weekly struct for Weekly
+// Weekly Weekly.
 type Weekly struct {
+	// The days of week.
 	DaysOfWeek []int32 `json:"daysOfWeek,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

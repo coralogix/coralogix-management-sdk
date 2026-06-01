@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// FailureReason the model 'FailureReason'
+// FailureReason Failure reason.
 type FailureReason string
 
 // List of FailureReason

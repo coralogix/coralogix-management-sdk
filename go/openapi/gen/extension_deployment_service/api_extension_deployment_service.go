@@ -34,31 +34,37 @@ type ApiExtensionDeploymentServiceDeployExtensionRequest struct {
 	extensionDeployment *ExtensionDeployment
 }
 
+// Unique identifier.
 func (r ApiExtensionDeploymentServiceDeployExtensionRequest) Id(id string) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	r.id = &id
 	return r
 }
 
+// Version number.
 func (r ApiExtensionDeploymentServiceDeployExtensionRequest) Version(version string) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	r.version = &version
 	return r
 }
 
+// The item ids.
 func (r ApiExtensionDeploymentServiceDeployExtensionRequest) ItemIds(itemIds []string) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	r.itemIds = &itemIds
 	return r
 }
 
+// The applications.
 func (r ApiExtensionDeploymentServiceDeployExtensionRequest) Applications(applications []string) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	r.applications = &applications
 	return r
 }
 
+// The subsystems.
 func (r ApiExtensionDeploymentServiceDeployExtensionRequest) Subsystems(subsystems []string) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	r.subsystems = &subsystems
 	return r
 }
 
+// The extension deployment configuration.
 func (r ApiExtensionDeploymentServiceDeployExtensionRequest) ExtensionDeployment(extensionDeployment ExtensionDeployment) ApiExtensionDeploymentServiceDeployExtensionRequest {
 	r.extensionDeployment = &extensionDeployment
 	return r
@@ -71,7 +77,10 @@ func (r ApiExtensionDeploymentServiceDeployExtensionRequest) Execute() (*DeployE
 /*
 ExtensionDeploymentServiceDeployExtension Deploy extension
 
-No description available
+Deploys an extension.
+
+Requires the following permissions:
+- `extensions:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceDeployExtensionRequest
@@ -212,7 +221,10 @@ func (r ApiExtensionDeploymentServiceGetDeployedExtensionsRequest) Execute() (*G
 /*
 ExtensionDeploymentServiceGetDeployedExtensions Get deployed extensions
 
-No description available
+Returns all deployed extensions.
+
+Requires the following permissions:
+- `extensions:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceGetDeployedExtensionsRequest
@@ -317,7 +329,10 @@ func (r ApiExtensionDeploymentServiceUndeployExtensionRequest) Execute() (*Undep
 /*
 ExtensionDeploymentServiceUndeployExtension Revert deployment of extension
 
-No description available
+Undeploys the specified extension.
+
+Requires the following permissions:
+- `extensions:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceUndeployExtensionRequest
@@ -417,31 +432,37 @@ type ApiExtensionDeploymentServiceUpdateExtensionRequest struct {
 	extensionDeployment *ExtensionDeployment
 }
 
+// Unique identifier.
 func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Id(id string) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	r.id = &id
 	return r
 }
 
+// Version number.
 func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Version(version string) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	r.version = &version
 	return r
 }
 
+// The item ids.
 func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) ItemIds(itemIds []string) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	r.itemIds = &itemIds
 	return r
 }
 
+// The applications.
 func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Applications(applications []string) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	r.applications = &applications
 	return r
 }
 
+// The subsystems.
 func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Subsystems(subsystems []string) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	r.subsystems = &subsystems
 	return r
 }
 
+// The extension deployment configuration to update.
 func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) ExtensionDeployment(extensionDeployment ExtensionDeployment) ApiExtensionDeploymentServiceUpdateExtensionRequest {
 	r.extensionDeployment = &extensionDeployment
 	return r
@@ -454,7 +475,10 @@ func (r ApiExtensionDeploymentServiceUpdateExtensionRequest) Execute() (*UpdateE
 /*
 ExtensionDeploymentServiceUpdateExtension Update extension
 
-No description available
+Updates a deployed extension.
+
+Requires the following permissions:
+- `extensions:Deploy`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionDeploymentServiceUpdateExtensionRequest

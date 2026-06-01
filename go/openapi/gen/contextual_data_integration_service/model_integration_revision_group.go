@@ -22,7 +22,9 @@ var _ MappedNullable = &IntegrationRevisionGroup{}
 
 // IntegrationRevisionGroup struct for IntegrationRevisionGroup
 type IntegrationRevisionGroup struct {
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

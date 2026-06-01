@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the BatchGetEventResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BatchGetEventResponse{}
 
-// BatchGetEventResponse struct for BatchGetEventResponse
+// BatchGetEventResponse Response containing the details of an alert event.
 type BatchGetEventResponse struct {
+	// List of events.
 	Events map[string]CxEventSingleOrMultiple `json:"events,omitempty"`
+	// The not found ids.
 	NotFoundIds []string `json:"notFoundIds,omitempty"`
 	Pagination *EventsV3PaginationResponse `json:"pagination,omitempty"`
 	AdditionalProperties map[string]interface{}

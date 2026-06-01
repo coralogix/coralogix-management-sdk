@@ -7,17 +7,20 @@ servers:
 paths:
   /aaa/team-scopes/v1:
     get:
-      description: No description available
+      description: Returns a data access scope by ID.
       externalDocs:
         url: ""
       operationId: ScopesService_GetTeamScopesByIds
       parameters:
-      - explode: true
+      - description: List of team scope identifiers to retrieve.
+        explode: true
         in: query
         name: ids
         required: false
         schema:
+          description: List of team scope identifiers to retrieve.
           items:
+            description: List of team scope identifiers to retrieve.
             example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
             type: string
           type: array
@@ -45,7 +48,7 @@ paths:
       tags:
       - Scopes Service
     post:
-      description: No description available
+      description: Creates a new data access scope.
       externalDocs:
         url: ""
       operationId: ScopesService_CreateScope
@@ -54,6 +57,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Create_Scope_Request"
+        required: true
       responses:
         "200":
           content:
@@ -77,7 +81,7 @@ paths:
       tags:
       - Scopes Service
     put:
-      description: No description available
+      description: Updates an existing data access scope.
       externalDocs:
         url: ""
       operationId: ScopesService_UpdateScope
@@ -86,6 +90,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Update_Scope_Request"
+        required: true
       responses:
         "200":
           content:
@@ -110,7 +115,7 @@ paths:
       - Scopes Service
   /aaa/team-scopes/v1/all/list:
     get:
-      description: No description available
+      description: Returns all data access scopes for the team.
       externalDocs:
         url: ""
       operationId: ScopesService_GetTeamScopes
@@ -138,16 +143,18 @@ paths:
       - Scopes Service
   /aaa/team-scopes/v1/{id}:
     delete:
-      description: No description available
+      description: Deletes the data access scope with the specified ID.
       externalDocs:
         url: ""
       operationId: ScopesService_DeleteScope
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
           type: string
         style: simple
@@ -200,11 +207,15 @@ components:
       title: Create Scope Response
       type: object
     DeleteScopeResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a data access scope.
+      externalDocs:
+        url: ""
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -281,6 +292,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
       properties:
         scopes:
+          description: List of scopes.
           items:
             $ref: "#/components/schemas/v1.Scope"
           type: array
@@ -338,11 +350,13 @@ components:
         entityType:
           $ref: "#/components/schemas/v1.EntityType"
         expression:
+          description: The expression.
           example: <v1>true
           type: string
       title: Filter
       type: object
     v1.EntityType:
+      description: Entity type.
       enum:
       - ENTITY_TYPE_UNSPECIFIED
       - ENTITY_TYPE_LOGS
@@ -366,28 +380,35 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
       properties:
         defaultExpression:
+          description: The default expression.
           example: <v1>true
           type: string
         description:
+          description: Human-readable description.
           example: The best scope
           type: string
         displayName:
+          description: The display name.
           example: my-scope
           type: string
         filters:
+          description: List of filters.
           items:
             $ref: "#/components/schemas/scopes.v1.Filter"
           type: array
         id:
+          description: Unique identifier.
           example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
           type: string
         teamId:
+          description: Team identifier.
           example: 1234
           format: int32
           type: integer
       title: Scope
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -396,19 +417,24 @@ components:
       description: This data structure represents a request to update a scope
       properties:
         defaultExpression:
+          description: The default expression.
           example: <v1>true
           type: string
         description:
+          description: Human-readable description.
           example: The best scope
           type: string
         displayName:
+          description: The display name.
           example: my-scope
           type: string
         filters:
+          description: List of filters.
           items:
             $ref: "#/components/schemas/scopes.v1.Filter"
           type: array
         id:
+          description: Unique identifier.
           example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
           type: string
       required:
@@ -422,15 +448,19 @@ components:
       description: This data structure represents a request to create a scope
       properties:
         defaultExpression:
+          description: The default expression.
           example: <v1>true
           type: string
         description:
+          description: Human-readable description.
           example: The best scope
           type: string
         displayName:
+          description: The display name.
           example: my-scope
           type: string
         filters:
+          description: List of filters.
           items:
             $ref: "#/components/schemas/scopes.v1.Filter"
           type: array

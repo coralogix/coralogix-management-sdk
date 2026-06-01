@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the EventRecurrenceSource type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventRecurrenceSource{}
 
-// EventRecurrenceSource struct for EventRecurrenceSource
+// EventRecurrenceSource Annotation source driven by recurring calendar events such as weekly deployments or maintenance windows.
 type EventRecurrenceSource struct {
+	// The message template.
 	MessageTemplate *string `json:"messageTemplate,omitempty"`
 	Recurrence *Recurrence `json:"recurrence,omitempty"`
 	Strategy *EventRecurrenceSourceStrategy `json:"strategy,omitempty"`

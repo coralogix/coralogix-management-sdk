@@ -23,6 +23,7 @@ var _ MappedNullable = &GetCompanyPoliciesResponse{}
 
 // GetCompanyPoliciesResponse This data structue is obtained when retrieving all policies of a company.
 type GetCompanyPoliciesResponse struct {
+	// List of policies.
 	Policies []Policy `json:"policies"`
 	AdditionalProperties map[string]interface{}
 }

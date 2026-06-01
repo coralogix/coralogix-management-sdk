@@ -22,6 +22,7 @@ var _ MappedNullable = &UpdateDataUsageMetricsExportStatusResponse{}
 
 // UpdateDataUsageMetricsExportStatusResponse This data structure is used to return data usage metrics export status.
 type UpdateDataUsageMetricsExportStatusResponse struct {
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

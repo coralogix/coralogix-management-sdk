@@ -22,6 +22,7 @@ var _ MappedNullable = &AtomicBatchExecuteActionsResponse{}
 
 // AtomicBatchExecuteActionsResponse This data structure represents the response to a batch Action execution request.
 type AtomicBatchExecuteActionsResponse struct {
+	// The matching responses.
 	MatchingResponses []ActionExecutionResponse `json:"matchingResponses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

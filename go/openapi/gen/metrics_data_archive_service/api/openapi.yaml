@@ -7,7 +7,7 @@ servers:
 paths:
   /metrics/data-setup/v1:
     get:
-      description: No description available
+      description: Returns the current metrics storage configuration.
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_GetTenantConfig
@@ -30,11 +30,11 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: GetTenantConfig
+      summary: Get Metrics Storage Configuration
       tags:
       - Metrics Data Archive Service
     post:
-      description: No description available
+      description: Creates the metrics storage configuration.
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_ConfigureTenant
@@ -43,6 +43,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MetricsConfiguratorPublicService_ConfigureTenant_request"
+        required: true
       responses:
         "200":
           content:
@@ -62,11 +63,11 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: ConfigureTenant
+      summary: Configure Tenant
       tags:
       - Metrics Data Archive Service
     put:
-      description: No description available
+      description: Updates the metrics storage configuration.
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_Update
@@ -75,6 +76,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MetricsConfiguratorPublicService_Update_request"
+        required: true
       responses:
         "200":
           content:
@@ -94,12 +96,12 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: Update
+      summary: Update Metrics Storage Configuration
       tags:
       - Metrics Data Archive Service
   /metrics/data-setup/v1/disable:
     post:
-      description: No description available
+      description: Disables the metrics storage configuration.
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_DisableArchive
@@ -122,12 +124,12 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: DisableArchive
+      summary: Disable Metrics Archive
       tags:
       - Metrics Data Archive Service
   /metrics/data-setup/v1/enable:
     post:
-      description: No description available
+      description: Enables the metrics storage configuration.
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_EnableArchive
@@ -150,12 +152,12 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: EnableArchive
+      summary: Enable Metrics Archive
       tags:
       - Metrics Data Archive Service
   /metrics/data-setup/v1/validate:
     post:
-      description: No description available
+      description: Validates the provided metrics storage configuration.
       externalDocs:
         url: ""
       operationId: MetricsConfiguratorPublicService_ValidateBucket
@@ -164,6 +166,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MetricsConfiguratorPublicService_ValidateBucket_request"
+        required: true
       responses:
         "200":
           content:
@@ -183,7 +186,7 @@ paths:
           content:
             application/json: {}
           description: Internal server error
-      summary: ValidateBucket
+      summary: Validate Metrics Storage Bucket
       tags:
       - Metrics Data Archive Service
 components:
@@ -232,8 +235,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -283,21 +286,23 @@ components:
       type: object
     GcsConfig:
       description: This data structure represents the GCS configuration for a tenant.
+      example:
+        bucket: bucket
       externalDocs:
         description: Find out more about metrics cost optimization
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
       properties:
         bucket:
+          description: Bucket name.
           type: string
       title: GCS Configuration
       type: object
     GetTenantConfigResponseV2:
+      description: Response containing the current metrics tenant configuration.
       example:
         tenantConfig:
-          ibm:
-            endpoint: s3.us-south.cloud-object-storage.appdomain.cloud
-            serviceCrn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-            crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+          gcs:
+            bucket: bucket
           prefix: prefix
           tenantId: 0
           disabled: true
@@ -305,27 +310,28 @@ components:
             fiveMinutesResolution: 2
             oneHourResolution: 3
             rawResolution: 1
+      externalDocs:
+        url: ""
       properties:
         tenantConfig:
           $ref: "#/components/schemas/TenantConfigV2"
       type: object
     IbmConfigV2:
       description: This data structure is used to configure an IBM bucket.
-      example:
-        endpoint: s3.us-south.cloud-object-storage.appdomain.cloud
-        serviceCrn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-        crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
       externalDocs:
         description: Find out more about metrics cost optimization
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
       properties:
         crn:
+          description: The crn.
           example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
           type: string
         endpoint:
+          description: Endpoint.
           example: s3.us-south.cloud-object-storage.appdomain.cloud
           type: string
         serviceCrn:
+          description: The service crn.
           example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
           type: string
       title: IBM Bucket Configuration
@@ -350,14 +356,17 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
       properties:
         fiveMinutesResolution:
+          description: The five minutes resolution.
           example: 2
           format: int64
           type: integer
         oneHourResolution:
+          description: The one hour resolution.
           example: 3
           format: int64
           type: integer
         rawResolution:
+          description: The raw resolution.
           example: 1
           format: int64
           type: integer
@@ -370,38 +379,23 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
       properties:
         bucket:
+          description: Bucket name.
           type: string
         region:
+          description: Region.
           type: string
       title: S3 Configuration
       type: object
     TenantConfigV2:
       oneOf:
+      - $ref: "#/components/schemas/TenantConfigV2Gcs"
       - $ref: "#/components/schemas/TenantConfigV2Ibm"
       - $ref: "#/components/schemas/TenantConfigV2S3"
-      - $ref: "#/components/schemas/TenantConfigV2Gcs"
     TenantConfigV2Gcs:
-      properties:
-        disabled:
-          type: boolean
-        gcs:
-          $ref: "#/components/schemas/GcsConfig"
-        prefix:
-          type: string
-        retentionPolicy:
-          $ref: "#/components/schemas/RetentionPolicyRequest"
-        tenantId:
-          format: int64
-          type: integer
-      required:
-      - gcs
-      type: object
-    TenantConfigV2Ibm:
+      description: Tenant config v2.
       example:
-        ibm:
-          endpoint: s3.us-south.cloud-object-storage.appdomain.cloud
-          serviceCrn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
-          crn: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+        gcs:
+          bucket: bucket
         prefix: prefix
         tenantId: 0
         disabled: true
@@ -409,32 +403,65 @@ components:
           fiveMinutesResolution: 2
           oneHourResolution: 3
           rawResolution: 1
+      externalDocs:
+        url: ""
       properties:
         disabled:
+          description: Whether metrics archiving is disabled for this tenant.
           type: boolean
-        ibm:
-          $ref: "#/components/schemas/IbmConfigV2"
+        gcs:
+          $ref: "#/components/schemas/GcsConfig"
         prefix:
+          description: Storage path prefix applied to all archived objects.
           type: string
         retentionPolicy:
           $ref: "#/components/schemas/RetentionPolicyRequest"
         tenantId:
+          description: Tenant identifier.
+          format: int64
+          type: integer
+      required:
+      - gcs
+      type: object
+    TenantConfigV2Ibm:
+      description: Tenant config v2.
+      externalDocs:
+        url: ""
+      properties:
+        disabled:
+          description: Whether metrics archiving is disabled for this tenant.
+          type: boolean
+        ibm:
+          $ref: "#/components/schemas/IbmConfigV2"
+        prefix:
+          description: Storage path prefix applied to all archived objects.
+          type: string
+        retentionPolicy:
+          $ref: "#/components/schemas/RetentionPolicyRequest"
+        tenantId:
+          description: Tenant identifier.
           format: int64
           type: integer
       required:
       - ibm
       type: object
     TenantConfigV2S3:
+      description: Tenant config v2.
+      externalDocs:
+        url: ""
       properties:
         disabled:
+          description: Whether metrics archiving is disabled for this tenant.
           type: boolean
         prefix:
+          description: Storage path prefix applied to all archived objects.
           type: string
         retentionPolicy:
           $ref: "#/components/schemas/RetentionPolicyRequest"
         s3:
           $ref: "#/components/schemas/S3Config"
         tenantId:
+          description: Tenant identifier.
           format: int64
           type: integer
       required:
@@ -449,6 +476,7 @@ components:
         gcs:
           $ref: "#/components/schemas/GcsConfig"
         retentionDays:
+          description: Archive retention period in days.
           format: int64
           type: integer
       required:
@@ -464,6 +492,7 @@ components:
         ibm:
           $ref: "#/components/schemas/IbmConfigV2"
         retentionDays:
+          description: Archive retention period in days.
           format: int64
           type: integer
       required:
@@ -477,6 +506,7 @@ components:
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
       properties:
         retentionDays:
+          description: Archive retention period in days.
           format: int64
           type: integer
         s3:
@@ -527,25 +557,26 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     MetricsConfiguratorPublicService_Update_request:
       oneOf:
-      - $ref: "#/components/schemas/UpdateRequestS3"
       - $ref: "#/components/schemas/UpdateRequestGcs"
       - $ref: "#/components/schemas/UpdateRequestIbm"
+      - $ref: "#/components/schemas/UpdateRequestS3"
       type: object
     MetricsConfiguratorPublicService_ConfigureTenant_request:
       oneOf:
-      - $ref: "#/components/schemas/ConfigureTenantRequestS3"
       - $ref: "#/components/schemas/ConfigureTenantRequestGcs"
       - $ref: "#/components/schemas/ConfigureTenantRequestIbm"
+      - $ref: "#/components/schemas/ConfigureTenantRequestS3"
       type: object
     MetricsConfiguratorPublicService_ValidateBucket_request:
       oneOf:
+      - $ref: "#/components/schemas/ValidateBucketRequestGcs"
       - $ref: "#/components/schemas/ValidateBucketRequestIbm"
       - $ref: "#/components/schemas/ValidateBucketRequestS3"
-      - $ref: "#/components/schemas/ValidateBucketRequestGcs"
       type: object

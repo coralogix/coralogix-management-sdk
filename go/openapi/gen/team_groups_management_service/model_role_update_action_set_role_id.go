@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the RoleUpdateActionSetRoleId type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleUpdateActionSetRoleId{}
 
-// RoleUpdateActionSetRoleId struct for RoleUpdateActionSetRoleId
+// RoleUpdateActionSetRoleId Clear role.
 type RoleUpdateActionSetRoleId struct {
+	// Discriminator indicating the role update action type (set_role_id or clear).
 	ActionType string `json:"actionType"`
 	SetRoleId SetRoleId `json:"setRoleId"`
 	AdditionalProperties map[string]interface{}

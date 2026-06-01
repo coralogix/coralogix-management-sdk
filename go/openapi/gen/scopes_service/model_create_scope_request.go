@@ -23,9 +23,13 @@ var _ MappedNullable = &CreateScopeRequest{}
 
 // CreateScopeRequest This data structure represents a request to create a scope
 type CreateScopeRequest struct {
+	// The default expression.
 	DefaultExpression *string `json:"defaultExpression,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
+	// The display name.
 	DisplayName string `json:"displayName"`
+	// List of filters.
 	Filters []ScopesV1Filter `json:"filters"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the EventRecurrenceSourceStrategyInstant type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EventRecurrenceSourceStrategyInstant{}
 
-// EventRecurrenceSourceStrategyInstant struct for EventRecurrenceSourceStrategyInstant
+// EventRecurrenceSourceStrategyInstant Renders the recurrence event as an instant snapshot at the configured start hour.
 type EventRecurrenceSourceStrategyInstant struct {
+	// The start time hour.
 	StartTimeHour *int32 `json:"startTimeHour,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

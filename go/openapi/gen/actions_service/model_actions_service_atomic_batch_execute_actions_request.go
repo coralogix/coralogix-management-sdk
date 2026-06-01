@@ -22,6 +22,7 @@ var _ MappedNullable = &ActionsServiceAtomicBatchExecuteActionsRequest{}
 
 // ActionsServiceAtomicBatchExecuteActionsRequest This data structure represents a request to execute a batch of Action operations atomically.
 type ActionsServiceAtomicBatchExecuteActionsRequest struct {
+	// The requests.
 	Requests []ActionExecutionRequest `json:"requests,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

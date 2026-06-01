@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the SpanFieldTagField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SpanFieldTagField{}
 
-// SpanFieldTagField struct for SpanFieldTagField
+// SpanFieldTagField Span field.
 type SpanFieldTagField struct {
+	// Name of a span tag field to use as the data source.
 	TagField string `json:"tagField"`
 	AdditionalProperties map[string]interface{}
 }

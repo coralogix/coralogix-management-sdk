@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the DemistoConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DemistoConfig{}
 
-// DemistoConfig struct for DemistoConfig
+// DemistoConfig Demisto config.
 type DemistoConfig struct {
+	// Raw payload data.
 	Payload *string `json:"payload,omitempty"`
+	// The uuid.
 	Uuid *string `json:"uuid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

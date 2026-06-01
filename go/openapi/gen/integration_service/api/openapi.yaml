@@ -7,16 +7,22 @@ servers:
 paths:
   /integrations/integrations/v1:
     get:
-      description: No description available
+      description: |-
+        Returns all available integration definitions.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetIntegrations
       parameters:
-      - explode: true
+      - description: Whether to include testing revisions in the response.
+        explode: true
         in: query
         name: include_testing_revision
         required: false
         schema:
+          description: Whether to include testing revisions in the response.
           type: boolean
         style: form
       responses:
@@ -45,24 +51,32 @@ paths:
       - integrations:ReadConfig
   /integrations/integrations/v1/definitions/{id}:
     get:
-      description: No description available
+      description: |-
+        Returns the definition for the specified integration type.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetIntegrationDefinition
       parameters:
-      - explode: false
+      - description: The unique identifier of the integration definition.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the integration definition.
           example: aws-sqs
           type: string
         style: simple
-      - explode: true
+      - description: Whether to include testing revisions in the response.
+        explode: true
         in: query
         name: include_testing_revision
         required: false
         schema:
+          description: Whether to include testing revisions in the response.
           type: boolean
         style: form
       responses:
@@ -91,16 +105,22 @@ paths:
       - integrations:ReadConfig
   /integrations/integrations/v1/deployed/{integration_id}:
     get:
-      description: No description available
+      description: |-
+        Returns the deployed instance of the specified integration.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetDeployedIntegration
       parameters:
-      - explode: false
+      - description: The integration id.
+        explode: false
         in: path
         name: integration_id
         required: true
         schema:
+          description: The integration id.
           example: aws-sqs
           type: string
         style: simple
@@ -130,16 +150,22 @@ paths:
       - integrations:ReadConfig
   /integrations/integrations/v1/instances/{integration_id}:
     delete:
-      description: No description available
+      description: |-
+        Removes the specified deployed integration instance.
+
+        Requires the following permissions:
+        - `integrations:Deploy`
       externalDocs:
         url: ""
       operationId: IntegrationService_DeleteIntegration
       parameters:
-      - explode: false
+      - description: The unique identifier of the integration instance to delete.
+        explode: false
         in: path
         name: integration_id
         required: true
         schema:
+          description: The unique identifier of the integration instance to delete.
           type: string
         style: simple
       responses:
@@ -168,16 +194,22 @@ paths:
       - integrations:Deploy
   /integrations/integrations/v1/rum/app-versions:
     get:
-      description: No description available
+      description: |-
+        Returns RUM application version data.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetRumApplicationVersionData
       parameters:
-      - explode: true
+      - description: The name of the RUM application to fetch version data for.
+        explode: true
         in: query
         name: application_name
         required: false
         schema:
+          description: The name of the RUM application to fetch version data for.
           type: string
         style: form
       responses:
@@ -206,7 +238,11 @@ paths:
       - integrations:ReadConfig
   /integrations/integrations/v1/rum/sync:
     post:
-      description: No description available
+      description: |-
+        Syncs RUM data for the team.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_SyncRumData
@@ -241,23 +277,31 @@ paths:
       - integrations:ReadConfig
   /integrations/integrations/v1/{id}:
     get:
-      description: No description available
+      description: |-
+        Returns the details of the specified integration.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetIntegrationDetails
       parameters:
-      - explode: false
+      - description: The unique identifier of the integration.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: The unique identifier of the integration.
           type: string
         style: simple
-      - explode: true
+      - description: Whether to include testing revisions in the response.
+        explode: true
         in: query
         name: include_testing_revision
         required: false
         schema:
+          description: Whether to include testing revisions in the response.
           type: boolean
         style: form
       responses:
@@ -286,7 +330,11 @@ paths:
       - integrations:ReadConfig
   /integrations/managed/v1:
     get:
-      description: No description available
+      description: |-
+        Returns a list of managed integration keys.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_ListManagedIntegrationKeys
@@ -316,16 +364,22 @@ paths:
       - integrations:ReadConfig
   /integrations/managed/v1/{integration_id}:
     get:
-      description: No description available
+      description: |-
+        Returns the status of the specified managed integration.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetManagedIntegrationStatus
       parameters:
-      - explode: false
+      - description: The unique identifier of the managed integration.
+        explode: false
         in: path
         name: integration_id
         required: true
         schema:
+          description: The unique identifier of the managed integration.
           type: string
         style: simple
       responses:
@@ -354,7 +408,11 @@ paths:
       - integrations:ReadConfig
   /integrations/metadata/v1:
     post:
-      description: No description available
+      description: |-
+        Creates or updates an integration deployment.
+
+        Requires the following permissions:
+        - `integrations:Deploy`
       externalDocs:
         url: ""
       operationId: IntegrationService_SaveIntegration
@@ -388,7 +446,11 @@ paths:
       x-coralogixPermissions:
       - integrations:Deploy
     put:
-      description: No description available
+      description: |-
+        Updates an existing integration deployment.
+
+        Requires the following permissions:
+        - `integrations:Deploy`
       externalDocs:
         url: ""
       operationId: IntegrationService_UpdateIntegration
@@ -423,7 +485,11 @@ paths:
       - integrations:Deploy
   /integrations/metadata/v1/test:
     post:
-      description: No description available
+      description: |-
+        Tests the integration configuration.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_TestIntegration
@@ -458,30 +524,43 @@ paths:
       - integrations:ReadConfig
   /integrations/template/v1:
     get:
-      description: No description available
+      description: |-
+        Returns the template for an integration.
+
+        Requires the following permissions:
+        - `integrations:ReadConfig`
       externalDocs:
         url: ""
       operationId: IntegrationService_GetTemplate
       parameters:
-      - explode: true
+      - description: The unique identifier of the integration to fetch a template
+          for.
+        explode: true
         in: query
         name: integration_id
         required: false
         schema:
+          description: The unique identifier of the integration to fetch a template
+            for.
           type: string
         style: form
-      - explode: true
+      - description: "Common ARM integration parameters (logs URL, API key, cgx domain)\
+          \ supplied when rendering the template."
+        explode: true
         in: query
         name: common_arm_params
         required: false
         schema:
           $ref: "#/components/schemas/Common_ARM_integration_parameters"
         style: form
-      - explode: true
+      - description: Empty extra parameters; use when the template does not require
+          additional inputs.
+        explode: true
         in: query
         name: empty
         required: false
         schema:
+          additionalProperties: false
           type: object
         style: form
       responses:
@@ -512,28 +591,40 @@ components:
   schemas:
     ARMStack:
       description: This data structure represents an Azure Resource Manager stack.
+      example:
+        resourceGroupName: resourceGroupName
+        subscriptionId: subscriptionId
       externalDocs:
         description: Find out more about the Azure Resource Manager (ARM) integration
           in our documentation
         url: https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/
       properties:
         resourceGroupName:
+          description: The resource group name.
           type: string
         subscriptionId:
+          description: The subscription id.
           type: string
       title: ARM stack
       type: object
     ApiKeyData:
+      description: Api key data.
+      example:
+        id: id
+        value: value
       externalDocs:
         url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
         value:
+          description: The value.
           type: string
       title: API key data
       type: object
     AzureArm:
+      additionalProperties: false
       description: This data structure represents an Azure ARM integration.
       externalDocs:
         url: ""
@@ -541,10 +632,13 @@ components:
       type: object
     AzureArmTemplate:
       description: This data structure represents an azure ARM template.
+      example:
+        templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
         templateUrl:
+          description: The template url.
           type: string
       title: Azure ARM template
       type: object
@@ -556,8 +650,10 @@ components:
         url: ""
       properties:
         descriptionMd:
+          description: The description md.
           type: string
         version:
+          description: Version.
           type: string
       title: Changelog entry
       type: object
@@ -569,32 +665,40 @@ components:
         url: https://coralogix.com/docs/integrations/aws/aws-cloudformation-logs/
       properties:
         arn:
+          description: The arn.
           type: string
         region:
+          description: Region.
           type: string
       title: CloudFormation stack
       type: object
     CloudFormationTemplate:
+      description: Cloud formation template.
       externalDocs:
         url: ""
       properties:
         commands:
+          description: The commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
           type: array
         parameters:
           additionalProperties:
             type: string
+          description: The parameters.
           type: object
         postInstallationSteps:
           additionalProperties:
             type: string
+          description: The post installation steps.
           type: object
         templateUrl:
+          description: The template url.
           type: string
       title: CloudFormation template
       type: object
     Cloudformation:
+      additionalProperties: false
       description: This data structure represents a CloudFormation integration.
       externalDocs:
         url: ""
@@ -605,38 +709,43 @@ components:
         url: ""
       properties:
         command:
+          description: The command.
           type: string
         description:
+          description: Human-readable description.
           type: string
         language:
           $ref: "#/components/schemas/Language"
         links:
+          description: List of links.
           items:
             $ref: "#/components/schemas/Link"
           type: array
         name:
+          description: Display name.
           type: string
         tooltipText:
+          description: The tooltip text.
           type: string
       title: Command information
       type: object
     ConfigurationBlock:
-      example:
-        name: name
-        description: description
-        value: value
       externalDocs:
         url: ""
       properties:
         description:
+          description: Human-readable description.
           type: string
         name:
+          description: Display name.
           type: string
         value:
+          description: The value.
           type: string
       title: Configuration block
       type: object
     ConnectionStatus:
+      description: Connection status.
       enum:
       - PENDING
       - ACTIVE
@@ -644,12 +753,14 @@ components:
       - STATUS_UNKNOWN
       type: string
     ContextualData:
+      additionalProperties: false
       description: This data structure represents a contextual data integration.
       externalDocs:
         url: ""
       title: Contextual data
       type: object
     DefaultIntegrationDetails:
+      description: Default integration details.
       example:
         registered:
         - lastUpdated: 2000-01-23T04:56:07.000+00:00
@@ -663,13 +774,19 @@ components:
             details:
               key: details
           id: id
+          arm:
+            resourceGroupName: resourceGroupName
+            subscriptionId: subscriptionId
           parameters:
-          - sensitiveData: "{}"
+          - apiKey:
+              id: id
+              value: value
             key: key
-          - sensitiveData: "{}"
+          - apiKey:
+              id: id
+              value: value
             key: key
           isTesting: true
-          empty: "{}"
         - lastUpdated: 2000-01-23T04:56:07.000+00:00
           definitionVersion: definitionVersion
           revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
@@ -681,25 +798,37 @@ components:
             details:
               key: details
           id: id
+          arm:
+            resourceGroupName: resourceGroupName
+            subscriptionId: subscriptionId
           parameters:
-          - sensitiveData: "{}"
+          - apiKey:
+              id: id
+              value: value
             key: key
-          - sensitiveData: "{}"
+          - apiKey:
+              id: id
+              value: value
             key: key
           isTesting: true
-          empty: "{}"
       externalDocs:
         url: ""
       properties:
         registered:
+          description: The registered.
           items:
             $ref: "#/components/schemas/RegisteredInstance"
           type: array
       title: Default integration details
       type: object
     DeleteIntegrationResponse:
+      additionalProperties: false
+      description: Response returned after successfully removing an integration instance.
+      externalDocs:
+        url: ""
       type: object
     DeployedIntegrationInformation:
+      description: Deployed integration information.
       example:
         definitionVersion: definitionVersion
         definitionKey: definitionKey
@@ -712,28 +841,37 @@ components:
             key: details
         id: id
         parameters:
-        - sensitiveData: "{}"
+        - apiKey:
+            id: id
+            value: value
           key: key
-        - sensitiveData: "{}"
+        - apiKey:
+            id: id
+            value: value
           key: key
       externalDocs:
         url: ""
       properties:
         definitionKey:
+          description: The definition key.
           type: string
         definitionVersion:
+          description: The definition version.
           type: string
         id:
+          description: Unique identifier.
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
         parameters:
+          description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
       title: Deployed integration information
       type: object
     Deprecation:
+      description: Deprecation.
       example:
         reason: reason
         replacementExtensions:
@@ -743,9 +881,12 @@ components:
         url: ""
       properties:
         reason:
+          description: Reason.
           type: string
         replacementExtensions:
+          description: The replacement extensions.
           items:
+            description: The replacement extensions.
             type: string
           type: array
       title: Deprecation
@@ -758,12 +899,14 @@ components:
         url: ""
       properties:
         data:
+          description: Data payload.
           type: string
         type:
           $ref: "#/components/schemas/ExtensionBinary.BinaryType"
       title: Extension binary
       type: object
     ExtensionBinary.BinaryType:
+      description: Type of binary content stored in the extension.
       enum:
       - KIBANA_INDEX_PATTERN
       type: string
@@ -790,28 +933,37 @@ components:
         url: ""
       properties:
         binaries:
+          description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionItemBinary"
           type: array
         data:
+          description: Data payload.
           type: object
         description:
+          description: Human-readable description.
           type: string
         extendedInternalId:
+          description: The extended internal id.
           type: string
         id:
+          description: Unique identifier.
           type: string
         isMandatory:
+          description: The is mandatory.
           type: boolean
         name:
+          description: Display name.
           type: string
         permissionResource:
           $ref: "#/components/schemas/PermissionResource"
         stableId:
+          description: The stable id.
           type: string
         targetDomain:
           $ref: "#/components/schemas/TargetDomain"
         uniqueId:
+          description: The unique id.
           type: string
       title: Extension item
       type: object
@@ -824,14 +976,17 @@ components:
         url: ""
       properties:
         data:
+          description: Data payload.
           type: string
         fileName:
+          description: The file name.
           type: string
         type:
           $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
       title: Extension item binary
       type: object
     ExtensionItemBinary.BinaryType:
+      description: Binary type.
       enum:
       - PREVIEW_IMAGE
       - KIBANA_DASHBOARD_DEFINITION
@@ -932,44 +1087,59 @@ components:
         url: ""
       properties:
         binaries:
+          description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionBinary"
           type: array
         description:
+          description: Human-readable description.
           type: string
         excerpt:
+          description: The excerpt.
           type: string
         integrationDetails:
+          description: The integration details.
           items:
             $ref: "#/components/schemas/IntegrationDetail"
           type: array
         isTesting:
+          description: The is testing.
           type: boolean
         items:
+          description: List of items.
           items:
             $ref: "#/components/schemas/ExtensionItem"
           type: array
         labels:
+          description: List of labels.
           items:
+            description: List of labels.
             type: string
           type: array
         permissionDeniedItems:
+          description: The permission denied items.
           items:
             $ref: "#/components/schemas/ExtensionItem"
           type: array
         version:
+          description: Version.
           type: string
       title: Extension revision
       type: object
     ExternalUrl:
+      description: External url.
+      example:
+        url: url
       externalDocs:
         url: ""
       properties:
         url:
+          description: URL.
           type: string
       title: External URL
       type: object
     FieldCondition:
+      description: Field condition.
       example:
         values:
         - fieldName: fieldName
@@ -983,12 +1153,14 @@ components:
         type:
           $ref: "#/components/schemas/FieldCondition.ConditionType"
         values:
+          description: List of values.
           items:
             $ref: "#/components/schemas/FieldCondition.FieldValue"
           type: array
       title: Field condition
       type: object
     FieldCondition.ConditionType:
+      description: Condition type.
       enum:
       - UNKNOWN
       - OR
@@ -1002,8 +1174,10 @@ components:
         url: ""
       properties:
         fieldName:
+          description: The field name.
           type: string
         valuePattern:
+          description: The value pattern.
           type: string
       title: Field value
       type: object
@@ -1011,10 +1185,10 @@ components:
       oneOf:
       - $ref: "#/components/schemas/FieldInformationMultiText"
       - $ref: "#/components/schemas/FieldInformationMultipleSelection"
-      - $ref: "#/components/schemas/FieldInformationSingleBoolean"
       - $ref: "#/components/schemas/FieldInformationSelection"
-      - $ref: "#/components/schemas/FieldInformationSingleNumber"
       - $ref: "#/components/schemas/FieldInformationSingle"
+      - $ref: "#/components/schemas/FieldInformationSingleBoolean"
+      - $ref: "#/components/schemas/FieldInformationSingleNumber"
     FieldInformationMultiText:
       example:
         visible: true
@@ -1048,34 +1222,57 @@ components:
         url: ""
       properties:
         allowedPattern:
+          description: Regular expression pattern that the field value must match
+            for validation.
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
+          description: Link to documentation providing more information about this
+            field.
           type: string
         groupId:
+          description: Identifier of the UI group this field belongs to for form layout
+            purposes.
           type: string
         multiText:
           $ref: "#/components/schemas/ListTextValue"
         name:
+          description: Display name.
           type: string
         placeholder:
+          description: Placeholder text shown in the input field before a value is
+            entered.
           type: string
         predefined:
+          description: Whether this field has a predefined value that is suggested
+            to the user.
           type: boolean
         readonly:
+          description: Whether this field is read-only and cannot be modified by the
+            user.
           type: boolean
         required:
+          description: Whether this field must be filled in before the integration
+            can be deployed.
           type: boolean
         templateParamName:
+          description: Name of the template parameter this field maps to in the deployment
+            template.
           type: string
         tooltip:
+          description: Tooltip text displayed on hover to provide additional context
+            for this field.
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
+          description: Notice displayed to users when an upgrade is required to use
+            this field.
           type: string
         visible:
+          description: Whether this field is visible in the integration configuration
+            UI.
           type: boolean
       required:
       - multiText
@@ -1086,34 +1283,57 @@ components:
         url: ""
       properties:
         allowedPattern:
+          description: Regular expression pattern that the field value must match
+            for validation.
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
+          description: Link to documentation providing more information about this
+            field.
           type: string
         groupId:
+          description: Identifier of the UI group this field belongs to for form layout
+            purposes.
           type: string
         multipleSelection:
           $ref: "#/components/schemas/MultipleSelectionValue"
         name:
+          description: Display name.
           type: string
         placeholder:
+          description: Placeholder text shown in the input field before a value is
+            entered.
           type: string
         predefined:
+          description: Whether this field has a predefined value that is suggested
+            to the user.
           type: boolean
         readonly:
+          description: Whether this field is read-only and cannot be modified by the
+            user.
           type: boolean
         required:
+          description: Whether this field must be filled in before the integration
+            can be deployed.
           type: boolean
         templateParamName:
+          description: Name of the template parameter this field maps to in the deployment
+            template.
           type: string
         tooltip:
+          description: Tooltip text displayed on hover to provide additional context
+            for this field.
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
+          description: Notice displayed to users when an upgrade is required to use
+            this field.
           type: string
         visible:
+          description: Whether this field is visible in the integration configuration
+            UI.
           type: boolean
       required:
       - multipleSelection
@@ -1124,34 +1344,57 @@ components:
         url: ""
       properties:
         allowedPattern:
+          description: Regular expression pattern that the field value must match
+            for validation.
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
+          description: Link to documentation providing more information about this
+            field.
           type: string
         groupId:
+          description: Identifier of the UI group this field belongs to for form layout
+            purposes.
           type: string
         name:
+          description: Display name.
           type: string
         placeholder:
+          description: Placeholder text shown in the input field before a value is
+            entered.
           type: string
         predefined:
+          description: Whether this field has a predefined value that is suggested
+            to the user.
           type: boolean
         readonly:
+          description: Whether this field is read-only and cannot be modified by the
+            user.
           type: boolean
         required:
+          description: Whether this field must be filled in before the integration
+            can be deployed.
           type: boolean
         selection:
           $ref: "#/components/schemas/SelectionValue"
         templateParamName:
+          description: Name of the template parameter this field maps to in the deployment
+            template.
           type: string
         tooltip:
+          description: Tooltip text displayed on hover to provide additional context
+            for this field.
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
+          description: Notice displayed to users when an upgrade is required to use
+            this field.
           type: string
         visible:
+          description: Whether this field is visible in the integration configuration
+            UI.
           type: boolean
       required:
       - selection
@@ -1162,34 +1405,57 @@ components:
         url: ""
       properties:
         allowedPattern:
+          description: Regular expression pattern that the field value must match
+            for validation.
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
+          description: Link to documentation providing more information about this
+            field.
           type: string
         groupId:
+          description: Identifier of the UI group this field belongs to for form layout
+            purposes.
           type: string
         name:
+          description: Display name.
           type: string
         placeholder:
+          description: Placeholder text shown in the input field before a value is
+            entered.
           type: string
         predefined:
+          description: Whether this field has a predefined value that is suggested
+            to the user.
           type: boolean
         readonly:
+          description: Whether this field is read-only and cannot be modified by the
+            user.
           type: boolean
         required:
+          description: Whether this field must be filled in before the integration
+            can be deployed.
           type: boolean
         single:
           $ref: "#/components/schemas/SingleValue"
         templateParamName:
+          description: Name of the template parameter this field maps to in the deployment
+            template.
           type: string
         tooltip:
+          description: Tooltip text displayed on hover to provide additional context
+            for this field.
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
+          description: Notice displayed to users when an upgrade is required to use
+            this field.
           type: string
         visible:
+          description: Whether this field is visible in the integration configuration
+            UI.
           type: boolean
       required:
       - single
@@ -1200,34 +1466,57 @@ components:
         url: ""
       properties:
         allowedPattern:
+          description: Regular expression pattern that the field value must match
+            for validation.
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
+          description: Link to documentation providing more information about this
+            field.
           type: string
         groupId:
+          description: Identifier of the UI group this field belongs to for form layout
+            purposes.
           type: string
         name:
+          description: Display name.
           type: string
         placeholder:
+          description: Placeholder text shown in the input field before a value is
+            entered.
           type: string
         predefined:
+          description: Whether this field has a predefined value that is suggested
+            to the user.
           type: boolean
         readonly:
+          description: Whether this field is read-only and cannot be modified by the
+            user.
           type: boolean
         required:
+          description: Whether this field must be filled in before the integration
+            can be deployed.
           type: boolean
         singleBoolean:
           $ref: "#/components/schemas/SingleBooleanValue"
         templateParamName:
+          description: Name of the template parameter this field maps to in the deployment
+            template.
           type: string
         tooltip:
+          description: Tooltip text displayed on hover to provide additional context
+            for this field.
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
+          description: Notice displayed to users when an upgrade is required to use
+            this field.
           type: string
         visible:
+          description: Whether this field is visible in the integration configuration
+            UI.
           type: boolean
       required:
       - singleBoolean
@@ -1238,34 +1527,57 @@ components:
         url: ""
       properties:
         allowedPattern:
+          description: Regular expression pattern that the field value must match
+            for validation.
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
+          description: Link to documentation providing more information about this
+            field.
           type: string
         groupId:
+          description: Identifier of the UI group this field belongs to for form layout
+            purposes.
           type: string
         name:
+          description: Display name.
           type: string
         placeholder:
+          description: Placeholder text shown in the input field before a value is
+            entered.
           type: string
         predefined:
+          description: Whether this field has a predefined value that is suggested
+            to the user.
           type: boolean
         readonly:
+          description: Whether this field is read-only and cannot be modified by the
+            user.
           type: boolean
         required:
+          description: Whether this field must be filled in before the integration
+            can be deployed.
           type: boolean
         singleNumber:
           $ref: "#/components/schemas/IntegrationRevision.SingleNumericValue"
         templateParamName:
+          description: Name of the template parameter this field maps to in the deployment
+            template.
           type: string
         tooltip:
+          description: Tooltip text displayed on hover to provide additional context
+            for this field.
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
+          description: Notice displayed to users when an upgrade is required to use
+            this field.
           type: string
         visible:
+          description: Whether this field is visible in the integration configuration
+            UI.
           type: boolean
       required:
       - singleNumber
@@ -1273,8 +1585,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -1323,22 +1635,26 @@ components:
       title: Filters
       type: object
     GenericIntegrationParameters:
+      description: Generic integration parameters.
       externalDocs:
         url: ""
       properties:
         parameters:
+          description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
       title: Generic integration parameters
       type: object
     GenericWebhook:
+      additionalProperties: false
       description: This data structure represents a generic webhook integration.
       externalDocs:
         url: ""
       title: Generic webhook
       type: object
     GetDeployedIntegrationResponse:
+      description: Response containing details of a deployed integration.
       example:
         integration:
           definitionVersion: definitionVersion
@@ -1352,9 +1668,13 @@ components:
               key: details
           id: id
           parameters:
-          - sensitiveData: "{}"
+          - apiKey:
+              id: id
+              value: value
             key: key
-          - sensitiveData: "{}"
+          - apiKey:
+              id: id
+              value: value
             key: key
       externalDocs:
         url: ""
@@ -1369,24 +1689,18 @@ components:
         integrationDefinition:
           featureFlag: featureFlag
           integrationType:
-            untracked: "{}"
+            arm: "{}"
           revisions:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
+            azureArmTemplate:
+              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
-            terraform:
-              configurationBlocks:
-              - name: name
-                description: description
-                value: value
-              - name: name
-                description: description
-                value: value
             id: id
             fields:
             - visible: true
@@ -1446,19 +1760,13 @@ components:
           - revisionDeploymentSupported: true
             featureFlag: featureFlag
             upgradeInstructionsMd: upgradeInstructionsMd
+            azureArmTemplate:
+              templateUrl: templateUrl
             groups:
             - name: name
               id: id
             - name: name
               id: id
-            terraform:
-              configurationBlocks:
-              - name: name
-                description: description
-                value: value
-              - name: name
-                description: description
-                value: value
             id: id
             fields:
             - visible: true
@@ -1524,6 +1832,7 @@ components:
       title: Get integration definition response
       type: object
     GetIntegrationDetailsResponse:
+      description: Response containing the details of an integration definition.
       example:
         integrationDetail:
           default:
@@ -1539,13 +1848,19 @@ components:
                 details:
                   key: details
               id: id
+              arm:
+                resourceGroupName: resourceGroupName
+                subscriptionId: subscriptionId
               parameters:
-              - sensitiveData: "{}"
+              - apiKey:
+                  id: id
+                  value: value
                 key: key
-              - sensitiveData: "{}"
+              - apiKey:
+                  id: id
+                  value: value
                 key: key
               isTesting: true
-              empty: "{}"
             - lastUpdated: 2000-01-23T04:56:07.000+00:00
               definitionVersion: definitionVersion
               revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
@@ -1557,13 +1872,19 @@ components:
                 details:
                   key: details
               id: id
+              arm:
+                resourceGroupName: resourceGroupName
+                subscriptionId: subscriptionId
               parameters:
-              - sensitiveData: "{}"
+              - apiKey:
+                  id: id
+                  value: value
                 key: key
-              - sensitiveData: "{}"
+              - apiKey:
+                  id: id
+                  value: value
                 key: key
               isTesting: true
-              empty: "{}"
           extensions:
           - image: image
             darkModeImage: darkModeImage
@@ -2307,6 +2628,8 @@ components:
             - integrations
             - integrations
             isHidden: true
+          external:
+            url: url
           docs:
           - link: link
             name: name
@@ -2315,7 +2638,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              untracked: "{}"
+              arm: "{}"
             versions:
             - versions
             - versions
@@ -2332,12 +2655,6 @@ components:
             tags:
             - tags
             - tags
-          local:
-            changes:
-            - descriptionMd: descriptionMd
-              version: version
-            - descriptionMd: descriptionMd
-              version: version
       externalDocs:
         url: ""
       properties:
@@ -2353,7 +2670,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              untracked: "{}"
+              arm: "{}"
             versions:
             - versions
             - versions
@@ -2380,7 +2697,7 @@ components:
           integration:
             featureFlag: featureFlag
             integrationType:
-              untracked: "{}"
+              arm: "{}"
             versions:
             - versions
             - versions
@@ -2407,6 +2724,7 @@ components:
         url: ""
       properties:
         integrations:
+          description: The integrations.
           items:
             $ref: "#/components/schemas/GetIntegrationsResponse.IntegrationWithCounts"
           type: array
@@ -2418,7 +2736,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            untracked: "{}"
+            arm: "{}"
           versions:
           - versions
           - versions
@@ -2445,23 +2763,30 @@ components:
         url: ""
       properties:
         amountIntegrations:
+          description: The amount integrations.
           format: int64
           type: integer
         errors:
+          description: List of errors.
           items:
+            description: List of errors.
             type: string
           type: array
         integration:
           $ref: "#/components/schemas/Integration"
         isDeprecated:
+          description: The is deprecated.
           type: boolean
         isNew:
+          description: The is new.
           type: boolean
         upgradeAvailable:
+          description: The upgrade available.
           type: boolean
       title: Integration with counts
       type: object
     GetManagedIntegrationStatusResponse:
+      description: Response containing the status of a managed integration.
       example:
         integrationId: integrationId
         status:
@@ -2475,12 +2800,14 @@ components:
         url: ""
       properties:
         integrationId:
+          description: The integration id.
           type: string
         status:
           $ref: "#/components/schemas/IntegrationStatus"
       title: Get managed integration status response
       type: object
     GetRumApplicationVersionDataResponse:
+      description: Response containing RUM application version data.
       example:
         versionData:
           versions:
@@ -2507,12 +2834,14 @@ components:
       title: Get RUM application version data response
       type: object
     GetTemplateResponse:
+      description: Response containing an integration template.
       example:
         templateUrl: templateUrl
       externalDocs:
         url: ""
       properties:
         templateUrl:
+          description: The template url.
           type: string
       title: Get template response
       type: object
@@ -2522,16 +2851,19 @@ components:
         url: ""
       properties:
         commands:
+          description: The commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
           type: array
         guide:
           $ref: "#/components/schemas/IntegrationGuide"
         template:
+          description: The template.
           type: string
       title: Helm chart
       type: object
     InputType:
+      description: Input type.
       enum:
       - API_KEY
       - TEXT
@@ -2552,7 +2884,7 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          untracked: "{}"
+          arm: "{}"
         versions:
         - versions
         - versions
@@ -2573,29 +2905,40 @@ components:
         url: ""
       properties:
         darkIcon:
+          description: The dark icon.
           type: string
         description:
+          description: Human-readable description.
           type: string
         featureFlag:
+          description: The feature flag.
           type: string
         icon:
+          description: Icon identifier.
           type: string
         id:
+          description: Unique identifier.
           type: string
         integrationType:
           $ref: "#/components/schemas/v1.IntegrationType"
         name:
+          description: Display name.
           type: string
         revisions:
+          description: The revisions.
           items:
             $ref: "#/components/schemas/v1.RevisionSummary"
           type: array
         tags:
+          description: List of tags.
           items:
+            description: List of tags.
             type: string
           type: array
         versions:
+          description: The versions.
           items:
+            description: The versions.
             type: string
           type: array
       title: Integration
@@ -2605,24 +2948,18 @@ components:
       example:
         featureFlag: featureFlag
         integrationType:
-          untracked: "{}"
+          arm: "{}"
         revisions:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
+          azureArmTemplate:
+            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
-          terraform:
-            configurationBlocks:
-            - name: name
-              description: description
-              value: value
-            - name: name
-              description: description
-              value: value
           id: id
           fields:
           - visible: true
@@ -2682,19 +3019,13 @@ components:
         - revisionDeploymentSupported: true
           featureFlag: featureFlag
           upgradeInstructionsMd: upgradeInstructionsMd
+          azureArmTemplate:
+            templateUrl: templateUrl
           groups:
           - name: name
             id: id
           - name: name
             id: id
-          terraform:
-            configurationBlocks:
-            - name: name
-              description: description
-              value: value
-            - name: name
-              description: description
-              value: value
           id: id
           fields:
           - visible: true
@@ -2756,12 +3087,15 @@ components:
         url: ""
       properties:
         featureFlag:
+          description: The feature flag.
           type: string
         integrationType:
           $ref: "#/components/schemas/v1.IntegrationType"
         key:
+          description: The key.
           type: string
         revisions:
+          description: The revisions.
           items:
             $ref: "#/components/schemas/IntegrationRevision"
           type: array
@@ -2775,39 +3109,18 @@ components:
         url: ""
       properties:
         link:
+          description: Link.
           type: string
         name:
+          description: Display name.
           type: string
       title: Integration detail
       type: object
     IntegrationDetails:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationDetailsLocal"
       - $ref: "#/components/schemas/IntegrationDetailsExternal"
+      - $ref: "#/components/schemas/IntegrationDetailsLocal"
     IntegrationDetailsExternal:
-      description: This data structure represents a set of integration details.
-      externalDocs:
-        url: ""
-      properties:
-        default:
-          $ref: "#/components/schemas/DefaultIntegrationDetails"
-        docs:
-          items:
-            $ref: "#/components/schemas/IntegrationDoc"
-          type: array
-        extensions:
-          items:
-            $ref: "#/components/schemas/v1.Extension"
-          type: array
-        external:
-          $ref: "#/components/schemas/ExternalUrl"
-        integration:
-          $ref: "#/components/schemas/Integration"
-      required:
-      - external
-      title: Integration details
-      type: object
-    IntegrationDetailsLocal:
       description: This data structure represents a set of integration details.
       example:
         default:
@@ -2823,13 +3136,19 @@ components:
               details:
                 key: details
             id: id
+            arm:
+              resourceGroupName: resourceGroupName
+              subscriptionId: subscriptionId
             parameters:
-            - sensitiveData: "{}"
+            - apiKey:
+                id: id
+                value: value
               key: key
-            - sensitiveData: "{}"
+            - apiKey:
+                id: id
+                value: value
               key: key
             isTesting: true
-            empty: "{}"
           - lastUpdated: 2000-01-23T04:56:07.000+00:00
             definitionVersion: definitionVersion
             revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
@@ -2841,13 +3160,19 @@ components:
               details:
                 key: details
             id: id
+            arm:
+              resourceGroupName: resourceGroupName
+              subscriptionId: subscriptionId
             parameters:
-            - sensitiveData: "{}"
+            - apiKey:
+                id: id
+                value: value
               key: key
-            - sensitiveData: "{}"
+            - apiKey:
+                id: id
+                value: value
               key: key
             isTesting: true
-            empty: "{}"
         extensions:
         - image: image
           darkModeImage: darkModeImage
@@ -3591,6 +3916,8 @@ components:
           - integrations
           - integrations
           isHidden: true
+        external:
+          url: url
         docs:
         - link: link
           name: name
@@ -3599,7 +3926,7 @@ components:
         integration:
           featureFlag: featureFlag
           integrationType:
-            untracked: "{}"
+            arm: "{}"
           versions:
           - versions
           - versions
@@ -3616,22 +3943,45 @@ components:
           tags:
           - tags
           - tags
-        local:
-          changes:
-          - descriptionMd: descriptionMd
-            version: version
-          - descriptionMd: descriptionMd
-            version: version
       externalDocs:
         url: ""
       properties:
         default:
           $ref: "#/components/schemas/DefaultIntegrationDetails"
         docs:
+          description: Documentation links associated with this integration.
           items:
             $ref: "#/components/schemas/IntegrationDoc"
           type: array
         extensions:
+          description: Extensions bundled with this integration for pre-built dashboards
+            and alerts.
+          items:
+            $ref: "#/components/schemas/v1.Extension"
+          type: array
+        external:
+          $ref: "#/components/schemas/ExternalUrl"
+        integration:
+          $ref: "#/components/schemas/Integration"
+      required:
+      - external
+      title: Integration details
+      type: object
+    IntegrationDetailsLocal:
+      description: This data structure represents a set of integration details.
+      externalDocs:
+        url: ""
+      properties:
+        default:
+          $ref: "#/components/schemas/DefaultIntegrationDetails"
+        docs:
+          description: Documentation links associated with this integration.
+          items:
+            $ref: "#/components/schemas/IntegrationDoc"
+          type: array
+        extensions:
+          description: Extensions bundled with this integration for pre-built dashboards
+            and alerts.
           items:
             $ref: "#/components/schemas/v1.Extension"
           type: array
@@ -3652,18 +4002,23 @@ components:
         url: ""
       properties:
         link:
+          description: Link.
           type: string
         name:
+          description: Display name.
           type: string
       title: Integration doc
       type: object
     IntegrationGuide:
+      description: Integration guide.
       externalDocs:
         url: ""
       properties:
         installationRequirements:
+          description: The installation requirements.
           type: string
         introduction:
+          description: The introduction.
           type: string
       title: Integration guide
       type: object
@@ -3673,21 +4028,23 @@ components:
         url: ""
       properties:
         integrationKey:
+          description: The integration key.
           type: string
         integrationParameters:
           $ref: "#/components/schemas/GenericIntegrationParameters"
         version:
+          description: Version number.
           type: string
       title: Integration metadata
       type: object
     IntegrationRevision:
       oneOf:
-      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
-      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
-      - $ref: "#/components/schemas/IntegrationRevisionManagedService"
-      - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
       - $ref: "#/components/schemas/IntegrationRevisionAzureArmTemplate"
+      - $ref: "#/components/schemas/IntegrationRevisionCloudFormation"
+      - $ref: "#/components/schemas/IntegrationRevisionHelmChart"
+      - $ref: "#/components/schemas/IntegrationRevisionManagedService"
       - $ref: "#/components/schemas/IntegrationRevisionRum"
+      - $ref: "#/components/schemas/IntegrationRevisionTerraform"
     IntegrationRevision.Group:
       example:
         name: name
@@ -3696,42 +4053,123 @@ components:
         url: ""
       properties:
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
       title: Group
       type: object
     IntegrationRevision.SingleNumericValue:
+      description: Single numeric value.
       externalDocs:
         url: ""
       properties:
         defaultValue:
+          description: The default value.
           format: double
           type: number
       title: Single numeric value
       type: object
     IntegrationRevisionAzureArmTemplate:
       description: This data structure represents an integration revision.
+      example:
+        revisionDeploymentSupported: true
+        featureFlag: featureFlag
+        upgradeInstructionsMd: upgradeInstructionsMd
+        azureArmTemplate:
+          templateUrl: templateUrl
+        groups:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        id: id
+        fields:
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
+        - visible: true
+          groupId: groupId
+          tooltip: tooltip
+          multiText:
+            options:
+            - options
+            - options
+            defaultValues:
+            - defaultValues
+            - defaultValues
+          type: API_KEY
+          upgradeNotice: upgradeNotice
+          predefined: true
+          required: true
+          templateParamName: templateParamName
+          readonly: true
+          documentationReference: documentationReference
+          name: name
+          placeholder: placeholder
+          applicableIf:
+            values:
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            - fieldName: fieldName
+              valuePattern: valuePattern
+            type: UNKNOWN
+          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
         azureArmTemplate:
           $ref: "#/components/schemas/AzureArmTemplate"
         featureFlag:
+          description: The feature flag.
           type: string
         fields:
+          description: Configuration fields that users must fill in to deploy this
+            integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
           type: array
         groups:
+          description: UI groups used to organize configuration fields into logical
+            sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
           type: array
         id:
+          description: Unique identifier.
           type: string
         revisionDeploymentSupported:
+          description: Whether this revision supports automated deployment through
+            the Coralogix platform.
           type: boolean
         upgradeInstructionsMd:
+          description: Markdown-formatted upgrade instructions shown when upgrading
+            from a previous revision.
           type: string
       required:
       - azureArmTemplate
@@ -3745,20 +4183,30 @@ components:
         cloudFormation:
           $ref: "#/components/schemas/CloudFormationTemplate"
         featureFlag:
+          description: The feature flag.
           type: string
         fields:
+          description: Configuration fields that users must fill in to deploy this
+            integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
           type: array
         groups:
+          description: UI groups used to organize configuration fields into logical
+            sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
           type: array
         id:
+          description: Unique identifier.
           type: string
         revisionDeploymentSupported:
+          description: Whether this revision supports automated deployment through
+            the Coralogix platform.
           type: boolean
         upgradeInstructionsMd:
+          description: Markdown-formatted upgrade instructions shown when upgrading
+            from a previous revision.
           type: string
       required:
       - cloudFormation
@@ -3770,22 +4218,32 @@ components:
         url: ""
       properties:
         featureFlag:
+          description: The feature flag.
           type: string
         fields:
+          description: Configuration fields that users must fill in to deploy this
+            integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
           type: array
         groups:
+          description: UI groups used to organize configuration fields into logical
+            sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
           type: array
         helmChart:
           $ref: "#/components/schemas/HelmChart"
         id:
+          description: Unique identifier.
           type: string
         revisionDeploymentSupported:
+          description: Whether this revision supports automated deployment through
+            the Coralogix platform.
           type: boolean
         upgradeInstructionsMd:
+          description: Markdown-formatted upgrade instructions shown when upgrading
+            from a previous revision.
           type: string
       required:
       - helmChart
@@ -3797,26 +4255,37 @@ components:
         url: ""
       properties:
         featureFlag:
+          description: The feature flag.
           type: string
         fields:
+          description: Configuration fields that users must fill in to deploy this
+            integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
           type: array
         groups:
+          description: UI groups used to organize configuration fields into logical
+            sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
           type: array
         id:
+          description: Unique identifier.
           type: string
         managedService:
+          additionalProperties: false
           description: This data structure represents a managed service.
           externalDocs:
             url: ""
           title: Managed service
           type: object
         revisionDeploymentSupported:
+          description: Whether this revision supports automated deployment through
+            the Coralogix platform.
           type: boolean
         upgradeInstructionsMd:
+          description: Markdown-formatted upgrade instructions shown when upgrading
+            from a previous revision.
           type: string
       required:
       - managedService
@@ -3828,22 +4297,32 @@ components:
         url: ""
       properties:
         featureFlag:
+          description: The feature flag.
           type: string
         fields:
+          description: Configuration fields that users must fill in to deploy this
+            integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
           type: array
         groups:
+          description: UI groups used to organize configuration fields into logical
+            sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
           type: array
         id:
+          description: Unique identifier.
           type: string
         revisionDeploymentSupported:
+          description: Whether this revision supports automated deployment through
+            the Coralogix platform.
           type: boolean
         rum:
           $ref: "#/components/schemas/Rum"
         upgradeInstructionsMd:
+          description: Markdown-formatted upgrade instructions shown when upgrading
+            from a previous revision.
           type: string
       required:
       - rum
@@ -3851,99 +4330,36 @@ components:
       type: object
     IntegrationRevisionTerraform:
       description: This data structure represents an integration revision.
-      example:
-        revisionDeploymentSupported: true
-        featureFlag: featureFlag
-        upgradeInstructionsMd: upgradeInstructionsMd
-        groups:
-        - name: name
-          id: id
-        - name: name
-          id: id
-        terraform:
-          configurationBlocks:
-          - name: name
-            description: description
-            value: value
-          - name: name
-            description: description
-            value: value
-        id: id
-        fields:
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          multiText:
-            options:
-            - options
-            - options
-            defaultValues:
-            - defaultValues
-            - defaultValues
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
-        - visible: true
-          groupId: groupId
-          tooltip: tooltip
-          multiText:
-            options:
-            - options
-            - options
-            defaultValues:
-            - defaultValues
-            - defaultValues
-          type: API_KEY
-          upgradeNotice: upgradeNotice
-          predefined: true
-          required: true
-          templateParamName: templateParamName
-          readonly: true
-          documentationReference: documentationReference
-          name: name
-          placeholder: placeholder
-          applicableIf:
-            values:
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            - fieldName: fieldName
-              valuePattern: valuePattern
-            type: UNKNOWN
-          allowedPattern: allowedPattern
       externalDocs:
         url: ""
       properties:
         featureFlag:
+          description: The feature flag.
           type: string
         fields:
+          description: Configuration fields that users must fill in to deploy this
+            integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
           type: array
         groups:
+          description: UI groups used to organize configuration fields into logical
+            sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
           type: array
         id:
+          description: Unique identifier.
           type: string
         revisionDeploymentSupported:
+          description: Whether this revision supports automated deployment through
+            the Coralogix platform.
           type: boolean
         terraform:
           $ref: "#/components/schemas/Terraform"
         upgradeInstructionsMd:
+          description: Markdown-formatted upgrade instructions shown when upgrading
+            from a previous revision.
           type: string
       required:
       - terraform
@@ -3966,14 +4382,18 @@ components:
         details:
           additionalProperties:
             type: string
+          description: List of details.
           type: object
         messages:
+          description: The messages.
           items:
+            description: The messages.
             type: string
           type: array
       title: Integration status
       type: object
     Language:
+      description: Language.
       enum:
       - UNKNOWN
       - BASH
@@ -3984,14 +4404,18 @@ components:
         url: ""
       properties:
         key:
+          description: The key.
           type: string
         text:
+          description: The text.
           type: string
         url:
+          description: URL.
           type: string
       title: Link
       type: object
     ListManagedIntegrationKeysResponse:
+      description: Response containing a list of managed integration keys.
       example:
         integrationKeys:
         - integrationKeys
@@ -4000,12 +4424,15 @@ components:
         url: ""
       properties:
         integrationKeys:
+          description: The integration keys.
           items:
+            description: The integration keys.
             type: string
           type: array
       title: List managed integration keys response
       type: object
     ListTextValue:
+      description: List text value.
       example:
         options:
         - options
@@ -4017,32 +4444,33 @@ components:
         url: ""
       properties:
         defaultValues:
+          description: The default values.
           items:
+            description: The default values.
             type: string
           type: array
         options:
+          description: Options.
           items:
+            description: Options.
             type: string
           type: array
       title: List text value
       type: object
     LocalChangelog:
-      example:
-        changes:
-        - descriptionMd: descriptionMd
-          version: version
-        - descriptionMd: descriptionMd
-          version: version
+      description: Local changelog.
       externalDocs:
         url: ""
       properties:
         changes:
+          description: The changes.
           items:
             $ref: "#/components/schemas/RevisionRef"
           type: array
       title: Local changelog
       type: object
     LogMetadata:
+      description: Log metadata.
       example:
         firstOccurrence: 2000-01-23T04:56:07.000+00:00
         lastOccurrence: 2000-01-23T04:56:07.000+00:00
@@ -4050,9 +4478,11 @@ components:
         url: ""
       properties:
         firstOccurrence:
+          description: The first occurrence.
           format: date-time
           type: string
         lastOccurrence:
+          description: The last occurrence.
           format: date-time
           type: string
       title: Log metadata
@@ -4067,17 +4497,21 @@ components:
       title: Managed
       type: object
     ManagedService:
+      additionalProperties: false
       description: This data structure represents a managed service.
       externalDocs:
         url: ""
       title: Managed service
       type: object
     MultipleSelectionValue:
+      description: Multiple selection value.
       externalDocs:
         url: ""
       properties:
         options:
+          description: Options.
           items:
+            description: Options.
             type: string
           type: array
       title: Multiple selection value
@@ -4092,6 +4526,7 @@ components:
           type: array
       type: object
     NoDeployment:
+      additionalProperties: false
       description: This data structure represents an integration that does not require
         deployment.
       externalDocs:
@@ -4100,19 +4535,25 @@ components:
       type: object
     Parameter:
       oneOf:
-      - $ref: "#/components/schemas/ParameterSensitiveData"
-      - $ref: "#/components/schemas/ParameterStringValue"
-      - $ref: "#/components/schemas/ParameterBooleanValue"
-      - $ref: "#/components/schemas/ParameterStringList"
       - $ref: "#/components/schemas/ParameterApiKey"
+      - $ref: "#/components/schemas/ParameterBooleanValue"
       - $ref: "#/components/schemas/ParameterNumericValue"
+      - $ref: "#/components/schemas/ParameterSensitiveData"
+      - $ref: "#/components/schemas/ParameterStringList"
+      - $ref: "#/components/schemas/ParameterStringValue"
     ParameterApiKey:
+      example:
+        apiKey:
+          id: id
+          value: value
+        key: key
       externalDocs:
         url: ""
       properties:
         apiKey:
           $ref: "#/components/schemas/ApiKeyData"
         key:
+          description: The key.
           type: string
       required:
       - apiKey
@@ -4123,8 +4564,10 @@ components:
         url: ""
       properties:
         booleanValue:
+          description: Boolean value for this integration parameter.
           type: boolean
         key:
+          description: The key.
           type: string
       required:
       - booleanValue
@@ -4135,8 +4578,10 @@ components:
         url: ""
       properties:
         key:
+          description: The key.
           type: string
         numericValue:
+          description: Numeric value for this integration parameter.
           format: double
           type: number
       required:
@@ -4144,15 +4589,15 @@ components:
       title: Parameter
       type: object
     ParameterSensitiveData:
-      example:
-        sensitiveData: "{}"
-        key: key
       externalDocs:
         url: ""
       properties:
         key:
+          description: The key.
           type: string
         sensitiveData:
+          additionalProperties: false
+          description: Sensitive data placeholder.
           externalDocs:
             url: ""
           title: Sensitive data placeholder
@@ -4166,6 +4611,7 @@ components:
         url: ""
       properties:
         key:
+          description: The key.
           type: string
         stringList:
           $ref: "#/components/schemas/StringList"
@@ -4178,14 +4624,17 @@ components:
         url: ""
       properties:
         key:
+          description: The key.
           type: string
         stringValue:
+          description: String value for this integration parameter.
           type: string
       required:
       - stringValue
       title: Parameter
       type: object
     PermissionResource:
+      description: Permission resource.
       enum:
       - UNKNOWN
       - ACTION
@@ -4204,6 +4653,7 @@ components:
       - LOGS_EVENTS_TO_METRICS
       type: string
     PushBasedContextualData:
+      additionalProperties: false
       description: This data structure represents a push based contextual data integration.
       externalDocs:
         url: ""
@@ -4211,27 +4661,58 @@ components:
       type: object
     RegisteredInstance:
       oneOf:
-      - $ref: "#/components/schemas/RegisteredInstanceEmpty"
-      - $ref: "#/components/schemas/RegisteredInstanceCloudformation"
       - $ref: "#/components/schemas/RegisteredInstanceArm"
+      - $ref: "#/components/schemas/RegisteredInstanceCloudformation"
+      - $ref: "#/components/schemas/RegisteredInstanceEmpty"
     RegisteredInstanceArm:
+      example:
+        lastUpdated: 2000-01-23T04:56:07.000+00:00
+        definitionVersion: definitionVersion
+        revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
+        integrationStatus:
+          connectionStatus: PENDING
+          messages:
+          - messages
+          - messages
+          details:
+            key: details
+        id: id
+        arm:
+          resourceGroupName: resourceGroupName
+          subscriptionId: subscriptionId
+        parameters:
+        - apiKey:
+            id: id
+            value: value
+          key: key
+        - apiKey:
+            id: id
+            value: value
+          key: key
+        isTesting: true
       externalDocs:
         url: ""
       properties:
         arm:
           $ref: "#/components/schemas/ARMStack"
         definitionVersion:
+          description: The definition version.
           type: string
         id:
+          description: Unique identifier.
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
         isTesting:
+          description: Whether this is a testing instance used for validation purposes
+            only.
           type: boolean
         lastUpdated:
+          description: Timestamp of the last update to this integration instance.
           format: date-time
           type: string
         parameters:
+          description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
@@ -4248,17 +4729,23 @@ components:
         cloudformation:
           $ref: "#/components/schemas/CloudFormationStack"
         definitionVersion:
+          description: The definition version.
           type: string
         id:
+          description: Unique identifier.
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
         isTesting:
+          description: Whether this is a testing instance used for validation purposes
+            only.
           type: boolean
         lastUpdated:
+          description: Timestamp of the last update to this integration instance.
           format: date-time
           type: string
         parameters:
+          description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
@@ -4269,31 +4756,14 @@ components:
       title: Registered instance
       type: object
     RegisteredInstanceEmpty:
-      example:
-        lastUpdated: 2000-01-23T04:56:07.000+00:00
-        definitionVersion: definitionVersion
-        revisionLifecycle: REVISION_LIFECYCLE_UNSPECIFIED
-        integrationStatus:
-          connectionStatus: PENDING
-          messages:
-          - messages
-          - messages
-          details:
-            key: details
-        id: id
-        parameters:
-        - sensitiveData: "{}"
-          key: key
-        - sensitiveData: "{}"
-          key: key
-        isTesting: true
-        empty: "{}"
       externalDocs:
         url: ""
       properties:
         definitionVersion:
+          description: The definition version.
           type: string
         empty:
+          additionalProperties: false
           description: This data structure represents an integration that does not
             require deployment.
           externalDocs:
@@ -4301,15 +4771,20 @@ components:
           title: No deployment
           type: object
         id:
+          description: Unique identifier.
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
         isTesting:
+          description: Whether this is a testing instance used for validation purposes
+            only.
           type: boolean
         lastUpdated:
+          description: Timestamp of the last update to this integration instance.
           format: date-time
           type: string
         parameters:
+          description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
@@ -4320,6 +4795,7 @@ components:
       title: Registered instance
       type: object
     RevisionLifecycle:
+      description: Revision lifecycle.
       enum:
       - REVISION_LIFECYCLE_UNSPECIFIED
       - REVISION_LIFECYCLE_ALPHA
@@ -4329,15 +4805,14 @@ components:
       - REVISION_LIFECYCLE_DEPRECATED
       type: string
     RevisionRef:
-      example:
-        descriptionMd: descriptionMd
-        version: version
       externalDocs:
         url: ""
       properties:
         descriptionMd:
+          description: The description md.
           type: string
         version:
+          description: Version number.
           type: string
       title: Revision reference
       type: object
@@ -4347,16 +4822,19 @@ components:
         url: ""
       properties:
         browserSdkCommands:
+          description: The browser sdk commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
           type: array
         sourceMapCommands:
+          description: The source map commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
           type: array
       title: RUM
       type: object
     RumVersionData:
+      description: Rum version data.
       example:
         versions:
         - logMetadata:
@@ -4378,9 +4856,11 @@ components:
         url: ""
       properties:
         syncedAt:
+          description: The synced at.
           format: date-time
           type: string
         versions:
+          description: The versions.
           items:
             $ref: "#/components/schemas/RumVersionData.Version"
           type: array
@@ -4403,53 +4883,67 @@ components:
         sourceMapMetadata:
           $ref: "#/components/schemas/SourceMapMetadata"
         version:
+          description: Version number.
           type: string
       title: Version
       type: object
     SaveIntegrationResponse:
+      description: Response returned after successfully saving an integration deployment.
       example:
         integrationId: integrationId
       externalDocs:
         url: ""
       properties:
         integrationId:
+          description: The integration id.
           type: string
       title: Save integration response
       type: object
     SelectionValue:
+      description: Selection value.
       externalDocs:
         url: ""
       properties:
         defaultValue:
+          description: The default value.
           type: string
         options:
+          description: Options.
           items:
+            description: Options.
             type: string
           type: array
       title: Selection value
       type: object
     SensitiveDataPlaceholder:
+      additionalProperties: false
+      description: Sensitive data placeholder.
       externalDocs:
         url: ""
       title: Sensitive data placeholder
       type: object
     SingleBooleanValue:
+      description: Single boolean value.
       externalDocs:
         url: ""
       properties:
         defaultValue:
+          description: The default value.
           type: boolean
       title: Single boolean value
       type: object
     SingleValue:
+      description: Single value.
       externalDocs:
         url: ""
       properties:
         defaultValue:
+          description: The default value.
           type: string
       title: Single value
       type: object
     SourceMapMetadata:
+      description: Source map metadata.
       example:
         isUploadedSuccessful: true
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -4457,23 +4951,29 @@ components:
         url: ""
       properties:
         createdAt:
+          description: Creation timestamp.
           format: date-time
           type: string
         isUploadedSuccessful:
+          description: The is uploaded successful.
           type: boolean
       title: Source map metadata
       type: object
     StringList:
+      description: String list.
       externalDocs:
         url: ""
       properties:
         values:
+          description: List of values.
           items:
+            description: List of values.
             type: string
           type: array
       title: String list
       type: object
     SyncRumDataResponse:
+      description: Response returned after syncing RUM data.
       example:
         syncExecuted: true
         syncedAt: 2000-01-23T04:56:07.000+00:00
@@ -4481,13 +4981,16 @@ components:
         url: ""
       properties:
         syncExecuted:
+          description: The sync executed.
           type: boolean
         syncedAt:
+          description: The synced at.
           format: date-time
           type: string
       title: Sync RUM data response
       type: object
     TargetDomain:
+      description: Target domain.
       enum:
       - ACTION
       - ALERT
@@ -4503,27 +5006,22 @@ components:
       type: string
     Terraform:
       description: This data structure represents a Terraform integration.
-      example:
-        configurationBlocks:
-        - name: name
-          description: description
-          value: value
-        - name: name
-          description: description
-          value: value
       externalDocs:
         url: ""
       properties:
         configurationBlocks:
+          description: The configuration blocks.
           items:
             $ref: "#/components/schemas/ConfigurationBlock"
           type: array
       title: Terraform
       type: object
     TestIntegrationResponse:
+      description: Response containing the results of an integration test.
       example:
         result:
-          success: "{}"
+          failure:
+            errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
@@ -4533,14 +5031,20 @@ components:
       type: object
     TestIntegrationResult:
       oneOf:
-      - $ref: "#/components/schemas/TestIntegrationResultSuccessVariant"
       - $ref: "#/components/schemas/TestIntegrationResultFailure"
+      - $ref: "#/components/schemas/TestIntegrationResultSuccessVariant"
     TestIntegrationResult.Success:
+      additionalProperties: false
+      description: Success.
       externalDocs:
         url: ""
       title: Success
       type: object
     TestIntegrationResultFailure:
+      description: Test integration result.
+      example:
+        failure:
+          errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
@@ -4551,12 +5055,13 @@ components:
       title: Test integration result
       type: object
     TestIntegrationResultSuccessVariant:
-      example:
-        success: "{}"
+      description: Test integration result.
       externalDocs:
         url: ""
       properties:
         success:
+          additionalProperties: false
+          description: Success.
           externalDocs:
             url: ""
           title: Success
@@ -4566,19 +5071,27 @@ components:
       title: Test integration result
       type: object
     Untracked:
+      additionalProperties: false
       description: This data structure represents an untracked integration.
       externalDocs:
         url: ""
       title: Untracked
       type: object
     UpdateIntegrationResponse:
+      additionalProperties: false
+      description: Response returned after successfully updating an integration.
+      externalDocs:
+        url: ""
       type: object
     V1IntegrationTypeArm:
       description: This data structure represents an integration type.
+      example:
+        arm: "{}"
       externalDocs:
         url: ""
       properties:
         arm:
+          additionalProperties: false
           description: This data structure represents an Azure ARM integration.
           externalDocs:
             url: ""
@@ -4594,6 +5107,7 @@ components:
         url: ""
       properties:
         cloudformation:
+          additionalProperties: false
           description: This data structure represents a CloudFormation integration.
           externalDocs:
             url: ""
@@ -4609,6 +5123,7 @@ components:
         url: ""
       properties:
         contextualData:
+          additionalProperties: false
           description: This data structure represents a contextual data integration.
           externalDocs:
             url: ""
@@ -4624,6 +5139,7 @@ components:
         url: ""
       properties:
         genericWebhook:
+          additionalProperties: false
           description: This data structure represents a generic webhook integration.
           externalDocs:
             url: ""
@@ -4650,6 +5166,7 @@ components:
         url: ""
       properties:
         pushBasedContextualData:
+          additionalProperties: false
           description: This data structure represents a push based contextual data
             integration.
           externalDocs:
@@ -4662,12 +5179,11 @@ components:
       type: object
     V1IntegrationTypeUntracked:
       description: This data structure represents an integration type.
-      example:
-        untracked: "{}"
       externalDocs:
         url: ""
       properties:
         untracked:
+          additionalProperties: false
           description: This data structure represents an untracked integration.
           externalDocs:
             url: ""
@@ -4678,6 +5194,7 @@ components:
       title: Integration type
       type: object
     Variant:
+      description: Variant.
       enum:
       - DEFAULT
       - GCP
@@ -4690,6 +5207,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v1.Extension:
+      description: Represents a Coralogix extension package containing pre-built resources.
       example:
         image: image
         darkModeImage: darkModeImage
@@ -5066,56 +5584,72 @@ components:
         url: ""
       properties:
         changelog:
+          description: The changelog.
           items:
             $ref: "#/components/schemas/ChangelogEntry"
           type: array
         darkModeImage:
+          description: The dark mode image.
           type: string
         deprecation:
           $ref: "#/components/schemas/Deprecation"
         id:
+          description: Unique identifier of the extension.
           type: string
         image:
+          description: Image reference.
           type: string
         integrations:
+          description: The integrations.
           items:
+            description: The integrations.
             type: string
           type: array
         isHidden:
+          description: The is hidden.
           type: boolean
         keywords:
+          description: The keywords.
           items:
+            description: The keywords.
             type: string
           type: array
         name:
+          description: Display name of the extension.
           type: string
         permissionDeniedRevisions:
+          description: The permission denied revisions.
           items:
             $ref: "#/components/schemas/ExtensionRevision"
           type: array
         revisions:
+          description: The revisions.
           items:
             $ref: "#/components/schemas/ExtensionRevision"
           type: array
       title: Extension metadata
       type: object
     v1.Failure:
+      description: Failure.
+      example:
+        errorMessage: errorMessage
       externalDocs:
         url: ""
       properties:
         errorMessage:
+          description: The error message.
           type: string
       title: Failure
       type: object
     v1.IntegrationType:
       oneOf:
-      - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
-      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeArm"
-      - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeCloudformation"
       - $ref: "#/components/schemas/V1IntegrationTypeContextualData"
       - $ref: "#/components/schemas/V1IntegrationTypeGenericWebhook"
       - $ref: "#/components/schemas/V1IntegrationTypeManaged"
+      - $ref: "#/components/schemas/V1IntegrationTypePushBasedContextualData"
+      - $ref: "#/components/schemas/V1IntegrationTypeUntracked"
     v1.RevisionSummary:
       example:
         lifecycle: REVISION_LIFECYCLE_UNSPECIFIED
@@ -5124,16 +5658,20 @@ components:
         lifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
         version:
+          description: Version number.
           type: string
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     Sync_RUM_data_request:
+      description: Request for syncing RUM data.
       properties:
         force:
+          description: The force.
           type: boolean
       title: Sync RUM data request
       type: object
@@ -5141,22 +5679,26 @@ components:
       description: This data structure represents a list of outgoing webhook types.
       properties:
         id:
+          description: Integration metadata ID generated at creation time.
           type: string
         metadata:
           $ref: "#/components/schemas/IntegrationMetadata"
       title: Update integration request
       type: object
     Save_integration_request:
+      description: Request for creating an integration deployment.
       properties:
         metadata:
           $ref: "#/components/schemas/IntegrationMetadata"
       title: Save integration request
       type: object
     Test_integration_request:
+      description: Request for testing an integration configuration.
       properties:
         integrationData:
           $ref: "#/components/schemas/IntegrationMetadata"
         integrationId:
+          description: ID of the existing integration instance to test.
           type: string
       title: Test integration request
       type: object
@@ -5165,10 +5707,13 @@ components:
         url: ""
       properties:
         apiKey:
+          description: API key used to authenticate requests for template access.
           type: string
         cgxDomain:
+          description: The cgx domain.
           type: string
         logsUrl:
+          description: The logs url.
           type: string
       title: Common ARM integration parameters
       type: object

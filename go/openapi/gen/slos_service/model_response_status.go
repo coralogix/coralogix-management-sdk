@@ -23,7 +23,9 @@ var _ MappedNullable = &ResponseStatus{}
 
 // ResponseStatus Status of the response, including error code and message.
 type ResponseStatus struct {
+	// List of details.
 	Details *map[string]string `json:"details,omitempty"`
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	StatusCode Code `json:"statusCode"`
 	AdditionalProperties map[string]interface{}

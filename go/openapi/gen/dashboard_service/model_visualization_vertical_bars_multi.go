@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationVerticalBarsMulti type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationVerticalBarsMulti{}
 
-// VisualizationVerticalBarsMulti struct for VisualizationVerticalBarsMulti
+// VisualizationVerticalBarsMulti Visualization.
 type VisualizationVerticalBarsMulti struct {
 	VerticalBarsMulti VerticalBarsMulti `json:"verticalBarsMulti"`
 	AdditionalProperties map[string]interface{}

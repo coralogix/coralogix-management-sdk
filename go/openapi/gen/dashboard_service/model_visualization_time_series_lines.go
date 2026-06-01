@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationTimeSeriesLines type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationTimeSeriesLines{}
 
-// VisualizationTimeSeriesLines struct for VisualizationTimeSeriesLines
+// VisualizationTimeSeriesLines Visualization.
 type VisualizationTimeSeriesLines struct {
 	TimeSeriesLines TimeSeriesLines `json:"timeSeriesLines"`
 	AdditionalProperties map[string]interface{}

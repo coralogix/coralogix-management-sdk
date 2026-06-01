@@ -24,6 +24,7 @@ var _ MappedNullable = &RumVersionDataVersion{}
 type RumVersionDataVersion struct {
 	LogMetadata *LogMetadata `json:"logMetadata,omitempty"`
 	SourceMapMetadata *SourceMapMetadata `json:"sourceMapMetadata,omitempty"`
+	// Version number.
 	Version *string `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

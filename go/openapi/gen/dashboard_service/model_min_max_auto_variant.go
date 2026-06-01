@@ -23,6 +23,7 @@ var _ MappedNullable = &MinMaxAutoVariant{}
 
 // MinMaxAutoVariant Definition of min/max value configuration, can be automatically derived from data or custom
 type MinMaxAutoVariant struct {
+	// Min max auto.
 	Auto map[string]interface{} `json:"auto"`
 	AdditionalProperties map[string]interface{}
 }

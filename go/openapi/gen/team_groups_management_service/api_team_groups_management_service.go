@@ -41,7 +41,7 @@ func (r ApiGroupsMgmtServiceCreateTeamGroupRequest) Execute() (*CreateTeamGroupR
 /*
 GroupsMgmtServiceCreateTeamGroup Create Team Group
 
-No description available
+Creates a new team group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGroupsMgmtServiceCreateTeamGroupRequest
@@ -143,10 +143,10 @@ func (r ApiGroupsMgmtServiceDeleteTeamGroupRequest) Execute() (*DeleteTeamGroupR
 /*
 GroupsMgmtServiceDeleteTeamGroup Delete Team Group
 
-No description available
+Deletes the team group with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId The unique identifier of the team group to delete.
  @return ApiGroupsMgmtServiceDeleteTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup(ctx context.Context, groupId int64) ApiGroupsMgmtServiceDeleteTeamGroupRequest {
@@ -241,11 +241,13 @@ type ApiGroupsMgmtServiceGetGroupUsersRequest struct {
 	pageToken *string
 }
 
+// Pagination size. Defaults to 100 if empty.
 func (r ApiGroupsMgmtServiceGetGroupUsersRequest) PageSize(pageSize int64) ApiGroupsMgmtServiceGetGroupUsersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
+// Optional pagination continuation token.
 func (r ApiGroupsMgmtServiceGetGroupUsersRequest) PageToken(pageToken string) ApiGroupsMgmtServiceGetGroupUsersRequest {
 	r.pageToken = &pageToken
 	return r
@@ -258,10 +260,10 @@ func (r ApiGroupsMgmtServiceGetGroupUsersRequest) Execute() (*GetGroupUsersRespo
 /*
 GroupsMgmtServiceGetGroupUsers Get Group Users
 
-No description available
+Returns all users in the specified team group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId The unique identifier of the team group whose users to list.
  @return ApiGroupsMgmtServiceGetGroupUsersRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsers(ctx context.Context, groupId int64) ApiGroupsMgmtServiceGetGroupUsersRequest {
@@ -287,7 +289,7 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/team-groups/v2/{group_id}/users"
+	localVarPath := localBasePath + "/aaa/team-groups/v2/{group_id}/users/list"
 	localVarPath = strings.Replace(localVarPath, "{"+"group_id"+"}", url.PathEscape(parameterValueToString(r.groupId, "groupId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -367,10 +369,10 @@ func (r ApiGroupsMgmtServiceGetTeamGroupRequest) Execute() (*GetTeamGroupRespons
 /*
 GroupsMgmtServiceGetTeamGroup Get Team Group
 
-No description available
+Returns the team group with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId The unique identifier of the team group.
  @return ApiGroupsMgmtServiceGetTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroup(ctx context.Context, groupId int64) ApiGroupsMgmtServiceGetTeamGroupRequest {
@@ -470,10 +472,10 @@ func (r ApiGroupsMgmtServiceGetTeamGroupByNameRequest) Execute() (*GetTeamGroupB
 /*
 GroupsMgmtServiceGetTeamGroupByName Get Team Group By Name
 
-No description available
+Returns the team group with the specified name.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param name
+ @param name The name of the team group to retrieve.
  @return ApiGroupsMgmtServiceGetTeamGroupByNameRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByName(ctx context.Context, name string) ApiGroupsMgmtServiceGetTeamGroupByNameRequest {
@@ -568,16 +570,19 @@ type ApiGroupsMgmtServiceGetTeamGroupsRequest struct {
 	pageToken *string
 }
 
+// Team to fetch team groups for. If not set, fetches groups associated with the logged in team.
 func (r ApiGroupsMgmtServiceGetTeamGroupsRequest) TeamId(teamId int64) ApiGroupsMgmtServiceGetTeamGroupsRequest {
 	r.teamId = &teamId
 	return r
 }
 
+// Page size.
 func (r ApiGroupsMgmtServiceGetTeamGroupsRequest) PageSize(pageSize int64) ApiGroupsMgmtServiceGetTeamGroupsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
+// The page token.
 func (r ApiGroupsMgmtServiceGetTeamGroupsRequest) PageToken(pageToken string) ApiGroupsMgmtServiceGetTeamGroupsRequest {
 	r.pageToken = &pageToken
 	return r
@@ -590,7 +595,7 @@ func (r ApiGroupsMgmtServiceGetTeamGroupsRequest) Execute() (*GetTeamGroupsRespo
 /*
 GroupsMgmtServiceGetTeamGroups Get Team Groups
 
-No description available
+Returns all team groups.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGroupsMgmtServiceGetTeamGroupsRequest
@@ -705,10 +710,10 @@ func (r ApiGroupsMgmtServiceUpdateTeamGroupRequest) Execute() (*UpdateTeamGroupR
 /*
 GroupsMgmtServiceUpdateTeamGroup Update Team Group
 
-No description available
+Updates the specified team group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param groupId
+ @param groupId Unique identifier of the team group to update.
  @return ApiGroupsMgmtServiceUpdateTeamGroupRequest
 */
 func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup(ctx context.Context, groupId int64) ApiGroupsMgmtServiceUpdateTeamGroupRequest {

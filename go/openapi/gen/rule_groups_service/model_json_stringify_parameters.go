@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the JsonStringifyParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonStringifyParameters{}
 
-// JsonStringifyParameters struct for JsonStringifyParameters
+// JsonStringifyParameters Json stringify parameters.
 type JsonStringifyParameters struct {
+	// The delete source.
 	DeleteSource *bool `json:"deleteSource,omitempty"`
+	// The destination field.
 	DestinationField *string `json:"destinationField,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -7,7 +7,7 @@ servers:
 paths:
   /aaa/team-saml/v1/active:
     post:
-      description: No description available
+      description: Activates or deactivates SAML for the team.
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_SetActive
@@ -40,16 +40,20 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/configuration:
     get:
-      description: No description available
+      description: Returns the current SAML configuration for the team.
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_GetConfiguration
       parameters:
-      - explode: true
+      - description: The unique identifier of the team whose SAML configuration to
+          retrieve.
+        explode: true
         in: query
         name: team_id
         required: false
         schema:
+          description: The unique identifier of the team whose SAML configuration
+            to retrieve.
           format: int64
           type: integer
         style: form
@@ -77,7 +81,7 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/idp_parameters:
     post:
-      description: No description available
+      description: Sets the identity provider parameters for SAML.
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_SetIDPParameters
@@ -110,16 +114,18 @@ paths:
       - SAML Configuration Service
   /aaa/team-saml/v1/sp_parameters:
     get:
-      description: No description available
+      description: Returns the service provider parameters for SAML.
       externalDocs:
         url: ""
       operationId: SamlConfigurationService_GetSPParameters
       parameters:
-      - explode: true
+      - description: Team identifier.
+        explode: true
         in: query
         name: team_id
         required: false
         schema:
+          description: Team identifier.
           example: 1234567
           format: int64
           type: integer
@@ -150,8 +156,8 @@ components:
   schemas:
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -216,7 +222,7 @@ components:
           groupNames:
           - group1
           - group1
-          metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          metadataContent: <?xml version= ...
           teamEntityId: 1234567
           active: true
         teamId: 0
@@ -231,6 +237,7 @@ components:
         spParameters:
           $ref: "#/components/schemas/SPParameters"
         teamId:
+          description: The team id.
           format: int64
           type: integer
       title: Get Configuration Response
@@ -254,38 +261,58 @@ components:
       title: Get SP Parameters Response
       type: object
     IDPDetails:
+      description: Idp details.
       example:
         icon: icon
         name: name
+      externalDocs:
+        url: ""
       properties:
         icon:
+          description: Icon identifier.
           type: string
         name:
+          description: Display name.
           type: string
       type: object
     IDPParameters:
       oneOf:
-      - $ref: "#/components/schemas/IDPParametersMetadataUrl"
       - $ref: "#/components/schemas/IDPParametersMetadataContent"
+      - $ref: "#/components/schemas/IDPParametersMetadataUrl"
     IDPParametersMetadataContent:
       description: This data structure represents a set of SAML identity provider
         parameters
+      example:
+        groupNames:
+        - group1
+        - group1
+        metadataContent: <?xml version= ...
+        teamEntityId: 1234567
+        active: true
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         active:
+          description: Whether SAML SSO is currently active for this team.
           example: true
           type: boolean
         groupNames:
+          description: List of group names mapped from the identity provider for role-based
+            access.
           items:
+            description: List of group names mapped from the identity provider for
+              role-based access.
             example: group1
             type: string
           type: array
         metadataContent:
+          description: Raw XML content of the identity provider SAML metadata document.
           example: <?xml version= ...
           type: string
         teamEntityId:
+          description: Coralogix team entity identifier used as the SAML service provider
+            entity ID.
           example: 1234567
           format: int64
           type: integer
@@ -296,29 +323,30 @@ components:
     IDPParametersMetadataUrl:
       description: This data structure represents a set of SAML identity provider
         parameters
-      example:
-        groupNames:
-        - group1
-        - group1
-        metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
-        teamEntityId: 1234567
-        active: true
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         active:
+          description: Whether SAML SSO is currently active for this team.
           example: true
           type: boolean
         groupNames:
+          description: List of group names mapped from the identity provider for role-based
+            access.
           items:
+            description: List of group names mapped from the identity provider for
+              role-based access.
             example: group1
             type: string
           type: array
         metadataUrl:
+          description: URL to the identity provider SAML metadata XML document.
           example: https://<...>.okta.com/app/<...>/sso/saml/metadata
           type: string
         teamEntityId:
+          description: Coralogix team entity identifier used as the SAML service provider
+            entity ID.
           example: 1234567
           format: int64
           type: integer
@@ -349,23 +377,33 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         assertionConsumerServiceUrl:
+          description: The assertion consumer service url.
           example: assertion
           type: string
         binding:
+          description: The binding.
           example: binding
           type: string
         metadataUrl:
+          description: The metadata url.
           example: https://<...>.okta.com/app/<...>/sso/saml/metadata
           type: string
         nameIdFormat:
+          description: The name id format.
           example: name_id
           type: string
         signingCertPem:
+          description: The signing cert pem.
           example: certificate
           type: string
       title: Service Provider Parameters
       type: object
     SetIDPParametersResponse:
+      additionalProperties: false
+      description: Response returned after successfully setting the identity provider
+        parameters.
+      externalDocs:
+        url: ""
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -373,8 +411,13 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v2.SetActiveResponse:
+      additionalProperties: false
+      description: Response returned after updating the SAML active state.
+      externalDocs:
+        url: ""
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -384,8 +427,10 @@ components:
         provider
       properties:
         isActive:
+          description: The is active.
           type: boolean
         teamId:
+          description: Team identifier.
           format: int64
           type: integer
       title: Set Active Request
@@ -397,6 +442,7 @@ components:
         params:
           $ref: "#/components/schemas/IDPParameters"
         teamId:
+          description: Team identifier.
           format: int64
           type: integer
       title: Set IDP Parameters Request

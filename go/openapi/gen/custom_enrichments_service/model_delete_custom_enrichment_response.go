@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the DeleteCustomEnrichmentResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteCustomEnrichmentResponse{}
 
-// DeleteCustomEnrichmentResponse struct for DeleteCustomEnrichmentResponse
+// DeleteCustomEnrichmentResponse Response returned after successfully deleting a custom enrichment rule.
 type DeleteCustomEnrichmentResponse struct {
+	// The custom enrichment id.
 	CustomEnrichmentId *int64 `json:"customEnrichmentId,omitempty"`
+	// Human-readable message.
 	Message *string `json:"message,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

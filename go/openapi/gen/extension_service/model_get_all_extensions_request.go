@@ -23,6 +23,7 @@ var _ MappedNullable = &GetAllExtensionsRequest{}
 // GetAllExtensionsRequest Request to list all extensions
 type GetAllExtensionsRequest struct {
 	Filter *GetAllExtensionsRequestFilter `json:"filter,omitempty"`
+	// Whether to include hidden extensions that are not publicly listed in the catalog.
 	IncludeHiddenExtensions *bool `json:"includeHiddenExtensions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

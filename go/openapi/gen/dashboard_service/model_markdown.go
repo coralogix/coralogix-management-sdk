@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the Markdown type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Markdown{}
 
-// Markdown struct for Markdown
+// Markdown Markdown.
 type Markdown struct {
 	// Markdown text
 	MarkdownText *string `json:"markdownText,omitempty"`

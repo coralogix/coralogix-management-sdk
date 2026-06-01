@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// SyntaxType the model 'SyntaxType'
+// SyntaxType Syntax type.
 type SyntaxType string
 
 // List of SyntaxType

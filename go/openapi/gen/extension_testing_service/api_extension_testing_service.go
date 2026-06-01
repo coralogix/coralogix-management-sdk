@@ -40,7 +40,10 @@ func (r ApiExtensionTestingServiceCleanupTestingRevisionRequest) Execute() (map[
 /*
 ExtensionTestingServiceCleanupTestingRevision Cleanup testing extension
 
-No description available
+Removes the testing revision of an extension.
+
+Requires the following permissions:
+- `extensions:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionTestingServiceCleanupTestingRevisionRequest
@@ -147,7 +150,10 @@ func (r ApiExtensionTestingServiceInitializeTestingRevisionRequest) Execute() (m
 /*
 ExtensionTestingServiceInitializeTestingRevision Initialize testing revision
 
-No description available
+Initializes a testing revision for an extension.
+
+Requires the following permissions:
+- `extensions:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionTestingServiceInitializeTestingRevisionRequest
@@ -254,7 +260,10 @@ func (r ApiExtensionTestingServiceTestExtensionRevisionRequest) Execute() (map[s
 /*
 ExtensionTestingServiceTestExtensionRevision Test extension revision
 
-No description available
+Tests an extension revision.
+
+Requires the following permissions:
+- `extensions:UpdateConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionTestingServiceTestExtensionRevisionRequest

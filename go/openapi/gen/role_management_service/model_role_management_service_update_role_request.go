@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the RoleManagementServiceUpdateRoleRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleManagementServiceUpdateRoleRequest{}
 
-// RoleManagementServiceUpdateRoleRequest struct for RoleManagementServiceUpdateRoleRequest
+// RoleManagementServiceUpdateRoleRequest Request for updating a custom role.
 type RoleManagementServiceUpdateRoleRequest struct {
+	// The new description.
 	NewDescription *string `json:"newDescription,omitempty"`
+	// The new name.
 	NewName *string `json:"newName,omitempty"`
 	NewPermissions *V2Permissions `json:"newPermissions,omitempty"`
 	AdditionalProperties map[string]interface{}

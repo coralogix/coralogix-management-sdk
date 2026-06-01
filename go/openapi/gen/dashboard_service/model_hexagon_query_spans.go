@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the HexagonQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HexagonQuerySpans{}
 
-// HexagonQuerySpans struct for HexagonQuerySpans
+// HexagonQuerySpans Discriminated union of possible query types for the hexagon widget.
 type HexagonQuerySpans struct {
 	Spans HexagonSpansQuery `json:"spans"`
 	AdditionalProperties map[string]interface{}

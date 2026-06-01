@@ -7,7 +7,11 @@ servers:
 paths:
   /integrations/extensions/v1/deployed:
     delete:
-      description: No description available
+      description: |-
+        Undeploys the specified extension.
+
+        Requires the following permissions:
+        - `extensions:Deploy`
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_UndeployExtension
@@ -41,7 +45,11 @@ paths:
       x-coralogixPermissions:
       - extensions:Deploy
     get:
-      description: No description available
+      description: |-
+        Returns all deployed extensions.
+
+        Requires the following permissions:
+        - `extensions:ReadConfig`
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_GetDeployedExtensions
@@ -70,53 +78,71 @@ paths:
       x-coralogixPermissions:
       - extensions:ReadConfig
     post:
-      description: No description available
+      description: |-
+        Updates a deployed extension.
+
+        Requires the following permissions:
+        - `extensions:Deploy`
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_UpdateExtension
       parameters:
-      - explode: true
+      - description: Unique identifier.
+        explode: true
         in: query
         name: id
         required: false
         schema:
+          description: Unique identifier.
           type: string
         style: form
-      - explode: true
+      - description: Version number.
+        explode: true
         in: query
         name: version
         required: false
         schema:
+          description: Version number.
           type: string
         style: form
-      - explode: true
+      - description: The item ids.
+        explode: true
         in: query
         name: item_ids
         required: false
         schema:
+          description: The item ids.
           items:
+            description: The item ids.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The applications.
+        explode: true
         in: query
         name: applications
         required: false
         schema:
+          description: The applications.
           items:
+            description: The applications.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The subsystems.
+        explode: true
         in: query
         name: subsystems
         required: false
         schema:
+          description: The subsystems.
           items:
+            description: The subsystems.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The extension deployment configuration to update.
+        explode: true
         in: query
         name: extension_deployment
         required: false
@@ -148,53 +174,71 @@ paths:
       x-coralogixPermissions:
       - extensions:Deploy
     put:
-      description: No description available
+      description: |-
+        Deploys an extension.
+
+        Requires the following permissions:
+        - `extensions:Deploy`
       externalDocs:
         url: ""
       operationId: ExtensionDeploymentService_DeployExtension
       parameters:
-      - explode: true
+      - description: Unique identifier.
+        explode: true
         in: query
         name: id
         required: false
         schema:
+          description: Unique identifier.
           type: string
         style: form
-      - explode: true
+      - description: Version number.
+        explode: true
         in: query
         name: version
         required: false
         schema:
+          description: Version number.
           type: string
         style: form
-      - explode: true
+      - description: The item ids.
+        explode: true
         in: query
         name: item_ids
         required: false
         schema:
+          description: The item ids.
           items:
+            description: The item ids.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The applications.
+        explode: true
         in: query
         name: applications
         required: false
         schema:
+          description: The applications.
           items:
+            description: The applications.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The subsystems.
+        explode: true
         in: query
         name: subsystems
         required: false
         schema:
+          description: The subsystems.
           items:
+            description: The subsystems.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The extension deployment configuration.
+        explode: true
         in: query
         name: extension_deployment
         required: false
@@ -228,6 +272,7 @@ paths:
 components:
   schemas:
     DeployExtensionResponse:
+      description: Response returned after successfully deploying an extension.
       example:
         extensionDeployment:
           itemIds:
@@ -277,26 +322,35 @@ components:
         url: ""
       properties:
         applications:
+          description: The applications.
           items:
+            description: The applications.
             type: string
           type: array
         id:
+          description: Unique identifier.
           type: string
         itemIds:
+          description: The item ids.
           items:
+            description: The item ids.
             type: string
           type: array
         subsystems:
+          description: The subsystems.
           items:
+            description: The subsystems.
             type: string
           type: array
         summary:
           $ref: "#/components/schemas/DeployedExtensionSummary"
         version:
+          description: Version number.
           type: string
       title: Deployed extension
       type: object
     DeployedExtensionSummary:
+      description: Deployed extension summary.
       example:
         deployedItemCounts:
           alerts: 6
@@ -317,6 +371,7 @@ components:
       title: Deployed extension summary
       type: object
     ExtensionDeployment:
+      description: Extension deployment.
       example:
         itemIds:
         - itemIds
@@ -333,20 +388,28 @@ components:
         url: ""
       properties:
         applications:
+          description: The applications.
           items:
+            description: The applications.
             type: string
           type: array
         id:
+          description: Unique identifier.
           type: string
         itemIds:
+          description: The item ids.
           items:
+            description: The item ids.
             type: string
           type: array
         subsystems:
+          description: The subsystems.
           items:
+            description: The subsystems.
             type: string
           type: array
         version:
+          description: Version number.
           type: string
       title: Extension deployment
       type: object
@@ -359,17 +422,20 @@ components:
         url: ""
       properties:
         itemId:
+          description: The item id.
           type: string
         reason:
+          description: Reason.
           type: string
         remoteId:
+          description: The remote id.
           type: string
       title: Failed item
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -418,6 +484,7 @@ components:
       title: Filters
       type: object
     GetDeployedExtensionsResponse:
+      description: Response containing a list of deployed extensions.
       example:
         deployedExtensions:
         - summary:
@@ -470,12 +537,14 @@ components:
         url: ""
       properties:
         deployedExtensions:
+          description: The deployed extensions.
           items:
             $ref: "#/components/schemas/DeployedExtension"
           type: array
       title: Get deployed extensions response
       type: object
     ItemCounts:
+      description: Item counts.
       example:
         alerts: 6
         eventsToMetrics: 5
@@ -491,33 +560,43 @@ components:
         url: ""
       properties:
         actions:
+          description: List of actions.
           format: int64
           type: integer
         alerts:
+          description: List of alerts.
           format: int64
           type: integer
         customDashboards:
+          description: The custom dashboards.
           format: int64
           type: integer
         enrichments:
+          description: List of enrichments.
           format: int64
           type: integer
         eventsToMetrics:
+          description: The events to metrics.
           format: int64
           type: integer
         grafanaDashboards:
+          description: The grafana dashboards.
           format: int64
           type: integer
         kibanaDashboards:
+          description: The kibana dashboards.
           format: int64
           type: integer
         metricsRuleGroup:
+          description: The metrics rule group.
           format: int64
           type: integer
         parsingRules:
+          description: The parsing rules.
           format: int64
           type: integer
         savedViews:
+          description: The saved views.
           format: int64
           type: integer
       title: Item counts
@@ -532,6 +611,7 @@ components:
           type: array
       type: object
     UndeployExtensionResponse:
+      description: Response returned after successfully undeploying an extension.
       example:
         extensionDeployment:
           itemIds:
@@ -558,12 +638,14 @@ components:
         extensionDeployment:
           $ref: "#/components/schemas/ExtensionDeployment"
         failedItems:
+          description: The failed items.
           items:
             $ref: "#/components/schemas/FailedItem"
           type: array
       title: Revert deployment of extension response
       type: object
     UpdateExtensionResponse:
+      description: Response returned after successfully updating a deployed extension.
       example:
         extensionDeployment:
           itemIds:
@@ -590,38 +672,54 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     Extension_deployment:
+      description: Extension deployment.
       externalDocs:
         url: ""
       properties:
         applications:
+          description: The applications.
           items:
+            description: The applications.
             type: string
           type: array
         id:
+          description: Unique identifier.
           type: string
         itemIds:
+          description: The item ids.
           items:
+            description: The item ids.
             type: string
           type: array
         subsystems:
+          description: The subsystems.
           items:
+            description: The subsystems.
             type: string
           type: array
         version:
+          description: Version number.
           type: string
       title: Extension deployment
       type: object
     Revert_deployment_of_extension_request:
+      description: Request for undeploying an extension.
       properties:
         id:
+          description: Unique identifier.
           type: string
         keptExtensionItems:
+          description: List of extension item IDs to retain after undeploying; all
+            other items will be removed.
           items:
+            description: List of extension item IDs to retain after undeploying; all
+              other items will be removed.
             type: string
           type: array
       title: Revert deployment of extension request

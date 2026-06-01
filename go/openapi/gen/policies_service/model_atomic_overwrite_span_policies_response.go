@@ -22,6 +22,7 @@ var _ MappedNullable = &AtomicOverwriteSpanPoliciesResponse{}
 
 // AtomicOverwriteSpanPoliciesResponse This data structue is obtained when overwriting span policies atomically.
 type AtomicOverwriteSpanPoliciesResponse struct {
+	// The create responses.
 	CreateResponses []CreatePolicyResponse `json:"createResponses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the UpdateOutgoingWebhookRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateOutgoingWebhookRequest{}
 
-// UpdateOutgoingWebhookRequest struct for UpdateOutgoingWebhookRequest
+// UpdateOutgoingWebhookRequest Request for updating an outgoing webhook.
 type UpdateOutgoingWebhookRequest struct {
 	Data *OutgoingWebhookInputData `json:"data,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

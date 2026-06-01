@@ -7,16 +7,18 @@ servers:
 paths:
   /aaa/custom-roles/v1:
     get:
-      description: No description available
+      description: Returns all custom roles for the authenticated team.
       externalDocs:
         url: ""
       operationId: RoleManagementService_ListCustomRoles
       parameters:
-      - explode: true
+      - description: Team identifier.
+        explode: true
         in: query
         name: team_id
         required: false
         schema:
+          description: Team identifier.
           format: int64
           type: integer
         style: form
@@ -43,7 +45,7 @@ paths:
       tags:
       - Role Management Service
     put:
-      description: No description available
+      description: Creates a new custom role.
       externalDocs:
         url: ""
       operationId: RoleManagementService_CreateRole
@@ -52,6 +54,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RoleManagementService_CreateRole_request"
+        required: true
       responses:
         "200":
           content:
@@ -84,16 +87,18 @@ paths:
       - Role Management Service
   /aaa/custom-roles/v1/{role_id}:
     delete:
-      description: No description available
+      description: Deletes the custom role with the specified ID.
       externalDocs:
         url: ""
       operationId: RoleManagementService_DeleteRole
       parameters:
-      - explode: false
+      - description: The role id.
+        explode: false
         in: path
         name: role_id
         required: true
         schema:
+          description: The role id.
           format: int64
           type: integer
         style: simple
@@ -128,16 +133,18 @@ paths:
       tags:
       - Role Management Service
     get:
-      description: No description available
+      description: Returns the details of the specified custom role.
       externalDocs:
         url: ""
       operationId: RoleManagementService_GetCustomRole
       parameters:
-      - explode: false
+      - description: The role id.
+        explode: false
         in: path
         name: role_id
         required: true
         schema:
+          description: The role id.
           format: int64
           type: integer
         style: simple
@@ -168,16 +175,18 @@ paths:
       tags:
       - Role Management Service
     post:
-      description: No description available
+      description: Updates the specified custom role.
       externalDocs:
         url: ""
       operationId: RoleManagementService_UpdateRole
       parameters:
-      - explode: false
+      - description: The role id.
+        explode: false
         in: path
         name: role_id
         required: true
         schema:
+          description: The role id.
           format: int64
           type: integer
         style: simple
@@ -214,7 +223,7 @@ paths:
       - Role Management Service
   /aaa/system-roles/v1:
     get:
-      description: No description available
+      description: Returns all built-in system roles.
       externalDocs:
         url: ""
       operationId: RoleManagementService_ListSystemRoles
@@ -243,51 +252,74 @@ paths:
 components:
   schemas:
     CreateRoleRequestParentRoleId:
+      description: Request for creating a custom role.
+      externalDocs:
+        url: ""
       properties:
         description:
+          description: Human-readable description.
           type: string
         name:
+          description: Display name.
           type: string
         parentRoleId:
+          description: The parent role id.
           format: int64
           type: integer
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             type: string
           type: array
         teamId:
+          description: Team identifier.
           format: int64
           type: integer
       required:
       - parentRoleId
       type: object
     CreateRoleRequestParentRoleName:
+      description: Request for creating a custom role.
+      externalDocs:
+        url: ""
       properties:
         description:
+          description: Human-readable description.
           type: string
         name:
+          description: Display name.
           type: string
         parentRoleName:
+          description: The parent role name.
           type: string
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             type: string
           type: array
         teamId:
+          description: Team identifier.
           format: int64
           type: integer
       required:
       - parentRoleName
       type: object
     CreateRoleResponse:
+      description: Response returned after successfully creating a custom role.
       example:
         id: 0
+      externalDocs:
+        url: ""
       properties:
         id:
+          description: Unique identifier.
           format: int64
           type: integer
       type: object
     CustomRole:
+      description: Custom role.
       example:
         parentRoleName: parentRoleName
         permissions:
@@ -298,33 +330,47 @@ components:
         name: name
         description: description
         parentRoleId: 0
+      externalDocs:
+        url: ""
       properties:
         description:
+          description: Human-readable description.
           type: string
         name:
+          description: Display name.
           type: string
         parentRoleId:
+          description: The parent role id.
           format: int64
           type: integer
         parentRoleName:
+          description: The parent role name.
           type: string
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             type: string
           type: array
         roleId:
+          description: The role id.
           format: int64
           type: integer
         teamId:
+          description: Team identifier.
           format: int64
           type: integer
       type: object
     DeleteRoleResponse:
+      additionalProperties: false
+      description: Response returned after successfully deleting a custom role.
+      externalDocs:
+        url: ""
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -373,6 +419,7 @@ components:
       title: Filters
       type: object
     GetCustomRoleResponse:
+      description: Response containing the details of a custom role.
       example:
         role:
           parentRoleName: parentRoleName
@@ -384,11 +431,14 @@ components:
           name: name
           description: description
           parentRoleId: 0
+      externalDocs:
+        url: ""
       properties:
         role:
           $ref: "#/components/schemas/CustomRole"
       type: object
     ListCustomRolesResponse:
+      description: Response containing a list of custom roles.
       example:
         roles:
         - parentRoleName: parentRoleName
@@ -409,13 +459,17 @@ components:
           name: name
           description: description
           parentRoleId: 0
+      externalDocs:
+        url: ""
       properties:
         roles:
+          description: List of roles.
           items:
             $ref: "#/components/schemas/CustomRole"
           type: array
       type: object
     ListSystemRolesResponse:
+      description: Response containing a list of system roles.
       example:
         roles:
         - permissions:
@@ -430,8 +484,11 @@ components:
           roleId: 0
           name: name
           description: description
+      externalDocs:
+        url: ""
       properties:
         roles:
+          description: List of roles.
           items:
             $ref: "#/components/schemas/SystemRole"
           type: array
@@ -455,18 +512,27 @@ components:
         description: description
       properties:
         description:
+          description: Human-readable description.
           type: string
         name:
+          description: Display name.
           type: string
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             type: string
           type: array
         roleId:
+          description: The role id.
           format: int64
           type: integer
       type: object
     UpdateRoleResponse:
+      additionalProperties: false
+      description: Response returned after successfully updating a custom role.
+      externalDocs:
+        url: ""
       type: object
     events.v3.FilterMatcher:
       enum:
@@ -474,13 +540,19 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v2.Permissions:
+      description: Permissions.
+      externalDocs:
+        url: ""
       properties:
         permissions:
+          description: List of permissions.
           items:
+            description: List of permissions.
             type: string
           type: array
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -491,10 +563,13 @@ components:
       - $ref: "#/components/schemas/CreateRoleRequestParentRoleName"
       type: object
     RoleManagementService_UpdateRole_request:
+      description: Request for updating a custom role.
       properties:
         newDescription:
+          description: The new description.
           type: string
         newName:
+          description: The new name.
           type: string
         newPermissions:
           $ref: "#/components/schemas/v2.Permissions"

@@ -26,6 +26,7 @@ type LineChart struct {
 	// Whether the line should remain connected instead of producing scattered points when null values are present in between
 	ConnectNulls *bool `json:"connectNulls,omitempty"`
 	Legend *Legend `json:"legend,omitempty"`
+	// Definitions of widget queries
 	QueryDefinitions []LineChartQueryDefinition `json:"queryDefinitions"`
 	StackedLine *LineChartStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *Tooltip `json:"tooltip,omitempty"`

@@ -22,9 +22,13 @@ var _ MappedNullable = &SloAlertValidityResult{}
 
 // SloAlertValidityResult struct for SloAlertValidityResult
 type SloAlertValidityResult struct {
+	// The alert version id.
 	AlertVersionId *string `json:"alertVersionId,omitempty"`
+	// The error message.
 	ErrorMessage *string `json:"errorMessage,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

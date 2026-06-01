@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the SourceMapMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SourceMapMetadata{}
 
-// SourceMapMetadata struct for SourceMapMetadata
+// SourceMapMetadata Source map metadata.
 type SourceMapMetadata struct {
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// The is uploaded successful.
 	IsUploadedSuccessful *bool `json:"isUploadedSuccessful,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

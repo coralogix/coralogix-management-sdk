@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the HeatmapTooltip type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HeatmapTooltip{}
 
-// HeatmapTooltip struct for HeatmapTooltip
+// HeatmapTooltip Heatmap tooltip.
 type HeatmapTooltip struct {
+	// Labels to display on the tooltip, should reference fields used in x-axis or y-axis
 	Labels []ObservationField `json:"labels,omitempty"`
 	// Custom template for the heatmap tooltip
 	MessageTemplate *string `json:"messageTemplate,omitempty"`

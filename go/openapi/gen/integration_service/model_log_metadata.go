@@ -21,9 +21,11 @@ var _ = bytes.MinRead
 // checks if the LogMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogMetadata{}
 
-// LogMetadata struct for LogMetadata
+// LogMetadata Log metadata.
 type LogMetadata struct {
+	// The first occurrence.
 	FirstOccurrence *time.Time `json:"firstOccurrence,omitempty"`
+	// The last occurrence.
 	LastOccurrence *time.Time `json:"lastOccurrence,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

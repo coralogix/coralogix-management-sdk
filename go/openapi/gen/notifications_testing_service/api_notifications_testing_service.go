@@ -40,7 +40,7 @@ func (r ApiTestingServiceTestConnectorConfigRequest) Execute() (*TestConnectorCo
 /*
 TestingServiceTestConnectorConfig Test Connector Config
 
-No description available
+Tests a notification connector configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestConnectorConfigRequest
@@ -67,7 +67,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestConnectorConfi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors/tests/config"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors:testConfig"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -147,7 +147,7 @@ func (r ApiTestingServiceTestDestinationRequest) Execute() (*TestDestinationResp
 /*
 TestingServiceTestDestination Test Destination
 
-No description available
+Tests a notification destination.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestDestinationRequest
@@ -174,7 +174,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestDestinationExe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/destinations/tests"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/destinations:test"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -254,7 +254,7 @@ func (r ApiTestingServiceTestExistingConnectorRequest) Execute() (*TestExistingC
 /*
 TestingServiceTestExistingConnector Test Existing Connector
 
-No description available
+Sends a test notification.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestExistingConnectorRequest
@@ -281,7 +281,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingConnec
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/notifications/tests"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/connectors:test"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -361,7 +361,7 @@ func (r ApiTestingServiceTestExistingPresetRequest) Execute() (*TestExistingPres
 /*
 TestingServiceTestExistingPreset Test Existing Preset
 
-No description available
+Tests an existing notification preset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestExistingPresetRequest
@@ -388,7 +388,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestExistingPreset
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/tests"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:test"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -468,7 +468,7 @@ func (r ApiTestingServiceTestPresetConfigRequest) Execute() (*TestPresetConfigRe
 /*
 TestingServiceTestPresetConfig Test Preset Config
 
-No description available
+Tests a notification preset configuration.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestPresetConfigRequest
@@ -495,7 +495,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestPresetConfigEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/presets/tests/config"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/presets:testConfig"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -575,7 +575,7 @@ func (r ApiTestingServiceTestRoutingConditionValidRequest) Execute() (*TestRouti
 /*
 TestingServiceTestRoutingConditionValid Test Routing Condition Valid
 
-No description available
+Tests notification routing conditions.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestRoutingConditionValidRequest
@@ -602,7 +602,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestRoutingConditi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/routing-conditions/tests"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/routers:testCondition"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -682,7 +682,7 @@ func (r ApiTestingServiceTestTemplateRenderRequest) Execute() (*TestTemplateRend
 /*
 TestingServiceTestTemplateRender Test Template Render
 
-No description available
+Tests the rendering of a notification template.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiTestingServiceTestTemplateRenderRequest
@@ -709,7 +709,7 @@ func (a *NotificationsTestingServiceAPIService) TestingServiceTestTemplateRender
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/notifications/notification-center/v1/template-render/tests"
+	localVarPath := localBasePath + "/notifications/notification-center/v1/templates:test"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

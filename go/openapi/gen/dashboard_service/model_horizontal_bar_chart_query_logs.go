@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the HorizontalBarChartQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &HorizontalBarChartQueryLogs{}
 
-// HorizontalBarChartQueryLogs struct for HorizontalBarChartQueryLogs
+// HorizontalBarChartQueryLogs Query.
 type HorizontalBarChartQueryLogs struct {
 	Logs HorizontalBarChartLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

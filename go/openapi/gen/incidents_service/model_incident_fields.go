@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// IncidentFields the model 'IncidentFields'
+// IncidentFields Incident fields.
 type IncidentFields string
 
 // List of IncidentFields

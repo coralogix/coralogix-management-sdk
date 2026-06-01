@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the MetaLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MetaLabels{}
 
-// MetaLabels struct for MetaLabels
+// MetaLabels Meta labels.
 type MetaLabels struct {
+	// The value.
 	Value []MetaLabelsProtobufV1MetaLabel `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

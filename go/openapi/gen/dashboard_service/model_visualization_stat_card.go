@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VisualizationStatCard type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VisualizationStatCard{}
 
-// VisualizationStatCard struct for VisualizationStatCard
+// VisualizationStatCard Visualization.
 type VisualizationStatCard struct {
 	StatCard StatCard `json:"statCard"`
 	AdditionalProperties map[string]interface{}

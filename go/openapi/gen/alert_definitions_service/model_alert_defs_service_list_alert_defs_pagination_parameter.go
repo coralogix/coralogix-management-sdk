@@ -22,7 +22,9 @@ var _ MappedNullable = &AlertDefsServiceListAlertDefsPaginationParameter{}
 
 // AlertDefsServiceListAlertDefsPaginationParameter struct for AlertDefsServiceListAlertDefsPaginationParameter
 type AlertDefsServiceListAlertDefsPaginationParameter struct {
+	// Page size.
 	PageSize *int64 `json:"pageSize,omitempty"`
+	// The page token.
 	PageToken *string `json:"pageToken,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

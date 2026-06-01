@@ -22,7 +22,13 @@ var _ MappedNullable = &V1Target{}
 
 // V1Target This data structure represents a target for quota policies. It defines a named group of datasets with a priority level and optional archive retention configuration.
 type V1Target struct {
+	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
+	// The dataset.
 	Dataset *string `json:"dataset,omitempty"`
+	// The dataspace.
+	Dataspace *string `json:"dataspace,omitempty" validate:"regexp=^[A-Za-z](?:[A-Za-z0-9_]|\\\\.[A-Za-z0-9_])*$"`
+	Priority *QuotaV1Priority `json:"priority,omitempty"`
+	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,6 +49,38 @@ func NewV1Target() *V1Target {
 func NewV1TargetWithDefaults() *V1Target {
 	this := V1Target{}
 	return &this
+}
+
+// GetArchiveRetention returns the ArchiveRetention field value if set, zero value otherwise.
+func (o *V1Target) GetArchiveRetention() ArchiveRetention {
+	if o == nil || IsNil(o.ArchiveRetention) {
+		var ret ArchiveRetention
+		return ret
+	}
+	return *o.ArchiveRetention
+}
+
+// GetArchiveRetentionOk returns a tuple with the ArchiveRetention field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1Target) GetArchiveRetentionOk() (*ArchiveRetention, bool) {
+	if o == nil || IsNil(o.ArchiveRetention) {
+		return nil, false
+	}
+	return o.ArchiveRetention, true
+}
+
+// HasArchiveRetention returns a boolean if a field has been set.
+func (o *V1Target) HasArchiveRetention() bool {
+	if o != nil && !IsNil(o.ArchiveRetention) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchiveRetention gets a reference to the given ArchiveRetention and assigns it to the ArchiveRetention field.
+func (o *V1Target) SetArchiveRetention(v ArchiveRetention) {
+	o.ArchiveRetention = &v
 }
 
 // GetDataset returns the Dataset field value if set, zero value otherwise.
@@ -77,6 +115,102 @@ func (o *V1Target) SetDataset(v string) {
 	o.Dataset = &v
 }
 
+// GetDataspace returns the Dataspace field value if set, zero value otherwise.
+func (o *V1Target) GetDataspace() string {
+	if o == nil || IsNil(o.Dataspace) {
+		var ret string
+		return ret
+	}
+	return *o.Dataspace
+}
+
+// GetDataspaceOk returns a tuple with the Dataspace field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1Target) GetDataspaceOk() (*string, bool) {
+	if o == nil || IsNil(o.Dataspace) {
+		return nil, false
+	}
+	return o.Dataspace, true
+}
+
+// HasDataspace returns a boolean if a field has been set.
+func (o *V1Target) HasDataspace() bool {
+	if o != nil && !IsNil(o.Dataspace) {
+		return true
+	}
+
+	return false
+}
+
+// SetDataspace gets a reference to the given string and assigns it to the Dataspace field.
+func (o *V1Target) SetDataspace(v string) {
+	o.Dataspace = &v
+}
+
+// GetPriority returns the Priority field value if set, zero value otherwise.
+func (o *V1Target) GetPriority() QuotaV1Priority {
+	if o == nil || IsNil(o.Priority) {
+		var ret QuotaV1Priority
+		return ret
+	}
+	return *o.Priority
+}
+
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1Target) GetPriorityOk() (*QuotaV1Priority, bool) {
+	if o == nil || IsNil(o.Priority) {
+		return nil, false
+	}
+	return o.Priority, true
+}
+
+// HasPriority returns a boolean if a field has been set.
+func (o *V1Target) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given QuotaV1Priority and assigns it to the Priority field.
+func (o *V1Target) SetPriority(v QuotaV1Priority) {
+	o.Priority = &v
+}
+
+// GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
+func (o *V1Target) GetPriorityOverride() PriorityOverride {
+	if o == nil || IsNil(o.PriorityOverride) {
+		var ret PriorityOverride
+		return ret
+	}
+	return *o.PriorityOverride
+}
+
+// GetPriorityOverrideOk returns a tuple with the PriorityOverride field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1Target) GetPriorityOverrideOk() (*PriorityOverride, bool) {
+	if o == nil || IsNil(o.PriorityOverride) {
+		return nil, false
+	}
+	return o.PriorityOverride, true
+}
+
+// HasPriorityOverride returns a boolean if a field has been set.
+func (o *V1Target) HasPriorityOverride() bool {
+	if o != nil && !IsNil(o.PriorityOverride) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOverride gets a reference to the given PriorityOverride and assigns it to the PriorityOverride field.
+func (o *V1Target) SetPriorityOverride(v PriorityOverride) {
+	o.PriorityOverride = &v
+}
+
 func (o V1Target) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -87,8 +221,20 @@ func (o V1Target) MarshalJSON() ([]byte, error) {
 
 func (o V1Target) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ArchiveRetention) {
+		toSerialize["archiveRetention"] = o.ArchiveRetention
+	}
 	if !IsNil(o.Dataset) {
 		toSerialize["dataset"] = o.Dataset
+	}
+	if !IsNil(o.Dataspace) {
+		toSerialize["dataspace"] = o.Dataspace
+	}
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
+	if !IsNil(o.PriorityOverride) {
+		toSerialize["priorityOverride"] = o.PriorityOverride
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -113,7 +259,11 @@ func (o *V1Target) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archiveRetention")
 		delete(additionalProperties, "dataset")
+		delete(additionalProperties, "dataspace")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "priorityOverride")
 		o.AdditionalProperties = additionalProperties
 	}
 

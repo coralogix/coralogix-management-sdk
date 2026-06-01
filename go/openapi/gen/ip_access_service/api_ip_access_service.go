@@ -40,7 +40,7 @@ func (r ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest) Execute() (*Crea
 /*
 IpAccessServiceCreateCompanyIpAccessSettings Create company IP access settings
 
-No description available
+Sets the IP access restrictions for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceCreateCompanyIpAccessSettingsRequest
@@ -135,6 +135,7 @@ type ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest struct {
 	id *string
 }
 
+// The unique identifier of the company IP access settings to delete.
 func (r ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest) Id(id string) ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest {
 	r.id = &id
 	return r
@@ -147,7 +148,7 @@ func (r ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest) Execute() (map[s
 /*
 IpAccessServiceDeleteCompanyIpAccessSettings Delete company IP access settings
 
-No description available
+Removes the IP access restrictions for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceDeleteCompanyIpAccessSettingsRequest
@@ -243,6 +244,7 @@ type ApiIpAccessServiceGetCompanyIpAccessSettingsRequest struct {
 	id *string
 }
 
+// The ID of the company IP access settings to get. If it&#39;s not provided, the id will be derived from the authorization header.
 func (r ApiIpAccessServiceGetCompanyIpAccessSettingsRequest) Id(id string) ApiIpAccessServiceGetCompanyIpAccessSettingsRequest {
 	r.id = &id
 	return r
@@ -255,7 +257,7 @@ func (r ApiIpAccessServiceGetCompanyIpAccessSettingsRequest) Execute() (*GetComp
 /*
 IpAccessServiceGetCompanyIpAccessSettings Get company IP access settings
 
-No description available
+Returns the current IP access settings for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceGetCompanyIpAccessSettingsRequest
@@ -363,7 +365,7 @@ func (r ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest) Execute() (*Rep
 /*
 IpAccessServiceReplaceCompanyIpAccessSettings Replace company IP access settings
 
-No description available
+Updates the IP access restrictions for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiIpAccessServiceReplaceCompanyIpAccessSettingsRequest

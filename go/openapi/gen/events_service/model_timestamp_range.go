@@ -24,7 +24,9 @@ var _ MappedNullable = &TimestampRange{}
 
 // TimestampRange This data structure represents a timestamp range
 type TimestampRange struct {
+	// Inclusive start of the time range.
 	From time.Time `json:"from"`
+	// Inclusive end of the time range.
 	To time.Time `json:"to"`
 	AdditionalProperties map[string]interface{}
 }

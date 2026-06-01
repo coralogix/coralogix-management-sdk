@@ -176,6 +176,7 @@ Class | Method | HTTP request | Description
  - [IncidentMetaLabelsCount](docs/IncidentMetaLabelsCount.md)
  - [IncidentMetaLabelsWithCount](docs/IncidentMetaLabelsWithCount.md)
  - [IncidentQueryFilter](docs/IncidentQueryFilter.md)
+ - [IncidentQueryFilterSearchQuery](docs/IncidentQueryFilterSearchQuery.md)
  - [IncidentQueryFiltersValues](docs/IncidentQueryFiltersValues.md)
  - [IncidentSearchQuery](docs/IncidentSearchQuery.md)
  - [IncidentSearchQueryContextualLabel](docs/IncidentSearchQueryContextualLabel.md)

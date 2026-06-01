@@ -42,7 +42,7 @@ func (r ApiSlosServiceBatchExecuteSloRequest) Execute() (*BatchExecuteSloRespons
 /*
 SlosServiceBatchExecuteSlo Batch Execute Slo
 
-No description available
+Triggers execution for all SLOs.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchExecuteSloRequest
@@ -74,6 +74,9 @@ func (a *SlosServiceAPIService) SlosServiceBatchExecuteSloExecute(r ApiSlosServi
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.batchExecuteSloRequest == nil {
+		return localVarReturnValue, nil, reportError("batchExecuteSloRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -137,6 +140,7 @@ type ApiSlosServiceBatchGetSlosRequest struct {
 	ids *[]string
 }
 
+// The ids.
 func (r ApiSlosServiceBatchGetSlosRequest) Ids(ids []string) ApiSlosServiceBatchGetSlosRequest {
 	r.ids = &ids
 	return r
@@ -149,7 +153,7 @@ func (r ApiSlosServiceBatchGetSlosRequest) Execute() (*BatchGetSlosResponse, *ht
 /*
 SlosServiceBatchGetSlos Batch Get Slo
 
-No description available
+Returns all SLOs for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceBatchGetSlosRequest
@@ -250,17 +254,18 @@ func (a *SlosServiceAPIService) SlosServiceBatchGetSlosExecute(r ApiSlosServiceB
 type ApiSlosServiceCreateSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	silenceDataValidations *bool
 	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
-}
-
-func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceCreateSloRequest {
-	r.silenceDataValidations = &silenceDataValidations
-	return r
+	silenceDataValidations *bool
 }
 
 func (r ApiSlosServiceCreateSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceCreateSloRequest {
 	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+	return r
+}
+
+// Whether to silence data validations.
+func (r ApiSlosServiceCreateSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceCreateSloRequest {
+	r.silenceDataValidations = &silenceDataValidations
 	return r
 }
 
@@ -271,7 +276,7 @@ func (r ApiSlosServiceCreateSloRequest) Execute() (*CreateSloResponse, *http.Res
 /*
 SlosServiceCreateSlo Create Slo
 
-No description available
+Creates a new SLO.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceCreateSloRequest
@@ -303,6 +308,9 @@ func (a *SlosServiceAPIService) SlosServiceCreateSloExecute(r ApiSlosServiceCrea
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.slosServiceReplaceSloRequest == nil {
+		return localVarReturnValue, nil, reportError("slosServiceReplaceSloRequest is required and must be specified")
+	}
 
 	if r.silenceDataValidations != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "silence_data_validations", r.silenceDataValidations, "form", "")
@@ -376,10 +384,10 @@ func (r ApiSlosServiceDeleteSloRequest) Execute() (*DeleteSloResponse, *http.Res
 /*
 SlosServiceDeleteSlo Delete Slo
 
-No description available
+Deletes the SLO with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiSlosServiceDeleteSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceDeleteSlo(ctx context.Context, id string) ApiSlosServiceDeleteSloRequest {
@@ -479,10 +487,10 @@ func (r ApiSlosServiceGetSloRequest) Execute() (*GetSloResponse, *http.Response,
 /*
 SlosServiceGetSlo Get Slo
 
-No description available
+Returns the details of the specified SLO.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiSlosServiceGetSloRequest
 */
 func (a *SlosServiceAPIService) SlosServiceGetSlo(ctx context.Context, id string) ApiSlosServiceGetSloRequest {
@@ -581,7 +589,7 @@ func (r ApiSlosServiceGetZeroStateRequest) Execute() (*GetZeroStateResponse, *ht
 /*
 SlosServiceGetZeroState Get Slo Zero State
 
-No description available
+Returns the zero-state configuration for SLOs.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceGetZeroStateRequest
@@ -674,6 +682,7 @@ type ApiSlosServiceListSlosRequest struct {
 	filters *[]SloFilter
 }
 
+// The filters.
 func (r ApiSlosServiceListSlosRequest) Filters(filters []SloFilter) ApiSlosServiceListSlosRequest {
 	r.filters = &filters
 	return r
@@ -686,7 +695,7 @@ func (r ApiSlosServiceListSlosRequest) Execute() (*ListSlosResponse, *http.Respo
 /*
 SlosServiceListSlos List Slos
 
-No description available
+Returns SLOs matching the given criteria.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceListSlosRequest
@@ -787,17 +796,18 @@ func (a *SlosServiceAPIService) SlosServiceListSlosExecute(r ApiSlosServiceListS
 type ApiSlosServiceReplaceSloRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	silenceDataValidations *bool
 	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
-}
-
-func (r ApiSlosServiceReplaceSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceReplaceSloRequest {
-	r.silenceDataValidations = &silenceDataValidations
-	return r
+	silenceDataValidations *bool
 }
 
 func (r ApiSlosServiceReplaceSloRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceReplaceSloRequest {
 	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
+	return r
+}
+
+// Whether to silence data validations.
+func (r ApiSlosServiceReplaceSloRequest) SilenceDataValidations(silenceDataValidations bool) ApiSlosServiceReplaceSloRequest {
+	r.silenceDataValidations = &silenceDataValidations
 	return r
 }
 
@@ -808,7 +818,7 @@ func (r ApiSlosServiceReplaceSloRequest) Execute() (*ReplaceSloResponse, *http.R
 /*
 SlosServiceReplaceSlo Replace Slo
 
-No description available
+Updates an existing SLO.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceReplaceSloRequest
@@ -840,6 +850,9 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.slosServiceReplaceSloRequest == nil {
+		return localVarReturnValue, nil, reportError("slosServiceReplaceSloRequest is required and must be specified")
+	}
 
 	if r.silenceDataValidations != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "silence_data_validations", r.silenceDataValidations, "form", "")
@@ -903,11 +916,11 @@ func (a *SlosServiceAPIService) SlosServiceReplaceSloExecute(r ApiSlosServiceRep
 type ApiSlosServiceValidateReplaceSloAlertsRequest struct {
 	ctx context.Context
 	ApiService *SlosServiceAPIService
-	slosServiceValidateReplaceSloAlertsRequest *SlosServiceValidateReplaceSloAlertsRequest
+	slosServiceReplaceSloRequest *SlosServiceReplaceSloRequest
 }
 
-func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceValidateReplaceSloAlertsRequest(slosServiceValidateReplaceSloAlertsRequest SlosServiceValidateReplaceSloAlertsRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
-	r.slosServiceValidateReplaceSloAlertsRequest = &slosServiceValidateReplaceSloAlertsRequest
+func (r ApiSlosServiceValidateReplaceSloAlertsRequest) SlosServiceReplaceSloRequest(slosServiceReplaceSloRequest SlosServiceReplaceSloRequest) ApiSlosServiceValidateReplaceSloAlertsRequest {
+	r.slosServiceReplaceSloRequest = &slosServiceReplaceSloRequest
 	return r
 }
 
@@ -918,7 +931,7 @@ func (r ApiSlosServiceValidateReplaceSloAlertsRequest) Execute() (*ReplaceSloAle
 /*
 SlosServiceValidateReplaceSloAlerts Replace Slo Pre-Validate Alerts
 
-No description available
+Validates and updates an SLO.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiSlosServiceValidateReplaceSloAlertsRequest
@@ -950,6 +963,9 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.slosServiceReplaceSloRequest == nil {
+		return localVarReturnValue, nil, reportError("slosServiceReplaceSloRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -969,7 +985,7 @@ func (a *SlosServiceAPIService) SlosServiceValidateReplaceSloAlertsExecute(r Api
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.slosServiceValidateReplaceSloAlertsRequest
+	localVarPostBody = r.slosServiceReplaceSloRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

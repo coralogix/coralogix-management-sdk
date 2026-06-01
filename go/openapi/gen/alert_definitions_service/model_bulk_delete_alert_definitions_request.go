@@ -22,6 +22,7 @@ var _ MappedNullable = &BulkDeleteAlertDefinitionsRequest{}
 
 // BulkDeleteAlertDefinitionsRequest A request to delete multiple alert defintions by their IDs
 type BulkDeleteAlertDefinitionsRequest struct {
+	// List of alert definition IDs to delete.
 	Ids []string `json:"ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

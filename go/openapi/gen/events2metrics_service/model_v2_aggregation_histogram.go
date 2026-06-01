@@ -24,8 +24,10 @@ var _ MappedNullable = &V2AggregationHistogram{}
 // V2AggregationHistogram This data structure represents an aggregation
 type V2AggregationHistogram struct {
 	AggType *AggType `json:"aggType,omitempty"`
+	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	Histogram E2MAggHistogram `json:"histogram"`
+	// Name of the target metric produced by this aggregation.
 	TargetMetricName *string `json:"targetMetricName,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

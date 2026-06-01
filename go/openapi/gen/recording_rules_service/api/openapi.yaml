@@ -7,7 +7,7 @@ servers:
 paths:
   /recording-rules/recording-rules/v1:
     get:
-      description: No description available
+      description: Returns all recording rule groups for the team.
       externalDocs:
         url: ""
       operationId: RuleGroupSets_List
@@ -34,7 +34,7 @@ paths:
       tags:
       - Recording Rules Service
     post:
-      description: No description available
+      description: Creates a new recording rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Create
@@ -67,16 +67,18 @@ paths:
       - Recording Rules Service
   /recording-rules/recording-rules/v1/{id}:
     delete:
-      description: No description available
+      description: Deletes the recording rule group with the specified ID.
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Delete
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -102,16 +104,18 @@ paths:
       tags:
       - Recording Rules Service
     get:
-      description: No description available
+      description: Returns the details of the specified recording rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Fetch
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       responses:
@@ -137,16 +141,18 @@ paths:
       tags:
       - Recording Rules Service
     put:
-      description: No description available
+      description: Updates the specified recording rule group.
       externalDocs:
         url: ""
       operationId: RuleGroupSets_Update
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
       requestBody:
@@ -187,13 +193,14 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
       properties:
         id:
+          description: Unique identifier.
           type: string
       title: Create Rule Group Set Result
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -254,12 +261,15 @@ components:
           format: int64
           type: integer
         expr:
+          description: The expr.
           type: string
         labels:
           additionalProperties:
             type: string
+          description: List of labels.
           type: object
         record:
+          description: Record.
           type: string
       title: In Rule
       type: object
@@ -270,21 +280,27 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
       properties:
         id:
+          description: Unique identifier.
           type: string
         interval:
+          description: Interval.
           format: int64
           type: integer
         limit:
+          description: Limit.
           example: ""
           format: int64
           type: string
         name:
+          description: Display name.
           type: string
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/InRule"
           type: array
         version:
+          description: Version number.
           format: int64
           type: integer
       title: In Rule Group
@@ -308,19 +324,24 @@ components:
           key: labels
       properties:
         evaluationDelayMs:
+          description: The evaluation delay ms.
           format: int64
           type: integer
         expr:
+          description: The expr.
           type: string
         labels:
           additionalProperties:
             type: string
+          description: List of labels.
           type: object
         lastEvalDurationMs:
+          description: The last eval duration ms.
           example: ""
           format: int64
           type: string
         record:
+          description: Record.
           type: string
       type: object
     OutRuleGroup:
@@ -346,25 +367,32 @@ components:
         version: 1
       properties:
         id:
+          description: Unique identifier.
           type: string
         interval:
+          description: Interval.
           format: int64
           type: integer
         lastEvalAt:
+          description: The last eval at.
           example: ""
           format: int64
           type: string
         limit:
+          description: Limit.
           example: ""
           format: int64
           type: string
         name:
+          description: Display name.
           type: string
         rules:
+          description: List of rules.
           items:
             $ref: "#/components/schemas/OutRule"
           type: array
         version:
+          description: Version number.
           format: int64
           type: integer
       type: object
@@ -417,12 +445,15 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
       properties:
         groups:
+          description: List of groups.
           items:
             $ref: "#/components/schemas/OutRuleGroup"
           type: array
         id:
+          description: Unique identifier.
           type: string
         name:
+          description: Display name.
           type: string
       title: Out Rule Group Set
       type: object
@@ -517,6 +548,7 @@ components:
         url: https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
       properties:
         sets:
+          description: The sets.
           items:
             $ref: "#/components/schemas/OutRuleGroupSet"
           type: array
@@ -528,6 +560,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -536,10 +569,12 @@ components:
       description: A set of rule groups to create.
       properties:
         groups:
+          description: List of groups.
           items:
             $ref: "#/components/schemas/InRuleGroup"
           type: array
         name:
+          description: Display name.
           type: string
       title: Create Rule Group Set
       type: object
@@ -547,10 +582,12 @@ components:
       description: A set of rule groups to update.
       properties:
         groups:
+          description: List of groups.
           items:
             $ref: "#/components/schemas/InRuleGroup"
           type: array
         name:
+          description: Display name.
           type: string
       title: Update Rule Group Set
       type: object

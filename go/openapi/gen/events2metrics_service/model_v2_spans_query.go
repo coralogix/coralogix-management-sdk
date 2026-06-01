@@ -22,10 +22,15 @@ var _ MappedNullable = &V2SpansQuery{}
 
 // V2SpansQuery This data structure represents a query for spans.
 type V2SpansQuery struct {
+	// The action filters.
 	ActionFilters []string `json:"actionFilters,omitempty"`
+	// The applicationname filters.
 	ApplicationnameFilters []string `json:"applicationnameFilters,omitempty"`
+	// The lucene.
 	Lucene *string `json:"lucene,omitempty"`
+	// The service filters.
 	ServiceFilters []string `json:"serviceFilters,omitempty"`
+	// The subsystemname filters.
 	SubsystemnameFilters []string `json:"subsystemnameFilters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

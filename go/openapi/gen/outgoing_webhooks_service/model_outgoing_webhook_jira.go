@@ -22,15 +22,21 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookJira type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookJira{}
 
-// OutgoingWebhookJira struct for OutgoingWebhookJira
+// OutgoingWebhookJira Outgoing webhook.
 type OutgoingWebhookJira struct {
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// External identifier.
 	ExternalId *int64 `json:"externalId,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	Jira JiraConfig `json:"jira"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

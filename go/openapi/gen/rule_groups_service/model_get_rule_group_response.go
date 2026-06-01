@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetRuleGroupResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetRuleGroupResponse{}
 
-// GetRuleGroupResponse struct for GetRuleGroupResponse
+// GetRuleGroupResponse Response containing the details of a parsing rule group.
 type GetRuleGroupResponse struct {
 	RuleGroup *RuleGroup `json:"ruleGroup,omitempty"`
 	AdditionalProperties map[string]interface{}

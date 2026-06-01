@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the SelectionValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SelectionValue{}
 
-// SelectionValue struct for SelectionValue
+// SelectionValue Selection value.
 type SelectionValue struct {
+	// The default value.
 	DefaultValue *string `json:"defaultValue,omitempty"`
+	// Options.
 	Options []string `json:"options,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

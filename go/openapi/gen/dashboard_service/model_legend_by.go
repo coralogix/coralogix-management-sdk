@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// LegendBy the model 'LegendBy'
+// LegendBy Legend by.
 type LegendBy string
 
 // List of LegendBy

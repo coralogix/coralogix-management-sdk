@@ -24,6 +24,7 @@ var _ MappedNullable = &UpdateRequestIbm{}
 // UpdateRequestIbm This data structure is used to update the configuration of a tenant.
 type UpdateRequestIbm struct {
 	Ibm IbmConfigV2 `json:"ibm"`
+	// Archive retention period in days.
 	RetentionDays *int64 `json:"retentionDays,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

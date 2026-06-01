@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the WidgetsPieChart type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsPieChart{}
 
-// WidgetsPieChart struct for WidgetsPieChart
+// WidgetsPieChart Pie chart.
 type WidgetsPieChart struct {
 	// Applied color scheme, one of the predefined values
 	ColorScheme *string `json:"colorScheme,omitempty"`

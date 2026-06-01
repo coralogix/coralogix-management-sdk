@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the Geomap type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Geomap{}
 
-// Geomap struct for Geomap
+// Geomap Geomap.
 type Geomap struct {
 	Aggregation *GeomapAggregation `json:"aggregation,omitempty"`
 	// Whether to render numeric value with abbreviation

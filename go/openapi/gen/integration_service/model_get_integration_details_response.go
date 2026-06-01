@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the GetIntegrationDetailsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetIntegrationDetailsResponse{}
 
-// GetIntegrationDetailsResponse struct for GetIntegrationDetailsResponse
+// GetIntegrationDetailsResponse Response containing the details of an integration definition.
 type GetIntegrationDetailsResponse struct {
 	IntegrationDetail *IntegrationDetails `json:"integrationDetail,omitempty"`
 	AdditionalProperties map[string]interface{}

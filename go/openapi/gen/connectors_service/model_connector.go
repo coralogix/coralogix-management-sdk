@@ -23,15 +23,22 @@ var _ MappedNullable = &Connector{}
 
 // Connector A connector configuration for sending notifications
 type Connector struct {
+	// The config overrides.
 	ConfigOverrides []EntityTypeConfigOverrides `json:"configOverrides,omitempty"`
 	ConnectorConfig *ConnectorConfig `json:"connectorConfig,omitempty"`
+	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
+	// Human-readable description.
 	Description *string `json:"description,omitempty"`
 	Diagnostics *Diagnostics `json:"diagnostics,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
+	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	Type *NotificationCenterConnectorType `json:"type,omitempty"`
+	// Timestamp of the last update.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// EventsV3OrderByDirection the model 'EventsV3OrderByDirection'
+// EventsV3OrderByDirection Order by direction.
 type EventsV3OrderByDirection string
 
 // List of events.v3.OrderByDirection

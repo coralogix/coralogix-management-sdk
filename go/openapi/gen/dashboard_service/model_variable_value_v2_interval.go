@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the VariableValueV2Interval type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &VariableValueV2Interval{}
 
-// VariableValueV2Interval struct for VariableValueV2Interval
+// VariableValueV2Interval Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).
 type VariableValueV2Interval struct {
 	Interval IntervalValue `json:"interval"`
 	AdditionalProperties map[string]interface{}

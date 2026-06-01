@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the Deprecation type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Deprecation{}
 
-// Deprecation struct for Deprecation
+// Deprecation Deprecation.
 type Deprecation struct {
+	// Reason.
 	Reason *string `json:"reason,omitempty"`
+	// The replacement extensions.
 	ReplacementExtensions []string `json:"replacementExtensions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

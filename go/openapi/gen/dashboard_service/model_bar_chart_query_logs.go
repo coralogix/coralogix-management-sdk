@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the BarChartQueryLogs type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BarChartQueryLogs{}
 
-// BarChartQueryLogs struct for BarChartQueryLogs
+// BarChartQueryLogs Query.
 type BarChartQueryLogs struct {
 	Logs BarChartLogsQuery `json:"logs"`
 	AdditionalProperties map[string]interface{}

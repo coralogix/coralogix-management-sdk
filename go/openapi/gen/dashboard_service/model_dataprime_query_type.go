@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the DataprimeQueryType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DataprimeQueryType{}
 
-// DataprimeQueryType struct for DataprimeQueryType
+// DataprimeQueryType Discriminated union specifying the type of Dataprime query used to fetch variable values.
 type DataprimeQueryType struct {
 	QueryText *QueryText `json:"queryText,omitempty"`
 	AdditionalProperties map[string]interface{}

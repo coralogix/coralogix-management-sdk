@@ -23,6 +23,7 @@ var _ MappedNullable = &UpdateRequestS3{}
 
 // UpdateRequestS3 This data structure is used to update the configuration of a tenant.
 type UpdateRequestS3 struct {
+	// Archive retention period in days.
 	RetentionDays *int64 `json:"retentionDays,omitempty"`
 	S3 S3Config `json:"s3"`
 	AdditionalProperties map[string]interface{}

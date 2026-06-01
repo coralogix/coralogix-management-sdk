@@ -35,6 +35,7 @@ type DetailedDailyUnits struct {
 	LowTracingUnits *V2Unit `json:"lowTracingUnits,omitempty"`
 	MediumLogsUnits *V2Unit `json:"mediumLogsUnits,omitempty"`
 	MediumTracingUnits *V2Unit `json:"mediumTracingUnits,omitempty"`
+	// The stats date.
 	StatsDate *time.Time `json:"statsDate,omitempty"`
 	TotalUnits *V2Unit `json:"totalUnits,omitempty"`
 	AdditionalProperties map[string]interface{}

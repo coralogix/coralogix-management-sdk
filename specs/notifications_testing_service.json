@@ -5,13 +5,59 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/notifications/notification-center/v1/connectors/tests/config": {
+    "/notifications/notification-center/v1/connectors:test": {
+      "post": {
+        "tags": [
+          "Notifications testing service"
+        ],
+        "summary": "Test Existing Connector",
+        "description": "Sends a test notification.",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TestingService_TestExistingConnector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request for sending a test notification.",
+                "type": "object",
+                "properties": {
+                  "connectorId": {
+                    "description": "The connector id.",
+                    "type": "string"
+                  },
+                  "payloadType": {
+                    "example": "default",
+                    "description": "Payload type to use when testing the connector.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestExistingConnectorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/notification-center/v1/connectors:testConfig": {
       "post": {
         "tags": [
           "Notifications testing service"
         ],
         "summary": "Test Connector Config",
-        "description": "No description available",
+        "description": "Tests a notification connector configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -28,6 +74,7 @@
                     "$ref": "#/components/schemas/notification_center.EntityType"
                   },
                   "fields": {
+                    "description": "Fields.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
@@ -35,6 +82,7 @@
                   },
                   "payloadType": {
                     "example": "default",
+                    "description": "Payload type to use when testing the connector.",
                     "type": "string"
                   },
                   "type": {
@@ -59,13 +107,13 @@
         }
       }
     },
-    "/notifications/notification-center/v1/destinations/tests": {
+    "/notifications/notification-center/v1/destinations:test": {
       "post": {
         "tags": [
           "Notifications testing service"
         ],
         "summary": "Test Destination",
-        "description": "No description available",
+        "description": "Tests a notification destination.",
         "externalDocs": {
           "url": ""
         },
@@ -74,25 +122,30 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for testing a notification destination.",
                 "type": "object",
                 "properties": {
                   "connectorConfigFields": {
+                    "description": "The connector config fields.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/TemplatedConnectorConfigField"
                     }
                   },
                   "connectorId": {
+                    "description": "The connector id.",
                     "type": "string"
                   },
                   "entitySubType": {
                     "example": "logsImmediateResolved",
+                    "description": "Entity sub-type to use when testing the destination.",
                     "type": "string"
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
                   },
                   "messageConfigFields": {
+                    "description": "The message config fields.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/notification_center.MessageConfigField"
@@ -100,9 +153,11 @@
                   },
                   "payloadType": {
                     "example": "default",
+                    "description": "Payload type to use when testing the destination.",
                     "type": "string"
                   },
                   "presetId": {
+                    "description": "The preset id.",
                     "type": "string"
                   }
                 }
@@ -124,56 +179,13 @@
         }
       }
     },
-    "/notifications/notification-center/v1/notifications/tests": {
-      "post": {
-        "tags": [
-          "Notifications testing service"
-        ],
-        "summary": "Test Existing Connector",
-        "description": "No description available",
-        "externalDocs": {
-          "url": ""
-        },
-        "operationId": "TestingService_TestExistingConnector",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "connectorId": {
-                    "type": "string"
-                  },
-                  "payloadType": {
-                    "example": "default",
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TestExistingConnectorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/notifications/notification-center/v1/presets/tests": {
+    "/notifications/notification-center/v1/presets:test": {
       "post": {
         "tags": [
           "Notifications testing service"
         ],
         "summary": "Test Existing Preset",
-        "description": "No description available",
+        "description": "Tests an existing notification preset.",
         "externalDocs": {
           "url": ""
         },
@@ -182,19 +194,23 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for testing an existing notification preset.",
                 "type": "object",
                 "properties": {
                   "connectorId": {
+                    "description": "The connector id.",
                     "type": "string"
                   },
                   "entitySubType": {
                     "example": "logsImmediateResolved",
+                    "description": "Entity sub-type to use when testing the preset.",
                     "type": "string"
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
                   },
                   "presetId": {
+                    "description": "The preset id.",
                     "type": "string"
                   }
                 }
@@ -216,13 +232,13 @@
         }
       }
     },
-    "/notifications/notification-center/v1/presets/tests/config": {
+    "/notifications/notification-center/v1/presets:testConfig": {
       "post": {
         "tags": [
           "Notifications testing service"
         ],
         "summary": "Test Preset Config",
-        "description": "No description available",
+        "description": "Tests a notification preset configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -231,25 +247,30 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for testing a notification preset configuration.",
                 "type": "object",
                 "properties": {
                   "configOverrides": {
+                    "description": "The config overrides.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ConfigOverrides"
                     }
                   },
                   "connectorId": {
+                    "description": "The connector id.",
                     "type": "string"
                   },
                   "entitySubType": {
                     "example": "metric",
+                    "description": "Entity sub-type to use when testing the preset configuration.",
                     "type": "string"
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
                   },
                   "parentPresetId": {
+                    "description": "The parent preset id.",
                     "type": "string"
                   }
                 }
@@ -271,13 +292,13 @@
         }
       }
     },
-    "/notifications/notification-center/v1/routing-conditions/tests": {
+    "/notifications/notification-center/v1/routers:testCondition": {
       "post": {
         "tags": [
           "Notifications testing service"
         ],
         "summary": "Test Routing Condition Valid",
-        "description": "No description available",
+        "description": "Tests notification routing conditions.",
         "externalDocs": {
           "url": ""
         },
@@ -295,6 +316,7 @@
                   },
                   "template": {
                     "example": "alertDef.priority == 'P1'",
+                    "description": "Routing condition expression to validate.",
                     "type": "string"
                   }
                 }
@@ -316,13 +338,13 @@
         }
       }
     },
-    "/notifications/notification-center/v1/template-render/tests": {
+    "/notifications/notification-center/v1/templates:test": {
       "post": {
         "tags": [
           "Notifications testing service"
         ],
         "summary": "Test Template Render",
-        "description": "No description available",
+        "description": "Tests the rendering of a notification template.",
         "externalDocs": {
           "url": ""
         },
@@ -331,10 +353,12 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for testing notification template rendering.",
                 "type": "object",
                 "properties": {
                   "entitySubType": {
                     "example": "logsImmediateResolved",
+                    "description": "Entity sub-type to use when testing template rendering.",
                     "type": "string"
                   },
                   "entityType": {
@@ -342,6 +366,7 @@
                   },
                   "template": {
                     "example": "{{ alertDef.name }}",
+                    "description": "Template string to test rendering for.",
                     "type": "string"
                   }
                 }
@@ -376,11 +401,13 @@
             "$ref": "#/components/schemas/MessageConfig"
           },
           "payloadType": {
+            "description": "Type of the payload.",
             "type": "string"
           }
         }
       },
       "FailureReason": {
+        "description": "Failure reason.",
         "type": "string",
         "enum": [
           "FAILURE_REASON_UNSPECIFIED",
@@ -393,10 +420,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -467,20 +494,35 @@
         ]
       },
       "MatchEntityTypeAndSubTypeCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Match entity type and sub type condition.",
         "type": "object",
         "properties": {
           "entitySubType": {
+            "description": "The entity sub type.",
             "type": "string"
           }
         }
       },
       "MatchEntityTypeCondition": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Match entity type condition.",
+        "type": "object",
+        "additionalProperties": false
       },
       "MessageConfig": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Message config.",
         "type": "object",
         "properties": {
           "fields": {
+            "description": "List of fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.MessageConfigField"
@@ -503,6 +545,10 @@
         }
       },
       "NotificationCenterConditionTypeMatchEntityType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Field condition.condition type.",
         "type": "object",
         "properties": {
           "matchEntityType": {
@@ -514,6 +560,10 @@
         ]
       },
       "NotificationCenterConditionTypeMatchEntityTypeAndSubType": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Field condition.condition type.",
         "type": "object",
         "properties": {
           "matchEntityTypeAndSubType": {
@@ -528,14 +578,20 @@
         "type": "object",
         "properties": {
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "template": {
+            "description": "Template.",
             "type": "string"
           }
         }
       },
       "TestConnectorConfigResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a connector configuration test.",
         "type": "object",
         "properties": {
           "result": {
@@ -544,6 +600,10 @@
         }
       },
       "TestDestinationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a notification destination test.",
         "type": "object",
         "properties": {
           "result": {
@@ -552,6 +612,10 @@
         }
       },
       "TestExistingConnectorResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of testing an existing connector.",
         "type": "object",
         "properties": {
           "result": {
@@ -560,6 +624,10 @@
         }
       },
       "TestExistingPresetResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of testing an existing preset.",
         "type": "object",
         "properties": {
           "result": {
@@ -568,6 +636,10 @@
         }
       },
       "TestPresetConfigResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a notification preset configuration test.",
         "type": "object",
         "properties": {
           "result": {
@@ -578,29 +650,40 @@
       "TestResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestResultSuccessVariant"
+            "$ref": "#/components/schemas/TestResultFailureVariant"
           },
           {
-            "$ref": "#/components/schemas/TestResultFailureVariant"
+            "$ref": "#/components/schemas/TestResultSuccessVariant"
           }
         ]
       },
       "TestResult.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Failure.",
         "type": "object",
         "properties": {
           "message": {
+            "description": "Human-readable message.",
             "type": "string"
           },
           "statusCode": {
+            "description": "The status code.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "TestResult.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the notification test succeeded.",
         "type": "object",
         "properties": {
           "metadata": {
+            "description": "Metadata.",
             "type": "object",
             "additionalProperties": {
               "type": "string"
@@ -609,6 +692,10 @@
         }
       },
       "TestResultFailureVariant": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a notification test, either a success or failure.",
         "type": "object",
         "properties": {
           "failure": {
@@ -620,6 +707,10 @@
         ]
       },
       "TestResultSuccessVariant": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a notification test, either a success or failure.",
         "type": "object",
         "properties": {
           "success": {
@@ -633,27 +724,37 @@
       "TestRoutingConditionValidResponse": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestRoutingConditionValidResponseSuccessVariant"
+            "$ref": "#/components/schemas/TestRoutingConditionValidResponseFailureVariant"
           },
           {
-            "$ref": "#/components/schemas/TestRoutingConditionValidResponseFailureVariant"
+            "$ref": "#/components/schemas/TestRoutingConditionValidResponseSuccessVariant"
           }
         ]
       },
       "TestRoutingConditionValidResponse.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the routing condition is invalid, with a human-readable error message.",
         "type": "object",
         "properties": {
           "message": {
             "example": "Invalid condition: condition should be rendered to a boolean value (true or false)",
+            "description": "Human-readable message.",
             "type": "string"
           }
         }
       },
       "TestRoutingConditionValidResponse.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the routing condition is valid, with the evaluated result.",
         "type": "object",
         "properties": {
           "result": {
             "example": true,
+            "description": "Result.",
             "type": "boolean"
           }
         }
@@ -693,6 +794,10 @@
         ]
       },
       "TestTemplateRenderResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the results of a notification template render test.",
         "type": "object",
         "properties": {
           "result": {
@@ -703,18 +808,23 @@
       "TestTemplateRenderResult": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/TestTemplateRenderResultSuccessVariant"
+            "$ref": "#/components/schemas/TestTemplateRenderResultFailureVariant"
           },
           {
-            "$ref": "#/components/schemas/TestTemplateRenderResultFailureVariant"
+            "$ref": "#/components/schemas/TestTemplateRenderResultSuccessVariant"
           }
         ]
       },
       "TestTemplateRenderResult.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Indicates the template render test failed, with a message and failure reason.",
         "type": "object",
         "properties": {
           "message": {
             "example": "Template rendering failed",
+            "description": "Human-readable message.",
             "type": "string"
           },
           "reason": {
@@ -723,15 +833,24 @@
         }
       },
       "TestTemplateRenderResult.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Success.",
         "type": "object",
         "properties": {
           "renderedValue": {
             "example": "Rendered template result",
+            "description": "The rendered value.",
             "type": "string"
           }
         }
       },
       "TestTemplateRenderResultFailureVariant": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
         "type": "object",
         "properties": {
           "failure": {
@@ -743,6 +862,10 @@
         ]
       },
       "TestTemplateRenderResultSuccessVariant": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
         "type": "object",
         "properties": {
           "success": {
@@ -774,14 +897,17 @@
         "type": "object",
         "properties": {
           "fieldName": {
+            "description": "The field name.",
             "type": "string"
           },
           "value": {
+            "description": "The value.",
             "type": "string"
           }
         }
       },
       "notification_center.ConnectorType": {
+        "description": "Connector type.",
         "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
@@ -790,10 +916,12 @@
           "PAGERDUTY",
           "IBM_EVENT_NOTIFICATIONS",
           "SERVICE_NOW",
-          "EMAIL"
+          "EMAIL",
+          "PAGERDUTY_INCIDENTS"
         ]
       },
       "notification_center.EntityType": {
+        "description": "Entity type.",
         "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
@@ -813,15 +941,18 @@
         "properties": {
           "fieldName": {
             "example": "title",
+            "description": "The field name.",
             "type": "string"
           },
           "template": {
             "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
+            "description": "The template.",
             "type": "string"
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

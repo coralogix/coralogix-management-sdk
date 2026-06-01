@@ -22,6 +22,7 @@ var _ MappedNullable = &ActivateRetentionsResponse{}
 
 // ActivateRetentionsResponse This data structure is obtained after setting the active status of retentions
 type ActivateRetentionsResponse struct {
+	// List of retentions to activate.
 	ActivateRetentions *bool `json:"activateRetentions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

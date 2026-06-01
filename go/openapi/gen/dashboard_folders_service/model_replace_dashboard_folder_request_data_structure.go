@@ -20,9 +20,10 @@ var _ = bytes.MinRead
 // checks if the ReplaceDashboardFolderRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceDashboardFolderRequestDataStructure{}
 
-// ReplaceDashboardFolderRequestDataStructure struct for ReplaceDashboardFolderRequestDataStructure
+// ReplaceDashboardFolderRequestDataStructure Request to replace an existing dashboard folder.
 type ReplaceDashboardFolderRequestDataStructure struct {
 	Folder *DashboardFolder `json:"folder,omitempty"`
+	// Idempotency key for the replace folder request, used to prevent duplicate updates.
 	RequestId *string `json:"requestId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

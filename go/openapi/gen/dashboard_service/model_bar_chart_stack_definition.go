@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the BarChartStackDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BarChartStackDefinition{}
 
-// BarChartStackDefinition struct for BarChartStackDefinition
+// BarChartStackDefinition Bar chart.stack definition.
 type BarChartStackDefinition struct {
 	// How many slices can fit in a single bar
 	MaxSlicesPerBar *int32 `json:"maxSlicesPerBar,omitempty"`

@@ -7,16 +7,18 @@ servers:
 paths:
   /alerts/alerts/v3/all/events:
     get:
-      description: No description available
+      description: Returns all alert events.
       externalDocs:
         url: ""
       operationId: EventsService_ListAlertEvents
       parameters:
-      - explode: true
+      - description: Alert version IDs to filter events by
+        explode: true
         in: query
         name: alert_ids
         required: false
         schema:
+          description: Alert version IDs to filter events by
           example:
           - 32144a8a-7ee0-4c16-a093-2bf1f9c12e1e
           items:
@@ -24,14 +26,16 @@ paths:
             type: string
           type: array
         style: form
-      - explode: true
+      - description: Time range to search for events
+        explode: true
         in: query
         name: timestamp_range
         required: false
         schema:
           $ref: "#/components/schemas/TimestampRange"
         style: form
-      - explode: true
+      - description: "Optional event labels to filter by (e.g., app, subsystem, region)"
+        explode: true
         in: query
         name: cx_event_labels
         required: false
@@ -43,16 +47,19 @@ paths:
             \ region)"
           type: object
         style: form
-      - explode: true
+      - description: Ordering criteria for the returned events.
+        explode: true
         in: query
         name: order_bys
         required: false
         schema:
+          description: Ordering criteria for the returned events.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
           type: array
         style: form
-      - explode: true
+      - description: Pagination parameters for the response.
+        explode: true
         in: query
         name: pagination
         required: false
@@ -83,28 +90,32 @@ paths:
       - Events Service
   /alerts/events/v3:
     get:
-      description: No description available
+      description: Returns a list of alert events matching the specified filters.
       externalDocs:
         url: ""
       operationId: EventsService_ListEvents
       parameters:
-      - explode: true
+      - description: Filter criteria for events.
+        explode: true
         in: query
         name: filter
         required: false
         schema:
           $ref: "#/components/schemas/EventsFilter"
         style: form
-      - explode: true
+      - description: Ordering criteria for the returned events.
+        explode: true
         in: query
         name: order_bys
         required: false
         schema:
+          description: Ordering criteria for the returned events.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
           type: array
         style: form
-      - explode: true
+      - description: Pagination parameters for the response.
+        explode: true
         in: query
         name: pagination
         required: false
@@ -135,12 +146,13 @@ paths:
       - Events Service
   /alerts/events/v3/all/count:
     get:
-      description: No description available
+      description: Returns the count of alert events matching the given filters.
       externalDocs:
         url: ""
       operationId: EventsService_ListEventsCount
       parameters:
-      - explode: true
+      - description: Filter criteria for events.
+        explode: true
         in: query
         name: filter
         required: false
@@ -171,37 +183,44 @@ paths:
       - Events Service
   /alerts/events/v3/all/list:
     get:
-      description: No description available
+      description: Returns a list of alert events matching the given filters.
       externalDocs:
         url: ""
       operationId: EventsService_BatchGetEvent
       parameters:
-      - explode: true
+      - description: The ids.
+        explode: true
         in: query
         name: ids
         required: false
         schema:
+          description: The ids.
           items:
+            description: The ids.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: Ordering criteria for the returned events.
+        explode: true
         in: query
         name: order_bys
         required: false
         schema:
+          description: Ordering criteria for the returned events.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
           type: array
         style: form
-      - explode: true
+      - description: Pagination parameters for the response.
+        explode: true
         in: query
         name: pagination
         required: false
         schema:
           $ref: "#/components/schemas/EventsService_ListAlertEvents_pagination_parameter"
         style: form
-      - explode: true
+      - description: Optional filter to narrow the set of returned events.
+        explode: true
         in: query
         name: filter
         required: false
@@ -232,12 +251,13 @@ paths:
       - Events Service
   /alerts/events/v3/all/statistics:
     get:
-      description: No description available
+      description: Returns statistical aggregates for alert events.
       externalDocs:
         url: ""
       operationId: EventsService_GetEventsStatistics
       parameters:
-      - explode: true
+      - description: Filter criteria for events.
+        explode: true
         in: query
         name: filter
         required: false
@@ -268,29 +288,34 @@ paths:
       - Events Service
   /alerts/events/v3/{id}:
     get:
-      description: No description available
+      description: Returns the alert event with the specified ID.
       externalDocs:
         url: ""
       operationId: EventsService_GetEvent
       parameters:
-      - explode: false
+      - description: Unique identifier of the alert event to retrieve.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier of the alert event to retrieve.
           example: test
           type: string
         style: simple
-      - explode: true
+      - description: The order bys.
+        explode: true
         in: query
         name: order_bys
         required: false
         schema:
+          description: The order bys.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
           type: array
         style: form
-      - explode: true
+      - description: Pagination parameters for the response.
+        explode: true
         in: query
         name: pagination
         required: false
@@ -322,6 +347,7 @@ paths:
 components:
   schemas:
     BatchGetEventResponse:
+      description: Response containing the details of an alert event.
       example:
         notFoundIds:
         - notFoundIds
@@ -331,25 +357,42 @@ components:
           nextPageToken: test
         events:
           key:
-            singleEvent:
-              cxEventType: test_type
-              companyId: 1
-              cxEventKey: test
-              cxEventMetadata:
-                key: cxEventMetadata
-              cxEventPayload: "{}"
-              cxEventPayloadType: test_payload_type
-              cxEventDedupKey: test_dedup_key
-              cxEventLabels:
-                key: cxEventLabels
-              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+            multipleEvents:
+              events:
+              - cxEventType: test_type
+                companyId: 1
+                cxEventKey: test
+                cxEventMetadata:
+                  key: cxEventMetadata
+                cxEventPayload: "{}"
+                cxEventPayloadType: test_payload_type
+                cxEventDedupKey: test_dedup_key
+                cxEventLabels:
+                  key: cxEventLabels
+                cxEventTimestamp: 2024-05-05T00:00:00Z
+              - cxEventType: test_type
+                companyId: 1
+                cxEventKey: test
+                cxEventMetadata:
+                  key: cxEventMetadata
+                cxEventPayload: "{}"
+                cxEventPayloadType: test_payload_type
+                cxEventDedupKey: test_dedup_key
+                cxEventLabels:
+                  key: cxEventLabels
+                cxEventTimestamp: 2024-05-05T00:00:00Z
+      externalDocs:
+        url: ""
       properties:
         events:
           additionalProperties:
             $ref: "#/components/schemas/CxEventSingleOrMultiple"
+          description: List of events.
           type: object
         notFoundIds:
+          description: The not found ids.
           items:
+            description: The not found ids.
             type: string
           type: array
         pagination:
@@ -368,38 +411,48 @@ components:
         cxEventDedupKey: test_dedup_key
         cxEventLabels:
           key: cxEventLabels
-        cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        cxEventTimestamp: 2024-05-05T00:00:00Z
       externalDocs:
         description: Find out more about events
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         companyId:
+          description: The company id.
           example: 1
           format: int32
           type: integer
         cxEventDedupKey:
+          description: The cx event dedup key.
           example: test_dedup_key
           type: string
         cxEventKey:
+          description: The cx event key.
           example: test
           type: string
         cxEventLabels:
           additionalProperties:
             type: string
+          description: The cx event labels.
           type: object
         cxEventMetadata:
           additionalProperties:
             type: string
+          description: The cx event metadata.
           type: object
         cxEventPayload:
+          description: The cx event payload.
           type: object
         cxEventPayloadType:
+          description: The cx event payload type.
           example: test_payload_type
           type: string
         cxEventTimestamp:
+          description: The cx event timestamp.
+          example: 2024-05-05T00:00:00Z
           format: date-time
           type: string
         cxEventType:
+          description: The cx event type.
           example: test_type
           type: string
       required:
@@ -414,11 +467,36 @@ components:
       type: object
     CxEventArray:
       description: This data structure represents an array of events
+      example:
+        events:
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            key: cxEventMetadata
+          cxEventPayload: "{}"
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            key: cxEventLabels
+          cxEventTimestamp: 2024-05-05T00:00:00Z
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+            key: cxEventMetadata
+          cxEventPayload: "{}"
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+            key: cxEventLabels
+          cxEventTimestamp: 2024-05-05T00:00:00Z
       externalDocs:
         description: Find out more about events
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
       properties:
         events:
+          description: List of events.
           items:
             $ref: "#/components/schemas/CxEvent"
           type: array
@@ -428,10 +506,35 @@ components:
       type: object
     CxEventSingleOrMultiple:
       oneOf:
-      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
       - $ref: "#/components/schemas/CxEventSingleOrMultipleMultipleEvents"
+      - $ref: "#/components/schemas/CxEventSingleOrMultipleSingleEvent"
     CxEventSingleOrMultipleMultipleEvents:
       description: This data structure represents a single or multiple events
+      example:
+        multipleEvents:
+          events:
+          - cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              key: cxEventMetadata
+            cxEventPayload: "{}"
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              key: cxEventLabels
+            cxEventTimestamp: 2024-05-05T00:00:00Z
+          - cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+              key: cxEventMetadata
+            cxEventPayload: "{}"
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+              key: cxEventLabels
+            cxEventTimestamp: 2024-05-05T00:00:00Z
       externalDocs:
         url: ""
       properties:
@@ -443,19 +546,6 @@ components:
       type: object
     CxEventSingleOrMultipleSingleEvent:
       description: This data structure represents a single or multiple events
-      example:
-        singleEvent:
-          cxEventType: test_type
-          companyId: 1
-          cxEventKey: test
-          cxEventMetadata:
-            key: cxEventMetadata
-          cxEventPayload: "{}"
-          cxEventPayloadType: test_payload_type
-          cxEventDedupKey: test_dedup_key
-          cxEventLabels:
-            key: cxEventLabels
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
       externalDocs:
         url: ""
       properties:
@@ -474,12 +564,13 @@ components:
           additionalProperties:
             format: int64
             type: string
+          description: The field statistics.
           type: object
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -544,10 +635,12 @@ components:
         cxEventLabelsFieldStatistics:
           additionalProperties:
             $ref: "#/components/schemas/FieldStatistics"
+          description: The cx event labels field statistics.
           type: object
         cxEventMetadataFieldStatistics:
           additionalProperties:
             $ref: "#/components/schemas/FieldStatistics"
+          description: The cx event metadata field statistics.
           type: object
       required:
       - cxEventMetadataFieldStatisticscxEventLabelsFieldStatistics
@@ -570,7 +663,7 @@ components:
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
             key: cxEventLabels
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          cxEventTimestamp: 2024-05-05T00:00:00Z
         - cxEventType: test_type
           companyId: 1
           cxEventKey: test
@@ -581,11 +674,12 @@ components:
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
             key: cxEventLabels
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          cxEventTimestamp: 2024-05-05T00:00:00Z
       externalDocs:
         url: ""
       properties:
         events:
+          description: List of events.
           items:
             $ref: "#/components/schemas/CxEvent"
           type: array
@@ -604,10 +698,12 @@ components:
         url: ""
       properties:
         count:
+          description: Number of items.
           example: "10"
           format: uint64
           type: string
         reachedLimit:
+          description: The reached limit.
           example: false
           type: boolean
       required:
@@ -630,52 +726,75 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     events.v3.OrderByDirection:
+      description: Order by direction.
       enum:
       - ORDER_BY_DIRECTION_UNSPECIFIED
       - ORDER_BY_DIRECTION_ASC
       - ORDER_BY_DIRECTION_DESC
       type: string
     events.v3.OrderByFields:
+      description: Order by fields.
       enum:
       - ORDER_BY_FIELDS_UNSPECIFIED
       - ORDER_BY_FIELDS_TIMESTAMP
       type: string
     events.v3.PaginationResponse:
+      description: Pagination metadata returned alongside paginated list responses.
       example:
         totalSize: 10
         nextPageToken: test
+      externalDocs:
+        url: ""
       properties:
         nextPageToken:
+          description: Token for fetching the next page of results.
           example: test
           type: string
         totalSize:
+          description: Total number of results.
           example: 10
           format: int64
           type: integer
       type: object
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
     v3.GetEventResponse:
+      description: Response containing the details of an alert event.
       example:
         pagination:
           totalSize: 10
           nextPageToken: test
         event:
-          singleEvent:
-            cxEventType: test_type
-            companyId: 1
-            cxEventKey: test
-            cxEventMetadata:
-              key: cxEventMetadata
-            cxEventPayload: "{}"
-            cxEventPayloadType: test_payload_type
-            cxEventDedupKey: test_dedup_key
-            cxEventLabels:
-              key: cxEventLabels
-            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          multipleEvents:
+            events:
+            - cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                key: cxEventMetadata
+              cxEventPayload: "{}"
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                key: cxEventLabels
+              cxEventTimestamp: 2024-05-05T00:00:00Z
+            - cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+                key: cxEventMetadata
+              cxEventPayload: "{}"
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+                key: cxEventLabels
+              cxEventTimestamp: 2024-05-05T00:00:00Z
+      externalDocs:
+        url: ""
       properties:
         event:
           $ref: "#/components/schemas/CxEventSingleOrMultiple"
@@ -699,7 +818,7 @@ components:
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
             key: cxEventLabels
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          cxEventTimestamp: 2024-05-05T00:00:00Z
         - cxEventType: test_type
           companyId: 1
           cxEventKey: test
@@ -710,11 +829,12 @@ components:
           cxEventDedupKey: test_dedup_key
           cxEventLabels:
             key: cxEventLabels
-          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          cxEventTimestamp: 2024-05-05T00:00:00Z
       externalDocs:
         url: ""
       properties:
         events:
+          description: List of events.
           items:
             $ref: "#/components/schemas/CxEvent"
           type: array
@@ -730,9 +850,11 @@ components:
         url: ""
       properties:
         from:
+          description: Inclusive start of the time range.
           format: date-time
           type: string
         to:
+          description: Inclusive end of the time range.
           format: date-time
           type: string
       required:
@@ -750,10 +872,12 @@ components:
     EventsService_ListAlertEvents_pagination_parameter:
       properties:
         pageSize:
+          description: Maximum number of results to return per page.
           example: 10
           format: int64
           type: integer
         pageToken:
+          description: Opaque token for fetching the next page of results.
           example: test
           type: string
       type: object
@@ -763,17 +887,23 @@ components:
         url: ""
       properties:
         cxEventKeys:
+          description: List of event attribute keys to include when retrieving event
+            data.
           example:
           - test_key
           items:
+            description: List of event attribute keys to include when retrieving event
+              data.
             type: string
           type: array
         cxEventLabelsFilters: {}
         cxEventMetadataFilters: {}
         cxEventTypes:
+          description: List of event type identifiers to include in the results.
           example:
           - test_type
           items:
+            description: List of event type identifiers to include in the results.
             type: string
           type: array
         timestamp: {}

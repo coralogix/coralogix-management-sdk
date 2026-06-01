@@ -41,7 +41,7 @@ func (r ApiApiKeysServiceCreateApiKeyRequest) Execute() (*CreateApiKeyResponse, 
 /*
 ApiKeysServiceCreateApiKey Create API Key
 
-No description available
+Creates a new API key for the authenticated team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiKeysServiceCreateApiKeyRequest
@@ -143,10 +143,10 @@ func (r ApiApiKeysServiceDeleteApiKeyRequest) Execute() (map[string]interface{},
 /*
 ApiKeysServiceDeleteApiKey Delete API Key
 
-No description available
+Deletes the API key with the given ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param keyId
+ @param keyId The unique identifier of the API key to delete.
  @return ApiApiKeysServiceDeleteApiKeyRequest
 */
 func (a *APIKeysServiceAPIService) ApiKeysServiceDeleteApiKey(ctx context.Context, keyId string) ApiApiKeysServiceDeleteApiKeyRequest {
@@ -246,10 +246,10 @@ func (r ApiApiKeysServiceGetApiKeyRequest) Execute() (*GetApiKeyResponse, *http.
 /*
 ApiKeysServiceGetApiKey Get API Key
 
-No description available
+Returns the details of the specified API key.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param keyId
+ @param keyId Key identifier.
  @return ApiApiKeysServiceGetApiKeyRequest
 */
 func (a *APIKeysServiceAPIService) ApiKeysServiceGetApiKey(ctx context.Context, keyId string) ApiApiKeysServiceGetApiKeyRequest {
@@ -348,7 +348,7 @@ func (r ApiApiKeysServiceGetApiKeysRequest) Execute() (*GetApiKeysResponse, *htt
 /*
 ApiKeysServiceGetApiKeys Get API Keys
 
-No description available
+Returns all API keys for the authenticated team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiKeysServiceGetApiKeysRequest
@@ -375,7 +375,7 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceGetApiKeysExecute(r ApiApiKeysS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/aaa/api-keys/v3/list"
+	localVarPath := localBasePath + "/aaa/api-keys/v3/list/all"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -447,7 +447,7 @@ func (r ApiApiKeysServiceGetSendDataApiKeysRequest) Execute() (*GetSendDataApiKe
 /*
 ApiKeysServiceGetSendDataApiKeys Get \"Send Data\" API Keys
 
-No description available
+Returns all send-data API keys for the authenticated team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiApiKeysServiceGetSendDataApiKeysRequest
@@ -553,10 +553,10 @@ func (r ApiApiKeysServiceUpdateApiKeyRequest) Execute() (map[string]interface{},
 /*
 ApiKeysServiceUpdateApiKey Update API Key
 
-No description available
+Updates the specified API key.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param keyId
+ @param keyId Key identifier.
  @return ApiApiKeysServiceUpdateApiKeyRequest
 */
 func (a *APIKeysServiceAPIService) ApiKeysServiceUpdateApiKey(ctx context.Context, keyId string) ApiApiKeysServiceUpdateApiKeyRequest {

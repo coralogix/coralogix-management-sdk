@@ -26,6 +26,7 @@ type SearchUsersResponse struct {
 	NextPageToken *int64 `json:"nextPageToken,omitempty"`
 	// Total number of users matching the search criteria across all pages
 	TotalCount *int64 `json:"totalCount,omitempty"`
+	// List of users matching the search criteria
 	Users []RbacV2User `json:"users,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

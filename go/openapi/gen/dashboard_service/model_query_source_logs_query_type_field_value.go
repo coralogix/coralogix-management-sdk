@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the QuerySourceLogsQueryTypeFieldValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QuerySourceLogsQueryTypeFieldValue{}
 
-// QuerySourceLogsQueryTypeFieldValue struct for QuerySourceLogsQueryTypeFieldValue
+// QuerySourceLogsQueryTypeFieldValue Query.logs query.type.field value.
 type QuerySourceLogsQueryTypeFieldValue struct {
 	ObservationField *ObservationField `json:"observationField,omitempty"`
 	AdditionalProperties map[string]interface{}

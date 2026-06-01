@@ -25,14 +25,19 @@ var _ MappedNullable = &UpdatePolicyRequestLogRules{}
 type UpdatePolicyRequestLogRules struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
+	// Optional free-text description of the policy's purpose.
 	Description *string `json:"description,omitempty"`
+	// Indicates whether the policy should be actively evaluated and applied.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Unique identifier of the policy to update.
 	Id string `json:"id"`
 	LogRules LogRules `json:"logRules"`
+	// Human-readable name for the policy.
 	Name *string `json:"name,omitempty"`
 	Priority *QuotaV1Priority `json:"priority,omitempty"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// List of data targets/destinations to which this policy routes data.
 	Targets []V1Target `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

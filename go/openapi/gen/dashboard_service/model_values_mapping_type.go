@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// ValuesMappingType the model 'ValuesMappingType'
+// ValuesMappingType Values mapping type.
 type ValuesMappingType string
 
 // List of ValuesMappingType

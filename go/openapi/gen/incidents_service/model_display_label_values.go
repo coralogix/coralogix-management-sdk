@@ -23,6 +23,7 @@ var _ MappedNullable = &DisplayLabelValues{}
 
 // DisplayLabelValues Represents display label values for filtering incidents
 type DisplayLabelValues struct {
+	// The display label values.
 	DisplayLabelValues []string `json:"displayLabelValues"`
 	AdditionalProperties map[string]interface{}
 }

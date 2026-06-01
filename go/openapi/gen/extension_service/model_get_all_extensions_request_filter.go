@@ -22,6 +22,7 @@ var _ MappedNullable = &GetAllExtensionsRequestFilter{}
 
 // GetAllExtensionsRequestFilter Filter by integration ids
 type GetAllExtensionsRequestFilter struct {
+	// The integrations.
 	Integrations []string `json:"integrations,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

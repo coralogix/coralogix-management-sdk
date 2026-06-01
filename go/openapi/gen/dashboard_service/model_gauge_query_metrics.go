@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the GaugeQueryMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GaugeQueryMetrics{}
 
-// GaugeQueryMetrics struct for GaugeQueryMetrics
+// GaugeQueryMetrics Discriminated union of possible query types for the gauge widget.
 type GaugeQueryMetrics struct {
 	Metrics GaugeMetricsQuery `json:"metrics"`
 	AdditionalProperties map[string]interface{}

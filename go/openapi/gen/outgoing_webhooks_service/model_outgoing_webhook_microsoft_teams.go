@@ -22,15 +22,22 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookMicrosoftTeams type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookMicrosoftTeams{}
 
-// OutgoingWebhookMicrosoftTeams struct for OutgoingWebhookMicrosoftTeams
+// OutgoingWebhookMicrosoftTeams Outgoing webhook.
 type OutgoingWebhookMicrosoftTeams struct {
+	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// External identifier.
 	ExternalId *int64 `json:"externalId,omitempty"`
+	// Unique identifier.
 	Id *string `json:"id,omitempty"`
+	// Microsoft teams config.
 	MicrosoftTeams map[string]interface{} `json:"microsoftTeams"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	Type *WebhookType `json:"type,omitempty"`
+	// Last-updated timestamp.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

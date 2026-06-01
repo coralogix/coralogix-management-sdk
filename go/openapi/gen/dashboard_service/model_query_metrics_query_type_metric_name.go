@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the QueryMetricsQueryTypeMetricName type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &QueryMetricsQueryTypeMetricName{}
 
-// QueryMetricsQueryTypeMetricName struct for QueryMetricsQueryTypeMetricName
+// QueryMetricsQueryTypeMetricName Fetches distinct metric names matching the given regex pattern.
 type QueryMetricsQueryTypeMetricName struct {
+	// The metric regex.
 	MetricRegex *string `json:"metricRegex,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

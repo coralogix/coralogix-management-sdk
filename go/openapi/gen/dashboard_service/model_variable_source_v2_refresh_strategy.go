@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// VariableSourceV2RefreshStrategy the model 'VariableSourceV2RefreshStrategy'
+// VariableSourceV2RefreshStrategy Refresh strategy.
 type VariableSourceV2RefreshStrategy string
 
 // List of VariableSourceV2.RefreshStrategy

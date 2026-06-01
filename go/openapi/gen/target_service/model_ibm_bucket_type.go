@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// IbmBucketType the model 'IbmBucketType'
+// IbmBucketType Ibm bucket type.
 type IbmBucketType string
 
 // List of IbmBucketType

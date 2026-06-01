@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the MultiSelectValueDisplayOptions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MultiSelectValueDisplayOptions{}
 
-// MultiSelectValueDisplayOptions struct for MultiSelectValueDisplayOptions
+// MultiSelectValueDisplayOptions Value display options.
 type MultiSelectValueDisplayOptions struct {
+	// The label regex.
 	LabelRegex *string `json:"labelRegex,omitempty"`
+	// The value regex.
 	ValueRegex *string `json:"valueRegex,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

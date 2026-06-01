@@ -41,7 +41,7 @@ func (r ApiEnrichmentServiceAddEnrichmentsRequest) Execute() (*AddEnrichmentsRes
 /*
 EnrichmentServiceAddEnrichments Add Enrichments
 
-No description available
+Creates new enrichment rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceAddEnrichmentsRequest
@@ -73,6 +73,9 @@ func (a *EnrichmentsServiceAPIService) EnrichmentServiceAddEnrichmentsExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.enrichmentsCreationRequest == nil {
+		return localVarReturnValue, nil, reportError("enrichmentsCreationRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -146,9 +149,9 @@ func (r ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest) Execute() (*At
 }
 
 /*
-EnrichmentServiceAtomicOverwriteAllEnrichments Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.
+EnrichmentServiceAtomicOverwriteAllEnrichments Atomic Overwrite for ALL types of enrichments
 
-No description available
+Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceAtomicOverwriteAllEnrichmentsRequest
@@ -253,9 +256,9 @@ func (r ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest) Execute() (*Atomi
 }
 
 /*
-EnrichmentServiceAtomicOverwriteEnrichments Atomic Overwrite for CustomEnrichments only.
+EnrichmentServiceAtomicOverwriteEnrichments Atomic Overwrite for CustomEnrichments only
 
-No description available
+Updates enrichment rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceAtomicOverwriteEnrichmentsRequest
@@ -356,7 +359,7 @@ func (r ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest) Execute() (*Get
 /*
 EnrichmentServiceGetCompanyEnrichmentSettings Get Company Enrichment Settings
 
-No description available
+Returns the current enrichment settings for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceGetCompanyEnrichmentSettingsRequest
@@ -455,7 +458,7 @@ func (r ApiEnrichmentServiceGetEnrichmentLimitRequest) Execute() (*GetEnrichment
 /*
 EnrichmentServiceGetEnrichmentLimit Get Enrichment Limit
 
-No description available
+Returns the maximum number of enrichment rules allowed.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceGetEnrichmentLimitRequest
@@ -554,7 +557,7 @@ func (r ApiEnrichmentServiceGetEnrichmentsRequest) Execute() (*GetEnrichmentsRes
 /*
 EnrichmentServiceGetEnrichments Get Enrichments
 
-No description available
+Returns all enrichment rules for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceGetEnrichmentsRequest
@@ -647,6 +650,7 @@ type ApiEnrichmentServiceRemoveEnrichmentsRequest struct {
 	enrichmentIds *[]int64
 }
 
+// The unique identifiers of the enrichment rules to delete.
 func (r ApiEnrichmentServiceRemoveEnrichmentsRequest) EnrichmentIds(enrichmentIds []int64) ApiEnrichmentServiceRemoveEnrichmentsRequest {
 	r.enrichmentIds = &enrichmentIds
 	return r
@@ -659,7 +663,7 @@ func (r ApiEnrichmentServiceRemoveEnrichmentsRequest) Execute() (*RemoveEnrichme
 /*
 EnrichmentServiceRemoveEnrichments Delete Enrichments
 
-No description available
+Deletes all enrichment rules for the team.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiEnrichmentServiceRemoveEnrichmentsRequest

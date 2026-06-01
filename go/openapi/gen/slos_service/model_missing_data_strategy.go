@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// MissingDataStrategy the model 'MissingDataStrategy'
+// MissingDataStrategy Missing data strategy.
 type MissingDataStrategy string
 
 // List of MissingDataStrategy

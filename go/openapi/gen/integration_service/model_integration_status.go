@@ -23,7 +23,9 @@ var _ MappedNullable = &IntegrationStatus{}
 // IntegrationStatus This data structure represents an integration status.
 type IntegrationStatus struct {
 	ConnectionStatus *ConnectionStatus `json:"connectionStatus,omitempty"`
+	// List of details.
 	Details *map[string]string `json:"details,omitempty"`
+	// The messages.
 	Messages []string `json:"messages,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -20,8 +20,9 @@ var _ = bytes.MinRead
 // checks if the SyncRUMDataRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SyncRUMDataRequest{}
 
-// SyncRUMDataRequest struct for SyncRUMDataRequest
+// SyncRUMDataRequest Request for syncing RUM data.
 type SyncRUMDataRequest struct {
+	// The force.
 	Force *bool `json:"force,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

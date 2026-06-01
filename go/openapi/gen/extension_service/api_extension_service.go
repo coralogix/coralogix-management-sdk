@@ -41,7 +41,10 @@ func (r ApiExtensionServiceGetAllExtensionsRequest) Execute() (*GetAllExtensions
 /*
 ExtensionServiceGetAllExtensions Get all extensions
 
-No description available
+Creates a new extension.
+
+Requires the following permissions:
+- `extensions:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiExtensionServiceGetAllExtensionsRequest
@@ -138,11 +141,13 @@ type ApiExtensionServiceGetExtensionRequest struct {
 	includeTestingRevision *bool
 }
 
+// Whether to include dashboard binaries in the response.
 func (r ApiExtensionServiceGetExtensionRequest) IncludeDashboardBinaries(includeDashboardBinaries bool) ApiExtensionServiceGetExtensionRequest {
 	r.includeDashboardBinaries = &includeDashboardBinaries
 	return r
 }
 
+// Whether to include testing revisions in the response.
 func (r ApiExtensionServiceGetExtensionRequest) IncludeTestingRevision(includeTestingRevision bool) ApiExtensionServiceGetExtensionRequest {
 	r.includeTestingRevision = &includeTestingRevision
 	return r
@@ -155,10 +160,13 @@ func (r ApiExtensionServiceGetExtensionRequest) Execute() (*V1Extension, *http.R
 /*
 ExtensionServiceGetExtension Get extension by ID
 
-No description available
+Returns the details of the specified extension.
+
+Requires the following permissions:
+- `extensions:ReadConfig`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
+ @param id Unique identifier.
  @return ApiExtensionServiceGetExtensionRequest
 */
 func (a *ExtensionServiceAPIService) ExtensionServiceGetExtension(ctx context.Context, id string) ApiExtensionServiceGetExtensionRequest {
@@ -184,7 +192,7 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/integrations/extensions/v1/{id}"
+	localVarPath := localBasePath + "/integrations/extensions/v1/catalog/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

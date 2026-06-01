@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// WebhookType the model 'WebhookType'
+// WebhookType Webhook type.
 type WebhookType string
 
 // List of WebhookType

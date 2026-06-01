@@ -11,7 +11,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Company Usage Limits",
-        "description": "No description available",
+        "description": "Returns parsing rule usage limits.",
         "externalDocs": {
           "url": ""
         },
@@ -54,7 +54,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group Model Mapping",
-        "description": "No description available",
+        "description": "Returns the model mapping for a parsing rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -63,34 +63,43 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request for retrieving the model mapping for a parsing rule group.",
                 "type": "object",
                 "properties": {
                   "creator": {
+                    "description": "Creator.",
                     "type": "string"
                   },
                   "description": {
+                    "description": "Human-readable description.",
                     "type": "string"
                   },
                   "enabled": {
+                    "description": "Whether this resource is enabled.",
                     "type": "boolean"
                   },
                   "hidden": {
+                    "description": "Whether to hide this rule group from the standard view.",
                     "type": "boolean"
                   },
                   "name": {
+                    "description": "Display name.",
                     "type": "string"
                   },
                   "order": {
+                    "description": "Sort order.",
                     "type": "integer",
                     "format": "int64"
                   },
                   "ruleMatchers": {
+                    "description": "List of rule matchers that determine which logs this group applies to.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RuleMatcher"
                     }
                   },
                   "ruleSubgroups": {
+                    "description": "List of rule subgroups defining the ordered set of rules in this group.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
@@ -139,7 +148,7 @@
           "Rule Groups Service"
         ],
         "summary": "List Rule Groups",
-        "description": "No description available",
+        "description": "Returns all parsing rule groups for the team.",
         "externalDocs": {
           "url": ""
         },
@@ -180,7 +189,7 @@
           "Rule Groups Service"
         ],
         "summary": "Create Rule Group",
-        "description": "No description available",
+        "description": "Creates a new parsing rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -189,34 +198,43 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request to create a new parsing rule group.",
                 "type": "object",
                 "properties": {
                   "creator": {
+                    "description": "Creator.",
                     "type": "string"
                   },
                   "description": {
+                    "description": "Human-readable description.",
                     "type": "string"
                   },
                   "enabled": {
+                    "description": "Whether this resource is enabled.",
                     "type": "boolean"
                   },
                   "hidden": {
+                    "description": "The hidden.",
                     "type": "boolean"
                   },
                   "name": {
+                    "description": "Display name.",
                     "type": "string"
                   },
                   "order": {
+                    "description": "Sort order.",
                     "type": "integer",
                     "format": "int64"
                   },
                   "ruleMatchers": {
+                    "description": "The rule matchers.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RuleMatcher"
                     }
                   },
                   "ruleSubgroups": {
+                    "description": "The rule subgroups.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
@@ -266,7 +284,7 @@
           "Rule Groups Service"
         ],
         "summary": "Bulk Delete Rule Group",
-        "description": "No description available",
+        "description": "Deletes all parsing rule groups.",
         "externalDocs": {
           "url": ""
         },
@@ -275,10 +293,13 @@
           {
             "in": "query",
             "name": "group_ids",
+            "description": "The unique identifiers of the parsing rule groups to delete.",
             "schema": {
+              "description": "The unique identifiers of the parsing rule groups to delete.",
               "type": "array",
               "items": {
                 "example": "",
+                "description": "The unique identifiers of the parsing rule groups to delete.",
                 "type": "string"
               }
             },
@@ -323,7 +344,7 @@
           "Rule Groups Service"
         ],
         "summary": "Get Rule Group",
-        "description": "No description available",
+        "description": "Returns the details of the specified parsing rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -332,8 +353,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "The unique identifier of the parsing rule group to retrieve.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the parsing rule group to retrieve.",
               "type": "string"
             },
             "style": "simple"
@@ -375,7 +398,7 @@
           "Rule Groups Service"
         ],
         "summary": "Update Rule Group",
-        "description": "No description available",
+        "description": "Updates the specified parsing rule group.",
         "externalDocs": {
           "url": ""
         },
@@ -384,8 +407,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "The unique identifier of the parsing rule group to update.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the parsing rule group to update.",
               "type": "string"
             },
             "style": "simple"
@@ -395,34 +420,43 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "Request to create a new parsing rule group.",
                 "type": "object",
                 "properties": {
                   "creator": {
+                    "description": "Creator.",
                     "type": "string"
                   },
                   "description": {
+                    "description": "Human-readable description.",
                     "type": "string"
                   },
                   "enabled": {
+                    "description": "Whether this resource is enabled.",
                     "type": "boolean"
                   },
                   "hidden": {
+                    "description": "The hidden.",
                     "type": "boolean"
                   },
                   "name": {
+                    "description": "Display name.",
                     "type": "string"
                   },
                   "order": {
+                    "description": "Sort order.",
                     "type": "integer",
                     "format": "int64"
                   },
                   "ruleMatchers": {
+                    "description": "The rule matchers.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RuleMatcher"
                     }
                   },
                   "ruleSubgroups": {
+                    "description": "The rule subgroups.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
@@ -472,7 +506,7 @@
           "Rule Groups Service"
         ],
         "summary": "Delete Rule Group",
-        "description": "No description available",
+        "description": "Deletes the parsing rule group with the specified ID.",
         "externalDocs": {
           "url": ""
         },
@@ -481,8 +515,10 @@
           {
             "in": "path",
             "name": "group_id",
+            "description": "The unique identifier of the parsing rule group to delete.",
             "required": true,
             "schema": {
+              "description": "The unique identifier of the parsing rule group to delete.",
               "type": "string"
             },
             "style": "simple"
@@ -524,50 +560,79 @@
   "components": {
     "schemas": {
       "AllowParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Allow parameters.",
         "type": "object",
         "properties": {
           "keepBlockedLogs": {
+            "description": "The keep blocked logs.",
             "type": "boolean"
           },
           "rule": {
+            "description": "Rule.",
             "type": "string"
           }
         }
       },
       "ApplicationNameConstraint": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Application name constraint.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "string"
           }
         }
       },
       "BlockParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Block parameters.",
         "type": "object",
         "properties": {
           "keepBlockedLogs": {
+            "description": "The keep blocked logs.",
             "type": "boolean"
           },
           "rule": {
+            "description": "Rule.",
             "type": "string"
           }
         }
       },
       "BulkDeleteRuleGroupResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after deleting all parsing rule groups.",
+        "type": "object",
+        "additionalProperties": false
       },
       "Counts": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Counts.",
         "type": "object",
         "properties": {
           "groups": {
+            "description": "List of groups.",
             "type": "integer",
             "format": "int32"
           },
           "parsingThemes": {
+            "description": "The parsing themes.",
             "type": "integer",
             "format": "int32"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "integer",
             "format": "int32"
           }
@@ -577,13 +642,16 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule"
@@ -595,15 +663,19 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
@@ -611,11 +683,16 @@
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
+            "description": "The source field.",
             "type": "string"
           }
         }
       },
       "CreateRuleGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully creating a parsing rule group.",
         "type": "object",
         "properties": {
           "ruleGroup": {
@@ -624,9 +701,15 @@
         }
       },
       "DeleteRuleGroupResponse": {
-        "type": "object"
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully deleting a parsing rule group.",
+        "type": "object",
+        "additionalProperties": false
       },
       "DestinationField": {
+        "description": "Destination field.",
         "type": "string",
         "enum": [
           "DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED",
@@ -638,17 +721,27 @@
         ]
       },
       "ExtractParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Extract parameters.",
         "type": "object",
         "properties": {
           "rule": {
+            "description": "Rule.",
             "type": "string"
           }
         }
       },
       "ExtractTimestampParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Extract timestamp parameters.",
         "type": "object",
         "properties": {
           "format": {
+            "description": "The format.",
             "type": "string"
           },
           "standard": {
@@ -659,10 +752,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -733,6 +826,7 @@
         ]
       },
       "FormatStandard": {
+        "description": "Format standard.",
         "type": "string",
         "enum": [
           "FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED",
@@ -745,9 +839,14 @@
         ]
       },
       "GetCompanyUsageLimitsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the company-level rule usage limits.",
         "type": "object",
         "properties": {
           "companyId": {
+            "description": "The company id.",
             "type": "string"
           },
           "limits": {
@@ -762,13 +861,16 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule"
@@ -780,15 +882,19 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
@@ -796,19 +902,29 @@
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
+            "description": "The source field.",
             "type": "string"
           }
         }
       },
       "GetRuleGroupModelMappingResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the model mapping for a parsing rule group.",
         "type": "object",
         "properties": {
           "ruleDefinition": {
+            "description": "The rule definition.",
             "type": "object"
           }
         }
       },
       "GetRuleGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the details of a parsing rule group.",
         "type": "object",
         "properties": {
           "ruleGroup": {
@@ -817,51 +933,76 @@
         }
       },
       "JsonExtractParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Json extract parameters.",
         "type": "object",
         "properties": {
           "destinationFieldText": {
+            "description": "The destination field text.",
             "type": "string"
           },
           "destinationFieldType": {
             "$ref": "#/components/schemas/DestinationField"
           },
           "rule": {
+            "description": "Rule.",
             "type": "string"
           }
         }
       },
       "JsonParseParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Json parse parameters.",
         "type": "object",
         "properties": {
           "deleteSource": {
+            "description": "The delete source.",
             "type": "boolean"
           },
           "destinationField": {
+            "description": "The destination field.",
             "type": "string"
           },
           "escapedValue": {
+            "description": "The escaped value.",
             "type": "boolean"
           },
           "overrideDest": {
+            "description": "The override dest.",
             "type": "boolean"
           }
         }
       },
       "JsonStringifyParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Json stringify parameters.",
         "type": "object",
         "properties": {
           "deleteSource": {
+            "description": "The delete source.",
             "type": "boolean"
           },
           "destinationField": {
+            "description": "The destination field.",
             "type": "string"
           }
         }
       },
       "ListRuleGroupsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing a list of parsing rule groups.",
         "type": "object",
         "properties": {
           "ruleGroups": {
+            "description": "The rule groups.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleGroup"
@@ -884,73 +1025,105 @@
         }
       },
       "ParseParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Parse parameters.",
         "type": "object",
         "properties": {
           "destinationField": {
+            "description": "The destination field.",
             "type": "string"
           },
           "rule": {
+            "description": "Rule.",
             "type": "string"
           }
         }
       },
       "RemoveFieldsParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Remove fields parameters.",
         "type": "object",
         "properties": {
           "fields": {
+            "description": "List of fields.",
             "type": "array",
             "items": {
+              "description": "List of fields.",
               "type": "string"
             }
           }
         }
       },
       "ReplaceParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Replace parameters.",
         "type": "object",
         "properties": {
           "destinationField": {
+            "description": "The destination field.",
             "type": "string"
           },
           "replaceNewVal": {
+            "description": "The replace new val.",
             "type": "string"
           },
           "rule": {
+            "description": "Rule.",
             "type": "string"
           }
         }
       },
       "RuleGroup": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule group.",
         "type": "object",
         "properties": {
           "creator": {
+            "description": "Creator.",
             "type": "string"
           },
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "hidden": {
+            "description": "The hidden.",
             "type": "boolean"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
           "ruleMatchers": {
+            "description": "The rule matchers.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleMatcher"
             }
           },
           "ruleSubgroups": {
+            "description": "The rule subgroups.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleSubgroup"
@@ -964,10 +1137,10 @@
             "$ref": "#/components/schemas/RuleMatcherApplicationName"
           },
           {
-            "$ref": "#/components/schemas/RuleMatcherSubsystemName"
+            "$ref": "#/components/schemas/RuleMatcherSeverity"
           },
           {
-            "$ref": "#/components/schemas/RuleMatcherSeverity"
+            "$ref": "#/components/schemas/RuleMatcherSubsystemName"
           }
         ]
       },
@@ -1007,38 +1180,42 @@
       "RuleParameters": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/RuleParametersParseParameters"
+            "$ref": "#/components/schemas/RuleParametersAllowParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersBlockParameters"
           },
           {
+            "$ref": "#/components/schemas/RuleParametersExtractParameters"
+          },
+          {
             "$ref": "#/components/schemas/RuleParametersExtractTimestampParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
           },
           {
             "$ref": "#/components/schemas/RuleParametersJsonParseParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
-          },
-          {
-            "$ref": "#/components/schemas/RuleParametersAllowParameters"
-          },
-          {
             "$ref": "#/components/schemas/RuleParametersJsonStringifyParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersExtractParameters"
+            "$ref": "#/components/schemas/RuleParametersParseParameters"
           },
           {
-            "$ref": "#/components/schemas/RuleParametersJsonExtractParameters"
+            "$ref": "#/components/schemas/RuleParametersRemoveFieldsParameters"
+          },
+          {
+            "$ref": "#/components/schemas/RuleParametersReplaceParameters"
           }
         ]
       },
       "RuleParametersAllowParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "allowParameters": {
@@ -1050,6 +1227,10 @@
         ]
       },
       "RuleParametersBlockParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "blockParameters": {
@@ -1061,6 +1242,10 @@
         ]
       },
       "RuleParametersExtractParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "extractParameters": {
@@ -1072,6 +1257,10 @@
         ]
       },
       "RuleParametersExtractTimestampParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "extractTimestampParameters": {
@@ -1083,6 +1272,10 @@
         ]
       },
       "RuleParametersJsonExtractParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "jsonExtractParameters": {
@@ -1094,6 +1287,10 @@
         ]
       },
       "RuleParametersJsonParseParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "jsonParseParameters": {
@@ -1105,6 +1302,10 @@
         ]
       },
       "RuleParametersJsonStringifyParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "jsonStringifyParameters": {
@@ -1116,6 +1317,10 @@
         ]
       },
       "RuleParametersParseParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "parseParameters": {
@@ -1127,6 +1332,10 @@
         ]
       },
       "RuleParametersRemoveFieldsParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "removeFieldsParameters": {
@@ -1138,6 +1347,10 @@
         ]
       },
       "RuleParametersReplaceParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Rule parameters.",
         "type": "object",
         "properties": {
           "replaceParameters": {
@@ -1152,16 +1365,20 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
           "rules": {
+            "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rules.v1.Rule"
@@ -1170,6 +1387,10 @@
         }
       },
       "SeverityConstraint": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Severity constraint.",
         "type": "object",
         "properties": {
           "value": {
@@ -1178,14 +1399,23 @@
         }
       },
       "SubsystemNameConstraint": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Subsystem name constraint.",
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "type": "string"
           }
         }
       },
       "UpdateRuleGroupResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response returned after successfully updating a parsing rule group.",
         "type": "object",
         "properties": {
           "ruleGroup": {
@@ -1194,6 +1424,7 @@
         }
       },
       "Value": {
+        "description": "Value.",
         "type": "string",
         "enum": [
           "VALUE_DEBUG_OR_UNSPECIFIED",
@@ -1215,18 +1446,23 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "type": "string"
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean"
           },
           "id": {
+            "description": "Unique identifier.",
             "type": "string"
           },
           "name": {
+            "description": "Display name.",
             "type": "string"
           },
           "order": {
+            "description": "Sort order.",
             "type": "integer",
             "format": "int64"
           },
@@ -1234,20 +1470,27 @@
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
+            "description": "The source field.",
             "type": "string"
           }
         }
       },
       "v1.TeamId": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Team id.",
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "type": "integer",
             "format": "int64"
           }
         }
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

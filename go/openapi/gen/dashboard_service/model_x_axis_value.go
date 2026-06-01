@@ -21,8 +21,9 @@ var _ = bytes.MinRead
 // checks if the XAxisValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &XAxisValue{}
 
-// XAxisValue struct for XAxisValue
+// XAxisValue X axis.
 type XAxisValue struct {
+	// X axis by value.
 	Value map[string]interface{} `json:"value"`
 	AdditionalProperties map[string]interface{}
 }

@@ -23,8 +23,11 @@ var _ MappedNullable = &LogMetaFieldsValues{}
 
 // LogMetaFieldsValues Values for log meta fields.
 type LogMetaFieldsValues struct {
+	// The application name values.
 	ApplicationNameValues string `json:"applicationNameValues"`
+	// The severity values.
 	SeverityValues string `json:"severityValues"`
+	// The subsystem name values.
 	SubsystemNameValues string `json:"subsystemNameValues"`
 	AdditionalProperties map[string]interface{}
 }

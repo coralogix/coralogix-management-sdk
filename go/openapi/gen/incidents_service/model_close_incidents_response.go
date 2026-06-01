@@ -23,6 +23,7 @@ var _ MappedNullable = &CloseIncidentsResponse{}
 
 // CloseIncidentsResponse Response containing the updated incidents after closing
 type CloseIncidentsResponse struct {
+	// List of incidents after closing
 	Incidents []Incident `json:"incidents"`
 	AdditionalProperties map[string]interface{}
 }

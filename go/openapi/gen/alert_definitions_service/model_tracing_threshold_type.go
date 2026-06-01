@@ -22,7 +22,9 @@ var _ MappedNullable = &TracingThresholdType{}
 
 // TracingThresholdType Configuration for alerts based on trace count thresholds
 type TracingThresholdType struct {
+	// Notification payload field filter
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
+	// The rules for the trace threshold alert.
 	Rules []TracingThresholdRule `json:"rules,omitempty"`
 	TracingFilter *TracingFilter `json:"tracingFilter,omitempty"`
 	AdditionalProperties map[string]interface{}

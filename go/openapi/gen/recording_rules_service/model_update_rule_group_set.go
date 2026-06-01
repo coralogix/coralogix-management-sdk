@@ -22,7 +22,9 @@ var _ MappedNullable = &UpdateRuleGroupSet{}
 
 // UpdateRuleGroupSet A set of rule groups to update.
 type UpdateRuleGroupSet struct {
+	// List of groups.
 	Groups []InRuleGroup `json:"groups,omitempty"`
+	// Display name.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

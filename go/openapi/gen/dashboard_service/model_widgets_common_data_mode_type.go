@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// WidgetsCommonDataModeType the model 'WidgetsCommonDataModeType'
+// WidgetsCommonDataModeType Data mode type.
 type WidgetsCommonDataModeType string
 
 // List of widgets.common.DataModeType

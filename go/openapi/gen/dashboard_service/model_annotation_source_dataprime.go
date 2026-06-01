@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the AnnotationSourceDataprime type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnnotationSourceDataprime{}
 
-// AnnotationSourceDataprime struct for AnnotationSourceDataprime
+// AnnotationSourceDataprime Source.
 type AnnotationSourceDataprime struct {
 	Dataprime DataprimeSource `json:"dataprime"`
 	AdditionalProperties map[string]interface{}

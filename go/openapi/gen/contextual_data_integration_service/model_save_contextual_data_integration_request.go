@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the SaveContextualDataIntegrationRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SaveContextualDataIntegrationRequest{}
 
-// SaveContextualDataIntegrationRequest struct for SaveContextualDataIntegrationRequest
+// SaveContextualDataIntegrationRequest Request for creating a contextual data integration.
 type SaveContextualDataIntegrationRequest struct {
 	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -10,8 +10,8 @@
         "tags": [
           "Metrics Data Archive Service"
         ],
-        "summary": "GetTenantConfig",
-        "description": "No description available",
+        "summary": "Get Metrics Storage Configuration",
+        "description": "Returns the current metrics storage configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -51,8 +51,8 @@
         "tags": [
           "Metrics Data Archive Service"
         ],
-        "summary": "Update",
-        "description": "No description available",
+        "summary": "Update Metrics Storage Configuration",
+        "description": "Updates the metrics storage configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -64,18 +64,19 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateRequestS3"
-                  },
-                  {
                     "$ref": "#/components/schemas/UpdateRequestGcs"
                   },
                   {
                     "$ref": "#/components/schemas/UpdateRequestIbm"
+                  },
+                  {
+                    "$ref": "#/components/schemas/UpdateRequestS3"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -112,8 +113,8 @@
         "tags": [
           "Metrics Data Archive Service"
         ],
-        "summary": "ConfigureTenant",
-        "description": "No description available",
+        "summary": "Configure Tenant",
+        "description": "Creates the metrics storage configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -125,18 +126,19 @@
                 "type": "object",
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/ConfigureTenantRequestS3"
-                  },
-                  {
                     "$ref": "#/components/schemas/ConfigureTenantRequestGcs"
                   },
                   {
                     "$ref": "#/components/schemas/ConfigureTenantRequestIbm"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ConfigureTenantRequestS3"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -175,8 +177,8 @@
         "tags": [
           "Metrics Data Archive Service"
         ],
-        "summary": "DisableArchive",
-        "description": "No description available",
+        "summary": "Disable Metrics Archive",
+        "description": "Disables the metrics storage configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -218,8 +220,8 @@
         "tags": [
           "Metrics Data Archive Service"
         ],
-        "summary": "EnableArchive",
-        "description": "No description available",
+        "summary": "Enable Metrics Archive",
+        "description": "Enables the metrics storage configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -261,8 +263,8 @@
         "tags": [
           "Metrics Data Archive Service"
         ],
-        "summary": "ValidateBucket",
-        "description": "No description available",
+        "summary": "Validate Metrics Storage Bucket",
+        "description": "Validates the provided metrics storage configuration.",
         "externalDocs": {
           "url": ""
         },
@@ -274,18 +276,19 @@
                 "type": "object",
                 "oneOf": [
                   {
+                    "$ref": "#/components/schemas/ValidateBucketRequestGcs"
+                  },
+                  {
                     "$ref": "#/components/schemas/ValidateBucketRequestIbm"
                   },
                   {
                     "$ref": "#/components/schemas/ValidateBucketRequestS3"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ValidateBucketRequestGcs"
                   }
                 ]
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -385,10 +388,10 @@
       "FilterPathAndValues": {
         "oneOf": [
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
+            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
           },
           {
-            "$ref": "#/components/schemas/FilterPathAndValuesFilters"
+            "$ref": "#/components/schemas/FilterPathAndValuesMultipleValues"
           }
         ]
       },
@@ -468,11 +471,16 @@
         "type": "object",
         "properties": {
           "bucket": {
+            "description": "Bucket name.",
             "type": "string"
           }
         }
       },
       "GetTenantConfigResponseV2": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the current metrics tenant configuration.",
         "type": "object",
         "properties": {
           "tenantConfig": {
@@ -491,14 +499,17 @@
         "properties": {
           "crn": {
             "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
+            "description": "The crn.",
             "type": "string"
           },
           "endpoint": {
             "example": "s3.us-south.cloud-object-storage.appdomain.cloud",
+            "description": "Endpoint.",
             "type": "string"
           },
           "serviceCrn": {
             "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
+            "description": "The service crn.",
             "type": "string"
           }
         }
@@ -528,16 +539,19 @@
         "properties": {
           "fiveMinutesResolution": {
             "example": 2,
+            "description": "The five minutes resolution.",
             "type": "integer",
             "format": "int64"
           },
           "oneHourResolution": {
             "example": 3,
+            "description": "The one hour resolution.",
             "type": "integer",
             "format": "int64"
           },
           "rawResolution": {
             "example": 1,
+            "description": "The raw resolution.",
             "type": "integer",
             "format": "int64"
           }
@@ -553,9 +567,11 @@
         "type": "object",
         "properties": {
           "bucket": {
+            "description": "Bucket name.",
             "type": "string"
           },
           "region": {
+            "description": "Region.",
             "type": "string"
           }
         }
@@ -563,32 +579,39 @@
       "TenantConfigV2": {
         "oneOf": [
           {
+            "$ref": "#/components/schemas/TenantConfigV2Gcs"
+          },
+          {
             "$ref": "#/components/schemas/TenantConfigV2Ibm"
           },
           {
             "$ref": "#/components/schemas/TenantConfigV2S3"
-          },
-          {
-            "$ref": "#/components/schemas/TenantConfigV2Gcs"
           }
         ]
       },
       "TenantConfigV2Gcs": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Tenant config v2.",
         "type": "object",
         "properties": {
           "disabled": {
+            "description": "Whether metrics archiving is disabled for this tenant.",
             "type": "boolean"
           },
           "gcs": {
             "$ref": "#/components/schemas/GcsConfig"
           },
           "prefix": {
+            "description": "Storage path prefix applied to all archived objects.",
             "type": "string"
           },
           "retentionPolicy": {
             "$ref": "#/components/schemas/RetentionPolicyRequest"
           },
           "tenantId": {
+            "description": "Tenant identifier.",
             "type": "integer",
             "format": "int64"
           }
@@ -598,21 +621,28 @@
         ]
       },
       "TenantConfigV2Ibm": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Tenant config v2.",
         "type": "object",
         "properties": {
           "disabled": {
+            "description": "Whether metrics archiving is disabled for this tenant.",
             "type": "boolean"
           },
           "ibm": {
             "$ref": "#/components/schemas/IbmConfigV2"
           },
           "prefix": {
+            "description": "Storage path prefix applied to all archived objects.",
             "type": "string"
           },
           "retentionPolicy": {
             "$ref": "#/components/schemas/RetentionPolicyRequest"
           },
           "tenantId": {
+            "description": "Tenant identifier.",
             "type": "integer",
             "format": "int64"
           }
@@ -622,12 +652,18 @@
         ]
       },
       "TenantConfigV2S3": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Tenant config v2.",
         "type": "object",
         "properties": {
           "disabled": {
+            "description": "Whether metrics archiving is disabled for this tenant.",
             "type": "boolean"
           },
           "prefix": {
+            "description": "Storage path prefix applied to all archived objects.",
             "type": "string"
           },
           "retentionPolicy": {
@@ -637,6 +673,7 @@
             "$ref": "#/components/schemas/S3Config"
           },
           "tenantId": {
+            "description": "Tenant identifier.",
             "type": "integer",
             "format": "int64"
           }
@@ -658,6 +695,7 @@
             "$ref": "#/components/schemas/GcsConfig"
           },
           "retentionDays": {
+            "description": "Archive retention period in days.",
             "type": "integer",
             "format": "int64"
           }
@@ -679,6 +717,7 @@
             "$ref": "#/components/schemas/IbmConfigV2"
           },
           "retentionDays": {
+            "description": "Archive retention period in days.",
             "type": "integer",
             "format": "int64"
           }
@@ -697,6 +736,7 @@
         "type": "object",
         "properties": {
           "retentionDays": {
+            "description": "Archive retention period in days.",
             "type": "integer",
             "format": "int64"
           },
@@ -767,6 +807,7 @@
         ]
       },
       "v3.FilterOperator": {
+        "description": "Filter operator.",
         "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",

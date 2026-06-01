@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the MinMaxCustom type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &MinMaxCustom{}
 
-// MinMaxCustom struct for MinMaxCustom
+// MinMaxCustom Min max custom.
 type MinMaxCustom struct {
+	// Maximum value.
 	Max *float64 `json:"max,omitempty"`
+	// Minimum value.
 	Min *float64 `json:"min,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

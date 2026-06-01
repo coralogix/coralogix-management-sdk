@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the WidgetsGauge type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WidgetsGauge{}
 
-// WidgetsGauge struct for WidgetsGauge
+// WidgetsGauge Gauge.
 type WidgetsGauge struct {
 	// Custom unit (requires to have unit field set as 'custom' to take effect)
 	CustomUnit *string `json:"customUnit,omitempty"`
@@ -44,6 +44,7 @@ type WidgetsGauge struct {
 	ShowOuterArc *bool `json:"showOuterArc,omitempty"`
 	ThresholdBy *GaugeThresholdBy `json:"thresholdBy,omitempty"`
 	ThresholdType *ThresholdType `json:"thresholdType,omitempty"`
+	// List of value thresholds, each with a certain color and an optional name label
 	Thresholds []GaugeThreshold `json:"thresholds,omitempty"`
 	Unit *GaugeUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}

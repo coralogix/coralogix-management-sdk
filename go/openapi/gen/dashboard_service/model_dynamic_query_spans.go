@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the DynamicQuerySpans type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DynamicQuerySpans{}
 
-// DynamicQuerySpans struct for DynamicQuerySpans
+// DynamicQuerySpans Discriminated union of possible query types for the dynamic widget.
 type DynamicQuerySpans struct {
 	Spans Spans `json:"spans"`
 	AdditionalProperties map[string]interface{}

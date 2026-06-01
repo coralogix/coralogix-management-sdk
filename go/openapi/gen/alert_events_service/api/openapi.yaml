@@ -7,25 +7,34 @@ servers:
 paths:
   /v3/alert-event-stats:
     get:
-      description: No description available
+      description: |-
+        Returns statistical data for alert events.
+
+        Requires the following permissions:
+        - `alerts:ReadConfig`
       externalDocs:
         url: ""
       operationId: AlertEventService_GetAlertEventsStats
       parameters:
-      - explode: true
+      - description: The ids.
+        explode: true
         in: query
         name: ids
         required: false
         schema:
+          description: The ids.
           items:
+            description: The ids.
             type: string
           type: array
         style: form
-      - explode: true
+      - description: The order bys.
+        explode: true
         in: query
         name: order_bys
         required: false
         schema:
+          description: The order bys.
           items:
             $ref: "#/components/schemas/AlertEventService_GetAlertEventsStats_order_bys_parameter_inner"
           type: array
@@ -56,28 +65,38 @@ paths:
       - alerts:ReadConfig
   /v3/alert-event/{id}:
     get:
-      description: No description available
+      description: |-
+        Returns the alert event with the specified ID.
+
+        Requires the following permissions:
+        - `alerts:ReadConfig`
       externalDocs:
         url: ""
       operationId: AlertEventService_GetAlertEvent
       parameters:
-      - explode: false
+      - description: Unique identifier.
+        explode: false
         in: path
         name: id
         required: true
         schema:
+          description: Unique identifier.
           type: string
         style: simple
-      - explode: true
+      - description: Ordering applied to the alert event occurrences in the response.
+        explode: true
         in: query
         name: order_bys
         required: false
         schema:
+          description: Ordering applied to the alert event occurrences in the response.
           items:
             $ref: "#/components/schemas/AlertEventService_GetAlertEventsStats_order_bys_parameter_inner"
           type: array
         style: form
-      - explode: true
+      - description: Pagination parameters (page size and page token) for the returned
+          occurrences.
+        explode: true
         in: query
         name: pagination
         required: false
@@ -122,7 +141,9 @@ components:
         url: ""
       properties:
         rules:
+          description: List of rules.
           items:
+            description: List of rules.
             type: string
           type: array
         status:
@@ -130,6 +151,7 @@ components:
       title: Activity analysis data structure
       type: object
     ActivityAnalysisStats:
+      description: Activity analysis stats.
       example:
         isMutedCount: 0
         rules:
@@ -139,20 +161,25 @@ components:
         url: ""
       properties:
         isMutedCount:
+          description: Number of muted items.
           format: int64
           type: integer
         rules:
+          description: List of rules.
           items:
+            description: List of rules.
             type: string
           type: array
       title: Event activity analysis statistics
       type: object
     ActivityAnalysisStatus:
+      description: Activity analysis status.
       enum:
       - ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
       - ACTIVITY_ANALYSIS_STATUS_MUTE
       type: string
     AlertEvent:
+      description: Alert event.
       example:
         preGroupingEventId: preGroupingEventId
         incidentCorrelationKey: incidentCorrelationKey
@@ -177,33 +204,43 @@ components:
         activityAnalysis:
           $ref: "#/components/schemas/ActivityAnalysis"
         alertId:
+          description: Unique identifier of the alert.
           type: string
         groupLabels:
           additionalProperties:
             type: string
+          description: Labels for the group.
           type: object
         incidentCorrelationKey:
+          description: Key used to correlate incidents.
           type: string
         payload:
+          description: Raw payload data.
           type: object
         payloadType:
+          description: Type of the payload.
           type: string
         permutationId:
+          description: Unique identifier of the permutation.
           type: string
         permutationLabels:
           additionalProperties:
             type: string
+          description: Labels for the permutation.
           type: object
         preGroupingEventId:
+          description: Identifier of the event before grouping.
           type: string
         status:
           $ref: "#/components/schemas/AlertStatus"
         timestamp:
+          description: Timestamp of the event.
           format: date-time
           type: string
       title: Alert event
       type: object
     AlertEventMultiplePermutation:
+      description: Alert event multiple permutation.
       example:
         alertEventMultiplePermutation:
         - preGroupingEventId: preGroupingEventId
@@ -240,13 +277,17 @@ components:
           permutationId: permutationId
           status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
           timestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
       properties:
         alertEventMultiplePermutation:
+          description: List of alert events for multiple permutations.
           items:
             $ref: "#/components/schemas/AlertEvent"
           type: array
       type: object
     AlertStatus:
+      description: Alert status.
       enum:
       - ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
       - ALERT_STATUS_TRIGGERED
@@ -278,19 +319,24 @@ components:
         activityAnalysisStats:
           $ref: "#/components/schemas/ActivityAnalysisStats"
         count:
+          description: Number of items.
           format: int64
           type: integer
         resolvedCount:
+          description: The resolved count.
           format: int64
           type: integer
         resolvedPermutationsSamples:
+          description: The resolved permutations samples.
           items:
             $ref: "#/components/schemas/v3.Permutation"
           type: array
         triggeredCount:
+          description: The triggered count.
           format: int64
           type: integer
         triggeredPermutationsSamples:
+          description: The triggered permutations samples.
           items:
             $ref: "#/components/schemas/v3.Permutation"
           type: array
@@ -298,8 +344,8 @@ components:
       type: object
     FilterPathAndValues:
       oneOf:
-      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
       - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
     FilterPathAndValuesFilters:
       description: This data structure represents a filter path and values
       externalDocs:
@@ -352,6 +398,7 @@ components:
       - $ref: "#/components/schemas/GetAlertEventResponseMultiplePermutation"
       - $ref: "#/components/schemas/GetAlertEventResponseSinglePermutation"
     GetAlertEventResponseMultiplePermutation:
+      description: Response containing the details of an alert event.
       example:
         pagination:
           totalSize: 0
@@ -397,6 +444,7 @@ components:
         url: ""
       properties:
         id:
+          description: Unique identifier of the alert event.
           type: string
         multiplePermutation:
           $ref: "#/components/schemas/AlertEventMultiplePermutation"
@@ -407,10 +455,12 @@ components:
       title: Get alert event response
       type: object
     GetAlertEventResponseSinglePermutation:
+      description: Response containing the details of an alert event.
       externalDocs:
         url: ""
       properties:
         id:
+          description: Unique identifier of the alert event.
           type: string
         pagination:
           $ref: "#/components/schemas/alerts.v3.PaginationResponse"
@@ -421,6 +471,7 @@ components:
       title: Get alert event response
       type: object
     GetAlertEventStatsResponse:
+      description: Response containing statistical data for alert events.
       example:
         eventsStats:
           key:
@@ -448,6 +499,7 @@ components:
         eventsStats:
           additionalProperties:
             $ref: "#/components/schemas/EventStats"
+          description: The events stats.
           type: object
       title: Get alert event statistics response
       type: object
@@ -461,24 +513,31 @@ components:
           type: array
       type: object
     OrderByAlertEventDirection:
+      description: Order by alert event direction.
       enum:
       - ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED
       - ORDER_BY_ALERT_EVENT_DIRECTION_ASC
       - ORDER_BY_ALERT_EVENT_DIRECTION_DESC
       type: string
     OrderByAlertEventFields:
+      description: Order by alert event fields.
       enum:
       - ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED
       - ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP
       type: string
     alerts.v3.PaginationResponse:
+      description: Pagination response.
       example:
         totalSize: 0
         nextPageToken: nextPageToken
+      externalDocs:
+        url: ""
       properties:
         nextPageToken:
+          description: Token for fetching the next page of results.
           type: string
         totalSize:
+          description: Total number of results.
           format: int64
           type: integer
       type: object
@@ -488,6 +547,7 @@ components:
       - FILTER_MATCHER_REGEXP
       type: string
     v3.FilterOperator:
+      description: Filter operator.
       enum:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
@@ -502,6 +562,7 @@ components:
         permutationLabels:
           additionalProperties:
             type: string
+          description: Labels for the permutation.
           type: object
       title: Permutation data structure
       type: object
@@ -515,8 +576,10 @@ components:
     AlertEventService_GetAlertEvent_pagination_parameter:
       properties:
         pageSize:
+          description: Page size.
           format: int64
           type: integer
         pageToken:
+          description: The page token.
           type: string
       type: object

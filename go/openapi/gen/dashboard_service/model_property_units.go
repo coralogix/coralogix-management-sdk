@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the PropertyUnits type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PropertyUnits{}
 
-// PropertyUnits struct for PropertyUnits
+// PropertyUnits Property units.
 type PropertyUnits struct {
 	// Whether to render numeric value with abbreviation
 	AllowAbbreviation *bool `json:"allowAbbreviation,omitempty"`

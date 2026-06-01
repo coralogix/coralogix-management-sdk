@@ -22,7 +22,9 @@ var _ MappedNullable = &Rum{}
 
 // Rum This data structure represents a RUM integration.
 type Rum struct {
+	// The browser sdk commands.
 	BrowserSdkCommands []CommandInformation `json:"browserSdkCommands,omitempty"`
+	// The source map commands.
 	SourceMapCommands []CommandInformation `json:"sourceMapCommands,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

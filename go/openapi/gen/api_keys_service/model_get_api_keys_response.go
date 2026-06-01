@@ -22,6 +22,7 @@ var _ MappedNullable = &GetApiKeysResponse{}
 
 // GetApiKeysResponse This data structure is the response obtained when retrieving all API keys.
 type GetApiKeysResponse struct {
+	// The keys.
 	Keys []KeyInfo `json:"keys,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

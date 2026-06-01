@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// VisualizationStackedLine the model 'VisualizationStackedLine'
+// VisualizationStackedLine Stacked line.
 type VisualizationStackedLine string
 
 // List of Visualization.StackedLine

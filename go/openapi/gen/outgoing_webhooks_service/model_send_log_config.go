@@ -20,9 +20,11 @@ var _ = bytes.MinRead
 // checks if the SendLogConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &SendLogConfig{}
 
-// SendLogConfig struct for SendLogConfig
+// SendLogConfig Send log config.
 type SendLogConfig struct {
+	// Raw payload data.
 	Payload *string `json:"payload,omitempty"`
+	// The uuid.
 	Uuid *string `json:"uuid,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
