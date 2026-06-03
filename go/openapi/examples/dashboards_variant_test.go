@@ -89,7 +89,7 @@ func TestDashboardVariantFixtures(t *testing.T) {
 		{
 			name: "folderPath",
 			configure: func(raw map[string]interface{}) {
-				raw["folderPath"] = map[string][]string{"segments": {"team", "dashboards"}}
+				raw["folderPath"] = map[string][]string{"segments": []string{"team", "dashboards"}}
 			},
 			assertions: func(t *testing.T, raw map[string]interface{}) {
 				t.Helper()
@@ -136,6 +136,116 @@ func TestDashboardVariantFixtures(t *testing.T) {
 
 type generatedOneOf interface {
 	GetActualInstance() interface{}
+}
+
+func TestDashboardConfigOneOfFixtures(t *testing.T) {
+	tests := []struct {
+		name    string
+		payload string
+		target  func() generatedOneOf
+		want    string
+	}{
+		{name: "action custom", payload: `{"customAction":{}}`, target: func() generatedOneOf { return &dashboards.ActionDefinition{} }, want: "ActionDefinitionCustomAction"},
+		{name: "action go to dashboard", payload: `{"goToDashboardAction":{}}`, target: func() generatedOneOf { return &dashboards.ActionDefinition{} }, want: "ActionDefinitionGoToDashboardAction"},
+		{name: "annotation source dataprime", payload: `{"dataprime":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceDataprime"},
+		{name: "annotation source event recurrence", payload: `{"eventRecurrence":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceEventRecurrence"},
+		{name: "annotation source logs", payload: `{"logs":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceLogs"},
+		{name: "annotation source manual", payload: `{"manual":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceManual"},
+		{name: "annotation source metrics", payload: `{"metrics":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceMetrics"},
+		{name: "annotation source spans", payload: `{"spans":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceSpans"},
+		{name: "annotation scope all widgets", payload: `{"allWidgets":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationWidgetScope{} }, want: "AnnotationWidgetScopeAllWidgetsVariant"},
+		{name: "annotation scope specific widgets", payload: `{"specificWidgets":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationWidgetScope{} }, want: "AnnotationWidgetScopeSpecificWidgetsVariant"},
+		{name: "color label range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.ColorLabelMapping{} }, want: "ColorLabelMappingRange"},
+		{name: "color label regex", payload: `{"regex":{}}`, target: func() generatedOneOf { return &dashboards.ColorLabelMapping{} }, want: "ColorLabelMappingRegex"},
+		{name: "color label value", payload: `{"value":{}}`, target: func() generatedOneOf { return &dashboards.ColorLabelMapping{} }, want: "ColorLabelMappingValue"},
+		{name: "colors by aggregation", payload: `{"aggregation":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByAggregationVariant"},
+		{name: "colors by category", payload: `{"category":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByCategoryVariant"},
+		{name: "colors by group by", payload: `{"groupBy":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByGroupByVariant"},
+		{name: "colors by query", payload: `{"query":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByQueryVariant"},
+		{name: "colors by stack", payload: `{"stack":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByStackVariant"},
+		{name: "dataprime source duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.DataprimeSourceStrategy{} }, want: "DataprimeSourceStrategyDurationVariant"},
+		{name: "dataprime source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.DataprimeSourceStrategy{} }, want: "DataprimeSourceStrategyInstantVariant"},
+		{name: "dataprime source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.DataprimeSourceStrategy{} }, want: "DataprimeSourceStrategyRangeVariant"},
+		{name: "display template mapped values", payload: `{"mappedValues":{}}`, target: func() generatedOneOf { return &dashboards.DisplayNameTemplateVariable{} }, want: "DisplayNameTemplateVariableMappedValues"},
+		{name: "display template observation field", payload: `{"observationField":{}}`, target: func() generatedOneOf { return &dashboards.DisplayNameTemplateVariable{} }, want: "DisplayNameTemplateVariableObservationField"},
+		{name: "event recurrence duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.EventRecurrenceSourceStrategy{} }, want: "EventRecurrenceSourceStrategyDurationVariant"},
+		{name: "event recurrence instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.EventRecurrenceSourceStrategy{} }, want: "EventRecurrenceSourceStrategyInstantVariant"},
+		{name: "filter path filters", payload: `{"filters":{"pathAndValues":[]},"path":"service.name"}`, target: func() generatedOneOf { return &dashboards.FilterPathAndValues{} }, want: "FilterPathAndValuesFilters"},
+		{name: "filter path multiple values", payload: `{"multipleValues":{},"path":"service.name"}`, target: func() generatedOneOf { return &dashboards.FilterPathAndValues{} }, want: "FilterPathAndValuesMultipleValues"},
+		{name: "filter source logs", payload: `{"logs":{}}`, target: func() generatedOneOf { return &dashboards.FilterSource{} }, want: "FilterSourceLogs"},
+		{name: "filter source metrics", payload: `{"metrics":{}}`, target: func() generatedOneOf { return &dashboards.FilterSource{} }, want: "FilterSourceMetrics"},
+		{name: "filter source spans", payload: `{"spans":{}}`, target: func() generatedOneOf { return &dashboards.FilterSource{} }, want: "FilterSourceSpans"},
+		{name: "geomap aggregation avg", payload: `{"avg":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationAvg"},
+		{name: "geomap aggregation count", payload: `{"count":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationCount"},
+		{name: "geomap aggregation max", payload: `{"max":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationMax"},
+		{name: "geomap aggregation min", payload: `{"min":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationMin"},
+		{name: "geomap aggregation sum", payload: `{"sum":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationSum"},
+		{name: "geomap color range", payload: `{"colorRange":"COLOR_GRADIENT_TYPE_BLUE"}`, target: func() generatedOneOf { return &dashboards.GeomapColor{} }, want: "GeomapColorColorRange"},
+		{name: "geomap color size", payload: `{"size":"COLOR_SOLID_TYPE_BLUE"}`, target: func() generatedOneOf { return &dashboards.GeomapColor{} }, want: "GeomapColorSize"},
+		{name: "geomap field aws region", payload: `{"awsRegionConfig":{}}`, target: func() generatedOneOf { return &dashboards.GeomapFieldConfig{} }, want: "GeomapFieldConfigAwsRegionConfig"},
+		{name: "geomap field coordinate", payload: `{"coordinateConfig":{}}`, target: func() generatedOneOf { return &dashboards.GeomapFieldConfig{} }, want: "GeomapFieldConfigCoordinateConfig"},
+		{name: "heatmap color range", payload: `{"colorRange":"COLOR_GRADIENT_TYPE_BLUE"}`, target: func() generatedOneOf { return &dashboards.Heatmap{} }, want: "HeatmapColorRange"},
+		{name: "heatmap preset", payload: `{"preset":"HEATMAP_COLOR_PRESET_BLUE"}`, target: func() generatedOneOf { return &dashboards.Heatmap{} }, want: "HeatmapPreset"},
+		{name: "horizontal bar y axis category", payload: `{"category":{}}`, target: func() generatedOneOf { return &dashboards.HorizontalBarChartYAxisViewBy{} }, want: "HorizontalBarChartYAxisViewByCategory"},
+		{name: "horizontal bar y axis value", payload: `{"value":{}}`, target: func() generatedOneOf { return &dashboards.HorizontalBarChartYAxisViewBy{} }, want: "HorizontalBarChartYAxisViewByValue"},
+		{name: "interval auto", payload: `{"auto":{}}`, target: func() generatedOneOf { return &dashboards.IntervalResolution{} }, want: "IntervalResolutionAuto"},
+		{name: "interval manual", payload: `{"manual":{"interval":"60s"}}`, target: func() generatedOneOf { return &dashboards.IntervalResolution{} }, want: "IntervalResolutionManual"},
+		{name: "logs source duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.LogsSourceStrategy{} }, want: "LogsSourceStrategyDurationVariant"},
+		{name: "logs source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.LogsSourceStrategy{} }, want: "LogsSourceStrategyInstantVariant"},
+		{name: "logs source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.LogsSourceStrategy{} }, want: "LogsSourceStrategyRangeVariant"},
+		{name: "manual source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.ManualSourceStrategy{} }, want: "ManualSourceStrategyInstantVariant"},
+		{name: "manual source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.ManualSourceStrategy{} }, want: "ManualSourceStrategyRangeVariant"},
+		{name: "min max auto", payload: `{"auto":{}}`, target: func() generatedOneOf { return &dashboards.MinMax{} }, want: "MinMaxAutoVariant"},
+		{name: "min max custom", payload: `{"custom":{}}`, target: func() generatedOneOf { return &dashboards.MinMax{} }, want: "MinMaxCustomVariant"},
+		{name: "multi string all", payload: `{"all":{}}`, target: func() generatedOneOf { return &dashboards.MultiStringValue{} }, want: "MultiStringValueAll"},
+		{name: "multi string list", payload: `{"list":{}}`, target: func() generatedOneOf { return &dashboards.MultiStringValue{} }, want: "MultiStringValueList"},
+		{name: "multi string selected all", payload: `{"selectedAll":{}}`, target: func() generatedOneOf { return &dashboards.MultiStringValue{} }, want: "MultiStringValueSelectedAll"},
+		{name: "property alignment", payload: `{"alignment":"TEXT_ALIGNMENT_LEFT"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionAlignment"},
+		{name: "property column display name", payload: `{"columnDisplayName":"Service"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionColumnDisplayName"},
+		{name: "property link", payload: `{"link":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionLink"},
+		{name: "property regex extract", payload: `{"regexExtract":"service=(.*)"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionRegexExtract"},
+		{name: "property thresholds", payload: `{"thresholds":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionThresholds"},
+		{name: "property units", payload: `{"units":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionUnits"},
+		{name: "property values alias", payload: `{"valuesAlias":"alias"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionValuesAlias"},
+		{name: "property values mapping", payload: `{"valuesMapping":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionValuesMapping"},
+		{name: "query source logs field name", payload: `{"fieldName":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceLogsQueryType{} }, want: "QuerySourceLogsQueryTypeFieldNameVariant"},
+		{name: "query source logs field value", payload: `{"fieldValue":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceLogsQueryType{} }, want: "QuerySourceLogsQueryTypeFieldValueVariant"},
+		{name: "query source metrics equals", payload: `{"equals":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryOperator{} }, want: "QuerySourceMetricsQueryOperatorEquals"},
+		{name: "query source metrics not equals", payload: `{"notEquals":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryOperator{} }, want: "QuerySourceMetricsQueryOperatorNotEquals"},
+		{name: "query source metrics string value", payload: `{"stringValue":"up"}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryStringOrVariable{} }, want: "QuerySourceMetricsQueryStringOrVariableStringValue"},
+		{name: "query source metrics variable name", payload: `{"variableName":"metric"}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryStringOrVariable{} }, want: "QuerySourceMetricsQueryStringOrVariableVariableName"},
+		{name: "query source spans field name", payload: `{"fieldName":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceSpansQueryType{} }, want: "QuerySourceSpansQueryTypeFieldNameVariant"},
+		{name: "query source spans field value", payload: `{"fieldValue":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceSpansQueryType{} }, want: "QuerySourceSpansQueryTypeFieldValueVariant"},
+		{name: "rule scope field", payload: `{"field":{}}`, target: func() generatedOneOf { return &dashboards.RuleScope{} }, want: "RuleScopeField"},
+		{name: "rule scope field type", payload: `{"fieldType":"FIELD_DATA_TYPE_STRING"}`, target: func() generatedOneOf { return &dashboards.RuleScope{} }, want: "RuleScopeFieldType"},
+		{name: "rule scope regex", payload: `{"regex":"service.*"}`, target: func() generatedOneOf { return &dashboards.RuleScope{} }, want: "RuleScopeRegex"},
+		{name: "section options custom", payload: `{"custom":{}}`, target: func() generatedOneOf { return &dashboards.SectionOptions{} }, want: "SectionOptionsCustom"},
+		{name: "section options internal", payload: `{"internal":{}}`, target: func() generatedOneOf { return &dashboards.SectionOptions{} }, want: "SectionOptionsInternal"},
+		{name: "sort category", payload: `{"category":{}}`, target: func() generatedOneOf { return &dashboards.SortStrategy{} }, want: "SortStrategyCategory"},
+		{name: "sort query value", payload: `{"queryValue":{}}`, target: func() generatedOneOf { return &dashboards.SortStrategy{} }, want: "SortStrategyQueryValue"},
+		{name: "span field metadata", payload: `{"metadataField":"METADATA_FIELD_SERVICE_NAME"}`, target: func() generatedOneOf { return &dashboards.SpanField{} }, want: "SpanFieldMetadataField"},
+		{name: "span field process tag", payload: `{"processTagField":"process.tag"}`, target: func() generatedOneOf { return &dashboards.SpanField{} }, want: "SpanFieldProcessTagField"},
+		{name: "span field tag", payload: `{"tagField":"service.name"}`, target: func() generatedOneOf { return &dashboards.SpanField{} }, want: "SpanFieldTagField"},
+		{name: "spans aggregation dimension", payload: `{"dimensionAggregation":{}}`, target: func() generatedOneOf { return &dashboards.SpansAggregation{} }, want: "SpansAggregationDimensionAggregation"},
+		{name: "spans aggregation metric", payload: `{"metricAggregation":{}}`, target: func() generatedOneOf { return &dashboards.SpansAggregation{} }, want: "SpansAggregationMetricAggregation"},
+		{name: "spans source duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.SpansSourceStrategy{} }, want: "SpansSourceStrategyDurationVariant"},
+		{name: "spans source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.SpansSourceStrategy{} }, want: "SpansSourceStrategyInstantVariant"},
+		{name: "spans source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.SpansSourceStrategy{} }, want: "SpansSourceStrategyRangeVariant"},
+		{name: "stat visual mapped values", payload: `{"mappedValues":{}}`, target: func() generatedOneOf { return &dashboards.StatVisualElement{} }, want: "StatVisualElementMappedValues"},
+		{name: "stat visual observation field", payload: `{"observationField":{}}`, target: func() generatedOneOf { return &dashboards.StatVisualElement{} }, want: "StatVisualElementObservationField"},
+		{name: "textbox default interval", payload: `{"defaultIntervalValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultIntervalValue"},
+		{name: "textbox default lucene", payload: `{"defaultLuceneValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultLuceneValue"},
+		{name: "textbox default numeric", payload: `{"defaultNumericValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultNumericValue"},
+		{name: "textbox default regex", payload: `{"defaultRegexValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultRegexValue"},
+		{name: "textbox default string", payload: `{"defaultStringValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultStringValue"},
+		{name: "textbox single numeric", payload: `{"singleNumeric":1}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueSingleNumeric"},
+		{name: "textbox single string", payload: `{"singleString":"value"}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueSingleString"},
+		{name: "x axis time", payload: `{"time":{}}`, target: func() generatedOneOf { return &dashboards.XAxis{} }, want: "XAxisTime"},
+		{name: "x axis time buckets", payload: `{"timeBuckets":{"auto":{}}}`, target: func() generatedOneOf { return &dashboards.XAxis{} }, want: "XAxisTimeBuckets"},
+		{name: "x axis value", payload: `{"value":{}}`, target: func() generatedOneOf { return &dashboards.XAxis{} }, want: "XAxisValue"},
+	}
+
+	runDashboardOneOfFixtureTable(t, tests)
 }
 
 func TestDashboardNestedOneOfFixtures(t *testing.T) {
@@ -795,19 +905,7 @@ func TestDashboardNestedOneOfFixtures(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			target := tt.target()
-			require.NoError(t, json.Unmarshal([]byte(tt.payload), target))
-			actual := target.GetActualInstance()
-			require.NotNil(t, actual)
-			require.Equal(t, tt.want, dashboardVariantName(actual))
-
-			data, err := json.Marshal(target)
-			require.NoError(t, err)
-			require.NotEqual(t, "null", string(data))
-		})
-	}
+	runDashboardOneOfFixtureTable(t, tests)
 }
 
 func minimalDashboardVariantJSON(name string) map[string]interface{} {
@@ -822,4 +920,27 @@ func minimalDashboardVariantJSON(name string) map[string]interface{} {
 
 func dashboardVariantName(v interface{}) string {
 	return strings.TrimPrefix(reflect.TypeOf(v).String(), "*dashboard_service.")
+}
+
+func runDashboardOneOfFixtureTable(t *testing.T, tests []struct {
+	name    string
+	payload string
+	target  func() generatedOneOf
+	want    string
+}) {
+	t.Helper()
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			target := tt.target()
+			require.NoError(t, json.Unmarshal([]byte(tt.payload), target))
+			actual := target.GetActualInstance()
+			require.NotNil(t, actual)
+			require.Equal(t, tt.want, dashboardVariantName(actual))
+
+			data, err := json.Marshal(target)
+			require.NoError(t, err)
+			require.NotEqual(t, "null", string(data))
+		})
+	}
 }
