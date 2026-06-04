@@ -1,0 +1,39 @@
+{
+  "name": "dashboard OpenAPI default refresh and time frame",
+  "description": "dashboard OpenAPI fixture without explicit refresh or time frame",
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "section"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "row"
+            },
+            "appearance": {
+              "height": 12
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "markdown"
+                },
+                "title": "markdown",
+                "definition": {
+                  "markdown": {
+                    "markdownText": "OpenAPI dashboard fixture"
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

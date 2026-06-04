@@ -26,31 +26,46 @@ import (
 
 func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 	tests := []struct {
-		name    string
-		fixture string
+		name               string
+		fixture            string
+		wantActualInstance bool
 	}{
 		{
-			name:    "mixed widget definitions and queries",
-			fixture: "dashboard_variant_mixed_widgets.json",
+			name:               "mixed widget definitions and queries",
+			fixture:            "dashboard_variant_mixed_widgets.json",
+			wantActualInstance: true,
 		},
 		{
-			name:    "dashboard variables and filters",
-			fixture: "dashboard_variant_variables_filters.json",
+			name:               "dashboard variables and filters",
+			fixture:            "dashboard_variant_variables_filters.json",
+			wantActualInstance: true,
 		},
 		{
-			name:    "dashboard actions and annotations",
-			fixture: "dashboard_variant_actions_annotations.json",
+			name:               "dashboard actions and annotations",
+			fixture:            "dashboard_variant_actions_annotations.json",
+			wantActualInstance: true,
 		},
 		{
-			name:    "dynamic visualizations",
-			fixture: "dashboard_variant_dynamic_visualizations.json",
+			name:               "dynamic visualizations",
+			fixture:            "dashboard_variant_dynamic_visualizations.json",
+			wantActualInstance: true,
+		},
+		{
+			name:               "missing refresh and time frame",
+			fixture:            "dashboard_variant_missing_refresh_time_frame.json",
+			wantActualInstance: false,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			dashboard := dashboardVariantFixture(t, tt.fixture)
-			require.NotNil(t, dashboard.GetActualInstance())
+			actual := dashboard.GetActualInstance()
+			if tt.wantActualInstance {
+				require.NotNil(t, actual)
+			} else {
+				require.Nil(t, actual)
+			}
 		})
 	}
 }
