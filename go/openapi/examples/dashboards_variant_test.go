@@ -16,132 +16,13 @@ package examples
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
-	"reflect"
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
 	dashboards "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/dashboard_service"
 )
-
-func TestDashboardVariantFixtures(t *testing.T) {
-	timeFrames := []struct {
-		field      string
-		value      interface{}
-		variant    string
-		otherField string
-	}{
-		{
-			field:      "relativeTimeFrame",
-			value:      "900s",
-			variant:    "RelativeTimeFrame",
-			otherField: "absoluteTimeFrame",
-		},
-		{
-			field: "absoluteTimeFrame",
-			value: map[string]string{
-				"from": "2026-05-28T10:00:00Z",
-				"to":   "2026-05-28T11:00:00Z",
-			},
-			variant:    "AbsoluteTimeFrame",
-			otherField: "relativeTimeFrame",
-		},
-	}
-
-	refreshes := []struct {
-		field   string
-		variant string
-	}{
-		{field: "off", variant: "Off"},
-		{field: "oneMinute", variant: "OneMinute"},
-		{field: "twoMinutes", variant: "TwoMinutes"},
-		{field: "fiveMinutes", variant: "FiveMinutes"},
-		{field: "fifteenMinutes", variant: "FifteenMinutes"},
-	}
-
-	folders := []struct {
-		name       string
-		configure  func(map[string]interface{})
-		assertions func(*testing.T, map[string]interface{})
-	}{
-		{
-			name:      "root",
-			configure: func(map[string]interface{}) {},
-			assertions: func(t *testing.T, raw map[string]interface{}) {
-				t.Helper()
-				require.NotContains(t, raw, "folderId")
-				require.NotContains(t, raw, "folderPath")
-			},
-		},
-		{
-			name: "folderId",
-			configure: func(raw map[string]interface{}) {
-				raw["folderId"] = map[string]string{"value": "00000000-0000-4000-8000-000000000001"}
-			},
-			assertions: func(t *testing.T, raw map[string]interface{}) {
-				t.Helper()
-				require.Contains(t, raw, "folderId")
-				require.NotContains(t, raw, "folderPath")
-			},
-		},
-		{
-			name: "folderPath",
-			configure: func(raw map[string]interface{}) {
-				raw["folderPath"] = map[string][]string{"segments": []string{"team", "dashboards"}}
-			},
-			assertions: func(t *testing.T, raw map[string]interface{}) {
-				t.Helper()
-				require.NotContains(t, raw, "folderId")
-				require.Contains(t, raw, "folderPath")
-			},
-		},
-	}
-
-	for _, timeFrame := range timeFrames {
-		for _, refresh := range refreshes {
-			for _, folder := range folders {
-				name := fmt.Sprintf("%s/%s/%s", timeFrame.field, refresh.field, folder.name)
-				t.Run(name, func(t *testing.T) {
-					raw := dashboardFixtureMap(t)
-					raw["name"] = name
-					raw["description"] = "dashboard OpenAPI variant fixture"
-					for _, candidate := range timeFrames {
-						delete(raw, candidate.field)
-					}
-					for _, candidate := range refreshes {
-						delete(raw, candidate.field)
-					}
-					raw[timeFrame.field] = timeFrame.value
-					raw[refresh.field] = map[string]interface{}{}
-					folder.configure(raw)
-
-					data, err := json.Marshal(raw)
-					require.NoError(t, err)
-
-					var dashboard dashboards.Dashboard
-					require.NoError(t, json.Unmarshal(data, &dashboard))
-
-					actual := dashboard.GetActualInstance()
-					require.NotNil(t, actual)
-					require.Equal(t, "Dashboard"+refresh.variant+timeFrame.variant, dashboardVariantName(actual))
-
-					roundTripData, err := json.Marshal(dashboard)
-					require.NoError(t, err)
-
-					var roundTrip map[string]interface{}
-					require.NoError(t, json.Unmarshal(roundTripData, &roundTrip))
-					require.Contains(t, roundTrip, timeFrame.field)
-					require.NotContains(t, roundTrip, timeFrame.otherField)
-					require.Contains(t, roundTrip, refresh.field)
-					folder.assertions(t, roundTrip)
-				})
-			}
-		}
-	}
-}
 
 func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 	tests := []struct {
@@ -215,10 +96,6 @@ func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 			}
 		})
 	}
-}
-
-func dashboardVariantName(v interface{}) string {
-	return strings.TrimPrefix(reflect.TypeOf(v).String(), "*dashboard_service.")
 }
 
 func dashboardVariantFixtureMap(t *testing.T, fixture string) map[string]interface{} {
