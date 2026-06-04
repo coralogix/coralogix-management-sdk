@@ -1,0 +1,97 @@
+{
+  "name": "dashboard OpenAPI dashboard actions and annotations",
+  "description": "dashboard OpenAPI full object variant fixture",
+  "relativeTimeFrame": "900s",
+  "off": {},
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "section"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "row"
+            },
+            "appearance": {
+              "height": 12
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "markdown"
+                },
+                "title": "markdown",
+                "definition": {
+                  "markdown": {
+                    "markdownText": "OpenAPI dashboard fixture"
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "actions": [
+    {
+      "name": "runbook",
+      "definition": {
+        "customAction": {
+          "url": "https://example.com/runbook"
+        }
+      }
+    },
+    {
+      "name": "related",
+      "definition": {
+        "goToDashboardAction": {
+          "dashboardId": "00000000-0000-4000-8000-000000000002"
+        }
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "name": "logs",
+      "scope": {
+        "allWidgets": {}
+      },
+      "source": {
+        "logs": {}
+      }
+    },
+    {
+      "name": "metrics",
+      "scope": {
+        "specificWidgets": {}
+      },
+      "source": {
+        "metrics": {}
+      }
+    },
+    {
+      "name": "manual",
+      "source": {
+        "manual": {}
+      }
+    },
+    {
+      "name": "dataprime",
+      "source": {
+        "dataprime": {}
+      }
+    },
+    {
+      "name": "spans",
+      "source": {
+        "spans": {}
+      }
+    }
+  ]
+}

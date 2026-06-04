@@ -17,6 +17,7 @@ package examples
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 	"reflect"
 	"strings"
 	"testing"
@@ -144,47 +145,13 @@ func TestDashboardVariantFixtures(t *testing.T) {
 
 func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 	tests := []struct {
-		name      string
-		configure func(map[string]interface{})
-		paths     [][]interface{}
+		name    string
+		fixture string
+		paths   [][]interface{}
 	}{
 		{
-			name: "mixed widget definitions and queries",
-			configure: func(raw map[string]interface{}) {
-				setDashboardWidgets(raw, []interface{}{
-					dashboardWidget("line", "line", map[string]interface{}{
-						"lineChart": map[string]interface{}{
-							"queryDefinitions": []interface{}{
-								map[string]interface{}{"id": "line-metrics", "query": map[string]interface{}{"metrics": map[string]interface{}{"promqlQuery": map[string]interface{}{"value": "up"}}}},
-								map[string]interface{}{"id": "line-logs", "query": map[string]interface{}{"logs": map[string]interface{}{"aggregations": []interface{}{map[string]interface{}{"count": map[string]interface{}{}}}}}},
-							},
-						},
-					}),
-					dashboardWidget("bar", "bar", map[string]interface{}{
-						"barChart": map[string]interface{}{
-							"query":    map[string]interface{}{"metrics": map[string]interface{}{"promqlQuery": map[string]interface{}{"value": "up"}}},
-							"colorsBy": map[string]interface{}{"aggregation": map[string]interface{}{}},
-							"xAxis":    map[string]interface{}{"time": map[string]interface{}{}},
-						},
-					}),
-					dashboardWidget("table", "table", map[string]interface{}{
-						"dataTable": map[string]interface{}{
-							"query": map[string]interface{}{"logs": map[string]interface{}{"aggregations": []interface{}{map[string]interface{}{"count": map[string]interface{}{}}}}},
-						},
-					}),
-					dashboardWidget("dynamic", "dynamic", map[string]interface{}{
-						"dynamic": map[string]interface{}{
-							"queryDefinitions": []interface{}{map[string]interface{}{"id": "dynamic-spans", "query": map[string]interface{}{"spans": map[string]interface{}{}}}},
-							"visualization":    map[string]interface{}{"table": map[string]interface{}{}},
-						},
-					}),
-					dashboardWidget("gauge", "gauge", map[string]interface{}{"gauge": map[string]interface{}{"query": map[string]interface{}{"dataprime": map[string]interface{}{}}}}),
-					dashboardWidget("hexagon", "hexagon", map[string]interface{}{"hexagon": map[string]interface{}{"query": map[string]interface{}{"logs": map[string]interface{}{}}}}),
-					dashboardWidget("horizontal", "horizontal", map[string]interface{}{"horizontalBarChart": map[string]interface{}{"query": map[string]interface{}{"spans": map[string]interface{}{}}, "yAxisViewBy": map[string]interface{}{"category": map[string]interface{}{}}}}),
-					dashboardWidget("markdown", "markdown", map[string]interface{}{"markdown": map[string]interface{}{"markdownText": "OpenAPI dashboard fixture"}}),
-					dashboardWidget("pie", "pie", map[string]interface{}{"pieChart": map[string]interface{}{"query": map[string]interface{}{"metrics": map[string]interface{}{"promqlQuery": map[string]interface{}{"value": "up"}}}}}),
-				})
-			},
+			name:    "mixed widget definitions and queries",
+			fixture: "dashboard_variant_mixed_widgets.json",
 			paths: [][]interface{}{
 				{"layout", "sections", 0, "rows", 0, "widgets", 0, "definition", "lineChart", "queryDefinitions", 0, "query", "metrics"},
 				{"layout", "sections", 0, "rows", 0, "widgets", 1, "definition", "barChart", "colorsBy", "aggregation"},
@@ -198,23 +165,8 @@ func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 			},
 		},
 		{
-			name: "dashboard variables and filters",
-			configure: func(raw map[string]interface{}) {
-				raw["variables"] = []interface{}{
-					map[string]interface{}{"name": "env", "definition": map[string]interface{}{"constant": map[string]interface{}{"value": "production"}}},
-					map[string]interface{}{"name": "service", "definition": map[string]interface{}{"multiSelect": map[string]interface{}{"selection": map[string]interface{}{"list": map[string]interface{}{"values": []interface{}{"api", "worker"}}}, "selected": []interface{}{"api"}}}},
-				}
-				raw["variablesV2"] = []interface{}{
-					map[string]interface{}{"name": "query", "source": map[string]interface{}{"query": map[string]interface{}{"logsQuery": map[string]interface{}{}}}, "value": map[string]interface{}{"singleString": map[string]interface{}{"value": map[string]interface{}{"value": "api", "label": "API"}}}},
-					map[string]interface{}{"name": "static", "source": map[string]interface{}{"static": map[string]interface{}{"values": []interface{}{map[string]interface{}{"value": "api", "label": "API"}}}}, "value": map[string]interface{}{"multiString": map[string]interface{}{"list": map[string]interface{}{"values": []interface{}{map[string]interface{}{"value": map[string]interface{}{"value": "api", "label": "API"}}}}}}},
-					map[string]interface{}{"name": "textbox", "source": map[string]interface{}{"textbox": map[string]interface{}{}}, "value": map[string]interface{}{"regex": map[string]interface{}{"value": map[string]interface{}{"value": "api.*", "label": "API services"}}}},
-				}
-				raw["filters"] = []interface{}{
-					map[string]interface{}{"displayName": "logs", "source": map[string]interface{}{"logs": map[string]interface{}{}}},
-					map[string]interface{}{"displayName": "metrics", "source": map[string]interface{}{"metrics": map[string]interface{}{}}},
-					map[string]interface{}{"displayName": "spans", "source": map[string]interface{}{"spans": map[string]interface{}{}}},
-				}
-			},
+			name:    "dashboard variables and filters",
+			fixture: "dashboard_variant_variables_filters.json",
 			paths: [][]interface{}{
 				{"variables", 0, "definition", "constant"},
 				{"variables", 1, "definition", "multiSelect", "selection", "list"},
@@ -227,20 +179,8 @@ func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 			},
 		},
 		{
-			name: "dashboard actions and annotations",
-			configure: func(raw map[string]interface{}) {
-				raw["actions"] = []interface{}{
-					map[string]interface{}{"name": "runbook", "definition": map[string]interface{}{"customAction": map[string]interface{}{"url": "https://example.com/runbook"}}},
-					map[string]interface{}{"name": "related", "definition": map[string]interface{}{"goToDashboardAction": map[string]interface{}{"dashboardId": "00000000-0000-4000-8000-000000000002"}}},
-				}
-				raw["annotations"] = []interface{}{
-					map[string]interface{}{"name": "logs", "scope": map[string]interface{}{"allWidgets": map[string]interface{}{}}, "source": map[string]interface{}{"logs": map[string]interface{}{}}},
-					map[string]interface{}{"name": "metrics", "scope": map[string]interface{}{"specificWidgets": map[string]interface{}{}}, "source": map[string]interface{}{"metrics": map[string]interface{}{}}},
-					map[string]interface{}{"name": "manual", "source": map[string]interface{}{"manual": map[string]interface{}{}}},
-					map[string]interface{}{"name": "dataprime", "source": map[string]interface{}{"dataprime": map[string]interface{}{}}},
-					map[string]interface{}{"name": "spans", "source": map[string]interface{}{"spans": map[string]interface{}{}}},
-				}
-			},
+			name:    "dashboard actions and annotations",
+			fixture: "dashboard_variant_actions_annotations.json",
 			paths: [][]interface{}{
 				{"actions", 0, "definition", "customAction"},
 				{"actions", 1, "definition", "goToDashboardAction"},
@@ -254,28 +194,8 @@ func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 			},
 		},
 		{
-			name: "dynamic visualizations",
-			configure: func(raw map[string]interface{}) {
-				widgets := make([]interface{}, 0)
-				for _, visualization := range []string{
-					"gauge", "geomap", "heatmap", "hexagonBins", "horizontalBars",
-					"horizontalBarsMulti", "pieChart", "stat", "statCard", "table",
-					"timeSeriesBars", "timeSeriesLines", "timeSeriesLinesMulti",
-					"verticalBars", "verticalBarsMulti",
-				} {
-					value := map[string]interface{}{}
-					if visualization == "heatmap" {
-						value["preset"] = "HEATMAP_COLOR_PRESET_BLUE"
-					}
-					widgets = append(widgets, dashboardWidget(visualization, visualization, map[string]interface{}{
-						"dynamic": map[string]interface{}{
-							"queryDefinitions": []interface{}{map[string]interface{}{"id": visualization, "query": map[string]interface{}{"logs": map[string]interface{}{}}}},
-							"visualization":    map[string]interface{}{visualization: value},
-						},
-					}))
-				}
-				setDashboardWidgets(raw, widgets)
-			},
+			name:    "dynamic visualizations",
+			fixture: "dashboard_variant_dynamic_visualizations.json",
 			paths: [][]interface{}{
 				{"layout", "sections", 0, "rows", 0, "widgets", 0, "definition", "dynamic", "visualization", "gauge"},
 				{"layout", "sections", 0, "rows", 0, "widgets", 1, "definition", "dynamic", "visualization", "geomap"},
@@ -288,11 +208,7 @@ func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			raw := dashboardFixtureMap(t)
-			raw["name"] = "dashboard OpenAPI " + tt.name
-			raw["description"] = "dashboard OpenAPI full object variant fixture"
-			tt.configure(raw)
-
+			raw := dashboardVariantFixtureMap(t, tt.fixture)
 			roundTrip := roundTripDashboardFixture(t, raw)
 			for _, path := range tt.paths {
 				requireDashboardPath(t, roundTrip, path...)
@@ -305,30 +221,15 @@ func dashboardVariantName(v interface{}) string {
 	return strings.TrimPrefix(reflect.TypeOf(v).String(), "*dashboard_service.")
 }
 
-func setDashboardWidgets(raw map[string]interface{}, widgets []interface{}) {
-	raw["layout"] = map[string]interface{}{
-		"sections": []interface{}{
-			map[string]interface{}{
-				"id": map[string]interface{}{"value": "section"},
-				"rows": []interface{}{
-					map[string]interface{}{
-						"id":         map[string]interface{}{"value": "row"},
-						"appearance": map[string]interface{}{"height": 12},
-						"widgets":    widgets,
-					},
-				},
-			},
-		},
-	}
-}
+func dashboardVariantFixtureMap(t *testing.T, fixture string) map[string]interface{} {
+	t.Helper()
 
-func dashboardWidget(id, title string, definition map[string]interface{}) map[string]interface{} {
-	return map[string]interface{}{
-		"id":         map[string]interface{}{"value": id},
-		"title":      title,
-		"definition": definition,
-		"appearance": map[string]interface{}{"width": 0},
-	}
+	data, err := os.ReadFile(fixture)
+	require.NoError(t, err)
+
+	var raw map[string]interface{}
+	require.NoError(t, json.Unmarshal(data, &raw))
+	return raw
 }
 
 func roundTripDashboardFixture(t *testing.T, raw map[string]interface{}) map[string]interface{} {

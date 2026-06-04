@@ -1,0 +1,221 @@
+{
+  "name": "dashboard OpenAPI mixed widget definitions and queries",
+  "description": "dashboard OpenAPI full object variant fixture",
+  "relativeTimeFrame": "900s",
+  "off": {},
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "section"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "row"
+            },
+            "appearance": {
+              "height": 12
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "line"
+                },
+                "title": "line",
+                "definition": {
+                  "lineChart": {
+                    "queryDefinitions": [
+                      {
+                        "id": "line-metrics",
+                        "query": {
+                          "metrics": {
+                            "promqlQuery": {
+                              "value": "up"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "id": "line-logs",
+                        "query": {
+                          "logs": {
+                            "aggregations": [
+                              {
+                                "count": {}
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "bar"
+                },
+                "title": "bar",
+                "definition": {
+                  "barChart": {
+                    "query": {
+                      "metrics": {
+                        "promqlQuery": {
+                          "value": "up"
+                        }
+                      }
+                    },
+                    "colorsBy": {
+                      "aggregation": {}
+                    },
+                    "xAxis": {
+                      "time": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "table"
+                },
+                "title": "table",
+                "definition": {
+                  "dataTable": {
+                    "query": {
+                      "logs": {
+                        "aggregations": [
+                          {
+                            "count": {}
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "dynamic"
+                },
+                "title": "dynamic",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "dynamic-spans",
+                        "query": {
+                          "spans": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "table": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "gauge"
+                },
+                "title": "gauge",
+                "definition": {
+                  "gauge": {
+                    "query": {
+                      "dataprime": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "hexagon"
+                },
+                "title": "hexagon",
+                "definition": {
+                  "hexagon": {
+                    "query": {
+                      "logs": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "horizontal"
+                },
+                "title": "horizontal",
+                "definition": {
+                  "horizontalBarChart": {
+                    "query": {
+                      "spans": {}
+                    },
+                    "yAxisViewBy": {
+                      "category": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "markdown"
+                },
+                "title": "markdown",
+                "definition": {
+                  "markdown": {
+                    "markdownText": "OpenAPI dashboard fixture"
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "pie"
+                },
+                "title": "pie",
+                "definition": {
+                  "pieChart": {
+                    "query": {
+                      "metrics": {
+                        "promqlQuery": {
+                          "value": "up"
+                        }
+                      }
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

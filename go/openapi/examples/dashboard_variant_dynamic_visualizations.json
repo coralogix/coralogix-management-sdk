@@ -1,0 +1,389 @@
+{
+  "name": "dashboard OpenAPI dynamic visualizations",
+  "description": "dashboard OpenAPI full object variant fixture",
+  "relativeTimeFrame": "900s",
+  "off": {},
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "section"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "row"
+            },
+            "appearance": {
+              "height": 12
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "gauge"
+                },
+                "title": "gauge",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "gauge",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "gauge": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "geomap"
+                },
+                "title": "geomap",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "geomap",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "geomap": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "heatmap"
+                },
+                "title": "heatmap",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "heatmap",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "heatmap": {
+                        "preset": "HEATMAP_COLOR_PRESET_BLUE"
+                      }
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "hexagonBins"
+                },
+                "title": "hexagonBins",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "hexagonBins",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "hexagonBins": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "horizontalBars"
+                },
+                "title": "horizontalBars",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "horizontalBars",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "horizontalBars": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "horizontalBarsMulti"
+                },
+                "title": "horizontalBarsMulti",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "horizontalBarsMulti",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "horizontalBarsMulti": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "pieChart"
+                },
+                "title": "pieChart",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "pieChart",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "pieChart": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "stat"
+                },
+                "title": "stat",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "stat",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "stat": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "statCard"
+                },
+                "title": "statCard",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "statCard",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "statCard": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "table"
+                },
+                "title": "table",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "table",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "table": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "timeSeriesBars"
+                },
+                "title": "timeSeriesBars",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "timeSeriesBars",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "timeSeriesBars": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "timeSeriesLines"
+                },
+                "title": "timeSeriesLines",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "timeSeriesLines",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "timeSeriesLines": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "timeSeriesLinesMulti"
+                },
+                "title": "timeSeriesLinesMulti",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "timeSeriesLinesMulti",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "timeSeriesLinesMulti": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "verticalBars"
+                },
+                "title": "verticalBars",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "verticalBars",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "verticalBars": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "verticalBarsMulti"
+                },
+                "title": "verticalBarsMulti",
+                "definition": {
+                  "dynamic": {
+                    "queryDefinitions": [
+                      {
+                        "id": "verticalBarsMulti",
+                        "query": {
+                          "logs": {}
+                        }
+                      }
+                    ],
+                    "visualization": {
+                      "verticalBarsMulti": {}
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "name": "dashboard OpenAPI dashboard variables and filters",
+  "description": "dashboard OpenAPI full object variant fixture",
+  "relativeTimeFrame": "900s",
+  "off": {},
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "section"
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "row"
+            },
+            "appearance": {
+              "height": 12
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "markdown"
+                },
+                "title": "markdown",
+                "definition": {
+                  "markdown": {
+                    "markdownText": "OpenAPI dashboard fixture"
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "variables": [
+    {
+      "name": "env",
+      "definition": {
+        "constant": {
+          "value": "production"
+        }
+      }
+    },
+    {
+      "name": "service",
+      "definition": {
+        "multiSelect": {
+          "selection": {
+            "list": {
+              "values": [
+                "api",
+                "worker"
+              ]
+            }
+          },
+          "selected": [
+            "api"
+          ]
+        }
+      }
+    }
+  ],
+  "variablesV2": [
+    {
+      "name": "query",
+      "source": {
+        "query": {
+          "logsQuery": {}
+        }
+      },
+      "value": {
+        "singleString": {
+          "value": {
+            "value": "api",
+            "label": "API"
+          }
+        }
+      }
+    },
+    {
+      "name": "static",
+      "source": {
+        "static": {
+          "values": [
+            {
+              "value": "api",
+              "label": "API"
+            }
+          ]
+        }
+      },
+      "value": {
+        "multiString": {
+          "list": {
+            "values": [
+              {
+                "value": {
+                  "value": "api",
+                  "label": "API"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "textbox",
+      "source": {
+        "textbox": {}
+      },
+      "value": {
+        "regex": {
+          "value": {
+            "value": "api.*",
+            "label": "API services"
+          }
+        }
+      }
+    }
+  ],
+  "filters": [
+    {
+      "displayName": "logs",
+      "source": {
+        "logs": {}
+      }
+    },
+    {
+      "displayName": "metrics",
+      "source": {
+        "metrics": {}
+      }
+    },
+    {
+      "displayName": "spans",
+      "source": {
+        "spans": {}
+      }
+    }
+  ]
+}
