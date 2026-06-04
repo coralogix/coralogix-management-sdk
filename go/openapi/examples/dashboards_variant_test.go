@@ -104,7 +104,15 @@ func TestDashboardVariantFixtures(t *testing.T) {
 			for _, folder := range folders {
 				name := fmt.Sprintf("%s/%s/%s", timeFrame.field, refresh.field, folder.name)
 				t.Run(name, func(t *testing.T) {
-					raw := minimalDashboardVariantJSON(name)
+					raw := dashboardFixtureMap(t)
+					raw["name"] = name
+					raw["description"] = "dashboard OpenAPI variant fixture"
+					for _, candidate := range timeFrames {
+						delete(raw, candidate.field)
+					}
+					for _, candidate := range refreshes {
+						delete(raw, candidate.field)
+					}
 					raw[timeFrame.field] = timeFrame.value
 					raw[refresh.field] = map[string]interface{}{}
 					folder.configure(raw)
@@ -134,787 +142,162 @@ func TestDashboardVariantFixtures(t *testing.T) {
 	}
 }
 
-type generatedOneOf interface {
-	GetActualInstance() interface{}
-}
-
-func TestDashboardConfigOneOfFixtures(t *testing.T) {
+func TestDashboardFullObjectVariantFixtures(t *testing.T) {
 	tests := []struct {
-		name    string
-		payload string
-		target  func() generatedOneOf
-		want    string
-	}{
-		{name: "action custom", payload: `{"customAction":{}}`, target: func() generatedOneOf { return &dashboards.ActionDefinition{} }, want: "ActionDefinitionCustomAction"},
-		{name: "action go to dashboard", payload: `{"goToDashboardAction":{}}`, target: func() generatedOneOf { return &dashboards.ActionDefinition{} }, want: "ActionDefinitionGoToDashboardAction"},
-		{name: "annotation source dataprime", payload: `{"dataprime":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceDataprime"},
-		{name: "annotation source event recurrence", payload: `{"eventRecurrence":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceEventRecurrence"},
-		{name: "annotation source logs", payload: `{"logs":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceLogs"},
-		{name: "annotation source manual", payload: `{"manual":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceManual"},
-		{name: "annotation source metrics", payload: `{"metrics":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceMetrics"},
-		{name: "annotation source spans", payload: `{"spans":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationSource{} }, want: "AnnotationSourceSpans"},
-		{name: "annotation scope all widgets", payload: `{"allWidgets":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationWidgetScope{} }, want: "AnnotationWidgetScopeAllWidgetsVariant"},
-		{name: "annotation scope specific widgets", payload: `{"specificWidgets":{}}`, target: func() generatedOneOf { return &dashboards.AnnotationWidgetScope{} }, want: "AnnotationWidgetScopeSpecificWidgetsVariant"},
-		{name: "color label range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.ColorLabelMapping{} }, want: "ColorLabelMappingRange"},
-		{name: "color label regex", payload: `{"regex":{}}`, target: func() generatedOneOf { return &dashboards.ColorLabelMapping{} }, want: "ColorLabelMappingRegex"},
-		{name: "color label value", payload: `{"value":{}}`, target: func() generatedOneOf { return &dashboards.ColorLabelMapping{} }, want: "ColorLabelMappingValue"},
-		{name: "colors by aggregation", payload: `{"aggregation":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByAggregationVariant"},
-		{name: "colors by category", payload: `{"category":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByCategoryVariant"},
-		{name: "colors by group by", payload: `{"groupBy":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByGroupByVariant"},
-		{name: "colors by query", payload: `{"query":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByQueryVariant"},
-		{name: "colors by stack", payload: `{"stack":{}}`, target: func() generatedOneOf { return &dashboards.ColorsBy{} }, want: "ColorsByStackVariant"},
-		{name: "dataprime source duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.DataprimeSourceStrategy{} }, want: "DataprimeSourceStrategyDurationVariant"},
-		{name: "dataprime source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.DataprimeSourceStrategy{} }, want: "DataprimeSourceStrategyInstantVariant"},
-		{name: "dataprime source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.DataprimeSourceStrategy{} }, want: "DataprimeSourceStrategyRangeVariant"},
-		{name: "display template mapped values", payload: `{"mappedValues":{}}`, target: func() generatedOneOf { return &dashboards.DisplayNameTemplateVariable{} }, want: "DisplayNameTemplateVariableMappedValues"},
-		{name: "display template observation field", payload: `{"observationField":{}}`, target: func() generatedOneOf { return &dashboards.DisplayNameTemplateVariable{} }, want: "DisplayNameTemplateVariableObservationField"},
-		{name: "event recurrence duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.EventRecurrenceSourceStrategy{} }, want: "EventRecurrenceSourceStrategyDurationVariant"},
-		{name: "event recurrence instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.EventRecurrenceSourceStrategy{} }, want: "EventRecurrenceSourceStrategyInstantVariant"},
-		{name: "filter path filters", payload: `{"filters":{"pathAndValues":[]},"path":"service.name"}`, target: func() generatedOneOf { return &dashboards.FilterPathAndValues{} }, want: "FilterPathAndValuesFilters"},
-		{name: "filter path multiple values", payload: `{"multipleValues":{},"path":"service.name"}`, target: func() generatedOneOf { return &dashboards.FilterPathAndValues{} }, want: "FilterPathAndValuesMultipleValues"},
-		{name: "filter source logs", payload: `{"logs":{}}`, target: func() generatedOneOf { return &dashboards.FilterSource{} }, want: "FilterSourceLogs"},
-		{name: "filter source metrics", payload: `{"metrics":{}}`, target: func() generatedOneOf { return &dashboards.FilterSource{} }, want: "FilterSourceMetrics"},
-		{name: "filter source spans", payload: `{"spans":{}}`, target: func() generatedOneOf { return &dashboards.FilterSource{} }, want: "FilterSourceSpans"},
-		{name: "geomap aggregation avg", payload: `{"avg":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationAvg"},
-		{name: "geomap aggregation count", payload: `{"count":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationCount"},
-		{name: "geomap aggregation max", payload: `{"max":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationMax"},
-		{name: "geomap aggregation min", payload: `{"min":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationMin"},
-		{name: "geomap aggregation sum", payload: `{"sum":{}}`, target: func() generatedOneOf { return &dashboards.GeomapAggregation{} }, want: "GeomapAggregationSum"},
-		{name: "geomap color range", payload: `{"colorRange":"COLOR_GRADIENT_TYPE_BLUE"}`, target: func() generatedOneOf { return &dashboards.GeomapColor{} }, want: "GeomapColorColorRange"},
-		{name: "geomap color size", payload: `{"size":"COLOR_SOLID_TYPE_BLUE"}`, target: func() generatedOneOf { return &dashboards.GeomapColor{} }, want: "GeomapColorSize"},
-		{name: "geomap field aws region", payload: `{"awsRegionConfig":{}}`, target: func() generatedOneOf { return &dashboards.GeomapFieldConfig{} }, want: "GeomapFieldConfigAwsRegionConfig"},
-		{name: "geomap field coordinate", payload: `{"coordinateConfig":{}}`, target: func() generatedOneOf { return &dashboards.GeomapFieldConfig{} }, want: "GeomapFieldConfigCoordinateConfig"},
-		{name: "heatmap color range", payload: `{"colorRange":"COLOR_GRADIENT_TYPE_BLUE"}`, target: func() generatedOneOf { return &dashboards.Heatmap{} }, want: "HeatmapColorRange"},
-		{name: "heatmap preset", payload: `{"preset":"HEATMAP_COLOR_PRESET_BLUE"}`, target: func() generatedOneOf { return &dashboards.Heatmap{} }, want: "HeatmapPreset"},
-		{name: "horizontal bar y axis category", payload: `{"category":{}}`, target: func() generatedOneOf { return &dashboards.HorizontalBarChartYAxisViewBy{} }, want: "HorizontalBarChartYAxisViewByCategory"},
-		{name: "horizontal bar y axis value", payload: `{"value":{}}`, target: func() generatedOneOf { return &dashboards.HorizontalBarChartYAxisViewBy{} }, want: "HorizontalBarChartYAxisViewByValue"},
-		{name: "interval auto", payload: `{"auto":{}}`, target: func() generatedOneOf { return &dashboards.IntervalResolution{} }, want: "IntervalResolutionAuto"},
-		{name: "interval manual", payload: `{"manual":{"interval":"60s"}}`, target: func() generatedOneOf { return &dashboards.IntervalResolution{} }, want: "IntervalResolutionManual"},
-		{name: "logs source duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.LogsSourceStrategy{} }, want: "LogsSourceStrategyDurationVariant"},
-		{name: "logs source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.LogsSourceStrategy{} }, want: "LogsSourceStrategyInstantVariant"},
-		{name: "logs source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.LogsSourceStrategy{} }, want: "LogsSourceStrategyRangeVariant"},
-		{name: "manual source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.ManualSourceStrategy{} }, want: "ManualSourceStrategyInstantVariant"},
-		{name: "manual source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.ManualSourceStrategy{} }, want: "ManualSourceStrategyRangeVariant"},
-		{name: "min max auto", payload: `{"auto":{}}`, target: func() generatedOneOf { return &dashboards.MinMax{} }, want: "MinMaxAutoVariant"},
-		{name: "min max custom", payload: `{"custom":{}}`, target: func() generatedOneOf { return &dashboards.MinMax{} }, want: "MinMaxCustomVariant"},
-		{name: "multi string all", payload: `{"all":{}}`, target: func() generatedOneOf { return &dashboards.MultiStringValue{} }, want: "MultiStringValueAll"},
-		{name: "multi string list", payload: `{"list":{}}`, target: func() generatedOneOf { return &dashboards.MultiStringValue{} }, want: "MultiStringValueList"},
-		{name: "multi string selected all", payload: `{"selectedAll":{}}`, target: func() generatedOneOf { return &dashboards.MultiStringValue{} }, want: "MultiStringValueSelectedAll"},
-		{name: "property alignment", payload: `{"alignment":"TEXT_ALIGNMENT_LEFT"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionAlignment"},
-		{name: "property column display name", payload: `{"columnDisplayName":"Service"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionColumnDisplayName"},
-		{name: "property link", payload: `{"link":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionLink"},
-		{name: "property regex extract", payload: `{"regexExtract":"service=(.*)"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionRegexExtract"},
-		{name: "property thresholds", payload: `{"thresholds":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionThresholds"},
-		{name: "property units", payload: `{"units":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionUnits"},
-		{name: "property values alias", payload: `{"valuesAlias":"alias"}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionValuesAlias"},
-		{name: "property values mapping", payload: `{"valuesMapping":{}}`, target: func() generatedOneOf { return &dashboards.PropertyDefinition{} }, want: "PropertyDefinitionValuesMapping"},
-		{name: "query source logs field name", payload: `{"fieldName":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceLogsQueryType{} }, want: "QuerySourceLogsQueryTypeFieldNameVariant"},
-		{name: "query source logs field value", payload: `{"fieldValue":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceLogsQueryType{} }, want: "QuerySourceLogsQueryTypeFieldValueVariant"},
-		{name: "query source metrics equals", payload: `{"equals":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryOperator{} }, want: "QuerySourceMetricsQueryOperatorEquals"},
-		{name: "query source metrics not equals", payload: `{"notEquals":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryOperator{} }, want: "QuerySourceMetricsQueryOperatorNotEquals"},
-		{name: "query source metrics string value", payload: `{"stringValue":"up"}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryStringOrVariable{} }, want: "QuerySourceMetricsQueryStringOrVariableStringValue"},
-		{name: "query source metrics variable name", payload: `{"variableName":"metric"}`, target: func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryStringOrVariable{} }, want: "QuerySourceMetricsQueryStringOrVariableVariableName"},
-		{name: "query source spans field name", payload: `{"fieldName":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceSpansQueryType{} }, want: "QuerySourceSpansQueryTypeFieldNameVariant"},
-		{name: "query source spans field value", payload: `{"fieldValue":{}}`, target: func() generatedOneOf { return &dashboards.QuerySourceSpansQueryType{} }, want: "QuerySourceSpansQueryTypeFieldValueVariant"},
-		{name: "rule scope field", payload: `{"field":{}}`, target: func() generatedOneOf { return &dashboards.RuleScope{} }, want: "RuleScopeField"},
-		{name: "rule scope field type", payload: `{"fieldType":"FIELD_DATA_TYPE_STRING"}`, target: func() generatedOneOf { return &dashboards.RuleScope{} }, want: "RuleScopeFieldType"},
-		{name: "rule scope regex", payload: `{"regex":"service.*"}`, target: func() generatedOneOf { return &dashboards.RuleScope{} }, want: "RuleScopeRegex"},
-		{name: "section options custom", payload: `{"custom":{}}`, target: func() generatedOneOf { return &dashboards.SectionOptions{} }, want: "SectionOptionsCustom"},
-		{name: "section options internal", payload: `{"internal":{}}`, target: func() generatedOneOf { return &dashboards.SectionOptions{} }, want: "SectionOptionsInternal"},
-		{name: "sort category", payload: `{"category":{}}`, target: func() generatedOneOf { return &dashboards.SortStrategy{} }, want: "SortStrategyCategory"},
-		{name: "sort query value", payload: `{"queryValue":{}}`, target: func() generatedOneOf { return &dashboards.SortStrategy{} }, want: "SortStrategyQueryValue"},
-		{name: "span field metadata", payload: `{"metadataField":"METADATA_FIELD_SERVICE_NAME"}`, target: func() generatedOneOf { return &dashboards.SpanField{} }, want: "SpanFieldMetadataField"},
-		{name: "span field process tag", payload: `{"processTagField":"process.tag"}`, target: func() generatedOneOf { return &dashboards.SpanField{} }, want: "SpanFieldProcessTagField"},
-		{name: "span field tag", payload: `{"tagField":"service.name"}`, target: func() generatedOneOf { return &dashboards.SpanField{} }, want: "SpanFieldTagField"},
-		{name: "spans aggregation dimension", payload: `{"dimensionAggregation":{}}`, target: func() generatedOneOf { return &dashboards.SpansAggregation{} }, want: "SpansAggregationDimensionAggregation"},
-		{name: "spans aggregation metric", payload: `{"metricAggregation":{}}`, target: func() generatedOneOf { return &dashboards.SpansAggregation{} }, want: "SpansAggregationMetricAggregation"},
-		{name: "spans source duration", payload: `{"duration":{}}`, target: func() generatedOneOf { return &dashboards.SpansSourceStrategy{} }, want: "SpansSourceStrategyDurationVariant"},
-		{name: "spans source instant", payload: `{"instant":{}}`, target: func() generatedOneOf { return &dashboards.SpansSourceStrategy{} }, want: "SpansSourceStrategyInstantVariant"},
-		{name: "spans source range", payload: `{"range":{}}`, target: func() generatedOneOf { return &dashboards.SpansSourceStrategy{} }, want: "SpansSourceStrategyRangeVariant"},
-		{name: "stat visual mapped values", payload: `{"mappedValues":{}}`, target: func() generatedOneOf { return &dashboards.StatVisualElement{} }, want: "StatVisualElementMappedValues"},
-		{name: "stat visual observation field", payload: `{"observationField":{}}`, target: func() generatedOneOf { return &dashboards.StatVisualElement{} }, want: "StatVisualElementObservationField"},
-		{name: "textbox default interval", payload: `{"defaultIntervalValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultIntervalValue"},
-		{name: "textbox default lucene", payload: `{"defaultLuceneValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultLuceneValue"},
-		{name: "textbox default numeric", payload: `{"defaultNumericValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultNumericValue"},
-		{name: "textbox default regex", payload: `{"defaultRegexValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultRegexValue"},
-		{name: "textbox default string", payload: `{"defaultStringValue":{}}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueDefaultStringValue"},
-		{name: "textbox single numeric", payload: `{"singleNumeric":1}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueSingleNumeric"},
-		{name: "textbox single string", payload: `{"singleString":"value"}`, target: func() generatedOneOf { return &dashboards.TextboxDefaultValue{} }, want: "TextboxDefaultValueSingleString"},
-		{name: "x axis time", payload: `{"time":{}}`, target: func() generatedOneOf { return &dashboards.XAxis{} }, want: "XAxisTime"},
-		{name: "x axis time buckets", payload: `{"timeBuckets":{"auto":{}}}`, target: func() generatedOneOf { return &dashboards.XAxis{} }, want: "XAxisTimeBuckets"},
-		{name: "x axis value", payload: `{"value":{}}`, target: func() generatedOneOf { return &dashboards.XAxis{} }, want: "XAxisValue"},
-	}
-
-	runDashboardOneOfFixtureTable(t, tests)
-}
-
-func TestDashboardNestedOneOfFixtures(t *testing.T) {
-	tests := []struct {
-		name    string
-		payload string
-		target  func() generatedOneOf
-		want    string
+		name      string
+		configure func(map[string]interface{})
+		paths     [][]interface{}
 	}{
 		{
-			name:    "widget line chart",
-			payload: `{"lineChart":{"queryDefinitions":[]}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionLineChart",
-		},
-		{
-			name:    "widget bar chart",
-			payload: `{"barChart":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionBarChart",
-		},
-		{
-			name:    "widget data table",
-			payload: `{"dataTable":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionDataTable",
-		},
-		{
-			name:    "widget dynamic",
-			payload: `{"dynamic":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionDynamic",
-		},
-		{
-			name:    "widget gauge",
-			payload: `{"gauge":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionGauge",
-		},
-		{
-			name:    "widget hexagon",
-			payload: `{"hexagon":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionHexagon",
-		},
-		{
-			name:    "widget horizontal bar chart",
-			payload: `{"horizontalBarChart":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionHorizontalBarChart",
-		},
-		{
-			name:    "widget markdown",
-			payload: `{"markdown":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionMarkdown",
-		},
-		{
-			name:    "widget pie chart",
-			payload: `{"pieChart":{}}`,
-			target:  func() generatedOneOf { return &dashboards.WidgetDefinition{} },
-			want:    "WidgetDefinitionPieChart",
-		},
-		{
-			name:    "bar chart dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.BarChartQuery{} },
-			want:    "BarChartQueryDataprime",
-		},
-		{
-			name:    "bar chart logs query",
-			payload: `{"logs":{}}`,
-			target:  func() generatedOneOf { return &dashboards.BarChartQuery{} },
-			want:    "BarChartQueryLogs",
-		},
-		{
-			name:    "bar chart metrics query",
-			payload: `{"metrics":{}}`,
-			target:  func() generatedOneOf { return &dashboards.BarChartQuery{} },
-			want:    "BarChartQueryMetrics",
-		},
-		{
-			name:    "bar chart spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.BarChartQuery{} },
-			want:    "BarChartQuerySpans",
-		},
-		{
-			name:    "dynamic dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.DynamicQuery{} },
-			want:    "DynamicQueryDataprime",
-		},
-		{
-			name:    "dynamic logs query",
-			payload: `{"logs":{}}`,
-			target:  func() generatedOneOf { return &dashboards.DynamicQuery{} },
-			want:    "DynamicQueryLogs",
-		},
-		{
-			name:    "dynamic metrics query",
-			payload: `{"metrics":{}}`,
-			target:  func() generatedOneOf { return &dashboards.DynamicQuery{} },
-			want:    "DynamicQueryMetrics",
-		},
-		{
-			name:    "dynamic spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.DynamicQuery{} },
-			want:    "DynamicQuerySpans",
-		},
-		{
-			name:    "gauge dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.GaugeQuery{} },
-			want:    "GaugeQueryDataprime",
-		},
-		{
-			name:    "gauge logs query",
-			payload: `{"logs":{}}`,
-			target:  func() generatedOneOf { return &dashboards.GaugeQuery{} },
-			want:    "GaugeQueryLogs",
-		},
-		{
-			name:    "gauge metrics query",
-			payload: `{"metrics":{}}`,
-			target:  func() generatedOneOf { return &dashboards.GaugeQuery{} },
-			want:    "GaugeQueryMetrics",
-		},
-		{
-			name:    "gauge spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.GaugeQuery{} },
-			want:    "GaugeQuerySpans",
-		},
-		{
-			name:    "hexagon dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HexagonQuery{} },
-			want:    "HexagonQueryDataprime",
-		},
-		{
-			name:    "hexagon logs query",
-			payload: `{"logs":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HexagonQuery{} },
-			want:    "HexagonQueryLogs",
-		},
-		{
-			name:    "hexagon metrics query",
-			payload: `{"metrics":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HexagonQuery{} },
-			want:    "HexagonQueryMetrics",
-		},
-		{
-			name:    "hexagon spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HexagonQuery{} },
-			want:    "HexagonQuerySpans",
-		},
-		{
-			name:    "horizontal bar chart dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HorizontalBarChartQuery{} },
-			want:    "HorizontalBarChartQueryDataprime",
-		},
-		{
-			name:    "horizontal bar chart logs query",
-			payload: `{"logs":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HorizontalBarChartQuery{} },
-			want:    "HorizontalBarChartQueryLogs",
-		},
-		{
-			name:    "horizontal bar chart metrics query",
-			payload: `{"metrics":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HorizontalBarChartQuery{} },
-			want:    "HorizontalBarChartQueryMetrics",
-		},
-		{
-			name:    "horizontal bar chart spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.HorizontalBarChartQuery{} },
-			want:    "HorizontalBarChartQuerySpans",
-		},
-		{
-			name:    "pie chart dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.PieChartQuery{} },
-			want:    "PieChartQueryDataprime",
-		},
-		{
-			name:    "pie chart logs query",
-			payload: `{"logs":{}}`,
-			target:  func() generatedOneOf { return &dashboards.PieChartQuery{} },
-			want:    "PieChartQueryLogs",
-		},
-		{
-			name:    "pie chart metrics query",
-			payload: `{"metrics":{}}`,
-			target:  func() generatedOneOf { return &dashboards.PieChartQuery{} },
-			want:    "PieChartQueryMetrics",
-		},
-		{
-			name:    "pie chart spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.PieChartQuery{} },
-			want:    "PieChartQuerySpans",
-		},
-		{
-			name:    "line chart metrics query",
-			payload: `{"metrics":{"promqlQuery":{"value":"up"}}}`,
-			target:  func() generatedOneOf { return &dashboards.LineChartQuery{} },
-			want:    "LineChartQueryMetrics",
-		},
-		{
-			name:    "line chart logs query",
-			payload: `{"logs":{"luceneQuery":{"value":"severity:warning"}}}`,
-			target:  func() generatedOneOf { return &dashboards.LineChartQuery{} },
-			want:    "LineChartQueryLogs",
-		},
-		{
-			name:    "line chart dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.LineChartQuery{} },
-			want:    "LineChartQueryDataprime",
-		},
-		{
-			name:    "line chart spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.LineChartQuery{} },
-			want:    "LineChartQuerySpans",
-		},
-		{
-			name:    "data table logs query",
-			payload: `{"logs":{"aggregations":[{"count":{}}]}}`,
-			target:  func() generatedOneOf { return &dashboards.DataTableQuery{} },
-			want:    "DataTableQueryLogs",
-		},
-		{
-			name:    "data table metrics query",
-			payload: `{"metrics":{"promqlQuery":{"value":"up"}}}`,
-			target:  func() generatedOneOf { return &dashboards.DataTableQuery{} },
-			want:    "DataTableQueryMetrics",
-		},
-		{
-			name:    "data table dataprime query",
-			payload: `{"dataprime":{}}`,
-			target:  func() generatedOneOf { return &dashboards.DataTableQuery{} },
-			want:    "DataTableQueryDataprime",
-		},
-		{
-			name:    "data table spans query",
-			payload: `{"spans":{}}`,
-			target:  func() generatedOneOf { return &dashboards.DataTableQuery{} },
-			want:    "DataTableQuerySpans",
-		},
-		{
-			name:    "logs aggregation average",
-			payload: `{"average":{"field":"duration"}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationAverage",
-		},
-		{
-			name:    "logs aggregation count",
-			payload: `{"count":{}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationCount",
-		},
-		{
-			name:    "logs aggregation count distinct",
-			payload: `{"countDistinct":{"field":"user"}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationCountDistinct",
-		},
-		{
-			name:    "logs aggregation max",
-			payload: `{"max":{"field":"duration"}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationMax",
-		},
-		{
-			name:    "logs aggregation min",
-			payload: `{"min":{"field":"duration"}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationMin",
-		},
-		{
-			name:    "logs aggregation sum",
-			payload: `{"sum":{"field":"duration"}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationSum",
-		},
-		{
-			name:    "logs aggregation percentile",
-			payload: `{"percentile":{"field":"duration","percent":99}}`,
-			target:  func() generatedOneOf { return &dashboards.LogsAggregation{} },
-			want:    "LogsAggregationPercentile",
-		},
-		{
-			name:    "filter equals",
-			payload: `{"equals":{"selection":{"list":{"values":["prod"]}}}}`,
-			target:  func() generatedOneOf { return &dashboards.FilterOperator{} },
-			want:    "FilterOperatorEquals",
-		},
-		{
-			name:    "filter not equals",
-			payload: `{"notEquals":{"selection":{"list":{"values":["dev"]}}}}`,
-			target:  func() generatedOneOf { return &dashboards.FilterOperator{} },
-			want:    "FilterOperatorNotEquals",
-		},
-		{
-			name:    "equals selection all",
-			payload: `{"all":{}}`,
-			target:  func() generatedOneOf { return &dashboards.EqualsSelection{} },
-			want:    "EqualsSelectionAll",
-		},
-		{
-			name:    "equals selection list",
-			payload: `{"list":{"values":["prod","staging"]}}`,
-			target:  func() generatedOneOf { return &dashboards.EqualsSelection{} },
-			want:    "EqualsSelectionList",
-		},
-		{
-			name:    "time frame relative",
-			payload: `{"relativeTimeFrame":"900s"}`,
-			target:  func() generatedOneOf { return &dashboards.TimeFrameSelect{} },
-			want:    "TimeFrameSelectRelativeTimeFrame",
-		},
-		{
-			name:    "time frame absolute",
-			payload: `{"absoluteTimeFrame":{"from":"2026-05-28T10:00:00Z","to":"2026-05-28T11:00:00Z"}}`,
-			target:  func() generatedOneOf { return &dashboards.TimeFrameSelect{} },
-			want:    "TimeFrameSelectAbsoluteTimeFrame",
-		},
-		{
-			name:    "variable constant",
-			payload: `{"constant":{"value":"production"}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableDefinition{} },
-			want:    "VariableDefinitionConstant",
-		},
-		{
-			name:    "variable multi select",
-			payload: `{"multiSelect":{"selection":{"all":{}},"selected":["production"]}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableDefinition{} },
-			want:    "VariableDefinitionMultiSelect",
-		},
-		{
-			name:    "multi select selection all",
-			payload: `{"all":{}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSelection{} },
-			want:    "MultiSelectSelectionAll",
-		},
-		{
-			name:    "multi select selection list",
-			payload: `{"list":{"values":["production"]}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSelection{} },
-			want:    "MultiSelectSelectionList",
-		},
-		{
-			name:    "multi select query logs",
-			payload: `{"logsQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectQuery{} },
-			want:    "MultiSelectQueryLogsQuery",
-		},
-		{
-			name:    "multi select query metrics",
-			payload: `{"metricsQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectQuery{} },
-			want:    "MultiSelectQueryMetricsQuery",
-		},
-		{
-			name:    "multi select query spans",
-			payload: `{"spansQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectQuery{} },
-			want:    "MultiSelectQuerySpansQuery",
-		},
-		{
-			name:    "multi select source constant list",
-			payload: `{"constantList":{"values":["production"]}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSource{} },
-			want:    "MultiSelectSourceConstantList",
-		},
-		{
-			name:    "multi select source logs path",
-			payload: `{"logsPath":{"path":"service"}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSource{} },
-			want:    "MultiSelectSourceLogsPath",
-		},
-		{
-			name:    "multi select source metric label",
-			payload: `{"metricLabel":{"label":"service"}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSource{} },
-			want:    "MultiSelectSourceMetricLabel",
-		},
-		{
-			name:    "multi select source query",
-			payload: `{"query":{}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSource{} },
-			want:    "MultiSelectSourceQuery",
-		},
-		{
-			name:    "multi select source span field",
-			payload: `{"spanField":{"field":"service"}}`,
-			target:  func() generatedOneOf { return &dashboards.MultiSelectSource{} },
-			want:    "MultiSelectSourceSpanField",
-		},
-		{
-			name:    "variable source query",
-			payload: `{"query":{"logsQuery":{}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2{} },
-			want:    "VariableSourceV2Query",
-		},
-		{
-			name:    "variable source static",
-			payload: `{"static":{"values":[{"value":"production","label":"Production"}]}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2{} },
-			want:    "VariableSourceV2Static",
-		},
-		{
-			name:    "variable source textbox",
-			payload: `{"textbox":{}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2{} },
-			want:    "VariableSourceV2Textbox",
-		},
-		{
-			name:    "variable query source dataprime",
-			payload: `{"dataprimeQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2QuerySource{} },
-			want:    "VariableSourceV2QuerySourceDataprimeQuery",
-		},
-		{
-			name:    "variable query source logs",
-			payload: `{"logsQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2QuerySource{} },
-			want:    "VariableSourceV2QuerySourceLogsQuery",
-		},
-		{
-			name:    "variable query source metrics",
-			payload: `{"metricsQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2QuerySource{} },
-			want:    "VariableSourceV2QuerySourceMetricsQuery",
-		},
-		{
-			name:    "variable query source spans",
-			payload: `{"spansQuery":{}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableSourceV2QuerySource{} },
-			want:    "VariableSourceV2QuerySourceSpansQuery",
-		},
-		{
-			name:    "variable value interval",
-			payload: `{"interval":{"value":{"value":"5m","label":"5m"}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableValueV2{} },
-			want:    "VariableValueV2Interval",
-		},
-		{
-			name:    "variable value lucene",
-			payload: `{"lucene":{"value":{"value":"severity:error","label":"Errors"}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableValueV2{} },
-			want:    "VariableValueV2Lucene",
-		},
-		{
-			name:    "variable value multi string",
-			payload: `{"multiString":{"list":{"values":[{"value":{"value":"production","label":"Production"}}]}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableValueV2{} },
-			want:    "VariableValueV2MultiString",
-		},
-		{
-			name:    "variable value regex",
-			payload: `{"regex":{"value":{"value":"prod.*","label":"Production"}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableValueV2{} },
-			want:    "VariableValueV2Regex",
-		},
-		{
-			name:    "variable value single numeric",
-			payload: `{"singleNumeric":{"value":{"value":42,"label":"42"}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableValueV2{} },
-			want:    "VariableValueV2SingleNumeric",
-		},
-		{
-			name:    "variable value single string",
-			payload: `{"singleString":{"value":{"value":"production","label":"Production"}}}`,
-			target:  func() generatedOneOf { return &dashboards.VariableValueV2{} },
-			want:    "VariableValueV2SingleString",
-		},
-		{
-			name:    "metric query type metric name",
-			payload: `{"metricName":{"metricRegex":"process_.*"}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryType{} },
-			want:    "QueryMetricsQueryTypeMetricNameVariant",
-		},
-		{
-			name:    "metric query type label name",
-			payload: `{"labelName":{"metricRegex":"process_.*"}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryType{} },
-			want:    "QueryMetricsQueryTypeLabelNameVariant",
-		},
-		{
-			name:    "metric query type label value",
-			payload: `{"labelValue":{}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryType{} },
-			want:    "QueryMetricsQueryTypeLabelValueVariant",
-		},
-		{
-			name:    "source metric query type metric name",
-			payload: `{"metricName":{"metricRegex":"process_.*"}}`,
-			target:  func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryType{} },
-			want:    "QuerySourceMetricsQueryTypeMetricNameVariant",
-		},
-		{
-			name:    "source metric query type label name",
-			payload: `{"labelName":{"metricRegex":"process_.*"}}`,
-			target:  func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryType{} },
-			want:    "QuerySourceMetricsQueryTypeLabelNameVariant",
-		},
-		{
-			name:    "source metric query type label value",
-			payload: `{"labelValue":{}}`,
-			target:  func() generatedOneOf { return &dashboards.QuerySourceMetricsQueryType{} },
-			want:    "QuerySourceMetricsQueryTypeLabelValueVariant",
-		},
-		{
-			name:    "logs query type field name",
-			payload: `{"fieldName":{"logRegex":"kubernetes.*"}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryLogsQueryType{} },
-			want:    "QueryLogsQueryTypeFieldNameVariant",
-		},
-		{
-			name:    "logs query type field value",
-			payload: `{"fieldValue":{}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryLogsQueryType{} },
-			want:    "QueryLogsQueryTypeFieldValueVariant",
-		},
-		{
-			name:    "spans query type field name",
-			payload: `{"fieldName":{"spanRegex":"http.*"}}`,
-			target:  func() generatedOneOf { return &dashboards.QuerySpansQueryType{} },
-			want:    "QuerySpansQueryTypeFieldNameVariant",
-		},
-		{
-			name:    "spans query type field value",
-			payload: `{"fieldValue":{}}`,
-			target:  func() generatedOneOf { return &dashboards.QuerySpansQueryType{} },
-			want:    "QuerySpansQueryTypeFieldValueVariant",
-		},
-		{
-			name:    "metrics operator equals",
-			payload: `{"equals":{"selection":{"list":{"values":[{"stringValue":"production"}]}}}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryOperator{} },
-			want:    "QueryMetricsQueryOperatorEquals",
-		},
-		{
-			name:    "metrics operator not equals",
-			payload: `{"notEquals":{"selection":{"list":{"values":[{"stringValue":"staging"}]}}}}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryOperator{} },
-			want:    "QueryMetricsQueryOperatorNotEquals",
-		},
-		{
-			name:    "metrics string or variable string",
-			payload: `{"stringValue":"production"}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryStringOrVariable{} },
-			want:    "QueryMetricsQueryStringOrVariableStringValue",
-		},
-		{
-			name:    "metrics string or variable name",
-			payload: `{"variableName":"env"}`,
-			target:  func() generatedOneOf { return &dashboards.QueryMetricsQueryStringOrVariable{} },
-			want:    "QueryMetricsQueryStringOrVariableVariableName",
-		},
-		{
-			name:    "visualization gauge",
-			payload: `{"gauge":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationGaugeVariant",
-		},
-		{
-			name:    "visualization geomap",
-			payload: `{"geomap":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationGeomap",
-		},
-		{
-			name:    "visualization heatmap",
-			payload: `{"heatmap":{"preset":"HEATMAP_COLOR_PRESET_BLUE"}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationHeatmap",
-		},
-		{
-			name:    "visualization hexagon bins",
-			payload: `{"hexagonBins":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationHexagonBins",
-		},
-		{
-			name:    "visualization horizontal bars",
-			payload: `{"horizontalBars":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationHorizontalBars",
-		},
-		{
-			name:    "visualization horizontal bars multi",
-			payload: `{"horizontalBarsMulti":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationHorizontalBarsMulti",
-		},
-		{
-			name:    "visualization pie chart",
-			payload: `{"pieChart":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationPieChartVariant",
-		},
-		{
-			name:    "visualization stat",
-			payload: `{"stat":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationStat",
-		},
-		{
-			name:    "visualization stat card",
-			payload: `{"statCard":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationStatCard",
-		},
-		{
-			name:    "visualization table",
-			payload: `{"table":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationTable",
-		},
-		{
-			name:    "visualization time series bars",
-			payload: `{"timeSeriesBars":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationTimeSeriesBars",
-		},
-		{
-			name:    "visualization time series lines",
-			payload: `{"timeSeriesLines":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationTimeSeriesLines",
-		},
-		{
-			name:    "visualization time series lines multi",
-			payload: `{"timeSeriesLinesMulti":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationTimeSeriesLinesMulti",
-		},
-		{
-			name:    "visualization vertical bars",
-			payload: `{"verticalBars":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationVerticalBars",
-		},
-		{
-			name:    "visualization vertical bars multi",
-			payload: `{"verticalBarsMulti":{}}`,
-			target:  func() generatedOneOf { return &dashboards.Visualization{} },
-			want:    "VisualizationVerticalBarsMulti",
+			name: "mixed widget definitions and queries",
+			configure: func(raw map[string]interface{}) {
+				setDashboardWidgets(raw, []interface{}{
+					dashboardWidget("line", "line", map[string]interface{}{
+						"lineChart": map[string]interface{}{
+							"queryDefinitions": []interface{}{
+								map[string]interface{}{"id": "line-metrics", "query": map[string]interface{}{"metrics": map[string]interface{}{"promqlQuery": map[string]interface{}{"value": "up"}}}},
+								map[string]interface{}{"id": "line-logs", "query": map[string]interface{}{"logs": map[string]interface{}{"aggregations": []interface{}{map[string]interface{}{"count": map[string]interface{}{}}}}}},
+							},
+						},
+					}),
+					dashboardWidget("bar", "bar", map[string]interface{}{
+						"barChart": map[string]interface{}{
+							"query":    map[string]interface{}{"metrics": map[string]interface{}{"promqlQuery": map[string]interface{}{"value": "up"}}},
+							"colorsBy": map[string]interface{}{"aggregation": map[string]interface{}{}},
+							"xAxis":    map[string]interface{}{"time": map[string]interface{}{}},
+						},
+					}),
+					dashboardWidget("table", "table", map[string]interface{}{
+						"dataTable": map[string]interface{}{
+							"query": map[string]interface{}{"logs": map[string]interface{}{"aggregations": []interface{}{map[string]interface{}{"count": map[string]interface{}{}}}}},
+						},
+					}),
+					dashboardWidget("dynamic", "dynamic", map[string]interface{}{
+						"dynamic": map[string]interface{}{
+							"queryDefinitions": []interface{}{map[string]interface{}{"id": "dynamic-spans", "query": map[string]interface{}{"spans": map[string]interface{}{}}}},
+							"visualization":    map[string]interface{}{"table": map[string]interface{}{}},
+						},
+					}),
+					dashboardWidget("gauge", "gauge", map[string]interface{}{"gauge": map[string]interface{}{"query": map[string]interface{}{"dataprime": map[string]interface{}{}}}}),
+					dashboardWidget("hexagon", "hexagon", map[string]interface{}{"hexagon": map[string]interface{}{"query": map[string]interface{}{"logs": map[string]interface{}{}}}}),
+					dashboardWidget("horizontal", "horizontal", map[string]interface{}{"horizontalBarChart": map[string]interface{}{"query": map[string]interface{}{"spans": map[string]interface{}{}}, "yAxisViewBy": map[string]interface{}{"category": map[string]interface{}{}}}}),
+					dashboardWidget("markdown", "markdown", map[string]interface{}{"markdown": map[string]interface{}{"markdownText": "OpenAPI dashboard fixture"}}),
+					dashboardWidget("pie", "pie", map[string]interface{}{"pieChart": map[string]interface{}{"query": map[string]interface{}{"metrics": map[string]interface{}{"promqlQuery": map[string]interface{}{"value": "up"}}}}}),
+				})
+			},
+			paths: [][]interface{}{
+				{"layout", "sections", 0, "rows", 0, "widgets", 0, "definition", "lineChart", "queryDefinitions", 0, "query", "metrics"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 1, "definition", "barChart", "colorsBy", "aggregation"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 2, "definition", "dataTable", "query", "logs"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 3, "definition", "dynamic", "visualization", "table"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 4, "definition", "gauge", "query", "dataprime"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 5, "definition", "hexagon", "query", "logs"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 6, "definition", "horizontalBarChart", "yAxisViewBy", "category"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 7, "definition", "markdown", "markdownText"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 8, "definition", "pieChart", "query", "metrics"},
+			},
+		},
+		{
+			name: "dashboard variables and filters",
+			configure: func(raw map[string]interface{}) {
+				raw["variables"] = []interface{}{
+					map[string]interface{}{"name": "env", "definition": map[string]interface{}{"constant": map[string]interface{}{"value": "production"}}},
+					map[string]interface{}{"name": "service", "definition": map[string]interface{}{"multiSelect": map[string]interface{}{"selection": map[string]interface{}{"list": map[string]interface{}{"values": []interface{}{"api", "worker"}}}, "selected": []interface{}{"api"}}}},
+				}
+				raw["variablesV2"] = []interface{}{
+					map[string]interface{}{"name": "query", "source": map[string]interface{}{"query": map[string]interface{}{"logsQuery": map[string]interface{}{}}}, "value": map[string]interface{}{"singleString": map[string]interface{}{"value": map[string]interface{}{"value": "api", "label": "API"}}}},
+					map[string]interface{}{"name": "static", "source": map[string]interface{}{"static": map[string]interface{}{"values": []interface{}{map[string]interface{}{"value": "api", "label": "API"}}}}, "value": map[string]interface{}{"multiString": map[string]interface{}{"list": map[string]interface{}{"values": []interface{}{map[string]interface{}{"value": map[string]interface{}{"value": "api", "label": "API"}}}}}}},
+					map[string]interface{}{"name": "textbox", "source": map[string]interface{}{"textbox": map[string]interface{}{}}, "value": map[string]interface{}{"regex": map[string]interface{}{"value": map[string]interface{}{"value": "api.*", "label": "API services"}}}},
+				}
+				raw["filters"] = []interface{}{
+					map[string]interface{}{"displayName": "logs", "source": map[string]interface{}{"logs": map[string]interface{}{}}},
+					map[string]interface{}{"displayName": "metrics", "source": map[string]interface{}{"metrics": map[string]interface{}{}}},
+					map[string]interface{}{"displayName": "spans", "source": map[string]interface{}{"spans": map[string]interface{}{}}},
+				}
+			},
+			paths: [][]interface{}{
+				{"variables", 0, "definition", "constant"},
+				{"variables", 1, "definition", "multiSelect", "selection", "list"},
+				{"variablesV2", 0, "source", "query", "logsQuery"},
+				{"variablesV2", 1, "source", "static", "values", 0, "value"},
+				{"variablesV2", 2, "source", "textbox"},
+				{"filters", 0, "source", "logs"},
+				{"filters", 1, "source", "metrics"},
+				{"filters", 2, "source", "spans"},
+			},
+		},
+		{
+			name: "dashboard actions and annotations",
+			configure: func(raw map[string]interface{}) {
+				raw["actions"] = []interface{}{
+					map[string]interface{}{"name": "runbook", "definition": map[string]interface{}{"customAction": map[string]interface{}{"url": "https://example.com/runbook"}}},
+					map[string]interface{}{"name": "related", "definition": map[string]interface{}{"goToDashboardAction": map[string]interface{}{"dashboardId": "00000000-0000-4000-8000-000000000002"}}},
+				}
+				raw["annotations"] = []interface{}{
+					map[string]interface{}{"name": "logs", "scope": map[string]interface{}{"allWidgets": map[string]interface{}{}}, "source": map[string]interface{}{"logs": map[string]interface{}{}}},
+					map[string]interface{}{"name": "metrics", "scope": map[string]interface{}{"specificWidgets": map[string]interface{}{}}, "source": map[string]interface{}{"metrics": map[string]interface{}{}}},
+					map[string]interface{}{"name": "manual", "source": map[string]interface{}{"manual": map[string]interface{}{}}},
+					map[string]interface{}{"name": "dataprime", "source": map[string]interface{}{"dataprime": map[string]interface{}{}}},
+					map[string]interface{}{"name": "spans", "source": map[string]interface{}{"spans": map[string]interface{}{}}},
+				}
+			},
+			paths: [][]interface{}{
+				{"actions", 0, "definition", "customAction"},
+				{"actions", 1, "definition", "goToDashboardAction"},
+				{"annotations", 0, "scope", "allWidgets"},
+				{"annotations", 0, "source", "logs"},
+				{"annotations", 1, "scope", "specificWidgets"},
+				{"annotations", 1, "source", "metrics"},
+				{"annotations", 2, "source", "manual"},
+				{"annotations", 3, "source", "dataprime"},
+				{"annotations", 4, "source", "spans"},
+			},
+		},
+		{
+			name: "dynamic visualizations",
+			configure: func(raw map[string]interface{}) {
+				widgets := make([]interface{}, 0)
+				for _, visualization := range []string{
+					"gauge", "geomap", "heatmap", "hexagonBins", "horizontalBars",
+					"horizontalBarsMulti", "pieChart", "stat", "statCard", "table",
+					"timeSeriesBars", "timeSeriesLines", "timeSeriesLinesMulti",
+					"verticalBars", "verticalBarsMulti",
+				} {
+					value := map[string]interface{}{}
+					if visualization == "heatmap" {
+						value["preset"] = "HEATMAP_COLOR_PRESET_BLUE"
+					}
+					widgets = append(widgets, dashboardWidget(visualization, visualization, map[string]interface{}{
+						"dynamic": map[string]interface{}{
+							"queryDefinitions": []interface{}{map[string]interface{}{"id": visualization, "query": map[string]interface{}{"logs": map[string]interface{}{}}}},
+							"visualization":    map[string]interface{}{visualization: value},
+						},
+					}))
+				}
+				setDashboardWidgets(raw, widgets)
+			},
+			paths: [][]interface{}{
+				{"layout", "sections", 0, "rows", 0, "widgets", 0, "definition", "dynamic", "visualization", "gauge"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 1, "definition", "dynamic", "visualization", "geomap"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 2, "definition", "dynamic", "visualization", "heatmap"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 9, "definition", "dynamic", "visualization", "table"},
+				{"layout", "sections", 0, "rows", 0, "widgets", 14, "definition", "dynamic", "visualization", "verticalBarsMulti"},
+			},
 		},
 	}
 
-	runDashboardOneOfFixtureTable(t, tests)
-}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			raw := dashboardFixtureMap(t)
+			raw["name"] = "dashboard OpenAPI " + tt.name
+			raw["description"] = "dashboard OpenAPI full object variant fixture"
+			tt.configure(raw)
 
-func minimalDashboardVariantJSON(name string) map[string]interface{} {
-	return map[string]interface{}{
-		"name":        name,
-		"description": "dashboard OpenAPI variant fixture",
-		"layout": map[string]interface{}{
-			"sections": []interface{}{},
-		},
+			roundTrip := roundTripDashboardFixture(t, raw)
+			for _, path := range tt.paths {
+				requireDashboardPath(t, roundTrip, path...)
+			}
+		})
 	}
 }
 
@@ -922,25 +305,71 @@ func dashboardVariantName(v interface{}) string {
 	return strings.TrimPrefix(reflect.TypeOf(v).String(), "*dashboard_service.")
 }
 
-func runDashboardOneOfFixtureTable(t *testing.T, tests []struct {
-	name    string
-	payload string
-	target  func() generatedOneOf
-	want    string
-}) {
+func setDashboardWidgets(raw map[string]interface{}, widgets []interface{}) {
+	raw["layout"] = map[string]interface{}{
+		"sections": []interface{}{
+			map[string]interface{}{
+				"id": map[string]interface{}{"value": "section"},
+				"rows": []interface{}{
+					map[string]interface{}{
+						"id":         map[string]interface{}{"value": "row"},
+						"appearance": map[string]interface{}{"height": 12},
+						"widgets":    widgets,
+					},
+				},
+			},
+		},
+	}
+}
+
+func dashboardWidget(id, title string, definition map[string]interface{}) map[string]interface{} {
+	return map[string]interface{}{
+		"id":         map[string]interface{}{"value": id},
+		"title":      title,
+		"definition": definition,
+		"appearance": map[string]interface{}{"width": 0},
+	}
+}
+
+func roundTripDashboardFixture(t *testing.T, raw map[string]interface{}) map[string]interface{} {
 	t.Helper()
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			target := tt.target()
-			require.NoError(t, json.Unmarshal([]byte(tt.payload), target))
-			actual := target.GetActualInstance()
-			require.NotNil(t, actual)
-			require.Equal(t, tt.want, dashboardVariantName(actual))
+	data, err := json.Marshal(raw)
+	require.NoError(t, err)
 
-			data, err := json.Marshal(target)
-			require.NoError(t, err)
-			require.NotEqual(t, "null", string(data))
-		})
+	var dashboard dashboards.Dashboard
+	require.NoError(t, json.Unmarshal(data, &dashboard))
+	require.NotNil(t, dashboard.GetActualInstance())
+
+	data, err = json.Marshal(dashboard)
+	require.NoError(t, err)
+
+	var roundTrip map[string]interface{}
+	require.NoError(t, json.Unmarshal(data, &roundTrip))
+	return roundTrip
+}
+
+func requireDashboardPath(t *testing.T, raw map[string]interface{}, path ...interface{}) interface{} {
+	t.Helper()
+
+	var current interface{} = raw
+	for _, segment := range path {
+		switch key := segment.(type) {
+		case string:
+			asMap, ok := current.(map[string]interface{})
+			require.Truef(t, ok, "expected object at %v", path)
+			next, ok := asMap[key]
+			require.Truef(t, ok, "missing key %q at %v", key, path)
+			require.NotNilf(t, next, "nil value for key %q at %v", key, path)
+			current = next
+		case int:
+			asSlice, ok := current.([]interface{})
+			require.Truef(t, ok, "expected array at %v", path)
+			require.Lessf(t, key, len(asSlice), "array index out of range at %v", path)
+			current = asSlice[key]
+		default:
+			t.Fatalf("unsupported path segment %T in %v", segment, path)
+		}
 	}
+	return current
 }
