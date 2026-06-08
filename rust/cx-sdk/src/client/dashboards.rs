@@ -101,7 +101,8 @@ impl DashboardsClient {
         dashboard: Dashboard,
         is_locked: bool,
     ) -> Result<CreateDashboardResponse> {
-        self.create_with_access_policy(dashboard, is_locked, None).await
+        self.create_with_access_policy(dashboard, is_locked, None)
+            .await
     }
 
     /// Creates a new dashboard with an optional access policy.
