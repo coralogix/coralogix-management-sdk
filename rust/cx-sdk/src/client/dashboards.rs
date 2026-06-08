@@ -101,11 +101,26 @@ impl DashboardsClient {
         dashboard: Dashboard,
         is_locked: bool,
     ) -> Result<CreateDashboardResponse> {
+        self.create_with_access_policy(dashboard, is_locked, None).await
+    }
+
+    /// Creates a new dashboard with an optional access policy.
+    ///
+    /// # Arguments
+    /// * `dashboard` - The dashboard to create.
+    /// * `access_policy` - JSON string representing the dashboard access policy.
+    pub async fn create_with_access_policy(
+        &self,
+        dashboard: Dashboard,
+        is_locked: bool,
+        access_policy: Option<String>,
+    ) -> Result<CreateDashboardResponse> {
         let request: Request<CreateDashboardRequest> = make_request_with_metadata(
             CreateDashboardRequest {
                 request_id: None,
                 dashboard: Some(dashboard),
                 is_locked: Some(is_locked),
+                access_policy,
             },
             &self.teams_level_metadata_map,
         );
@@ -137,11 +152,27 @@ impl DashboardsClient {
         dashboard: Dashboard,
         is_locked: bool,
     ) -> Result<ReplaceDashboardResponse> {
+        self.replace_with_access_policy(dashboard, is_locked, None)
+            .await
+    }
+
+    /// Replaces a dashboard with an optional access policy.
+    ///
+    /// # Arguments
+    /// * `dashboard` - The [`Dashboard`] to replace.
+    /// * `access_policy` - JSON string representing the dashboard access policy.
+    pub async fn replace_with_access_policy(
+        &self,
+        dashboard: Dashboard,
+        is_locked: bool,
+        access_policy: Option<String>,
+    ) -> Result<ReplaceDashboardResponse> {
         let request: Request<ReplaceDashboardRequest> = make_request_with_metadata(
             ReplaceDashboardRequest {
                 request_id: None,
                 dashboard: Some(dashboard),
                 is_locked: Some(is_locked),
+                access_policy,
             },
             &self.teams_level_metadata_map,
         );

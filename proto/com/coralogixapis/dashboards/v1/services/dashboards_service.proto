@@ -351,6 +351,13 @@ message CreateDashboardRequest {
   google.protobuf.StringValue request_id = 1;
   ast.Dashboard dashboard = 2;
   google.protobuf.BoolValue is_locked = 3;
+  optional string access_policy = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups."
+    min_length: 1
+    max_length: 65536
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 message CreateDashboardResponse {
@@ -387,6 +394,13 @@ message ReplaceDashboardRequest {
   google.protobuf.StringValue request_id = 1;
   ast.Dashboard dashboard = 2;
   google.protobuf.BoolValue is_locked = 3;
+  optional string access_policy = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups."
+    min_length: 1
+    max_length: 65536
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 message ReplaceDashboardResponse {
@@ -495,6 +509,13 @@ message GetDashboardBySlugResponse {
   google.protobuf.BoolValue is_locked = 10;
   google.protobuf.StringValue locker_author_id = 11;
   google.protobuf.StringValue locker_name = 12;
+  optional string access_policy = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups."
+    min_length: 1
+    max_length: 65536
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 enum TokenOriginType {
@@ -531,6 +552,13 @@ message GetDashboardResponse {
   google.protobuf.BoolValue is_locked = 10;
   google.protobuf.StringValue locker_author_id = 11;
   google.protobuf.StringValue locker_name = 12;
+  optional string access_policy = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    example: "\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\""
+    description: "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups."
+    min_length: 1
+    max_length: 65536
+    pattern: "^[\\s\\S]*$"
+  }];
 }
 
 message PinDashboardRequest {
