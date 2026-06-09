@@ -16,6 +16,7 @@
 mod tests {
     use std::collections::HashMap;
 
+    use anyhow::Context;
     use cx_sdk::client::alerts::{
         self,
         ActivitySchedule,
@@ -285,12 +286,12 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_slack_connector() {
+    async fn test_slack_connector() -> anyhow::Result<()> {
         let notifications_client = NotificationsClient::new(
             AuthContext::from_env(),
-            CoralogixRegion::from_env().unwrap(),
+            CoralogixRegion::from_env().context("failed to read Coralogix region from env")?,
         )
-        .unwrap();
+        .context("failed to create notifications client")?;
 
         let connector = create_test_slack_connector();
 
@@ -299,7 +300,7 @@ mod tests {
             .as_ref()
             .map_or(vec![], |f| f.fields.clone());
 
-        let success: bool = match notifications_client
+        match notifications_client
             .test_connector_config(
                 connector.r#type(),
                 fields,
@@ -307,49 +308,58 @@ mod tests {
                 "slack_raw".into(),
             )
             .await
-            .unwrap()
+            .context("failed to test Slack connector config")?
             .result
-            .unwrap()
+            .context("Slack connector config test response is missing result")?
             .result
-            .unwrap()
+            .context("Slack connector config test response is missing inner result")?
         {
-            test_result::Result::Success(_) => true,
-            test_result::Result::Failure(_) => false,
+            test_result::Result::Success(_) => {}
+            test_result::Result::Failure(failure) => {
+                anyhow::bail!("Slack connector config test failed: {failure:?}");
+            }
         };
-        assert!(success);
 
         let create_response = notifications_client
             .create_connector(connector.clone())
             .await
-            .unwrap();
-        let connector_id = create_response.connector.unwrap().id.unwrap();
+            .context("failed to create Slack connector")?;
+        let connector_id = create_response
+            .connector
+            .context("create Slack connector response is missing connector")?
+            .id
+            .context("created Slack connector is missing id")?;
 
-        let success: bool = match notifications_client
+        match notifications_client
             .test_existing_connector(connector_id.clone(), "slack_raw".into())
             .await
-            .unwrap()
+            .with_context(|| format!("failed to test existing Slack connector id={connector_id}"))?
             .result
-            .unwrap()
+            .context("existing Slack connector test response is missing result")?
             .result
-            .unwrap()
+            .context("existing Slack connector test response is missing inner result")?
         {
-            test_result::Result::Success(_) => true,
-            test_result::Result::Failure(_) => false,
+            test_result::Result::Success(_) => {}
+            test_result::Result::Failure(failure) => {
+                anyhow::bail!("existing Slack connector test failed: {failure:?}");
+            }
         };
 
-        assert!(success);
         let retrieved_connector = notifications_client
             .get_connector(connector_id.clone())
             .await
-            .unwrap()
-            .connector;
+            .with_context(|| format!("failed to get Slack connector id={connector_id}"))?
+            .connector
+            .context("get Slack connector response is missing connector")?;
 
-        assert_eq!(retrieved_connector.unwrap().name, connector.name);
+        assert_eq!(retrieved_connector.name, connector.name);
 
         notifications_client
-            .delete_connector(connector_id)
+            .delete_connector(connector_id.clone())
             .await
-            .unwrap();
+            .with_context(|| format!("failed to delete Slack connector id={connector_id}"))?;
+
+        Ok(())
     }
 
     #[tokio::test]
