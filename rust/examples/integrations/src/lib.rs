@@ -297,11 +297,20 @@ mod tests {
         )
         .unwrap();
         let parsed_url: Url = url.parse().unwrap();
+        let host = parsed_url
+            .host_str()
+            .unwrap_or("<missing host>")
+            .to_string();
+        let url_for_message = parsed_url.to_string();
 
         let hook = client
             .create(t, Some(name.clone()), parsed_url.clone(), config.clone())
             .await
-            .unwrap();
+            .unwrap_or_else(|error| {
+                panic!(
+                    "failed to create outgoing webhook name={name:?} type={t:?} url={url_for_message:?} host={host:?}: {error:?}"
+                )
+            });
         let _ = client
             .replace(
                 hook.id.clone().unwrap(),
@@ -311,9 +320,24 @@ mod tests {
                 config,
             )
             .await
-            .unwrap();
-        let _ = client.get(hook.id.clone().unwrap()).await.unwrap();
-        let _ = client.delete(hook.id.clone().unwrap()).await.unwrap();
+            .unwrap_or_else(|error| {
+                panic!(
+                    "failed to replace outgoing webhook name={name:?} type={t:?} url={url_for_message:?} host={host:?}: {error:?}"
+                )
+            });
+        let _ = client.get(hook.id.clone().unwrap()).await.unwrap_or_else(|error| {
+            panic!(
+                "failed to get outgoing webhook name={name:?} type={t:?} url={url_for_message:?} host={host:?}: {error:?}"
+            )
+        });
+        let _ = client
+            .delete(hook.id.clone().unwrap())
+            .await
+            .unwrap_or_else(|error| {
+                panic!(
+                    "failed to delete outgoing webhook name={name:?} type={t:?} url={url_for_message:?} host={host:?}: {error:?}"
+                )
+            });
     }
 
     #[tokio::test]
