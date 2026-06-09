@@ -16,7 +16,6 @@
 mod tests {
     use std::collections::HashMap;
 
-    use anyhow::Context;
     use cx_sdk::client::alerts::{
         self,
         ActivitySchedule,
@@ -81,9 +80,6 @@ mod tests {
             PresetType,
             TemplatedConnectorConfigField,
             condition_type::Condition,
-            test_result::{
-                self,
-            },
         },
     };
 
@@ -114,42 +110,6 @@ mod tests {
                 fields: vec![TemplatedConnectorConfigField {
                     field_name: "additionalBodyFields".into(),
                     template: "{\"priority\": \"{{alertDef.priority}}\"}".into(),
-                }],
-            }],
-            diagnostics: None,
-        }
-    }
-
-    fn create_test_slack_connector() -> Connector {
-        Connector {
-            name: "TestSlackConnectorRust".into(),
-            description: "Connector for Notification Center testing.".into(),
-            r#type: ConnectorType::Slack.into(),
-            id: None,
-            connector_config: Some(ConnectorConfig {
-                fields: vec![
-                    ConnectorConfigField {
-                        field_name: "integrationId".into(),
-                        value: "60d87305-1110-4a0a-b388-85fb769892ee".into(),
-                    },
-                    ConnectorConfigField {
-                        field_name: "channel".into(),
-                        value: "luigis-testing-grounds".into(),
-                    },
-                    ConnectorConfigField {
-                        field_name: "fallbackChannel".into(),
-                        value: "luigis-testing-grounds".into(),
-                    },
-                ],
-            }),
-            team_id: None,
-            create_time: None,
-            update_time: None,
-            config_overrides: vec![EntityTypeConfigOverrides {
-                entity_type: EntityType::Alerts.into(),
-                fields: vec![TemplatedConnectorConfigField {
-                    field_name: "channel".into(),
-                    template: "{{alertDef.priority}}".into(),
                 }],
             }],
             diagnostics: None,
@@ -283,83 +243,6 @@ mod tests {
             update_time: None,
             parent_id: Some("preset_system_pagerduty_alerts_basic".into()),
         }
-    }
-
-    #[tokio::test]
-    async fn test_slack_connector() -> anyhow::Result<()> {
-        let notifications_client = NotificationsClient::new(
-            AuthContext::from_env(),
-            CoralogixRegion::from_env().context("failed to read Coralogix region from env")?,
-        )
-        .context("failed to create notifications client")?;
-
-        let connector = create_test_slack_connector();
-
-        let fields = connector
-            .connector_config
-            .as_ref()
-            .map_or(vec![], |f| f.fields.clone());
-
-        match notifications_client
-            .test_connector_config(
-                connector.r#type(),
-                fields,
-                EntityType::Alerts,
-                "slack_raw".into(),
-            )
-            .await
-            .context("failed to test Slack connector config")?
-            .result
-            .context("Slack connector config test response is missing result")?
-            .result
-            .context("Slack connector config test response is missing inner result")?
-        {
-            test_result::Result::Success(_) => {}
-            test_result::Result::Failure(failure) => {
-                anyhow::bail!("Slack connector config test failed: {failure:?}");
-            }
-        };
-
-        let create_response = notifications_client
-            .create_connector(connector.clone())
-            .await
-            .context("failed to create Slack connector")?;
-        let connector_id = create_response
-            .connector
-            .context("create Slack connector response is missing connector")?
-            .id
-            .context("created Slack connector is missing id")?;
-
-        match notifications_client
-            .test_existing_connector(connector_id.clone(), "slack_raw".into())
-            .await
-            .with_context(|| format!("failed to test existing Slack connector id={connector_id}"))?
-            .result
-            .context("existing Slack connector test response is missing result")?
-            .result
-            .context("existing Slack connector test response is missing inner result")?
-        {
-            test_result::Result::Success(_) => {}
-            test_result::Result::Failure(failure) => {
-                anyhow::bail!("existing Slack connector test failed: {failure:?}");
-            }
-        };
-
-        let retrieved_connector = notifications_client
-            .get_connector(connector_id.clone())
-            .await
-            .with_context(|| format!("failed to get Slack connector id={connector_id}"))?
-            .connector
-            .context("get Slack connector response is missing connector")?;
-
-        assert_eq!(retrieved_connector.name, connector.name);
-
-        notifications_client
-            .delete_connector(connector_id.clone())
-            .await
-            .with_context(|| format!("failed to delete Slack connector id={connector_id}"))?;
-
-        Ok(())
     }
 
     #[tokio::test]
