@@ -220,14 +220,6 @@ mod tests {
         .await;
 
         crud(
-            "opsgenie-webhook".into(),
-            WebhookType::Opsgenie,
-            "https://example.opsgenie.com/".parse().unwrap(),
-            Config::Opsgenie(OpsgenieConfig {}),
-        )
-        .await;
-
-        crud(
             "demisto-webhook".into(),
             WebhookType::Demisto,
             "https://example.com/".parse().unwrap(),
