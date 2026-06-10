@@ -91,6 +91,11 @@ func TestUsers(t *testing.T) {
 			{Value: "example@coralogix.com", Primary: true, Type: "work"},
 		},
 	})
+	t.Cleanup(func() {
+		if createdUser != nil && createdUser.ID != nil {
+			_ = c.Delete(context.Background(), *createdUser.ID)
+		}
+	})
 
 	assertNilAndPrintError(t, err)
 

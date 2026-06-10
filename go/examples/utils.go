@@ -14,6 +14,7 @@
 package examples
 
 import (
+	"errors"
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
@@ -21,9 +22,13 @@ import (
 )
 
 func assertNilAndPrintError(t *testing.T, err error) {
+	t.Helper()
 	if err != nil {
-		e := err.(*cxsdk.SdkAPIError)
-		t.Fatal(e.Error())
+		var e *cxsdk.SdkAPIError
+		if errors.As(err, &e) {
+			t.Fatal(e.Error())
+		}
+		t.Fatalf("unexpected error type %T: %v", err, err)
 	}
 	assert.Nil(t, err)
 }

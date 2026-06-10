@@ -36,14 +36,29 @@ type DashboardsClient struct {
 // CreateDashboardRequest is a request to create a dashboard.
 type CreateDashboardRequest = services.CreateDashboardRequest
 
+// CreateDashboardResponse is a response from creating a dashboard.
+type CreateDashboardResponse = services.CreateDashboardResponse
+
 // ReplaceDashboardRequest is a request to replace a dashboard.
 type ReplaceDashboardRequest = services.ReplaceDashboardRequest
+
+// ReplaceDashboardResponse is a response from replacing a dashboard.
+type ReplaceDashboardResponse = services.ReplaceDashboardResponse
 
 // DeleteDashboardRequest is a request to delete a dashboard.
 type DeleteDashboardRequest = services.DeleteDashboardRequest
 
 // GetDashboardRequest is a request to get a dashboard.
 type GetDashboardRequest = services.GetDashboardRequest
+
+// GetDashboardResponse is a response from getting a dashboard.
+type GetDashboardResponse = services.GetDashboardResponse
+
+// GetDashboardBySlugRequest is a request to get a dashboard by slug.
+type GetDashboardBySlugRequest = services.GetDashboardBySlugRequest
+
+// GetDashboardBySlugResponse is a response from getting a dashboard by slug.
+type GetDashboardBySlugResponse = services.GetDashboardBySlugResponse
 
 // PinDashboardRequest is a request to pin a dashboard.
 type PinDashboardRequest = services.PinDashboardRequest
@@ -1212,7 +1227,7 @@ type AssignDashboardFolderRequest = services.AssignDashboardFolderRequest
 const dashboardsFeatureGroupID = "dashboards"
 
 // Create Creates a new dashboard.
-func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*services.CreateDashboardResponse, error) {
+func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -1230,7 +1245,7 @@ func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardReques
 }
 
 // Get gets a dashboard.
-func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*services.GetDashboardResponse, error) {
+func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*GetDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -1266,7 +1281,7 @@ func (d DashboardsClient) List(ctx context.Context) (*services.GetDashboardCatal
 }
 
 // Replace replaces a dashboard.
-func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequest) (*services.ReplaceDashboardResponse, error) {
+func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequest) (*ReplaceDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err

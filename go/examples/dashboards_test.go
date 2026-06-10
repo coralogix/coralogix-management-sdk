@@ -29,6 +29,8 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
+	dashboardAccessPolicy := `{"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"grant","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"grant"}},"rules":[]}`
+
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -44,12 +46,20 @@ func TestDashboards(t *testing.T) {
 	}
 
 	createRes, e := c.Create(context.Background(), &cxsdk.CreateDashboardRequest{
-		Dashboard: &d,
+		Dashboard:    &d,
+		AccessPolicy: &dashboardAccessPolicy,
 	})
 	if e != nil {
 		log.Fatal(e.Error())
 	}
 	assertNilAndPrintError(t, e)
+	getRes, e := c.Get(context.Background(), &cxsdk.GetDashboardRequest{
+		DashboardId: createRes.DashboardId,
+	})
+	assertNilAndPrintError(t, e)
+	if assert.NotNil(t, getRes.AccessPolicy) {
+		assert.JSONEq(t, dashboardAccessPolicy, *getRes.AccessPolicy)
+	}
 	_, e = c.Pin(context.Background(), &cxsdk.PinDashboardRequest{
 		DashboardId: createRes.DashboardId,
 	})

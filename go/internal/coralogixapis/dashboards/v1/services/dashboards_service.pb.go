@@ -85,6 +85,7 @@ type CreateDashboardRequest struct {
 	RequestId     *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Dashboard     *ast.Dashboard          `protobuf:"bytes,2,opt,name=dashboard,proto3" json:"dashboard,omitempty"`
 	IsLocked      *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
+	AccessPolicy  *string                 `protobuf:"bytes,4,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -140,6 +141,13 @@ func (x *CreateDashboardRequest) GetIsLocked() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *CreateDashboardRequest) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
+}
+
 type CreateDashboardResponse struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	DashboardId   *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=dashboard_id,json=dashboardId,proto3" json:"dashboard_id,omitempty"`
@@ -189,6 +197,7 @@ type ReplaceDashboardRequest struct {
 	RequestId     *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
 	Dashboard     *ast.Dashboard          `protobuf:"bytes,2,opt,name=dashboard,proto3" json:"dashboard,omitempty"`
 	IsLocked      *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
+	AccessPolicy  *string                 `protobuf:"bytes,4,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -242,6 +251,13 @@ func (x *ReplaceDashboardRequest) GetIsLocked() *wrapperspb.BoolValue {
 		return x.IsLocked
 	}
 	return nil
+}
+
+func (x *ReplaceDashboardRequest) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
 }
 
 type ReplaceDashboardResponse struct {
@@ -470,6 +486,7 @@ type GetDashboardBySlugResponse struct {
 	IsLocked          *wrapperspb.BoolValue   `protobuf:"bytes,10,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
 	LockerAuthorId    *wrapperspb.StringValue `protobuf:"bytes,11,opt,name=locker_author_id,json=lockerAuthorId,proto3" json:"locker_author_id,omitempty"`
 	LockerName        *wrapperspb.StringValue `protobuf:"bytes,12,opt,name=locker_name,json=lockerName,proto3" json:"locker_name,omitempty"`
+	AccessPolicy      *string                 `protobuf:"bytes,13,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -588,6 +605,13 @@ func (x *GetDashboardBySlugResponse) GetLockerName() *wrapperspb.StringValue {
 	return nil
 }
 
+func (x *GetDashboardBySlugResponse) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
+}
+
 type GetDashboardResponse struct {
 	state             protoimpl.MessageState  `protogen:"open.v1"`
 	Dashboard         *ast.Dashboard          `protobuf:"bytes,1,opt,name=dashboard,proto3" json:"dashboard,omitempty"`
@@ -602,6 +626,7 @@ type GetDashboardResponse struct {
 	IsLocked          *wrapperspb.BoolValue   `protobuf:"bytes,10,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
 	LockerAuthorId    *wrapperspb.StringValue `protobuf:"bytes,11,opt,name=locker_author_id,json=lockerAuthorId,proto3" json:"locker_author_id,omitempty"`
 	LockerName        *wrapperspb.StringValue `protobuf:"bytes,12,opt,name=locker_name,json=lockerName,proto3" json:"locker_name,omitempty"`
+	AccessPolicy      *string                 `protobuf:"bytes,14,opt,name=access_policy,json=accessPolicy,proto3,oneof" json:"access_policy,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -718,6 +743,13 @@ func (x *GetDashboardResponse) GetLockerName() *wrapperspb.StringValue {
 		return x.LockerName
 	}
 	return nil
+}
+
+func (x *GetDashboardResponse) GetAccessPolicy() string {
+	if x != nil && x.AccessPolicy != nil {
+		return *x.AccessPolicy
+	}
+	return ""
 }
 
 type PinDashboardRequest struct {
@@ -1084,27 +1116,31 @@ var File_com_coralogixapis_dashboards_v1_services_dashboards_service_proto proto
 
 const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogixapis/dashboards/v1/services/dashboards_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdd\x03\n" +
+	"Acom/coralogixapis/dashboards/v1/services/dashboards_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x9b\a\n" +
 	"\x16CreateDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12L\n" +
 	"\tdashboard\x18\x02 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x127\n" +
-	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked:\xfe\x01\x9aA\xfa\x01\n" +
+	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12\xa9\x03\n" +
+	"\raccess_policy\x18\x04 \x01(\tB\xfe\x02\x9aA\xfa\x022qJSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.J\xf1\x01\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\"x\x80\x80\x04\x80\x01\x01\x8a\x01\t^[\\s\\S]*$H\x00R\faccessPolicy\x88\x01\x01:\xfe\x01\x9aA\xfa\x01\n" +
 	"{*'Create dashboard request data structure27This is a request used to create a new custom dashboard\xd2\x01\n" +
 	"request_id\xd2\x01\tdashboard*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd7\x02\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\x10\n" +
+	"\x0e_access_policy\"\xd7\x02\n" +
 	"\x17CreateDashboardResponse\x12?\n" +
 	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xfa\x01\x9aA\xf6\x01\n" +
 	"w*(Create dashboard response data structure2KThis is a response received when a custom dashboard is successfully created*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xf4\x03\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xb2\a\n" +
 	"\x17ReplaceDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12L\n" +
 	"\tdashboard\x18\x02 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x127\n" +
-	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked:\x94\x02\x9aA\x90\x02\n" +
+	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12\xa9\x03\n" +
+	"\raccess_policy\x18\x04 \x01(\tB\xfe\x02\x9aA\xfa\x022qJSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.J\xf1\x01\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\"x\x80\x80\x04\x80\x01\x01\x8a\x01\t^[\\s\\S]*$H\x00R\faccessPolicy\x88\x01\x01:\x94\x02\x9aA\x90\x02\n" +
 	"\x90\x01*(Replace dashboard request data structure2KThis is a request sent to update an existing dashboard with new information\xd2\x01\n" +
 	"request_id\xd2\x01\tdashboard*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x93\x02\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\x10\n" +
+	"\x0e_access_policy\"\x93\x02\n" +
 	"\x18ReplaceDashboardResponse:\xf6\x01\x9aA\xf2\x01\n" +
 	"s*)Replace dashboard response data structure2FThis is a response received when the dashboard is successfully updated*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x96\x03\n" +
@@ -1125,7 +1161,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x19GetDashboardBySlugRequest\x120\n" +
 	"\x04slug\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04slug:\x82\x02\x9aA\xfe\x01\n" +
 	"\x7f*0Get dashboard by URL slug request data structure2DThis is a request to get a specific custom dashboard by its URL slug\xd2\x01\x04slug*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xf2\b\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xb0\f\n" +
 	"\x1aGetDashboardBySlugResponse\x12L\n" +
 	"\tdashboard\x18\x01 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x129\n" +
 	"\n" +
@@ -1143,9 +1179,11 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12F\n" +
 	"\x10locker_author_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\x0elockerAuthorId\x12=\n" +
 	"\vlocker_name\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\n" +
-	"lockerName:\xf4\x01\x9aA\xf0\x01\n" +
+	"lockerName\x12\xa9\x03\n" +
+	"\raccess_policy\x18\r \x01(\tB\xfe\x02\x9aA\xfa\x022qJSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.J\xf1\x01\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\"x\x80\x80\x04\x80\x01\x01\x8a\x01\t^[\\s\\S]*$H\x00R\faccessPolicy\x88\x01\x01:\xf4\x01\x9aA\xf0\x01\n" +
 	"j*1Get dashboard by URL slug response data structure25This is a response containing the requested dashboard*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xe0\b\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\x10\n" +
+	"\x0e_access_policy\"\x9e\f\n" +
 	"\x14GetDashboardResponse\x12L\n" +
 	"\tdashboard\x18\x01 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x129\n" +
 	"\n" +
@@ -1163,9 +1201,11 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12F\n" +
 	"\x10locker_author_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\x0elockerAuthorId\x12=\n" +
 	"\vlocker_name\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\n" +
-	"lockerName:\xe8\x01\x9aA\xe4\x01\n" +
+	"lockerName\x12\xa9\x03\n" +
+	"\raccess_policy\x18\x0e \x01(\tB\xfe\x02\x9aA\xfa\x022qJSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.J\xf1\x01\"{\\\"version\\\":\\\"2025-01-01\\\",\\\"default\\\":{\\\"permissions\\\":{\\\"team-dashboards:Read\\\":\\\"grant\\\",\\\"team-dashboards:Update\\\":\\\"deny\\\",\\\"team-dashboards:ReadAccessPolicy\\\":\\\"grant\\\",\\\"team-dashboards:UpdateAccessPolicy\\\":\\\"deny\\\"}},\\\"rules\\\":[]}\"x\x80\x80\x04\x80\x01\x01\x8a\x01\t^[\\s\\S]*$H\x00R\faccessPolicy\x88\x01\x01:\xe8\x01\x9aA\xe4\x01\n" +
 	"^*%Get dashboard response data structure25This is a response containing the requested dashboard*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x9e\x03\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\x10\n" +
+	"\x0e_access_policy\"\x9e\x03\n" +
 	"\x13PinDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12?\n" +
@@ -1427,6 +1467,10 @@ func file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_init
 	if File_com_coralogixapis_dashboards_v1_services_dashboards_service_proto != nil {
 		return
 	}
+	file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_msgTypes[0].OneofWrappers = []any{}
+	file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_msgTypes[2].OneofWrappers = []any{}
+	file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_msgTypes[8].OneofWrappers = []any{}
+	file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

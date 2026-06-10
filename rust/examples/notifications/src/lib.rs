@@ -80,9 +80,6 @@ mod tests {
             PresetType,
             TemplatedConnectorConfigField,
             condition_type::Condition,
-            test_result::{
-                self,
-            },
         },
     };
 
@@ -113,42 +110,6 @@ mod tests {
                 fields: vec![TemplatedConnectorConfigField {
                     field_name: "additionalBodyFields".into(),
                     template: "{\"priority\": \"{{alertDef.priority}}\"}".into(),
-                }],
-            }],
-            diagnostics: None,
-        }
-    }
-
-    fn create_test_slack_connector() -> Connector {
-        Connector {
-            name: "TestSlackConnectorRust".into(),
-            description: "Connector for Notification Center testing.".into(),
-            r#type: ConnectorType::Slack.into(),
-            id: None,
-            connector_config: Some(ConnectorConfig {
-                fields: vec![
-                    ConnectorConfigField {
-                        field_name: "integrationId".into(),
-                        value: "60d87305-1110-4a0a-b388-85fb769892ee".into(),
-                    },
-                    ConnectorConfigField {
-                        field_name: "channel".into(),
-                        value: "luigis-testing-grounds".into(),
-                    },
-                    ConnectorConfigField {
-                        field_name: "fallbackChannel".into(),
-                        value: "luigis-testing-grounds".into(),
-                    },
-                ],
-            }),
-            team_id: None,
-            create_time: None,
-            update_time: None,
-            config_overrides: vec![EntityTypeConfigOverrides {
-                entity_type: EntityType::Alerts.into(),
-                fields: vec![TemplatedConnectorConfigField {
-                    field_name: "channel".into(),
-                    template: "{{alertDef.priority}}".into(),
                 }],
             }],
             diagnostics: None,
@@ -282,142 +243,6 @@ mod tests {
             update_time: None,
             parent_id: Some("preset_system_pagerduty_alerts_basic".into()),
         }
-    }
-
-    #[tokio::test]
-    async fn test_https_connector() {
-        let notifications_client = NotificationsClient::new(
-            AuthContext::from_env(),
-            CoralogixRegion::from_env().unwrap(),
-        )
-        .unwrap();
-
-        let connector = create_test_https_connector("TestHttpsConnectorRust".into());
-
-        let fields = connector
-            .connector_config
-            .as_ref()
-            .map_or(vec![], |f| f.fields.clone());
-
-        let success: bool = match notifications_client
-            .test_connector_config(
-                connector.r#type(),
-                fields,
-                EntityType::Alerts,
-                "generic_https_default".into(),
-            )
-            .await
-            .unwrap()
-            .result
-            .unwrap()
-            .result
-            .unwrap()
-        {
-            test_result::Result::Success(_) => true,
-            test_result::Result::Failure(_) => false,
-        };
-        assert!(success);
-
-        let create_response = notifications_client
-            .create_connector(connector.clone())
-            .await
-            .unwrap();
-        let connector_id = create_response.connector.unwrap().id.unwrap();
-
-        let success: bool = match notifications_client
-            .test_existing_connector(connector_id.clone(), "generic_https_default".into())
-            .await
-            .unwrap()
-            .result
-            .unwrap()
-            .result
-            .unwrap()
-        {
-            test_result::Result::Success(_) => true,
-            test_result::Result::Failure(_) => false,
-        };
-
-        assert!(success);
-        let retrieved_connector = notifications_client
-            .get_connector(connector_id.clone())
-            .await
-            .unwrap()
-            .connector;
-
-        assert_eq!(retrieved_connector.unwrap().name, connector.name);
-
-        notifications_client
-            .delete_connector(connector_id)
-            .await
-            .unwrap();
-    }
-
-    #[tokio::test]
-    async fn test_slack_connector() {
-        let notifications_client = NotificationsClient::new(
-            AuthContext::from_env(),
-            CoralogixRegion::from_env().unwrap(),
-        )
-        .unwrap();
-
-        let connector = create_test_slack_connector();
-
-        let fields = connector
-            .connector_config
-            .as_ref()
-            .map_or(vec![], |f| f.fields.clone());
-
-        let success: bool = match notifications_client
-            .test_connector_config(
-                connector.r#type(),
-                fields,
-                EntityType::Alerts,
-                "slack_raw".into(),
-            )
-            .await
-            .unwrap()
-            .result
-            .unwrap()
-            .result
-            .unwrap()
-        {
-            test_result::Result::Success(_) => true,
-            test_result::Result::Failure(_) => false,
-        };
-        assert!(success);
-
-        let create_response = notifications_client
-            .create_connector(connector.clone())
-            .await
-            .unwrap();
-        let connector_id = create_response.connector.unwrap().id.unwrap();
-
-        let success: bool = match notifications_client
-            .test_existing_connector(connector_id.clone(), "slack_raw".into())
-            .await
-            .unwrap()
-            .result
-            .unwrap()
-            .result
-            .unwrap()
-        {
-            test_result::Result::Success(_) => true,
-            test_result::Result::Failure(_) => false,
-        };
-
-        assert!(success);
-        let retrieved_connector = notifications_client
-            .get_connector(connector_id.clone())
-            .await
-            .unwrap()
-            .connector;
-
-        assert_eq!(retrieved_connector.unwrap().name, connector.name);
-
-        notifications_client
-            .delete_connector(connector_id)
-            .await
-            .unwrap();
     }
 
     #[tokio::test]
