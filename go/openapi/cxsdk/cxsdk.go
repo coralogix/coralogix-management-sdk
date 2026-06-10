@@ -35,6 +35,7 @@ import (
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/policies_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
+	quotas "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/quota_allocation_rule_set_service"
 	archiveretention "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/retentions_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
 	scopes "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/scopes_service"
@@ -71,6 +72,7 @@ type ClientSet struct {
 	integrations         *integrations.IntegrationServiceAPIService
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
 	presets              *presets.PresetsServiceAPIService
+	quotas               *quotas.QuotaAllocationRuleSetServiceAPIService
 	scopes               *scopes.ScopesServiceAPIService
 	slos                 *slos.SlosServiceAPIService
 	recordingRules       *recordingrules.RecordingRulesServiceAPIService
@@ -186,6 +188,11 @@ func (c *ClientSet) Presets() *presets.PresetsServiceAPIService {
 	return c.presets
 }
 
+// Quotas returns the QuotaAllocationRuleSetServiceAPIService client.
+func (c *ClientSet) Quotas() *quotas.QuotaAllocationRuleSetServiceAPIService {
+	return c.quotas
+}
+
 // SLOs returns the SlosServiceAPIService client.
 func (c *ClientSet) SLOs() *slos.SlosServiceAPIService {
 	return c.slos
@@ -250,6 +257,7 @@ func NewClientSet(c *Config) *ClientSet {
 		integrations:         NewIntegrationsClient(c),
 		globalRouters:        NewGlobalRoutersClient(c),
 		presets:              NewPresetsClient(c),
+		quotas:               NewQuotasClient(c),
 		scopes:               NewScopesClient(c),
 		slos:                 NewSLOsClient(c),
 		recordingRules:       NewRecordingRulesClient(c),
@@ -507,6 +515,19 @@ func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return presets.NewAPIClient(cfg).PresetsServiceAPI
+}
+
+// NewQuotasClient builds a new QuotaAllocationRuleSetServiceAPIService from CallPropertiesCreator.
+func NewQuotasClient(c *Config) *quotas.QuotaAllocationRuleSetServiceAPIService {
+	cfg := quotas.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = quotas.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return quotas.NewAPIClient(cfg).QuotaAllocationRuleSetServiceAPI
 }
 
 // NewScopesClient builds a new ScopesServiceAPIService from CallPropertiesCreator.
