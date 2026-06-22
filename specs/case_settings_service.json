@@ -476,7 +476,8 @@
           "inactivePeriod": {
             "example": "3600s",
             "description": "Period of inactivity after which cases are automatically resolved.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -493,7 +494,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/KPISettings"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -517,12 +519,14 @@
           "resolutionSnoozePeriod": {
             "example": "600s",
             "description": "Period after resolution during which new cases are snoozed.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "suppressionPeriod": {
             "example": "3600s",
             "description": "Default period during which duplicate or related cases are suppressed.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -632,7 +636,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.KeyValue"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -691,7 +696,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -713,7 +719,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -737,7 +744,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -812,7 +820,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IndicatorFilter"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -871,7 +880,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IndicatorPriority"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -926,7 +936,8 @@
           "threshold": {
             "example": "300s",
             "description": "Elapsed time after which the KPI is considered breached.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/KPIType"
@@ -951,8 +962,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -990,12 +1003,14 @@
           "key": {
             "example": "service",
             "description": "Key of the pair (e.g., label or grouping name)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "example": "payments",
             "description": "Value associated with the key",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [

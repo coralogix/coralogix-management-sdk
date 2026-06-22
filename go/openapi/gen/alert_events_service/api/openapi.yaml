@@ -25,7 +25,9 @@ paths:
           description: The ids.
           items:
             description: The ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The order bys.
@@ -37,6 +39,7 @@ paths:
           description: The order bys.
           items:
             $ref: "#/components/schemas/AlertEventService_GetAlertEventsStats_order_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       responses:
@@ -81,6 +84,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       - description: Ordering applied to the alert event occurrences in the response.
@@ -92,6 +96,7 @@ paths:
           description: Ordering applied to the alert event occurrences in the response.
           items:
             $ref: "#/components/schemas/AlertEventService_GetAlertEventsStats_order_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       - description: Pagination parameters (page size and page token) for the returned
@@ -144,7 +149,9 @@ components:
           description: List of rules.
           items:
             description: List of rules.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         status:
           $ref: "#/components/schemas/ActivityAnalysisStatus"
@@ -163,12 +170,15 @@ components:
         isMutedCount:
           description: Number of muted items.
           format: int64
+          minimum: 0
           type: integer
         rules:
           description: List of rules.
           items:
             description: List of rules.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Event activity analysis statistics
       type: object
@@ -205,37 +215,45 @@ components:
           $ref: "#/components/schemas/ActivityAnalysis"
         alertId:
           description: Unique identifier of the alert.
+          minLength: 0
           type: string
         groupLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels for the group.
           type: object
         incidentCorrelationKey:
           description: Key used to correlate incidents.
+          minLength: 0
           type: string
         payload:
           description: Raw payload data.
           type: object
         payloadType:
           description: Type of the payload.
+          minLength: 0
           type: string
         permutationId:
           description: Unique identifier of the permutation.
+          minLength: 0
           type: string
         permutationLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels for the permutation.
           type: object
         preGroupingEventId:
           description: Identifier of the event before grouping.
+          minLength: 0
           type: string
         status:
           $ref: "#/components/schemas/AlertStatus"
         timestamp:
           description: Timestamp of the event.
           format: date-time
+          minLength: 0
           type: string
       title: Alert event
       type: object
@@ -284,6 +302,7 @@ components:
           description: List of alert events for multiple permutations.
           items:
             $ref: "#/components/schemas/AlertEvent"
+          minItems: 0
           type: array
       type: object
     AlertStatus:
@@ -305,14 +324,14 @@ components:
           rules:
           - rules
           - rules
-        triggeredCount: 5
-        count: 6
+        triggeredCount: 0
+        count: 0
         triggeredPermutationsSamples:
         - permutationLabels:
             key: permutationLabels
         - permutationLabels:
             key: permutationLabels
-        resolvedCount: 1
+        resolvedCount: 0
       externalDocs:
         url: ""
       properties:
@@ -321,24 +340,29 @@ components:
         count:
           description: Number of items.
           format: int64
+          minimum: 0
           type: integer
         resolvedCount:
           description: The resolved count.
           format: int64
+          minimum: 0
           type: integer
         resolvedPermutationsSamples:
           description: The resolved permutations samples.
           items:
             $ref: "#/components/schemas/v3.Permutation"
+          minItems: 0
           type: array
         triggeredCount:
           description: The triggered count.
           format: int64
+          minimum: 0
           type: integer
         triggeredPermutationsSamples:
           description: The triggered permutations samples.
           items:
             $ref: "#/components/schemas/v3.Permutation"
+          minItems: 0
           type: array
       title: Alert event statistics data structure
       type: object
@@ -355,6 +379,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -371,6 +396,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -388,6 +414,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -445,6 +472,7 @@ components:
       properties:
         id:
           description: Unique identifier of the alert event.
+          minLength: 0
           type: string
         multiplePermutation:
           $ref: "#/components/schemas/AlertEventMultiplePermutation"
@@ -461,6 +489,7 @@ components:
       properties:
         id:
           description: Unique identifier of the alert event.
+          minLength: 0
           type: string
         pagination:
           $ref: "#/components/schemas/alerts.v3.PaginationResponse"
@@ -485,14 +514,14 @@ components:
               rules:
               - rules
               - rules
-            triggeredCount: 5
-            count: 6
+            triggeredCount: 0
+            count: 0
             triggeredPermutationsSamples:
             - permutationLabels:
                 key: permutationLabels
             - permutationLabels:
                 key: permutationLabels
-            resolvedCount: 1
+            resolvedCount: 0
       externalDocs:
         url: ""
       properties:
@@ -509,7 +538,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OrderByAlertEventDirection:
@@ -535,10 +566,12 @@ components:
       properties:
         nextPageToken:
           description: Token for fetching the next page of results.
+          minLength: 0
           type: string
         totalSize:
           description: Total number of results.
           format: int64
+          minimum: 0
           type: integer
       type: object
     events.v3.FilterMatcher:
@@ -561,6 +594,7 @@ components:
       properties:
         permutationLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels for the permutation.
           type: object
@@ -578,8 +612,10 @@ components:
         pageSize:
           description: Page size.
           format: int64
+          minimum: 0
           type: integer
         pageToken:
           description: The page token.
+          minLength: 0
           type: string
       type: object

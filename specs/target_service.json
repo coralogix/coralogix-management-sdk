@@ -133,7 +133,8 @@
             "deprecated": true,
             "example": "json_id",
             "description": "The archiving format ID.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enableTags": {
             "example": true,
@@ -176,7 +177,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -198,7 +200,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -222,7 +225,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -241,7 +245,8 @@
           "bucketCrn": {
             "example": "bucket_crn",
             "description": "The bucket crn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "bucketType": {
             "$ref": "#/components/schemas/IbmBucketType"
@@ -249,12 +254,14 @@
           "endpoint": {
             "example": "http://some.endpoint.com:8081",
             "description": "Endpoint.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "serviceCrn": {
             "example": "service_crn",
             "description": "The service crn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -280,8 +287,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -331,22 +340,26 @@
           "bucket": {
             "example": "bucket",
             "description": "Bucket name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "externalId": {
             "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
             "description": "External identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "region": {
             "example": "us-west-2",
             "description": "Region.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "roleArn": {
             "example": "arn:aws:iam::123456789012:role/CoralogixArchive",
             "description": "The role arn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [

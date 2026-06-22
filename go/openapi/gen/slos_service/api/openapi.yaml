@@ -21,6 +21,7 @@ paths:
           description: The filters.
           items:
             $ref: "#/components/schemas/SloFilter"
+          minItems: 0
           type: array
         style: form
       responses:
@@ -183,8 +184,9 @@ paths:
           description: The ids.
           items:
             description: The ids.
-            example: ""
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -223,6 +225,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -260,6 +263,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -370,12 +374,14 @@ components:
         key:
           description: Label/tag name to filter on
           example: environment
+          minLength: 0
           type: string
         value:
           deprecated: true
           description: "Deprecated: use values instead. Single value to match (kept\
             \ for backward compatibility)"
           example: production
+          minLength: 0
           type: string
         values:
           description: "Preferred: multiple values to match (OR semantics, e.g. status\
@@ -384,7 +390,9 @@ components:
             description: "Preferred: multiple values to match (OR semantics, e.g.\
               \ status IN [500, 503])"
             example: "500"
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: ApmFilter
       type: object
@@ -493,6 +501,7 @@ components:
           description: Additional label-based filters to apply to the metrics
           items:
             $ref: "#/components/schemas/ApmFilter"
+          minItems: 0
           type: array
         groupingKeys:
           description: Labels to group SLO results by
@@ -501,7 +510,9 @@ components:
           - region
           items:
             description: Labels to group SLO results by
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         services:
           description: List of service names to monitor
@@ -510,7 +521,9 @@ components:
           - payment-service
           items:
             description: List of service names to monitor
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - errorConfig
@@ -525,6 +538,7 @@ components:
           description: Additional label-based filters to apply to the metrics
           items:
             $ref: "#/components/schemas/ApmFilter"
+          minItems: 0
           type: array
         groupingKeys:
           description: Labels to group SLO results by
@@ -533,7 +547,9 @@ components:
           - region
           items:
             description: Labels to group SLO results by
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         latencyConfig:
           $ref: "#/components/schemas/ApmLatencySli"
@@ -544,7 +560,9 @@ components:
           - payment-service
           items:
             description: List of service names to monitor
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - latencyConfig
@@ -718,6 +736,7 @@ components:
           description: The matching responses.
           items:
             $ref: "#/components/schemas/SloExecutionResponse"
+          minItems: 0
           type: array
         status:
           $ref: "#/components/schemas/ResponseStatus"
@@ -887,12 +906,15 @@ components:
           description: The not found ids.
           items:
             description: The not found ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         slos:
           description: The slos.
           items:
             $ref: "#/components/schemas/Slo"
+          minItems: 0
           type: array
       required:
       - slos
@@ -1113,6 +1135,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
       required:
       - id
@@ -1131,7 +1154,9 @@ components:
           description: The effected slo alert ids.
           items:
             description: The effected slo alert ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: DeleteSloResponse
       type: object
@@ -1148,6 +1173,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -1164,6 +1190,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -1181,6 +1208,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -1482,6 +1510,7 @@ components:
           description: The slos.
           items:
             $ref: "#/components/schemas/Slo"
+          minItems: 0
           type: array
       required:
       - slos
@@ -1495,6 +1524,7 @@ components:
         query:
           description: Query string.
           example: "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+          minLength: 0
           type: string
       title: Metric
       type: object
@@ -1511,7 +1541,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ProductTypeValues:
@@ -1523,6 +1555,7 @@ components:
           description: The values.
           items:
             $ref: "#/components/schemas/SloProductType"
+          minItems: 0
           type: array
       type: object
     ReplaceSloAlertsValidationsResponse:
@@ -1544,6 +1577,7 @@ components:
           description: The alerts validation result.
           items:
             $ref: "#/components/schemas/SloAlertValidityResult"
+          minItems: 0
           type: array
       required:
       - alertsValidationResult
@@ -1652,7 +1686,9 @@ components:
           description: The effected slo alert ids.
           items:
             description: The effected slo alert ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         slo:
           $ref: "#/components/schemas/Slo"
@@ -1683,11 +1719,13 @@ components:
       properties:
         details:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of details.
           type: object
         message:
           description: Human-readable message.
+          minLength: 0
           type: string
         statusCode:
           $ref: "#/components/schemas/Code"
@@ -1709,15 +1747,19 @@ components:
       properties:
         alertVersionId:
           description: The alert version id.
+          minLength: 0
           type: string
         errorMessage:
           description: The error message.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       type: object
     SloApmSli:
@@ -1807,29 +1849,35 @@ components:
         createTime:
           description: RFC3339 timestamp of when the SLO was created.
           format: date-time
+          minLength: 0
           type: string
         creator:
           description: Email or identifier of the user who created the SLO.
           example: test@domain.com
+          minLength: 0
           type: string
         description:
           description: Human-readable description of the SLO.
           example: A brief description of my SLO
+          minLength: 0
           type: string
         grouping:
           $ref: "#/components/schemas/v1.Grouping"
         id:
           description: Unique identifier of the SLO.
           example: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          minLength: 0
           type: string
         labels:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of labels.
           type: object
         name:
           description: Human-readable display name for the SLO.
           example: Example Slo Name
+          minLength: 0
           type: string
         ownershipTags:
           $ref: "#/components/schemas/SloOwnershipTags"
@@ -1851,10 +1899,12 @@ components:
           deprecated: true
           description: "Deprecated: SLO type string. Use slo_type instead."
           example: request
+          minLength: 0
           type: string
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       required:
       - apmSli
@@ -2120,6 +2170,7 @@ components:
         labelName:
           description: Filter by a specific SLO label key.
           example: environment
+          minLength: 0
           type: string
       required:
       - labelName
@@ -2182,6 +2233,7 @@ components:
             \ the request otherwise. To filter by configured ownership service on\
             \ any SLO type, use ownership_service_values instead."
           example: payment-service
+          minLength: 0
           type: string
       required:
       - serviceName
@@ -2229,7 +2281,9 @@ components:
             description: Metric label names to use as sources (label-driven). Actual
               values come from series at query time. Empty if not using label-driven
               for this dimension.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         resolvedValues:
           description: "Flat, deduplicated union of static_values and the values resolved\
@@ -2246,7 +2300,9 @@ components:
               \ resolved from label_keys across observed permutations (empties excluded).\
               \ Empty when neither source yields any value. Provides a single searchable\
               \ list of values for this ownership tag, regardless of source."
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         staticValues:
           description: Group-wide static values (broad). Empty if not using broad
@@ -2256,7 +2312,9 @@ components:
           items:
             description: Group-wide static values (broad). Empty if not using broad
               for this dimension.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: SloOwnershipTag
       type: object
@@ -2324,29 +2382,35 @@ components:
         createTime:
           description: RFC3339 timestamp of when the SLO was created.
           format: date-time
+          minLength: 0
           type: string
         creator:
           description: Email or identifier of the user who created the SLO.
           example: test@domain.com
+          minLength: 0
           type: string
         description:
           description: Human-readable description of the SLO.
           example: A brief description of my SLO
+          minLength: 0
           type: string
         grouping:
           $ref: "#/components/schemas/v1.Grouping"
         id:
           description: Unique identifier of the SLO.
           example: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          minLength: 0
           type: string
         labels:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of labels.
           type: object
         name:
           description: Human-readable display name for the SLO.
           example: Example Slo Name
+          minLength: 0
           type: string
         ownershipTags:
           $ref: "#/components/schemas/SloOwnershipTags"
@@ -2370,10 +2434,12 @@ components:
           deprecated: true
           description: "Deprecated: SLO type string. Use slo_type instead."
           example: request
+          minLength: 0
           type: string
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       required:
       - requestBasedMetricSli
@@ -2404,29 +2470,35 @@ components:
         createTime:
           description: RFC3339 timestamp of when the SLO was created.
           format: date-time
+          minLength: 0
           type: string
         creator:
           description: Email or identifier of the user who created the SLO.
           example: test@domain.com
+          minLength: 0
           type: string
         description:
           description: Human-readable description of the SLO.
           example: A brief description of my SLO
+          minLength: 0
           type: string
         grouping:
           $ref: "#/components/schemas/v1.Grouping"
         id:
           description: Unique identifier of the SLO.
           example: b11919d5-ef85-4bb1-8655-02640dbe94d9
+          minLength: 0
           type: string
         labels:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of labels.
           type: object
         name:
           description: Human-readable display name for the SLO.
           example: Example Slo Name
+          minLength: 0
           type: string
         ownershipTags:
           $ref: "#/components/schemas/SloOwnershipTags"
@@ -2448,10 +2520,12 @@ components:
           deprecated: true
           description: "Deprecated: SLO type string. Use slo_type instead."
           example: request
+          minLength: 0
           type: string
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
         windowBasedMetricSli:
           $ref: "#/components/schemas/WindowBasedMetricSli"
@@ -2468,7 +2542,9 @@ components:
           description: The values.
           items:
             description: The values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     TypeValues:
@@ -2480,6 +2556,7 @@ components:
           description: The values.
           items:
             $ref: "#/components/schemas/SloType"
+          minItems: 0
           type: array
       type: object
     WindowBasedMetricSli:
@@ -2527,7 +2604,9 @@ components:
           description: List of labels.
           items:
             description: List of labels.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Grouping
       type: object
@@ -2548,6 +2627,7 @@ components:
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       title: Revision
       type: object
@@ -2761,6 +2841,7 @@ components:
           description: The requests.
           items:
             $ref: "#/components/schemas/SloExecutionRequest"
+          minItems: 0
           type: array
       required:
       - requests

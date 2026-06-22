@@ -29,6 +29,7 @@ paths:
         schema:
           description: Aggregation resolution. Minimum supported value is 1h. Must
             be between 1 hour and the date_range interval.
+          minLength: 0
           type: string
         style: form
       - description: List of fields to aggregate results by (for example pillar and
@@ -42,6 +43,7 @@ paths:
             and priority).
           items:
             $ref: "#/components/schemas/AggregateBy"
+          minItems: 0
           type: array
         style: form
       - description: Dimensions to filter results by; only entries that contain all
@@ -55,6 +57,7 @@ paths:
             all listed dimensions are returned.
           items:
             $ref: "#/components/schemas/DataUsageService_GetDataUsage_dimension_filters_parameter_inner"
+          minItems: 0
           type: array
         style: form
       responses:
@@ -266,6 +269,7 @@ paths:
         schema:
           description: Aggregation resolution with second precision. Must be between
             1 second and the date_range interval.
+          minLength: 0
           type: string
         style: form
       - description: Optional scope filter that restricts results to the listed applications
@@ -341,6 +345,7 @@ paths:
         schema:
           description: Aggregation resolution with second precision. Must be between
             1 second and the date_range interval.
+          minLength: 0
           type: string
         style: form
       - description: Optional scope filter that restricts results to the listed applications
@@ -407,6 +412,7 @@ components:
           description: The dimensions.
           items:
             $ref: "#/components/schemas/Dimension"
+          minItems: 0
           type: array
         sizeGb:
           description: The size gb.
@@ -415,6 +421,7 @@ components:
         timestamp:
           description: Timestamp.
           format: date-time
+          minLength: 0
           type: string
         units:
           description: The units.
@@ -439,10 +446,12 @@ components:
           description: The evaluations.
           items:
             $ref: "#/components/schemas/Evaluation"
+          minItems: 0
           type: array
         statsDate:
           description: The stats date.
           format: date-time
+          minLength: 0
           type: string
         totalTokens:
           $ref: "#/components/schemas/Token"
@@ -500,6 +509,7 @@ components:
         statsDate:
           description: The stats date.
           format: date-time
+          minLength: 0
           type: string
         totalGbs:
           $ref: "#/components/schemas/v2.GB"
@@ -561,6 +571,7 @@ components:
         statsDate:
           description: The stats date.
           format: date-time
+          minLength: 0
           type: string
         totalUnits:
           $ref: "#/components/schemas/v2.Unit"
@@ -621,6 +632,7 @@ components:
           $ref: "#/components/schemas/Token"
         evaluatorName:
           description: The evaluator name.
+          minLength: 0
           type: string
       type: object
     FilterPathAndValues:
@@ -636,6 +648,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -652,6 +665,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -669,6 +683,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -686,10 +701,12 @@ components:
         key:
           description: The key.
           example: key
+          minLength: 0
           type: string
         value:
           description: The value.
           example: value
+          minLength: 0
           type: string
       title: Generic Dimension
       type: object
@@ -746,6 +763,7 @@ components:
           description: List of tokens.
           items:
             $ref: "#/components/schemas/DetailedDailyEvaluationTokens"
+          minItems: 0
           type: array
       type: object
     GetDailyUsageProcessedGbsRequestDateRange:
@@ -831,6 +849,7 @@ components:
           description: The gbs.
           items:
             $ref: "#/components/schemas/DetailedDailyProcessedGbs"
+          minItems: 0
           type: array
       type: object
     GetDailyUsageUnitsRequestDateRange:
@@ -918,6 +937,7 @@ components:
           description: The units.
           items:
             $ref: "#/components/schemas/DetailedDailyUnits"
+          minItems: 0
           type: array
       type: object
     GetDataUsageMetricsExportStatusResponse:
@@ -967,6 +987,7 @@ components:
           description: List of entries.
           items:
             $ref: "#/components/schemas/DataUsageEntry"
+          minItems: 0
           type: array
       title: Get Data Usage Response
       type: object
@@ -994,6 +1015,7 @@ components:
           description: The logs count.
           items:
             $ref: "#/components/schemas/LogsCount"
+          minItems: 0
           type: array
       title: Get Logs Count Response
       type: object
@@ -1023,6 +1045,7 @@ components:
           description: The spans count.
           items:
             $ref: "#/components/schemas/SpansCount"
+          minItems: 0
           type: array
       title: Get Spans Count Response
       type: object
@@ -1041,11 +1064,14 @@ components:
       properties:
         applicationName:
           description: The application name.
+          minLength: 0
           type: string
         logsCount:
           description: The logs count.
           example: "100"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         priority:
           $ref: "#/components/schemas/v2.Priority"
@@ -1053,10 +1079,12 @@ components:
           $ref: "#/components/schemas/datausage.v2.Severity"
         subsystemName:
           description: The subsystem name.
+          minLength: 0
           type: string
         timestamp:
           description: Timestamp.
           format: date-time
+          minLength: 0
           type: string
       title: Logs Count
       type: object
@@ -1066,7 +1094,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     SpansCount:
@@ -1086,37 +1116,50 @@ components:
         errorSpanCount:
           description: The error span count.
           example: "10"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         lowErrorSpanCount:
           description: The low error span count.
           example: "5"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         lowSuccessSpanCount:
           description: The low success span count.
           example: "50"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         mediumErrorSpanCount:
           description: The medium error span count.
           example: "20"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         mediumSuccessSpanCount:
           description: The medium success span count.
           example: "200"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         successSpanCount:
           description: The success span count.
           example: "100"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         timestamp:
           description: Timestamp of the event.
           example: 2021-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
       title: Spans Count
       type: object
@@ -1173,11 +1216,13 @@ components:
           description: The from date.
           example: 2021-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
         toDate:
           description: The to date.
           example: 2021-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
       title: Date Range
       type: object
@@ -1259,11 +1304,13 @@ components:
           description: The from date.
           example: 2021-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
         toDate:
           description: The to date.
           example: 2021-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
       title: Date Range
       type: object
@@ -1310,14 +1357,18 @@ components:
           items:
             description: "List of application names to filter on (OR logic, full match)."
             example: application1
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         subsystem:
           description: "List of subsystem names to filter on (OR logic, full match)."
           items:
             description: "List of subsystem names to filter on (OR logic, full match)."
             example: subsystem1
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Scopes Filter
       type: object

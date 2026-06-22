@@ -68,11 +68,13 @@
                 "properties": {
                   "creator": {
                     "description": "Creator.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "description": {
                     "description": "Human-readable description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "enabled": {
                     "description": "Whether this resource is enabled.",
@@ -84,26 +86,30 @@
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "order": {
                     "description": "Sort order.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "ruleMatchers": {
                     "description": "List of rule matchers that determine which logs this group applies to.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RuleMatcher"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "ruleSubgroups": {
                     "description": "List of rule subgroups defining the ordered set of rules in this group.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -203,11 +209,13 @@
                 "properties": {
                   "creator": {
                     "description": "Creator.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "description": {
                     "description": "Human-readable description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "enabled": {
                     "description": "Whether this resource is enabled.",
@@ -219,26 +227,30 @@
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "order": {
                     "description": "Sort order.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "ruleMatchers": {
                     "description": "The rule matchers.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RuleMatcher"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "ruleSubgroups": {
                     "description": "The rule subgroups.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "teamId": {
                     "$ref": "#/components/schemas/v1.TeamId"
@@ -298,10 +310,11 @@
               "description": "The unique identifiers of the parsing rule groups to delete.",
               "type": "array",
               "items": {
-                "example": "",
                 "description": "The unique identifiers of the parsing rule groups to delete.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -357,7 +370,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the parsing rule group to retrieve.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -411,7 +425,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the parsing rule group to update.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -425,11 +440,13 @@
                 "properties": {
                   "creator": {
                     "description": "Creator.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "description": {
                     "description": "Human-readable description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "enabled": {
                     "description": "Whether this resource is enabled.",
@@ -441,26 +458,30 @@
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "order": {
                     "description": "Sort order.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "ruleMatchers": {
                     "description": "The rule matchers.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RuleMatcher"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "ruleSubgroups": {
                     "description": "The rule subgroups.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "teamId": {
                     "$ref": "#/components/schemas/v1.TeamId"
@@ -519,7 +540,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the parsing rule group to delete.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -572,7 +594,8 @@
           },
           "rule": {
             "description": "Rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -585,7 +608,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -602,7 +626,8 @@
           },
           "rule": {
             "description": "Rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -648,14 +673,16 @@
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -664,7 +691,8 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -672,19 +700,22 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "parameters": {
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
             "description": "The source field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -729,7 +760,8 @@
         "properties": {
           "rule": {
             "description": "Rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -742,7 +774,8 @@
         "properties": {
           "format": {
             "description": "The format.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "standard": {
             "$ref": "#/components/schemas/FormatStandard"
@@ -772,7 +805,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -794,7 +828,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -818,7 +853,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -847,7 +883,8 @@
         "properties": {
           "companyId": {
             "description": "The company id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "limits": {
             "$ref": "#/components/schemas/Counts"
@@ -867,14 +904,16 @@
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -883,7 +922,8 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -891,19 +931,22 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "parameters": {
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
             "description": "The source field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -941,14 +984,16 @@
         "properties": {
           "destinationFieldText": {
             "description": "The destination field text.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "destinationFieldType": {
             "$ref": "#/components/schemas/DestinationField"
           },
           "rule": {
             "description": "Rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -965,7 +1010,8 @@
           },
           "destinationField": {
             "description": "The destination field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "escapedValue": {
             "description": "The escaped value.",
@@ -990,7 +1036,8 @@
           },
           "destinationField": {
             "description": "The destination field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1006,7 +1053,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleGroup"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1019,8 +1067,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1033,11 +1083,13 @@
         "properties": {
           "destinationField": {
             "description": "The destination field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "rule": {
             "description": "Rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1053,8 +1105,10 @@
             "type": "array",
             "items": {
               "description": "List of fields.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1067,15 +1121,18 @@
         "properties": {
           "destinationField": {
             "description": "The destination field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "replaceNewVal": {
             "description": "The replace new val.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "rule": {
             "description": "Rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1088,11 +1145,13 @@
         "properties": {
           "creator": {
             "description": "Creator.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -1104,30 +1163,35 @@
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "ruleMatchers": {
             "description": "The rule matchers.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleMatcher"
-            }
+            },
+            "minItems": 0
           },
           "ruleSubgroups": {
             "description": "The rule subgroups.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleSubgroup"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1370,19 +1434,22 @@
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rules.v1.Rule"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1407,7 +1474,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1447,7 +1515,8 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -1455,23 +1524,27 @@
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "order": {
             "description": "Sort order.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "parameters": {
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
             "description": "The source field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1485,7 +1558,8 @@
           "id": {
             "description": "Unique identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },

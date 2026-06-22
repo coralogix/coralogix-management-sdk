@@ -198,6 +198,9 @@ func (a *ExtensionServiceAPIService) ExtensionServiceGetExtensionExecute(r ApiEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	if r.includeDashboardBinaries != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_dashboard_binaries", r.includeDashboardBinaries, "form", "")

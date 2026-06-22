@@ -51,12 +51,14 @@
                     "example": 1,
                     "description": "The custom enrichment id.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "description": {
                     "example": "custom_enrichment_description",
                     "description": "New human-readable description of the custom enrichment.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "file": {
                     "$ref": "#/components/schemas/File"
@@ -64,7 +66,8 @@
                   "name": {
                     "example": "custom_enrichment_name",
                     "description": "New human-readable name for the custom enrichment.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -112,7 +115,8 @@
                   "description": {
                     "example": "custom_enrichment_description",
                     "description": "Human-readable description of the custom enrichment.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "file": {
                     "$ref": "#/components/schemas/File"
@@ -120,7 +124,8 @@
                   "name": {
                     "example": "custom_enrichment_name",
                     "description": "Human-readable name for the custom enrichment.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -175,7 +180,8 @@
                     "$ref": "#/components/schemas/SearchClauseName"
                   }
                 ]
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -215,7 +221,8 @@
               "example": 1,
               "description": "The unique identifier of the custom enrichment rule.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -253,7 +260,8 @@
               "example": 1,
               "description": "The unique identifier of the custom enrichment rule to delete.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -290,7 +298,8 @@
           "message": {
             "example": "Custom enrichment created successfully",
             "description": "Human-readable message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -303,21 +312,25 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fileName": {
             "description": "The file name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fileSize": {
             "description": "The file size.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "description": "Unique identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "isQueryOnly": {
             "description": "The is query only.",
@@ -325,12 +338,14 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "version": {
             "description": "Version number.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -354,7 +369,8 @@
           "binary": {
             "description": "Binary content of the enrichment data file encoded as base64.",
             "type": "string",
-            "format": "byte"
+            "format": "byte",
+            "minLength": 0
           },
           "definition": {
             "$ref": "#/components/schemas/CustomEnrichment"
@@ -376,7 +392,8 @@
           },
           "textual": {
             "description": "Textual content of the enrichment data file as a UTF-8 string.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -394,12 +411,14 @@
             "example": 1,
             "description": "The custom enrichment id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "message": {
             "example": "Custom enrichment deleted successfully",
             "description": "Human-readable message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -426,23 +445,27 @@
             "example": "0xFABB32",
             "description": "Binary content of the file encoded as base64.",
             "type": "string",
-            "format": "byte"
+            "format": "byte",
+            "minLength": 0
           },
           "extension": {
             "example": "csv",
             "description": "File extension indicating the file format (e.g., csv, json).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "file_name",
             "description": "Name of the file.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "size": {
             "example": 100,
             "description": "Size of the file in bytes.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -461,23 +484,27 @@
           "extension": {
             "example": "csv",
             "description": "File extension indicating the file format (e.g., csv, json).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "file_name",
             "description": "Name of the file.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "size": {
             "example": 100,
             "description": "Size of the file in bytes.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "textual": {
             "example": "row1,row2 value1,value2",
             "description": "Textual content of the file as a UTF-8 string.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -507,7 +534,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -529,7 +557,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -553,7 +582,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -591,7 +621,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEnrichment"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -604,8 +635,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -622,7 +655,8 @@
             "example": 1,
             "description": "Search by the numeric ID of the custom enrichment.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -641,7 +675,8 @@
           "name": {
             "example": "custom_enrichment_name",
             "description": "Search by the name of the custom enrichment.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -660,7 +695,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomEnrichmentData"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -679,7 +715,8 @@
           "message": {
             "example": "Custom enrichment updated successfully",
             "description": "Human-readable message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

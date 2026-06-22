@@ -40,6 +40,9 @@ model_bar_chart_query_metrics.go
 model_bar_chart_query_spans.go
 model_bar_chart_spans_query.go
 model_bar_chart_stack_definition.go
+model_check_dashboard_request_dashboard.go
+model_check_dashboard_request_dashboard_id.go
+model_check_dashboard_response.go
 model_color_apply_target.go
 model_color_gradient_type.go
 model_color_label_mapping.go
@@ -81,6 +84,7 @@ model_dashboard_one_minute_absolute_time_frame.go
 model_dashboard_one_minute_relative_time_frame.go
 model_dashboard_two_minutes_absolute_time_frame.go
 model_dashboard_two_minutes_relative_time_frame.go
+model_dashboards_service_check_dashboard_request.go
 model_data_table.go
 model_data_table_column.go
 model_data_table_dataprime_query.go
@@ -219,6 +223,8 @@ model_interval_resolution.go
 model_interval_resolution_auto.go
 model_interval_resolution_manual.go
 model_interval_value.go
+model_issue.go
+model_issue_severity.go
 model_layout.go
 model_legend.go
 model_legend_by.go

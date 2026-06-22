@@ -29,6 +29,8 @@ type TimeSeriesLinesMulti struct {
 	QueryDisplaySettings []QueryDisplaySettings `json:"queryDisplaySettings,omitempty"`
 	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
+	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
+	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -212,6 +214,38 @@ func (o *TimeSeriesLinesMulti) SetTooltip(v TimeSeriesTooltip) {
 	o.Tooltip = &v
 }
 
+// GetUseDataTimeRange returns the UseDataTimeRange field value if set, zero value otherwise.
+func (o *TimeSeriesLinesMulti) GetUseDataTimeRange() bool {
+	if o == nil || IsNil(o.UseDataTimeRange) {
+		var ret bool
+		return ret
+	}
+	return *o.UseDataTimeRange
+}
+
+// GetUseDataTimeRangeOk returns a tuple with the UseDataTimeRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeSeriesLinesMulti) GetUseDataTimeRangeOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseDataTimeRange) {
+		return nil, false
+	}
+	return o.UseDataTimeRange, true
+}
+
+// HasUseDataTimeRange returns a boolean if a field has been set.
+func (o *TimeSeriesLinesMulti) HasUseDataTimeRange() bool {
+	if o != nil && !IsNil(o.UseDataTimeRange) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseDataTimeRange gets a reference to the given bool and assigns it to the UseDataTimeRange field.
+func (o *TimeSeriesLinesMulti) SetUseDataTimeRange(v bool) {
+	o.UseDataTimeRange = &v
+}
+
 // GetXAxisTimeFormat returns the XAxisTimeFormat field value if set, zero value otherwise.
 func (o *TimeSeriesLinesMulti) GetXAxisTimeFormat() XAxisTimeFormat {
 	if o == nil || IsNil(o.XAxisTimeFormat) {
@@ -269,6 +303,9 @@ func (o TimeSeriesLinesMulti) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tooltip) {
 		toSerialize["tooltip"] = o.Tooltip
 	}
+	if !IsNil(o.UseDataTimeRange) {
+		toSerialize["useDataTimeRange"] = o.UseDataTimeRange
+	}
 	if !IsNil(o.XAxisTimeFormat) {
 		toSerialize["xAxisTimeFormat"] = o.XAxisTimeFormat
 	}
@@ -300,6 +337,7 @@ func (o *TimeSeriesLinesMulti) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "queryDisplaySettings")
 		delete(additionalProperties, "stackedLine")
 		delete(additionalProperties, "tooltip")
+		delete(additionalProperties, "useDataTimeRange")
 		delete(additionalProperties, "xAxisTimeFormat")
 		o.AdditionalProperties = additionalProperties
 	}

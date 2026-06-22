@@ -68,6 +68,7 @@ paths:
         schema:
           description: The unique identifier of the integration definition.
           example: aws-sqs
+          minLength: 0
           type: string
         style: simple
       - description: Whether to include testing revisions in the response.
@@ -122,6 +123,7 @@ paths:
         schema:
           description: The integration id.
           example: aws-sqs
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -166,6 +168,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the integration instance to delete.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -210,6 +213,7 @@ paths:
         required: false
         schema:
           description: The name of the RUM application to fetch version data for.
+          minLength: 0
           type: string
         style: form
       responses:
@@ -293,6 +297,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the integration.
+          minLength: 0
           type: string
         style: simple
       - description: Whether to include testing revisions in the response.
@@ -380,6 +385,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the managed integration.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -542,6 +548,7 @@ paths:
         schema:
           description: The unique identifier of the integration to fetch a template
             for.
+          minLength: 0
           type: string
         style: form
       - description: "Common ARM integration parameters (logs URL, API key, cgx domain)\
@@ -601,9 +608,11 @@ components:
       properties:
         resourceGroupName:
           description: The resource group name.
+          minLength: 0
           type: string
         subscriptionId:
           description: The subscription id.
+          minLength: 0
           type: string
       title: ARM stack
       type: object
@@ -617,9 +626,11 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       title: API key data
       type: object
@@ -639,6 +650,7 @@ components:
       properties:
         templateUrl:
           description: The template url.
+          minLength: 0
           type: string
       title: Azure ARM template
       type: object
@@ -651,9 +663,11 @@ components:
       properties:
         descriptionMd:
           description: The description md.
+          minLength: 0
           type: string
         version:
           description: Version.
+          minLength: 0
           type: string
       title: Changelog entry
       type: object
@@ -666,9 +680,11 @@ components:
       properties:
         arn:
           description: The arn.
+          minLength: 0
           type: string
         region:
           description: Region.
+          minLength: 0
           type: string
       title: CloudFormation stack
       type: object
@@ -681,19 +697,23 @@ components:
           description: The commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
+          minItems: 0
           type: array
         parameters:
           additionalProperties:
+            minLength: 0
             type: string
           description: The parameters.
           type: object
         postInstallationSteps:
           additionalProperties:
+            minLength: 0
             type: string
           description: The post installation steps.
           type: object
         templateUrl:
           description: The template url.
+          minLength: 0
           type: string
       title: CloudFormation template
       type: object
@@ -710,9 +730,11 @@ components:
       properties:
         command:
           description: The command.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         language:
           $ref: "#/components/schemas/Language"
@@ -720,12 +742,15 @@ components:
           description: List of links.
           items:
             $ref: "#/components/schemas/Link"
+          minItems: 0
           type: array
         name:
           description: Display name.
+          minLength: 0
           type: string
         tooltipText:
           description: The tooltip text.
+          minLength: 0
           type: string
       title: Command information
       type: object
@@ -735,12 +760,15 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       title: Configuration block
       type: object
@@ -818,6 +846,7 @@ components:
           description: The registered.
           items:
             $ref: "#/components/schemas/RegisteredInstance"
+          minItems: 0
           type: array
       title: Default integration details
       type: object
@@ -854,12 +883,15 @@ components:
       properties:
         definitionKey:
           description: The definition key.
+          minLength: 0
           type: string
         definitionVersion:
           description: The definition version.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
@@ -867,6 +899,7 @@ components:
           description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
+          minItems: 0
           type: array
       title: Deployed integration information
       type: object
@@ -882,12 +915,15 @@ components:
       properties:
         reason:
           description: Reason.
+          minLength: 0
           type: string
         replacementExtensions:
           description: The replacement extensions.
           items:
             description: The replacement extensions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Deprecation
       type: object
@@ -900,6 +936,7 @@ components:
       properties:
         data:
           description: Data payload.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/ExtensionBinary.BinaryType"
@@ -936,34 +973,41 @@ components:
           description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionItemBinary"
+          minItems: 0
           type: array
         data:
           description: Data payload.
           type: object
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         extendedInternalId:
           description: The extended internal id.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         isMandatory:
           description: The is mandatory.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         permissionResource:
           $ref: "#/components/schemas/PermissionResource"
         stableId:
           description: The stable id.
+          minLength: 0
           type: string
         targetDomain:
           $ref: "#/components/schemas/TargetDomain"
         uniqueId:
           description: The unique id.
+          minLength: 0
           type: string
       title: Extension item
       type: object
@@ -977,9 +1021,11 @@ components:
       properties:
         data:
           description: Data payload.
+          minLength: 0
           type: string
         fileName:
           description: The file name.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
@@ -1090,17 +1136,21 @@ components:
           description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionBinary"
+          minItems: 0
           type: array
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         excerpt:
           description: The excerpt.
+          minLength: 0
           type: string
         integrationDetails:
           description: The integration details.
           items:
             $ref: "#/components/schemas/IntegrationDetail"
+          minItems: 0
           type: array
         isTesting:
           description: The is testing.
@@ -1109,20 +1159,25 @@ components:
           description: List of items.
           items:
             $ref: "#/components/schemas/ExtensionItem"
+          minItems: 0
           type: array
         labels:
           description: List of labels.
           items:
             description: List of labels.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         permissionDeniedItems:
           description: The permission denied items.
           items:
             $ref: "#/components/schemas/ExtensionItem"
+          minItems: 0
           type: array
         version:
           description: Version.
+          minLength: 0
           type: string
       title: Extension revision
       type: object
@@ -1135,6 +1190,7 @@ components:
       properties:
         url:
           description: URL.
+          minLength: 0
           type: string
       title: External URL
       type: object
@@ -1156,6 +1212,7 @@ components:
           description: List of values.
           items:
             $ref: "#/components/schemas/FieldCondition.FieldValue"
+          minItems: 0
           type: array
       title: Field condition
       type: object
@@ -1175,9 +1232,11 @@ components:
       properties:
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         valuePattern:
           description: The value pattern.
+          minLength: 0
           type: string
       title: Field value
       type: object
@@ -1224,25 +1283,30 @@ components:
         allowedPattern:
           description: Regular expression pattern that the field value must match
             for validation.
+          minLength: 0
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
           description: Link to documentation providing more information about this
             field.
+          minLength: 0
           type: string
         groupId:
           description: Identifier of the UI group this field belongs to for form layout
             purposes.
+          minLength: 0
           type: string
         multiText:
           $ref: "#/components/schemas/ListTextValue"
         name:
           description: Display name.
+          minLength: 0
           type: string
         placeholder:
           description: Placeholder text shown in the input field before a value is
             entered.
+          minLength: 0
           type: string
         predefined:
           description: Whether this field has a predefined value that is suggested
@@ -1259,16 +1323,19 @@ components:
         templateParamName:
           description: Name of the template parameter this field maps to in the deployment
             template.
+          minLength: 0
           type: string
         tooltip:
           description: Tooltip text displayed on hover to provide additional context
             for this field.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
           description: Notice displayed to users when an upgrade is required to use
             this field.
+          minLength: 0
           type: string
         visible:
           description: Whether this field is visible in the integration configuration
@@ -1285,25 +1352,30 @@ components:
         allowedPattern:
           description: Regular expression pattern that the field value must match
             for validation.
+          minLength: 0
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
           description: Link to documentation providing more information about this
             field.
+          minLength: 0
           type: string
         groupId:
           description: Identifier of the UI group this field belongs to for form layout
             purposes.
+          minLength: 0
           type: string
         multipleSelection:
           $ref: "#/components/schemas/MultipleSelectionValue"
         name:
           description: Display name.
+          minLength: 0
           type: string
         placeholder:
           description: Placeholder text shown in the input field before a value is
             entered.
+          minLength: 0
           type: string
         predefined:
           description: Whether this field has a predefined value that is suggested
@@ -1320,16 +1392,19 @@ components:
         templateParamName:
           description: Name of the template parameter this field maps to in the deployment
             template.
+          minLength: 0
           type: string
         tooltip:
           description: Tooltip text displayed on hover to provide additional context
             for this field.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
           description: Notice displayed to users when an upgrade is required to use
             this field.
+          minLength: 0
           type: string
         visible:
           description: Whether this field is visible in the integration configuration
@@ -1346,23 +1421,28 @@ components:
         allowedPattern:
           description: Regular expression pattern that the field value must match
             for validation.
+          minLength: 0
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
           description: Link to documentation providing more information about this
             field.
+          minLength: 0
           type: string
         groupId:
           description: Identifier of the UI group this field belongs to for form layout
             purposes.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         placeholder:
           description: Placeholder text shown in the input field before a value is
             entered.
+          minLength: 0
           type: string
         predefined:
           description: Whether this field has a predefined value that is suggested
@@ -1381,16 +1461,19 @@ components:
         templateParamName:
           description: Name of the template parameter this field maps to in the deployment
             template.
+          minLength: 0
           type: string
         tooltip:
           description: Tooltip text displayed on hover to provide additional context
             for this field.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
           description: Notice displayed to users when an upgrade is required to use
             this field.
+          minLength: 0
           type: string
         visible:
           description: Whether this field is visible in the integration configuration
@@ -1407,23 +1490,28 @@ components:
         allowedPattern:
           description: Regular expression pattern that the field value must match
             for validation.
+          minLength: 0
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
           description: Link to documentation providing more information about this
             field.
+          minLength: 0
           type: string
         groupId:
           description: Identifier of the UI group this field belongs to for form layout
             purposes.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         placeholder:
           description: Placeholder text shown in the input field before a value is
             entered.
+          minLength: 0
           type: string
         predefined:
           description: Whether this field has a predefined value that is suggested
@@ -1442,16 +1530,19 @@ components:
         templateParamName:
           description: Name of the template parameter this field maps to in the deployment
             template.
+          minLength: 0
           type: string
         tooltip:
           description: Tooltip text displayed on hover to provide additional context
             for this field.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
           description: Notice displayed to users when an upgrade is required to use
             this field.
+          minLength: 0
           type: string
         visible:
           description: Whether this field is visible in the integration configuration
@@ -1468,23 +1559,28 @@ components:
         allowedPattern:
           description: Regular expression pattern that the field value must match
             for validation.
+          minLength: 0
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
           description: Link to documentation providing more information about this
             field.
+          minLength: 0
           type: string
         groupId:
           description: Identifier of the UI group this field belongs to for form layout
             purposes.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         placeholder:
           description: Placeholder text shown in the input field before a value is
             entered.
+          minLength: 0
           type: string
         predefined:
           description: Whether this field has a predefined value that is suggested
@@ -1503,16 +1599,19 @@ components:
         templateParamName:
           description: Name of the template parameter this field maps to in the deployment
             template.
+          minLength: 0
           type: string
         tooltip:
           description: Tooltip text displayed on hover to provide additional context
             for this field.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
           description: Notice displayed to users when an upgrade is required to use
             this field.
+          minLength: 0
           type: string
         visible:
           description: Whether this field is visible in the integration configuration
@@ -1529,23 +1628,28 @@ components:
         allowedPattern:
           description: Regular expression pattern that the field value must match
             for validation.
+          minLength: 0
           type: string
         applicableIf:
           $ref: "#/components/schemas/FieldCondition"
         documentationReference:
           description: Link to documentation providing more information about this
             field.
+          minLength: 0
           type: string
         groupId:
           description: Identifier of the UI group this field belongs to for form layout
             purposes.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         placeholder:
           description: Placeholder text shown in the input field before a value is
             entered.
+          minLength: 0
           type: string
         predefined:
           description: Whether this field has a predefined value that is suggested
@@ -1564,16 +1668,19 @@ components:
         templateParamName:
           description: Name of the template parameter this field maps to in the deployment
             template.
+          minLength: 0
           type: string
         tooltip:
           description: Tooltip text displayed on hover to provide additional context
             for this field.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/InputType"
         upgradeNotice:
           description: Notice displayed to users when an upgrade is required to use
             this field.
+          minLength: 0
           type: string
         visible:
           description: Whether this field is visible in the integration configuration
@@ -1596,6 +1703,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -1612,6 +1720,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -1629,6 +1738,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -1643,6 +1753,7 @@ components:
           description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
+          minItems: 0
           type: array
       title: Generic integration parameters
       type: object
@@ -2727,6 +2838,7 @@ components:
           description: The integrations.
           items:
             $ref: "#/components/schemas/GetIntegrationsResponse.IntegrationWithCounts"
+          minItems: 0
           type: array
       title: Get integrations response
       type: object
@@ -2765,12 +2877,15 @@ components:
         amountIntegrations:
           description: The amount integrations.
           format: int64
+          minimum: 0
           type: integer
         errors:
           description: List of errors.
           items:
             description: List of errors.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         integration:
           $ref: "#/components/schemas/Integration"
@@ -2801,6 +2916,7 @@ components:
       properties:
         integrationId:
           description: The integration id.
+          minLength: 0
           type: string
         status:
           $ref: "#/components/schemas/IntegrationStatus"
@@ -2842,6 +2958,7 @@ components:
       properties:
         templateUrl:
           description: The template url.
+          minLength: 0
           type: string
       title: Get template response
       type: object
@@ -2854,11 +2971,13 @@ components:
           description: The commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
+          minItems: 0
           type: array
         guide:
           $ref: "#/components/schemas/IntegrationGuide"
         template:
           description: The template.
+          minLength: 0
           type: string
       title: Helm chart
       type: object
@@ -2906,40 +3025,51 @@ components:
       properties:
         darkIcon:
           description: The dark icon.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         icon:
           description: Icon identifier.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         integrationType:
           $ref: "#/components/schemas/v1.IntegrationType"
         name:
           description: Display name.
+          minLength: 0
           type: string
         revisions:
           description: The revisions.
           items:
             $ref: "#/components/schemas/v1.RevisionSummary"
+          minItems: 0
           type: array
         tags:
           description: List of tags.
           items:
             description: List of tags.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         versions:
           description: The versions.
           items:
             description: The versions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Integration
       type: object
@@ -3088,16 +3218,19 @@ components:
       properties:
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         integrationType:
           $ref: "#/components/schemas/v1.IntegrationType"
         key:
           description: The key.
+          minLength: 0
           type: string
         revisions:
           description: The revisions.
           items:
             $ref: "#/components/schemas/IntegrationRevision"
+          minItems: 0
           type: array
       title: Integration definition
       type: object
@@ -3110,9 +3243,11 @@ components:
       properties:
         link:
           description: Link.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Integration detail
       type: object
@@ -3952,12 +4087,14 @@ components:
           description: Documentation links associated with this integration.
           items:
             $ref: "#/components/schemas/IntegrationDoc"
+          minItems: 0
           type: array
         extensions:
           description: Extensions bundled with this integration for pre-built dashboards
             and alerts.
           items:
             $ref: "#/components/schemas/v1.Extension"
+          minItems: 0
           type: array
         external:
           $ref: "#/components/schemas/ExternalUrl"
@@ -3978,12 +4115,14 @@ components:
           description: Documentation links associated with this integration.
           items:
             $ref: "#/components/schemas/IntegrationDoc"
+          minItems: 0
           type: array
         extensions:
           description: Extensions bundled with this integration for pre-built dashboards
             and alerts.
           items:
             $ref: "#/components/schemas/v1.Extension"
+          minItems: 0
           type: array
         integration:
           $ref: "#/components/schemas/Integration"
@@ -4003,9 +4142,11 @@ components:
       properties:
         link:
           description: Link.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Integration doc
       type: object
@@ -4016,9 +4157,11 @@ components:
       properties:
         installationRequirements:
           description: The installation requirements.
+          minLength: 0
           type: string
         introduction:
           description: The introduction.
+          minLength: 0
           type: string
       title: Integration guide
       type: object
@@ -4029,11 +4172,13 @@ components:
       properties:
         integrationKey:
           description: The integration key.
+          minLength: 0
           type: string
         integrationParameters:
           $ref: "#/components/schemas/GenericIntegrationParameters"
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Integration metadata
       type: object
@@ -4054,9 +4199,11 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Group
       type: object
@@ -4147,21 +4294,25 @@ components:
           $ref: "#/components/schemas/AzureArmTemplate"
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         fields:
           description: Configuration fields that users must fill in to deploy this
             integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
+          minItems: 0
           type: array
         groups:
           description: UI groups used to organize configuration fields into logical
             sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         revisionDeploymentSupported:
           description: Whether this revision supports automated deployment through
@@ -4170,6 +4321,7 @@ components:
         upgradeInstructionsMd:
           description: Markdown-formatted upgrade instructions shown when upgrading
             from a previous revision.
+          minLength: 0
           type: string
       required:
       - azureArmTemplate
@@ -4184,21 +4336,25 @@ components:
           $ref: "#/components/schemas/CloudFormationTemplate"
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         fields:
           description: Configuration fields that users must fill in to deploy this
             integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
+          minItems: 0
           type: array
         groups:
           description: UI groups used to organize configuration fields into logical
             sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         revisionDeploymentSupported:
           description: Whether this revision supports automated deployment through
@@ -4207,6 +4363,7 @@ components:
         upgradeInstructionsMd:
           description: Markdown-formatted upgrade instructions shown when upgrading
             from a previous revision.
+          minLength: 0
           type: string
       required:
       - cloudFormation
@@ -4219,23 +4376,27 @@ components:
       properties:
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         fields:
           description: Configuration fields that users must fill in to deploy this
             integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
+          minItems: 0
           type: array
         groups:
           description: UI groups used to organize configuration fields into logical
             sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
+          minItems: 0
           type: array
         helmChart:
           $ref: "#/components/schemas/HelmChart"
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         revisionDeploymentSupported:
           description: Whether this revision supports automated deployment through
@@ -4244,6 +4405,7 @@ components:
         upgradeInstructionsMd:
           description: Markdown-formatted upgrade instructions shown when upgrading
             from a previous revision.
+          minLength: 0
           type: string
       required:
       - helmChart
@@ -4256,21 +4418,25 @@ components:
       properties:
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         fields:
           description: Configuration fields that users must fill in to deploy this
             integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
+          minItems: 0
           type: array
         groups:
           description: UI groups used to organize configuration fields into logical
             sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         managedService:
           additionalProperties: false
@@ -4286,6 +4452,7 @@ components:
         upgradeInstructionsMd:
           description: Markdown-formatted upgrade instructions shown when upgrading
             from a previous revision.
+          minLength: 0
           type: string
       required:
       - managedService
@@ -4298,21 +4465,25 @@ components:
       properties:
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         fields:
           description: Configuration fields that users must fill in to deploy this
             integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
+          minItems: 0
           type: array
         groups:
           description: UI groups used to organize configuration fields into logical
             sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         revisionDeploymentSupported:
           description: Whether this revision supports automated deployment through
@@ -4323,6 +4494,7 @@ components:
         upgradeInstructionsMd:
           description: Markdown-formatted upgrade instructions shown when upgrading
             from a previous revision.
+          minLength: 0
           type: string
       required:
       - rum
@@ -4335,21 +4507,25 @@ components:
       properties:
         featureFlag:
           description: The feature flag.
+          minLength: 0
           type: string
         fields:
           description: Configuration fields that users must fill in to deploy this
             integration revision.
           items:
             $ref: "#/components/schemas/FieldInformation"
+          minItems: 0
           type: array
         groups:
           description: UI groups used to organize configuration fields into logical
             sections.
           items:
             $ref: "#/components/schemas/IntegrationRevision.Group"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         revisionDeploymentSupported:
           description: Whether this revision supports automated deployment through
@@ -4360,6 +4536,7 @@ components:
         upgradeInstructionsMd:
           description: Markdown-formatted upgrade instructions shown when upgrading
             from a previous revision.
+          minLength: 0
           type: string
       required:
       - terraform
@@ -4381,6 +4558,7 @@ components:
           $ref: "#/components/schemas/ConnectionStatus"
         details:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of details.
           type: object
@@ -4388,7 +4566,9 @@ components:
           description: The messages.
           items:
             description: The messages.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Integration status
       type: object
@@ -4405,12 +4585,15 @@ components:
       properties:
         key:
           description: The key.
+          minLength: 0
           type: string
         text:
           description: The text.
+          minLength: 0
           type: string
         url:
           description: URL.
+          minLength: 0
           type: string
       title: Link
       type: object
@@ -4427,7 +4610,9 @@ components:
           description: The integration keys.
           items:
             description: The integration keys.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: List managed integration keys response
       type: object
@@ -4447,13 +4632,17 @@ components:
           description: The default values.
           items:
             description: The default values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         options:
           description: Options.
           items:
             description: Options.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: List text value
       type: object
@@ -4466,6 +4655,7 @@ components:
           description: The changes.
           items:
             $ref: "#/components/schemas/RevisionRef"
+          minItems: 0
           type: array
       title: Local changelog
       type: object
@@ -4480,10 +4670,12 @@ components:
         firstOccurrence:
           description: The first occurrence.
           format: date-time
+          minLength: 0
           type: string
         lastOccurrence:
           description: The last occurrence.
           format: date-time
+          minLength: 0
           type: string
       title: Log metadata
       type: object
@@ -4512,7 +4704,9 @@ components:
           description: Options.
           items:
             description: Options.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Multiple selection value
       type: object
@@ -4522,7 +4716,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NoDeployment:
@@ -4554,6 +4750,7 @@ components:
           $ref: "#/components/schemas/ApiKeyData"
         key:
           description: The key.
+          minLength: 0
           type: string
       required:
       - apiKey
@@ -4568,6 +4765,7 @@ components:
           type: boolean
         key:
           description: The key.
+          minLength: 0
           type: string
       required:
       - booleanValue
@@ -4579,6 +4777,7 @@ components:
       properties:
         key:
           description: The key.
+          minLength: 0
           type: string
         numericValue:
           description: Numeric value for this integration parameter.
@@ -4594,6 +4793,7 @@ components:
       properties:
         key:
           description: The key.
+          minLength: 0
           type: string
         sensitiveData:
           additionalProperties: false
@@ -4612,6 +4812,7 @@ components:
       properties:
         key:
           description: The key.
+          minLength: 0
           type: string
         stringList:
           $ref: "#/components/schemas/StringList"
@@ -4625,9 +4826,11 @@ components:
       properties:
         key:
           description: The key.
+          minLength: 0
           type: string
         stringValue:
           description: String value for this integration parameter.
+          minLength: 0
           type: string
       required:
       - stringValue
@@ -4697,9 +4900,11 @@ components:
           $ref: "#/components/schemas/ARMStack"
         definitionVersion:
           description: The definition version.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
@@ -4710,11 +4915,13 @@ components:
         lastUpdated:
           description: Timestamp of the last update to this integration instance.
           format: date-time
+          minLength: 0
           type: string
         parameters:
           description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
+          minItems: 0
           type: array
         revisionLifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
@@ -4730,9 +4937,11 @@ components:
           $ref: "#/components/schemas/CloudFormationStack"
         definitionVersion:
           description: The definition version.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
@@ -4743,11 +4952,13 @@ components:
         lastUpdated:
           description: Timestamp of the last update to this integration instance.
           format: date-time
+          minLength: 0
           type: string
         parameters:
           description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
+          minItems: 0
           type: array
         revisionLifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
@@ -4761,6 +4972,7 @@ components:
       properties:
         definitionVersion:
           description: The definition version.
+          minLength: 0
           type: string
         empty:
           additionalProperties: false
@@ -4772,6 +4984,7 @@ components:
           type: object
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         integrationStatus:
           $ref: "#/components/schemas/IntegrationStatus"
@@ -4782,11 +4995,13 @@ components:
         lastUpdated:
           description: Timestamp of the last update to this integration instance.
           format: date-time
+          minLength: 0
           type: string
         parameters:
           description: The parameters.
           items:
             $ref: "#/components/schemas/Parameter"
+          minItems: 0
           type: array
         revisionLifecycle:
           $ref: "#/components/schemas/RevisionLifecycle"
@@ -4810,9 +5025,11 @@ components:
       properties:
         descriptionMd:
           description: The description md.
+          minLength: 0
           type: string
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Revision reference
       type: object
@@ -4825,11 +5042,13 @@ components:
           description: The browser sdk commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
+          minItems: 0
           type: array
         sourceMapCommands:
           description: The source map commands.
           items:
             $ref: "#/components/schemas/CommandInformation"
+          minItems: 0
           type: array
       title: RUM
       type: object
@@ -4858,11 +5077,13 @@ components:
         syncedAt:
           description: The synced at.
           format: date-time
+          minLength: 0
           type: string
         versions:
           description: The versions.
           items:
             $ref: "#/components/schemas/RumVersionData.Version"
+          minItems: 0
           type: array
       title: RUM version data
       type: object
@@ -4884,6 +5105,7 @@ components:
           $ref: "#/components/schemas/SourceMapMetadata"
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Version
       type: object
@@ -4896,6 +5118,7 @@ components:
       properties:
         integrationId:
           description: The integration id.
+          minLength: 0
           type: string
       title: Save integration response
       type: object
@@ -4906,12 +5129,15 @@ components:
       properties:
         defaultValue:
           description: The default value.
+          minLength: 0
           type: string
         options:
           description: Options.
           items:
             description: Options.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Selection value
       type: object
@@ -4939,6 +5165,7 @@ components:
       properties:
         defaultValue:
           description: The default value.
+          minLength: 0
           type: string
       title: Single value
       type: object
@@ -4953,6 +5180,7 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         isUploadedSuccessful:
           description: The is uploaded successful.
@@ -4968,7 +5196,9 @@ components:
           description: List of values.
           items:
             description: List of values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: String list
       type: object
@@ -4986,6 +5216,7 @@ components:
         syncedAt:
           description: The synced at.
           format: date-time
+          minLength: 0
           type: string
       title: Sync RUM data response
       type: object
@@ -5013,6 +5244,7 @@ components:
           description: The configuration blocks.
           items:
             $ref: "#/components/schemas/ConfigurationBlock"
+          minItems: 0
           type: array
       title: Terraform
       type: object
@@ -5587,23 +5819,29 @@ components:
           description: The changelog.
           items:
             $ref: "#/components/schemas/ChangelogEntry"
+          minItems: 0
           type: array
         darkModeImage:
           description: The dark mode image.
+          minLength: 0
           type: string
         deprecation:
           $ref: "#/components/schemas/Deprecation"
         id:
           description: Unique identifier of the extension.
+          minLength: 0
           type: string
         image:
           description: Image reference.
+          minLength: 0
           type: string
         integrations:
           description: The integrations.
           items:
             description: The integrations.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         isHidden:
           description: The is hidden.
@@ -5612,20 +5850,25 @@ components:
           description: The keywords.
           items:
             description: The keywords.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         name:
           description: Display name of the extension.
+          minLength: 0
           type: string
         permissionDeniedRevisions:
           description: The permission denied revisions.
           items:
             $ref: "#/components/schemas/ExtensionRevision"
+          minItems: 0
           type: array
         revisions:
           description: The revisions.
           items:
             $ref: "#/components/schemas/ExtensionRevision"
+          minItems: 0
           type: array
       title: Extension metadata
       type: object
@@ -5638,6 +5881,7 @@ components:
       properties:
         errorMessage:
           description: The error message.
+          minLength: 0
           type: string
       title: Failure
       type: object
@@ -5659,6 +5903,7 @@ components:
           $ref: "#/components/schemas/RevisionLifecycle"
         version:
           description: Version number.
+          minLength: 0
           type: string
       type: object
     v3.FilterOperator:
@@ -5680,6 +5925,7 @@ components:
       properties:
         id:
           description: Integration metadata ID generated at creation time.
+          minLength: 0
           type: string
         metadata:
           $ref: "#/components/schemas/IntegrationMetadata"
@@ -5699,6 +5945,7 @@ components:
           $ref: "#/components/schemas/IntegrationMetadata"
         integrationId:
           description: ID of the existing integration instance to test.
+          minLength: 0
           type: string
       title: Test integration request
       type: object
@@ -5708,12 +5955,15 @@ components:
       properties:
         apiKey:
           description: API key used to authenticate requests for template access.
+          minLength: 0
           type: string
         cgxDomain:
           description: The cgx domain.
+          minLength: 0
           type: string
         logsUrl:
           description: The logs url.
+          minLength: 0
           type: string
       title: Common ARM integration parameters
       type: object

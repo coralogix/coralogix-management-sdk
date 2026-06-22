@@ -46,12 +46,14 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CommentAttachment"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "text": {
                     "example": "This is updated text",
                     "description": "Comment text to update",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -267,7 +269,8 @@
             "schema": {
               "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the event to fetch",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -339,7 +342,8 @@
             "schema": {
               "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the comment event to update",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -357,12 +361,14 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CommentAttachment"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "text": {
                     "example": "This is updated text",
                     "description": "Comment text to update",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -438,7 +444,8 @@
             "schema": {
               "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
               "description": "ID of the comment event to delete",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -504,12 +511,14 @@
           "id": {
             "example": "2b1c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e",
             "description": "API key ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "Incident Management Integration Key",
             "description": "API key name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -524,11 +533,13 @@
           "assigneeUserId": {
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "New assignee user ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "previousAssigneeUserId": {
             "description": "Previous assignee user ID (if any)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -547,7 +558,8 @@
             "example": "2025-09-22T10:30:00.000Z",
             "description": "Server-side insertion time",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "eventData": {
             "$ref": "#/components/schemas/CaseEventData"
@@ -555,18 +567,21 @@
           "eventId": {
             "example": "ef51d3d9-a301-496b-aa7d-9a6e519ba0d5",
             "description": "Unique identifier of the event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "eventTime": {
             "example": "2025-09-22T10:29:45.000Z",
             "description": "Logical occurrence time of the event",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "updateTime": {
             "description": "If edited, last modification time of the event",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -920,7 +935,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommentAttachment"
-            }
+            },
+            "minItems": 0
           },
           "slack": {
             "$ref": "#/components/schemas/SlackCommentMetadata"
@@ -928,7 +944,8 @@
           "unsafeText": {
             "example": "Looking into DB timeouts",
             "description": "Comment text",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -972,17 +989,20 @@
           "customDashboardId": {
             "example": "dashboard_3f166e9f-3c88-4af2-b52e-138f339dab3e",
             "description": "Unique identifier of the custom dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "queryLinkSuffix": {
             "example": "/dashboards/custom/123/widgets/456?time=123456789",
             "description": "URL suffix for accessing the widget (not including the Coralogix domain part)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "widgetId": {
             "example": "widget_a1b2c3d4-e5f6-7890-abcd-ef1234567890",
             "description": "Unique identifier of the widget within the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "widgetScreenshot": {
             "$ref": "#/components/schemas/FileAttachment"
@@ -1151,12 +1171,14 @@
           "fileId": {
             "example": "file_a1b2c3d4-e5f6-7890-abcd-ef1234567890",
             "description": "Unique identifier of the file (same id as used in blobset flow)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fileName": {
             "example": "screenshot_2025-09-22.png",
             "description": "Original name of the attached file",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isDeleted": {
             "example": false,
@@ -1193,7 +1215,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1215,7 +1238,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1239,7 +1263,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1263,7 +1288,8 @@
           "threshold": {
             "example": "300s",
             "description": "Duration after which the KPI threshold was set to breach",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1287,23 +1313,27 @@
           "logContent": {
             "example": "ERROR: Database connection timeout after 30 seconds",
             "description": "Raw content of the log entry",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "logId": {
             "example": "log_4f8b1a2c3d5e6f7g8h9i0j1k2l3m4n5o",
             "description": "Unique identifier of the log entry",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "logTimestamp": {
             "example": "2025-09-22T10:30:00.000Z",
             "description": "Timestamp when the log entry was created",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "queryLinkSuffix": {
             "example": "/logs/query?time=123456789&query=error",
             "description": "URL suffix for querying related logs (not including the Coralogix domain part)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1321,8 +1351,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1337,7 +1369,8 @@
           "error": {
             "example": "Slack API: channel_not_found",
             "description": "Error message for the failed notification",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1351,7 +1384,8 @@
           "token": {
             "example": "4c8ba1ec-acee-4bc7-ad6c-d35476b58541",
             "description": "Notification token/reference",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1366,14 +1400,16 @@
           "notificationRequestId": {
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID, as sent to the notifications center.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "notifications": {
             "description": "List of notifications produced by this action",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotificationMetadata"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1479,11 +1515,13 @@
         "properties": {
           "from": {
             "description": "Previous resolution reason",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "to": {
             "description": "New resolution reason",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1498,21 +1536,25 @@
           "coralogixUserId": {
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Service Now user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "User ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "userEmail": {
             "example": "example@coralogix.com",
             "description": "Mail of the user",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "username": {
             "description": "Username",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1527,22 +1569,26 @@
           "coralogixUserId": {
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "If the Slack user is linked to a Coralogix user, this field contains the Coralogix user ID.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayName": {
             "example": "John Doe",
             "description": "Slack display name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slackUserId": {
             "example": "U012AB3CD",
             "description": "Slack user ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "userEmail": {
             "example": "john.doe@example.com",
             "description": "Email of the Slack user",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1557,27 +1603,32 @@
           "channelId": {
             "example": "C012AB3CD",
             "description": "Slack channel ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "threadId": {
             "example": "1234567890.123456",
             "description": "Slack thread ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "userEmail": {
             "example": "john.doe@example.com",
             "description": "Email of the Slack user",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "userId": {
             "example": "U012AB3CD",
             "description": "Slack user ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "workspaceId": {
             "example": "T012AB3CD",
             "description": "Slack workspace ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1633,11 +1684,13 @@
         "properties": {
           "from": {
             "description": "Previous case title",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "to": {
             "description": "New case title",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1651,7 +1704,8 @@
         "properties": {
           "previousAssigneeUserId": {
             "description": "User ID that was unassigned",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1666,7 +1720,8 @@
           "unknownAssigneeEmail": {
             "example": "unknown",
             "description": "Email of the assignee that could not be found",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1697,7 +1752,8 @@
           "id": {
             "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
             "description": "User ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1737,7 +1793,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CaseEvent"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [

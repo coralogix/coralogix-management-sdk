@@ -182,6 +182,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceDeleteCustom
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.id < 0 {
+		return localVarReturnValue, nil, reportError("id must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -285,6 +288,9 @@ func (a *CustomEnrichmentsServiceAPIService) CustomEnrichmentServiceGetCustomEnr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.id < 0 {
+		return localVarReturnValue, nil, reportError("id must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

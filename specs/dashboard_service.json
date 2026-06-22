@@ -5,6 +5,84 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/dashboards/check/v1": {
+      "post": {
+        "tags": [
+          "Dashboard service"
+        ],
+        "summary": "Validate a dashboard and return issues",
+        "description": "Checks a dashboard definition or an existing dashboard by id and returns validation issues without persisting changes.\n\nRequires the following permissions:\n- `team-dashboards:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DashboardsService_CheckDashboard",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckDashboardRequestDashboard"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CheckDashboardRequestDashboardId"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckDashboardResponse"
+                },
+                "example": {
+                  "issues": [
+                    {
+                      "location": "/sections/0/rows/1/widgets/2",
+                      "message": "Widget 'cpu-chart' references undefined variable 'env'",
+                      "severity": "SEVERITY_ERROR"
+                    },
+                    {
+                      "location": "/sections/1/rows/0/widgets/0/queries/0",
+                      "message": "Query uses deprecated function 'timeShift'",
+                      "severity": "SEVERITY_WARNING"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "team-dashboards:Read"
+        ]
+      }
+    },
     "/dashboards/dashboards/v1": {
       "put": {
         "tags": [
@@ -41,7 +119,8 @@
                   },
                   "requestId": {
                     "description": "Idempotency key for the replace request, used to prevent duplicate updates.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -122,7 +201,8 @@
                   },
                   "requestId": {
                     "description": "The request id.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -234,7 +314,8 @@
             "required": true,
             "schema": {
               "description": "The URL slug identifying the dashboard to retrieve.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -285,19 +366,6 @@
           "url": ""
         },
         "operationId": "DashboardsService_GetDashboard",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dashboard_id",
-            "description": "The dashboard id.",
-            "required": true,
-            "schema": {
-              "description": "The dashboard id.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -344,23 +412,13 @@
         "operationId": "DashboardsService_DeleteDashboard",
         "parameters": [
           {
-            "in": "path",
-            "name": "dashboard_id",
-            "description": "The dashboard id.",
-            "required": true,
-            "schema": {
-              "description": "The dashboard id.",
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
             "in": "query",
             "name": "request_id",
             "description": "Optional client-supplied request identifier used to correlate the deletion request.",
             "schema": {
               "description": "Optional client-supplied request identifier used to correlate the deletion request.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -398,7 +456,21 @@
         "x-coralogixPermissions": [
           "team-dashboards:Update"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "dashboard_id",
+          "description": "The dashboard id.",
+          "required": true,
+          "schema": {
+            "description": "The dashboard id.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     },
     "/dashboards/dashboards/v1/{dashboard_id}/default": {
       "put": {
@@ -419,7 +491,8 @@
             "required": true,
             "schema": {
               "description": "The dashboard id.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -434,7 +507,8 @@
                 "properties": {
                   "requestId": {
                     "description": "Idempotency key for the replace default dashboard request, used to prevent duplicate operations.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -499,7 +573,8 @@
             "required": true,
             "schema": {
               "description": "The dashboard id.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -514,11 +589,13 @@
                 "properties": {
                   "folderId": {
                     "description": "The ID of the folder to assign the dashboard to. Set to null to assign to the root folder.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "requestId": {
                     "description": "Idempotency key for the assign folder request, used to prevent duplicate operations.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -577,23 +654,13 @@
         "operationId": "DashboardsService_PinDashboard",
         "parameters": [
           {
-            "in": "path",
-            "name": "dashboard_id",
-            "description": "The dashboard id.",
-            "required": true,
-            "schema": {
-              "description": "The dashboard id.",
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
             "in": "query",
             "name": "request_id",
             "description": "Idempotency key for the pin request, used to prevent duplicate operations.",
             "schema": {
               "description": "Idempotency key for the pin request, used to prevent duplicate operations.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -644,23 +711,13 @@
         "operationId": "DashboardsService_UnpinDashboard",
         "parameters": [
           {
-            "in": "path",
-            "name": "dashboard_id",
-            "description": "The dashboard id.",
-            "required": true,
-            "schema": {
-              "description": "The dashboard id.",
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
             "in": "query",
             "name": "request_id",
             "description": "Idempotency key for the unpin request, used to prevent duplicate operations.",
             "schema": {
               "description": "Idempotency key for the unpin request, used to prevent duplicate operations.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -698,7 +755,21 @@
         "x-coralogixPermissions": [
           "team-dashboards:Read"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "dashboard_id",
+          "description": "The dashboard id.",
+          "required": true,
+          "schema": {
+            "description": "The dashboard id.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     }
   },
   "components": {
@@ -767,7 +838,8 @@
           },
           "label": {
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -787,7 +859,8 @@
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -795,11 +868,13 @@
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "scope": {
             "$ref": "#/components/schemas/Annotation.WidgetScope"
@@ -861,8 +936,10 @@
             "type": "array",
             "items": {
               "description": "The widget ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1036,7 +1113,8 @@
           },
           "minimumInterval": {
             "description": "Minimum interval duration. The calculated interval will not be smaller than this value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1089,7 +1167,8 @@
         "properties": {
           "field": {
             "description": "The field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -1110,7 +1189,8 @@
           "colorScheme": {
             "example": "classic",
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
@@ -1118,7 +1198,8 @@
           "customUnit": {
             "example": "mph",
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -1137,7 +1218,8 @@
           "groupNameTemplate": {
             "example": "Result - {{ variable }}",
             "description": "Custom template name for a bar group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -1204,19 +1286,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names by which results are grouped",
             "type": "array",
             "items": {
               "description": "List of field names by which results are grouped",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -1239,29 +1325,34 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names to group the query results",
             "type": "array",
             "items": {
               "description": "List of field names to group the query results",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "groupNamesFields": {
             "description": "List of observation fields to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "stackedGroupNameField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -1290,15 +1381,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names by which metric results are grouped",
             "type": "array",
             "items": {
               "description": "List of field names by which metric results are grouped",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -1308,7 +1402,8 @@
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -1347,21 +1442,24 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupNamesFields": {
             "description": "A list of observation fields definitions to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -1391,7 +1489,8 @@
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1455,6 +1554,78 @@
           "spans"
         ]
       },
+      "CheckDashboardRequestDashboard": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Check dashboard request data structure",
+        "description": "Validate a dashboard definition or an existing dashboard by id",
+        "type": "object",
+        "properties": {
+          "dashboard": {
+            "$ref": "#/components/schemas/Dashboard"
+          },
+          "requestId": {
+            "description": "Optional idempotency key for the check request",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "dashboard"
+        ]
+      },
+      "CheckDashboardRequestDashboardId": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Check dashboard request data structure",
+        "description": "Validate a dashboard definition or an existing dashboard by id",
+        "type": "object",
+        "properties": {
+          "dashboardId": {
+            "description": "Id of an existing dashboard to load and validate",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "requestId": {
+            "description": "Optional idempotency key for the check request",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "dashboardId"
+        ]
+      },
+      "CheckDashboardResponse": {
+        "externalDocs": {
+          "description": "Find out more Dashboards in our documentation.",
+          "url": "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+        },
+        "title": "Check dashboard response data structure",
+        "description": "Validation result containing a list of issues found in the dashboard",
+        "type": "object",
+        "properties": {
+          "issues": {
+            "description": "List of validation issues; empty when the dashboard is valid",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          }
+        }
+      },
       "ColorApplyTarget": {
         "description": "Color apply target.",
         "type": "string",
@@ -1506,7 +1677,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MappingSection"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1721,7 +1893,8 @@
         "properties": {
           "columnName": {
             "description": "The column name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "width": {
             "description": "The width.",
@@ -1739,7 +1912,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1755,8 +1929,10 @@
             "type": "array",
             "items": {
               "description": "List of values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1777,7 +1953,8 @@
         "properties": {
           "field": {
             "description": "The field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -1795,7 +1972,8 @@
         "properties": {
           "dashboardId": {
             "description": "The dashboard id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1808,7 +1986,8 @@
         "properties": {
           "url": {
             "description": "Static URL that may contain variables using {{variable_name}} syntax",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1829,11 +2008,13 @@
           },
           "description": {
             "description": "Short description of a section",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Section custom name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "repetitiveVar": {
             "$ref": "#/components/schemas/RepetitiveVar"
@@ -1891,15 +2072,18 @@
           },
           "id": {
             "description": "A unique identifier of the action",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "The display name of the action",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "queryId": {
             "description": "Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "shouldOpenInNewWindow": {
             "description": "Defines if the action should open in a new window or current window in the browser",
@@ -1907,7 +2091,8 @@
           },
           "widgetId": {
             "description": "Reference to specific widget within a dashboard, can be null if the action is dashboard wide",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1920,16 +2105,19 @@
         "properties": {
           "authorId": {
             "description": "The author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "createTime": {
             "description": "The create time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "folder": {
             "$ref": "#/components/schemas/DashboardFolder"
@@ -1937,7 +2125,8 @@
           "id": {
             "example": "6U1Q8Hpa263Se8PkRKaiE",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isDefault": {
             "description": "The is default.",
@@ -1953,20 +2142,24 @@
           },
           "lockerAuthorId": {
             "description": "The locker author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "description": "The slug name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -1987,19 +2180,22 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fifteenMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFifteenMinutes"
@@ -2009,7 +2205,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2020,7 +2217,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2028,26 +2226,30 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2071,19 +2273,22 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fifteenMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFifteenMinutes"
@@ -2093,7 +2298,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2104,7 +2310,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2112,30 +2319,35 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "relativeTimeFrame": {
             "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2162,26 +2374,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "fiveMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
@@ -2195,7 +2411,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2203,26 +2420,30 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2246,26 +2467,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "fiveMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFiveMinutes"
@@ -2279,7 +2504,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2287,30 +2513,35 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "relativeTimeFrame": {
             "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2329,15 +2560,18 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "parentId": {
             "description": "The parent id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2358,26 +2592,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2388,7 +2626,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2396,7 +2635,8 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "off": {
             "$ref": "#/components/schemas/AutoRefreshOff"
@@ -2404,21 +2644,24 @@
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2442,26 +2685,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2472,7 +2719,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2480,33 +2728,38 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "off": {
             "$ref": "#/components/schemas/AutoRefreshOff"
           },
           "relativeTimeFrame": {
             "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2533,26 +2786,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2563,7 +2820,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2571,7 +2829,8 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "oneMinute": {
             "$ref": "#/components/schemas/AutoRefreshOneMinute"
@@ -2579,21 +2838,24 @@
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2617,26 +2879,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2647,7 +2913,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2655,33 +2922,38 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "oneMinute": {
             "$ref": "#/components/schemas/AutoRefreshOneMinute"
           },
           "relativeTimeFrame": {
             "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "variables": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2708,26 +2980,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2738,7 +3014,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2746,12 +3023,14 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "twoMinutes": {
             "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
@@ -2761,14 +3040,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2792,26 +3073,30 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardAction"
-            }
+            },
+            "minItems": 0
           },
           "annotations": {
             "description": "A list of annotations that can be used within the dashboard's visualizations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Annotation"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "example": "Sample description",
             "description": "A brief description or summary of the dashboard's purpose or content",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "A list of filters that can be applied to the dashboard's data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/filters.Filter"
-            }
+            },
+            "minItems": 0
           },
           "folderId": {
             "$ref": "#/components/schemas/UUID"
@@ -2822,7 +3107,8 @@
           "id": {
             "example": "GZLHSeqelCbD3I7HbIDtL",
             "description": "A unique identifier of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "layout": {
             "$ref": "#/components/schemas/Layout"
@@ -2830,16 +3116,19 @@
           "name": {
             "example": "Example Name",
             "description": "The display name of the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "relativeTimeFrame": {
             "description": "Relative time frame specifying a duration from the current time",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slugName": {
             "example": "system-health-monitoring",
             "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "twoMinutes": {
             "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
@@ -2849,14 +3138,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Variable"
-            }
+            },
+            "minItems": 0
           },
           "variablesV2": {
             "description": "A list of variables that can be used within the dashboard for dynamic content",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VariableV2"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2878,7 +3169,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DataTable.Column"
-            }
+            },
+            "minItems": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -2905,7 +3197,8 @@
         "properties": {
           "field": {
             "description": "Name of the field to display in the column",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "width": {
             "description": "Custom width of the column, by default it's automatically adjusted",
@@ -2930,7 +3223,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -2950,7 +3244,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "grouping": {
             "$ref": "#/components/schemas/LogsQuery.Grouping"
@@ -2979,7 +3274,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -3021,7 +3317,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "grouping": {
             "$ref": "#/components/schemas/SpansQuery.Grouping"
@@ -3137,11 +3434,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "messageTemplate": {
             "description": "The message template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -3374,11 +3673,13 @@
         "properties": {
           "id": {
             "description": "Unique id of the query definition",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Custom name of the query",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "query": {
             "$ref": "#/components/schemas/Dynamic.Query"
@@ -3481,8 +3782,10 @@
             "type": "array",
             "items": {
               "description": "A list of selected values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3527,7 +3830,8 @@
         "properties": {
           "messageTemplate": {
             "description": "The message template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "recurrence": {
             "$ref": "#/components/schemas/Recurrence"
@@ -3556,7 +3860,8 @@
         "properties": {
           "duration": {
             "description": "Duration.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "startTimeHour": {
             "description": "The start time hour.",
@@ -3648,7 +3953,8 @@
         "properties": {
           "field": {
             "description": "The log field to which the filter is applied.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -3729,7 +4035,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UUID"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -3788,7 +4095,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3810,7 +4118,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3882,7 +4191,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -3901,8 +4211,10 @@
             "type": "array",
             "items": {
               "description": "The segments.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3934,7 +4246,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -3957,14 +4270,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "A list of observation fields by which to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "logsAggregation": {
             "$ref": "#/components/schemas/LogsAggregation"
@@ -3996,7 +4311,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -4041,21 +4357,24 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupBys": {
             "description": "A list of observation fields to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -4078,7 +4397,8 @@
         "properties": {
           "color": {
             "description": "Color of the threshold",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "from": {
             "description": "Minimum bound value of the threshold",
@@ -4087,7 +4407,8 @@
           },
           "label": {
             "description": "Optional label of the threshold",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -4212,7 +4533,8 @@
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -4464,11 +4786,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "messageTemplate": {
             "description": "Custom template for the geomap tooltip",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -4491,16 +4815,19 @@
           },
           "authorId": {
             "description": "The author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "authorName": {
             "description": "The author name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "createdOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4514,27 +4841,32 @@
           },
           "lockerAuthorId": {
             "description": "The locker author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lockerName": {
             "description": "The locker name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "updatedOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
           },
           "updaterAuthorId": {
             "description": "The updater author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updaterName": {
             "description": "The updater name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -4551,7 +4883,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardCatalogItem"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -4574,16 +4907,19 @@
           },
           "authorId": {
             "description": "The author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "authorName": {
             "description": "The author name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "createdOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4597,11 +4933,13 @@
           },
           "lockerAuthorId": {
             "description": "The locker author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lockerName": {
             "description": "The locker name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "resolvedWidgets": {
             "description": "Map of resolved widget references for widgets with references in the dashboard",
@@ -4613,18 +4951,21 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "updatedOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
           },
           "updaterAuthorId": {
             "description": "The updater author id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updaterName": {
             "description": "The updater name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -4637,7 +4978,8 @@
         "properties": {
           "dashboardId": {
             "description": "Reference to specific dashboard",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -4695,7 +5037,8 @@
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -4724,7 +5067,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -4734,7 +5078,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -4767,7 +5112,8 @@
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -4799,7 +5145,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -4809,7 +5156,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -4828,11 +5176,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "messageTemplate": {
             "description": "Custom template for the heatmap tooltip",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -4845,7 +5195,8 @@
         "properties": {
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -4890,7 +5241,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -4913,7 +5265,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -4933,14 +5286,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "A list of observation fields by which to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "logsAggregation": {
             "$ref": "#/components/schemas/LogsAggregation"
@@ -4972,7 +5327,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -5014,21 +5370,24 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupBys": {
             "description": "A list of observation fields to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -5058,11 +5417,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 2,
@@ -5096,7 +5457,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -5175,14 +5537,16 @@
         "properties": {
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -5204,7 +5568,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a bar group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -5268,19 +5633,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names by which results are grouped",
             "type": "array",
             "items": {
               "description": "List of field names by which results are grouped",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -5303,29 +5672,34 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names to group the query results",
             "type": "array",
             "items": {
               "description": "List of field names to group the query results",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "groupNamesFields": {
             "description": "List of observation fields to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "stackedGroupNameField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -5354,15 +5728,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names by which metric results are grouped",
             "type": "array",
             "items": {
               "description": "List of field names by which metric results are grouped",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -5372,7 +5749,8 @@
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -5411,21 +5789,24 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupNamesFields": {
             "description": "A list of observation fields definitions to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -5455,7 +5836,8 @@
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -5576,18 +5958,21 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -5601,7 +5986,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -5630,14 +6016,16 @@
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "subCategoryFields": {
             "description": "The sub category fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -5688,18 +6076,21 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -5713,7 +6104,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -5734,7 +6126,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HorizontalBarsMulti.QueryFieldSettings"
-            }
+            },
+            "minItems": 0
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -5772,7 +6165,8 @@
         "properties": {
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -5884,6 +6278,37 @@
           }
         }
       },
+      "Issue": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "Location of the issue within the dashboard as an RFC 6901 JSON Pointer (e.g. \"/sections/0/rows/1/widgets/2\"). Empty or omitted for root-level issues.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 512
+          },
+          "message": {
+            "description": "Human-readable description of the issue",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "severity": {
+            "$ref": "#/components/schemas/IssueSeverity"
+          }
+        }
+      },
+      "IssueSeverity": {
+        "description": "Severity of a validation issue.",
+        "type": "string",
+        "enum": [
+          "SEVERITY_UNSPECIFIED",
+          "SEVERITY_ERROR",
+          "SEVERITY_WARNING"
+        ]
+      },
       "Layout": {
         "externalDocs": {
           "url": ""
@@ -5896,7 +6321,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Section"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -5917,7 +6343,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LegendColumn"
-            }
+            },
+            "minItems": 0
           },
           "groupByQuery": {
             "description": "In case of multiple queries, whether legend items should be grouped by their respective queries",
@@ -5986,13 +6413,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LineChart.QueryDefinition"
-            }
+            },
+            "minItems": 0
           },
           "stackedLine": {
             "$ref": "#/components/schemas/LineChart.StackedLine"
           },
           "tooltip": {
             "$ref": "#/components/schemas/Tooltip"
+          },
+          "useDataTimeRange": {
+            "example": false,
+            "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
+            "type": "boolean"
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -6018,7 +6451,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -6037,29 +6471,34 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsAggregation"
-            }
+            },
+            "minItems": 0
           },
           "filters": {
             "description": "List of filters that narrow down query results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "List of field names to group the query results",
             "type": "array",
             "items": {
               "description": "List of field names to group the query results",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "groupBys": {
             "description": "A list of observation fields to group the query results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -6084,7 +6523,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -6123,11 +6563,13 @@
         "properties": {
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -6150,7 +6592,8 @@
           },
           "id": {
             "description": "Unique id of the query definition",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "intervalResolution": {
             "$ref": "#/components/schemas/IntervalResolution"
@@ -6162,7 +6605,8 @@
           },
           "name": {
             "description": "Custom name of the query",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "query": {
             "$ref": "#/components/schemas/LineChart.Query"
@@ -6176,11 +6620,14 @@
           "seriesCountLimit": {
             "description": "Max count of the series per query",
             "type": "string",
-            "format": "int64"
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -6218,7 +6665,8 @@
           },
           "interval": {
             "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6234,28 +6682,32 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansAggregation"
-            }
+            },
+            "minItems": 0
           },
           "filters": {
             "description": "List of span query filters",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupBys": {
             "description": "A list of observation fields to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -6342,7 +6794,8 @@
           },
           "name": {
             "description": "Name of the link action",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "shouldOpenInNewWindow": {
             "description": "Defines if the link action should open in a new window or current window in the browser",
@@ -6350,7 +6803,8 @@
           },
           "url": {
             "description": "Static URL that may contain variables using {{variable_name}} syntax",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6366,7 +6820,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SingleStringValue"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -6383,7 +6838,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsAggregation"
-            }
+            },
+            "minItems": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -6393,14 +6849,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "A list of observation fields by which to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -6549,7 +7007,8 @@
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6565,7 +7024,8 @@
           },
           "id": {
             "description": "Aggregation unique identifier",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isVisible": {
             "description": "Whether the aggregation is visible in the table",
@@ -6573,7 +7033,8 @@
           },
           "name": {
             "description": "Aggregation name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6589,22 +7050,26 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsQuery.Aggregation"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "List of field names to group the query results",
             "type": "array",
             "items": {
               "description": "List of field names to group the query results",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "groupBys": {
             "description": "List of observation fields to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -6623,14 +7088,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "messageTemplate": {
             "description": "The message template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "strategy": {
             "$ref": "#/components/schemas/LogsSource.Strategy"
@@ -6746,7 +7213,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6772,7 +7240,8 @@
         "properties": {
           "interval": {
             "description": "Fixed interval duration for time buckets, specified by the user.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "maximumDataPoints": {
             "example": 500,
@@ -6782,7 +7251,8 @@
           },
           "minimumInterval": {
             "description": "Minimum interval duration constraint. The selected interval will not be smaller than this value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -6798,7 +7268,8 @@
         "properties": {
           "messageTemplate": {
             "description": "The message template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -6827,7 +7298,8 @@
         "properties": {
           "customUnit": {
             "description": "The custom unit.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -6848,7 +7320,8 @@
         "properties": {
           "customUnit": {
             "description": "The custom unit.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "endValue": {
             "description": "The end value.",
@@ -6916,11 +7389,13 @@
           },
           "mapTo": {
             "description": "Display text to map the matched value to",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "Value to match (exact string for value mapping, regex pattern for regex mapping)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6933,11 +7408,13 @@
         "properties": {
           "markdownText": {
             "description": "Markdown text",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltipText": {
             "description": "Tooltip text to display on widget hover",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -6950,7 +7427,8 @@
         "properties": {
           "field": {
             "description": "The field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7014,11 +7492,13 @@
         "properties": {
           "label": {
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "metricName": {
             "description": "The metric name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -7054,11 +7534,13 @@
         "properties": {
           "label": {
             "description": "The label associated with the metric.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "metric": {
             "description": "The name of the metric to which the filter is applied.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "operator": {
             "$ref": "#/components/schemas/Filter.Operator"
@@ -7098,12 +7580,15 @@
             "type": "array",
             "items": {
               "description": "List of labels.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "messageTemplate": {
             "description": "The message template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -7137,7 +7622,8 @@
         "properties": {
           "field": {
             "description": "The field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7226,8 +7712,10 @@
             "items": {
               "deprecated": true,
               "description": "The selected values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "selection": {
             "$ref": "#/components/schemas/MultiSelect.Selection"
@@ -7313,16 +7801,20 @@
             "type": "array",
             "items": {
               "description": "List of labels.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "values": {
             "description": "List of values.",
             "type": "array",
             "items": {
               "description": "List of values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -7354,11 +7846,13 @@
         "properties": {
           "labelRegex": {
             "description": "The label regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "valueRegex": {
             "description": "The value regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -7579,8 +8073,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -7610,8 +8106,10 @@
             "type": "array",
             "items": {
               "description": "A list of values for the selection.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -7624,7 +8122,8 @@
         "properties": {
           "label": {
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
@@ -7645,8 +8144,10 @@
             "type": "array",
             "items": {
               "description": "The keypath.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "scope": {
             "$ref": "#/components/schemas/DatasetScope"
@@ -7672,7 +8173,8 @@
         "properties": {
           "field": {
             "description": "Field name to order by",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "orderDirection": {
             "$ref": "#/components/schemas/OrderDirection"
@@ -7688,7 +8190,8 @@
         "properties": {
           "field": {
             "description": "The field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7716,19 +8219,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.Source"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names by which results are grouped",
             "type": "array",
             "items": {
               "description": "List of field names by which results are grouped",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -7751,29 +8258,34 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter.LogsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names to group the query results",
             "type": "array",
             "items": {
               "description": "List of field names to group the query results",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "groupNamesFields": {
             "description": "List of observation fields to group the results",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "stackedGroupName": {
             "description": "Field name by which results are stacked in individual group",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "stackedGroupNameField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -7802,15 +8314,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricsFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names by which metric results are grouped",
             "type": "array",
             "items": {
               "description": "List of field names by which metric results are grouped",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "promqlQuery": {
             "$ref": "#/components/schemas/PromQlQuery"
@@ -7820,7 +8335,8 @@
           },
           "stackedGroupName": {
             "description": "Field name by which results in groups are divided into subgroups",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -7859,21 +8375,24 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupNames": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupNamesFields": {
             "description": "A list of observation fields definitions to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -7903,7 +8422,8 @@
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual slice in the stack",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -7995,7 +8515,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8082,7 +8603,8 @@
           "columnDisplayName": {
             "example": "Renamed header",
             "description": "Column display name property, allows renaming the column header name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -8114,7 +8636,8 @@
           "regexExtract": {
             "example": "gr[ae]y",
             "description": "Value of Regex Extract property, a regex string",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -8161,7 +8684,8 @@
           "valuesAlias": {
             "example": "Pod: {{$d.pod}}",
             "description": "Value alias property, used to give alias names to selected fields",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -8195,7 +8719,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LinkAction"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -8224,7 +8749,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -8242,7 +8768,8 @@
           },
           "customUnit": {
             "description": "Custom unit (requires to set unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
@@ -8276,7 +8803,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PropertyValuesMapping.ValueMapping"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -8285,11 +8813,13 @@
         "properties": {
           "inputValue": {
             "description": "The input value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "replaceValue": {
             "description": "The replace value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/ValuesMappingType"
@@ -8327,7 +8857,8 @@
         "properties": {
           "logRegex": {
             "description": "The log regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8427,7 +8958,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -8463,7 +8995,8 @@
         "properties": {
           "metricRegex": {
             "description": "The metric regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8479,7 +9012,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Query.MetricsQuery.MetricsLabelFilter"
-            }
+            },
+            "minItems": 0
           },
           "labelName": {
             "$ref": "#/components/schemas/Query.MetricsQuery.StringOrVariable"
@@ -8498,7 +9032,8 @@
         "properties": {
           "metricRegex": {
             "description": "The metric regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8533,7 +9068,8 @@
         "properties": {
           "spanRegex": {
             "description": "The span regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8570,15 +9106,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -8593,7 +9132,8 @@
           },
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -8601,11 +9141,14 @@
           "seriesCountLimit": {
             "description": "Max count of the series per query",
             "type": "string",
-            "format": "int64"
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "temporalField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -8618,7 +9161,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "yAxisMax": {
             "example": 1000,
@@ -8706,7 +9250,8 @@
         "properties": {
           "stringValue": {
             "description": "A literal string value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -8722,7 +9267,8 @@
         "properties": {
           "variableName": {
             "description": "The name of a dashboard variable whose current value will be substituted.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -8817,7 +9363,8 @@
         "properties": {
           "logRegex": {
             "description": "The log regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8917,7 +9464,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -8956,7 +9504,8 @@
         "properties": {
           "metricRegex": {
             "description": "The metric regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -8972,7 +9521,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuerySource.MetricsQuery.MetricsLabelFilter"
-            }
+            },
+            "minItems": 0
           },
           "labelName": {
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
@@ -8991,7 +9541,8 @@
         "properties": {
           "metricRegex": {
             "description": "The metric regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -9026,7 +9577,8 @@
         "properties": {
           "spanRegex": {
             "description": "The span regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -9114,7 +9666,8 @@
         "properties": {
           "stringValue": {
             "description": "A literal string value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9130,7 +9683,8 @@
         "properties": {
           "variableName": {
             "description": "The name of a dashboard variable whose current value will be substituted.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9291,7 +9845,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -9320,7 +9875,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MappingSection"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -9346,7 +9902,8 @@
           "name": {
             "example": "pod_name",
             "description": "Variable name that can be applied on section making it repetitive section",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -9384,7 +9941,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Widget"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -9466,7 +10024,8 @@
         "properties": {
           "regex": {
             "description": "Regular expression pattern used to scope the rule.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9496,7 +10055,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Row"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -9613,7 +10173,8 @@
         "properties": {
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -9657,7 +10218,8 @@
           "strategyType": {
             "example": "STRATEGY_TYPE_CATEGORY",
             "description": "Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9678,7 +10240,8 @@
           "strategyType": {
             "example": "STRATEGY_TYPE_CATEGORY",
             "description": "Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9722,7 +10285,8 @@
         "properties": {
           "processTagField": {
             "description": "Name of a process-level tag field to use as the data source.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9750,7 +10314,8 @@
         "properties": {
           "tagField": {
             "description": "Name of a span tag field to use as the data source.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -9769,8 +10334,10 @@
             "type": "array",
             "items": {
               "description": "The keypath.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "relationType": {
             "$ref": "#/components/schemas/SpanRelationType"
@@ -9803,7 +10370,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LogsAggregation"
-            }
+            },
+            "minItems": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -9813,14 +10381,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "A list of fields to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
@@ -9894,7 +10464,8 @@
           },
           "id": {
             "description": "Aggregation unique identifier",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isVisible": {
             "description": "Whether the aggregation is visible in the table",
@@ -9902,7 +10473,8 @@
           },
           "name": {
             "description": "Aggregation name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -9918,21 +10490,24 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpansQuery.Aggregation"
-            }
+            },
+            "minItems": 0
           },
           "groupBy": {
             "description": "List of field names to group the span records",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanField"
-            }
+            },
+            "minItems": 0
           },
           "groupBys": {
             "description": "A list of observation fields definitions to group the records by",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SpanObservationField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -9951,14 +10526,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "luceneQuery": {
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "messageTemplate": {
             "description": "The message template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "strategy": {
             "$ref": "#/components/schemas/SpansSource.Strategy"
@@ -10090,11 +10667,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 2,
@@ -10135,7 +10714,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -10148,7 +10728,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -10170,14 +10751,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorLabelMapping": {
             "$ref": "#/components/schemas/ColorLabelMapping"
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 2,
@@ -10208,7 +10791,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -10235,14 +10819,16 @@
           },
           "templateText": {
             "description": "Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "templateVariables": {
             "description": "Variables available for use in the display name template, each referencing either a datashape field or mapped values",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DisplayNameTemplateVariable"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -10262,14 +10848,16 @@
           },
           "templateText": {
             "description": "Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "templateVariables": {
             "description": "Variables available for use in the display name template, each referencing either a datashape field or mapped values",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DisplayNameTemplateVariable"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -10291,7 +10879,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ValueLabel"
-            }
+            },
+            "minItems": 0
           },
           "valuesOrderDirection": {
             "$ref": "#/components/schemas/OrderDirection"
@@ -10307,11 +10896,13 @@
         "properties": {
           "label": {
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -10324,7 +10915,8 @@
         "properties": {
           "field": {
             "description": "The field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -10343,14 +10935,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Table.Column"
-            }
+            },
+            "minItems": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Table.Rule"
-            }
+            },
+            "minItems": 0
           },
           "settings": {
             "$ref": "#/components/schemas/TableSettings"
@@ -10374,21 +10968,24 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "$ref": "#/components/schemas/UUID"
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "properties": {
             "description": "The properties.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Property"
-            }
+            },
+            "minItems": 0
           },
           "ruleScope": {
             "$ref": "#/components/schemas/RuleScope"
@@ -10407,7 +11004,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ColumnWidthEntry"
-            }
+            },
+            "minItems": 0
           },
           "rowStyle": {
             "$ref": "#/components/schemas/RowStyle"
@@ -10433,7 +11031,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -10449,7 +11048,8 @@
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -10490,7 +11090,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -10503,7 +11104,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -10635,7 +11237,8 @@
           "singleString": {
             "deprecated": true,
             "description": "Deprecated. Default string value for the textbox variable.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -10673,12 +11276,14 @@
           "from": {
             "description": "The from.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "to": {
             "description": "The to.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -10716,7 +11321,8 @@
         "properties": {
           "relativeTimeFrame": {
             "description": "Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -10743,15 +11349,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -10777,7 +11386,8 @@
           },
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sortBy": {
             "$ref": "#/components/schemas/SortByType"
@@ -10796,7 +11406,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -10832,11 +11443,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme for this query, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "connectNulls": {
             "example": false,
@@ -10845,7 +11458,8 @@
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -10867,11 +11481,14 @@
           "seriesCountLimit": {
             "description": "Max count of the series per query",
             "type": "string",
-            "format": "int64"
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "seriesNameTemplate": {
             "description": "Custom template for the series name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "stackedLine": {
             "$ref": "#/components/schemas/Visualization.StackedLine"
@@ -10885,12 +11502,18 @@
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
           },
+          "useDataTimeRange": {
+            "example": false,
+            "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
+            "type": "boolean"
+          },
           "valueFields": {
             "description": "The value fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -10929,13 +11552,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QueryDisplaySettings"
-            }
+            },
+            "minItems": 0
           },
           "stackedLine": {
             "$ref": "#/components/schemas/Visualization.StackedLine"
           },
           "tooltip": {
             "$ref": "#/components/schemas/TimeSeriesTooltip"
+          },
+          "useDataTimeRange": {
+            "example": false,
+            "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
+            "type": "boolean"
           },
           "xAxisTimeFormat": {
             "$ref": "#/components/schemas/XAxisTimeFormat"
@@ -11005,7 +11634,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -11028,11 +11658,13 @@
           },
           "label": {
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -11053,18 +11685,21 @@
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayName": {
             "description": "The display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayType": {
             "$ref": "#/components/schemas/VariableDisplayType"
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -11187,11 +11822,13 @@
         "properties": {
           "labelRegex": {
             "description": "The label regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "valueRegex": {
             "description": "The value regex.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -11353,7 +11990,8 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayFullRow": {
             "description": "The display full row.",
@@ -11361,7 +11999,8 @@
           },
           "displayName": {
             "description": "The display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayType": {
             "$ref": "#/components/schemas/VariableDisplayTypeV2"
@@ -11371,7 +12010,8 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "source": {
             "$ref": "#/components/schemas/VariableSourceV2"
@@ -11525,18 +12165,21 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -11546,7 +12189,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -11575,14 +12219,16 @@
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual stack",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "subCategoryFields": {
             "description": "The sub category fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -11624,18 +12270,21 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "colorsBy": {
             "$ref": "#/components/schemas/ColorsBy"
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 4,
@@ -11645,7 +12294,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -11666,7 +12316,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VerticalBarsMulti.QueryFieldSettings"
-            }
+            },
+            "minItems": 0
           },
           "scaleType": {
             "$ref": "#/components/schemas/ScaleType"
@@ -11701,7 +12352,8 @@
         "properties": {
           "queryId": {
             "description": "Reference to the query id from Dynamic.query_display_settings",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "valueField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -11787,11 +12439,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 2,
@@ -11839,7 +12493,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/common.Threshold"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -11852,7 +12507,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -11873,15 +12529,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customUnit": {
             "description": "Custom unit (requires the unit field to be set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "decimalPrecision": {
             "example": 5,
@@ -11891,7 +12550,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,
@@ -11928,14 +12588,16 @@
           },
           "stackNameTemplate": {
             "description": "Custom template name of an individual slice in the stack",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "subCategoryFields": {
             "description": "The sub category fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObservationField"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -12257,7 +12919,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Weekday"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -12276,29 +12939,40 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "definition": {
             "$ref": "#/components/schemas/Widget.Definition"
           },
           "description": {
             "description": "Short description of the widget",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "$ref": "#/components/schemas/UUID"
+          },
+          "layoutColumns": {
+            "description": "Number of columns occupied by the widget in the dashboard layout",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 2147483647
           },
           "reference": {
             "$ref": "#/components/schemas/WidgetReference"
           },
           "title": {
             "description": "Name of the widget",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -12492,7 +13166,8 @@
         "properties": {
           "dashboardId": {
             "description": "Dashboard ID containing the referenced widget",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "widgetId": {
             "$ref": "#/components/schemas/UUID"
@@ -12527,7 +13202,8 @@
           },
           "interval": {
             "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -12636,7 +13312,8 @@
         "properties": {
           "text": {
             "description": "The text.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -12650,7 +13327,8 @@
         "properties": {
           "color": {
             "description": "Color of the threshold",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "from": {
             "description": "Minimum bound value of the threshold",
@@ -12659,7 +13337,8 @@
           },
           "label": {
             "description": "Optional label of the threshold",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -12722,7 +13401,8 @@
           },
           "displayName": {
             "description": "A display name for the filter",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Indicates if the filter is currently enabled or not.",
@@ -12783,7 +13463,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dynamic.QueryDefinition"
-            }
+            },
+            "minItems": 0
           },
           "timeFrame": {
             "$ref": "#/components/schemas/TimeFrameSelect"
@@ -12802,7 +13483,8 @@
         "properties": {
           "customUnit": {
             "description": "Custom unit (requires to have unit field set as 'custom' to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -12864,7 +13546,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Gauge.Threshold"
-            }
+            },
+            "minItems": 0
           },
           "unit": {
             "$ref": "#/components/schemas/Gauge.Unit"
@@ -12880,11 +13563,13 @@
         "properties": {
           "colorScheme": {
             "description": "Applied color scheme, one of the predefined values",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customUnit": {
             "description": "Custom unit (requires the unit field to be set to custom to take effect)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataModeType": {
             "$ref": "#/components/schemas/widgets.common.DataModeType"
@@ -12902,7 +13587,8 @@
           },
           "groupNameTemplate": {
             "description": "Custom template name for a group, can contain variables",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "hashColors": {
             "example": false,

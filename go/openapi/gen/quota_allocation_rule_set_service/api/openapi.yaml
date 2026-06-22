@@ -60,7 +60,7 @@ paths:
         required: false
         schema:
           description: Unique identifier.
-          example: ""
+          minLength: 0
           type: string
         style: form
       responses:
@@ -215,6 +215,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
       title: Delete quota allocation rule set response
       type: object
@@ -231,6 +232,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -247,6 +249,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -264,6 +267,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -300,7 +304,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     QuotaAllocationEntityTypeRule:
@@ -335,6 +341,7 @@ components:
           type: boolean
         entityType:
           description: The entity type.
+          minLength: 0
           type: string
       required:
       - allocation
@@ -365,11 +372,13 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/QuotaAllocationEntityTypeRule"
+          minItems: 0
           type: array
       required:
       - rules

@@ -181,6 +181,9 @@ func (a *RoleManagementServiceAPIService) RoleManagementServiceDeleteRoleExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.roleId < 0 {
+		return localVarReturnValue, nil, reportError("roleId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -284,6 +287,9 @@ func (a *RoleManagementServiceAPIService) RoleManagementServiceGetCustomRoleExec
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.roleId < 0 {
+		return localVarReturnValue, nil, reportError("roleId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -601,6 +607,9 @@ func (a *RoleManagementServiceAPIService) RoleManagementServiceUpdateRoleExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.roleId < 0 {
+		return localVarReturnValue, nil, reportError("roleId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

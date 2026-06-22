@@ -67,7 +67,8 @@
             "description": "Unique identifier.",
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           },
@@ -77,7 +78,8 @@
             "description": "Version number.",
             "schema": {
               "description": "Version number.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           },
@@ -90,8 +92,10 @@
               "type": "array",
               "items": {
                 "description": "The item ids.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -104,8 +108,10 @@
               "type": "array",
               "items": {
                 "description": "The applications.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -118,8 +124,10 @@
               "type": "array",
               "items": {
                 "description": "The subsystems.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -140,32 +148,40 @@
                   "type": "array",
                   "items": {
                     "description": "The applications.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "id": {
                   "description": "Unique identifier.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "itemIds": {
                   "description": "The item ids.",
                   "type": "array",
                   "items": {
                     "description": "The item ids.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "subsystems": {
                   "description": "The subsystems.",
                   "type": "array",
                   "items": {
                     "description": "The subsystems.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "version": {
                   "description": "Version number.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -223,7 +239,8 @@
             "description": "Unique identifier.",
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           },
@@ -233,7 +250,8 @@
             "description": "Version number.",
             "schema": {
               "description": "Version number.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           },
@@ -246,8 +264,10 @@
               "type": "array",
               "items": {
                 "description": "The item ids.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -260,8 +280,10 @@
               "type": "array",
               "items": {
                 "description": "The applications.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -274,8 +296,10 @@
               "type": "array",
               "items": {
                 "description": "The subsystems.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -296,32 +320,40 @@
                   "type": "array",
                   "items": {
                     "description": "The applications.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "id": {
                   "description": "Unique identifier.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "itemIds": {
                   "description": "The item ids.",
                   "type": "array",
                   "items": {
                     "description": "The item ids.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "subsystems": {
                   "description": "The subsystems.",
                   "type": "array",
                   "items": {
                     "description": "The subsystems.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "version": {
                   "description": "Version number.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -382,15 +414,18 @@
                 "properties": {
                   "id": {
                     "description": "Unique identifier.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "keptExtensionItems": {
                     "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
                     "type": "array",
                     "items": {
                       "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -460,35 +495,43 @@
             "type": "array",
             "items": {
               "description": "The applications.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "itemIds": {
             "description": "The item ids.",
             "type": "array",
             "items": {
               "description": "The item ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "subsystems": {
             "description": "The subsystems.",
             "type": "array",
             "items": {
               "description": "The subsystems.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "summary": {
             "$ref": "#/components/schemas/DeployedExtensionSummary"
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -518,32 +561,40 @@
             "type": "array",
             "items": {
               "description": "The applications.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "itemIds": {
             "description": "The item ids.",
             "type": "array",
             "items": {
               "description": "The item ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "subsystems": {
             "description": "The subsystems.",
             "type": "array",
             "items": {
               "description": "The subsystems.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -556,15 +607,18 @@
         "properties": {
           "itemId": {
             "description": "The item id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "reason": {
             "description": "Reason.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "remoteId": {
             "description": "The remote id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -591,7 +645,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -613,7 +668,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -637,7 +693,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -657,7 +714,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeployedExtension"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -672,52 +730,62 @@
           "actions": {
             "description": "List of actions.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "alerts": {
             "description": "List of alerts.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "customDashboards": {
             "description": "The custom dashboards.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "enrichments": {
             "description": "List of enrichments.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "eventsToMetrics": {
             "description": "The events to metrics.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "grafanaDashboards": {
             "description": "The grafana dashboards.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "kibanaDashboards": {
             "description": "The kibana dashboards.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "metricsRuleGroup": {
             "description": "The metrics rule group.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "parsingRules": {
             "description": "The parsing rules.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "savedViews": {
             "description": "The saved views.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -730,8 +798,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -751,7 +821,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FailedItem"
-            }
+            },
+            "minItems": 0
           }
         }
       },

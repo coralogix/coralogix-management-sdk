@@ -1400,6 +1400,116 @@ func (a *CasesServiceAPIService) CasesServiceGetCaseExecute(r ApiCasesServiceGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCasesServiceGetCaseByIndicatorRequest struct {
+	ctx context.Context
+	ApiService *CasesServiceAPIService
+	getCaseByIndicatorRequest *GetCaseByIndicatorRequest
+}
+
+func (r ApiCasesServiceGetCaseByIndicatorRequest) GetCaseByIndicatorRequest(getCaseByIndicatorRequest GetCaseByIndicatorRequest) ApiCasesServiceGetCaseByIndicatorRequest {
+	r.getCaseByIndicatorRequest = &getCaseByIndicatorRequest
+	return r
+}
+
+func (r ApiCasesServiceGetCaseByIndicatorRequest) Execute() (*GetCaseByIndicatorResponse, *http.Response, error) {
+	return r.ApiService.CasesServiceGetCaseByIndicatorExecute(r)
+}
+
+/*
+CasesServiceGetCaseByIndicator Get case by indicator
+
+Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.
+
+Requires the following permissions:
+- `case:Read`
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCasesServiceGetCaseByIndicatorRequest
+*/
+func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicator(ctx context.Context) ApiCasesServiceGetCaseByIndicatorRequest {
+	return ApiCasesServiceGetCaseByIndicatorRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetCaseByIndicatorResponse
+func (a *CasesServiceAPIService) CasesServiceGetCaseByIndicatorExecute(r ApiCasesServiceGetCaseByIndicatorRequest) (*GetCaseByIndicatorResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCaseByIndicatorResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CasesServiceAPIService.CasesServiceGetCaseByIndicator")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/cases/indicators/v1/get"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getCaseByIndicatorRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCasesServiceGetCaseDeepLinksRequest struct {
 	ctx context.Context
 	ApiService *CasesServiceAPIService

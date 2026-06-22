@@ -33,6 +33,7 @@ paths:
           description: Group by fields for aggregation
           items:
             $ref: "#/components/schemas/IncidentsService_ListIncidentAggregations_group_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       - description: Pagination parameters
@@ -188,6 +189,7 @@ paths:
         schema:
           description: Event ID associated to the Incident to acknowledge
           example: event_id_1
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -233,6 +235,7 @@ paths:
         schema:
           description: Event ID associated to the Incident to acknowledge
           example: event_id_1
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -278,6 +281,7 @@ paths:
         schema:
           description: Event ID associated to the Incident to resolve
           example: event_id_1
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -406,7 +410,9 @@ paths:
           description: The ids.
           items:
             description: The ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -534,7 +540,9 @@ paths:
           - incident_id_2
           items:
             description: List of incident IDs to unassign
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -699,6 +707,7 @@ paths:
         schema:
           description: Unique identifier.
           example: incident_id
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -744,6 +753,7 @@ paths:
         schema:
           description: ID of the incident to retrieve events for
           example: incident_id
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -937,6 +947,7 @@ components:
           description: List of incidents after acknowledgment
           items:
             $ref: "#/components/schemas/Incident"
+          minItems: 0
           type: array
       required:
       - incidents
@@ -1047,6 +1058,7 @@ components:
           description: List of incidents after assignment
           items:
             $ref: "#/components/schemas/Incident"
+          minItems: 0
           type: array
       required:
       - incidents
@@ -1062,6 +1074,7 @@ components:
         assignee:
           description: Assignee.
           example: assignee
+          minLength: 0
           type: string
         count:
           description: Number of items.
@@ -1164,7 +1177,9 @@ components:
           - not_found_id_2
           items:
             description: List of IDs that were not found
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - incidents
@@ -1276,6 +1291,7 @@ components:
           description: List of incidents after closing
           items:
             $ref: "#/components/schemas/Incident"
+          minItems: 0
           type: array
       required:
       - incidents
@@ -1291,6 +1307,7 @@ components:
         contextualLabelValue:
           description: The contextual label value.
           example: contextual_label_value
+          minLength: 0
           type: string
         count:
           description: Number of items.
@@ -1311,7 +1328,9 @@ components:
           description: The contextual label values.
           items:
             description: The contextual label values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - contextualLabelValues
@@ -1331,6 +1350,7 @@ components:
           description: The values with count.
           items:
             $ref: "#/components/schemas/ContextualLabelValueWithCount"
+          minItems: 0
           type: array
       required:
       - valuesWithCount
@@ -1347,10 +1367,12 @@ components:
         fieldName:
           description: The field name.
           example: field_name
+          minLength: 0
           type: string
         fieldValue:
           description: The field value.
           example: field_value
+          minLength: 0
           type: string
       required:
       - fieldName
@@ -1372,6 +1394,7 @@ components:
         displayLabelValue:
           description: The display label value.
           example: display_label_value
+          minLength: 0
           type: string
       required:
       - count
@@ -1387,7 +1410,9 @@ components:
           description: The display label values.
           items:
             description: The display label values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - displayLabelValues
@@ -1407,6 +1432,7 @@ components:
           description: The values with count.
           items:
             $ref: "#/components/schemas/DisplayLabelValueWithCount"
+          minItems: 0
           type: array
       required:
       - valuesWithCount
@@ -1425,6 +1451,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -1441,6 +1468,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -1458,6 +1486,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -1550,6 +1579,7 @@ components:
           description: List of incident events
           items:
             $ref: "#/components/schemas/IncidentEvent"
+          minItems: 0
           type: array
       title: Get incident events response
       type: object
@@ -1619,6 +1649,7 @@ components:
       properties:
         contextualLabel:
           description: The contextual label to group by.
+          minLength: 0
           type: string
         orderByDirection:
           $ref: "#/components/schemas/v1.OrderByDirection"
@@ -1719,14 +1750,17 @@ components:
           description: The assignments.
           items:
             $ref: "#/components/schemas/Assignment"
+          minItems: 0
           type: array
         closedAt:
           description: The closed at.
           example: 2024-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
         contextualLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: The contextual labels.
           type: object
@@ -1734,27 +1768,33 @@ components:
           description: Creation timestamp.
           example: 2024-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: incident_description
+          minLength: 0
           type: string
         displayLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: The display labels.
           type: object
         duration:
           description: Duration.
+          minLength: 0
           type: string
         events:
           description: List of events.
           items:
             $ref: "#/components/schemas/IncidentEvent"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
           example: incident_id
+          minLength: 0
           type: string
         isMuted:
           description: The is muted.
@@ -1763,20 +1803,24 @@ components:
         lastStateUpdateKey:
           description: The last state update key.
           example: last_state_update_key
+          minLength: 0
           type: string
         lastStateUpdateTime:
           description: The last state update time.
           example: 2024-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
         metaLabels:
           description: Metadata labels.
           items:
             $ref: "#/components/schemas/incidents.v1.MetaLabel"
+          minItems: 0
           type: array
         name:
           description: Display name.
           example: incident_name
+          minLength: 0
           type: string
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -1853,53 +1897,65 @@ components:
           description: The agg assignments count.
           items:
             $ref: "#/components/schemas/IncidentAssignmentCount"
+          minItems: 0
           type: array
         aggMetaLabelsCount:
           description: The agg meta labels count.
           items:
             $ref: "#/components/schemas/IncidentMetaLabelsCount"
+          minItems: 0
           type: array
         aggSeverityCount:
           description: The agg severity count.
           items:
             $ref: "#/components/schemas/IncidentSeverityCount"
+          minItems: 0
           type: array
         aggStateCount:
           description: The agg state count.
           items:
             $ref: "#/components/schemas/IncidentStateCount"
+          minItems: 0
           type: array
         aggStatusCount:
           description: The agg status count.
           items:
             $ref: "#/components/schemas/IncidentStatusCount"
+          minItems: 0
           type: array
         allValuesCount:
           description: The all values count.
           format: int64
+          minimum: 0
           type: integer
         firstCreatedAt:
           description: The first created at.
           format: date-time
+          minLength: 0
           type: string
         groupBysValue:
           description: The group bys value.
           items:
             $ref: "#/components/schemas/GroupByValues"
+          minItems: 0
           type: array
         lastClosedAt:
           description: The last closed at.
           format: date-time
+          minLength: 0
           type: string
         lastStateUpdateTime:
           description: The last state update time.
           format: date-time
+          minLength: 0
           type: string
         listIncidentsId:
           description: The list incidents id.
           items:
             description: The list incidents id.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - aggAssignmentsCount
@@ -1929,6 +1985,7 @@ components:
           description: Number of items.
           example: 10
           format: int64
+          minimum: 0
           type: integer
       required:
       - assignedTo
@@ -1981,6 +2038,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2006,6 +2064,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2057,6 +2116,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2082,6 +2142,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2119,6 +2180,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2144,6 +2206,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2197,10 +2260,12 @@ components:
       properties:
         cxEventKey:
           description: The cx event key.
+          minLength: 0
           type: string
         cxEventTimestamp:
           description: The cx event timestamp.
           format: date-time
+          minLength: 0
           type: string
         incidentEvent:
           $ref: "#/components/schemas/IncidentEvent"
@@ -2239,23 +2304,29 @@ components:
           description: The alert group by fields.
           items:
             description: The alert group by fields.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         alertId:
           description: Unique identifier of the alert.
+          minLength: 0
           type: string
         alertLabels:
           description: The alert labels.
           items:
             $ref: "#/components/schemas/incidents.v1.MetaLabel"
+          minItems: 0
           type: array
         alertName:
           description: The alert name.
+          minLength: 0
           type: string
         alertType:
           $ref: "#/components/schemas/IncidentEventAlertType"
         incidentPermutation:
           additionalProperties:
+            minLength: 0
             type: string
           description: The incident permutation.
           type: object
@@ -2283,6 +2354,7 @@ components:
       properties:
         userId:
           description: The user id.
+          minLength: 0
           type: string
       type: object
     IncidentEventOriginatorOperational:
@@ -2292,6 +2364,7 @@ components:
       properties:
         systemName:
           description: The system name.
+          minLength: 0
           type: string
       type: object
     IncidentEventSnoozeIndicator:
@@ -2306,9 +2379,11 @@ components:
         startTime:
           description: Start time.
           format: date-time
+          minLength: 0
           type: string
         userId:
           description: The user id.
+          minLength: 0
           type: string
       title: Incident event snooze indicator
       type: object
@@ -2322,6 +2397,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2347,6 +2423,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2394,6 +2471,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2423,6 +2501,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2473,6 +2552,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2498,6 +2578,7 @@ components:
         id:
           description: The ID of the incident event
           example: incident_event_id
+          minLength: 0
           type: string
         incidentEventType:
           $ref: "#/components/schemas/IncidentEventType"
@@ -2537,6 +2618,7 @@ components:
       properties:
         applicationName:
           description: Application associated with the incident.
+          minLength: 0
           type: string
       required:
       - applicationName
@@ -2549,6 +2631,7 @@ components:
         closedAt:
           description: Timestamp when the incident was closed.
           format: date-time
+          minLength: 0
           type: string
       required:
       - closedAt
@@ -2561,6 +2644,7 @@ components:
         createdAt:
           description: Timestamp when the incident was created.
           format: date-time
+          minLength: 0
           type: string
       required:
       - createdAt
@@ -2572,6 +2656,7 @@ components:
       properties:
         duration:
           description: Duration.
+          minLength: 0
           type: string
       required:
       - duration
@@ -2583,6 +2668,7 @@ components:
       properties:
         id:
           description: Unique identifier of the incident.
+          minLength: 0
           type: string
       required:
       - id
@@ -2595,6 +2681,7 @@ components:
         lastStateUpdateTime:
           description: Timestamp of the most recent state change.
           format: date-time
+          minLength: 0
           type: string
       required:
       - lastStateUpdateTime
@@ -2606,6 +2693,7 @@ components:
       properties:
         name:
           description: Display name of the incident.
+          minLength: 0
           type: string
       required:
       - name
@@ -2647,6 +2735,7 @@ components:
       properties:
         subsystemName:
           description: Subsystem associated with the incident.
+          minLength: 0
           type: string
       required:
       - subsystemName
@@ -2680,6 +2769,7 @@ components:
           description: Number of items.
           example: 10
           format: int64
+          minimum: 0
           type: integer
         metaLabel:
           $ref: "#/components/schemas/incidents.v1.MetaLabel"
@@ -2718,13 +2808,17 @@ components:
           description: Filter by application names
           items:
             description: Filter by application names
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         assignee:
           description: Filter by assignee
           items:
             description: Filter by assignee
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         contextualLabels:
           additionalProperties:
@@ -2743,6 +2837,7 @@ components:
           description: "Filters all incidents that were open in the given timeframe\
             \ end time (deprecated, use incident_open_range instead)"
           format: date-time
+          minLength: 0
           type: string
         incidentDurationRange:
           $ref: "#/components/schemas/v1.TimeRange"
@@ -2753,6 +2848,7 @@ components:
           description: Filters all incidents with the given meta labels
           items:
             $ref: "#/components/schemas/incidents.v1.MetaLabel"
+          minItems: 0
           type: array
         metaLabelsOp:
           $ref: "#/components/schemas/v1.FilterOperator"
@@ -2762,28 +2858,34 @@ components:
           description: Filter by incident severity
           items:
             $ref: "#/components/schemas/IncidentSeverity"
+          minItems: 0
           type: array
         startTime:
           deprecated: true
           description: "Filters all incidents that were open in the given timeframe\
             \ start time (deprecated, use incident_open_range instead)"
           format: date-time
+          minLength: 0
           type: string
         state:
           description: Filter by incident state
           items:
             $ref: "#/components/schemas/IncidentState"
+          minItems: 0
           type: array
         status:
           description: Filter by incident status
           items:
             $ref: "#/components/schemas/IncidentStatus"
+          minItems: 0
           type: array
         subsystemName:
           description: Filter by subsystem names
           items:
             description: Filter by subsystem names
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Incident query filter
       type: object
@@ -2841,6 +2943,7 @@ components:
           description: The assignee with count.
           items:
             $ref: "#/components/schemas/AssigneeWithCount"
+          minItems: 0
           type: array
         contextualLabels:
           additionalProperties:
@@ -2858,21 +2961,25 @@ components:
           description: The meta labels with count.
           items:
             $ref: "#/components/schemas/IncidentMetaLabelsWithCount"
+          minItems: 0
           type: array
         severityWithCount:
           description: The severity with count.
           items:
             $ref: "#/components/schemas/IncidentSeverityWithCount"
+          minItems: 0
           type: array
         stateWithCount:
           description: The state with count.
           items:
             $ref: "#/components/schemas/IncidentStateWithCount"
+          minItems: 0
           type: array
         statusWithCount:
           description: The status with count.
           items:
             $ref: "#/components/schemas/IncidentStatusWithCount"
+          minItems: 0
           type: array
       required:
       - assigneeWithCount
@@ -2896,10 +3003,12 @@ components:
       properties:
         contextualLabel:
           description: The contextual label to search in.
+          minLength: 0
           type: string
         query:
           description: The search query
           example: error
+          minLength: 0
           type: string
       required:
       - contextualLabel
@@ -2917,6 +3026,7 @@ components:
         query:
           description: The search query
           example: error
+          minLength: 0
           type: string
       required:
       - field
@@ -2945,6 +3055,7 @@ components:
           description: Number of items.
           example: 10
           format: int64
+          minimum: 0
           type: integer
         severity:
           $ref: "#/components/schemas/IncidentSeverity"
@@ -2990,6 +3101,7 @@ components:
           description: Number of items.
           example: 10
           format: int64
+          minimum: 0
           type: integer
         state:
           $ref: "#/components/schemas/IncidentState"
@@ -3036,6 +3148,7 @@ components:
           description: Number of items.
           example: 10
           format: int64
+          minimum: 0
           type: integer
         status:
           $ref: "#/components/schemas/IncidentStatus"
@@ -3167,6 +3280,7 @@ components:
           description: List of incident aggregations
           items:
             $ref: "#/components/schemas/IncidentAggregation"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3303,6 +3417,7 @@ components:
           description: List of incident events
           items:
             $ref: "#/components/schemas/IncidentEventExtended"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3322,7 +3437,9 @@ components:
         count:
           description: Total number of incident events matching the filter
           example: "100"
-          format: uint64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         reachedLimit:
           description: Indicates if the count reached the system limit
@@ -3438,6 +3555,7 @@ components:
           description: Incidents.
           items:
             $ref: "#/components/schemas/Incident"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3452,7 +3570,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OriginatorType:
@@ -3627,6 +3747,7 @@ components:
           description: List of incidents after resolution
           items:
             $ref: "#/components/schemas/Incident"
+          minItems: 0
           type: array
       required:
       - incidents
@@ -3737,6 +3858,7 @@ components:
           description: List of incidents after unassignment
           items:
             $ref: "#/components/schemas/Incident"
+          minItems: 0
           type: array
       required:
       - incidents
@@ -3749,6 +3871,7 @@ components:
       properties:
         cxEventKey:
           description: The cx event key.
+          minLength: 0
           type: string
       type: object
     UpsertIncidentStateType:
@@ -3764,6 +3887,7 @@ components:
       properties:
         contextualLabel:
           description: A contextual label key to order by.
+          minLength: 0
           type: string
         direction:
           $ref: "#/components/schemas/v1.OrderByDirection"
@@ -3860,10 +3984,12 @@ components:
         key:
           description: The key.
           example: key
+          minLength: 0
           type: string
         value:
           description: The value.
           example: value
+          minLength: 0
           type: string
       title: Incident meta label
       type: object
@@ -3876,10 +4002,12 @@ components:
           description: Number of items to return per page
           example: 10
           format: int64
+          minimum: 0
           type: integer
         pageToken:
           description: Token for the next page of results
           example: next_page_token
+          minLength: 0
           type: string
       required:
       - pageSize
@@ -3896,11 +4024,13 @@ components:
         nextPageToken:
           description: Token for the next page of results
           example: next_page_token
+          minLength: 0
           type: string
         totalSize:
           description: Total number of items available
           example: 100
           format: int64
+          minimum: 0
           type: integer
       required:
       - totalSize
@@ -3916,6 +4046,7 @@ components:
         userId:
           description: The user id.
           example: user_id
+          minLength: 0
           type: string
       required:
       - userId
@@ -3946,10 +4077,12 @@ components:
         endTime:
           description: End time of the range
           format: date-time
+          minLength: 0
           type: string
         startTime:
           description: Start time of the range
           format: date-time
+          minLength: 0
           type: string
       required:
       - endTime
@@ -3962,25 +4095,6 @@ components:
       - FILTER_OPERATOR_AND_OR_UNSPECIFIED
       - FILTER_OPERATOR_OR
       type: string
-    Incident_meta_label:
-      description: Meta label.
-      externalDocs:
-        url: ""
-      properties:
-        key:
-          description: The key.
-          example: key
-          type: string
-        value:
-          description: The value.
-          example: value
-          type: string
-      title: Incident meta label
-      type: object
-    Incident_query_filter_searchQuery:
-      oneOf:
-      - $ref: "#/components/schemas/IncidentSearchQueryContextualLabel"
-      - $ref: "#/components/schemas/IncidentSearchQueryIncidentField"
     Incident_query_filter:
       description: Filter configuration for incidents
       externalDocs:
@@ -3990,13 +4104,17 @@ components:
           description: Filter by application names
           items:
             description: Filter by application names
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         assignee:
           description: Filter by assignee
           items:
             description: Filter by assignee
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         contextualLabels:
           additionalProperties: {}
@@ -4012,6 +4130,7 @@ components:
           description: "Filters all incidents that were open in the given timeframe\
             \ end time (deprecated, use incident_open_range instead)"
           format: date-time
+          minLength: 0
           type: string
         incidentDurationRange: {}
         isMuted:
@@ -4019,39 +4138,44 @@ components:
           type: boolean
         metaLabels:
           description: Filters all incidents with the given meta labels
-          items:
-            $ref: "#/components/schemas/Incident_meta_label"
+          items: {}
+          minItems: 0
           type: array
         metaLabelsOp:
           $ref: "#/components/schemas/v1.FilterOperator"
-        searchQuery:
-          $ref: "#/components/schemas/Incident_query_filter_searchQuery"
+        searchQuery: {}
         severity:
           description: Filter by incident severity
           items:
             $ref: "#/components/schemas/IncidentSeverity"
+          minItems: 0
           type: array
         startTime:
           deprecated: true
           description: "Filters all incidents that were open in the given timeframe\
             \ start time (deprecated, use incident_open_range instead)"
           format: date-time
+          minLength: 0
           type: string
         state:
           description: Filter by incident state
           items:
             $ref: "#/components/schemas/IncidentState"
+          minItems: 0
           type: array
         status:
           description: Filter by incident status
           items:
             $ref: "#/components/schemas/IncidentStatus"
+          minItems: 0
           type: array
         subsystemName:
           description: Filter by subsystem names
           items:
             description: Filter by subsystem names
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Incident query filter
       type: object
@@ -4068,10 +4192,12 @@ components:
           description: Number of items to return per page
           example: 10
           format: int64
+          minimum: 0
           type: integer
         pageToken:
           description: Token for the next page of results
           example: next_page_token
+          minLength: 0
           type: string
       required:
       - pageSize
@@ -4096,16 +4222,19 @@ components:
         labels: {}
         name:
           description: The name of the incident
+          minLength: 0
           type: string
         severity:
           description: The severity of the incident
           items:
             $ref: "#/components/schemas/IncidentSeverity"
+          minItems: 0
           type: array
         status:
           description: The status of the incident
           items:
             $ref: "#/components/schemas/IncidentStatus"
+          minItems: 0
           type: array
         timestamp: {}
       title: Incident event query filter
@@ -4137,6 +4266,7 @@ components:
           description: Order by fields
           items:
             $ref: "#/components/schemas/v1.OrderBy"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/incidents.v1.PaginationRequest"
@@ -4152,7 +4282,9 @@ components:
           - incident_id_2
           items:
             description: List of incident IDs to acknowledge
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - incidentIds
@@ -4170,7 +4302,9 @@ components:
           - incident_id_2
           items:
             description: List of incident IDs to assign
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - assignedTo
@@ -4187,7 +4321,9 @@ components:
           - incident_id_2
           items:
             description: List of incident IDs to close
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - incidentIds
@@ -4203,7 +4339,9 @@ components:
           - incident_id_2
           items:
             description: List of incident IDs to resolve
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - incidentIds

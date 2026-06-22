@@ -73,7 +73,8 @@
                   },
                   "requestId": {
                     "description": "Idempotency key for the replace folder request, used to prevent duplicate updates.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 }
               }
@@ -137,7 +138,8 @@
                   },
                   "requestId": {
                     "description": "The request id.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 }
               }
@@ -192,23 +194,13 @@
         "operationId": "DashboardFoldersService_GetDashboardFolder",
         "parameters": [
           {
-            "in": "path",
-            "name": "folder_id",
-            "description": "The folder id.",
-            "required": true,
-            "schema": {
-              "description": "The folder id.",
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
             "in": "query",
             "name": "request_id",
             "description": "Optional client-supplied request identifier used to correlate the get folder request.",
             "schema": {
               "description": "Optional client-supplied request identifier used to correlate the get folder request.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -259,23 +251,13 @@
         "operationId": "DashboardFoldersService_DeleteDashboardFolder",
         "parameters": [
           {
-            "in": "path",
-            "name": "folder_id",
-            "description": "The folder id.",
-            "required": true,
-            "schema": {
-              "description": "The folder id.",
-              "type": "string"
-            },
-            "style": "simple"
-          },
-          {
             "in": "query",
             "name": "request_id",
             "description": "Idempotency key for the delete folder request, used to prevent duplicate operations.",
             "schema": {
               "description": "Idempotency key for the delete folder request, used to prevent duplicate operations.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -313,7 +295,21 @@
         "x-coralogixPermissions": [
           "team-dashboards:Update"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "folder_id",
+          "description": "The folder id.",
+          "required": true,
+          "schema": {
+            "description": "The folder id.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     }
   },
   "components": {
@@ -329,7 +325,8 @@
         "properties": {
           "folderId": {
             "description": "The folder id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -342,15 +339,18 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "parentId": {
             "description": "The parent id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -387,7 +387,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -409,7 +410,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -433,7 +435,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -468,7 +471,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DashboardFolder"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -481,8 +485,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },

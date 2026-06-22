@@ -241,6 +241,9 @@ func (a *EventsServiceAPIService) EventsServiceGetEventExecute(r ApiEventsServic
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	if r.orderBys != nil {
 		t := *r.orderBys

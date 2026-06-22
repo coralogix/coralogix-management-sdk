@@ -133,6 +133,7 @@ paths:
         required: true
         schema:
           description: The folder id.
+          minLength: 0
           type: string
         style: simple
       - description: "Idempotency key for the delete folder request, used to prevent\
@@ -144,6 +145,7 @@ paths:
         schema:
           description: "Idempotency key for the delete folder request, used to prevent\
             \ duplicate operations."
+          minLength: 0
           type: string
         style: form
       responses:
@@ -187,6 +189,7 @@ paths:
         required: true
         schema:
           description: The folder id.
+          minLength: 0
           type: string
         style: simple
       - description: Optional client-supplied request identifier used to correlate
@@ -198,6 +201,7 @@ paths:
         schema:
           description: Optional client-supplied request identifier used to correlate
             the get folder request.
+          minLength: 0
           type: string
         style: form
       responses:
@@ -236,6 +240,7 @@ components:
       properties:
         folderId:
           description: The folder id.
+          minLength: 0
           type: string
       title: Create dashboard folder response data structure
       type: object
@@ -250,12 +255,15 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         parentId:
           description: The parent id.
+          minLength: 0
           type: string
       type: object
     DeleteDashboardFolderResponse:
@@ -279,6 +287,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -295,6 +304,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -312,6 +322,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -350,6 +361,7 @@ components:
           description: The folder.
           items:
             $ref: "#/components/schemas/DashboardFolder"
+          minItems: 0
           type: array
       title: List dashboard folders response data structure
       type: object
@@ -359,7 +371,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ReplaceDashboardFolderResponse:
@@ -389,6 +403,7 @@ components:
         requestId:
           description: "Idempotency key for the replace folder request, used to prevent\
             \ duplicate updates."
+          minLength: 0
           type: string
       title: Replace dashboard folder request data structure
       type: object
@@ -399,6 +414,7 @@ components:
           $ref: "#/components/schemas/DashboardFolder"
         requestId:
           description: The request id.
+          minLength: 0
           type: string
       title: Create dashboard folder request data structure
       type: object

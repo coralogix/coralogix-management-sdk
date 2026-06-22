@@ -240,7 +240,8 @@
                   "id": {
                     "example": "example_id",
                     "description": "Unique identifier.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 }
               }
@@ -464,7 +465,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the outgoing webhook.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -522,7 +524,8 @@
             "schema": {
               "example": "example_id",
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -582,7 +585,8 @@
             "schema": {
               "example": "example_id",
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -660,27 +664,32 @@
         "properties": {
           "detail": {
             "description": "Detail.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "detailType": {
             "example": "detail_type",
             "description": "The detail type.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "eventBusArn": {
             "example": "arn:aws:events:us-east-1:123456789012:event-bus/default",
             "description": "The event bus arn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "roleName": {
             "example": "role_name",
             "description": "The role name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "source": {
             "example": "source",
             "description": "Source.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -695,7 +704,8 @@
           "id": {
             "example": "example_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -718,12 +728,14 @@
         "properties": {
           "payload": {
             "description": "Raw payload data.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "uuid": {
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "description": "The uuid.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -770,8 +782,10 @@
             "type": "array",
             "items": {
               "description": "The email addresses.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -806,7 +820,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -828,7 +843,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -852,7 +868,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -871,7 +888,8 @@
             "description": "The headers.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "method": {
@@ -879,12 +897,14 @@
           },
           "payload": {
             "description": "Raw payload data.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "uuid": {
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "description": "The uuid.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -927,19 +947,23 @@
           },
           "eventNotificationsInstanceId": {
             "description": "The event notifications instance id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "regionId": {
             "description": "The region id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sourceId": {
             "description": "The source id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sourceName": {
             "description": "The source name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -954,17 +978,20 @@
           "apiToken": {
             "example": "jira_api_token",
             "description": "The api token.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "email": {
             "example": "jira_email",
             "description": "Email address.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "projectKey": {
             "example": "jira_project_key",
             "description": "The project key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -981,7 +1008,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutgoingWebhookExtendedSummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -998,7 +1026,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutboundWebhookSummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1015,7 +1044,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutgoingWebhookType"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1032,7 +1062,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutgoingWebhookSummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1073,8 +1104,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1097,20 +1130,24 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "description": "The external id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1118,7 +1155,8 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -1176,23 +1214,27 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1200,12 +1242,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1223,7 +1267,8 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "demisto": {
             "$ref": "#/components/schemas/DemistoConfig"
@@ -1232,17 +1277,20 @@
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1250,12 +1298,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1273,7 +1323,8 @@
           "label": {
             "example": "example_label",
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1291,7 +1342,8 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "emailGroup": {
             "$ref": "#/components/schemas/EmailGroupConfig"
@@ -1300,17 +1352,20 @@
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1318,12 +1373,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1340,23 +1397,27 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1364,12 +1425,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1384,13 +1447,15 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "genericWebhook": {
             "$ref": "#/components/schemas/GenericWebhookConfig"
@@ -1398,12 +1463,14 @@
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1411,12 +1478,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1434,13 +1503,15 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "ibmEventNotifications": {
             "$ref": "#/components/schemas/IbmEventNotificationsConfig"
@@ -1448,12 +1519,14 @@
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1461,12 +1534,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1527,7 +1602,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1535,7 +1611,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1556,7 +1633,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1564,7 +1642,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1585,7 +1664,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1593,7 +1673,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1614,7 +1695,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1622,7 +1704,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1643,7 +1726,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1651,7 +1735,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1672,7 +1757,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1680,7 +1766,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1701,7 +1788,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1709,7 +1797,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1730,7 +1819,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1738,7 +1828,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1756,7 +1847,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "opsgenie": {
             "$ref": "#/components/schemas/OpsgenieConfig"
@@ -1767,7 +1859,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1785,7 +1878,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "pagerDuty": {
             "$ref": "#/components/schemas/PagerDutyConfig"
@@ -1796,7 +1890,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1814,7 +1909,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sendLog": {
             "$ref": "#/components/schemas/SendLogConfig"
@@ -1825,7 +1921,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1843,7 +1940,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slack": {
             "$ref": "#/components/schemas/SlackConfig"
@@ -1854,7 +1952,8 @@
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1872,18 +1971,21 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "jira": {
             "$ref": "#/components/schemas/JiraConfig"
@@ -1891,7 +1993,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1899,12 +2002,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1922,18 +2027,21 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "microsoftTeams": {
             "$ref": "#/components/schemas/MicrosoftTeamsConfig"
@@ -1941,7 +2049,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1949,12 +2058,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1972,18 +2083,21 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "msTeamsWorkflow": {
             "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
@@ -1991,7 +2105,8 @@
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1999,12 +2114,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2022,23 +2139,27 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "opsgenie": {
             "$ref": "#/components/schemas/OpsgenieConfig"
@@ -2049,12 +2170,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2072,23 +2195,27 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "pagerDuty": {
             "$ref": "#/components/schemas/PagerDutyConfig"
@@ -2099,12 +2226,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2122,23 +2251,27 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sendLog": {
             "$ref": "#/components/schemas/SendLogConfig"
@@ -2149,12 +2282,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2172,23 +2307,27 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slack": {
             "$ref": "#/components/schemas/SlackConfig"
@@ -2199,12 +2338,14 @@
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2221,33 +2362,39 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "externalId": {
             "example": 123456,
             "description": "External identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "id": {
             "example": "webhook_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_webhook",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "url": {
             "example": "slack.webhook.com",
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2262,12 +2409,14 @@
             "example": 3,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "label": {
             "example": "example_label",
             "description": "The label.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -2285,7 +2434,8 @@
           "serviceKey": {
             "example": "pager_duty_service_key",
             "description": "The service key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2299,12 +2449,14 @@
         "properties": {
           "payload": {
             "description": "Raw payload data.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "uuid": {
             "example": "d838cd7b-087b-40c6-bc33-80997020f5d0",
             "description": "The uuid.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2321,14 +2473,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Attachment"
-            }
+            },
+            "minItems": 0
           },
           "digests": {
             "description": "The digests.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Digest"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -2353,18 +2507,21 @@
           "displayMessage": {
             "example": "example_display_message",
             "description": "The display message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "errorMessage": {
             "example": "example_error_message",
             "description": "The error message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "statusCode": {
             "example": 400,
             "description": "The status code.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },

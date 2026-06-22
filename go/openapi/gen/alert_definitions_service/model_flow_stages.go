@@ -24,7 +24,7 @@ var _ MappedNullable = &FlowStages{}
 type FlowStages struct {
 	FlowStagesGroups *FlowStagesGroups `json:"flowStagesGroups,omitempty"`
 	// The timeframe ms.
-	TimeframeMs *string `json:"timeframeMs,omitempty"`
+	TimeframeMs *string `json:"timeframeMs,omitempty" validate:"regexp=^-?[0-9]+$"`
 	TimeframeType *TimeframeType `json:"timeframeType,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

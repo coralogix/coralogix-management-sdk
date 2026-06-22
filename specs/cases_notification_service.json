@@ -33,8 +33,10 @@
                     "type": "array",
                     "items": {
                       "description": "Case IDs to retrieve notification deliveries for",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -96,7 +98,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotificationDelivery"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -114,12 +117,14 @@
           "connectorId": {
             "example": "c1d2e3f4-5678-90ab-cdef-1234567890ab",
             "description": "Unique identifier of the connector",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "connectorName": {
             "example": "Production Slack",
             "description": "Display name of the connector",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "connectorType": {
             "$ref": "#/components/schemas/v1.ConnectorType"
@@ -162,7 +167,8 @@
           "errorMessage": {
             "example": "Connection timeout after 30s",
             "description": "Error message describing the failure",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -222,7 +228,8 @@
           "evidenceUrl": {
             "example": "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456",
             "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -249,7 +256,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -271,7 +279,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -295,7 +304,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -331,8 +341,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -349,7 +361,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RouterInfo"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -392,13 +405,15 @@
           "requestNotificationId": {
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timestamp": {
             "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -420,13 +435,15 @@
           "requestNotificationId": {
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timestamp": {
             "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -448,13 +465,15 @@
           "requestNotificationId": {
             "example": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
             "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timestamp": {
             "example": "2025-09-22T10:30:00.000Z",
             "description": "When the notification was triggered",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -475,7 +494,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeliveryAttempt"
-            }
+            },
+            "minItems": 0
           },
           "router": {
             "$ref": "#/components/schemas/RouterInfo"
@@ -497,12 +517,14 @@
           "routerId": {
             "example": "d4e5f678-90ab-cdef-1234-567890abcdef",
             "description": "Unique identifier of the router",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "routerName": {
             "example": "Production alerts router",
             "description": "Display name of the router",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -526,7 +548,8 @@
           "CONNECTOR_TYPE_SERVICE_NOW",
           "CONNECTOR_TYPE_PAGER_DUTY",
           "CONNECTOR_TYPE_EMAIL",
-          "CONNECTOR_TYPE_GENERIC_HTTPS"
+          "CONNECTOR_TYPE_GENERIC_HTTPS",
+          "CONNECTOR_TYPE_MICROSOFT_TEAMS"
         ]
       },
       "v3.FilterOperator": {

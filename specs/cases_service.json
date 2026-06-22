@@ -1045,6 +1045,87 @@
         ]
       }
     },
+    "/cases/indicators/v1/get": {
+      "post": {
+        "tags": [
+          "Cases service"
+        ],
+        "summary": "Get case by indicator",
+        "description": "Retrieve a case by its source indicator. Currently supports Prometheus AlertManager alerts identified by fingerprint and start time.\n\nRequires the following permissions:\n- `case:Read`",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CasesService_GetCaseByIndicator",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Get case by indicator request",
+                "description": "Request to retrieve a case associated with a given alert indicator.",
+                "type": "object",
+                "properties": {
+                  "prometheusAlert": {
+                    "$ref": "#/components/schemas/PrometheusAlertManagerIndicator"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCaseByIndicatorResponse"
+                },
+                "example": {
+                  "case": {
+                    "category": "CASE_CATEGORY_AVAILABILITY",
+                    "createTime": "2025-09-22T10:30:00.000Z",
+                    "groupings": [],
+                    "id": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                    "impactedEntities": [],
+                    "labels": [],
+                    "priority": "CASE_PRIORITY_P2",
+                    "status": "CASE_STATUS_ACKNOWLEDGED",
+                    "title": "Database outage investigation"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "case:Read"
+        ]
+      }
+    },
     "/cases/priority-override/v1": {
       "post": {
         "tags": [
@@ -1209,23 +1290,6 @@
           "url": ""
         },
         "operationId": "CasesService_SetPriorityOverride",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-            "required": true,
-            "schema": {
-              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
-              "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-              "type": "string",
-              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
-              "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1290,23 +1354,6 @@
           "url": ""
         },
         "operationId": "CasesService_ClearPriorityOverride",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-            "required": true,
-            "schema": {
-              "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
-              "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
-              "type": "string",
-              "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
-              "minLength": 1,
-              "maxLength": 64
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -1340,7 +1387,24 @@
         "x-coralogixPermissions": [
           "case:Update"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+          "required": true,
+          "schema": {
+            "example": "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+            "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",
+            "type": "string",
+            "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[A-Z]+-[0-9]+)$",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "style": "simple"
+        }
+      ]
     },
     "/cases/resolved/v1": {
       "post": {
@@ -1555,6 +1619,7 @@
               "minLength": 36,
               "maxLength": 36
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -1593,6 +1658,7 @@
               "minLength": 36,
               "maxLength": 36
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "alertVersions": {
@@ -1609,6 +1675,7 @@
               "minLength": 1,
               "maxLength": 64
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         }
@@ -1645,6 +1712,7 @@
             "description": "Number of cases associated with this alert ID",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           }
         }
@@ -1679,6 +1747,7 @@
               "minLength": 1,
               "maxLength": 64
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "groupingType": {
@@ -1698,6 +1767,7 @@
             "items": {
               "$ref": "#/components/schemas/AlertIndicator.Permutation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "priority": {
@@ -1749,7 +1819,8 @@
             "description": "A single permutation represented as map<string, string>.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           }
         }
@@ -1783,7 +1854,8 @@
         "properties": {
           "alertDef": {
             "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "logs": {
             "$ref": "#/components/schemas/LogsLink"
@@ -1803,7 +1875,8 @@
         "properties": {
           "alertDef": {
             "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "metric": {
             "$ref": "#/components/schemas/MetricLink"
@@ -1823,7 +1896,8 @@
         "properties": {
           "alertDef": {
             "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "rum": {
             "$ref": "#/components/schemas/RumLink"
@@ -1843,7 +1917,8 @@
         "properties": {
           "alertDef": {
             "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "slo": {
             "$ref": "#/components/schemas/SloLink"
@@ -1863,7 +1938,8 @@
         "properties": {
           "alertDef": {
             "description": "URL to the alert definition that triggered the indicator. Empty when not available.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tracing": {
             "$ref": "#/components/schemas/TracingLink"
@@ -2013,12 +2089,14 @@
             "items": {
               "$ref": "#/components/schemas/AssigneeCount"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "unassignedCount": {
             "description": "Number of cases without an assignee",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           }
         },
@@ -2045,6 +2123,7 @@
             "description": "Number of cases assigned to this assignee",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           }
         }
@@ -2171,6 +2250,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2192,6 +2272,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2213,6 +2294,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2234,6 +2316,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2255,6 +2338,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2276,6 +2360,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2297,6 +2382,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2344,10 +2430,11 @@
             "maxLength": 30
           },
           "duration": {
-            "example": "",
             "description": "Measures how long the Case is/was opened in milliseconds",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "groupings": {
             "description": "Grouping dimensions (e.g., service, subsystem)",
@@ -2355,6 +2442,7 @@
             "items": {
               "$ref": "#/components/schemas/v1.KeyValue"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "id": {
@@ -2371,6 +2459,7 @@
             "items": {
               "$ref": "#/components/schemas/ImpactedEntity"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "kpiBreaches": {
@@ -2382,7 +2471,11 @@
             "items": {
               "$ref": "#/components/schemas/v1.KeyValue"
             },
+            "minItems": 0,
             "maxItems": 1000
+          },
+          "ollyAnalysis": {
+            "$ref": "#/components/schemas/OllyAnalysis"
           },
           "priority": {
             "$ref": "#/components/schemas/CasePriority"
@@ -2459,14 +2552,16 @@
           },
           "detail": {
             "description": "Absolute URL to the case detail page.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "impactedEntities": {
             "description": "Per-impacted-entity drilldown links.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ImpactedEntityLink"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -2487,6 +2582,7 @@
             "items": {
               "$ref": "#/components/schemas/AssigneeOption"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "breached": {
@@ -2498,6 +2594,7 @@
             "items": {
               "$ref": "#/components/schemas/KPIFilter"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "caseLabelsFilter": {
@@ -2513,6 +2610,7 @@
             "items": {
               "$ref": "#/components/schemas/CaseCategory"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "connectorTypeFilters": {
@@ -2521,6 +2619,7 @@
             "items": {
               "$ref": "#/components/schemas/ConnectorTypeFilter"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "dateRange": {
@@ -2532,6 +2631,16 @@
             "items": {
               "$ref": "#/components/schemas/FilterGroup"
             },
+            "minItems": 0,
+            "maxItems": 1000
+          },
+          "indicatorTypes": {
+            "description": "List of indicator types to filter on",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IndicatorType"
+            },
+            "minItems": 0,
             "maxItems": 1000
           },
           "labels": {
@@ -2540,6 +2649,7 @@
             "items": {
               "$ref": "#/components/schemas/FilterGroup"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "priorities": {
@@ -2552,6 +2662,7 @@
             "items": {
               "$ref": "#/components/schemas/CasePriority"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "statuses": {
@@ -2560,6 +2671,7 @@
             "items": {
               "$ref": "#/components/schemas/CaseStatus"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "textSearch": {
@@ -2586,6 +2698,16 @@
             "items": {
               "$ref": "#/components/schemas/AlertIndicator"
             },
+            "minItems": 0,
+            "maxItems": 1000
+          },
+          "genericIndicators": {
+            "description": "List of generic indicators contributing to the case",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenericIndicator"
+            },
+            "minItems": 0,
             "maxItems": 1000
           },
           "prometheusAlertIndicators": {
@@ -2594,6 +2716,7 @@
             "items": {
               "$ref": "#/components/schemas/PrometheusAlertIndicator"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -2615,6 +2738,7 @@
             "items": {
               "$ref": "#/components/schemas/v1.KeyValue"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         }
@@ -2845,6 +2969,7 @@
             "description": "Number of cases in this category",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           }
         }
@@ -2975,6 +3100,27 @@
           "DATE_RANGE_MODE_CREATED_AT"
         ]
       },
+      "EntityLink": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Entity link",
+        "description": "A URL reference to an entity in the originating system.",
+        "type": "object",
+        "properties": {
+          "url": {
+            "example": "https://app.coralogix.com/error-tracking/issues/abc123",
+            "description": "URL to the entity in the originating system.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
       "FilterAggregation": {
         "externalDocs": {
           "url": ""
@@ -2987,6 +3133,7 @@
             "description": "Number of cases matching this filter",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           },
           "filter": {
@@ -3023,6 +3170,7 @@
               "minLength": 1,
               "maxLength": 4096
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -3053,6 +3201,7 @@
             "items": {
               "$ref": "#/components/schemas/ValueCount"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -3083,7 +3232,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3105,7 +3255,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3129,11 +3280,124 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
           "pathAndValues"
+        ]
+      },
+      "GenericIndicator": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Generic indicator",
+        "description": "An indicator sourced from a generic external system (e.g. Error Tracking).",
+        "type": "object",
+        "properties": {
+          "entityLinks": {
+            "description": "URLs to the originating entities in the external system.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityLink"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "externalId": {
+            "example": "et-issue-8827",
+            "description": "Opaque reference to the originating entity in the external system.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "id": {
+            "example": "f56645c5-9cd4-4b9f-961f-4f852d8835a0",
+            "description": "Unique identifier of this generic indicator.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "indicatorType": {
+            "$ref": "#/components/schemas/GenericIndicatorType"
+          },
+          "labels": {
+            "description": "Arbitrary key-value metadata from the originating system.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v1.KeyValue"
+            },
+            "minItems": 0,
+            "maxItems": 1000
+          },
+          "lastResolvedAt": {
+            "example": "2025-09-22T11:05:00.000Z",
+            "description": "When present, timestamp when the indicator last resolved.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 30
+          },
+          "lastTriggeredAt": {
+            "example": "2025-09-22T10:30:00.000Z",
+            "description": "Timestamp when the indicator last triggered.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 30
+          },
+          "priority": {
+            "$ref": "#/components/schemas/IndicatorPriority"
+          },
+          "status": {
+            "$ref": "#/components/schemas/GenericIndicatorStatus"
+          }
+        },
+        "required": [
+          "id",
+          "externalId",
+          "indicatorType",
+          "status",
+          "priority",
+          "lastTriggeredAt"
+        ]
+      },
+      "GenericIndicatorStatus": {
+        "title": "Generic indicator status",
+        "description": "Lifecycle status of a generic indicator.",
+        "type": "string",
+        "enum": [
+          "GENERIC_INDICATOR_STATUS_UNSPECIFIED",
+          "GENERIC_INDICATOR_STATUS_TRIGGERED",
+          "GENERIC_INDICATOR_STATUS_RESOLVED"
+        ]
+      },
+      "GenericIndicatorType": {
+        "title": "Generic indicator type",
+        "description": "Sub-type of a generic indicator.",
+        "type": "string",
+        "enum": [
+          "GENERIC_INDICATOR_TYPE_UNSPECIFIED",
+          "GENERIC_INDICATOR_TYPE_ERROR_TRACKING"
+        ]
+      },
+      "GetCaseByIndicatorResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get case by indicator response",
+        "description": "Response containing the case associated with the given indicator.",
+        "type": "object",
+        "properties": {
+          "case": {
+            "$ref": "#/components/schemas/Case"
+          }
+        },
+        "required": [
+          "case"
         ]
       },
       "GetCaseDeepLinksResponse": {
@@ -3193,6 +3457,7 @@
               "minLength": 1,
               "maxLength": 4096
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -3255,7 +3520,8 @@
           },
           "url": {
             "description": "Absolute URL to the entity drilldown view.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3283,6 +3549,15 @@
           "INDICATOR_STATE_NO_DATA"
         ]
       },
+      "IndicatorType": {
+        "type": "string",
+        "enum": [
+          "INDICATOR_TYPE_UNSPECIFIED",
+          "INDICATOR_TYPE_ALERT",
+          "INDICATOR_TYPE_PROMETHEUS_ALERTMANAGER",
+          "INDICATOR_TYPE_ERROR_TRACKING"
+        ]
+      },
       "KPIBreaches": {
         "externalDocs": {
           "url": ""
@@ -3297,6 +3572,7 @@
             "items": {
               "$ref": "#/components/schemas/BreachedKPI"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -3349,6 +3625,7 @@
             "items": {
               "$ref": "#/components/schemas/Case"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "pagination": {
@@ -3370,7 +3647,8 @@
         "properties": {
           "logs": {
             "description": "Explore logs URL pre-filtered to the alert query and case time window.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3384,7 +3662,8 @@
         "properties": {
           "metrics": {
             "description": "Explore metrics URL pre-filtered to the alert query and case time window.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3397,8 +3676,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3409,6 +3690,104 @@
         "description": "No connector.",
         "type": "object",
         "additionalProperties": false
+      },
+      "OllyAnalysis": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Olly analysis",
+        "description": "Result of an automated Olly analysis attached to a case.",
+        "type": "object",
+        "properties": {
+          "completedAt": {
+            "example": "2025-09-22T10:30:00.000Z",
+            "description": "When the analysis attempt completed.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 30
+          },
+          "payload": {
+            "$ref": "#/components/schemas/OllyAnalysisPayload"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OllyAnalysisStatus"
+          }
+        }
+      },
+      "OllyAnalysisPayload": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Olly analysis payload",
+        "description": "Typed analysis payload returned by Olly. Present only when status = STATUS_OK.",
+        "type": "object",
+        "properties": {
+          "generatedAt": {
+            "example": "2025-09-22T10:30:00.000Z",
+            "description": "Timestamp when the analysis was generated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 30
+          },
+          "investigationSummary": {
+            "example": "Latency spike on checkout-service correlates with a deploy of v1.42 and elevated DB pool saturation.",
+            "description": "Natural-language summary of the Olly investigation.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 8192
+          },
+          "remediationRecommendations": {
+            "example": [
+              "Roll back checkout-service to v1.41",
+              "Increase orders Postgres pool size to 200"
+            ],
+            "description": "Ordered list of remediation steps, one recommendation per element.",
+            "type": "array",
+            "items": {
+              "description": "Ordered list of remediation steps, one recommendation per element.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "minItems": 0,
+            "maxItems": 50
+          },
+          "rootCause": {
+            "example": "Connection-pool exhaustion on the orders Postgres instance.",
+            "description": "Olly's hypothesised root cause for the case.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "rootCauseConfidence": {
+            "$ref": "#/components/schemas/OllyAnalysisRootCauseConfidence"
+          }
+        }
+      },
+      "OllyAnalysisRootCauseConfidence": {
+        "description": "Confidence level Olly assigns to the root-cause hypothesis.",
+        "type": "string",
+        "enum": [
+          "OLLY_ANALYSIS_ROOT_CAUSE_CONFIDENCE_UNSPECIFIED",
+          "OLLY_ANALYSIS_ROOT_CAUSE_CONFIDENCE_LOW",
+          "OLLY_ANALYSIS_ROOT_CAUSE_CONFIDENCE_MEDIUM",
+          "OLLY_ANALYSIS_ROOT_CAUSE_CONFIDENCE_HIGH"
+        ]
+      },
+      "OllyAnalysisStatus": {
+        "description": "Olly analysis outcome status.",
+        "type": "string",
+        "enum": [
+          "STATUS_UNSPECIFIED",
+          "STATUS_OK",
+          "STATUS_CAPACITY_REACHED",
+          "STATUS_FAILED"
+        ]
       },
       "PagerDuty": {
         "externalDocs": {
@@ -3432,6 +3811,7 @@
             "description": "Number of cases with this priority",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           },
           "priority": {
@@ -3483,7 +3863,8 @@
             "description": "Annotations attached to the alert.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "createdAt": {
@@ -3514,7 +3895,8 @@
             "description": "Labels attached to the alert.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "priority": {
@@ -3570,6 +3952,7 @@
             "items": {
               "$ref": "#/components/schemas/PrometheusAlert"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "externalUrl": {
@@ -3584,7 +3967,8 @@
             "description": "Labels used to group the alerts.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "priority": {
@@ -3638,6 +4022,36 @@
         "description": "Marker indicating that the case was resolved through a Prometheus AlertManager integration.",
         "type": "object",
         "additionalProperties": false
+      },
+      "PrometheusAlertManagerIndicator": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Prometheus AlertManager indicator",
+        "description": "Lookup keys identifying a specific Prometheus AlertManager alert episode.",
+        "type": "object",
+        "properties": {
+          "fingerprint": {
+            "example": "a1b2c3d4e5f6a7b8",
+            "description": "Prometheus alert fingerprint — the stable, label-derived hash that identifies this alert across firings.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "startedAt": {
+            "example": "2025-09-22T10:30:00.000Z",
+            "description": "ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 20,
+            "maxLength": 30
+          }
+        },
+        "required": [
+          "fingerprint",
+          "startedAt"
+        ]
       },
       "PrometheusAlertQuery": {
         "externalDocs": {
@@ -3787,7 +4201,8 @@
         "properties": {
           "rum": {
             "description": "RUM errors URL pre-filtered to the alert applications and case time window.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3835,7 +4250,8 @@
         "properties": {
           "slo": {
             "description": "SLO overview URL with the permutation preselected.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3851,6 +4267,7 @@
             "description": "Number of cases with this status",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           },
           "status": {
@@ -3877,7 +4294,8 @@
         "properties": {
           "tracing": {
             "description": "Explore traces URL pre-filtered to the alert query and case time window.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3972,6 +4390,7 @@
             "description": "Count of cases for this value",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000000
           },
           "value": {
@@ -3998,6 +4417,7 @@
             "items": {
               "$ref": "#/components/schemas/AlertIdAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "assigneeAggregations": {
@@ -4009,6 +4429,7 @@
             "items": {
               "$ref": "#/components/schemas/CategoryAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "flatLabelsAggregation": {
@@ -4017,6 +4438,7 @@
             "items": {
               "$ref": "#/components/schemas/FilterAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "groupingAggregations": {
@@ -4025,6 +4447,7 @@
             "items": {
               "$ref": "#/components/schemas/FilterGroupAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "labelAggregations": {
@@ -4033,6 +4456,7 @@
             "items": {
               "$ref": "#/components/schemas/FilterGroupAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "priorityAggregations": {
@@ -4041,6 +4465,7 @@
             "items": {
               "$ref": "#/components/schemas/PriorityAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           },
           "statusAggregations": {
@@ -4049,6 +4474,7 @@
             "items": {
               "$ref": "#/components/schemas/StatusAggregation"
             },
+            "minItems": 0,
             "maxItems": 1000
           }
         },
@@ -4091,6 +4517,7 @@
             "description": "Number of items to skip before starting to collect results",
             "type": "integer",
             "format": "int64",
+            "minimum": 0,
             "maximum": 1000000
           }
         }
@@ -4147,7 +4574,8 @@
           "CONNECTOR_TYPE_SERVICE_NOW",
           "CONNECTOR_TYPE_PAGER_DUTY",
           "CONNECTOR_TYPE_EMAIL",
-          "CONNECTOR_TYPE_GENERIC_HTTPS"
+          "CONNECTOR_TYPE_GENERIC_HTTPS",
+          "CONNECTOR_TYPE_MICROSOFT_TEAMS"
         ]
       },
       "v1.KeyValue": {
@@ -4161,12 +4589,14 @@
           "key": {
             "example": "service",
             "description": "Key of the pair (e.g., label or grouping name)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "example": "payments",
             "description": "Value associated with the key",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [

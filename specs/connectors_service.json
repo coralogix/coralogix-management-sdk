@@ -153,8 +153,10 @@
               "type": "array",
               "items": {
                 "description": "The unique identifiers of the connectors to retrieve.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -193,10 +195,11 @@
               "description": "The unique identifiers of the connectors whose summaries to retrieve.",
               "type": "array",
               "items": {
-                "example": "",
                 "description": "The unique identifiers of the connectors whose summaries to retrieve.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -315,7 +318,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the connector.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -351,7 +355,8 @@
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -397,8 +402,10 @@
             "type": "array",
             "items": {
               "description": "The not found ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -426,8 +433,10 @@
             "type": "array",
             "items": {
               "description": "The not found ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -445,7 +454,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
-            }
+            },
+            "minItems": 0
           },
           "connectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
@@ -453,12 +463,14 @@
           "createTime": {
             "description": "The create time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "example": "Connector for team notifications",
             "description": "Human-readable description.",
             "type": "string",
+            "minLength": 0,
             "maxLength": 5000
           },
           "diagnostics": {
@@ -467,19 +479,25 @@
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "My Slack Connector",
             "description": "Display name.",
             "type": "string",
+            "minLength": 0,
             "maxLength": 200
+          },
+          "resolvedConnectorConfig": {
+            "$ref": "#/components/schemas/ConnectorConfig"
           },
           "teamId": {
             "example": 12345,
             "description": "Team identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -487,7 +505,8 @@
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -505,7 +524,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -517,7 +537,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
-            }
+            },
+            "minItems": 0
           },
           "connectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
@@ -525,24 +546,32 @@
           "createTime": {
             "description": "The create time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
+          },
+          "resolvedConnectorConfig": {
+            "$ref": "#/components/schemas/ConnectorConfig"
           },
           "teamId": {
             "description": "The team id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -550,7 +579,8 @@
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -567,7 +597,8 @@
             "example": 5,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -630,7 +661,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TemplatedConnectorConfigField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -657,7 +689,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -679,7 +712,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -703,7 +737,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -738,7 +773,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorTypeSummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -756,7 +792,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorSummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -774,7 +811,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Connector"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -787,8 +825,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -811,11 +851,13 @@
         "properties": {
           "fieldName": {
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "template": {
             "description": "Template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -831,11 +873,13 @@
         "properties": {
           "fieldName": {
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -850,7 +894,8 @@
           "IBM_EVENT_NOTIFICATIONS",
           "SERVICE_NOW",
           "EMAIL",
-          "PAGERDUTY_INCIDENTS"
+          "PAGERDUTY_INCIDENTS",
+          "MICROSOFT_TEAMS"
         ]
       },
       "notification_center.EntityType": {

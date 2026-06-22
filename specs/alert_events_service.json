@@ -26,8 +26,10 @@
               "type": "array",
               "items": {
                 "description": "The ids.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -48,7 +50,8 @@
                     "$ref": "#/components/schemas/OrderByAlertEventFields"
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -107,7 +110,8 @@
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           },
@@ -128,7 +132,8 @@
                     "$ref": "#/components/schemas/OrderByAlertEventFields"
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -142,11 +147,13 @@
                 "pageSize": {
                   "description": "Page size.",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "description": "The page token.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -204,8 +211,10 @@
             "type": "array",
             "items": {
               "description": "List of rules.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "status": {
             "$ref": "#/components/schemas/ActivityAnalysisStatus"
@@ -223,15 +232,18 @@
           "isMutedCount": {
             "description": "Number of muted items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "description": "List of rules.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -256,18 +268,21 @@
           },
           "alertId": {
             "description": "Unique identifier of the alert.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupLabels": {
             "description": "Labels for the group.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "incidentCorrelationKey": {
             "description": "Key used to correlate incidents.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "payload": {
             "description": "Raw payload data.",
@@ -275,22 +290,26 @@
           },
           "payloadType": {
             "description": "Type of the payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutationId": {
             "description": "Unique identifier of the permutation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutationLabels": {
             "description": "Labels for the permutation.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "preGroupingEventId": {
             "description": "Identifier of the event before grouping.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "status": {
             "$ref": "#/components/schemas/AlertStatus"
@@ -298,7 +317,8 @@
           "timestamp": {
             "description": "Timestamp of the event.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -314,7 +334,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertEvent"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -340,31 +361,36 @@
           "count": {
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "resolvedCount": {
             "description": "The resolved count.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "resolvedPermutationsSamples": {
             "description": "The resolved permutations samples.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v3.Permutation"
-            }
+            },
+            "minItems": 0
           },
           "triggeredCount": {
             "description": "The triggered count.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "triggeredPermutationsSamples": {
             "description": "The triggered permutations samples.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v3.Permutation"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -391,7 +417,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -413,7 +440,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -437,7 +465,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -464,7 +493,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier of the alert event.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "multiplePermutation": {
             "$ref": "#/components/schemas/AlertEventMultiplePermutation"
@@ -487,7 +517,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier of the alert event.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/alerts.v3.PaginationResponse"
@@ -526,8 +557,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -557,12 +590,14 @@
         "properties": {
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "totalSize": {
             "description": "Total number of results.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -592,7 +627,8 @@
             "description": "Labels for the permutation.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           }
         }

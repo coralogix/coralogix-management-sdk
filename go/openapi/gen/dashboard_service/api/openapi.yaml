@@ -5,6 +5,54 @@ info:
 servers:
 - url: /
 paths:
+  /dashboards/check/v1:
+    post:
+      description: |-
+        Checks a dashboard definition or an existing dashboard by id and returns validation issues without persisting changes.
+
+        Requires the following permissions:
+        - `team-dashboards:Read`
+      externalDocs:
+        url: ""
+      operationId: DashboardsService_CheckDashboard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DashboardsService_CheckDashboard_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                issues:
+                - location: /sections/0/rows/1/widgets/2
+                  message: Widget 'cpu-chart' references undefined variable 'env'
+                  severity: SEVERITY_ERROR
+                - location: /sections/1/rows/0/widgets/0/queries/0
+                  message: Query uses deprecated function 'timeShift'
+                  severity: SEVERITY_WARNING
+              schema:
+                $ref: "#/components/schemas/CheckDashboardResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Validate a dashboard and return issues
+      tags:
+      - Dashboard service
+      x-coralogixPermissions:
+      - team-dashboards:Read
   /dashboards/dashboards/v1:
     post:
       description: |-
@@ -136,6 +184,7 @@ paths:
         required: true
         schema:
           description: The URL slug identifying the dashboard to retrieve.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -180,6 +229,7 @@ paths:
         required: true
         schema:
           description: The dashboard id.
+          minLength: 0
           type: string
         style: simple
       - description: Optional client-supplied request identifier used to correlate
@@ -191,6 +241,7 @@ paths:
         schema:
           description: Optional client-supplied request identifier used to correlate
             the deletion request.
+          minLength: 0
           type: string
         style: form
       responses:
@@ -234,6 +285,7 @@ paths:
         required: true
         schema:
           description: The dashboard id.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -278,6 +330,7 @@ paths:
         required: true
         schema:
           description: The dashboard id.
+          minLength: 0
           type: string
         style: simple
       requestBody:
@@ -328,6 +381,7 @@ paths:
         required: true
         schema:
           description: The dashboard id.
+          minLength: 0
           type: string
         style: simple
       requestBody:
@@ -378,6 +432,7 @@ paths:
         required: true
         schema:
           description: The dashboard id.
+          minLength: 0
           type: string
         style: simple
       - description: "Idempotency key for the unpin request, used to prevent duplicate\
@@ -389,6 +444,7 @@ paths:
         schema:
           description: "Idempotency key for the unpin request, used to prevent duplicate\
             \ operations."
+          minLength: 0
           type: string
         style: form
       responses:
@@ -432,6 +488,7 @@ paths:
         required: true
         schema:
           description: The dashboard id.
+          minLength: 0
           type: string
         style: simple
       - description: "Idempotency key for the pin request, used to prevent duplicate\
@@ -443,6 +500,7 @@ paths:
         schema:
           description: "Idempotency key for the pin request, used to prevent duplicate\
             \ operations."
+          minLength: 0
           type: string
         style: form
       responses:
@@ -522,6 +580,7 @@ components:
           type: boolean
         label:
           description: The label.
+          minLength: 0
           type: string
       type: object
     AllValue:
@@ -572,15 +631,18 @@ components:
           $ref: "#/components/schemas/AnnotationColor"
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
           type: boolean
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         scope:
           $ref: "#/components/schemas/Annotation.WidgetScope"
@@ -614,7 +676,9 @@ components:
           description: The widget ids.
           items:
             description: The widget ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     AnnotationColor:
@@ -776,6 +840,7 @@ components:
         minimumInterval:
           description: Minimum interval duration. The calculated interval will not
             be smaller than this value.
+          minLength: 0
           type: string
       title: AutoIntervalResolution
       type: object
@@ -816,6 +881,7 @@ components:
       properties:
         field:
           description: The field.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -878,6 +944,7 @@ components:
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
           example: classic
+          minLength: 0
           type: string
         colorsBy:
           $ref: "#/components/schemas/ColorsBy"
@@ -885,6 +952,7 @@ components:
           description: Custom unit (requires to have unit field set to custom to take
             effect)
           example: mph
+          minLength: 0
           type: string
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -901,6 +969,7 @@ components:
         groupNameTemplate:
           description: "Custom template name for a bar group, can contain variables"
           example: "Result - {{ variable }}"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -964,15 +1033,19 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names by which results are grouped
           items:
             description: List of field names by which results are grouped
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         stackedGroupName:
           description: Field name by which results in groups are divided into subgroups
+          minLength: 0
           type: string
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -989,22 +1062,27 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names to group the query results
           items:
             description: List of field names to group the query results
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         groupNamesFields:
           description: List of observation fields to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
         stackedGroupName:
           description: Field name by which results are stacked in individual group
+          minLength: 0
           type: string
         stackedGroupNameField:
           $ref: "#/components/schemas/ObservationField"
@@ -1025,12 +1103,15 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names by which metric results are grouped
           items:
             description: List of field names by which metric results are grouped
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -1038,6 +1119,7 @@ components:
           $ref: "#/components/schemas/PromQLQueryType"
         stackedGroupName:
           description: Field name by which results in groups are divided into subgroups
+          minLength: 0
           type: string
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -1060,17 +1142,20 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupNamesFields:
           description: A list of observation fields definitions to group the records
             by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -1096,6 +1181,7 @@ components:
           type: integer
         stackNameTemplate:
           description: Custom template name of an individual stack
+          minLength: 0
           type: string
       type: object
     BarChartQueryDataprime:
@@ -1153,6 +1239,78 @@ components:
       required:
       - spans
       type: object
+    CheckDashboardRequestDashboard:
+      description: Validate a dashboard definition or an existing dashboard by id
+      externalDocs:
+        description: Find out more Dashboards in our documentation.
+        url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+      properties:
+        dashboard:
+          $ref: "#/components/schemas/Dashboard"
+        requestId:
+          description: Optional idempotency key for the check request
+          maxLength: 128
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+      required:
+      - dashboard
+      title: Check dashboard request data structure
+      type: object
+    CheckDashboardRequestDashboardId:
+      description: Validate a dashboard definition or an existing dashboard by id
+      externalDocs:
+        description: Find out more Dashboards in our documentation.
+        url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+      properties:
+        dashboardId:
+          description: Id of an existing dashboard to load and validate
+          maxLength: 128
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        requestId:
+          description: Optional idempotency key for the check request
+          maxLength: 128
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+      required:
+      - dashboardId
+      title: Check dashboard request data structure
+      type: object
+    CheckDashboardResponse:
+      description: Validation result containing a list of issues found in the dashboard
+      example:
+        issues:
+        - severity: SEVERITY_UNSPECIFIED
+          location: location
+          message: message
+        - severity: SEVERITY_UNSPECIFIED
+          location: location
+          message: message
+        - severity: SEVERITY_UNSPECIFIED
+          location: location
+          message: message
+        - severity: SEVERITY_UNSPECIFIED
+          location: location
+          message: message
+        - severity: SEVERITY_UNSPECIFIED
+          location: location
+          message: message
+      externalDocs:
+        description: Find out more Dashboards in our documentation.
+        url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+      properties:
+        issues:
+          description: List of validation issues; empty when the dashboard is valid
+          items:
+            $ref: "#/components/schemas/Issue"
+          maxItems: 1000
+          minItems: 0
+          type: array
+      title: Check dashboard response data structure
+      type: object
     ColorApplyTarget:
       description: Color apply target.
       enum:
@@ -1188,6 +1346,7 @@ components:
           description: List of exact value-to-display mapping sections
           items:
             $ref: "#/components/schemas/MappingSection"
+          minItems: 0
           type: array
       title: ValueMapping
       type: object
@@ -1359,6 +1518,7 @@ components:
       properties:
         columnName:
           description: The column name.
+          minLength: 0
           type: string
         width:
           description: The width.
@@ -1374,6 +1534,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     ConstantListSource:
@@ -1385,7 +1546,9 @@ components:
           description: List of values.
           items:
             description: List of values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Count:
@@ -1401,6 +1564,7 @@ components:
       properties:
         field:
           description: The field.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -1416,6 +1580,7 @@ components:
       properties:
         dashboardId:
           description: The dashboard id.
+          minLength: 0
           type: string
       title: Create dashboard response data structure
       type: object
@@ -1429,6 +1594,7 @@ components:
         url:
           description: "Static URL that may contain variables using {{variable_name}}\
             \ syntax"
+          minLength: 0
           type: string
       type: object
     CustomSectionOptions:
@@ -1452,9 +1618,11 @@ components:
           $ref: "#/components/schemas/SectionColor"
         description:
           description: Short description of a section
+          minLength: 0
           type: string
         name:
           description: Section custom name
+          minLength: 0
           type: string
         repetitiveVar:
           $ref: "#/components/schemas/RepetitiveVar"
@@ -1494,13 +1662,16 @@ components:
           $ref: "#/components/schemas/ActionDefinition"
         id:
           description: A unique identifier of the action
+          minLength: 0
           type: string
         name:
           description: The display name of the action
+          minLength: 0
           type: string
         queryId:
           description: "Reference to specific query within a widget, can be null if\
             \ the action is dashboard wide or related to single query widget"
+          minLength: 0
           type: string
         shouldOpenInNewWindow:
           description: Defines if the action should open in a new window or current
@@ -1509,6 +1680,7 @@ components:
         widgetId:
           description: "Reference to specific widget within a dashboard, can be null\
             \ if the action is dashboard wide"
+          minLength: 0
           type: string
       title: Dashboard Action
       type: object
@@ -1534,19 +1706,23 @@ components:
       properties:
         authorId:
           description: The author id.
+          minLength: 0
           type: string
         createTime:
           description: The create time.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         folder:
           $ref: "#/components/schemas/DashboardFolder"
         id:
           description: Unique identifier.
           example: 6U1Q8Hpa263Se8PkRKaiE
+          minLength: 0
           type: string
         isDefault:
           description: The is default.
@@ -1559,16 +1735,20 @@ components:
           type: boolean
         lockerAuthorId:
           description: The locker author id.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         slugName:
           description: The slug name.
+          minLength: 0
           type: string
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       title: Dashboard catalog item data structure
       type: object
@@ -1747,6 +1927,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -1808,6 +1989,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -1874,6 +2056,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -1935,6 +2118,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -2013,6 +2197,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -2074,6 +2259,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -2140,6 +2326,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -2201,6 +2388,7 @@ components:
                 appearance:
                   width: 6
                 description: description
+                layoutColumns: 1210617418
                 definition:
                   barChart:
                     maxBarsPerChart: 20
@@ -2344,17 +2532,20 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         fifteenMinutes:
           additionalProperties: false
@@ -2366,6 +2557,7 @@ components:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2374,28 +2566,33 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - absoluteTimeFrame
@@ -2416,17 +2613,20 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         fifteenMinutes:
           additionalProperties: false
@@ -2438,6 +2638,7 @@ components:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2446,32 +2647,38 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         relativeTimeFrame:
           description: Relative time frame specifying a duration from the current
             time
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - fifteenMinutes
@@ -2494,22 +2701,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         fiveMinutes:
           additionalProperties: false
@@ -2524,28 +2735,33 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - absoluteTimeFrame
@@ -2566,22 +2782,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         fiveMinutes:
           additionalProperties: false
@@ -2596,32 +2816,38 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         relativeTimeFrame:
           description: Relative time frame specifying a duration from the current
             time
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - fiveMinutes
@@ -2641,12 +2867,15 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         parentId:
           description: The parent id.
+          minLength: 0
           type: string
       type: object
     DashboardOffAbsoluteTimeFrame:
@@ -2663,22 +2892,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2687,12 +2920,14 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         "off":
           additionalProperties: false
@@ -2703,18 +2938,21 @@ components:
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - absoluteTimeFrame
@@ -2735,22 +2973,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2759,12 +3001,14 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         "off":
           additionalProperties: false
@@ -2775,22 +3019,26 @@ components:
         relativeTimeFrame:
           description: Relative time frame specifying a duration from the current
             time
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - layout
@@ -2813,22 +3061,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2837,12 +3089,14 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         oneMinute:
           additionalProperties: false
@@ -2853,18 +3107,21 @@ components:
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - absoluteTimeFrame
@@ -2885,22 +3142,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2909,12 +3170,14 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         oneMinute:
           additionalProperties: false
@@ -2925,22 +3188,26 @@ components:
         relativeTimeFrame:
           description: Relative time frame specifying a duration from the current
             time
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         variables:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - layout
@@ -2963,22 +3230,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -2987,16 +3258,19 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         twoMinutes:
           additionalProperties: false
@@ -3009,12 +3283,14 @@ components:
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - absoluteTimeFrame
@@ -3035,22 +3311,26 @@ components:
             context
           items:
             $ref: "#/components/schemas/DashboardAction"
+          minItems: 0
           type: array
         annotations:
           description: A list of annotations that can be used within the dashboard's
             visualizations
           items:
             $ref: "#/components/schemas/Annotation"
+          minItems: 0
           type: array
         description:
           description: A brief description or summary of the dashboard's purpose or
             content
           example: Sample description
+          minLength: 0
           type: string
         filters:
           description: A list of filters that can be applied to the dashboard's data
           items:
             $ref: "#/components/schemas/filters.Filter"
+          minItems: 0
           type: array
         folderId:
           $ref: "#/components/schemas/UUID"
@@ -3059,20 +3339,24 @@ components:
         id:
           description: A unique identifier of the dashboard
           example: GZLHSeqelCbD3I7HbIDtL
+          minLength: 0
           type: string
         layout:
           $ref: "#/components/schemas/Layout"
         name:
           description: The display name of the dashboard
           example: Example Name
+          minLength: 0
           type: string
         relativeTimeFrame:
           description: Relative time frame specifying a duration from the current
             time
+          minLength: 0
           type: string
         slugName:
           description: A unique slug name serving as an alias for accessing the dashboard
           example: system-health-monitoring
+          minLength: 0
           type: string
         twoMinutes:
           additionalProperties: false
@@ -3085,12 +3369,14 @@ components:
             dynamic content
           items:
             $ref: "#/components/schemas/Variable"
+          minItems: 0
           type: array
         variablesV2:
           description: A list of variables that can be used within the dashboard for
             dynamic content
           items:
             $ref: "#/components/schemas/VariableV2"
+          minItems: 0
           type: array
       required:
       - layout
@@ -3108,6 +3394,7 @@ components:
           description: List of column definitions
           items:
             $ref: "#/components/schemas/DataTable.Column"
+          minItems: 0
           type: array
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -3127,6 +3414,7 @@ components:
       properties:
         field:
           description: Name of the field to display in the column
+          minLength: 0
           type: string
         width:
           description: "Custom width of the column, by default it's automatically\
@@ -3145,6 +3433,7 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -3159,6 +3448,7 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         grouping:
           $ref: "#/components/schemas/LogsQuery.Grouping"
@@ -3179,6 +3469,7 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -3203,6 +3494,7 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         grouping:
           $ref: "#/components/schemas/SpansQuery.Grouping"
@@ -3319,9 +3611,11 @@ components:
           description: The label fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         messageTemplate:
           description: The message template.
+          minLength: 0
           type: string
         orientation:
           $ref: "#/components/schemas/AnnotationOrientation"
@@ -3507,9 +3801,11 @@ components:
       properties:
         id:
           description: Unique id of the query definition
+          minLength: 0
           type: string
         name:
           description: Custom name of the query
+          minLength: 0
           type: string
         query:
           $ref: "#/components/schemas/Dynamic.Query"
@@ -3579,7 +3875,9 @@ components:
           description: A list of selected values.
           items:
             description: A list of selected values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: ListSelection
       type: object
@@ -3620,6 +3918,7 @@ components:
       properties:
         messageTemplate:
           description: The message template.
+          minLength: 0
           type: string
         recurrence:
           $ref: "#/components/schemas/Recurrence"
@@ -3638,6 +3937,7 @@ components:
       properties:
         duration:
           description: Duration.
+          minLength: 0
           type: string
         startTimeHour:
           description: The start time hour.
@@ -3721,6 +4021,7 @@ components:
       properties:
         field:
           description: The log field to which the filter is applied.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -3785,6 +4086,7 @@ components:
           description: The widget ids.
           items:
             $ref: "#/components/schemas/UUID"
+          minItems: 0
           type: array
       type: object
     FilterOperatorEquals:
@@ -3826,6 +4128,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -3842,6 +4145,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -3904,6 +4208,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -3922,7 +4227,9 @@ components:
           description: The segments.
           items:
             description: The segments.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Gauge.Aggregation:
@@ -3946,6 +4253,7 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -3962,11 +4270,13 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupBy:
           description: A list of observation fields by which to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         logsAggregation:
           $ref: "#/components/schemas/LogsAggregation"
@@ -3989,6 +4299,7 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -4015,16 +4326,19 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupBy:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupBys:
           description: A list of observation fields to group the records by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -4041,6 +4355,7 @@ components:
       properties:
         color:
           description: Color of the threshold
+          minLength: 0
           type: string
         from:
           description: Minimum bound value of the threshold
@@ -4048,6 +4363,7 @@ components:
           type: number
         label:
           description: Optional label of the threshold
+          minLength: 0
           type: string
       title: Threshold
       type: object
@@ -4143,6 +4459,7 @@ components:
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -4308,9 +4625,11 @@ components:
             \ from clusters or points on the map."
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         messageTemplate:
           description: Custom template for the geomap tooltip
+          minLength: 0
           type: string
       type: object
     GetDashboardBySlugResponse:
@@ -4502,6 +4821,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4563,6 +4883,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4629,6 +4950,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4690,6 +5012,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4768,6 +5091,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4829,6 +5153,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4895,6 +5220,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -4956,6 +5282,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5106,13 +5433,16 @@ components:
           type: string
         authorId:
           description: The author id.
+          minLength: 0
           type: string
         authorName:
           description: The author name.
+          minLength: 0
           type: string
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         createdOriginType:
           $ref: "#/components/schemas/TokenOriginType"
@@ -5123,21 +5453,26 @@ components:
           type: boolean
         lockerAuthorId:
           description: The locker author id.
+          minLength: 0
           type: string
         lockerName:
           description: The locker name.
+          minLength: 0
           type: string
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         updatedOriginType:
           $ref: "#/components/schemas/TokenOriginType"
         updaterAuthorId:
           description: The updater author id.
+          minLength: 0
           type: string
         updaterName:
           description: The updater name.
+          minLength: 0
           type: string
       title: Get dashboard by URL slug response data structure
       type: object
@@ -5182,6 +5517,7 @@ components:
           description: List of items.
           items:
             $ref: "#/components/schemas/DashboardCatalogItem"
+          minItems: 0
           type: array
       title: Get dashboard catalog response data structure.
       type: object
@@ -5199,6 +5535,7 @@ components:
             appearance:
               width: 6
             description: description
+            layoutColumns: 1210617418
             definition:
               barChart:
                 maxBarsPerChart: 20
@@ -5437,6 +5774,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5498,6 +5836,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5564,6 +5903,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5625,6 +5965,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5703,6 +6044,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5764,6 +6106,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5830,6 +6173,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -5891,6 +6235,7 @@ components:
                   appearance:
                     width: 6
                   description: description
+                  layoutColumns: 1210617418
                   definition:
                     barChart:
                       maxBarsPerChart: 20
@@ -6041,13 +6386,16 @@ components:
           type: string
         authorId:
           description: The author id.
+          minLength: 0
           type: string
         authorName:
           description: The author name.
+          minLength: 0
           type: string
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         createdOriginType:
           $ref: "#/components/schemas/TokenOriginType"
@@ -6058,9 +6406,11 @@ components:
           type: boolean
         lockerAuthorId:
           description: The locker author id.
+          minLength: 0
           type: string
         lockerName:
           description: The locker name.
+          minLength: 0
           type: string
         resolvedWidgets:
           additionalProperties:
@@ -6071,14 +6421,17 @@ components:
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         updatedOriginType:
           $ref: "#/components/schemas/TokenOriginType"
         updaterAuthorId:
           description: The updater author id.
+          minLength: 0
           type: string
         updaterName:
           description: The updater name.
+          minLength: 0
           type: string
       title: Get dashboard response data structure
       type: object
@@ -6089,6 +6442,7 @@ components:
       properties:
         dashboardId:
           description: Reference to specific dashboard
+          minLength: 0
           type: string
       type: object
     Heatmap:
@@ -6134,6 +6488,7 @@ components:
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -6157,6 +6512,7 @@ components:
             heatmap grid.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         xAxisTimeFormat:
           $ref: "#/components/schemas/XAxisTimeFormat"
@@ -6165,6 +6521,7 @@ components:
             heatmap grid.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
       required:
       - colorRange
@@ -6193,6 +6550,7 @@ components:
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -6218,6 +6576,7 @@ components:
             heatmap grid.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         xAxisTimeFormat:
           $ref: "#/components/schemas/XAxisTimeFormat"
@@ -6226,6 +6585,7 @@ components:
             heatmap grid.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
       required:
       - preset
@@ -6240,9 +6600,11 @@ components:
             \ used in x-axis or y-axis"
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         messageTemplate:
           description: Custom template for the heatmap tooltip
+          minLength: 0
           type: string
       type: object
     Hexagon:
@@ -6253,6 +6615,7 @@ components:
         customUnit:
           description: Custom unit (requires to have unit field set as UNIT_CUSTOM
             to take effect)
+          minLength: 0
           type: string
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -6291,6 +6654,7 @@ components:
             \ optional name label"
           items:
             $ref: "#/components/schemas/common.Threshold"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -6306,6 +6670,7 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -6320,11 +6685,13 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupBy:
           description: A list of observation fields by which to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         logsAggregation:
           $ref: "#/components/schemas/LogsAggregation"
@@ -6347,6 +6714,7 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -6371,16 +6739,19 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupBy:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupBys:
           description: A list of observation fields to group the records by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -6403,10 +6774,12 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         customUnit:
           description: Custom unit (requires to have unit field set as UNIT_CUSTOM
             to take effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -6437,6 +6810,7 @@ components:
             \ optional name label"
           items:
             $ref: "#/components/schemas/common.Threshold"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -6490,12 +6864,14 @@ components:
       properties:
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         colorsBy:
           $ref: "#/components/schemas/ColorsBy"
         customUnit:
           description: Custom unit (requires to have unit field set to custom to take
             effect)
+          minLength: 0
           type: string
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -6514,6 +6890,7 @@ components:
           type: boolean
         groupNameTemplate:
           description: "Custom template name for a bar group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -6560,15 +6937,19 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names by which results are grouped
           items:
             description: List of field names by which results are grouped
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         stackedGroupName:
           description: Field name by which results in groups are divided into subgroups
+          minLength: 0
           type: string
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -6585,22 +6966,27 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names to group the query results
           items:
             description: List of field names to group the query results
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         groupNamesFields:
           description: List of observation fields to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
         stackedGroupName:
           description: Field name by which results are stacked in individual group
+          minLength: 0
           type: string
         stackedGroupNameField:
           $ref: "#/components/schemas/ObservationField"
@@ -6621,12 +7007,15 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names by which metric results are grouped
           items:
             description: List of field names by which metric results are grouped
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -6634,6 +7023,7 @@ components:
           $ref: "#/components/schemas/PromQLQueryType"
         stackedGroupName:
           description: Field name by which results in groups are divided into subgroups
+          minLength: 0
           type: string
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -6656,17 +7046,20 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupNamesFields:
           description: A list of observation fields definitions to group the records
             by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -6689,6 +7082,7 @@ components:
           type: integer
         stackNameTemplate:
           description: Custom template name of an individual stack
+          minLength: 0
           type: string
       type: object
     HorizontalBarChart.YAxisViewBy:
@@ -6776,15 +7170,18 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         colorsBy:
           $ref: "#/components/schemas/ColorsBy"
         customUnit:
           description: Custom unit (requires to have unit field set to custom to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -6797,6 +7194,7 @@ components:
           type: boolean
         groupNameTemplate:
           description: "Custom template name for a group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -6819,11 +7217,13 @@ components:
           $ref: "#/components/schemas/SortByType"
         stackNameTemplate:
           description: Custom template name of an individual stack
+          minLength: 0
           type: string
         subCategoryFields:
           description: The sub category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -6862,15 +7262,18 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         colorsBy:
           $ref: "#/components/schemas/ColorsBy"
         customUnit:
           description: Custom unit (requires to have unit field set to custom to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -6883,6 +7286,7 @@ components:
           type: boolean
         groupNameTemplate:
           description: "Custom template name for a group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -6899,6 +7303,7 @@ components:
           description: Per-query field settings
           items:
             $ref: "#/components/schemas/HorizontalBarsMulti.QueryFieldSettings"
+          minItems: 0
           type: array
         scaleType:
           $ref: "#/components/schemas/ScaleType"
@@ -6926,6 +7331,7 @@ components:
       properties:
         queryId:
           description: Reference to the query id from Dynamic.query_display_settings
+          minLength: 0
           type: string
         valueField:
           $ref: "#/components/schemas/ObservationField"
@@ -7019,6 +7425,36 @@ components:
         value:
           $ref: "#/components/schemas/StringValueLabel"
       type: object
+    Issue:
+      example:
+        severity: SEVERITY_UNSPECIFIED
+        location: location
+        message: message
+      properties:
+        location:
+          description: Location of the issue within the dashboard as an RFC 6901 JSON
+            Pointer (e.g. "/sections/0/rows/1/widgets/2"). Empty or omitted for root-level
+            issues.
+          maxLength: 512
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
+        message:
+          description: Human-readable description of the issue
+          maxLength: 4096
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        severity:
+          $ref: "#/components/schemas/IssueSeverity"
+      type: object
+    IssueSeverity:
+      description: Severity of a validation issue.
+      enum:
+      - SEVERITY_UNSPECIFIED
+      - SEVERITY_ERROR
+      - SEVERITY_WARNING
+      type: string
     Layout:
       description: Layout.
       example:
@@ -7048,6 +7484,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7109,6 +7546,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7175,6 +7613,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7236,6 +7675,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7314,6 +7754,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7375,6 +7816,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7441,6 +7883,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7502,6 +7945,7 @@ components:
               appearance:
                 width: 6
               description: description
+              layoutColumns: 1210617418
               definition:
                 barChart:
                   maxBarsPerChart: 20
@@ -7562,6 +8006,7 @@ components:
           description: The list of sections in the dashboard
           items:
             $ref: "#/components/schemas/Section"
+          minItems: 0
           type: array
       type: object
     Legend:
@@ -7585,6 +8030,7 @@ components:
           - LEGEND_COLUMN_NAME
           items:
             $ref: "#/components/schemas/LegendColumn"
+          minItems: 0
           type: array
         groupByQuery:
           description: "In case of multiple queries, whether legend items should be\
@@ -7639,11 +8085,18 @@ components:
           description: Definitions of widget queries
           items:
             $ref: "#/components/schemas/LineChart.QueryDefinition"
+          minItems: 0
           type: array
         stackedLine:
           $ref: "#/components/schemas/LineChart.StackedLine"
         tooltip:
           $ref: "#/components/schemas/Tooltip"
+        useDataTimeRange:
+          description: "When used, dashboard or widget time frame is ignored and X\
+            \ axis will represent only dates present in received data which can differ\
+            \ significantly from time ranges that were requested."
+          example: false
+          type: boolean
         xAxisTimeFormat:
           $ref: "#/components/schemas/XAxisTimeFormat"
       required:
@@ -7661,6 +8114,7 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -7676,22 +8130,27 @@ components:
             \ one element"
           items:
             $ref: "#/components/schemas/LogsAggregation"
+          minItems: 0
           type: array
         filters:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupBy:
           description: List of field names to group the query results
           items:
             description: List of field names to group the query results
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         groupBys:
           description: A list of observation fields to group the query results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -7709,6 +8168,7 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -7731,10 +8191,12 @@ components:
         colorScheme:
           description: "Applied color scheme for this query, one of the predefined\
             \ values"
+          minLength: 0
           type: string
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -7754,6 +8216,7 @@ components:
           type: boolean
         id:
           description: Unique id of the query definition
+          minLength: 0
           type: string
         intervalResolution:
           $ref: "#/components/schemas/IntervalResolution"
@@ -7763,6 +8226,7 @@ components:
           type: boolean
         name:
           description: Custom name of the query
+          minLength: 0
           type: string
         query:
           $ref: "#/components/schemas/LineChart.Query"
@@ -7772,10 +8236,13 @@ components:
           $ref: "#/components/schemas/ScaleType"
         seriesCountLimit:
           description: Max count of the series per query
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         seriesNameTemplate:
           description: Custom template for the series name
+          minLength: 0
           type: string
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -7807,6 +8274,7 @@ components:
         interval:
           description: "Interval of value sampling, i.e. every 5 minutes, every 1\
             \ second and so on (deprecated)"
+          minLength: 0
           type: string
       title: Resolution
       type: object
@@ -7820,21 +8288,25 @@ components:
             \ only one element"
           items:
             $ref: "#/components/schemas/SpansAggregation"
+          minItems: 0
           type: array
         filters:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupBy:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupBys:
           description: A list of observation fields to group the records by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -7898,6 +8370,7 @@ components:
           $ref: "#/components/schemas/UUID"
         name:
           description: Name of the link action
+          minLength: 0
           type: string
         shouldOpenInNewWindow:
           description: Defines if the link action should open in a new window or current
@@ -7906,6 +8379,7 @@ components:
         url:
           description: "Static URL that may contain variables using {{variable_name}}\
             \ syntax"
+          minLength: 0
           type: string
       type: object
     ListValue:
@@ -7917,6 +8391,7 @@ components:
           description: List of values.
           items:
             $ref: "#/components/schemas/SingleStringValue"
+          minItems: 0
           type: array
       type: object
     Logs:
@@ -7928,6 +8403,7 @@ components:
           description: Aggregation function
           items:
             $ref: "#/components/schemas/LogsAggregation"
+          minItems: 0
           type: array
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -7935,11 +8411,13 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupBy:
           description: A list of observation fields by which to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -8044,6 +8522,7 @@ components:
           $ref: "#/components/schemas/ObservationField"
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     LogsQuery.Aggregation:
@@ -8055,12 +8534,14 @@ components:
           $ref: "#/components/schemas/LogsAggregation"
         id:
           description: Aggregation unique identifier
+          minLength: 0
           type: string
         isVisible:
           description: Whether the aggregation is visible in the table
           type: boolean
         name:
           description: Aggregation name
+          minLength: 0
           type: string
       type: object
     LogsQuery.Grouping:
@@ -8072,17 +8553,21 @@ components:
           description: List of aggregations
           items:
             $ref: "#/components/schemas/LogsQuery.Aggregation"
+          minItems: 0
           type: array
         groupBy:
           description: List of field names to group the query results
           items:
             description: List of field names to group the query results
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         groupBys:
           description: List of observation fields to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
       type: object
     LogsSource:
@@ -8096,11 +8581,13 @@ components:
           description: The label fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
         messageTemplate:
           description: The message template.
+          minLength: 0
           type: string
         strategy:
           $ref: "#/components/schemas/LogsSource.Strategy"
@@ -8181,6 +8668,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     LuceneQueryValue:
@@ -8201,6 +8689,7 @@ components:
         interval:
           description: "Fixed interval duration for time buckets, specified by the\
             \ user."
+          minLength: 0
           type: string
         maximumDataPoints:
           description: Maximum number of data points constraint.
@@ -8210,6 +8699,7 @@ components:
         minimumInterval:
           description: Minimum interval duration constraint. The selected interval
             will not be smaller than this value.
+          minLength: 0
           type: string
       required:
       - interval
@@ -8222,6 +8712,7 @@ components:
       properties:
         messageTemplate:
           description: The message template.
+          minLength: 0
           type: string
         orientation:
           $ref: "#/components/schemas/AnnotationOrientation"
@@ -8240,6 +8731,7 @@ components:
       properties:
         customUnit:
           description: The custom unit.
+          minLength: 0
           type: string
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -8256,6 +8748,7 @@ components:
       properties:
         customUnit:
           description: The custom unit.
+          minLength: 0
           type: string
         endValue:
           description: The end value.
@@ -8306,10 +8799,12 @@ components:
           $ref: "#/components/schemas/ColorSolidType"
         mapTo:
           description: Display text to map the matched value to
+          minLength: 0
           type: string
         value:
           description: "Value to match (exact string for value mapping, regex pattern\
             \ for regex mapping)"
+          minLength: 0
           type: string
       title: MappingSection
       type: object
@@ -8320,9 +8815,11 @@ components:
       properties:
         markdownText:
           description: Markdown text
+          minLength: 0
           type: string
         tooltipText:
           description: Tooltip text to display on widget hover
+          minLength: 0
           type: string
       type: object
     Max:
@@ -8332,6 +8829,7 @@ components:
       properties:
         field:
           description: The field.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -8380,9 +8878,11 @@ components:
       properties:
         label:
           description: The label.
+          minLength: 0
           type: string
         metricName:
           description: The metric name.
+          minLength: 0
           type: string
       type: object
     Metrics:
@@ -8407,9 +8907,11 @@ components:
       properties:
         label:
           description: The label associated with the metric.
+          minLength: 0
           type: string
         metric:
           description: The name of the metric to which the filter is applied.
+          minLength: 0
           type: string
         operator:
           $ref: "#/components/schemas/Filter.Operator"
@@ -8441,10 +8943,13 @@ components:
           description: List of labels.
           items:
             description: List of labels.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         messageTemplate:
           description: The message template.
+          minLength: 0
           type: string
         orientation:
           $ref: "#/components/schemas/AnnotationOrientation"
@@ -8472,6 +8977,7 @@ components:
       properties:
         field:
           description: The field.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -8539,7 +9045,9 @@ components:
           items:
             deprecated: true
             description: The selected values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         selection:
           $ref: "#/components/schemas/MultiSelect.Selection"
@@ -8595,13 +9103,17 @@ components:
           description: List of labels.
           items:
             description: List of labels.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         values:
           description: List of values.
           items:
             description: List of values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     MultiSelect.Source:
@@ -8618,9 +9130,11 @@ components:
       properties:
         labelRegex:
           description: The label regex.
+          minLength: 0
           type: string
         valueRegex:
           description: The value regex.
+          minLength: 0
           type: string
       type: object
     MultiSelectQueryLogsQuery:
@@ -8784,7 +9298,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NotEquals.Selection:
@@ -8806,7 +9322,9 @@ components:
           description: A list of values for the selection.
           items:
             description: A list of values for the selection.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: ListSelection
       type: object
@@ -8817,6 +9335,7 @@ components:
       properties:
         label:
           description: The label.
+          minLength: 0
           type: string
         value:
           description: The value.
@@ -8837,7 +9356,9 @@ components:
           description: The keypath.
           items:
             description: The keypath.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         scope:
           $ref: "#/components/schemas/DatasetScope"
@@ -8857,6 +9378,7 @@ components:
       properties:
         field:
           description: Field name to order by
+          minLength: 0
           type: string
         orderDirection:
           $ref: "#/components/schemas/OrderDirection"
@@ -8868,6 +9390,7 @@ components:
       properties:
         field:
           description: The field.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -8887,15 +9410,19 @@ components:
           description: List of query filters
           items:
             $ref: "#/components/schemas/Filter.Source"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names by which results are grouped
           items:
             description: List of field names by which results are grouped
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         stackedGroupName:
           description: Field name by which results in groups are divided into subgroups
+          minLength: 0
           type: string
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -8912,22 +9439,27 @@ components:
           description: List of filters that narrow down query results
           items:
             $ref: "#/components/schemas/Filter.LogsFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names to group the query results
           items:
             description: List of field names to group the query results
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         groupNamesFields:
           description: List of observation fields to group the results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
         stackedGroupName:
           description: Field name by which results are stacked in individual group
+          minLength: 0
           type: string
         stackedGroupNameField:
           $ref: "#/components/schemas/ObservationField"
@@ -8948,12 +9480,15 @@ components:
           description: List of metrics filters
           items:
             $ref: "#/components/schemas/MetricsFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names by which metric results are grouped
           items:
             description: List of field names by which metric results are grouped
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         promqlQuery:
           $ref: "#/components/schemas/PromQlQuery"
@@ -8961,6 +9496,7 @@ components:
           $ref: "#/components/schemas/PromQLQueryType"
         stackedGroupName:
           description: Field name by which results in groups are divided into subgroups
+          minLength: 0
           type: string
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -8983,17 +9519,20 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupNames:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupNamesFields:
           description: A list of observation fields definitions to group the records
             by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -9017,6 +9556,7 @@ components:
           type: integer
         stackNameTemplate:
           description: Custom template name of an individual slice in the stack
+          minLength: 0
           type: string
       type: object
     PieChartQueryDataprime:
@@ -9081,6 +9621,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     PromqlQuery:
@@ -9133,6 +9674,7 @@ components:
           description: "Column display name property, allows renaming the column header\
             \ name"
           example: Renamed header
+          minLength: 0
           type: string
       required:
       - columnDisplayName
@@ -9155,6 +9697,7 @@ components:
         regexExtract:
           description: "Value of Regex Extract property, a regex string"
           example: "gr[ae]y"
+          minLength: 0
           type: string
       required:
       - regexExtract
@@ -9188,6 +9731,7 @@ components:
           description: "Value alias property, used to give alias names to selected\
             \ fields"
           example: "Pod: {{$d.pod}}"
+          minLength: 0
           type: string
       required:
       - valuesAlias
@@ -9211,6 +9755,7 @@ components:
           description: Collection of link actions
           items:
             $ref: "#/components/schemas/LinkAction"
+          minItems: 0
           type: array
       type: object
     PropertyThresholds:
@@ -9234,6 +9779,7 @@ components:
           description: List of thresholds
           items:
             $ref: "#/components/schemas/common.Threshold"
+          minItems: 0
           type: array
       type: object
     PropertyUnits:
@@ -9248,6 +9794,7 @@ components:
         customUnit:
           description: Custom unit (requires to set unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -9276,15 +9823,18 @@ components:
           description: The mappings.
           items:
             $ref: "#/components/schemas/PropertyValuesMapping.ValueMapping"
+          minItems: 0
           type: array
       type: object
     PropertyValuesMapping.ValueMapping:
       properties:
         inputValue:
           description: The input value.
+          minLength: 0
           type: string
         replaceValue:
           description: The replace value.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/ValuesMappingType"
@@ -9308,6 +9858,7 @@ components:
       properties:
         logRegex:
           description: The log regex.
+          minLength: 0
           type: string
       type: object
     Query.LogsQuery.Type.FieldValue:
@@ -9376,6 +9927,7 @@ components:
           description: List of values.
           items:
             $ref: "#/components/schemas/Query.MetricsQuery.StringOrVariable"
+          minItems: 0
           type: array
       type: object
     Query.MetricsQuery.StringOrVariable:
@@ -9394,6 +9946,7 @@ components:
       properties:
         metricRegex:
           description: The metric regex.
+          minLength: 0
           type: string
       type: object
     Query.MetricsQuery.Type.LabelValue:
@@ -9405,6 +9958,7 @@ components:
           description: The label filters.
           items:
             $ref: "#/components/schemas/Query.MetricsQuery.MetricsLabelFilter"
+          minItems: 0
           type: array
         labelName:
           $ref: "#/components/schemas/Query.MetricsQuery.StringOrVariable"
@@ -9418,6 +9972,7 @@ components:
       properties:
         metricRegex:
           description: The metric regex.
+          minLength: 0
           type: string
       type: object
     Query.SpansQuery:
@@ -9439,6 +9994,7 @@ components:
       properties:
         spanRegex:
           description: The span regex.
+          minLength: 0
           type: string
       type: object
     Query.SpansQuery.Type.FieldValue:
@@ -9464,14 +10020,17 @@ components:
           description: A list of category fields for grouping the query results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme for this query, one of the predefined\
             \ values"
+          minLength: 0
           type: string
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -9485,15 +10044,19 @@ components:
           type: boolean
         queryId:
           description: Reference to the query id from Dynamic.query_display_settings
+          minLength: 0
           type: string
         scaleType:
           $ref: "#/components/schemas/ScaleType"
         seriesCountLimit:
           description: Max count of the series per query
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         seriesNameTemplate:
           description: Custom template for the series name
+          minLength: 0
           type: string
         temporalField:
           $ref: "#/components/schemas/ObservationField"
@@ -9504,6 +10067,7 @@ components:
             the query results
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         yAxisMax:
           description: Number indicating the upper band for y axis
@@ -9566,6 +10130,7 @@ components:
       properties:
         stringValue:
           description: A literal string value.
+          minLength: 0
           type: string
       required:
       - stringValue
@@ -9578,6 +10143,7 @@ components:
         variableName:
           description: The name of a dashboard variable whose current value will be
             substituted.
+          minLength: 0
           type: string
       required:
       - variableName
@@ -9649,6 +10215,7 @@ components:
       properties:
         logRegex:
           description: The log regex.
+          minLength: 0
           type: string
       type: object
     QuerySource.LogsQuery.Type.FieldValue:
@@ -9715,6 +10282,7 @@ components:
           description: List of values.
           items:
             $ref: "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
+          minItems: 0
           type: array
       type: object
     QuerySource.MetricsQuery.StringOrVariable:
@@ -9734,6 +10302,7 @@ components:
       properties:
         metricRegex:
           description: The metric regex.
+          minLength: 0
           type: string
       type: object
     QuerySource.MetricsQuery.Type.LabelValue:
@@ -9745,6 +10314,7 @@ components:
           description: The label filters.
           items:
             $ref: "#/components/schemas/QuerySource.MetricsQuery.MetricsLabelFilter"
+          minItems: 0
           type: array
         labelName:
           $ref: "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
@@ -9758,6 +10328,7 @@ components:
       properties:
         metricRegex:
           description: The metric regex.
+          minLength: 0
           type: string
       type: object
     QuerySource.SpansQuery:
@@ -9779,6 +10350,7 @@ components:
       properties:
         spanRegex:
           description: The span regex.
+          minLength: 0
           type: string
       type: object
     QuerySource.SpansQuery.Type.FieldValue:
@@ -9838,6 +10410,7 @@ components:
       properties:
         stringValue:
           description: A literal string value.
+          minLength: 0
           type: string
       required:
       - stringValue
@@ -9850,6 +10423,7 @@ components:
         variableName:
           description: The name of a dashboard variable whose current value will be
             substituted.
+          minLength: 0
           type: string
       required:
       - variableName
@@ -9969,6 +10543,7 @@ components:
           description: List of color thresholds defining color ranges
           items:
             $ref: "#/components/schemas/common.Threshold"
+          minItems: 0
           type: array
       title: RangeMapping
       type: object
@@ -9989,6 +10564,7 @@ components:
           description: List of regex pattern-to-display mapping sections
           items:
             $ref: "#/components/schemas/MappingSection"
+          minItems: 0
           type: array
       title: RegexMapping
       type: object
@@ -10011,6 +10587,7 @@ components:
           description: Variable name that can be applied on section making it repetitive
             section
           example: pod_name
+          minLength: 0
           type: string
       type: object
     ReplaceDashboardResponse:
@@ -10045,6 +10622,7 @@ components:
           appearance:
             width: 6
           description: description
+          layoutColumns: 1210617418
           definition:
             barChart:
               maxBarsPerChart: 20
@@ -10106,6 +10684,7 @@ components:
           appearance:
             width: 6
           description: description
+          layoutColumns: 1210617418
           definition:
             barChart:
               maxBarsPerChart: 20
@@ -10168,6 +10747,7 @@ components:
           description: The list of widgets in the row
           items:
             $ref: "#/components/schemas/Widget"
+          minItems: 0
           type: array
       type: object
     Row.Appearance:
@@ -10225,6 +10805,7 @@ components:
       properties:
         regex:
           description: Regular expression pattern used to scope the rule.
+          minLength: 0
           type: string
       required:
       - regex
@@ -10263,6 +10844,7 @@ components:
             appearance:
               width: 6
             description: description
+            layoutColumns: 1210617418
             definition:
               barChart:
                 maxBarsPerChart: 20
@@ -10324,6 +10906,7 @@ components:
             appearance:
               width: 6
             description: description
+            layoutColumns: 1210617418
             definition:
               barChart:
                 maxBarsPerChart: 20
@@ -10390,6 +10973,7 @@ components:
             appearance:
               width: 6
             description: description
+            layoutColumns: 1210617418
             definition:
               barChart:
                 maxBarsPerChart: 20
@@ -10451,6 +11035,7 @@ components:
             appearance:
               width: 6
             description: description
+            layoutColumns: 1210617418
             definition:
               barChart:
                 maxBarsPerChart: 20
@@ -10514,6 +11099,7 @@ components:
             row of visualizations)
           items:
             $ref: "#/components/schemas/Row"
+          minItems: 0
           type: array
       type: object
     SectionColor:
@@ -10610,6 +11196,7 @@ components:
       properties:
         queryId:
           description: Reference to the query id from Dynamic.query_display_settings
+          minLength: 0
           type: string
       type: object
     SortByType:
@@ -10642,6 +11229,7 @@ components:
         strategyType:
           description: Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE
           example: STRATEGY_TYPE_CATEGORY
+          minLength: 0
           type: string
       required:
       - category
@@ -10657,6 +11245,7 @@ components:
         strategyType:
           description: Discriminator field - STRATEGY_TYPE_CATEGORY or STRATEGY_TYPE_QUERY_VALUE
           example: STRATEGY_TYPE_CATEGORY
+          minLength: 0
           type: string
       required:
       - queryValue
@@ -10684,6 +11273,7 @@ components:
       properties:
         processTagField:
           description: Name of a process-level tag field to use as the data source.
+          minLength: 0
           type: string
       required:
       - processTagField
@@ -10703,6 +11293,7 @@ components:
       properties:
         tagField:
           description: Name of a span tag field to use as the data source.
+          minLength: 0
           type: string
       required:
       - tagField
@@ -10716,7 +11307,9 @@ components:
           description: The keypath.
           items:
             description: The keypath.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         relationType:
           $ref: "#/components/schemas/SpanRelationType"
@@ -10740,6 +11333,7 @@ components:
           description: Span query aggregation function
           items:
             $ref: "#/components/schemas/LogsAggregation"
+          minItems: 0
           type: array
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -10747,11 +11341,13 @@ components:
           description: List of span query filters
           items:
             $ref: "#/components/schemas/SpansFilter"
+          minItems: 0
           type: array
         groupBy:
           description: A list of fields to group the records by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
@@ -10800,12 +11396,14 @@ components:
           $ref: "#/components/schemas/SpansAggregation"
         id:
           description: Aggregation unique identifier
+          minLength: 0
           type: string
         isVisible:
           description: Whether the aggregation is visible in the table
           type: boolean
         name:
           description: Aggregation name
+          minLength: 0
           type: string
       type: object
     SpansQuery.Grouping:
@@ -10818,17 +11416,20 @@ components:
           description: List of aggregations applied to span records
           items:
             $ref: "#/components/schemas/SpansQuery.Aggregation"
+          minItems: 0
           type: array
         groupBy:
           description: List of field names to group the span records
           items:
             $ref: "#/components/schemas/SpanField"
+          minItems: 0
           type: array
         groupBys:
           description: A list of observation fields definitions to group the records
             by
           items:
             $ref: "#/components/schemas/SpanObservationField"
+          minItems: 0
           type: array
       type: object
     SpansSource:
@@ -10842,11 +11443,13 @@ components:
           description: The label fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         luceneQuery:
           $ref: "#/components/schemas/LuceneQuery"
         messageTemplate:
           description: The message template.
+          minLength: 0
           type: string
         strategy:
           $ref: "#/components/schemas/SpansSource.Strategy"
@@ -10939,10 +11542,12 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         customUnit:
           description: Custom unit (requires to have unit field set as UNIT_CUSTOM
             to take effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -10979,6 +11584,7 @@ components:
             \ optional name label"
           items:
             $ref: "#/components/schemas/common.Threshold"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -10988,6 +11594,7 @@ components:
           description: The value fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
       type: object
     StatCard:
@@ -11004,12 +11611,14 @@ components:
           description: Fields to use for categorizing the stat card data
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorLabelMapping:
           $ref: "#/components/schemas/ColorLabelMapping"
         customUnit:
           description: Custom unit (requires to have unit field set as UNIT_CUSTOM
             to take effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -11033,6 +11642,7 @@ components:
           description: Fields to use for the stat card value
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
       title: StatCard
       type: object
@@ -11056,12 +11666,14 @@ components:
         templateText:
           description: "Optional display name template with variable support, e.g.\
             \ 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'"
+          minLength: 0
           type: string
         templateVariables:
           description: "Variables available for use in the display name template,\
             \ each referencing either a datashape field or mapped values"
           items:
             $ref: "#/components/schemas/DisplayNameTemplateVariable"
+          minItems: 0
           type: array
       required:
       - mappedValues
@@ -11079,12 +11691,14 @@ components:
         templateText:
           description: "Optional display name template with variable support, e.g.\
             \ 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'"
+          minLength: 0
           type: string
         templateVariables:
           description: "Variables available for use in the display name template,\
             \ each referencing either a datashape field or mapped values"
           items:
             $ref: "#/components/schemas/DisplayNameTemplateVariable"
+          minItems: 0
           type: array
       required:
       - observationField
@@ -11101,6 +11715,7 @@ components:
           description: List of values.
           items:
             $ref: "#/components/schemas/ValueLabel"
+          minItems: 0
           type: array
         valuesOrderDirection:
           $ref: "#/components/schemas/OrderDirection"
@@ -11115,9 +11730,11 @@ components:
       properties:
         label:
           description: The label.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     Sum:
@@ -11127,6 +11744,7 @@ components:
       properties:
         field:
           description: The field.
+          minLength: 0
           type: string
         observationField:
           $ref: "#/components/schemas/ObservationField"
@@ -11141,11 +11759,13 @@ components:
           description: List of columns.
           items:
             $ref: "#/components/schemas/Table.Column"
+          minItems: 0
           type: array
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/Table.Rule"
+          minItems: 0
           type: array
         settings:
           $ref: "#/components/schemas/TableSettings"
@@ -11162,16 +11782,19 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         id:
           $ref: "#/components/schemas/UUID"
         name:
           description: Display name.
+          minLength: 0
           type: string
         properties:
           description: The properties.
           items:
             $ref: "#/components/schemas/Property"
+          minItems: 0
           type: array
         ruleScope:
           $ref: "#/components/schemas/RuleScope"
@@ -11185,6 +11808,7 @@ components:
           description: List of configured column widths
           items:
             $ref: "#/components/schemas/ColumnWidthEntry"
+          minItems: 0
           type: array
         rowStyle:
           $ref: "#/components/schemas/RowStyle"
@@ -11204,6 +11828,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     TextboxDefaultLuceneValue:
@@ -11215,6 +11840,7 @@ components:
           $ref: "#/components/schemas/v1.common.DataModeType"
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     TextboxDefaultNumericValue:
@@ -11245,6 +11871,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     TextboxDefaultStringValue:
@@ -11254,6 +11881,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     TextboxDefaultValue:
@@ -11336,6 +11964,7 @@ components:
         singleString:
           deprecated: true
           description: Deprecated. Default string value for the textbox variable.
+          minLength: 0
           type: string
       required:
       - singleString
@@ -11367,10 +11996,12 @@ components:
         from:
           description: The from.
           format: date-time
+          minLength: 0
           type: string
         to:
           description: The to.
           format: date-time
+          minLength: 0
           type: string
       type: object
     TimeFrameSelect:
@@ -11399,6 +12030,7 @@ components:
         relativeTimeFrame:
           description: "Relative time frame expressed as a duration offset from the\
             \ current time (e.g., last 15 minutes)."
+          minLength: 0
           type: string
       required:
       - relativeTimeFrame
@@ -11418,14 +12050,17 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme for this query, one of the predefined\
             \ values"
+          minLength: 0
           type: string
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -11447,6 +12082,7 @@ components:
           $ref: "#/components/schemas/ScaleType"
         seriesNameTemplate:
           description: Custom template for the series name
+          minLength: 0
           type: string
         sortBy:
           $ref: "#/components/schemas/SortByType"
@@ -11460,6 +12096,7 @@ components:
           description: The value fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         xAxisTimeFormat:
           $ref: "#/components/schemas/XAxisTimeFormat"
@@ -11487,10 +12124,12 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme for this query, one of the predefined\
             \ values"
+          minLength: 0
           type: string
         connectNulls:
           description: Whether the line should remain connected instead of producing
@@ -11500,6 +12139,7 @@ components:
         customUnit:
           description: Custom unit (requires to have unit field as 'custom' to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -11517,10 +12157,13 @@ components:
           $ref: "#/components/schemas/ScaleType"
         seriesCountLimit:
           description: Max count of the series per query
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         seriesNameTemplate:
           description: Custom template for the series name
+          minLength: 0
           type: string
         stackedLine:
           $ref: "#/components/schemas/Visualization.StackedLine"
@@ -11530,10 +12173,17 @@ components:
           $ref: "#/components/schemas/TimeSeriesTooltip"
         unit:
           $ref: "#/components/schemas/common.Unit"
+        useDataTimeRange:
+          description: "When used, dashboard or widget time frame is ignored and X\
+            \ axis will represent only dates present in received data which can differ\
+            \ significantly from time ranges that were requested."
+          example: false
+          type: boolean
         valueFields:
           description: The value fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         xAxisTimeFormat:
           $ref: "#/components/schemas/XAxisTimeFormat"
@@ -11564,11 +12214,18 @@ components:
           description: Definitions of widget queries
           items:
             $ref: "#/components/schemas/QueryDisplaySettings"
+          minItems: 0
           type: array
         stackedLine:
           $ref: "#/components/schemas/Visualization.StackedLine"
         tooltip:
           $ref: "#/components/schemas/TimeSeriesTooltip"
+        useDataTimeRange:
+          description: "When used, dashboard or widget time frame is ignored and X\
+            \ axis will represent only dates present in received data which can differ\
+            \ significantly from time ranges that were requested."
+          example: false
+          type: boolean
         xAxisTimeFormat:
           $ref: "#/components/schemas/XAxisTimeFormat"
       type: object
@@ -11622,6 +12279,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     UnpinDashboardResponse:
@@ -11639,9 +12297,11 @@ components:
           type: boolean
         label:
           description: The label.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     ValuesMappingType:
@@ -11665,14 +12325,17 @@ components:
           $ref: "#/components/schemas/Variable.Definition"
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         displayName:
           description: The display name.
+          minLength: 0
           type: string
         displayType:
           $ref: "#/components/schemas/VariableDisplayType"
         name:
           description: Display name.
+          minLength: 0
           type: string
       type: object
     Variable.Definition:
@@ -11756,9 +12419,11 @@ components:
       properties:
         labelRegex:
           description: The label regex.
+          minLength: 0
           type: string
         valueRegex:
           description: The value regex.
+          minLength: 0
           type: string
       type: object
     VariableSourceV2Query:
@@ -11931,12 +12596,14 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         displayFullRow:
           description: The display full row.
           type: boolean
         displayName:
           description: The display name.
+          minLength: 0
           type: string
         displayType:
           $ref: "#/components/schemas/VariableDisplayTypeV2"
@@ -11944,6 +12611,7 @@ components:
           $ref: "#/components/schemas/UUID"
         name:
           description: Display name.
+          minLength: 0
           type: string
         source:
           $ref: "#/components/schemas/VariableSourceV2"
@@ -12052,15 +12720,18 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         colorsBy:
           $ref: "#/components/schemas/ColorsBy"
         customUnit:
           description: Custom unit (requires to have unit field set to custom to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -12070,6 +12741,7 @@ components:
           type: integer
         groupNameTemplate:
           description: "Custom template name for a group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -12092,11 +12764,13 @@ components:
           $ref: "#/components/schemas/SortByType"
         stackNameTemplate:
           description: Custom template name of an individual stack
+          minLength: 0
           type: string
         subCategoryFields:
           description: The sub category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -12128,15 +12802,18 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         colorsBy:
           $ref: "#/components/schemas/ColorsBy"
         customUnit:
           description: Custom unit (requires to have unit field set to custom to take
             effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -12146,6 +12823,7 @@ components:
           type: integer
         groupNameTemplate:
           description: "Custom template name for a group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -12162,6 +12840,7 @@ components:
           description: Per-query field settings
           items:
             $ref: "#/components/schemas/VerticalBarsMulti.QueryFieldSettings"
+          minItems: 0
           type: array
         scaleType:
           $ref: "#/components/schemas/ScaleType"
@@ -12187,6 +12866,7 @@ components:
       properties:
         queryId:
           description: Reference to the query id from Dynamic.query_display_settings
+          minLength: 0
           type: string
         valueField:
           $ref: "#/components/schemas/ObservationField"
@@ -12233,10 +12913,12 @@ components:
             gauge instances.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         customUnit:
           description: Custom unit (requires to have unit field set as UNIT_CUSTOM
             to take effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -12281,6 +12963,7 @@ components:
             \ optional name label"
           items:
             $ref: "#/components/schemas/common.Threshold"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -12290,6 +12973,7 @@ components:
           description: The value fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
       type: object
     Visualization.PieChart:
@@ -12305,13 +12989,16 @@ components:
           description: The category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         customUnit:
           description: Custom unit (requires the unit field to be set to custom to
             take effect)
+          minLength: 0
           type: string
         decimalPrecision:
           description: "Number indicating the decimal precision of the numeric values,\
@@ -12321,6 +13008,7 @@ components:
           type: integer
         groupNameTemplate:
           description: "Custom template name for a group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -12350,11 +13038,13 @@ components:
           type: boolean
         stackNameTemplate:
           description: Custom template name of an individual slice in the stack
+          minLength: 0
           type: string
         subCategoryFields:
           description: The sub category fields.
           items:
             $ref: "#/components/schemas/ObservationField"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/common.Unit"
@@ -12577,6 +13267,7 @@ components:
           description: The days of week.
           items:
             $ref: "#/components/schemas/Weekday"
+          minItems: 0
           type: array
       type: object
     Widget:
@@ -12590,6 +13281,7 @@ components:
         appearance:
           width: 6
         description: description
+        layoutColumns: 1210617418
         definition:
           barChart:
             maxBarsPerChart: 20
@@ -12652,22 +13344,32 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         definition:
           $ref: "#/components/schemas/Widget.Definition"
         description:
           description: Short description of the widget
+          minLength: 0
           type: string
         id:
           $ref: "#/components/schemas/UUID"
+        layoutColumns:
+          description: Number of columns occupied by the widget in the dashboard layout
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
         reference:
           $ref: "#/components/schemas/WidgetReference"
         title:
           description: Name of the widget
+          minLength: 0
           type: string
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
       title: Widget
       type: object
@@ -12844,6 +13546,7 @@ components:
       properties:
         dashboardId:
           description: Dashboard ID containing the referenced widget
+          minLength: 0
           type: string
         widgetId:
           $ref: "#/components/schemas/UUID"
@@ -12869,6 +13572,7 @@ components:
         interval:
           description: "Interval of value sampling, i.e. every 5 minutes, every 1\
             \ second and so on (deprecated)"
+          minLength: 0
           type: string
       title: XAxisByTime
       type: object
@@ -12960,6 +13664,7 @@ components:
       properties:
         text:
           description: The text.
+          minLength: 0
           type: string
       type: object
     common.Threshold:
@@ -12969,6 +13674,7 @@ components:
       properties:
         color:
           description: Color of the threshold
+          minLength: 0
           type: string
         from:
           description: Minimum bound value of the threshold
@@ -12976,6 +13682,7 @@ components:
           type: number
         label:
           description: Optional label of the threshold
+          minLength: 0
           type: string
       title: Threshold
       type: object
@@ -13055,6 +13762,7 @@ components:
           type: boolean
         displayName:
           description: A display name for the filter
+          minLength: 0
           type: string
         enabled:
           description: Indicates if the filter is currently enabled or not.
@@ -13100,6 +13808,7 @@ components:
           description: Definitions of widget queries
           items:
             $ref: "#/components/schemas/Dynamic.QueryDefinition"
+          minItems: 0
           type: array
         timeFrame:
           $ref: "#/components/schemas/TimeFrameSelect"
@@ -13114,6 +13823,7 @@ components:
         customUnit:
           description: Custom unit (requires to have unit field set as 'custom' to
             take effect)
+          minLength: 0
           type: string
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -13168,6 +13878,7 @@ components:
             \ optional name label"
           items:
             $ref: "#/components/schemas/Gauge.Threshold"
+          minItems: 0
           type: array
         unit:
           $ref: "#/components/schemas/Gauge.Unit"
@@ -13179,10 +13890,12 @@ components:
       properties:
         colorScheme:
           description: "Applied color scheme, one of the predefined values"
+          minLength: 0
           type: string
         customUnit:
           description: Custom unit (requires the unit field to be set to custom to
             take effect)
+          minLength: 0
           type: string
         dataModeType:
           $ref: "#/components/schemas/widgets.common.DataModeType"
@@ -13198,6 +13911,7 @@ components:
           type: boolean
         groupNameTemplate:
           description: "Custom template name for a group, can contain variables"
+          minLength: 0
           type: string
         hashColors:
           description: Whether to ignore color scheme and derive colors from algorithm
@@ -13264,6 +13978,11 @@ components:
       - DATA_MODE_TYPE_HIGH_UNSPECIFIED
       - DATA_MODE_TYPE_ARCHIVE
       type: string
+    DashboardsService_CheckDashboard_request:
+      oneOf:
+      - $ref: "#/components/schemas/CheckDashboardRequestDashboard"
+      - $ref: "#/components/schemas/CheckDashboardRequestDashboardId"
+      type: object
     Replace_dashboard_request_data_structure:
       description: This is a request sent to update an existing dashboard with new
         information
@@ -13287,6 +14006,7 @@ components:
         requestId:
           description: "Idempotency key for the replace request, used to prevent duplicate\
             \ updates."
+          minLength: 0
           type: string
       required:
       - dashboard
@@ -13314,6 +14034,7 @@ components:
           type: boolean
         requestId:
           description: The request id.
+          minLength: 0
           type: string
       required:
       - dashboard
@@ -13326,6 +14047,7 @@ components:
         requestId:
           description: "Idempotency key for the replace default dashboard request,\
             \ used to prevent duplicate operations."
+          minLength: 0
           type: string
       required:
       - requestId
@@ -13337,10 +14059,12 @@ components:
         folderId:
           description: The ID of the folder to assign the dashboard to. Set to null
             to assign to the root folder.
+          minLength: 0
           type: string
         requestId:
           description: "Idempotency key for the assign folder request, used to prevent\
             \ duplicate operations."
+          minLength: 0
           type: string
       required:
       - requestId

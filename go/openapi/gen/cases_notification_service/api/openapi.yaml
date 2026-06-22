@@ -100,6 +100,7 @@ components:
           description: Notification deliveries for the case
           items:
             $ref: "#/components/schemas/NotificationDelivery"
+          minItems: 0
           type: array
       required:
       - notificationDeliveries
@@ -117,10 +118,12 @@ components:
         connectorId:
           description: Unique identifier of the connector
           example: c1d2e3f4-5678-90ab-cdef-1234567890ab
+          minLength: 0
           type: string
         connectorName:
           description: Display name of the connector
           example: Production Slack
+          minLength: 0
           type: string
         connectorType:
           $ref: "#/components/schemas/v1.ConnectorType"
@@ -162,6 +165,7 @@ components:
         errorMessage:
           description: Error message describing the failure
           example: Connection timeout after 30s
+          minLength: 0
           type: string
       required:
       - errorMessage
@@ -205,6 +209,7 @@ components:
           description: "URL to the delivered notification, if available (e.g. Slack\
             \ message, ServiceNow record)"
           example: https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456
+          minLength: 0
           type: string
       title: Delivery success
       type: object
@@ -221,6 +226,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -237,6 +243,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -254,6 +261,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -326,7 +334,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NoNotificationCreatedResult:
@@ -339,6 +349,7 @@ components:
           description: Routers that matched the notification request
           items:
             $ref: "#/components/schemas/RouterInfo"
+          minItems: 0
           type: array
       required:
       - matchedRouters
@@ -389,11 +400,13 @@ components:
           description: "The notification request ID that triggered this delivery,\
             \ used to correlate delivery outcomes with their originating requests"
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          minLength: 0
           type: string
         timestamp:
           description: When the notification was triggered
           example: 2025-09-22T10:30:00Z
           format: date-time
+          minLength: 0
           type: string
       required:
       - attempted
@@ -411,11 +424,13 @@ components:
           description: "The notification request ID that triggered this delivery,\
             \ used to correlate delivery outcomes with their originating requests"
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          minLength: 0
           type: string
         timestamp:
           description: When the notification was triggered
           example: 2025-09-22T10:30:00Z
           format: date-time
+          minLength: 0
           type: string
       required:
       - noNotificationCreated
@@ -438,11 +453,13 @@ components:
           description: "The notification request ID that triggered this delivery,\
             \ used to correlate delivery outcomes with their originating requests"
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          minLength: 0
           type: string
         timestamp:
           description: When the notification was triggered
           example: 2025-09-22T10:30:00Z
           format: date-time
+          minLength: 0
           type: string
       required:
       - noRouterMatched
@@ -478,6 +495,7 @@ components:
           description: Individual delivery attempts to connectors
           items:
             $ref: "#/components/schemas/DeliveryAttempt"
+          minItems: 0
           type: array
         router:
           $ref: "#/components/schemas/RouterInfo"
@@ -497,10 +515,12 @@ components:
         routerId:
           description: Unique identifier of the router
           example: d4e5f678-90ab-cdef-1234-567890abcdef
+          minLength: 0
           type: string
         routerName:
           description: Display name of the router
           example: Production alerts router
+          minLength: 0
           type: string
       required:
       - routerId
@@ -521,6 +541,7 @@ components:
       - CONNECTOR_TYPE_PAGER_DUTY
       - CONNECTOR_TYPE_EMAIL
       - CONNECTOR_TYPE_GENERIC_HTTPS
+      - CONNECTOR_TYPE_MICROSOFT_TEAMS
       type: string
     v3.FilterOperator:
       description: Filter operator.
@@ -539,7 +560,9 @@ components:
           - a1b2c3d4-e5f6-7890-abcd-ef1234567890
           items:
             description: Case IDs to retrieve notification deliveries for
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       required:
       - caseIds

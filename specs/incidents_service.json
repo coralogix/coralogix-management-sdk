@@ -34,16 +34,20 @@
                   "type": "array",
                   "items": {
                     "description": "Filter by application names",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "assignee": {
                   "description": "Filter by assignee",
                   "type": "array",
                   "items": {
                     "description": "Filter by assignee",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "contextualLabels": {
                   "description": "Filter by contextual labels",
@@ -60,7 +64,8 @@
                   "deprecated": true,
                   "description": "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)",
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "minLength": 0
                 },
                 "incidentDurationRange": {},
                 "isMuted": {
@@ -70,74 +75,53 @@
                 "metaLabels": {
                   "description": "Filters all incidents with the given meta labels",
                   "type": "array",
-                  "items": {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "title": "Incident meta label",
-                    "description": "Meta label.",
-                    "type": "object",
-                    "properties": {
-                      "key": {
-                        "example": "key",
-                        "description": "The key.",
-                        "type": "string"
-                      },
-                      "value": {
-                        "example": "value",
-                        "description": "The value.",
-                        "type": "string"
-                      }
-                    }
-                  }
+                  "items": {},
+                  "minItems": 0
                 },
                 "metaLabelsOp": {
                   "$ref": "#/components/schemas/v1.FilterOperator"
                 },
-                "searchQuery": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/IncidentSearchQueryContextualLabel"
-                    },
-                    {
-                      "$ref": "#/components/schemas/IncidentSearchQueryIncidentField"
-                    }
-                  ]
-                },
+                "searchQuery": {},
                 "severity": {
                   "description": "Filter by incident severity",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "startTime": {
                   "deprecated": true,
                   "description": "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)",
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "minLength": 0
                 },
                 "state": {
                   "description": "Filter by incident state",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentState"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "status": {
                   "description": "Filter by incident status",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "subsystemName": {
                   "description": "Filter by subsystem names",
                   "type": "array",
                   "items": {
                     "description": "Filter by subsystem names",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 }
               }
             },
@@ -159,7 +143,8 @@
                     "$ref": "#/components/schemas/GroupByIncidentField"
                   }
                 ]
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -179,12 +164,14 @@
                   "example": 10,
                   "description": "Number of items to return per page",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "example": "next_page_token",
                   "description": "Token for the next page of results",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               },
               "required": [
@@ -270,21 +257,24 @@
                 "labels": {},
                 "name": {
                   "description": "The name of the incident",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "severity": {
                   "description": "The severity of the incident",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "status": {
                   "description": "The status of the incident",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "timestamp": {}
               }
@@ -307,12 +297,14 @@
                   "example": 10,
                   "description": "Number of items to return per page",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "example": "next_page_token",
                   "description": "Token for the next page of results",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               },
               "required": [
@@ -419,21 +411,24 @@
                 "labels": {},
                 "name": {
                   "description": "The name of the incident",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "severity": {
                   "description": "The severity of the incident",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "status": {
                   "description": "The status of the incident",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "timestamp": {}
               }
@@ -496,7 +491,8 @@
             "schema": {
               "example": "event_id_1",
               "description": "Event ID associated to the Incident to acknowledge",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -556,7 +552,8 @@
             "schema": {
               "example": "event_id_1",
               "description": "Event ID associated to the Incident to acknowledge",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -616,7 +613,8 @@
             "schema": {
               "example": "event_id_1",
               "description": "Event ID associated to the Incident to resolve",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -759,21 +757,24 @@
                 "labels": {},
                 "name": {
                   "description": "The name of the incident",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "severity": {
                   "description": "The severity of the incident",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentSeverity"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "status": {
                   "description": "The status of the incident",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/IncidentStatus"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "timestamp": {}
               }
@@ -837,8 +838,10 @@
               "type": "array",
               "items": {
                 "description": "The ids.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -903,7 +906,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/v1.OrderBy"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "pagination": {
                     "$ref": "#/components/schemas/incidents.v1.PaginationRequest"
@@ -976,8 +980,10 @@
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to acknowledge",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -1054,8 +1060,10 @@
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to assign",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -1125,8 +1133,10 @@
               "type": "array",
               "items": {
                 "description": "List of incident IDs to unassign",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -1194,8 +1204,10 @@
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to close",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -1269,8 +1281,10 @@
                     "type": "array",
                     "items": {
                       "description": "List of incident IDs to resolve",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -1336,7 +1350,8 @@
             "schema": {
               "example": "incident_id",
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -1396,7 +1411,8 @@
             "schema": {
               "example": "incident_id",
               "description": "ID of the incident to retrieve events for",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -1468,7 +1484,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Incident"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1488,7 +1505,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Incident"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1505,7 +1523,8 @@
           "assignee": {
             "example": "assignee",
             "description": "Assignee.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "count": {
             "example": 10,
@@ -1563,8 +1582,10 @@
             "type": "array",
             "items": {
               "description": "List of IDs that were not found",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1585,7 +1606,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Incident"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1602,7 +1624,8 @@
           "contextualLabelValue": {
             "example": "contextual_label_value",
             "description": "The contextual label value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "count": {
             "example": 10,
@@ -1629,8 +1652,10 @@
             "type": "array",
             "items": {
               "description": "The contextual label values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1649,7 +1674,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ContextualLabelValueWithCount"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1667,12 +1693,14 @@
           "fieldName": {
             "example": "field_name",
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fieldValue": {
             "example": "field_value",
             "description": "The field value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1696,7 +1724,8 @@
           "displayLabelValue": {
             "example": "display_label_value",
             "description": "The display label value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1717,8 +1746,10 @@
             "type": "array",
             "items": {
               "description": "The display label values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1737,7 +1768,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DisplayLabelValueWithCount"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1767,7 +1799,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1789,7 +1822,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1813,7 +1847,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1849,7 +1884,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentEvent"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1878,7 +1914,8 @@
         "properties": {
           "contextualLabel": {
             "description": "The contextual label to group by.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "orderByDirection": {
             "$ref": "#/components/schemas/v1.OrderByDirection"
@@ -1953,54 +1990,63 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Assignment"
-            }
+            },
+            "minItems": 0
           },
           "closedAt": {
             "example": "2024-01-01T00:00:00.000Z",
             "description": "The closed at.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "contextualLabels": {
             "description": "The contextual labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "createdAt": {
             "example": "2024-01-01T00:00:00.000Z",
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "example": "incident_description",
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayLabels": {
             "description": "The display labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "duration": {
             "description": "Duration.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "events": {
             "description": "List of events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentEvent"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "example": "incident_id",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isMuted": {
             "example": false,
@@ -2010,25 +2056,29 @@
           "lastStateUpdateKey": {
             "example": "last_state_update_key",
             "description": "The last state update key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lastStateUpdateTime": {
             "example": "2024-01-01T00:00:00.000Z",
             "description": "The last state update time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "metaLabels": {
             "description": "Metadata labels.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "example": "incident_name",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
@@ -2067,70 +2117,82 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentAssignmentCount"
-            }
+            },
+            "minItems": 0
           },
           "aggMetaLabelsCount": {
             "description": "The agg meta labels count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentMetaLabelsCount"
-            }
+            },
+            "minItems": 0
           },
           "aggSeverityCount": {
             "description": "The agg severity count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentSeverityCount"
-            }
+            },
+            "minItems": 0
           },
           "aggStateCount": {
             "description": "The agg state count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentStateCount"
-            }
+            },
+            "minItems": 0
           },
           "aggStatusCount": {
             "description": "The agg status count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentStatusCount"
-            }
+            },
+            "minItems": 0
           },
           "allValuesCount": {
             "description": "The all values count.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "firstCreatedAt": {
             "description": "The first created at.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "groupBysValue": {
             "description": "The group bys value.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupByValues"
-            }
+            },
+            "minItems": 0
           },
           "lastClosedAt": {
             "description": "The last closed at.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "lastStateUpdateTime": {
             "description": "The last state update time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "listIncidentsId": {
             "description": "The list incidents id.",
             "type": "array",
             "items": {
               "description": "The list incidents id.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -2161,7 +2223,8 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -2238,7 +2301,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2271,7 +2335,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2338,7 +2403,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2371,7 +2437,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2422,7 +2489,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2455,7 +2523,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2486,12 +2555,14 @@
         "properties": {
           "cxEventKey": {
             "description": "The cx event key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "cxEventTimestamp": {
             "description": "The cx event timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "incidentEvent": {
             "$ref": "#/components/schemas/IncidentEvent"
@@ -2518,23 +2589,28 @@
             "type": "array",
             "items": {
               "description": "The alert group by fields.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "alertId": {
             "description": "Unique identifier of the alert.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "alertLabels": {
             "description": "The alert labels.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
-            }
+            },
+            "minItems": 0
           },
           "alertName": {
             "description": "The alert name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "alertType": {
             "$ref": "#/components/schemas/IncidentEventAlertType"
@@ -2543,7 +2619,8 @@
             "description": "The incident permutation.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "incidentSeverity": {
@@ -2577,7 +2654,8 @@
         "properties": {
           "userId": {
             "description": "The user id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2590,7 +2668,8 @@
         "properties": {
           "systemName": {
             "description": "The system name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2610,11 +2689,13 @@
           "startTime": {
             "description": "Start time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "userId": {
             "description": "The user id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2632,7 +2713,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2665,7 +2747,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2726,7 +2809,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2759,7 +2843,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2822,7 +2907,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2855,7 +2941,8 @@
           "id": {
             "example": "incident_event_id",
             "description": "The ID of the incident event",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "incidentEventType": {
             "$ref": "#/components/schemas/IncidentEventType"
@@ -2926,7 +3013,8 @@
         "properties": {
           "applicationName": {
             "description": "Application associated with the incident.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2943,7 +3031,8 @@
           "closedAt": {
             "description": "Timestamp when the incident was closed.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -2960,7 +3049,8 @@
           "createdAt": {
             "description": "Timestamp when the incident was created.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -2976,7 +3066,8 @@
         "properties": {
           "duration": {
             "description": "Duration.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2992,7 +3083,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier of the incident.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3009,7 +3101,8 @@
           "lastStateUpdateTime": {
             "description": "Timestamp of the most recent state change.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -3025,7 +3118,8 @@
         "properties": {
           "name": {
             "description": "Display name of the incident.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3086,7 +3180,8 @@
         "properties": {
           "subsystemName": {
             "description": "Subsystem associated with the incident.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3122,7 +3217,8 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "metaLabel": {
             "$ref": "#/components/schemas/incidents.v1.MetaLabel"
@@ -3168,16 +3264,20 @@
             "type": "array",
             "items": {
               "description": "Filter by application names",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "assignee": {
             "description": "Filter by assignee",
             "type": "array",
             "items": {
               "description": "Filter by assignee",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "contextualLabels": {
             "description": "Filter by contextual labels",
@@ -3200,7 +3300,8 @@
             "deprecated": true,
             "description": "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "incidentDurationRange": {
             "$ref": "#/components/schemas/v1.TimeRange"
@@ -3214,7 +3315,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/incidents.v1.MetaLabel"
-            }
+            },
+            "minItems": 0
           },
           "metaLabelsOp": {
             "$ref": "#/components/schemas/v1.FilterOperator"
@@ -3227,35 +3329,41 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentSeverity"
-            }
+            },
+            "minItems": 0
           },
           "startTime": {
             "deprecated": true,
             "description": "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "state": {
             "description": "Filter by incident state",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentState"
-            }
+            },
+            "minItems": 0
           },
           "status": {
             "description": "Filter by incident status",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentStatus"
-            }
+            },
+            "minItems": 0
           },
           "subsystemName": {
             "description": "Filter by subsystem names",
             "type": "array",
             "items": {
               "description": "Filter by subsystem names",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3272,7 +3380,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssigneeWithCount"
-            }
+            },
+            "minItems": 0
           },
           "contextualLabels": {
             "description": "The contextual labels.",
@@ -3296,28 +3405,32 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentMetaLabelsWithCount"
-            }
+            },
+            "minItems": 0
           },
           "severityWithCount": {
             "description": "The severity with count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentSeverityWithCount"
-            }
+            },
+            "minItems": 0
           },
           "stateWithCount": {
             "description": "The state with count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentStateWithCount"
-            }
+            },
+            "minItems": 0
           },
           "statusWithCount": {
             "description": "The status with count.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentStatusWithCount"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -3351,12 +3464,14 @@
         "properties": {
           "contextualLabel": {
             "description": "The contextual label to search in.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "query": {
             "example": "error",
             "description": "The search query",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3379,7 +3494,8 @@
           "query": {
             "example": "error",
             "description": "The search query",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3411,7 +3527,8 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
@@ -3464,7 +3581,8 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "state": {
             "$ref": "#/components/schemas/IncidentState"
@@ -3518,7 +3636,8 @@
             "example": 10,
             "description": "Number of items.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "status": {
             "$ref": "#/components/schemas/IncidentStatus"
@@ -3564,7 +3683,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentAggregation"
-            }
+            },
+            "minItems": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3601,7 +3721,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IncidentEventExtended"
-            }
+            },
+            "minItems": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3623,7 +3744,9 @@
             "example": "100",
             "description": "Total number of incident events matching the filter",
             "type": "string",
-            "format": "uint64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "reachedLimit": {
             "example": false,
@@ -3645,7 +3768,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Incident"
-            }
+            },
+            "minItems": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
@@ -3665,8 +3789,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3708,7 +3834,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Incident"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -3728,7 +3855,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Incident"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -3744,7 +3872,8 @@
         "properties": {
           "cxEventKey": {
             "description": "The cx event key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3766,7 +3895,8 @@
         "properties": {
           "contextualLabel": {
             "description": "A contextual label key to order by.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "direction": {
             "$ref": "#/components/schemas/v1.OrderByDirection"
@@ -3832,12 +3962,14 @@
           "key": {
             "example": "key",
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "example": "value",
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3853,12 +3985,14 @@
             "example": 10,
             "description": "Number of items to return per page",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "pageToken": {
             "example": "next_page_token",
             "description": "Token for the next page of results",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3876,13 +4010,15 @@
           "nextPageToken": {
             "example": "next_page_token",
             "description": "Token for the next page of results",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "totalSize": {
             "example": 100,
             "description": "Total number of items available",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -3900,7 +4036,8 @@
           "userId": {
             "example": "user_id",
             "description": "The user id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3945,12 +4082,14 @@
           "endTime": {
             "description": "End time of the range",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "startTime": {
             "description": "Start time of the range",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [

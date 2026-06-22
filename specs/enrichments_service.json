@@ -51,7 +51,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentFieldDefinition"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "enrichmentType": {
                     "$ref": "#/components/schemas/EnrichmentType"
@@ -61,7 +62,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -104,7 +106,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
-                    }
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -154,8 +157,10 @@
               "items": {
                 "description": "The unique identifiers of the enrichment rules to delete.",
                 "type": "integer",
-                "format": "int64"
-              }
+                "format": "int64",
+                "minimum": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -197,7 +202,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -285,7 +291,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -304,7 +311,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -320,7 +328,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -334,7 +343,8 @@
           "resourceType": {
             "example": "ec2",
             "description": "The resource type.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -348,34 +358,40 @@
           "enrichmentAmountLimit": {
             "description": "The enrichment amount limit.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "enrichmentsInUse": {
             "description": "The enrichments in use.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "queryOnlyRowLimit": {
             "description": "The query only row limit.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "queryOnlySizeLimitBytes": {
-            "example": "",
             "description": "The query only size limit bytes.",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "rowLimit": {
             "description": "The row limit.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "sizeLimitBytes": {
-            "example": "",
             "description": "The size limit bytes.",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           }
         }
       },
@@ -390,7 +406,8 @@
             "example": 1,
             "description": "Unique identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -424,7 +441,8 @@
           "enrichedFieldName": {
             "example": "1",
             "description": "The enriched field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
@@ -432,13 +450,15 @@
           "fieldName": {
             "example": "1",
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "example": 1,
             "description": "Unique identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "selectedColumns": {
             "example": [
@@ -449,8 +469,10 @@
             "type": "array",
             "items": {
               "description": "The selected columns.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "targets": {
             "description": "The targets for the enrichment",
@@ -473,19 +495,23 @@
         "properties": {
           "enrichedFieldName": {
             "description": "The enriched field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fieldName": {
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "selectedColumns": {
             "description": "The selected columns.",
             "type": "array",
             "items": {
               "description": "The selected columns.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "targets": {
             "description": "The targets for the enrichment",
@@ -509,7 +535,8 @@
         "properties": {
           "enrichedFieldName": {
             "description": "The enriched field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
@@ -517,15 +544,18 @@
           "fieldName": {
             "example": "sourceIPs",
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "selectedColumns": {
             "description": "The selected columns.",
             "type": "array",
             "items": {
               "description": "The selected columns.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "targets": {
             "description": "The targets for the enrichment",
@@ -641,7 +671,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -663,7 +694,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -687,7 +719,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -732,13 +765,15 @@
             "example": 10,
             "description": "Limit.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "used": {
             "example": 5,
             "description": "The used.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -760,7 +795,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -776,8 +812,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -795,7 +833,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
-            }
+            },
+            "minItems": 0
           }
         }
       },

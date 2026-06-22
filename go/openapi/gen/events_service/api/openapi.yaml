@@ -23,7 +23,9 @@ paths:
           - 32144a8a-7ee0-4c16-a093-2bf1f9c12e1e
           items:
             description: Alert version IDs to filter events by
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: Time range to search for events
@@ -41,7 +43,7 @@ paths:
         required: false
         schema:
           additionalProperties:
-            example: ""
+            minLength: 0
             type: string
           description: "Optional event labels to filter by (e.g., app, subsystem,\
             \ region)"
@@ -56,6 +58,7 @@ paths:
           description: Ordering criteria for the returned events.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       - description: Pagination parameters for the response.
@@ -112,6 +115,7 @@ paths:
           description: Ordering criteria for the returned events.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       - description: Pagination parameters for the response.
@@ -197,7 +201,9 @@ paths:
           description: The ids.
           items:
             description: The ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: Ordering criteria for the returned events.
@@ -209,6 +215,7 @@ paths:
           description: Ordering criteria for the returned events.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       - description: Pagination parameters for the response.
@@ -301,6 +308,7 @@ paths:
         schema:
           description: Unique identifier of the alert event to retrieve.
           example: test
+          minLength: 0
           type: string
         style: simple
       - description: The order bys.
@@ -312,6 +320,7 @@ paths:
           description: The order bys.
           items:
             $ref: "#/components/schemas/EventsService_ListAlertEvents_order_bys_parameter_inner"
+          minItems: 0
           type: array
         style: form
       - description: Pagination parameters for the response.
@@ -393,7 +402,9 @@ components:
           description: The not found ids.
           items:
             description: The not found ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/events.v3.PaginationResponse"
@@ -424,18 +435,22 @@ components:
         cxEventDedupKey:
           description: The cx event dedup key.
           example: test_dedup_key
+          minLength: 0
           type: string
         cxEventKey:
           description: The cx event key.
           example: test
+          minLength: 0
           type: string
         cxEventLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: The cx event labels.
           type: object
         cxEventMetadata:
           additionalProperties:
+            minLength: 0
             type: string
           description: The cx event metadata.
           type: object
@@ -445,15 +460,18 @@ components:
         cxEventPayloadType:
           description: The cx event payload type.
           example: test_payload_type
+          minLength: 0
           type: string
         cxEventTimestamp:
           description: The cx event timestamp.
           example: 2024-05-05T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
         cxEventType:
           description: The cx event type.
           example: test_type
+          minLength: 0
           type: string
       required:
       - companyId
@@ -499,6 +517,7 @@ components:
           description: List of events.
           items:
             $ref: "#/components/schemas/CxEvent"
+          minItems: 0
           type: array
       required:
       - events
@@ -562,7 +581,9 @@ components:
       properties:
         fieldStatistics:
           additionalProperties:
-            format: int64
+            maxLength: 20
+            minLength: 1
+            pattern: "^-?[0-9]+$"
             type: string
           description: The field statistics.
           type: object
@@ -580,6 +601,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -596,6 +618,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -613,6 +636,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -682,6 +706,7 @@ components:
           description: List of events.
           items:
             $ref: "#/components/schemas/CxEvent"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/events.v3.PaginationResponse"
@@ -700,7 +725,9 @@ components:
         count:
           description: Number of items.
           example: "10"
-          format: uint64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         reachedLimit:
           description: The reached limit.
@@ -717,7 +744,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     events.v3.FilterMatcher:
@@ -749,11 +778,13 @@ components:
         nextPageToken:
           description: Token for fetching the next page of results.
           example: test
+          minLength: 0
           type: string
         totalSize:
           description: Total number of results.
           example: 10
           format: int64
+          minimum: 0
           type: integer
       type: object
     v3.FilterOperator:
@@ -837,6 +868,7 @@ components:
           description: List of events.
           items:
             $ref: "#/components/schemas/CxEvent"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/events.v3.PaginationResponse"
@@ -852,10 +884,12 @@ components:
         from:
           description: Inclusive start of the time range.
           format: date-time
+          minLength: 0
           type: string
         to:
           description: Inclusive end of the time range.
           format: date-time
+          minLength: 0
           type: string
       required:
       - from
@@ -875,10 +909,12 @@ components:
           description: Maximum number of results to return per page.
           example: 10
           format: int64
+          minimum: 0
           type: integer
         pageToken:
           description: Opaque token for fetching the next page of results.
           example: test
+          minLength: 0
           type: string
       type: object
     EventsFilter:
@@ -894,7 +930,9 @@ components:
           items:
             description: List of event attribute keys to include when retrieving event
               data.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         cxEventLabelsFilters: {}
         cxEventMetadataFilters: {}
@@ -904,7 +942,9 @@ components:
           - test_type
           items:
             description: List of event type identifiers to include in the results.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         timestamp: {}
       required:

@@ -178,6 +178,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceDeleteTeamGroup
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.groupId < 0 {
+		return localVarReturnValue, nil, reportError("groupId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -295,6 +298,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetGroupUsersEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.groupId < 0 {
+		return localVarReturnValue, nil, reportError("groupId must be greater than 0")
+	}
 
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", "")
@@ -404,6 +410,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.groupId < 0 {
+		return localVarReturnValue, nil, reportError("groupId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -507,6 +516,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceGetTeamGroupByN
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.name) < 0 {
+		return localVarReturnValue, nil, reportError("name must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -745,6 +757,9 @@ func (a *TeamGroupsManagementServiceAPIService) GroupsMgmtServiceUpdateTeamGroup
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.groupId < 0 {
+		return localVarReturnValue, nil, reportError("groupId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

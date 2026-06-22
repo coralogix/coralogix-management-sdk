@@ -21,6 +21,8 @@ var _ = bytes.MinRead
 
 // AlertDefProperties - struct for AlertDefProperties
 type AlertDefProperties struct {
+	AlertDefPropertiesAnalyticsImmediate *AlertDefPropertiesAnalyticsImmediate
+	AlertDefPropertiesAnalyticsThreshold *AlertDefPropertiesAnalyticsThreshold
 	AlertDefPropertiesFlow *AlertDefPropertiesFlow
 	AlertDefPropertiesLogsAnomaly *AlertDefPropertiesLogsAnomaly
 	AlertDefPropertiesLogsImmediate *AlertDefPropertiesLogsImmediate
@@ -34,6 +36,20 @@ type AlertDefProperties struct {
 	AlertDefPropertiesSloThreshold *AlertDefPropertiesSloThreshold
 	AlertDefPropertiesTracingImmediate *AlertDefPropertiesTracingImmediate
 	AlertDefPropertiesTracingThreshold *AlertDefPropertiesTracingThreshold
+}
+
+// AlertDefPropertiesAnalyticsImmediateAsAlertDefProperties is a convenience function that returns AlertDefPropertiesAnalyticsImmediate wrapped in AlertDefProperties
+func AlertDefPropertiesAnalyticsImmediateAsAlertDefProperties(v *AlertDefPropertiesAnalyticsImmediate) AlertDefProperties {
+	return AlertDefProperties{
+		AlertDefPropertiesAnalyticsImmediate: v,
+	}
+}
+
+// AlertDefPropertiesAnalyticsThresholdAsAlertDefProperties is a convenience function that returns AlertDefPropertiesAnalyticsThreshold wrapped in AlertDefProperties
+func AlertDefPropertiesAnalyticsThresholdAsAlertDefProperties(v *AlertDefPropertiesAnalyticsThreshold) AlertDefProperties {
+	return AlertDefProperties{
+		AlertDefPropertiesAnalyticsThreshold: v,
+	}
 }
 
 // AlertDefPropertiesFlowAsAlertDefProperties is a convenience function that returns AlertDefPropertiesFlow wrapped in AlertDefProperties
@@ -132,6 +148,40 @@ func AlertDefPropertiesTracingThresholdAsAlertDefProperties(v *AlertDefPropertie
 func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into AlertDefPropertiesAnalyticsImmediate
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesAnalyticsImmediate)
+	if err == nil {
+		jsonAlertDefPropertiesAnalyticsImmediate, _ := json.Marshal(dst.AlertDefPropertiesAnalyticsImmediate)
+		if string(jsonAlertDefPropertiesAnalyticsImmediate) == "{}" { // empty struct
+			dst.AlertDefPropertiesAnalyticsImmediate = nil
+		} else {
+			if err = validator.Validate(dst.AlertDefPropertiesAnalyticsImmediate); err != nil {
+				dst.AlertDefPropertiesAnalyticsImmediate = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.AlertDefPropertiesAnalyticsImmediate = nil
+	}
+
+	// try to unmarshal data into AlertDefPropertiesAnalyticsThreshold
+	err = json.Unmarshal(data, &dst.AlertDefPropertiesAnalyticsThreshold)
+	if err == nil {
+		jsonAlertDefPropertiesAnalyticsThreshold, _ := json.Marshal(dst.AlertDefPropertiesAnalyticsThreshold)
+		if string(jsonAlertDefPropertiesAnalyticsThreshold) == "{}" { // empty struct
+			dst.AlertDefPropertiesAnalyticsThreshold = nil
+		} else {
+			if err = validator.Validate(dst.AlertDefPropertiesAnalyticsThreshold); err != nil {
+				dst.AlertDefPropertiesAnalyticsThreshold = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.AlertDefPropertiesAnalyticsThreshold = nil
+	}
+
 	// try to unmarshal data into AlertDefPropertiesFlow
 	err = json.Unmarshal(data, &dst.AlertDefPropertiesFlow)
 	if err == nil {
@@ -355,6 +405,8 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.AlertDefPropertiesAnalyticsImmediate = nil
+		dst.AlertDefPropertiesAnalyticsThreshold = nil
 		dst.AlertDefPropertiesFlow = nil
 		dst.AlertDefPropertiesLogsAnomaly = nil
 		dst.AlertDefPropertiesLogsImmediate = nil
@@ -379,6 +431,14 @@ func (dst *AlertDefProperties) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src AlertDefProperties) MarshalJSON() ([]byte, error) {
+	if src.AlertDefPropertiesAnalyticsImmediate != nil {
+		return json.Marshal(&src.AlertDefPropertiesAnalyticsImmediate)
+	}
+
+	if src.AlertDefPropertiesAnalyticsThreshold != nil {
+		return json.Marshal(&src.AlertDefPropertiesAnalyticsThreshold)
+	}
+
 	if src.AlertDefPropertiesFlow != nil {
 		return json.Marshal(&src.AlertDefPropertiesFlow)
 	}
@@ -439,6 +499,14 @@ func (obj *AlertDefProperties) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
+	if obj.AlertDefPropertiesAnalyticsImmediate != nil {
+		return obj.AlertDefPropertiesAnalyticsImmediate
+	}
+
+	if obj.AlertDefPropertiesAnalyticsThreshold != nil {
+		return obj.AlertDefPropertiesAnalyticsThreshold
+	}
+
 	if obj.AlertDefPropertiesFlow != nil {
 		return obj.AlertDefPropertiesFlow
 	}
@@ -497,6 +565,14 @@ func (obj *AlertDefProperties) GetActualInstance() (interface{}) {
 
 // Get the actual instance value
 func (obj AlertDefProperties) GetActualInstanceValue() (interface{}) {
+	if obj.AlertDefPropertiesAnalyticsImmediate != nil {
+		return *obj.AlertDefPropertiesAnalyticsImmediate
+	}
+
+	if obj.AlertDefPropertiesAnalyticsThreshold != nil {
+		return *obj.AlertDefPropertiesAnalyticsThreshold
+	}
+
 	if obj.AlertDefPropertiesFlow != nil {
 		return *obj.AlertDefPropertiesFlow
 	}

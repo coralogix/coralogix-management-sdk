@@ -29,8 +29,10 @@
               "type": "array",
               "items": {
                 "description": "Alert version IDs to filter events by",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -49,12 +51,14 @@
                 "from": {
                   "description": "Inclusive start of the time range.",
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "minLength": 0
                 },
                 "to": {
                   "description": "Inclusive end of the time range.",
                   "type": "string",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "minLength": 0
                 }
               },
               "required": [
@@ -72,8 +76,8 @@
               "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
               "type": "object",
               "additionalProperties": {
-                "example": "",
-                "type": "string"
+                "type": "string",
+                "minLength": 0
               }
             },
             "style": "form"
@@ -95,7 +99,8 @@
                     "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -110,12 +115,14 @@
                   "example": 10,
                   "description": "Maximum number of results to return per page.",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "example": "test",
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -186,8 +193,10 @@
                   "type": "array",
                   "items": {
                     "description": "List of event attribute keys to include when retrieving event data.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "cxEventLabelsFilters": {},
                 "cxEventMetadataFilters": {},
@@ -199,8 +208,10 @@
                   "type": "array",
                   "items": {
                     "description": "List of event type identifiers to include in the results.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "timestamp": {}
               },
@@ -229,7 +240,8 @@
                     "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -244,12 +256,14 @@
                   "example": 10,
                   "description": "Maximum number of results to return per page.",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "example": "test",
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -320,8 +334,10 @@
                   "type": "array",
                   "items": {
                     "description": "List of event attribute keys to include when retrieving event data.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "cxEventLabelsFilters": {},
                 "cxEventMetadataFilters": {},
@@ -333,8 +349,10 @@
                   "type": "array",
                   "items": {
                     "description": "List of event type identifiers to include in the results.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "timestamp": {}
               },
@@ -400,8 +418,10 @@
               "type": "array",
               "items": {
                 "description": "The ids.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -422,7 +442,8 @@
                     "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -437,12 +458,14 @@
                   "example": 10,
                   "description": "Maximum number of results to return per page.",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "example": "test",
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -525,8 +548,10 @@
                   "type": "array",
                   "items": {
                     "description": "List of event attribute keys to include when retrieving event data.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "cxEventLabelsFilters": {},
                 "cxEventMetadataFilters": {},
@@ -538,8 +563,10 @@
                   "type": "array",
                   "items": {
                     "description": "List of event type identifiers to include in the results.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "timestamp": {}
               },
@@ -604,7 +631,8 @@
             "schema": {
               "example": "test",
               "description": "Unique identifier of the alert event to retrieve.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           },
@@ -625,7 +653,8 @@
                     "$ref": "#/components/schemas/events.v3.OrderByFields"
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           },
@@ -640,12 +669,14 @@
                   "example": 10,
                   "description": "Maximum number of results to return per page.",
                   "type": "integer",
-                  "format": "int64"
+                  "format": "int64",
+                  "minimum": 0
                 },
                 "pageToken": {
                   "example": "test",
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -706,8 +737,10 @@
             "type": "array",
             "items": {
               "description": "The not found ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
@@ -732,25 +765,29 @@
           "cxEventDedupKey": {
             "example": "test_dedup_key",
             "description": "The cx event dedup key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "cxEventKey": {
             "example": "test",
             "description": "The cx event key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "cxEventLabels": {
             "description": "The cx event labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "cxEventMetadata": {
             "description": "The cx event metadata.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "cxEventPayload": {
@@ -760,18 +797,21 @@
           "cxEventPayloadType": {
             "example": "test_payload_type",
             "description": "The cx event payload type.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "cxEventTimestamp": {
             "example": "2024-05-05T00:00:00.000Z",
             "description": "The cx event timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "cxEventType": {
             "example": "test_type",
             "description": "The cx event type.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -798,7 +838,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -855,7 +896,9 @@
             "type": "object",
             "additionalProperties": {
               "type": "string",
-              "format": "int64"
+              "pattern": "^-?[0-9]+$",
+              "minLength": 1,
+              "maxLength": 20
             }
           }
         }
@@ -883,7 +926,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -905,7 +949,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -929,7 +974,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -976,7 +1022,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
-            }
+            },
+            "minItems": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
@@ -998,7 +1045,9 @@
             "example": "10",
             "description": "Number of items.",
             "type": "string",
-            "format": "uint64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "reachedLimit": {
             "example": false,
@@ -1020,8 +1069,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1059,13 +1110,15 @@
           "nextPageToken": {
             "example": "test",
             "description": "Token for fetching the next page of results.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "totalSize": {
             "example": 10,
             "description": "Total number of results.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -1105,7 +1158,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
-            }
+            },
+            "minItems": 0
           },
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"

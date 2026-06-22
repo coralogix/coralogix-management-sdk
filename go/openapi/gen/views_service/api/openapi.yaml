@@ -15,6 +15,33 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                views:
+                - filters:
+                    filters:
+                    - name: applicationName
+                      selectedValues:
+                        demo: true
+                    - name: subsystemName
+                      selectedValues:
+                        demo: true
+                    - name: operationName
+                      selectedValues:
+                        demo: true
+                    - name: serviceName
+                      selectedValues:
+                        demo: true
+                    - name: severity
+                      selectedValues:
+                        demo: true
+                  id: 52
+                  name: Logs view
+                  searchQuery:
+                    query: logs
+                  timeSelection:
+                    customSelection:
+                      fromTime: 2024-01-25T11:31:43.152Z
+                      toTime: 2024-01-25T11:37:13.238Z
               schema:
                 $ref: "#/components/schemas/ListViewsResponse"
           description: ""
@@ -36,6 +63,32 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                filters:
+                  filters:
+                  - name: applicationName
+                    selectedValues:
+                      demo: true
+                  - name: subsystemName
+                    selectedValues:
+                      demo: true
+                  - name: operationName
+                    selectedValues:
+                      demo: true
+                  - name: serviceName
+                    selectedValues:
+                      demo: true
+                  - name: severity
+                    selectedValues:
+                      demo: true
+                id: 52
+                name: Logs view
+                searchQuery:
+                  query: logs
+                timeSelection:
+                  customSelection:
+                    fromTime: 2024-01-25T11:31:43.152Z
+                    toTime: 2024-01-25T11:37:13.238Z
               schema:
                 $ref: "#/components/schemas/View"
           description: ""
@@ -91,6 +144,32 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                filters:
+                  filters:
+                  - name: applicationName
+                    selectedValues:
+                      demo: true
+                  - name: subsystemName
+                    selectedValues:
+                      demo: true
+                  - name: operationName
+                    selectedValues:
+                      demo: true
+                  - name: serviceName
+                    selectedValues:
+                      demo: true
+                  - name: severity
+                    selectedValues:
+                      demo: true
+                id: 52
+                name: Logs view
+                searchQuery:
+                  query: logs
+                timeSelection:
+                  customSelection:
+                    fromTime: 2024-01-25T11:31:43.152Z
+                    toTime: 2024-01-25T11:37:13.238Z
               schema:
                 $ref: "#/components/schemas/View"
           description: ""
@@ -124,6 +203,32 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                filters:
+                  filters:
+                  - name: applicationName
+                    selectedValues:
+                      demo: true
+                  - name: subsystemName
+                    selectedValues:
+                      demo: true
+                  - name: operationName
+                    selectedValues:
+                      demo: true
+                  - name: serviceName
+                    selectedValues:
+                      demo: true
+                  - name: severity
+                    selectedValues:
+                      demo: true
+                id: 52
+                name: Logs view
+                searchQuery:
+                  query: logs new
+                timeSelection:
+                  customSelection:
+                    fromTime: 2024-01-25T11:31:43.152Z
+                    toTime: 2024-01-25T11:37:13.238Z
               schema:
                 $ref: "#/components/schemas/View"
           description: ""
@@ -175,6 +280,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -191,6 +297,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -208,6 +315,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -264,6 +372,7 @@ components:
           description: The views.
           items:
             $ref: "#/components/schemas/View"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -272,7 +381,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     QuickTimeSelection:
@@ -290,6 +401,7 @@ components:
           description: Folder name
           example: 3600
           format: int64
+          minimum: 0
           type: integer
       required:
       - seconds

@@ -23,6 +23,57 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListViewsResponse"
+                },
+                "example": {
+                  "views": [
+                    {
+                      "filters": {
+                        "filters": [
+                          {
+                            "name": "applicationName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "subsystemName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "operationName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "serviceName",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          },
+                          {
+                            "name": "severity",
+                            "selectedValues": {
+                              "demo": true
+                            }
+                          }
+                        ]
+                      },
+                      "id": 52,
+                      "name": "Logs view",
+                      "searchQuery": {
+                        "query": "logs"
+                      },
+                      "timeSelection": {
+                        "customSelection": {
+                          "fromTime": "2024-01-25T11:31:43.152Z",
+                          "toTime": "2024-01-25T11:37:13.238Z"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -90,6 +141,53 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/View"
+                },
+                "example": {
+                  "filters": {
+                    "filters": [
+                      {
+                        "name": "applicationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "subsystemName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "operationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "serviceName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "severity",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      }
+                    ]
+                  },
+                  "id": 52,
+                  "name": "Logs view",
+                  "searchQuery": {
+                    "query": "logs"
+                  },
+                  "timeSelection": {
+                    "customSelection": {
+                      "fromTime": "2024-01-25T11:31:43.152Z",
+                      "toTime": "2024-01-25T11:37:13.238Z"
+                    }
+                  }
                 }
               }
             }
@@ -108,21 +206,6 @@
           "url": ""
         },
         "operationId": "ViewsService_GetView",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "id",
-            "required": true,
-            "schema": {
-              "example": 52,
-              "description": "id",
-              "type": "integer",
-              "format": "int32"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -130,6 +213,53 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/View"
+                },
+                "example": {
+                  "filters": {
+                    "filters": [
+                      {
+                        "name": "applicationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "subsystemName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "operationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "serviceName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "severity",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      }
+                    ]
+                  },
+                  "id": 52,
+                  "name": "Logs view",
+                  "searchQuery": {
+                    "query": "logs"
+                  },
+                  "timeSelection": {
+                    "customSelection": {
+                      "fromTime": "2024-01-25T11:31:43.152Z",
+                      "toTime": "2024-01-25T11:37:13.238Z"
+                    }
+                  }
                 }
               }
             }
@@ -146,21 +276,6 @@
           "url": ""
         },
         "operationId": "ViewsService_ReplaceView",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "id",
-            "required": true,
-            "schema": {
-              "example": 52,
-              "description": "id",
-              "type": "integer",
-              "format": "int32"
-            },
-            "style": "simple"
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -216,6 +331,53 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/View"
+                },
+                "example": {
+                  "filters": {
+                    "filters": [
+                      {
+                        "name": "applicationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "subsystemName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "operationName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "serviceName",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      },
+                      {
+                        "name": "severity",
+                        "selectedValues": {
+                          "demo": true
+                        }
+                      }
+                    ]
+                  },
+                  "id": 52,
+                  "name": "Logs view",
+                  "searchQuery": {
+                    "query": "logs new"
+                  },
+                  "timeSelection": {
+                    "customSelection": {
+                      "fromTime": "2024-01-25T11:31:43.152Z",
+                      "toTime": "2024-01-25T11:37:13.238Z"
+                    }
+                  }
                 }
               }
             }
@@ -232,21 +394,6 @@
           "url": ""
         },
         "operationId": "ViewsService_DeleteView",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "id",
-            "required": true,
-            "schema": {
-              "example": 52,
-              "description": "id",
-              "type": "integer",
-              "format": "int32"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -259,7 +406,22 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "example": 52,
+            "description": "id",
+            "type": "integer",
+            "format": "int32"
+          },
+          "style": "simple"
+        }
+      ]
     }
   },
   "components": {
@@ -322,7 +484,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -344,7 +507,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -368,7 +532,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -387,7 +552,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/View"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -400,8 +566,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -423,7 +591,8 @@
             "example": 3600,
             "description": "Folder name",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [

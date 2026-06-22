@@ -22,9 +22,9 @@
             "name": "id",
             "description": "Unique identifier.",
             "schema": {
-              "example": "",
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -286,7 +286,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -313,7 +314,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -335,7 +337,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -359,7 +362,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -388,8 +392,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -424,7 +430,8 @@
           },
           "entityType": {
             "description": "The entity type.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -444,14 +451,16 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/QuotaAllocationEntityTypeRule"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [

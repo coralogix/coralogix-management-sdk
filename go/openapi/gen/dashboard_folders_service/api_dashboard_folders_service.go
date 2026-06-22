@@ -191,6 +191,9 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceDeleteDashboa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.folderId) < 0 {
+		return localVarReturnValue, nil, reportError("folderId must have at least 0 elements")
+	}
 
 	if r.requestId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")
@@ -307,6 +310,9 @@ func (a *DashboardFoldersServiceAPIService) DashboardFoldersServiceGetDashboardF
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.folderId) < 0 {
+		return localVarReturnValue, nil, reportError("folderId must have at least 0 elements")
+	}
 
 	if r.requestId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "request_id", r.requestId, "form", "")

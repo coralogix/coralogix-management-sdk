@@ -79,6 +79,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -116,6 +117,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -153,6 +155,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       requestBody:
@@ -194,6 +197,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
       title: Create Rule Group Set Result
       type: object
@@ -210,6 +214,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -226,6 +231,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -243,6 +249,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -259,17 +266,21 @@ components:
             expression. Allows late-arriving data to be ingested before evaluation.
           example: 60000
           format: int64
+          minimum: 0
           type: integer
         expr:
           description: The expr.
+          minLength: 0
           type: string
         labels:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of labels.
           type: object
         record:
           description: Record.
+          minLength: 0
           type: string
       title: In Rule
       type: object
@@ -281,27 +292,33 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         interval:
           description: Interval.
           format: int64
+          minimum: 0
           type: integer
         limit:
           description: Limit.
-          example: ""
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/InRule"
+          minItems: 0
           type: array
         version:
           description: Version number.
           format: int64
+          minimum: 0
           type: integer
       title: In Rule Group
       type: object
@@ -311,14 +328,16 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OutRule:
       example:
-        lastEvalDurationMs: ""
+        lastEvalDurationMs: lastEvalDurationMs
         record: record
-        evaluationDelayMs: 6
+        evaluationDelayMs: 0
         expr: expr
         labels:
           key: labels
@@ -326,74 +345,86 @@ components:
         evaluationDelayMs:
           description: The evaluation delay ms.
           format: int64
+          minimum: 0
           type: integer
         expr:
           description: The expr.
+          minLength: 0
           type: string
         labels:
           additionalProperties:
+            minLength: 0
             type: string
           description: List of labels.
           type: object
         lastEvalDurationMs:
           description: The last eval duration ms.
-          example: ""
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         record:
           description: Record.
+          minLength: 0
           type: string
       type: object
     OutRuleGroup:
       example:
-        limit: ""
+        limit: limit
         name: name
         interval: 0
         rules:
-        - lastEvalDurationMs: ""
+        - lastEvalDurationMs: lastEvalDurationMs
           record: record
-          evaluationDelayMs: 6
+          evaluationDelayMs: 0
           expr: expr
           labels:
             key: labels
-        - lastEvalDurationMs: ""
+        - lastEvalDurationMs: lastEvalDurationMs
           record: record
-          evaluationDelayMs: 6
+          evaluationDelayMs: 0
           expr: expr
           labels:
             key: labels
         id: id
-        lastEvalAt: ""
-        version: 1
+        lastEvalAt: lastEvalAt
+        version: 0
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         interval:
           description: Interval.
           format: int64
+          minimum: 0
           type: integer
         lastEvalAt:
           description: The last eval at.
-          example: ""
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         limit:
           description: Limit.
-          example: ""
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/OutRule"
+          minItems: 0
           type: array
         version:
           description: Version number.
           format: int64
+          minimum: 0
           type: integer
       type: object
     OutRuleGroupSet:
@@ -401,44 +432,44 @@ components:
       example:
         name: name
         groups:
-        - limit: ""
+        - limit: limit
           name: name
           interval: 0
           rules:
-          - lastEvalDurationMs: ""
+          - lastEvalDurationMs: lastEvalDurationMs
             record: record
-            evaluationDelayMs: 6
+            evaluationDelayMs: 0
             expr: expr
             labels:
               key: labels
-          - lastEvalDurationMs: ""
+          - lastEvalDurationMs: lastEvalDurationMs
             record: record
-            evaluationDelayMs: 6
+            evaluationDelayMs: 0
             expr: expr
             labels:
               key: labels
           id: id
-          lastEvalAt: ""
-          version: 1
-        - limit: ""
+          lastEvalAt: lastEvalAt
+          version: 0
+        - limit: limit
           name: name
           interval: 0
           rules:
-          - lastEvalDurationMs: ""
+          - lastEvalDurationMs: lastEvalDurationMs
             record: record
-            evaluationDelayMs: 6
+            evaluationDelayMs: 0
             expr: expr
             labels:
               key: labels
-          - lastEvalDurationMs: ""
+          - lastEvalDurationMs: lastEvalDurationMs
             record: record
-            evaluationDelayMs: 6
+            evaluationDelayMs: 0
             expr: expr
             labels:
               key: labels
           id: id
-          lastEvalAt: ""
-          version: 1
+          lastEvalAt: lastEvalAt
+          version: 0
         id: id
       externalDocs:
         description: Find out more about recording rules
@@ -448,12 +479,15 @@ components:
           description: List of groups.
           items:
             $ref: "#/components/schemas/OutRuleGroup"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Out Rule Group Set
       type: object
@@ -463,85 +497,85 @@ components:
         sets:
         - name: name
           groups:
-          - limit: ""
+          - limit: limit
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: ""
-            version: 1
-          - limit: ""
+            lastEvalAt: lastEvalAt
+            version: 0
+          - limit: limit
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: ""
-            version: 1
+            lastEvalAt: lastEvalAt
+            version: 0
           id: id
         - name: name
           groups:
-          - limit: ""
+          - limit: limit
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: ""
-            version: 1
-          - limit: ""
+            lastEvalAt: lastEvalAt
+            version: 0
+          - limit: limit
             name: name
             interval: 0
             rules:
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
-            - lastEvalDurationMs: ""
+            - lastEvalDurationMs: lastEvalDurationMs
               record: record
-              evaluationDelayMs: 6
+              evaluationDelayMs: 0
               expr: expr
               labels:
                 key: labels
             id: id
-            lastEvalAt: ""
-            version: 1
+            lastEvalAt: lastEvalAt
+            version: 0
           id: id
       externalDocs:
         description: Find out more about recording rules
@@ -551,6 +585,7 @@ components:
           description: The sets.
           items:
             $ref: "#/components/schemas/OutRuleGroupSet"
+          minItems: 0
           type: array
       title: Rule Group Set Listing
       type: object
@@ -572,9 +607,11 @@ components:
           description: List of groups.
           items:
             $ref: "#/components/schemas/InRuleGroup"
+          minItems: 0
           type: array
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Create Rule Group Set
       type: object
@@ -585,9 +622,11 @@ components:
           description: List of groups.
           items:
             $ref: "#/components/schemas/InRuleGroup"
+          minItems: 0
           type: array
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Update Rule Group Set
       type: object

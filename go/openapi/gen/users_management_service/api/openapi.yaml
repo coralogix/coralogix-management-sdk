@@ -20,6 +20,7 @@ paths:
         schema:
           description: Team ID where the users will be created
           format: int64
+          minimum: 0
           type: integer
         style: simple
       requestBody:
@@ -71,6 +72,7 @@ paths:
         schema:
           description: Team ID containing the users to update
           format: int64
+          minimum: 0
           type: integer
         style: simple
       requestBody:
@@ -119,6 +121,7 @@ paths:
         schema:
           description: Team ID to search within
           format: int64
+          minimum: 0
           type: integer
         style: simple
       - description: User account ID to retrieve
@@ -129,6 +132,7 @@ paths:
         schema:
           description: User account ID to retrieve
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -172,6 +176,7 @@ paths:
         schema:
           description: Team ID containing the users to update
           format: int64
+          minimum: 0
           type: integer
         style: simple
       requestBody:
@@ -220,6 +225,7 @@ paths:
         schema:
           description: Team ID to search within
           format: int64
+          minimum: 0
           type: integer
         style: simple
       - description: Optional filter by username (partial match supported)
@@ -229,7 +235,7 @@ paths:
         required: false
         schema:
           description: Optional filter by username (partial match supported)
-          example: ""
+          minLength: 0
           type: string
         style: form
       - description: "Optional filter by user status (e.g., 'active', 'inactive')"
@@ -248,6 +254,7 @@ paths:
         schema:
           description: Number of results per page
           format: int64
+          minimum: 0
           type: integer
         style: form
       - description: Token for pagination to retrieve the next page of results
@@ -258,6 +265,7 @@ paths:
         schema:
           description: Token for pagination to retrieve the next page of results
           format: int64
+          minimum: 0
           type: integer
         style: form
       responses:
@@ -305,6 +313,7 @@ components:
       properties:
         accessType:
           description: "Type of access: 'permanent' or 'temporary'"
+          minLength: 0
           type: string
         permanentAccess:
           additionalProperties: false
@@ -327,6 +336,7 @@ components:
       properties:
         accessType:
           description: "Type of access: 'permanent' or 'temporary'"
+          minLength: 0
           type: string
         temporaryAccess:
           $ref: "#/components/schemas/TemporaryAccess"
@@ -363,6 +373,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -379,6 +390,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -396,6 +408,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -426,7 +439,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OnboardingMode:
@@ -449,7 +464,7 @@ components:
         \ criteria, along with pagination tokens and total count."
       example:
         nextPageToken: 0
-        totalCount: 6
+        totalCount: 0
         users:
         - firstName: firstName
           lastName: lastName
@@ -471,16 +486,19 @@ components:
           description: Token for the next page of results. Empty if no more pages
             available.
           format: int64
+          minimum: 0
           type: integer
         totalCount:
           description: Total number of users matching the search criteria across all
             pages
           format: int64
+          minimum: 0
           type: integer
         users:
           description: List of users matching the search criteria
           items:
             $ref: "#/components/schemas/rbac.v2.User"
+          minItems: 0
           type: array
       title: SearchUsersResponse
       type: object
@@ -495,6 +513,7 @@ components:
             \ this time, the user will no longer be able to access the system."
           example: 2021-01-01T00:00:00Z
           format: date-time
+          minLength: 0
           type: string
       title: TemporaryAccess
       type: object
@@ -514,7 +533,9 @@ components:
           items:
             description: List of user account IDs for the successfully updated users
             format: int64
+            minimum: 0
             type: integer
+          minItems: 0
           type: array
       title: UpdateUsersResponse
       type: object
@@ -536,7 +557,9 @@ components:
             description: List of user account IDs for users whose status was successfully
               updated
             format: int64
+            minimum: 0
             type: integer
+          minItems: 0
           type: array
       title: UpdateUserStatusResponse
       type: object
@@ -562,18 +585,22 @@ components:
             \ or both. Not supported in invite onboarding mode"
           items:
             $ref: "#/components/schemas/AllowedLoginMode"
+          minItems: 0
           type: array
         firstName:
           description: User's first name
+          minLength: 0
           type: string
         lastName:
           description: User's last name
+          minLength: 0
           type: string
         status:
           $ref: "#/components/schemas/UserStatus"
         username:
           description: Unique username for the user. Must be unique within the system.
             Updating username for existing users is not supported and ignored.
+          minLength: 0
           type: string
       title: UserTemplate
       type: object
@@ -597,21 +624,26 @@ components:
       properties:
         firstName:
           description: User first name
+          minLength: 0
           type: string
         lastName:
           description: User last name
+          minLength: 0
           type: string
         status:
           $ref: "#/components/schemas/UserStatus"
         userAccountId:
           description: Associated account id. An account can have many users.
           format: int64
+          minimum: 0
           type: integer
         userId:
           description: Unique user id
+          minLength: 0
           type: string
         username:
           description: Unique username
+          minLength: 0
           type: string
       title: User
       type: object
@@ -626,6 +658,7 @@ components:
         userAccountId:
           description: User account ID of the user to update
           format: int64
+          minimum: 0
           type: integer
         userTemplate:
           $ref: "#/components/schemas/UserTemplate"
@@ -656,7 +689,9 @@ components:
             description: List of user account IDs to update. All users will be set
               to the same status.
             format: int64
+            minimum: 0
             type: integer
+          minItems: 0
           type: array
       title: UpdateUserStatusRequest
       type: object

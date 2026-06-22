@@ -246,6 +246,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -262,6 +263,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -279,6 +281,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -294,6 +297,7 @@ components:
       properties:
         bucket:
           description: Bucket name.
+          minLength: 0
           type: string
       title: GCS Configuration
       type: object
@@ -325,14 +329,17 @@ components:
         crn:
           description: The crn.
           example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+          minLength: 0
           type: string
         endpoint:
           description: Endpoint.
           example: s3.us-south.cloud-object-storage.appdomain.cloud
+          minLength: 0
           type: string
         serviceCrn:
           description: The service crn.
           example: "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+          minLength: 0
           type: string
       title: IBM Bucket Configuration
       type: object
@@ -342,7 +349,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     RetentionPolicyRequest:
@@ -359,16 +368,19 @@ components:
           description: The five minutes resolution.
           example: 2
           format: int64
+          minimum: 0
           type: integer
         oneHourResolution:
           description: The one hour resolution.
           example: 3
           format: int64
+          minimum: 0
           type: integer
         rawResolution:
           description: The raw resolution.
           example: 1
           format: int64
+          minimum: 0
           type: integer
       title: Retenion Policy Request
       type: object
@@ -380,9 +392,11 @@ components:
       properties:
         bucket:
           description: Bucket name.
+          minLength: 0
           type: string
         region:
           description: Region.
+          minLength: 0
           type: string
       title: S3 Configuration
       type: object
@@ -413,12 +427,14 @@ components:
           $ref: "#/components/schemas/GcsConfig"
         prefix:
           description: Storage path prefix applied to all archived objects.
+          minLength: 0
           type: string
         retentionPolicy:
           $ref: "#/components/schemas/RetentionPolicyRequest"
         tenantId:
           description: Tenant identifier.
           format: int64
+          minimum: 0
           type: integer
       required:
       - gcs
@@ -435,12 +451,14 @@ components:
           $ref: "#/components/schemas/IbmConfigV2"
         prefix:
           description: Storage path prefix applied to all archived objects.
+          minLength: 0
           type: string
         retentionPolicy:
           $ref: "#/components/schemas/RetentionPolicyRequest"
         tenantId:
           description: Tenant identifier.
           format: int64
+          minimum: 0
           type: integer
       required:
       - ibm
@@ -455,6 +473,7 @@ components:
           type: boolean
         prefix:
           description: Storage path prefix applied to all archived objects.
+          minLength: 0
           type: string
         retentionPolicy:
           $ref: "#/components/schemas/RetentionPolicyRequest"
@@ -463,6 +482,7 @@ components:
         tenantId:
           description: Tenant identifier.
           format: int64
+          minimum: 0
           type: integer
       required:
       - s3
@@ -478,6 +498,7 @@ components:
         retentionDays:
           description: Archive retention period in days.
           format: int64
+          minimum: 0
           type: integer
       required:
       - gcs
@@ -494,6 +515,7 @@ components:
         retentionDays:
           description: Archive retention period in days.
           format: int64
+          minimum: 0
           type: integer
       required:
       - ibm
@@ -508,6 +530,7 @@ components:
         retentionDays:
           description: Archive retention period in days.
           format: int64
+          minimum: 0
           type: integer
         s3:
           $ref: "#/components/schemas/S3Config"

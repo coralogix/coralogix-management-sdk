@@ -34,7 +34,7 @@ type Case struct {
 	// When the case was created
 	CreateTime time.Time `json:"createTime"`
 	// Measures how long the Case is/was opened in milliseconds
-	Duration *string `json:"duration,omitempty"`
+	Duration *string `json:"duration,omitempty" validate:"regexp=^[0-9]+$"`
 	// Grouping dimensions (e.g., service, subsystem)
 	Groupings []V1KeyValue `json:"groupings"`
 	// Unique identifier of the case
@@ -44,6 +44,7 @@ type Case struct {
 	KpiBreaches *KPIBreaches `json:"kpiBreaches,omitempty"`
 	// User-defined labels for the case
 	Labels []V1KeyValue `json:"labels"`
+	OllyAnalysis *OllyAnalysis `json:"ollyAnalysis,omitempty"`
 	Priority CasePriority `json:"priority"`
 	PriorityDetails *PriorityDetails `json:"priorityDetails,omitempty"`
 	// Readable identifier of the case, available only for the cases that became Active. May be used interchangeably with `id` when calling Cases APIs that target a specific case.
@@ -421,6 +422,38 @@ func (o *Case) SetLabels(v []V1KeyValue) {
 	o.Labels = v
 }
 
+// GetOllyAnalysis returns the OllyAnalysis field value if set, zero value otherwise.
+func (o *Case) GetOllyAnalysis() OllyAnalysis {
+	if o == nil || IsNil(o.OllyAnalysis) {
+		var ret OllyAnalysis
+		return ret
+	}
+	return *o.OllyAnalysis
+}
+
+// GetOllyAnalysisOk returns a tuple with the OllyAnalysis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Case) GetOllyAnalysisOk() (*OllyAnalysis, bool) {
+	if o == nil || IsNil(o.OllyAnalysis) {
+		return nil, false
+	}
+	return o.OllyAnalysis, true
+}
+
+// HasOllyAnalysis returns a boolean if a field has been set.
+func (o *Case) HasOllyAnalysis() bool {
+	if o != nil && !IsNil(o.OllyAnalysis) {
+		return true
+	}
+
+	return false
+}
+
+// SetOllyAnalysis gets a reference to the given OllyAnalysis and assigns it to the OllyAnalysis field.
+func (o *Case) SetOllyAnalysis(v OllyAnalysis) {
+	o.OllyAnalysis = &v
+}
+
 // GetPriority returns the Priority field value
 func (o *Case) GetPriority() CasePriority {
 	if o == nil {
@@ -655,6 +688,9 @@ func (o Case) ToMap() (map[string]interface{}, error) {
 		toSerialize["kpiBreaches"] = o.KpiBreaches
 	}
 	toSerialize["labels"] = o.Labels
+	if !IsNil(o.OllyAnalysis) {
+		toSerialize["ollyAnalysis"] = o.OllyAnalysis
+	}
 	toSerialize["priority"] = o.Priority
 	if !IsNil(o.PriorityDetails) {
 		toSerialize["priorityDetails"] = o.PriorityDetails
@@ -734,6 +770,7 @@ func (o *Case) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "impactedEntities")
 		delete(additionalProperties, "kpiBreaches")
 		delete(additionalProperties, "labels")
+		delete(additionalProperties, "ollyAnalysis")
 		delete(additionalProperties, "priority")
 		delete(additionalProperties, "priorityDetails")
 		delete(additionalProperties, "readableId")

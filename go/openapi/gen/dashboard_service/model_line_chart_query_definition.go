@@ -45,7 +45,7 @@ type LineChartQueryDefinition struct {
 	Resolution *LineChartResolution `json:"resolution,omitempty"`
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
-	SeriesCountLimit *string `json:"seriesCountLimit,omitempty"`
+	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`

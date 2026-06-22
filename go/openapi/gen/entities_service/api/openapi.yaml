@@ -61,6 +61,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -77,6 +78,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -94,6 +96,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -112,7 +115,9 @@ components:
           description: The entity sub types.
           items:
             description: The entity sub types.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ListEntityTypesResponse:
@@ -128,6 +133,7 @@ components:
           description: The entity types.
           items:
             $ref: "#/components/schemas/notification_center.EntityType"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -136,7 +142,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     events.v3.FilterMatcher:

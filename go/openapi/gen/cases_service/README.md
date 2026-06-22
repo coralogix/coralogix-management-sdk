@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 *CasesServiceAPI* | [**CasesServiceClearPriorityOverride**](docs/CasesServiceAPI.md#casesserviceclearpriorityoverride) | **Delete** /cases/priority-override/v1/{id} | Remove priority override
 *CasesServiceAPI* | [**CasesServiceCloseCase**](docs/CasesServiceAPI.md#casesserviceclosecase) | **Post** /cases/closed/v1/{id} | Close a case
 *CasesServiceAPI* | [**CasesServiceGetCase**](docs/CasesServiceAPI.md#casesservicegetcase) | **Get** /cases/cases/v1/{id} | Get case by ID
+*CasesServiceAPI* | [**CasesServiceGetCaseByIndicator**](docs/CasesServiceAPI.md#casesservicegetcasebyindicator) | **Post** /cases/indicators/v1/get | Get case by indicator
 *CasesServiceAPI* | [**CasesServiceGetCaseDeepLinks**](docs/CasesServiceAPI.md#casesservicegetcasedeeplinks) | **Get** /cases/cases/v1/{case_id}/deep-links | Get case deep links
 *CasesServiceAPI* | [**CasesServiceGetFilterValues**](docs/CasesServiceAPI.md#casesservicegetfiltervalues) | **Post** /cases/filter-values/v1 | Get available filter values
 *CasesServiceAPI* | [**CasesServiceGetGroupingKeys**](docs/CasesServiceAPI.md#casesservicegetgroupingkeys) | **Get** /cases/grouping-keys/v1 | Get available grouping keys
@@ -174,6 +175,7 @@ Class | Method | HTTP request | Description
  - [ConnectorTypeFilterNoConnector](docs/ConnectorTypeFilterNoConnector.md)
  - [DateRangeFilter](docs/DateRangeFilter.md)
  - [DateRangeMode](docs/DateRangeMode.md)
+ - [EntityLink](docs/EntityLink.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterAggregation](docs/FilterAggregation.md)
  - [FilterGroup](docs/FilterGroup.md)
@@ -182,6 +184,11 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)
  - [FilterPathAndValuesMultipleValues](docs/FilterPathAndValuesMultipleValues.md)
  - [Filters](docs/Filters.md)
+ - [GenericIndicator](docs/GenericIndicator.md)
+ - [GenericIndicatorStatus](docs/GenericIndicatorStatus.md)
+ - [GenericIndicatorType](docs/GenericIndicatorType.md)
+ - [GetCaseByIndicatorRequest](docs/GetCaseByIndicatorRequest.md)
+ - [GetCaseByIndicatorResponse](docs/GetCaseByIndicatorResponse.md)
  - [GetCaseDeepLinksResponse](docs/GetCaseDeepLinksResponse.md)
  - [GetCaseFilterValuesRequest](docs/GetCaseFilterValuesRequest.md)
  - [GetCaseResponse](docs/GetCaseResponse.md)
@@ -192,6 +199,7 @@ Class | Method | HTTP request | Description
  - [ImpactedEntityLink](docs/ImpactedEntityLink.md)
  - [IndicatorPriority](docs/IndicatorPriority.md)
  - [IndicatorState](docs/IndicatorState.md)
+ - [IndicatorType](docs/IndicatorType.md)
  - [KPIBreaches](docs/KPIBreaches.md)
  - [KPIFilter](docs/KPIFilter.md)
  - [KPIPriority](docs/KPIPriority.md)
@@ -201,10 +209,15 @@ Class | Method | HTTP request | Description
  - [LogsLink](docs/LogsLink.md)
  - [MetricLink](docs/MetricLink.md)
  - [MultipleValues](docs/MultipleValues.md)
+ - [OllyAnalysis](docs/OllyAnalysis.md)
+ - [OllyAnalysisPayload](docs/OllyAnalysisPayload.md)
+ - [OllyAnalysisRootCauseConfidence](docs/OllyAnalysisRootCauseConfidence.md)
+ - [OllyAnalysisStatus](docs/OllyAnalysisStatus.md)
  - [PriorityAggregation](docs/PriorityAggregation.md)
  - [PriorityDetails](docs/PriorityDetails.md)
  - [PrometheusAlert](docs/PrometheusAlert.md)
  - [PrometheusAlertIndicator](docs/PrometheusAlertIndicator.md)
+ - [PrometheusAlertManagerIndicator](docs/PrometheusAlertManagerIndicator.md)
  - [PrometheusAlertQuery](docs/PrometheusAlertQuery.md)
  - [PrometheusAlertStatus](docs/PrometheusAlertStatus.md)
  - [PrometheusAlertStatusResolved](docs/PrometheusAlertStatusResolved.md)

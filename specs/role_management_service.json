@@ -24,7 +24,8 @@
             "schema": {
               "description": "Team identifier.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           }
@@ -143,20 +144,6 @@
           "url": ""
         },
         "operationId": "RoleManagementService_GetCustomRole",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "role_id",
-            "description": "The role id.",
-            "required": true,
-            "schema": {
-              "description": "The role id.",
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -204,20 +191,6 @@
           "url": ""
         },
         "operationId": "RoleManagementService_UpdateRole",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "role_id",
-            "description": "The role id.",
-            "required": true,
-            "schema": {
-              "description": "The role id.",
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -227,11 +200,13 @@
                 "properties": {
                   "newDescription": {
                     "description": "The new description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "newName": {
                     "description": "The new name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "newPermissions": {
                     "$ref": "#/components/schemas/v2.Permissions"
@@ -288,20 +263,6 @@
           "url": ""
         },
         "operationId": "RoleManagementService_DeleteRole",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "role_id",
-            "description": "The role id.",
-            "required": true,
-            "schema": {
-              "description": "The role id.",
-              "type": "integer",
-              "format": "int64"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -344,7 +305,22 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "role_id",
+          "description": "The role id.",
+          "required": true,
+          "schema": {
+            "description": "The role id.",
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "style": "simple"
+        }
+      ]
     },
     "/aaa/system-roles/v1": {
       "get": {
@@ -401,29 +377,35 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "parentRoleId": {
             "description": "The parent role id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "permissions": {
             "description": "List of permissions.",
             "type": "array",
             "items": {
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "teamId": {
             "description": "Team identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -439,28 +421,34 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "parentRoleName": {
             "description": "The parent role name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissions": {
             "description": "List of permissions.",
             "type": "array",
             "items": {
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "teamId": {
             "description": "Team identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -477,7 +465,8 @@
           "id": {
             "description": "Unique identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -490,38 +479,46 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "parentRoleId": {
             "description": "The parent role id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "parentRoleName": {
             "description": "The parent role name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissions": {
             "description": "List of permissions.",
             "type": "array",
             "items": {
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "roleId": {
             "description": "The role id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "teamId": {
             "description": "Team identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -556,7 +553,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -578,7 +576,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -602,7 +601,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -633,7 +633,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CustomRole"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -649,7 +650,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SystemRole"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -662,8 +664,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -672,24 +676,29 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissions": {
             "description": "List of permissions.",
             "type": "array",
             "items": {
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "roleId": {
             "description": "The role id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -720,8 +729,10 @@
             "type": "array",
             "items": {
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },

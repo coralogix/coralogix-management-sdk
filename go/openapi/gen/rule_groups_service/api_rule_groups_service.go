@@ -296,6 +296,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceDeleteRuleGroupExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.groupId) < 0 {
+		return localVarReturnValue, nil, reportError("groupId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -498,6 +501,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceGetRuleGroupExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.groupId) < 0 {
+		return localVarReturnValue, nil, reportError("groupId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -813,6 +819,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroupExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.groupId) < 0 {
+		return localVarReturnValue, nil, reportError("groupId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

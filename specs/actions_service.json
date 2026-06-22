@@ -125,16 +125,20 @@
                     "type": "array",
                     "items": {
                       "description": "The application names.",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   },
                   "description": {
                     "description": "Human-readable description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "dpxlFilter": {
                     "description": "The dpxl filter.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "isPrivate": {
                     "description": "The is private.",
@@ -142,7 +146,8 @@
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "sourceType": {
                     "$ref": "#/components/schemas/v2.SourceType"
@@ -152,19 +157,23 @@
                     "type": "array",
                     "items": {
                       "description": "The subsystem names.",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   },
                   "url": {
                     "description": "URL.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "urlFields": {
                     "description": "The url fields.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/UrlField"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -214,19 +223,6 @@
           "url": ""
         },
         "operationId": "ActionsService_GetAction",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -268,19 +264,6 @@
           "url": ""
         },
         "operationId": "ActionsService_DeleteAction",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -311,7 +294,21 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier.",
+          "required": true,
+          "schema": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     },
     "/actions/batch/v2": {
       "post": {
@@ -336,7 +333,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ActionExecutionRequest"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -398,7 +396,8 @@
                     "type": "object",
                     "additionalProperties": {
                       "type": "integer",
-                      "format": "int64"
+                      "format": "int64",
+                      "minimum": 0
                     }
                   },
                   "sharedActionsOrder": {
@@ -406,7 +405,8 @@
                     "type": "object",
                     "additionalProperties": {
                       "type": "integer",
-                      "format": "int64"
+                      "format": "int64",
+                      "minimum": 0
                     }
                   }
                 }
@@ -577,7 +577,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ActionExecutionResponse"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -593,16 +594,20 @@
             "type": "array",
             "items": {
               "description": "The application names.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dpxlFilter": {
             "description": "The dpxl filter.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isPrivate": {
             "description": "The is private.",
@@ -610,7 +615,8 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sourceType": {
             "$ref": "#/components/schemas/v2.SourceType"
@@ -620,19 +626,23 @@
             "type": "array",
             "items": {
               "description": "The subsystem names.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "url": {
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "urlFields": {
             "description": "The url fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UrlField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -657,7 +667,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -692,7 +703,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -714,7 +726,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -738,7 +751,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -769,7 +783,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.Action"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -782,8 +797,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -828,7 +845,8 @@
         "properties": {
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "required": {
             "description": "The required.",
@@ -855,24 +873,30 @@
             "type": "array",
             "items": {
               "description": "The application names.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "createdBy": {
             "description": "The created by.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dpxlFilter": {
             "description": "The dpxl filter.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isHidden": {
             "description": "The is hidden.",
@@ -884,7 +908,8 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sourceType": {
             "$ref": "#/components/schemas/v2.SourceType"
@@ -894,19 +919,23 @@
             "type": "array",
             "items": {
               "description": "The subsystem names.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "url": {
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "urlFields": {
             "description": "The url fields.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UrlField"
-            }
+            },
+            "minItems": 0
           }
         }
       },

@@ -17,6 +17,8 @@ model_alert_def_order_by_fields.go
 model_alert_def_override.go
 model_alert_def_priority.go
 model_alert_def_properties.go
+model_alert_def_properties_analytics_immediate.go
+model_alert_def_properties_analytics_threshold.go
 model_alert_def_properties_flow.go
 model_alert_def_properties_logs_anomaly.go
 model_alert_def_properties_logs_immediate.go
@@ -40,6 +42,11 @@ model_alert_definition_order_by_list.go
 model_alert_defs_service_list_alert_defs_pagination_parameter.go
 model_alerts_op.go
 model_alerts_v3_pagination_response.go
+model_analytics_immediate_type.go
+model_analytics_threshold_operator.go
+model_analytics_threshold_rule.go
+model_analytics_threshold_rule_condition.go
+model_analytics_threshold_type.go
 model_anomaly_alert_settings.go
 model_bulk_delete_alert_definitions_request.go
 model_bulk_delete_alert_defs_response.go
@@ -52,6 +59,7 @@ model_burn_rate_type_dual.go
 model_burn_rate_type_single.go
 model_create_alert_def_response.go
 model_create_alert_definition_request.go
+model_dataprime_alert_query.go
 model_day_of_week.go
 model_download_alerts_response.go
 model_duration_unit.go

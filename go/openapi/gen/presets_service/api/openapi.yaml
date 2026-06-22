@@ -21,8 +21,9 @@ paths:
           description: The unique identifiers of the presets to retrieve.
           items:
             description: The unique identifiers of the presets to retrieve.
-            example: ""
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -49,6 +50,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -75,6 +77,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the custom preset to set as default.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -134,6 +137,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the preset to retrieve.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -160,6 +164,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the preset to set as default.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -345,7 +350,9 @@ components:
           description: The not found ids.
           items:
             description: The not found ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         presets:
           additionalProperties:
@@ -372,6 +379,7 @@ components:
           $ref: "#/components/schemas/MessageConfig"
         payloadType:
           description: Type of the payload.
+          minLength: 0
           type: string
       type: object
     CreateCustomPresetResponse:
@@ -436,6 +444,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -452,6 +461,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -469,6 +479,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -590,6 +601,7 @@ components:
           description: The preset summaries.
           items:
             $ref: "#/components/schemas/PresetSummary"
+          minItems: 0
           type: array
       type: object
     MatchEntityTypeAndSubTypeCondition:
@@ -599,6 +611,7 @@ components:
       properties:
         entitySubType:
           description: The entity sub type.
+          minLength: 0
           type: string
       type: object
     MatchEntityTypeCondition:
@@ -622,6 +635,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.MessageConfigField"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -630,7 +644,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NotificationCenterConditionTypeMatchEntityType:
@@ -702,36 +718,43 @@ components:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/ConfigOverrides"
+          minItems: 0
           type: array
         connectorType:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         createTime:
           description: The create time.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: Custom preset for alerts
+          minLength: 0
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: My Preset
+          minLength: 0
           type: string
         parentId:
           description: The parent id.
           example: preset_system_slack_alerts_basic
+          minLength: 0
           type: string
         presetType:
           $ref: "#/components/schemas/PresetType"
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       title: Preset
       type: object
@@ -760,32 +783,38 @@ components:
         createTime:
           description: The create time.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: Custom preset for alerts
           maxLength: 5000
+          minLength: 0
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: My Preset
           maxLength: 200
+          minLength: 0
           type: string
         parentId:
           description: The parent id.
           example: c246e826-10c2-405e-8d3f-afcc24ad4d15
+          minLength: 0
           type: string
         presetType:
           $ref: "#/components/schemas/PresetType"
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       title: Preset Summary
       type: object
@@ -870,6 +899,7 @@ components:
       - SERVICE_NOW
       - EMAIL
       - PAGERDUTY_INCIDENTS
+      - MICROSOFT_TEAMS
       type: string
     notification_center.EntityType:
       description: Entity type.
@@ -892,10 +922,12 @@ components:
         fieldName:
           description: The field name.
           example: title
+          minLength: 0
           type: string
         template:
           description: The template.
           example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          minLength: 0
           type: string
       title: Message Config Field
       type: object

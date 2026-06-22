@@ -31,7 +31,8 @@
                   "teamId": {
                     "description": "Team identifier.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   }
                 }
               }
@@ -89,7 +90,8 @@
             "schema": {
               "description": "The unique identifier of the team whose SAML configuration to retrieve.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           }
@@ -151,7 +153,8 @@
                   "teamId": {
                     "description": "Team identifier.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   }
                 }
               }
@@ -210,7 +213,8 @@
               "example": 1234567,
               "description": "Team identifier.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           }
@@ -273,7 +277,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -295,7 +300,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -319,7 +325,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -347,7 +354,8 @@
           "teamId": {
             "description": "The team id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -374,11 +382,13 @@
         "properties": {
           "icon": {
             "description": "Icon identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -412,19 +422,23 @@
             "items": {
               "example": "group1",
               "description": "List of group names mapped from the identity provider for role-based access.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "metadataContent": {
             "example": "<?xml version= ...",
             "description": "Raw XML content of the identity provider SAML metadata document.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "teamEntityId": {
             "example": 1234567,
             "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -451,19 +465,23 @@
             "items": {
               "example": "group1",
               "description": "List of group names mapped from the identity provider for role-based access.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "metadataUrl": {
             "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
             "description": "URL to the identity provider SAML metadata XML document.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "teamEntityId": {
             "example": 1234567,
             "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -479,8 +497,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -496,27 +516,32 @@
           "assertionConsumerServiceUrl": {
             "example": "assertion",
             "description": "The assertion consumer service url.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "binding": {
             "example": "binding",
             "description": "The binding.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "metadataUrl": {
             "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
             "description": "The metadata url.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "nameIdFormat": {
             "example": "name_id",
             "description": "The name id format.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "signingCertPem": {
             "example": "certificate",
             "description": "The signing cert pem.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

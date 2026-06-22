@@ -24,17 +24,17 @@ var _ MappedNullable = &SpansCount{}
 // SpansCount This data structure represents a spans count.
 type SpansCount struct {
 	// The error span count.
-	ErrorSpanCount *string `json:"errorSpanCount,omitempty"`
+	ErrorSpanCount *string `json:"errorSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// The low error span count.
-	LowErrorSpanCount *string `json:"lowErrorSpanCount,omitempty"`
+	LowErrorSpanCount *string `json:"lowErrorSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// The low success span count.
-	LowSuccessSpanCount *string `json:"lowSuccessSpanCount,omitempty"`
+	LowSuccessSpanCount *string `json:"lowSuccessSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// The medium error span count.
-	MediumErrorSpanCount *string `json:"mediumErrorSpanCount,omitempty"`
+	MediumErrorSpanCount *string `json:"mediumErrorSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// The medium success span count.
-	MediumSuccessSpanCount *string `json:"mediumSuccessSpanCount,omitempty"`
+	MediumSuccessSpanCount *string `json:"mediumSuccessSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// The success span count.
-	SuccessSpanCount *string `json:"successSpanCount,omitempty"`
+	SuccessSpanCount *string `json:"successSpanCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Timestamp of the event.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}

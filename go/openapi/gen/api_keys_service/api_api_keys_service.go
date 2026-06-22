@@ -178,6 +178,9 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceDeleteApiKeyExecute(r ApiApiKey
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.keyId) < 0 {
+		return localVarReturnValue, nil, reportError("keyId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -281,6 +284,9 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceGetApiKeyExecute(r ApiApiKeysSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.keyId) < 0 {
+		return localVarReturnValue, nil, reportError("keyId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -588,6 +594,9 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceUpdateApiKeyExecute(r ApiApiKey
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.keyId) < 0 {
+		return localVarReturnValue, nil, reportError("keyId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

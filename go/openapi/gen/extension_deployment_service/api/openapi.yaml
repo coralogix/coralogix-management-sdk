@@ -94,6 +94,7 @@ paths:
         required: false
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: form
       - description: Version number.
@@ -103,6 +104,7 @@ paths:
         required: false
         schema:
           description: Version number.
+          minLength: 0
           type: string
         style: form
       - description: The item ids.
@@ -114,7 +116,9 @@ paths:
           description: The item ids.
           items:
             description: The item ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The applications.
@@ -126,7 +130,9 @@ paths:
           description: The applications.
           items:
             description: The applications.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The subsystems.
@@ -138,7 +144,9 @@ paths:
           description: The subsystems.
           items:
             description: The subsystems.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The extension deployment configuration to update.
@@ -190,6 +198,7 @@ paths:
         required: false
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: form
       - description: Version number.
@@ -199,6 +208,7 @@ paths:
         required: false
         schema:
           description: Version number.
+          minLength: 0
           type: string
         style: form
       - description: The item ids.
@@ -210,7 +220,9 @@ paths:
           description: The item ids.
           items:
             description: The item ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The applications.
@@ -222,7 +234,9 @@ paths:
           description: The applications.
           items:
             description: The applications.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The subsystems.
@@ -234,7 +248,9 @@ paths:
           description: The subsystems.
           items:
             description: The subsystems.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       - description: The extension deployment configuration.
@@ -297,16 +313,16 @@ components:
       example:
         summary:
           deployedItemCounts:
-            alerts: 6
-            eventsToMetrics: 5
-            grafanaDashboards: 2
-            savedViews: 2
-            customDashboards: 1
-            kibanaDashboards: 7
+            alerts: 0
+            eventsToMetrics: 0
+            grafanaDashboards: 0
+            savedViews: 0
+            customDashboards: 0
+            kibanaDashboards: 0
             actions: 0
-            metricsRuleGroup: 9
-            enrichments: 5
-            parsingRules: 3
+            metricsRuleGroup: 0
+            enrichments: 0
+            parsingRules: 0
         itemIds:
         - itemIds
         - itemIds
@@ -325,27 +341,35 @@ components:
           description: The applications.
           items:
             description: The applications.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         itemIds:
           description: The item ids.
           items:
             description: The item ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         subsystems:
           description: The subsystems.
           items:
             description: The subsystems.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         summary:
           $ref: "#/components/schemas/DeployedExtensionSummary"
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Deployed extension
       type: object
@@ -353,16 +377,16 @@ components:
       description: Deployed extension summary.
       example:
         deployedItemCounts:
-          alerts: 6
-          eventsToMetrics: 5
-          grafanaDashboards: 2
-          savedViews: 2
-          customDashboards: 1
-          kibanaDashboards: 7
+          alerts: 0
+          eventsToMetrics: 0
+          grafanaDashboards: 0
+          savedViews: 0
+          customDashboards: 0
+          kibanaDashboards: 0
           actions: 0
-          metricsRuleGroup: 9
-          enrichments: 5
-          parsingRules: 3
+          metricsRuleGroup: 0
+          enrichments: 0
+          parsingRules: 0
       externalDocs:
         url: ""
       properties:
@@ -391,25 +415,33 @@ components:
           description: The applications.
           items:
             description: The applications.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         itemIds:
           description: The item ids.
           items:
             description: The item ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         subsystems:
           description: The subsystems.
           items:
             description: The subsystems.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Extension deployment
       type: object
@@ -423,12 +455,15 @@ components:
       properties:
         itemId:
           description: The item id.
+          minLength: 0
           type: string
         reason:
           description: Reason.
+          minLength: 0
           type: string
         remoteId:
           description: The remote id.
+          minLength: 0
           type: string
       title: Failed item
       type: object
@@ -445,6 +480,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -461,6 +497,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -478,6 +515,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -489,16 +527,16 @@ components:
         deployedExtensions:
         - summary:
             deployedItemCounts:
-              alerts: 6
-              eventsToMetrics: 5
-              grafanaDashboards: 2
-              savedViews: 2
-              customDashboards: 1
-              kibanaDashboards: 7
+              alerts: 0
+              eventsToMetrics: 0
+              grafanaDashboards: 0
+              savedViews: 0
+              customDashboards: 0
+              kibanaDashboards: 0
               actions: 0
-              metricsRuleGroup: 9
-              enrichments: 5
-              parsingRules: 3
+              metricsRuleGroup: 0
+              enrichments: 0
+              parsingRules: 0
           itemIds:
           - itemIds
           - itemIds
@@ -512,16 +550,16 @@ components:
           - applications
         - summary:
             deployedItemCounts:
-              alerts: 6
-              eventsToMetrics: 5
-              grafanaDashboards: 2
-              savedViews: 2
-              customDashboards: 1
-              kibanaDashboards: 7
+              alerts: 0
+              eventsToMetrics: 0
+              grafanaDashboards: 0
+              savedViews: 0
+              customDashboards: 0
+              kibanaDashboards: 0
               actions: 0
-              metricsRuleGroup: 9
-              enrichments: 5
-              parsingRules: 3
+              metricsRuleGroup: 0
+              enrichments: 0
+              parsingRules: 0
           itemIds:
           - itemIds
           - itemIds
@@ -540,64 +578,75 @@ components:
           description: The deployed extensions.
           items:
             $ref: "#/components/schemas/DeployedExtension"
+          minItems: 0
           type: array
       title: Get deployed extensions response
       type: object
     ItemCounts:
       description: Item counts.
       example:
-        alerts: 6
-        eventsToMetrics: 5
-        grafanaDashboards: 2
-        savedViews: 2
-        customDashboards: 1
-        kibanaDashboards: 7
+        alerts: 0
+        eventsToMetrics: 0
+        grafanaDashboards: 0
+        savedViews: 0
+        customDashboards: 0
+        kibanaDashboards: 0
         actions: 0
-        metricsRuleGroup: 9
-        enrichments: 5
-        parsingRules: 3
+        metricsRuleGroup: 0
+        enrichments: 0
+        parsingRules: 0
       externalDocs:
         url: ""
       properties:
         actions:
           description: List of actions.
           format: int64
+          minimum: 0
           type: integer
         alerts:
           description: List of alerts.
           format: int64
+          minimum: 0
           type: integer
         customDashboards:
           description: The custom dashboards.
           format: int64
+          minimum: 0
           type: integer
         enrichments:
           description: List of enrichments.
           format: int64
+          minimum: 0
           type: integer
         eventsToMetrics:
           description: The events to metrics.
           format: int64
+          minimum: 0
           type: integer
         grafanaDashboards:
           description: The grafana dashboards.
           format: int64
+          minimum: 0
           type: integer
         kibanaDashboards:
           description: The kibana dashboards.
           format: int64
+          minimum: 0
           type: integer
         metricsRuleGroup:
           description: The metrics rule group.
           format: int64
+          minimum: 0
           type: integer
         parsingRules:
           description: The parsing rules.
           format: int64
+          minimum: 0
           type: integer
         savedViews:
           description: The saved views.
           format: int64
+          minimum: 0
           type: integer
       title: Item counts
       type: object
@@ -607,7 +656,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     UndeployExtensionResponse:
@@ -641,6 +692,7 @@ components:
           description: The failed items.
           items:
             $ref: "#/components/schemas/FailedItem"
+          minItems: 0
           type: array
       title: Revert deployment of extension response
       type: object
@@ -686,25 +738,33 @@ components:
           description: The applications.
           items:
             description: The applications.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         itemIds:
           description: The item ids.
           items:
             description: The item ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         subsystems:
           description: The subsystems.
           items:
             description: The subsystems.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Extension deployment
       type: object
@@ -713,6 +773,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         keptExtensionItems:
           description: List of extension item IDs to retain after undeploying; all
@@ -720,7 +781,9 @@ components:
           items:
             description: List of extension item IDs to retain after undeploying; all
               other items will be removed.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Revert deployment of extension request
       type: object

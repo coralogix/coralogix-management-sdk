@@ -24,7 +24,8 @@
             "schema": {
               "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           },
@@ -35,7 +36,8 @@
             "schema": {
               "description": "Page size.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           },
@@ -44,9 +46,9 @@
             "name": "page_token",
             "description": "The page token.",
             "schema": {
-              "example": "",
               "description": "The page token.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -102,23 +104,27 @@
                 "properties": {
                   "description": {
                     "description": "Human-readable description of the team group.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "externalId": {
                     "description": "External identifier for the group, used when the group is managed by an external identity provider.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "groupType": {
                     "$ref": "#/components/schemas/GroupType"
                   },
                   "name": {
                     "description": "Unique display name for the new team group.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "roleId": {
                     "description": "Identifier of the role to assign to this group.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "scope": {
                     "$ref": "#/components/schemas/v2.Scope"
@@ -126,15 +132,18 @@
                   "teamId": {
                     "description": "Team to associate the group with. If not set, uses the authenticated team.",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "userIds": {
                     "description": "The user ids.",
                     "type": "array",
                     "items": {
                       "description": "The user ids.",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -199,7 +208,8 @@
             "schema": {
               "description": "The unique identifier of the team group.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -261,7 +271,8 @@
             "required": true,
             "schema": {
               "description": "The name of the team group to retrieve.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -324,7 +335,8 @@
             "schema": {
               "description": "Unique identifier of the team group to update.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -339,18 +351,21 @@
                 "properties": {
                   "description": {
                     "description": "New human-readable description for the team group.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "externalId": {
                     "description": "New external identifier for the group.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "groupType": {
                     "$ref": "#/components/schemas/GroupType"
                   },
                   "name": {
                     "description": "New display name for the team group.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "roleUpdate": {
                     "$ref": "#/components/schemas/RoleUpdate"
@@ -422,7 +437,8 @@
             "schema": {
               "description": "The unique identifier of the team group to delete.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -485,7 +501,8 @@
             "schema": {
               "description": "The unique identifier of the team group whose users to list.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           },
@@ -496,7 +513,8 @@
             "schema": {
               "description": "Pagination size. Defaults to 100 if empty.",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           },
@@ -505,9 +523,9 @@
             "name": "page_token",
             "description": "Optional pagination continuation token.",
             "schema": {
-              "example": "",
               "description": "Optional pagination continuation token.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -605,7 +623,8 @@
           "groupId": {
             "description": "The group id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -632,7 +651,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -654,7 +674,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -678,7 +699,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -696,19 +718,22 @@
         "properties": {
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "totalCount": {
             "description": "The total count.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "users": {
             "description": "List of users.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -754,16 +779,19 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TeamGroup"
-            }
+            },
+            "minItems": 0
           },
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "totalCount": {
             "description": "The total count.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -795,8 +823,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -810,16 +840,19 @@
         "properties": {
           "description": {
             "description": "Role description",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Unique role name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "roleId": {
             "description": "Unique role identifier",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -863,7 +896,8 @@
         "properties": {
           "actionType": {
             "description": "Discriminator indicating the role update action type (set_role_id or clear).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "clear": {
             "$ref": "#/components/schemas/ClearRole"
@@ -883,7 +917,8 @@
         "properties": {
           "actionType": {
             "description": "Discriminator indicating the role update action type (set_role_id or clear).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "setRoleId": {
             "$ref": "#/components/schemas/SetRoleId"
@@ -934,7 +969,8 @@
         "properties": {
           "actionType": {
             "description": "Discriminator indicating the scope update action type (set_scope_id or clear).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "clear": {
             "$ref": "#/components/schemas/ClearScope"
@@ -954,7 +990,8 @@
         "properties": {
           "actionType": {
             "description": "Discriminator indicating the scope update action type (set_scope_id or clear).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "setScopeId": {
             "$ref": "#/components/schemas/SetScopeId"
@@ -975,7 +1012,8 @@
           "value": {
             "description": "The value.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -988,7 +1026,8 @@
         "properties": {
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1003,20 +1042,24 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "description": "Group description",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "externalId": {
             "description": "Group external identifier. Applies if team is externally defined.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Unique team group identifier",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "groupOrigin": {
             "$ref": "#/components/schemas/GroupOrigin"
@@ -1026,7 +1069,8 @@
           },
           "name": {
             "description": "Unique name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "role": {
             "$ref": "#/components/schemas/Role"
@@ -1037,12 +1081,14 @@
           "teamId": {
             "description": "Team this group belongs to",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -1072,8 +1118,10 @@
             "type": "array",
             "items": {
               "description": "The user ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1133,7 +1181,8 @@
           },
           "operationType": {
             "description": "Discriminator indicating the user update operation type (add, remove, or set).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1150,7 +1199,8 @@
         "properties": {
           "operationType": {
             "description": "Discriminator indicating the user update operation type (add, remove, or set).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "remove": {
             "$ref": "#/components/schemas/UserIdList"
@@ -1170,7 +1220,8 @@
         "properties": {
           "operationType": {
             "description": "Discriminator indicating the user update operation type (add, remove, or set).",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "set": {
             "$ref": "#/components/schemas/UserIdList"
@@ -1198,11 +1249,13 @@
         "properties": {
           "firstName": {
             "description": "User first name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lastName": {
             "description": "User last name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "status": {
             "$ref": "#/components/schemas/UserStatus"
@@ -1210,15 +1263,18 @@
           "userAccountId": {
             "description": "Associated account id. An account can have many users.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "userId": {
             "description": "Unique user id",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "username": {
             "description": "Unique username",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1233,7 +1289,8 @@
         "properties": {
           "scopeId": {
             "description": "Reference to an existing scope by ID",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

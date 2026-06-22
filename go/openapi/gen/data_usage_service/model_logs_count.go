@@ -26,7 +26,7 @@ type LogsCount struct {
 	// The application name.
 	ApplicationName *string `json:"applicationName,omitempty"`
 	// The logs count.
-	LogsCount *string `json:"logsCount,omitempty"`
+	LogsCount *string `json:"logsCount,omitempty" validate:"regexp=^[0-9]+$"`
 	Priority *V2Priority `json:"priority,omitempty"`
 	Severity *DatausageV2Severity `json:"severity,omitempty"`
 	// The subsystem name.

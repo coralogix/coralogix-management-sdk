@@ -39,9 +39,9 @@ type IncidentQueryFilter struct {
 	// Indicates if the incident is muted
 	IsMuted *bool `json:"isMuted,omitempty"`
 	// Filters all incidents with the given meta labels
-	MetaLabels []IncidentMetaLabel `json:"metaLabels,omitempty"`
+	MetaLabels []interface{} `json:"metaLabels,omitempty"`
 	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
-	SearchQuery *IncidentQueryFilterSearchQuery `json:"searchQuery,omitempty"`
+	SearchQuery interface{} `json:"searchQuery,omitempty"`
 	// Filter by incident severity
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)
@@ -337,9 +337,9 @@ func (o *IncidentQueryFilter) SetIsMuted(v bool) {
 }
 
 // GetMetaLabels returns the MetaLabels field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetMetaLabels() []IncidentMetaLabel {
+func (o *IncidentQueryFilter) GetMetaLabels() []interface{} {
 	if o == nil || IsNil(o.MetaLabels) {
-		var ret []IncidentMetaLabel
+		var ret []interface{}
 		return ret
 	}
 	return o.MetaLabels
@@ -347,7 +347,7 @@ func (o *IncidentQueryFilter) GetMetaLabels() []IncidentMetaLabel {
 
 // GetMetaLabelsOk returns a tuple with the MetaLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]IncidentMetaLabel, bool) {
+func (o *IncidentQueryFilter) GetMetaLabelsOk() ([]interface{}, bool) {
 	if o == nil || IsNil(o.MetaLabels) {
 		return nil, false
 	}
@@ -363,8 +363,8 @@ func (o *IncidentQueryFilter) HasMetaLabels() bool {
 	return false
 }
 
-// SetMetaLabels gets a reference to the given []IncidentMetaLabel and assigns it to the MetaLabels field.
-func (o *IncidentQueryFilter) SetMetaLabels(v []IncidentMetaLabel) {
+// SetMetaLabels gets a reference to the given []interface{} and assigns it to the MetaLabels field.
+func (o *IncidentQueryFilter) SetMetaLabels(v []interface{}) {
 	o.MetaLabels = v
 }
 
@@ -400,22 +400,23 @@ func (o *IncidentQueryFilter) SetMetaLabelsOp(v V1FilterOperator) {
 	o.MetaLabelsOp = &v
 }
 
-// GetSearchQuery returns the SearchQuery field value if set, zero value otherwise.
-func (o *IncidentQueryFilter) GetSearchQuery() IncidentQueryFilterSearchQuery {
-	if o == nil || IsNil(o.SearchQuery) {
-		var ret IncidentQueryFilterSearchQuery
+// GetSearchQuery returns the SearchQuery field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IncidentQueryFilter) GetSearchQuery() interface{} {
+	if o == nil {
+		var ret interface{}
 		return ret
 	}
-	return *o.SearchQuery
+	return o.SearchQuery
 }
 
 // GetSearchQueryOk returns a tuple with the SearchQuery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentQueryFilter) GetSearchQueryOk() (*IncidentQueryFilterSearchQuery, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *IncidentQueryFilter) GetSearchQueryOk() (*interface{}, bool) {
 	if o == nil || IsNil(o.SearchQuery) {
 		return nil, false
 	}
-	return o.SearchQuery, true
+	return &o.SearchQuery, true
 }
 
 // HasSearchQuery returns a boolean if a field has been set.
@@ -427,9 +428,9 @@ func (o *IncidentQueryFilter) HasSearchQuery() bool {
 	return false
 }
 
-// SetSearchQuery gets a reference to the given IncidentQueryFilterSearchQuery and assigns it to the SearchQuery field.
-func (o *IncidentQueryFilter) SetSearchQuery(v IncidentQueryFilterSearchQuery) {
-	o.SearchQuery = &v
+// SetSearchQuery gets a reference to the given interface{} and assigns it to the SearchQuery field.
+func (o *IncidentQueryFilter) SetSearchQuery(v interface{}) {
+	o.SearchQuery = v
 }
 
 // GetSeverity returns the Severity field value if set, zero value otherwise.
@@ -635,7 +636,7 @@ func (o IncidentQueryFilter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetaLabelsOp) {
 		toSerialize["metaLabelsOp"] = o.MetaLabelsOp
 	}
-	if !IsNil(o.SearchQuery) {
+	if o.SearchQuery != nil {
 		toSerialize["searchQuery"] = o.SearchQuery
 	}
 	if !IsNil(o.Severity) {

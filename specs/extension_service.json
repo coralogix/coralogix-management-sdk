@@ -90,7 +90,8 @@
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           },
@@ -162,11 +163,13 @@
         "properties": {
           "descriptionMd": {
             "description": "The description md.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "version": {
             "description": "Version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -180,15 +183,18 @@
         "properties": {
           "reason": {
             "description": "Reason.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "replacementExtensions": {
             "description": "The replacement extensions.",
             "type": "array",
             "items": {
               "description": "The replacement extensions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -201,7 +207,8 @@
         "properties": {
           "data": {
             "description": "Data payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
@@ -227,7 +234,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
-            }
+            },
+            "minItems": 0
           },
           "data": {
             "description": "Data payload.",
@@ -235,15 +243,18 @@
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "extendedInternalId": {
             "description": "The extended internal id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isMandatory": {
             "description": "The is mandatory.",
@@ -251,21 +262,24 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
             "description": "The stable id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
             "description": "The unique id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -278,11 +292,13 @@
         "properties": {
           "data": {
             "description": "Data payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fileName": {
             "description": "The file name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
@@ -312,22 +328,26 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "excerpt": {
             "description": "The excerpt.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationDetails": {
             "description": "The integration details.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
-            }
+            },
+            "minItems": 0
           },
           "isTesting": {
             "description": "The is testing.",
@@ -338,26 +358,31 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
-            }
+            },
+            "minItems": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "array",
             "items": {
               "description": "List of labels.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "permissionDeniedItems": {
             "description": "The permission denied items.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
-            }
+            },
+            "minItems": 0
           },
           "version": {
             "description": "Version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -384,7 +409,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -406,7 +432,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -430,7 +457,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -450,8 +478,10 @@
             "type": "array",
             "items": {
               "description": "The integrations.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -468,7 +498,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Extension"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -481,26 +512,31 @@
         "properties": {
           "darkModeImage": {
             "description": "The dark mode image.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "image": {
             "description": "Image reference.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrations": {
             "description": "The integrations.",
             "type": "array",
             "items": {
               "description": "The integrations.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "isHidden": {
             "description": "The is hidden.",
@@ -511,19 +547,23 @@
             "type": "array",
             "items": {
               "description": "The keywords.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisions": {
             "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Revision"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -536,33 +576,39 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "excerpt": {
             "description": "The excerpt.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationDetails": {
             "description": "The integration details.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
-            }
+            },
+            "minItems": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "array",
             "items": {
               "description": "List of labels.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "summary": {
             "$ref": "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -592,11 +638,13 @@
         "properties": {
           "link": {
             "description": "Link.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -611,52 +659,62 @@
           "actions": {
             "description": "List of actions.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "alerts": {
             "description": "List of alerts.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "customDashboards": {
             "description": "The custom dashboards.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "enrichments": {
             "description": "List of enrichments.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "eventsToMetrics": {
             "description": "The events to metrics.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "grafanaDashboards": {
             "description": "The grafana dashboards.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "kibanaDashboards": {
             "description": "The kibana dashboards.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "metricsRuleGroup": {
             "description": "The metrics rule group.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "parsingRules": {
             "description": "The parsing rules.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "savedViews": {
             "description": "The saved views.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -669,8 +727,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -732,30 +792,36 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
-            }
+            },
+            "minItems": 0
           },
           "darkModeImage": {
             "description": "The dark mode image.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
             "description": "Unique identifier of the extension.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "image": {
             "description": "Image reference.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrations": {
             "description": "The integrations.",
             "type": "array",
             "items": {
               "description": "The integrations.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "isHidden": {
             "description": "The is hidden.",
@@ -766,26 +832,31 @@
             "type": "array",
             "items": {
               "description": "The keywords.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "name": {
             "description": "Display name of the extension.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissionDeniedRevisions": {
             "description": "The permission denied revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
-            }
+            },
+            "minItems": 0
           },
           "revisions": {
             "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
-            }
+            },
+            "minItems": 0
           }
         }
       },

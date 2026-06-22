@@ -78,6 +78,7 @@ model_connector_type_filter_connector_type.go
 model_connector_type_filter_no_connector.go
 model_date_range_filter.go
 model_date_range_mode.go
+model_entity_link.go
 model_events_v3_filter_matcher.go
 model_filter_aggregation.go
 model_filter_group.go
@@ -86,6 +87,11 @@ model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
 model_filter_path_and_values_multiple_values.go
 model_filters.go
+model_generic_indicator.go
+model_generic_indicator_status.go
+model_generic_indicator_type.go
+model_get_case_by_indicator_request.go
+model_get_case_by_indicator_response.go
 model_get_case_deep_links_response.go
 model_get_case_filter_values_request.go
 model_get_case_response.go
@@ -96,6 +102,7 @@ model_impacted_entity_apm_service.go
 model_impacted_entity_link.go
 model_indicator_priority.go
 model_indicator_state.go
+model_indicator_type.go
 model_kpi_breaches.go
 model_kpi_filter.go
 model_kpi_priority.go
@@ -105,10 +112,15 @@ model_list_cases_response.go
 model_logs_link.go
 model_metric_link.go
 model_multiple_values.go
+model_olly_analysis.go
+model_olly_analysis_payload.go
+model_olly_analysis_root_cause_confidence.go
+model_olly_analysis_status.go
 model_priority_aggregation.go
 model_priority_details.go
 model_prometheus_alert.go
 model_prometheus_alert_indicator.go
+model_prometheus_alert_manager_indicator.go
 model_prometheus_alert_query.go
 model_prometheus_alert_status.go
 model_prometheus_alert_status_resolved.go
