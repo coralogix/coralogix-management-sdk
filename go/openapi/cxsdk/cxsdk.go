@@ -16,6 +16,8 @@ package cxsdk
 
 import (
 	actions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/actions_service"
+	aiapplications "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ai_applications_service"
+	aievaluations "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/ai_evaluations_service"
 	alerts "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_definitions_service"
 	alertscheduler "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/alert_scheduler_rule_service"
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/api_keys_service"
@@ -52,6 +54,8 @@ import (
 // ClientSet provides access to all API clients.
 type ClientSet struct {
 	actions              *actions.ActionsServiceAPIService
+	aiApplications       *aiapplications.AIApplicationsServiceAPIService
+	aiEvaluations        *aievaluations.AIEvaluationsServiceAPIService
 	alerts               *alerts.AlertDefinitionsServiceAPIService
 	alertScheduler       *alertscheduler.AlertSchedulerRuleServiceAPIService
 	apiKeys              *apikeys.APIKeysServiceAPIService
@@ -86,6 +90,16 @@ type ClientSet struct {
 // Actions returns the ActionsServiceAPIService client.
 func (c *ClientSet) Actions() *actions.ActionsServiceAPIService {
 	return c.actions
+}
+
+// AIApplications returns the AIApplicationsServiceAPIService client.
+func (c *ClientSet) AIApplications() *aiapplications.AIApplicationsServiceAPIService {
+	return c.aiApplications
+}
+
+// AIEvaluations returns the AIEvaluationsServiceAPIService client.
+func (c *ClientSet) AIEvaluations() *aievaluations.AIEvaluationsServiceAPIService {
+	return c.aiEvaluations
 }
 
 // Alerts returns the AlertDefinitionsServiceAPIService client.
@@ -237,6 +251,8 @@ func (c *ClientSet) ViewsFolders() *viewsfolders.FoldersForViewsServiceAPIServic
 func NewClientSet(c *Config) *ClientSet {
 	return &ClientSet{
 		actions:              NewActionsClient(c),
+		aiApplications:       NewAIApplicationsClient(c),
+		aiEvaluations:        NewAIEvaluationsClient(c),
 		alerts:               NewAlertsClient(c),
 		alertScheduler:       NewAlertSchedulerClient(c),
 		apiKeys:              NewAPIKeysClient(c),
@@ -280,6 +296,32 @@ func NewActionsClient(c *Config) *actions.ActionsServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return actions.NewAPIClient(cfg).ActionsServiceAPI
+}
+
+// NewAIApplicationsClient builds a new AIApplicationsServiceAPIService from CallPropertiesCreator.
+func NewAIApplicationsClient(c *Config) *aiapplications.AIApplicationsServiceAPIService {
+	cfg := aiapplications.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = aiapplications.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return aiapplications.NewAPIClient(cfg).AIApplicationsServiceAPI
+}
+
+// NewAIEvaluationsClient builds a new AIEvaluationsServiceAPIService from CallPropertiesCreator.
+func NewAIEvaluationsClient(c *Config) *aievaluations.AIEvaluationsServiceAPIService {
+	cfg := aievaluations.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = aievaluations.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return aievaluations.NewAPIClient(cfg).AIEvaluationsServiceAPI
 }
 
 // NewAlertsClient builds a new AlertDefinitionsServiceAPIService from CallPropertiesCreator.
