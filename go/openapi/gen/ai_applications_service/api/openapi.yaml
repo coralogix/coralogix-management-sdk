@@ -1,0 +1,565 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /ai/applications/v3:
+    get:
+      description: "Lists AI applications, optionally filtered by evaluation type."
+      externalDocs:
+        url: ""
+      operationId: AiApplicationsService_ListAiApplications
+      parameters:
+      - description: Number of items per page. Default 200 if omitted.
+        explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          description: Number of items per page. Default 200 if omitted.
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - description: Zero-based page offset. Default 0 if omitted.
+        explode: true
+        in: query
+        name: page_offset
+        required: false
+        schema:
+          description: Zero-based page offset. Default 0 if omitted.
+          format: int64
+          maximum: 10000
+          minimum: 0
+          type: integer
+        style: form
+      - description: "Optional filter: only include applications that have at least\
+          \ one evaluation of any of these types."
+        explode: true
+        in: query
+        name: evaluation_types
+        required: false
+        schema:
+          description: "Optional filter: only include applications that have at least\
+            \ one evaluation of any of these types."
+          items:
+            $ref: "#/components/schemas/EvaluationType"
+          maxItems: 100
+          minItems: 0
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                aiApplications:
+                - application: checkout
+                  companyId: "12345"
+                  createdAt: 2026-06-02T15:30:00.000Z
+                  guardrailsIntegrated: true
+                  id: 175677d1-fc90-4a89-9e35-0590b188ebb2
+                  subsystem: api
+                  updatedAt: 2026-06-02T15:35:00.000Z
+              schema:
+                $ref: "#/components/schemas/ListAiApplicationsResponse"
+          description: ""
+      summary: List AI applications
+      tags:
+      - AI Applications Service
+  /ai/applications/v3/{id}:
+    delete:
+      description: Deletes an AI application by its unique identifier.
+      externalDocs:
+        url: ""
+      operationId: AiApplicationsService_DeleteAiApplication
+      parameters:
+      - description: Unique identifier of the AI application to delete.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Unique identifier of the AI application to delete.
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 175677d1-fc90-4a89-9e35-0590b188ebb2
+              schema:
+                $ref: "#/components/schemas/DeleteAiApplicationResponse"
+          description: ""
+      summary: Delete AI application
+      tags:
+      - AI Applications Service
+    get:
+      description: Gets an AI application by its unique identifier.
+      externalDocs:
+        url: ""
+      operationId: AiApplicationsService_GetAiApplicationById
+      parameters:
+      - description: Unique identifier of the AI application.
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Unique identifier of the AI application.
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                aiApplication:
+                  application: checkout
+                  companyId: "12345"
+                  createdAt: 2026-06-02T15:30:00.000Z
+                  guardrailsIntegrated: true
+                  id: 175677d1-fc90-4a89-9e35-0590b188ebb2
+                  subsystem: api
+                  updatedAt: 2026-06-02T15:35:00.000Z
+              schema:
+                $ref: "#/components/schemas/GetAiApplicationByIdResponse"
+          description: ""
+      summary: Get AI application
+      tags:
+      - AI Applications Service
+  /ai/model-pricing/v3:
+    delete:
+      description: Deletes the company-wide custom model pricing configuration.
+      externalDocs:
+        url: ""
+      operationId: AiApplicationsService_DeleteCompanyModelPricing
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
+              schema:
+                $ref: "#/components/schemas/DeleteCompanyModelPricingResponse"
+          description: ""
+      summary: Delete company model pricing
+      tags:
+      - AI Applications Service
+    get:
+      description: Returns the company-wide custom model pricing configuration.
+      externalDocs:
+        url: ""
+      operationId: AiApplicationsService_GetCompanyModelPricing
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                pricing:
+                  companyId: "12345"
+                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
+                  prices:
+                    gpt-4o:
+                      inputPricePerMillionTokens: 2.5
+                      outputPricePerMillionTokens: 10
+              schema:
+                $ref: "#/components/schemas/GetCompanyModelPricingResponse"
+          description: ""
+      summary: Get company model pricing
+      tags:
+      - AI Applications Service
+    put:
+      description: Replaces the company-wide custom model pricing configuration.
+      externalDocs:
+        url: ""
+      operationId: AiApplicationsService_SetCompanyModelPricing
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiApplicationsService_SetCompanyModelPricing_request"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                pricing:
+                  companyId: "12345"
+                  id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
+                  prices:
+                    gpt-4o:
+                      inputPricePerMillionTokens: 2.5
+                      outputPricePerMillionTokens: 10
+              schema:
+                $ref: "#/components/schemas/SetCompanyModelPricingResponse"
+          description: ""
+      summary: Set company model pricing
+      tags:
+      - AI Applications Service
+components:
+  schemas:
+    AiApplication:
+      description: AI Application
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        companyId: companyId
+        application: application
+        guardrailsIntegrated: true
+        subsystem: subsystem
+        id: id
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        application:
+          description: Application name.
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]+$"
+          type: string
+        companyId:
+          description: Company ID
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]+$"
+          type: string
+        createdAt:
+          description: RFC3339 timestamp when the application was first observed.
+          format: date-time
+          maxLength: 35
+          minLength: 20
+          type: string
+        guardrailsIntegrated:
+          description: Whether guardrails are integrated for this application.
+          type: boolean
+        id:
+          description: Unique identifier of the AI application.
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          type: string
+        subsystem:
+          description: Subsystem name
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]+$"
+          type: string
+        updatedAt:
+          description: RFC3339 timestamp when the application was last updated.
+          format: date-time
+          maxLength: 35
+          minLength: 20
+          type: string
+      type: object
+    CompanyModelPricing:
+      description: Company-wide custom model pricing configuration.
+      example:
+        companyId: companyId
+        id: id
+        prices:
+          key:
+            cacheReadPricePerMillionTokens: 0.8008281904610115
+            outputPricePerMillionTokens: 5.962133916683182
+            inputPricePerMillionTokens: 1.4658129805029452
+            cacheWritePricePerMillionTokens: 6.027456183070403
+      externalDocs:
+        url: ""
+      properties:
+        companyId:
+          description: Company identifier.
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]+$"
+          type: string
+        id:
+          description: Unique identifier of the pricing record.
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          type: string
+        prices:
+          additionalProperties:
+            $ref: "#/components/schemas/ModelPrice"
+          description: Map of model name to custom price. Replaces all existing prices
+            on set.
+          type: object
+      type: object
+    DeleteAiApplicationResponse:
+      description: Response returned after deleting an AI application.
+      example:
+        id: id
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: Unique identifier of the deleted AI application.
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          type: string
+      type: object
+    DeleteCompanyModelPricingResponse:
+      description: Response returned after deleting company model pricing.
+      example:
+        id: id
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: Unique identifier of the deleted pricing record.
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          type: string
+      type: object
+    EvaluationType:
+      enum:
+      - ALLOWED_TOPICS
+      - COMPETITION
+      - HALLUCINATION_COMPLETENESS
+      - HALLUCINATION_CONTEXT_ADHERENCE
+      - HALLUCINATION_CONTEXT_RELEVANCE
+      - HALLUCINATION_CORRECTNESS
+      - PII
+      - PROMPT_INJECTION
+      - RESTRICTED_TOPICS
+      - SEXISM
+      - SQL_ALLOWED_TABLES
+      - SQL_HALLUCINATION
+      - SQL_READ_ONLY
+      - SQL_RESTRICTED_TABLES
+      - TOXICITY
+      - HALLUCINATION_TASK_ADHERENCE
+      - SQL_LOAD
+      - LANGUAGE_MISMATCH
+      - CUSTOM_EVALUATION
+      type: string
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValuesFilters"
+      - $ref: "#/components/schemas/FilterPathAndValuesMultipleValues"
+    FilterPathAndValuesFilters:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          minLength: 0
+          type: string
+      required:
+      - filters
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValuesMultipleValues:
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          minLength: 0
+          type: string
+      required:
+      - multipleValues
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetAiApplicationByIdResponse:
+      description: Response containing the requested AI application.
+      example:
+        aiApplication:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          companyId: companyId
+          application: application
+          guardrailsIntegrated: true
+          subsystem: subsystem
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        aiApplication:
+          $ref: "#/components/schemas/AiApplication"
+      type: object
+    GetCompanyModelPricingResponse:
+      description: Response containing the company's custom model pricing.
+      example:
+        pricing:
+          companyId: companyId
+          id: id
+          prices:
+            key:
+              cacheReadPricePerMillionTokens: 0.8008281904610115
+              outputPricePerMillionTokens: 5.962133916683182
+              inputPricePerMillionTokens: 1.4658129805029452
+              cacheWritePricePerMillionTokens: 6.027456183070403
+      externalDocs:
+        url: ""
+      properties:
+        pricing:
+          $ref: "#/components/schemas/CompanyModelPricing"
+      type: object
+    ListAiApplicationsResponse:
+      description: Response containing a page of AI applications.
+      example:
+        aiApplications:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          companyId: companyId
+          application: application
+          guardrailsIntegrated: true
+          subsystem: subsystem
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          companyId: companyId
+          application: application
+          guardrailsIntegrated: true
+          subsystem: subsystem
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          companyId: companyId
+          application: application
+          guardrailsIntegrated: true
+          subsystem: subsystem
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          companyId: companyId
+          application: application
+          guardrailsIntegrated: true
+          subsystem: subsystem
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          companyId: companyId
+          application: application
+          guardrailsIntegrated: true
+          subsystem: subsystem
+          id: id
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        aiApplications:
+          description: The list of AI applications on this page.
+          items:
+            $ref: "#/components/schemas/AiApplication"
+          maxItems: 1000
+          minItems: 0
+          type: array
+      type: object
+    ModelPrice:
+      description: "Custom price for a single model, per one million tokens (USD)."
+      example:
+        cacheReadPricePerMillionTokens: 0.8008281904610115
+        outputPricePerMillionTokens: 5.962133916683182
+        inputPricePerMillionTokens: 1.4658129805029452
+        cacheWritePricePerMillionTokens: 6.027456183070403
+      externalDocs:
+        url: ""
+      properties:
+        cacheReadPricePerMillionTokens:
+          description: Cache read token price per one million tokens (USD).
+          format: double
+          type: number
+        cacheWritePricePerMillionTokens:
+          description: Cache write token price per one million tokens (USD).
+          format: double
+          type: number
+        inputPricePerMillionTokens:
+          description: Input token price per one million tokens (USD).
+          format: double
+          type: number
+        outputPricePerMillionTokens:
+          description: Output token price per one million tokens (USD).
+          format: double
+          type: number
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            minLength: 0
+            type: string
+          minItems: 0
+          type: array
+      type: object
+    SetCompanyModelPricingResponse:
+      description: Response containing the updated company model pricing.
+      example:
+        pricing:
+          companyId: companyId
+          id: id
+          prices:
+            key:
+              cacheReadPricePerMillionTokens: 0.8008281904610115
+              outputPricePerMillionTokens: 5.962133916683182
+              inputPricePerMillionTokens: 1.4658129805029452
+              cacheWritePricePerMillionTokens: 6.027456183070403
+      externalDocs:
+        url: ""
+      properties:
+        pricing:
+          $ref: "#/components/schemas/CompanyModelPricing"
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      description: Filter operator.
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    AiApplicationsService_SetCompanyModelPricing_request:
+      description: Request to set (replace) the company's custom model pricing.
+      properties:
+        prices:
+          additionalProperties:
+            $ref: "#/components/schemas/ModelPrice"
+          description: Full replacement map of model name to custom price.
+          type: object
+      required:
+      - prices
+      type: object

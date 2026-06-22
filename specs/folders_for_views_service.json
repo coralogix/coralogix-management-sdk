@@ -23,6 +23,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListViewFoldersResponse"
+                },
+                "example": {
+                  "folders": [
+                    {
+                      "id": "0cd4ed54-9b59-4eef-b329-151a167e2304",
+                      "name": "My Folder"
+                    }
+                  ]
                 }
               }
             }
@@ -77,6 +85,10 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ViewFolder"
+                },
+                "example": {
+                  "id": "0cd4ed54-9b59-4eef-b329-151a167e2304",
+                  "name": "My Folder"
                 }
               }
             }
@@ -119,6 +131,10 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ViewFolder"
+                },
+                "example": {
+                  "id": "0cd4ed54-9b59-4eef-b329-151a167e2304",
+                  "name": "My Folder"
                 }
               }
             }
@@ -137,23 +153,6 @@
           "url": ""
         },
         "operationId": "ViewsFoldersService_GetViewFolder",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier for folders",
-            "required": true,
-            "schema": {
-              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
-              "description": "Unique identifier for folders",
-              "type": "string",
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-              "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -161,6 +160,10 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ViewFolder"
+                },
+                "example": {
+                  "id": "0cd4ed54-9b59-4eef-b329-151a167e2304",
+                  "name": "My Folder"
                 }
               }
             }
@@ -177,23 +180,6 @@
           "url": ""
         },
         "operationId": "ViewsFoldersService_DeleteViewFolder",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier for folders",
-            "required": true,
-            "schema": {
-              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
-              "description": "Unique identifier for folders",
-              "type": "string",
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-              "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -206,7 +192,24 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier for folders",
+          "required": true,
+          "schema": {
+            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+            "description": "Unique identifier for folders",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "style": "simple"
+        }
+      ]
     }
   },
   "components": {
@@ -242,7 +245,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -264,7 +268,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -288,7 +293,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -307,7 +313,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ViewFolder"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -320,8 +327,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },

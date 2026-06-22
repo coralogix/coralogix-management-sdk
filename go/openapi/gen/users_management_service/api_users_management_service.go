@@ -77,6 +77,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceCreateUsersExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.teamId < 0 {
+		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -186,6 +189,12 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceGetUserExecute(r ApiU
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.teamId < 0 {
+		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
+	}
+	if r.userAccountId < 0 {
+		return localVarReturnValue, nil, reportError("userAccountId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -317,6 +326,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceSearchUsersExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.teamId < 0 {
+		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
+	}
 
 	if r.username != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "username", r.username, "form", "")
@@ -438,6 +450,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.teamId < 0 {
+		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -549,6 +564,9 @@ func (a *UsersManagementServiceAPIService) UsersMgmtServiceUpdateUsersStatusesEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.teamId < 0 {
+		return localVarReturnValue, nil, reportError("teamId must be greater than 0")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

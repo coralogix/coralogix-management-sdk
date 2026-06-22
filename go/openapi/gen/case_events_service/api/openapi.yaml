@@ -201,6 +201,7 @@ paths:
         schema:
           description: ID of the event to fetch
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -254,6 +255,7 @@ paths:
         schema:
           description: ID of the comment event to delete
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -306,6 +308,7 @@ paths:
         schema:
           description: ID of the comment event to update
           example: f56645c5-9cd4-4b9f-961f-4f852d8835a0
+          minLength: 0
           type: string
         style: simple
       requestBody:
@@ -359,10 +362,12 @@ components:
         id:
           description: API key ID
           example: 2b1c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e
+          minLength: 0
           type: string
         name:
           description: API key name
           example: Incident Management Integration Key
+          minLength: 0
           type: string
       title: API key actor
       type: object
@@ -377,9 +382,11 @@ components:
         assigneeUserId:
           description: New assignee user ID
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          minLength: 0
           type: string
         previousAssigneeUserId:
           description: Previous assignee user ID (if any)
+          minLength: 0
           type: string
       title: Assigned event
       type: object
@@ -407,21 +414,25 @@ components:
           description: Server-side insertion time
           example: 2025-09-22T10:30:00Z
           format: date-time
+          minLength: 0
           type: string
         eventData:
           $ref: "#/components/schemas/CaseEventData"
         eventId:
           description: Unique identifier of the event
           example: ef51d3d9-a301-496b-aa7d-9a6e519ba0d5
+          minLength: 0
           type: string
         eventTime:
           description: Logical occurrence time of the event
           example: 2025-09-22T10:29:45Z
           format: date-time
+          minLength: 0
           type: string
         updateTime:
           description: "If edited, last modification time of the event"
           format: date-time
+          minLength: 0
           type: string
       required:
       - actor
@@ -657,12 +668,14 @@ components:
           description: Attachments to the comment
           items:
             $ref: "#/components/schemas/CommentAttachment"
+          minItems: 0
           type: array
         slack:
           $ref: "#/components/schemas/SlackCommentMetadata"
         unsafeText:
           description: Comment text
           example: Looking into DB timeouts
+          minLength: 0
           type: string
       title: Comment event
       type: object
@@ -708,15 +721,18 @@ components:
         customDashboardId:
           description: Unique identifier of the custom dashboard
           example: dashboard_3f166e9f-3c88-4af2-b52e-138f339dab3e
+          minLength: 0
           type: string
         queryLinkSuffix:
           description: URL suffix for accessing the widget (not including the Coralogix
             domain part)
           example: /dashboards/custom/123/widgets/456?time=123456789
+          minLength: 0
           type: string
         widgetId:
           description: Unique identifier of the widget within the dashboard
           example: widget_a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          minLength: 0
           type: string
         widgetScreenshot:
           $ref: "#/components/schemas/FileAttachment"
@@ -836,10 +852,12 @@ components:
         fileId:
           description: Unique identifier of the file (same id as used in blobset flow)
           example: file_a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          minLength: 0
           type: string
         fileName:
           description: Original name of the attached file
           example: screenshot_2025-09-22.png
+          minLength: 0
           type: string
         isDeleted:
           description: Flag indicating whether the file has been marked as deleted
@@ -864,6 +882,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -880,6 +899,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -897,6 +917,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -914,6 +935,7 @@ components:
         threshold:
           description: Duration after which the KPI threshold was set to breach
           example: 300s
+          minLength: 0
           type: string
       title: KPI breached event
       type: object
@@ -932,20 +954,24 @@ components:
         logContent:
           description: Raw content of the log entry
           example: "ERROR: Database connection timeout after 30 seconds"
+          minLength: 0
           type: string
         logId:
           description: Unique identifier of the log entry
           example: log_4f8b1a2c3d5e6f7g8h9i0j1k2l3m4n5o
+          minLength: 0
           type: string
         logTimestamp:
           description: Timestamp when the log entry was created
           example: 2025-09-22T10:30:00Z
           format: date-time
+          minLength: 0
           type: string
         queryLinkSuffix:
           description: URL suffix for querying related logs (not including the Coralogix
             domain part)
           example: /logs/query?time=123456789&query=error
+          minLength: 0
           type: string
       required:
       - logContent
@@ -959,7 +985,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NotificationFailedCaseEvent:
@@ -970,6 +998,7 @@ components:
         error:
           description: Error message for the failed notification
           example: "Slack API: channel_not_found"
+          minLength: 0
           type: string
       title: Notification failed event
       type: object
@@ -980,6 +1009,7 @@ components:
         token:
           description: Notification token/reference
           example: 4c8ba1ec-acee-4bc7-ad6c-d35476b58541
+          minLength: 0
           type: string
       title: Notification metadata
       type: object
@@ -992,11 +1022,13 @@ components:
           description: "The notification request ID, as sent to the notifications\
             \ center."
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
+          minLength: 0
           type: string
         notifications:
           description: List of notifications produced by this action
           items:
             $ref: "#/components/schemas/NotificationMetadata"
+          minItems: 0
           type: array
       title: Notification sent event
       type: object
@@ -1081,9 +1113,11 @@ components:
       properties:
         from:
           description: Previous resolution reason
+          minLength: 0
           type: string
         to:
           description: New resolution reason
+          minLength: 0
           type: string
       title: Resolution reason changed event
       type: object
@@ -1097,17 +1131,21 @@ components:
           description: "If the Service Now user is linked to a Coralogix user, this\
             \ field contains the Coralogix user ID."
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          minLength: 0
           type: string
         id:
           description: User ID
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          minLength: 0
           type: string
         userEmail:
           description: Mail of the user
           example: example@coralogix.com
+          minLength: 0
           type: string
         username:
           description: Username
+          minLength: 0
           type: string
       title: Service Now actor
       type: object
@@ -1120,18 +1158,22 @@ components:
           description: "If the Slack user is linked to a Coralogix user, this field\
             \ contains the Coralogix user ID."
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          minLength: 0
           type: string
         displayName:
           description: Slack display name
           example: John Doe
+          minLength: 0
           type: string
         slackUserId:
           description: Slack user ID
           example: U012AB3CD
+          minLength: 0
           type: string
         userEmail:
           description: Email of the Slack user
           example: john.doe@example.com
+          minLength: 0
           type: string
       title: Slack actor
       type: object
@@ -1143,22 +1185,27 @@ components:
         channelId:
           description: Slack channel ID
           example: C012AB3CD
+          minLength: 0
           type: string
         threadId:
           description: Slack thread ID
           example: "1234567890.123456"
+          minLength: 0
           type: string
         userEmail:
           description: Email of the Slack user
           example: john.doe@example.com
+          minLength: 0
           type: string
         userId:
           description: Slack user ID
           example: U012AB3CD
+          minLength: 0
           type: string
         workspaceId:
           description: Slack workspace ID
           example: T012AB3CD
+          minLength: 0
           type: string
       title: Slack comment metadata
       type: object
@@ -1201,9 +1248,11 @@ components:
       properties:
         from:
           description: Previous case title
+          minLength: 0
           type: string
         to:
           description: New case title
+          minLength: 0
           type: string
       title: Title changed event
       type: object
@@ -1214,6 +1263,7 @@ components:
       properties:
         previousAssigneeUserId:
           description: User ID that was unassigned
+          minLength: 0
           type: string
       title: Unassigned event
       type: object
@@ -1225,6 +1275,7 @@ components:
         unknownAssigneeEmail:
           description: Email of the assignee that could not be found
           example: unknown
+          minLength: 0
           type: string
       title: Unknown assignee error
       type: object
@@ -1261,6 +1312,7 @@ components:
         id:
           description: User ID
           example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          minLength: 0
           type: string
       title: User actor
       type: object
@@ -1329,6 +1381,7 @@ components:
           description: Events for the case
           items:
             $ref: "#/components/schemas/CaseEvent"
+          minItems: 0
           type: array
       required:
       - events
@@ -1347,10 +1400,12 @@ components:
           description: Attachments to the comment
           items:
             $ref: "#/components/schemas/CommentAttachment"
+          minItems: 0
           type: array
         text:
           description: Comment text to update
           example: This is updated text
+          minLength: 0
           type: string
       required:
       - text
@@ -1363,10 +1418,12 @@ components:
           description: Attachments to the comment
           items:
             $ref: "#/components/schemas/CommentAttachment"
+          minItems: 0
           type: array
         text:
           description: Comment text to update
           example: This is updated text
+          minLength: 0
           type: string
       required:
       - text

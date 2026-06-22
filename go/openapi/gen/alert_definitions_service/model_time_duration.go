@@ -23,7 +23,7 @@ var _ MappedNullable = &TimeDuration{}
 // TimeDuration Configuration for time duration
 type TimeDuration struct {
 	// The duration value
-	Duration *string `json:"duration,omitempty"`
+	Duration *string `json:"duration,omitempty" validate:"regexp=^[0-9]+$"`
 	Unit *DurationUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

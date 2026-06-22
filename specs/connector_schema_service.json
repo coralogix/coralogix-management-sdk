@@ -56,7 +56,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectorConfigSchemaField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -72,20 +73,25 @@
             "type": "array",
             "items": {
               "description": "The allowed values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "default": {
             "description": "The default.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fieldName": {
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"
@@ -111,15 +117,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchema"
-            }
+            },
+            "minItems": 0
           },
           "supportedPayloadTypes": {
             "description": "The supported payload types.",
             "type": "array",
             "items": {
               "description": "The supported payload types.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -164,7 +173,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -186,7 +196,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -210,7 +221,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -237,11 +249,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchemaField"
-            }
+            },
+            "minItems": 0
           },
           "payloadType": {
             "description": "Type of the payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -253,16 +267,20 @@
             "type": "array",
             "items": {
               "description": "The allowed values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "default": {
             "description": "The default.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "disableOverride": {
             "description": "The disable override.",
@@ -270,7 +288,8 @@
           },
           "fieldName": {
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"
@@ -293,8 +312,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -325,7 +346,8 @@
           "IBM_EVENT_NOTIFICATIONS",
           "SERVICE_NOW",
           "EMAIL",
-          "PAGERDUTY_INCIDENTS"
+          "PAGERDUTY_INCIDENTS",
+          "MICROSOFT_TEAMS"
         ]
       },
       "v3.FilterOperator": {

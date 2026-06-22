@@ -162,6 +162,7 @@ components:
           $ref: "#/components/schemas/MessageConfig"
         payloadType:
           description: Type of the payload.
+          minLength: 0
           type: string
       type: object
     FailureReason:
@@ -186,6 +187,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -202,6 +204,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -219,6 +222,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -231,6 +235,7 @@ components:
       properties:
         entitySubType:
           description: The entity sub type.
+          minLength: 0
           type: string
       type: object
     MatchEntityTypeCondition:
@@ -248,6 +253,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.MessageConfigField"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -256,7 +262,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NotificationCenterConditionTypeMatchEntityType:
@@ -287,9 +295,11 @@ components:
       properties:
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         template:
           description: Template.
+          minLength: 0
           type: string
       type: object
     TestConnectorConfigResponse:
@@ -372,10 +382,12 @@ components:
       properties:
         message:
           description: Human-readable message.
+          minLength: 0
           type: string
         statusCode:
           description: The status code.
           format: int64
+          minimum: 0
           type: integer
       type: object
     TestResult.Success:
@@ -385,6 +397,7 @@ components:
       properties:
         metadata:
           additionalProperties:
+            minLength: 0
             type: string
           description: Metadata.
           type: object
@@ -430,6 +443,7 @@ components:
           description: Human-readable message.
           example: "Invalid condition: condition should be rendered to a boolean value\
             \ (true or false)"
+          minLength: 0
           type: string
       type: object
     TestRoutingConditionValidResponse.Success:
@@ -500,6 +514,7 @@ components:
         message:
           description: Human-readable message.
           example: Template rendering failed
+          minLength: 0
           type: string
         reason:
           $ref: "#/components/schemas/FailureReason"
@@ -512,6 +527,7 @@ components:
         renderedValue:
           description: The rendered value.
           example: Rendered template result
+          minLength: 0
           type: string
       type: object
     TestTemplateRenderResultFailureVariant:
@@ -553,9 +569,11 @@ components:
       properties:
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     notification_center.ConnectorType:
@@ -569,6 +587,7 @@ components:
       - SERVICE_NOW
       - EMAIL
       - PAGERDUTY_INCIDENTS
+      - MICROSOFT_TEAMS
       type: string
     notification_center.EntityType:
       description: Entity type.
@@ -588,10 +607,12 @@ components:
         fieldName:
           description: The field name.
           example: title
+          minLength: 0
           type: string
         template:
           description: The template.
           example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          minLength: 0
           type: string
       title: Message Config Field
       type: object
@@ -606,10 +627,12 @@ components:
       properties:
         connectorId:
           description: The connector id.
+          minLength: 0
           type: string
         payloadType:
           description: Payload type to use when testing the connector.
           example: default
+          minLength: 0
           type: string
       type: object
     Test_Connector_Config_Request:
@@ -621,10 +644,12 @@ components:
           description: Fields.
           items:
             $ref: "#/components/schemas/notification_center.ConnectorConfigField"
+          minItems: 0
           type: array
         payloadType:
           description: Payload type to use when testing the connector.
           example: default
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
@@ -637,13 +662,16 @@ components:
           description: The connector config fields.
           items:
             $ref: "#/components/schemas/TemplatedConnectorConfigField"
+          minItems: 0
           type: array
         connectorId:
           description: The connector id.
+          minLength: 0
           type: string
         entitySubType:
           description: Entity sub-type to use when testing the destination.
           example: logsImmediateResolved
+          minLength: 0
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
@@ -651,13 +679,16 @@ components:
           description: The message config fields.
           items:
             $ref: "#/components/schemas/notification_center.MessageConfigField"
+          minItems: 0
           type: array
         payloadType:
           description: Payload type to use when testing the destination.
           example: default
+          minLength: 0
           type: string
         presetId:
           description: The preset id.
+          minLength: 0
           type: string
       type: object
     TestingService_TestExistingPreset_request:
@@ -665,15 +696,18 @@ components:
       properties:
         connectorId:
           description: The connector id.
+          minLength: 0
           type: string
         entitySubType:
           description: Entity sub-type to use when testing the preset.
           example: logsImmediateResolved
+          minLength: 0
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         presetId:
           description: The preset id.
+          minLength: 0
           type: string
       type: object
     TestingService_TestPresetConfig_request:
@@ -683,18 +717,22 @@ components:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/ConfigOverrides"
+          minItems: 0
           type: array
         connectorId:
           description: The connector id.
+          minLength: 0
           type: string
         entitySubType:
           description: Entity sub-type to use when testing the preset configuration.
           example: metric
+          minLength: 0
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         parentPresetId:
           description: The parent preset id.
+          minLength: 0
           type: string
       type: object
     Test_Routing_Condition_Valid_Request:
@@ -705,6 +743,7 @@ components:
         template:
           description: Routing condition expression to validate.
           example: alertDef.priority == 'P1'
+          minLength: 0
           type: string
       title: Test Routing Condition Valid Request
       type: object
@@ -714,11 +753,13 @@ components:
         entitySubType:
           description: Entity sub-type to use when testing template rendering.
           example: logsImmediateResolved
+          minLength: 0
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         template:
           description: Template string to test rendering for.
           example: "{{ alertDef.name }}"
+          minLength: 0
           type: string
       type: object

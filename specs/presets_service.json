@@ -25,10 +25,11 @@
               "description": "The unique identifiers of the presets to retrieve.",
               "type": "array",
               "items": {
-                "example": "",
                 "description": "The unique identifiers of the presets to retrieve.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -66,7 +67,8 @@
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -104,7 +106,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the custom preset to set as default.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -187,7 +190,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the preset to retrieve.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -225,7 +229,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the preset to set as default.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -454,8 +459,10 @@
             "type": "array",
             "items": {
               "description": "The not found ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "presets": {
             "description": "List of permission presets.",
@@ -477,7 +484,8 @@
           },
           "payloadType": {
             "description": "Type of the payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -526,7 +534,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -548,7 +557,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -572,7 +582,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -627,7 +638,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PresetSummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -640,7 +652,8 @@
         "properties": {
           "entitySubType": {
             "description": "The entity sub type.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -664,7 +677,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.MessageConfigField"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -677,8 +691,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -729,7 +745,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConfigOverrides"
-            }
+            },
+            "minItems": 0
           },
           "connectorType": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -737,12 +754,14 @@
           "createTime": {
             "description": "The create time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "example": "Custom preset for alerts",
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "entityType": {
             "$ref": "#/components/schemas/notification_center.EntityType"
@@ -750,17 +769,20 @@
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "My Preset",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "parentId": {
             "example": "preset_system_slack_alerts_basic",
             "description": "The parent id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "presetType": {
             "$ref": "#/components/schemas/PresetType"
@@ -768,7 +790,8 @@
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -790,12 +813,14 @@
           "createTime": {
             "description": "The create time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "example": "Custom preset for alerts",
             "description": "Human-readable description.",
             "type": "string",
+            "minLength": 0,
             "maxLength": 5000
           },
           "entityType": {
@@ -804,18 +829,21 @@
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "My Preset",
             "description": "Display name.",
             "type": "string",
+            "minLength": 0,
             "maxLength": 200
           },
           "parentId": {
             "example": "c246e826-10c2-405e-8d3f-afcc24ad4d15",
             "description": "The parent id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "presetType": {
             "$ref": "#/components/schemas/PresetType"
@@ -823,7 +851,8 @@
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -894,7 +923,8 @@
           "IBM_EVENT_NOTIFICATIONS",
           "SERVICE_NOW",
           "EMAIL",
-          "PAGERDUTY_INCIDENTS"
+          "PAGERDUTY_INCIDENTS",
+          "MICROSOFT_TEAMS"
         ]
       },
       "notification_center.EntityType": {
@@ -919,12 +949,14 @@
           "fieldName": {
             "example": "title",
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "template": {
             "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
             "description": "The template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

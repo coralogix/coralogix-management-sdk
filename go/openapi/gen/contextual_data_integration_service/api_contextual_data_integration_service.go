@@ -74,6 +74,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -187,6 +190,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	if r.includeTestingIntegrations != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_integrations", r.includeTestingIntegrations, "form", "")
@@ -303,6 +309,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	if r.includeTestingRevisions != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revisions", r.includeTestingRevisions, "form", "")
@@ -640,6 +649,9 @@ func (a *ContextualDataIntegrationServiceAPIService) ContextualDataIntegrationSe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.integrationId) < 0 {
+		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

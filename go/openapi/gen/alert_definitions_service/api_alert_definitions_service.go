@@ -404,6 +404,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceDeleteAlertDefExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -724,6 +727,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -830,6 +836,9 @@ func (a *AlertDefinitionsServiceAPIService) AlertDefsServiceGetAlertDefByVersion
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.alertVersionId) < 0 {
+		return localVarReturnValue, nil, reportError("alertVersionId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

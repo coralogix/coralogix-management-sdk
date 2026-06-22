@@ -327,6 +327,7 @@ components:
         inactivePeriod:
           description: Period of inactivity after which cases are automatically resolved.
           example: 3600s
+          minLength: 0
           type: string
       title: Auto resolve config
       type: object
@@ -350,6 +351,7 @@ components:
           description: List of KPI thresholds for different case priorities.
           items:
             $ref: "#/components/schemas/KPISettings"
+          minItems: 0
           type: array
       title: KPI settings
       type: object
@@ -385,11 +387,13 @@ components:
         resolutionSnoozePeriod:
           description: Period after resolution during which new cases are snoozed.
           example: 600s
+          minLength: 0
           type: string
         suppressionPeriod:
           description: Default period during which duplicate or related cases are
             suppressed.
           example: 3600s
+          minLength: 0
           type: string
       title: Case lifecycle settings
       type: object
@@ -545,6 +549,7 @@ components:
             list here means no alerts will be processed.
           items:
             $ref: "#/components/schemas/v1.KeyValue"
+          minItems: 0
           type: array
       type: object
     EntityLabelFilterAll:
@@ -589,6 +594,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -605,6 +611,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -622,6 +629,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -796,6 +804,7 @@ components:
             be OR'ed together
           items:
             $ref: "#/components/schemas/IndicatorFilter"
+          minItems: 0
           type: array
       title: Global indicator settings
       type: object
@@ -845,6 +854,7 @@ components:
             here means no alerts will be processed.
           items:
             $ref: "#/components/schemas/IndicatorPriority"
+          minItems: 0
           type: array
       type: object
     IndicatorPriorityFilterAll:
@@ -895,6 +905,7 @@ components:
         threshold:
           description: Elapsed time after which the KPI is considered breached.
           example: 300s
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/KPIType"
@@ -913,7 +924,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     UpdateCaseSettingsResponse:
@@ -977,10 +990,12 @@ components:
         key:
           description: "Key of the pair (e.g., label or grouping name)"
           example: service
+          minLength: 0
           type: string
         value:
           description: Value associated with the key
           example: payments
+          minLength: 0
           type: string
       required:
       - key

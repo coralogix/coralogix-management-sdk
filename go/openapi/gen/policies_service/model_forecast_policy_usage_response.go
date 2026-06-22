@@ -24,7 +24,7 @@ var _ MappedNullable = &ForecastPolicyUsageResponse{}
 // ForecastPolicyUsageResponse Forecasted usage in bytes for a draft TCO policy, based on bytes matched over a given time window.
 type ForecastPolicyUsageResponse struct {
 	// Estimated number of bytes the draft policy would match over the requested time window.
-	EstimatedBytes int64 `json:"estimatedBytes"`
+	EstimatedBytes string `json:"estimatedBytes" validate:"regexp=^-?[0-9]+$"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,7 +34,7 @@ type _ForecastPolicyUsageResponse ForecastPolicyUsageResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewForecastPolicyUsageResponse(estimatedBytes int64) *ForecastPolicyUsageResponse {
+func NewForecastPolicyUsageResponse(estimatedBytes string) *ForecastPolicyUsageResponse {
 	this := ForecastPolicyUsageResponse{}
 	this.EstimatedBytes = estimatedBytes
 	return &this
@@ -49,9 +49,9 @@ func NewForecastPolicyUsageResponseWithDefaults() *ForecastPolicyUsageResponse {
 }
 
 // GetEstimatedBytes returns the EstimatedBytes field value
-func (o *ForecastPolicyUsageResponse) GetEstimatedBytes() int64 {
+func (o *ForecastPolicyUsageResponse) GetEstimatedBytes() string {
 	if o == nil {
-		var ret int64
+		var ret string
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *ForecastPolicyUsageResponse) GetEstimatedBytes() int64 {
 
 // GetEstimatedBytesOk returns a tuple with the EstimatedBytes field value
 // and a boolean to check if the value has been set.
-func (o *ForecastPolicyUsageResponse) GetEstimatedBytesOk() (*int64, bool) {
+func (o *ForecastPolicyUsageResponse) GetEstimatedBytesOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *ForecastPolicyUsageResponse) GetEstimatedBytesOk() (*int64, bool) {
 }
 
 // SetEstimatedBytes sets field value
-func (o *ForecastPolicyUsageResponse) SetEstimatedBytes(v int64) {
+func (o *ForecastPolicyUsageResponse) SetEstimatedBytes(v string) {
 	o.EstimatedBytes = v
 }
 

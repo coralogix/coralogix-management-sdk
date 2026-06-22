@@ -29,7 +29,7 @@ type OutRule struct {
 	// List of labels.
 	Labels *map[string]string `json:"labels,omitempty"`
 	// The last eval duration ms.
-	LastEvalDurationMs *string `json:"lastEvalDurationMs,omitempty"`
+	LastEvalDurationMs *string `json:"lastEvalDurationMs,omitempty" validate:"regexp=^[0-9]+$"`
 	// Record.
 	Record *string `json:"record,omitempty"`
 	AdditionalProperties map[string]interface{}

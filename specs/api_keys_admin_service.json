@@ -68,7 +68,8 @@
                   "accessPolicy": {
                     "example": "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}",
                     "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "hashed": {
                     "example": true,
@@ -81,7 +82,8 @@
                   "name": {
                     "example": "my_api_key",
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "owner": {
                     "$ref": "#/components/schemas/Owner"
@@ -148,8 +150,10 @@
                     "items": {
                       "example": "key_abc123",
                       "description": "List of API key IDs to delete.",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -212,7 +216,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/ApiKeyStatusUpdate"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -285,7 +290,8 @@
           "keyId": {
             "example": "key_abc123",
             "description": "Key identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -307,15 +313,18 @@
             "items": {
               "example": "logs:read",
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "presets": {
             "description": "List of permission presets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PermissionsPreset"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -331,12 +340,14 @@
           "userEmail": {
             "example": "test@example.com",
             "description": "The user email.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "userId": {
             "example": "user_123",
             "description": "The user id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -355,8 +366,10 @@
             "items": {
               "example": "read_logs",
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "presets": {
             "description": "List of permission presets.",
@@ -364,8 +377,10 @@
             "items": {
               "example": "my_preset",
               "description": "List of permission presets.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -381,17 +396,20 @@
           "keyId": {
             "example": "my_key_id",
             "description": "Key identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "my_api_key",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "example": "my_api_key_value",
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -428,7 +446,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -450,7 +469,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -474,7 +494,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -495,7 +516,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiKeySummary"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -508,8 +530,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -535,7 +559,8 @@
         "properties": {
           "organisationId": {
             "description": "Organisation identifier of the API key owner.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -552,7 +577,8 @@
           "teamId": {
             "description": "The team id.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -568,7 +594,8 @@
         "properties": {
           "userId": {
             "description": "User identifier of the API key owner.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -593,7 +620,8 @@
           "name": {
             "example": "my_preset",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissions": {
             "description": "List of permissions.",
@@ -601,8 +629,10 @@
             "items": {
               "example": "logs:read",
               "description": "List of permissions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -635,12 +665,14 @@
           "createdAt": {
             "description": "The timestamp when the API key was created.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "id": {
             "example": "key_abc123",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isActive": {
             "description": "Whether this resource is active.",
@@ -649,12 +681,14 @@
           "keyName": {
             "example": "my_api_key",
             "description": "The key name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lastActivated": {
             "description": "The timestamp when the API key was last activated.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "owner": {
             "$ref": "#/components/schemas/ApiKeyOwner"

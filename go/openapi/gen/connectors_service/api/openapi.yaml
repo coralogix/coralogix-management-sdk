@@ -97,7 +97,9 @@ paths:
           - connector-id-2
           items:
             description: The unique identifiers of the connectors to retrieve.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -128,8 +130,9 @@ paths:
           items:
             description: The unique identifiers of the connectors whose summaries
               to retrieve.
-            example: ""
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -214,6 +217,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -239,6 +243,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the connector.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -274,6 +279,12 @@ components:
                 fieldName: fieldName
               - template: template
                 fieldName: fieldName
+            resolvedConnectorConfig:
+              fields:
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
             createTime: 2000-01-23T04:56:07.000+00:00
             teamId: 0
             connectorConfig:
@@ -302,7 +313,9 @@ components:
           - connector-id-3
           items:
             description: The not found ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Batch Get Connector Summaries Response
       type: object
@@ -328,6 +341,12 @@ components:
                 fieldName: fieldName
               - template: template
                 fieldName: fieldName
+            resolvedConnectorConfig:
+              fields:
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
             createTime: 2000-01-23T04:56:07.000+00:00
             teamId: 12345
             connectorConfig:
@@ -356,7 +375,9 @@ components:
           - connector-id-3
           items:
             description: The not found ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Batch Get Connectors Response
       type: object
@@ -378,6 +399,12 @@ components:
             fieldName: fieldName
           - template: template
             fieldName: fieldName
+        resolvedConnectorConfig:
+          fields:
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
         createTime: 2000-01-23T04:56:07.000+00:00
         teamId: 12345
         connectorConfig:
@@ -399,39 +426,48 @@ components:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/EntityTypeConfigOverrides"
+          minItems: 0
           type: array
         connectorConfig:
           $ref: "#/components/schemas/ConnectorConfig"
         createTime:
           description: The create time.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: Connector for team notifications
           maxLength: 5000
+          minLength: 0
           type: string
         diagnostics:
           $ref: "#/components/schemas/Diagnostics"
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: My Slack Connector
           maxLength: 200
+          minLength: 0
           type: string
+        resolvedConnectorConfig:
+          $ref: "#/components/schemas/ConnectorConfig"
         teamId:
           description: Team identifier.
           example: 12345
           format: int64
+          minimum: 0
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       title: Connector
       type: object
@@ -451,6 +487,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.ConnectorConfigField"
+          minItems: 0
           type: array
       title: Connector Config
       type: object
@@ -469,6 +506,12 @@ components:
             fieldName: fieldName
           - template: template
             fieldName: fieldName
+        resolvedConnectorConfig:
+          fields:
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
         createTime: 2000-01-23T04:56:07.000+00:00
         teamId: 0
         connectorConfig:
@@ -487,31 +530,40 @@ components:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/EntityTypeConfigOverrides"
+          minItems: 0
           type: array
         connectorConfig:
           $ref: "#/components/schemas/ConnectorConfig"
         createTime:
           description: The create time.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
+        resolvedConnectorConfig:
+          $ref: "#/components/schemas/ConnectorConfig"
         teamId:
           description: The team id.
           format: int64
+          minimum: 0
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       type: object
     ConnectorTypeSummary:
@@ -527,6 +579,7 @@ components:
           description: Number of items.
           example: 5
           format: int64
+          minimum: 0
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
@@ -551,6 +604,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
@@ -613,6 +672,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/TemplatedConnectorConfigField"
+          minItems: 0
           type: array
       type: object
     FilterPathAndValues:
@@ -628,6 +688,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -644,6 +705,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -661,6 +723,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -685,6 +748,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
@@ -722,6 +791,7 @@ components:
           description: The connector type summaries.
           items:
             $ref: "#/components/schemas/ConnectorTypeSummary"
+          minItems: 0
           type: array
       title: Get Connector Type Summaries Response
       type: object
@@ -742,6 +812,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 0
           connectorConfig:
@@ -768,6 +844,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 0
           connectorConfig:
@@ -789,6 +871,7 @@ components:
           description: The connectors.
           items:
             $ref: "#/components/schemas/ConnectorSummary"
+          minItems: 0
           type: array
       title: List Connector Summaries Response
       type: object
@@ -811,6 +894,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
@@ -839,6 +928,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
@@ -860,6 +955,7 @@ components:
           description: The connectors.
           items:
             $ref: "#/components/schemas/Connector"
+          minItems: 0
           type: array
       title: List Connectors Response
       type: object
@@ -869,7 +965,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ReplaceConnectorResponse:
@@ -891,6 +989,12 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
@@ -919,9 +1023,11 @@ components:
       properties:
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         template:
           description: Template.
+          minLength: 0
           type: string
       type: object
     events.v3.FilterMatcher:
@@ -936,9 +1042,11 @@ components:
       properties:
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     notification_center.ConnectorType:
@@ -952,6 +1060,7 @@ components:
       - SERVICE_NOW
       - EMAIL
       - PAGERDUTY_INCIDENTS
+      - MICROSOFT_TEAMS
       type: string
     notification_center.EntityType:
       description: Entity type.

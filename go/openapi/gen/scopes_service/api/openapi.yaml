@@ -22,7 +22,9 @@ paths:
           items:
             description: List of team scope identifiers to retrieve.
             example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -156,6 +158,7 @@ paths:
         schema:
           description: Unique identifier.
           example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -225,6 +228,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -241,6 +245,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -258,6 +263,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -295,6 +301,7 @@ components:
           description: List of scopes.
           items:
             $ref: "#/components/schemas/v1.Scope"
+          minItems: 0
           type: array
       required:
       - scopes
@@ -306,7 +313,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     UpdateScopeResponse:
@@ -352,6 +361,7 @@ components:
         expression:
           description: The expression.
           example: <v1>true
+          minLength: 0
           type: string
       title: Filter
       type: object
@@ -382,23 +392,28 @@ components:
         defaultExpression:
           description: The default expression.
           example: <v1>true
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: The best scope
+          minLength: 0
           type: string
         displayName:
           description: The display name.
           example: my-scope
+          minLength: 0
           type: string
         filters:
           description: List of filters.
           items:
             $ref: "#/components/schemas/scopes.v1.Filter"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
           example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
+          minLength: 0
           type: string
         teamId:
           description: Team identifier.
@@ -419,23 +434,28 @@ components:
         defaultExpression:
           description: The default expression.
           example: <v1>true
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: The best scope
+          minLength: 0
           type: string
         displayName:
           description: The display name.
           example: my-scope
+          minLength: 0
           type: string
         filters:
           description: List of filters.
           items:
             $ref: "#/components/schemas/scopes.v1.Filter"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
           example: 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
+          minLength: 0
           type: string
       required:
       - defaultExpression
@@ -450,19 +470,23 @@ components:
         defaultExpression:
           description: The default expression.
           example: <v1>true
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
           example: The best scope
+          minLength: 0
           type: string
         displayName:
           description: The display name.
           example: my-scope
+          minLength: 0
           type: string
         filters:
           description: List of filters.
           items:
             $ref: "#/components/schemas/scopes.v1.Filter"
+          minItems: 0
           type: array
       required:
       - displayName

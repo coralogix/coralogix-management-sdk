@@ -21,6 +21,7 @@ paths:
           description: The unique identifier of the company IP access settings to
             delete.
           example: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+          minLength: 0
           type: string
         style: form
       responses:
@@ -60,7 +61,7 @@ paths:
         schema:
           description: "The ID of the company IP access settings to get. If it's not\
             \ provided, the id will be derived from the authorization header."
-          example: ""
+          minLength: 0
           type: string
         style: form
       responses:
@@ -170,6 +171,7 @@ components:
           description: The unique identifier for the company IP access settings. This
             is typically a company ID.
           example: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+          minLength: 0
           type: string
         ipAccess:
           additionalProperties:
@@ -225,6 +227,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -241,6 +244,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -258,6 +262,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -299,10 +304,12 @@ components:
         ipRange:
           description: The IP range in CIDR notation.
           example: 192.168.0.1/24
+          minLength: 0
           type: string
         name:
           description: The name of the IP access entry.
           example: Office Network
+          minLength: 0
           type: string
       title: IP Access
       type: object
@@ -312,7 +319,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ReplaceCompanyIpAccessSettingsResponse:
@@ -355,11 +364,13 @@ components:
           description: Unique identifier of the existing IP access settings resource
             to replace.
           example: d662a2f1-21c3-493c-8f8a-595d3ab05ef3
+          minLength: 0
           type: string
         ipAccess:
           description: List of IP access entries to replace.
           items:
             $ref: "#/components/schemas/IpAccess"
+          minItems: 0
           type: array
       title: Replace company IP access settings request
       type: object
@@ -373,6 +384,7 @@ components:
           description: List of IP access entries to create.
           items:
             $ref: "#/components/schemas/IpAccess"
+          minItems: 0
           type: array
       title: Create company IP access settings request
       type: object

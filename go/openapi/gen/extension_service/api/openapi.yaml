@@ -62,6 +62,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       - description: Whether to include dashboard binaries in the response.
@@ -117,9 +118,11 @@ components:
       properties:
         descriptionMd:
           description: The description md.
+          minLength: 0
           type: string
         version:
           description: Version.
+          minLength: 0
           type: string
       title: Changelog entry
       type: object
@@ -135,12 +138,15 @@ components:
       properties:
         reason:
           description: Reason.
+          minLength: 0
           type: string
         replacementExtensions:
           description: The replacement extensions.
           items:
             description: The replacement extensions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Deprecation
       type: object
@@ -153,6 +159,7 @@ components:
       properties:
         data:
           description: Data payload.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/ExtensionBinary.BinaryType"
@@ -189,34 +196,41 @@ components:
           description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionItemBinary"
+          minItems: 0
           type: array
         data:
           description: Data payload.
           type: object
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         extendedInternalId:
           description: The extended internal id.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         isMandatory:
           description: The is mandatory.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         permissionResource:
           $ref: "#/components/schemas/PermissionResource"
         stableId:
           description: The stable id.
+          minLength: 0
           type: string
         targetDomain:
           $ref: "#/components/schemas/TargetDomain"
         uniqueId:
           description: The unique id.
+          minLength: 0
           type: string
       title: Extension item
       type: object
@@ -230,9 +244,11 @@ components:
       properties:
         data:
           description: Data payload.
+          minLength: 0
           type: string
         fileName:
           description: The file name.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/ExtensionItemBinary.BinaryType"
@@ -343,17 +359,21 @@ components:
           description: The binaries.
           items:
             $ref: "#/components/schemas/ExtensionBinary"
+          minItems: 0
           type: array
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         excerpt:
           description: The excerpt.
+          minLength: 0
           type: string
         integrationDetails:
           description: The integration details.
           items:
             $ref: "#/components/schemas/IntegrationDetail"
+          minItems: 0
           type: array
         isTesting:
           description: The is testing.
@@ -362,20 +382,25 @@ components:
           description: List of items.
           items:
             $ref: "#/components/schemas/ExtensionItem"
+          minItems: 0
           type: array
         labels:
           description: List of labels.
           items:
             description: List of labels.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         permissionDeniedItems:
           description: The permission denied items.
           items:
             $ref: "#/components/schemas/ExtensionItem"
+          minItems: 0
           type: array
         version:
           description: Version.
+          minLength: 0
           type: string
       title: Extension revision
       type: object
@@ -392,6 +417,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -408,6 +434,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -425,6 +452,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -439,7 +467,9 @@ components:
           description: The integrations.
           items:
             description: The integrations.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: A filter structure for a request to get all extensions
       type: object
@@ -456,16 +486,16 @@ components:
           revisions:
           - summary:
               itemCounts:
-                alerts: 6
-                eventsToMetrics: 5
-                grafanaDashboards: 2
-                savedViews: 2
-                customDashboards: 1
-                kibanaDashboards: 7
+                alerts: 0
+                eventsToMetrics: 0
+                grafanaDashboards: 0
+                savedViews: 0
+                customDashboards: 0
+                kibanaDashboards: 0
                 actions: 0
-                metricsRuleGroup: 9
-                enrichments: 5
-                parsingRules: 3
+                metricsRuleGroup: 0
+                enrichments: 0
+                parsingRules: 0
               isNew: true
             description: description
             excerpt: excerpt
@@ -480,16 +510,16 @@ components:
             - labels
           - summary:
               itemCounts:
-                alerts: 6
-                eventsToMetrics: 5
-                grafanaDashboards: 2
-                savedViews: 2
-                customDashboards: 1
-                kibanaDashboards: 7
+                alerts: 0
+                eventsToMetrics: 0
+                grafanaDashboards: 0
+                savedViews: 0
+                customDashboards: 0
+                kibanaDashboards: 0
                 actions: 0
-                metricsRuleGroup: 9
-                enrichments: 5
-                parsingRules: 3
+                metricsRuleGroup: 0
+                enrichments: 0
+                parsingRules: 0
               isNew: true
             description: description
             excerpt: excerpt
@@ -521,16 +551,16 @@ components:
           revisions:
           - summary:
               itemCounts:
-                alerts: 6
-                eventsToMetrics: 5
-                grafanaDashboards: 2
-                savedViews: 2
-                customDashboards: 1
-                kibanaDashboards: 7
+                alerts: 0
+                eventsToMetrics: 0
+                grafanaDashboards: 0
+                savedViews: 0
+                customDashboards: 0
+                kibanaDashboards: 0
                 actions: 0
-                metricsRuleGroup: 9
-                enrichments: 5
-                parsingRules: 3
+                metricsRuleGroup: 0
+                enrichments: 0
+                parsingRules: 0
               isNew: true
             description: description
             excerpt: excerpt
@@ -545,16 +575,16 @@ components:
             - labels
           - summary:
               itemCounts:
-                alerts: 6
-                eventsToMetrics: 5
-                grafanaDashboards: 2
-                savedViews: 2
-                customDashboards: 1
-                kibanaDashboards: 7
+                alerts: 0
+                eventsToMetrics: 0
+                grafanaDashboards: 0
+                savedViews: 0
+                customDashboards: 0
+                kibanaDashboards: 0
                 actions: 0
-                metricsRuleGroup: 9
-                enrichments: 5
-                parsingRules: 3
+                metricsRuleGroup: 0
+                enrichments: 0
+                parsingRules: 0
               isNew: true
             description: description
             excerpt: excerpt
@@ -584,6 +614,7 @@ components:
           description: The extensions.
           items:
             $ref: "#/components/schemas/GetAllExtensionsResponse.Extension"
+          minItems: 0
           type: array
       title: Get all extensions response
       type: object
@@ -598,16 +629,16 @@ components:
         revisions:
         - summary:
             itemCounts:
-              alerts: 6
-              eventsToMetrics: 5
-              grafanaDashboards: 2
-              savedViews: 2
-              customDashboards: 1
-              kibanaDashboards: 7
+              alerts: 0
+              eventsToMetrics: 0
+              grafanaDashboards: 0
+              savedViews: 0
+              customDashboards: 0
+              kibanaDashboards: 0
               actions: 0
-              metricsRuleGroup: 9
-              enrichments: 5
-              parsingRules: 3
+              metricsRuleGroup: 0
+              enrichments: 0
+              parsingRules: 0
             isNew: true
           description: description
           excerpt: excerpt
@@ -622,16 +653,16 @@ components:
           - labels
         - summary:
             itemCounts:
-              alerts: 6
-              eventsToMetrics: 5
-              grafanaDashboards: 2
-              savedViews: 2
-              customDashboards: 1
-              kibanaDashboards: 7
+              alerts: 0
+              eventsToMetrics: 0
+              grafanaDashboards: 0
+              savedViews: 0
+              customDashboards: 0
+              kibanaDashboards: 0
               actions: 0
-              metricsRuleGroup: 9
-              enrichments: 5
-              parsingRules: 3
+              metricsRuleGroup: 0
+              enrichments: 0
+              parsingRules: 0
             isNew: true
           description: description
           excerpt: excerpt
@@ -659,20 +690,25 @@ components:
       properties:
         darkModeImage:
           description: The dark mode image.
+          minLength: 0
           type: string
         deprecation:
           $ref: "#/components/schemas/Deprecation"
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         image:
           description: Image reference.
+          minLength: 0
           type: string
         integrations:
           description: The integrations.
           items:
             description: The integrations.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         isHidden:
           description: The is hidden.
@@ -681,15 +717,19 @@ components:
           description: The keywords.
           items:
             description: The keywords.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         name:
           description: Display name.
+          minLength: 0
           type: string
         revisions:
           description: The revisions.
           items:
             $ref: "#/components/schemas/GetAllExtensionsResponse.Revision"
+          minItems: 0
           type: array
       title: Extension
       type: object
@@ -697,16 +737,16 @@ components:
       example:
         summary:
           itemCounts:
-            alerts: 6
-            eventsToMetrics: 5
-            grafanaDashboards: 2
-            savedViews: 2
-            customDashboards: 1
-            kibanaDashboards: 7
+            alerts: 0
+            eventsToMetrics: 0
+            grafanaDashboards: 0
+            savedViews: 0
+            customDashboards: 0
+            kibanaDashboards: 0
             actions: 0
-            metricsRuleGroup: 9
-            enrichments: 5
-            parsingRules: 3
+            metricsRuleGroup: 0
+            enrichments: 0
+            parsingRules: 0
           isNew: true
         description: description
         excerpt: excerpt
@@ -724,25 +764,31 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         excerpt:
           description: The excerpt.
+          minLength: 0
           type: string
         integrationDetails:
           description: The integration details.
           items:
             $ref: "#/components/schemas/IntegrationDetail"
+          minItems: 0
           type: array
         labels:
           description: List of labels.
           items:
             description: List of labels.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         summary:
           $ref: "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
         version:
           description: Version number.
+          minLength: 0
           type: string
       title: Revision
       type: object
@@ -750,16 +796,16 @@ components:
       description: Revision summary.
       example:
         itemCounts:
-          alerts: 6
-          eventsToMetrics: 5
-          grafanaDashboards: 2
-          savedViews: 2
-          customDashboards: 1
-          kibanaDashboards: 7
+          alerts: 0
+          eventsToMetrics: 0
+          grafanaDashboards: 0
+          savedViews: 0
+          customDashboards: 0
+          kibanaDashboards: 0
           actions: 0
-          metricsRuleGroup: 9
-          enrichments: 5
-          parsingRules: 3
+          metricsRuleGroup: 0
+          enrichments: 0
+          parsingRules: 0
         isNew: true
       externalDocs:
         url: ""
@@ -780,67 +826,79 @@ components:
       properties:
         link:
           description: Link.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       title: Integration detail
       type: object
     ItemCounts:
       description: Item counts.
       example:
-        alerts: 6
-        eventsToMetrics: 5
-        grafanaDashboards: 2
-        savedViews: 2
-        customDashboards: 1
-        kibanaDashboards: 7
+        alerts: 0
+        eventsToMetrics: 0
+        grafanaDashboards: 0
+        savedViews: 0
+        customDashboards: 0
+        kibanaDashboards: 0
         actions: 0
-        metricsRuleGroup: 9
-        enrichments: 5
-        parsingRules: 3
+        metricsRuleGroup: 0
+        enrichments: 0
+        parsingRules: 0
       externalDocs:
         url: ""
       properties:
         actions:
           description: List of actions.
           format: int64
+          minimum: 0
           type: integer
         alerts:
           description: List of alerts.
           format: int64
+          minimum: 0
           type: integer
         customDashboards:
           description: The custom dashboards.
           format: int64
+          minimum: 0
           type: integer
         enrichments:
           description: List of enrichments.
           format: int64
+          minimum: 0
           type: integer
         eventsToMetrics:
           description: The events to metrics.
           format: int64
+          minimum: 0
           type: integer
         grafanaDashboards:
           description: The grafana dashboards.
           format: int64
+          minimum: 0
           type: integer
         kibanaDashboards:
           description: The kibana dashboards.
           format: int64
+          minimum: 0
           type: integer
         metricsRuleGroup:
           description: The metrics rule group.
           format: int64
+          minimum: 0
           type: integer
         parsingRules:
           description: The parsing rules.
           format: int64
+          minimum: 0
           type: integer
         savedViews:
           description: The saved views.
           format: int64
+          minimum: 0
           type: integer
       title: Item counts
       type: object
@@ -850,7 +908,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     PermissionResource:
@@ -1273,23 +1333,29 @@ components:
           description: The changelog.
           items:
             $ref: "#/components/schemas/ChangelogEntry"
+          minItems: 0
           type: array
         darkModeImage:
           description: The dark mode image.
+          minLength: 0
           type: string
         deprecation:
           $ref: "#/components/schemas/Deprecation"
         id:
           description: Unique identifier of the extension.
+          minLength: 0
           type: string
         image:
           description: Image reference.
+          minLength: 0
           type: string
         integrations:
           description: The integrations.
           items:
             description: The integrations.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         isHidden:
           description: The is hidden.
@@ -1298,20 +1364,25 @@ components:
           description: The keywords.
           items:
             description: The keywords.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         name:
           description: Display name of the extension.
+          minLength: 0
           type: string
         permissionDeniedRevisions:
           description: The permission denied revisions.
           items:
             $ref: "#/components/schemas/ExtensionRevision"
+          minItems: 0
           type: array
         revisions:
           description: The revisions.
           items:
             $ref: "#/components/schemas/ExtensionRevision"
+          minItems: 0
           type: array
       title: Extension metadata
       type: object

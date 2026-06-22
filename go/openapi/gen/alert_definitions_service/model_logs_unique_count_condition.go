@@ -23,7 +23,7 @@ var _ MappedNullable = &LogsUniqueCountCondition{}
 // LogsUniqueCountCondition Defines conditions for unique count alerts
 type LogsUniqueCountCondition struct {
 	// The maximum unique count
-	MaxUniqueCount *string `json:"maxUniqueCount,omitempty"`
+	MaxUniqueCount *string `json:"maxUniqueCount,omitempty" validate:"regexp=^-?[0-9]+$"`
 	TimeWindow *LogsUniqueValueTimeWindow `json:"timeWindow,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

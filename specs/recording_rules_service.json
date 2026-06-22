@@ -70,11 +70,13 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 }
               }
@@ -124,19 +126,6 @@
           "url": ""
         },
         "operationId": "RuleGroupSets_Fetch",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -178,19 +167,6 @@
           "url": ""
         },
         "operationId": "RuleGroupSets_Update",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -204,11 +180,13 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 }
               }
@@ -256,19 +234,6 @@
           "url": ""
         },
         "operationId": "RuleGroupSets_Delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -299,7 +264,21 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier.",
+          "required": true,
+          "schema": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     }
   },
   "components": {
@@ -315,7 +294,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -342,7 +322,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -364,7 +345,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -388,7 +370,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -408,22 +391,26 @@
             "example": 60000,
             "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "expr": {
             "description": "The expr.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "record": {
             "description": "Record.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -438,34 +425,40 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "interval": {
             "description": "Interval.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "limit": {
-            "example": "",
             "description": "Limit.",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InRule"
-            }
+            },
+            "minItems": 0
           },
           "version": {
             "description": "Version number.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -478,8 +471,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -489,28 +484,33 @@
           "evaluationDelayMs": {
             "description": "The evaluation delay ms.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "expr": {
             "description": "The expr.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "lastEvalDurationMs": {
-            "example": "",
             "description": "The last eval duration ms.",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "record": {
             "description": "Record.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -519,40 +519,47 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "interval": {
             "description": "Interval.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "lastEvalAt": {
-            "example": "",
             "description": "The last eval at.",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "limit": {
-            "example": "",
             "description": "Limit.",
             "type": "string",
-            "format": "int64"
+            "pattern": "^[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "rules": {
             "description": "List of rules.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRule"
-            }
+            },
+            "minItems": 0
           },
           "version": {
             "description": "Version number.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -570,15 +577,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRuleGroup"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -596,7 +606,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRuleGroupSet"
-            }
+            },
+            "minItems": 0
           }
         }
       },

@@ -75,6 +75,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceAcknowledgeIncidentByEventI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.eventId) < 0 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -750,6 +753,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentExecute(r ApiInc
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -856,6 +862,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentByEventIdExecute
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.eventId) < 0 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -962,6 +971,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceGetIncidentEventsExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.incidentId) < 0 {
+		return localVarReturnValue, nil, reportError("incidentId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1674,6 +1686,9 @@ func (a *IncidentsServiceAPIService) IncidentsServiceResolveIncidentByEventIdExe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.eventId) < 0 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -27,8 +27,10 @@
               "items": {
                 "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
                 "description": "List of team scope identifiers to retrieve.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -85,29 +87,34 @@
                   "defaultExpression": {
                     "example": "<v1>true",
                     "description": "The default expression.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "description": {
                     "example": "The best scope",
                     "description": "Human-readable description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "displayName": {
                     "example": "my-scope",
                     "description": "The display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "filters": {
                     "description": "List of filters.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
-                    }
+                    },
+                    "minItems": 0
                   },
                   "id": {
                     "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
                     "description": "Unique identifier.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 },
                 "required": [
@@ -173,24 +180,28 @@
                   "defaultExpression": {
                     "example": "<v1>true",
                     "description": "The default expression.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "description": {
                     "example": "The best scope",
                     "description": "Human-readable description.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "displayName": {
                     "example": "my-scope",
                     "description": "The display name.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "filters": {
                     "description": "List of filters.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
-                    }
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -297,7 +308,8 @@
             "schema": {
               "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -385,7 +397,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -407,7 +420,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -431,7 +445,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -452,7 +467,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Scope"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -468,8 +484,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -512,7 +530,8 @@
           "expression": {
             "example": "<v1>true",
             "description": "The expression.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -537,29 +556,34 @@
           "defaultExpression": {
             "example": "<v1>true",
             "description": "The default expression.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "The best scope",
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "displayName": {
             "example": "my-scope",
             "description": "The display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "filters": {
             "description": "List of filters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/scopes.v1.Filter"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "example": "60c82be2-413f-4b8e-8201-7f5c51e2ef2b",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "teamId": {
             "example": 1234,

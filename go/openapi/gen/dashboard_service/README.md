@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DashboardServiceAPI* | [**DashboardCatalogServiceGetDashboardCatalog**](docs/DashboardServiceAPI.md#dashboardcatalogservicegetdashboardcatalog) | **Get** /dashboards/dashboards/v1/catalog/list | Get dashboard catalog
 *DashboardServiceAPI* | [**DashboardsServiceAssignDashboardFolder**](docs/DashboardServiceAPI.md#dashboardsserviceassigndashboardfolder) | **Post** /dashboards/dashboards/v1/{dashboard_id}/folder | Assign a dashboard to a folder
+*DashboardServiceAPI* | [**DashboardsServiceCheckDashboard**](docs/DashboardServiceAPI.md#dashboardsservicecheckdashboard) | **Post** /dashboards/check/v1 | Validate a dashboard and return issues
 *DashboardServiceAPI* | [**DashboardsServiceCreateDashboard**](docs/DashboardServiceAPI.md#dashboardsservicecreatedashboard) | **Post** /dashboards/dashboards/v1 | Create a new dashboard
 *DashboardServiceAPI* | [**DashboardsServiceDeleteDashboard**](docs/DashboardServiceAPI.md#dashboardsservicedeletedashboard) | **Delete** /dashboards/dashboards/v1/{dashboard_id} | Delete a dashboard
 *DashboardServiceAPI* | [**DashboardsServiceGetDashboard**](docs/DashboardServiceAPI.md#dashboardsservicegetdashboard) | **Get** /dashboards/dashboards/v1/{dashboard_id} | Get a dashboard
@@ -125,6 +126,9 @@ Class | Method | HTTP request | Description
  - [BarChartQuerySpans](docs/BarChartQuerySpans.md)
  - [BarChartSpansQuery](docs/BarChartSpansQuery.md)
  - [BarChartStackDefinition](docs/BarChartStackDefinition.md)
+ - [CheckDashboardRequestDashboard](docs/CheckDashboardRequestDashboard.md)
+ - [CheckDashboardRequestDashboardId](docs/CheckDashboardRequestDashboardId.md)
+ - [CheckDashboardResponse](docs/CheckDashboardResponse.md)
  - [ColorApplyTarget](docs/ColorApplyTarget.md)
  - [ColorGradientType](docs/ColorGradientType.md)
  - [ColorLabelMapping](docs/ColorLabelMapping.md)
@@ -166,6 +170,7 @@ Class | Method | HTTP request | Description
  - [DashboardOneMinuteRelativeTimeFrame](docs/DashboardOneMinuteRelativeTimeFrame.md)
  - [DashboardTwoMinutesAbsoluteTimeFrame](docs/DashboardTwoMinutesAbsoluteTimeFrame.md)
  - [DashboardTwoMinutesRelativeTimeFrame](docs/DashboardTwoMinutesRelativeTimeFrame.md)
+ - [DashboardsServiceCheckDashboardRequest](docs/DashboardsServiceCheckDashboardRequest.md)
  - [DataTable](docs/DataTable.md)
  - [DataTableColumn](docs/DataTableColumn.md)
  - [DataTableDataprimeQuery](docs/DataTableDataprimeQuery.md)
@@ -304,6 +309,8 @@ Class | Method | HTTP request | Description
  - [IntervalResolutionAuto](docs/IntervalResolutionAuto.md)
  - [IntervalResolutionManual](docs/IntervalResolutionManual.md)
  - [IntervalValue](docs/IntervalValue.md)
+ - [Issue](docs/Issue.md)
+ - [IssueSeverity](docs/IssueSeverity.md)
  - [Layout](docs/Layout.md)
  - [Legend](docs/Legend.md)
  - [LegendBy](docs/LegendBy.md)

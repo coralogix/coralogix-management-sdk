@@ -161,6 +161,7 @@ components:
         keyId:
           description: Key identifier.
           example: key_abc123
+          minLength: 0
           type: string
       title: API Key Status Update
       type: object
@@ -203,12 +204,15 @@ components:
           items:
             description: List of permissions.
             example: logs:read
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         presets:
           description: List of permission presets.
           items:
             $ref: "#/components/schemas/PermissionsPreset"
+          minItems: 0
           type: array
       title: API Key Summary
       type: object
@@ -224,10 +228,12 @@ components:
         userEmail:
           description: The user email.
           example: test@example.com
+          minLength: 0
           type: string
         userId:
           description: The user id.
           example: user_123
+          minLength: 0
           type: string
       title: API Key User Owner
       type: object
@@ -243,14 +249,18 @@ components:
           items:
             description: List of permissions.
             example: read_logs
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         presets:
           description: List of permission presets.
           items:
             description: List of permission presets.
             example: my_preset
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Key Permissions
       type: object
@@ -268,14 +278,17 @@ components:
         keyId:
           description: Key identifier.
           example: my_key_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_api_key
+          minLength: 0
           type: string
         value:
           description: The value.
           example: my_api_key_value
+          minLength: 0
           type: string
       title: Create Api Key Response
       type: object
@@ -301,6 +314,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -317,6 +331,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -334,6 +349,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -400,6 +416,7 @@ components:
           description: The keys.
           items:
             $ref: "#/components/schemas/ApiKeySummary"
+          minItems: 0
           type: array
       title: Get Team Members API Keys Response
       type: object
@@ -409,7 +426,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Owner:
@@ -424,6 +443,7 @@ components:
       properties:
         organisationId:
           description: Organisation identifier of the API key owner.
+          minLength: 0
           type: string
       required:
       - organisationId
@@ -436,6 +456,7 @@ components:
         teamId:
           description: The team id.
           format: int64
+          minimum: 0
           type: integer
       required:
       - teamId
@@ -447,6 +468,7 @@ components:
       properties:
         userId:
           description: User identifier of the API key owner.
+          minLength: 0
           type: string
       required:
       - userId
@@ -472,13 +494,16 @@ components:
         name:
           description: Display name.
           example: my_preset
+          minLength: 0
           type: string
         permissions:
           description: List of permissions.
           items:
             description: List of permissions.
             example: logs:read
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Permissions Preset
       type: object
@@ -515,10 +540,12 @@ components:
         createdAt:
           description: The timestamp when the API key was created.
           format: date-time
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
           example: key_abc123
+          minLength: 0
           type: string
         isActive:
           description: Whether this resource is active.
@@ -526,10 +553,12 @@ components:
         keyName:
           description: The key name.
           example: my_api_key
+          minLength: 0
           type: string
         lastActivated:
           description: The timestamp when the API key was last activated.
           format: date-time
+          minLength: 0
           type: string
         owner:
           $ref: "#/components/schemas/ApiKeyOwner"
@@ -550,6 +579,7 @@ components:
           example: "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\"\
             :\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\"\
             :\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+          minLength: 0
           type: string
         hashed:
           description: Whether the value is stored as a one-way hash.
@@ -560,6 +590,7 @@ components:
         name:
           description: Display name.
           example: my_api_key
+          minLength: 0
           type: string
         owner:
           $ref: "#/components/schemas/Owner"
@@ -573,7 +604,9 @@ components:
           items:
             description: List of API key IDs to delete.
             example: key_abc123
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Delete API Keys Request
       type: object
@@ -585,6 +618,7 @@ components:
           description: The updates.
           items:
             $ref: "#/components/schemas/ApiKeyStatusUpdate"
+          minItems: 0
           type: array
       title: Update API Keys Status Request
       type: object

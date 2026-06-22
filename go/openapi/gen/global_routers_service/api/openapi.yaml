@@ -104,8 +104,9 @@ paths:
           items:
             description: The unique identifiers of the global routers to retrieve
               summaries for.
-            example: ""
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -133,7 +134,7 @@ paths:
         required: false
         schema:
           additionalProperties:
-            example: ""
+            minLength: 0
             type: string
           description: "Entity label matcher to validate, expressed as a map of label\
             \ keys to expected values."
@@ -163,6 +164,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -188,6 +190,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the global router to retrieve.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -292,7 +295,9 @@ components:
           - global-router-id-3
           items:
             description: The not found ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         routers:
           additionalProperties:
@@ -425,6 +430,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -441,6 +447,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -458,6 +465,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -629,15 +637,18 @@ components:
         createTime:
           description: The create time.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         disabled:
           description: The disabled.
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: The entity labels.
           type: object
@@ -647,19 +658,23 @@ components:
           description: The fallback destinations to be used if no rule matches.
           items:
             $ref: "#/components/schemas/RoutingTarget"
+          minItems: 0
           type: array
         fallbackTargets:
           description: The fallback targets.
           items:
             $ref: "#/components/schemas/FallbackTarget"
+          minItems: 0
           type: array
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: My Router
+          minLength: 0
           type: string
         routingLabels:
           $ref: "#/components/schemas/RoutingLabels"
@@ -667,10 +682,12 @@ components:
           description: List of rules.
           items:
             $ref: "#/components/schemas/RoutingRule"
+          minItems: 0
           type: array
         updateTime:
           description: Timestamp of the last update.
           format: date-time
+          minLength: 0
           type: string
       title: Global Router
       type: object
@@ -830,6 +847,7 @@ components:
           description: The routers.
           items:
             $ref: "#/components/schemas/GlobalRouter"
+          minItems: 0
           type: array
       title: List Global Routers Response
       type: object
@@ -839,7 +857,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ReplaceGlobalRouterResponse:
@@ -938,12 +958,15 @@ components:
       properties:
         environment:
           description: The environment.
+          minLength: 0
           type: string
         service:
           description: Service name.
+          minLength: 0
           type: string
         team:
           description: Team.
+          minLength: 0
           type: string
       title: Routing Labels
       type: object
@@ -973,9 +996,11 @@ components:
         condition:
           description: Condition.
           example: alertDef.priority == 'P3'
+          minLength: 0
           type: string
         customDetails:
           additionalProperties:
+            minLength: 0
             type: string
           description: The custom details.
           type: object
@@ -983,11 +1008,13 @@ components:
           $ref: "#/components/schemas/notification_center.EntityType"
         name:
           description: Display name.
+          minLength: 0
           type: string
         targets:
           description: List of targets.
           items:
             $ref: "#/components/schemas/RoutingTarget"
+          minItems: 0
           type: array
       title: Routing Rule
       type: object
@@ -1005,18 +1032,22 @@ components:
       properties:
         connectorId:
           description: The connector id.
+          minLength: 0
           type: string
         customDetails:
           additionalProperties:
+            minLength: 0
             type: string
           description: The custom details.
           type: object
         id:
           description: Unique identifier.
           example: d4b56246-64bb-4714-a8bd-97c999f1d801
+          minLength: 0
           type: string
         presetId:
           description: The preset id.
+          minLength: 0
           type: string
       title: Routing Target
       type: object
@@ -1048,6 +1079,7 @@ components:
       properties:
         message:
           description: Human-readable message.
+          minLength: 0
           type: string
       type: object
     ValidateEntityLabelMatcherResult.Success:
@@ -1110,8 +1142,9 @@ components:
           description: The values.
           items:
             description: The values.
-            example: ""
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Replace_Global_Router_Request:

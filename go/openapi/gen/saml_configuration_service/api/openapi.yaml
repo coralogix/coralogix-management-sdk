@@ -55,6 +55,7 @@ paths:
           description: The unique identifier of the team whose SAML configuration
             to retrieve.
           format: int64
+          minimum: 0
           type: integer
         style: form
       responses:
@@ -128,6 +129,7 @@ paths:
           description: Team identifier.
           example: 1234567
           format: int64
+          minimum: 0
           type: integer
         style: form
       responses:
@@ -167,6 +169,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -183,6 +186,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -200,6 +204,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -239,6 +244,7 @@ components:
         teamId:
           description: The team id.
           format: int64
+          minimum: 0
           type: integer
       title: Get Configuration Response
       type: object
@@ -270,9 +276,11 @@ components:
       properties:
         icon:
           description: Icon identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       type: object
     IDPParameters:
@@ -304,17 +312,21 @@ components:
             description: List of group names mapped from the identity provider for
               role-based access.
             example: group1
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         metadataContent:
           description: Raw XML content of the identity provider SAML metadata document.
           example: <?xml version= ...
+          minLength: 0
           type: string
         teamEntityId:
           description: Coralogix team entity identifier used as the SAML service provider
             entity ID.
           example: 1234567
           format: int64
+          minimum: 0
           type: integer
       required:
       - metadataContent
@@ -338,17 +350,21 @@ components:
             description: List of group names mapped from the identity provider for
               role-based access.
             example: group1
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         metadataUrl:
           description: URL to the identity provider SAML metadata XML document.
           example: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          minLength: 0
           type: string
         teamEntityId:
           description: Coralogix team entity identifier used as the SAML service provider
             entity ID.
           example: 1234567
           format: int64
+          minimum: 0
           type: integer
       required:
       - metadataUrl
@@ -360,7 +376,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     SPParameters:
@@ -379,22 +397,27 @@ components:
         assertionConsumerServiceUrl:
           description: The assertion consumer service url.
           example: assertion
+          minLength: 0
           type: string
         binding:
           description: The binding.
           example: binding
+          minLength: 0
           type: string
         metadataUrl:
           description: The metadata url.
           example: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          minLength: 0
           type: string
         nameIdFormat:
           description: The name id format.
           example: name_id
+          minLength: 0
           type: string
         signingCertPem:
           description: The signing cert pem.
           example: certificate
+          minLength: 0
           type: string
       title: Service Provider Parameters
       type: object
@@ -432,6 +455,7 @@ components:
         teamId:
           description: Team identifier.
           format: int64
+          minimum: 0
           type: integer
       title: Set Active Request
       type: object
@@ -444,6 +468,7 @@ components:
         teamId:
           description: Team identifier.
           format: int64
+          minimum: 0
           type: integer
       title: Set IDP Parameters Request
       type: object

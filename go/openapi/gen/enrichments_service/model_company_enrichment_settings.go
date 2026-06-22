@@ -29,11 +29,11 @@ type CompanyEnrichmentSettings struct {
 	// The query only row limit.
 	QueryOnlyRowLimit *int64 `json:"queryOnlyRowLimit,omitempty"`
 	// The query only size limit bytes.
-	QueryOnlySizeLimitBytes *string `json:"queryOnlySizeLimitBytes,omitempty"`
+	QueryOnlySizeLimitBytes *string `json:"queryOnlySizeLimitBytes,omitempty" validate:"regexp=^[0-9]+$"`
 	// The row limit.
 	RowLimit *int64 `json:"rowLimit,omitempty"`
 	// The size limit bytes.
-	SizeLimitBytes *string `json:"sizeLimitBytes,omitempty"`
+	SizeLimitBytes *string `json:"sizeLimitBytes,omitempty" validate:"regexp=^[0-9]+$"`
 	AdditionalProperties map[string]interface{}
 }
 

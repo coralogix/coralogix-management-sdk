@@ -26,7 +26,9 @@ paths:
           items:
             description: The unique identifiers of the enrichment rules to delete.
             format: int64
+            minimum: 0
             type: integer
+          minItems: 0
           type: array
         style: form
       responses:
@@ -195,6 +197,7 @@ components:
           description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
+          minItems: 0
           type: array
       required:
       - enrichments
@@ -241,6 +244,7 @@ components:
           description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
+          minItems: 0
           type: array
       type: object
     AtomicOverwriteEnrichmentsResponse:
@@ -284,6 +288,7 @@ components:
           description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
+          minItems: 0
           type: array
       type: object
     AwsType:
@@ -296,45 +301,52 @@ components:
         resourceType:
           description: The resource type.
           example: ec2
+          minLength: 0
           type: string
       type: object
     CompanyEnrichmentSettings:
       description: Company enrichment settings.
       example:
-        rowLimit: 5
-        sizeLimitBytes: ""
-        enrichmentsInUse: 6
-        queryOnlyRowLimit: 1
+        rowLimit: 0
+        sizeLimitBytes: sizeLimitBytes
+        enrichmentsInUse: 0
+        queryOnlyRowLimit: 0
         enrichmentAmountLimit: 0
-        queryOnlySizeLimitBytes: ""
+        queryOnlySizeLimitBytes: queryOnlySizeLimitBytes
       externalDocs:
         url: ""
       properties:
         enrichmentAmountLimit:
           description: The enrichment amount limit.
           format: int64
+          minimum: 0
           type: integer
         enrichmentsInUse:
           description: The enrichments in use.
           format: int64
+          minimum: 0
           type: integer
         queryOnlyRowLimit:
           description: The query only row limit.
           format: int64
+          minimum: 0
           type: integer
         queryOnlySizeLimitBytes:
           description: The query only size limit bytes.
-          example: ""
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         rowLimit:
           description: The row limit.
           format: int64
+          minimum: 0
           type: integer
         sizeLimitBytes:
           description: The size limit bytes.
-          example: ""
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
       type: object
     CustomEnrichmentType:
@@ -346,6 +358,7 @@ components:
           description: Unique identifier.
           example: 1
           format: int64
+          minimum: 0
           type: integer
       type: object
     DatasetTarget:
@@ -390,17 +403,20 @@ components:
         enrichedFieldName:
           description: The enriched field name.
           example: "1"
+          minLength: 0
           type: string
         enrichmentType:
           $ref: "#/components/schemas/EnrichmentType"
         fieldName:
           description: The field name.
           example: "1"
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
           example: 1
           format: int64
+          minimum: 0
           type: integer
         selectedColumns:
           description: The selected columns.
@@ -409,7 +425,9 @@ components:
           - population
           items:
             description: The selected columns.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         targets:
           description: The targets for the enrichment
@@ -428,15 +446,19 @@ components:
       properties:
         enrichedFieldName:
           description: The enriched field name.
+          minLength: 0
           type: string
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         selectedColumns:
           description: The selected columns.
           items:
             description: The selected columns.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         targets:
           description: The targets for the enrichment
@@ -454,18 +476,22 @@ components:
       properties:
         enrichedFieldName:
           description: The enriched field name.
+          minLength: 0
           type: string
         enrichmentType:
           $ref: "#/components/schemas/EnrichmentType"
         fieldName:
           description: The field name.
           example: sourceIPs
+          minLength: 0
           type: string
         selectedColumns:
           description: The selected columns.
           items:
             description: The selected columns.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         targets:
           description: The targets for the enrichment
@@ -545,6 +571,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -561,6 +588,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -578,6 +606,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -596,12 +625,12 @@ components:
       description: Response containing the company-level enrichment settings.
       example:
         enrichmentSettings:
-          rowLimit: 5
-          sizeLimitBytes: ""
-          enrichmentsInUse: 6
-          queryOnlyRowLimit: 1
+          rowLimit: 0
+          sizeLimitBytes: sizeLimitBytes
+          enrichmentsInUse: 0
+          queryOnlyRowLimit: 0
           enrichmentAmountLimit: 0
-          queryOnlySizeLimitBytes: ""
+          queryOnlySizeLimitBytes: queryOnlySizeLimitBytes
       externalDocs:
         url: ""
       properties:
@@ -621,11 +650,13 @@ components:
           description: Limit.
           example: 10
           format: int64
+          minimum: 0
           type: integer
         used:
           description: The used.
           example: 5
           format: int64
+          minimum: 0
           type: integer
       required:
       - limit
@@ -674,6 +705,7 @@ components:
           description: List of enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
+          minItems: 0
           type: array
       required:
       - enrichments
@@ -685,7 +717,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     RemoveEnrichmentsResponse:
@@ -730,6 +764,7 @@ components:
           description: The remaining enrichments.
           items:
             $ref: "#/components/schemas/Enrichment"
+          minItems: 0
           type: array
       title: Encrichments Delettion Response
       type: object
@@ -757,6 +792,7 @@ components:
           description: "Deprecated: enrichment field definitions."
           items:
             $ref: "#/components/schemas/EnrichmentFieldDefinition"
+          minItems: 0
           type: array
         enrichmentType:
           $ref: "#/components/schemas/EnrichmentType"
@@ -764,6 +800,7 @@ components:
           description: List of enrichment rules to atomically replace existing rules.
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
+          minItems: 0
           type: array
       type: object
     Enrichments_Creation_Request:
@@ -773,6 +810,7 @@ components:
           description: The request enrichments.
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
+          minItems: 0
           type: array
       required:
       - requestEnrichments
@@ -785,5 +823,6 @@ components:
           description: Complete list of enrichment rules to replace all existing rules.
           items:
             $ref: "#/components/schemas/EnrichmentRequestModel"
+          minItems: 0
           type: array
       type: object

@@ -154,6 +154,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -170,6 +171,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -187,6 +189,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -227,6 +230,7 @@ components:
           description: The retentions.
           items:
             $ref: "#/components/schemas/archive.v1.Retention"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -235,16 +239,20 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     RetentionUpdateElement:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
       type: object
     UpdateRetentionsResponse:
@@ -267,6 +275,7 @@ components:
           description: The retentions.
           items:
             $ref: "#/components/schemas/archive.v1.Retention"
+          minItems: 0
           type: array
       required:
       - retentions
@@ -288,9 +297,11 @@ components:
           type: boolean
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
@@ -316,6 +327,7 @@ components:
           description: List of retention tag updates to apply.
           items:
             $ref: "#/components/schemas/RetentionUpdateElement"
+          minItems: 0
           type: array
       required:
       - retentionUpdateElements

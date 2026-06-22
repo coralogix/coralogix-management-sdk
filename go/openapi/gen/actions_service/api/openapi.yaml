@@ -111,6 +111,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -148,6 +149,7 @@ paths:
         required: true
         schema:
           description: Unique identifier.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -396,6 +398,7 @@ components:
           description: The matching responses.
           items:
             $ref: "#/components/schemas/ActionExecutionResponse"
+          minItems: 0
           type: array
       type: object
     CreateActionRequest:
@@ -407,19 +410,24 @@ components:
           description: The application names.
           items:
             description: The application names.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         dpxlFilter:
           description: The dpxl filter.
+          minLength: 0
           type: string
         isPrivate:
           description: The is private.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         sourceType:
           $ref: "#/components/schemas/v2.SourceType"
@@ -427,15 +435,19 @@ components:
           description: The subsystem names.
           items:
             description: The subsystem names.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         url:
           description: URL.
+          minLength: 0
           type: string
         urlFields:
           description: The url fields.
           items:
             $ref: "#/components/schemas/UrlField"
+          minItems: 0
           type: array
       type: object
     CreateActionResponse:
@@ -475,6 +487,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
       type: object
     DeleteActionResponse:
@@ -496,6 +509,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -512,6 +526,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -529,6 +544,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -616,6 +632,7 @@ components:
           description: List of actions.
           items:
             $ref: "#/components/schemas/v2.Action"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -624,7 +641,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OrderActionsResponse:
@@ -682,6 +701,7 @@ components:
       properties:
         name:
           description: Display name.
+          minLength: 0
           type: string
         required:
           description: The required.
@@ -722,19 +742,25 @@ components:
           description: The application names.
           items:
             description: The application names.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         createdBy:
           description: The created by.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         dpxlFilter:
           description: The dpxl filter.
+          minLength: 0
           type: string
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         isHidden:
           description: The is hidden.
@@ -744,6 +770,7 @@ components:
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         sourceType:
           $ref: "#/components/schemas/v2.SourceType"
@@ -751,15 +778,19 @@ components:
           description: The subsystem names.
           items:
             description: The subsystem names.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         url:
           description: URL.
+          minLength: 0
           type: string
         urlFields:
           description: The url fields.
           items:
             $ref: "#/components/schemas/UrlField"
+          minItems: 0
           type: array
       type: object
     v2.SourceType:
@@ -788,19 +819,24 @@ components:
           description: The application names.
           items:
             description: The application names.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         dpxlFilter:
           description: The dpxl filter.
+          minLength: 0
           type: string
         isPrivate:
           description: The is private.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         sourceType:
           $ref: "#/components/schemas/v2.SourceType"
@@ -808,15 +844,19 @@ components:
           description: The subsystem names.
           items:
             description: The subsystem names.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         url:
           description: URL.
+          minLength: 0
           type: string
         urlFields:
           description: The url fields.
           items:
             $ref: "#/components/schemas/UrlField"
+          minItems: 0
           type: array
       type: object
     ActionsService_AtomicBatchExecuteActions_request:
@@ -827,6 +867,7 @@ components:
           description: The requests.
           items:
             $ref: "#/components/schemas/ActionExecutionRequest"
+          minItems: 0
           type: array
       type: object
     ActionsService_OrderActions_request:
@@ -835,12 +876,14 @@ components:
         privateActionsOrder:
           additionalProperties:
             format: int64
+            minimum: 0
             type: integer
           description: The private actions order.
           type: object
         sharedActionsOrder:
           additionalProperties:
             format: int64
+            minimum: 0
             type: integer
           description: The shared actions order.
           type: object

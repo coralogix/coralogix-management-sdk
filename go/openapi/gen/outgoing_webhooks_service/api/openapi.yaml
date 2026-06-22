@@ -327,6 +327,7 @@ paths:
         schema:
           description: Unique identifier.
           example: example_id
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -370,6 +371,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the outgoing webhook.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -415,6 +417,7 @@ paths:
         schema:
           description: Unique identifier.
           example: example_id
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -474,22 +477,27 @@ components:
       properties:
         detail:
           description: Detail.
+          minLength: 0
           type: string
         detailType:
           description: The detail type.
           example: detail_type
+          minLength: 0
           type: string
         eventBusArn:
           description: The event bus arn.
           example: arn:aws:events:us-east-1:123456789012:event-bus/default
+          minLength: 0
           type: string
         roleName:
           description: The role name.
           example: role_name
+          minLength: 0
           type: string
         source:
           description: Source.
           example: source
+          minLength: 0
           type: string
       title: AWS EventBridge configuration
       type: object
@@ -503,6 +511,7 @@ components:
         id:
           description: Unique identifier.
           example: example_id
+          minLength: 0
           type: string
       title: Create outgoing webhook response
       type: object
@@ -520,10 +529,12 @@ components:
       properties:
         payload:
           description: Raw payload data.
+          minLength: 0
           type: string
         uuid:
           description: The uuid.
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          minLength: 0
           type: string
       title: Demisto configuration
       type: object
@@ -558,7 +569,9 @@ components:
           - example@coralogix.com
           items:
             description: The email addresses.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Email group configuration
       type: object
@@ -581,6 +594,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -597,6 +611,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -614,6 +629,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -626,6 +642,7 @@ components:
       properties:
         headers:
           additionalProperties:
+            minLength: 0
             type: string
           description: The headers.
           type: object
@@ -633,10 +650,12 @@ components:
           $ref: "#/components/schemas/MethodType"
         payload:
           description: Raw payload data.
+          minLength: 0
           type: string
         uuid:
           description: The uuid.
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          minLength: 0
           type: string
       title: Generic webhook configuration
       type: object
@@ -686,15 +705,19 @@ components:
           $ref: "#/components/schemas/EndpointType"
         eventNotificationsInstanceId:
           description: The event notifications instance id.
+          minLength: 0
           type: string
         regionId:
           description: The region id.
+          minLength: 0
           type: string
         sourceId:
           description: The source id.
+          minLength: 0
           type: string
         sourceName:
           description: The source name.
+          minLength: 0
           type: string
       title: IBM event notification configuration
       type: object
@@ -706,14 +729,17 @@ components:
         apiToken:
           description: The api token.
           example: jira_api_token
+          minLength: 0
           type: string
         email:
           description: Email address.
           example: jira_email
+          minLength: 0
           type: string
         projectKey:
           description: The project key.
           example: jira_project_key
+          minLength: 0
           type: string
       title: Jira configuration
       type: object
@@ -742,6 +768,7 @@ components:
           description: The deployed.
           items:
             $ref: "#/components/schemas/OutgoingWebhookExtendedSummary"
+          minItems: 0
           type: array
       title: List all outgoing webhooks response
       type: object
@@ -768,6 +795,7 @@ components:
           description: The outbound webhook summaries.
           items:
             $ref: "#/components/schemas/OutboundWebhookSummary"
+          minItems: 0
           type: array
       title: List outbound webhooks summary response
       type: object
@@ -788,6 +816,7 @@ components:
           description: List of webhooks.
           items:
             $ref: "#/components/schemas/OutgoingWebhookType"
+          minItems: 0
           type: array
       title: List outgoing webhook types response
       type: object
@@ -814,6 +843,7 @@ components:
           description: The deployed.
           items:
             $ref: "#/components/schemas/OutgoingWebhookSummary"
+          minItems: 0
           type: array
       title: List outgoing webhooks response
       type: object
@@ -845,7 +875,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OpsgenieConfig:
@@ -869,22 +901,27 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: The external id.
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
       title: Outbound webhook summary
       type: object
@@ -926,29 +963,35 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - awsEventBridge
@@ -962,6 +1005,7 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         demisto:
           $ref: "#/components/schemas/DemistoConfig"
@@ -969,24 +1013,29 @@ components:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - demisto
@@ -1003,6 +1052,7 @@ components:
         label:
           description: The label.
           example: example_label
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
@@ -1016,6 +1066,7 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         emailGroup:
           $ref: "#/components/schemas/EmailGroupConfig"
@@ -1023,24 +1074,29 @@ components:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - emailGroup
@@ -1061,29 +1117,35 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       title: Outgoing webhook extended summary
       type: object
@@ -1095,31 +1157,37 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         genericWebhook:
           $ref: "#/components/schemas/GenericWebhookConfig"
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - genericWebhook
@@ -1133,31 +1201,37 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         ibmEventNotifications:
           $ref: "#/components/schemas/IbmEventNotificationsConfig"
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - ibmEventNotifications
@@ -1187,12 +1261,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - awsEventBridge
@@ -1208,12 +1284,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - demisto
@@ -1229,12 +1307,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - emailGroup
@@ -1250,12 +1330,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - genericWebhook
@@ -1271,12 +1353,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - ibmEventNotifications
@@ -1292,12 +1376,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - jira
@@ -1318,12 +1404,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - microsoftTeams
@@ -1344,12 +1432,14 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - msTeamsWorkflow
@@ -1363,6 +1453,7 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         opsgenie:
           additionalProperties: false
@@ -1376,6 +1467,7 @@ components:
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - opsgenie
@@ -1389,6 +1481,7 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         pagerDuty:
           $ref: "#/components/schemas/PagerDutyConfig"
@@ -1397,6 +1490,7 @@ components:
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - pagerDuty
@@ -1410,6 +1504,7 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         sendLog:
           $ref: "#/components/schemas/SendLogConfig"
@@ -1418,6 +1513,7 @@ components:
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - sendLog
@@ -1431,6 +1527,7 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         slack:
           $ref: "#/components/schemas/SlackConfig"
@@ -1439,6 +1536,7 @@ components:
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - slack
@@ -1452,31 +1550,37 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         jira:
           $ref: "#/components/schemas/JiraConfig"
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - jira
@@ -1490,15 +1594,18 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         microsoftTeams:
           additionalProperties: false
@@ -1510,16 +1617,19 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - microsoftTeams
@@ -1533,15 +1643,18 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         msTeamsWorkflow:
           additionalProperties: false
@@ -1553,16 +1666,19 @@ components:
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - msTeamsWorkflow
@@ -1576,19 +1692,23 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         opsgenie:
           additionalProperties: false
@@ -1602,10 +1722,12 @@ components:
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - opsgenie
@@ -1619,19 +1741,23 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         pagerDuty:
           $ref: "#/components/schemas/PagerDutyConfig"
@@ -1640,10 +1766,12 @@ components:
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - pagerDuty
@@ -1657,19 +1785,23 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         sendLog:
           $ref: "#/components/schemas/SendLogConfig"
@@ -1678,10 +1810,12 @@ components:
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - sendLog
@@ -1695,19 +1829,23 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         slack:
           $ref: "#/components/schemas/SlackConfig"
@@ -1716,10 +1854,12 @@ components:
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       required:
       - slack
@@ -1739,27 +1879,33 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: 123456
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           example: webhook_id
+          minLength: 0
           type: string
         name:
           description: Display name.
           example: my_webhook
+          minLength: 0
           type: string
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
         url:
           description: URL.
           example: slack.webhook.com
+          minLength: 0
           type: string
       title: Outgoing webhook summary
       type: object
@@ -1775,10 +1921,12 @@ components:
           description: Number of items.
           example: 3
           format: int64
+          minimum: 0
           type: integer
         label:
           description: The label.
           example: example_label
+          minLength: 0
           type: string
         type:
           $ref: "#/components/schemas/WebhookType"
@@ -1792,6 +1940,7 @@ components:
         serviceKey:
           description: The service key.
           example: pager_duty_service_key
+          minLength: 0
           type: string
       title: PagerDuty configuration
       type: object
@@ -1802,10 +1951,12 @@ components:
       properties:
         payload:
           description: Raw payload data.
+          minLength: 0
           type: string
         uuid:
           description: The uuid.
           example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          minLength: 0
           type: string
       title: Send log configuration
       type: object
@@ -1818,11 +1969,13 @@ components:
           description: The attachments.
           items:
             $ref: "#/components/schemas/Attachment"
+          minItems: 0
           type: array
         digests:
           description: The digests.
           items:
             $ref: "#/components/schemas/Digest"
+          minItems: 0
           type: array
       title: Slack configuration
       type: object
@@ -1842,15 +1995,18 @@ components:
         displayMessage:
           description: The display message.
           example: example_display_message
+          minLength: 0
           type: string
         errorMessage:
           description: The error message.
           example: example_error_message
+          minLength: 0
           type: string
         statusCode:
           description: The status code.
           example: 400
           format: int64
+          minimum: 0
           type: integer
       title: Test outgoing webhook failure
       type: object
@@ -1943,6 +2099,7 @@ components:
         id:
           description: Unique identifier.
           example: example_id
+          minLength: 0
           type: string
       title: Update outgoing webhook request
       type: object

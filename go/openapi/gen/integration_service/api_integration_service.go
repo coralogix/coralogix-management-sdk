@@ -74,6 +74,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceDeleteIntegrationExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.integrationId) < 0 {
+		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -180,6 +183,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetDeployedIntegrationE
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.integrationId) < 0 {
+		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -293,6 +299,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDefinitio
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	if r.includeTestingRevision != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", "")
@@ -409,6 +418,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetIntegrationDetailsEx
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	if r.includeTestingRevision != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "include_testing_revision", r.includeTestingRevision, "form", "")
@@ -630,6 +642,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceGetManagedIntegrationSt
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.integrationId) < 0 {
+		return localVarReturnValue, nil, reportError("integrationId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

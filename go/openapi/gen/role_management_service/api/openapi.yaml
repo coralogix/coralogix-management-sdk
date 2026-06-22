@@ -20,6 +20,7 @@ paths:
         schema:
           description: Team identifier.
           format: int64
+          minimum: 0
           type: integer
         style: form
       responses:
@@ -100,6 +101,7 @@ paths:
         schema:
           description: The role id.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -146,6 +148,7 @@ paths:
         schema:
           description: The role id.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -188,6 +191,7 @@ paths:
         schema:
           description: The role id.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       requestBody:
@@ -258,23 +262,29 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         parentRoleId:
           description: The parent role id.
           format: int64
+          minimum: 0
           type: integer
         permissions:
           description: List of permissions.
           items:
             description: List of permissions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         teamId:
           description: Team identifier.
           format: int64
+          minimum: 0
           type: integer
       required:
       - parentRoleId
@@ -286,22 +296,28 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         parentRoleName:
           description: The parent role name.
+          minLength: 0
           type: string
         permissions:
           description: List of permissions.
           items:
             description: List of permissions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         teamId:
           description: Team identifier.
           format: int64
+          minimum: 0
           type: integer
       required:
       - parentRoleName
@@ -316,6 +332,7 @@ components:
         id:
           description: Unique identifier.
           format: int64
+          minimum: 0
           type: integer
       type: object
     CustomRole:
@@ -325,8 +342,8 @@ components:
         permissions:
         - permissions
         - permissions
-        roleId: 6
-        teamId: 1
+        roleId: 0
+        teamId: 0
         name: name
         description: description
         parentRoleId: 0
@@ -335,30 +352,38 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         parentRoleId:
           description: The parent role id.
           format: int64
+          minimum: 0
           type: integer
         parentRoleName:
           description: The parent role name.
+          minLength: 0
           type: string
         permissions:
           description: List of permissions.
           items:
             description: List of permissions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         roleId:
           description: The role id.
           format: int64
+          minimum: 0
           type: integer
         teamId:
           description: Team identifier.
           format: int64
+          minimum: 0
           type: integer
       type: object
     DeleteRoleResponse:
@@ -380,6 +405,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -396,6 +422,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -413,6 +440,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -426,8 +454,8 @@ components:
           permissions:
           - permissions
           - permissions
-          roleId: 6
-          teamId: 1
+          roleId: 0
+          teamId: 0
           name: name
           description: description
           parentRoleId: 0
@@ -445,8 +473,8 @@ components:
           permissions:
           - permissions
           - permissions
-          roleId: 6
-          teamId: 1
+          roleId: 0
+          teamId: 0
           name: name
           description: description
           parentRoleId: 0
@@ -454,8 +482,8 @@ components:
           permissions:
           - permissions
           - permissions
-          roleId: 6
-          teamId: 1
+          roleId: 0
+          teamId: 0
           name: name
           description: description
           parentRoleId: 0
@@ -466,6 +494,7 @@ components:
           description: List of roles.
           items:
             $ref: "#/components/schemas/CustomRole"
+          minItems: 0
           type: array
       type: object
     ListSystemRolesResponse:
@@ -491,6 +520,7 @@ components:
           description: List of roles.
           items:
             $ref: "#/components/schemas/SystemRole"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -499,7 +529,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     SystemRole:
@@ -513,19 +545,24 @@ components:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         permissions:
           description: List of permissions.
           items:
             description: List of permissions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         roleId:
           description: The role id.
           format: int64
+          minimum: 0
           type: integer
       type: object
     UpdateRoleResponse:
@@ -548,7 +585,9 @@ components:
           description: List of permissions.
           items:
             description: List of permissions.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     v3.FilterOperator:
@@ -567,9 +606,11 @@ components:
       properties:
         newDescription:
           description: The new description.
+          minLength: 0
           type: string
         newName:
           description: The new name.
+          minLength: 0
           type: string
         newPermissions:
           $ref: "#/components/schemas/v2.Permissions"

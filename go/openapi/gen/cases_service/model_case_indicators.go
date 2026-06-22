@@ -25,6 +25,8 @@ var _ MappedNullable = &CaseIndicators{}
 type CaseIndicators struct {
 	// List of alert indicators contributing to the case
 	AlertIndicators []AlertIndicator `json:"alertIndicators"`
+	// List of generic indicators contributing to the case
+	GenericIndicators []GenericIndicator `json:"genericIndicators,omitempty"`
 	// List of Prometheus alert indicators contributing to the case
 	PrometheusAlertIndicators []PrometheusAlertIndicator `json:"prometheusAlertIndicators,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -74,6 +76,38 @@ func (o *CaseIndicators) SetAlertIndicators(v []AlertIndicator) {
 	o.AlertIndicators = v
 }
 
+// GetGenericIndicators returns the GenericIndicators field value if set, zero value otherwise.
+func (o *CaseIndicators) GetGenericIndicators() []GenericIndicator {
+	if o == nil || IsNil(o.GenericIndicators) {
+		var ret []GenericIndicator
+		return ret
+	}
+	return o.GenericIndicators
+}
+
+// GetGenericIndicatorsOk returns a tuple with the GenericIndicators field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseIndicators) GetGenericIndicatorsOk() ([]GenericIndicator, bool) {
+	if o == nil || IsNil(o.GenericIndicators) {
+		return nil, false
+	}
+	return o.GenericIndicators, true
+}
+
+// HasGenericIndicators returns a boolean if a field has been set.
+func (o *CaseIndicators) HasGenericIndicators() bool {
+	if o != nil && !IsNil(o.GenericIndicators) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenericIndicators gets a reference to the given []GenericIndicator and assigns it to the GenericIndicators field.
+func (o *CaseIndicators) SetGenericIndicators(v []GenericIndicator) {
+	o.GenericIndicators = v
+}
+
 // GetPrometheusAlertIndicators returns the PrometheusAlertIndicators field value if set, zero value otherwise.
 func (o *CaseIndicators) GetPrometheusAlertIndicators() []PrometheusAlertIndicator {
 	if o == nil || IsNil(o.PrometheusAlertIndicators) {
@@ -117,6 +151,9 @@ func (o CaseIndicators) MarshalJSON() ([]byte, error) {
 func (o CaseIndicators) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["alertIndicators"] = o.AlertIndicators
+	if !IsNil(o.GenericIndicators) {
+		toSerialize["genericIndicators"] = o.GenericIndicators
+	}
 	if !IsNil(o.PrometheusAlertIndicators) {
 		toSerialize["prometheusAlertIndicators"] = o.PrometheusAlertIndicators
 	}
@@ -165,6 +202,7 @@ func (o *CaseIndicators) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "alertIndicators")
+		delete(additionalProperties, "genericIndicators")
 		delete(additionalProperties, "prometheusAlertIndicators")
 		o.AdditionalProperties = additionalProperties
 	}

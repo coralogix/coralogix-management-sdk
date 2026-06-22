@@ -70,7 +70,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RetentionUpdateElement"
-                    }
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -244,7 +245,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -266,7 +268,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -290,7 +293,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -327,7 +331,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/archive.v1.Retention"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -340,8 +345,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -350,11 +357,13 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -372,7 +381,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/archive.v1.Retention"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -394,11 +404,13 @@
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "order": {
             "description": "Sort order.",

@@ -84,7 +84,8 @@
                     }
                   }
                 }
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -295,7 +296,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/SloExecutionRequest"
-                    }
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -358,10 +360,11 @@
               "description": "The ids.",
               "type": "array",
               "items": {
-                "example": "",
                 "description": "The ids.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -409,19 +412,6 @@
           "url": ""
         },
         "operationId": "SlosService_GetSlo",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -463,19 +453,6 @@
           "url": ""
         },
         "operationId": "SlosService_DeleteSlo",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -506,7 +483,21 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier.",
+          "required": true,
+          "schema": {
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     },
     "/slo/validated/v1": {
       "put": {
@@ -638,13 +629,15 @@
           "key": {
             "example": "environment",
             "description": "Label/tag name to filter on",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "deprecated": true,
             "example": "production",
             "description": "Deprecated: use values instead. Single value to match (kept for backward compatibility)",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "values": {
             "description": "Preferred: multiple values to match (OR semantics, e.g. status IN [500, 503])",
@@ -652,8 +645,10 @@
             "items": {
               "example": "500",
               "description": "Preferred: multiple values to match (OR semantics, e.g. status IN [500, 503])",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -768,7 +763,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApmFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupingKeys": {
             "example": [
@@ -779,8 +775,10 @@
             "type": "array",
             "items": {
               "description": "Labels to group SLO results by",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "services": {
             "example": [
@@ -791,8 +789,10 @@
             "type": "array",
             "items": {
               "description": "List of service names to monitor",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -812,7 +812,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApmFilter"
-            }
+            },
+            "minItems": 0
           },
           "groupingKeys": {
             "example": [
@@ -823,8 +824,10 @@
             "type": "array",
             "items": {
               "description": "Labels to group SLO results by",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "latencyConfig": {
             "$ref": "#/components/schemas/ApmLatencySli"
@@ -838,8 +841,10 @@
             "type": "array",
             "items": {
               "description": "List of service names to monitor",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -859,7 +864,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloExecutionResponse"
-            }
+            },
+            "minItems": 0
           },
           "status": {
             "$ref": "#/components/schemas/ResponseStatus"
@@ -882,15 +888,18 @@
             "type": "array",
             "items": {
               "description": "The not found ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "slos": {
             "description": "The slos.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Slo"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -977,7 +986,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -997,8 +1007,10 @@
             "type": "array",
             "items": {
               "description": "The effected slo alert ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1025,7 +1037,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1047,7 +1060,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1071,7 +1085,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1172,7 +1187,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Slo"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1190,7 +1206,8 @@
           "query": {
             "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))",
             "description": "Query string.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1212,8 +1229,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1229,7 +1248,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloProductType"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1246,7 +1266,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloAlertValidityResult"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1287,8 +1308,10 @@
             "type": "array",
             "items": {
               "description": "The effected slo alert ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "slo": {
             "$ref": "#/components/schemas/Slo"
@@ -1326,12 +1349,14 @@
             "description": "List of details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "message": {
             "description": "Human-readable message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "statusCode": {
             "$ref": "#/components/schemas/Code"
@@ -1359,19 +1384,23 @@
         "properties": {
           "alertVersionId": {
             "description": "The alert version id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "errorMessage": {
             "description": "The error message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1392,17 +1421,20 @@
           "createTime": {
             "description": "RFC3339 timestamp of when the SLO was created.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "creator": {
             "example": "test@domain.com",
             "description": "Email or identifier of the user who created the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "A brief description of my SLO",
             "description": "Human-readable description of the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "grouping": {
             "$ref": "#/components/schemas/v1.Grouping"
@@ -1410,19 +1442,22 @@
           "id": {
             "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
             "description": "Unique identifier of the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "name": {
             "example": "Example Slo Name",
             "description": "Human-readable display name for the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "ownershipTags": {
             "$ref": "#/components/schemas/SloOwnershipTags"
@@ -1449,12 +1484,14 @@
             "deprecated": true,
             "example": "request",
             "description": "Deprecated: SLO type string. Use slo_type instead.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -1622,7 +1659,8 @@
           "labelName": {
             "example": "environment",
             "description": "Filter by a specific SLO label key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1705,7 +1743,8 @@
           "serviceName": {
             "example": "payment-service",
             "description": "Filter by service name from the APM SLI services list (not ownership tags). Only valid for APM product SLOs. MUST be used together with a product_type filter that includes APM; the server may reject the request otherwise. To filter by configured ownership service on any SLO type, use ownership_service_values instead.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1746,8 +1785,10 @@
             "type": "array",
             "items": {
               "description": "Metric label names to use as sources (label-driven). Actual values come from series at query time. Empty if not using label-driven for this dimension.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "resolvedValues": {
             "example": [
@@ -1760,8 +1801,10 @@
             "type": "array",
             "items": {
               "description": "Flat, deduplicated union of static_values and the values resolved from label_keys across observed permutations (empties excluded). Empty when neither source yields any value. Provides a single searchable list of values for this ownership tag, regardless of source.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "staticValues": {
             "example": [
@@ -1771,8 +1814,10 @@
             "type": "array",
             "items": {
               "description": "Group-wide static values (broad). Empty if not using broad for this dimension.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1817,17 +1862,20 @@
           "createTime": {
             "description": "RFC3339 timestamp of when the SLO was created.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "creator": {
             "example": "test@domain.com",
             "description": "Email or identifier of the user who created the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "A brief description of my SLO",
             "description": "Human-readable description of the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "grouping": {
             "$ref": "#/components/schemas/v1.Grouping"
@@ -1835,19 +1883,22 @@
           "id": {
             "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
             "description": "Unique identifier of the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "name": {
             "example": "Example Slo Name",
             "description": "Human-readable display name for the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "ownershipTags": {
             "$ref": "#/components/schemas/SloOwnershipTags"
@@ -1877,12 +1928,14 @@
             "deprecated": true,
             "example": "request",
             "description": "Deprecated: SLO type string. Use slo_type instead.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         },
         "required": [
@@ -1922,17 +1975,20 @@
           "createTime": {
             "description": "RFC3339 timestamp of when the SLO was created.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "creator": {
             "example": "test@domain.com",
             "description": "Email or identifier of the user who created the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "A brief description of my SLO",
             "description": "Human-readable description of the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "grouping": {
             "$ref": "#/components/schemas/v1.Grouping"
@@ -1940,19 +1996,22 @@
           "id": {
             "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
             "description": "Unique identifier of the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "name": {
             "example": "Example Slo Name",
             "description": "Human-readable display name for the SLO.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "ownershipTags": {
             "$ref": "#/components/schemas/SloOwnershipTags"
@@ -1979,12 +2038,14 @@
             "deprecated": true,
             "example": "request",
             "description": "Deprecated: SLO type string. Use slo_type instead.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "windowBasedMetricSli": {
             "$ref": "#/components/schemas/WindowBasedMetricSli"
@@ -2006,8 +2067,10 @@
             "type": "array",
             "items": {
               "description": "The values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2023,7 +2086,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SloType"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -2084,8 +2148,10 @@
             "type": "array",
             "items": {
               "description": "List of labels.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2106,7 +2172,8 @@
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },

@@ -83,7 +83,8 @@
             "schema": {
               "example": "aws-sqs",
               "description": "The unique identifier of the integration definition.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           },
@@ -153,7 +154,8 @@
             "schema": {
               "example": "aws-sqs",
               "description": "The integration id.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -212,7 +214,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the integration instance to delete.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -270,7 +273,8 @@
             "description": "The name of the RUM application to fetch version data for.",
             "schema": {
               "description": "The name of the RUM application to fetch version data for.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -392,7 +396,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the integration.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           },
@@ -507,7 +512,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the managed integration.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -568,7 +574,8 @@
                 "properties": {
                   "id": {
                     "description": "Integration metadata ID generated at creation time.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
@@ -697,7 +704,8 @@
                   },
                   "integrationId": {
                     "description": "ID of the existing integration instance to test.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   }
                 }
               }
@@ -757,7 +765,8 @@
             "description": "The unique identifier of the integration to fetch a template for.",
             "schema": {
               "description": "The unique identifier of the integration to fetch a template for.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           },
@@ -774,15 +783,18 @@
               "properties": {
                 "apiKey": {
                   "description": "API key used to authenticate requests for template access.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "cgxDomain": {
                   "description": "The cgx domain.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "logsUrl": {
                   "description": "The logs url.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -848,11 +860,13 @@
         "properties": {
           "resourceGroupName": {
             "description": "The resource group name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "subscriptionId": {
             "description": "The subscription id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -866,11 +880,13 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -893,7 +909,8 @@
         "properties": {
           "templateUrl": {
             "description": "The template url.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -906,11 +923,13 @@
         "properties": {
           "descriptionMd": {
             "description": "The description md.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "version": {
             "description": "Version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -925,11 +944,13 @@
         "properties": {
           "arn": {
             "description": "The arn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "region": {
             "description": "Region.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -946,25 +967,29 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
-            }
+            },
+            "minItems": 0
           },
           "parameters": {
             "description": "The parameters.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "postInstallationSteps": {
             "description": "The post installation steps.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "templateUrl": {
             "description": "The template url.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -986,11 +1011,13 @@
         "properties": {
           "command": {
             "description": "The command.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "language": {
             "$ref": "#/components/schemas/Language"
@@ -1000,15 +1027,18 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Link"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltipText": {
             "description": "The tooltip text.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1021,15 +1051,18 @@
         "properties": {
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1065,7 +1098,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RegisteredInstance"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1087,15 +1121,18 @@
         "properties": {
           "definitionKey": {
             "description": "The definition key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "definitionVersion": {
             "description": "The definition version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -1105,7 +1142,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1119,15 +1157,18 @@
         "properties": {
           "reason": {
             "description": "Reason.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "replacementExtensions": {
             "description": "The replacement extensions.",
             "type": "array",
             "items": {
               "description": "The replacement extensions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1140,7 +1181,8 @@
         "properties": {
           "data": {
             "description": "Data payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
@@ -1166,7 +1208,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
-            }
+            },
+            "minItems": 0
           },
           "data": {
             "description": "Data payload.",
@@ -1174,15 +1217,18 @@
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "extendedInternalId": {
             "description": "The extended internal id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "isMandatory": {
             "description": "The is mandatory.",
@@ -1190,21 +1236,24 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
             "description": "The stable id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
             "description": "The unique id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1217,11 +1266,13 @@
         "properties": {
           "data": {
             "description": "Data payload.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fileName": {
             "description": "The file name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
@@ -1251,22 +1302,26 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
-            }
+            },
+            "minItems": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "excerpt": {
             "description": "The excerpt.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationDetails": {
             "description": "The integration details.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
-            }
+            },
+            "minItems": 0
           },
           "isTesting": {
             "description": "The is testing.",
@@ -1277,26 +1332,31 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
-            }
+            },
+            "minItems": 0
           },
           "labels": {
             "description": "List of labels.",
             "type": "array",
             "items": {
               "description": "List of labels.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "permissionDeniedItems": {
             "description": "The permission denied items.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
-            }
+            },
+            "minItems": 0
           },
           "version": {
             "description": "Version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1310,7 +1370,8 @@
         "properties": {
           "url": {
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1330,7 +1391,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldCondition.FieldValue"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1352,11 +1414,13 @@
         "properties": {
           "fieldName": {
             "description": "The field name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "valuePattern": {
             "description": "The value pattern.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -1391,29 +1455,34 @@
         "properties": {
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "multiText": {
             "$ref": "#/components/schemas/ListTextValue"
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1429,18 +1498,21 @@
           },
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1460,29 +1532,34 @@
         "properties": {
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "multipleSelection": {
             "$ref": "#/components/schemas/MultipleSelectionValue"
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1498,18 +1575,21 @@
           },
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1529,26 +1609,31 @@
         "properties": {
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1567,18 +1652,21 @@
           },
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1598,26 +1686,31 @@
         "properties": {
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1636,18 +1729,21 @@
           },
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1667,26 +1763,31 @@
         "properties": {
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1705,18 +1806,21 @@
           },
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1736,26 +1840,31 @@
         "properties": {
           "allowedPattern": {
             "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
             "description": "Link to documentation providing more information about this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "groupId": {
             "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "placeholder": {
             "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "predefined": {
             "description": "Whether this field has a predefined value that is suggested to the user.",
@@ -1774,18 +1883,21 @@
           },
           "templateParamName": {
             "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "tooltip": {
             "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
             "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "visible": {
             "description": "Whether this field is visible in the integration configuration UI.",
@@ -1819,7 +1931,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1841,7 +1954,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1865,7 +1979,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1885,7 +2000,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1950,7 +2066,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetIntegrationsResponse.IntegrationWithCounts"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1964,15 +2081,18 @@
           "amountIntegrations": {
             "description": "The amount integrations.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "errors": {
             "description": "List of errors.",
             "type": "array",
             "items": {
               "description": "List of errors.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "integration": {
             "$ref": "#/components/schemas/Integration"
@@ -2001,7 +2121,8 @@
         "properties": {
           "integrationId": {
             "description": "The integration id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "status": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -2031,7 +2152,8 @@
         "properties": {
           "templateUrl": {
             "description": "The template url.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2048,14 +2170,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
-            }
+            },
+            "minItems": 0
           },
           "guide": {
             "$ref": "#/components/schemas/IntegrationGuide"
           },
           "template": {
             "description": "The template.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2088,53 +2212,64 @@
         "properties": {
           "darkIcon": {
             "description": "The dark icon.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "icon": {
             "description": "Icon identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisions": {
             "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.RevisionSummary"
-            }
+            },
+            "minItems": 0
           },
           "tags": {
             "description": "List of tags.",
             "type": "array",
             "items": {
               "description": "List of tags.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "versions": {
             "description": "The versions.",
             "type": "array",
             "items": {
               "description": "The versions.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2148,21 +2283,24 @@
         "properties": {
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
           },
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisions": {
             "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -2175,11 +2313,13 @@
         "properties": {
           "link": {
             "description": "Link.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2209,14 +2349,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDoc"
-            }
+            },
+            "minItems": 0
           },
           "extensions": {
             "description": "Extensions bundled with this integration for pre-built dashboards and alerts.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Extension"
-            }
+            },
+            "minItems": 0
           },
           "external": {
             "$ref": "#/components/schemas/ExternalUrl"
@@ -2245,14 +2387,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDoc"
-            }
+            },
+            "minItems": 0
           },
           "extensions": {
             "description": "Extensions bundled with this integration for pre-built dashboards and alerts.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Extension"
-            }
+            },
+            "minItems": 0
           },
           "integration": {
             "$ref": "#/components/schemas/Integration"
@@ -2275,11 +2419,13 @@
         "properties": {
           "link": {
             "description": "Link.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2293,11 +2439,13 @@
         "properties": {
           "installationRequirements": {
             "description": "The installation requirements.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "introduction": {
             "description": "The introduction.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2311,14 +2459,16 @@
         "properties": {
           "integrationKey": {
             "description": "The integration key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationParameters": {
             "$ref": "#/components/schemas/GenericIntegrationParameters"
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2353,11 +2503,13 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2389,25 +2541,29 @@
           },
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
-            }
+            },
+            "minItems": 0
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisionDeploymentSupported": {
             "description": "Whether this revision supports automated deployment through the Coralogix platform.",
@@ -2415,7 +2571,8 @@
           },
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2435,25 +2592,29 @@
           },
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
-            }
+            },
+            "minItems": 0
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisionDeploymentSupported": {
             "description": "Whether this revision supports automated deployment through the Coralogix platform.",
@@ -2461,7 +2622,8 @@
           },
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2478,28 +2640,32 @@
         "properties": {
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
-            }
+            },
+            "minItems": 0
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
-            }
+            },
+            "minItems": 0
           },
           "helmChart": {
             "$ref": "#/components/schemas/HelmChart"
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisionDeploymentSupported": {
             "description": "Whether this revision supports automated deployment through the Coralogix platform.",
@@ -2507,7 +2673,8 @@
           },
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2524,25 +2691,29 @@
         "properties": {
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
-            }
+            },
+            "minItems": 0
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "managedService": {
             "$ref": "#/components/schemas/ManagedService"
@@ -2553,7 +2724,8 @@
           },
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2570,25 +2742,29 @@
         "properties": {
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
-            }
+            },
+            "minItems": 0
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisionDeploymentSupported": {
             "description": "Whether this revision supports automated deployment through the Coralogix platform.",
@@ -2599,7 +2775,8 @@
           },
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2616,25 +2793,29 @@
         "properties": {
           "featureFlag": {
             "description": "The feature flag.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "fields": {
             "description": "Configuration fields that users must fill in to deploy this integration revision.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
-            }
+            },
+            "minItems": 0
           },
           "groups": {
             "description": "UI groups used to organize configuration fields into logical sections.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "revisionDeploymentSupported": {
             "description": "Whether this revision supports automated deployment through the Coralogix platform.",
@@ -2645,7 +2826,8 @@
           },
           "upgradeInstructionsMd": {
             "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2667,7 +2849,8 @@
             "description": "List of details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "messages": {
@@ -2675,8 +2858,10 @@
             "type": "array",
             "items": {
               "description": "The messages.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2698,15 +2883,18 @@
         "properties": {
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "text": {
             "description": "The text.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "url": {
             "description": "URL.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -2723,8 +2911,10 @@
             "type": "array",
             "items": {
               "description": "The integration keys.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2741,16 +2931,20 @@
             "type": "array",
             "items": {
               "description": "The default values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "options": {
             "description": "Options.",
             "type": "array",
             "items": {
               "description": "Options.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2767,7 +2961,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RevisionRef"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -2782,12 +2977,14 @@
           "firstOccurrence": {
             "description": "The first occurrence.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "lastOccurrence": {
             "description": "The last occurrence.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -2826,8 +3023,10 @@
             "type": "array",
             "items": {
               "description": "Options.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2840,8 +3039,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -2888,7 +3089,8 @@
           },
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2908,7 +3110,8 @@
           },
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -2924,7 +3127,8 @@
         "properties": {
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "numericValue": {
             "description": "Numeric value for this integration parameter.",
@@ -2945,7 +3149,8 @@
         "properties": {
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "sensitiveData": {
             "$ref": "#/components/schemas/SensitiveDataPlaceholder"
@@ -2964,7 +3169,8 @@
         "properties": {
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "stringList": {
             "$ref": "#/components/schemas/StringList"
@@ -2983,11 +3189,13 @@
         "properties": {
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "stringValue": {
             "description": "String value for this integration parameter.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -3049,11 +3257,13 @@
           },
           "definitionVersion": {
             "description": "The definition version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -3065,14 +3275,16 @@
           "lastUpdated": {
             "description": "Timestamp of the last update to this integration instance.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "parameters": {
             "description": "The parameters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
-            }
+            },
+            "minItems": 0
           },
           "revisionLifecycle": {
             "$ref": "#/components/schemas/RevisionLifecycle"
@@ -3094,11 +3306,13 @@
           },
           "definitionVersion": {
             "description": "The definition version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -3110,14 +3324,16 @@
           "lastUpdated": {
             "description": "Timestamp of the last update to this integration instance.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "parameters": {
             "description": "The parameters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
-            }
+            },
+            "minItems": 0
           },
           "revisionLifecycle": {
             "$ref": "#/components/schemas/RevisionLifecycle"
@@ -3136,14 +3352,16 @@
         "properties": {
           "definitionVersion": {
             "description": "The definition version.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "empty": {
             "$ref": "#/components/schemas/NoDeployment"
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -3155,14 +3373,16 @@
           "lastUpdated": {
             "description": "Timestamp of the last update to this integration instance.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "parameters": {
             "description": "The parameters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
-            }
+            },
+            "minItems": 0
           },
           "revisionLifecycle": {
             "$ref": "#/components/schemas/RevisionLifecycle"
@@ -3193,11 +3413,13 @@
         "properties": {
           "descriptionMd": {
             "description": "The description md.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3214,14 +3436,16 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
-            }
+            },
+            "minItems": 0
           },
           "sourceMapCommands": {
             "description": "The source map commands.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -3236,14 +3460,16 @@
           "syncedAt": {
             "description": "The synced at.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "versions": {
             "description": "The versions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RumVersionData.Version"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -3262,7 +3488,8 @@
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3276,7 +3503,8 @@
         "properties": {
           "integrationId": {
             "description": "The integration id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3290,15 +3518,18 @@
         "properties": {
           "defaultValue": {
             "description": "The default value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "options": {
             "description": "Options.",
             "type": "array",
             "items": {
               "description": "Options.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3335,7 +3566,8 @@
         "properties": {
           "defaultValue": {
             "description": "The default value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3350,7 +3582,8 @@
           "createdAt": {
             "description": "Creation timestamp.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "isUploadedSuccessful": {
             "description": "The is uploaded successful.",
@@ -3371,8 +3604,10 @@
             "type": "array",
             "items": {
               "description": "List of values.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -3391,7 +3626,8 @@
           "syncedAt": {
             "description": "The synced at.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -3425,7 +3661,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConfigurationBlock"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -3652,30 +3889,36 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
-            }
+            },
+            "minItems": 0
           },
           "darkModeImage": {
             "description": "The dark mode image.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
             "description": "Unique identifier of the extension.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "image": {
             "description": "Image reference.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "integrations": {
             "description": "The integrations.",
             "type": "array",
             "items": {
               "description": "The integrations.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "isHidden": {
             "description": "The is hidden.",
@@ -3686,26 +3929,31 @@
             "type": "array",
             "items": {
               "description": "The keywords.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "name": {
             "description": "Display name of the extension.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permissionDeniedRevisions": {
             "description": "The permission denied revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
-            }
+            },
+            "minItems": 0
           },
           "revisions": {
             "description": "The revisions.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -3719,7 +3967,8 @@
         "properties": {
           "errorMessage": {
             "description": "The error message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -3756,7 +4005,8 @@
           },
           "version": {
             "description": "Version number.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

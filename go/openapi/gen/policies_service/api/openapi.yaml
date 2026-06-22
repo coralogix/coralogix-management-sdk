@@ -171,6 +171,8 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                estimatedBytes: "13251739648"
               schema:
                 $ref: "#/components/schemas/ForecastPolicyUsageResponse"
           description: ""
@@ -272,6 +274,7 @@ paths:
         schema:
           description: The unique identifier of the data policy to delete.
           example: id
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -310,6 +313,7 @@ paths:
         schema:
           description: The unique identifier of the data policy to retrieve.
           example: id
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -440,6 +444,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
       type: object
     AtomicOverwriteLogPoliciesResponse:
@@ -576,6 +581,7 @@ components:
           description: The create responses.
           items:
             $ref: "#/components/schemas/CreatePolicyResponse"
+          minItems: 0
           type: array
       title: Atomic Overwrite Log Policies Response
       type: object
@@ -713,6 +719,7 @@ components:
           description: The create responses.
           items:
             $ref: "#/components/schemas/CreatePolicyResponse"
+          minItems: 0
           type: array
       title: Atomic Overwrite Span Policies Response
       type: object
@@ -860,6 +867,7 @@ components:
           description: The test policies bulk result.
           items:
             $ref: "#/components/schemas/TestPoliciesResult"
+          minItems: 0
           type: array
       required:
       - testPoliciesBulkResult
@@ -878,6 +886,7 @@ components:
         description:
           description: Human-readable description.
           example: My Policy Description
+          minLength: 0
           type: string
         disabled:
           description: The disabled.
@@ -885,6 +894,7 @@ components:
         name:
           description: Display name.
           example: My Policy
+          minLength: 0
           type: string
         priority:
           $ref: "#/components/schemas/quota.v1.Priority"
@@ -896,6 +906,7 @@ components:
           description: List of targets.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
       required:
       - description
@@ -931,6 +942,7 @@ components:
         description:
           description: Optional free-text description of the policy's purpose.
           example: My Policy Description
+          minLength: 0
           type: string
         disabled:
           description: "When true, the policy is disabled and will not be evaluated."
@@ -940,6 +952,7 @@ components:
         name:
           description: Human-readable name for the policy.
           example: My Policy
+          minLength: 0
           type: string
         placement:
           $ref: "#/components/schemas/Placement"
@@ -954,6 +967,7 @@ components:
             data.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
       required:
       - logRules
@@ -974,6 +988,7 @@ components:
         description:
           description: Optional free-text description of the policy's purpose.
           example: My Policy Description
+          minLength: 0
           type: string
         disabled:
           description: "When true, the policy is disabled and will not be evaluated."
@@ -981,6 +996,7 @@ components:
         name:
           description: Human-readable name for the policy.
           example: My Policy
+          minLength: 0
           type: string
         placement:
           $ref: "#/components/schemas/Placement"
@@ -997,6 +1013,7 @@ components:
             data.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
       required:
       - name
@@ -1111,6 +1128,7 @@ components:
         id:
           description: Unique identifier.
           example: id
+          minLength: 0
           type: string
       required:
       - id
@@ -1129,6 +1147,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -1145,6 +1164,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -1162,6 +1182,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -1277,7 +1298,7 @@ components:
       description: "Forecasted usage in bytes for a draft TCO policy, based on bytes\
         \ matched over a given time window."
       example:
-        estimatedBytes: 13251739648
+        estimatedBytes: "13251739648"
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1285,11 +1306,11 @@ components:
         estimatedBytes:
           description: Estimated number of bytes the draft policy would match over
             the requested time window.
-          example: 13251739648
-          format: int64
-          maximum: 9007199254740991
-          minimum: 1
-          type: integer
+          example: "13251739648"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
       required:
       - estimatedBytes
       title: Forecast Policy Usage Response
@@ -1427,6 +1448,7 @@ components:
           description: List of policies.
           items:
             $ref: "#/components/schemas/Policy"
+          minItems: 0
           type: array
       required:
       - policies
@@ -1542,14 +1564,17 @@ components:
         applicationNameValues:
           description: The application name values.
           example: application_name
+          minLength: 0
           type: string
         severityValues:
           description: The severity values.
           example: severity
+          minLength: 0
           type: string
         subsystemNameValues:
           description: The subsystem name values.
           example: subsystem_name
+          minLength: 0
           type: string
       required:
       - applicationNameValues
@@ -1570,11 +1595,13 @@ components:
       properties:
         dpxlExpression:
           description: The dpxl expression.
+          minLength: 0
           type: string
         severities:
           description: The severities.
           items:
             $ref: "#/components/schemas/quota.v1.Severity"
+          minItems: 0
           type: array
       required:
       - severities
@@ -1598,7 +1625,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Placement:
@@ -1717,6 +1746,7 @@ components:
         createdAt:
           description: Timestamp (RFC 3339) when the policy was created.
           example: 2021-01-01T00:00:00.000Z
+          minLength: 0
           type: string
         deleted:
           description: Soft-delete marker; when true the policy has been deleted and
@@ -1726,6 +1756,7 @@ components:
         description:
           description: Optional free-text description of the policy's purpose.
           example: My Policy Description
+          minLength: 0
           type: string
         enabled:
           description: Indicates whether the policy is actively evaluated and applied.
@@ -1734,12 +1765,14 @@ components:
         id:
           description: Unique identifier for the policy.
           example: policy_id
+          minLength: 0
           type: string
         logRules:
           $ref: "#/components/schemas/LogRules"
         name:
           description: Human-readable name for the policy.
           example: My Policy
+          minLength: 0
           type: string
         order:
           description: Ordering priority that determines the sequence in which policies
@@ -1760,10 +1793,12 @@ components:
             data.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
         updatedAt:
           description: Timestamp (RFC 3339) when the policy was last updated.
           example: 2021-01-01T00:00:00.000Z
+          minLength: 0
           type: string
       required:
       - companyId
@@ -1788,6 +1823,7 @@ components:
         id:
           description: Unique identifier.
           example: id
+          minLength: 0
           type: string
         order:
           description: Sort order.
@@ -1818,6 +1854,7 @@ components:
         createdAt:
           description: Timestamp (RFC 3339) when the policy was created.
           example: 2021-01-01T00:00:00.000Z
+          minLength: 0
           type: string
         deleted:
           description: Soft-delete marker; when true the policy has been deleted and
@@ -1827,6 +1864,7 @@ components:
         description:
           description: Optional free-text description of the policy's purpose.
           example: My Policy Description
+          minLength: 0
           type: string
         enabled:
           description: Indicates whether the policy is actively evaluated and applied.
@@ -1835,10 +1873,12 @@ components:
         id:
           description: Unique identifier for the policy.
           example: policy_id
+          minLength: 0
           type: string
         name:
           description: Human-readable name for the policy.
           example: My Policy
+          minLength: 0
           type: string
         order:
           description: Ordering priority that determines the sequence in which policies
@@ -1861,10 +1901,12 @@ components:
             data.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
         updatedAt:
           description: Timestamp (RFC 3339) when the policy was last updated.
           example: 2021-01-01T00:00:00.000Z
+          minLength: 0
           type: string
       required:
       - companyId
@@ -1921,6 +1963,7 @@ components:
             percentages to priority levels.
           items:
             $ref: "#/components/schemas/UsageTier"
+          minItems: 0
           type: array
       type: object
     QuotaBasedStatus:
@@ -1959,6 +2002,7 @@ components:
           description: The orders.
           items:
             $ref: "#/components/schemas/PolicyOrder"
+          minItems: 0
           type: array
       required:
       - orders
@@ -2003,6 +2047,7 @@ components:
           description: The tag rules.
           items:
             $ref: "#/components/schemas/TagRule"
+          minItems: 0
           type: array
       type: object
     SpansPolicySettings:
@@ -2028,10 +2073,12 @@ components:
         tagName:
           description: The tag name.
           example: tag_name
+          minLength: 0
           type: string
         tagValue:
           description: The tag value.
           example: tag_value
+          minLength: 0
           type: string
       required:
       - ruleTypeId
@@ -2139,6 +2186,7 @@ components:
         description:
           description: Optional free-text description of the policy's purpose.
           example: My Policy Description
+          minLength: 0
           type: string
         enabled:
           description: Indicates whether the policy should be actively evaluated and
@@ -2148,12 +2196,14 @@ components:
         id:
           description: Unique identifier of the policy to update.
           example: policy_id
+          minLength: 0
           type: string
         logRules:
           $ref: "#/components/schemas/LogRules"
         name:
           description: Human-readable name for the policy.
           example: My Policy
+          minLength: 0
           type: string
         priority:
           $ref: "#/components/schemas/quota.v1.Priority"
@@ -2166,6 +2216,7 @@ components:
             data.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
       required:
       - id
@@ -2185,6 +2236,7 @@ components:
         description:
           description: Optional free-text description of the policy's purpose.
           example: My Policy Description
+          minLength: 0
           type: string
         enabled:
           description: Indicates whether the policy should be actively evaluated and
@@ -2194,10 +2246,12 @@ components:
         id:
           description: Unique identifier of the policy to update.
           example: policy_id
+          minLength: 0
           type: string
         name:
           description: Human-readable name for the policy.
           example: My Policy
+          minLength: 0
           type: string
         priority:
           $ref: "#/components/schemas/quota.v1.Priority"
@@ -2212,6 +2266,7 @@ components:
             data.
           items:
             $ref: "#/components/schemas/v1.Target"
+          minItems: 0
           type: array
       required:
       - id
@@ -2337,6 +2392,7 @@ components:
       properties:
         name:
           description: Display name.
+          minLength: 0
           type: string
         ruleTypeId:
           $ref: "#/components/schemas/RuleTypeId"
@@ -2384,6 +2440,7 @@ components:
         dataset:
           description: The dataset.
           example: dataset1
+          minLength: 0
           type: string
         dataspace:
           description: The dataspace.
@@ -2412,6 +2469,7 @@ components:
           description: Policies.
           items:
             $ref: "#/components/schemas/CreateLogPolicyRequest"
+          minItems: 0
           type: array
       required:
       - policies
@@ -2441,6 +2499,7 @@ components:
           description: The orders.
           items:
             $ref: "#/components/schemas/PolicyOrder"
+          minItems: 0
           type: array
         sourceType:
           $ref: "#/components/schemas/v1.SourceType"
@@ -2456,6 +2515,7 @@ components:
           description: The meta fields values list.
           items:
             $ref: "#/components/schemas/LogMetaFieldsValues"
+          minItems: 0
           type: array
       required:
       - metaFieldsValuesList
@@ -2480,6 +2540,7 @@ components:
           description: List of span policies to create as part of the atomic overwrite.
           items:
             $ref: "#/components/schemas/CreateSpanPolicyRequest"
+          minItems: 0
           type: array
       required:
       - policies

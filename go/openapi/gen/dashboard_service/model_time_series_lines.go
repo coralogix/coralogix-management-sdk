@@ -39,13 +39,15 @@ type TimeSeriesLines struct {
 	Legend *Legend `json:"legend,omitempty"`
 	ScaleType *ScaleType `json:"scaleType,omitempty"`
 	// Max count of the series per query
-	SeriesCountLimit *string `json:"seriesCountLimit,omitempty"`
+	SeriesCountLimit *string `json:"seriesCountLimit,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Custom template for the series name
 	SeriesNameTemplate *string `json:"seriesNameTemplate,omitempty"`
 	StackedLine *VisualizationStackedLine `json:"stackedLine,omitempty"`
 	TemporalField *ObservationField `json:"temporalField,omitempty"`
 	Tooltip *TimeSeriesTooltip `json:"tooltip,omitempty"`
 	Unit *CommonUnit `json:"unit,omitempty"`
+	// When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.
+	UseDataTimeRange *bool `json:"useDataTimeRange,omitempty"`
 	// The value fields.
 	ValueFields []ObservationField `json:"valueFields,omitempty"`
 	XAxisTimeFormat *XAxisTimeFormat `json:"xAxisTimeFormat,omitempty"`
@@ -555,6 +557,38 @@ func (o *TimeSeriesLines) SetUnit(v CommonUnit) {
 	o.Unit = &v
 }
 
+// GetUseDataTimeRange returns the UseDataTimeRange field value if set, zero value otherwise.
+func (o *TimeSeriesLines) GetUseDataTimeRange() bool {
+	if o == nil || IsNil(o.UseDataTimeRange) {
+		var ret bool
+		return ret
+	}
+	return *o.UseDataTimeRange
+}
+
+// GetUseDataTimeRangeOk returns a tuple with the UseDataTimeRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TimeSeriesLines) GetUseDataTimeRangeOk() (*bool, bool) {
+	if o == nil || IsNil(o.UseDataTimeRange) {
+		return nil, false
+	}
+	return o.UseDataTimeRange, true
+}
+
+// HasUseDataTimeRange returns a boolean if a field has been set.
+func (o *TimeSeriesLines) HasUseDataTimeRange() bool {
+	if o != nil && !IsNil(o.UseDataTimeRange) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseDataTimeRange gets a reference to the given bool and assigns it to the UseDataTimeRange field.
+func (o *TimeSeriesLines) SetUseDataTimeRange(v bool) {
+	o.UseDataTimeRange = &v
+}
+
 // GetValueFields returns the ValueFields field value if set, zero value otherwise.
 func (o *TimeSeriesLines) GetValueFields() []ObservationField {
 	if o == nil || IsNil(o.ValueFields) {
@@ -738,6 +772,9 @@ func (o TimeSeriesLines) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+	if !IsNil(o.UseDataTimeRange) {
+		toSerialize["useDataTimeRange"] = o.UseDataTimeRange
+	}
 	if !IsNil(o.ValueFields) {
 		toSerialize["valueFields"] = o.ValueFields
 	}
@@ -788,6 +825,7 @@ func (o *TimeSeriesLines) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "temporalField")
 		delete(additionalProperties, "tooltip")
 		delete(additionalProperties, "unit")
+		delete(additionalProperties, "useDataTimeRange")
 		delete(additionalProperties, "valueFields")
 		delete(additionalProperties, "xAxisTimeFormat")
 		delete(additionalProperties, "yAxisMax")

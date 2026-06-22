@@ -408,7 +408,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -430,7 +431,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -454,7 +456,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -472,7 +475,8 @@
         "properties": {
           "bucket": {
             "description": "Bucket name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -500,17 +504,20 @@
           "crn": {
             "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
             "description": "The crn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "endpoint": {
             "example": "s3.us-south.cloud-object-storage.appdomain.cloud",
             "description": "Endpoint.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "serviceCrn": {
             "example": "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::",
             "description": "The service crn.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -523,8 +530,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -541,19 +550,22 @@
             "example": 2,
             "description": "The five minutes resolution.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "oneHourResolution": {
             "example": 3,
             "description": "The one hour resolution.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "rawResolution": {
             "example": 1,
             "description": "The raw resolution.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         }
       },
@@ -568,11 +580,13 @@
         "properties": {
           "bucket": {
             "description": "Bucket name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "region": {
             "description": "Region.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -605,7 +619,8 @@
           },
           "prefix": {
             "description": "Storage path prefix applied to all archived objects.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "retentionPolicy": {
             "$ref": "#/components/schemas/RetentionPolicyRequest"
@@ -613,7 +628,8 @@
           "tenantId": {
             "description": "Tenant identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -636,7 +652,8 @@
           },
           "prefix": {
             "description": "Storage path prefix applied to all archived objects.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "retentionPolicy": {
             "$ref": "#/components/schemas/RetentionPolicyRequest"
@@ -644,7 +661,8 @@
           "tenantId": {
             "description": "Tenant identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -664,7 +682,8 @@
           },
           "prefix": {
             "description": "Storage path prefix applied to all archived objects.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "retentionPolicy": {
             "$ref": "#/components/schemas/RetentionPolicyRequest"
@@ -675,7 +694,8 @@
           "tenantId": {
             "description": "Tenant identifier.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -697,7 +717,8 @@
           "retentionDays": {
             "description": "Archive retention period in days.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -719,7 +740,8 @@
           "retentionDays": {
             "description": "Archive retention period in days.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           }
         },
         "required": [
@@ -738,7 +760,8 @@
           "retentionDays": {
             "description": "Archive retention period in days.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "s3": {
             "$ref": "#/components/schemas/S3Config"

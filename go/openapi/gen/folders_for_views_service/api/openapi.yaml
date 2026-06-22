@@ -15,6 +15,10 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                folders:
+                - id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                  name: My Folder
               schema:
                 $ref: "#/components/schemas/ListViewFoldersResponse"
           description: ""
@@ -35,6 +39,9 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                name: My Folder
               schema:
                 $ref: "#/components/schemas/ViewFolder"
           description: ""
@@ -56,6 +63,9 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                name: My Folder
               schema:
                 $ref: "#/components/schemas/ViewFolder"
           description: ""
@@ -115,6 +125,9 @@ paths:
         "200":
           content:
             application/json:
+              example:
+                id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                name: My Folder
               schema:
                 $ref: "#/components/schemas/ViewFolder"
           description: ""
@@ -142,6 +155,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -158,6 +172,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -175,6 +190,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -195,6 +211,7 @@ components:
           description: The folders.
           items:
             $ref: "#/components/schemas/ViewFolder"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -203,7 +220,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ViewFolder:

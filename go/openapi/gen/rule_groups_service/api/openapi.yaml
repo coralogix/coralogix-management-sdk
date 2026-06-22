@@ -82,8 +82,9 @@ paths:
           description: The unique identifiers of the parsing rule groups to delete.
           items:
             description: The unique identifiers of the parsing rule groups to delete.
-            example: ""
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         style: form
       responses:
@@ -181,6 +182,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the parsing rule group to delete.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -218,6 +220,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the parsing rule group to retrieve.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -255,6 +258,7 @@ paths:
         required: true
         schema:
           description: The unique identifier of the parsing rule group to update.
+          minLength: 0
           type: string
         style: simple
       requestBody:
@@ -299,6 +303,7 @@ components:
           type: boolean
         rule:
           description: Rule.
+          minLength: 0
           type: string
       type: object
     ApplicationNameConstraint:
@@ -310,6 +315,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     BlockParameters:
@@ -322,6 +328,7 @@ components:
           type: boolean
         rule:
           description: Rule.
+          minLength: 0
           type: string
       type: object
     BulkDeleteRuleGroupResponse:
@@ -360,32 +367,38 @@ components:
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule"
+          minItems: 0
           type: array
       type: object
     CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         parameters:
           $ref: "#/components/schemas/RuleParameters"
         sourceField:
           description: The source field.
+          minLength: 0
           type: string
       type: object
     CreateRuleGroupResponse:
@@ -403,7 +416,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -413,10 +426,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           - rules:
             - sourceField: sourceField
               name: name
@@ -427,7 +440,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -437,10 +450,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           creator: creator
           hidden: true
           ruleMatchers:
@@ -482,6 +495,7 @@ components:
       properties:
         rule:
           description: Rule.
+          minLength: 0
           type: string
       type: object
     ExtractTimestampParameters:
@@ -491,6 +505,7 @@ components:
       properties:
         format:
           description: The format.
+          minLength: 0
           type: string
         standard:
           $ref: "#/components/schemas/FormatStandard"
@@ -508,6 +523,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -524,6 +540,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -541,6 +558,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -574,6 +592,7 @@ components:
       properties:
         companyId:
           description: The company id.
+          minLength: 0
           type: string
         limits:
           $ref: "#/components/schemas/Counts"
@@ -588,32 +607,38 @@ components:
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule"
+          minItems: 0
           type: array
       type: object
     GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule:
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         parameters:
           $ref: "#/components/schemas/RuleParameters"
         sourceField:
           description: The source field.
+          minLength: 0
           type: string
       type: object
     GetRuleGroupModelMappingResponse:
@@ -642,7 +667,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -652,10 +677,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           - rules:
             - sourceField: sourceField
               name: name
@@ -666,7 +691,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -676,10 +701,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           creator: creator
           hidden: true
           ruleMatchers:
@@ -705,11 +730,13 @@ components:
       properties:
         destinationFieldText:
           description: The destination field text.
+          minLength: 0
           type: string
         destinationFieldType:
           $ref: "#/components/schemas/DestinationField"
         rule:
           description: Rule.
+          minLength: 0
           type: string
       type: object
     JsonParseParameters:
@@ -722,6 +749,7 @@ components:
           type: boolean
         destinationField:
           description: The destination field.
+          minLength: 0
           type: string
         escapedValue:
           description: The escaped value.
@@ -740,6 +768,7 @@ components:
           type: boolean
         destinationField:
           description: The destination field.
+          minLength: 0
           type: string
       type: object
     ListRuleGroupsResponse:
@@ -757,7 +786,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -767,10 +796,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           - rules:
             - sourceField: sourceField
               name: name
@@ -781,7 +810,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -791,10 +820,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           creator: creator
           hidden: true
           ruleMatchers:
@@ -818,7 +847,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -828,10 +857,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           - rules:
             - sourceField: sourceField
               name: name
@@ -842,7 +871,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -852,10 +881,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           creator: creator
           hidden: true
           ruleMatchers:
@@ -875,6 +904,7 @@ components:
           description: The rule groups.
           items:
             $ref: "#/components/schemas/RuleGroup"
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -883,7 +913,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ParseParameters:
@@ -893,9 +925,11 @@ components:
       properties:
         destinationField:
           description: The destination field.
+          minLength: 0
           type: string
         rule:
           description: Rule.
+          minLength: 0
           type: string
       type: object
     RemoveFieldsParameters:
@@ -907,7 +941,9 @@ components:
           description: List of fields.
           items:
             description: List of fields.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ReplaceParameters:
@@ -917,12 +953,15 @@ components:
       properties:
         destinationField:
           description: The destination field.
+          minLength: 0
           type: string
         replaceNewVal:
           description: The replace new val.
+          minLength: 0
           type: string
         rule:
           description: Rule.
+          minLength: 0
           type: string
       type: object
     RuleGroup:
@@ -939,7 +978,7 @@ components:
                 rule: rule
                 keepBlockedLogs: true
             enabled: true
-            order: 1
+            order: 0
           - sourceField: sourceField
             name: name
             description: description
@@ -949,10 +988,10 @@ components:
                 rule: rule
                 keepBlockedLogs: true
             enabled: true
-            order: 1
+            order: 0
           id: id
           enabled: true
-          order: 6
+          order: 0
         - rules:
           - sourceField: sourceField
             name: name
@@ -963,7 +1002,7 @@ components:
                 rule: rule
                 keepBlockedLogs: true
             enabled: true
-            order: 1
+            order: 0
           - sourceField: sourceField
             name: name
             description: description
@@ -973,10 +1012,10 @@ components:
                 rule: rule
                 keepBlockedLogs: true
             enabled: true
-            order: 1
+            order: 0
           id: id
           enabled: true
-          order: 6
+          order: 0
         creator: creator
         hidden: true
         ruleMatchers:
@@ -994,9 +1033,11 @@ components:
       properties:
         creator:
           description: Creator.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
@@ -1006,23 +1047,28 @@ components:
           type: boolean
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         ruleMatchers:
           description: The rule matchers.
           items:
             $ref: "#/components/schemas/RuleMatcher"
+          minItems: 0
           type: array
         ruleSubgroups:
           description: The rule subgroups.
           items:
             $ref: "#/components/schemas/RuleSubgroup"
+          minItems: 0
           type: array
       type: object
     RuleMatcher:
@@ -1182,7 +1228,7 @@ components:
               rule: rule
               keepBlockedLogs: true
           enabled: true
-          order: 1
+          order: 0
         - sourceField: sourceField
           name: name
           description: description
@@ -1192,25 +1238,28 @@ components:
               rule: rule
               keepBlockedLogs: true
           enabled: true
-          order: 1
+          order: 0
         id: id
         enabled: true
-        order: 6
+        order: 0
       properties:
         enabled:
           description: Whether this resource is enabled.
           type: boolean
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         rules:
           description: List of rules.
           items:
             $ref: "#/components/schemas/rules.v1.Rule"
+          minItems: 0
           type: array
       type: object
     SeverityConstraint:
@@ -1228,6 +1277,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     UpdateRuleGroupResponse:
@@ -1245,7 +1295,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -1255,10 +1305,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           - rules:
             - sourceField: sourceField
               name: name
@@ -1269,7 +1319,7 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             - sourceField: sourceField
               name: name
               description: description
@@ -1279,10 +1329,10 @@ components:
                   rule: rule
                   keepBlockedLogs: true
               enabled: true
-              order: 1
+              order: 0
             id: id
             enabled: true
-            order: 6
+            order: 0
           creator: creator
           hidden: true
           ruleMatchers:
@@ -1327,28 +1377,33 @@ components:
             rule: rule
             keepBlockedLogs: true
         enabled: true
-        order: 1
+        order: 0
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
           type: boolean
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         parameters:
           $ref: "#/components/schemas/RuleParameters"
         sourceField:
           description: The source field.
+          minLength: 0
           type: string
       type: object
     v1.TeamId:
@@ -1359,6 +1414,7 @@ components:
         id:
           description: Unique identifier.
           format: int64
+          minimum: 0
           type: integer
       type: object
     v3.FilterOperator:
@@ -1372,9 +1428,11 @@ components:
       properties:
         creator:
           description: Creator.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
@@ -1384,22 +1442,26 @@ components:
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         ruleMatchers:
           description: List of rule matchers that determine which logs this group
             applies to.
           items:
             $ref: "#/components/schemas/RuleMatcher"
+          minItems: 0
           type: array
         ruleSubgroups:
           description: List of rule subgroups defining the ordered set of rules in
             this group.
           items:
             $ref: "#/components/schemas/GetRuleGroupModelMappingRequest.CreateRuleSubgroup"
+          minItems: 0
           type: array
       type: object
     RuleGroupsService_CreateRuleGroup_request:
@@ -1407,9 +1469,11 @@ components:
       properties:
         creator:
           description: Creator.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
@@ -1419,20 +1483,24 @@ components:
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         order:
           description: Sort order.
           format: int64
+          minimum: 0
           type: integer
         ruleMatchers:
           description: The rule matchers.
           items:
             $ref: "#/components/schemas/RuleMatcher"
+          minItems: 0
           type: array
         ruleSubgroups:
           description: The rule subgroups.
           items:
             $ref: "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
+          minItems: 0
           type: array
         teamId:
           $ref: "#/components/schemas/v1.TeamId"

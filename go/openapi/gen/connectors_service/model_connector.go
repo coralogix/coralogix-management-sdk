@@ -35,6 +35,7 @@ type Connector struct {
 	Id *string `json:"id,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty"`
+	ResolvedConnectorConfig *ConnectorConfig `json:"resolvedConnectorConfig,omitempty"`
 	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	Type *NotificationCenterConnectorType `json:"type,omitempty"`
@@ -286,6 +287,38 @@ func (o *Connector) SetName(v string) {
 	o.Name = &v
 }
 
+// GetResolvedConnectorConfig returns the ResolvedConnectorConfig field value if set, zero value otherwise.
+func (o *Connector) GetResolvedConnectorConfig() ConnectorConfig {
+	if o == nil || IsNil(o.ResolvedConnectorConfig) {
+		var ret ConnectorConfig
+		return ret
+	}
+	return *o.ResolvedConnectorConfig
+}
+
+// GetResolvedConnectorConfigOk returns a tuple with the ResolvedConnectorConfig field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Connector) GetResolvedConnectorConfigOk() (*ConnectorConfig, bool) {
+	if o == nil || IsNil(o.ResolvedConnectorConfig) {
+		return nil, false
+	}
+	return o.ResolvedConnectorConfig, true
+}
+
+// HasResolvedConnectorConfig returns a boolean if a field has been set.
+func (o *Connector) HasResolvedConnectorConfig() bool {
+	if o != nil && !IsNil(o.ResolvedConnectorConfig) {
+		return true
+	}
+
+	return false
+}
+
+// SetResolvedConnectorConfig gets a reference to the given ConnectorConfig and assigns it to the ResolvedConnectorConfig field.
+func (o *Connector) SetResolvedConnectorConfig(v ConnectorConfig) {
+	o.ResolvedConnectorConfig = &v
+}
+
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
 func (o *Connector) GetTeamId() int64 {
 	if o == nil || IsNil(o.TeamId) {
@@ -413,6 +446,9 @@ func (o Connector) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.ResolvedConnectorConfig) {
+		toSerialize["resolvedConnectorConfig"] = o.ResolvedConnectorConfig
+	}
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
@@ -452,6 +488,7 @@ func (o *Connector) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "diagnostics")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "resolvedConnectorConfig")
 		delete(additionalProperties, "teamId")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "updateTime")

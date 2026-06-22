@@ -25,7 +25,8 @@
             "schema": {
               "description": "Team ID containing the users to update",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -39,7 +40,8 @@
                   "userAccountId": {
                     "description": "User account ID of the user to update",
                     "type": "integer",
-                    "format": "int64"
+                    "format": "int64",
+                    "minimum": 0
                   },
                   "userTemplate": {
                     "$ref": "#/components/schemas/UserTemplate"
@@ -105,7 +107,8 @@
             "schema": {
               "description": "Team ID where the users will be created",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -191,7 +194,8 @@
             "schema": {
               "description": "Team ID to search within",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           },
@@ -203,7 +207,8 @@
             "schema": {
               "description": "User account ID to retrieve",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -266,7 +271,8 @@
             "schema": {
               "description": "Team ID containing the users to update",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           }
@@ -288,8 +294,10 @@
                     "items": {
                       "description": "List of user account IDs to update. All users will be set to the same status.",
                       "type": "integer",
-                      "format": "int64"
-                    }
+                      "format": "int64",
+                      "minimum": 0
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -354,7 +362,8 @@
             "schema": {
               "description": "Team ID to search within",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "simple"
           },
@@ -363,9 +372,9 @@
             "name": "username",
             "description": "Optional filter by username (partial match supported)",
             "schema": {
-              "example": "",
               "description": "Optional filter by username (partial match supported)",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           },
@@ -385,7 +394,8 @@
             "schema": {
               "description": "Number of results per page",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           },
@@ -396,7 +406,8 @@
             "schema": {
               "description": "Token for pagination to retrieve the next page of results",
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0
             },
             "style": "form"
           }
@@ -469,7 +480,8 @@
         "properties": {
           "accessType": {
             "description": "Type of access: 'permanent' or 'temporary'",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permanentAccess": {
             "$ref": "#/components/schemas/PermanentAccess"
@@ -490,7 +502,8 @@
         "properties": {
           "accessType": {
             "description": "Type of access: 'permanent' or 'temporary'",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "temporaryAccess": {
             "$ref": "#/components/schemas/TemporaryAccess"
@@ -542,7 +555,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -564,7 +578,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -588,7 +603,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -618,8 +634,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -653,19 +671,22 @@
           "nextPageToken": {
             "description": "Token for the next page of results. Empty if no more pages available.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "totalCount": {
             "description": "Total number of users matching the search criteria across all pages",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "users": {
             "description": "List of users matching the search criteria",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -681,7 +702,8 @@
             "example": "2021-01-01T00:00:00.000Z",
             "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -700,8 +722,10 @@
             "items": {
               "description": "List of user account IDs for the successfully updated users",
               "type": "integer",
-              "format": "int64"
-            }
+              "format": "int64",
+              "minimum": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -720,8 +744,10 @@
             "items": {
               "description": "List of user account IDs for users whose status was successfully updated",
               "type": "integer",
-              "format": "int64"
-            }
+              "format": "int64",
+              "minimum": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -751,22 +777,26 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AllowedLoginMode"
-            }
+            },
+            "minItems": 0
           },
           "firstName": {
             "description": "User's first name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lastName": {
             "description": "User's last name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "status": {
             "$ref": "#/components/schemas/UserStatus"
           },
           "username": {
             "description": "Unique username for the user. Must be unique within the system. Updating username for existing users is not supported and ignored.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -787,11 +817,13 @@
         "properties": {
           "firstName": {
             "description": "User first name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "lastName": {
             "description": "User last name",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "status": {
             "$ref": "#/components/schemas/UserStatus"
@@ -799,15 +831,18 @@
           "userAccountId": {
             "description": "Associated account id. An account can have many users.",
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "minimum": 0
           },
           "userId": {
             "description": "Unique user id",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "username": {
             "description": "Unique username",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

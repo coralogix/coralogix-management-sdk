@@ -197,6 +197,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceDeleteCommentExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.eventId) < 0 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -303,6 +306,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceGetEventExecute(r ApiCase
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.eventId) < 0 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -639,6 +645,9 @@ func (a *CaseEventsServiceAPIService) CaseEventsServiceUpdateCommentExecute(r Ap
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.eventId) < 0 {
+		return localVarReturnValue, nil, reportError("eventId must have at least 0 elements")
+	}
 	if r.updateCommentEventRequest == nil {
 		return localVarReturnValue, nil, reportError("updateCommentEventRequest is required and must be specified")
 	}

@@ -22,6 +22,7 @@ paths:
           description: "Team to fetch team groups for. If not set, fetches groups\
             \ associated with the logged in team."
           format: int64
+          minimum: 0
           type: integer
         style: form
       - description: Page size.
@@ -32,6 +33,7 @@ paths:
         schema:
           description: Page size.
           format: int64
+          minimum: 0
           type: integer
         style: form
       - description: The page token.
@@ -41,7 +43,7 @@ paths:
         required: false
         schema:
           description: The page token.
-          example: ""
+          minLength: 0
           type: string
         style: form
       responses:
@@ -117,6 +119,7 @@ paths:
         schema:
           description: The unique identifier of the team group.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -159,6 +162,7 @@ paths:
         required: true
         schema:
           description: The name of the team group to retrieve.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -202,6 +206,7 @@ paths:
         schema:
           description: The unique identifier of the team group to delete.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -244,6 +249,7 @@ paths:
         schema:
           description: Unique identifier of the team group to update.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       requestBody:
@@ -292,6 +298,7 @@ paths:
         schema:
           description: The unique identifier of the team group whose users to list.
           format: int64
+          minimum: 0
           type: integer
         style: simple
       - description: Pagination size. Defaults to 100 if empty.
@@ -302,6 +309,7 @@ paths:
         schema:
           description: Pagination size. Defaults to 100 if empty.
           format: int64
+          minimum: 0
           type: integer
         style: form
       - description: Optional pagination continuation token.
@@ -311,7 +319,7 @@ paths:
         required: false
         schema:
           description: Optional pagination continuation token.
-          example: ""
+          minLength: 0
           type: string
         style: form
       responses:
@@ -371,13 +379,13 @@ components:
           createdAt: 2000-01-23T04:56:07.000+00:00
           groupType: GROUP_TYPE_UNSPECIFIED
           role:
-            roleId: 6
+            roleId: 0
             name: name
             description: description
           groupId: 0
           scope:
             scopeId: scopeId
-          teamId: 1
+          teamId: 0
           name: name
           description: description
           externalId: externalId
@@ -403,6 +411,7 @@ components:
         groupId:
           description: The group id.
           format: int64
+          minimum: 0
           type: integer
       title: DeleteTeamGroupResponse
       type: object
@@ -419,6 +428,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -435,6 +445,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -452,6 +463,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -466,13 +478,13 @@ components:
         users:
         - firstName: firstName
           lastName: lastName
-          userAccountId: 6
+          userAccountId: 0
           userId: userId
           status: USER_STATUS_UNSPECIFIED
           username: username
         - firstName: firstName
           lastName: lastName
-          userAccountId: 6
+          userAccountId: 0
           userId: userId
           status: USER_STATUS_UNSPECIFIED
           username: username
@@ -482,15 +494,18 @@ components:
       properties:
         nextPageToken:
           description: Token for fetching the next page of results.
+          minLength: 0
           type: string
         totalCount:
           description: The total count.
           format: int64
+          minimum: 0
           type: integer
         users:
           description: List of users.
           items:
             $ref: "#/components/schemas/rbac.v2.User"
+          minItems: 0
           type: array
       title: GetGroupUsersResponse
       type: object
@@ -502,13 +517,13 @@ components:
           createdAt: 2000-01-23T04:56:07.000+00:00
           groupType: GROUP_TYPE_UNSPECIFIED
           role:
-            roleId: 6
+            roleId: 0
             name: name
             description: description
           groupId: 0
           scope:
             scopeId: scopeId
-          teamId: 1
+          teamId: 0
           name: name
           description: description
           externalId: externalId
@@ -530,13 +545,13 @@ components:
           createdAt: 2000-01-23T04:56:07.000+00:00
           groupType: GROUP_TYPE_UNSPECIFIED
           role:
-            roleId: 6
+            roleId: 0
             name: name
             description: description
           groupId: 0
           scope:
             scopeId: scopeId
-          teamId: 1
+          teamId: 0
           name: name
           description: description
           externalId: externalId
@@ -558,13 +573,13 @@ components:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           groupType: GROUP_TYPE_UNSPECIFIED
           role:
-            roleId: 6
+            roleId: 0
             name: name
             description: description
           groupId: 0
           scope:
             scopeId: scopeId
-          teamId: 1
+          teamId: 0
           name: name
           description: description
           externalId: externalId
@@ -573,19 +588,19 @@ components:
         - createdAt: 2000-01-23T04:56:07.000+00:00
           groupType: GROUP_TYPE_UNSPECIFIED
           role:
-            roleId: 6
+            roleId: 0
             name: name
             description: description
           groupId: 0
           scope:
             scopeId: scopeId
-          teamId: 1
+          teamId: 0
           name: name
           description: description
           externalId: externalId
           groupOrigin: GROUP_ORIGIN_UNSPECIFIED
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        totalCount: 5
+        totalCount: 0
       externalDocs:
         description: Find out more about groups
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
@@ -594,13 +609,16 @@ components:
           description: List of groups.
           items:
             $ref: "#/components/schemas/TeamGroup"
+          minItems: 0
           type: array
         nextPageToken:
           description: Token for fetching the next page of results.
+          minLength: 0
           type: string
         totalCount:
           description: The total count.
           format: int64
+          minimum: 0
           type: integer
       title: GetTeamGroupsResponse
       type: object
@@ -625,14 +643,16 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Role:
       description: A role that can be assigned to a group. Each role has a collection
         of permissions associated with it.
       example:
-        roleId: 6
+        roleId: 0
         name: name
         description: description
       externalDocs:
@@ -640,13 +660,16 @@ components:
       properties:
         description:
           description: Role description
+          minLength: 0
           type: string
         name:
           description: Unique role name
+          minLength: 0
           type: string
         roleId:
           description: Unique role identifier
           format: int64
+          minimum: 0
           type: integer
       title: Role
       type: object
@@ -687,6 +710,7 @@ components:
         actionType:
           description: Discriminator indicating the role update action type (set_role_id
             or clear).
+          minLength: 0
           type: string
         clear:
           $ref: "#/components/schemas/ClearRole"
@@ -702,6 +726,7 @@ components:
         actionType:
           description: Discriminator indicating the role update action type (set_role_id
             or clear).
+          minLength: 0
           type: string
         setRoleId:
           $ref: "#/components/schemas/SetRoleId"
@@ -746,6 +771,7 @@ components:
         actionType:
           description: Discriminator indicating the scope update action type (set_scope_id
             or clear).
+          minLength: 0
           type: string
         clear:
           $ref: "#/components/schemas/ClearScope"
@@ -761,6 +787,7 @@ components:
         actionType:
           description: Discriminator indicating the scope update action type (set_scope_id
             or clear).
+          minLength: 0
           type: string
         setScopeId:
           $ref: "#/components/schemas/SetScopeId"
@@ -776,6 +803,7 @@ components:
         value:
           description: The value.
           format: int64
+          minimum: 0
           type: integer
       type: object
     SetScopeId:
@@ -785,6 +813,7 @@ components:
       properties:
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     TeamGroup:
@@ -793,13 +822,13 @@ components:
         createdAt: 2000-01-23T04:56:07.000+00:00
         groupType: GROUP_TYPE_UNSPECIFIED
         role:
-          roleId: 6
+          roleId: 0
           name: name
           description: description
         groupId: 0
         scope:
           scopeId: scopeId
-        teamId: 1
+        teamId: 0
         name: name
         description: description
         externalId: externalId
@@ -811,16 +840,20 @@ components:
         createdAt:
           description: Creation timestamp.
           format: date-time
+          minLength: 0
           type: string
         description:
           description: Group description
+          minLength: 0
           type: string
         externalId:
           description: Group external identifier. Applies if team is externally defined.
+          minLength: 0
           type: string
         groupId:
           description: Unique team group identifier
           format: int64
+          minimum: 0
           type: integer
         groupOrigin:
           $ref: "#/components/schemas/GroupOrigin"
@@ -828,6 +861,7 @@ components:
           $ref: "#/components/schemas/GroupType"
         name:
           description: Unique name
+          minLength: 0
           type: string
         role:
           $ref: "#/components/schemas/Role"
@@ -836,10 +870,12 @@ components:
         teamId:
           description: Team this group belongs to
           format: int64
+          minimum: 0
           type: integer
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
+          minLength: 0
           type: string
       title: TeamGroup
       type: object
@@ -850,13 +886,13 @@ components:
           createdAt: 2000-01-23T04:56:07.000+00:00
           groupType: GROUP_TYPE_UNSPECIFIED
           role:
-            roleId: 6
+            roleId: 0
             name: name
             description: description
           groupId: 0
           scope:
             scopeId: scopeId
-          teamId: 1
+          teamId: 0
           name: name
           description: description
           externalId: externalId
@@ -883,7 +919,9 @@ components:
           description: The user ids.
           items:
             description: The user ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     UserStatus:
@@ -938,6 +976,7 @@ components:
         operationType:
           description: "Discriminator indicating the user update operation type (add,\
             \ remove, or set)."
+          minLength: 0
           type: string
       required:
       - add
@@ -951,6 +990,7 @@ components:
         operationType:
           description: "Discriminator indicating the user update operation type (add,\
             \ remove, or set)."
+          minLength: 0
           type: string
         remove:
           $ref: "#/components/schemas/UserIdList"
@@ -966,6 +1006,7 @@ components:
         operationType:
           description: "Discriminator indicating the user update operation type (add,\
             \ remove, or set)."
+          minLength: 0
           type: string
         set:
           $ref: "#/components/schemas/UserIdList"
@@ -984,7 +1025,7 @@ components:
       example:
         firstName: firstName
         lastName: lastName
-        userAccountId: 6
+        userAccountId: 0
         userId: userId
         status: USER_STATUS_UNSPECIFIED
         username: username
@@ -993,21 +1034,26 @@ components:
       properties:
         firstName:
           description: User first name
+          minLength: 0
           type: string
         lastName:
           description: User last name
+          minLength: 0
           type: string
         status:
           $ref: "#/components/schemas/UserStatus"
         userAccountId:
           description: Associated account id. An account can have many users.
           format: int64
+          minimum: 0
           type: integer
         userId:
           description: Unique user id
+          minLength: 0
           type: string
         username:
           description: Unique username
+          minLength: 0
           type: string
       title: User
       type: object
@@ -1022,6 +1068,7 @@ components:
       properties:
         scopeId:
           description: Reference to an existing scope by ID
+          minLength: 0
           type: string
       title: Scope
       type: object
@@ -1040,7 +1087,7 @@ components:
         roleId: 0
         scope:
           scopeId: scopeId
-        teamId: 6
+        teamId: 0
         userIds:
         - userIds
         - userIds
@@ -1050,19 +1097,23 @@ components:
       properties:
         description:
           description: Human-readable description of the team group.
+          minLength: 0
           type: string
         externalId:
           description: "External identifier for the group, used when the group is\
             \ managed by an external identity provider."
+          minLength: 0
           type: string
         groupType:
           $ref: "#/components/schemas/GroupType"
         name:
           description: Unique display name for the new team group.
+          minLength: 0
           type: string
         roleId:
           description: Identifier of the role to assign to this group.
           format: int64
+          minimum: 0
           type: integer
         scope:
           $ref: "#/components/schemas/v2.Scope"
@@ -1070,12 +1121,15 @@ components:
           description: "Team to associate the group with. If not set, uses the authenticated\
             \ team."
           format: int64
+          minimum: 0
           type: integer
         userIds:
           description: The user ids.
           items:
             description: The user ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: CreateTeamGroupRequest
       type: object
@@ -1107,14 +1161,17 @@ components:
       properties:
         description:
           description: New human-readable description for the team group.
+          minLength: 0
           type: string
         externalId:
           description: New external identifier for the group.
+          minLength: 0
           type: string
         groupType:
           $ref: "#/components/schemas/GroupType"
         name:
           description: New display name for the team group.
+          minLength: 0
           type: string
         roleUpdate:
           $ref: "#/components/schemas/RoleUpdate"

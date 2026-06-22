@@ -30,6 +30,8 @@ type Widget struct {
 	// Short description of the widget
 	Description *string `json:"description,omitempty"`
 	Id *UUID `json:"id,omitempty"`
+	// Number of columns occupied by the widget in the dashboard layout
+	LayoutColumns *int32 `json:"layoutColumns,omitempty"`
 	Reference *WidgetReference `json:"reference,omitempty"`
 	// Name of the widget
 	Title *string `json:"title,omitempty"`
@@ -217,6 +219,38 @@ func (o *Widget) SetId(v UUID) {
 	o.Id = &v
 }
 
+// GetLayoutColumns returns the LayoutColumns field value if set, zero value otherwise.
+func (o *Widget) GetLayoutColumns() int32 {
+	if o == nil || IsNil(o.LayoutColumns) {
+		var ret int32
+		return ret
+	}
+	return *o.LayoutColumns
+}
+
+// GetLayoutColumnsOk returns a tuple with the LayoutColumns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Widget) GetLayoutColumnsOk() (*int32, bool) {
+	if o == nil || IsNil(o.LayoutColumns) {
+		return nil, false
+	}
+	return o.LayoutColumns, true
+}
+
+// HasLayoutColumns returns a boolean if a field has been set.
+func (o *Widget) HasLayoutColumns() bool {
+	if o != nil && !IsNil(o.LayoutColumns) {
+		return true
+	}
+
+	return false
+}
+
+// SetLayoutColumns gets a reference to the given int32 and assigns it to the LayoutColumns field.
+func (o *Widget) SetLayoutColumns(v int32) {
+	o.LayoutColumns = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *Widget) GetReference() WidgetReference {
 	if o == nil || IsNil(o.Reference) {
@@ -338,6 +372,9 @@ func (o Widget) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	if !IsNil(o.LayoutColumns) {
+		toSerialize["layoutColumns"] = o.LayoutColumns
+	}
 	if !IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
@@ -375,6 +412,7 @@ func (o *Widget) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "definition")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "layoutColumns")
 		delete(additionalProperties, "reference")
 		delete(additionalProperties, "title")
 		delete(additionalProperties, "updatedAt")

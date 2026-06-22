@@ -35,6 +35,8 @@ type CaseFilters struct {
 	DateRange *DateRangeFilter `json:"dateRange,omitempty"`
 	// Grouping-based filters (e.g., service, subsystem)
 	Groupings []FilterGroup `json:"groupings,omitempty"`
+	// List of indicator types to filter on
+	IndicatorTypes []IndicatorType `json:"indicatorTypes,omitempty"`
 	// Label-based filters applied to cases
 	Labels []FilterGroup `json:"labels,omitempty"`
 	// List of case priorities to filter on
@@ -321,6 +323,38 @@ func (o *CaseFilters) SetGroupings(v []FilterGroup) {
 	o.Groupings = v
 }
 
+// GetIndicatorTypes returns the IndicatorTypes field value if set, zero value otherwise.
+func (o *CaseFilters) GetIndicatorTypes() []IndicatorType {
+	if o == nil || IsNil(o.IndicatorTypes) {
+		var ret []IndicatorType
+		return ret
+	}
+	return o.IndicatorTypes
+}
+
+// GetIndicatorTypesOk returns a tuple with the IndicatorTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CaseFilters) GetIndicatorTypesOk() ([]IndicatorType, bool) {
+	if o == nil || IsNil(o.IndicatorTypes) {
+		return nil, false
+	}
+	return o.IndicatorTypes, true
+}
+
+// HasIndicatorTypes returns a boolean if a field has been set.
+func (o *CaseFilters) HasIndicatorTypes() bool {
+	if o != nil && !IsNil(o.IndicatorTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndicatorTypes gets a reference to the given []IndicatorType and assigns it to the IndicatorTypes field.
+func (o *CaseFilters) SetIndicatorTypes(v []IndicatorType) {
+	o.IndicatorTypes = v
+}
+
 // GetLabels returns the Labels field value if set, zero value otherwise.
 func (o *CaseFilters) GetLabels() []FilterGroup {
 	if o == nil || IsNil(o.Labels) {
@@ -483,6 +517,9 @@ func (o CaseFilters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Groupings) {
 		toSerialize["groupings"] = o.Groupings
 	}
+	if !IsNil(o.IndicatorTypes) {
+		toSerialize["indicatorTypes"] = o.IndicatorTypes
+	}
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
@@ -526,6 +563,7 @@ func (o *CaseFilters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "connectorTypeFilters")
 		delete(additionalProperties, "dateRange")
 		delete(additionalProperties, "groupings")
+		delete(additionalProperties, "indicatorTypes")
 		delete(additionalProperties, "labels")
 		delete(additionalProperties, "priorities")
 		delete(additionalProperties, "statuses")

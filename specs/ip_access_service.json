@@ -22,9 +22,9 @@
             "name": "id",
             "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
             "schema": {
-              "example": "",
               "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -84,14 +84,16 @@
                   "id": {
                     "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
                     "description": "Unique identifier of the existing IP access settings resource to replace.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "ipAccess": {
                     "description": "List of IP access entries to replace.",
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/IpAccess"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -155,7 +157,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/IpAccess"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -211,7 +214,8 @@
             "schema": {
               "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
               "description": "The unique identifier of the company IP access settings to delete.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -265,7 +269,8 @@
           "id": {
             "example": "d662a2f1-21c3-493c-8f8a-595d3ab05ef3",
             "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "ipAccess": {
             "description": "The list of IP access entries.",
@@ -330,7 +335,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -352,7 +358,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -376,7 +383,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -413,12 +421,14 @@
           "ipRange": {
             "example": "192.168.0.1/24",
             "description": "The IP range in CIDR notation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "Office Network",
             "description": "The name of the IP access entry.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -431,8 +441,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },

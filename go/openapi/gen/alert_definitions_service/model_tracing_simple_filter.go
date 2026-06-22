@@ -23,7 +23,7 @@ var _ MappedNullable = &TracingSimpleFilter{}
 // TracingSimpleFilter Basic filter configuration using a latency threshold and label filters
 type TracingSimpleFilter struct {
 	// The latency threshold to filter traces in milliseconds
-	LatencyThresholdMs *string `json:"latencyThresholdMs,omitempty"`
+	LatencyThresholdMs *string `json:"latencyThresholdMs,omitempty" validate:"regexp=^[0-9]+$"`
 	TracingLabelFilters *TracingLabelFilters `json:"tracingLabelFilters,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

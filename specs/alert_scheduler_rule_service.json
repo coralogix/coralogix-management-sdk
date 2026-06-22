@@ -25,19 +25,19 @@
               "type": "object",
               "properties": {
                 "endTime": {
-                  "example": "",
                   "description": "End time.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "startTime": {
-                  "example": "",
                   "description": "Start time.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "timezone": {
-                  "example": "",
                   "description": "Timezone.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 }
               }
             },
@@ -74,9 +74,9 @@
             "name": "next_page_token",
             "description": "Token for fetching the next page of results.",
             "schema": {
-              "example": "",
               "description": "Token for fetching the next page of results.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "form"
           }
@@ -259,7 +259,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/UpdateAlertSchedulerRuleRequest"
-                    }
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -324,7 +325,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/CreateAlertSchedulerRuleRequest"
-                    }
+                    },
+                    "minItems": 0
                   }
                 },
                 "required": [
@@ -386,7 +388,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the alert scheduler (suppression) rule.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -440,7 +443,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the alert scheduler (suppression) rule to delete.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -485,15 +489,18 @@
         "properties": {
           "endTime": {
             "description": "End time.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "startTime": {
             "description": "Start time.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timezone": {
             "description": "Timezone.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -506,11 +513,13 @@
         "properties": {
           "createdAt": {
             "description": "Creation timestamp.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "enabled": {
             "description": "Whether this resource is enabled.",
@@ -521,29 +530,34 @@
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "metaLabels": {
             "description": "Metadata labels.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "schedule": {
             "$ref": "#/components/schemas/Schedule"
           },
           "uniqueIdentifier": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -559,8 +573,10 @@
             "type": "array",
             "items": {
               "description": "List of alert scheduler rule IDs.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -576,7 +592,8 @@
           },
           "whatExpression": {
             "description": "Dataprime expression that filters the alerts by group-by values.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -595,7 +612,8 @@
           },
           "whatExpression": {
             "description": "Dataprime expression that filters the alerts by group-by values.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -614,8 +632,10 @@
             "type": "array",
             "items": {
               "description": "The alert scheduler rule version ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -630,7 +650,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ActiveTimeframe"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -646,8 +667,10 @@
             "type": "array",
             "items": {
               "description": "The value.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -707,7 +730,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateAlertSchedulerRuleResponse"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -785,7 +809,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -807,7 +832,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -831,7 +857,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -869,11 +896,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlertSchedulerRuleWithActiveTimeframe"
-            }
+            },
+            "minItems": 0
           },
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -892,7 +921,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -910,7 +940,8 @@
               "description": "The days of month.",
               "type": "integer",
               "format": "int32"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -923,8 +954,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -995,7 +1028,8 @@
           },
           "terminationDate": {
             "description": "ISO 8601 date after which the recurring rule stops being applied.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeframe": {
             "$ref": "#/components/schemas/Timeframe"
@@ -1022,7 +1056,8 @@
           },
           "terminationDate": {
             "description": "ISO 8601 date after which the recurring rule stops being applied.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeframe": {
             "$ref": "#/components/schemas/Timeframe"
@@ -1046,7 +1081,8 @@
           },
           "terminationDate": {
             "description": "ISO 8601 date after which the recurring rule stops being applied.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timeframe": {
             "$ref": "#/components/schemas/Timeframe"
@@ -1151,11 +1187,13 @@
           },
           "startTime": {
             "description": "Start time.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timezone": {
             "description": "Timezone.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1171,15 +1209,18 @@
         "properties": {
           "endTime": {
             "description": "End time.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "startTime": {
             "description": "Start time.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "timezone": {
             "description": "Timezone.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1234,7 +1275,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UpdateAlertSchedulerRuleResponse"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1255,7 +1297,8 @@
               "description": "The days of week.",
               "type": "integer",
               "format": "int32"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1285,15 +1328,18 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "key": {
             "description": "The key.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "value": {
             "description": "The value.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

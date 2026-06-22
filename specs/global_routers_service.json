@@ -40,10 +40,11 @@
                     "description": "The values.",
                     "type": "array",
                     "items": {
-                      "example": "",
                       "description": "The values.",
-                      "type": "string"
-                    }
+                      "type": "string",
+                      "minLength": 0
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -163,10 +164,11 @@
               "description": "The unique identifiers of the global routers to retrieve summaries for.",
               "type": "array",
               "items": {
-                "example": "",
                 "description": "The unique identifiers of the global routers to retrieve summaries for.",
-                "type": "string"
-              }
+                "type": "string",
+                "minLength": 0
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -205,8 +207,8 @@
               "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
               "type": "object",
               "additionalProperties": {
-                "example": "",
-                "type": "string"
+                "type": "string",
+                "minLength": 0
               }
             },
             "style": "form"
@@ -245,7 +247,8 @@
             "required": true,
             "schema": {
               "description": "The unique identifier of the global router to retrieve.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -281,7 +284,8 @@
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             },
             "style": "simple"
           }
@@ -320,8 +324,10 @@
             "type": "array",
             "items": {
               "description": "The not found ids.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "routers": {
             "description": "The routers.",
@@ -394,7 +400,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -416,7 +423,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -440,7 +448,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -473,11 +482,13 @@
           "createTime": {
             "description": "The create time.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           },
           "description": {
             "description": "Human-readable description.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "disabled": {
             "description": "The disabled.",
@@ -487,7 +498,8 @@
             "description": "The entity labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "entityType": {
@@ -498,24 +510,28 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
-            }
+            },
+            "minItems": 0
           },
           "fallbackTargets": {
             "description": "The fallback targets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FallbackTarget"
-            }
+            },
+            "minItems": 0
           },
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "name": {
             "example": "My Router",
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "routingLabels": {
             "$ref": "#/components/schemas/RoutingLabels"
@@ -525,12 +541,14 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingRule"
-            }
+            },
+            "minItems": 0
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0
           }
         }
       },
@@ -548,7 +566,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GlobalRouter"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -561,8 +580,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -591,15 +612,18 @@
         "properties": {
           "environment": {
             "description": "The environment.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "service": {
             "description": "Service name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "team": {
             "description": "Team.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -615,13 +639,15 @@
           "condition": {
             "example": "alertDef.priority == 'P3'",
             "description": "Condition.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customDetails": {
             "description": "The custom details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "entityType": {
@@ -629,14 +655,16 @@
           },
           "name": {
             "description": "Display name.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "targets": {
             "description": "List of targets.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -651,23 +679,27 @@
         "properties": {
           "connectorId": {
             "description": "The connector id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "customDetails": {
             "description": "The custom details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string"
+              "type": "string",
+              "minLength": 0
             }
           },
           "id": {
             "example": "d4b56246-64bb-4714-a8bd-97c999f1d801",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "presetId": {
             "description": "The preset id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },
@@ -704,7 +736,8 @@
         "properties": {
           "message": {
             "description": "Human-readable message.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         }
       },

@@ -83,6 +83,7 @@ components:
           deprecated: true
           description: The archiving format ID.
           example: json_id
+          minLength: 0
           type: string
         enableTags:
           description: The enable tags.
@@ -111,6 +112,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -127,6 +129,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -144,6 +147,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -163,16 +167,19 @@ components:
         bucketCrn:
           description: The bucket crn.
           example: bucket_crn
+          minLength: 0
           type: string
         bucketType:
           $ref: "#/components/schemas/IbmBucketType"
         endpoint:
           description: Endpoint.
           example: http://some.endpoint.com:8081
+          minLength: 0
           type: string
         serviceCrn:
           description: The service crn.
           example: service_crn
+          minLength: 0
           type: string
       required:
       - bucketCrn
@@ -192,7 +199,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     S3TargetServiceGetTargetResponse:
@@ -253,18 +262,22 @@ components:
         bucket:
           description: Bucket name.
           example: bucket
+          minLength: 0
           type: string
         externalId:
           description: External identifier.
           example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+          minLength: 0
           type: string
         region:
           description: Region.
           example: us-west-2
+          minLength: 0
           type: string
         roleArn:
           description: The role arn.
           example: arn:aws:iam::123456789012:role/CoralogixArchive
+          minLength: 0
           type: string
       required:
       - bucket

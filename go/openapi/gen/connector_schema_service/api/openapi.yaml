@@ -61,6 +61,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/ConnectorConfigSchemaField"
+          minItems: 0
           type: array
       type: object
     ConnectorConfigSchemaField:
@@ -82,16 +83,21 @@ components:
           description: The allowed values.
           items:
             description: The allowed values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         default:
           description: The default.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         fieldType:
           $ref: "#/components/schemas/FieldType"
@@ -180,12 +186,15 @@ components:
           description: The message config schemas.
           items:
             $ref: "#/components/schemas/MessageConfigSchema"
+          minItems: 0
           type: array
         supportedPayloadTypes:
           description: The supported payload types.
           items:
             description: The supported payload types.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
@@ -216,6 +225,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -232,6 +242,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -249,6 +260,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -363,9 +375,11 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/MessageConfigSchemaField"
+          minItems: 0
           type: array
         payloadType:
           description: Type of the payload.
+          minLength: 0
           type: string
       type: object
     MessageConfigSchemaField:
@@ -385,19 +399,24 @@ components:
           description: The allowed values.
           items:
             description: The allowed values.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         default:
           description: The default.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         disableOverride:
           description: The disable override.
           type: boolean
         fieldName:
           description: The field name.
+          minLength: 0
           type: string
         fieldType:
           $ref: "#/components/schemas/FieldType"
@@ -413,7 +432,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     TemplateRenderingMode:
@@ -439,6 +460,7 @@ components:
       - SERVICE_NOW
       - EMAIL
       - PAGERDUTY_INCIDENTS
+      - MICROSOFT_TEAMS
       type: string
     v3.FilterOperator:
       description: Filter operator.

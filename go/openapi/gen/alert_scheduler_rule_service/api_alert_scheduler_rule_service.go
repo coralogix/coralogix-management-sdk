@@ -291,6 +291,9 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceDeleteAle
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.alertSchedulerRuleId) < 0 {
+		return localVarReturnValue, nil, reportError("alertSchedulerRuleId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -394,6 +397,9 @@ func (a *AlertSchedulerRuleServiceAPIService) AlertSchedulerRuleServiceGetAlertS
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.alertSchedulerRuleId) < 0 {
+		return localVarReturnValue, nil, reportError("alertSchedulerRuleId must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -314,6 +314,7 @@ paths:
         schema:
           description: Alert version ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -359,6 +360,7 @@ paths:
         schema:
           description: The unique identifier of the alert definition to delete.
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -403,6 +405,7 @@ paths:
         schema:
           description: Alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -454,6 +457,7 @@ components:
           - DAY_OF_WEEK_TUESDAY
           items:
             $ref: "#/components/schemas/DayOfWeek"
+          minItems: 0
           type: array
         endTime:
           $ref: "#/components/schemas/TimeOfDay"
@@ -469,6 +473,15 @@ components:
         alertDefProperties:
           entityLabels:
             key: entityLabels
+          analyticsImmediate:
+            dataprimeQuery:
+              query: source logs | filter severity == 'error' | count_agg_key by applicationName
+            useRowsAsPermutations: false
+            evaluationDelayMs: 300000
+            timeframeMinutes: 60
+            noDataPolicy:
+              autoRetireSeconds: 3600
+              state: NO_DATA_POLICY_STATE_UNSPECIFIED
           phantomMode: false
           notificationGroupExcess:
           - router:
@@ -736,45 +749,6 @@ components:
             dataSet: dataSet
           - dataSpace: dataSpace
             dataSet: dataSet
-          flow:
-            enforceSuppression: true
-            stages:
-            - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-              flowStagesGroups:
-                groups:
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              timeframeMs: timeframeMs
-            - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-              flowStagesGroups:
-                groups:
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                  alertDefs:
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  - not: true
-                    id: 123e4567-e89b-12d3-a456-426614174000
-                  nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              timeframeMs: timeframeMs
           groupByKeys:
           - key1
           - key2
@@ -790,20 +764,24 @@ components:
           $ref: "#/components/schemas/AlertDefProperties"
         alertVersionId:
           description: The old alert ID
+          minLength: 0
           type: string
         createdTime:
           description: The time when the alert definition was created
           example: 2023-10-01T12:00:00Z
           format: date-time
+          minLength: 0
           type: string
         id:
           description: The alert definition's persistent ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
         lastTriggeredTime:
           description: The last time the alert definition was triggered
           example: 2023-10-01T12:00:00Z
           format: date-time
+          minLength: 0
           type: string
         status:
           $ref: "#/components/schemas/AlertDefStatus"
@@ -811,6 +789,7 @@ components:
           description: The time when the alert definition was last updated
           example: 2023-10-01T12:00:00Z
           format: date-time
+          minLength: 0
           type: string
       title: Alert definition
       type: object
@@ -821,9 +800,11 @@ components:
       properties:
         dataSet:
           description: File name of the dataset
+          minLength: 0
           type: string
         dataSpace:
           description: Folder name of the datasource
+          minLength: 0
           type: string
       type: object
     AlertDefIncidentSettings:
@@ -838,6 +819,7 @@ components:
           description: The time in minutes before the alert can be retriggered
           example: 30
           format: int64
+          minimum: 0
           type: integer
         notifyOn:
           $ref: "#/components/schemas/NotifyOn"
@@ -933,6 +915,7 @@ components:
           description: The destinations for notifications.  (Notification Center feature)
           items:
             $ref: "#/components/schemas/NotificationDestination"
+          minItems: 0
           type: array
         groupByKeys:
           description: The keys to group the alerts by
@@ -941,7 +924,9 @@ components:
           - key2
           items:
             description: The keys to group the alerts by
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         router:
           $ref: "#/components/schemas/NotificationRouter"
@@ -949,6 +934,7 @@ components:
           description: The settings for webhooks associated with the alert definition
           items:
             $ref: "#/components/schemas/AlertDefWebhooksSettings"
+          minItems: 0
           type: array
       title: Alert definition notification group
       type: object
@@ -987,6 +973,8 @@ components:
       type: string
     AlertDefProperties:
       oneOf:
+      - $ref: "#/components/schemas/AlertDefPropertiesAnalyticsImmediate"
+      - $ref: "#/components/schemas/AlertDefPropertiesAnalyticsThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesFlow"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsAnomaly"
       - $ref: "#/components/schemas/AlertDefPropertiesLogsImmediate"
@@ -1000,11 +988,20 @@ components:
       - $ref: "#/components/schemas/AlertDefPropertiesSloThreshold"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingImmediate"
       - $ref: "#/components/schemas/AlertDefPropertiesTracingThreshold"
-    AlertDefPropertiesFlow:
+    AlertDefPropertiesAnalyticsImmediate:
       description: User-configurable properties of an alert definition
       example:
         entityLabels:
           key: entityLabels
+        analyticsImmediate:
+          dataprimeQuery:
+            query: source logs | filter severity == 'error' | count_agg_key by applicationName
+          useRowsAsPermutations: false
+          evaluationDelayMs: 300000
+          timeframeMinutes: 60
+          noDataPolicy:
+            autoRetireSeconds: 3600
+            state: NO_DATA_POLICY_STATE_UNSPECIFIED
         phantomMode: false
         notificationGroupExcess:
         - router:
@@ -1272,45 +1269,6 @@ components:
           dataSet: dataSet
         - dataSpace: dataSpace
           dataSet: dataSet
-        flow:
-          enforceSuppression: true
-          stages:
-          - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-            flowStagesGroups:
-              groups:
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            timeframeMs: timeframeMs
-          - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-            flowStagesGroups:
-              groups:
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-              - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                alertDefs:
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                - not: true
-                  id: 123e4567-e89b-12d3-a456-426614174000
-                nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            timeframeMs: timeframeMs
         groupByKeys:
         - key1
         - key2
@@ -1319,10 +1277,13 @@ components:
       properties:
         activeOn:
           $ref: "#/components/schemas/ActivitySchedule"
+        analyticsImmediate:
+          $ref: "#/components/schemas/AnalyticsImmediateType"
         dataSources:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1332,6 +1293,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1339,6 +1301,153 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          description: Keys used to group and aggregate alert data
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            minLength: 0
+            type: string
+          minItems: 0
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          minLength: 0
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          description: Additional notification groups for alerts (deprecated)
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      required:
+      - analyticsImmediate
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesAnalyticsThreshold:
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        analyticsThreshold:
+          $ref: "#/components/schemas/AnalyticsThresholdType"
+        dataSources:
+          description: The sources from which to sample logs
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
+          type: array
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          minLength: 0
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            minLength: 0
+            type: string
+          description: Labels used to identify and categorize the alert entity
+          type: object
+        groupByKeys:
+          description: Keys used to group and aggregate alert data
+          example:
+          - key1
+          - key2
+          items:
+            description: Keys used to group and aggregate alert data
+            minLength: 0
+            type: string
+          minItems: 0
+          type: array
+        incidentsSettings:
+          $ref: "#/components/schemas/AlertDefIncidentSettings"
+        name:
+          description: The name of the alert definition
+          example: My Alert
+          minLength: 0
+          type: string
+        notificationGroup:
+          $ref: "#/components/schemas/AlertDefNotificationGroup"
+        notificationGroupExcess:
+          description: Additional notification groups for alerts (deprecated)
+          items:
+            $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
+          type: array
+        phantomMode:
+          description: Whether the alert is in phantom mode (creating incidents or
+            not)
+          example: false
+          type: boolean
+        priority:
+          $ref: "#/components/schemas/AlertDefPriority"
+        type:
+          $ref: "#/components/schemas/AlertDefType"
+      required:
+      - analyticsThreshold
+      title: Alert definition properties
+      type: object
+    AlertDefPropertiesFlow:
+      description: User-configurable properties of an alert definition
+      externalDocs:
+        url: ""
+      properties:
+        activeOn:
+          $ref: "#/components/schemas/ActivitySchedule"
+        dataSources:
+          description: The sources from which to sample logs
+          items:
+            $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
+          type: array
+        deleted:
+          description: Whether the alert has been marked as deleted
+          example: false
+          type: boolean
+        description:
+          description: A detailed description of what the alert monitors and when
+            it triggers
+          example: Alert description
+          minLength: 0
+          type: string
+        enabled:
+          description: Whether the alert is currently active and monitoring
+          example: true
+          type: boolean
+        entityLabels:
+          additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1351,13 +1460,16 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1365,6 +1477,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1390,6 +1503,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1399,6 +1513,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1406,6 +1521,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1416,7 +1532,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1425,6 +1543,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1432,6 +1551,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1457,6 +1577,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1466,6 +1587,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1473,6 +1595,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1483,7 +1606,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1492,6 +1617,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1499,6 +1625,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1524,6 +1651,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1533,6 +1661,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1540,6 +1669,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1550,7 +1680,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1559,6 +1691,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1566,6 +1699,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1591,6 +1725,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1600,6 +1735,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1607,6 +1743,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1617,7 +1754,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1626,6 +1765,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1633,6 +1773,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1658,6 +1799,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1667,6 +1809,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1674,6 +1817,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1684,7 +1828,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1693,6 +1839,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1700,6 +1847,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1725,6 +1873,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1734,6 +1883,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1741,6 +1891,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1751,7 +1902,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1760,6 +1913,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1767,6 +1921,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1792,6 +1947,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1801,6 +1957,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1808,6 +1965,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1818,7 +1976,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1827,6 +1987,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1834,6 +1995,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1859,6 +2021,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1868,6 +2031,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1875,6 +2039,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1885,7 +2050,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1894,6 +2061,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1901,6 +2069,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1926,6 +2095,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -1935,6 +2105,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -1942,6 +2113,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -1952,7 +2124,9 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
@@ -1961,6 +2135,7 @@ components:
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -1968,6 +2143,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -1993,6 +2169,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -2002,6 +2179,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -2009,6 +2187,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -2019,13 +2198,16 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -2033,6 +2215,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -2060,6 +2243,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -2069,6 +2253,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -2076,6 +2261,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -2086,13 +2272,16 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -2100,6 +2289,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -2127,6 +2317,7 @@ components:
           description: The sources from which to sample logs
           items:
             $ref: "#/components/schemas/AlertDefDataSource"
+          minItems: 0
           type: array
         deleted:
           description: Whether the alert has been marked as deleted
@@ -2136,6 +2327,7 @@ components:
           description: A detailed description of what the alert monitors and when
             it triggers
           example: Alert description
+          minLength: 0
           type: string
         enabled:
           description: Whether the alert is currently active and monitoring
@@ -2143,6 +2335,7 @@ components:
           type: boolean
         entityLabels:
           additionalProperties:
+            minLength: 0
             type: string
           description: Labels used to identify and categorize the alert entity
           type: object
@@ -2153,13 +2346,16 @@ components:
           - key2
           items:
             description: Keys used to group and aggregate alert data
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         incidentsSettings:
           $ref: "#/components/schemas/AlertDefIncidentSettings"
         name:
           description: The name of the alert definition
           example: My Alert
+          minLength: 0
           type: string
         notificationGroup:
           $ref: "#/components/schemas/AlertDefNotificationGroup"
@@ -2167,6 +2363,7 @@ components:
           description: Additional notification groups for alerts (deprecated)
           items:
             $ref: "#/components/schemas/AlertDefNotificationGroup"
+          minItems: 0
           type: array
         phantomMode:
           description: Whether the alert is in phantom mode (creating incidents or
@@ -2201,6 +2398,7 @@ components:
         id:
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
       title: Alert definition to replace
       type: object
@@ -2220,6 +2418,8 @@ components:
       - ALERT_DEF_TYPE_TRACING_THRESHOLD
       - ALERT_DEF_TYPE_FLOW
       - ALERT_DEF_TYPE_SLO_THRESHOLD
+      - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE
+      - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD
       type: string
     AlertDefWebhooksSettings:
       description: Configuration for webhook notifications for an alert
@@ -2237,6 +2437,7 @@ components:
           description: The time in minutes before the alert can be retriggered
           example: 15
           format: int64
+          minimum: 0
           type: integer
         notifyOn:
           $ref: "#/components/schemas/NotifyOn"
@@ -2248,6 +2449,127 @@ components:
       - ALERTS_OP_AND_OR_UNSPECIFIED
       - ALERTS_OP_OR
       type: string
+    AnalyticsImmediateType:
+      description: Configuration for analytics alerts that fire immediately when a
+        DataPrime query returns a result
+      example:
+        dataprimeQuery:
+          query: source logs | filter severity == 'error' | count_agg_key by applicationName
+        useRowsAsPermutations: false
+        evaluationDelayMs: 300000
+        timeframeMinutes: 60
+        noDataPolicy:
+          autoRetireSeconds: 3600
+          state: NO_DATA_POLICY_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        dataprimeQuery:
+          $ref: "#/components/schemas/DataprimeAlertQuery"
+        evaluationDelayMs:
+          description: The delay in milliseconds before evaluating the alert condition
+          example: 300000
+          format: int32
+          maximum: 2147483647
+          minimum: -60000
+          type: integer
+        noDataPolicy:
+          $ref: "#/components/schemas/NoDataPolicy"
+        timeframeMinutes:
+          description: The evaluation window duration in minutes
+          example: 60
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        useRowsAsPermutations:
+          description: Whether each result row is treated as a separate permutation.
+            Defaults to false for immediate alerts to avoid high-cardinality alerts
+            by mistake.
+          example: false
+          type: boolean
+      title: Analytics immediate alert type
+      type: object
+    AnalyticsThresholdOperator:
+      description: The comparison operator applied to analytics threshold rules.
+      enum:
+      - ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED
+      - ANALYTICS_THRESHOLD_OPERATOR_LESS_THAN
+      - ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_EQUALS
+      - ANALYTICS_THRESHOLD_OPERATOR_LESS_THAN_OR_EQUALS
+      - ANALYTICS_THRESHOLD_OPERATOR_EQUALS
+      type: string
+    AnalyticsThresholdRule:
+      description: A rule that defines a threshold condition and its priority override
+      externalDocs:
+        url: ""
+      properties:
+        condition:
+          $ref: "#/components/schemas/AnalyticsThresholdRuleCondition"
+        override:
+          $ref: "#/components/schemas/AlertDefOverride"
+      title: Analytics threshold rule
+      type: object
+    AnalyticsThresholdRuleCondition:
+      description: Defines the threshold value to compare against
+      externalDocs:
+        url: ""
+      properties:
+        threshold:
+          description: The threshold value to compare against
+          example: 100
+          format: double
+          type: number
+      title: Analytics threshold rule condition
+      type: object
+    AnalyticsThresholdType:
+      description: Configuration for alerts that fire when a numeric column in a DataPrime
+        query result violates a threshold
+      externalDocs:
+        url: ""
+      properties:
+        dataprimeQuery:
+          $ref: "#/components/schemas/DataprimeAlertQuery"
+        evaluationDelayMs:
+          description: The delay in milliseconds before evaluating the alert condition
+          example: 300000
+          format: int32
+          maximum: 2147483647
+          minimum: -60000
+          type: integer
+        noDataPolicy:
+          $ref: "#/components/schemas/NoDataPolicy"
+        operator:
+          $ref: "#/components/schemas/AnalyticsThresholdOperator"
+        rules:
+          description: The per-priority threshold rules
+          items:
+            $ref: "#/components/schemas/AnalyticsThresholdRule"
+          maxItems: 5
+          minItems: 1
+          type: array
+        targetColumn:
+          description: The name of the numeric result column to compare
+          example: error_count
+          maxLength: 256
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
+        timeframeMinutes:
+          description: The evaluation window duration in minutes
+          example: 60
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        useRowsAsPermutations:
+          description: Whether each result row is treated as a separate permutation.
+            Defaults to true for threshold alerts as permutation count is easier to
+            estimate.
+          example: true
+          type: boolean
+      title: Analytics threshold alert type
+      type: object
     AnomalyAlertSettings:
       description: Common settings for anomaly-based alerts.
       externalDocs:
@@ -2277,7 +2599,9 @@ components:
           - 123e4567-e89b-12d3-a456-426614174000
           items:
             description: IDs of alert definitions that were successfully deleted
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         notFoundIds:
           description: IDs of alert definitions that were not found
@@ -2285,7 +2609,9 @@ components:
           - 123e4567-e89b-12d3-a456-426614174000
           items:
             description: IDs of alert definitions that were not found
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Bulk delete alert definitions response
       type: object
@@ -2305,6 +2631,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2572,45 +2908,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -2623,6 +2920,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -2890,45 +3197,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -2943,11 +3211,13 @@ components:
           description: List of successfully replaced alert definitions
           items:
             $ref: "#/components/schemas/AlertDef"
+          minItems: 0
           type: array
         failedToReplaceAlertDefs:
           description: List of alert definitions that failed to be replaced
           items:
             $ref: "#/components/schemas/FailedToReplaceAlertDef"
+          minItems: 0
           type: array
         notFoundIds:
           description: List of alert definition IDs that were not found
@@ -2955,7 +3225,9 @@ components:
           - 123e4567-e89b-12d3-a456-426614174000
           items:
             description: List of alert definition IDs that were not found
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         skippedIds:
           description: List of alert definition IDs that were skipped (no changes
@@ -2965,7 +3237,9 @@ components:
           items:
             description: List of alert definition IDs that were skipped (no changes
               detected)
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Bulk replace alert definitions response
       type: object
@@ -3036,6 +3310,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -3303,45 +3587,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -3355,6 +3600,22 @@ components:
         alertDef:
           $ref: "#/components/schemas/AlertDef"
       title: Create alert definition response
+      type: object
+    DataprimeAlertQuery:
+      description: A DataPrime query
+      example:
+        query: source logs | filter severity == 'error' | count_agg_key by applicationName
+      externalDocs:
+        url: ""
+      properties:
+        query:
+          description: The DataPrime query string
+          example: source logs | filter severity == 'error' | count_agg_key by applicationName
+          maxLength: 10000
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
+      title: DataPrime alert query
       type: object
     DayOfWeek:
       enum:
@@ -3386,6 +3647,7 @@ components:
           example: !!binary |-
             U0dWc2JHOGdWMjl5YkdRPQ==
           format: byte
+          minLength: 0
           type: string
       title: Download alerts response
       type: object
@@ -3407,6 +3669,7 @@ components:
           description: The count for this enabled status
           example: 25
           format: int64
+          minimum: 0
           type: integer
         enabled:
           description: Whether the alert is enabled (true) or disabled (false)
@@ -3427,14 +3690,17 @@ components:
           description: The count for this entity label value
           example: 28
           format: int64
+          minimum: 0
           type: integer
         labelKey:
           description: The entity label key
           example: environment
+          minLength: 0
           type: string
         labelValue:
           description: The entity label value
           example: production
+          minLength: 0
           type: string
       title: Entity label count
       type: object
@@ -3462,6 +3728,7 @@ components:
         id:
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
       title: Failed to replace alert definition
       type: object
@@ -3502,26 +3769,31 @@ components:
           description: Counts for different alert enabled statuses
           items:
             $ref: "#/components/schemas/EnabledCount"
+          minItems: 0
           type: array
         entityLabelCounts:
           description: Counts for different entity label values
           items:
             $ref: "#/components/schemas/EntityLabelCount"
+          minItems: 0
           type: array
         priorityCounts:
           description: Counts for different alert priorities
           items:
             $ref: "#/components/schemas/PriorityCount"
+          minItems: 0
           type: array
         statusCounts:
           description: Counts for different alert statuses
           items:
             $ref: "#/components/schemas/StatusCount"
+          minItems: 0
           type: array
         typeCounts:
           description: Counts for different alert types
           items:
             $ref: "#/components/schemas/TypeCount"
+          minItems: 0
           type: array
       title: Filter option counts
       type: object
@@ -3576,6 +3848,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -3592,6 +3865,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -3609,6 +3883,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -3616,25 +3891,6 @@ components:
       type: object
     FlowStages:
       description: Defines stages in a flow alert
-      example:
-        timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-        flowStagesGroups:
-          groups:
-          - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-            alertDefs:
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-          - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-            alertDefs:
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            - not: true
-              id: 123e4567-e89b-12d3-a456-426614174000
-            nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-        timeframeMs: timeframeMs
       externalDocs:
         url: ""
       properties:
@@ -3642,7 +3898,9 @@ components:
           $ref: "#/components/schemas/FlowStagesGroups"
         timeframeMs:
           description: The timeframe ms.
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         timeframeType:
           $ref: "#/components/schemas/TimeframeType"
@@ -3650,14 +3908,6 @@ components:
       type: object
     FlowStagesGroup:
       description: Defines a group of stages in a flow alert
-      example:
-        alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-        alertDefs:
-        - not: true
-          id: 123e4567-e89b-12d3-a456-426614174000
-        - not: true
-          id: 123e4567-e89b-12d3-a456-426614174000
-        nextOp: NEXT_OP_AND_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -3675,22 +3925,6 @@ components:
       type: object
     FlowStagesGroups:
       description: Groups of stages in a flow alert
-      example:
-        groups:
-        - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-          alertDefs:
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-        - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-          alertDefs:
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          - not: true
-            id: 123e4567-e89b-12d3-a456-426614174000
-          nextOp: NEXT_OP_AND_OR_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -3698,20 +3932,19 @@ components:
           description: List of groups.
           items:
             $ref: "#/components/schemas/FlowStagesGroup"
+          minItems: 0
           type: array
       title: Flow stage groups
       type: object
     FlowStagesGroupsAlertDefs:
       description: Alert definitions for a flow stage group
-      example:
-        not: true
-        id: 123e4567-e89b-12d3-a456-426614174000
       externalDocs:
         url: ""
       properties:
         id:
           description: The alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
         not:
           description: Whether to negate the alert definition or not.
@@ -3721,45 +3954,6 @@ components:
       type: object
     FlowType:
       description: Configuration for flow-based alerts with multiple stages
-      example:
-        enforceSuppression: true
-        stages:
-        - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-          flowStagesGroups:
-            groups:
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-          timeframeMs: timeframeMs
-        - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-          flowStagesGroups:
-            groups:
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-            - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-              alertDefs:
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              - not: true
-                id: 123e4567-e89b-12d3-a456-426614174000
-              nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-          timeframeMs: timeframeMs
       externalDocs:
         description: Learn more about flow alerts in our documentation
         url: https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/
@@ -3785,6 +3979,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4052,45 +4256,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -4114,6 +4279,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4381,45 +4556,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -4444,6 +4580,7 @@ components:
         value:
           description: The value of the label to filter by
           example: my-app
+          minLength: 0
           type: string
       title: Label filter type
       type: object
@@ -4456,16 +4593,19 @@ components:
           description: The application name.
           items:
             $ref: "#/components/schemas/LabelFilterType"
+          minItems: 0
           type: array
         severities:
           description: The severities.
           items:
             $ref: "#/components/schemas/LogSeverity"
+          minItems: 0
           type: array
         subsystemName:
           description: The subsystem name.
           items:
             $ref: "#/components/schemas/LabelFilterType"
+          minItems: 0
           type: array
       title: Label filters
       type: object
@@ -4481,6 +4621,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -4748,45 +4898,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -4799,6 +4910,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -5066,45 +5187,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -5119,6 +5201,7 @@ components:
           description: List of alert definitions
           items:
             $ref: "#/components/schemas/AlertDef"
+          minItems: 0
           type: array
         pagination:
           $ref: "#/components/schemas/alerts.v3.PaginationResponse"
@@ -5194,7 +5277,9 @@ components:
           items:
             description: The filter to specify which fields to include in the notification
               payload
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         rules:
           description: The rules for the log anomaly alert
@@ -5220,7 +5305,9 @@ components:
           - obj.field
           items:
             description: The notification payload filter.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Logs immediate alert type
       type: object
@@ -5232,6 +5319,7 @@ components:
         keypathToTrack:
           description: The keypath to track for new values
           example: metadata.field
+          minLength: 0
           type: string
         timeWindow:
           $ref: "#/components/schemas/LogsNewValueTimeWindow"
@@ -5282,7 +5370,9 @@ components:
           items:
             description: The filter to specify which fields to include in the notification
               payload.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         rules:
           description: The rules for the log new value alert.
@@ -5344,6 +5434,7 @@ components:
         denominatorAlias:
           description: "The alias for the denominator filter, used for display purposes"
           example: denominator_alias
+          minLength: 0
           type: string
         evaluationDelayMs:
           description: The delay in milliseconds before evaluating the alert condition
@@ -5362,13 +5453,16 @@ components:
           - obj.field
           items:
             description: The notification payload filter.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         numerator:
           $ref: "#/components/schemas/v3.LogsFilter"
         numeratorAlias:
           description: "The alias for the numerator filter, used for display purposes"
           example: numerator_alias
+          minLength: 0
           type: string
         rules:
           description: The rules for the ratio alert
@@ -5415,6 +5509,7 @@ components:
           $ref: "#/components/schemas/LabelFilters"
         luceneQuery:
           description: The lucene query.
+          minLength: 0
           type: string
       title: Simple log filter
       type: object
@@ -5477,7 +5572,9 @@ components:
           items:
             description: The filter to specify which fields to include in the notification
               payload
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         rules:
           description: The rules for the threshold alert
@@ -5557,7 +5654,9 @@ components:
           - obj.field
           items:
             description: The notification payload filter.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         rules:
           description: The rules for the time-relative alert
@@ -5603,7 +5702,9 @@ components:
         maxUniqueCount:
           description: The maximum unique count
           example: "100"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         timeWindow:
           $ref: "#/components/schemas/LogsUniqueValueTimeWindow"
@@ -5629,7 +5730,9 @@ components:
         maxUniqueCountPerGroupByKey:
           description: The maximum unique count per group by key
           example: "100"
-          format: int64
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
           type: string
         notificationPayloadFilter:
           description: The filter to specify which fields to include in the notification
@@ -5639,7 +5742,9 @@ components:
           items:
             description: The filter to specify which fields to include in the notification
               payload
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         rules:
           description: The rules for the log unique count alert
@@ -5651,6 +5756,7 @@ components:
         uniqueCountKeypath:
           description: The keypath in the logs to be used for unique count
           example: obj.field
+          minLength: 0
           type: string
       title: Log-based unique count alert type
       type: object
@@ -5692,11 +5798,13 @@ components:
             to trigger the alert
           example: 20
           format: int64
+          minimum: 0
           type: integer
         minNonNullValuesPct:
           description: The percentage of non-null values required to trigger the alert
           example: 10
           format: int64
+          minimum: 0
           type: integer
         ofTheLast:
           $ref: "#/components/schemas/MetricTimeWindow"
@@ -5754,6 +5862,7 @@ components:
         promql:
           description: A PromQL filter for metrics
           example: "avg_over_time(metric_name[5m]) > 10"
+          minLength: 0
           type: string
       title: Metric filter configuration in alerts
       type: object
@@ -5771,6 +5880,7 @@ components:
             \ required for the alert to be triggered"
           example: 80
           format: int64
+          minimum: 0
           type: integer
       required:
       - minNonNullValuesPct
@@ -5801,6 +5911,7 @@ components:
             trigger the alert
           example: 80
           format: int64
+          minimum: 0
           type: integer
         ofTheLast:
           $ref: "#/components/schemas/MetricTimeWindow"
@@ -5870,6 +5981,7 @@ components:
         metricTimeWindowDynamicDuration:
           description: The time window as a dynamic value
           example: 1h30m
+          minLength: 0
           type: string
       required:
       - metricTimeWindowDynamicDuration
@@ -5909,7 +6021,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     NextOp:
@@ -5920,6 +6034,9 @@ components:
       type: string
     NoDataPolicy:
       description: No data policy.
+      example:
+        autoRetireSeconds: 3600
+        state: NO_DATA_POLICY_STATE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
@@ -5983,12 +6100,14 @@ components:
         connectorId:
           description: The connector ID used to send notifications
           example: connector_id_example
+          minLength: 0
           type: string
         notifyOn:
           $ref: "#/components/schemas/NotifyOn"
         presetId:
           description: Optional preset ID for the notification destination
           example: preset_id_example
+          minLength: 0
           type: string
         resolvedRouteOverrides:
           $ref: "#/components/schemas/NotificationRouting"
@@ -5997,6 +6116,7 @@ components:
             destination
           example: 600
           format: int64
+          minimum: 0
           type: integer
         triggeredRoutingOverrides:
           $ref: "#/components/schemas/NotificationRouting"
@@ -6013,6 +6133,7 @@ components:
         id:
           description: The ID of the notification router
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
         notifyOn:
           $ref: "#/components/schemas/NotifyOn"
@@ -6059,6 +6180,7 @@ components:
           description: The count for this alert priority
           example: 15
           format: int64
+          minimum: 0
           type: integer
         priority:
           $ref: "#/components/schemas/AlertDefPriority"
@@ -6075,6 +6197,7 @@ components:
           - mail@gmail.com
           items:
             description: The list of email recipients for alert notifications
+            minLength: 0
             type: string
           minItems: 1
           type: array
@@ -6089,6 +6212,16 @@ components:
           alertDefProperties:
             entityLabels:
               key: entityLabels
+            analyticsImmediate:
+              dataprimeQuery:
+                query: source logs | filter severity == 'error' | count_agg_key by
+                  applicationName
+              useRowsAsPermutations: false
+              evaluationDelayMs: 300000
+              timeframeMinutes: 60
+              noDataPolicy:
+                autoRetireSeconds: 3600
+                state: NO_DATA_POLICY_STATE_UNSPECIFIED
             phantomMode: false
             notificationGroupExcess:
             - router:
@@ -6356,45 +6489,6 @@ components:
               dataSet: dataSet
             - dataSpace: dataSpace
               dataSet: dataSet
-            flow:
-              enforceSuppression: true
-              stages:
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
-              - timeframeType: TIMEFRAME_TYPE_UNSPECIFIED
-                flowStagesGroups:
-                  groups:
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                  - alertsOp: ALERTS_OP_AND_OR_UNSPECIFIED
-                    alertDefs:
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    - not: true
-                      id: 123e4567-e89b-12d3-a456-426614174000
-                    nextOp: NEXT_OP_AND_OR_UNSPECIFIED
-                timeframeMs: timeframeMs
             groupByKeys:
             - key1
             - key2
@@ -6473,6 +6567,7 @@ components:
           description: The count for this alert status
           example: 15
           format: int64
+          minimum: 0
           type: integer
         status:
           $ref: "#/components/schemas/AlertDefStatus"
@@ -6486,7 +6581,9 @@ components:
         duration:
           description: The duration value
           example: "60"
-          format: uint64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         unit:
           $ref: "#/components/schemas/DurationUnit"
@@ -6550,6 +6647,7 @@ components:
           - value2
           items:
             description: The values of the label to filter by
+            minLength: 0
             type: string
           minItems: 1
           type: array
@@ -6567,7 +6665,9 @@ components:
           - obj.field
           items:
             description: Notification payload field filter
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         tracingFilter:
           $ref: "#/components/schemas/TracingFilter"
@@ -6583,26 +6683,31 @@ components:
           description: Filter by application names
           items:
             $ref: "#/components/schemas/TracingFilterType"
+          minItems: 0
           type: array
         operationName:
           description: Filter by operation names
           items:
             $ref: "#/components/schemas/TracingFilterType"
+          minItems: 0
           type: array
         serviceName:
           description: Filter by service names
           items:
             $ref: "#/components/schemas/TracingFilterType"
+          minItems: 0
           type: array
         spanFields:
           description: Filter by span fields
           items:
             $ref: "#/components/schemas/TracingSpanFieldsFilterType"
+          minItems: 0
           type: array
         subsystemName:
           description: Filter by subsystem names
           items:
             $ref: "#/components/schemas/TracingFilterType"
+          minItems: 0
           type: array
       title: Tracing label filters
       type: object
@@ -6615,7 +6720,9 @@ components:
         latencyThresholdMs:
           description: The latency threshold to filter traces in milliseconds
           example: "1000"
-          format: uint64
+          maxLength: 20
+          minLength: 1
+          pattern: "^[0-9]+$"
           type: string
         tracingLabelFilters:
           $ref: "#/components/schemas/TracingLabelFilters"
@@ -6631,6 +6738,7 @@ components:
         key:
           description: The key of the span field to filter by
           example: span.field.key
+          minLength: 0
           type: string
       title: Tracing span fields filter type
       type: object
@@ -6676,7 +6784,9 @@ components:
           - obj.field
           items:
             description: Notification payload field filter
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         rules:
           description: The rules for the trace threshold alert.
@@ -6726,6 +6836,7 @@ components:
           description: The count for this alert type
           example: 42
           format: int64
+          minimum: 0
           type: integer
         type:
           $ref: "#/components/schemas/AlertDefType"
@@ -6742,6 +6853,7 @@ components:
           description: The integration ID for the notification
           example: 123
           format: int64
+          minimum: 0
           type: integer
       required:
       - integrationId
@@ -6768,10 +6880,12 @@ components:
       properties:
         nextPageToken:
           description: Token for fetching the next page of results.
+          minLength: 0
           type: string
         totalSize:
           description: Total number of results.
           format: int64
+          minimum: 0
           type: integer
       type: object
     events.v3.FilterMatcher:
@@ -6801,10 +6915,12 @@ components:
         fieldName:
           description: The name of the configuration field
           example: description
+          minLength: 0
           type: string
         template:
           description: The template for the configuration field
           example: template_example
+          minLength: 0
           type: string
       title: Connector config field
       type: object
@@ -6838,10 +6954,12 @@ components:
         fieldName:
           description: The name of the configuration field
           example: description
+          minLength: 0
           type: string
         template:
           description: The template for the configuration field
           example: template_example
+          minLength: 0
           type: string
       title: Message config field
       type: object
@@ -6853,6 +6971,7 @@ components:
         sloId:
           description: The SLO ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
       title: SLO Definition
       type: object
@@ -6878,16 +6997,19 @@ components:
           description: Connector configuration fields
           items:
             $ref: "#/components/schemas/v3.ConnectorConfigField"
+          minItems: 0
           type: array
         messageConfigFields:
           description: Notification message configuration fields
           items:
             $ref: "#/components/schemas/v3.MessageConfigField"
+          minItems: 0
           type: array
         payloadType:
           description: the payload type for the notification
           example: "slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved,\
             \ generic_https_default"
+          minLength: 0
           type: string
       title: Source overrides
       type: object
@@ -6926,9 +7048,11 @@ components:
         pageSize:
           description: Page size.
           format: int64
+          minimum: 0
           type: integer
         pageToken:
           description: The page token.
+          minLength: 0
           type: string
       type: object
     Alert_definition_order_by:
@@ -6964,6 +7088,7 @@ components:
         id:
           description: Alert definition ID
           example: 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
           type: string
       title: Replace alert definition request
       type: object
@@ -6996,7 +7121,9 @@ components:
           - 123e4567-e89b-12d3-a456-426614174000
           items:
             description: List of alert definition IDs to delete.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: Bulk delete alert definitions request
       type: object
@@ -7007,6 +7134,7 @@ components:
           description: List of alert definitions to replace
           items:
             $ref: "#/components/schemas/AlertDefToReplace"
+          minItems: 0
           type: array
       title: Bulk replace alert definitions request
       type: object

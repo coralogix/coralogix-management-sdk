@@ -27,7 +27,7 @@ type InRuleGroup struct {
 	// Interval.
 	Interval *int64 `json:"interval,omitempty"`
 	// Limit.
-	Limit *string `json:"limit,omitempty"`
+	Limit *string `json:"limit,omitempty" validate:"regexp=^[0-9]+$"`
 	// Display name.
 	Name *string `json:"name,omitempty"`
 	// List of rules.

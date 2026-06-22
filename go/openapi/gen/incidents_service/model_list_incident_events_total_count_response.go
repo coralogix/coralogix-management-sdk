@@ -23,7 +23,7 @@ var _ MappedNullable = &ListIncidentEventsTotalCountResponse{}
 // ListIncidentEventsTotalCountResponse A response containing the total count of matching incident events and whether the count limit was reached
 type ListIncidentEventsTotalCountResponse struct {
 	// Total number of incident events matching the filter
-	Count *string `json:"count,omitempty"`
+	Count *string `json:"count,omitempty" validate:"regexp=^[0-9]+$"`
 	// Indicates if the count reached the system limit
 	ReachedLimit *bool `json:"reachedLimit,omitempty"`
 	AdditionalProperties map[string]interface{}

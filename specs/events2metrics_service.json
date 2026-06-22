@@ -135,7 +135,8 @@
                     "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/E2MExecutionRequest"
-                    }
+                    },
+                    "minItems": 0
                   }
                 }
               }
@@ -167,20 +168,6 @@
           "url": ""
         },
         "operationId": "Events2MetricService_GetE2M",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -204,20 +191,6 @@
           "url": ""
         },
         "operationId": "Events2MetricService_DeleteE2M",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "Unique identifier.",
-            "required": true,
-            "schema": {
-              "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
-              "description": "Unique identifier.",
-              "type": "string"
-            },
-            "style": "simple"
-          }
-        ],
         "responses": {
           "200": {
             "description": "",
@@ -230,7 +203,22 @@
             }
           }
         }
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "description": "Unique identifier.",
+          "required": true,
+          "schema": {
+            "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+            "description": "Unique identifier.",
+            "type": "string",
+            "minLength": 0
+          },
+          "style": "simple"
+        }
+      ]
     },
     "/events2metrics/labels/v2/cardinalities": {
       "get": {
@@ -263,8 +251,10 @@
                   "items": {
                     "example": "myAction",
                     "description": "The action filters.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "applicationnameFilters": {
                   "description": "The applicationname filters.",
@@ -272,13 +262,16 @@
                   "items": {
                     "example": "myApp",
                     "description": "The applicationname filters.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "lucene": {
                   "example": "applicationName:myApp",
                   "description": "The lucene.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "serviceFilters": {
                   "description": "The service filters.",
@@ -286,8 +279,10 @@
                   "items": {
                     "example": "myService",
                     "description": "The service filters.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "subsystemnameFilters": {
                   "description": "The subsystemname filters.",
@@ -295,8 +290,10 @@
                   "items": {
                     "example": "mySubsystem",
                     "description": "The subsystemname filters.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 }
               }
             },
@@ -318,7 +315,8 @@
                 "alias": {
                   "example": "new_query",
                   "description": "The alias.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "applicationnameFilters": {
                   "description": "The applicationname filters.",
@@ -326,20 +324,24 @@
                   "items": {
                     "example": "app_name",
                     "description": "The applicationname filters.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 },
                 "lucene": {
                   "example": "log_obj.numeric_field: [50 TO 100]",
                   "description": "The lucene.",
-                  "type": "string"
+                  "type": "string",
+                  "minLength": 0
                 },
                 "severityFilters": {
                   "description": "The severity filters.",
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/logs2metrics.v2.Severity"
-                  }
+                  },
+                  "minItems": 0
                 },
                 "subsystemnameFilters": {
                   "description": "The subsystemname filters.",
@@ -347,8 +349,10 @@
                   "items": {
                     "example": "sub_name",
                     "description": "The subsystemname filters.",
-                    "type": "string"
-                  }
+                    "type": "string",
+                    "minLength": 0
+                  },
+                  "minItems": 0
                 }
               }
             },
@@ -373,20 +377,23 @@
                   "sourceField": {
                     "example": "log_obj.string_value",
                     "description": "The source field.",
-                    "type": "string"
+                    "type": "string",
+                    "minLength": 0
                   },
                   "targetLabel": {
                     "example": "alias_label_name",
                     "description": "The target label.",
                     "type": "string",
-                    "pattern": "^[\\w/-]+$"
+                    "pattern": "^[\\w/-]+$",
+                    "minLength": 0
                   }
                 },
                 "required": [
                   "targetLabel",
                   "sourceField"
                 ]
-              }
+              },
+              "minItems": 0
             },
             "style": "form"
           }
@@ -459,7 +466,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/E2MExecutionResponse"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -504,7 +512,8 @@
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -522,7 +531,8 @@
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -556,7 +566,8 @@
               "description": "The buckets.",
               "type": "number",
               "format": "float"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -596,12 +607,14 @@
           "dataSource": {
             "example": "my_namespace/my_dataset",
             "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "avg and max the latency of catalog service",
             "description": "Human-readable description for the new E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
@@ -611,19 +624,22 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
-            }
+            },
+            "minItems": 0
           },
           "metricLabels": {
             "description": "Metric labels to attach to the generated metrics.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "example": "Service catalog latency",
             "description": "Human-readable name for the new E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutationsLimit": {
             "example": 30000,
@@ -652,31 +668,36 @@
           "dataSource": {
             "example": "my_namespace/my_dataset",
             "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "avg and max the latency of catalog service",
             "description": "Human-readable description for the new E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "metricFields": {
             "description": "Metric fields to create and aggregate from the events.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
-            }
+            },
+            "minItems": 0
           },
           "metricLabels": {
             "description": "Metric labels to attach to the generated metrics.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "example": "Service catalog latency",
             "description": "Human-readable name for the new E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutationsLimit": {
             "example": 30000,
@@ -800,17 +821,20 @@
           "createTime": {
             "example": "2022-06-30T12:30:00.000Z",
             "description": "RFC3339 timestamp of when this E2M was created.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataSource": {
             "example": "my_namespace/my_dataset",
             "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "avg and max the latency of catalog service",
             "description": "Human-readable description of this E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
@@ -833,6 +857,7 @@
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
             },
+            "minItems": 0,
             "maxItems": 10
           },
           "metricLabels": {
@@ -840,12 +865,14 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "example": "Service_catalog_latency",
             "description": "Human-readable name for this E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutations": {
             "$ref": "#/components/schemas/E2MPermutations"
@@ -856,7 +883,8 @@
           "updateTime": {
             "example": "2022-06-30T12:30:00.000Z",
             "description": "RFC3339 timestamp of when this E2M was last updated.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -902,17 +930,20 @@
           "createTime": {
             "example": "2022-06-30T12:30:00.000Z",
             "description": "RFC3339 timestamp of when this E2M was created.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "dataSource": {
             "example": "my_namespace/my_dataset",
             "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "description": {
             "example": "avg and max the latency of catalog service",
             "description": "Human-readable description of this E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "id": {
             "example": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
@@ -932,6 +963,7 @@
             "items": {
               "$ref": "#/components/schemas/v2.MetricField"
             },
+            "minItems": 0,
             "maxItems": 10
           },
           "metricLabels": {
@@ -939,12 +971,14 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MetricLabel"
-            }
+            },
+            "minItems": 0
           },
           "name": {
             "example": "Service_catalog_latency",
             "description": "Human-readable name for this E2M.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutations": {
             "$ref": "#/components/schemas/E2MPermutations"
@@ -958,7 +992,8 @@
           "updateTime": {
             "example": "2022-06-30T12:30:00.000Z",
             "description": "RFC3339 timestamp of when this E2M was last updated.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -999,7 +1034,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1021,7 +1057,8 @@
           },
           "path": {
             "example": "test",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1045,7 +1082,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1078,7 +1116,8 @@
         "properties": {
           "companyId": {
             "description": "The company id.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "labelsLimit": {
             "description": "The labels limit.",
@@ -1098,7 +1137,8 @@
         "properties": {
           "day": {
             "description": "The day.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "permutations": {
             "description": "List of permutations.",
@@ -1140,7 +1180,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/E2M"
-            }
+            },
+            "minItems": 0
           }
         },
         "required": [
@@ -1159,7 +1200,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LabelsPermutationsCardinalityDay"
-            }
+            },
+            "minItems": 0
           }
         }
       },
@@ -1175,13 +1217,15 @@
           "sourceField": {
             "example": "log_obj.string_value",
             "description": "The source field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "targetLabel": {
             "example": "alias_label_name",
             "description": "The target label.",
             "type": "string",
-            "pattern": "^[\\w/-]+$"
+            "pattern": "^[\\w/-]+$",
+            "minLength": 0
           }
         },
         "required": [
@@ -1198,8 +1242,10 @@
           "values": {
             "type": "array",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1268,7 +1314,8 @@
           "targetMetricName": {
             "example": "alias_field_name_agg_func",
             "description": "Name of the target metric produced by this aggregation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1298,7 +1345,8 @@
           "targetMetricName": {
             "example": "alias_field_name_agg_func",
             "description": "Name of the target metric produced by this aggregation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1327,7 +1375,8 @@
           "targetMetricName": {
             "example": "alias_field_name_agg_func",
             "description": "Name of the target metric produced by this aggregation.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           }
         },
         "required": [
@@ -1379,7 +1428,8 @@
           "alias": {
             "example": "new_query",
             "description": "The alias.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "applicationnameFilters": {
             "description": "The applicationname filters.",
@@ -1387,20 +1437,24 @@
             "items": {
               "example": "app_name",
               "description": "The applicationname filters.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "lucene": {
             "example": "log_obj.numeric_field: [50 TO 100]",
             "description": "The lucene.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "severityFilters": {
             "description": "The severity filters.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/logs2metrics.v2.Severity"
-            }
+            },
+            "minItems": 0
           },
           "subsystemnameFilters": {
             "description": "The subsystemname filters.",
@@ -1408,8 +1462,10 @@
             "items": {
               "example": "sub_name",
               "description": "The subsystemname filters.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },
@@ -1427,18 +1483,21 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v2.Aggregation"
-            }
+            },
+            "minItems": 0
           },
           "sourceField": {
             "example": "log_obj.numeric_field",
             "description": "The source field.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "targetBaseMetricName": {
             "example": "alias_field_name",
             "description": "The target base metric name.",
             "type": "string",
-            "pattern": "^[\\w/-]+$"
+            "pattern": "^[\\w/-]+$",
+            "minLength": 0
           }
         },
         "required": [
@@ -1462,8 +1521,10 @@
             "items": {
               "example": "myAction",
               "description": "The action filters.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "applicationnameFilters": {
             "description": "The applicationname filters.",
@@ -1471,13 +1532,16 @@
             "items": {
               "example": "myApp",
               "description": "The applicationname filters.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "lucene": {
             "example": "applicationName:myApp",
             "description": "The lucene.",
-            "type": "string"
+            "type": "string",
+            "minLength": 0
           },
           "serviceFilters": {
             "description": "The service filters.",
@@ -1485,8 +1549,10 @@
             "items": {
               "example": "myService",
               "description": "The service filters.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           },
           "subsystemnameFilters": {
             "description": "The subsystemname filters.",
@@ -1494,8 +1560,10 @@
             "items": {
               "example": "mySubsystem",
               "description": "The subsystemname filters.",
-              "type": "string"
-            }
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
           }
         }
       },

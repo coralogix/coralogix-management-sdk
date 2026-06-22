@@ -99,6 +99,7 @@ paths:
         schema:
           description: Unique identifier.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -125,6 +126,7 @@ paths:
         schema:
           description: Unique identifier.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -169,6 +171,7 @@ paths:
           description: The metric labels to evaluate cardinality for.
           items:
             $ref: "#/components/schemas/Metric_Label"
+          minItems: 0
           type: array
         style: form
       responses:
@@ -455,6 +458,7 @@ components:
           description: The matching responses.
           items:
             $ref: "#/components/schemas/E2MExecutionResponse"
+          minItems: 0
           type: array
       type: object
     CreateE2MRequest:
@@ -603,6 +607,7 @@ components:
         id:
           description: Unique identifier.
           example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          minLength: 0
           type: string
       required:
       - id
@@ -619,6 +624,7 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
       required:
       - id
@@ -645,6 +651,7 @@ components:
             example: 2
             format: float
             type: number
+          minItems: 0
           type: array
       title: E2M Aggregate Histogram
       type: object
@@ -672,10 +679,12 @@ components:
           description: "Optional data source in namespace/dataset_name format. If\
             \ not set, defaults to the standard logs/spans stream."
           example: my_namespace/my_dataset
+          minLength: 0
           type: string
         description:
           description: Human-readable description for the new E2M.
           example: avg and max the latency of catalog service
+          minLength: 0
           type: string
         logsQuery:
           $ref: "#/components/schemas/v2.LogsQuery"
@@ -683,15 +692,18 @@ components:
           description: Metric fields to create and aggregate from the events.
           items:
             $ref: "#/components/schemas/v2.MetricField"
+          minItems: 0
           type: array
         metricLabels:
           description: Metric labels to attach to the generated metrics.
           items:
             $ref: "#/components/schemas/MetricLabel"
+          minItems: 0
           type: array
         name:
           description: Human-readable name for the new E2M.
           example: Service catalog latency
+          minLength: 0
           type: string
         permutationsLimit:
           description: Maximum number of unique metric permutations allowed for this
@@ -716,24 +728,29 @@ components:
           description: "Optional data source in namespace/dataset_name format. If\
             \ not set, defaults to the standard logs/spans stream."
           example: my_namespace/my_dataset
+          minLength: 0
           type: string
         description:
           description: Human-readable description for the new E2M.
           example: avg and max the latency of catalog service
+          minLength: 0
           type: string
         metricFields:
           description: Metric fields to create and aggregate from the events.
           items:
             $ref: "#/components/schemas/v2.MetricField"
+          minItems: 0
           type: array
         metricLabels:
           description: Metric labels to attach to the generated metrics.
           items:
             $ref: "#/components/schemas/MetricLabel"
+          minItems: 0
           type: array
         name:
           description: Human-readable name for the new E2M.
           example: Service catalog latency
+          minLength: 0
           type: string
         permutationsLimit:
           description: Maximum number of unique metric permutations allowed for this
@@ -1043,15 +1060,18 @@ components:
         createTime:
           description: RFC3339 timestamp of when this E2M was created.
           example: 2022-06-30T12:30:00.000Z
+          minLength: 0
           type: string
         dataSource:
           description: "Optional data source in namespace/dataset_name format. If\
             \ not set, defaults to the standard logs/spans stream."
           example: my_namespace/my_dataset
+          minLength: 0
           type: string
         description:
           description: Human-readable description of this E2M.
           example: avg and max the latency of catalog service
+          minLength: 0
           type: string
         id:
           description: Unique identifier for this E2M. Required on update requests.
@@ -1070,15 +1090,18 @@ components:
           items:
             $ref: "#/components/schemas/v2.MetricField"
           maxItems: 10
+          minItems: 0
           type: array
         metricLabels:
           description: Metric labels to attach to the generated metrics.
           items:
             $ref: "#/components/schemas/MetricLabel"
+          minItems: 0
           type: array
         name:
           description: Human-readable name for this E2M.
           example: Service_catalog_latency
+          minLength: 0
           type: string
         permutations:
           $ref: "#/components/schemas/E2MPermutations"
@@ -1087,6 +1110,7 @@ components:
         updateTime:
           description: RFC3339 timestamp of when this E2M was last updated.
           example: 2022-06-30T12:30:00.000Z
+          minLength: 0
           type: string
       required:
       - logsQuery
@@ -1126,15 +1150,18 @@ components:
         createTime:
           description: RFC3339 timestamp of when this E2M was created.
           example: 2022-06-30T12:30:00.000Z
+          minLength: 0
           type: string
         dataSource:
           description: "Optional data source in namespace/dataset_name format. If\
             \ not set, defaults to the standard logs/spans stream."
           example: my_namespace/my_dataset
+          minLength: 0
           type: string
         description:
           description: Human-readable description of this E2M.
           example: avg and max the latency of catalog service
+          minLength: 0
           type: string
         id:
           description: Unique identifier for this E2M. Required on update requests.
@@ -1151,15 +1178,18 @@ components:
           items:
             $ref: "#/components/schemas/v2.MetricField"
           maxItems: 10
+          minItems: 0
           type: array
         metricLabels:
           description: Metric labels to attach to the generated metrics.
           items:
             $ref: "#/components/schemas/MetricLabel"
+          minItems: 0
           type: array
         name:
           description: Human-readable name for this E2M.
           example: Service_catalog_latency
+          minLength: 0
           type: string
         permutations:
           $ref: "#/components/schemas/E2MPermutations"
@@ -1170,6 +1200,7 @@ components:
         updateTime:
           description: RFC3339 timestamp of when this E2M was last updated.
           example: 2022-06-30T12:30:00.000Z
+          minLength: 0
           type: string
       required:
       - name
@@ -1197,6 +1228,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -1213,6 +1245,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -1230,6 +1263,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -1380,6 +1414,7 @@ components:
       properties:
         companyId:
           description: The company id.
+          minLength: 0
           type: string
         labelsLimit:
           description: The labels limit.
@@ -1397,6 +1432,7 @@ components:
       properties:
         day:
           description: The day.
+          minLength: 0
           type: string
         permutations:
           description: List of permutations.
@@ -1661,6 +1697,7 @@ components:
           description: The e2m.
           items:
             $ref: "#/components/schemas/E2M"
+          minItems: 0
           type: array
       required:
       - e2m
@@ -1682,6 +1719,7 @@ components:
           description: List of permutations.
           items:
             $ref: "#/components/schemas/LabelsPermutationsCardinalityDay"
+          minItems: 0
           type: array
       type: object
     MetricLabel:
@@ -1696,10 +1734,12 @@ components:
         sourceField:
           description: The source field.
           example: log_obj.string_value
+          minLength: 0
           type: string
         targetLabel:
           description: The target label.
           example: alias_label_name
+          minLength: 0
           pattern: "^[\\w/-]+$"
           type: string
       required:
@@ -1713,7 +1753,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     ReplaceE2MRequest:
@@ -1889,6 +1931,7 @@ components:
         targetMetricName:
           description: Name of the target metric produced by this aggregation.
           example: alias_field_name_agg_func
+          minLength: 0
           type: string
       required:
       - histogram
@@ -1912,6 +1955,7 @@ components:
         targetMetricName:
           description: Name of the target metric produced by this aggregation.
           example: alias_field_name_agg_func
+          minLength: 0
           type: string
       required:
       - none
@@ -1933,6 +1977,7 @@ components:
         targetMetricName:
           description: Name of the target metric produced by this aggregation.
           example: alias_field_name_agg_func
+          minLength: 0
           type: string
       required:
       - samples
@@ -1980,29 +2025,36 @@ components:
         alias:
           description: The alias.
           example: new_query
+          minLength: 0
           type: string
         applicationnameFilters:
           description: The applicationname filters.
           items:
             description: The applicationname filters.
             example: app_name
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         lucene:
           description: The lucene.
           example: "log_obj.numeric_field: [50 TO 100]"
+          minLength: 0
           type: string
         severityFilters:
           description: The severity filters.
           items:
             $ref: "#/components/schemas/logs2metrics.v2.Severity"
+          minItems: 0
           type: array
         subsystemnameFilters:
           description: The subsystemname filters.
           items:
             description: The subsystemname filters.
             example: sub_name
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: SpansQuery
       type: object
@@ -2034,14 +2086,17 @@ components:
           description: The aggregations.
           items:
             $ref: "#/components/schemas/v2.Aggregation"
+          minItems: 0
           type: array
         sourceField:
           description: The source field.
           example: log_obj.numeric_field
+          minLength: 0
           type: string
         targetBaseMetricName:
           description: The target base metric name.
           example: alias_field_name
+          minLength: 0
           pattern: "^[\\w/-]+$"
           type: string
       required:
@@ -2061,32 +2116,41 @@ components:
           items:
             description: The action filters.
             example: myAction
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         applicationnameFilters:
           description: The applicationname filters.
           items:
             description: The applicationname filters.
             example: myApp
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         lucene:
           description: The lucene.
           example: applicationName:myApp
+          minLength: 0
           type: string
         serviceFilters:
           description: The service filters.
           items:
             description: The service filters.
             example: myService
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         subsystemnameFilters:
           description: The subsystemname filters.
           items:
             description: The subsystemname filters.
             example: mySubsystem
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: SpansQuery
       type: object
@@ -2114,6 +2178,7 @@ components:
           description: The requests.
           items:
             $ref: "#/components/schemas/E2MExecutionRequest"
+          minItems: 0
           type: array
       type: object
     SpansQuery:
@@ -2127,32 +2192,41 @@ components:
           items:
             description: The action filters.
             example: myAction
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         applicationnameFilters:
           description: The applicationname filters.
           items:
             description: The applicationname filters.
             example: myApp
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         lucene:
           description: The lucene.
           example: applicationName:myApp
+          minLength: 0
           type: string
         serviceFilters:
           description: The service filters.
           items:
             description: The service filters.
             example: myService
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         subsystemnameFilters:
           description: The subsystemname filters.
           items:
             description: The subsystemname filters.
             example: mySubsystem
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: SpansQuery
       type: object
@@ -2165,29 +2239,36 @@ components:
         alias:
           description: The alias.
           example: new_query
+          minLength: 0
           type: string
         applicationnameFilters:
           description: The applicationname filters.
           items:
             description: The applicationname filters.
             example: app_name
+            minLength: 0
             type: string
+          minItems: 0
           type: array
         lucene:
           description: The lucene.
           example: "log_obj.numeric_field: [50 TO 100]"
+          minLength: 0
           type: string
         severityFilters:
           description: The severity filters.
           items:
             $ref: "#/components/schemas/logs2metrics.v2.Severity"
+          minItems: 0
           type: array
         subsystemnameFilters:
           description: The subsystemname filters.
           items:
             description: The subsystemname filters.
             example: sub_name
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       title: SpansQuery
       type: object
@@ -2200,10 +2281,12 @@ components:
         sourceField:
           description: The source field.
           example: log_obj.string_value
+          minLength: 0
           type: string
         targetLabel:
           description: The target label.
           example: alias_label_name
+          minLength: 0
           pattern: "^[\\w/-]+$"
           type: string
       required:

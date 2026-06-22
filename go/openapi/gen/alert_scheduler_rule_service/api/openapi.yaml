@@ -46,7 +46,7 @@ paths:
         required: false
         schema:
           description: Token for fetching the next page of results.
-          example: ""
+          minLength: 0
           type: string
         style: form
       responses:
@@ -220,6 +220,7 @@ paths:
         schema:
           description: The unique identifier of the alert scheduler (suppression)
             rule to delete.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -258,6 +259,7 @@ paths:
         schema:
           description: The unique identifier of the alert scheduler (suppression)
             rule.
+          minLength: 0
           type: string
         style: simple
       responses:
@@ -292,12 +294,15 @@ components:
       properties:
         endTime:
           description: End time.
+          minLength: 0
           type: string
         startTime:
           description: Start time.
+          minLength: 0
           type: string
         timezone:
           description: Timezone.
+          minLength: 0
           type: string
       type: object
     AlertSchedulerRule:
@@ -341,9 +346,11 @@ components:
       properties:
         createdAt:
           description: Creation timestamp.
+          minLength: 0
           type: string
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         enabled:
           description: Whether this resource is enabled.
@@ -352,22 +359,27 @@ components:
           $ref: "#/components/schemas/alert_scheduler_rule_protobuf.v1.Filter"
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         metaLabels:
           description: Metadata labels.
           items:
             $ref: "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
+          minItems: 0
           type: array
         name:
           description: Display name.
+          minLength: 0
           type: string
         schedule:
           $ref: "#/components/schemas/Schedule"
         uniqueIdentifier:
           description: Unique identifier.
+          minLength: 0
           type: string
         updatedAt:
           description: Last-updated timestamp.
+          minLength: 0
           type: string
       type: object
     AlertSchedulerRuleIds:
@@ -379,7 +391,9 @@ components:
           description: List of alert scheduler rule IDs.
           items:
             description: List of alert scheduler rule IDs.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     AlertSchedulerRuleProtobufV1FilterAlertMetaLabels:
@@ -401,6 +415,7 @@ components:
           $ref: "#/components/schemas/MetaLabels"
         whatExpression:
           description: Dataprime expression that filters the alerts by group-by values.
+          minLength: 0
           type: string
       required:
       - alertMetaLabels
@@ -414,6 +429,7 @@ components:
           $ref: "#/components/schemas/AlertUniqueIds"
         whatExpression:
           description: Dataprime expression that filters the alerts by group-by values.
+          minLength: 0
           type: string
       required:
       - alertUniqueIds
@@ -427,7 +443,9 @@ components:
           description: The alert scheduler rule version ids.
           items:
             description: The alert scheduler rule version ids.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     AlertSchedulerRuleWithActiveTimeframe:
@@ -480,6 +498,7 @@ components:
           description: The next active timeframes.
           items:
             $ref: "#/components/schemas/ActiveTimeframe"
+          minItems: 0
           type: array
       type: object
     AlertUniqueIds:
@@ -491,7 +510,9 @@ components:
           description: The value.
           items:
             description: The value.
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     Always:
@@ -640,6 +661,7 @@ components:
           description: The create suppression responses.
           items:
             $ref: "#/components/schemas/CreateAlertSchedulerRuleResponse"
+          minItems: 0
           type: array
       required:
       - createSuppressionResponses
@@ -693,6 +715,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -709,6 +732,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -726,6 +750,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -874,9 +899,11 @@ components:
           description: The alert scheduler rules.
           items:
             $ref: "#/components/schemas/AlertSchedulerRuleWithActiveTimeframe"
+          minItems: 0
           type: array
         nextPageToken:
           description: Token for fetching the next page of results.
+          minLength: 0
           type: string
       required:
       - alertSchedulerRules
@@ -899,6 +926,7 @@ components:
           description: The value.
           items:
             $ref: "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
+          minItems: 0
           type: array
       type: object
     Monthly:
@@ -912,6 +940,7 @@ components:
             description: The days of month.
             format: int32
             type: integer
+          minItems: 0
           type: array
       type: object
     MultipleValues:
@@ -920,7 +949,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     OneTime:
@@ -980,6 +1011,7 @@ components:
           type: integer
         terminationDate:
           description: ISO 8601 date after which the recurring rule stops being applied.
+          minLength: 0
           type: string
         timeframe:
           $ref: "#/components/schemas/Timeframe"
@@ -1000,6 +1032,7 @@ components:
           type: integer
         terminationDate:
           description: ISO 8601 date after which the recurring rule stops being applied.
+          minLength: 0
           type: string
         timeframe:
           $ref: "#/components/schemas/Timeframe"
@@ -1018,6 +1051,7 @@ components:
           type: integer
         terminationDate:
           description: ISO 8601 date after which the recurring rule stops being applied.
+          minLength: 0
           type: string
         timeframe:
           $ref: "#/components/schemas/Timeframe"
@@ -1100,9 +1134,11 @@ components:
           $ref: "#/components/schemas/v1.Duration"
         startTime:
           description: Start time.
+          minLength: 0
           type: string
         timezone:
           description: Timezone.
+          minLength: 0
           type: string
       required:
       - duration
@@ -1114,12 +1150,15 @@ components:
       properties:
         endTime:
           description: End time.
+          minLength: 0
           type: string
         startTime:
           description: Start time.
+          minLength: 0
           type: string
         timezone:
           description: Timezone.
+          minLength: 0
           type: string
       required:
       - endTime
@@ -1264,6 +1303,7 @@ components:
           description: The update suppression responses.
           items:
             $ref: "#/components/schemas/UpdateAlertSchedulerRuleResponse"
+          minItems: 0
           type: array
       required:
       - updateSuppressionResponses
@@ -1280,6 +1320,7 @@ components:
             description: The days of week.
             format: int32
             type: integer
+          minItems: 0
           type: array
       type: object
     alert_scheduler_rule_protobuf.v1.Filter:
@@ -1302,12 +1343,15 @@ components:
       properties:
         id:
           description: Unique identifier.
+          minLength: 0
           type: string
         key:
           description: The key.
+          minLength: 0
           type: string
         value:
           description: The value.
+          minLength: 0
           type: string
       type: object
     v1.Duration:
@@ -1335,15 +1379,15 @@ components:
       properties:
         endTime:
           description: End time.
-          example: ""
+          minLength: 0
           type: string
         startTime:
           description: Start time.
-          example: ""
+          minLength: 0
           type: string
         timezone:
           description: Timezone.
-          example: ""
+          minLength: 0
           type: string
       type: object
     AlertSchedulerRuleService_GetBulkAlertSchedulerRule_alert_scheduler_rules_ids_parameter:
@@ -1375,6 +1419,7 @@ components:
           description: The update alert scheduler rule requests.
           items:
             $ref: "#/components/schemas/UpdateAlertSchedulerRuleRequest"
+          minItems: 0
           type: array
       required:
       - updateAlertSchedulerRuleRequests
@@ -1387,6 +1432,7 @@ components:
           description: The create alert scheduler rule requests.
           items:
             $ref: "#/components/schemas/CreateAlertSchedulerRuleRequest"
+          minItems: 0
           type: array
       required:
       - createAlertSchedulerRuleRequests

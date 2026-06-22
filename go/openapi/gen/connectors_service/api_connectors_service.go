@@ -413,6 +413,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceDeleteConnectorExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -516,6 +519,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceGetConnectorExecute(r Api
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if strlen(r.id) < 0 {
+		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

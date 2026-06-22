@@ -79,6 +79,7 @@ paths:
           description: Search clauses used to filter custom enrichment data.
           items:
             $ref: "#/components/schemas/CustomEnrichmentService_SearchCustomEnrichmentData_search_clauses_parameter_inner"
+          minItems: 0
           type: array
         style: form
       responses:
@@ -107,6 +108,7 @@ paths:
           description: The unique identifier of the custom enrichment rule to delete.
           example: 1
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -134,6 +136,7 @@ paths:
           description: The unique identifier of the custom enrichment rule.
           example: 1
           format: int64
+          minimum: 0
           type: integer
         style: simple
       responses:
@@ -159,8 +162,8 @@ components:
           fileSize: 0
           name: name
           description: description
-          id: 6
-          version: 1
+          id: 0
+          version: 0
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -170,6 +173,7 @@ components:
         message:
           description: Human-readable message.
           example: Custom enrichment created successfully
+          minLength: 0
           type: string
       title: Create Custom Enrichment Response
       type: object
@@ -181,34 +185,40 @@ components:
         fileSize: 0
         name: name
         description: description
-        id: 6
-        version: 1
+        id: 0
+        version: 0
       externalDocs:
         url: ""
       properties:
         description:
           description: Human-readable description.
+          minLength: 0
           type: string
         fileName:
           description: The file name.
+          minLength: 0
           type: string
         fileSize:
           description: The file size.
           format: int64
+          minimum: 0
           type: integer
         id:
           description: Unique identifier.
           format: int64
+          minimum: 0
           type: integer
         isQueryOnly:
           description: The is query only.
           type: boolean
         name:
           description: Display name.
+          minLength: 0
           type: string
         version:
           description: Version number.
           format: int64
+          minimum: 0
           type: integer
       type: object
     CustomEnrichmentData:
@@ -225,14 +235,15 @@ components:
           fileSize: 0
           name: name
           description: description
-          id: 6
-          version: 1
+          id: 0
+          version: 0
       externalDocs:
         url: ""
       properties:
         binary:
           description: Binary content of the enrichment data file encoded as base64.
           format: byte
+          minLength: 0
           type: string
         definition:
           $ref: "#/components/schemas/CustomEnrichment"
@@ -248,6 +259,7 @@ components:
           $ref: "#/components/schemas/CustomEnrichment"
         textual:
           description: Textual content of the enrichment data file as a UTF-8 string.
+          minLength: 0
           type: string
       required:
       - textual
@@ -265,10 +277,12 @@ components:
           description: The custom enrichment id.
           example: 1
           format: int64
+          minimum: 0
           type: integer
         message:
           description: Human-readable message.
           example: Custom enrichment deleted successfully
+          minLength: 0
           type: string
       type: object
     File:
@@ -286,19 +300,23 @@ components:
           example: !!binary |-
             MHhGQUJCMzI=
           format: byte
+          minLength: 0
           type: string
         extension:
           description: "File extension indicating the file format (e.g., csv, json)."
           example: csv
+          minLength: 0
           type: string
         name:
           description: Name of the file.
           example: file_name
+          minLength: 0
           type: string
         size:
           description: Size of the file in bytes.
           example: 100
           format: int64
+          minimum: 0
           type: integer
       required:
       - binary
@@ -313,19 +331,23 @@ components:
         extension:
           description: "File extension indicating the file format (e.g., csv, json)."
           example: csv
+          minLength: 0
           type: string
         name:
           description: Name of the file.
           example: file_name
+          minLength: 0
           type: string
         size:
           description: Size of the file in bytes.
           example: 100
           format: int64
+          minimum: 0
           type: integer
         textual:
           description: Textual content of the file as a UTF-8 string.
           example: "row1,row2 value1,value2"
+          minLength: 0
           type: string
       required:
       - textual
@@ -344,6 +366,7 @@ components:
           $ref: "#/components/schemas/Filters"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - filters
@@ -360,6 +383,7 @@ components:
           $ref: "#/components/schemas/MultipleValues"
         path:
           example: test
+          minLength: 0
           type: string
       required:
       - multipleValues
@@ -377,6 +401,7 @@ components:
         pathAndValues:
           items:
             $ref: "#/components/schemas/FilterPathAndValues"
+          minItems: 0
           type: array
       required:
       - pathAndValues
@@ -392,8 +417,8 @@ components:
           fileSize: 0
           name: name
           description: description
-          id: 6
-          version: 1
+          id: 0
+          version: 0
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -414,15 +439,15 @@ components:
           fileSize: 0
           name: name
           description: description
-          id: 6
-          version: 1
+          id: 0
+          version: 0
         - fileName: fileName
           isQueryOnly: true
           fileSize: 0
           name: name
           description: description
-          id: 6
-          version: 1
+          id: 0
+          version: 0
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -431,6 +456,7 @@ components:
           description: The custom enrichments.
           items:
             $ref: "#/components/schemas/CustomEnrichment"
+          minItems: 0
           type: array
       title: Get Custom Enrichments Response
       type: object
@@ -440,7 +466,9 @@ components:
           $ref: "#/components/schemas/events.v3.FilterMatcher"
         values:
           items:
+            minLength: 0
             type: string
+          minItems: 0
           type: array
       type: object
     SearchClauseId:
@@ -453,6 +481,7 @@ components:
           description: Search by the numeric ID of the custom enrichment.
           example: 1
           format: int64
+          minimum: 0
           type: integer
       required:
       - id
@@ -467,6 +496,7 @@ components:
         name:
           description: Search by the name of the custom enrichment.
           example: custom_enrichment_name
+          minLength: 0
           type: string
       required:
       - name
@@ -483,8 +513,8 @@ components:
             fileSize: 0
             name: name
             description: description
-            id: 6
-            version: 1
+            id: 0
+            version: 0
         - binary: binary
           definition:
             fileName: fileName
@@ -492,8 +522,8 @@ components:
             fileSize: 0
             name: name
             description: description
-            id: 6
-            version: 1
+            id: 0
+            version: 0
       externalDocs:
         url: ""
       properties:
@@ -501,6 +531,7 @@ components:
           description: The custom enrichments data.
           items:
             $ref: "#/components/schemas/CustomEnrichmentData"
+          minItems: 0
           type: array
       type: object
     UpdateCustomEnrichmentResponse:
@@ -514,8 +545,8 @@ components:
           fileSize: 0
           name: name
           description: description
-          id: 6
-          version: 1
+          id: 0
+          version: 0
       externalDocs:
         description: Find out more about enrichments
         url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
@@ -525,6 +556,7 @@ components:
         message:
           description: Human-readable message.
           example: Custom enrichment updated successfully
+          minLength: 0
           type: string
       title: Update Custom Enrichment Response
       type: object
@@ -546,16 +578,19 @@ components:
           description: The custom enrichment id.
           example: 1
           format: int64
+          minimum: 0
           type: integer
         description:
           description: New human-readable description of the custom enrichment.
           example: custom_enrichment_description
+          minLength: 0
           type: string
         file:
           $ref: "#/components/schemas/File"
         name:
           description: New human-readable name for the custom enrichment.
           example: custom_enrichment_name
+          minLength: 0
           type: string
       required:
       - customEnrichmentId
@@ -570,12 +605,14 @@ components:
         description:
           description: Human-readable description of the custom enrichment.
           example: custom_enrichment_description
+          minLength: 0
           type: string
         file:
           $ref: "#/components/schemas/File"
         name:
           description: Human-readable name for the custom enrichment.
           example: custom_enrichment_name
+          minLength: 0
           type: string
       required:
       - description

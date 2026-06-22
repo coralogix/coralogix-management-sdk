@@ -24,7 +24,7 @@ var _ MappedNullable = &LogsUniqueCountType{}
 type LogsUniqueCountType struct {
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
 	// The maximum unique count per group by key
-	MaxUniqueCountPerGroupByKey *string `json:"maxUniqueCountPerGroupByKey,omitempty"`
+	MaxUniqueCountPerGroupByKey *string `json:"maxUniqueCountPerGroupByKey,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
 	// The rules for the log unique count alert
