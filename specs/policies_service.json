@@ -1202,6 +1202,14 @@
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "timeBucketMs": {
+            "example": "3600000",
+            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
+            "type": "string",
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           }
         },
         "required": [
@@ -1226,6 +1234,14 @@
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "timeBucketMs": {
+            "example": "3600000",
+            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
+            "type": "string",
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "week": {
             "$ref": "#/components/schemas/Week"
@@ -1256,6 +1272,14 @@
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "timeBucketMs": {
+            "example": "3600000",
+            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
+            "type": "string",
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           }
         },
         "required": [
@@ -1280,6 +1304,14 @@
           },
           "subsystemRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
+          },
+          "timeBucketMs": {
+            "example": "3600000",
+            "description": "Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.",
+            "type": "string",
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
           },
           "week": {
             "$ref": "#/components/schemas/Week"
@@ -1306,6 +1338,15 @@
             "pattern": "^-?[0-9]+$",
             "minLength": 1,
             "maxLength": 20
+          },
+          "usageBuckets": {
+            "description": "Per-bucket breakdown of matched bytes over the requested time window. Empty unless time_bucket_ms was set on the request.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsageBucket"
+            },
+            "minItems": 0,
+            "maxItems": 10080
           }
         },
         "required": [
@@ -2095,6 +2136,36 @@
         },
         "required": [
           "policy"
+        ]
+      },
+      "UsageBucket": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Usage Bucket",
+        "description": "Bytes matched within a single time bucket of the forecast window.",
+        "type": "object",
+        "properties": {
+          "bucketStartMs": {
+            "example": "1728763200000",
+            "description": "Start of the bucket window, in epoch milliseconds (the rounded-down bucket timestamp).",
+            "type": "string",
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "bytes": {
+            "example": "552155648",
+            "description": "Number of bytes the draft policy would match within this bucket.",
+            "type": "string",
+            "pattern": "^-?[0-9]+$",
+            "minLength": 1,
+            "maxLength": 20
+          }
+        },
+        "required": [
+          "bucketStartMs",
+          "bytes"
         ]
       },
       "UsageTier": {

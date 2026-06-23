@@ -28,6 +28,8 @@ type ForecastPolicyUsageRequestLogRulesDay struct {
 	Day map[string]interface{} `json:"day"`
 	LogRules LogRules `json:"logRules"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.
+	TimeBucketMs *string `json:"timeBucketMs,omitempty" validate:"regexp=^-?[0-9]+$"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -164,6 +166,38 @@ func (o *ForecastPolicyUsageRequestLogRulesDay) SetSubsystemRule(v QuotaV1Rule) 
 	o.SubsystemRule = &v
 }
 
+// GetTimeBucketMs returns the TimeBucketMs field value if set, zero value otherwise.
+func (o *ForecastPolicyUsageRequestLogRulesDay) GetTimeBucketMs() string {
+	if o == nil || IsNil(o.TimeBucketMs) {
+		var ret string
+		return ret
+	}
+	return *o.TimeBucketMs
+}
+
+// GetTimeBucketMsOk returns a tuple with the TimeBucketMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastPolicyUsageRequestLogRulesDay) GetTimeBucketMsOk() (*string, bool) {
+	if o == nil || IsNil(o.TimeBucketMs) {
+		return nil, false
+	}
+	return o.TimeBucketMs, true
+}
+
+// HasTimeBucketMs returns a boolean if a field has been set.
+func (o *ForecastPolicyUsageRequestLogRulesDay) HasTimeBucketMs() bool {
+	if o != nil && !IsNil(o.TimeBucketMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeBucketMs gets a reference to the given string and assigns it to the TimeBucketMs field.
+func (o *ForecastPolicyUsageRequestLogRulesDay) SetTimeBucketMs(v string) {
+	o.TimeBucketMs = &v
+}
+
 func (o ForecastPolicyUsageRequestLogRulesDay) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -181,6 +215,9 @@ func (o ForecastPolicyUsageRequestLogRulesDay) ToMap() (map[string]interface{}, 
 	toSerialize["logRules"] = o.LogRules
 	if !IsNil(o.SubsystemRule) {
 		toSerialize["subsystemRule"] = o.SubsystemRule
+	}
+	if !IsNil(o.TimeBucketMs) {
+		toSerialize["timeBucketMs"] = o.TimeBucketMs
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -231,6 +268,7 @@ func (o *ForecastPolicyUsageRequestLogRulesDay) UnmarshalJSON(data []byte) (err 
 		delete(additionalProperties, "day")
 		delete(additionalProperties, "logRules")
 		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "timeBucketMs")
 		o.AdditionalProperties = additionalProperties
 	}
 
