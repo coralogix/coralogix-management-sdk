@@ -25,7 +25,7 @@ var _ MappedNullable = &CheckDashboardRequestDashboard{}
 type CheckDashboardRequestDashboard struct {
 	Dashboard Dashboard `json:"dashboard"`
 	// Optional idempotency key for the check request
-	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

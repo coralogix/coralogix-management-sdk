@@ -24,7 +24,7 @@ var _ MappedNullable = &EntityLink{}
 // EntityLink A URL reference to an entity in the originating system.
 type EntityLink struct {
 	// URL to the entity in the originating system.
-	Url string `json:"url" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Url string `json:"url" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

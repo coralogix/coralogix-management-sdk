@@ -24,9 +24,9 @@ var _ MappedNullable = &CheckDashboardRequestDashboardId{}
 // CheckDashboardRequestDashboardId Validate a dashboard definition or an existing dashboard by id
 type CheckDashboardRequestDashboardId struct {
 	// Id of an existing dashboard to load and validate
-	DashboardId string `json:"dashboardId" validate:"regexp=^[\\\\s\\\\S]*$"`
+	DashboardId string `json:"dashboardId" validate:"regexp=^[\\s\\S]*$"`
 	// Optional idempotency key for the check request
-	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	RequestId *string `json:"requestId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

@@ -23,7 +23,7 @@ var _ MappedNullable = &PromptInjectionConfig{}
 // PromptInjectionConfig Configuration for the PromptInjection evaluation.
 type PromptInjectionConfig struct {
 	// Additional context passed to the LLM evaluator.
-	AdditionalContext *string `json:"additionalContext,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AdditionalContext *string `json:"additionalContext,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

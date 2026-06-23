@@ -25,7 +25,7 @@ type CasesV1PaginationRequest struct {
 	// Number of items to return per page
 	PageSize *int64 `json:"pageSize,omitempty"`
 	// Token for the next page of results
-	PageToken *string `json:"pageToken,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	PageToken *string `json:"pageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number of items to skip before starting to collect results
 	Skip *int64 `json:"skip,omitempty"`
 	AdditionalProperties map[string]interface{}

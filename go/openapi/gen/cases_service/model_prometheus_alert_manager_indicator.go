@@ -25,7 +25,7 @@ var _ MappedNullable = &PrometheusAlertManagerIndicator{}
 // PrometheusAlertManagerIndicator Lookup keys identifying a specific Prometheus AlertManager alert episode.
 type PrometheusAlertManagerIndicator struct {
 	// Prometheus alert fingerprint — the stable, label-derived hash that identifies this alert across firings.
-	Fingerprint string `json:"fingerprint" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Fingerprint string `json:"fingerprint" validate:"regexp=^[\\s\\S]*$"`
 	// ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).
 	StartedAt time.Time `json:"startedAt"`
 	AdditionalProperties map[string]interface{}

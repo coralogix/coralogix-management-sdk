@@ -27,7 +27,7 @@ type Case struct {
 	// When the case was acknowledged
 	AcknowledgeTime *time.Time `json:"acknowledgeTime,omitempty"`
 	// AI summary of the case
-	AiSummary *string `json:"aiSummary,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AiSummary *string `json:"aiSummary,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Assignee *CasesV1UserDetails `json:"assignee,omitempty"`
 	CaseIndicators *CaseIndicators `json:"caseIndicators,omitempty"`
 	Category CaseCategory `json:"category"`
@@ -52,7 +52,7 @@ type Case struct {
 	ResolutionDetails *ResolutionDetails `json:"resolutionDetails,omitempty"`
 	Status CaseStatus `json:"status"`
 	// Case title
-	Title string `json:"title" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Title string `json:"title" validate:"regexp=^[\\s\\S]*$"`
 	// When the case was last updated
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}

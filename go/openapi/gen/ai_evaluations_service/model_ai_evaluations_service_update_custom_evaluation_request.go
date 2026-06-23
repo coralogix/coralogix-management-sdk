@@ -23,23 +23,23 @@ var _ MappedNullable = &AiEvaluationsServiceUpdateCustomEvaluationRequest{}
 // AiEvaluationsServiceUpdateCustomEvaluationRequest Request to update a custom evaluation in the catalog.
 type AiEvaluationsServiceUpdateCustomEvaluationRequest struct {
 	// Human-readable description.
-	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Example conversations and expected scores.
 	Examples []CustomEvaluationExample `json:"examples,omitempty"`
 	// Instructions sent to the LLM evaluator.
-	Instructions *string `json:"instructions,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Instructions *string `json:"instructions,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Display name of the custom evaluation.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Policy type identifier.
-	PolicyType *string `json:"policyType,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	PolicyType *string `json:"policyType,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Description of what counts as safe.
-	Safe *string `json:"safe,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Safe *string `json:"safe,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to include the system prompt in the LLM input.
 	ShouldIncludeSystemPrompt *bool `json:"shouldIncludeSystemPrompt,omitempty"`
 	// Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.
 	UpdateMask *string `json:"updateMask,omitempty" validate:"regexp=^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"`
 	// Description of what counts as violating the policy.
-	Violates *string `json:"violates,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Violates *string `json:"violates,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

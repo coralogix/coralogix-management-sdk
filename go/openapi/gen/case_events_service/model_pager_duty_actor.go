@@ -25,11 +25,11 @@ type PagerDutyActor struct {
 	// If the PagerDuty user is linked to a Coralogix user, this field contains the Coralogix user ID.
 	CoralogixUserId *string `json:"coralogixUserId,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// PagerDuty display name
-	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	DisplayName *string `json:"displayName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// PagerDuty user ID
-	PagerDutyUserId *string `json:"pagerDutyUserId,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	PagerDutyUserId *string `json:"pagerDutyUserId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Email of the PagerDuty user
-	UserEmail *string `json:"userEmail,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	UserEmail *string `json:"userEmail,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

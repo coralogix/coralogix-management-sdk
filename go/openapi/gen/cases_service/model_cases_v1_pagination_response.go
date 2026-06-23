@@ -23,7 +23,7 @@ var _ MappedNullable = &CasesV1PaginationResponse{}
 // CasesV1PaginationResponse Pagination information for list responses.
 type CasesV1PaginationResponse struct {
 	// Token for the next page of results
-	NextPageToken *string `json:"nextPageToken,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	NextPageToken *string `json:"nextPageToken,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

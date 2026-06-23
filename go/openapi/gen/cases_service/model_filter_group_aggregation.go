@@ -24,7 +24,7 @@ var _ MappedNullable = &FilterGroupAggregation{}
 // FilterGroupAggregation Aggregated case counts for a single filter group key, with one entry per observed value.
 type FilterGroupAggregation struct {
 	// Filter group key
-	Key *string `json:"key,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Key *string `json:"key,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Aggregations per value
 	ValueCounts []ValueCount `json:"valueCounts"`
 	AdditionalProperties map[string]interface{}

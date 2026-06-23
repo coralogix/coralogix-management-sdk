@@ -16,6 +16,7 @@ package examples
 
 import (
 	"context"
+	"encoding/json"
 	"net/http"
 	"testing"
 
@@ -279,6 +280,51 @@ func TestAICustomEvaluations(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.False(t, customEvaluationExists(customEvaluations.GetItems(), customEvaluationID))
+}
+
+func TestAIEvaluationConfigDecodesPromptInjection(t *testing.T) {
+	payload := []byte(`{
+		"promptInjection": {
+			"additionalContext": "Only inspect the user prompt."
+		}
+	}`)
+
+	var config aievaluations.EvaluationConfig
+	require.NoError(t, json.Unmarshal(payload, &config))
+
+	promptInjection, ok := config.GetActualInstance().(*aievaluations.EvaluationConfigPromptInjection)
+	require.Truef(t, ok, "expected promptInjection config, got %T", config.GetActualInstance())
+	promptInjectionConfig, ok := promptInjection.GetPromptInjectionOk()
+	require.True(t, ok)
+	require.Equal(t, "Only inspect the user prompt.", promptInjectionConfig.GetAdditionalContext())
+}
+
+func TestAIEvaluationConfigDecodesCustomEvaluation(t *testing.T) {
+	payload := []byte(`{
+		"customEvaluation": {
+			"instructions": "Score 1 when the response mentions a competitor.\nScore 0 otherwise.",
+			"policyType": "competition",
+			"safe": "does not mention competitors",
+			"violates": "mentions a competitor product",
+			"shouldIncludeSystemPrompt": false,
+			"examples": [
+				{
+					"conversation": "User: which tool is best?\nAssistant: CompetitorX is great.",
+					"score": "1"
+				}
+			]
+		}
+	}`)
+
+	var config aievaluations.EvaluationConfig
+	require.NoError(t, json.Unmarshal(payload, &config))
+
+	customEvaluation, ok := config.GetActualInstance().(*aievaluations.EvaluationConfigCustomEvaluation)
+	require.Truef(t, ok, "expected customEvaluation config, got %T", config.GetActualInstance())
+	customEvaluationConfig, ok := customEvaluation.GetCustomEvaluationOk()
+	require.True(t, ok)
+	require.Equal(t, "competition", customEvaluationConfig.GetPolicyType())
+	require.Len(t, customEvaluationConfig.GetExamples(), 1)
 }
 
 func deleteAIEvaluation(t *testing.T, client *aievaluations.AIEvaluationsServiceAPIService, id string) {

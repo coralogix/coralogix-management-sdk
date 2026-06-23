@@ -23,9 +23,9 @@ var _ MappedNullable = &ApmServiceEntity{}
 // ApmServiceEntity Application Performance Monitoring service identified as impacted by a case.
 type ApmServiceEntity struct {
 	// Programming language of the APM service
-	Language *string `json:"language,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Language *string `json:"language,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Name of the impacted APM service
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

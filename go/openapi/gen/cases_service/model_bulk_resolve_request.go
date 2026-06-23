@@ -26,7 +26,7 @@ type BulkResolveRequest struct {
 	// IDs of the cases to resolve. Each entry accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
 	Ids []string `json:"ids"`
 	// Reason for resolution
-	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

@@ -24,7 +24,7 @@ var _ MappedNullable = &ResolutionDetails{}
 // ResolutionDetails Information about how and when a case was resolved.
 type ResolutionDetails struct {
 	// Resolution reason
-	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timestamp when the case was resolved
 	ResolveTime *time.Time `json:"resolveTime,omitempty"`
 	ResolvedBy *CaseResolver `json:"resolvedBy,omitempty"`

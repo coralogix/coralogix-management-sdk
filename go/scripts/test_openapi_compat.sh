@@ -2,49 +2,14 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 FIXTURES_DIR="$REPO_ROOT/go/openapi/testdata/compat"
 WORK_DIR="$REPO_ROOT/go/openapi/testdata/.compat-tmp"
 TEMPLATE_DIR="$REPO_ROOT/go/openapi/templates"
 OPENAPI_TOOLS_CONFIG="$REPO_ROOT/openapitools.json"
 
-run_openapi_generator() {
-  if command -v openapi-generator-cli >/dev/null 2>&1; then
-    openapi-generator-cli "$@"
-    return
-  fi
-
-  if command -v openapi-generator >/dev/null 2>&1; then
-    openapi-generator "$@"
-    return
-  fi
-
-  if command -v npx >/dev/null 2>&1 && java -version >/dev/null 2>&1; then
-    npx --yes @openapitools/openapi-generator-cli "$@"
-    return
-  fi
-
-  if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-    local generator_version
-    generator_version="$(python3 - "$OPENAPI_TOOLS_CONFIG" <<'PY'
-import json
-import sys
-
-config = json.load(open(sys.argv[1]))
-print(config["generator-cli"]["version"])
-PY
-)"
-    docker run --rm \
-      -v "$PWD:/local" \
-      -w /local \
-      "openapitools/openapi-generator-cli:v${generator_version}" \
-      "$@"
-    return
-  fi
-
-  echo "openapi-generator-cli requires either a local CLI, a working Java runtime, or Docker" >&2
-  return 127
-}
+source "$SCRIPT_DIR/openapi_generator_common.sh"
 
 rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR"
@@ -71,6 +36,8 @@ for fixture_dir in "$FIXTURES_DIR"/*; do
     --template-dir="$template_rel" \
     --additional-properties=withGoMod=false,packageName="$package_name",enumClassPrefix=true,disallowAdditionalPropertiesIfNotPresent=false \
     --global-property=apiTests=false,modelTests=false,apiDocs=false,modelDocs=false >/dev/null
+
+  normalize_regex_validator_tags "$outdir"
 
   cp "$fixture_dir/compat_test.go" "$outdir/compat_test.go"
 

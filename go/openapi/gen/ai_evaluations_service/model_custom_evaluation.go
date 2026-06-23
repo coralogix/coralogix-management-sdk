@@ -26,11 +26,11 @@ type CustomEvaluation struct {
 	ApplicationIds []string `json:"applicationIds,omitempty"`
 	Config *CustomEvaluationConfig `json:"config,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier of the custom evaluation.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Display name of the custom evaluation.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	AdditionalProperties map[string]interface{}
 }
 

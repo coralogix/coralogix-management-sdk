@@ -30,7 +30,7 @@ type AlertIndicator struct {
 	AlertVersions []string `json:"alertVersions"`
 	GroupingType AlertGroupingType `json:"groupingType"`
 	// Last seen version ID of the triggered alert definition.
-	LatestAlertVersion string `json:"latestAlertVersion" validate:"regexp=^[\\\\s\\\\S]*$"`
+	LatestAlertVersion string `json:"latestAlertVersion" validate:"regexp=^[\\s\\S]*$"`
 	// Array of the alert permutations.
 	Permutations []AlertIndicatorPermutation `json:"permutations"`
 	Priority IndicatorPriority `json:"priority"`

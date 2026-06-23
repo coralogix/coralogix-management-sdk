@@ -24,9 +24,9 @@ var _ MappedNullable = &AiApplication{}
 // AiApplication AI Application
 type AiApplication struct {
 	// Application name.
-	Application *string `json:"application,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Company ID
-	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// RFC3339 timestamp when the application was first observed.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Whether guardrails are integrated for this application.
@@ -34,7 +34,7 @@ type AiApplication struct {
 	// Unique identifier of the AI application.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Subsystem name
-	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// RFC3339 timestamp when the application was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	AdditionalProperties map[string]interface{}

@@ -24,9 +24,9 @@ var _ MappedNullable = &AiEvaluation{}
 // AiEvaluation A configured AI evaluation that runs against an AI application's spans.
 type AiEvaluation struct {
 	// Name of the AI application this evaluation belongs to.
-	Application *string `json:"application,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Company that owns this evaluation.
-	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	Config *EvaluationConfig `json:"config,omitempty"`
 	// RFC3339 timestamp when the evaluation was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -37,7 +37,7 @@ type AiEvaluation struct {
 	// Whether the evaluation is currently active.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
-	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	Target *EvaluationTarget `json:"target,omitempty"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`

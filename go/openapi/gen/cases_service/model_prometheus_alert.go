@@ -25,17 +25,17 @@ var _ MappedNullable = &PrometheusAlert{}
 // PrometheusAlert Data describing a single Prometheus alert within an alert group.
 type PrometheusAlert struct {
 	// Identifier of the Prometheus alerts group this alert belongs to.
-	AlertGroupId string `json:"alertGroupId" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AlertGroupId string `json:"alertGroupId" validate:"regexp=^[\\s\\S]*$"`
 	// Name of the alert (typically the `alertname` label).
-	AlertName string `json:"alertName" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AlertName string `json:"alertName" validate:"regexp=^[\\s\\S]*$"`
 	// Annotations attached to the alert.
 	Annotations map[string]string `json:"annotations"`
 	// Timestamp when the alert was first observed.
 	CreatedAt time.Time `json:"createdAt"`
 	// Prometheus alert fingerprint (stable identifier for this alert instance).
-	Fingerprint string `json:"fingerprint" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Fingerprint string `json:"fingerprint" validate:"regexp=^[\\s\\S]*$"`
 	// URL of the system that generated the alert.
-	GeneratorUrl string `json:"generatorUrl" validate:"regexp=^[\\\\s\\\\S]*$"`
+	GeneratorUrl string `json:"generatorUrl" validate:"regexp=^[\\s\\S]*$"`
 	// Labels attached to the alert.
 	Labels map[string]string `json:"labels"`
 	Priority IndicatorPriority `json:"priority"`

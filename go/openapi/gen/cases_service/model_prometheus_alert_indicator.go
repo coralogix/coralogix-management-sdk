@@ -25,18 +25,18 @@ var _ MappedNullable = &PrometheusAlertIndicator{}
 // PrometheusAlertIndicator Data describing a triggered Prometheus alert group and its constituent alerts.
 type PrometheusAlertIndicator struct {
 	// Identifier of the Prometheus alerts group.
-	AlertGroupId string `json:"alertGroupId" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AlertGroupId string `json:"alertGroupId" validate:"regexp=^[\\s\\S]*$"`
 	// Individual alerts contained in this group.
 	Alerts []PrometheusAlert `json:"alerts"`
 	// External URL of the Alertmanager instance that emitted the group.
-	ExternalUrl string `json:"externalUrl" validate:"regexp=^[\\\\s\\\\S]*$"`
+	ExternalUrl string `json:"externalUrl" validate:"regexp=^[\\s\\S]*$"`
 	// Labels used to group the alerts.
 	GroupLabels map[string]string `json:"groupLabels"`
 	Priority IndicatorPriority `json:"priority"`
 	// Timestamp when the alert group was first received.
 	ReceivedAt time.Time `json:"receivedAt"`
 	// Name of the Alertmanager receiver that handled the group.
-	Receiver string `json:"receiver" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Receiver string `json:"receiver" validate:"regexp=^[\\s\\S]*$"`
 	Status PrometheusAlertStatus `json:"status"`
 	// Timestamp when the alert group was last updated.
 	UpdatedAt time.Time `json:"updatedAt"`

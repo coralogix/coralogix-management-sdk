@@ -24,7 +24,7 @@ var _ MappedNullable = &ReplaceDashboardRequestDataStructure{}
 // ReplaceDashboardRequestDataStructure This is a request sent to update an existing dashboard with new information
 type ReplaceDashboardRequestDataStructure struct {
 	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
-	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Dashboard Dashboard `json:"dashboard"`
 	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`
