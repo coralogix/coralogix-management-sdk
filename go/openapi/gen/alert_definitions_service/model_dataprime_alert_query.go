@@ -23,7 +23,7 @@ var _ MappedNullable = &DataprimeAlertQuery{}
 // DataprimeAlertQuery A DataPrime query
 type DataprimeAlertQuery struct {
 	// The DataPrime query string
-	Query *string `json:"query,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Query *string `json:"query,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

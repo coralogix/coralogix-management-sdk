@@ -30,7 +30,7 @@ type CaseSettings struct {
 	// Unique identifier for the team configuration
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	// Human-readable name for the team configuration
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timestamp when the team configuration was last updated
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}

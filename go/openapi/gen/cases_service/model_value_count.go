@@ -25,7 +25,7 @@ type ValueCount struct {
 	// Count of cases for this value
 	Count *int64 `json:"count,omitempty"`
 	// Filter value
-	Value *string `json:"value,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

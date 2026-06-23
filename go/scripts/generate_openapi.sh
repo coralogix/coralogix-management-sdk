@@ -15,48 +15,13 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SPECS_DIR="specs"
 OUT_BASE="go/openapi/gen"
 TEMPLATE_DIR="go/openapi/templates"
 OPENAPI_TOOLS_CONFIG="openapitools.json"
 
-run_openapi_generator() {
-  if command -v openapi-generator-cli >/dev/null 2>&1; then
-    openapi-generator-cli "$@"
-    return
-  fi
-
-  if command -v openapi-generator >/dev/null 2>&1; then
-    openapi-generator "$@"
-    return
-  fi
-
-  if command -v npx >/dev/null 2>&1 && java -version >/dev/null 2>&1; then
-    npx --yes @openapitools/openapi-generator-cli "$@"
-    return
-  fi
-
-  if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-    local generator_version
-    generator_version="$(python3 - "$OPENAPI_TOOLS_CONFIG" <<'PY'
-import json
-import sys
-
-config = json.load(open(sys.argv[1]))
-print(config["generator-cli"]["version"])
-PY
-)"
-    docker run --rm \
-      -v "$PWD:/local" \
-      -w /local \
-      "openapitools/openapi-generator-cli:v${generator_version}" \
-      "$@"
-    return
-  fi
-
-  echo "openapi-generator-cli requires either a local CLI, a working Java runtime, or Docker" >&2
-  return 127
-}
+source "$SCRIPT_DIR/openapi_generator_common.sh"
 
 rm -rf "$OUT_BASE"
 
@@ -80,4 +45,6 @@ for spec in "$SPECS_DIR"/*; do
       echo "FAILED to generate for $filename"
       continue
   fi
+
+  normalize_regex_validator_tags "$outdir"
 done

@@ -23,7 +23,7 @@ var _ MappedNullable = &CompanyModelPricing{}
 // CompanyModelPricing Company-wide custom model pricing configuration.
 type CompanyModelPricing struct {
 	// Company identifier.
-	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	CompanyId *string `json:"companyId,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Unique identifier of the pricing record.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Map of model name to custom price. Replaces all existing prices on set.

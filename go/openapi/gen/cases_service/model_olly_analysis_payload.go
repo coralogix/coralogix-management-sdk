@@ -26,11 +26,11 @@ type OllyAnalysisPayload struct {
 	// Timestamp when the analysis was generated.
 	GeneratedAt *time.Time `json:"generatedAt,omitempty"`
 	// Natural-language summary of the Olly investigation.
-	InvestigationSummary *string `json:"investigationSummary,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	InvestigationSummary *string `json:"investigationSummary,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Ordered list of remediation steps, one recommendation per element.
 	RemediationRecommendations []string `json:"remediationRecommendations,omitempty"`
 	// Olly's hypothesised root cause for the case.
-	RootCause *string `json:"rootCause,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	RootCause *string `json:"rootCause,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	RootCauseConfidence *OllyAnalysisRootCauseConfidence `json:"rootCauseConfidence,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

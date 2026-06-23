@@ -24,7 +24,7 @@ var _ MappedNullable = &PrometheusAlertQuery{}
 // PrometheusAlertQuery Query backing a Prometheus alert.
 type PrometheusAlertQuery struct {
 	// PromQL expression that triggered the alert.
-	Promql string `json:"promql" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Promql string `json:"promql" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

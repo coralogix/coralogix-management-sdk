@@ -23,7 +23,7 @@ var _ MappedNullable = &AssigneeCount{}
 // AssigneeCount Count of cases for a single assignee.
 type AssigneeCount struct {
 	// Identifier of the assignee
-	Assignee *string `json:"assignee,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Assignee *string `json:"assignee,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Number of cases assigned to this assignee
 	Count *int64 `json:"count,omitempty"`
 	AdditionalProperties map[string]interface{}

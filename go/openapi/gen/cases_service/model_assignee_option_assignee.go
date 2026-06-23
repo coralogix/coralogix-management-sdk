@@ -24,7 +24,7 @@ var _ MappedNullable = &AssigneeOptionAssignee{}
 // AssigneeOptionAssignee Assignee filter option representing either a specific assignee or unassigned cases.
 type AssigneeOptionAssignee struct {
 	// User identifier of the assignee to filter by
-	Assignee string `json:"assignee" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Assignee string `json:"assignee" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

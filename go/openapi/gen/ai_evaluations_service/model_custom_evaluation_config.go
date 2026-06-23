@@ -25,15 +25,15 @@ type CustomEvaluationConfig struct {
 	// Example conversations and expected scores.
 	Examples []CustomEvaluationExample `json:"examples,omitempty"`
 	// Instructions sent to the LLM evaluator.
-	Instructions *string `json:"instructions,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Instructions *string `json:"instructions,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Policy type identifier.
-	PolicyType *string `json:"policyType,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	PolicyType *string `json:"policyType,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	// Description of what counts as safe.
-	Safe *string `json:"safe,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Safe *string `json:"safe,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether to include the system prompt in the LLM input.
 	ShouldIncludeSystemPrompt *bool `json:"shouldIncludeSystemPrompt,omitempty"`
 	// Description of what counts as violating the policy.
-	Violates *string `json:"violates,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Violates *string `json:"violates,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

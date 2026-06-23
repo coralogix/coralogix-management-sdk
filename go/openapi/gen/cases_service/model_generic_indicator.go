@@ -27,7 +27,7 @@ type GenericIndicator struct {
 	// URLs to the originating entities in the external system.
 	EntityLinks []EntityLink `json:"entityLinks,omitempty"`
 	// Opaque reference to the originating entity in the external system.
-	ExternalId string `json:"externalId" validate:"regexp=^[\\\\s\\\\S]*$"`
+	ExternalId string `json:"externalId" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier of this generic indicator.
 	Id string `json:"id" validate:"regexp=^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"`
 	IndicatorType GenericIndicatorType `json:"indicatorType"`

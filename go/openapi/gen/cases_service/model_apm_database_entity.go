@@ -23,9 +23,9 @@ var _ MappedNullable = &ApmDatabaseEntity{}
 // ApmDatabaseEntity Application Performance Monitoring database identified as impacted by a case.
 type ApmDatabaseEntity struct {
 	// Name of the impacted database
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Database system (e.g., postgresql, mysql)
-	System *string `json:"system,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	System *string `json:"system,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

@@ -23,12 +23,12 @@ var _ MappedNullable = &AiEvaluationsServiceUpdateAiEvaluationRequest{}
 // AiEvaluationsServiceUpdateAiEvaluationRequest Request to update an existing AI evaluation.
 type AiEvaluationsServiceUpdateAiEvaluationRequest struct {
 	// Name of the AI application this evaluation belongs to.
-	Application *string `json:"application,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	Config *EvaluationConfig `json:"config,omitempty"`
 	// Whether the evaluation is active.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
-	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\\\s\\\\S]+$"`
+	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
 	Target *EvaluationTarget `json:"target,omitempty"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`

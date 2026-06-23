@@ -24,7 +24,7 @@ var _ MappedNullable = &GetDashboardResponse{}
 // GetDashboardResponse This is a response containing the requested dashboard
 type GetDashboardResponse struct {
 	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
-	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The author id.
 	AuthorId *string `json:"authorId,omitempty"`
 	// The author name.

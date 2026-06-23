@@ -24,7 +24,7 @@ var _ MappedNullable = &FilterGroup{}
 // FilterGroup A filter group containing a key and its possible values.
 type FilterGroup struct {
 	// Key of the filter group (e.g., service, environment)
-	Key string `json:"key" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Key string `json:"key" validate:"regexp=^[\\s\\S]*$"`
 	// Values associated with the filter group key
 	Values []string `json:"values"`
 	AdditionalProperties map[string]interface{}

@@ -23,7 +23,7 @@ var _ MappedNullable = &PrometheusAlertManagerActor{}
 // PrometheusAlertManagerActor Information about the Prometheus Alert Manager instance that initiated the action.
 type PrometheusAlertManagerActor struct {
 	// Prometheus Alert Manager receiver name
-	ReceiverName *string `json:"receiverName,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	ReceiverName *string `json:"receiverName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

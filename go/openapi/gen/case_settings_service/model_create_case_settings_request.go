@@ -26,7 +26,7 @@ type CreateCaseSettingsRequest struct {
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
 	GlobalIndicatorSettings GlobalIndicatorSettings `json:"globalIndicatorSettings"`
 	// Optional display name for the case settings team configuration
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

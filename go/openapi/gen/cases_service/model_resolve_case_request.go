@@ -23,7 +23,7 @@ var _ MappedNullable = &ResolveCaseRequest{}
 // ResolveCaseRequest Request to mark a case as resolved.
 type ResolveCaseRequest struct {
 	// Reason to resolve
-	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Reason *string `json:"reason,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

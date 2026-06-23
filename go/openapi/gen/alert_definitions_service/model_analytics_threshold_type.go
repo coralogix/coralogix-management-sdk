@@ -30,7 +30,7 @@ type AnalyticsThresholdType struct {
 	// The per-priority threshold rules
 	Rules []AnalyticsThresholdRule `json:"rules,omitempty"`
 	// The name of the numeric result column to compare
-	TargetColumn *string `json:"targetColumn,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	TargetColumn *string `json:"targetColumn,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`
 	// Whether each result row is treated as a separate permutation. Defaults to true for threshold alerts as permutation count is easier to estimate.

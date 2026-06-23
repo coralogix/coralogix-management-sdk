@@ -23,7 +23,7 @@ var _ MappedNullable = &CustomEvaluationExample{}
 // CustomEvaluationExample A single labeled example for a custom evaluation.
 type CustomEvaluationExample struct {
 	// Example conversation text.
-	Conversation *string `json:"conversation,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Conversation *string `json:"conversation,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Expected score for this example.
 	Score *string `json:"score,omitempty" validate:"regexp=^[0-9]+$"`
 	AdditionalProperties map[string]interface{}

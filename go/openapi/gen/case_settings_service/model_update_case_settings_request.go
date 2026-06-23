@@ -25,7 +25,7 @@ type UpdateCaseSettingsRequest struct {
 	CaseLifecycle *CaseLifecycle `json:"caseLifecycle,omitempty"`
 	GlobalIndicatorSettings *GlobalIndicatorSettings `json:"globalIndicatorSettings,omitempty"`
 	// New display name for the case settings team configuration
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

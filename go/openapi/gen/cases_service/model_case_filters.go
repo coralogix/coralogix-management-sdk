@@ -44,7 +44,7 @@ type CaseFilters struct {
 	// List of case statuses to filter on
 	Statuses []CaseStatus `json:"statuses,omitempty"`
 	// Test search query applied to case titles
-	TextSearch *string `json:"textSearch,omitempty" validate:"regexp=^[\\\\s\\\\S]*$"`
+	TextSearch *string `json:"textSearch,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 
