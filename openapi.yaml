@@ -24867,6 +24867,50 @@ components:
       description: Daily.
       externalDocs:
         url: ''
+    DailyTotals:
+      oneOf:
+        - $ref: '#/components/schemas/DailyTotalsMetric'
+        - $ref: '#/components/schemas/DailyTotalsService'
+    DailyTotalsMetric:
+      required:
+        - metric
+      type: object
+      properties:
+        bytesVolume:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
+        cardinality:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
+        metric:
+          $ref: '#/components/schemas/MetricDailyExtra'
+        unitUsage:
+          type: number
+          format: float
+    DailyTotalsService:
+      required:
+        - service
+      type: object
+      properties:
+        bytesVolume:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
+        cardinality:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
+        service:
+          $ref: '#/components/schemas/ServiceDailyExtra'
+        unitUsage:
+          type: number
+          format: float
     Dashboard:
       oneOf:
         - $ref: '#/components/schemas/DashboardFifteenMinutesAbsoluteTimeFrame'
@@ -31557,6 +31601,17 @@ components:
           $ref: '#/components/schemas/LogRules'
         subsystemRule:
           $ref: '#/components/schemas/quota.v1.Rule'
+        timeBucketMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: >-
+            Optional bucket size, in milliseconds, used to split the forecast
+            into time buckets. When set, the response includes a per-bucket
+            breakdown in usage_buckets; when omitted, only the total estimated
+            bytes are returned.
+          example: '3600000'
       description: >-
         Request to forecast the usage in bytes of a draft TCO policy, based on
         the bytes matched by its filter rules over a given time window.
@@ -31576,6 +31631,17 @@ components:
           $ref: '#/components/schemas/LogRules'
         subsystemRule:
           $ref: '#/components/schemas/quota.v1.Rule'
+        timeBucketMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: >-
+            Optional bucket size, in milliseconds, used to split the forecast
+            into time buckets. When set, the response includes a per-bucket
+            breakdown in usage_buckets; when omitted, only the total estimated
+            bytes are returned.
+          example: '3600000'
         week:
           $ref: '#/components/schemas/Week'
       description: >-
@@ -31599,6 +31665,17 @@ components:
           $ref: '#/components/schemas/SpanRules'
         subsystemRule:
           $ref: '#/components/schemas/quota.v1.Rule'
+        timeBucketMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: >-
+            Optional bucket size, in milliseconds, used to split the forecast
+            into time buckets. When set, the response includes a per-bucket
+            breakdown in usage_buckets; when omitted, only the total estimated
+            bytes are returned.
+          example: '3600000'
       description: >-
         Request to forecast the usage in bytes of a draft TCO policy, based on
         the bytes matched by its filter rules over a given time window.
@@ -31618,6 +31695,17 @@ components:
           $ref: '#/components/schemas/SpanRules'
         subsystemRule:
           $ref: '#/components/schemas/quota.v1.Rule'
+        timeBucketMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: >-
+            Optional bucket size, in milliseconds, used to split the forecast
+            into time buckets. When set, the response includes a per-bucket
+            breakdown in usage_buckets; when omitted, only the total estimated
+            bytes are returned.
+          example: '3600000'
         week:
           $ref: '#/components/schemas/Week'
       description: >-
@@ -31641,6 +31729,15 @@ components:
             Estimated number of bytes the draft policy would match over the
             requested time window.
           example: '13251739648'
+        usageBuckets:
+          maxItems: 10080
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageBucket'
+          description: >-
+            Per-bucket breakdown of matched bytes over the requested time
+            window. Empty unless time_bucket_ms was set on the request.
       description: >-
         Forecasted usage in bytes for a draft TCO policy, based on bytes matched
         over a given time window.
@@ -34732,6 +34829,8 @@ components:
       properties:
         common:
           $ref: '#/components/schemas/CommonRequestFields'
+        endDate:
+          $ref: '#/components/schemas/Date'
         entityType:
           $ref: '#/components/schemas/metric_usage_service.EntityType'
         filters:
@@ -34744,8 +34843,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PillarType'
+        length:
+          minimum: 0
+          type: integer
+          format: int64
+        orderBy:
+          $ref: '#/components/schemas/metric_usage_service.OrderBy'
+        ordering:
+          $ref: '#/components/schemas/metric_usage_service.Ordering'
         skipTotals:
           type: boolean
+        startDate:
+          $ref: '#/components/schemas/Date'
+        startOffset:
+          minimum: 0
+          type: integer
+          format: int64
     GetMetricEntityUsagesResponse:
       type: object
       properties:
@@ -43334,6 +43447,11 @@ components:
     MetricDailyExtra:
       type: object
       properties:
+        sampleCount:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
         totalDailySampleCount:
           maxLength: 20
           minLength: 1
@@ -51430,6 +51548,11 @@ components:
     ServiceDailyExtra:
       type: object
       properties:
+        sampleCount:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
         totalDailySampleCount:
           maxLength: 20
           minLength: 1
@@ -57279,6 +57402,32 @@ components:
         on a log.
       externalDocs:
         url: ''
+    UsageBucket:
+      title: Usage Bucket
+      required:
+        - bucketStartMs
+        - bytes
+      type: object
+      properties:
+        bucketStartMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: >-
+            Start of the bucket window, in epoch milliseconds (the rounded-down
+            bucket timestamp).
+          example: '1728763200000'
+        bytes:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: Number of bytes the draft policy would match within this bucket.
+          example: '552155648'
+      description: Bytes matched within a single time bucket of the forecast window.
+      externalDocs:
+        url: ''
     UsageCalendarDateRange:
       required:
         - start
@@ -57412,6 +57561,8 @@ components:
         - metricDaily
       type: object
       properties:
+        date:
+          $ref: '#/components/schemas/Date'
         metricDaily:
           $ref: '#/components/schemas/MetricDailyExtra'
         outputSetStats:
@@ -57423,11 +57574,15 @@ components:
             $ref: '#/components/schemas/UsageRecord'
         totalDailyUsage:
           $ref: '#/components/schemas/CommonDailyUsageFields'
+        totals:
+          $ref: '#/components/schemas/DailyTotals'
     UsageDayServiceDaily:
       required:
         - serviceDaily
       type: object
       properties:
+        date:
+          $ref: '#/components/schemas/Date'
         outputSetStats:
           $ref: '#/components/schemas/OutputSetStats'
         records:
@@ -57439,6 +57594,8 @@ components:
           $ref: '#/components/schemas/ServiceDailyExtra'
         totalDailyUsage:
           $ref: '#/components/schemas/CommonDailyUsageFields'
+        totals:
+          $ref: '#/components/schemas/DailyTotals'
     UsageEntry:
       type: object
       properties:

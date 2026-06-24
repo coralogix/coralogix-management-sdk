@@ -1214,6 +1214,15 @@ components:
           $ref: "#/components/schemas/LogRules"
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
+        timeBucketMs:
+          description: "Optional bucket size, in milliseconds, used to split the forecast\
+            \ into time buckets. When set, the response includes a per-bucket breakdown\
+            \ in usage_buckets; when omitted, only the total estimated bytes are returned."
+          example: "3600000"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
       required:
       - day
       - logRules
@@ -1232,6 +1241,15 @@ components:
           $ref: "#/components/schemas/LogRules"
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
+        timeBucketMs:
+          description: "Optional bucket size, in milliseconds, used to split the forecast\
+            \ into time buckets. When set, the response includes a per-bucket breakdown\
+            \ in usage_buckets; when omitted, only the total estimated bytes are returned."
+          example: "3600000"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
         week:
           additionalProperties: false
           description: Marker selecting a one-week forecast window.
@@ -1264,6 +1282,15 @@ components:
           $ref: "#/components/schemas/SpanRules"
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
+        timeBucketMs:
+          description: "Optional bucket size, in milliseconds, used to split the forecast\
+            \ into time buckets. When set, the response includes a per-bucket breakdown\
+            \ in usage_buckets; when omitted, only the total estimated bytes are returned."
+          example: "3600000"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
       required:
       - day
       - spanRules
@@ -1282,6 +1309,15 @@ components:
           $ref: "#/components/schemas/SpanRules"
         subsystemRule:
           $ref: "#/components/schemas/quota.v1.Rule"
+        timeBucketMs:
+          description: "Optional bucket size, in milliseconds, used to split the forecast\
+            \ into time buckets. When set, the response includes a per-bucket breakdown\
+            \ in usage_buckets; when omitted, only the total estimated bytes are returned."
+          example: "3600000"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
         week:
           additionalProperties: false
           description: Marker selecting a one-week forecast window.
@@ -1299,6 +1335,17 @@ components:
         \ matched over a given time window."
       example:
         estimatedBytes: "13251739648"
+        usageBuckets:
+        - bucketStartMs: "1728763200000"
+          bytes: "552155648"
+        - bucketStartMs: "1728763200000"
+          bytes: "552155648"
+        - bucketStartMs: "1728763200000"
+          bytes: "552155648"
+        - bucketStartMs: "1728763200000"
+          bytes: "552155648"
+        - bucketStartMs: "1728763200000"
+          bytes: "552155648"
       externalDocs:
         description: Find out more about quota management.
         url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
@@ -1311,6 +1358,14 @@ components:
           minLength: 1
           pattern: "^-?[0-9]+$"
           type: string
+        usageBuckets:
+          description: Per-bucket breakdown of matched bytes over the requested time
+            window. Empty unless time_bucket_ms was set on the request.
+          items:
+            $ref: "#/components/schemas/UsageBucket"
+          maxItems: 10080
+          minItems: 0
+          type: array
       required:
       - estimatedBytes
       title: Forecast Policy Usage Response
@@ -2346,6 +2401,34 @@ components:
       required:
       - policy
       title: Update Policy Response
+      type: object
+    UsageBucket:
+      description: Bytes matched within a single time bucket of the forecast window.
+      example:
+        bucketStartMs: "1728763200000"
+        bytes: "552155648"
+      externalDocs:
+        url: ""
+      properties:
+        bucketStartMs:
+          description: "Start of the bucket window, in epoch milliseconds (the rounded-down\
+            \ bucket timestamp)."
+          example: "1728763200000"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
+        bytes:
+          description: Number of bytes the draft policy would match within this bucket.
+          example: "552155648"
+          maxLength: 20
+          minLength: 1
+          pattern: "^-?[0-9]+$"
+          type: string
+      required:
+      - bucketStartMs
+      - bytes
+      title: Usage Bucket
       type: object
     UsageTier:
       example:

@@ -67,6 +67,7 @@ model_test_policies_result.go
 model_update_policy_request_log_rules.go
 model_update_policy_request_span_rules.go
 model_update_policy_response.go
+model_usage_bucket.go
 model_usage_tier.go
 model_v1_source_type.go
 model_v1_target.go

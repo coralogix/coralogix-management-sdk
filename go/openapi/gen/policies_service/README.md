@@ -154,6 +154,7 @@ Class | Method | HTTP request | Description
  - [UpdatePolicyRequestLogRules](docs/UpdatePolicyRequestLogRules.md)
  - [UpdatePolicyRequestSpanRules](docs/UpdatePolicyRequestSpanRules.md)
  - [UpdatePolicyResponse](docs/UpdatePolicyResponse.md)
+ - [UsageBucket](docs/UsageBucket.md)
  - [UsageTier](docs/UsageTier.md)
  - [V1SourceType](docs/V1SourceType.md)
  - [V1Target](docs/V1Target.md)

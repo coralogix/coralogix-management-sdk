@@ -26,6 +26,8 @@ type ForecastPolicyUsageRequestSpanRulesWeek struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	SpanRules SpanRules `json:"spanRules"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
+	// Optional bucket size, in milliseconds, used to split the forecast into time buckets. When set, the response includes a per-bucket breakdown in usage_buckets; when omitted, only the total estimated bytes are returned.
+	TimeBucketMs *string `json:"timeBucketMs,omitempty" validate:"regexp=^-?[0-9]+$"`
 	// Marker selecting a one-week forecast window.
 	Week map[string]interface{} `json:"week"`
 	AdditionalProperties map[string]interface{}
@@ -140,6 +142,38 @@ func (o *ForecastPolicyUsageRequestSpanRulesWeek) SetSubsystemRule(v QuotaV1Rule
 	o.SubsystemRule = &v
 }
 
+// GetTimeBucketMs returns the TimeBucketMs field value if set, zero value otherwise.
+func (o *ForecastPolicyUsageRequestSpanRulesWeek) GetTimeBucketMs() string {
+	if o == nil || IsNil(o.TimeBucketMs) {
+		var ret string
+		return ret
+	}
+	return *o.TimeBucketMs
+}
+
+// GetTimeBucketMsOk returns a tuple with the TimeBucketMs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastPolicyUsageRequestSpanRulesWeek) GetTimeBucketMsOk() (*string, bool) {
+	if o == nil || IsNil(o.TimeBucketMs) {
+		return nil, false
+	}
+	return o.TimeBucketMs, true
+}
+
+// HasTimeBucketMs returns a boolean if a field has been set.
+func (o *ForecastPolicyUsageRequestSpanRulesWeek) HasTimeBucketMs() bool {
+	if o != nil && !IsNil(o.TimeBucketMs) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimeBucketMs gets a reference to the given string and assigns it to the TimeBucketMs field.
+func (o *ForecastPolicyUsageRequestSpanRulesWeek) SetTimeBucketMs(v string) {
+	o.TimeBucketMs = &v
+}
+
 // GetWeek returns the Week field value
 func (o *ForecastPolicyUsageRequestSpanRulesWeek) GetWeek() map[string]interface{} {
 	if o == nil {
@@ -180,6 +214,9 @@ func (o ForecastPolicyUsageRequestSpanRulesWeek) ToMap() (map[string]interface{}
 	toSerialize["spanRules"] = o.SpanRules
 	if !IsNil(o.SubsystemRule) {
 		toSerialize["subsystemRule"] = o.SubsystemRule
+	}
+	if !IsNil(o.TimeBucketMs) {
+		toSerialize["timeBucketMs"] = o.TimeBucketMs
 	}
 	toSerialize["week"] = o.Week
 
@@ -230,6 +267,7 @@ func (o *ForecastPolicyUsageRequestSpanRulesWeek) UnmarshalJSON(data []byte) (er
 		delete(additionalProperties, "applicationRule")
 		delete(additionalProperties, "spanRules")
 		delete(additionalProperties, "subsystemRule")
+		delete(additionalProperties, "timeBucketMs")
 		delete(additionalProperties, "week")
 		o.AdditionalProperties = additionalProperties
 	}

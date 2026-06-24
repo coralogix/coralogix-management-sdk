@@ -25,6 +25,8 @@ var _ MappedNullable = &ForecastPolicyUsageResponse{}
 type ForecastPolicyUsageResponse struct {
 	// Estimated number of bytes the draft policy would match over the requested time window.
 	EstimatedBytes string `json:"estimatedBytes" validate:"regexp=^-?[0-9]+$"`
+	// Per-bucket breakdown of matched bytes over the requested time window. Empty unless time_bucket_ms was set on the request.
+	UsageBuckets []UsageBucket `json:"usageBuckets,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -72,6 +74,38 @@ func (o *ForecastPolicyUsageResponse) SetEstimatedBytes(v string) {
 	o.EstimatedBytes = v
 }
 
+// GetUsageBuckets returns the UsageBuckets field value if set, zero value otherwise.
+func (o *ForecastPolicyUsageResponse) GetUsageBuckets() []UsageBucket {
+	if o == nil || IsNil(o.UsageBuckets) {
+		var ret []UsageBucket
+		return ret
+	}
+	return o.UsageBuckets
+}
+
+// GetUsageBucketsOk returns a tuple with the UsageBuckets field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ForecastPolicyUsageResponse) GetUsageBucketsOk() ([]UsageBucket, bool) {
+	if o == nil || IsNil(o.UsageBuckets) {
+		return nil, false
+	}
+	return o.UsageBuckets, true
+}
+
+// HasUsageBuckets returns a boolean if a field has been set.
+func (o *ForecastPolicyUsageResponse) HasUsageBuckets() bool {
+	if o != nil && !IsNil(o.UsageBuckets) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsageBuckets gets a reference to the given []UsageBucket and assigns it to the UsageBuckets field.
+func (o *ForecastPolicyUsageResponse) SetUsageBuckets(v []UsageBucket) {
+	o.UsageBuckets = v
+}
+
 func (o ForecastPolicyUsageResponse) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -83,6 +117,9 @@ func (o ForecastPolicyUsageResponse) MarshalJSON() ([]byte, error) {
 func (o ForecastPolicyUsageResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["estimatedBytes"] = o.EstimatedBytes
+	if !IsNil(o.UsageBuckets) {
+		toSerialize["usageBuckets"] = o.UsageBuckets
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -128,6 +165,7 @@ func (o *ForecastPolicyUsageResponse) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "estimatedBytes")
+		delete(additionalProperties, "usageBuckets")
 		o.AdditionalProperties = additionalProperties
 	}
 
