@@ -218,11 +218,20 @@ func URLFromRegion(region string) (string, bool) {
 }
 
 // URLFromDomain returns the Coralogix OpenAPI URL for the given custom domain.
+//
+// The OpenAPI host is derived from the base Coralogix domain by prefixing it
+// with "api.", consistent with URLFromRegion (e.g. domain "eu2.coralogix.com"
+// resolves to "api.eu2.coralogix.com"). A domain that already carries the
+// "api." prefix is accepted as-is for backward compatibility.
 func URLFromDomain(domain string) string {
+	host := domain
+	if !strings.HasPrefix(host, "api.") {
+		host = "api." + host
+	}
 	url := gourl.URL{
 		Scheme: "https",
 		Path:   "mgmt/openapi/5",
-		Host:   domain,
+		Host:   host,
 	}
 	return url.String()
 }
