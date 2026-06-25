@@ -370,8 +370,27 @@ func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 	case "ap3":
 		return GrpcAP3
 	default:
-		return fmt.Sprintf("ng-api-grpc.%s:443", regionIdentifier)
+		return CoralogixGrpcEndpointFromDomain(regionIdentifier)
 	}
+}
+
+// normalizeCoralogixDomain reduces a Coralogix domain to its base form by
+// stripping a leading "api." label. The OpenAPI/REST client identifies a
+// tenant by its API host (e.g. "api.eu2.coralogix.com"), whereas the gRPC and
+// ng-api REST endpoints are derived by prefixing the base domain
+// (e.g. "eu2.coralogix.com") with "ng-api-grpc." / "ng-api-http.". Normalizing
+// here lets callers pass either form interchangeably and still reach the
+// correct host for every protocol.
+func normalizeCoralogixDomain(domain string) string {
+	return strings.TrimPrefix(domain, "api.")
+}
+
+// CoralogixGrpcEndpointFromDomain returns the gRPC endpoint for a custom
+// Coralogix domain (e.g. "eu2.coralogix.com" or "mycompany.coralogix.com").
+// A leading "api." is tolerated so the same domain value used to configure the
+// OpenAPI/REST client also yields the correct gRPC host.
+func CoralogixGrpcEndpointFromDomain(domain string) string {
+	return fmt.Sprintf("ng-api-grpc.%s:443", normalizeCoralogixDomain(domain))
 }
 
 // CoralogixRestEndpointFromRegion reads the Coralogix REST endpoint from environment variables.
@@ -394,8 +413,16 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 	case "ap3":
 		return RestAP3
 	default:
-		return fmt.Sprintf("https://ng-api-http.%s", regionIdentifier)
+		return CoralogixRestEndpointFromDomain(regionIdentifier)
 	}
+}
+
+// CoralogixRestEndpointFromDomain returns the ng-api REST endpoint for a custom
+// Coralogix domain (e.g. "eu2.coralogix.com" or "mycompany.coralogix.com").
+// A leading "api." is tolerated so the same domain value used to configure the
+// OpenAPI client also yields the correct REST host.
+func CoralogixRestEndpointFromDomain(domain string) string {
+	return fmt.Sprintf("https://ng-api-http.%s", normalizeCoralogixDomain(domain))
 }
 
 // AuthContext is a struct that holds the API keys for the Coralogix SDK.
