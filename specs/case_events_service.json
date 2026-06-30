@@ -78,25 +78,41 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "401": {
             "description": "Unauthorized request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "403": {
             "description": "Forbidden",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "500": {
             "description": "Internal server error",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         },
@@ -147,25 +163,41 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "401": {
             "description": "Unauthorized request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "403": {
             "description": "Forbidden",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "500": {
             "description": "Internal server error",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         },
@@ -216,31 +248,51 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "401": {
             "description": "Unauthorized request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "403": {
             "description": "Forbidden",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "404": {
             "description": "Case not found",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "500": {
             "description": "Internal server error",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         },
@@ -289,31 +341,51 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "401": {
             "description": "Unauthorized request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "403": {
             "description": "Forbidden",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "404": {
             "description": "Event not found",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "500": {
             "description": "Internal server error",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         },
@@ -393,31 +465,51 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "401": {
             "description": "Unauthorized request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "403": {
             "description": "Forbidden",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "404": {
             "description": "Event not found",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "500": {
             "description": "Internal server error",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         },
@@ -464,31 +556,51 @@
           "400": {
             "description": "Bad Request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "401": {
             "description": "Unauthorized request",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "403": {
             "description": "Forbidden",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "404": {
             "description": "Event not found",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           },
           "500": {
             "description": "Internal server error",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
         },
@@ -1023,10 +1135,33 @@
         "type": "object",
         "additionalProperties": false
       },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
       "EventActor": {
         "oneOf": [
           {
             "$ref": "#/components/schemas/EventActorApiKey"
+          },
+          {
+            "$ref": "#/components/schemas/EventActorMicrosoftTeams"
           },
           {
             "$ref": "#/components/schemas/EventActorPagerDuty"
@@ -1062,6 +1197,22 @@
         },
         "required": [
           "apiKey"
+        ]
+      },
+      "EventActorMicrosoftTeams": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Event actor",
+        "description": "Actor that initiated the event.",
+        "type": "object",
+        "properties": {
+          "microsoftTeams": {
+            "$ref": "#/components/schemas/MicrosoftTeamsActor"
+          }
+        },
+        "required": [
+          "microsoftTeams"
         ]
       },
       "EventActorPagerDuty": {
@@ -1341,6 +1492,48 @@
           "logTimestamp",
           "logContent"
         ]
+      },
+      "MicrosoftTeamsActor": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Microsoft Teams actor",
+        "description": "Information about the Microsoft Teams user who initiated the action.",
+        "type": "object",
+        "properties": {
+          "coralogixUserId": {
+            "example": "3af152ee-9eaf-4803-87f1-23c5fb2fbaa0",
+            "description": "If the Microsoft Teams user is linked to a Coralogix user, this field contains the Coralogix user ID.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "displayName": {
+            "example": "John Doe",
+            "description": "Microsoft Teams display name",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "teamsUserId": {
+            "example": "29:1abc123def456",
+            "description": "Microsoft Teams user ID",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "userEmail": {
+            "example": "john.doe@example.com",
+            "description": "Email of the Microsoft Teams user",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
       },
       "MultipleValues": {
         "type": "object",

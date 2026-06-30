@@ -24,6 +24,7 @@ model_dimension_pillar.go
 model_dimension_priority.go
 model_dimension_severity.go
 model_dimension_tier.go
+model_error.go
 model_evaluation.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go

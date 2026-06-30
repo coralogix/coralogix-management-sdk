@@ -209,6 +209,7 @@ Class | Method | HTTP request | Description
  - [EqualsSelectionAll](docs/EqualsSelectionAll.md)
  - [EqualsSelectionList](docs/EqualsSelectionList.md)
  - [EqualsSelectionListSelection](docs/EqualsSelectionListSelection.md)
+ - [Error](docs/Error.md)
  - [EventRecurrenceSource](docs/EventRecurrenceSource.md)
  - [EventRecurrenceSourceStrategy](docs/EventRecurrenceSourceStrategy.md)
  - [EventRecurrenceSourceStrategyDuration](docs/EventRecurrenceSourceStrategyDuration.md)

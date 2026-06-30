@@ -23,11 +23,11 @@ var _ MappedNullable = &RoutingLabels{}
 // RoutingLabels Allows to configure routing labels which are used for routers resolution
 type RoutingLabels struct {
 	// The environment.
-	Environment *string `json:"environment,omitempty"`
+	Environment *string `json:"environment,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Service name.
-	Service *string `json:"service,omitempty"`
+	Service *string `json:"service,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Team.
-	Team *string `json:"team,omitempty"`
+	Team *string `json:"team,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

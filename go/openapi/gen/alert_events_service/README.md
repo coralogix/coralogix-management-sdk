@@ -93,6 +93,7 @@ Class | Method | HTTP request | Description
  - [AlertEventServiceGetAlertEventsStatsOrderBysParameterInner](docs/AlertEventServiceGetAlertEventsStatsOrderBysParameterInner.md)
  - [AlertStatus](docs/AlertStatus.md)
  - [AlertsV3PaginationResponse](docs/AlertsV3PaginationResponse.md)
+ - [Error](docs/Error.md)
  - [EventStats](docs/EventStats.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)

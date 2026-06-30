@@ -23,6 +23,7 @@ paths:
             description: The unique identifiers of the presets to retrieve.
             minLength: 0
             type: string
+          maxItems: 600
           minItems: 0
           type: array
         style: form
@@ -50,7 +51,9 @@ paths:
         required: true
         schema:
           description: Unique identifier.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -77,7 +80,9 @@ paths:
         required: true
         schema:
           description: The unique identifier of the custom preset to set as default.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -137,7 +142,9 @@ paths:
         required: true
         schema:
           description: The unique identifier of the preset to retrieve.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -164,7 +171,9 @@ paths:
         required: true
         schema:
           description: The unique identifier of the preset to set as default.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -310,6 +319,9 @@ components:
         notFoundIds:
         - notFoundIds
         - notFoundIds
+        - notFoundIds
+        - notFoundIds
+        - notFoundIds
         presets:
           key:
             connectorType: CONNECTOR_TYPE_UNSPECIFIED
@@ -320,11 +332,68 @@ components:
                   fieldName: title
                 - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                   fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
               payloadType: payloadType
               conditionType:
                 matchEntityType: "{}"
             - messageConfig:
                 fields:
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+              payloadType: payloadType
+              conditionType:
+                matchEntityType: "{}"
+            - messageConfig:
+                fields:
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+              payloadType: payloadType
+              conditionType:
+                matchEntityType: "{}"
+            - messageConfig:
+                fields:
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+              payloadType: payloadType
+              conditionType:
+                matchEntityType: "{}"
+            - messageConfig:
+                fields:
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
+                - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                  fieldName: title
                 - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                   fieldName: title
                 - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
@@ -352,6 +421,7 @@ components:
             description: The not found ids.
             minLength: 0
             type: string
+          maxItems: 600
           minItems: 0
           type: array
         presets:
@@ -369,6 +439,12 @@ components:
             fieldName: title
           - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
             fieldName: title
+          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+            fieldName: title
+          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+            fieldName: title
+          - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+            fieldName: title
         payloadType: payloadType
         conditionType:
           matchEntityType: "{}"
@@ -378,8 +454,10 @@ components:
         messageConfig:
           $ref: "#/components/schemas/MessageConfig"
         payloadType:
-          description: Type of the payload.
-          minLength: 0
+          description: Connector payload schema type.
+          maxLength: 100
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
       type: object
     CreateCustomPresetResponse:
@@ -394,11 +472,68 @@ components:
                 fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                 fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
             payloadType: payloadType
             conditionType:
               matchEntityType: "{}"
           - messageConfig:
               fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                 fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
@@ -518,11 +653,68 @@ components:
                 fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                 fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
             payloadType: payloadType
             conditionType:
               matchEntityType: "{}"
           - messageConfig:
               fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                 fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
@@ -594,6 +786,39 @@ components:
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           presetType: PRESET_TYPE_UNSPECIFIED
           parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
+        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Preset
+          description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          presetType: PRESET_TYPE_UNSPECIFIED
+          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
+        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Preset
+          description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          presetType: PRESET_TYPE_UNSPECIFIED
+          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
+        - connectorType: CONNECTOR_TYPE_UNSPECIFIED
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Preset
+          description: Custom preset for alerts
+          attachmentConfig:
+            policy: AUTO
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          presetType: PRESET_TYPE_UNSPECIFIED
+          parentId: c246e826-10c2-405e-8d3f-afcc24ad4d15
       externalDocs:
         url: ""
       properties:
@@ -601,6 +826,7 @@ components:
           description: The preset summaries.
           items:
             $ref: "#/components/schemas/PresetSummary"
+          maxItems: 600
           minItems: 0
           type: array
       type: object
@@ -611,7 +837,9 @@ components:
       properties:
         entitySubType:
           description: The entity sub type.
-          minLength: 0
+          maxLength: 100
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
       type: object
     MatchEntityTypeCondition:
@@ -628,6 +856,12 @@ components:
           fieldName: title
         - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
           fieldName: title
+        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          fieldName: title
+        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          fieldName: title
+        - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          fieldName: title
       externalDocs:
         url: ""
       properties:
@@ -635,6 +869,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.MessageConfigField"
+          maxItems: 100
           minItems: 0
           type: array
       type: object
@@ -686,11 +921,68 @@ components:
               fieldName: title
             - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
               fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
           payloadType: payloadType
           conditionType:
             matchEntityType: "{}"
         - messageConfig:
             fields:
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+          payloadType: payloadType
+          conditionType:
+            matchEntityType: "{}"
+        - messageConfig:
+            fields:
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+          payloadType: payloadType
+          conditionType:
+            matchEntityType: "{}"
+        - messageConfig:
+            fields:
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+          payloadType: payloadType
+          conditionType:
+            matchEntityType: "{}"
+        - messageConfig:
+            fields:
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
+            - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+              fieldName: title
             - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
               fieldName: title
             - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
@@ -718,6 +1010,7 @@ components:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/ConfigOverrides"
+          maxItems: 100
           minItems: 0
           type: array
         connectorType:
@@ -730,24 +1023,32 @@ components:
         description:
           description: Human-readable description.
           example: Custom preset for alerts
+          maxLength: 5000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         name:
           description: Display name.
           example: My Preset
-          minLength: 0
+          maxLength: 200
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         parentId:
           description: The parent id.
           example: preset_system_slack_alerts_basic
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         presetType:
           $ref: "#/components/schemas/PresetType"
@@ -790,24 +1091,30 @@ components:
           example: Custom preset for alerts
           maxLength: 5000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         name:
           description: Display name.
           example: My Preset
           maxLength: 200
-          minLength: 0
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         parentId:
           description: The parent id.
           example: c246e826-10c2-405e-8d3f-afcc24ad4d15
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         presetType:
           $ref: "#/components/schemas/PresetType"
@@ -837,11 +1144,68 @@ components:
                 fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                 fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
             payloadType: payloadType
             conditionType:
               matchEntityType: "{}"
           - messageConfig:
               fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+            payloadType: payloadType
+            conditionType:
+              matchEntityType: "{}"
+          - messageConfig:
+              fields:
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
+              - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+                fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
                 fieldName: title
               - template: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
@@ -922,12 +1286,16 @@ components:
         fieldName:
           description: The field name.
           example: title
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         template:
           description: The template.
           example: "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}"
+          maxLength: 20000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
       title: Message Config Field
       type: object

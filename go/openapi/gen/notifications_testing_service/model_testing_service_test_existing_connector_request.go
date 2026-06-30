@@ -23,9 +23,9 @@ var _ MappedNullable = &TestingServiceTestExistingConnectorRequest{}
 // TestingServiceTestExistingConnectorRequest Request for sending a test notification.
 type TestingServiceTestExistingConnectorRequest struct {
 	// The connector id.
-	ConnectorId *string `json:"connectorId,omitempty"`
+	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Payload type to use when testing the connector.
-	PayloadType *string `json:"payloadType,omitempty"`
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

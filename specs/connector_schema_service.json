@@ -57,7 +57,8 @@
             "items": {
               "$ref": "#/components/schemas/ConnectorConfigSchemaField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -76,22 +77,29 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "default": {
             "description": "The default.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"
@@ -118,7 +126,8 @@
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchema"
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 100
           },
           "supportedPayloadTypes": {
             "description": "The supported payload types.",
@@ -128,7 +137,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 1,
+            "maxItems": 100
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -250,12 +260,15 @@
             "items": {
               "$ref": "#/components/schemas/MessageConfigSchemaField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "payloadType": {
             "description": "Type of the payload.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -268,19 +281,26 @@
             "items": {
               "description": "The allowed values.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 4096
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "default": {
             "description": "The default.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
           },
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 4096
           },
           "disableOverride": {
             "description": "The disable override.",
@@ -289,7 +309,9 @@
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "fieldType": {
             "$ref": "#/components/schemas/FieldType"

@@ -30,15 +30,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Acknowledge multiple cases
       tags:
@@ -82,15 +88,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Unacknowledge a case
       tags:
@@ -133,15 +145,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Acknowledge a case
       tags:
@@ -194,15 +212,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Remove assignment from multiple cases
       tags:
@@ -233,15 +257,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Assign multiple cases to a user
       tags:
@@ -285,15 +315,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Remove case assignment
       tags:
@@ -342,15 +378,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Assign a case to a user
       tags:
@@ -381,15 +423,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: List cases with filters
       tags:
@@ -432,15 +480,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get case deep links
       tags:
@@ -483,15 +537,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get case by ID
       tags:
@@ -539,15 +599,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Update case fields
       tags:
@@ -579,15 +645,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Close multiple cases
       tags:
@@ -631,15 +703,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Close a case
       tags:
@@ -670,15 +748,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get available filter values
       tags:
@@ -704,15 +788,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get available grouping keys
       tags:
@@ -754,19 +844,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get case by indicator
       tags:
@@ -819,15 +917,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Remove priority override from multiple cases
       tags:
@@ -858,15 +962,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Override priority for multiple cases
       tags:
@@ -909,15 +1019,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Remove priority override
       tags:
@@ -965,15 +1081,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Set priority override
       tags:
@@ -1005,15 +1127,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Resolve multiple cases
       tags:
@@ -1062,15 +1190,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Resolve a case
       tags:
@@ -35668,6 +35802,7 @@ components:
       oneOf:
       - $ref: "#/components/schemas/CaseResolverApiKeyVariant"
       - $ref: "#/components/schemas/CaseResolverCxUser"
+      - $ref: "#/components/schemas/CaseResolverMicrosoftTeams"
       - $ref: "#/components/schemas/CaseResolverPagerDuty"
       - $ref: "#/components/schemas/CaseResolverPrometheusAlertManager"
       - $ref: "#/components/schemas/CaseResolverServiceNow"
@@ -35713,6 +35848,23 @@ components:
           type: object
       required:
       - cxUser
+      title: Case resolver
+      type: object
+    CaseResolverMicrosoftTeams:
+      description: Entity responsible for resolving the case.
+      externalDocs:
+        url: ""
+      properties:
+        microsoftTeams:
+          additionalProperties: false
+          description: Marker indicating that the case was resolved through a Microsoft
+            Teams integration.
+          externalDocs:
+            url: ""
+          title: Microsoft Teams resolver
+          type: object
+      required:
+      - microsoftTeams
       title: Case resolver
       type: object
     CaseResolverPagerDuty:
@@ -37668,6 +37820,25 @@ components:
       required:
       - url
       title: Entity link
+      type: object
+    Error:
+      description: Standard error response body returned for a failed request.
+      example:
+        code: 139
+        message: message
+      properties:
+        code:
+          description: "HTTP status code of the error (for example 400, 404, 500)."
+          format: int32
+          maximum: 599
+          minimum: 100
+          type: integer
+        message:
+          description: Human-readable description of the error.
+          maxLength: 4096
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
       type: object
     FilterAggregation:
       description: Count of cases matching a single key/value filter combination.
@@ -44239,6 +44410,14 @@ components:
           minLength: 0
           type: string
       title: Metric link
+      type: object
+    MicrosoftTeams:
+      additionalProperties: false
+      description: Marker indicating that the case was resolved through a Microsoft
+        Teams integration.
+      externalDocs:
+        url: ""
+      title: Microsoft Teams resolver
       type: object
     MultipleValues:
       properties:

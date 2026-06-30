@@ -17,6 +17,7 @@ model_digest.go
 model_digest_type.go
 model_email_group_config.go
 model_endpoint_type.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go

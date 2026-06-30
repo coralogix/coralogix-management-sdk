@@ -91,6 +91,7 @@ Class | Method | HTTP request | Description
  - [ConfigureTenantRequestGcs](docs/ConfigureTenantRequestGcs.md)
  - [ConfigureTenantRequestIbm](docs/ConfigureTenantRequestIbm.md)
  - [ConfigureTenantRequestS3](docs/ConfigureTenantRequestS3.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

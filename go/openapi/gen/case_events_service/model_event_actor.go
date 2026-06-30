@@ -22,6 +22,7 @@ var _ = bytes.MinRead
 // EventActor - struct for EventActor
 type EventActor struct {
 	EventActorApiKey *EventActorApiKey
+	EventActorMicrosoftTeams *EventActorMicrosoftTeams
 	EventActorPagerDuty *EventActorPagerDuty
 	EventActorPrometheusAlertManager *EventActorPrometheusAlertManager
 	EventActorServiceNow *EventActorServiceNow
@@ -34,6 +35,13 @@ type EventActor struct {
 func EventActorApiKeyAsEventActor(v *EventActorApiKey) EventActor {
 	return EventActor{
 		EventActorApiKey: v,
+	}
+}
+
+// EventActorMicrosoftTeamsAsEventActor is a convenience function that returns EventActorMicrosoftTeams wrapped in EventActor
+func EventActorMicrosoftTeamsAsEventActor(v *EventActorMicrosoftTeams) EventActor {
+	return EventActor{
+		EventActorMicrosoftTeams: v,
 	}
 }
 
@@ -99,6 +107,23 @@ func (dst *EventActor) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.EventActorApiKey = nil
+	}
+
+	// try to unmarshal data into EventActorMicrosoftTeams
+	err = json.Unmarshal(data, &dst.EventActorMicrosoftTeams)
+	if err == nil {
+		jsonEventActorMicrosoftTeams, _ := json.Marshal(dst.EventActorMicrosoftTeams)
+		if string(jsonEventActorMicrosoftTeams) == "{}" { // empty struct
+			dst.EventActorMicrosoftTeams = nil
+		} else {
+			if err = validator.Validate(dst.EventActorMicrosoftTeams); err != nil {
+				dst.EventActorMicrosoftTeams = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.EventActorMicrosoftTeams = nil
 	}
 
 	// try to unmarshal data into EventActorPagerDuty
@@ -206,6 +231,7 @@ func (dst *EventActor) UnmarshalJSON(data []byte) error {
 	if match > 1 { // more than 1 match
 		// reset to nil
 		dst.EventActorApiKey = nil
+		dst.EventActorMicrosoftTeams = nil
 		dst.EventActorPagerDuty = nil
 		dst.EventActorPrometheusAlertManager = nil
 		dst.EventActorServiceNow = nil
@@ -225,6 +251,10 @@ func (dst *EventActor) UnmarshalJSON(data []byte) error {
 func (src EventActor) MarshalJSON() ([]byte, error) {
 	if src.EventActorApiKey != nil {
 		return json.Marshal(&src.EventActorApiKey)
+	}
+
+	if src.EventActorMicrosoftTeams != nil {
+		return json.Marshal(&src.EventActorMicrosoftTeams)
 	}
 
 	if src.EventActorPagerDuty != nil {
@@ -263,6 +293,10 @@ func (obj *EventActor) GetActualInstance() (interface{}) {
 		return obj.EventActorApiKey
 	}
 
+	if obj.EventActorMicrosoftTeams != nil {
+		return obj.EventActorMicrosoftTeams
+	}
+
 	if obj.EventActorPagerDuty != nil {
 		return obj.EventActorPagerDuty
 	}
@@ -295,6 +329,10 @@ func (obj *EventActor) GetActualInstance() (interface{}) {
 func (obj EventActor) GetActualInstanceValue() (interface{}) {
 	if obj.EventActorApiKey != nil {
 		return *obj.EventActorApiKey
+	}
+
+	if obj.EventActorMicrosoftTeams != nil {
+		return *obj.EventActorMicrosoftTeams
 	}
 
 	if obj.EventActorPagerDuty != nil {

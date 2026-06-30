@@ -116,6 +116,7 @@ Class | Method | HTTP request | Description
  - [DisplayLabelValueWithCount](docs/DisplayLabelValueWithCount.md)
  - [DisplayLabelValues](docs/DisplayLabelValues.md)
  - [DisplayLabelValuesWithCount](docs/DisplayLabelValuesWithCount.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

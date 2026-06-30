@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
  - [CreatePolicyResponse](docs/CreatePolicyResponse.md)
  - [CreateSpanPolicyRequest](docs/CreateSpanPolicyRequest.md)
  - [DeletePolicyResponse](docs/DeletePolicyResponse.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

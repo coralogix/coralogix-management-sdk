@@ -39,6 +39,9 @@ components:
         - allowedValues:
           - allowedValues
           - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
           default: default
           allowOverrides: true
           fieldName: fieldName
@@ -46,6 +49,45 @@ components:
           fieldType: FIELD_TYPE_UNSPECIFIED
           required: true
         - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          default: default
+          allowOverrides: true
+          fieldName: fieldName
+          description: description
+          fieldType: FIELD_TYPE_UNSPECIFIED
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          default: default
+          allowOverrides: true
+          fieldName: fieldName
+          description: description
+          fieldType: FIELD_TYPE_UNSPECIFIED
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          default: default
+          allowOverrides: true
+          fieldName: fieldName
+          description: description
+          fieldType: FIELD_TYPE_UNSPECIFIED
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
           - allowedValues
           - allowedValues
           default: default
@@ -61,12 +103,16 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/ConnectorConfigSchemaField"
+          maxItems: 100
           minItems: 0
           type: array
       type: object
     ConnectorConfigSchemaField:
       example:
         allowedValues:
+        - allowedValues
+        - allowedValues
+        - allowedValues
         - allowedValues
         - allowedValues
         default: default
@@ -85,19 +131,26 @@ components:
             description: The allowed values.
             minLength: 0
             type: string
+          maxItems: 100
           minItems: 0
           type: array
         default:
           description: The default.
+          maxLength: 4096
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         description:
           description: Human-readable description.
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         fieldName:
           description: The field name.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         fieldType:
           $ref: "#/components/schemas/FieldType"
@@ -113,6 +166,9 @@ components:
           - allowedValues:
             - allowedValues
             - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
             default: default
             allowOverrides: true
             fieldName: fieldName
@@ -120,6 +176,45 @@ components:
             fieldType: FIELD_TYPE_UNSPECIFIED
             required: true
           - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            allowOverrides: true
+            fieldName: fieldName
+            description: description
+            fieldType: FIELD_TYPE_UNSPECIFIED
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            allowOverrides: true
+            fieldName: fieldName
+            description: description
+            fieldType: FIELD_TYPE_UNSPECIFIED
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            allowOverrides: true
+            fieldName: fieldName
+            description: description
+            fieldType: FIELD_TYPE_UNSPECIFIED
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
             - allowedValues
             - allowedValues
             default: default
@@ -131,6 +226,9 @@ components:
         supportedPayloadTypes:
         - supportedPayloadTypes
         - supportedPayloadTypes
+        - supportedPayloadTypes
+        - supportedPayloadTypes
+        - supportedPayloadTypes
         type: CONNECTOR_TYPE_UNSPECIFIED
         messageConfigSchemas:
         - payloadType: payloadType
@@ -138,6 +236,9 @@ components:
           - allowedValues:
             - allowedValues
             - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
             default: default
             renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
             fieldName: fieldName
@@ -146,6 +247,48 @@ components:
             fieldType: null
             required: true
           - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
             - allowedValues
             - allowedValues
             default: default
@@ -160,6 +303,9 @@ components:
           - allowedValues:
             - allowedValues
             - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
             default: default
             renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
             fieldName: fieldName
@@ -168,6 +314,249 @@ components:
             fieldType: null
             required: true
           - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+        - payloadType: payloadType
+          fields:
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+        - payloadType: payloadType
+          fields:
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+        - payloadType: payloadType
+          fields:
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            - allowedValues
+            default: default
+            renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+            fieldName: fieldName
+            disableOverride: true
+            description: description
+            fieldType: null
+            required: true
+          - allowedValues:
+            - allowedValues
+            - allowedValues
+            - allowedValues
             - allowedValues
             - allowedValues
             default: default
@@ -186,7 +575,8 @@ components:
           description: The message config schemas.
           items:
             $ref: "#/components/schemas/MessageConfigSchema"
-          minItems: 0
+          maxItems: 100
+          minItems: 1
           type: array
         supportedPayloadTypes:
           description: The supported payload types.
@@ -194,7 +584,8 @@ components:
             description: The supported payload types.
             minLength: 0
             type: string
-          minItems: 0
+          maxItems: 100
+          minItems: 1
           type: array
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
@@ -276,6 +667,9 @@ components:
             - allowedValues:
               - allowedValues
               - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
               default: default
               allowOverrides: true
               fieldName: fieldName
@@ -283,6 +677,45 @@ components:
               fieldType: FIELD_TYPE_UNSPECIFIED
               required: true
             - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              allowOverrides: true
+              fieldName: fieldName
+              description: description
+              fieldType: FIELD_TYPE_UNSPECIFIED
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              allowOverrides: true
+              fieldName: fieldName
+              description: description
+              fieldType: FIELD_TYPE_UNSPECIFIED
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              allowOverrides: true
+              fieldName: fieldName
+              description: description
+              fieldType: FIELD_TYPE_UNSPECIFIED
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
               - allowedValues
               - allowedValues
               default: default
@@ -294,6 +727,9 @@ components:
           supportedPayloadTypes:
           - supportedPayloadTypes
           - supportedPayloadTypes
+          - supportedPayloadTypes
+          - supportedPayloadTypes
+          - supportedPayloadTypes
           type: CONNECTOR_TYPE_UNSPECIFIED
           messageConfigSchemas:
           - payloadType: payloadType
@@ -301,6 +737,9 @@ components:
             - allowedValues:
               - allowedValues
               - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
               default: default
               renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
               fieldName: fieldName
@@ -309,6 +748,48 @@ components:
               fieldType: null
               required: true
             - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
               - allowedValues
               - allowedValues
               default: default
@@ -323,6 +804,9 @@ components:
             - allowedValues:
               - allowedValues
               - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
               default: default
               renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
               fieldName: fieldName
@@ -331,6 +815,249 @@ components:
               fieldType: null
               required: true
             - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+          - payloadType: payloadType
+            fields:
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+          - payloadType: payloadType
+            fields:
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+          - payloadType: payloadType
+            fields:
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              - allowedValues
+              default: default
+              renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+              fieldName: fieldName
+              disableOverride: true
+              description: description
+              fieldType: null
+              required: true
+            - allowedValues:
+              - allowedValues
+              - allowedValues
+              - allowedValues
               - allowedValues
               - allowedValues
               default: default
@@ -353,6 +1080,9 @@ components:
         - allowedValues:
           - allowedValues
           - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
           default: default
           renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
           fieldName: fieldName
@@ -361,6 +1091,48 @@ components:
           fieldType: null
           required: true
         - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          default: default
+          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+          fieldName: fieldName
+          disableOverride: true
+          description: description
+          fieldType: null
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          default: default
+          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+          fieldName: fieldName
+          disableOverride: true
+          description: description
+          fieldType: null
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          - allowedValues
+          default: default
+          renderingMode: TEMPLATE_RENDERING_MODE_UNSPECIFIED
+          fieldName: fieldName
+          disableOverride: true
+          description: description
+          fieldType: null
+          required: true
+        - allowedValues:
+          - allowedValues
+          - allowedValues
+          - allowedValues
           - allowedValues
           - allowedValues
           default: default
@@ -375,16 +1147,22 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/MessageConfigSchemaField"
+          maxItems: 100
           minItems: 0
           type: array
         payloadType:
           description: Type of the payload.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
       type: object
     MessageConfigSchemaField:
       example:
         allowedValues:
+        - allowedValues
+        - allowedValues
+        - allowedValues
         - allowedValues
         - allowedValues
         default: default
@@ -399,24 +1177,33 @@ components:
           description: The allowed values.
           items:
             description: The allowed values.
+            maxLength: 4096
             minLength: 0
+            pattern: "^[\\s\\S]*$"
             type: string
+          maxItems: 100
           minItems: 0
           type: array
         default:
           description: The default.
+          maxLength: 4096
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         description:
           description: Human-readable description.
-          minLength: 0
+          maxLength: 4096
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         disableOverride:
           description: The disable override.
           type: boolean
         fieldName:
           description: The field name.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         fieldType:
           $ref: "#/components/schemas/FieldType"

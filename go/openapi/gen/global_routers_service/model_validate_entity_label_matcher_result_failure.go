@@ -23,7 +23,7 @@ var _ MappedNullable = &ValidateEntityLabelMatcherResultFailure{}
 // ValidateEntityLabelMatcherResultFailure Test outgoing webhook response.failure.
 type ValidateEntityLabelMatcherResultFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

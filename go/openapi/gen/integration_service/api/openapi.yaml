@@ -34,15 +34,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get all integrations
       tags:
@@ -89,15 +95,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get integration definition
       tags:
@@ -135,15 +147,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get deployed integration
       tags:
@@ -180,15 +198,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Delete integration
       tags:
@@ -225,15 +249,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get RUM integration versions data
       tags:
@@ -264,15 +294,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Trigger sync of RUM integration data
       tags:
@@ -318,15 +354,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get integration details
       tags:
@@ -352,15 +394,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: List managed integration keys
       tags:
@@ -397,15 +445,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get managed integration status
       tags:
@@ -436,15 +490,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Save integration registration metadata
       tags:
@@ -474,15 +534,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Update integration
       tags:
@@ -513,15 +579,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Test integration
       tags:
@@ -579,15 +651,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get integration template
       tags:
@@ -926,6 +1004,25 @@ components:
           minItems: 0
           type: array
       title: Deprecation
+      type: object
+    Error:
+      description: Standard error response body returned for a failed request.
+      example:
+        code: 400
+        message: message
+      properties:
+        code:
+          description: "HTTP status code of the error (for example 400, 404, 500)."
+          format: int32
+          maximum: 599
+          minimum: 100
+          type: integer
+        message:
+          description: Human-readable description of the error.
+          maxLength: 4096
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
       type: object
     ExtensionBinary:
       example:

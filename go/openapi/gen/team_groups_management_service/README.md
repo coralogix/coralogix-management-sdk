@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
  - [CreateTeamGroupRequest](docs/CreateTeamGroupRequest.md)
  - [CreateTeamGroupResponse](docs/CreateTeamGroupResponse.md)
  - [DeleteTeamGroupResponse](docs/DeleteTeamGroupResponse.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

@@ -99,6 +99,7 @@ paths:
             description: The unique identifiers of the connectors to retrieve.
             minLength: 0
             type: string
+          maxItems: 800
           minItems: 0
           type: array
         style: form
@@ -132,6 +133,7 @@ paths:
               to retrieve.
             minLength: 0
             type: string
+          maxItems: 800
           minItems: 0
           type: array
         style: form
@@ -217,7 +219,9 @@ paths:
         required: true
         schema:
           description: Unique identifier.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -243,7 +247,9 @@ paths:
         required: true
         schema:
           description: The unique identifier of the connector.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -273,8 +279,56 @@ components:
                 fieldName: fieldName
               - template: template
                 fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
             - entityType: ENTITY_TYPE_UNSPECIFIED
               fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
               - template: template
                 fieldName: fieldName
               - template: template
@@ -285,18 +339,30 @@ components:
                 value: value
               - fieldName: fieldName
                 value: value
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
             createTime: 2000-01-23T04:56:07.000+00:00
-            teamId: 0
+            teamId: 12345
             connectorConfig:
               fields:
               - fieldName: fieldName
                 value: value
               - fieldName: fieldName
                 value: value
-            name: name
-            description: description
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
+            name: My Slack Connector
+            description: Connector for team notifications
             updateTime: 2000-01-23T04:56:07.000+00:00
-            id: id
+            id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
             type: CONNECTOR_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about notification center
@@ -315,6 +381,7 @@ components:
             description: The not found ids.
             minLength: 0
             type: string
+          maxItems: 800
           minItems: 0
           type: array
       title: Batch Get Connector Summaries Response
@@ -335,8 +402,56 @@ components:
                 fieldName: fieldName
               - template: template
                 fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
             - entityType: ENTITY_TYPE_UNSPECIFIED
               fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+            - entityType: ENTITY_TYPE_UNSPECIFIED
+              fields:
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
+              - template: template
+                fieldName: fieldName
               - template: template
                 fieldName: fieldName
               - template: template
@@ -347,10 +462,22 @@ components:
                 value: value
               - fieldName: fieldName
                 value: value
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
             createTime: 2000-01-23T04:56:07.000+00:00
             teamId: 12345
             connectorConfig:
               fields:
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
+              - fieldName: fieldName
+                value: value
               - fieldName: fieldName
                 value: value
               - fieldName: fieldName
@@ -377,6 +504,7 @@ components:
             description: The not found ids.
             minLength: 0
             type: string
+          maxItems: 800
           minItems: 0
           type: array
       title: Batch Get Connectors Response
@@ -393,8 +521,56 @@ components:
             fieldName: fieldName
           - template: template
             fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
         - entityType: ENTITY_TYPE_UNSPECIFIED
           fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
           - template: template
             fieldName: fieldName
           - template: template
@@ -405,10 +581,22 @@ components:
             value: value
           - fieldName: fieldName
             value: value
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
         createTime: 2000-01-23T04:56:07.000+00:00
         teamId: 12345
         connectorConfig:
           fields:
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
           - fieldName: fieldName
             value: value
           - fieldName: fieldName
@@ -426,6 +614,7 @@ components:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/EntityTypeConfigOverrides"
+          maxItems: 100
           minItems: 0
           type: array
         connectorConfig:
@@ -440,19 +629,23 @@ components:
           example: Connector for team notifications
           maxLength: 5000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         diagnostics:
           $ref: "#/components/schemas/Diagnostics"
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         name:
           description: Display name.
           example: My Slack Connector
           maxLength: 200
-          minLength: 0
+          minLength: 1
+          pattern: "^[\\s\\S]+$"
           type: string
         resolvedConnectorConfig:
           $ref: "#/components/schemas/ConnectorConfig"
@@ -460,7 +653,8 @@ components:
           description: Team identifier.
           example: 12345
           format: int64
-          minimum: 0
+          maximum: 4294967295
+          minimum: 1
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
@@ -479,6 +673,12 @@ components:
           value: value
         - fieldName: fieldName
           value: value
+        - fieldName: fieldName
+          value: value
+        - fieldName: fieldName
+          value: value
+        - fieldName: fieldName
+          value: value
       externalDocs:
         description: Find out more about notification center
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
@@ -487,6 +687,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/notification_center.ConnectorConfigField"
+          maxItems: 100
           minItems: 0
           type: array
       title: Connector Config
@@ -500,8 +701,56 @@ components:
             fieldName: fieldName
           - template: template
             fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
         - entityType: ENTITY_TYPE_UNSPECIFIED
           fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+        - entityType: ENTITY_TYPE_UNSPECIFIED
+          fields:
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
+          - template: template
+            fieldName: fieldName
           - template: template
             fieldName: fieldName
           - template: template
@@ -512,24 +761,37 @@ components:
             value: value
           - fieldName: fieldName
             value: value
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
         createTime: 2000-01-23T04:56:07.000+00:00
-        teamId: 0
+        teamId: 12345
         connectorConfig:
           fields:
           - fieldName: fieldName
             value: value
           - fieldName: fieldName
             value: value
-        name: name
-        description: description
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
+          - fieldName: fieldName
+            value: value
+        name: My Slack Connector
+        description: Connector for team notifications
         updateTime: 2000-01-23T04:56:07.000+00:00
-        id: id
+        id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
         type: CONNECTOR_TYPE_UNSPECIFIED
       properties:
         configOverrides:
           description: The config overrides.
           items:
             $ref: "#/components/schemas/EntityTypeConfigOverrides"
+          maxItems: 100
           minItems: 0
           type: array
         connectorConfig:
@@ -541,22 +803,33 @@ components:
           type: string
         description:
           description: Human-readable description.
+          example: Connector for team notifications
+          maxLength: 5000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         id:
           description: Unique identifier.
-          minLength: 0
+          example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         name:
           description: Display name.
-          minLength: 0
+          example: My Slack Connector
+          maxLength: 200
+          minLength: 1
+          pattern: "^[\\s\\S]+$"
           type: string
         resolvedConnectorConfig:
           $ref: "#/components/schemas/ConnectorConfig"
         teamId:
           description: The team id.
+          example: 12345
           format: int64
-          minimum: 0
+          maximum: 4294967295
+          minimum: 1
           type: integer
         type:
           $ref: "#/components/schemas/notification_center.ConnectorType"
@@ -579,6 +852,7 @@ components:
           description: Number of items.
           example: 5
           format: int64
+          maximum: 800
           minimum: 0
           type: integer
         type:
@@ -598,8 +872,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -610,10 +932,22 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
             fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
@@ -665,6 +999,12 @@ components:
           fieldName: fieldName
         - template: template
           fieldName: fieldName
+        - template: template
+          fieldName: fieldName
+        - template: template
+          fieldName: fieldName
+        - template: template
+          fieldName: fieldName
       properties:
         entityType:
           $ref: "#/components/schemas/notification_center.EntityType"
@@ -672,6 +1012,7 @@ components:
           description: List of fields.
           items:
             $ref: "#/components/schemas/TemplatedConnectorConfigField"
+          maxItems: 100
           minItems: 0
           type: array
       type: object
@@ -742,8 +1083,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -754,10 +1143,22 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
             fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
@@ -783,6 +1184,12 @@ components:
           type: CONNECTOR_TYPE_UNSPECIFIED
         - count: 5
           type: CONNECTOR_TYPE_UNSPECIFIED
+        - count: 5
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - count: 5
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - count: 5
+          type: CONNECTOR_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about notification center
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
@@ -791,6 +1198,7 @@ components:
           description: The connector type summaries.
           items:
             $ref: "#/components/schemas/ConnectorTypeSummary"
+          maxItems: 800
           minItems: 0
           type: array
       title: Get Connector Type Summaries Response
@@ -806,8 +1214,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -818,18 +1274,30 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
-          teamId: 0
+          teamId: 12345
           connectorConfig:
             fields:
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
               value: value
-          name: name
-          description: description
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
           updateTime: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: CONNECTOR_TYPE_UNSPECIFIED
         - configOverrides:
           - entityType: ENTITY_TYPE_UNSPECIFIED
@@ -838,8 +1306,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -850,18 +1366,306 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
-          teamId: 0
+          teamId: 12345
           connectorConfig:
             fields:
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
               value: value
-          name: name
-          description: description
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
           updateTime: 2000-01-23T04:56:07.000+00:00
-          id: id
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           type: CONNECTOR_TYPE_UNSPECIFIED
       externalDocs:
         description: Find out more about notification center
@@ -871,6 +1675,7 @@ components:
           description: The connectors.
           items:
             $ref: "#/components/schemas/ConnectorSummary"
+          maxItems: 800
           minItems: 0
           type: array
       title: List Connector Summaries Response
@@ -888,8 +1693,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -900,10 +1753,22 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
             fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
@@ -922,8 +1787,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -934,10 +1847,304 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
             fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          name: My Slack Connector
+          description: Connector for team notifications
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          type: CONNECTOR_TYPE_UNSPECIFIED
+        - diagnostics:
+            delivery: DELIVERY_UNSPECIFIED
+          configOverrides:
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          resolvedConnectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+          createTime: 2000-01-23T04:56:07.000+00:00
+          teamId: 12345
+          connectorConfig:
+            fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
@@ -955,6 +2162,7 @@ components:
           description: The connectors.
           items:
             $ref: "#/components/schemas/Connector"
+          maxItems: 800
           minItems: 0
           type: array
       title: List Connectors Response
@@ -983,8 +2191,56 @@ components:
               fieldName: fieldName
             - template: template
               fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
           - entityType: ENTITY_TYPE_UNSPECIFIED
             fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+          - entityType: ENTITY_TYPE_UNSPECIFIED
+            fields:
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
+            - template: template
+              fieldName: fieldName
             - template: template
               fieldName: fieldName
             - template: template
@@ -995,10 +2251,22 @@ components:
               value: value
             - fieldName: fieldName
               value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
           createTime: 2000-01-23T04:56:07.000+00:00
           teamId: 12345
           connectorConfig:
             fields:
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
+            - fieldName: fieldName
+              value: value
             - fieldName: fieldName
               value: value
             - fieldName: fieldName
@@ -1023,11 +2291,15 @@ components:
       properties:
         fieldName:
           description: The field name.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         template:
           description: Template.
+          maxLength: 20000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
       type: object
     events.v3.FilterMatcher:
@@ -1042,11 +2314,15 @@ components:
       properties:
         fieldName:
           description: The field name.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         value:
           description: The value.
+          maxLength: 20000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
       type: object
     notification_center.ConnectorType:

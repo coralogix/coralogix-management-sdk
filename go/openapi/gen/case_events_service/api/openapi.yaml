@@ -48,19 +48,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Create a comment event
       tags:
@@ -103,19 +111,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: List events for a case
       tags:
@@ -159,23 +175,33 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Case not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Sync external Case events
       tags:
@@ -213,23 +239,33 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Event not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get an event by ID
       tags:
@@ -267,23 +303,33 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Event not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Delete a comment event
       tags:
@@ -326,23 +372,33 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "403":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Forbidden
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Event not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Update a comment event
       tags:
@@ -749,9 +805,29 @@ components:
         url: ""
       title: Delete comment response
       type: object
+    Error:
+      description: Standard error response body returned for a failed request.
+      example:
+        code: 139
+        message: message
+      properties:
+        code:
+          description: "HTTP status code of the error (for example 400, 404, 500)."
+          format: int32
+          maximum: 599
+          minimum: 100
+          type: integer
+        message:
+          description: Human-readable description of the error.
+          maxLength: 4096
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
+      type: object
     EventActor:
       oneOf:
       - $ref: "#/components/schemas/EventActorApiKey"
+      - $ref: "#/components/schemas/EventActorMicrosoftTeams"
       - $ref: "#/components/schemas/EventActorPagerDuty"
       - $ref: "#/components/schemas/EventActorPrometheusAlertManager"
       - $ref: "#/components/schemas/EventActorServiceNow"
@@ -771,6 +847,17 @@ components:
           $ref: "#/components/schemas/ApiKeyActor"
       required:
       - apiKey
+      title: Event actor
+      type: object
+    EventActorMicrosoftTeams:
+      description: Actor that initiated the event.
+      externalDocs:
+        url: ""
+      properties:
+        microsoftTeams:
+          $ref: "#/components/schemas/MicrosoftTeamsActor"
+      required:
+      - microsoftTeams
       title: Event actor
       type: object
     EventActorPagerDuty:
@@ -978,6 +1065,42 @@ components:
       - logId
       - logTimestamp
       title: Log attachment
+      type: object
+    MicrosoftTeamsActor:
+      description: Information about the Microsoft Teams user who initiated the action.
+      externalDocs:
+        url: ""
+      properties:
+        coralogixUserId:
+          description: "If the Microsoft Teams user is linked to a Coralogix user,\
+            \ this field contains the Coralogix user ID."
+          example: 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        displayName:
+          description: Microsoft Teams display name
+          example: John Doe
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        teamsUserId:
+          description: Microsoft Teams user ID
+          example: 29:1abc123def456
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        userEmail:
+          description: Email of the Microsoft Teams user
+          example: john.doe@example.com
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+      title: Microsoft Teams actor
       type: object
     MultipleValues:
       properties:

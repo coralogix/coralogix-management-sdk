@@ -18,6 +18,7 @@ model_configuration_block.go
 model_connection_status.go
 model_default_integration_details.go
 model_deprecation.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_extension_binary.go
 model_extension_binary_binary_type.go

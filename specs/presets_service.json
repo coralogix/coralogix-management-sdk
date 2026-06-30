@@ -29,7 +29,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 600
             },
             "style": "form"
           }
@@ -68,7 +69,9 @@
             "schema": {
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -107,7 +110,9 @@
             "schema": {
               "description": "The unique identifier of the custom preset to set as default.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -191,7 +196,9 @@
             "schema": {
               "description": "The unique identifier of the preset to retrieve.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -230,7 +237,9 @@
             "schema": {
               "description": "The unique identifier of the preset to set as default.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -462,7 +471,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 600
           },
           "presets": {
             "description": "List of permission presets.",
@@ -483,9 +493,11 @@
             "$ref": "#/components/schemas/MessageConfig"
           },
           "payloadType": {
-            "description": "Type of the payload.",
+            "description": "Connector payload schema type.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         }
       },
@@ -639,7 +651,8 @@
             "items": {
               "$ref": "#/components/schemas/PresetSummary"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 600
           }
         }
       },
@@ -653,7 +666,9 @@
           "entitySubType": {
             "description": "The entity sub type.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         }
       },
@@ -678,7 +693,8 @@
             "items": {
               "$ref": "#/components/schemas/notification_center.MessageConfigField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -746,7 +762,8 @@
             "items": {
               "$ref": "#/components/schemas/ConfigOverrides"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "connectorType": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -761,7 +778,9 @@
             "example": "Custom preset for alerts",
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000
           },
           "entityType": {
             "$ref": "#/components/schemas/notification_center.EntityType"
@@ -770,19 +789,25 @@
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
             "example": "My Preset",
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 200
           },
           "parentId": {
             "example": "preset_system_slack_alerts_basic",
             "description": "The parent id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "presetType": {
             "$ref": "#/components/schemas/PresetType"
@@ -820,6 +845,7 @@
             "example": "Custom preset for alerts",
             "description": "Human-readable description.",
             "type": "string",
+            "pattern": "^[\\s\\S]*$",
             "minLength": 0,
             "maxLength": 5000
           },
@@ -830,20 +856,25 @@
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
             "example": "My Preset",
             "description": "Display name.",
             "type": "string",
-            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
             "maxLength": 200
           },
           "parentId": {
             "example": "c246e826-10c2-405e-8d3f-afcc24ad4d15",
             "description": "The parent id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "presetType": {
             "$ref": "#/components/schemas/PresetType"
@@ -950,13 +981,17 @@
             "example": "title",
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "template": {
             "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
             "description": "The template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
           }
         }
       },

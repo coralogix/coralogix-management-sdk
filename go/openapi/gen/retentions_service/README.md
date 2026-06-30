@@ -88,6 +88,7 @@ Class | Method | HTTP request | Description
 
  - [ActivateRetentionsResponse](docs/ActivateRetentionsResponse.md)
  - [ArchiveV1Retention](docs/ArchiveV1Retention.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

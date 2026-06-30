@@ -164,7 +164,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -176,12 +177,13 @@
         "type": "object",
         "properties": {
           "entityTypes": {
-            "description": "The entity types.",
+            "description": "The supported payload types.",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/notification_center.EntityType"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },

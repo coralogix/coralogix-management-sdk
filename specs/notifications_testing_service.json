@@ -26,13 +26,17 @@
                   "connectorId": {
                     "description": "The connector id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   },
                   "payloadType": {
                     "example": "default",
                     "description": "Payload type to use when testing the connector.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   }
                 }
               }
@@ -81,13 +85,16 @@
                     "items": {
                       "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "payloadType": {
                     "example": "default",
                     "description": "Payload type to use when testing the connector.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "type": {
                     "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -135,18 +142,23 @@
                     "items": {
                       "$ref": "#/components/schemas/TemplatedConnectorConfigField"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "connectorId": {
                     "description": "The connector id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   },
                   "entitySubType": {
                     "example": "logsImmediateResolved",
                     "description": "Entity sub-type to use when testing the destination.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
@@ -157,18 +169,23 @@
                     "items": {
                       "$ref": "#/components/schemas/notification_center.MessageConfigField"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "payloadType": {
                     "example": "default",
                     "description": "Payload type to use when testing the destination.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "presetId": {
                     "description": "The preset id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 }
               }
@@ -210,13 +227,17 @@
                   "connectorId": {
                     "description": "The connector id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   },
                   "entitySubType": {
                     "example": "logsImmediateResolved",
                     "description": "Entity sub-type to use when testing the preset.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
@@ -224,7 +245,9 @@
                   "presetId": {
                     "description": "The preset id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 }
               }
@@ -269,18 +292,23 @@
                     "items": {
                       "$ref": "#/components/schemas/ConfigOverrides"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "maxItems": 100
                   },
                   "connectorId": {
                     "description": "The connector id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   },
                   "entitySubType": {
                     "example": "metric",
                     "description": "Entity sub-type to use when testing the preset configuration.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
@@ -288,7 +316,9 @@
                   "parentPresetId": {
                     "description": "The parent preset id.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+                    "minLength": 1,
+                    "maxLength": 128
                   }
                 }
               }
@@ -335,7 +365,9 @@
                     "example": "alertDef.priority == 'P1'",
                     "description": "Routing condition expression to validate.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]+$",
+                    "minLength": 1,
+                    "maxLength": 20000
                   }
                 }
               }
@@ -378,7 +410,9 @@
                     "example": "logsImmediateResolved",
                     "description": "Entity sub-type to use when testing template rendering.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 1,
+                    "maxLength": 100
                   },
                   "entityType": {
                     "$ref": "#/components/schemas/notification_center.EntityType"
@@ -387,7 +421,9 @@
                     "example": "{{ alertDef.name }}",
                     "description": "Template string to test rendering for.",
                     "type": "string",
-                    "minLength": 0
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 20000
                   }
                 }
               }
@@ -421,9 +457,11 @@
             "$ref": "#/components/schemas/MessageConfig"
           },
           "payloadType": {
-            "description": "Type of the payload.",
+            "description": "Connector payload schema type.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         }
       },
@@ -527,7 +565,9 @@
           "entitySubType": {
             "description": "The entity sub type.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 100
           }
         }
       },
@@ -552,7 +592,8 @@
             "items": {
               "$ref": "#/components/schemas/notification_center.MessageConfigField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -608,12 +649,16 @@
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "template": {
             "description": "Template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
           }
         }
       },
@@ -697,13 +742,16 @@
           "message": {
             "description": "Human-readable message.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           },
           "statusCode": {
             "description": "The status code.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 100,
+            "maximum": 599
           }
         }
       },
@@ -775,7 +823,9 @@
             "example": "Invalid condition: condition should be rendered to a boolean value (true or false)",
             "description": "Human-readable message.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           }
         }
       },
@@ -860,7 +910,9 @@
             "example": "Template rendering failed",
             "description": "Human-readable message.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           },
           "reason": {
             "$ref": "#/components/schemas/FailureReason"
@@ -878,7 +930,9 @@
             "example": "Rendered template result",
             "description": "The rendered value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 50000
           }
         }
       },
@@ -935,12 +989,16 @@
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
           }
         }
       },
@@ -982,13 +1040,17 @@
             "example": "title",
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "template": {
             "example": "{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}",
             "description": "The template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
           }
         }
       },

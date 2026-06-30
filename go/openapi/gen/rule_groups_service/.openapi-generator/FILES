@@ -15,6 +15,7 @@ model_create_rule_group_request_create_rule_subgroup.go
 model_create_rule_group_request_create_rule_subgroup_create_rule.go
 model_create_rule_group_response.go
 model_destination_field.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_extract_parameters.go
 model_extract_timestamp_parameters.go

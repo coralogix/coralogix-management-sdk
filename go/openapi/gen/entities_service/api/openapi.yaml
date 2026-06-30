@@ -108,6 +108,9 @@ components:
         entitySubTypes:
         - entitySubTypes
         - entitySubTypes
+        - entitySubTypes
+        - entitySubTypes
+        - entitySubTypes
       externalDocs:
         url: ""
       properties:
@@ -117,6 +120,7 @@ components:
             description: The entity sub types.
             minLength: 0
             type: string
+          maxItems: 100
           minItems: 0
           type: array
       type: object
@@ -126,13 +130,17 @@ components:
         entityTypes:
         - ENTITY_TYPE_UNSPECIFIED
         - ENTITY_TYPE_UNSPECIFIED
+        - ENTITY_TYPE_UNSPECIFIED
+        - ENTITY_TYPE_UNSPECIFIED
+        - ENTITY_TYPE_UNSPECIFIED
       externalDocs:
         url: ""
       properties:
         entityTypes:
-          description: The entity types.
+          description: The supported payload types.
           items:
             $ref: "#/components/schemas/notification_center.EntityType"
+          maxItems: 100
           minItems: 0
           type: array
       type: object

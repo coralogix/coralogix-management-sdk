@@ -23,13 +23,13 @@ var _ MappedNullable = &RoutingTarget{}
 // RoutingTarget Defines routing target for notifications
 type RoutingTarget struct {
 	// The connector id.
-	ConnectorId *string `json:"connectorId,omitempty"`
+	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// The custom details.
 	CustomDetails *map[string]string `json:"customDetails,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The preset id.
-	PresetId *string `json:"presetId,omitempty"`
+	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

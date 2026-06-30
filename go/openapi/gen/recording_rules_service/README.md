@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
 
  - [CreateRuleGroupSet](docs/CreateRuleGroupSet.md)
  - [CreateRuleGroupSetResult](docs/CreateRuleGroupSetResult.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

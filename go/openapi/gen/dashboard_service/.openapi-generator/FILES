@@ -123,6 +123,7 @@ model_equals_selection.go
 model_equals_selection_all.go
 model_equals_selection_list.go
 model_equals_selection_list_selection.go
+model_error.go
 model_event_recurrence_source.go
 model_event_recurrence_source_strategy.go
 model_event_recurrence_source_strategy_duration.go
