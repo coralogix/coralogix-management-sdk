@@ -25,7 +25,7 @@ type MessageConfigSchema struct {
 	// List of fields.
 	Fields []MessageConfigSchemaField `json:"fields,omitempty"`
 	// Type of the payload.
-	PayloadType *string `json:"payloadType,omitempty"`
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

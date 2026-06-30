@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 
  - [ChangelogEntry](docs/ChangelogEntry.md)
  - [Deprecation](docs/Deprecation.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [ExtensionBinary](docs/ExtensionBinary.md)
  - [ExtensionBinaryBinaryType](docs/ExtensionBinaryBinaryType.md)

@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
  - [CxEventSingleOrMultiple](docs/CxEventSingleOrMultiple.md)
  - [CxEventSingleOrMultipleMultipleEvents](docs/CxEventSingleOrMultipleMultipleEvents.md)
  - [CxEventSingleOrMultipleSingleEvent](docs/CxEventSingleOrMultipleSingleEvent.md)
+ - [Error](docs/Error.md)
  - [EventsFilter](docs/EventsFilter.md)
  - [EventsServiceBatchGetEventFilterParameter](docs/EventsServiceBatchGetEventFilterParameter.md)
  - [EventsServiceListAlertEventsOrderBysParameterInner](docs/EventsServiceListAlertEventsOrderBysParameterInner.md)

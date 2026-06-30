@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
  - [CreateRuleGroupRequestCreateRuleSubgroupCreateRule](docs/CreateRuleGroupRequestCreateRuleSubgroupCreateRule.md)
  - [CreateRuleGroupResponse](docs/CreateRuleGroupResponse.md)
  - [DestinationField](docs/DestinationField.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [ExtractParameters](docs/ExtractParameters.md)
  - [ExtractTimestampParameters](docs/ExtractTimestampParameters.md)

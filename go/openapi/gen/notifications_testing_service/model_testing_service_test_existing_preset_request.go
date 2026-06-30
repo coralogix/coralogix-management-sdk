@@ -23,12 +23,12 @@ var _ MappedNullable = &TestingServiceTestExistingPresetRequest{}
 // TestingServiceTestExistingPresetRequest Request for testing an existing notification preset.
 type TestingServiceTestExistingPresetRequest struct {
 	// The connector id.
-	ConnectorId *string `json:"connectorId,omitempty"`
+	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Entity sub-type to use when testing the preset.
-	EntitySubType *string `json:"entitySubType,omitempty"`
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The preset id.
-	PresetId *string `json:"presetId,omitempty"`
+	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

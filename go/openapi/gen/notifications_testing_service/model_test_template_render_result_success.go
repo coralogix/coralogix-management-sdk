@@ -23,7 +23,7 @@ var _ MappedNullable = &TestTemplateRenderResultSuccess{}
 // TestTemplateRenderResultSuccess Success.
 type TestTemplateRenderResultSuccess struct {
 	// The rendered value.
-	RenderedValue *string `json:"renderedValue,omitempty"`
+	RenderedValue *string `json:"renderedValue,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

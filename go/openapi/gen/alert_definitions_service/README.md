@@ -150,6 +150,7 @@ Class | Method | HTTP request | Description
  - [DurationUnit](docs/DurationUnit.md)
  - [EnabledCount](docs/EnabledCount.md)
  - [EntityLabelCount](docs/EntityLabelCount.md)
+ - [Error](docs/Error.md)
  - [ErrorBudgetThreshold](docs/ErrorBudgetThreshold.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FailedToReplaceAlertDef](docs/FailedToReplaceAlertDef.md)

@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
  - [EntityLabelFilterAll](docs/EntityLabelFilterAll.md)
  - [EntityLabelFilterValues](docs/EntityLabelFilterValues.md)
  - [EntityLabelFilterValuesVariant](docs/EntityLabelFilterValuesVariant.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

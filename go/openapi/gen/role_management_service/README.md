@@ -92,6 +92,7 @@ Class | Method | HTTP request | Description
  - [CreateRoleRequestParentRoleName](docs/CreateRoleRequestParentRoleName.md)
  - [CreateRoleResponse](docs/CreateRoleResponse.md)
  - [CustomRole](docs/CustomRole.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

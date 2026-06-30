@@ -25,13 +25,13 @@ type MessageConfigSchemaField struct {
 	// The allowed values.
 	AllowedValues []string `json:"allowedValues,omitempty"`
 	// The default.
-	Default *string `json:"default,omitempty"`
+	Default *string `json:"default,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The disable override.
 	DisableOverride *bool `json:"disableOverride,omitempty"`
 	// The field name.
-	FieldName *string `json:"fieldName,omitempty"`
+	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	FieldType *FieldType `json:"fieldType,omitempty"`
 	RenderingMode *TemplateRenderingMode `json:"renderingMode,omitempty"`
 	// The required.

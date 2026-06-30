@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
  - [CreateBulkAlertSchedulerRuleRequestDataStructure](docs/CreateBulkAlertSchedulerRuleRequestDataStructure.md)
  - [CreateBulkAlertSchedulerRuleResponse](docs/CreateBulkAlertSchedulerRuleResponse.md)
  - [DurationFrequency](docs/DurationFrequency.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterByAlertSchedulerRuleIdsAlertSchedulerIds](docs/FilterByAlertSchedulerRuleIdsAlertSchedulerIds.md)
  - [FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds](docs/FilterByAlertSchedulerRuleIdsAlertSchedulerVersionIds.md)

@@ -20,6 +20,7 @@ model_connection_status.go
 model_default_integration_details.go
 model_deployed_integration_information.go
 model_deprecation.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_extension_binary.go
 model_extension_binary_binary_type.go

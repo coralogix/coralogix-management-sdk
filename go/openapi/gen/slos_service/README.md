@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
  - [CreateSloResponse](docs/CreateSloResponse.md)
  - [DeleteSloRequest](docs/DeleteSloRequest.md)
  - [DeleteSloResponse](docs/DeleteSloResponse.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
  - [CreateApiKeyRequestKeyPermissions](docs/CreateApiKeyRequestKeyPermissions.md)
  - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
  - [DeleteAPIKeysRequest](docs/DeleteAPIKeysRequest.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

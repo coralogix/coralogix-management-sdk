@@ -23,7 +23,7 @@ var _ MappedNullable = &TestRoutingConditionValidResponseFailure{}
 // TestRoutingConditionValidResponseFailure Indicates the routing condition is invalid, with a human-readable error message.
 type TestRoutingConditionValidResponseFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

@@ -23,10 +23,10 @@ var _ MappedNullable = &TestingServiceTestTemplateRenderRequest{}
 // TestingServiceTestTemplateRenderRequest Request for testing notification template rendering.
 type TestingServiceTestTemplateRenderRequest struct {
 	// Entity sub-type to use when testing template rendering.
-	EntitySubType *string `json:"entitySubType,omitempty"`
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Template string to test rendering for.
-	Template *string `json:"template,omitempty"`
+	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

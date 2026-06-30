@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
  - [DimensionPriority](docs/DimensionPriority.md)
  - [DimensionSeverity](docs/DimensionSeverity.md)
  - [DimensionTier](docs/DimensionTier.md)
+ - [Error](docs/Error.md)
  - [Evaluation](docs/Evaluation.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)

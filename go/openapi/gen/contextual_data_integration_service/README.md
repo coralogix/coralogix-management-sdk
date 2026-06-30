@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
  - [ConnectionStatus](docs/ConnectionStatus.md)
  - [DefaultIntegrationDetails](docs/DefaultIntegrationDetails.md)
  - [Deprecation](docs/Deprecation.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [ExtensionBinary](docs/ExtensionBinary.md)
  - [ExtensionBinaryBinaryType](docs/ExtensionBinaryBinaryType.md)

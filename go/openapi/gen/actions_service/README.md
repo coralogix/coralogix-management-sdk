@@ -105,6 +105,7 @@ Class | Method | HTTP request | Description
  - [CreateActionRequest](docs/CreateActionRequest.md)
  - [CreateActionResponse](docs/CreateActionResponse.md)
  - [DeleteActionRequest](docs/DeleteActionRequest.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

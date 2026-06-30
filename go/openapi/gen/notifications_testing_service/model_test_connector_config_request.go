@@ -26,7 +26,7 @@ type TestConnectorConfigRequest struct {
 	// Fields.
 	Fields []NotificationCenterConnectorConfigField `json:"fields,omitempty"`
 	// Payload type to use when testing the connector.
-	PayloadType *string `json:"payloadType,omitempty"`
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Type *NotificationCenterConnectorType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

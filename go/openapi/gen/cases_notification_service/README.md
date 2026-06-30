@@ -91,6 +91,7 @@ Class | Method | HTTP request | Description
  - [DeliveryOutcomeFailure](docs/DeliveryOutcomeFailure.md)
  - [DeliveryOutcomeSuccess](docs/DeliveryOutcomeSuccess.md)
  - [DeliverySuccess](docs/DeliverySuccess.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
  - [DefaultIntegrationDetails](docs/DefaultIntegrationDetails.md)
  - [DeployedIntegrationInformation](docs/DeployedIntegrationInformation.md)
  - [Deprecation](docs/Deprecation.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [ExtensionBinary](docs/ExtensionBinary.md)
  - [ExtensionBinaryBinaryType](docs/ExtensionBinaryBinaryType.md)

@@ -23,6 +23,7 @@ var _ = bytes.MinRead
 type CaseResolver struct {
 	CaseResolverApiKeyVariant *CaseResolverApiKeyVariant
 	CaseResolverCxUser *CaseResolverCxUser
+	CaseResolverMicrosoftTeams *CaseResolverMicrosoftTeams
 	CaseResolverPagerDuty *CaseResolverPagerDuty
 	CaseResolverPrometheusAlertManager *CaseResolverPrometheusAlertManager
 	CaseResolverServiceNow *CaseResolverServiceNow
@@ -41,6 +42,13 @@ func CaseResolverApiKeyVariantAsCaseResolver(v *CaseResolverApiKeyVariant) CaseR
 func CaseResolverCxUserAsCaseResolver(v *CaseResolverCxUser) CaseResolver {
 	return CaseResolver{
 		CaseResolverCxUser: v,
+	}
+}
+
+// CaseResolverMicrosoftTeamsAsCaseResolver is a convenience function that returns CaseResolverMicrosoftTeams wrapped in CaseResolver
+func CaseResolverMicrosoftTeamsAsCaseResolver(v *CaseResolverMicrosoftTeams) CaseResolver {
+	return CaseResolver{
+		CaseResolverMicrosoftTeams: v,
 	}
 }
 
@@ -116,6 +124,23 @@ func (dst *CaseResolver) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.CaseResolverCxUser = nil
+	}
+
+	// try to unmarshal data into CaseResolverMicrosoftTeams
+	err = json.Unmarshal(data, &dst.CaseResolverMicrosoftTeams)
+	if err == nil {
+		jsonCaseResolverMicrosoftTeams, _ := json.Marshal(dst.CaseResolverMicrosoftTeams)
+		if string(jsonCaseResolverMicrosoftTeams) == "{}" { // empty struct
+			dst.CaseResolverMicrosoftTeams = nil
+		} else {
+			if err = validator.Validate(dst.CaseResolverMicrosoftTeams); err != nil {
+				dst.CaseResolverMicrosoftTeams = nil
+			} else {
+				match++
+			}
+		}
+	} else {
+		dst.CaseResolverMicrosoftTeams = nil
 	}
 
 	// try to unmarshal data into CaseResolverPagerDuty
@@ -207,6 +232,7 @@ func (dst *CaseResolver) UnmarshalJSON(data []byte) error {
 		// reset to nil
 		dst.CaseResolverApiKeyVariant = nil
 		dst.CaseResolverCxUser = nil
+		dst.CaseResolverMicrosoftTeams = nil
 		dst.CaseResolverPagerDuty = nil
 		dst.CaseResolverPrometheusAlertManager = nil
 		dst.CaseResolverServiceNow = nil
@@ -229,6 +255,10 @@ func (src CaseResolver) MarshalJSON() ([]byte, error) {
 
 	if src.CaseResolverCxUser != nil {
 		return json.Marshal(&src.CaseResolverCxUser)
+	}
+
+	if src.CaseResolverMicrosoftTeams != nil {
+		return json.Marshal(&src.CaseResolverMicrosoftTeams)
 	}
 
 	if src.CaseResolverPagerDuty != nil {
@@ -267,6 +297,10 @@ func (obj *CaseResolver) GetActualInstance() (interface{}) {
 		return obj.CaseResolverCxUser
 	}
 
+	if obj.CaseResolverMicrosoftTeams != nil {
+		return obj.CaseResolverMicrosoftTeams
+	}
+
 	if obj.CaseResolverPagerDuty != nil {
 		return obj.CaseResolverPagerDuty
 	}
@@ -299,6 +333,10 @@ func (obj CaseResolver) GetActualInstanceValue() (interface{}) {
 
 	if obj.CaseResolverCxUser != nil {
 		return *obj.CaseResolverCxUser
+	}
+
+	if obj.CaseResolverMicrosoftTeams != nil {
+		return *obj.CaseResolverMicrosoftTeams
 	}
 
 	if obj.CaseResolverPagerDuty != nil {

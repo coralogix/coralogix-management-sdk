@@ -25,16 +25,16 @@ type TestingServiceTestDestinationRequest struct {
 	// The connector config fields.
 	ConnectorConfigFields []TemplatedConnectorConfigField `json:"connectorConfigFields,omitempty"`
 	// The connector id.
-	ConnectorId *string `json:"connectorId,omitempty"`
+	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Entity sub-type to use when testing the destination.
-	EntitySubType *string `json:"entitySubType,omitempty"`
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The message config fields.
 	MessageConfigFields []NotificationCenterMessageConfigField `json:"messageConfigFields,omitempty"`
 	// Payload type to use when testing the destination.
-	PayloadType *string `json:"payloadType,omitempty"`
+	PayloadType *string `json:"payloadType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The preset id.
-	PresetId *string `json:"presetId,omitempty"`
+	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

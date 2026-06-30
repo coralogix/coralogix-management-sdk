@@ -103,6 +103,7 @@ Class | Method | HTTP request | Description
  - [DigestType](docs/DigestType.md)
  - [EmailGroupConfig](docs/EmailGroupConfig.md)
  - [EndpointType](docs/EndpointType.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

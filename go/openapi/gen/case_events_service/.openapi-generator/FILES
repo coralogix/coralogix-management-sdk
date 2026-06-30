@@ -35,8 +35,10 @@ model_create_comment_event_request.go
 model_create_comment_response.go
 model_created_case_event.go
 model_custom_dashboard_widget_attachment.go
+model_error.go
 model_event_actor.go
 model_event_actor_api_key.go
+model_event_actor_microsoft_teams.go
 model_event_actor_pager_duty.go
 model_event_actor_prometheus_alert_manager.go
 model_event_actor_service_now.go
@@ -52,6 +54,7 @@ model_filters.go
 model_kpi_breached_case_event.go
 model_kpi_type.go
 model_log_attachment.go
+model_microsoft_teams_actor.go
 model_multiple_values.go
 model_notification_failed_case_event.go
 model_notification_metadata.go

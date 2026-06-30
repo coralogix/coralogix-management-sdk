@@ -26,7 +26,7 @@ type GlobalRouter struct {
 	// The create time.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
-	Description *string `json:"description,omitempty"`
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The disabled.
 	Disabled *bool `json:"disabled,omitempty"`
 	// The entity labels.
@@ -37,9 +37,9 @@ type GlobalRouter struct {
 	// The fallback targets.
 	FallbackTargets []FallbackTarget `json:"fallbackTargets,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
 	// List of rules.
 	Rules []RoutingRule `json:"rules,omitempty"`

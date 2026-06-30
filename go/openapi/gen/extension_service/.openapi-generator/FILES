@@ -9,6 +9,7 @@ configuration.go
 git_push.sh
 model_changelog_entry.go
 model_deprecation.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_extension_binary.go
 model_extension_binary_binary_type.go

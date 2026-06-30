@@ -65,6 +65,7 @@ model_download_alerts_response.go
 model_duration_unit.go
 model_enabled_count.go
 model_entity_label_count.go
+model_error.go
 model_error_budget_threshold.go
 model_events_v3_filter_matcher.go
 model_failed_to_replace_alert_def.go

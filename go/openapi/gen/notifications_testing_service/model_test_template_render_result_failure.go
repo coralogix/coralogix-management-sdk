@@ -23,7 +23,7 @@ var _ MappedNullable = &TestTemplateRenderResultFailure{}
 // TestTemplateRenderResultFailure Indicates the template render test failed, with a message and failure reason.
 type TestTemplateRenderResultFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	Reason *FailureReason `json:"reason,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
