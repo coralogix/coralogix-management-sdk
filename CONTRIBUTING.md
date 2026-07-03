@@ -36,6 +36,20 @@ With these formal requirements fulfilled, a reviewer will have an easy time acce
 ### Git pre-commit and post-commit hooks
 We provide a git pre-commit hook and a post-commit hook that you can use in order to verify whether your code satisfies some basic quality checks, and whether you broke the public API. You can install them by simply running the `install_hooks.sh` script in the root of the repository. In order to run the post-commit hook, you're gonna need `modver` (https://github.com/bobg/modver) installed on your system. You're not forced to install the hooks, but we highly recommend you do.
 
+This repository also uses [pre-commit](https://pre-commit.com/) for local commit hooks, including Gitleaks secret scanning.
+To enable the hooks locally, run from the repo root:
+
+```sh
+$ pre-commit install
+```
+
+To test the Gitleaks hook manually:
+
+```sh
+$ pre-commit run gitleaks --all-files
+```
+
+If needed, bypass with `SKIP=gitleaks git commit ...` or `git commit --no-verify`.
 
 
 
