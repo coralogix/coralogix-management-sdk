@@ -44,7 +44,8 @@
                       "type": "string",
                       "minLength": 0
                     },
-                    "minItems": 0
+                    "minItems": 1,
+                    "maxItems": 100
                   }
                 }
               }
@@ -168,7 +169,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 200
             },
             "style": "form"
           }
@@ -248,7 +250,9 @@
             "schema": {
               "description": "The unique identifier of the global router to retrieve.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -285,7 +289,9 @@
             "schema": {
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -327,7 +333,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 200
           },
           "routers": {
             "description": "The routers.",
@@ -488,7 +495,9 @@
           "description": {
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000
           },
           "disabled": {
             "description": "The disabled.",
@@ -511,7 +520,8 @@
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "fallbackTargets": {
             "description": "The fallback targets.",
@@ -519,19 +529,24 @@
             "items": {
               "$ref": "#/components/schemas/FallbackTarget"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "id": {
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
             "example": "My Router",
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 200
           },
           "routingLabels": {
             "$ref": "#/components/schemas/RoutingLabels"
@@ -542,7 +557,8 @@
             "items": {
               "$ref": "#/components/schemas/RoutingRule"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           },
           "updateTime": {
             "description": "Timestamp of the last update.",
@@ -567,7 +583,8 @@
             "items": {
               "$ref": "#/components/schemas/GlobalRouter"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 200
           }
         }
       },
@@ -613,17 +630,23 @@
           "environment": {
             "description": "The environment.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "service": {
             "description": "Service name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "team": {
             "description": "Team.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           }
         }
       },
@@ -640,7 +663,9 @@
             "example": "alertDef.priority == 'P3'",
             "description": "Condition.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 20000
           },
           "customDetails": {
             "description": "The custom details.",
@@ -656,7 +681,9 @@
           "name": {
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 200
           },
           "targets": {
             "description": "List of targets.",
@@ -664,7 +691,8 @@
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 10
           }
         }
       },
@@ -680,7 +708,9 @@
           "connectorId": {
             "description": "The connector id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "customDetails": {
             "description": "The custom details.",
@@ -694,12 +724,16 @@
             "example": "d4b56246-64bb-4714-a8bd-97c999f1d801",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 36,
+            "maxLength": 36
           },
           "presetId": {
             "description": "The preset id.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           }
         }
       },
@@ -737,7 +771,9 @@
           "message": {
             "description": "Human-readable message.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 10000
           }
         }
       },

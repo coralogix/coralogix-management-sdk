@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
  - [CoralogixCustomerSupportAccess](docs/CoralogixCustomerSupportAccess.md)
  - [CreateCompanyIPAccessSettingsRequest](docs/CreateCompanyIPAccessSettingsRequest.md)
  - [CreateCompanyIpAccessSettingsResponse](docs/CreateCompanyIpAccessSettingsResponse.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

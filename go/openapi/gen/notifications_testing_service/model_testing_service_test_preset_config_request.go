@@ -25,12 +25,12 @@ type TestingServiceTestPresetConfigRequest struct {
 	// The config overrides.
 	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
 	// The connector id.
-	ConnectorId *string `json:"connectorId,omitempty"`
+	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Entity sub-type to use when testing the preset configuration.
-	EntitySubType *string `json:"entitySubType,omitempty"`
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// The parent preset id.
-	ParentPresetId *string `json:"parentPresetId,omitempty"`
+	ParentPresetId *string `json:"parentPresetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

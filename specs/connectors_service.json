@@ -156,7 +156,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 800
             },
             "style": "form"
           }
@@ -199,7 +200,8 @@
                 "type": "string",
                 "minLength": 0
               },
-              "minItems": 0
+              "minItems": 0,
+              "maxItems": 800
             },
             "style": "form"
           }
@@ -319,7 +321,9 @@
             "schema": {
               "description": "The unique identifier of the connector.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -356,7 +360,9 @@
             "schema": {
               "description": "Unique identifier.",
               "type": "string",
-              "minLength": 0
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "minLength": 1,
+              "maxLength": 128
             },
             "style": "simple"
           }
@@ -405,7 +411,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 800
           }
         }
       },
@@ -436,7 +443,8 @@
               "type": "string",
               "minLength": 0
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 800
           }
         }
       },
@@ -455,7 +463,8 @@
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "connectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
@@ -470,6 +479,7 @@
             "example": "Connector for team notifications",
             "description": "Human-readable description.",
             "type": "string",
+            "pattern": "^[\\s\\S]*$",
             "minLength": 0,
             "maxLength": 5000
           },
@@ -480,13 +490,16 @@
             "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
             "example": "My Slack Connector",
             "description": "Display name.",
             "type": "string",
-            "minLength": 0,
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
             "maxLength": 200
           },
           "resolvedConnectorConfig": {
@@ -497,7 +510,8 @@
             "description": "Team identifier.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 1,
+            "maximum": 4294967295
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -525,7 +539,8 @@
             "items": {
               "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -538,7 +553,8 @@
             "items": {
               "$ref": "#/components/schemas/EntityTypeConfigOverrides"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           },
           "connectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
@@ -550,28 +566,39 @@
             "minLength": 0
           },
           "description": {
+            "example": "Connector for team notifications",
             "description": "Human-readable description.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 5000
           },
           "id": {
+            "example": "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9",
             "description": "Unique identifier.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "minLength": 1,
+            "maxLength": 128
           },
           "name": {
+            "example": "My Slack Connector",
             "description": "Display name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]+$",
+            "minLength": 1,
+            "maxLength": 200
           },
           "resolvedConnectorConfig": {
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "teamId": {
+            "example": 12345,
             "description": "The team id.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 1,
+            "maximum": 4294967295
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -598,7 +625,8 @@
             "description": "Number of items.",
             "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "maximum": 800
           },
           "type": {
             "$ref": "#/components/schemas/notification_center.ConnectorType"
@@ -662,7 +690,8 @@
             "items": {
               "$ref": "#/components/schemas/TemplatedConnectorConfigField"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 100
           }
         }
       },
@@ -774,7 +803,8 @@
             "items": {
               "$ref": "#/components/schemas/ConnectorTypeSummary"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 800
           }
         }
       },
@@ -793,7 +823,8 @@
             "items": {
               "$ref": "#/components/schemas/ConnectorSummary"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 800
           }
         }
       },
@@ -812,7 +843,8 @@
             "items": {
               "$ref": "#/components/schemas/Connector"
             },
-            "minItems": 0
+            "minItems": 0,
+            "maxItems": 800
           }
         }
       },
@@ -852,12 +884,16 @@
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "template": {
             "description": "Template.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
           }
         }
       },
@@ -874,12 +910,16 @@
           "fieldName": {
             "description": "The field name.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 256
           },
           "value": {
             "description": "The value.",
             "type": "string",
-            "minLength": 0
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 20000
           }
         }
       },

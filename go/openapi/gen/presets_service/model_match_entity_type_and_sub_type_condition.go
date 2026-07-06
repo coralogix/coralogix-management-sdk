@@ -23,7 +23,7 @@ var _ MappedNullable = &MatchEntityTypeAndSubTypeCondition{}
 // MatchEntityTypeAndSubTypeCondition Match entity type and sub type condition.
 type MatchEntityTypeAndSubTypeCondition struct {
 	// The entity sub type.
-	EntitySubType *string `json:"entitySubType,omitempty"`
+	EntitySubType *string `json:"entitySubType,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 }
 

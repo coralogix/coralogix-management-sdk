@@ -37,23 +37,33 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Team not found
         "409":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: User already exists
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Create Users
       tags:
@@ -89,19 +99,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: User not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Update Users
       tags:
@@ -144,19 +162,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: User not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get User
       tags:
@@ -193,19 +219,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: User not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Activate/Revoke Users
       tags:
@@ -277,19 +311,27 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "404":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Team not found
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Search Users
       tags:
@@ -359,6 +401,25 @@ components:
         description: Find out more about user management
         url: https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
       title: CreateUsersResponse
+      type: object
+    Error:
+      description: Standard error response body returned for a failed request.
+      example:
+        code: 400
+        message: message
+      properties:
+        code:
+          description: "HTTP status code of the error (for example 400, 404, 500)."
+          format: int32
+          maximum: 599
+          minimum: 100
+          type: integer
+        message:
+          description: Human-readable description of the error.
+          maxLength: 4096
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
       type: object
     FilterPathAndValues:
       oneOf:

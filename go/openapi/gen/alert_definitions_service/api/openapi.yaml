@@ -49,15 +49,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get a list of all accessible alert definitions
       tags:
@@ -87,15 +93,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Create an alert
       tags:
@@ -125,15 +137,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Replace an alert definition
       tags:
@@ -168,15 +186,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get counts for filter options
       tags:
@@ -207,15 +231,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Bulk delete alert definitions
       tags:
@@ -241,15 +271,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Download alerts
       tags:
@@ -280,15 +316,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Bulk replace alert definitions
       tags:
@@ -326,15 +368,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get alert definition by alert version ID
       tags:
@@ -372,15 +420,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: DeleteAlertDef
       tags:
@@ -417,15 +471,21 @@ paths:
           description: ""
         "400":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Bad Request
         "401":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Unauthorized request
         "500":
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
           description: Internal server error
       summary: Get alert definition by ID
       tags:
@@ -3703,6 +3763,25 @@ components:
           minLength: 0
           type: string
       title: Entity label count
+      type: object
+    Error:
+      description: Standard error response body returned for a failed request.
+      example:
+        code: 400
+        message: message
+      properties:
+        code:
+          description: "HTTP status code of the error (for example 400, 404, 500)."
+          format: int32
+          maximum: 599
+          minimum: 100
+          type: integer
+        message:
+          description: Human-readable description of the error.
+          maxLength: 4096
+          minLength: 0
+          pattern: "^[\\s\\S]*$"
+          type: string
       type: object
     ErrorBudgetThreshold:
       description: Error budget threshold definition

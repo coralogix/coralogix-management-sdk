@@ -23,7 +23,7 @@ var _ MappedNullable = &TestResultFailure{}
 // TestResultFailure Failure.
 type TestResultFailure struct {
 	// Human-readable message.
-	Message *string `json:"message,omitempty"`
+	Message *string `json:"message,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The status code.
 	StatusCode *int64 `json:"statusCode,omitempty"`
 	AdditionalProperties map[string]interface{}

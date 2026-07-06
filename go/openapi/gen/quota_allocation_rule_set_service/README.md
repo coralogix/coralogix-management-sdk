@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
  - [CreateQuotaAllocationRuleSetRequest](docs/CreateQuotaAllocationRuleSetRequest.md)
  - [CreateQuotaAllocationRuleSetResponse](docs/CreateQuotaAllocationRuleSetResponse.md)
  - [DeleteQuotaAllocationRuleSetResponse](docs/DeleteQuotaAllocationRuleSetResponse.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

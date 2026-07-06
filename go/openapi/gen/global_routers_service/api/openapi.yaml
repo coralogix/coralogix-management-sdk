@@ -106,6 +106,7 @@ paths:
               summaries for.
             minLength: 0
             type: string
+          maxItems: 200
           minItems: 0
           type: array
         style: form
@@ -164,7 +165,9 @@ paths:
         required: true
         schema:
           description: Unique identifier.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -190,7 +193,9 @@ paths:
         required: true
         schema:
           description: The unique identifier of the global router to retrieve.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         style: simple
       responses:
@@ -241,12 +246,135 @@ components:
                 customDetails:
                   key: customDetails
                 presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
             - condition: alertDef.priority == 'P3'
               entityType: null
               name: name
               customDetails:
                 key: customDetails
               targets:
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - condition: alertDef.priority == 'P3'
+              entityType: null
+              name: name
+              customDetails:
+                key: customDetails
+              targets:
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - condition: alertDef.priority == 'P3'
+              entityType: null
+              name: name
+              customDetails:
+                key: customDetails
+              targets:
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - condition: alertDef.priority == 'P3'
+              entityType: null
+              name: name
+              customDetails:
+                key: customDetails
+              targets:
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+              - connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
               - connectorId: connectorId
                 id: d4b56246-64bb-4714-a8bd-97c999f1d801
                 customDetails:
@@ -273,8 +401,44 @@ components:
                 customDetails:
                   key: customDetails
                 presetId: presetId
+            - entityType: null
+              target:
+                connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - entityType: null
+              target:
+                connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
+            - entityType: null
+              target:
+                connectorId: connectorId
+                id: d4b56246-64bb-4714-a8bd-97c999f1d801
+                customDetails:
+                  key: customDetails
+                presetId: presetId
             id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
             fallback:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
             - connectorId: connectorId
               id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
@@ -297,6 +461,7 @@ components:
             description: The not found ids.
             minLength: 0
             type: string
+          maxItems: 200
           minItems: 0
           type: array
         routers:
@@ -338,12 +503,135 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           - condition: alertDef.priority == 'P3'
             entityType: null
             name: name
             customDetails:
               key: customDetails
             targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
             - connectorId: connectorId
               id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
@@ -370,8 +658,44 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
           - connectorId: connectorId
             id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
@@ -503,12 +827,135 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           - condition: alertDef.priority == 'P3'
             entityType: null
             name: name
             customDetails:
               key: customDetails
             targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
             - connectorId: connectorId
               id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
@@ -535,8 +982,44 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
           - connectorId: connectorId
             id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
@@ -586,12 +1069,135 @@ components:
             customDetails:
               key: customDetails
             presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
         - condition: alertDef.priority == 'P3'
           entityType: null
           name: name
           customDetails:
             key: customDetails
           targets:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - condition: alertDef.priority == 'P3'
+          entityType: null
+          name: name
+          customDetails:
+            key: customDetails
+          targets:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - condition: alertDef.priority == 'P3'
+          entityType: null
+          name: name
+          customDetails:
+            key: customDetails
+          targets:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - condition: alertDef.priority == 'P3'
+          entityType: null
+          name: name
+          customDetails:
+            key: customDetails
+          targets:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
           - connectorId: connectorId
             id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
@@ -618,8 +1224,44 @@ components:
             customDetails:
               key: customDetails
             presetId: presetId
+        - entityType: null
+          target:
+            connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityType: null
+          target:
+            connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityType: null
+          target:
+            connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
         id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
         fallback:
+        - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
+        - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
+        - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
         - connectorId: connectorId
           id: d4b56246-64bb-4714-a8bd-97c999f1d801
           customDetails:
@@ -641,7 +1283,9 @@ components:
           type: string
         description:
           description: Human-readable description.
+          maxLength: 5000
           minLength: 0
+          pattern: "^[\\s\\S]*$"
           type: string
         disabled:
           description: The disabled.
@@ -658,23 +1302,29 @@ components:
           description: The fallback destinations to be used if no rule matches.
           items:
             $ref: "#/components/schemas/RoutingTarget"
+          maxItems: 10
           minItems: 0
           type: array
         fallbackTargets:
           description: The fallback targets.
           items:
             $ref: "#/components/schemas/FallbackTarget"
+          maxItems: 10
           minItems: 0
           type: array
         id:
           description: Unique identifier.
           example: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         name:
           description: Display name.
           example: My Router
-          minLength: 0
+          maxLength: 200
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         routingLabels:
           $ref: "#/components/schemas/RoutingLabels"
@@ -682,6 +1332,7 @@ components:
           description: List of rules.
           items:
             $ref: "#/components/schemas/RoutingRule"
+          maxItems: 10
           minItems: 0
           type: array
         updateTime:
@@ -723,12 +1374,135 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           - condition: alertDef.priority == 'P3'
             entityType: null
             name: name
             customDetails:
               key: customDetails
             targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
             - connectorId: connectorId
               id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
@@ -755,8 +1529,44 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
           - connectorId: connectorId
             id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
@@ -795,12 +1605,135 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           - condition: alertDef.priority == 'P3'
             entityType: null
             name: name
             customDetails:
               key: customDetails
             targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
             - connectorId: connectorId
               id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
@@ -827,8 +1760,737 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityLabels:
+            key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          disabled: true
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityLabels:
+            key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          disabled: true
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+        - entityLabels:
+            key: entityLabels
+          routingLabels:
+            environment: environment
+            service: service
+            team: team
+          createTime: 2000-01-23T04:56:07.000+00:00
+          entityType: ENTITY_TYPE_UNSPECIFIED
+          name: My Router
+          description: description
+          disabled: true
+          rules:
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          updateTime: 2000-01-23T04:56:07.000+00:00
+          fallbackTargets:
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
           - connectorId: connectorId
             id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
@@ -847,6 +2509,7 @@ components:
           description: The routers.
           items:
             $ref: "#/components/schemas/GlobalRouter"
+          maxItems: 200
           minItems: 0
           type: array
       title: List Global Routers Response
@@ -894,12 +2557,135 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           - condition: alertDef.priority == 'P3'
             entityType: null
             name: name
             customDetails:
               key: customDetails
             targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - condition: alertDef.priority == 'P3'
+            entityType: null
+            name: name
+            customDetails:
+              key: customDetails
+            targets:
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+            - connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
             - connectorId: connectorId
               id: d4b56246-64bb-4714-a8bd-97c999f1d801
               customDetails:
@@ -926,8 +2712,44 @@ components:
               customDetails:
                 key: customDetails
               presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
+          - entityType: null
+            target:
+              connectorId: connectorId
+              id: d4b56246-64bb-4714-a8bd-97c999f1d801
+              customDetails:
+                key: customDetails
+              presetId: presetId
           id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           fallback:
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
+          - connectorId: connectorId
+            id: d4b56246-64bb-4714-a8bd-97c999f1d801
+            customDetails:
+              key: customDetails
+            presetId: presetId
           - connectorId: connectorId
             id: d4b56246-64bb-4714-a8bd-97c999f1d801
             customDetails:
@@ -958,15 +2780,21 @@ components:
       properties:
         environment:
           description: The environment.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         service:
           description: Service name.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         team:
           description: Team.
-          minLength: 0
+          maxLength: 256
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
       title: Routing Labels
       type: object
@@ -989,6 +2817,21 @@ components:
           customDetails:
             key: customDetails
           presetId: presetId
+        - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
+        - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
+        - connectorId: connectorId
+          id: d4b56246-64bb-4714-a8bd-97c999f1d801
+          customDetails:
+            key: customDetails
+          presetId: presetId
       externalDocs:
         description: Find out more about notification center
         url: https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
@@ -996,7 +2839,9 @@ components:
         condition:
           description: Condition.
           example: alertDef.priority == 'P3'
-          minLength: 0
+          maxLength: 20000
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         customDetails:
           additionalProperties:
@@ -1008,12 +2853,15 @@ components:
           $ref: "#/components/schemas/notification_center.EntityType"
         name:
           description: Display name.
-          minLength: 0
+          maxLength: 200
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
         targets:
           description: List of targets.
           items:
             $ref: "#/components/schemas/RoutingTarget"
+          maxItems: 10
           minItems: 0
           type: array
       title: Routing Rule
@@ -1032,7 +2880,9 @@ components:
       properties:
         connectorId:
           description: The connector id.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
         customDetails:
           additionalProperties:
@@ -1043,11 +2893,15 @@ components:
         id:
           description: Unique identifier.
           example: d4b56246-64bb-4714-a8bd-97c999f1d801
-          minLength: 0
+          maxLength: 36
+          minLength: 36
+          pattern: "^[\\s\\S]*$"
           type: string
         presetId:
           description: The preset id.
-          minLength: 0
+          maxLength: 128
+          minLength: 1
+          pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
           type: string
       title: Routing Target
       type: object
@@ -1079,7 +2933,9 @@ components:
       properties:
         message:
           description: Human-readable message.
-          minLength: 0
+          maxLength: 10000
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
           type: string
       type: object
     ValidateEntityLabelMatcherResult.Success:
@@ -1144,7 +3000,8 @@ components:
             description: The values.
             minLength: 0
             type: string
-          minItems: 0
+          maxItems: 100
+          minItems: 1
           type: array
       type: object
     Replace_Global_Router_Request:

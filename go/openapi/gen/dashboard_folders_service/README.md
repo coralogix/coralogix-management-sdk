@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
  - [CreateDashboardFolderRequestDataStructure](docs/CreateDashboardFolderRequestDataStructure.md)
  - [CreateDashboardFolderResponse](docs/CreateDashboardFolderResponse.md)
  - [DashboardFolder](docs/DashboardFolder.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

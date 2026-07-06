@@ -23,12 +23,12 @@ var _ MappedNullable = &RoutingRule{}
 // RoutingRule Defines routing rule for notifications
 type RoutingRule struct {
 	// Condition.
-	Condition *string `json:"condition,omitempty"`
+	Condition *string `json:"condition,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The custom details.
 	CustomDetails *map[string]string `json:"customDetails,omitempty"`
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// List of targets.
 	Targets []RoutingTarget `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}

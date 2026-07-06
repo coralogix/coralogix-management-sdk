@@ -60,6 +60,7 @@ model_case_priority.go
 model_case_resolver.go
 model_case_resolver_api_key_variant.go
 model_case_resolver_cx_user.go
+model_case_resolver_microsoft_teams.go
 model_case_resolver_pager_duty.go
 model_case_resolver_prometheus_alert_manager.go
 model_case_resolver_service_now.go
@@ -79,6 +80,7 @@ model_connector_type_filter_no_connector.go
 model_date_range_filter.go
 model_date_range_mode.go
 model_entity_link.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_filter_aggregation.go
 model_filter_group.go

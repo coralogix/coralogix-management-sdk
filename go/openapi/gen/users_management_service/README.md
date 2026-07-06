@@ -91,6 +91,7 @@ Class | Method | HTTP request | Description
  - [AccessTypePermanentAccess](docs/AccessTypePermanentAccess.md)
  - [AccessTypeTemporaryAccess](docs/AccessTypeTemporaryAccess.md)
  - [AllowedLoginMode](docs/AllowedLoginMode.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [FilterPathAndValuesFilters](docs/FilterPathAndValuesFilters.md)

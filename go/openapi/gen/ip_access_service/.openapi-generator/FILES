@@ -11,6 +11,7 @@ model_company_ip_access_settings.go
 model_coralogix_customer_support_access.go
 model_create_company_ip_access_settings_request.go
 model_create_company_ip_access_settings_response.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go

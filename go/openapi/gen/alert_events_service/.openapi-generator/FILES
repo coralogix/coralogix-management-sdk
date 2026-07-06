@@ -16,6 +16,7 @@ model_alert_event_service_get_alert_event_pagination_parameter.go
 model_alert_event_service_get_alert_events_stats_order_bys_parameter_inner.go
 model_alert_status.go
 model_alerts_v3_pagination_response.go
+model_error.go
 model_event_stats.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go

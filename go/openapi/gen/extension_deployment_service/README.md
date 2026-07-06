@@ -89,6 +89,7 @@ Class | Method | HTTP request | Description
  - [DeployExtensionResponse](docs/DeployExtensionResponse.md)
  - [DeployedExtension](docs/DeployedExtension.md)
  - [DeployedExtensionSummary](docs/DeployedExtensionSummary.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [ExtensionDeployment](docs/ExtensionDeployment.md)
  - [FailedItem](docs/FailedItem.md)

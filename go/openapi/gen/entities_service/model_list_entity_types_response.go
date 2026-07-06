@@ -22,7 +22,7 @@ var _ MappedNullable = &ListEntityTypesResponse{}
 
 // ListEntityTypesResponse Response containing a list of notification entity types.
 type ListEntityTypesResponse struct {
-	// The entity types.
+	// The supported payload types.
 	EntityTypes []NotificationCenterEntityType `json:"entityTypes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

@@ -8,6 +8,7 @@ client.go
 configuration.go
 git_push.sh
 model_archive_spec.go
+model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
 model_filter_path_and_values_filters.go
